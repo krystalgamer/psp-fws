@@ -308,7 +308,7 @@ void func_0000A938(void) {
 }
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_0000B554);
 #endif
 
@@ -566,7 +566,7 @@ INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_00012D64);
 
 INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_00012E6C);
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_0000BEFC);
 #endif
 
@@ -650,7 +650,7 @@ void func_0000B86C(void) {
 }
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", _ZN14Class_00025160C2Ei);
 
 INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_0000C390);
@@ -682,7 +682,7 @@ void func_00013344(void) {
 }
 #endif
 
-#if FW_VERSION != 102
+#if FW_VERSION == 100 || FW_VERSION >= 150
 Class_00025160::Class_00025160(s32 owner) {
     Reset();
     this->owner = owner;
@@ -782,7 +782,7 @@ void func_0000BA5C(void *arg0) {
 }
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_0000C560);
 
 INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", _ZN14Class_00025148C1Ei);
@@ -825,7 +825,7 @@ void func_00013594(struct Unk_func_00013594_0 *arg0) {
 }
 #endif
 
-#if FW_VERSION != 102
+#if FW_VERSION == 100 || FW_VERSION >= 150
 Class_00025148::Class_00025148(s32 owner) : Class_00025160(owner) {
     Init();
 }
@@ -1015,7 +1015,11 @@ void func_0000C784(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s
 }
 #endif
 
-#if FW_VERSION < 150
+#if FW_VERSION == 103
+INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_0000C784);
+#endif
+
+#if FW_VERSION < 103
 void func_0000C784(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, s32 arg7) {
     func_0000C824(arg0);
     M2C_FIELD(arg0, s32 *, 8) = arg3;
@@ -1033,7 +1037,11 @@ void func_0000C860(void *arg0) {
 }
 #endif
 
-#if FW_VERSION < 150
+#if FW_VERSION == 103
+INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_0000C860);
+#endif
+
+#if FW_VERSION < 103
 void func_0000C860(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0xC) = 0;
 }
@@ -1121,6 +1129,10 @@ INCLUDE_RODATA("nonmatchings/savedata_utility_010FEC", D_00027770);
 INCLUDE_RODATA("nonmatchings/savedata_utility_010FEC", D_00025174);
 #endif
 
+#if FW_VERSION == 103
+INCLUDE_RODATA("nonmatchings/savedata_utility_010FEC", D_0002091C);
+#endif
+
 #if FW_VERSION >= 150 && FW_VERSION < 271
 INCLUDE_RODATA("nonmatchings/savedata_utility_010FEC", D_00021C28);
 #endif
@@ -1195,7 +1207,7 @@ INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_00014428);
 INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_0000D338);
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_0000DF40);
 #endif
 
@@ -1236,7 +1248,7 @@ INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_0000F718);
 INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_0000F95C);
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_0000D88C);
 #endif
 
@@ -1254,6 +1266,10 @@ void func_0000D88C(paf::View *view, paf::PhWidget *widget, s32 idx) {
 
 #if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_0000DAA4);
+#endif
+
+#if FW_VERSION == 103
+INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_0000E8C0);
 #endif
 
 #if FW_VERSION >= 282
@@ -1388,7 +1404,7 @@ void func_000157FC(s32 arg0) {
 }
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_000157FC);
 #endif
 
@@ -1410,7 +1426,7 @@ INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_00015924);
 INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_0001598C);
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_0000E454);
 #endif
 
@@ -1446,7 +1462,7 @@ INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_0001599C);
 
 INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_000159B8);
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_0000E618);
 #endif
 

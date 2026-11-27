@@ -42,19 +42,25 @@ INCLUDE_RODATA("nonmatchings/savedata_utility_006DD4", D_00024CE8);
 INCLUDE_RODATA("nonmatchings/savedata_utility_006DD4", D_00024D50);
 #endif
 
+#if FW_VERSION != 103
 INCLUDE_RODATA("nonmatchings/savedata_utility_006DD4", D_00024DB0);
+#endif
 
 #if FW_VERSION == 271
 INCLUDE_RODATA("nonmatchings/savedata_utility_006DD4", D_00024ED8);
 #endif
 
+#if FW_VERSION != 103
 INCLUDE_RODATA("nonmatchings/savedata_utility_006DD4", D_00024DB4);
+#endif
 
 #if FW_VERSION == 260
 INCLUDE_RODATA("nonmatchings/savedata_utility_006DD4", D_000264DC);
 #endif
 
+#if FW_VERSION != 103
 INCLUDE_RODATA("nonmatchings/savedata_utility_006DD4", D_00024DC4);
+#endif
 
 #if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/savedata_utility_006DD4", D_00027494);
@@ -187,12 +193,16 @@ void func_000094D0(M2C_UNK **arg0) {
 }
 #endif
 
-#if FW_VERSION < 150 || FW_VERSION >= 282
+#if FW_VERSION < 103 || FW_VERSION >= 282
 INCLUDE_RODATA("nonmatchings/savedata_utility_006DD4", D_00024E28);
 #endif
 
 #if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_00004974);
+#endif
+
+#if FW_VERSION == 103
+INCLUDE_RODATA("nonmatchings/savedata_utility_006DD4", D_00020500);
 #endif
 
 #if FW_VERSION >= 282
@@ -226,6 +236,16 @@ INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_0000A290);
 
 #if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_00004E20);
+#endif
+
+#if FW_VERSION == 103
+INCLUDE_RODATA("nonmatchings/savedata_utility_006DD4", D_00020534);
+
+INCLUDE_RODATA("nonmatchings/savedata_utility_006DD4", D_00020538);
+
+INCLUDE_RODATA("nonmatchings/savedata_utility_006DD4", D_0002053C);
+
+INCLUDE_RODATA("nonmatchings/savedata_utility_006DD4", D_00020540);
 #endif
 
 #if FW_VERSION >= 282
@@ -294,7 +314,7 @@ INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_0000AC6C);
 
 INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", _ZN3paf12SurfaceRCPtrINS_7SurfaceEE6AddRefEv);
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_00005E78);
 
 INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_00005EA8);
@@ -308,7 +328,7 @@ INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", _ZN14Class_00024F10D0Ev);
 
 /* the key function (vfunc00) is still asm, so the vtable stays data */
 
-#if FW_VERSION != 102
+#if FW_VERSION == 100 || FW_VERSION >= 150
 Class_00024F10::Class_00024F10(s32 arg1, s32 arg2) : Class_000119A0(arg1, arg2) {
 }
 
@@ -408,7 +428,7 @@ void func_00005D0C(M2C_UNK **arg0) {
 INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_00005D44);
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_00006880);
 #endif
 
@@ -436,7 +456,7 @@ void func_00005E74(void *arg0, s32 arg1) {
 INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_00005E90);
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_00006064);
 #endif
 
@@ -457,7 +477,7 @@ INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_0000B64C);
 INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_0000608C);
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_00006BC0);
 #endif
 
@@ -495,7 +515,7 @@ INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_00006650);
 INCLUDE_RODATA("nonmatchings/savedata_utility_006DD4", D_00024F10);
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_RODATA("nonmatchings/savedata_utility_006DD4", D_000203A0);
 
 INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_000071BC);
@@ -547,7 +567,7 @@ INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_0000AF30);
 
 INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_0000AF60);
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_0000777C);
 
 INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_000077E0);
@@ -609,7 +629,7 @@ Class_00024FC8::Class_00024FC8(s32 owner, s32 arg2) : Class_0001FC80(owner, arg2
 }
 #endif
 
-#if FW_VERSION != 102
+#if FW_VERSION == 100 || FW_VERSION >= 150
 Class_00024FC8::~Class_00024FC8() {
     Clear();
 }
@@ -670,7 +690,7 @@ INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_0000B718);
 
 INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_0000B8AC);
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_00007C0C);
 
 INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_00007CE0);
@@ -710,7 +730,7 @@ INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_0000BAD0);
 
 INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_0000BBB0);
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_00007FC8);
 #endif
 
@@ -842,7 +862,7 @@ INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_0000D038);
 INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_00007ED4);
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_RODATA("nonmatchings/savedata_utility_006DD4", D_0001F958);
 
 INCLUDE_RODATA("nonmatchings/savedata_utility_006DD4", D_00020438);
@@ -1029,6 +1049,12 @@ void func_00008210(void *arg0) {
 INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_0000827C);
 #endif
 
+#if FW_VERSION == 103
+INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_00009104);
+
+INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_00005DC0);
+#endif
+
 #if FW_VERSION >= 150 && FW_VERSION < 250
 INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_00008724);
 #endif
@@ -1097,7 +1123,7 @@ INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_0000D1E8);
 
 INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_0000D268);
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_0000923C);
 
 INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_0000926C);
@@ -1131,7 +1157,7 @@ Class_00024FE8::Class_00024FE8(s32 owner) : Class_00025148(owner) {
 INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", _ZN14Class_00024FE8C1Ei);
 #endif
 
-#if FW_VERSION != 102
+#if FW_VERSION == 100 || FW_VERSION >= 150
 Class_00024FE8::~Class_00024FE8() {
 }
 #endif

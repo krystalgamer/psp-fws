@@ -1,5 +1,5 @@
 /* lang: c++ */
-/* cflags[100,150,152,250,260,102]: -Os */
+/* cflags[100,150,152,250,260,102,103]: -Os */
 /* cflags: -O2 */
 #include "common.h"
 #include "savedata_utility_decls.h"
@@ -24,7 +24,7 @@ INCLUDE_RODATA("nonmatchings/savedata_utility_015C1C", D_000252A0);
 INCLUDE_RODATA("nonmatchings/savedata_utility_015C1C", D_000252A8);
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/savedata_utility_015C1C", func_0000F118);
 #endif
 
@@ -66,7 +66,7 @@ void _ZN14Class_0001FC80C1Eii(void *arg0, s32 arg1, s32 arg2) {
 }
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/savedata_utility_015C1C", func_0000F304);
 #endif
 
@@ -262,7 +262,7 @@ INCLUDE_ASM("nonmatchings/savedata_utility_015C1C", func_0000F970);
 INCLUDE_ASM("nonmatchings/savedata_utility_015C1C", func_00016D5C);
 #endif
 
-#if FW_VERSION < 150
+#if FW_VERSION < 103
 INCLUDE_ASM("nonmatchings/savedata_utility_015C1C", func_0000FA70);
 #endif
 
@@ -295,6 +295,12 @@ INCLUDE_RODATA("nonmatchings/savedata_utility_015C1C", D_0001FC98);
 #endif
 
 INCLUDE_ASM("nonmatchings/savedata_utility_015C1C", func_00016EC0);
+
+#if FW_VERSION == 103
+INCLUDE_ASM("nonmatchings/savedata_utility_015C1C", func_00010870);
+
+INCLUDE_ASM("nonmatchings/savedata_utility_015C1C", func_000108E8_v103);
+#endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/savedata_utility_015C1C", func_000117A8);
