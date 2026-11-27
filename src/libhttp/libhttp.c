@@ -201,7 +201,37 @@ INCLUDE_ASM("nonmatchings/libhttp", sceHttpAbortRequest);
 #if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/libhttp", sceHttpGetContentLength);
 
-INCLUDE_ASM("nonmatchings/libhttp", sceHttpGetStatusCode);
+s32 sceHttpGetStatusCode(s32 arg0, s32 *arg1) {
+    void *sp0;
+    s32 temp_a1;
+    s32 temp_v0;
+    s32 var_a0;
+
+    if (D_0000DCCC != 1) {
+        var_a0 = 0x80431001;
+    } else {
+        temp_v0 = func_00004AFC(arg0, &sp0);
+        var_a0 = temp_v0;
+        if (temp_v0 >= 0) {
+            var_a0 = 0x80431065;
+            temp_a1 = M2C_FIELD(sp0, s32 *, 0x2C);
+            if (temp_a1 != 0) {
+                var_a0 = 0x80431063;
+                if (temp_a1 != 6) {
+                    var_a0 = 0x8043106C;
+                    if (temp_a1 != 7) {
+                        var_a0 = 0;
+                        *arg1 = M2C_FIELD(sp0, s32 *, 0x124);
+                    }
+                }
+            }
+        }
+    }
+    if (sp0 != NULL) {
+        M2C_FIELD(sp0, s32 *, 0x18) = (s32) (M2C_FIELD(sp0, s32 *, 0x18) - 1);
+    }
+    return var_a0;
+}
 
 INCLUDE_ASM("nonmatchings/libhttp", sceHttpGetNetworkErrno);
 
