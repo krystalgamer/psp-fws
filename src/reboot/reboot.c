@@ -6,7 +6,13 @@
 #include "reboot_decls.h"
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/reboot", func_00000000_v100);
+s32 func_00000000_v100(void) {
+    if (func_00006FA4(0) < 0) {
+        Kprintf("flash.c:%s:sceBootLfatfsMount failed\n", "FlashInitialize");
+        return 0x80020001;
+    }
+    return 0;
+}
 #endif
 
 INCLUDE_ASM("nonmatchings/reboot", func_00000000);
@@ -21,7 +27,27 @@ void func_000003BC(void (*arg0)(s32)) {
     D_00017124 = arg0;
 }
 
+#if FW_VERSION == 100
+void func_000003C8(s32 test, u32 lvl) {
+    u32 cur = ((u32)func_00001D14() & 0x300) >> 8;
+
+    if (test != 0) {
+        return;
+    }
+    if (lvl < cur) {
+        if (D_00017124 != NULL) {
+            D_00017124(0);
+            return;
+        }
+        Kprintf("There is no assert handler, stop\n");
+        for (;;) {
+        }
+    }
+    Kprintf("assertion ignore (level %d >= %d)\n", lvl, cur);
+}
+#else
 INCLUDE_ASM("nonmatchings/reboot", func_000003C8);
+#endif
 
 #if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/reboot", func_00000554);

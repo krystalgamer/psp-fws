@@ -35,7 +35,9 @@ INCLUDE_ASM("nonmatchings/reboot_002D0C", func_00002D2C);
 INCLUDE_ASM("nonmatchings/reboot_002D0C", func_00002D50);
 #endif
 
-INCLUDE_ASM("nonmatchings/reboot_002D0C", look_ctype_table);
+s32 look_ctype_table(s32 c) {
+    return D_00016DF1[c];
+}
 
 M2C_UNK *get_ctype_table(void) {
     return &D_00016DF1;
@@ -152,11 +154,26 @@ void func_000029B4(char **pp, s32 c) {
         **pp = 0;
     }
 }
+
+s32 sprintf(char *buf, const char *fmt, ...) {
+    __builtin_va_list ap;
+    char *p = buf;
+
+    __builtin_va_start(ap, fmt);
+    return prnt(func_000029B4, &p, fmt, ap);
+}
+#else
+INCLUDE_ASM("nonmatchings/reboot_002D0C", sprintf);
 #endif
 
-INCLUDE_ASM("nonmatchings/reboot_002D0C", sprintf);
-
+#if FW_VERSION == 100
+s32 vsprintf(char *buf, const char *fmt, void *ap) {
+    char *p = buf;
+    return prnt(func_000029B4, &p, fmt, ap);
+}
+#else
 INCLUDE_ASM("nonmatchings/reboot_002D0C", vsprintf);
+#endif
 
 #if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/reboot_002D0C", sceKernelDcacheWBinvAll);
@@ -408,7 +425,24 @@ INCLUDE_ASM("nonmatchings/reboot_002D0C", func_0000526C);
 INCLUDE_RODATA("nonmatchings/reboot_002D0C", D_00015164);
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/reboot_002D0C", func_000045FC);
+extern char D_00015164[];
+
+s32 func_000045FC(u8 *buf, void *execInfo) {
+    if (func_00003DD8(buf) != 0) {
+        buf += 0x40;
+    }
+    switch (M2C_FIELD(execInfo, s32 *, 0x20)) {
+    case -1:
+    case 0:
+        break;
+    case 1:
+    case 2:
+        func_00004680(buf, execInfo);
+        return 0;
+    }
+    Kprintf(D_00015164, "sceKernelLoadExecutableObject");
+    return -1;
+}
 
 INCLUDE_ASM("nonmatchings/reboot_002D0C", func_00004680);
 

@@ -164,7 +164,7 @@
   "func_00013A60": "s32 func_00013A60(u32 bit, s32 on);",
   "func_00013AAC": "s32 func_00013AAC(u32 mask, s32 on);",
   "get_ctype_table": "M2C_UNK *get_ctype_table(void);",
-  "look_ctype_table": "s32 look_ctype_table(s32);",
+  "look_ctype_table": "s32 look_ctype_table(s32 c);",
   "memchr": "void *memchr(const void *s, s32 c, s32 n);",
   "memcmp": "s32 memcmp(const void *a, const void *b, s32 n);",
   "memcpy": "void *memcpy(void *dst, const void *src, s32 n);",

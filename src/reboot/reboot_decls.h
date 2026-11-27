@@ -479,7 +479,7 @@ void func_000138F8(void);
 s32 func_00013A60(u32 bit, s32 on);
 s32 func_00013AAC(u32 mask, s32 on);
 M2C_UNK *get_ctype_table(void);
-s32 look_ctype_table(s32);
+s32 look_ctype_table(s32 c);
 void *memchr(const void *s, s32 c, s32 n);
 s32 memcmp(const void *a, const void *b, s32 n);
 void *memcpy(void *dst, const void *src, s32 n);
