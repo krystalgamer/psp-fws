@@ -8,9 +8,7 @@
 
 INCLUDE_ASM("nonmatchings/pspnet_apctl", sceNetApctlInit);
 
-#if FW_VERSION >= 151
-INCLUDE_ASM("nonmatchings/pspnet_apctl", sceNetApctlTerm);
-#else
+#if FW_VERSION < 250
 s32 sceNetApctlTerm(void) {
     s32 temp_v0;
     s32 var_v1;
@@ -25,9 +23,9 @@ s32 sceNetApctlTerm(void) {
     }
     return var_v1;
 }
-#endif
+#else
+INCLUDE_ASM("nonmatchings/pspnet_apctl", sceNetApctlTerm);
 
-#if FW_VERSION >= 250
 INCLUDE_ASM("nonmatchings/pspnet_apctl", sceNetApctlAddHandler);
 #endif
 

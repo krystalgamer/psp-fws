@@ -102,9 +102,7 @@ INCLUDE_ASM("nonmatchings/pspnet", sceNet_lib_CFA79880);
 
 INCLUDE_ASM("nonmatchings/pspnet", sceNetInit);
 
-#if FW_VERSION != 150
-INCLUDE_ASM("nonmatchings/pspnet", sceNetTerm);
-#else
+#if FW_VERSION >= 150 && FW_VERSION < 201
 s32 sceNetTerm(void) {
     func_00001B7C();
     func_00002300();
@@ -115,6 +113,8 @@ s32 sceNetTerm(void) {
     sceWlanDrv_lib_8D5F551B(0x10000);
     return 0;
 }
+#else
+INCLUDE_ASM("nonmatchings/pspnet", sceNetTerm);
 #endif
 
 #if FW_VERSION == 271
@@ -555,9 +555,6 @@ void _sce_pspnet_callout_cleanup(void) {
 }
 #endif
 
-#if FW_VERSION >= 152
-INCLUDE_ASM("nonmatchings/pspnet", _sce_pspnet_callout_reset);
-#else
 void _sce_pspnet_callout_reset(s32 arg0, u32 arg1, s32 arg2, s32 arg3) {
     u32 var_v1;
 
@@ -569,7 +566,6 @@ void _sce_pspnet_callout_reset(s32 arg0, u32 arg1, s32 arg2, s32 arg3) {
         _sce_pspnet_callout_reset_usec(arg0, var_v1 * 0x2710, arg2, arg3);
     }
 }
-#endif
 
 INCLUDE_ASM("nonmatchings/pspnet", func_00002FD8);
 
