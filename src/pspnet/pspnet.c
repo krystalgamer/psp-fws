@@ -2050,7 +2050,7 @@ s32 bpf_allocbufs(struct bpf_d *d) {
     return 0;
 }
 
-void func_000044C0(struct ifnet *ifp) {
+void bpfdetach(struct ifnet *ifp) {
     struct bpf_if *bp, **pbp;
     struct bpf_d *d;
     s32 i, s;
@@ -3134,7 +3134,7 @@ s32 _sce_pspnet_stop_of_inet_module_in_if_core(void) {
 INCLUDE_ASM("nonmatchings/pspnet", func_000064CC);
 
 #if FW_VERSION < 201
-void func_000069DC(struct ifnet *ifp, const u8 *lla) {
+void ether_ifattach(struct ifnet *ifp, const u8 *lla) {
     struct sockaddr_dl *sdl;
 
     ifp->if_type = IFT_ETHER;
@@ -3142,7 +3142,7 @@ void func_000069DC(struct ifnet *ifp, const u8 *lla) {
     ifp->if_hdrlen = 14;
     ifp->if_mtu = 1500;
     ifp->if_output = func_00007020;
-    ifp->if_input = func_00006C8C;
+    ifp->if_input = ether_input;
     if (ifp->if_baudrate == 0)
         ifp->if_baudrate = 10000000;
     if ((sdl = ifp->if_sadl) && sdl->sdl_family == AF_LINK) {
@@ -3154,7 +3154,7 @@ void func_000069DC(struct ifnet *ifp, const u8 *lla) {
     ifp->if_broadcastaddr = D_0000A0F0;
 }
 #else
-INCLUDE_ASM("nonmatchings/pspnet", func_000069DC);
+INCLUDE_ASM("nonmatchings/pspnet", ether_ifattach);
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
@@ -3162,7 +3162,7 @@ INCLUDE_ASM("nonmatchings/pspnet", func_00006AA0);
 #endif
 
 #if FW_VERSION < 201
-void func_00006B10(struct ifnet *ifp) {
+void ether_ifdetach(struct ifnet *ifp) {
     struct ethercom *ec = (void *)ifp;
     struct sockaddr_dl *sdl = ifp->if_sadl;
     struct ether_multi *enm;
@@ -3180,9 +3180,9 @@ void func_00006B10(struct ifnet *ifp) {
     sdl->sdl_type = 0;
 }
 
-INCLUDE_ASM("nonmatchings/pspnet", func_00006BBC);
+INCLUDE_ASM("nonmatchings/pspnet", ether_crc32_le);
 
-u32 func_00006C28(const u8 *buf, u32 len) {
+u32 ether_crc32_be(const u8 *buf, u32 len) {
     u32 i, crc, carry;
     u32 bit;
     u32 rem;
@@ -3206,7 +3206,7 @@ u32 func_00006C28(const u8 *buf, u32 len) {
 INCLUDE_ASM("nonmatchings/pspnet", func_00006AA8);
 #endif
 
-s32 func_00006AE8(struct sockaddr *sa, u8 *addrlo, u8 *addrhi) {
+s32 ether_multiaddr(struct sockaddr *sa, u8 *addrlo, u8 *addrhi) {
     s32 handled;
     s32 error;
 
@@ -3281,7 +3281,7 @@ s32 _sce_pspnet_stop_of_adhoc_module_in_if_ethersubr_core(void) {
 }
 #endif
 
-INCLUDE_ASM("nonmatchings/pspnet", func_00006C8C);
+INCLUDE_ASM("nonmatchings/pspnet", ether_input);
 
 s32 func_00007020(void *a0, void *a1, void *a2, void *a3) {
     if (D_0000B3D4 > 0)
