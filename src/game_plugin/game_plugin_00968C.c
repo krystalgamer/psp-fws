@@ -459,33 +459,3 @@ INCLUDE_ASM("nonmatchings/game_plugin_00968C", func_0000FFC4);
 INCLUDE_ASM("nonmatchings/game_plugin_00968C", func_000100C8);
 
 INCLUDE_ASM("nonmatchings/game_plugin_00968C", func_00010238);
-
-INCLUDE_ASM("nonmatchings/game_plugin_00968C", func_0001040C);
-
-#if FW_VERSION == 271
-INCLUDE_ASM("nonmatchings/game_plugin_00968C", func_000105E0);
-#endif
-
-#if FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/game_plugin_00968C", func_00010464);
-#endif
-
-#if FW_VERSION >= 340
-INCLUDE_ASM("nonmatchings/game_plugin_00968C", func_00014428);
-
-INCLUDE_ASM("nonmatchings/game_plugin_00968C", func_0001499C);
-#endif
-
-#if FW_VERSION >= 350
-INCLUDE_ASM("nonmatchings/game_plugin_00968C", func_00010A38);
-#endif
-
-INCLUDE_RODATA("nonmatchings/game_plugin_00968C", D_000122F8);
-
-#if FW_VERSION == 271
-INCLUDE_RODATA("nonmatchings/game_plugin_00968C", D_00012468);
-#endif
-
-#if FW_VERSION >= 282
-INCLUDE_RODATA("nonmatchings/game_plugin_00968C", D_00012300);
-#endif

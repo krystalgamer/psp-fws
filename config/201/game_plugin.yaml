@@ -61,6 +61,7 @@ segments:
       - [0x8594, c, game_plugin_0081A4]
       - [0x8A0C, c, game_plugin_00856C]
       - [0x9B0C, c, game_plugin_00968C]
+      - [0xFD68, c, game_plugin_crtend]
       - { start: 0xFDC0, type: asm, name: fini, linker_section: .fini }
       - { start: 0xFDDC, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x1033C, type: prxpad, order: .text }
@@ -86,6 +87,7 @@ segments:
       - [0x112FC, .rodata, game_plugin_0081A4]
       - [0x11388, .rodata, game_plugin_00856C]
       - [0x114D0, .rodata, game_plugin_00968C]
+      - [0x11524, .rodata, game_plugin_crtend]
       - { start: 0x1152C, type: prxpad, order: .rodata }
   - name: game_plugin_seg1
     type: code

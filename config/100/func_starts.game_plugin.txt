@@ -1,4 +1,5 @@
-// function starts pinned by tools/add_version.py
+// function starts pinned by tools/split_tu.py
+func_00000000 = 0x00000000; // type:func
 func_00000024 = 0x00000024; // type:func
 func_000000AC = 0x000000AC; // type:func
 func_0000015C = 0x0000015C; // type:func
@@ -135,3 +136,4 @@ func_0000D0C8 = 0x0000D0C8; // type:func
 func_0000E3F0 = 0x0000E3F0; // type:func
 func_0000E50C = 0x0000E50C; // type:func
 func_0000E710 = 0x0000E710; // type:func
+func_0000FC3C = 0x0000FC3C; // type:func
