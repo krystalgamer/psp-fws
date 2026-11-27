@@ -1236,7 +1236,7 @@ void _sce_pspnet_callout_reset_usec(struct callout *c, u32 usec, void (*func)(vo
 INCLUDE_ASM("nonmatchings/pspnet", _sce_pspnet_callout_reset_usec);
 #endif
 
-#if FW_VERSION == 102 || FW_VERSION >= 271
+#if (FW_VERSION >= 102 && FW_VERSION < 150) || FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/pspnet", _sce_pspnet_callout_stop);
 #else
 void _sce_pspnet_callout_stop(struct callout *c) {
@@ -2326,7 +2326,7 @@ INCLUDE_ASM("nonmatchings/pspnet", func_00005AD4);
 INCLUDE_ASM("nonmatchings/pspnet", ifinit);
 #endif
 
-#if FW_VERSION == 102 || (FW_VERSION >= 201 && FW_VERSION < 282)
+#if (FW_VERSION >= 102 && FW_VERSION < 150) || (FW_VERSION >= 201 && FW_VERSION < 282)
 INCLUDE_ASM("nonmatchings/pspnet", _sce_pspnet_if_nulloutput);
 #endif
 
@@ -2909,7 +2909,7 @@ void *sceNetMemchr(const void *s, s32 c, s32 n) {
 }
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/pspnet", func_00007C0C);
 #endif
 
@@ -2984,7 +2984,7 @@ INCLUDE_ASM("nonmatchings/pspnet", func_00007CA4);
 INCLUDE_ASM("nonmatchings/pspnet", func_00007D20);
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 void sceNetBcopy(const void *src, void *dst, s32 n) {
     func_00007C0C(dst, src, n);
 }
@@ -2996,7 +2996,7 @@ void sceNetBcopy(const void *src, void *dst, s32 n) {
 }
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/pspnet", func_00007D38);
 #endif
 
@@ -3038,7 +3038,7 @@ char *sceNetIndex(const char *s, s32 c) {
 }
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/pspnet", func_00007E10);
 #endif
 
@@ -3095,7 +3095,7 @@ char *sceNetStrncpy(char *dst, const char *src, s32 n) {
 }
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/pspnet", func_00007F6C);
 
 INCLUDE_ASM("nonmatchings/pspnet", func_00007F9C);
@@ -3179,7 +3179,7 @@ char func_00007B50(char c) {
     return c;
 }
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/pspnet", func_000087D0);
 #else
 char sceNetTolower(char c) {
@@ -3555,7 +3555,7 @@ INCLUDE_ASM("nonmatchings/pspnet", __umoddi3);
 
 INCLUDE_RODATA("nonmatchings/pspnet", D_0000A574);
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_RODATA("nonmatchings/pspnet", D_00009DA8);
 #endif
 
