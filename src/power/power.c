@@ -1592,7 +1592,7 @@ INCLUDE_ASM("nonmatchings/power", scePowerGetBatteryChargeCycle);
 #endif
 
 #if FW_VERSION >= 282
-s32 scePowerGetInnerTemp(void) {
+s32 scePowerGetInnerTemp(float *temp) {
     return 0x802B0010;
 }
 #endif

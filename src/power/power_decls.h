@@ -127,9 +127,14 @@ typedef struct {
     u32 unk1C;
 #endif
     volatile s32 curHardwarePowerSwitchRequest; /* 1.00: 0x18, 1.50: 0x20 */
-    volatile s32 curSoftwarePowerSwitchRequest; /* 1.00: 0x1C, 1.50: 0x24 */
+#if FW_VERSION >= 201
+    /* volatile from 2.01 on (scePowerIsRequest reads it); a plain store in 1.00 func_00001178 */
+    volatile s32 curSoftwarePowerSwitchRequest; /* 0x24 */
+#else
+    s32 curSoftwarePowerSwitchRequest; /* 1.00: 0x1C, 1.50: 0x24 */
+#endif
 #if FW_VERSION >= 150
-    volatile u32 isRebootPowerLockExist; /* 0x28 */
+    u32 isRebootPowerLockExist; /* 0x28 */
 #endif
 #if FW_VERSION >= 201
     u32 coldResetMode; /* 0x2C */
@@ -281,7 +286,7 @@ s32 scePowerGetDdrStrength(s32 *arg0, s32 *arg1);
 s32 scePowerGetDdrVoltage(s32 *arg0, s32 *arg1);
 s32 scePowerGetForceSuspendCapacity(void);
 s32 scePowerGetGeEdramRefreshMode(void);
-s32 scePowerGetInnerTemp(void);
+s32 scePowerGetInnerTemp(float *temp);
 u8 scePowerGetLedOffTiming(void);
 s32 scePowerGetLowBatteryCapacity(void);
 s32 scePowerGetPllClockFrequencyInt(void);
