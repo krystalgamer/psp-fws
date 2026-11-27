@@ -91,3 +91,17 @@ D_000038D4 = 0x00003914;
 D_000038D5 = 0x00003915;
 D_00003380_v311 = 0x00003380; // rom:0x3400
 // shared names (tools/add_version.py) end
+updateAudioBuf = 0x00000000; // type:func
+audioOutput = 0x00001330; // type:func
+dmaUpdate = 0x000001E8; // type:func
+audioMixerThread = 0x00000274; // type:func
+audioOutputDmaCb = 0x000004EC; // type:func
+audioIntrHandler = 0x00001908; // type:func
+audioHwInit = 0x00001A70; // type:func
+audioEventHandler = 0x00001B90; // type:func
+audioSRCOutputDmaCb = 0x00001CC8; // type:func
+audioSRCOutput = 0x0000217C; // type:func
+audioInputThread = 0x0000234C; // type:func
+audioInputSetup = 0x000028AC; // type:func
+audioInput = 0x000029D4; // type:func
+audioInputDmaCb = 0x00002B7C; // type:func

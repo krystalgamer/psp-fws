@@ -86,12 +86,19 @@ sceSysregAudioClkoutIoEnable = 0x00002FB4; // type:func
 // shared names (tools/add_version.py) begin
 D_000032E4 = 0x0000351C; // rom:0x359C
 D_0000394C = 0x00003A8C;
-func_0000020C = 0x00000200; // type:func rom:0x280
-func_00000518 = 0x00000510; // type:func rom:0x590
-func_00001330 = 0x00001334; // type:func rom:0x13B4
-func_00001834 = 0x00001938; // type:func rom:0x19B8
-func_000017A0 = 0x00001AA0; // type:func rom:0x1B20
-func_000019C0 = 0x00001BDC; // type:func rom:0x1C5C
-func_00002938 = 0x00002BE8; // type:func rom:0x2C68
+dmaUpdate = 0x00000200; // type:func rom:0x280
+audioOutputDmaCb = 0x00000510; // type:func rom:0x590
+audioOutput = 0x00001334; // type:func rom:0x13B4
+audioIntrHandler = 0x00001938; // type:func rom:0x19B8
+audioHwInit = 0x00001AA0; // type:func rom:0x1B20
+audioEventHandler = 0x00001BDC; // type:func rom:0x1C5C
+audioInput = 0x00002BE8; // type:func rom:0x2C68
 // shared names (tools/add_version.py) end
 g_audio = 0x000035C0;
+updateAudioBuf = 0x00000000; // type:func
+audioMixerThread = 0x0000028C; // type:func
+audioSRCOutputDmaCb = 0x00001D24; // type:func
+audioSRCOutput = 0x000021E0; // type:func
+audioInputThread = 0x000023B4; // type:func
+audioInputSetup = 0x00002A94; // type:func
+audioInputDmaCb = 0x00002DA0; // type:func

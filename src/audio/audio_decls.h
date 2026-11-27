@@ -57,10 +57,15 @@ typedef struct {
 
 extern SceAudio g_audio;
 
-s32 func_00000220(s32 arg);
-s32 func_0000243C(s32, s32, s32);
-s32 func_000029D4(s32, s32, s32);
-s32 func_00002A18(s32, s32, s32);
+void audioHwInit(void);
+s32 audioInput(s32 sampleCount, s32 freq, void *buf);
+s32 audioInputDmaCb(s32 arg0, s32 arg1);
+s32 audioInputSetup(void);
+s32 audioOutput(SceAudioChannel *channel, s32 leftVol, s32 rightVol, void *buf);
+s32 audioOutputDmaCb(s32 unused, s32 arg1);
+s32 audioSRCOutput(s32 vol, void *buf);
+s32 audioSRCOutputDmaCb(s32 arg0, s32 arg1);
+s32 dmaUpdate(s32 arg);
 s32 sceAudioInput(s32 arg0, s32 arg1, void *arg2);
 s32 sceAudioOutput2OutputBlocking(s32 arg0, void *arg1);
 s32 sceAudioOutput2Release(void);
@@ -77,5 +82,6 @@ s32 sceKernelDmaOpEnQueue(void *op);
 s32 sceKernelDmaOpQuit(void *op);
 s32 sceKernelSetEventFlag(SceUID id, u32 bits);
 s32 sceKernelWaitEventFlag(SceUID id, u32 bits, u32 wait, u32 *outBits, void *timeout);
+void updateAudioBuf(s32 arg);
 
 #endif
