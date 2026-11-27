@@ -313,6 +313,21 @@ struct Unk_func_0000A3DC_0 {
     s32 ** unk8;
 };
 
+/* lfatfs.c wait_sema(): inlined into every UFat* entry point. */
+extern SceUID D_0000D354;
+extern char D_0000CF5C[];
+extern char D_0000CF6C[];
+s32 Kprintf(const char *fmt, ...);
+s32 sceKernelWaitSema(SceUID semaid, s32 signal, u32 *timeout);
+static inline s32 wait_sema(SceUID sema) {
+    s32 ret = sceKernelWaitSema(sema, 1, NULL);
+
+    if (ret != 0) {
+        Kprintf(D_0000CF5C, D_0000CF6C, ret);
+    }
+    return ret;
+}
+
 extern char D_0000C56C[];
 extern char D_0000C5B4[];
 extern char D_0000CD6C[];
@@ -325,6 +340,7 @@ extern char D_0000CF9C[];
 extern char D_0000D03C[];
 extern char D_0000D084[];
 extern char D_0000D22C[];
+extern SceUID D_0000D354;
 extern volatile SceUID D_0000D360;
 extern u8 D_0000D464[256];
 extern void *D_0000D60C;
@@ -398,12 +414,16 @@ void func_00003ACC(s32 arg0);
 s32 func_00003AD8(s32, s32, s32);
 void func_00003AE8(struct Unk_func_00003AE8_0 *arg0);
 void func_00003B14(struct Unk_func_00003B14_0 *arg0);
+void func_00003B3C(s32 *args);
+void func_00003B70(s32 *args);
 void func_00003B90(struct Unk_func_00003B90_0 *arg0);
 void func_00003BB8(struct Unk_func_00003BB8_0 *arg0);
 void func_00003BD8(struct Unk_func_00003BD8_0 *arg0);
 void func_00003BF8(struct Unk_func_00003BF8_0 *arg0);
 void func_00003C18(struct Unk_func_00003C18_0 *arg0);
 void func_00003C40(struct Unk_func_00003C40_0 *arg0);
+void func_00003C6C(s32 *args);
+void func_00003CA0(s32 *args);
 s32 func_00003F94(s32, s32);
 s32 func_00004258(s32, s32);
 s32 func_000042D8(s32, s32, s32, s32);
