@@ -527,8 +527,8 @@ s32 func_00002750(void) {
     return sceKernelPollSema(D_0000EB50, 1);
 }
 
-void func_00002774(void) {
-    sceKernelWaitSema(D_0000EB50, 1, NULL);
+s32 func_00002774(void) {
+    return sceKernelWaitSema(D_0000EB50, 1, NULL);
 }
 #endif
 
@@ -936,7 +936,56 @@ out:
 INCLUDE_ASM("nonmatchings/umdman", sceUmdExecTestCmd);
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION >= 201
+#if FW_VERSION == 100
+s32 sceUmdExecAllocateFromReadCmd(SceUmdDrive *drive, void *param) {
+    s8 buf[0x10];
+    volatile SceAtaCmdState state;
+    s32 stat;
+    s32 ret;
+
+    if (drive == NULL || drive->ataDrive == NULL)
+        return 0x80010016;
+    ret = sceUmdManProbeRemainIcache(drive);
+    if (ret != 0)
+        return ret;
+    func_00007C30_v100(drive->ataDrive->driveId, &stat);
+    ret = func_00007CA8_v100(drive->ataDrive->driveId, stat);
+    if (ret != 0)
+        goto end;
+    if (drive->ataDrive->unk8 != 0xB0)
+        goto end;
+    ret = func_00005358(0xF0, drive);
+    if (ret != 0)
+        goto end;
+    {
+        s32 st = stat;
+        volatile SceAtaCmdState *s = &state;
+        SceAtaDrive *ata = drive->ataDrive;
+        ret = 0x80010016;
+        state.unk0 = 0xF0;
+        if (ata == NULL || s == NULL)
+            goto end;
+        ata->cmd = (SceAtaCmdState *)s;
+        s->unkC = (u32)buf;
+        ata->cmd->driveStat = st;
+    }
+    ret = sceAtaExecPacketCmd(drive->ataDrive, 0, 0x2000, 0, 0, 0xF0, param);
+    if (ret != 0)
+        goto end;
+    ret = sceAtaAccessDataPort(drive->ataDrive, drive->ataDrive->timeout, 2, 2);
+    if (ret != 0)
+        goto end;
+    ret = 0x80211022;
+    if (buf[0] != 0x47 && buf[0] != 8)
+        goto end;
+    ret = sceAtaCheckPacketCmdComplete(drive->ataDrive, 2);
+end:
+    sceUmdMan_driver_815AA6D3(drive);
+    return ret;
+}
+#endif
+
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/umdman", sceUmdExecAllocateFromReadCmd);
 #endif
 
@@ -985,9 +1034,113 @@ end:
 INCLUDE_ASM("nonmatchings/umdman", sceUmdExecReadCapacityCmd);
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION >= 201
-INCLUDE_ASM("nonmatchings/umdman", sceUmdExecModSenseCmd);
+#if FW_VERSION == 100
+s32 sceUmdExecModSenseCmd(SceUmdDrive *drive, u16 *param, void *buf) {
+    volatile SceAtaCmdState state;
+    s32 stat;
+    s32 dipsw;
+    s32 ret;
 
+    if (drive == NULL || drive->ataDrive == NULL || param == NULL || buf == NULL)
+        return 0x80010016;
+    while (sceUmdManSyncState() != 0)
+        ;
+    ret = sceUmdManProbeRemainIcache(drive);
+    if (ret != 0)
+        return ret;
+    dipsw = sceKernelDipswAll();
+    if ((dipsw & 0x10000) != 0) {
+        ret = func_00002774();
+        if (ret < 0)
+            goto release;
+    }
+    func_00007C30_v100(drive->ataDrive->driveId, &stat);
+    ret = func_00007CA8_v100(drive->ataDrive->driveId, stat);
+    if (ret != 0)
+        goto end;
+    ret = func_00005358(90, drive);
+    if (ret != 0)
+        goto end;
+    {
+        s32 st = stat;
+        ret = 0x80010016;
+        if (drive->ataDrive != NULL) {
+            drive->ataDrive->cmd = (SceAtaCmdState *)&state;
+            state.unkC = (u32)buf;
+            drive->ataDrive->cmd->driveStat = st;
+            ret = sceAtaExecPacketCmd(drive->ataDrive, 0, 0x2000, 0, 0, 90, param);
+            if (ret == 0) {
+                ret = sceAtaAccessDataPort(drive->ataDrive, drive->ataDrive->timeout, 2, param[2]);
+                if (ret == 0)
+                    ret = sceAtaCheckPacketCmdComplete(drive->ataDrive, param[2]);
+            }
+        }
+    }
+end:
+    if ((dipsw & 0x10000) != 0)
+        func_0000279C();
+release:
+    sceUmdMan_driver_815AA6D3(drive);
+    return ret;
+}
+#endif
+
+#if FW_VERSION >= 201
+INCLUDE_ASM("nonmatchings/umdman", sceUmdExecModSenseCmd);
+#endif
+
+#if FW_VERSION == 100
+s32 sceUmdExecModSelectCmd(SceUmdDrive *drive, u16 *param, void *buf) {
+    volatile SceAtaCmdState state;
+    s32 stat;
+    s32 dipsw;
+    s32 ret;
+
+    if (drive == NULL || drive->ataDrive == NULL || param == NULL || buf == NULL)
+        return 0x80010016;
+    while (sceUmdManSyncState() != 0)
+        ;
+    ret = sceUmdManProbeRemainIcache(drive);
+    if (ret != 0)
+        return ret;
+    dipsw = sceKernelDipswAll();
+    if ((dipsw & 0x10000) != 0) {
+        ret = func_00002774();
+        if (ret < 0)
+            goto release;
+    }
+    func_00007C30_v100(drive->ataDrive->driveId, &stat);
+    ret = func_00007CA8_v100(drive->ataDrive->driveId, stat);
+    if (ret != 0)
+        goto end;
+    ret = func_00005358(85, drive);
+    if (ret != 0)
+        goto end;
+    {
+        s32 st = stat;
+        ret = 0x80010016;
+        if (drive->ataDrive != NULL) {
+            drive->ataDrive->cmd = (SceAtaCmdState *)&state;
+            state.unkC = (u32)buf;
+            drive->ataDrive->cmd->driveStat = st;
+            ret = sceAtaExecPacketCmd(drive->ataDrive, 0, 0x2000, 0, 0, 85, param);
+            if (ret == 0) {
+                ret = sceAtaAccessDataPort(drive->ataDrive, drive->ataDrive->timeout, 2, param[2]);
+                if (ret == 0)
+                    ret = sceAtaCheckPacketCmdComplete(drive->ataDrive, param[2]);
+            }
+        }
+    }
+end:
+    if ((dipsw & 0x10000) != 0)
+        func_0000279C();
+release:
+    sceUmdMan_driver_815AA6D3(drive);
+    return ret;
+}
+#endif
+
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/umdman", sceUmdExecModSelectCmd);
 #endif
 
@@ -1164,11 +1317,149 @@ end:
 INCLUDE_ASM("nonmatchings/umdman", sceUmdExecPrefetch10Cmd);
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION >= 201
+#if FW_VERSION == 100
+s32 sceUmdExecReadUMDStructureCmd(SceUmdDrive *drive, u16 *param, void *buf) {
+    volatile SceAtaCmdState state;
+    s32 stat;
+    s32 ret;
+
+    if (drive == NULL || drive->ataDrive == NULL || drive->ataDrive->driveId < 0 || param == NULL || buf == NULL)
+        return 0x80010016;
+    ret = sceUmdManProbeRemainIcache(drive);
+    if (ret != 0)
+        return ret;
+    func_00007C30_v100(drive->ataDrive->driveId, &stat);
+    ret = func_00007CA8_v100(drive->ataDrive->driveId, stat);
+    if (ret != 0)
+        goto end;
+    ret = func_00005358(173, drive);
+    if (ret != 0)
+        goto end;
+    drive->ataDrive->byteLimit = sceAtaGetByteLimitCount(param[4]);
+    {
+        s32 st = stat;
+        ret = 0x80010016;
+        if (drive->ataDrive != NULL) {
+            drive->ataDrive->cmd = (SceAtaCmdState *)&state;
+            state.unkC = (u32)buf;
+            drive->ataDrive->cmd->driveStat = st;
+            ret = sceAtaExecPacketCmd(drive->ataDrive, 0, (u16)drive->ataDrive->byteLimit, 0, 0, 173, param);
+            if (ret == 0) {
+                ret = sceAtaAccessDataPort(drive->ataDrive, drive->ataDrive->timeout, 2, 4);
+                if (ret == 0) {
+                    ret = sceAtaAccessDataPort(drive->ataDrive, drive->ataDrive->timeout, 2, param[4]);
+                    if (ret == 0)
+                        ret = sceAtaCheckPacketCmdComplete(drive->ataDrive, param[4]);
+                }
+            }
+        }
+    }
+end:
+    sceUmdMan_driver_815AA6D3(drive);
+    return ret;
+}
+#endif
+
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/umdman", sceUmdExecReadUMDStructureCmd);
+#endif
 
+#if FW_VERSION == 100
+s32 sceUmdExecReportCacheCmd(SceUmdDrive *drive, u16 *param, void *buf) {
+    volatile SceAtaCmdState state;
+    s32 stat;
+    s32 ret;
+
+    if (drive == NULL || drive->ataDrive == NULL || param == NULL || buf == NULL)
+        return 0x80010016;
+    while (sceUmdManSyncState() != 0)
+        ;
+    ret = sceUmdManProbeRemainIcache(drive);
+    if (ret != 0)
+        return ret;
+    func_00007C30_v100(drive->ataDrive->driveId, &stat);
+    ret = func_00007CA8_v100(drive->ataDrive->driveId, stat);
+    if (ret != 0)
+        goto end;
+    if (drive->ataDrive->unk8 != 0xB0)
+        goto end;
+    ret = func_00005358(242, drive);
+    if (ret != 0)
+        goto end;
+    {
+        s32 st = stat;
+        SceAtaDrive *ata = drive->ataDrive;
+        ret = 0x80010016;
+        if (ata == NULL)
+            goto end;
+        ata->cmd = (SceAtaCmdState *)&state;
+        state.unkC = (u32)buf;
+        ata->cmd->driveStat = st;
+        ata->byteLimit = sceAtaGetByteLimitCount(param[2]);
+    }
+    ret = sceAtaExecPacketCmd(drive->ataDrive, 0, (u16)drive->ataDrive->byteLimit, 0, 0, 0xF2, param);
+    if (ret != 0)
+        goto end;
+    ret = sceAtaAccessDataPort(drive->ataDrive, drive->ataDrive->timeout, 2, param[2]);
+    if (ret != 0)
+        goto end;
+    ret = sceAtaCheckPacketCmdComplete(drive->ataDrive, param[2]);
+end:
+    sceUmdMan_driver_815AA6D3(drive);
+    return ret;
+}
+#endif
+
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/umdman", sceUmdExecReportCacheCmd);
+#endif
 
+#if FW_VERSION == 100
+s32 sceUmdExecGetMediaInfoCmd(SceUmdDrive *drive, s32 size, void *buf) {
+    volatile SceAtaCmdState state;
+    s32 stat;
+    s32 len = size;
+    s32 ret;
+
+    if (drive == NULL || drive->ataDrive == NULL || buf == NULL || size <= 0)
+        return 0x80010016;
+    while (sceUmdManSyncState() != 0)
+        ;
+    ret = sceUmdManProbeRemainIcache(drive);
+    if (ret != 0)
+        return ret;
+    func_00007C30_v100(drive->ataDrive->driveId, &stat);
+    ret = func_00007CA8_v100(drive->ataDrive->driveId, stat);
+    if (ret != 0)
+        goto end;
+    if (drive->ataDrive->unk8 != 0xB0)
+        goto end;
+    ret = func_00005358(244, drive);
+    if (ret != 0)
+        goto end;
+    {
+        s32 st = stat;
+        ret = 0x80010016;
+        if (drive->ataDrive == NULL)
+            goto end;
+        drive->ataDrive->cmd = (SceAtaCmdState *)&state;
+        state.unkC = (u32)buf;
+        drive->ataDrive->cmd->driveStat = st;
+    }
+    ret = sceAtaExecPacketCmd(drive->ataDrive, 0, (u16)sceAtaGetByteLimitCount(size), 0, 0, 0xF4, &len);
+    if (ret != 0)
+        goto end;
+    ret = sceAtaAccessDataPort(drive->ataDrive, drive->ataDrive->timeout, 2, size);
+    if (ret != 0)
+        goto end;
+    ret = sceAtaCheckPacketCmdComplete(drive->ataDrive, size);
+end:
+    sceUmdMan_driver_815AA6D3(drive);
+    return ret;
+}
+#endif
+
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/umdman", sceUmdExecGetMediaInfoCmd);
 #endif
 
@@ -1388,7 +1679,51 @@ end:
 INCLUDE_ASM("nonmatchings/umdman", sceUmdExecSeekCmd);
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION >= 201
+#if FW_VERSION == 100
+s32 sceUmdExecGetErrorLogCmd(SceUmdDrive *drive, u16 *param, void *buf) {
+    volatile SceAtaCmdState state;
+    s32 stat;
+    s32 ret;
+    SceAtaDrive *ata;
+
+    if (drive == NULL || drive->ataDrive == NULL || param == NULL || buf == NULL)
+        return 0x80010016;
+    while (sceUmdManSyncState() != 0)
+        ;
+    ret = sceUmdManProbeRemainIcache(drive);
+    if (ret != 0)
+        return ret;
+    func_00007C30_v100(drive->ataDrive->driveId, &stat);
+    ret = func_00007CA8_v100(drive->ataDrive->driveId, stat);
+    if (ret != 0)
+        goto end;
+    ata = drive->ataDrive;
+    if (ata->unk8 != 0xB0)
+        goto end;
+    {
+        s32 st = stat;
+        ret = 0x80010016;
+        if (ata == NULL)
+            goto end;
+        ata->cmd = (SceAtaCmdState *)&state;
+        state.unkC = (u32)buf;
+        ata->cmd->driveStat = st;
+        ata->byteLimit = sceAtaGetByteLimitCount(param[1]);
+    }
+    ret = sceAtaExecPacketCmd(drive->ataDrive, 0, (u16)drive->ataDrive->byteLimit, 0, 0, 0xF9, param);
+    if (ret != 0)
+        goto end;
+    ret = sceAtaAccessDataPort(drive->ataDrive, drive->ataDrive->timeout, 2, param[1]);
+    if (ret != 0)
+        goto end;
+    ret = sceAtaCheckPacketCmdComplete(drive->ataDrive, param[1]);
+end:
+    sceUmdMan_driver_815AA6D3(drive);
+    return ret;
+}
+#endif
+
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/umdman", sceUmdExecGetErrorLogCmd);
 #endif
 
@@ -1416,9 +1751,58 @@ s32 func_00007CA8_v100(s32 id, s32 stat) {
         return 0;
     return sceAtaIsNormalDriveStat(id) ? 0 : 0x80211018;
 }
+
+s32 sceUmdExecSetCDSpeedCmd(SceUmdDrive *drive, void *param) {
+    volatile SceAtaCmdState state;
+    s32 stat;
+    s32 dipsw;
+    s32 ret;
+    SceAtaDrive *ata;
+
+    if (drive == NULL || drive->ataDrive == NULL || param == NULL)
+        return 0x80010016;
+    while (sceUmdManSyncState() != 0)
+        ;
+    ret = sceUmdManProbeRemainIcache(drive);
+    if (ret != 0)
+        return ret;
+    dipsw = sceKernelDipswAll();
+    if ((dipsw & 0x10000) != 0) {
+        ret = func_00002774();
+        if (ret < 0)
+            goto release;
+    }
+    func_00007C30_v100(drive->ataDrive->driveId, &stat);
+    ret = func_00007CA8_v100(drive->ataDrive->driveId, stat);
+    if (ret != 0)
+        goto end;
+    ata = drive->ataDrive;
+    if (ata->unk8 != 0xB0)
+        goto end;
+    {
+        s32 st = stat;
+        ret = 0x80010016;
+        if (ata == NULL)
+            goto end;
+        ata->cmd = (SceAtaCmdState *)&state;
+        state.unkC = 0;
+        ata->cmd->driveStat = st;
+        ata->byteLimit = sceAtaGetByteLimitCount(0x2000);
+    }
+    ret = sceAtaExecPacketCmd(drive->ataDrive, 0, (u16)drive->ataDrive->byteLimit, 0, 0, 0xBB, param);
+    if (ret != 0)
+        goto end;
+    ret = sceAtaCheckPacketCmdComplete(drive->ataDrive, 0);
+end:
+    if ((dipsw & 0x10000) != 0)
+        func_0000279C();
+release:
+    sceUmdMan_driver_815AA6D3(drive);
+    return ret;
+}
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION >= 300
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/umdman", sceUmdExecSetCDSpeedCmd);
 #endif
 
@@ -1428,7 +1812,56 @@ INCLUDE_ASM("nonmatchings/umdman", func_00004CEC);
 
 #if FW_VERSION == 100 || FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/umdman", sceUmdExecSetStreamingCmd);
+#endif
 
+#if FW_VERSION == 100
+s32 sceUmdExecAdjustDataCmd(s32 cmd, SceUmdDrive *drive, u16 *param, void *buf) {
+    volatile SceAtaCmdState state;
+    s32 stat;
+    s32 ret;
+    SceAtaDrive *ata;
+
+    if (drive == NULL || drive->ataDrive == NULL || param == NULL || buf == NULL)
+        return 0x80010016;
+    ret = sceUmdManProbeRemainIcache(drive);
+    if (ret != 0)
+        return ret;
+    func_00007C30_v100(drive->ataDrive->driveId, &stat);
+    ret = func_00007CA8_v100(drive->ataDrive->driveId, stat);
+    if (ret != 0)
+        goto end;
+    ata = drive->ataDrive;
+    if (ata->unk8 != 0xB0)
+        goto end;
+    if (cmd == 0xFC)
+        ata->timeout = 2;
+    else if (cmd == 0xFD)
+        ata->timeout = 4;
+    else
+        return 0x80010016;
+    {
+        s32 st = stat;
+        ret = 0x80010016;
+        if (ata != NULL) {
+            ata->cmd = (SceAtaCmdState *)&state;
+            state.unkC = (u32)buf;
+            ata->cmd->driveStat = st;
+            ret = sceAtaExecPacketCmd(drive->ataDrive, 0, 0x8000, 0, 0, cmd, param);
+            if (ret == 0) {
+                ret = sceAtaAccessDataPort(drive->ataDrive, drive->ataDrive->timeout, 2, param[1]);
+                if (ret == 0)
+                    ret = sceAtaCheckPacketCmdComplete(drive->ataDrive, param[1]);
+            }
+        }
+    }
+end:
+    sceUmdMan_driver_815AA6D3(drive);
+out:
+    return ret;
+}
+#endif
+
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/umdman", sceUmdExecAdjustDataCmd);
 #endif
 
