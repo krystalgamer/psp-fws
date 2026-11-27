@@ -195,11 +195,11 @@ s32 func_000101AC(void *arg0) {
 }
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 271
+#if FW_VERSION >= 152 && FW_VERSION < 271
 INCLUDE_ASM("nonmatchings/savedata_utility_017068", func_000101B4);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 152
 void func_000101B4(void *arg0, s32 arg1) {
     _ZN3paf4View8PageOpenEPKcii(M2C_FIELD(arg0, s32 *, 4), arg1, 0, 0);
 }
