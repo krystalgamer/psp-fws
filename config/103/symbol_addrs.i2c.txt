@@ -21,3 +21,21 @@ sceSysregIicClkDisable = 0x000014B4; // type:func rom:0x1534
 sceSysregIicIoEnable = 0x000014BC; // type:func rom:0x153C
 sceSysregIicIoDisable = 0x000014C4; // type:func rom:0x1544
 // shared names (tools/add_version.py) end
+
+// NID-derived names
+sceI2cMasterReceive = 0x000002B8; // type:func
+sceI2cMasterTransmitReceive = 0x000007B4; // type:func
+module_start = 0x00000EB4; // type:func
+sceI2cInit = 0x00000FD0; // type:func
+sceI2cSetPollingMode = 0x0000114C; // type:func
+sceI2cSetClock = 0x00001198; // type:func
+sceKernelRegisterIntrHandler = 0x00001434; // type:func
+sceKernelEnableIntr = 0x00001444; // type:func
+sceKernelDisableIntr = 0x0000144C; // type:func
+sceKernelCreateSema = 0x0000145C; // type:func
+sceKernelSignalSema = 0x0000146C; // type:func
+sceKernelWaitSema = 0x00001474; // type:func
+sceKernelCreateEventFlag = 0x0000147C; // type:func
+sceKernelSetEventFlag = 0x0000148C; // type:func
+sceKernelWaitEventFlag = 0x00001494; // type:func
+sceKernelRegisterSysEventHandler = 0x0000149C; // type:func
