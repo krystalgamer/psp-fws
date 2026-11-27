@@ -94,6 +94,14 @@ typedef struct SceMsgPipe {
     s32 unk4; /* 0x04: cleared when the last waiting thread leaves */
 } SceMsgPipe;
 
+/* saved state of the syscall the thread is in (partial) */
+typedef struct SceThreadSyscallFrame {
+    u8 unk0[0xC];
+    void *ra; /* 0x0C: user return address */
+    u8 unk10[0x18 - 0x10];
+    s32 unk18; /* 0x18 */
+} SceThreadSyscallFrame;
+
 /* "Thread" uid type data, 0x10C bytes (1.00) */
 typedef struct SceThread {
     struct SceThread *next; /* 0x00 */
@@ -128,7 +136,7 @@ typedef struct SceThread {
     s32 threadPreemptCount; /* 0xEC */
     s32 releaseCount; /* 0xF0 */
     u8 unkF4[0x100 - 0xF4];
-    void *unk100; /* 0x100 */
+    SceThreadSyscallFrame *unk100; /* 0x100 */
     u8 unk104[0x10C - 0x104];
 } SceThread;
 
