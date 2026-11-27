@@ -4,6 +4,12 @@
 #include "common.h"
 #include "m2c_macros.h"
 
+#ifdef __cplusplus
+#include "paf.h"
+#include "vsh.h"
+extern "C" {
+#endif
+
 struct Unk_func_00004BA8_0 {
     s32 unk0;
     s32 unk4;
@@ -157,9 +163,9 @@ M2C_UNK _ZN3paf4View9PageCloseEPKc(s32);
 s32 _ZN3paf6Module12SetInterfaceEiPv(s32, s32, s32);
 void **_ZN3paf8PhWidget9FindChildEPKci(s32, M2C_UNK *, M2C_UNK);
 M2C_UNK _ZN3paf9PhHandler11SetCallBackEiPFvPNS_8PhWidgetEPNS_7PhEventEPvES5_(s32, M2C_UNK, M2C_UNK *, M2C_UNK);
-M2C_UNK _ZN3vsh12BusyIcon_IncEv();
+M2C_UNK _ZN3vsh12BusyIcon_IncEv(void);
 s32 _ZN3vsh14GetString_BackE6Locale(M2C_UNK);
-s32 _ZN3vsh14GetString_BackEv();
+s32 _ZN3vsh14GetString_BackEv(void);
 M2C_UNK _ZN3vsh26ShowButtonNavigation_EnterEb(M2C_UNK);
 M2C_UNK _ZN3vsh30SetButtonNavigationString_BackEPKw(void *, s32);
 void **_ZNK3paf4View10FindWidgetEPKc(s32, M2C_UNK *);
@@ -175,7 +181,7 @@ s32 func_00000480(s32);
 void func_0000049C(void);
 void func_000004BC(void);
 s32 func_0000052C(s32, s32);
-M2C_UNK func_00000588();
+M2C_UNK func_00000588(...);
 s32 func_000005D8(void);
 void func_0000083C(s32 arg0);
 void func_0000084C(s32 arg0);
@@ -249,7 +255,7 @@ void func_00003C3C(void);
 s32 func_00003E08(s32);
 s32 func_00003E44(void);
 s32 func_00003ECC(void);
-M2C_UNK func_00004338();
+M2C_UNK func_00004338(...);
 void func_000043E0(void);
 s32 func_00004428(void);
 s32 func_000046B8(void);
@@ -279,18 +285,18 @@ s32 func_000052C0(void);
 s32 func_0000535C(void);
 s32 func_0000544C(void);
 void func_000054E4(void);
-M2C_UNK func_00005568();
+M2C_UNK func_00005568(...);
 s32 func_00005748(void);
 s32 func_00005874(void);
 void func_00005930(void);
-M2C_UNK func_0000594C();
+M2C_UNK func_0000594C(...);
 void func_00006060(void);
 s32 func_0000638C(void);
 void func_0000641C(void);
 s32 func_000064A8(void);
 s32 func_000068C0(s32 arg0);
-M2C_UNK func_000069EC();
-M2C_UNK func_00006A80();
+M2C_UNK func_000069EC(...);
+M2C_UNK func_00006A80(...);
 void func_00006AA0(struct Unk_func_00006AA0_0 *arg0);
 void func_00006CF4(struct Unk_func_00006CF4_0 *arg0);
 void func_00006D04(struct Unk_func_00006D04_0 *arg0, s32 arg1);
@@ -298,27 +304,31 @@ M2C_UNK func_00006D38(void *);
 void func_00006E54(struct Unk_func_00006E54_0 *arg0);
 s32 func_00006EC8(s32, s32);
 void func_0000D310(void);
-M2C_UNK func_0000D368();
+M2C_UNK func_0000D368(...);
 s32 module_stop(void);
 M2C_UNK sceKernelPowerTick(M2C_UNK);
 s32 sceKernelStopModule(s32, u32, void *, void *, void *);
 s32 sceKernelUnloadModule(s32);
-s32 sceNetAdhocDownloadAbortRecv();
-s32 sceNetAdhocDownloadAbortRequestSession();
+s32 sceNetAdhocDownloadAbortRecv(...);
+s32 sceNetAdhocDownloadAbortRequestSession(...);
 s32 sceNetAdhocDownloadStartClient(M2C_UNK, M2C_UNK, M2C_UNK, M2C_UNK);
-M2C_UNK sceNetAdhocDownloadStopClient();
-M2C_UNK sceNetAdhocMatchingTerm();
+M2C_UNK sceNetAdhocDownloadStopClient(...);
+M2C_UNK sceNetAdhocMatchingTerm(...);
 s32 sceNetAdhocTerm(void);
 M2C_UNK sceNetAdhocctlDelHandler(s32);
-M2C_UNK sceNetAdhocctlDisconnect();
-M2C_UNK sceNetAdhocctlTerm();
-M2C_UNK sceNetTerm();
+M2C_UNK sceNetAdhocctlDisconnect(...);
+M2C_UNK sceNetAdhocctlTerm(...);
+M2C_UNK sceNetTerm(...);
 M2C_UNK scePaf_39E62C88(s32, M2C_UNK *, M2C_UNK, M2C_UNK);
 M2C_UNK scePaf_8B38372A(s32);
 M2C_UNK scePaf_A013540A(s32, M2C_UNK *);
 s32 scePaf_BB3CBD19(s32, M2C_UNK *, M2C_UNK);
 M2C_UNK scePaf_CD216C47(s32);
 M2C_UNK sceVshCommonGui_11C48509(void *, s32);
-s32 sceVshCommonGui_EC899EBE();
+s32 sceVshCommonGui_EC899EBE(...);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

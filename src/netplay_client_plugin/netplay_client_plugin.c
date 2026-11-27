@@ -1,3 +1,4 @@
+/* lang: c++ */
 #include "common.h"
 #include "netplay_client_plugin_decls.h"
 
@@ -197,7 +198,7 @@ INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_0000015C);
 void func_0000015C(void) {
     M2C_UNK *temp_s0;
 
-    temp_s0 = "page_netplay_dialog";
+    temp_s0 = (M2C_UNK*) "page_netplay_dialog";
     scePaf_39E62C88(D_0000EAF0, temp_s0, 0, 0);
     scePaf_A013540A(D_0000EAF0, temp_s0);
 }
