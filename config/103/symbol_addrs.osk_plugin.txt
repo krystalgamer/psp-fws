@@ -557,3 +557,30 @@ func_0000CA20 = 0x0000CC1C; // type:func rom:0xCC9C
 func_0000CA28 = 0x0000CC24; // type:func rom:0xCCA4
 D_0000D974_v103 = 0x0000D974; // rom:0xD9F4
 // shared names (tools/add_version.py) end
+
+// NID-derived names
+sce_paf_private_wcscpy = 0x0000C96C; // type:func
+sce_paf_private_qsort = 0x0000C9AC; // type:func
+_Znwj = 0x0000C9B4; // type:func
+_ZN3paf8PhWidget8ShowFadeEfbi = 0x0000C9CC; // type:func
+_ZN3paf8PhWidget8HideFadeEfbi = 0x0000C9D4; // type:func
+_ZN3paf8PhWidget16SetScale_ontimerERK4vec4 = 0x0000C9EC; // type:func
+_ZN3paf8PhWidget6GetPosEPS0_RK4vec4 = 0x0000CA24; // type:func
+_ZNK3paf6PhText12GetLineCountEv = 0x0000CA7C; // type:func
+_ZNK3paf6PhText15GetVisibleLinesEv = 0x0000CA84; // type:func
+_ZN3paf6PhText12SetFontStyleERKNS_11PhFontStyleE = 0x0000CAAC; // type:func
+_ZmlRK4vec4f = 0x0000CAC4; // type:func
+_ZN3paf4View15SetEventHandlerEPKNS_18EventFunctionEntryE = 0x0000CAEC; // type:func
+_ZNK3paf4View6GetArgEPKc = 0x0000CAF4; // type:func
+_ZNK3paf4View8ArgumentcviEv = 0x0000CAFC; // type:func
+_ZN3paf4View12SetInterfaceEiPv = 0x0000CB24; // type:func
+_ZNK3paf4View8PageRootEPKc = 0x0000CB2C; // type:func
+_ZN3paf4View6UnloadEPS0_PFvPKcE = 0x0000CB34; // type:func
+_ZN3paf4View8GetSoundEPKc = 0x0000CB3C; // type:func
+_ZN3paf9Framework8InstanceEv = 0x0000CB44; // type:func
+_ZN3paf4View12PageActivateEPv = 0x0000CB4C; // type:func
+scePaf_F93D4E1F = 0x0000CB7C; // type:func
+scePaf_B9383A25 = 0x0000CB84; // type:func
+InputDevice_PspPad_DisableAnalog = 0x0000CB8C; // type:func
+sceUtility_private_19461966 = 0x0000CBBC; // type:func
+sceVshCommonGui_1A6F3382 = 0x0000CBE4; // type:func
