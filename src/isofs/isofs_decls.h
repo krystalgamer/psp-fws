@@ -96,12 +96,30 @@ typedef struct {
 } IsofsCacheEntry;
 typedef char chk_IsofsCacheEntry[(sizeof(IsofsCacheEntry) == 0x30) ? 1 : -1];
 
-/* open directory (iob->i_private for dopen) */
+/* parsed path table entry (0x38) */
+typedef struct {
+    u8 nameLen; /* 0x0 */
+    u8 earLen; /* 0x1 */
+    u32 lbn __attribute__((packed, aligned(2))); /* 0x2 */
+    u16 parentNum; /* 0x6 */
+    char name[32]; /* 0x8 */
+    u32 dirNum; /* 0x28 */
+    u32 dirLevel; /* 0x2C */
+    u32 lbnSize; /* 0x30 */
+    u32 unk34;
+} IsofsPath;
+typedef char chk_IsofsPath[(sizeof(IsofsPath) == 0x38) ? 1 : -1];
+
+/* open directory (iob->i_private for dopen) (0x18) */
 typedef struct {
     IsoDirectory *isoDir; /* 0x0 */
-    void *paths; /* 0x4 */
+    IsofsPath *paths; /* 0x4 */
     void *fplData; /* 0x8 */
+    u32 lbnSize; /* 0xC */
+    u32 dirRecLen; /* 0x10 */
+    u32 lbn; /* 0x14 */
 } IsofsDir;
+typedef char chk_IsofsDir[(sizeof(IsofsDir) == 0x18) ? 1 : -1];
 
 typedef s64 SceOff;
 typedef int SceMode;
@@ -229,7 +247,7 @@ struct IsofsUnit {
     u32 unk88;
     u32 unk8C;
     u32 unk90;
-    void *paths; /* 0x94 */
+    IsofsPath *paths; /* 0x94 */
     IsofsFdw *fdw; /* 0x98 */
     void *pathTable; /* 0x9C */
     IsofsBlkDevData *blkDev; /* 0xA0, sceBLKGetDeviceData() */
@@ -284,6 +302,7 @@ extern s32 D_000067C4;
 extern struct D_00007608_s D_00007608;
 extern s32 D_00007B40;
 extern char D_000084D8[];
+extern char D_0000885C[];
 extern s32 D_00008A90;
 extern s32 D_00009AC0;
 extern s32 D_00009B00;
@@ -354,7 +373,7 @@ u8 func_00005060(void);
 s32 func_0000506C(u32 arg0);
 void func_000050CC(void *arg0);
 s32 func_000054D4(s32 arg0);
-s32 func_00005908(void *arg0);
+s32 func_00005908(SceIoIob *iob, char *path);
 s32 func_00005970(s32 arg0);
 s32 func_000059DC(void);
 s32 func_00005E10(void);
@@ -400,6 +419,7 @@ s32 sceIsofsFileTerm(IsofsFile *files);
 IsofsUnit *sceIsofsGetFileSystem(s32 unitNum);
 s32 sceIsofsLbInit(IsofsUnit *unit, s32 count, s32 filesCount);
 void sceIsofsLbTerm(IsofsUnit *unit);
+IsofsPath *sceIsofsLookupDir(IsofsUnit *unit, char *path, s32 level, SceSize len, s32 flag, s32 *outRet);
 s32 sceIsofsReadFile(const char *blockDev, IsofsFile *file, void *buf, SceSize size, u32 *args);
 void sceIsofsSbTerm(IsofsFd *fd);
 void *sceKernelAllocHeapMemory(SceUID heapId, SceSize size);
