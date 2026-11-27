@@ -17,7 +17,29 @@ static inline u32 shiftK1NoSlot(void) {
     return oldK1;
 }
 
+#if FW_VERSION == 100
+s32 scePowerInit(void) {
+    u8 buf[0x200];
+
+    func_00001178();
+    func_00002D70();
+    if (sceIdStorageLookup(4, 0, buf, sizeof(buf)) < 0) {
+        D_00003CC0.isWlanSuppressChargingEnabled = 0;
+        func_00002E6C(0xD8, 0xD8);
+    } else {
+        D_00003CC0.isWlanSuppressChargingEnabled = buf[0x19];
+        func_00002E6C(*(u16 *)&buf[0x1A], *(u16 *)&buf[0x1C]);
+    }
+    func_00001BAC();
+    func_00002DD0();
+    sceSysconSetAcSupplyCallback(func_00000DD4, 0);
+    sceSysconSetLowBatteryCallback(func_0000054C, 0);
+    sceKernelRegisterSysEventHandler(&D_00003C60);
+    return 0;
+}
+#else
 INCLUDE_ASM("nonmatchings/power", scePowerInit);
+#endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/power", func_00000174);
@@ -27,7 +49,26 @@ INCLUDE_ASM("nonmatchings/power", func_00000174);
 INCLUDE_ASM("nonmatchings/power", func_00000464);
 #endif
 
+#if FW_VERSION == 100
+s32 func_000004BC(s32 eventId, char *eventName, void *param, s32 *result) {
+    switch (eventId) {
+    case 0x402:
+        if (func_00002EFC() != 0) {
+            return 0x80000021;
+        }
+        break;
+    case 0x400:
+        func_00002E84();
+        break;
+    case 0x100000:
+        func_00002F0C();
+        break;
+    }
+    return 0;
+}
+#else
 INCLUDE_ASM("nonmatchings/power", func_000004BC);
+#endif
 
 INCLUDE_ASM("nonmatchings/power", scePowerRegisterCallback);
 
@@ -53,9 +94,25 @@ INCLUDE_ASM("nonmatchings/power", func_00000A3C);
 
 #if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/power", scePowerGetBacklightMaximum);
+#else
+s32 module_start(void) {
+    s32 i;
+    ScePowerCallbackCB *cb;
+
+    memset(&D_00003CC0, 0, sizeof(ScePower));
+    cb = D_00003CC0.powerCallbackCBs;
+    for (i = 0; i < 32; i++) {
+        cb->cbid = -1;
+        cb++;
+    }
+    scePowerInit();
+    return 0;
+}
 #endif
 
+#if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/power", module_start);
+#endif
 
 #if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/power", module_reboot_before);
@@ -185,7 +242,17 @@ u8 scePowerGetLedOffTiming(void) {
 }
 #endif
 
+#if FW_VERSION == 100
+void func_00000DD4(s32 enable, void *argp) {
+    if (enable != 0) {
+        func_0000096C(0, 0x1000, 0);
+    } else {
+        func_0000096C(0x1000, 0, 0);
+    }
+}
+#else
 INCLUDE_ASM("nonmatchings/power", func_00000DD4);
+#endif
 
 #if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/power", D_00005864);
@@ -276,7 +343,13 @@ INCLUDE_ASM("nonmatchings/power", scePowerVolatileMemTryLock);
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/power", func_0000054C);
+void func_0000054C(s32 enable, void *argp) {
+    if (enable != 0) {
+        func_0000096C(0, 0x100, 0);
+    } else {
+        func_0000096C(0x100, 0, 0);
+    }
+}
 #endif
 
 #if FW_VERSION < 282
@@ -347,9 +420,33 @@ INCLUDE_ASM("nonmatchings/power", func_000025D8);
 INCLUDE_ASM("nonmatchings/power", func_00002414);
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION == 100
+s32 func_00001178(void) {
+    D_00003E00.mode = 2;
+    D_00003E00.wakeupCondition = 8;
+    D_00003E00.eventId = 0;
+    D_00003E00.workerThreadId = 0;
+    D_00003E00.powerLockForUserShouldForceWait = 0;
+    D_00003E00.numPowerLocksUser = 0;
+    D_00003E00.numPowerLocksKernel = 0;
+    D_00003E00.curHardwarePowerSwitchRequest = 0;
+    D_00003E00.curSoftwarePowerSwitchRequest = 0;
+    D_00003E00.resumeCount = 0;
+    D_00003E00.eventId = sceKernelCreateEventFlag("ScePowerSw", 0x201, 0x50000, NULL);
+    D_00003E00.workerThreadId = sceKernelCreateThread("ScePowerMain", func_00000658, 4, 0x800, 1, NULL);
+    sceKernelStartThread(D_00003E00.workerThreadId, 0, NULL);
+    sceSysconSetPowerSwitchCallback(func_00001624, NULL);
+    sceSysconSetHoldSwitchCallback(func_000029BC, NULL);
+    sceKernelRegisterPowerHandlers(&D_00003B7C);
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/power", func_00001178);
-#else
+#endif
+
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/power", func_0000250C);
 #endif
 
@@ -588,9 +685,50 @@ INCLUDE_ASM("nonmatchings/power", func_00001FEC);
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/power", func_000014A0);
+s32 func_000014A0(s32 lockType, s32 isUserLock) {
+    s32 intr;
+    u32 forceWait;
 
-INCLUDE_ASM("nonmatchings/power", func_0000157C);
+    intr = sceKernelCpuSuspendIntr();
+    forceWait = D_00003E00.powerLockForUserShouldForceWait;
+    if (forceWait == 0 && D_00003E00.numPowerLocksUser == 0 && D_00003E00.numPowerLocksKernel == 0) {
+        sceKernelClearEventFlag(D_00003E00.eventId, ~0x10000);
+    }
+    if (isUserLock) {
+        D_00003E00.numPowerLocksUser++;
+        sceKernelCpuResumeIntr(intr);
+        if (forceWait != 0) {
+            return sceKernelWaitEventFlag(D_00003E00.eventId, 0x40000, 1, NULL, NULL);
+        }
+        return 0;
+    }
+    D_00003E00.numPowerLocksKernel++;
+    sceKernelCpuResumeIntr(intr);
+    return 0;
+}
+
+s32 func_0000157C(s32 lockType, s32 isUserLock) {
+    s32 intr;
+    s32 count;
+
+    intr = sceKernelCpuSuspendIntr();
+    if (isUserLock) {
+        count = D_00003E00.numPowerLocksUser;
+        if (count > 0) {
+            D_00003E00.numPowerLocksUser = --count;
+        }
+    } else {
+        count = D_00003E00.numPowerLocksKernel;
+        if (count > 0) {
+            D_00003E00.numPowerLocksKernel = --count;
+        }
+    }
+    if (D_00003E00.powerLockForUserShouldForceWait == 0 && D_00003E00.numPowerLocksUser == 0 && D_00003E00.numPowerLocksKernel == 0) {
+        sceKernelSetEventFlag(D_00003E00.eventId, 0x10000);
+    }
+    sceKernelCpuResumeIntr(intr);
+    return count;
+}
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
@@ -696,7 +834,13 @@ void func_00002944(s32 arg0) {
 }
 #endif
 
-INCLUDE_ASM("nonmatchings/power", func_000029BC);
+void func_000029BC(s32 enable, void *argp) {
+    if (enable != 0) {
+        func_0000096C(0, 0x40000000, 0);
+    } else {
+        func_0000096C(0x40000000, 0, 0);
+    }
+}
 
 #if FW_VERSION < 152
 INCLUDE_ASM("nonmatchings/power", func_000016D8);
