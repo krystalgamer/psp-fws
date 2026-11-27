@@ -281,14 +281,14 @@ INCLUDE_ASM("nonmatchings/registry", func_00001908);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 201
-void func_00001908(s32 arg0, s32 **arg1, s32 **arg2) {
-    if (arg0 == 1) {
-        *arg1 = "/registry/system.ireg";
-        *arg2 = "/registry/system.dreg";
+void func_00001908(s32 type, const char **ireg, const char **dreg) {
+    if (type == 1) {
+        *ireg = "/registry/system.ireg";
+        *dreg = "/registry/system.dreg";
         return;
     }
-    *arg1 = NULL;
-    *arg2 = NULL;
+    *ireg = NULL;
+    *dreg = NULL;
 }
 #endif
 
@@ -548,20 +548,17 @@ INCLUDE_ASM("nonmatchings/registry", func_00003E60);
 INCLUDE_ASM("nonmatchings/registry", func_00003EA4);
 
 #if FW_VERSION < 282
-s32 func_00003A3C(void) {
-    s32 var_v0;
-    void *temp_v0;
+s32 func_00003A3C(s32 index) {
+    s32 ret;
+    SceRegHive *h;
 
-    temp_v0 = func_00000B6C();
-    var_v0 = 0x80082715;
-    if (temp_v0 != NULL) {
-        M2C_FIELD(temp_v0, s8 *, 7) = 0;
-        M2C_FIELD(temp_v0, s8 *, 5) = 0;
-        M2C_FIELD(temp_v0, s8 *, 6) = 0;
-        M2C_FIELD(temp_v0, s8 *, 4) = 1;
-        var_v0 = 0;
+    h = func_00000B6C(index);
+    ret = 0x80082715;
+    if (h != NULL) {
+        h->unk4 = 1;
+        ret = 0;
     }
-    return var_v0;
+    return ret;
 }
 #endif
 
@@ -570,35 +567,32 @@ INCLUDE_ASM("nonmatchings/registry", func_00003A80);
 #endif
 
 #if FW_VERSION == 100
-s32 func_00003A80(void) {
-    s32 var_v0;
-    void *temp_v0;
+s32 func_00003A80(SceRegIndexEntry *cat) {
+    s32 ret;
+    SceRegCatNode *n;
 
-    temp_v0 = func_00003EA4();
-    var_v0 = 0x8008272E;
-    if (temp_v0 != NULL) {
-        M2C_FIELD(temp_v0, s32 *, 4) = 1;
-        var_v0 = 0;
+    n = func_00003EA4(cat);
+    ret = 0x8008272E;
+    if (n != NULL) {
+        n->unk4 = 1;
+        ret = 0;
     }
-    return var_v0;
+    return ret;
 }
 #endif
 
 #if FW_VERSION >= 282
-s32 func_00003EE8(void) {
-    s32 var_v0;
-    struct Unk_func_00003EE8_temp_v0 *temp_v0;
+s32 func_00003EE8(s32 index) {
+    s32 ret;
+    SceRegHive *h;
 
-    temp_v0 = func_00000B6C();
-    var_v0 = 0x80082715;
-    if (temp_v0 != NULL) {
-        temp_v0->unk7 = 0;
-        temp_v0->unk5 = 0;
-        temp_v0->unk6 = 0;
-        temp_v0->unk4 = 1;
-        var_v0 = 0;
+    h = func_00000B6C(index);
+    ret = 0x80082715;
+    if (h != NULL) {
+        h->unk4 = 1;
+        ret = 0;
     }
-    return var_v0;
+    return ret;
 }
 
 INCLUDE_ASM("nonmatchings/registry", func_00003F2C);
@@ -607,30 +601,30 @@ INCLUDE_ASM("nonmatchings/registry", func_00003F2C);
 INCLUDE_ASM("nonmatchings/registry", func_00003FE4);
 
 #if FW_VERSION >= 282
-s32 func_00004024(void) {
-    s32 var_v0;
-    struct Unk_func_00004024_temp_v0 *temp_v0;
+s32 func_00004024(SceRegIndexEntry *cat) {
+    s32 ret;
+    SceRegCatNode *n;
 
-    temp_v0 = func_00003EA4();
-    var_v0 = 0x8008272E;
-    if (temp_v0 != NULL) {
-        temp_v0->unk4 = 0;
-        var_v0 = 0;
+    n = func_00003EA4(cat);
+    ret = 0x8008272E;
+    if (n != NULL) {
+        n->unk4 = 0;
+        ret = 0;
     }
-    return var_v0;
+    return ret;
 }
 #else
-s32 func_00004058(void) {
-    s32 var_v0;
-    void *temp_v0;
+s32 func_00004058(SceRegIndexEntry *cat) {
+    s32 ret;
+    SceRegCatNode *n;
 
-    temp_v0 = func_00003EA4();
-    var_v0 = 0x8008272E;
-    if (temp_v0 != NULL) {
-        M2C_FIELD(temp_v0, s32 *, 4) = 0;
-        var_v0 = 0;
+    n = func_00003EA4(cat);
+    ret = 0x8008272E;
+    if (n != NULL) {
+        n->unk4 = 0;
+        ret = 0;
     }
-    return var_v0;
+    return ret;
 }
 #endif
 
@@ -937,11 +931,11 @@ void func_00006A0C(void) {
 INCLUDE_ASM("nonmatchings/registry", func_00006A48);
 
 #if FW_VERSION < 282
-void func_000062E0(s32 arg0) {
-    sceKernelFreeVpl(g_vplId, arg0);
+void func_000062E0(void *ptr) {
+    sceKernelFreeVpl(g_vplId, ptr);
 }
 #else
-void func_00006AC0(s32 arg0) {
-    sceKernelFreeVpl(g_vplId, arg0);
+void func_00006AC0(void *ptr) {
+    sceKernelFreeVpl(g_vplId, ptr);
 }
 #endif
