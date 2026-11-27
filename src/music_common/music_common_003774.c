@@ -89,7 +89,7 @@ void music_common_476871AE(void) {
     s32 temp_v0;
 
     if (D_00025B94 == 0) {
-        temp_v0 = scePaf_61A8E8EC(0x14);
+        temp_v0 = _Znwj(0x14);
         func_00003F40(temp_v0);
         D_00025B94 = temp_v0;
     }

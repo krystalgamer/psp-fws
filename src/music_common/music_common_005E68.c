@@ -646,7 +646,7 @@ void ***func_000079E4(void ***arg0, struct Unk_func_000079E4_1 *arg1, void **arg
     temp_a1 = M2C_FIELD(temp_v1, void **, 0);
     *temp_s0 = temp_a1;
     M2C_FIELD(M2C_FIELD(temp_v1, void **, 0), void ***, 4) = temp_s0;
-    scePaf_F5001144(temp_v1, temp_a1);
+    sce_paf_private_free2(temp_v1, temp_a1);
     *arg0 = temp_s0;
     arg1->unk4 -= 1;
     return arg0;
@@ -1149,7 +1149,7 @@ s32 func_0000D278(void *arg0) {
 
     temp_v0 = M2C_FIELD(arg0, s32 *, 0x45C);
     if (temp_v0 != 0) {
-        scePaf_CCFF20ED(temp_v0);
+        _ZdaPv(temp_v0);
         M2C_FIELD(arg0, s32 *, 0x45C) = 0;
     }
     return 0;
@@ -2062,7 +2062,7 @@ INCLUDE_ASM("nonmatchings/music_common_005E68", func_00010A3C);
 #if FW_VERSION >= 350
 void func_00010AA0(s32 arg0) {
     func_00010ACC(arg0);
-    scePaf_8A902F65(arg0);
+    _ZN3paf8PhWidget11UpdateStateEv(arg0);
 }
 #endif
 
@@ -2933,7 +2933,7 @@ void ***func_00017184(void ***arg0, struct Unk_func_00017184_1 *arg1, void **arg
     temp_a1 = M2C_FIELD(temp_v1, void **, 0);
     *temp_s0 = temp_a1;
     M2C_FIELD(M2C_FIELD(temp_v1, void **, 0), void ***, 4) = temp_s0;
-    scePaf_F5001144(temp_v1, temp_a1);
+    sce_paf_private_free2(temp_v1, temp_a1);
     *arg0 = temp_s0;
     arg1->unk4 -= 1;
     return arg0;
