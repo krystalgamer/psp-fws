@@ -1213,8 +1213,60 @@ s32 isofs_exit(void *entry) {
 }
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/isofs", isofs_exit);
+#if FW_VERSION >= 150 && FW_VERSION < 152
+s32 isofs_exit(void *entry) {
+    IsofsMgr *mgr;
+    s32 ret;
+
+    ISOFS_ASSERT(entry != NULL, D_00006224, D_00006200, "isofs_exit", 0x511);
+    if (entry == NULL) {
+        return 0x80010016;
+    }
+    ret = func_000001B8();
+    if (ret != 0) {
+        return ret;
+    }
+    ret = func_00000E6C();
+    if (ret != 0) {
+        return ret;
+    }
+    mgr = &g_isofsMgr;
+    if (mgr->driveType == 2) {
+        func_00004F08();
+        func_00004FC4();
+    }
+    sceKernelDeleteHeap(mgr->heapId);
+    sceKernelDeleteSema(mgr->semaId);
+    return 0;
+}
+#endif
+
+#if FW_VERSION == 152
+s32 isofs_exit(void *entry) {
+    IsofsMgr *mgr;
+    s32 ret;
+
+    ISOFS_ASSERT(entry != NULL, D_00006224, D_00006200, "isofs_exit", 0x50F);
+    if (entry == NULL) {
+        return 0x80010016;
+    }
+    ret = func_000001B8();
+    if (ret != 0) {
+        return ret;
+    }
+    ret = func_00000E6C();
+    if (ret != 0) {
+        return ret;
+    }
+    mgr = &g_isofsMgr;
+    if (mgr->driveType == 2) {
+        func_00004F08();
+        func_00004FC4();
+    }
+    sceKernelDeleteHeap(mgr->heapId);
+    sceKernelDeleteSema(mgr->semaId);
+    return 0;
+}
 #endif
 
 #if FW_VERSION < 201
@@ -1332,9 +1384,121 @@ s32 func_0000664C(s32 arg0) {
 INCLUDE_ASM("nonmatchings/isofs", isofs_open);
 
 INCLUDE_ASM("nonmatchings/isofs", isofs_read);
+#endif
 
-INCLUDE_ASM("nonmatchings/isofs", isofs_lseek);
+#if FW_VERSION == 100
+SceOff isofs_lseek(SceIoIob *iob, SceOff ofs, s32 whence) {
+    IsofsUnit *unit = sceIsofsGetFileSystem(iob->i_unit);
+    IsofsFile *file;
+    s32 ret;
 
+    ISOFS_ASSERT(iob != NULL, D_00006224, D_00006200, "isofs_lseek", 0x6CB);
+    ISOFS_ASSERT(unit != NULL, D_00006224, D_00006200, "isofs_lseek", 0x6CC);
+    ret = sceKernelWaitSema(unit->semaId, 1, NULL);
+    if (ret < 0) {
+        return ret;
+    }
+    file = iob->i_private;
+    ret = 0x80010016;
+    if (iob == NULL || file == NULL) {
+        goto end;
+    }
+    ret = 0x80010015;
+    if (iob->i_flgs & 8) {
+        goto end;
+    }
+    ret = isofs_set_lseek(file, ofs, whence);
+end:
+    sceKernelSignalSema(unit->semaId, 1);
+    return ret;
+}
+#endif
+
+#if FW_VERSION >= 102 && FW_VERSION < 150
+SceOff isofs_lseek(SceIoIob *iob, SceOff ofs, s32 whence) {
+    IsofsUnit *unit = sceIsofsGetFileSystem(iob->i_unit);
+    IsofsFile *file;
+    s32 ret;
+
+    ISOFS_ASSERT(iob != NULL, D_00006224, D_00006200, "isofs_lseek", 0x6D1);
+    ISOFS_ASSERT(unit != NULL, D_00006224, D_00006200, "isofs_lseek", 0x6D2);
+    ret = sceKernelWaitSema(unit->semaId, 1, NULL);
+    if (ret < 0) {
+        return ret;
+    }
+    file = iob->i_private;
+    ret = 0x80010016;
+    if (iob == NULL || file == NULL) {
+        goto end;
+    }
+    ret = 0x80010015;
+    if (iob->i_flgs & 8) {
+        goto end;
+    }
+    ret = isofs_set_lseek(file, ofs, whence);
+end:
+    sceKernelSignalSema(unit->semaId, 1);
+    return ret;
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 152
+SceOff isofs_lseek(SceIoIob *iob, SceOff ofs, s32 whence) {
+    IsofsUnit *unit = sceIsofsGetFileSystem(iob->i_unit);
+    IsofsFile *file;
+    s32 ret;
+
+    ISOFS_ASSERT(iob != NULL, D_00006224, D_00006200, "isofs_lseek", 0x732);
+    ISOFS_ASSERT(unit != NULL, D_00006224, D_00006200, "isofs_lseek", 0x733);
+    ret = sceKernelWaitSema(unit->semaId, 1, NULL);
+    if (ret < 0) {
+        return ret;
+    }
+    file = iob->i_private;
+    ret = 0x80010016;
+    if (iob == NULL || file == NULL) {
+        goto end;
+    }
+    ret = 0x80010015;
+    if (iob->i_flgs & 8) {
+        goto end;
+    }
+    ret = isofs_set_lseek(file, ofs, whence);
+end:
+    sceKernelSignalSema(unit->semaId, 1);
+    return ret;
+}
+#endif
+
+#if FW_VERSION == 152
+SceOff isofs_lseek(SceIoIob *iob, SceOff ofs, s32 whence) {
+    IsofsUnit *unit = sceIsofsGetFileSystem(iob->i_unit);
+    IsofsFile *file;
+    s32 ret;
+
+    ISOFS_ASSERT(iob != NULL, D_00006224, D_00006200, "isofs_lseek", 0x74F);
+    ISOFS_ASSERT(unit != NULL, D_00006224, D_00006200, "isofs_lseek", 0x750);
+    ret = sceKernelWaitSema(unit->semaId, 1, NULL);
+    if (ret < 0) {
+        return ret;
+    }
+    file = iob->i_private;
+    ret = 0x80010016;
+    if (iob == NULL || file == NULL) {
+        goto end;
+    }
+    ret = 0x80010015;
+    if (iob->i_flgs & 8) {
+        goto end;
+    }
+    ret = isofs_set_lseek(file, ofs, whence);
+end:
+    sceKernelSignalSema(unit->semaId, 1);
+    return ret;
+}
+#endif
+
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/isofs", isofs_ioctl);
 
 INCLUDE_ASM("nonmatchings/isofs", isofs_devctl);
@@ -1430,9 +1594,7 @@ s32 func_00007748(void) {
 
 #if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/isofs", isofs_parse_argument);
-#endif
 
-#if FW_VERSION < 201
 s32 isofs_setup_manager(s32 arg0, s32 maxUnits, s32 maxFiles, s32 fdwCount) {
     SceUID heapId;
 
@@ -1455,7 +1617,6 @@ s32 isofs_setup_manager(s32 arg0, s32 maxUnits, s32 maxFiles, s32 fdwCount) {
 }
 #endif
 
-
 #if FW_VERSION == 152
 INCLUDE_ASM("nonmatchings/isofs", func_00007ED8);
 #endif
@@ -1464,8 +1625,136 @@ INCLUDE_ASM("nonmatchings/isofs", func_00007ED8);
 INCLUDE_ASM("nonmatchings/isofs", isofs_exec_ioctl_cmd);
 #endif
 
-#if FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/isofs", isofs_set_lseek);
+#if FW_VERSION == 100
+SceOff isofs_set_lseek(IsofsFile *file, SceOff ofs, s32 whence) {
+    SceOff base;
+    SceOff pos;
+
+    ISOFS_ASSERT(file != NULL, D_00006224, D_00006200, "isofs_set_lseek", 0x695);
+    if (file == NULL) {
+        return 0x80010016;
+    }
+    switch (whence) {
+    case 0:
+        base = 0;
+        pos = ofs;
+        break;
+    case 1:
+        base = file->fpos;
+        pos = base + ofs;
+        break;
+    case 2:
+        base = file->size;
+        pos = base + ofs;
+        break;
+    default:
+        return 0x80010016;
+    }
+    if (file->size < base + ofs || pos < 0) {
+        return 0x80010005;
+    }
+    file->fpos = pos;
+    return pos;
+}
+#endif
+
+#if FW_VERSION >= 102 && FW_VERSION < 150
+SceOff isofs_set_lseek(IsofsFile *file, SceOff ofs, s32 whence) {
+    SceOff base;
+    SceOff pos;
+
+    ISOFS_ASSERT(file != NULL, D_00006224, D_00006200, "isofs_set_lseek", 0x69B);
+    if (file == NULL) {
+        return 0x80010016;
+    }
+    switch (whence) {
+    case 0:
+        base = 0;
+        pos = ofs;
+        break;
+    case 1:
+        base = file->fpos;
+        pos = base + ofs;
+        break;
+    case 2:
+        base = file->size;
+        pos = base + ofs;
+        break;
+    default:
+        return 0x80010016;
+    }
+    if (file->size < base + ofs || pos < 0) {
+        return 0x80010005;
+    }
+    file->fpos = pos;
+    return pos;
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 152
+SceOff isofs_set_lseek(IsofsFile *file, SceOff ofs, s32 whence) {
+    SceOff base;
+    SceOff pos;
+
+    ISOFS_ASSERT(file != NULL, D_00006224, D_00006200, "isofs_set_lseek", 0x6FC);
+    if (file == NULL) {
+        return 0x80010016;
+    }
+    switch (whence) {
+    case 0:
+        base = 0;
+        pos = ofs;
+        break;
+    case 1:
+        base = file->fpos;
+        pos = base + ofs;
+        break;
+    case 2:
+        base = file->size;
+        pos = base + ofs;
+        break;
+    default:
+        return 0x80010016;
+    }
+    if (file->size < base + ofs || pos < 0) {
+        return 0x80010005;
+    }
+    file->fpos = pos;
+    return pos;
+}
+#endif
+
+#if FW_VERSION == 152
+SceOff isofs_set_lseek(IsofsFile *file, SceOff ofs, s32 whence) {
+    SceOff base;
+    SceOff pos;
+
+    ISOFS_ASSERT(file != NULL, D_00006224, D_00006200, "isofs_set_lseek", 0x719);
+    if (file == NULL) {
+        return 0x80010016;
+    }
+    switch (whence) {
+    case 0:
+        base = 0;
+        pos = ofs;
+        break;
+    case 1:
+        base = file->fpos;
+        pos = base + ofs;
+        break;
+    case 2:
+        base = file->size;
+        pos = base + ofs;
+        break;
+    default:
+        return 0x80010016;
+    }
+    if (file->size < base + ofs || pos < 0) {
+        return 0x80010005;
+    }
+    file->fpos = pos;
+    return pos;
+}
 #endif
 
 #if FW_VERSION >= 102 && FW_VERSION < 150

@@ -7,7 +7,7 @@ SCE 1.x asserts pass __LINE__ as the 4th Kprintf argument (`addiu $a3, $zero, N`
 versions the code is often identical except for these constants, so a port fails on a few words.
 This tool reads both built ELFs (tmp/build/VER/MOD.elf, which match the baseroms), collects every
 `addiu $a3, $zero, imm` in the function in address order and pairs them positionally. When both versions
-have the same count, the differing pairs become `--sub` arguments for tools/port.py (as `0xOLD)=0xNEW)`
+have the same count, the differing pairs become `--sub` arguments for tools/port.py (as whole tokens `0xOLD=0xNEW`
 and the decimal form). Without --port it only prints them; with --port it runs port.py (passing --apply
 through). Values below --min (default 0x10) are ignored (small constants are rarely line numbers).
 """
@@ -84,7 +84,7 @@ def main():
             ready = [x for x, y in sorted(todo.items()) if y not in todo] or [min(todo)]
             for x in ready:
                 y = todo.pop(x)
-                subs += [f"0x{x:X})=0x{y:X})", f"{x})={y})"]
+                subs += [f"0x{x:X}=0x{y:X}", f"{x}={y}"]
         print(f"{func}: " + (" ".join(f"--sub '{s}'" for s in subs) if subs else "no line changes"))
         if args.port:
             cmd = [sys.executable, str(ROOT / "tools/port.py"), args.module, args.src_ver, args.dst_ver, spec]
