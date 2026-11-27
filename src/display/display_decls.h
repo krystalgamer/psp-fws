@@ -81,15 +81,15 @@ typedef struct {
 typedef struct {
     u32 subIntrMask;          /* 0x00: enabled VBLANK sub interrupts */
     u32 vcount;               /* 0x04 */
+    s32 unk8;                 /* 0x08: 1.50+: sceDisplayAdjustAccumulatedHcount offset */
 #if FW_VERSION == 100
-    s32 unk8;                 /* 0x08 */
     s32 hcountPerFrame;       /* 0x0C */
 #elif FW_VERSION < 201
-    u8 pad8[0xC];
+    u8 padC[8];
 #elif FW_VERSION < 282
-    u8 pad8[0x10];
+    u8 padC[0xC];
 #else
-    u8 pad8[0xC];
+    u8 padC[8];
     s32 unk14;
     u8 pad18[8];
 #endif

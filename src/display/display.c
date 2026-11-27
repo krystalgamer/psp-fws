@@ -905,7 +905,28 @@ INCLUDE_ASM("nonmatchings/display", sceDisplayWaitVblankCB);
 #endif
 
 #if FW_VERSION >= 150
-INCLUDE_ASM("nonmatchings/display", sceDisplayAdjustAccumulatedHcount);
+s32 sceDisplayAdjustAccumulatedHcount(s32 value)
+{
+    s32 i = 0;
+    s32 intr;
+    u32 acc;
+
+    if (value < 0) {
+        return 0x800001FE;
+    }
+    intr = sceKernelCpuSuspendIntr();
+    do {
+        i++;
+        if (i >= 4) {
+            sceKernelCpuResumeIntr(intr);
+            return 0x80020001;
+        }
+        acc = *(volatile u32 *)0xBE740004;
+    } while (*(volatile u32 *)0xBE740004 != acc);
+    g_Vblank.unk8 = value - acc;
+    sceKernelCpuResumeIntr(intr);
+    return 0;
+}
 #else
 s32 sceDisplayGetAccumulatedHcount(void)
 {
