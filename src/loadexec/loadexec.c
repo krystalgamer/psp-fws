@@ -1,4 +1,4 @@
-/* cflags[100,102,103]: -O2 */
+/* cflags[100,102,103]: -O2 -mno-split-addresses */
 /* cflags: -O2 -frename-registers */
 #include "common.h"
 #include "loadexec_decls.h"
@@ -427,9 +427,14 @@ INCLUDE_ASM("nonmatchings/loadexec", sceKernelLoadExecBufferPlain);
 
 #if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/loadexec", sceKernelLoadExecFromHost);
+
+s32 sceKernelRegisterExitCallback(s32 arg0) {
+    D_00003060 = arg0;
+    return 0;
+}
 #endif
 
-#if FW_VERSION < 201
+#if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/loadexec", sceKernelRegisterExitCallback);
 #endif
 
@@ -581,7 +586,14 @@ INCLUDE_ASM("nonmatchings/loadexec", sceKernelInvokeExitCallback);
 INCLUDE_ASM("nonmatchings/loadexec", LoadExecForKernel_11412288);
 #endif
 
+#if FW_VERSION < 150
+s32 module_bootstart(void) {
+    D_00003060 = 0;
+    return 0;
+}
+#else
 INCLUDE_ASM("nonmatchings/loadexec", module_bootstart);
+#endif
 
 #if FW_VERSION == 280 || FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/loadexec", D_00001F7C);

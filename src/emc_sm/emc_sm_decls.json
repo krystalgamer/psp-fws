@@ -8,6 +8,7 @@
   "sceKernelReleaseIntrHandler": "M2C_UNK sceKernelReleaseIntrHandler(M2C_UNK);",
   "sceKernelUnregisterSysEventHandler": "M2C_UNK sceKernelUnregisterSysEventHandler(M2C_UNK *);",
   "sceNandEnd": "s32 sceNandEnd(void);",
+  "sceNandEraseBlockWithRetry": "s32 sceNandEraseBlockWithRetry(u32);",
   "sceNandGetPageSize": "s32 sceNandGetPageSize(void);",
   "sceNandGetPagesPerBlock": "s32 sceNandGetPagesPerBlock(void);",
   "sceNandGetTotalBlocks": "s32 sceNandGetTotalBlocks(void);",
@@ -19,6 +20,8 @@
   "sceNandResume": "s32 sceNandResume(void);",
   "sceNandSuspend": "s32 sceNandSuspend(void);",
   "sceNandWriteAccess": "s32 sceNandWriteAccess(s32, s32, s32, s32, s32);",
+  "sceNandWriteBlock": "s32 sceNandWriteBlock(u32 arg0, void *arg1, void *arg2);",
+  "sceNandWritePages": "s32 sceNandWritePages(u32 arg0, void *arg1, void *arg2, u32 arg3);",
   "sceNandWritePagesRawAll": "void sceNandWritePagesRawAll(s32 arg0, s32 arg1, s32 arg2, s32 arg3);"
  },
  "vars": {

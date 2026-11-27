@@ -97,6 +97,7 @@ M2C_UNK sceKernelRegisterIntrHandler(M2C_UNK, M2C_UNK, M2C_UNK *, M2C_UNK, M2C_U
 M2C_UNK sceKernelRegisterSubIntrHandler(M2C_UNK, M2C_UNK, M2C_UNK *, M2C_UNK);
 M2C_UNK sceKernelRegisterSysEventHandler(M2C_UNK *);
 M2C_UNK sceKernelReleaseIntrHandler(M2C_UNK);
+s32 sceKernelReleaseSubIntrHandler(s32, s32);
 s32 sceKernelSetEventFlag(s32, u32);
 M2C_UNK sceKernelUnregisterSysEventHandler(M2C_UNK *);
 M2C_UNK sceSysregDmacplusBusClockDisable();
