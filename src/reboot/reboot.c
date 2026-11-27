@@ -62,7 +62,7 @@ INCLUDE_ASM("nonmatchings/reboot", func_000011B4);
 
 INCLUDE_ASM("nonmatchings/reboot", func_00001AAC);
 
-INCLUDE_ASM("nonmatchings/reboot", func_00001B78);
+INCLUDE_ASM("nonmatchings/reboot", Kprintf);
 #endif
 
 void func_00001C14(s32 arg0) {
@@ -107,7 +107,7 @@ INCLUDE_RODATA("nonmatchings/reboot", D_00012894);
 
 INCLUDE_RODATA("nonmatchings/reboot", D_0001289C);
 
-INCLUDE_ASM("nonmatchings/reboot", func_00001B78);
+INCLUDE_ASM("nonmatchings/reboot", Kprintf);
 #else
 INCLUDE_ASM("nonmatchings/reboot", func_00001C34);
 #endif

@@ -48,10 +48,10 @@ s32 func_00002CB8(s32 arg0) {
 
 INCLUDE_ASM("nonmatchings/reboot_002A4C", func_00002CC0);
 
-void func_00002CCC(const void *src, void *dst, u32 n) {
-    func_00002EA0(dst, src, n);
+void bcopy(const void *src, void *dst, u32 n) {
+    memmove(dst, src, n);
 }
 
-void func_00002CF0(const void *a, const void *b, s32 n) {
-    func_00002F14(a, b, n);
+void bcmp(const void *a, const void *b, s32 n) {
+    memcmp(a, b, n);
 }

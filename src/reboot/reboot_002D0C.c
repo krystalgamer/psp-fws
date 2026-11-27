@@ -4,8 +4,8 @@
 #include "common.h"
 #include "reboot_decls.h"
 
-void func_00002D0C(void *s, u32 n) {
-    func_00002E30(s, 0, n);
+void bzero(void *s, u32 n) {
+    memset(s, 0, n);
 }
 
 #if FW_VERSION == 100
@@ -13,7 +13,7 @@ s32 func_00001D2C(s32 arg0) {
     s32 var_v0;
 
     var_v0 = arg0;
-    if (func_00002D74(arg0) & 2) {
+    if (look_ctype_table(arg0) & 2) {
         var_v0 = (arg0 & 0xFF) - 0x20;
     }
     return var_v0;
@@ -23,7 +23,7 @@ s32 func_00001D68(s32 arg0) {
     s32 var_v0;
 
     var_v0 = arg0;
-    if (func_00002D74(arg0) & 1) {
+    if (look_ctype_table(arg0) & 1) {
         var_v0 = (arg0 & 0xFF) + 0x20;
     }
     return var_v0;
@@ -34,13 +34,13 @@ INCLUDE_ASM("nonmatchings/reboot_002D0C", func_00002D2C);
 INCLUDE_ASM("nonmatchings/reboot_002D0C", func_00002D50);
 #endif
 
-INCLUDE_ASM("nonmatchings/reboot_002D0C", func_00002D74);
+INCLUDE_ASM("nonmatchings/reboot_002D0C", look_ctype_table);
 
-M2C_UNK *func_00002D84(void) {
+M2C_UNK *get_ctype_table(void) {
     return &D_00016DF1;
 }
 
-void *func_00002D90(const void *s, s32 c, s32 n) {
+void *memchr(const void *s, s32 c, s32 n) {
     const u8 *p = s;
     u8 ch = c;
     if (p != NULL) {
@@ -55,11 +55,11 @@ void *func_00002D90(const void *s, s32 c, s32 n) {
     return NULL;
 }
 
-INCLUDE_ASM("nonmatchings/reboot_002D0C", func_00002DC8);
+INCLUDE_ASM("nonmatchings/reboot_002D0C", memcpy);
 
-INCLUDE_ASM("nonmatchings/reboot_002D0C", func_00002E30);
+INCLUDE_ASM("nonmatchings/reboot_002D0C", memset);
 
-void *func_00002EA0(void *dst, const void *src, s32 n) {
+void *memmove(void *dst, const void *src, s32 n) {
     u8 *d = dst;
     const u8 *s = src;
 
@@ -79,7 +79,7 @@ void *func_00002EA0(void *dst, const void *src, s32 n) {
     return dst;
 }
 
-s32 func_00002F14(const void *a, const void *b, s32 n) {
+s32 memcmp(const void *a, const void *b, s32 n) {
     const u8 *p = a;
     const u8 *q = b;
     while (n > 0) {
@@ -101,9 +101,9 @@ INCLUDE_ASM("nonmatchings/reboot_002D0C", func_00002F5C);
 
 INCLUDE_ASM("nonmatchings/reboot_002D0C", func_00002FDC);
 
-INCLUDE_ASM("nonmatchings/reboot_002D0C", func_00003058);
+INCLUDE_ASM("nonmatchings/reboot_002D0C", wmemset);
 
-s32 func_000030B8(const char *s) {
+s32 strlen(const char *s) {
     s32 len = 0;
     if (s == NULL) {
         return 0;
@@ -114,7 +114,7 @@ s32 func_000030B8(const char *s) {
     return len;
 }
 
-char *func_000030EC(const char *s, s32 c) {
+char *strchr(const char *s, s32 c) {
     char ch = c;
     if (s == NULL) {
         return NULL;
@@ -133,12 +133,12 @@ INCLUDE_ASM("nonmatchings/reboot_002D0C", func_00002144);
 INCLUDE_ASM("nonmatchings/reboot_002D0C", func_0000311C);
 #endif
 
-INCLUDE_ASM("nonmatchings/reboot_002D0C", func_000031B8);
+INCLUDE_ASM("nonmatchings/reboot_002D0C", strncpy);
 
-INCLUDE_ASM("nonmatchings/reboot_002D0C", func_00003234);
+INCLUDE_ASM("nonmatchings/reboot_002D0C", strrchr);
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/reboot_002D0C", func_000022A0);
+INCLUDE_ASM("nonmatchings/reboot_002D0C", prnt);
 
 INCLUDE_RODATA("nonmatchings/reboot_002D0C", D_00012AA8);
 
@@ -152,12 +152,12 @@ void func_000029B4(char **pp, s32 c) {
     }
 }
 #else
-INCLUDE_ASM("nonmatchings/reboot_002D0C", func_0000327C);
+INCLUDE_ASM("nonmatchings/reboot_002D0C", prnt);
 #endif
 
-INCLUDE_ASM("nonmatchings/reboot_002D0C", func_00003994);
+INCLUDE_ASM("nonmatchings/reboot_002D0C", sprintf);
 
-INCLUDE_ASM("nonmatchings/reboot_002D0C", func_000039E0);
+INCLUDE_ASM("nonmatchings/reboot_002D0C", vsprintf);
 
 #if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/reboot_002D0C", func_00002A58);
