@@ -54,6 +54,34 @@ enum SceThreadStatus {
     THREAD_KILLED = 0x20
 };
 
+/* user-visible status structs (uOFW threadman_kernel.h) */
+typedef struct {
+    SceSize size;
+    char name[32];
+    u32 attr;
+    s32 initCount;
+    s32 currentCount;
+    s32 maxCount;
+    s32 numWaitThreads;
+} SceKernelSemaInfo;
+
+typedef struct {
+    SceSize size;
+    char name[32];
+    u32 attr;
+    u32 initPattern;
+    u32 currentPattern;
+    s32 numWaitThreads;
+} SceKernelEventFlagInfo;
+
+/* "Semaphore" uid type data */
+typedef struct SceSema {
+    s32 unk0;
+    s32 currentCount; /* 0x04 */
+    s32 maxCount; /* 0x08 */
+    s32 initCount; /* 0x0C */
+} SceSema;
+
 /* "MsgPipe" uid type data (partial) */
 typedef struct SceMsgPipe {
     s32 unk0;
@@ -149,6 +177,8 @@ typedef struct SceThreadmanInfo {
     u8 unk63C[0x660 - 0x63C];
     union {
         u32 size;
+        SceKernelSemaInfo sema;
+        SceKernelEventFlagInfo eventFlag;
         u8 buf[0x84];
     } tmpInfo; /* 0x660: refer-status scratch buffer */
     u8 unk6E4[0x6F0 - 0x6E4];
@@ -338,7 +368,12 @@ extern char D_00014E78[];
 extern char D_00014E80[];
 extern char D_00014EDC[];
 extern char D_00014EE4[];
+extern char D_00014F2C[];
+extern char D_00014F74[];
+extern char D_000150BC[];
 extern SceSysmemUidLookupFunc D_00015390[];
+extern SceSysmemUidLookupFunc D_000153C0[];
+extern SceSysmemUidLookupFunc D_000153D8[];
 extern SceSysmemUidLookupFunc D_000153F0[];
 extern SceSysmemUidLookupFunc D_00015410[];
 extern SceSysmemUidLookupFunc D_00015428[];
@@ -347,9 +382,14 @@ extern SceSysmemUidLookupFunc D_00015468[];
 extern s32 D_00015470;
 extern SceSysmemUidLookupFunc D_00015480[];
 extern s32 D_00015490;
+extern SceSysmemUidLookupFunc D_00015498[];
 extern s32 D_000154A8;
+extern SceSysmemUidLookupFunc D_000154B0[];
 extern s32 D_000154C0;
+extern SceSysmemUidLookupFunc D_000154C8[];
+extern SceSysmemUidLookupFunc D_000154E0[];
 extern s32 D_000154E8;
+extern SceSysmemUidLookupFunc D_000154F8[];
 extern s32 D_00015500;
 extern void *D_00015518;
 extern s32 D_0001551C;
@@ -377,6 +417,7 @@ extern s32 D_000166F8;
 extern s32 D_0001671C;
 extern s32 D_00016754;
 extern s32 D_00016778;
+extern char D_00016928[];
 extern s32 D_000169E0;
 extern s32 D_00016C78;
 extern void *D_000172B4;

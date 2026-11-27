@@ -12,6 +12,17 @@ static inline void *getRa(void) {
     return ra;
 }
 
+/* the original assert loads the file and function name before testing */
+#define THREADMAN_ASSERT(ok, fmt, file, func, line) \
+    do { \
+        const char *__file = (file); \
+        const char *__func = (func); \
+        if (!(ok)) { \
+            Kprintf((fmt), __file, __func, (line)); \
+            sceKernelAssert((ok), 0); \
+        } \
+    } while (0)
+
 #if FW_VERSION == 100
 void func_00000000(SceThreadQueue *queue, s32 waitType) {
     SceThread *thread = g_threadmanInfo.currentThread;
@@ -247,7 +258,12 @@ s32 func_00000688(s32 arg0, void *arg1) {
     return 0;
 }
 
-INCLUDE_ASM("nonmatchings/threadman", func_000006A8);
+s32 func_000006A8(void) {
+    s32 ok = sceKernelCreateUIDtype("WaitQ", 0x14, D_00015390, NULL, &g_threadmanInfo.uidWaitQType) == 0;
+
+    THREADMAN_ASSERT(ok, D_00014928, D_00014948, "initWaitQ", 0x120);
+    return 0;
+}
 
 INCLUDE_ASM("nonmatchings/threadman", func_0000072C);
 
@@ -765,7 +781,19 @@ INCLUDE_ASM("nonmatchings/threadman", func_000029B8);
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/threadman", func_00002614);
+/* "WaitQ" again: one literal per original object (thsema.c, ...), merged within this file */
+const char D_0001497C[] = "WaitQ";
+
+s32 func_00002614(void) {
+    s32 ok;
+
+    ok = sceKernelCreateUIDtypeInherit(D_0001497C, "ThreadEventHandler", 0x30, D_000153C0, NULL,
+                                       &g_threadmanInfo.uidThreadEventHandlerType) == 0;
+    THREADMAN_ASSERT(ok, "Assertion failed at %s:%s:%04d\n", "thcallback.c", "initCallback", 0x40A);
+    ok = sceKernelCreateUIDtypeInherit(D_0001497C, "Callback", 0x30, D_000153D8, NULL, &g_threadmanInfo.uidCallbackType) == 0;
+    THREADMAN_ASSERT(ok, "Assertion failed at %s:%s:%04d\n", "thcallback.c", "initCallback", 0x40B);
+    return 0;
+}
 #endif
 
 #if FW_VERSION >= 282
@@ -930,7 +958,15 @@ s32 func_00004B48(void) {
 INCLUDE_ASM("nonmatchings/threadman", func_00004B68);
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/threadman", func_000048B0);
+/* "WaitQ" again: one literal per original object (thsema.c, ...), merged within this file */
+const char D_00014CF0[] = "WaitQ";
+
+s32 func_000048B0(void) {
+    s32 ok = sceKernelCreateUIDtypeInherit(D_00014CF0, "Semaphore", 0x30, D_000153F0, NULL, &g_threadmanInfo.uidSemaType) == 0;
+
+    THREADMAN_ASSERT(ok, D_00014CBC, D_00014CB0, "initSema", 0x23E);
+    return 0;
+}
 #endif
 
 INCLUDE_ASM("nonmatchings/threadman", sceKernelCreateEventFlag);
@@ -1022,7 +1058,15 @@ INCLUDE_ASM("nonmatchings/threadman", func_00006CB0);
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/threadman", func_000059D4);
+/* "WaitQ" again: one literal per original object (thsema.c, ...), merged within this file */
+const char D_00014D58[] = "WaitQ";
+
+s32 func_000059D4(void) {
+    s32 ok = sceKernelCreateUIDtypeInherit(D_00014D58, "EventFlag", 0x30, D_00015410, NULL, &g_threadmanInfo.uidEventFlagType) == 0;
+
+    THREADMAN_ASSERT(ok, D_00014D1C, D_00014D10, "initEventFlag", 0x23A);
+    return 0;
+}
 #endif
 
 #if FW_VERSION < 282
@@ -1090,7 +1134,15 @@ s32 func_000068A0(void) {
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/threadman", func_000068C0);
+/* "WaitQ" again: one literal per original object (thsema.c, ...), merged within this file */
+const char D_00014DF4[] = "WaitQ";
+
+s32 func_000068C0(void) {
+    s32 ok = sceKernelCreateUIDtypeInherit(D_00014DF4, "Mbx", 0x30, D_00015428, NULL, &g_threadmanInfo.uidMbxType) == 0;
+
+    THREADMAN_ASSERT(ok, D_00014D88, D_00014D7C, "initMbx", 0x1F5);
+    return 0;
+}
 #endif
 
 #if FW_VERSION < 282
@@ -1179,7 +1231,15 @@ s32 func_000089A0(SceSysmemUidCB *cb) {
     return 0;
 }
 
-INCLUDE_ASM("nonmatchings/threadman", func_000089F0);
+/* "WaitQ" again: one literal per original object (thsema.c, ...), merged within this file */
+const char D_00014E5C[] = "WaitQ";
+
+s32 func_000089F0(void) {
+    s32 ok = sceKernelCreateUIDtypeInherit(D_00014E5C, "MsgPipe", 0x30, D_00015440, NULL, &g_threadmanInfo.uidMsgPipeType) == 0;
+
+    THREADMAN_ASSERT(ok, D_00014E24, D_00014E18, "initMsgPipe", 0x4C5);
+    return 0;
+}
 #endif
 
 #if FW_VERSION < 201
@@ -1228,7 +1288,15 @@ INCLUDE_ASM("nonmatchings/threadman", func_0000989C);
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/threadman", func_00009918);
+/* "WaitQ" again: one literal per original object (thsema.c, ...), merged within this file */
+const char D_00014EC8[] = "WaitQ";
+
+s32 func_00009918(void) {
+    s32 ok = sceKernelCreateUIDtypeInherit(D_00014EC8, "Vpl", 0x30, D_00015468, NULL, &g_threadmanInfo.uidVplType) == 0;
+
+    THREADMAN_ASSERT(ok, D_00014E80, D_00014E78, "initVpl", 0x1EC);
+    return 0;
+}
 #endif
 
 #if FW_VERSION < 282
@@ -1504,7 +1572,15 @@ INCLUDE_ASM("nonmatchings/threadman", func_0000A8D0);
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/threadman", func_0000A968);
+/* "WaitQ" again: one literal per original object (thsema.c, ...), merged within this file */
+const char D_00014F18[] = "WaitQ";
+
+s32 func_0000A968(void) {
+    s32 ok = sceKernelCreateUIDtypeInherit(D_00014F18, "Fpl", 0x30, D_00015480, NULL, &g_threadmanInfo.uidFplType) == 0;
+
+    THREADMAN_ASSERT(ok, D_00014EE4, D_00014EDC, "initFpl", 0x230);
+    return 0;
+}
 
 INCLUDE_ASM("nonmatchings/threadman", func_0000A9F4);
 
@@ -1836,7 +1912,19 @@ s32 func_0000DF00(SceSysmemUidCB *cb, SceSysmemUidCB *type, s32 funcId, void *ap
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/threadman", func_0000DF3C);
+s32 func_0000DF3C(void) {
+    s32 ok;
+
+    ok = sceKernelCreateUIDtype("Timer", 0x14, D_000154E0, NULL, &g_threadmanInfo.uidTimerType) == 0;
+    THREADMAN_ASSERT(ok, D_00014F74, D_00014F2C, "initAlarm", 0x752);
+    ok = sceKernelCreateUIDtypeInherit("Timer", "Delay", 0x30, D_00015498, NULL, &g_threadmanInfo.uidDelayType) == 0;
+    THREADMAN_ASSERT(ok, D_00014F74, D_00014F2C, "initAlarm", 0x754);
+    ok = sceKernelCreateUIDtypeInherit("Timer", "Alarm", 0x30, D_000154B0, NULL, &g_threadmanInfo.uidAlarmType) == 0;
+    THREADMAN_ASSERT(ok, D_00014F74, D_00014F2C, "initAlarm", 0x755);
+    ok = sceKernelCreateUIDtypeInherit("Timer", "VTimer", 0x30, D_000154C8, NULL, &g_threadmanInfo.uidVTimerType) == 0;
+    THREADMAN_ASSERT(ok, D_00014F74, D_00014F2C, "initAlarm", 0x756);
+    return 0;
+}
 #endif
 
 #if FW_VERSION >= 282
@@ -2778,7 +2866,15 @@ INCLUDE_ASM("nonmatchings/threadman", func_000144B4);
 #if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/threadman", func_00013AC4);
 
-INCLUDE_ASM("nonmatchings/threadman", func_00013C88);
+/* "WaitQ" again: one literal per original object (thsema.c, ...), merged within this file */
+const char D_0001536C[] = "WaitQ";
+
+s32 func_00013C88(void) {
+    s32 ok = sceKernelCreateUIDtypeInherit(D_0001536C, "Thread", 0x10C, D_000154F8, NULL, &g_threadmanInfo.uidThreadType) == 0;
+
+    THREADMAN_ASSERT(ok, D_00016928, D_000150BC, "initThread", 0xCB7);
+    return 0;
+}
 #endif
 
 #if FW_VERSION >= 282
