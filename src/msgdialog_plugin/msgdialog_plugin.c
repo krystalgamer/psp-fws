@@ -359,6 +359,12 @@ INCLUDE_RODATA("nonmatchings/msgdialog_plugin", D_000018B8);
 
 INCLUDE_RODATA("nonmatchings/msgdialog_plugin", D_000018E0);
 
+#if FW_VERSION == 103
+INCLUDE_RODATA("nonmatchings/msgdialog_plugin", D_00001294);
+
+INCLUDE_RODATA("nonmatchings/msgdialog_plugin", D_000012AC);
+#endif
+
 #if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/msgdialog_plugin", D_00001604);
 #endif

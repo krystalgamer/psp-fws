@@ -15,6 +15,7 @@ options:
   cache_path: tmp/build/103/.splat_cache.msgdialog_plugin
   symbol_addrs_path:
     - config/103/symbol_addrs.msgdialog_plugin.txt
+    - config/103/func_starts.msgdialog_plugin.txt
     - tmp/build/103/prx_syms.msgdialog_plugin.txt
   reloc_addrs_path: [tmp/build/103/reloc_addrs.msgdialog_plugin.txt]
   asset_path: tmp/assets/103/msgdialog_plugin
@@ -53,7 +54,8 @@ segments:
     vram: 0x0
     subsegments:
       - { start: 0x80, type: asm, name: init, linker_section: .init }
-      - [0xA4, asm, msgdialog_plugin]
+      - [0xA4, c, msgdialog_plugin]
+      - [0xD28, c, msgdialog_plugin_crtend]
       - { start: 0xD80, type: asm, name: fini, linker_section: .fini }
       - { start: 0xD9C, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0xE74, type: prxpad, order: .text }
@@ -71,7 +73,7 @@ segments:
       - { start: 0x101C, type: rodata, name: dtors, linker_section: .dtors }
       - { start: 0x1024, type: rodata, name: jcr, linker_section: .jcr }
       - { start: 0x1028, type: rodata, name: eh_frame, linker_section: .eh_frame }
-      - [0x102C, rodata, msgdialog_plugin]
+      - [0x102C, .rodata, msgdialog_plugin]
   - name: msgdialog_plugin_seg1
     type: code
     start: 0x1370
