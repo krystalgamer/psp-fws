@@ -1080,32 +1080,30 @@ u32 func_00003B78(u32 v) {
     return i;
 }
 
-#if FW_VERSION == 100
+#if FW_VERSION < 201
 s32 func_00002B40(SceWlanSoftc *sc) {
     SceWlanMsg *msg = func_0000840C(sc, sizeof(SceWlanMsg));
 
     msg->cmd = 0x80000008;
+#if FW_VERSION >= 102
+    msg->state = 0;
+#endif
     sceKernelSendMbx(sc->mbx, msg);
     return 0;
 }
 #endif
 
-#if FW_VERSION >= 102 && FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/wlan", func_00002B40);
-#endif
-
-#if FW_VERSION == 100
+#if FW_VERSION < 201
 s32 func_00002B84(SceWlanSoftc *sc) {
     SceWlanMsg *msg = func_0000840C(sc, sizeof(SceWlanMsg));
 
     msg->cmd = 0x80000009;
+#if FW_VERSION >= 102
+    msg->state = 0;
+#endif
     sceKernelSendMbx(sc->mbx, msg);
     return 0;
 }
-#endif
-
-#if FW_VERSION >= 102 && FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/wlan", func_00002B84);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 201
@@ -1157,7 +1155,7 @@ s32 sceWlanDrv_driver_40B0AA4A(void) {
 INCLUDE_ASM("nonmatchings/wlan", sceWlanDrv_driver_8D5F551B);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 201
 void func_00002C5C(void *ifh) {
     SceWlanSoftc *sc = sceNetGetIfhandleOpt(ifh);
     SceWlanMsg *msg = func_00008440(sc, sizeof(SceWlanMsg));
@@ -1167,15 +1165,14 @@ void func_00002C5C(void *ifh) {
         return;
     }
     msg->cmd = 0x8000000A;
+#if FW_VERSION >= 102
+    msg->state = 0;
+#endif
     sceKernelSendMbx(sc->mbx, msg);
 }
 #endif
 
-#if FW_VERSION >= 102 && FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/wlan", func_00002C5C);
-#endif
-
-#if FW_VERSION == 100
+#if FW_VERSION < 201
 void func_00002CD4(void *ifh) {
     SceWlanSoftc *sc = sceNetGetIfhandleOpt(ifh);
     SceWlanMsg *msg = func_00008440(sc, sizeof(SceWlanMsg));
@@ -1185,12 +1182,11 @@ void func_00002CD4(void *ifh) {
         return;
     }
     msg->cmd = 0x8000000B;
+#if FW_VERSION >= 102
+    msg->state = 0;
+#endif
     sceKernelSendMbx(sc->mbx, msg);
 }
-#endif
-
-#if FW_VERSION >= 102 && FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/wlan", func_00002CD4);
 #endif
 
 #if FW_VERSION >= 300
