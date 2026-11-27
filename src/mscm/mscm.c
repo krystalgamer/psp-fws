@@ -1,6 +1,6 @@
 /* cflags[152]: -Os */
 /* cflags[150]: -Os */
-/* cflags[100,102]: -Os */
+/* cflags[100,102,103]: -Os */
 /* cflags: -O2 -frename-registers */
 #include "common.h"
 #include "mscm_decls.h"
@@ -105,7 +105,7 @@ INCLUDE_ASM("nonmatchings/mscm", func_0000027C);
 INCLUDE_ASM("nonmatchings/mscm", func_00000244);
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/mscm", func_00000430);
 #else
 INCLUDE_ASM("nonmatchings/mscm", sceMScmStartModule);
@@ -150,7 +150,7 @@ void func_00000930(s32 arg0) {
 }
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/mscm", func_000009D4);
 #else
 INCLUDE_ASM("nonmatchings/mscm", sceMScmRegisterCLD);
@@ -194,7 +194,7 @@ INCLUDE_ASM("nonmatchings/mscm", sceMScmQueryMSCMStatus);
 INCLUDE_ASM("nonmatchings/mscm", sceMScmGetCLDM);
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/mscm", func_0000172C);
 #endif
 
