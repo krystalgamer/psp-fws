@@ -4,6 +4,10 @@
 
 INCLUDE_ASM("nonmatchings/syscon", sceSysconInit);
 
+#if FW_VERSION < 282
+INCLUDE_ASM("nonmatchings/syscon", func_00000204);
+#endif
+
 #if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/syscon", func_00000218);
 #endif
@@ -73,8 +77,6 @@ INCLUDE_RODATA("nonmatchings/syscon", D_000044B8);
 #endif
 
 #if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/syscon", func_00000204);
-
 INCLUDE_ASM("nonmatchings/syscon", func_00000360);
 
 INCLUDE_ASM("nonmatchings/syscon", sceSysconCmdExec);
@@ -123,9 +125,19 @@ s32 module_start(void) {
     return 0;
 }
 
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/syscon", func_00000FF4);
+#else
 INCLUDE_ASM("nonmatchings/syscon", module_reboot_before);
+#endif
 
 INCLUDE_ASM("nonmatchings/syscon", sceSysconEnd);
+
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/syscon", func_00001120);
+
+INCLUDE_ASM("nonmatchings/syscon", func_00001144);
+#endif
 
 #if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/syscon", func_000016C0);
@@ -136,13 +148,15 @@ s32 sceSysconSuspend(void) {
     sceKernelDisableSubIntr(4, 4);
     return 0;
 }
-#else
+#endif
+
+#if FW_VERSION == 100
 s32 sceSysconSuspend(void) {
     return 0;
 }
 #endif
 
-#if FW_VERSION < 300
+#if FW_VERSION == 100 || (FW_VERSION >= 150 && FW_VERSION < 300)
 INCLUDE_ASM("nonmatchings/syscon", sceSysconResume);
 #endif
 
@@ -802,9 +816,15 @@ s32 sceSysconCtrlTachyonWDT(u32 arg0) {
 }
 #endif
 
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/syscon", func_00001C40);
+
+INCLUDE_ASM("nonmatchings/syscon", func_00001CF8);
+#else
 INCLUDE_ASM("nonmatchings/syscon", sceSysconResetDevice);
 
 INCLUDE_ASM("nonmatchings/syscon", sceSysconPowerSuspend);
+#endif
 
 INCLUDE_ASM("nonmatchings/syscon", sceSysconNop);
 
@@ -1127,7 +1147,11 @@ INCLUDE_ASM("nonmatchings/syscon", func_000038C4);
 
 INCLUDE_ASM("nonmatchings/syscon", sceSysconCtrlTachyonVoltage);
 
-#if FW_VERSION < 282
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/syscon", func_00002CF4);
+#endif
+
+#if FW_VERSION == 100 || (FW_VERSION >= 150 && FW_VERSION < 282)
 INCLUDE_ASM("nonmatchings/syscon", sceSyscon_driver_9C4E3CA9);
 #endif
 
