@@ -536,3 +536,6 @@ ether_ipmulticast_min = 0x0002E498; // rom:0x2E518
 ether_ipmulticast_max = 0x0002E4A0; // rom:0x2E520
 igmp_stat = 0x00030218;
 ip_ctloutput = 0x00017F60; // type:func
+inet_ntoa = 0x000129D0; // type:func
+in_pcblookup_port = 0x000139A4; // type:func
+rip_disconnect = 0x0001C2E0; // type:func
