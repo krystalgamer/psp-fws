@@ -95,3 +95,7 @@ sceKernelDeleteUID = 0x000061B4; // type:func rom:0x6234
 D_00006464_v102 = 0x00006464; // rom:0x64E4
 // shared names (tools/add_version.py) end
 func_00000214 = 0x00000214; // type:func
+sceKernelModuleFromUID = 0x00004CD8; // type:func
+sceKernelReleaseModule = 0x00005118; // type:func
+sceKernelFindModuleByUID = 0x0000524C; // type:func
+sceKernelGetModuleList = 0x000052BC; // type:func

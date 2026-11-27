@@ -1530,7 +1530,7 @@ INCLUDE_ASM("nonmatchings/loadcore", func_00004BD4);
 #endif
 
 #if FW_VERSION >= 102 && FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/loadcore", func_00004CD8);
+INCLUDE_ASM("nonmatchings/loadcore", sceKernelModuleFromUID);
 #endif
 
 #if FW_VERSION == 100
@@ -1741,7 +1741,7 @@ INCLUDE_ASM("nonmatchings/loadcore", sceKernelRegisterModule);
 #endif
 
 #if FW_VERSION >= 102 && FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/loadcore", func_00005118);
+INCLUDE_ASM("nonmatchings/loadcore", sceKernelReleaseModule);
 #endif
 
 #if FW_VERSION == 100
@@ -1795,7 +1795,7 @@ INCLUDE_ASM("nonmatchings/loadcore", sceKernelFindModuleByAddress);
 #endif
 
 #if FW_VERSION >= 102 && FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/loadcore", func_0000524C);
+INCLUDE_ASM("nonmatchings/loadcore", sceKernelFindModuleByUID);
 #endif
 
 #if FW_VERSION >= 282
@@ -1832,7 +1832,7 @@ s32 sceKernelModuleCount(void) {
 #endif
 
 #if FW_VERSION >= 102 && FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/loadcore", func_000052BC);
+INCLUDE_ASM("nonmatchings/loadcore", sceKernelGetModuleList);
 #endif
 
 #if FW_VERSION == 100
