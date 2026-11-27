@@ -4,6 +4,10 @@
 #include "common.h"
 #include "m2c_macros.h"
 
+typedef __builtin_va_list va_list;
+#define va_start(v, l) __builtin_stdarg_start((v), l)
+#define va_end(v) __builtin_va_end(v)
+
 struct socket;
 struct ifnet;
 /* NetBSD 1.5 sys/queue.h */
@@ -216,15 +220,6 @@ struct Unk_func_00005744_var_s0 {
     struct Unk_func_00005744_var_s0 *unk4;
 };
 
-struct Unk_sceNetEtherNtostr_0 {
-    u8 unk0;
-    u8 unk1;
-    u8 unk2;
-    u8 unk3;
-    u8 unk4;
-    u8 unk5;
-};
-
 struct Unk_sceNet_lib_92633D8D_0 {
     u8 pad0[0x8];
     s32 unk8;
@@ -409,6 +404,8 @@ void func_00007D60(const void *src, void *dst, s32 n);
 void func_00007D84(void *s, s32 n);
 s32 func_00007DAC(const char *s1, const char *s2);
 char *func_00007E2C(const char *s, s32 c);
+s32 func_00007E3C(void (*putc)(char **pp, s32 c), char **pp, const char *fmt, va_list ap);
+s32 func_00007E50(void (*putc)(char **pp, s32 c), char **pp, const char *fmt, va_list ap);
 char *func_00007E5C(const char *s, s32 c);
 s32 func_00007EA4(const char *s1, const char *s2, s32 n);
 char *func_00007F3C(char *dst, const char *src, s32 n);
@@ -416,6 +413,9 @@ char *func_00007FB8(const char *s, s32 c);
 u8 *func_00007FE8(u8 *arg0, u8 *arg1);
 s32 func_00008020(const char *s);
 s32 func_00008054(char *buf, const char *fmt, ...);
+s32 func_000080A0(void (*putc)(char **pp, s32 c), char **pp, const char *fmt, va_list ap);
+void func_00008594(char **pp, s32 c);
+void func_00008598(char **pp, s32 c);
 s32 func_00008790(s32, s32, s32);
 s32 func_00008794(s32, s32, s32);
 void func_000087C8(char **pp, s32 c);
@@ -442,7 +442,7 @@ s32 sceNetBpfIoctl(s32 fd, u32 cmd, void *data);
 s32 sceNetBpfOpen(void);
 s32 sceNetBpfRead(s32 fd, void *buf, s32 len);
 s32 sceNetBpfWrite(s32 fd, void *buf, s32 len);
-void sceNetEtherNtostr(struct Unk_sceNetEtherNtostr_0 *arg0, s32 arg1);
+void sceNetEtherNtostr(const u8 *mac, char *buf);
 void sceNetEtherStrton(const char *str, u8 *mac);
 void sceNetFreeInternal(void *p);
 s32 sceNetFreeThreadinfo(SceUID thid);
@@ -457,7 +457,7 @@ M2C_UNK sceNetMFreem(void *);
 void *sceNetMallocInternal(u32 size);
 u8 *sceNetMemcpy(u8 *arg0, u8 *arg1, s32 arg2);
 u32 sceNetRand(void);
-s32 sceNetSprintf(s32, s32, s32, s32, s32, s32, s32, s32);
+s32 sceNetSprintf(char *buf, const char *fmt, ...);
 u8 *sceNetStrcpy(u8 *arg0, u8 *arg1);
 s32 sceNetTerm(void);
 s32 sceNetThreadAbort(SceUID thid);

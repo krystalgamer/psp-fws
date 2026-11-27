@@ -2349,14 +2349,22 @@ INCLUDE_RODATA("nonmatchings/pspnet", D_00009D5C);
 INCLUDE_ASM("nonmatchings/pspnet", func_0000795C);
 #endif
 
-#if FW_VERSION != 282
+#if FW_VERSION < 201
+void sceNetEtherNtostr(const u8 *mac, char *buf) {
+    func_00008054(buf, "%02x:%02x:%02x:%02x:%02x:%02x", mac[0], mac[1], mac[2], mac[3], mac[4], mac[5]);
+}
+#endif
+
+#if (FW_VERSION >= 201 && FW_VERSION < 282) || FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/pspnet", sceNetEtherNtostr);
-#else
-void sceNetEtherNtostr(struct Unk_sceNetEtherNtostr_0 *arg0, s32 arg1) {
-    if (((arg0 == NULL) | (arg1 == 0)) != 0) {
+#endif
+
+#if FW_VERSION == 282
+void sceNetEtherNtostr(const u8 *mac, char *buf) {
+    if (((mac == NULL) | (buf == NULL)) != 0) {
 
     } else {
-        sceNetSprintf(arg1, (s32) "%02x:%02x:%02x:%02x:%02x:%02x", (s32) arg0->unk0, (s32) arg0->unk1, (s32) arg0->unk2, (s32) arg0->unk3, (s32) arg0->unk4, (s32) arg0->unk5);
+        sceNetSprintf(buf, "%02x:%02x:%02x:%02x:%02x:%02x", mac[0], mac[1], mac[2], mac[3], mac[4], mac[5]);
     }
 }
 #endif
@@ -2591,7 +2599,17 @@ s32 func_00008020(const char *s) {
     return n;
 }
 
-INCLUDE_ASM("nonmatchings/pspnet", func_00008054);
+s32 func_00008054(char *buf, const char *fmt, ...) {
+    va_list ap;
+    char *p;
+    s32 ret;
+
+    p = buf;
+    va_start(ap, fmt);
+    ret = func_000080A0(func_000087C8, &p, fmt, ap);
+    va_end(ap);
+    return ret;
+}
 
 INCLUDE_ASM("nonmatchings/pspnet", func_000080A0);
 
@@ -2740,7 +2758,17 @@ void sceNetBzero(void *s, s32 n) {
     }
 }
 
-INCLUDE_ASM("nonmatchings/pspnet", sceNetSprintf);
+s32 sceNetSprintf(char *buf, const char *fmt, ...) {
+    va_list ap;
+    char *p;
+    s32 ret;
+
+    p = buf;
+    va_start(ap, fmt);
+    ret = func_00007E3C(func_00008598, &p, fmt, ap);
+    va_end(ap);
+    return ret;
+}
 
 INCLUDE_ASM("nonmatchings/pspnet", func_00007E3C);
 
@@ -2845,7 +2873,17 @@ void sceNetBzero(void *s, s32 n) {
     }
 }
 
-INCLUDE_ASM("nonmatchings/pspnet", sceNetSprintf);
+s32 sceNetSprintf(char *buf, const char *fmt, ...) {
+    va_list ap;
+    char *p;
+    s32 ret;
+
+    p = buf;
+    va_start(ap, fmt);
+    ret = func_00007E50(func_00008594, &p, fmt, ap);
+    va_end(ap);
+    return ret;
+}
 
 INCLUDE_ASM("nonmatchings/pspnet", func_00007E50);
 
