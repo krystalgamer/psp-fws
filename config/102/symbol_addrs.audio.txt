@@ -61,3 +61,32 @@ sceSysregAudioClkoutClkDisable = 0x00002A78; // type:func rom:0x2AF8
 sceSysregAudioIoDisable = 0x00002A98; // type:func rom:0x2B18
 sceSysregAudioClkoutIoDisable = 0x00002AA8; // type:func rom:0x2B28
 // shared names (tools/add_version.py) end
+
+// NID-derived names
+sceAudioOutputBlocking = 0x000005F4; // type:func
+sceAudioOutputPannedBlocking = 0x00000888; // type:func
+sceAudioGetChannelRestLen = 0x00001124; // type:func
+sceAudioSetFrequency = 0x000011F4; // type:func
+sceAudioInit = 0x000012D8; // type:func
+sceAudioSetVolumeOffset = 0x000016B8; // type:func
+sceKernelDmaOpAlloc = 0x00002930; // type:func
+sceKernelRegisterIntrHandler = 0x00002990; // type:func
+sceKernelEnableIntr = 0x00002998; // type:func
+sceKernelCreateEventFlag = 0x000029B0; // type:func
+sceKernelClearEventFlag = 0x000029C8; // type:func
+sceKernelCreateThread = 0x000029D8; // type:func
+sceKernelStartThread = 0x000029E0; // type:func
+sceKernelDcacheWritebackInvalidateRange = 0x000029F8; // type:func
+sceClockgenAudioClkSetFreq = 0x00002A00; // type:func
+sceClockgenAudioClkEnable = 0x00002A08; // type:func
+sceCodecInputEnable = 0x00002A20; // type:func
+sceCodecSetFrequency = 0x00002A30; // type:func
+sceCodecSetVolumeOffset = 0x00002A38; // type:func
+sceKernelRegisterSysEventHandler = 0x00002A40; // type:func
+sceSysregAudioBusClockEnable = 0x00002A50; // type:func
+sceSysregAudioClkEnable = 0x00002A60; // type:func
+sceSysregAudioClkoutClkEnable = 0x00002A70; // type:func
+sceSysregAudioClkSelect = 0x00002A80; // type:func
+sceSysregAudioClkoutClkSelect = 0x00002A88; // type:func
+sceSysregAudioIoEnable = 0x00002A90; // type:func
+sceSysregAudioClkoutIoEnable = 0x00002AA0; // type:func

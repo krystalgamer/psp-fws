@@ -70,19 +70,11 @@ s32 sceAudioOutput(u32 chanId, s32 vol, void *buf) {
     setK1(oldK1);
     return ret;
 }
-#endif
-
-#if FW_VERSION >= 102 && FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/audio", func_000005F4);
-#endif
-
-#if FW_VERSION >= 260
+#else
 INCLUDE_ASM("nonmatchings/audio", sceAudioOutput);
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/audio", sceAudioOutputBlocking);
-#endif
 
 #if FW_VERSION < 260
 s32 sceAudioOutputPanned(u32 chanId, s32 leftVol, s32 rightVol, void *buf) {
@@ -109,19 +101,11 @@ s32 sceAudioOutputPanned(u32 chanId, s32 leftVol, s32 rightVol, void *buf) {
     setK1(oldK1);
     return ret;
 }
-#endif
-
-#if FW_VERSION >= 102 && FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/audio", func_00000888);
-#endif
-
-#if FW_VERSION >= 260
+#else
 INCLUDE_ASM("nonmatchings/audio", sceAudioOutputPanned);
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/audio", sceAudioOutputPannedBlocking);
-#endif
 
 #if FW_VERSION < 260
 s32 sceAudioChReserve(s32 channel, s32 sampleCount, s32 format) {
@@ -298,13 +282,7 @@ err:
     setK1(oldK1);
     return 0x80260007;
 }
-#endif
-
-#if FW_VERSION >= 102 && FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/audio", func_00001124);
-#endif
-
-#if FW_VERSION >= 201
+#else
 INCLUDE_ASM("nonmatchings/audio", sceAudioChangeChannelConfig);
 #endif
 
@@ -320,9 +298,7 @@ s32 sceAudioGetChannelRestLen(u32 chanId) {
         return 0x80260003;
     return g_audio.chans[chanId].curSampleCnt + g_audio.chans[chanId].unk10 * g_audio.chans[chanId].sampleCount;
 }
-#endif
-
-#if FW_VERSION >= 150
+#else
 INCLUDE_ASM("nonmatchings/audio", sceAudioGetChannelRestLen);
 #endif
 
@@ -356,19 +332,11 @@ s32 audioOutput(SceAudioChannel *channel, s32 leftVol, s32 rightVol, void *buf) 
         updateAudioBuf(0);
     return channel->sampleCount;
 }
-#endif
-
-#if FW_VERSION >= 102 && FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/audio", func_000011F4);
-#endif
-
-#if FW_VERSION >= 260
+#else
 INCLUDE_ASM("nonmatchings/audio", audioOutput);
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/audio", sceAudioSetFrequency);
-#endif
 
 #if FW_VERSION >= 250
 INCLUDE_ASM("nonmatchings/audio", sceAudioEnd);
@@ -442,11 +410,7 @@ INCLUDE_RODATA("nonmatchings/audio", D_00002D7C);
 INCLUDE_RODATA("nonmatchings/audio", D_00002D88);
 #endif
 
-#if FW_VERSION >= 102 && FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/audio", func_000012D8);
-#else
 INCLUDE_ASM("nonmatchings/audio", sceAudioInit);
-#endif
 
 #if FW_VERSION < 201
 s32 sceAudioEnd(void) {
@@ -488,7 +452,7 @@ s32 sceAudioLoopbackTest(s32 arg0) {
 #endif
 
 #if FW_VERSION >= 102 && FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/audio", func_000016B8);
+INCLUDE_ASM("nonmatchings/audio", sceAudioSetVolumeOffset);
 #endif
 
 #if FW_VERSION == 103
