@@ -371,8 +371,10 @@ struct SceNetInetWaiter {
     u8 unk24[0x48 - 0x24];
     s32 flags;                  /* 0x48 */
     SceUID sema;                /* 0x4C */
+#if FW_VERSION < 150
     u8 unk50[4];
-    struct socket *sockets;     /* 0x54 list linked by so_selnext */
+#endif
+    struct socket *sockets;     /* 0x54 (1.00) / 0x50 (1.50+): list linked by so_selnext */
 };
 
 
@@ -770,18 +772,38 @@ struct tcpcb {
     (w)->sockets = (so); \
 } while (0)
 #define SO_WAITER_DETACH(w, so) do { \
+    struct socket *_p; \
     (so)->so_waiter = NULL; \
-    if ((w)->sockets == (so)) { \
-        (w)->sockets = (so)->so_selnext; \
-    } else { \
-        struct socket *_p; \
-        for (_p = (w)->sockets; _p != NULL && _p->so_selnext != (so); _p = _p->so_selnext) { \
+    _p = (w)->sockets; \
+    if (_p == (so)) { \
+        (w)->sockets = _p->so_selnext; \
+    } else if (_p != NULL) { \
+        while (_p->so_selnext != (so)) { \
+            _p = _p->so_selnext; \
+            if (_p == NULL) { \
+                break; \
+            } \
         } \
         if (_p != NULL) { \
             _p->so_selnext = (so)->so_selnext; \
         } \
     } \
 } while (0)
+
+/* struct iovec / msghdr (sys/uio.h, sys/socket.h) */
+struct iovec {
+    void *iov_base;
+    u32 iov_len;
+};
+struct msghdr {
+    void *msg_name;             /* 0x00 */
+    u32 msg_namelen;            /* 0x04 */
+    struct iovec *msg_iov;      /* 0x08 */
+    s32 msg_iovlen;             /* 0x0C */
+    void *msg_control;          /* 0x10 */
+    u32 msg_controllen;         /* 0x14 */
+    s32 msg_flags;              /* 0x18 */
+};
 
 struct SceTailqHead {
     void *tqh_first;
@@ -1242,6 +1264,8 @@ void func_00005A78(struct socket *so);
 void func_00005AB8(struct socket *so);
 s32 func_00005B8C(void);
 s32 func_00005D70(void);
+s32 func_00006568(struct SceNetInetWaiter *w, s32 s, struct msghdr *mp, s32 flags, s32 *retsize);
+s32 func_00006AB0(struct SceNetInetWaiter *w, s32 s, struct msghdr *mp, u32 *namelenp, s32 *retsize);
 s32 func_00007490(struct mbuf **mp, const void *buf, s32 buflen, s32 type);
 void func_000076C4(s32 arg0, s32 arg1, s32 arg2);
 void func_000076E0(s32 arg0, s32 arg1, s32 arg2);
@@ -1405,10 +1429,13 @@ void sceNetFreeInternal(void *p);
 s32 sceNetInetInetAddr(s32 arg0);
 void sceNetInetInetAton(s32 arg0, s32 arg1);
 const char *sceNetInetInetNtop(s32 af, const void *src, char *dst, s32 size);
+s32 sceNetInetListen(s32 s, s32 backlog);
+s32 sceNetInetShutdown(s32 s, s32 how);
 struct ifqueue *sceNetInet_lib_D7928A6D(void);
 struct mbuf *sceNetMFree(struct mbuf *m);
 void sceNetMFreem(struct mbuf *m);
 struct mbuf *sceNetMGet(s32 how, s32 type);
+struct mbuf *sceNetMGetclr(s32 how, s32 type);
 void *sceNetMallocInternal(u32 size);
 M2C_UNK sceNetMemset(M2C_UNK *, M2C_UNK, M2C_UNK);
 u32 sceNetRand(void);

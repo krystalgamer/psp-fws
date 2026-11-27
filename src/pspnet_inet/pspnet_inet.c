@@ -1055,7 +1055,51 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", sceNetInetGetsockopt);
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", sceNetInetGetsockname);
 
+#if FW_VERSION == 100
+s32 sceNetInetGetpeername(s32 s, struct sockaddr *asa, u32 *alen) {
+    struct SceNetInetWaiter *w;
+    struct socket *so;
+    struct mbuf *m;
+    u32 len;
+    s32 error;
+
+    w = _sce_pspnet_thread_enter();
+    if (w == NULL) {
+        return -1;
+    }
+    so = func_00005700(s);
+    error = 9; /* EBADF */
+    if (so != NULL) {
+        SO_WAITER_ATTACH(w, so);
+        if ((so->so_state & (SS_ISCONNECTED | SS_ISCONFIRMING)) == 0) {
+            error = 128; /* ENOTCONN */
+            goto out;
+        }
+        len = *alen;
+        m = sceNetMGetclr(M_WAITOK, MT_SONAME);
+        if (m == NULL) {
+            error = 12; /* ENOMEM */
+            goto out;
+        }
+        error = so->so_proto->pr_usrreq(so, 16 /* PRU_PEERADDR */, NULL, m, NULL);
+        if (error) {
+            goto bad;
+        }
+        if (len > m->m_len) {
+            len = m->m_len;
+        }
+        func_0002C9B8(mtod(m, u8 *), asa, len);
+        *alen = len;
+    bad:
+        sceNetMFreem(m);
+    out:
+        SO_WAITER_DETACH(w, so);
+    }
+    return _sce_pspnet_thread_leave(w, error);
+}
+#else
 INCLUDE_ASM("nonmatchings/pspnet_inet", sceNetInetGetpeername);
+#endif
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00007490);
 
@@ -1122,23 +1166,185 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", sceNetInet_lib_B3FF98EB);
 
 #if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/pspnet_inet", sceNetInetSocket);
-#else
+#endif
+
+#if FW_VERSION == 100
+s32 sceNetInetBind(s32 s, const struct sockaddr *name, s32 namelen) {
+    struct SceNetInetWaiter *w;
+    struct socket *so;
+    struct mbuf *nam;
+    s32 error;
+
+    w = _sce_pspnet_thread_enter();
+    if (w == NULL) {
+        return -1;
+    }
+    so = func_00005700(s);
+    error = 9; /* EBADF */
+    if (so != NULL) {
+        SO_WAITER_ATTACH(w, so);
+        error = func_00007490(&nam, name, namelen, MT_SONAME);
+        if (error) {
+            goto bad;
+        }
+        error = func_0000431C(so, nam);
+        sceNetMFreem(nam);
+    bad:
+        SO_WAITER_DETACH(w, so);
+    }
+    return _sce_pspnet_thread_leave(w, error);
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/pspnet_inet", sceNetInetBind);
 #endif
 
+#if FW_VERSION == 100
+s32 sceNetInetListen(s32 s, s32 backlog) {
+    struct SceNetInetWaiter *w;
+    struct socket *so;
+    s32 error;
+
+    w = _sce_pspnet_thread_enter();
+    if (w == NULL) {
+        return -1;
+    }
+    so = func_00005700(s);
+    error = 9; /* EBADF */
+    if (so != NULL) {
+        SO_WAITER_ATTACH(w, so);
+        error = func_00004190(so, backlog);
+        SO_WAITER_DETACH(w, so);
+    }
+    return _sce_pspnet_thread_leave(w, error);
+}
+#else
 INCLUDE_ASM("nonmatchings/pspnet_inet", sceNetInetListen);
-
-#if FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/pspnet_inet", sceNetInetSend);
-
-INCLUDE_ASM("nonmatchings/pspnet_inet", sceNetInetSendto);
-
-INCLUDE_ASM("nonmatchings/pspnet_inet", sceNetInetRecv);
-
-INCLUDE_ASM("nonmatchings/pspnet_inet", sceNetInetRecvfrom);
 #endif
 
+#if FW_VERSION < 201
+s32 sceNetInetSend(s32 s, const void *buf, u32 len, s32 flags) {
+    struct SceNetInetWaiter *w;
+    struct msghdr msg;
+    struct iovec aiov;
+    s32 retsize;
+
+    w = _sce_pspnet_thread_enter();
+    if (w == NULL) {
+        return -1;
+    }
+    msg.msg_name = NULL;
+    msg.msg_namelen = 0;
+    msg.msg_iov = &aiov;
+    msg.msg_iovlen = 1;
+    aiov.iov_base = (void *)buf;
+    aiov.iov_len = len;
+    msg.msg_control = NULL;
+    if (_sce_pspnet_thread_leave(w, func_00006568(w, s, &msg, flags, &retsize)) < 0) {
+        return -1;
+    }
+    return retsize;
+}
+
+s32 sceNetInetSendto(s32 s, const void *buf, u32 len, s32 flags, const struct sockaddr *to, u32 tolen) {
+    struct SceNetInetWaiter *w;
+    struct msghdr msg;
+    struct iovec aiov;
+    s32 retsize;
+
+    w = _sce_pspnet_thread_enter();
+    if (w == NULL) {
+        return -1;
+    }
+    msg.msg_name = (void *)to;
+    msg.msg_namelen = tolen;
+    msg.msg_iov = &aiov;
+    msg.msg_iovlen = 1;
+    aiov.iov_base = (void *)buf;
+    aiov.iov_len = len;
+    msg.msg_control = NULL;
+    if (_sce_pspnet_thread_leave(w, func_00006568(w, s, &msg, flags, &retsize)) < 0) {
+        return -1;
+    }
+    return retsize;
+}
+
+s32 sceNetInetRecv(s32 s, void *buf, u32 len, s32 flags) {
+    struct SceNetInetWaiter *w;
+    struct msghdr msg;
+    struct iovec aiov;
+    s32 retsize;
+
+    w = _sce_pspnet_thread_enter();
+    if (w == NULL) {
+        return -1;
+    }
+    msg.msg_name = NULL;
+    msg.msg_namelen = 0;
+    msg.msg_iov = &aiov;
+    msg.msg_iovlen = 1;
+    aiov.iov_base = buf;
+    aiov.iov_len = len;
+    msg.msg_control = NULL;
+    msg.msg_flags = flags;
+    if (_sce_pspnet_thread_leave(w, func_00006AB0(w, s, &msg, NULL, &retsize)) < 0) {
+        return -1;
+    }
+    return retsize;
+}
+
+s32 sceNetInetRecvfrom(s32 s, void *buf, u32 len, s32 flags, struct sockaddr *from, u32 *fromlenaddr) {
+    struct SceNetInetWaiter *w;
+    struct msghdr msg;
+    struct iovec aiov;
+    s32 retsize;
+
+    w = _sce_pspnet_thread_enter();
+    if (w == NULL) {
+        return -1;
+    }
+    if (fromlenaddr) {
+        msg.msg_namelen = *fromlenaddr;
+    } else {
+        msg.msg_namelen = 0;
+    }
+    msg.msg_name = from;
+    msg.msg_iov = &aiov;
+    msg.msg_iovlen = 1;
+    aiov.iov_base = buf;
+    aiov.iov_len = len;
+    msg.msg_control = NULL;
+    msg.msg_flags = flags;
+    if (_sce_pspnet_thread_leave(w, func_00006AB0(w, s, &msg, fromlenaddr, &retsize)) < 0) {
+        return -1;
+    }
+    return retsize;
+}
+#endif
+
+#if FW_VERSION == 100
+s32 sceNetInetShutdown(s32 s, s32 how) {
+    struct SceNetInetWaiter *w;
+    struct socket *so;
+    s32 error;
+
+    w = _sce_pspnet_thread_enter();
+    if (w == NULL) {
+        return -1;
+    }
+    so = func_00005700(s);
+    error = 9; /* EBADF */
+    if (so != NULL) {
+        SO_WAITER_ATTACH(w, so);
+        error = func_00004404(so, how);
+        SO_WAITER_DETACH(w, so);
+    }
+    return _sce_pspnet_thread_leave(w, error);
+}
+#else
 INCLUDE_ASM("nonmatchings/pspnet_inet", sceNetInetShutdown);
+#endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_000085D0);
