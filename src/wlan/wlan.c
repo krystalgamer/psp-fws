@@ -2333,10 +2333,10 @@ s32 func_000067D4(SceWlanMac *mac) {
             memset(&mac->chip, 0, sizeof(mac->chip));
             mac->sync = NULL;
             mac->modeStop = NULL;
-            mac->unk84[0] = 0;
-            mac->unk84[1] = 0;
-            mac->unk84[2] = 0;
-            mac->unk84[3] = 0;
+            mac->reset = NULL;
+            mac->unk88[0] = 0;
+            mac->unk88[1] = 0;
+            mac->unk88[2] = 0;
             mac->regWrite = NULL;
             mac->gpSend = NULL;
             mac->gpRecv = NULL;

@@ -116,7 +116,8 @@ typedef struct {
     u16 pad6;
     void *(*init)(SceWlanMac *);                /* 0x08 -> SceWlanMac.sync */
     void (*stop)(SceWlanMac *);                 /* 0x0C */
-    u32 fn[4];                                  /* 0x10 */
+    s32 (*reset)(SceWlanMac *);                 /* 0x10 */
+    u32 fn[3];                                  /* 0x14 */
     s32 (*regWrite)(SceWlanMac *, s32, void *); /* 0x20 */
     s32 (*gpSend)(SceWlanMac *, s32, void *, u32);          /* 0x24 */
     s32 (*gpRecv)(SceWlanMac *, s32, void *, u32, s32 *);   /* 0x28 */
@@ -139,7 +140,7 @@ typedef struct {
 } SceWlanMlmeBuf;
 
 typedef struct {
-    u32 unk00;
+    u32 flags;                  /* 0x00 */
     u16 unk04;                  /* 0x04 */
     u16 unk06;                  /* 0x06 */
     u16 unk08;                  /* 0x08 */
@@ -158,6 +159,8 @@ typedef struct {
     u8 unk44[0x50 - 0x44];
     void *unk50;                /* 0x50 */
     void *unk54;                /* 0x54 */
+    u8 unk58[0x78 - 0x58];
+    u32 unk78;                  /* 0x78 */
 } SceWlanMlmeSync;
 
 /* MAC/chip state (D_000191B0->mac); offsets are 1.00's, 1.50 inserts 0x3C bytes before 0x7C */
@@ -173,7 +176,8 @@ struct SceWlanMac {
 #endif
     SceWlanMlmeSync *sync;      /* 0x07C mode data */
     void (*modeStop)(SceWlanMac *);  /* 0x080 */
-    u32 unk84[4];               /* 0x084 */
+    s32 (*reset)(SceWlanMac *); /* 0x084 */
+    u32 unk88[3];               /* 0x088 */
     s32 (*regWrite)(SceWlanMac *, s32, void *);  /* 0x094 */
     s32 (*gpSend)(SceWlanMac *, s32, void *, u32);              /* 0x098 */
     s32 (*gpRecv)(SceWlanMac *, s32, void *, u32, s32 *);       /* 0x09C */
@@ -243,7 +247,9 @@ struct SceWlanSoftc {
     s32 poolCount;              /* 0x230 */
     SceWlanQEnt *pool;          /* 0x234 */
     SceWlanQEnt *poolNext;      /* 0x238 */
-    u8 unk23C[0x260 - 0x23C];
+    u8 unk23C[0x24C - 0x23C];
+    void *unk24C;               /* 0x24C */
+    u8 unk250[0x260 - 0x250];
     SceUID thread;              /* 0x260 SceWlanMac */
 #if FW_VERSION >= 150
     u32 unk_v150;
@@ -260,7 +266,7 @@ struct SceWlanSoftc {
     u8 unk294[0x2A8 - 0x294];
     SceWlanQueue q2A8;          /* 0x2A8 */
     SceWlanQueue q2B0;          /* 0x2B0 */
-    u8 unk2B8[4];
+    void *unk2B8;               /* 0x2B8 */
     u32 unk2BC;                 /* 0x2BC */
     s32 gpCallback;             /* 0x2C0 */
     s32 switchState;            /* 0x2C4 */
