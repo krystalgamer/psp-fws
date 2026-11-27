@@ -1269,12 +1269,12 @@ extern s32 D_0002C1D8;
 extern s32 D_0002C1DC;
 extern s32 D_0002C1E0;
 extern s32 D_0002C1E4;
-extern s32 D_0002C1E8;
+extern s32 D_0002C1E8; /* icmperrppslim */
 extern s32 D_0002C208; /* ip_maxfragpackets */
 extern s32 D_0002C228;
 extern s32 D_0002C22C;
 extern s32 D_0002C234;
-extern s32 D_0002C270;
+extern s32 D_0002C270; /* icmpreturndatabytes */
 extern s32 D_0002C30C;
 extern s32 D_0002C310;
 extern s32 D_0002C314;
@@ -1302,7 +1302,7 @@ extern s32 D_0002C588;
 extern s32 D_0002C58C;
 extern s32 D_0002C590;
 extern s32 D_0002C594;
-extern s32 D_0002C5B4;
+extern s32 D_0002C5B4; /* icmpmaskrepl */
 extern struct { struct SceNetInetKeyNode *lh_first; } D_0002C5B8;
 extern s32 *D_0002C5BC;
 extern s32 D_0002C5D8;
@@ -1323,7 +1323,7 @@ extern struct SceTailqHead D_0002CFF8[];
 extern s32 D_0002D944; /* ipq_locked */
 extern struct ipstat D_0002D960; /* ipstat */
 extern struct { struct ipq *lh_first; } D_0002DA48; /* ipq */
-extern u8 D_0002DA50[0x170];
+extern u8 D_0002DA50[0x170]; /* icmpstat */
 extern s32 D_0002DBC0;
 extern M2C_UNK D_0002DBC8;
 extern s32 D_0002DC30;
@@ -1597,6 +1597,7 @@ s32 func_0002CCF8(void *putc, void *arg, const char *fmt, __builtin_va_list ap);
 void func_0002D420();
 struct socket *getsock(s32 s);
 void icmp_send(struct mbuf *m, struct mbuf *opts);
+s32 icmp_sysctl(s32 *name, u32 namelen, void *oldp, u32 *oldlenp, void *newp, u32 newlen);
 s32 if_rtdel(struct rtentry *rt, void *arg);
 struct ifaddr *ifa_ifwithaddr(struct sockaddr *addr);
 struct ifaddr *ifa_ifwithladdr(struct sockaddr *addr);
@@ -1622,7 +1623,9 @@ void ip_input(struct mbuf *m);
 s32 ip_optlen(void *inp);
 s32 ip_output(struct mbuf *m0, struct mbuf *opt, struct route *ro, s32 flags, struct ip_moptions *imo);
 struct in_ifaddr *ip_rtaddr(struct in_addr dst);
+void ip_savecontrol(struct inpcb *inp, struct mbuf **mp, struct ip *ip, struct mbuf *m);
 void ip_slowtimo(void);
+void ip_stripoptions(struct mbuf *m, struct mbuf *mopt);
 void lortrequest(s32 cmd, struct rtentry *rt);
 s32 module_start(void);
 s32 module_stop(void);

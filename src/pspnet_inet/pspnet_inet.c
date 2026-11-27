@@ -3536,7 +3536,35 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_000161A0);
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00015CFC);
 #endif
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_000160E4);
+void ip_savecontrol(struct inpcb *inp, struct mbuf **mp, struct ip *ip, struct mbuf *m) {
+    if (inp->inp_socket->so_options & 0x400) { /* SO_TIMESTAMP */
+        struct timeval tv;
+
+        _sce_pspnet_microtime(&tv);
+        *mp = sbcreatecontrol(&tv, sizeof(tv), 2 /* SCM_TIMESTAMP */, 0xFFFF /* SOL_SOCKET */);
+        if (*mp) {
+            mp = &(*mp)->m_next;
+        }
+    }
+    if (inp->inp_flags & 0x4) { /* INP_RECVDSTADDR */
+        *mp = sbcreatecontrol(&ip->ip_dst, sizeof(struct in_addr), 7 /* IP_RECVDSTADDR */, 0 /* IPPROTO_IP */);
+        if (*mp) {
+            mp = &(*mp)->m_next;
+        }
+    }
+    if (inp->inp_flags & 0x80) { /* INP_RECVIF */
+        struct sockaddr_dl sdl;
+
+        sdl.sdl_len = 8; /* offsetof(struct sockaddr_dl, sdl_data[0]) */
+        sdl.sdl_family = 18; /* AF_LINK */
+        sdl.sdl_index = m->m_pkthdr.rcvif ? m->m_pkthdr.rcvif->if_index : 0;
+        sdl.sdl_nlen = sdl.sdl_alen = sdl.sdl_slen = 0;
+        *mp = sbcreatecontrol(&sdl, sdl.sdl_len, 20 /* IP_RECVIF */, 0 /* IPPROTO_IP */);
+        if (*mp) {
+            mp = &(*mp)->m_next;
+        }
+    }
+}
 
 INCLUDE_RODATA("nonmatchings/pspnet_inet", D_0002B764);
 
@@ -3597,7 +3625,27 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_00016830);
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00016D78);
 #endif
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_00016938);
+#if FW_VERSION < 201
+void ip_stripoptions(struct mbuf *m, struct mbuf *mopt) {
+    s32 i;
+    struct ip *ip = mtod(m, struct ip *);
+    u8 *opts;
+    s32 olen;
+
+    olen = ((ip->ip_hl_v & 0xF) << 2) - sizeof(struct ip);
+    opts = (u8 *)(ip + 1);
+    i = m->m_len - (sizeof(struct ip) + olen);
+    func_0002C9B8(opts + olen, opts, (u32)i);
+    m->m_len -= olen;
+    if (m->m_flags & M_PKTHDR) {
+        m->m_pkthdr.len -= olen;
+    }
+    ip->ip_len -= olen;
+    ip->ip_hl_v = (ip->ip_hl_v & 0xF0) | (sizeof(struct ip) >> 2);
+}
+#else
+INCLUDE_ASM("nonmatchings/pspnet_inet", ip_stripoptions);
+#endif
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", ip_output);
 
@@ -3705,7 +3753,40 @@ u32 iptime(void) {
     return __builtin_allegrex_wsbw(t);
 }
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_000196DC);
+s32 icmp_sysctl(s32 *name, u32 namelen, void *oldp, u32 *oldlenp, void *newp, u32 newlen) {
+    s32 arg, error;
+
+    if (namelen != 1) {
+        return 20; /* ENOTDIR */
+    }
+    switch (name[0]) {
+    case 1: /* ICMPCTL_MASKREPL */
+        error = sysctl_int(oldp, oldlenp, newp, newlen, &D_0002C5B4);
+        break;
+    case 3: /* ICMPCTL_RETURNDATABYTES */
+        arg = D_0002C270;
+        error = sysctl_int(oldp, oldlenp, newp, newlen, &arg);
+        if (error) {
+            break;
+        }
+        if ((arg >= 8) || (arg <= 512)) {
+            D_0002C270 = arg;
+        } else {
+            error = 22;
+        }
+        break;
+    case 4: /* ICMPCTL_ERRPPSLIMIT */
+        error = sysctl_int(oldp, oldlenp, newp, newlen, &D_0002C1E8);
+        break;
+    case 5: /* SCE: icmpstat */
+        error = sysctl_rdstruct(oldp, oldlenp, newp, D_0002DA50, 0x170);
+        break;
+    default:
+        error = 109; /* ENOPROTOOPT */
+        break;
+    }
+    return error;
+}
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_000197D4);
 

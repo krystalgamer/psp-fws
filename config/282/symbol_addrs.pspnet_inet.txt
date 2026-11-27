@@ -259,3 +259,6 @@ icmp_send = 0x000195B8; // type:func
 ip_freef = 0x00015654; // type:func
 in_cksum = 0x000130B8; // type:func
 ip_output = 0x000169EC; // type:func
+ip_savecontrol = 0x000160E4; // type:func
+ip_stripoptions = 0x00016938; // type:func
+icmp_sysctl = 0x000196DC; // type:func
