@@ -489,11 +489,48 @@ INCLUDE_ASM("nonmatchings/display", sceDisplaySetMode);
 INCLUDE_ASM("nonmatchings/display", sceDisplayGetMode);
 
 INCLUDE_ASM("nonmatchings/display", sceDisplay_driver_63E22A26);
+#endif
 
-INCLUDE_ASM("nonmatchings/display", sceDisplay_driver_5B5AEFAD);
+#if FW_VERSION < 271
+s32 sceDisplay_driver_5B5AEFAD(s32 pri, void **topaddr, s32 *bufferWidth, s32 *pixelFormat, s32 sync)
+{
+    u32 oldK1;
+    s32 intr;
+
+    if ((u32)pri >= 4) {
+        return 0x80000102;
+    }
+    oldK1 = shiftK1Noreorder();
+    if ((k1IsUserMode() && IS_USER_ADDR(topaddr) == 0) || (k1IsUserMode() && IS_USER_ADDR(bufferWidth) == 0)
+        || (k1IsUserMode() && IS_USER_ADDR(pixelFormat) == 0)) {
+        setK1(oldK1);
+        return 0x80000023;
+    }
+    if (topaddr == NULL) {
+        setK1(oldK1);
+        return 0x80000103;
+    }
+    intr = sceKernelCpuSuspendIntr();
+    if (sync == 1 && g_display.fb[pri].changed) {
+        *topaddr = g_display.fb[pri].topaddr;
+    } else {
+        *topaddr = g_display.fb[pri].curTopaddr;
+    }
+    if (bufferWidth != NULL) {
+        *bufferWidth = g_display.fb[pri].bufferWidth;
+    }
+    if (pixelFormat != NULL) {
+        *pixelFormat = g_display.fb[pri].pixelFormat;
+    }
+    sceKernelCpuResumeIntr(intr);
+    setK1(oldK1);
+    return 0;
+}
 #endif
 
 #if FW_VERSION == 271
+INCLUDE_ASM("nonmatchings/display", sceDisplay_driver_5B5AEFAD);
+
 INCLUDE_ASM("nonmatchings/display", sceDisplayGetBacklightSel);
 #endif
 
