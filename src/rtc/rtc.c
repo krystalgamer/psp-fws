@@ -54,7 +54,7 @@ INCLUDE_ASM("nonmatchings/rtc", func_00000000_v300);
 #endif
 
 #if FW_VERSION >= 270
-INCLUDE_ASM("nonmatchings/rtc", func_00000000);
+INCLUDE_ASM("nonmatchings/rtc", alarmCallback);
 #endif
 
 INCLUDE_ASM("nonmatchings/rtc", sceRtcSynchronize);
@@ -185,13 +185,13 @@ INCLUDE_ASM("nonmatchings/rtc", sceRtcGetLastAdjustedTime);
 s32 module_start(void) {
     memset(&g_rtc, 0, sizeof(g_rtc));
     g_rtc.cbId = -1;
-    func_0000358C();
+    registerFunctions();
     g_rtc.unk0 = 0;
     g_rtc.unk4 = 0;
     g_rtc.unkC = 0;
     g_rtc.unk8 = 0;
     sceRtcSynchronize();
-    sceSysconSetAlarmCallback(func_00000000, NULL);
+    sceSysconSetAlarmCallback(alarmCallback, NULL);
     sceKernelRegisterSysEventHandler(&D_00004530);
     return 0;
 }
@@ -200,13 +200,13 @@ s32 module_start(void) {
 #if FW_VERSION < 270
 s32 module_start(void) {
     memset(&g_rtc, 0, sizeof(g_rtc));
-    func_0000358C();
+    registerFunctions();
     g_rtc.unk0 = 0;
     g_rtc.unk4 = 0;
     g_rtc.unkC = 0;
     g_rtc.unk8 = 0;
     sceRtcSynchronize();
-    sceKernelRegisterSysEventHandler(&D_00003BF0);
+    sceKernelRegisterSysEventHandler(&rtc_handler);
     return 0;
 }
 #endif
@@ -221,7 +221,7 @@ s32 module_reboot_before(void) {
 
 #if FW_VERSION < 270
 s32 module_reboot_before(void) {
-    sceKernelUnregisterSysEventHandler(&D_00003BF0);
+    sceKernelUnregisterSysEventHandler(&rtc_handler);
     return 0;
 }
 #endif
@@ -236,7 +236,7 @@ s32 module_start(void) {
     g_rtc.unk8 = 0;
     sceRtcSynchronize();
     func_00003D9C();
-    sceSysconSetAlarmCallback(func_00000000, NULL);
+    sceSysconSetAlarmCallback(alarmCallback, NULL);
     sceKernelRegisterSysEventHandler(&D_00004540);
     return 0;
 }
@@ -254,13 +254,13 @@ INCLUDE_ASM("nonmatchings/rtc", sceRtcInit);
 s32 sceRtcInit(void) {
     memset(&g_rtc, 0, sizeof(g_rtc));
     g_rtc.cbId = -1;
-    func_0000358C();
+    registerFunctions();
     g_rtc.unk0 = 0;
     g_rtc.unk4 = 0;
     g_rtc.unkC = 0;
     g_rtc.unk8 = 0;
     sceRtcSynchronize();
-    sceSysconSetAlarmCallback(func_00000000, NULL);
+    sceSysconSetAlarmCallback(alarmCallback, NULL);
     sceKernelRegisterSysEventHandler(&D_00004530);
     return 0;
 }
@@ -269,13 +269,13 @@ s32 sceRtcInit(void) {
 #if FW_VERSION < 270
 s32 sceRtcInit(void) {
     memset(&g_rtc, 0, sizeof(g_rtc));
-    func_0000358C();
+    registerFunctions();
     g_rtc.unk0 = 0;
     g_rtc.unk4 = 0;
     g_rtc.unkC = 0;
     g_rtc.unk8 = 0;
     sceRtcSynchronize();
-    sceKernelRegisterSysEventHandler(&D_00003BF0);
+    sceKernelRegisterSysEventHandler(&rtc_handler);
     return 0;
 }
 #endif
@@ -294,7 +294,7 @@ s32 sceRtcEnd(void) {
 
 #if FW_VERSION < 270
 s32 sceRtcEnd(void) {
-    sceKernelUnregisterSysEventHandler(&D_00003BF0);
+    sceKernelUnregisterSysEventHandler(&rtc_handler);
     return 0;
 }
 #endif
@@ -446,7 +446,7 @@ s32 sceRtcConvertLocalTimeToUTC(const u64 *tickLocal, u64 *tickUTC) {
 }
 
 #if FW_VERSION < 282
-s32 func_00000DB0(s32 arg0) {
+s32 sysEventHandler(s32 arg0) {
     switch (arg0) {                                 /* irregular */
     case 0x400:
         break;
@@ -677,7 +677,7 @@ INCLUDE_RODATA("nonmatchings/rtc", D_00004350);
 #if FW_VERSION >= 300
 INCLUDE_RODATA("nonmatchings/rtc", D_00004360);
 
-INCLUDE_RODATA("nonmatchings/rtc", D_000044DC);
+INCLUDE_RODATA("nonmatchings/rtc", g_daysInMonth);
 
 INCLUDE_ASM("nonmatchings/rtc", func_00002ED4);
 
@@ -738,7 +738,7 @@ INCLUDE_ASM("nonmatchings/rtc", func_000030C4);
 INCLUDE_ASM("nonmatchings/rtc", func_00003188);
 #endif
 
-s32 func_0000328C(const char *s) {
+s32 parseDigits2(const char *s) {
     s8 c0 = s[0];
     s8 c1 = s[1];
 
@@ -748,7 +748,7 @@ s32 func_0000328C(const char *s) {
     return (c0 - '0') * 10 + (c1 - '0');
 }
 
-s32 func_000032D4(const char *s) {
+s32 parseDigits4(const char *s) {
     s8 c0 = s[0];
     s8 c1 = s[1];
     s8 c2 = s[2];
@@ -767,7 +767,7 @@ INCLUDE_ASM("nonmatchings/rtc", sceRtcFormatRFC2822);
 INCLUDE_ASM("nonmatchings/rtc", sceRtcFormatRFC3339);
 
 #if FW_VERSION < 282
-char *func_000032D0(char *buf, s32 n) {
+char *formatDigits2(char *buf, s32 n) {
     buf[0] = (n / 10) % 10 + '0';
     buf[1] = n % 10 + '0';
     return buf + 2;
@@ -780,7 +780,7 @@ char *func_00003AF8(char *buf, s32 n) {
 }
 #endif
 
-char *func_00003B60(char *buf, s32 n) {
+char *formatDigits4(char *buf, s32 n) {
     buf[3] = n % 10 + '0';
     n /= 10;
     buf[2] = n % 10 + '0';
@@ -847,26 +847,26 @@ s32 sceRtcFormatRFC3339LocalTime(char *pszDateTime, const u64 *pUtc) {
 }
 #endif
 
-INCLUDE_ASM("nonmatchings/rtc", func_00003D10);
+INCLUDE_ASM("nonmatchings/rtc", getTimeOfDayHandler);
 
 #if FW_VERSION < 282
-s32 func_0000358C(void) {
-    return sceKernelRegisterLibcRtcFunc(func_00003DD4, func_00003DF4, func_00003D10);
+s32 registerFunctions(void) {
+    return sceKernelRegisterLibcRtcFunc(clockHandler, timeHandler, getTimeOfDayHandler);
 }
 #else
 void func_00003D9C(void) {
-    sceKernelRegisterRtcFunc(func_00003DD4, func_00003DF4, func_00003D10, sceRtcGetCurrentSecureTick);
+    sceKernelRegisterRtcFunc(clockHandler, timeHandler, getTimeOfDayHandler, sceRtcGetCurrentSecureTick);
 }
 #endif
 
-u32 func_00003DD4(void) {
+u32 clockHandler(void) {
     u64 tick;
 
     sceRtcGetCurrentTick(&tick);
     return tick;
 }
 
-u32 func_00003DF4(u32 *t) {
+u32 timeHandler(u32 *t) {
     pspTime date;
     u64 tick;
     u32 ret;
@@ -885,7 +885,7 @@ INCLUDE_RODATA("nonmatchings/rtc", D_00004614);
 #else
 INCLUDE_RODATA("nonmatchings/rtc", D_000044D4);
 
-INCLUDE_RODATA("nonmatchings/rtc", D_000044DC);
+INCLUDE_RODATA("nonmatchings/rtc", g_daysInMonth);
 #endif
 
 INCLUDE_RODATA("nonmatchings/rtc", D_000044F4);

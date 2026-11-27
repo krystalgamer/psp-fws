@@ -45,26 +45,26 @@ typedef struct {
     u32 clockAdjust;        /* 0x50 (2.70+: 0x58): scratchpad 8, sum of syscon clocks overwritten by SetCurrentTick */
 } SceRtcState;
 
-extern s32 D_00003BF0;
-extern const s8 D_000044DC[2][12];
+extern s32 rtc_handler;
+extern const s8 g_daysInMonth[2][12];
 extern s32 D_00004530;
 extern M2C_UNK D_00004540;
 extern SceRtcState g_rtc;
 
 u64 __udivdi3(u64 a, u64 b);
-void func_00000000(s32 arg0, void *arg1);
-s32 func_00000DB0(s32 arg0);
+void alarmCallback(s32 arg0, void *arg1);
+s32 sysEventHandler(s32 arg0);
 s32 func_0000138C(s32 arg0);
-s32 func_0000328C(const char *s);
-char *func_000032D0(char *buf, s32 n);
-s32 func_000032D4(const char *s);
-s32 func_0000358C(void);
+s32 parseDigits2(const char *s);
+char *formatDigits2(char *buf, s32 n);
+s32 parseDigits4(const char *s);
+s32 registerFunctions(void);
 char *func_00003AF8(char *buf, s32 n);
-char *func_00003B60(char *buf, s32 n);
-s32 func_00003D10(SceKernelTimeval *tv, SceKernelTimezone *tz);
+char *formatDigits4(char *buf, s32 n);
+s32 getTimeOfDayHandler(SceKernelTimeval *tv, SceKernelTimezone *tz);
 void func_00003D9C(void);
-u32 func_00003DD4(void);
-u32 func_00003DF4(u32 *t);
+u32 clockHandler(void);
+u32 timeHandler(u32 *t);
 void *memset(void *s, s32 c, u32 n);
 s32 module_reboot_before(void);
 s32 module_start(void);
