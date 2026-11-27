@@ -1091,13 +1091,3 @@ INCLUDE_ASM("nonmatchings/paf_0A99B4", Job_Start);
 s32 func_000B7EB0(void) {
     return D_001A5240;
 }
-
-INCLUDE_ASM("nonmatchings/paf_0A99B4", func_000B7EBC);
-
-INCLUDE_ASM("nonmatchings/paf_0A99B4", Job_Cancel);
-
-INCLUDE_ASM("nonmatchings/paf_0A99B4", Job_Cancel2);
-
-s32 Job_isCanceled(struct Unk_scePaf_75062BCF_0 *arg0) {
-    return arg0->unk18 == 3;
-}
