@@ -84,3 +84,7 @@ parseDigits2 = 0x0000328C; // type:func
 parseDigits4 = 0x000032D4; // type:func
 alarmCallback = 0x00000000; // type:func
 g_daysInMonth = 0x000044DC;
+registerFunctions = 0x00003D9C; // type:func
+formatDigits2 = 0x00003AF8; // type:func
+sysEventHandler = 0x0000138C; // type:func
+rtc_handler = 0x00004540;

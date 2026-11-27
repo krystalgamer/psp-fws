@@ -192,7 +192,7 @@ s32 module_start(void) {
     g_rtc.unk8 = 0;
     sceRtcSynchronize();
     sceSysconSetAlarmCallback(alarmCallback, NULL);
-    sceKernelRegisterSysEventHandler(&D_00004530);
+    sceKernelRegisterSysEventHandler(&rtc_handler);
     return 0;
 }
 #endif
@@ -214,7 +214,7 @@ s32 module_start(void) {
 #if FW_VERSION >= 270 && FW_VERSION < 282
 s32 module_reboot_before(void) {
     sceSysconSetAlarmCallback(NULL, NULL);
-    sceKernelUnregisterSysEventHandler(&D_00004530);
+    sceKernelUnregisterSysEventHandler(&rtc_handler);
     return 0;
 }
 #endif
@@ -235,15 +235,15 @@ s32 module_start(void) {
     g_rtc.unkC = 0;
     g_rtc.unk8 = 0;
     sceRtcSynchronize();
-    func_00003D9C();
+    registerFunctions();
     sceSysconSetAlarmCallback(alarmCallback, NULL);
-    sceKernelRegisterSysEventHandler(&D_00004540);
+    sceKernelRegisterSysEventHandler(&rtc_handler);
     return 0;
 }
 
 s32 module_reboot_before(void) {
     sceSysconSetAlarmCallback(NULL, NULL);
-    sceKernelUnregisterSysEventHandler(&D_00004540);
+    sceKernelUnregisterSysEventHandler(&rtc_handler);
     return 0;
 }
 
@@ -261,7 +261,7 @@ s32 sceRtcInit(void) {
     g_rtc.unk8 = 0;
     sceRtcSynchronize();
     sceSysconSetAlarmCallback(alarmCallback, NULL);
-    sceKernelRegisterSysEventHandler(&D_00004530);
+    sceKernelRegisterSysEventHandler(&rtc_handler);
     return 0;
 }
 #endif
@@ -287,7 +287,7 @@ INCLUDE_ASM("nonmatchings/rtc", sceRtcEnd);
 #if FW_VERSION >= 270 && FW_VERSION < 282
 s32 sceRtcEnd(void) {
     sceSysconSetAlarmCallback(NULL, NULL);
-    sceKernelUnregisterSysEventHandler(&D_00004530);
+    sceKernelUnregisterSysEventHandler(&rtc_handler);
     return 0;
 }
 #endif
@@ -459,7 +459,7 @@ s32 sysEventHandler(s32 arg0) {
 #endif
 
 #if FW_VERSION == 282
-s32 func_0000138C(s32 arg0) {
+s32 sysEventHandler(s32 arg0) {
     switch (arg0) {                                 /* irregular */
     case 0x400:
         break;
@@ -773,7 +773,7 @@ char *formatDigits2(char *buf, s32 n) {
     return buf + 2;
 }
 #else
-char *func_00003AF8(char *buf, s32 n) {
+char *formatDigits2(char *buf, s32 n) {
     buf[0] = (n / 10) % 10 + '0';
     buf[1] = n % 10 + '0';
     return buf + 2;
@@ -854,7 +854,7 @@ s32 registerFunctions(void) {
     return sceKernelRegisterLibcRtcFunc(clockHandler, timeHandler, getTimeOfDayHandler);
 }
 #else
-s32 func_00003D9C(void) {
+s32 registerFunctions(void) {
     return sceKernelRegisterRtcFunc(clockHandler, timeHandler, getTimeOfDayHandler, sceRtcGetCurrentSecureTick);
 }
 #endif

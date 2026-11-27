@@ -100,3 +100,4 @@ timeHandler = 0x00003DE0; // type:func rom:0x3E80
 D_00004580_v270 = 0x00004580;
 // shared names (tools/add_version.py) end
 alarmCallback = 0x00000000; // type:func
+rtc_handler = 0x00004530;
