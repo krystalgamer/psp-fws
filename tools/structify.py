@@ -182,9 +182,11 @@ def ordered_types(types):
     for k in keys:
         body = re.sub(r"/\*.*?\*/", "", types[k], flags=re.S)
         d = set()
-        for m in re.finditer(r"\b(\w+)\b(?!\s*\*)", body):
-            o = owner.get(m[1])
-            if o and o != k and m[1] not in defs[k]:
+        for m in re.finditer(r"(\bstruct\s+|\bunion\s+|\benum\s+)?\b(\w+)\b(\s*\*)?", body):
+            o = owner.get(m[2])
+            # by-value uses need the definition first; pointer uses of a typedef name need the typedef
+            # (only `struct X *` is fine without it)
+            if o and o != k and m[2] not in defs[k] and not (m[3] and m[1]):
                 d.add(o)
         deps[k] = d
     out, done = [], set()
