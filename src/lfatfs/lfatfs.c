@@ -308,11 +308,7 @@ INCLUDE_RODATA("nonmatchings/lfatfs", D_0000CD2C);
 INCLUDE_RODATA("nonmatchings/lfatfs", D_0000CD34);
 #endif
 
-#if FW_VERSION >= 102 && FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/lfatfs", func_00000AF4);
-#else
 INCLUDE_ASM("nonmatchings/lfatfs", module_start);
-#endif
 
 #if FW_VERSION >= 300 && FW_VERSION < 310
 INCLUDE_RODATA("nonmatchings/lfatfs", D_0000CF8C);
@@ -382,7 +378,7 @@ INCLUDE_RODATA("nonmatchings/lfatfs", D_0000CE50);
 #endif
 
 #if FW_VERSION >= 102 && FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/lfatfs", func_00000D10);
+INCLUDE_ASM("nonmatchings/lfatfs", module_reboot_before);
 
 INCLUDE_ASM("nonmatchings/lfatfs", func_00000DD0);
 
