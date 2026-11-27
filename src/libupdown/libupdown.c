@@ -1,7 +1,7 @@
 /* cflags[152]: -O2 -frename-registers */
 /* cflags[151]: -O2 -frename-registers */
 /* cflags[150]: -O2 -frename-registers */
-/* cflags[100,102]: -O2 -frename-registers */
+/* cflags[100,102,103]: -O2 -frename-registers */
 #include "common.h"
 #include "libupdown_decls.h"
 
@@ -119,7 +119,7 @@ INCLUDE_ASM("nonmatchings/libupdown", func_000018E0);
 INCLUDE_ASM("nonmatchings/libupdown", func_00001888);
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_RODATA("nonmatchings/libupdown", D_000032D0);
 
 INCLUDE_RODATA("nonmatchings/libupdown", D_000032E0);
@@ -211,7 +211,7 @@ INCLUDE_ASM("nonmatchings/libupdown", func_000021D0);
 
 INCLUDE_ASM("nonmatchings/libupdown", sceUpdateDownloadInitEx);
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/libupdown", func_0000246C);
 #else
 INCLUDE_ASM("nonmatchings/libupdown", sceUpdateDownloadInit);
@@ -219,9 +219,15 @@ INCLUDE_ASM("nonmatchings/libupdown", sceUpdateDownloadInit);
 
 INCLUDE_ASM("nonmatchings/libupdown", sceUpdateDownloadEnd);
 
+#if FW_VERSION == 103
+INCLUDE_ASM("nonmatchings/libupdown", func_000025A4);
+
+INCLUDE_ASM("nonmatchings/libupdown", func_00002688);
+#else
 INCLUDE_ASM("nonmatchings/libupdown", sceUpdateDownloadConnectServer);
 
 INCLUDE_ASM("nonmatchings/libupdown", sceUpdateDownloadReadData);
+#endif
 
 void func_0000258C(void) {
     sceKernelGetSystemTimeLow();
