@@ -1,0 +1,19 @@
+// shared names (tools/add_version.py) begin
+scePwmInit = 0x00000000; // type:func rom:0x80
+scePwmStart = 0x0000006C; // type:func rom:0xEC
+scePwmStop = 0x0000010C; // type:func rom:0x18C
+scePwmChangeDuty = 0x00000194; // type:func rom:0x214
+scePwmReferDuty = 0x000001F4; // type:func rom:0x274
+scePwmIsLoading = 0x0000024C; // type:func rom:0x2CC
+module_start = 0x00000278; // type:func rom:0x2F8
+module_reboot_before = 0x00000298; // type:func rom:0x318
+scePwmEnd = 0x000002BC; // type:func rom:0x33C
+scePwmSuspend = 0x000002E0; // type:func rom:0x360
+scePwmResume = 0x00000328; // type:func rom:0x3A8
+sceKernelRegisterSysEventHandler = 0x000003D0; // type:func rom:0x450
+sceKernelUnregisterSysEventHandler = 0x000003D8; // type:func rom:0x458
+sceSysregPwmClkEnable = 0x000003E0; // type:func rom:0x460
+sceSysregPwmClkDisable = 0x000003E8; // type:func rom:0x468
+sceSysregPwmIoEnable = 0x000003F0; // type:func rom:0x470
+sceSysregPwmIoDisable = 0x000003F8; // type:func rom:0x478
+// shared names (tools/add_version.py) end
