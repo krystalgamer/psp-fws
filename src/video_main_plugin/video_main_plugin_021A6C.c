@@ -164,7 +164,7 @@ INCLUDE_ASM("nonmatchings/video_main_plugin_021A6C", func_0002272C);
 
 #if FW_VERSION >= 350
 s32 func_00022794(s32 arg0, s32 *arg1) {
-    *arg1 = scePaf_746499C1(arg0 + 0x4C);
+    *arg1 = sce_paf_private_atoi(arg0 + 0x4C);
     return 0;
 }
 #else
@@ -1099,7 +1099,7 @@ INCLUDE_ASM("nonmatchings/video_main_plugin_021A6C", func_00026AB0);
 
 #if FW_VERSION >= 350
 void func_00026ACC(s32 *arg0) {
-    scePaf_62231A8B(*arg0);
+    sce_paf_private_fseek(*arg0);
 }
 #else
 void func_00026ACC(s32 *arg0) {
@@ -1109,7 +1109,7 @@ void func_00026ACC(s32 *arg0) {
 
 #if FW_VERSION >= 350
 void func_00026AE8(s32 *arg0) {
-    scePaf_DA0209EF(*arg0);
+    sce_paf_private_ftell(*arg0);
 }
 #else
 void func_00026AE8(s32 *arg0) {

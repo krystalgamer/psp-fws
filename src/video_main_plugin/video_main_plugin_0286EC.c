@@ -791,12 +791,12 @@ void func_0002FFB0(void **arg0) {
     if (var_v0 != var_a0) {
         do {
             temp_s0 = M2C_FIELD(var_v0, void **, 4);
-            scePaf_F5001144(var_v0);
+            sce_paf_private_free2(var_v0);
             var_a0 = *arg0;
             var_v0 = temp_s0;
         } while (temp_s0 != var_a0);
     }
-    scePaf_F5001144(var_a0);
+    sce_paf_private_free2(var_a0);
 }
 #endif
 
@@ -1929,7 +1929,7 @@ INCLUDE_ASM("nonmatchings/video_main_plugin_0286EC", func_00038458);
 
 #if FW_VERSION >= 350
 s32 func_00038524(void) {
-    scePaf_F5E9D973(scePaf_88784487(&D_00055298) + 0xF8);
+    _ZN8PSJSExec16FinalizeExecSyncEv(scePaf_88784487(&D_00055298) + 0xF8);
     return 0;
 }
 #endif
