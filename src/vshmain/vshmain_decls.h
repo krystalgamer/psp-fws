@@ -425,6 +425,7 @@ extern s32 D_00020CFC;
 extern s32 D_00020E6C;
 extern s32 D_00020E74;
 extern s32 D_00020E7C;
+extern s32 D_00020E80;
 extern s32 D_00020E9C;
 extern s32 D_00020EA0;
 extern s32 D_00020EA4;
@@ -633,6 +634,7 @@ extern M2C_UNK func_0000FBA8;
 extern M2C_UNK func_0000FC30;
 extern M2C_UNK func_0000FE28;
 extern M2C_UNK func_00010174;
+extern M2C_UNK func_00014A8C;
 extern M2C_UNK func_0001FC94;
 extern M2C_UNK func_00025388;
 

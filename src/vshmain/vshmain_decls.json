@@ -731,6 +731,7 @@
   "D_00020E6C": "extern s32 D_00020E6C;",
   "D_00020E74": "extern s32 D_00020E74;",
   "D_00020E7C": "extern s32 D_00020E7C;",
+  "D_00020E80": "extern s32 D_00020E80;",
   "D_00020E9C": "extern s32 D_00020E9C;",
   "D_00020EA0": "extern s32 D_00020EA0;",
   "D_00020EA4": "extern s32 D_00020EA4;",
@@ -939,6 +940,7 @@
   "func_0000FC30": "extern M2C_UNK func_0000FC30;",
   "func_0000FE28": "extern M2C_UNK func_0000FE28;",
   "func_00010174": "extern M2C_UNK func_00010174;",
+  "func_00014A8C": "extern M2C_UNK func_00014A8C;",
   "func_0001FC94": "extern M2C_UNK func_0001FC94;",
   "func_00025388": "extern M2C_UNK func_00025388;"
  }

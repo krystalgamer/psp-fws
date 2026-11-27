@@ -1793,11 +1793,11 @@ INCLUDE_ASM("nonmatchings/vshmain", func_000041B4);
 INCLUDE_ASM("nonmatchings/vshmain", func_0000438C);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 201
+#if FW_VERSION >= 151 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/vshmain", func_000041D0);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 151
 s32 *func_000041D0(s32 *arg0, s32 arg1, s32 arg2) {
     *arg0 = func_00004524(arg1, arg2);
     return arg0;
@@ -4701,7 +4701,7 @@ void func_0000EC84(void) {
 }
 #endif
 
-#if FW_VERSION >= 150
+#if FW_VERSION >= 151
 INCLUDE_ASM("nonmatchings/vshmain", func_0000ECA4);
 #else
 void func_0000ECA4(s32 arg0) {
@@ -9116,9 +9116,27 @@ INCLUDE_ASM("nonmatchings/vshmain", func_0001E6F4);
 INCLUDE_ASM("nonmatchings/vshmain", func_0001E960);
 #endif
 
-#if FW_VERSION >= 150
+#if FW_VERSION >= 151
 INCLUDE_ASM("nonmatchings/vshmain", func_0001E734);
-#else
+#endif
+
+#if FW_VERSION == 150
+void func_0001E734(s32 arg0) {
+    void **temp_v0;
+
+    _ZN3paf9PhHandler11SetCallBackEiPFvPNS_8PhWidgetEPNS_7PhEventEPvES5_(arg0, 0x80003, (s32) &func_00014A8C, 0);
+    if (D_0003089C->unkA4 == 0) {
+
+    } else {
+        temp_v0 = _ZNK3paf4View10FindWidgetEPKc(D_00020E80, "mlist_optionmenu");
+        if (temp_v0 != NULL) {
+            _ZN3paf6PhList10SetItemNumEi(temp_v0, func_000165C8((s32) D_0003089C));
+        }
+    }
+}
+#endif
+
+#if FW_VERSION == 100
 void func_0001E734(s32 arg0) {
     void **temp_v0;
 
@@ -9873,8 +9891,37 @@ INCLUDE_ASM("nonmatchings/vshmain", func_0002053C);
 
 INCLUDE_ASM("nonmatchings/vshmain", func_00020578);
 
-#if FW_VERSION >= 150 && FW_VERSION < 201
+#if FW_VERSION >= 151 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/vshmain", func_00011988);
+#endif
+
+#if FW_VERSION == 150
+void func_00011988(void *arg0) {
+    if (arg0 != NULL) {
+        M2C_FIELD(arg0, s32 *, 0x94) = _ZN3paf4View8GetSoundEPKc(D_000308B4, &D_0002B1F4);
+        M2C_FIELD(arg0, s32 *, 0x98) = _ZN3paf4View8GetSoundEPKc(D_000308B4, &D_0002B200);
+        M2C_FIELD(arg0, s32 *, 0x9C) = _ZN3paf4View8GetSoundEPKc(D_000308B4, &D_0002B20C);
+        M2C_FIELD(arg0, s32 *, 0xA0) = _ZN3paf4View8GetSoundEPKc(D_000308B4, &D_0002B20C);
+        M2C_FIELD(arg0, s32 *, 0xA4) = _ZN3paf4View8GetSoundEPKc(D_000308B4, &D_0002B218);
+        M2C_FIELD(arg0, s32 *, 0xA8) = _ZN3paf4View8GetSoundEPKc(D_000308B4, &D_0002B20C);
+        M2C_FIELD(arg0, s32 *, 0xAC) = _ZN3paf4View8GetSoundEPKc(D_000308B4, &D_0002B1F4);
+        M2C_FIELD(arg0, s32 *, 0xB0) = _ZN3paf4View8GetSoundEPKc(D_000308B4, &D_0002B20C);
+        M2C_FIELD(arg0, s32 *, 0xB4) = _ZN3paf4View8GetSoundEPKc(D_000308B4, &D_0002B200);
+        M2C_FIELD(arg0, s32 *, 0xB8) = _ZN3paf4View8GetSoundEPKc(D_000308B4, &D_0002B200);
+        M2C_FIELD(arg0, s32 *, 0xBC) = _ZN3paf4View8GetSoundEPKc(D_000308B4, &D_0002B200);
+        M2C_FIELD(arg0, s32 *, 0xC0) = _ZN3paf4View8GetSoundEPKc(D_000308B4, &D_0002B1F4);
+        M2C_FIELD(arg0, s32 *, 0xC4) = _ZN3paf4View8GetSoundEPKc(D_000308B4, &D_0002B20C);
+        M2C_FIELD(arg0, s32 *, 0xC8) = _ZN3paf4View8GetSoundEPKc(D_000308B4, &D_0002B1F4);
+        M2C_FIELD(arg0, s32 *, 0xCC) = _ZN3paf4View8GetSoundEPKc(D_000308B4, &D_0002B200);
+        M2C_FIELD(arg0, s32 *, 0xD0) = _ZN3paf4View8GetSoundEPKc(D_000308B4, &D_0002B20C);
+        M2C_FIELD(arg0, s32 *, 0xD4) = _ZN3paf4View8GetSoundEPKc(D_000308B4, &D_0002B1F4);
+        M2C_FIELD(arg0, s32 *, 0xD8) = _ZN3paf4View8GetSoundEPKc(D_000308B4, &D_0002B200);
+        M2C_FIELD(arg0, s32 *, 0xDC) = _ZN3paf4View8GetSoundEPKc(D_000308B4, &D_0002B20C);
+        M2C_FIELD(arg0, s32 *, 0xE0) = _ZN3paf4View8GetSoundEPKc(D_000308B4, &D_0002B1F4);
+        M2C_FIELD(arg0, s32 *, 0xE4) = _ZN3paf4View8GetSoundEPKc(D_000308B4, &D_0002B200);
+        M2C_FIELD(arg0, s32 *, 0xE8) = _ZN3paf4View8GetSoundEPKc(D_000308B4, &D_0002B20C);
+    }
+}
 #endif
 
 #if FW_VERSION == 100
@@ -11302,11 +11349,11 @@ s32 func_00023E70(struct Unk_func_00023E70_0 *arg0) {
 }
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 350
+#if FW_VERSION >= 151 && FW_VERSION < 350
 INCLUDE_ASM("nonmatchings/vshmain", func_00023E78);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 151
 void func_00023E78(void *arg0, s32 *arg1) {
     _ZN3paf4View8PageOpenEPKcii(M2C_FIELD(arg0, s32 *, 4), (s32) arg1, 0, 0);
 }
