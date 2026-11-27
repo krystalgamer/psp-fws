@@ -1,5 +1,5 @@
 /* cflags[150]: -Os -frename-registers */
-/* cflags[100,102]: -Os */
+/* cflags[100,102,103]: -Os */
 /* cflags[152]: -O2 -frename-registers */
 #include "common.h"
 #include "exceptionman_decls.h"
