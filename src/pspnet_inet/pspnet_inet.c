@@ -2845,7 +2845,17 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_00012490);
 #if FW_VERSION >= 151 && FW_VERSION < 282
 #if FW_VERSION < 201
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", in_socktrim);
+void in_socktrim(struct sockaddr_in *ap) {
+    char *cplim = (char *)&ap->sin_addr;
+    char *cp = (char *)(&ap->sin_addr + 1);
+
+    ap->sin_len = 0;
+    while (--cp >= cplim)
+        if (*cp) {
+            (ap)->sin_len = cp - (char *)(ap) + 1;
+            break;
+        }
+}
 
 #endif
 #endif
