@@ -19,8 +19,8 @@ s32 module_stop(void) {
 
 #if FW_VERSION >= 350
 void func_0000015C(void) {
-    scePaf_39E62C88(D_00001F4C, &D_00001AB4, 0, 0);
-    scePaf_A013540A(D_00001F4C, &D_00001AB4);
+    _ZN3paf4View8PageOpenEPKcii(D_00001F4C, &D_00001AB4, 0, 0);
+    _ZN3paf4View12PageActivateEPKc(D_00001F4C, &D_00001AB4);
 }
 #else
 void func_0000015C(void) {

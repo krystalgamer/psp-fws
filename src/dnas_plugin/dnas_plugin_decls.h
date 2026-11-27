@@ -33,8 +33,6 @@ void func_000013B4(void **arg0, void **arg1);
 void func_000014F0(void **arg0);
 M2C_UNK func_0000161C(...);
 s32 module_stop(void);
-M2C_UNK scePaf_39E62C88(s32, M2C_UNK *, M2C_UNK, M2C_UNK);
-M2C_UNK scePaf_A013540A(s32, M2C_UNK *);
 
 #ifdef __cplusplus
 }

@@ -13,9 +13,7 @@
   "func_000013B4": "void func_000013B4(void **arg0, void **arg1);",
   "func_000014F0": "void func_000014F0(void **arg0);",
   "func_0000161C": "M2C_UNK func_0000161C();",
-  "module_stop": "s32 module_stop(void);",
-  "scePaf_39E62C88": "M2C_UNK scePaf_39E62C88(s32, M2C_UNK *, M2C_UNK, M2C_UNK);",
-  "scePaf_A013540A": "M2C_UNK scePaf_A013540A(s32, M2C_UNK *);"
+  "module_stop": "s32 module_stop(void);"
  },
  "types": {
   "Unk_func_000014F0_temp_a0": "struct Unk_func_000014F0_temp_a0 {\n    u8 pad0[0x4];\n    s32 unk4;\n};"
