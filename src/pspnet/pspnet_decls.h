@@ -365,7 +365,7 @@ struct uio {
 };
 
 
-s32 func_00007DAC(const char *s1, const char *s2);
+s32 sceNetStrcmp(const char *s1, const char *s2);
 s32 _sce_pspnet_spllock(void);
 void _sce_pspnet_splunlock(s32 arg0);
 s32 _sce_pspnet_if_nulloutput(void);
@@ -380,7 +380,7 @@ extern __inline__ struct ifnet *ifunit_inline(const char *name) {
     for (ifp = TAILQ_FIRST(&D_0000BE54); ifp != NULL; ifp = TAILQ_NEXT(ifp, if_list)) {
         if (ifp->if_output == _sce_pspnet_if_nulloutput)
             continue;
-        if (func_00007DAC(ifp->if_xname, name) == 0) {
+        if (sceNetStrcmp(ifp->if_xname, name) == 0) {
             _sce_pspnet_splunlock(s);
             return ifp;
         }
@@ -606,33 +606,15 @@ s32 func_000079E4(void);
 s32 func_00007A68(char c);
 char func_00007B50(char c);
 M2C_UNK *func_00007BBC(void);
-void *func_00007BD4(const void *s, s32 c, s32 n);
-void *func_00007C0C(void *dst, const void *src, s32 n);
-s32 func_00007C80(const void *s1, const void *s2, s32 n);
-u8 *func_00007CC0(u8 *arg0, u8 *arg1, s32 arg2);
-void *func_00007CF4(void *s, s32 c, s32 n);
 s32 func_00007D20(const void *s1, const void *s2, s32 n);
-void func_00007D60(const void *src, void *dst, s32 n);
-void func_00007D84(void *s, s32 n);
-s32 func_00007DAC(const char *s1, const char *s2);
-char *func_00007E2C(const char *s, s32 c);
 s32 func_00007E3C(void (*putc)(char **pp, s32 c), char **pp, const char *fmt, va_list ap);
 s32 func_00007E50(void (*putc)(char **pp, s32 c), char **pp, const char *fmt, va_list ap);
-char *func_00007E5C(const char *s, s32 c);
-s32 func_00007EA4(const char *s1, const char *s2, s32 n);
-char *func_00007F3C(char *dst, const char *src, s32 n);
-char *func_00007FB8(const char *s, s32 c);
-u8 *func_00007FE8(u8 *arg0, u8 *arg1);
-s32 func_00008020(const char *s);
-s32 func_00008054(char *buf, const char *fmt, ...);
 s32 func_000080A0(void (*putc)(char **pp, s32 c), char **pp, const char *fmt, va_list ap);
 void func_00008594(char **pp, s32 c);
 void func_00008598(char **pp, s32 c);
 s32 func_00008790(s32, s32, s32);
 s32 func_00008794(s32, s32, s32);
 void func_000087C8(char **pp, s32 c);
-char func_0000881C(char c);
-char func_00008848(s32 c);
 s32 *func_0000885C(void);
 void if_deactivate(struct ifnet *ifp);
 void if_nulldrain(void);
@@ -662,11 +644,13 @@ s32 sceKernelSysClock2USec(SceKernelSysClock *clock, u32 *sec, u32 *usec);
 s32 sceKernelTerminateThread(s32);
 s32 sceKernelWaitSema(s32, s32, void *);
 void sceNetAtoi(s32 arg0);
+void sceNetBcopy(const void *src, void *dst, s32 n);
 s32 sceNetBpfClose(s32 fd);
 s32 sceNetBpfIoctl(s32 fd, u32 cmd, void *data);
 s32 sceNetBpfOpen(void);
 s32 sceNetBpfRead(s32 fd, void *buf, s32 len);
 s32 sceNetBpfWrite(s32 fd, void *buf, s32 len);
+void sceNetBzero(void *s, s32 n);
 void sceNetEtherNtostr(const u8 *mac, char *buf);
 void sceNetEtherStrton(const char *str, u8 *mac);
 void sceNetFreeInternal(void *p);
@@ -681,15 +665,28 @@ M2C_UNK sceNetIfhandleTerm();
 s32 sceNetIfhandleWaitSema(s32 sema, s32 n, u32 *timeout);
 s32 sceNetIfhandle_lib_0C391E9F(s32 poolSize);
 M2C_UNK sceNetIfhandle_lib_29ED84C5();
+char *sceNetIndex(const char *s, s32 c);
 s32 sceNetInit(s32 poolSize, s32 calloutPrio, s32 calloutStack, s32 netintrPrio, s32 netintrStack);
+char sceNetLook_ctype_table(s32 c);
 M2C_UNK sceNetMFreem(void *);
 void *sceNetMallocInternal(u32 size);
+void *sceNetMemchr(const void *s, s32 c, s32 n);
+s32 sceNetMemcmp(const void *s1, const void *s2, s32 n);
 u8 *sceNetMemcpy(u8 *arg0, u8 *arg1, s32 arg2);
+void *sceNetMemmove(void *dst, const void *src, s32 n);
+void *sceNetMemset(void *s, s32 c, s32 n);
 u32 sceNetRand(void);
 s32 sceNetSprintf(char *buf, const char *fmt, ...);
+char *sceNetStrchr(const char *s, s32 c);
+s32 sceNetStrcmp(const char *s1, const char *s2);
 u8 *sceNetStrcpy(u8 *arg0, u8 *arg1);
+s32 sceNetStrlen(const char *s);
+s32 sceNetStrncmp(const char *s1, const char *s2, s32 n);
+char *sceNetStrncpy(char *dst, const char *src, s32 n);
+char *sceNetStrrchr(const char *s, s32 c);
 s32 sceNetTerm(void);
 s32 sceNetThreadAbort(SceUID thid);
+char sceNetTolower(char c);
 M2C_UNK sceWlanDrv_lib_8D5F551B(M2C_UNK);
 s32 slpque_init(void);
 void slpque_term(void);

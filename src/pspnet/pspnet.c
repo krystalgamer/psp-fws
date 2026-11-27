@@ -15,7 +15,7 @@ s32 sceNetConfig80211LeaveRequest(const char *name, s32 *out) {
     struct SceNetIfreq1 req = {{0}};
     s32 ret;
 
-    func_00007F3C(req.ifr_name, name, IFNAMSIZ);
+    sceNetStrncpy(req.ifr_name, name, IFNAMSIZ);
     ret = _sce_pspnet_ifioctl(NULL, 0xC01469D8, &req, 1);
     if (ret != 0)
         goto end;
@@ -31,7 +31,7 @@ INCLUDE_ASM("nonmatchings/pspnet", sceNetConfig80211LeaveRequest);
 s32 sceNetConfig80211SetAuth(const char *name, s32 auth) {
     struct SceNetIfreq1 req = {{0}};
 
-    func_00007F3C(req.ifr_name, name, IFNAMSIZ);
+    sceNetStrncpy(req.ifr_name, name, IFNAMSIZ);
     req.args[0] = auth;
     return _sce_pspnet_ifioctl(NULL, 0x801469DD, &req, 1);
 }
@@ -43,7 +43,7 @@ INCLUDE_ASM("nonmatchings/pspnet", sceNetConfig80211SetAuth);
 s32 sceNetConfig80211SetPowerSave(const char *name, s32 arg) {
     struct SceNetIfreq1 req = {{0}};
 
-    func_00007F3C(req.ifr_name, name, IFNAMSIZ);
+    sceNetStrncpy(req.ifr_name, name, IFNAMSIZ);
     req.args[0] = arg;
     return _sce_pspnet_ifioctl(NULL, 0x801469DF, &req, 1);
 }
@@ -91,7 +91,7 @@ INCLUDE_ASM("nonmatchings/pspnet", sceNetConfig80211GetIfInfo);
 s32 sceNetConfig80211GetBssDesc(const char *name, s32 arg) {
     struct SceNetIfreq1 req = {{0}};
 
-    func_00007F3C(req.ifr_name, name, IFNAMSIZ);
+    sceNetStrncpy(req.ifr_name, name, IFNAMSIZ);
     req.args[0] = arg;
     return _sce_pspnet_ifioctl(NULL, 0xC01469D7, &req, 1);
 }
@@ -104,7 +104,7 @@ s32 sceNetConfig80211ScanRequest(const char *name, s32 arg0, s32 *inout, s32 arg
     struct SceNetIfreq4 req = {{0}};
     s32 ret;
 
-    func_00007F3C(req.ifr_name, name, IFNAMSIZ);
+    sceNetStrncpy(req.ifr_name, name, IFNAMSIZ);
     req.args[0] = arg0;
     req.args[1] = *inout;
     req.args[2] = arg2;
@@ -125,7 +125,7 @@ s32 sceNetConfig80211CreateRequest(const char *name, s32 arg, s32 *out) {
     struct SceNetIfreq2 req = {{0}};
     s32 ret;
 
-    func_00007F3C(req.ifr_name, name, IFNAMSIZ);
+    sceNetStrncpy(req.ifr_name, name, IFNAMSIZ);
     req.args[0] = arg;
     ret = _sce_pspnet_ifioctl(NULL, 0xC01869D5, &req, 1);
     if (ret != 0)
@@ -143,7 +143,7 @@ s32 sceNetConfig80211JoinRequest(const char *name, s32 arg, s32 *out) {
     struct SceNetIfreq2 req = {{0}};
     s32 ret;
 
-    func_00007F3C(req.ifr_name, name, IFNAMSIZ);
+    sceNetStrncpy(req.ifr_name, name, IFNAMSIZ);
     req.args[0] = arg;
     ret = _sce_pspnet_ifioctl(NULL, 0xC01869D6, &req, 1);
     if (ret != 0)
@@ -162,7 +162,7 @@ INCLUDE_ASM("nonmatchings/pspnet", sceNet_lib_EB38431E);
 s32 sceNetConfig80211SetConf(const char *name, s32 arg) {
     struct SceNetIfreq1 req = {{0}};
 
-    func_00007F3C(req.ifr_name, name, IFNAMSIZ);
+    sceNetStrncpy(req.ifr_name, name, IFNAMSIZ);
     req.args[0] = arg;
     return _sce_pspnet_ifioctl(NULL, 0x801469D2, &req, 1);
 }
@@ -174,7 +174,7 @@ INCLUDE_ASM("nonmatchings/pspnet", sceNetConfig80211SetConf);
 s32 sceNetConfig80211GetConf(const char *name, void *buf) {
     struct SceNetIfreq1 req = {{0}};
 
-    func_00007F3C(req.ifr_name, name, IFNAMSIZ);
+    sceNetStrncpy(req.ifr_name, name, IFNAMSIZ);
     req.args[0] = (s32)buf;
     return _sce_pspnet_ifioctl(NULL, 0x401469D3, &req, 1);
 }
@@ -186,7 +186,7 @@ INCLUDE_ASM("nonmatchings/pspnet", sceNetConfig80211GetConf);
 s32 sceNetConfig80211GetAuth(const char *name, void *buf) {
     struct SceNetIfreq1 req = {{0}};
 
-    func_00007F3C(req.ifr_name, name, IFNAMSIZ);
+    sceNetStrncpy(req.ifr_name, name, IFNAMSIZ);
     req.args[0] = (s32)buf;
     return _sce_pspnet_ifioctl(NULL, 0x401469DE, &req, 1);
 }
@@ -199,7 +199,7 @@ s32 sceNetConfig80211GetPowerSave(const char *name, s32 *out) {
     struct SceNetIfreq1 req = {{0}};
     s32 ret;
 
-    func_00007F3C(req.ifr_name, name, IFNAMSIZ);
+    sceNetStrncpy(req.ifr_name, name, IFNAMSIZ);
     ret = _sce_pspnet_ifioctl(NULL, 0x401469E0, &req, 1);
     if (ret != 0)
         goto end;
@@ -216,7 +216,7 @@ s32 sceNetConfig80211EnterGameMode(const char *name, s32 arg0, s32 arg1, s32 *ou
     struct SceNetIfreq3 req = {{0}};
     s32 ret;
 
-    func_00007F3C(req.ifr_name, name, IFNAMSIZ);
+    sceNetStrncpy(req.ifr_name, name, IFNAMSIZ);
     req.args[0] = arg0;
     req.args[1] = arg1;
     ret = _sce_pspnet_ifioctl(NULL, 0xC01C69E1, &req, 1);
@@ -239,7 +239,7 @@ s32 sceNetConfigUpInterface(const char *name) {
     struct ifreq ifr = {{0}};
     s32 ret;
 
-    func_00007F3C(ifr.ifr_name, name, IFNAMSIZ);
+    sceNetStrncpy(ifr.ifr_name, name, IFNAMSIZ);
     ret = _sce_pspnet_ifioctl(NULL, SIOCGIFFLAGS, &ifr, 1);
     if (ret != 0)
         goto end;
@@ -257,7 +257,7 @@ s32 sceNetConfigDownInterface(const char *name) {
     struct ifreq ifr = {{0}};
     s32 ret;
 
-    func_00007F3C(ifr.ifr_name, name, IFNAMSIZ);
+    sceNetStrncpy(ifr.ifr_name, name, IFNAMSIZ);
     ret = _sce_pspnet_ifioctl(NULL, SIOCGIFFLAGS, &ifr, 1);
     if (ret != 0)
         goto end;
@@ -312,7 +312,7 @@ s32 sceNetConfigGetIfEvent(const char *name, s32 *out0, s32 *out1) {
     struct SceNetIfEvent ev;
     s32 ret;
 
-    func_00007F3C(ifr.ifr_name, name, IFNAMSIZ);
+    sceNetStrncpy(ifr.ifr_name, name, IFNAMSIZ);
     ifr.ifr_data = &ev;
     ev.unk0 = 0;
     ev.unk4 = 0;
@@ -333,7 +333,7 @@ s32 sceNetConfigSetIfEventFlag(const char *name, s32 arg0, s32 arg1) {
     struct ifreq ifr = {{0}};
     struct SceNetIfEvent ev;
 
-    func_00007F3C(ifr.ifr_name, name, IFNAMSIZ);
+    sceNetStrncpy(ifr.ifr_name, name, IFNAMSIZ);
     ifr.ifr_data = &ev;
     ev.unk0 = arg0;
     ev.unk4 = arg1;
@@ -349,7 +349,7 @@ s32 sceNetConfigGetIfEventFlag(const char *name, s32 *out0, s32 *out1) {
     struct SceNetIfEvent ev;
     s32 ret;
 
-    func_00007F3C(ifr.ifr_name, name, IFNAMSIZ);
+    sceNetStrncpy(ifr.ifr_name, name, IFNAMSIZ);
     ifr.ifr_data = &ev;
     ev.unk0 = 0;
     ev.unk4 = 0;
@@ -693,7 +693,7 @@ struct SceNetThreadInfo *_sce_pspnet_thread_enter(void) {
         ti = sceNetMallocInternal(sizeof(struct SceNetThreadInfo));
         if (ti == NULL)
             goto fail;
-        func_00007CF4(ti, 0, sizeof(struct SceNetThreadInfo));
+        sceNetMemset(ti, 0, sizeof(struct SceNetThreadInfo));
         TAILQ_INSERT_TAIL(&D_0000AF44, ti, ti_link);
         ti->ti_thid = thid;
     }
@@ -731,7 +731,7 @@ struct SceNetThreadInfo *_sce_pspnet_thread_enter(void) {
         ti = sceNetMallocInternal(sizeof(struct SceNetThreadInfo));
         if (ti == NULL)
             goto fail;
-        func_00007CF4(ti, 0, sizeof(struct SceNetThreadInfo));
+        sceNetMemset(ti, 0, sizeof(struct SceNetThreadInfo));
         TAILQ_INSERT_TAIL(&D_0000AF44, ti, ti_link);
         ti->ti_thid = thid;
         ti->ti_sema = sceKernelCreateSema("SceNetThreadInfo", 0, 0, 1, NULL);
@@ -1909,7 +1909,7 @@ s32 bpfopen(s32 minor) {
     d = &D_0000BC14[minor];
     if (!D_ISFREE(d))
         return 16;
-    func_00007CF4(d, 0, sizeof(*d));
+    sceNetMemset(d, 0, sizeof(*d));
     d->bd_bufsize = D_0000A87C;
     return 0;
 }
@@ -2024,7 +2024,7 @@ u8 *bpf_mcpy(u8 *arg0, void *arg1, u32 arg2) {
             temp_s0_2 = (temp_s0 >= var_s1) ? var_s1 : temp_s0;
             temp_a2 = temp_s0_2;
             var_s1 -= temp_s0_2;
-            func_00007CC0(var_s3, M2C_FIELD(var_s2, u8 **, 8), (s32) temp_a2);
+            sceNetMemcpy(var_s3, M2C_FIELD(var_s2, u8 **, 8), (s32) temp_a2);
             var_s3 = &var_s3[temp_s0_2];
             var_s2 = M2C_FIELD(var_s2, void **, 0);
         } while (var_s1 != 0);
@@ -2198,7 +2198,7 @@ void _sce_pspnet_if_attach(struct ifnet *ifp) {
     ifp->if_index = index;
     D_0000B0B8[ifp->if_index] = ifp;
 
-    namelen = func_00008020(ifp->if_xname);
+    namelen = sceNetStrlen(ifp->if_xname);
     masklen = 8 + namelen;
     socksize = masklen + ifp->if_addrlen;
 #define ROUNDUP(a) (1 + (((a) - 1) | (sizeof(long) - 1)))
@@ -2207,11 +2207,11 @@ void _sce_pspnet_if_attach(struct ifnet *ifp) {
     socksize = ROUNDUP(socksize);
     ifasize = sizeof(*ifa) + 2 * socksize;
     ifa = sceNetMallocInternal(ifasize);
-    func_00007CF4(ifa, 0, ifasize);
+    sceNetMemset(ifa, 0, ifasize);
     sdl = (struct sockaddr_dl *)(ifa + 1);
     sdl->sdl_len = socksize;
     sdl->sdl_family = AF_LINK;
-    func_00007D60(ifp->if_xname, sdl->sdl_data, namelen);
+    sceNetBcopy(ifp->if_xname, sdl->sdl_data, namelen);
     sdl->sdl_nlen = namelen;
     sdl->sdl_index = ifp->if_index;
     sdl->sdl_type = ifp->if_type;
@@ -2261,7 +2261,7 @@ void _sce_pspnet_if_attach(struct ifnet *ifp) {
     ifp->if_index = index;
     D_0000B0B8[ifp->if_index] = ifp;
 
-    namelen = func_00008020(ifp->if_xname);
+    namelen = sceNetStrlen(ifp->if_xname);
     masklen = 8 + namelen;
     socksize = masklen + ifp->if_addrlen;
 #define ROUNDUP(a) (1 + (((a) - 1) | (sizeof(long) - 1)))
@@ -2270,11 +2270,11 @@ void _sce_pspnet_if_attach(struct ifnet *ifp) {
     socksize = ROUNDUP(socksize);
     ifasize = sizeof(*ifa) + 2 * socksize;
     ifa = sceNetMallocInternal(ifasize);
-    func_00007CF4(ifa, 0, ifasize);
+    sceNetMemset(ifa, 0, ifasize);
     sdl = (struct sockaddr_dl *)(ifa + 1);
     sdl->sdl_len = socksize;
     sdl->sdl_family = AF_LINK;
-    func_00007D60(ifp->if_xname, sdl->sdl_data, namelen);
+    sceNetBcopy(ifp->if_xname, sdl->sdl_data, namelen);
     sdl->sdl_nlen = namelen;
     sdl->sdl_index = ifp->if_index;
     sdl->sdl_type = ifp->if_type;
@@ -2560,7 +2560,7 @@ struct ifnet *_sce_pspnet_ifunit(const char *name) {
     for (ifp = TAILQ_FIRST(&D_0000BE54); ifp != NULL; ifp = TAILQ_NEXT(ifp, if_list)) {
         if (ifp->if_output == _sce_pspnet_if_nulloutput)
             continue;
-        if (func_00007DAC(ifp->if_xname, name) == 0) {
+        if (sceNetStrcmp(ifp->if_xname, name) == 0) {
             _sce_pspnet_splunlock(s);
             return ifp;
         }
@@ -2581,7 +2581,7 @@ s32 _sce_pspnet_if_exist(const char *name) {
     for (ifp = TAILQ_FIRST(&D_0000BE54); ifp != NULL; ifp = TAILQ_NEXT(ifp, if_list)) {
         if (ifp->if_output == _sce_pspnet_if_nulloutput)
             continue;
-        if (func_00007DAC(ifp->if_xname, name) == 0) {
+        if (sceNetStrcmp(ifp->if_xname, name) == 0) {
             _sce_pspnet_splunlock(s);
             return 1;
         }
@@ -2606,7 +2606,7 @@ s32 _sce_pspnet_get_ifindex(const char *name) {
     index = -1;
     s = _sce_pspnet_spllock();
     for (ifp = TAILQ_FIRST(&D_0000BE54); ifp != NULL; ifp = TAILQ_NEXT(ifp, if_list)) {
-        if (func_00007EA4(name, ifp->if_xname, IFNAMSIZ) == 0) {
+        if (sceNetStrncmp(name, ifp->if_xname, IFNAMSIZ) == 0) {
             index = ifp->if_index;
             break;
         }
@@ -2766,7 +2766,7 @@ struct ifnet *_sce_pspnet_ifplookup_lladdr(const void *lladdr) {
     struct ifnet *ifp;
 
     for (ifp = TAILQ_FIRST(&D_0000BE54); ifp != NULL; ifp = TAILQ_NEXT(ifp, if_list)) {
-        if (func_00007C80(LLADDR(ifp->if_sadl), lladdr, 6) == 0)
+        if (sceNetMemcmp(LLADDR(ifp->if_sadl), lladdr, 6) == 0)
             break;
     }
     return ifp;
@@ -3038,7 +3038,7 @@ INCLUDE_ASM("nonmatchings/pspnet", func_0000795C);
 
 #if FW_VERSION < 201
 void sceNetEtherNtostr(const u8 *mac, char *buf) {
-    func_00008054(buf, "%02x:%02x:%02x:%02x:%02x:%02x", mac[0], mac[1], mac[2], mac[3], mac[4], mac[5]);
+    sceNetSprintf(buf, "%02x:%02x:%02x:%02x:%02x:%02x", mac[0], mac[1], mac[2], mac[3], mac[4], mac[5]);
 }
 #endif
 
@@ -3073,7 +3073,7 @@ s32 module_stop(void) {
     return 0;
 }
 
-void *func_00007BD4(const void *s, s32 c, s32 n) {
+void *sceNetMemchr(const void *s, s32 c, s32 n) {
     const u8 *p;
     u8 ch = c;
 
@@ -3086,7 +3086,7 @@ void *func_00007BD4(const void *s, s32 c, s32 n) {
     return NULL;
 }
 
-void *func_00007C0C(void *dst, const void *src, s32 n) {
+void *sceNetMemmove(void *dst, const void *src, s32 n) {
     u8 *d;
     const u8 *s;
 
@@ -3106,9 +3106,9 @@ void *func_00007C0C(void *dst, const void *src, s32 n) {
     return dst;
 }
 
-INCLUDE_ASM("nonmatchings/pspnet", func_00007C80);
+INCLUDE_ASM("nonmatchings/pspnet", sceNetMemcmp);
 
-u8 *func_00007CC0(u8 *arg0, u8 *arg1, s32 arg2) {
+u8 *sceNetMemcpy(u8 *arg0, u8 *arg1, s32 arg2) {
     s32 var_a2;
     u8 *var_a1;
     u8 *var_v0;
@@ -3134,7 +3134,7 @@ u8 *func_00007CC0(u8 *arg0, u8 *arg1, s32 arg2) {
     return var_v0;
 }
 
-void *func_00007CF4(void *s, s32 c, s32 n) {
+void *sceNetMemset(void *s, s32 c, s32 n) {
     u8 *p;
 
     if (s != NULL) {
@@ -3155,11 +3155,11 @@ INCLUDE_ASM("nonmatchings/pspnet", func_00007D20);
 #endif
 
 #if FW_VERSION < 201
-void func_00007D60(const void *src, void *dst, s32 n) {
-    func_00007C0C(dst, src, n);
+void sceNetBcopy(const void *src, void *dst, s32 n) {
+    sceNetMemmove(dst, src, n);
 }
 
-void func_00007D84(void *s, s32 n) {
+void sceNetBzero(void *s, s32 n) {
     u8 *p;
 
     if (s != NULL) {
@@ -3168,7 +3168,7 @@ void func_00007D84(void *s, s32 n) {
     }
 }
 
-s32 func_00007DAC(const char *s1, const char *s2) {
+s32 sceNetStrcmp(const char *s1, const char *s2) {
     if (s1 == NULL || s2 == NULL) {
         if (s1 == s2)
             return 0;
@@ -3181,7 +3181,7 @@ s32 func_00007DAC(const char *s1, const char *s2) {
     return *s1 - *(s2 - 1);
 }
 
-char *func_00007E2C(const char *s, s32 c) {
+char *sceNetIndex(const char *s, s32 c) {
     char ch = c;
 
     if (s == NULL)
@@ -3193,7 +3193,7 @@ char *func_00007E2C(const char *s, s32 c) {
     return NULL;
 }
 
-char *func_00007E5C(const char *s, s32 c) {
+char *sceNetStrrchr(const char *s, s32 c) {
     const char *p;
     char ch = c;
 
@@ -3210,7 +3210,7 @@ char *func_00007E5C(const char *s, s32 c) {
     return NULL;
 }
 
-s32 func_00007EA4(const char *s1, const char *s2, s32 n) {
+s32 sceNetStrncmp(const char *s1, const char *s2, s32 n) {
     if (s1 == NULL || s2 == NULL) {
         if (s1 == s2)
             return 0;
@@ -3225,7 +3225,7 @@ s32 func_00007EA4(const char *s1, const char *s2, s32 n) {
     return (n < 0) ? 0 : *s1 - *(s2 - 1);
 }
 
-char *func_00007F3C(char *dst, const char *src, s32 n) {
+char *sceNetStrncpy(char *dst, const char *src, s32 n) {
     char *d;
     s32 i;
 
@@ -3242,7 +3242,7 @@ char *func_00007F3C(char *dst, const char *src, s32 n) {
     return dst;
 }
 
-char *func_00007FB8(const char *s, s32 c) {
+char *sceNetStrchr(const char *s, s32 c) {
     char ch = c;
 
     if (s == NULL)
@@ -3254,7 +3254,7 @@ char *func_00007FB8(const char *s, s32 c) {
     return NULL;
 }
 
-u8 *func_00007FE8(u8 *arg0, u8 *arg1) {
+u8 *sceNetStrcpy(u8 *arg0, u8 *arg1) {
     u8 *var_a1;
     u8 *var_a2;
     u8 *var_v0;
@@ -3275,7 +3275,7 @@ u8 *func_00007FE8(u8 *arg0, u8 *arg1) {
     return var_v0;
 }
 
-s32 func_00008020(const char *s) {
+s32 sceNetStrlen(const char *s) {
     s32 n;
 
     n = 0;
@@ -3286,7 +3286,7 @@ s32 func_00008020(const char *s) {
     return n;
 }
 
-s32 func_00008054(char *buf, const char *fmt, ...) {
+s32 sceNetSprintf(char *buf, const char *fmt, ...) {
     va_list ap;
     char *p;
     s32 ret;
@@ -3330,7 +3330,7 @@ char sceNetLook_ctype_table(s32 c) {
     return D_0000A88C[c + 1];
 }
 #else
-char func_0000881C(char c) {
+char sceNetTolower(char c) {
     s32 t = D_0000A88C[c + 1];
 
     if (t & 1)
@@ -3338,7 +3338,7 @@ char func_0000881C(char c) {
     return c;
 }
 
-char func_00008848(s32 c) {
+char sceNetLook_ctype_table(s32 c) {
     return D_0000A88C[c + 1];
 }
 #endif
