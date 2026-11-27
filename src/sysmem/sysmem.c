@@ -166,7 +166,6 @@ INCLUDE_ASM("nonmatchings/sysmem", sceKernelAllocHeapMemory);
 INCLUDE_ASM("nonmatchings/sysmem", _FreeHeapMemory);
 #endif
 
-#if FW_VERSION == 100
 s32 sceKernelFreeHeapMemory(SceUID id, void *addr) {
     SceSysmemUidCB *uid;
     s32 oldIntr = suspendIntr();
@@ -179,9 +178,6 @@ s32 sceKernelFreeHeapMemory(SceUID id, void *addr) {
     resumeIntr(oldIntr);
     return ret;
 }
-#else
-INCLUDE_ASM("nonmatchings/sysmem", sceKernelFreeHeapMemory);
-#endif
 
 #if FW_VERSION == 100
 s32 _HeapTotalFreeSize(SceSysmemHeap *heap) {
@@ -196,33 +192,34 @@ s32 _HeapTotalFreeSize(SceSysmemHeap *heap) {
     }
     return total;
 }
-#endif
 
+s32 sceKernelHeapTotalFreeSize(SceUID id) {
+    SceSysmemUidCB *uid;
+    s32 oldIntr = suspendIntr();
+    s32 ret = sceKernelGetUIDcontrolBlockWithType(id, g_HeapType, &uid);
+    if (ret != 0) {
+        resumeIntr(oldIntr);
+        return ret;
+    }
+    ret = _HeapTotalFreeSize(UID_CB_TO_DATA(uid, g_HeapType, SceSysmemHeap));
+    resumeIntr(oldIntr);
+    return ret;
+}
+#else
 INCLUDE_ASM("nonmatchings/sysmem", sceKernelHeapTotalFreeSize);
+#endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 280
 INCLUDE_ASM("nonmatchings/sysmem", sceKernelGetHeapTypeCB);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 201
 SceSysmemUidCB *sceKernelGetHeapTypeCB(void) {
     return g_HeapType;
 }
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 201
-SceSysmemUidCB *sceKernelGetHeapTypeCB(void) {
-    return g_HeapType;
-}
-#endif
-
-#if FW_VERSION == 100
-s32 sceKernelGetUidManHeapID(void) {
-    return HeapCBUid;
-}
-#endif
-
-#if FW_VERSION >= 150 && FW_VERSION < 201
+#if FW_VERSION < 280
 s32 sceKernelGetUidManHeapID(void) {
     return HeapCBUid;
 }
@@ -232,12 +229,6 @@ s32 sceKernelGetUidManHeapID(void) {
 INCLUDE_ASM("nonmatchings/sysmem", sceKernelGetHeapIDfromVAddr);
 
 INCLUDE_ASM("nonmatchings/sysmem", sceKernelIsValidHeap);
-#endif
-
-#if FW_VERSION >= 201 && FW_VERSION < 280
-s32 sceKernelGetUidManHeapID(void) {
-    return HeapCBUid;
-}
 #endif
 
 INCLUDE_ASM("nonmatchings/sysmem", func_00000BC0);
@@ -2033,15 +2024,9 @@ SceSysmemUidCB *search_UIDObj_By_Name_With_Type(const char *name, SceSysmemUidCB
 }
 #endif
 
-#if FW_VERSION < 201
 s32 obj_no_op(SceSysmemUidCB *uid, SceSysmemUidCB *uidWithFunc, s32 funcId, __builtin_va_list ap) {
     return uid->uid;
 }
-#else
-s32 obj_no_op(SceSysmemUidCB *uid, SceSysmemUidCB *uidWithFunc, s32 funcId, __builtin_va_list ap) {
-    return uid->uid;
-}
-#endif
 
 #if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/sysmem", obj_do_delete);
@@ -2072,15 +2057,9 @@ s32 obj_do_name(SceSysmemUidCB *uid, SceSysmemUidCB *uidWithFunc, s32 funcId, __
     return 0;
 }
 
-#if FW_VERSION < 201
 s32 obj_do_type(SceSysmemUidCB *uid, SceSysmemUidCB *uidWithFunc, s32 funcId, __builtin_va_list ap) {
     return uid->meta->uid;
 }
-#else
-s32 obj_do_type(SceSysmemUidCB *uid, SceSysmemUidCB *uidWithFunc, s32 funcId, __builtin_va_list ap) {
-    return uid->meta->uid;
-}
-#endif
 
 #if FW_VERSION < 350
 s32 obj_do_isKindOf(SceSysmemUidCB *uid, SceSysmemUidCB *uidWithFunc, s32 funcId, __builtin_va_list ap) {
