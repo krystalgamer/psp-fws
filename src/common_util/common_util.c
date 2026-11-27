@@ -1,3 +1,4 @@
+/* lang: c++ */
 #include "common.h"
 #include "common_util_decls.h"
 
@@ -438,7 +439,7 @@ INCLUDE_ASM("nonmatchings/common_util", _ZN3vsh9PowerLockD1Ev);
 
 #if FW_VERSION >= 250 && FW_VERSION < 282
 void _ZN3vsh9PowerLockD1Ev(s32 *arg0) {
-    if (!(*arg0 & 1)) {
+    if ((*arg0 & 1) == 0) {
 
     } else {
         scePowerCancelRequest();
@@ -481,7 +482,7 @@ void sceVshCommonUtil_50B05438(s32 arg0, s32 arg1) {
 INCLUDE_ASM("nonmatchings/common_util", _ZN3vsh9PowerLockC1Ei);
 
 void _ZN3vsh9PowerLockD1Ev(s32 *arg0) {
-    if (!(*arg0 & 1)) {
+    if ((*arg0 & 1) == 0) {
 
     } else {
         scePowerCancelRequest();
@@ -547,7 +548,7 @@ void func_000012F8(void) {
 
 #if FW_VERSION >= 150 && FW_VERSION < 201
 void _ZN3vsh9PowerLockD1Ev(s32 *arg0) {
-    if (!(*arg0 & 1)) {
+    if ((*arg0 & 1) == 0) {
 
     } else {
         scePowerCancelRequest();
