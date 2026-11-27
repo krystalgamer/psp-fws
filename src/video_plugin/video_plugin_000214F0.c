@@ -6,7 +6,9 @@
 #include "video_plugin_decls.h"
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/video_plugin_000214F0", func_000214F0);
+void func_000214F0(s32 arg0) {
+    func_000205CC(arg0 - 0x38);
+}
 
 void func_0002150C(s32 arg0, s32 arg1) {
     func_000205D4(arg0 - 0x38, arg1);
