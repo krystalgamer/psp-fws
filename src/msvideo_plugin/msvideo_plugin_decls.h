@@ -7,7 +7,16 @@
 #ifdef __cplusplus
 #include "paf.h"
 #include "vsh.h"
+#pragma interface
 extern "C" {
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_00064420 is data (vptr = label - 8 + 8) */
+class Class_00064420 {
+public:
+    virtual ~Class_00064420();
+};
 #endif
 
 struct D_00065E24_s {

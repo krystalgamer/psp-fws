@@ -1801,30 +1801,6 @@ void func_0001D340(s32 arg0, s32 arg1, s32 arg2) {
 void func_0001D368(s32 arg0, s32 arg1) {
     func_0002499C(arg1, arg0);
 }
-#endif
-
-#if FW_VERSION == 150
-void func_0001FA14(s32 **arg0) {
-    *arg0 = &D_00064420;
-}
-#endif
-
-#if FW_VERSION == 152
-void func_0001FA14(M2C_UNK **arg0) {
-    *arg0 = &D_00064420;
-}
-#endif
-
-#if FW_VERSION < 150
-void func_0001D38C_v100(M2C_UNK **arg0) {
-    *arg0 = &D_00064420;
-}
-#endif
-
-#if FW_VERSION < 201
-void func_000247BC(s32 **arg0) {
-    *arg0 = &D_00064420;
-}
 #else
 void func_00024758(void) {
 }
@@ -1836,24 +1812,10 @@ void func_00024760(s32 arg0, M2C_UNK arg1, s32 arg2) {
 void func_00024788(s32 arg0, M2C_UNK arg1) {
     func_0002499C(arg1, arg0);
 }
-
-void func_000247AC(M2C_UNK **arg0) {
-    *arg0 = &D_00064420;
-}
-
-void func_000247BC(M2C_UNK **arg0) {
-    *arg0 = &D_00064420;
-}
-
-INCLUDE_ASM("nonmatchings/msvideo_plugin_00018700", func_000247CC);
 #endif
 
-#if FW_VERSION < 201
-void func_000247CC(s32 **arg0) {
-    *arg0 = &D_00064420;
-    _ZdlPv(arg0);
+Class_00064420::~Class_00064420() {
 }
-#endif
 
 INCLUDE_ASM("nonmatchings/msvideo_plugin_00018700", func_000247F4);
 
@@ -1883,6 +1845,8 @@ INCLUDE_RODATA("nonmatchings/msvideo_plugin_00018700", D_000643E0);
 INCLUDE_RODATA("nonmatchings/msvideo_plugin_00018700", D_00064400);
 
 INCLUDE_RODATA("nonmatchings/msvideo_plugin_00018700", D_00064420);
+
+__asm__(".globl _ZTV14Class_00064420\n_ZTV14Class_00064420 = D_00064420 - 8\n");
 
 INCLUDE_ASM("nonmatchings/msvideo_plugin_00018700", func_00024A8C);
 

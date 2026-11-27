@@ -1,4 +1,7 @@
 {
+ "cxx_prelude": [
+  "#pragma interface"
+ ],
  "funcs": {
   "InputDevice_PspHprm_Unlock": "M2C_UNK InputDevice_PspHprm_Unlock();",
   "InputDevice_PspPad_Unlock": "M2C_UNK InputDevice_PspPad_Unlock();",
@@ -1706,6 +1709,7 @@
   "sce_paf_private_strlen": "s32 sce_paf_private_strlen(s32);"
  },
  "types": {
+  "Class_00064420": "#ifdef __cplusplus\n/* vtable _ZTV14Class_00064420 is data (vptr = label - 8 + 8) */\nclass Class_00064420 {\npublic:\n    virtual ~Class_00064420();\n};\n#endif",
   "D_00065E24_s": "struct D_00065E24_s {\n    s8 unk0;\n    u8 pad1[0x7F];\n    s32 unk80;\n};",
   "Unk_D_00065E04": "struct Unk_D_00065E04 {\n    u8 pad0[0x2C];\n    s32 unk2C;\n};",
   "Unk_D_000663E8": "struct Unk_D_000663E8 {\n    u8 pad0[0x20];\n    s32 unk20;\n    u8 pad24[0x1F];\n    u8 unk43;\n    u8 pad44[0x158];\n    s32 unk19C;\n};",
