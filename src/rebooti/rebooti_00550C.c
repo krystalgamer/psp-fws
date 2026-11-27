@@ -286,7 +286,30 @@ s32 func_000083F8(void) {
     return 0x8001B000;
 }
 
-INCLUDE_ASM("nonmatchings/rebooti_00550C", buf_read);
+s32 buf_read(UFatUnit *unit, s32 offset, u8 *buf, s32 size) {
+    UFatBuf *b;
+    s32 sector = offset >> 9;
+    s32 off = offset & 0x1FF;
+    s32 n, ret;
+
+    while (size > 0) {
+        n = size;
+        if (0x200 - off < size) {
+            n = 0x200 - off;
+        }
+        size -= n;
+        ret = func_0000A894(&b, unit, sector, 1);
+        if (ret < 0) {
+            Kprintf("lfatfs.c:%s:buf_lookup(%d) -> %d\n", "buf_read", sector, ret);
+            return ret;
+        }
+        bcopy(b->data + off, buf, n);
+        buf += n;
+        sector++;
+        off = 0;
+    }
+    return 0;
+}
 
 INCLUDE_ASM("nonmatchings/rebooti_00550C", func_000084F8);
 
@@ -755,7 +778,32 @@ s32 func_0000F734(void) {
     return 0;
 }
 
-INCLUDE_ASM("nonmatchings/rebooti_00550C", func_0000F73C);
+s32 func_0000F73C(const char *s, s32 *unit, s32 *part, s32 *single) {
+    const char *p;
+    s32 ret;
+
+    *single = 0;
+    *part = 0;
+    *unit = 0;
+    p = func_0000FEBC(s, unit);
+    if (*p == '\0') {
+        return 0;
+    }
+    if (*p != ',') {
+        return -1;
+    }
+    p++;
+    if (func_00001F84("single", p) == 0) {
+        *single = 1;
+        return 0;
+    }
+    p = func_0000FEBC(p, part);
+    ret = -1;
+    if (*p == '\0') {
+        ret = 0;
+    }
+    return ret;
+}
 
 INCLUDE_ASM("nonmatchings/rebooti_00550C", func_0000F7E4);
 

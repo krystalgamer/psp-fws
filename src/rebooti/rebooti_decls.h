@@ -14,6 +14,13 @@ struct Unk_func_00007EF0_0 {
     s32 unk10;
 };
 
+typedef struct UFatBuf UFatBuf;
+/* sector buffer cache entry (buf_lookup), size unknown */
+struct UFatBuf {
+    u8 pad0[0x14];
+    u8 *data; /* 0x14 */
+};
+
 typedef int SceMode;
 typedef s64 SceOff;
 typedef s32 SceSSize;
@@ -372,6 +379,7 @@ void func_00001C58(s32 intr);
 s32 func_00001CB8(s32 arg0);
 s32 func_00001D2C(s32 arg0);
 s32 func_00001D68(s32 arg0);
+s32 func_00001F84(const char *a, const char *b);
 M2C_UNK func_00003174();
 s32 func_0000326C(s32 baud);
 s32 func_000032CC(s8 c);
@@ -459,6 +467,7 @@ s32 func_0000FBE0(void);
 s32 func_0000FBEC(void);
 s32 func_0000FC94(void);
 s32 func_0000FCA0(void);
+const char *func_0000FEBC(const char *s, s32 *out);
 s32 func_000100C4(u32 ppn, void *user, void *spare, u32 len, s32 mode);
 s32 func_000102AC(u32 ppn, void *user, void *spare, u32 len, s32 mode);
 s32 func_000106F0(void);

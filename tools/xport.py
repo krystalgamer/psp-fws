@@ -54,6 +54,20 @@ def elf_funcs(ver, mod):
     return out
 
 
+LIT = re.compile(r'"(?:[^"\\\n]|\\.)*"|\'(?:[^\'\\\n]|\\.)*\'|/\*.*?\*/|//[^\n]*', re.S)
+
+
+def code_sub(pat, repl, text):
+    """re.sub outside string/char literals and comments (a string may hold a function's real name)."""
+    out, pos = [], 0
+    for m in LIT.finditer(text):
+        out.append(re.sub(pat, repl, text[pos:m.start()]))
+        out.append(m[0])
+        pos = m.end()
+    out.append(re.sub(pat, repl, text[pos:]))
+    return "".join(out)
+
+
 def elf_syms(ver, mod):
     """function address -> name"""
     with open(ROOT / "tmp/build" / ver / f"{mod}.elf", "rb") as f:
@@ -273,7 +287,7 @@ def main():
         body = re.sub(rf"\b{name}\b(?=\s*\()", dname, body, count=1)
         for s in a.sub:
             o, n = s.split("=", 1)
-            body = re.sub(rf"\b{re.escape(o)}\b", n, body)
+            body = code_sub(rf"\b{re.escape(o)}\b", n, body)
         cf, df = work / f"{dname}.c", work / f"{dname}.h"
         # callees: DST's names from the twin jal pairs; other SRC auto names (func_00000000 may be another
         # function in DST) get placeholders, so that hand_try reports DST's name for each
@@ -286,7 +300,7 @@ def main():
                 ren[n] = f"xp_{n}"
         if ren:
             pat = re.compile(r"\b(" + "|".join(map(re.escape, ren)) + r")\b")
-            body = pat.sub(lambda m: ren[m[1]], body)
+            body = code_sub(pat, lambda m: ren[m[1]], body)
         result = "?"
         for _ in range(5):
             decl, dmap = [], {}
@@ -322,7 +336,7 @@ def main():
             if not prs:
                 break
             for tgt, mine in prs:
-                body = re.sub(rf"\b{mine}\b", tgt, body)
+                body = code_sub(rf"\b{mine}\b", tgt, body)
                 orig = next((o for o, r in ren.items() if r == mine), mine)
                 ren[orig] = tgt
         if "RESULT: MATCH" in result and "xp_" in body:
