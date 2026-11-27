@@ -762,7 +762,26 @@ INCLUDE_RODATA("nonmatchings/reboot_008F5C", D_00015FB8);
 
 INCLUDE_ASM("nonmatchings/reboot_008F5C", func_0000E668);
 
-INCLUDE_ASM("nonmatchings/reboot_008F5C", func_0000E7B0);
+s32 func_0000E7B0(void) {
+    s32 i = 0;
+    s32 status;
+
+    for (;;) {
+        func_00011A80(0);
+        status = sceNandReadStatus();
+        i++;
+        func_00011AB0();
+        if ((s8)status < 0) {
+            return 0;
+        }
+        if (i >= 6) {
+            return 0x80270001;
+        }
+        func_00011A80(1);
+        sceNandSetWriteProtect(0);
+        func_00011AB0();
+    }
+}
 
 INCLUDE_ASM("nonmatchings/reboot_008F5C", func_0000E830);
 
@@ -922,7 +941,26 @@ s32 func_00010EBC(void) {
     return 0x8001B000;
 }
 
-INCLUDE_ASM("nonmatchings/reboot_008F5C", func_00010EC8);
+s32 func_00010EC8(void) {
+    s32 i = 0;
+    s32 status;
+
+    for (;;) {
+        func_00011A80(0);
+        status = sceNandReadStatus();
+        i++;
+        func_00011AB0();
+        if ((s8)status >= 0) {
+            return 0;
+        }
+        if (i >= 6) {
+            return 0x80270001;
+        }
+        func_00011A80(1);
+        sceNandSetWriteProtect(1);
+        func_00011AB0();
+    }
+}
 
 #if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/reboot_008F5C", func_0000FAC4);
