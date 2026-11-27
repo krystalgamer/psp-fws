@@ -2769,7 +2769,20 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_000139A8);
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00013A94);
 #endif
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_00013BAC);
+void in_pcbstate(struct inpcb *inp, s32 state) {
+    if (inp->inp_state > INP_ATTACHED) {
+        LIST_REMOVE(inp, inp_hash);
+    }
+    switch (state) {
+    case INP_BOUND:
+        LIST_INSERT_HEAD(INPCBHASH_BIND(inp->inp_table, inp->inp_laddr, inp->inp_lport), inp, inp_hash);
+        break;
+    case INP_CONNECTED:
+        LIST_INSERT_HEAD(INPCBHASH_CONNECT(inp->inp_table, inp->inp_faddr, inp->inp_fport, inp->inp_laddr, inp->inp_lport), inp, inp_hash);
+        break;
+    }
+    inp->inp_state = state;
+}
 
 #if FW_VERSION >= 151 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_0001384C);
@@ -2807,11 +2820,82 @@ void in_pcbinit(struct inpcbtable *table, s32 bindhashsize, s32 connecthashsize)
 }
 #endif
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_00013F68);
+#if FW_VERSION < 201
+s32 in_pcballoc(struct socket *so, void *v) {
+    struct inpcbtable *table = v;
+    struct inpcb *inp;
+    s32 s;
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_00014018);
+    inp = sceNetMallocInternal(sizeof(*inp));
+    if (inp == NULL) {
+        return 105; /* ENOBUFS */
+    }
+    func_0002C94C(inp, 0, sizeof(*inp));
+    inp->inp_table = table;
+    inp->inp_socket = so;
+    inp->inp_errormtu = -1;
+    so->so_pcb = inp;
+    s = _sce_pspnet_spllock();
+    CIRCLEQ_INSERT_HEAD(&table->inpt_queue, inp, inp_queue);
+    in_pcbstate(inp, INP_ATTACHED);
+    _sce_pspnet_splunlock(s);
+    return 0;
+}
+#else
+INCLUDE_ASM("nonmatchings/pspnet_inet", in_pcballoc);
+#endif
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_00014120);
+#if FW_VERSION < 151
+void in_pcbdisconnect(void *v) {
+    struct inpcb *inp = v;
+
+    inp->inp_faddr = zeroin_addr;
+    inp->inp_fport = 0;
+    in_pcbstate(inp, INP_BOUND);
+    if (inp->inp_socket->so_state & SS_NOFDREF) {
+        struct socket *so = inp->inp_socket;
+        s32 s;
+
+        so->so_pcb = NULL;
+        sofree(so);
+        if (inp->inp_options) {
+            (void)sceNetMFree(inp->inp_options);
+        }
+        if (inp->inp_route.ro_rt) {
+            rtfree(inp->inp_route.ro_rt);
+        }
+        ip_freemoptions(inp->inp_moptions);
+        s = _sce_pspnet_spllock();
+        in_pcbstate(inp, INP_ATTACHED);
+        CIRCLEQ_REMOVE(&inp->inp_table->inpt_queue, inp, inp_queue);
+        _sce_pspnet_splunlock(s);
+        sceNetFreeInternal(inp);
+    }
+}
+#else
+INCLUDE_ASM("nonmatchings/pspnet_inet", in_pcbdisconnect);
+#endif
+
+void in_pcbdetach(void *v) {
+    struct inpcb *inp = v;
+    struct socket *so = inp->inp_socket;
+    s32 s;
+
+    so->so_pcb = NULL;
+    sofree(so);
+    if (inp->inp_options) {
+        (void)sceNetMFree(inp->inp_options);
+    }
+    if (inp->inp_route.ro_rt) {
+        rtfree(inp->inp_route.ro_rt);
+    }
+    ip_freemoptions(inp->inp_moptions);
+    s = _sce_pspnet_spllock();
+    in_pcbstate(inp, INP_ATTACHED);
+    CIRCLEQ_REMOVE(&inp->inp_table->inpt_queue, inp, inp_queue);
+    _sce_pspnet_splunlock(s);
+    sceNetFreeInternal(inp);
+}
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00014260);
@@ -3361,7 +3445,7 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_0001B1B0);
 void func_0001B5C0(void) {
     D_0002C30C = 0x2000;
     D_0002C310 = 0x2000;
-    in_pcbinit(&D_0002DC10, 1, 1);
+    in_pcbinit(&udbtable, 1, 1);
 }
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_0001B5FC);
@@ -3377,8 +3461,8 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_0001B820);
 #endif
 
 #if FW_VERSION < 151
-void func_0001C2E0(u8 *arg0) {
-    *(SceNetBytes4 *)(arg0 + 0x48) = D_0002F544;
+void func_0001C2E0(struct inpcb *inp) {
+    inp->inp_faddr = zeroin_addr;
 }
 #endif
 
@@ -3406,7 +3490,7 @@ void func_0001CE38(void) {
     D_0002C320 = 0xA280;
     D_0002C314 = 1;
     func_0002C94C(&D_0002DC30, 0, 0x48);
-    in_pcbinit(&D_000302C8, D_0002E8D8, D_0002E8D8);
+    in_pcbinit(&tcbtable, D_0002E8D8, D_0002E8D8);
 }
 #endif
 

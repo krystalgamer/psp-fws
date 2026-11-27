@@ -847,6 +847,37 @@ struct inpcbtable {
     &(table)->inpt_connecthashtbl[((__builtin_allegrex_wsbw((faddr).s_addr) + (u16)__builtin_allegrex_wsbh(fport)) + \
         (__builtin_allegrex_wsbw((laddr).s_addr) + (u16)__builtin_allegrex_wsbh(lport))) & (table)->inpt_connecthash]
 
+#define CIRCLEQ_INSERT_HEAD(head, elm, field) do { \
+    (elm)->field.cqe_next = (head)->cqh_first; \
+    (elm)->field.cqe_prev = (void *)(head); \
+    if ((head)->cqh_last == (void *)(head)) \
+        (head)->cqh_last = (elm); \
+    else \
+        (head)->cqh_first->field.cqe_prev = (elm); \
+    (head)->cqh_first = (elm); \
+} while (0)
+#define CIRCLEQ_REMOVE(head, elm, field) do { \
+    if ((elm)->field.cqe_next == (void *)(head)) \
+        (head)->cqh_last = (elm)->field.cqe_prev; \
+    else \
+        (elm)->field.cqe_next->field.cqe_prev = (elm)->field.cqe_prev; \
+    if ((elm)->field.cqe_prev == (void *)(head)) \
+        (head)->cqh_first = (elm)->field.cqe_next; \
+    else \
+        (elm)->field.cqe_prev->field.cqe_next = (elm)->field.cqe_next; \
+} while (0)
+#define LIST_INSERT_HEAD(head, elm, field) do { \
+    if (((elm)->field.le_next = (head)->lh_first) != NULL) \
+        (head)->lh_first->field.le_prev = &(elm)->field.le_next; \
+    (head)->lh_first = (elm); \
+    (elm)->field.le_prev = &(head)->lh_first; \
+} while (0)
+#define LIST_REMOVE(elm, field) do { \
+    if ((elm)->field.le_next != NULL) \
+        (elm)->field.le_next->field.le_prev = (elm)->field.le_prev; \
+    *(elm)->field.le_prev = (elm)->field.le_next; \
+} while (0)
+
 struct SceTailqHead {
     void *tqh_first;
     void **tqh_last;
@@ -1154,7 +1185,6 @@ extern struct SceTailqHead D_0002CFF8[];
 extern u8 D_0002DA50[0x170];
 extern s32 D_0002DBC0;
 extern M2C_UNK D_0002DBC8;
-extern struct inpcbtable D_0002DC10;
 extern s32 D_0002DC30;
 extern struct inpcbtable D_0002DC78;
 extern struct SceTailqHead D_0002DC98[13];
@@ -1188,9 +1218,7 @@ extern char D_0002F288[18] __attribute__((aligned(4)));
 extern s32 D_0002F500;
 extern s32 D_0002F50C;
 extern s32 D_0002F510;
-extern SceNetBytes4 D_0002F544;
 extern u8 D_00030218[];
-extern struct inpcbtable D_000302C8;
 extern u8 *D_000305A4;
 extern const struct cp chap; /* chap */
 extern const struct cp *cps[IDX_COUNT]; /* cps */
@@ -1213,9 +1241,12 @@ extern struct radix_node_head *rt_tables[32]; /* rt_tables */
 extern s32 rttrash; /* rttrash */
 extern struct soqhead so_list;
 extern s32 somaxconn; /* somaxconn */
+extern struct inpcbtable tcbtable;
 extern s32 tcp_backoff[]; /* tcp_backoff */
 extern s32 tcp_compat_42; /* tcp_compat_42 */
 extern u32 tcp_iss_seq; /* tcp_iss_seq */
+extern struct inpcbtable udbtable;
+extern struct in_addr zeroin_addr; /* zeroin_addr */
 
 void _sce_pspnet_callout_init(void *c);
 void _sce_pspnet_callout_reset(void *c, s32 ticks, void (*func)(void *), void *arg);
@@ -1369,6 +1400,7 @@ void func_0001A8AC(void);
 void func_0001AA20(struct Unk_func_0001AA20_0 *arg0);
 void func_0001B50C(void *arg0);
 void func_0001C208(void);
+void func_0001C2E0(struct inpcb *inp);
 void func_0001C57C(struct Unk_func_0001C57C_0 *arg0, s16 arg1);
 void func_0001D1E4(void *arg0, s16 arg1);
 void func_000215C4(void *p);
@@ -1422,7 +1454,11 @@ void func_0002D420();
 struct socket *getsock(s32 s);
 s32 if_rtdel(struct rtentry *rt, void *arg);
 void in_losing(struct inpcb *inp);
+s32 in_pcballoc(struct socket *so, void *v);
+void in_pcbdetach(void *v);
+void in_pcbdisconnect(void *v);
 void in_pcbinit(struct inpcbtable *table, s32 bindhashsize, s32 connecthashsize);
+void in_pcbstate(struct inpcb *inp, s32 state);
 void lortrequest(s32 cmd, struct rtentry *rt);
 s32 module_start(void);
 s32 module_stop(void);
