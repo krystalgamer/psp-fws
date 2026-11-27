@@ -373,7 +373,7 @@ u8 func_00005060(void);
 s32 func_0000506C(u32 arg0);
 void func_000050CC(void *arg0);
 s32 func_000054D4(s32 arg0);
-s32 func_00005908(SceIoIob *iob, char *path);
+s32 func_00005908(void *arg0);
 s32 func_00005970(s32 arg0);
 s32 func_000059DC(void);
 s32 func_00005E10(void);
