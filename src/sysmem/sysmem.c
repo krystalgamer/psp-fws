@@ -1728,11 +1728,11 @@ s32 sceKernelIsKindOf(struct Unk_SysMemForKernel_82D3CEE3_0 *arg0, s32 arg1) {
 INCLUDE_ASM("nonmatchings/sysmem", sceKernelPrintUidListAll);
 #endif
 
-#if FW_VERSION >= 151 && FW_VERSION < 201
+#if FW_VERSION == 152
 INCLUDE_ASM("nonmatchings/sysmem", sceKernelGetUidmanCB);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 152
 s32 *sceKernelGetUidmanCB(void) {
     return &D_0000FC98;
 }
