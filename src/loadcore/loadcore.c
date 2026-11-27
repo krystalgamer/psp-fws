@@ -1824,11 +1824,7 @@ s32 sceKernelRegisterModule(SceModule *mod) {
 INCLUDE_ASM("nonmatchings/loadcore", sceKernelRegisterModule);
 #endif
 
-#if FW_VERSION >= 102 && FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/loadcore", sceKernelReleaseModule);
-#endif
-
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 s32 sceKernelReleaseModule(SceModule *mod) {
     SceModule *prev;
 
@@ -1844,9 +1840,7 @@ s32 sceKernelReleaseModule(SceModule *mod) {
     Kprintf("module.c:%s:Cannot found modcb 0x%p\n", "sceKernelReleaseModule", mod);
     return 0x80020001;
 }
-#endif
 
-#if FW_VERSION < 150
 SceModule *sceKernelFindModuleByName(const char *name) {
     s32 intr;
     SceModule *mod;
@@ -1880,7 +1874,7 @@ INCLUDE_ASM("nonmatchings/loadcore", sceKernelFindModuleByAddress);
 INCLUDE_ASM("nonmatchings/loadcore", sceKernelGetModuleGPByAddressForKernel);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 SceModule *sceKernelFindModuleByUID(SceUID uid) {
     SceModule *mod;
 
@@ -1895,7 +1889,7 @@ SceModule *sceKernelFindModuleByUID(SceUID uid) {
 }
 #endif
 
-#if (FW_VERSION >= 102 && FW_VERSION < 150) || FW_VERSION >= 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/loadcore", sceKernelFindModuleByUID);
 #endif
 
@@ -1909,11 +1903,7 @@ s32 sceKernelModuleCount(void) {
 }
 #endif
 
-#if FW_VERSION >= 102 && FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/loadcore", sceKernelGetModuleList);
-#endif
-
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 s32 sceKernelGetModuleList(u32 size, SceUID *list) {
     SceModule *mod;
 
@@ -1927,7 +1917,7 @@ s32 sceKernelGetModuleList(u32 size, SceUID *list) {
 }
 
 /* zero words after module.c's strings (start of the next object's .rodata?) */
-const u32 D_0000714C[13] = { 0 };
+const u32 g_rodataPad[13] = { 0 };
 #endif
 
 #if FW_VERSION >= 282
