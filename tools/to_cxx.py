@@ -98,7 +98,7 @@ def compile_errors(path, ver):
     v, var = fw(ver)
     cpp = subprocess.run(["cpp", "-undef", "-nostdinc", "-Iinclude", "-Isrc", f"-DVERSION={ver}", f"-DFW_VERSION={v}",
                           f"-DFW_VARIANT={var}", "-D__GNUC__=3", "-D_LANGUAGE_C", "-D__psp__", "-D__mips__",
-                          "-D__cplusplus=1", str(path)], capture_output=True, text=True, cwd=ROOT)
+                          "-D__cplusplus=1", str(path.resolve().relative_to(ROOT))], capture_output=True, text=True, cwd=ROOT)
     if cpp.returncode:
         return [(0, "cpp: " + cpp.stderr.strip()[:300])]
     cc = subprocess.run([str(ROOT / "tmp/toolchains/bin" / f"cc1plus-{comp}"), *flags.split(), "-fno-exceptions",
@@ -373,7 +373,18 @@ def fix_convert_return(lines, idx, msg):
     return True
 
 
-FIXERS = [fix_too_few, fix_too_many, fix_convert_return, fix_convert_arg, fix_convert_passing, fix_convert_assign, fix_ptr_int_compare]
+def fix_undeclared(lines, idx, msg):
+    """`f' undeclared (first use this function)`: C called it with an implicit `int f()`; declare
+    `s32 f(...)` (same calling sequence for integer arguments)."""
+    m = re.search(r"`\s*(\w+)' undeclared \(first use this function\)", msg)
+    if not m or not re.match(r"^(func_[0-9A-F]{8}|\w+_[0-9A-F]{8})$", m[1]):
+        return False
+    STORE.setdefault("funcs", {}).setdefault(m[1], f"s32 {m[1]}(...);")
+    CHANGED_PROTOS.setdefault("", "")
+    return True
+
+
+FIXERS = [fix_too_few, fix_too_many, fix_convert_return, fix_undeclared, fix_convert_arg, fix_convert_passing, fix_convert_assign, fix_ptr_int_compare]
 
 
 # ---------------------------------------------------------------- driver
@@ -388,6 +399,11 @@ def main():
     ap.add_argument("--keep", action="store_true", help="keep the changes on failure")
     a = ap.parse_args()
     mod = a.module
+    if not (ROOT / f"config/{a.ver}/{mod}.yaml").exists():
+        have = sorted((p.parent.name for p in ROOT.glob(f"config/*/{mod}.yaml")), key=lambda v: (int(re.match(r"\d+", v)[0]), v))
+        if not have:
+            sys.exit(f"{mod}: no config")
+        a.ver = have[0]
     sd = src_dir(a.ver, mod)
     vers = [a.ver] + [v for v in sharing_versions(a.ver, mod) if v != a.ver]
     files = sorted(sd.glob("*.c"))
@@ -411,6 +427,9 @@ def main():
     STORE.clear()
     STORE.update(store)
     store = STORE
+    # C accepts `extern void D;` (only &D is used); C++ doesn't
+    for k, v in store.get("vars", {}).items():
+        store["vars"][k] = re.sub(r"^extern (volatile )?void (\w+);$", r"extern \1u8 \2;", v)
     structify.write_decls(mod, store)
     print(f"{mod}: {len(files)} units marked C++, {nots} `!(x & K)` rewritten, versions {' '.join(vers)}")
 
