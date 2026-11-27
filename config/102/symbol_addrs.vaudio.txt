@@ -1,0 +1,9 @@
+// shared names (tools/add_version.py) begin
+D_00000D9C = 0x0000090C; // rom:0x98C
+D_00000990 = 0x00000A00;
+sceVaudioSetEffectType = 0x0000040C; // type:func rom:0x48C
+sceVaudio_driver_DCC18F25 = 0x0000057C; // type:func rom:0x5FC
+func_000005DC = 0x00000644; // type:func rom:0x6C4
+sceKernelSignalSema = 0x000006DC; // type:func rom:0x75C
+sceKernelWaitSema = 0x000006E4; // type:func rom:0x764
+// shared names (tools/add_version.py) end
