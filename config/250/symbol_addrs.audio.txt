@@ -85,7 +85,7 @@ sceSysregAudioClkoutIoEnable = 0x00003034; // type:func
 sceSysregAudioClkoutIoDisable = 0x0000303C; // type:func
 // shared names (tools/add_version.py) begin
 D_000032E4 = 0x00003564; // rom:0x35E4
-D_00003480 = 0x00003600;
+g_audio = 0x00003600;
 D_000038C0 = 0x00003A40;
 D_0000394C = 0x00003ACC;
 D_00003300 = 0x00003AD0;

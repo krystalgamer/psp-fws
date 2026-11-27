@@ -1,5 +1,6 @@
 {
  "funcs": {
+  "func_00000220": "s32 func_00000220(s32 arg);",
   "func_0000243C": "s32 func_0000243C(s32, s32, s32);",
   "func_000029D4": "s32 func_000029D4(s32, s32, s32);",
   "func_00002A18": "s32 func_00002A18(s32, s32, s32);",
@@ -13,11 +14,17 @@
   "sceAudioSetVolumeOffset": "s32 sceAudioSetVolumeOffset(s32 arg0);",
   "sceCodecSetVolumeOffset": "M2C_UNK sceCodecSetVolumeOffset(s32);",
   "sceKernelCpuResumeIntr": "void sceKernelCpuResumeIntr(s32);",
-  "sceKernelCpuSuspendIntr": "s32 sceKernelCpuSuspendIntr(void);"
+  "sceKernelCpuSuspendIntr": "s32 sceKernelCpuSuspendIntr(void);",
+  "sceKernelDmaOpDeQueue": "s32 sceKernelDmaOpDeQueue(void *op);",
+  "sceKernelDmaOpEnQueue": "s32 sceKernelDmaOpEnQueue(void *op);",
+  "sceKernelDmaOpQuit": "s32 sceKernelDmaOpQuit(void *op);",
+  "sceKernelSetEventFlag": "s32 sceKernelSetEventFlag(SceUID id, u32 bits);",
+  "sceKernelWaitEventFlag": "s32 sceKernelWaitEventFlag(SceUID id, u32 bits, u32 wait, u32 *outBits, void *timeout);"
+ },
+ "types": {
+  "SceAudio": "typedef struct {\n    void *buf;\n    s32 curSampleCnt;\n    u16 sampleCount;\n    u8 unk10;\n    u8 bytesPerSample;\n    u16 leftVol;\n    u16 rightVol;\n} SceAudioChannel;\ntypedef struct {\n    u8 buf0[240];\n    u8 buf240[272];\n    u8 buf512[240];\n    u8 buf752[272];\n    u32 hwBuf[48];\n#if FW_VERSION < 201\n    SceAudioChannel chans[8];\n    void *dmaPtr[3];\n    SceUID evFlagId[3];\n#else\n    void *dmaPtr[3];\n    SceUID evFlagId;\n    SceAudioChannel chans[8];\n#endif\n    s32 freq;\n    u8 flags;\n    s8 volumeOffset;\n    u8 delayShift;\n    u8 padding1;\n    u16 srcChFreq;\n    u16 srcChSampleCnt;\n    u16 srcVol;\n    u8 numChans;\n    u8 padding2;\n    u32 inputOrigSampleCnt;\n    u32 inputCurSampleCnt;\n    void *inputBuf;\n#if FW_VERSION >= 150\n    s16 unkInput0;\n    s16 inputGain;\n    s16 unkInput2;\n    s16 unkInput3;\n    s16 unkInput4;\n    s16 unkInput5;\n#endif\n    u8 inputHwFreq;\n    s8 inputIsWaiting;\n    s8 inputInited;\n    s8 unkCodecArg;\n} SceAudio;"
  },
  "vars": {
-  "D_0000339D": "extern s8 D_0000339D;",
-  "D_000033B5": "extern s8 D_000033B5;",
-  "D_0000379D": "extern s8 D_0000379D;"
+  "g_audio": "extern SceAudio g_audio;"
  }
 }

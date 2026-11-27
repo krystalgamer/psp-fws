@@ -94,3 +94,4 @@ func_000017A0 = 0x00001AA0; // type:func rom:0x1B20
 func_000019C0 = 0x00001BDC; // type:func rom:0x1C5C
 func_00002938 = 0x00002BE8; // type:func rom:0x2C68
 // shared names (tools/add_version.py) end
+g_audio = 0x000035C0;

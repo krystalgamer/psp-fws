@@ -73,3 +73,4 @@ sceSysregAudioClkoutIoDisable = 0x00002910; // type:func
 D_000032E4 = 0x00002D64;
 func_00001330 = 0x00001158; // type:func
 // shared names (tools/add_version.py) end
+g_audio = 0x00002E40;

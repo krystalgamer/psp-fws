@@ -81,3 +81,4 @@ sceSysregAudioIoEnable = 0x00002D68; // type:func
 sceSysregAudioClkoutClkEnable = 0x00002D70; // type:func
 sceSysregAudioClkoutClkDisable = 0x00002D78; // type:func
 sceSysregAudioClkoutIoEnable = 0x00002D80; // type:func
+g_audio = 0x00003380;

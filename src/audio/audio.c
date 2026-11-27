@@ -1,6 +1,13 @@
 /* cflags: -O2 -frename-registers */
 #include "common.h"
 #include "audio_decls.h"
+#include "k1.h"
+
+#define HW(addr) (*(volatile s32 *)(addr))
+
+static inline void pspSync(void) {
+    __asm__ __volatile__("sync");
+}
 
 INCLUDE_ASM("nonmatchings/audio", func_00000000);
 
@@ -20,11 +27,35 @@ INCLUDE_ASM("nonmatchings/audio", func_00000298);
 INCLUDE_ASM("nonmatchings/audio", func_00000518);
 #endif
 
-#if FW_VERSION < 201
+#if FW_VERSION == 100
+s32 func_00000220(s32 arg) {
+g_audio.flags &= ~(1 << arg); HW(0xBE000004) = (s8)g_audio.flags;
+    sceKernelDmaOpQuit(g_audio.dmaPtr[arg]);
+    sceKernelDmaOpDeQueue(g_audio.dmaPtr[arg]);
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/audio", func_00000220);
+#endif
 
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/audio", func_0000028C);
+#endif
 
+#if FW_VERSION == 100
+s32 func_000004CC(s32 unused, s32 arg1) {
+    if (arg1 != 0) {
+        func_00000220(0);
+        return -1;
+    }
+    sceKernelSetEventFlag(g_audio.evFlagId[0], 1);
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/audio", func_000004CC);
 #endif
 
@@ -183,7 +214,7 @@ s32 sceAudioSetVolumeOffset(s32 arg0) {
         var_a0 = arg0 * 6;
     }
     sceCodecSetVolumeOffset(var_a0);
-    D_0000379D = arg0 + 8;
+    g_audio.volumeOffset = arg0 + 8;
     return 0;
 }
 #endif
@@ -201,7 +232,7 @@ s32 sceAudioSetVolumeOffset(s32 arg0) {
         var_a0 = arg0 * 6;
     }
     sceCodecSetVolumeOffset(var_a0);
-    D_0000339D = arg0 + 8;
+    g_audio.volumeOffset = arg0 + 8;
     return 0;
 }
 #endif
@@ -321,7 +352,7 @@ s32 sceAudioInput(s32 arg0, s32 arg1, void *arg2) {
     s32 temp_a0;
 
     temp_a0 = sceKernelCpuSuspendIntr();
-    D_000033B5 = 1;
+    g_audio.inputIsWaiting = 1;
     sceKernelCpuResumeIntr(temp_a0);
     return func_0000243C(arg0, arg1, (s32) arg2);
 }
