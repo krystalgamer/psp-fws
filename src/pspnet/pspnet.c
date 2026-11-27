@@ -464,7 +464,21 @@ s32 sceNetGetLocalEtherAddr(u8 *ea) {
     return ret;
 }
 #else
-INCLUDE_ASM("nonmatchings/pspnet", sceNetGetLocalEtherAddr);
+s32 sceNetGetLocalEtherAddr(u8 *ea) {
+    struct ifnet *ifp;
+    s32 ret;
+
+    if (sceKernelCheckThreadStack() < 0x3F0)
+        return 0x80410005;
+    ret = 0;
+    ifp = _sce_pspnet_ifunit("wlan");
+    if (ifp == NULL) {
+        ret = 0x80410180;
+    } else {
+        sceNetMemcpy(ea, LLADDR(ifp->if_sadl), 6);
+    }
+    return ret;
+}
 #endif
 
 #if FW_VERSION < 201
@@ -673,7 +687,22 @@ s32 sceNetTerm(void) {
 }
 #endif
 
-#if FW_VERSION >= 201
+#if FW_VERSION >= 201 && FW_VERSION < 282
+s32 sceNetTerm(void) {
+    if (sceKernelCheckThreadStack() < 0x3F0)
+        return 0x80410005;
+    netintr_term();
+    threadinfo_term();
+    slpque_term();
+    spl_term();
+    callout_shutdown();
+    func_00007778();
+    sceWlanDrv_lib_8D5F551B(0x10000);
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/pspnet", sceNetTerm);
 #endif
 
@@ -1026,7 +1055,31 @@ s32 sceNetFreeThreadinfo(SceUID thid) {
 #endif
 
 #if FW_VERSION >= 201
-INCLUDE_ASM("nonmatchings/pspnet", sceNetFreeThreadinfo);
+s32 sceNetFreeThreadinfo(SceUID thid) {
+    struct SceNetThreadInfo *ti;
+    s32 ret;
+
+    ret = 0;
+    if (sceKernelCheckThreadStack() < 0x3E0)
+        return 0x80410005;
+    sceKernelWaitSema(D_0000A868, 1, NULL);
+    for (ti = TAILQ_FIRST(&D_0000AF44); ti != NULL; ti = TAILQ_NEXT(ti, ti_link)) {
+        if (ti->ti_thid == thid)
+            break;
+    }
+    if (ti == NULL) {
+        ret = 0x80410104;
+    } else if (ti->ti_refcnt > 0) {
+        ret = 0x80410105;
+    } else {
+        TAILQ_REMOVE(&D_0000AF44, ti, ti_link);
+        _sce_pspnet_callout_cleanup(&ti->ti_callout);
+        sceKernelDeleteSema(ti->ti_sema);
+        sceNetFreeInternal(ti);
+    }
+    sceKernelSignalSema(D_0000A868, 1);
+    return ret;
+}
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 201
@@ -3821,7 +3874,11 @@ s32 sceNetGetMallocStat(void *stat) {
     return sceNetGetMallocStatInternal(stat);
 }
 #else
-INCLUDE_ASM("nonmatchings/pspnet", sceNetGetMallocStat);
+s32 sceNetGetMallocStat(void *stat) {
+    if (sceKernelCheckThreadStack() < 0x3F0)
+        return 0x80410005;
+    return sceNetGetMallocStatInternal(stat);
+}
 #endif
 
 #if FW_VERSION < 201
