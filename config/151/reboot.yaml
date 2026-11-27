@@ -58,7 +58,7 @@ segments:
       - [0x2AA8, c, reboot_002A28]
       - [0x2ACC, c, reboot_002A4C]
       - [0x2D8C, c, reboot_002D0C]
-      - [0x8FDC, c, reboot_008F5C]
+      - [0x65B8, c, reboot_008F5C]
       - [0x12C84, c, reboot_012C04]
       - { start: 0x14678, type: prxpad, order: .text }
       - { start: 0x14680, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
@@ -72,7 +72,7 @@ segments:
       - [0x1476C, .rodata, reboot]
       - [0x14B90, .rodata, reboot_001CB4]
       - [0x14C20, .rodata, reboot_002D0C]
-      - [0x15964, .rodata, reboot_008F5C]
+      - [0x152D8, .rodata, reboot_008F5C]
       - [0x16C94, .rodata, reboot_012C04]
   - name: reboot_seg1
     type: code

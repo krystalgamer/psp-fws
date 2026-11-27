@@ -4,6 +4,113 @@
 #include "common.h"
 #include "reboot_decls.h"
 
+INCLUDE_ASM("nonmatchings/reboot_008F5C", func_00006538);
+
+INCLUDE_RODATA("nonmatchings/reboot_008F5C", D_000152C4);
+
+INCLUDE_RODATA("nonmatchings/reboot_008F5C", D_000152D0);
+
+INCLUDE_ASM("nonmatchings/reboot_008F5C", func_00006B24);
+
+INCLUDE_ASM("nonmatchings/reboot_008F5C", func_00006F0C);
+
+INCLUDE_RODATA("nonmatchings/reboot_008F5C", D_00015500);
+
+INCLUDE_RODATA("nonmatchings/reboot_008F5C", D_00015508);
+
+INCLUDE_RODATA("nonmatchings/reboot_008F5C", D_00015514);
+
+INCLUDE_RODATA("nonmatchings/reboot_008F5C", D_00015520);
+
+INCLUDE_RODATA("nonmatchings/reboot_008F5C", D_00015528);
+
+INCLUDE_ASM("nonmatchings/reboot_008F5C", func_00006FA4);
+
+INCLUDE_ASM("nonmatchings/reboot_008F5C", func_000070A4);
+
+s32 func_00007140(void) {
+    return 0;
+}
+
+INCLUDE_RODATA("nonmatchings/reboot_008F5C", D_00015550);
+
+INCLUDE_RODATA("nonmatchings/reboot_008F5C", D_00015558);
+
+INCLUDE_ASM("nonmatchings/reboot_008F5C", func_00007148);
+
+s32 func_000071F0(void) {
+    return 0;
+}
+
+INCLUDE_ASM("nonmatchings/reboot_008F5C", func_000071F8);
+
+INCLUDE_ASM("nonmatchings/reboot_008F5C", func_0000725C);
+
+INCLUDE_ASM("nonmatchings/reboot_008F5C", func_000072BC);
+
+INCLUDE_ASM("nonmatchings/reboot_008F5C", func_000072FC);
+
+INCLUDE_ASM("nonmatchings/reboot_008F5C", func_00007350);
+
+#if FW_VERSION == 100
+INCLUDE_ASM("nonmatchings/reboot_008F5C", func_00006204);
+#else
+INCLUDE_ASM("nonmatchings/reboot_008F5C", func_0000748C);
+#endif
+
+INCLUDE_ASM("nonmatchings/reboot_008F5C", func_00007978);
+
+INCLUDE_ASM("nonmatchings/reboot_008F5C", func_000079E4);
+
+INCLUDE_ASM("nonmatchings/reboot_008F5C", func_00007C3C);
+
+#if FW_VERSION == 100
+INCLUDE_ASM("nonmatchings/reboot_008F5C", func_00006AB4);
+#else
+INCLUDE_ASM("nonmatchings/reboot_008F5C", func_00007D24);
+#endif
+
+INCLUDE_ASM("nonmatchings/reboot_008F5C", func_00007E50);
+
+INCLUDE_ASM("nonmatchings/reboot_008F5C", func_00008268);
+
+INCLUDE_RODATA("nonmatchings/reboot_008F5C", D_000155A8);
+
+INCLUDE_RODATA("nonmatchings/reboot_008F5C", D_000155D4);
+
+INCLUDE_ASM("nonmatchings/reboot_008F5C", func_00008368);
+
+INCLUDE_ASM("nonmatchings/reboot_008F5C", func_00008444);
+
+INCLUDE_ASM("nonmatchings/reboot_008F5C", func_00008D1C);
+
+s32 func_00008E68(void) {
+    return 0;
+}
+
+s32 func_00008E70(void) {
+    return 0;
+}
+
+void func_00008E78(s32 arg0, M2C_UNK arg1, M2C_UNK arg2, M2C_UNK arg3) {
+    func_0000E028();
+    func_00007E50(arg0, arg1, arg2, arg3);
+}
+
+s32 func_00008ED4(s32 arg0) {
+    s32 temp_s0;
+
+    func_0000E028();
+    temp_s0 = func_00008268(arg0);
+    func_0000E028();
+    return temp_s0;
+}
+
+void func_00008F0C(struct Unk_func_00008F0C_0 *arg0, M2C_UNK arg1, M2C_UNK arg2) {
+    func_0000E028();
+    func_000079E4(arg0->unk10, arg1, arg2, 0);
+}
+
 s32 func_00008F5C(s32 arg0, s32 arg1, s32 arg2) {
     s32 temp_s1;
 
