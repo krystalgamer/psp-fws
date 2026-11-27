@@ -1,5 +1,5 @@
 /* cflags[152]: -O2 -frename-registers */
-/* cflags[100,102]: -O2 -frename-registers */
+/* cflags[100,102,103]: -O2 -frename-registers */
 #include "common.h"
 #include "usbstorboot_decls.h"
 
@@ -79,7 +79,7 @@ INCLUDE_RODATA("nonmatchings/usbstorboot", D_00001BD8);
 
 INCLUDE_ASM("nonmatchings/usbstorboot", func_000007B0);
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 152
 INCLUDE_ASM("nonmatchings/usbstorboot", func_00000868);
 
 INCLUDE_ASM("nonmatchings/usbstorboot", func_000008E4);
