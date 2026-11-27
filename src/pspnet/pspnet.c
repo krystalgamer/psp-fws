@@ -135,32 +135,16 @@ INCLUDE_ASM("nonmatchings/pspnet", func_00001980);
 
 INCLUDE_ASM("nonmatchings/pspnet", func_00001CE0);
 
-#if FW_VERSION == 100 || (FW_VERSION >= 201 && FW_VERSION < 282)
-INCLUDE_ASM("nonmatchings/pspnet", _sce_pspnet_schednetintr);
-#endif
-
-#if FW_VERSION >= 150 && FW_VERSION < 201
+#if FW_VERSION < 282
 void _sce_pspnet_schednetintr(s32 arg0) {
     D_0000AC38 |= 1 << arg0;
 }
-#endif
 
-#if FW_VERSION == 100 || (FW_VERSION >= 201 && FW_VERSION < 282)
-INCLUDE_ASM("nonmatchings/pspnet", _sce_pspnet_schednetintr_with_evf);
-#endif
-
-#if FW_VERSION >= 150 && FW_VERSION < 201
 void _sce_pspnet_schednetintr_with_evf(s32 arg0) {
     D_0000AC38 |= 1 << arg0;
     sceKernelSetEventFlag(D_0000A0D0, 0x10U);
 }
-#endif
 
-#if FW_VERSION == 100 || (FW_VERSION >= 201 && FW_VERSION < 282)
-INCLUDE_ASM("nonmatchings/pspnet", func_00001B7C);
-#endif
-
-#if FW_VERSION >= 150 && FW_VERSION < 201
 s32 func_00001B7C(void) {
     if (D_0000AC3C >= 0) {
         sceKernelTerminateThread(D_0000AC3C);
@@ -173,109 +157,59 @@ s32 func_00001B7C(void) {
     D_0000A0D0 = -1;
     return sceNetIfhandleTerm();
 }
-#endif
 
-#if FW_VERSION == 100 || (FW_VERSION >= 201 && FW_VERSION < 282)
-INCLUDE_ASM("nonmatchings/pspnet", _sce_pspnet_start_of_inet_module_in_netintr);
-#endif
-
-#if FW_VERSION >= 150 && FW_VERSION < 201
 s32 _sce_pspnet_start_of_inet_module_in_netintr(s32 arg0, s32 arg1) {
     D_0000AC20 = arg0;
     D_0000AC24 = arg1;
     D_0000AC10 = 1;
     return 0;
 }
-#endif
 
-#if FW_VERSION == 100 || (FW_VERSION >= 201 && FW_VERSION < 282)
-INCLUDE_ASM("nonmatchings/pspnet", _sce_pspnet_stop_of_inet_module_in_netintr);
-#endif
-
-#if FW_VERSION >= 150 && FW_VERSION < 201
 s32 _sce_pspnet_stop_of_inet_module_in_netintr(void) {
     D_0000AC10 = 0;
     D_0000AC20 = 0;
     D_0000AC24 = 0;
     return 0;
 }
-#endif
 
-#if FW_VERSION == 100 || (FW_VERSION >= 201 && FW_VERSION < 282)
-INCLUDE_ASM("nonmatchings/pspnet", _sce_pspnet_start_of_ipv6_module_in_netintr);
-#endif
-
-#if FW_VERSION >= 150 && FW_VERSION < 201
 s32 _sce_pspnet_start_of_ipv6_module_in_netintr(s32 arg0) {
     D_0000AC28 = arg0;
     D_0000AC14 = 1;
     return 0;
 }
-#endif
 
-#if FW_VERSION == 100 || (FW_VERSION >= 201 && FW_VERSION < 282)
-INCLUDE_ASM("nonmatchings/pspnet", _sce_pspnet_stop_of_ipv6_module_in_netintr);
-#endif
-
-#if FW_VERSION >= 150 && FW_VERSION < 201
 s32 _sce_pspnet_stop_of_ipv6_module_in_netintr(void) {
     D_0000AC14 = 0;
     D_0000AC28 = 0;
     return 0;
 }
-#endif
 
-#if FW_VERSION == 100 || (FW_VERSION >= 201 && FW_VERSION < 282)
-INCLUDE_ASM("nonmatchings/pspnet", _sce_pspnet_start_of_pppoe_module_in_netintr);
-#endif
-
-#if FW_VERSION >= 150 && FW_VERSION < 201
 s32 _sce_pspnet_start_of_pppoe_module_in_netintr(s32 arg0) {
     D_0000AC2C = arg0;
     D_0000AC18 = 1;
     return 0;
 }
-#endif
 
-#if FW_VERSION == 100 || (FW_VERSION >= 201 && FW_VERSION < 282)
-INCLUDE_ASM("nonmatchings/pspnet", _sce_pspnet_stop_of_pppoe_module_in_netintr);
-#endif
-
-#if FW_VERSION >= 150 && FW_VERSION < 201
 s32 _sce_pspnet_stop_of_pppoe_module_in_netintr(void) {
     D_0000AC18 = 0;
     D_0000AC2C = 0;
     return 0;
 }
-#endif
 
-#if FW_VERSION == 100 || (FW_VERSION >= 201 && FW_VERSION < 282)
-INCLUDE_ASM("nonmatchings/pspnet", _sce_pspnet_start_of_adhoc_module_in_netintr);
-#endif
-
-#if FW_VERSION >= 150 && FW_VERSION < 201
 s32 _sce_pspnet_start_of_adhoc_module_in_netintr(s32 arg0, s32 arg1) {
     D_0000AC30 = arg0;
     D_0000AC34 = arg1;
     D_0000AC1C = 1;
     return 0;
 }
-#endif
 
-#if FW_VERSION == 100 || (FW_VERSION >= 201 && FW_VERSION < 282)
-INCLUDE_ASM("nonmatchings/pspnet", _sce_pspnet_stop_of_adhoc_module_in_netintr);
-#endif
-
-#if FW_VERSION >= 150 && FW_VERSION < 201
 s32 _sce_pspnet_stop_of_adhoc_module_in_netintr(void) {
     D_0000AC1C = 0;
     D_0000AC30 = 0;
     D_0000AC34 = 0;
     return 0;
 }
-#endif
-
-#if FW_VERSION >= 282
+#else
 void _sce_pspnet_schednetintr(s32 arg0) {
     D_0000AF40 |= 1 << arg0;
 }
