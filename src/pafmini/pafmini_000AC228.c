@@ -1,11 +1,11 @@
 #include "common.h"
 #include "pafmini_decls.h"
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION >= 151 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pafmini_000AC228", func_000AC228);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 151
 void func_000AC228(s32 arg0) {
     func_000AC178(arg0);
 }
@@ -3218,8 +3218,16 @@ INCLUDE_ASM("nonmatchings/pafmini_000AC228", func_000A9BCC);
 void func_000A9C14(void) {
     D_0010DD08 = 0;
 }
-#else
+#endif
+
+#if FW_VERSION == 100 || (FW_VERSION >= 151 && FW_VERSION < 282)
 INCLUDE_ASM("nonmatchings/pafmini_000AC228", func_000A9C20);
+#endif
+
+#if FW_VERSION == 150
+void func_000A9C20(void) {
+    func_000CB60C();
+}
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
@@ -3383,8 +3391,16 @@ INCLUDE_ASM("nonmatchings/pafmini_000AC228", func_000AA600);
 INCLUDE_ASM("nonmatchings/pafmini_000AC228", func_000AA6A0);
 
 INCLUDE_ASM("nonmatchings/pafmini_000AC228", func_000AA6DC);
-#else
+#endif
+
+#if FW_VERSION == 100 || (FW_VERSION >= 151 && FW_VERSION < 282)
 INCLUDE_ASM("nonmatchings/pafmini_000AC228", func_000AA78C);
+#endif
+
+#if FW_VERSION == 150
+void func_000AA78C(void) {
+    func_000C6F64();
+}
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
@@ -3606,8 +3622,16 @@ INCLUDE_ASM("nonmatchings/pafmini_000AC228", func_000AAD70);
 INCLUDE_ASM("nonmatchings/pafmini_000AC228", func_000AADB4);
 
 INCLUDE_ASM("nonmatchings/pafmini_000AC228", func_000AAE08);
-#else
+#endif
+
+#if FW_VERSION == 100 || (FW_VERSION >= 151 && FW_VERSION < 282)
 INCLUDE_ASM("nonmatchings/pafmini_000AC228", func_000AAE94);
+#endif
+
+#if FW_VERSION == 150
+void func_000AAE94(void) {
+    func_000C7B7C();
+}
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282

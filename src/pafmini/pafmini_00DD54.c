@@ -129,11 +129,11 @@ void func_0000FB48(M2C_UNK **arg0, M2C_UNK *arg1) {
 }
 #endif
 
-#if FW_VERSION == 150 || (FW_VERSION >= 201 && FW_VERSION < 282)
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pafmini_00DD54", func_0000FB88);
 #endif
 
-#if FW_VERSION == 100 || (FW_VERSION >= 151 && FW_VERSION < 201)
+#if FW_VERSION < 201
 void func_0000FB88(void *arg0) {
     func_0000FBA4(arg0);
 }
@@ -150,11 +150,11 @@ void func_0000FBA4(void *arg0) {
 }
 #endif
 
-#if FW_VERSION == 150 || (FW_VERSION >= 201 && FW_VERSION < 282)
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pafmini_00DD54", func_0000FBB0);
 #endif
 
-#if FW_VERSION == 100 || (FW_VERSION >= 151 && FW_VERSION < 201)
+#if FW_VERSION < 201
 void func_0000FBB0(void) {
     func_0000FBCC();
 }
@@ -774,11 +774,11 @@ INCLUDE_ASM("nonmatchings/pafmini_00DD54", func_00012CE4);
 INCLUDE_ASM("nonmatchings/pafmini_00DD54", func_00012D34);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 152
+#if FW_VERSION == 151
 INCLUDE_ASM("nonmatchings/pafmini_00DD54", func_00012D8C);
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION == 152
+#if FW_VERSION < 151 || FW_VERSION == 152
 void func_00012D8C(void) {
     func_00012DA8();
 }
@@ -1659,21 +1659,21 @@ void func_00020EC4(void *arg0) {
 INCLUDE_ASM("nonmatchings/pafmini_00DD54", func_00020ED4);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 201
+#if FW_VERSION >= 151 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/pafmini_00DD54", func_00020F14);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 151
 void func_00020F14(void *arg0) {
     func_00021570(arg0);
 }
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 201
+#if FW_VERSION >= 151 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/pafmini_00DD54", func_00020F30);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 151
 void func_00020F30(void) {
     func_00021580();
 }
@@ -2494,21 +2494,21 @@ void func_00029F58(s32 arg0, s32 *arg1, s32 arg2, s32 arg3) {
 INCLUDE_ASM("nonmatchings/pafmini_00DD54", _ZN8psjsnameC1ERK11PSJSContextPKti);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 201
+#if FW_VERSION >= 151 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/pafmini_00DD54", func_00029F98);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 151
 void func_00029F98(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     func_0002A0C0(arg0, arg1, arg2, arg3);
 }
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 201
+#if FW_VERSION >= 151 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/pafmini_00DD54", func_00029FB4);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 151
 void func_00029FB4(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     func_0002A0C0(arg0, arg1, arg2, arg3);
 }
