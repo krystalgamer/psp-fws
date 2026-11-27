@@ -358,11 +358,73 @@ INCLUDE_RODATA("nonmatchings/usb", D_00009A20);
 
 INCLUDE_RODATA("nonmatchings/usb", D_00009A3C);
 
-#if FW_VERSION < 300
+#if FW_VERSION < 282
+s32 func_0000293C(s32 size, void *args) {
+    s32 ret;
+
+    g_usbbd.drivers = NULL;
+    g_usbbd.speed = -1;
+    g_usbbd.actState = 0x100;
+    g_usbbd.cableState = 0x10;
+    g_usbbd.numInterfaces = 0;
+    g_usbbd.numEndpoints = 1;
+    g_usbbd.connState = 1;
+    g_usbbd.eps[0].endpoint = &g_usbbd.ep0;
+    g_usbbd.eps[0].address = 0xFF;
+    g_usbbd.unk120 = 0;
+    g_usbbd.unk124 = 0;
+    g_usbbd.unk128 = 0;
+    g_usbbd.ep0.busEndpointNumber = 0;
+    g_usbbd.ep0.endpointNumber = 0;
+    g_usbbd.ep0.transmittedBytes = 0;
+    g_usbbd.eps[0].type = 0;
+    g_usbbd.eps[0].tail = NULL;
+    g_usbbd.eps[0].head = NULL;
+    ret = sceKernelCreateEventFlag(D_00009A3C, 0x201, 0, NULL);
+    if (ret < 0) {
+        Kprintf("usbbd ERROR : Cannot create event flag\n", ret);
+        return ret;
+    }
+    g_usbbd.eventFlag = ret;
+    func_00000688();
+    ret = func_0000574C();
+    if (ret < 0) {
+        if (sceKernelDeleteEventFlag(g_usbbd.eventFlag) < 0) {
+            Kprintf(D_00009A6C);
+        }
+        return ret;
+    }
+    return 0;
+}
+#endif
+
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/usb", func_0000293C);
+#endif
 
+#if FW_VERSION < 300
 INCLUDE_RODATA("nonmatchings/usb", D_00009A6C);
+#endif
 
+#if FW_VERSION < 282
+s32 func_00002A48(s32 size, void *args) {
+    if (g_usbbd.drivers != NULL) {
+        Kprintf("usbbd ERROR : bus driver is used by protocol drivers\n");
+        return 0x80243006;
+    }
+    func_00005A70();
+    if (sceKernelDeleteEventFlag(g_usbbd.eventFlag) < 0) {
+        Kprintf(D_00009A6C);
+    }
+    g_usbbd.unkE4 = 0x20;
+    g_usbbd.actState = 0x100;
+    g_usbbd.cableState = 0x10;
+    g_usbbd.connState = 1;
+    return 0;
+}
+#endif
+
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/usb", func_00002A48);
 #endif
 
@@ -507,7 +569,7 @@ s32 module_start(void) {
     s32 temp_v0;
     s32 var_v0;
 
-    temp_v0 = sceKernelCreateSema(&D_00009A3C, 1U, 1, 1, NULL);
+    temp_v0 = sceKernelCreateSema(D_00009A3C, 1U, 1, 1, NULL);
     var_v0 = 1;
     if (temp_v0 >= 0) {
         D_000094F0 = temp_v0;
@@ -524,7 +586,7 @@ s32 module_start(void) {
     s32 temp_v0;
     s32 var_v0;
 
-    temp_v0 = sceKernelCreateSema(&D_00009A3C, 1U, 1, 1, NULL);
+    temp_v0 = sceKernelCreateSema(D_00009A3C, 1U, 1, 1, NULL);
     if (temp_v0 >= 0) {
         D_0000AD2C = temp_v0;
         func_00005B6C();
@@ -543,7 +605,7 @@ s32 module_start(void) {
     s32 temp_v0;
     s32 var_v0;
 
-    temp_v0 = sceKernelCreateSema(&D_00009A3C, 1U, 1, 1, NULL);
+    temp_v0 = sceKernelCreateSema(D_00009A3C, 1U, 1, 1, NULL);
     if (temp_v0 >= 0) {
         g_usbbd.sema = temp_v0;
         func_00005B6C();
@@ -566,7 +628,7 @@ s32 module_start(void) {
     s32 temp_v0;
     s32 var_v0;
 
-    temp_v0 = sceKernelCreateSema(&D_00009A3C, 1U, 1, 1, NULL);
+    temp_v0 = sceKernelCreateSema(D_00009A3C, 1U, 1, 1, NULL);
     if (temp_v0 >= 0) {
         g_usbbd.sema = temp_v0;
         func_00005AF0();
@@ -629,7 +691,7 @@ s32 module_start(void) {
     s32 temp_v0;
     s32 var_v0;
 
-    temp_v0 = sceKernelCreateSema(&D_00009A3C, 1U, 1, 1, NULL);
+    temp_v0 = sceKernelCreateSema(D_00009A3C, 1U, 1, 1, NULL);
     if (temp_v0 >= 0) {
         D_0000AFB0 = temp_v0;
         func_00005CC0();
