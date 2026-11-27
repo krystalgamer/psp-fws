@@ -661,7 +661,38 @@ INCLUDE_RODATA("nonmatchings/iofilemgr", D_00005118);
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/iofilemgr", do_open);
+SceUID do_open(const char *path, s32 flags, SceMode mode, s32 async) {
+    SceIoIob *iob;
+    u32 oldK1;
+    s32 ret;
+
+    oldK1 = shiftK1();
+    if (k1IsUserMode() && (s32)path < 0) {
+        Kprintf(D_00005118, "do_open", path);
+        setK1(oldK1);
+        return 0x800200D3;
+    }
+    ret = alloc_iob(&iob);
+    if (ret >= 0) {
+        iob->i_de = (SceIoDeviceEntry *)-1;
+        iob->asyncArgs[0] = (s32)path;
+        iob->asyncArgs[1] = flags;
+        iob->asyncArgs[2] = mode;
+        if (!async) {
+            ret = open_main(iob);
+        } else {
+            ret = start_async(iob, 1);
+            if (ret >= 0) {
+                ret = iob->fd;
+            }
+        }
+        if (ret < 0) {
+            free_iob(iob);
+        }
+    }
+    setK1(oldK1);
+    return ret;
+}
 #endif
 
 #if FW_VERSION >= 282
@@ -1064,7 +1095,40 @@ INCLUDE_ASM("nonmatchings/iofilemgr", func_00002E64);
 #if FW_VERSION == 100 || FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/iofilemgr", sceIoChangeThreadCwd);
 
-INCLUDE_ASM("nonmatchings/iofilemgr", sceIoCancel);
+s32 sceIoCancel(SceUID fd) {
+    SceIoIob *iob;
+    u32 oldK1;
+    s32 ret;
+    s32 intr;
+
+    oldK1 = shiftK1();
+    ret = validate_fd(fd, 0, 8, 1, &iob);
+    if (ret < 0) {
+        setK1(oldK1);
+        return ret;
+    }
+    if (iob->i_de->d_dp->dt_func->df_cancel == NULL) {
+        setK1(oldK1);
+        return 0x80020325;
+    }
+    ret = iob->i_de->d_dp->dt_func->df_cancel(iob);
+    if (ret < 0) {
+        setK1(oldK1);
+        return ret;
+    }
+    intr = sceKernelCpuSuspendIntr();
+    if (iob->asyncThread != 0) {
+        sceKernelTerminateDeleteThread(iob->asyncThread);
+        sceKernelDeleteSema(iob->asyncSema);
+        sceKernelDeleteEventFlag(iob->asyncEvFlag);
+        iob->asyncEvFlag = 0;
+        iob->asyncSema = 0;
+        iob->asyncThread = 0;
+    }
+    sceKernelCpuResumeIntr(intr);
+    setK1(oldK1);
+    return 0;
+}
 #endif
 
 #if FW_VERSION >= 282
@@ -1073,7 +1137,46 @@ INCLUDE_ASM("nonmatchings/iofilemgr", sceIoGetFdList);
 INCLUDE_ASM("nonmatchings/iofilemgr", sceIoGetFdDebugInfo);
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION >= 282
+#if FW_VERSION == 100
+s32 sceIoAddDrv(SceIoDeviceTable *drv) {
+    SceIoDeviceList *list;
+    u32 oldK1;
+    s32 ret;
+
+    oldK1 = shiftK1();
+    if (k1IsUserMode() && (s32)drv < 0) {
+        Kprintf(D_00005118, "sceIoAddDrv", drv);
+        setK1(oldK1);
+        return 0x800200D3;
+    }
+    if (lookup_device_list(drv->dt_string) != NULL) {
+        Kprintf("iofilemgr.c:%s:device '%s' is already registered\n", "sceIoAddDrv", drv->dt_string);
+        setK1(oldK1);
+        return 0x8002032B;
+    }
+    list = alloc_device_list();
+    if (list == NULL) {
+        setK1(oldK1);
+        return 0x80020190;
+    }
+    list->arg.d_dp = drv;
+    ret = 0x80020325;
+    if (drv->dt_func->df_init != NULL) {
+        ret = drv->dt_func->df_init(&list->arg);
+        if (ret < 0) {
+            Kprintf("iofilemgr.c:%s:AddDrv(): cannot init\n", "sceIoAddDrv");
+            free_device_list(list);
+        } else {
+            ret = 0;
+            add_device_list(list);
+        }
+    }
+    setK1(oldK1);
+    return ret;
+}
+#endif
+
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/iofilemgr", sceIoAddDrv);
 #endif
 
@@ -1092,9 +1195,41 @@ s32 func_00002E18(SceIoDeviceEntry *dev) {
     sceKernelCpuResumeIntr(intr);
     return 0;
 }
+
+s32 sceIoDelDrv(const char *drv) {
+    SceIoDeviceList *list;
+    u32 oldK1;
+    s32 ret;
+
+    oldK1 = shiftK1();
+    if (k1IsUserMode() && (s32)drv < 0) {
+        Kprintf(D_00005118, "sceIoDelDrv", drv);
+        setK1(oldK1);
+        return 0x800200D3;
+    }
+    list = lookup_device_list(drv);
+    if (list == NULL) {
+        setK1(oldK1);
+        return 0x80020321;
+    }
+    ret = 0x80020325;
+    if (list->arg.d_dp->dt_func->df_exit != NULL) {
+        delete_device_list(list);
+        ret = list->arg.d_dp->dt_func->df_exit(&list->arg);
+        if (ret < 0) {
+            add_device_list(list);
+        } else {
+            func_00002E18(&list->arg);
+            ret = 0;
+            free_device_list(list);
+        }
+    }
+    setK1(oldK1);
+    return ret;
+}
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION >= 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/iofilemgr", sceIoDelDrv);
 #endif
 
