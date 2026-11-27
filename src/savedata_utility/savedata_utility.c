@@ -179,7 +179,13 @@ void func_000003D8(void) {
 
 INCLUDE_ASM("nonmatchings/savedata_utility", func_00000404);
 
+#if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/savedata_utility", func_00000440);
+#else
+void func_00000440(s32 arg0) {
+    _ZN3paf6Module12SetInterfaceEiPv(arg0, 1, (s32) &D_00025774);
+}
+#endif
 
 INCLUDE_ASM("nonmatchings/savedata_utility", func_00000464);
 
