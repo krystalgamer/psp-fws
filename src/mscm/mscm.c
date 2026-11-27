@@ -113,9 +113,36 @@ INCLUDE_ASM("nonmatchings/mscm", func_00000240);
 
 INCLUDE_RODATA("nonmatchings/mscm", D_00007120);
 
-#if FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/mscm", func_00000124);
+#if FW_VERSION == 100
+s32 func_00000124(s32 slot) {
+    SceMScmHC *hc = &D_00006F14[0];
+    s32 ok = (hc != NULL);
+    s32 ret;
 
+    ret = 0x80220081;
+    if (slot == 0) {
+        const char *fn = "_sceMScmReinitializeHC", *file = "init.c";
+        if (!ok) {
+            Kprintf("Assertion failed at %s:%s:%04d\n", file, fn, 0x80);
+            sceKernelAssert(ok, 0);
+        }
+        func_00005E58(0, 0);
+        func_00005EB0(0);
+        func_00005E58(0, 1);
+        sceMScmResetHC(hc, 2);
+        sceMScmResetHC(hc, 4);
+        sceMScmSetHCTransferMode(hc, 1, 1, 2);
+        return 0;
+    }
+    return ret;
+}
+#endif
+
+#if FW_VERSION >= 102 && FW_VERSION < 201
+INCLUDE_ASM("nonmatchings/mscm", func_00000124);
+#endif
+
+#if FW_VERSION < 201
 s32 func_000001E4(SceMScmHC *hc) {
     sceSysregMsifIoDisable(hc->index);
     sceMScmSetSlotPower(hc, 1);
@@ -676,11 +703,60 @@ INCLUDE_ASM("nonmatchings/mscm", func_00005030);
 INCLUDE_ASM("nonmatchings/mscm", func_00005088);
 #endif
 
+#if FW_VERSION != 201
+s32 sceMScmIconLoadUcode(SceMScmHC *hc, u32 addr, u16 *code, s32 count) {
+    s32 i;
+
+    if (hcRead16(&hc->reg->unk4) & 1) {
+        return 0x80220086;
+    }
+    if (addr >= 0x80) {
+        return 0x80220081;
+    }
+    if (count > 0x80) {
+        return 0x80220081;
+    }
+    if (addr + count >= 0x80) {
+        return 0x80220081;
+    }
+    hcWrite16(&hc->reg->unk2, addr);
+    for (i = 0; i < count; i++) {
+        hcWrite16(&hc->reg->unk20, *code);
+        code++;
+    }
+    return 0;
+}
+#else
 INCLUDE_ASM("nonmatchings/mscm", sceMScmIconLoadUcode);
+#endif
 
+#if FW_VERSION != 201
+s32 sceMScmIconStartUcode(SceMScmHC *hc, u32 addr) {
+    if (hcRead16(&hc->reg->unk4) & 1) {
+        return 0x80220086;
+    }
+    if (addr >= 0x80) {
+        return 0x80220081;
+    }
+    hcWrite16(&hc->reg->unk2, addr);
+    hcOr16(&hc->reg->unk0, 1);
+    return 0;
+}
+#else
 INCLUDE_ASM("nonmatchings/mscm", sceMScmIconStartUcode);
+#endif
 
+#if FW_VERSION != 201
+s32 sceMScmIconStopUcode(SceMScmHC *hc) {
+    if (!(hcRead16(&hc->reg->unk4) & 1)) {
+        return 0x80220081;
+    }
+    hcAnd16(&hc->reg->unk4, 0xFFFE);
+    return 0;
+}
+#else
 INCLUDE_ASM("nonmatchings/mscm", sceMScmIconStopUcode);
+#endif
 
 void sceMScmIconResetIcon(SceMScmHC *hc) {
     sceMScmResetHC(hc, 4);

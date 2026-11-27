@@ -22,7 +22,9 @@ typedef struct {
     u16 unk6;
     volatile u16 unk8;      /* 0x08: interrupt cause */
     u16 unkA;
-    u8 unkC[0x30 - 0xC];
+    u8 unkC[0x20 - 0xC];
+    volatile u16 unk20;     /* 0x20: icon ucode data port */
+    u8 unk22[0x30 - 0x22];
     volatile u16 command;   /* 0x30: TPC << 12 | size */
     u16 unk32;
     volatile u32 data;      /* 0x34 */
@@ -65,6 +67,39 @@ typedef char chk_SceMScmHC[(sizeof(SceMScmHC) == 0x27C) ? 1 : -1];
 typedef char chk_SceMScmHC[(sizeof(SceMScmHC) == 0x284) ? 1 : -1];
 #endif
 
+/* HC register accessors: each access runs with interrupts disabled (inlined everywhere) */
+s32 sceKernelCpuSuspendIntr(void);
+void sceKernelCpuResumeIntr(s32 intr);
+
+static inline u16 hcRead16(volatile u16 *p) {
+    s32 intr = sceKernelCpuSuspendIntr();
+    u16 v = *p;
+    sceKernelCpuResumeIntr(intr);
+    return v;
+}
+
+static inline void hcWrite16(volatile u16 *p, u16 v) {
+    s32 intr = sceKernelCpuSuspendIntr();
+    *p = v;
+    asm volatile("sync");
+    sceKernelCpuResumeIntr(intr);
+}
+
+static inline void hcOr16(volatile u16 *p, u16 v) {
+    s32 intr = sceKernelCpuSuspendIntr();
+    *p |= v;
+    asm volatile("sync");
+    sceKernelCpuResumeIntr(intr);
+}
+
+
+static inline void hcAnd16(volatile u16 *p, u16 v) {
+    s32 intr = sceKernelCpuSuspendIntr();
+    *p &= v;
+    asm volatile("sync");
+    sceKernelCpuResumeIntr(intr);
+}
+
 extern SceMScmBitMap D_000069F8[13];
 extern u8 D_00006B10[];
 extern u8 D_00006B24[];
@@ -78,6 +113,7 @@ extern s32 D_00007AF4;
 
 s32 func_00000000(s32 slot);
 s32 func_000000AC(s32 slot);
+s32 func_00000124(s32 slot);
 s32 func_000001E4(SceMScmHC *hc);
 void func_00000930(s32 arg0);
 s32 func_00000C1C(SceMScmHC *hc);
@@ -133,7 +169,10 @@ s32 sceMScmGetSlotPower(SceMScmHC *hc, s32 *out);
 s32 sceMScmGetSlotState(SceMScmHC *hc, s32 *out);
 s32 sceMScmHCLastStatus(SceMScmHC *hc);
 u16 sceMScmHCSetBusyCount(SceMScmHC *hc, u16 count);
+s32 sceMScmIconLoadUcode(SceMScmHC *hc, u32 addr, u16 *code, s32 count);
 void sceMScmIconResetIcon(SceMScmHC *hc);
+s32 sceMScmIconStartUcode(SceMScmHC *hc, u32 addr);
+s32 sceMScmIconStopUcode(SceMScmHC *hc);
 s32 sceMScmResetHC(SceMScmHC *hc, s32 mode);
 s32 sceMScmSendTPC(SceMScmHC *hc, u8 tpc, s32 size, s32 timeout);
 s32 sceMScmSendTPCDMA(SceMScmHC *hc, u8 dmaCh, s32 a2, s32 a3);
