@@ -91,6 +91,19 @@ def target_reloc_syms(mod, name):
         m = re.match(r"rom:(0[xX][0-9A-Fa-f]+) reloc:MIPS_\w+ symbol:(\w+)", line)
         if m and rom <= int(m[1], 16) < end:
             out.append((int(m[1], 16), m[2]))
+    # the address each reloc resolves to, from the original's own HI/LO immediates
+    # (splat's label name may carry another version's address)
+    addrs, hi = [], {}
+    for r, _ in sorted(out):
+        w = struct.unpack_from("<I", mod.base, r)[0]
+        imm = w & 0xFFFF
+        if w >> 26 == 0xF:  # lui
+            hi[(w >> 16) & 31] = imm
+            addrs.append(None)
+        else:
+            base = hi.get((w >> 21) & 31, 0)
+            addrs.append((base << 16) + (imm - 0x10000 if imm & 0x8000 else imm))
+    target_reloc_syms.addrs = addrs
     return [n for _, n in sorted(out)]
 
 
@@ -339,11 +352,12 @@ def main():
                       + (f" [{m}+0x{off:X}]" if off is not None else ""))
             # string literals the C emits must equal the original's (hand_try compares no other rodata)
             bad_str = []
-            for (w, ms) in zip(want, compiled_reloc_syms.strings):
-                m2 = re.fullmatch(r"D_([0-9A-F]{8})", w)
-                if ms is None or not m2:
+            taddrs = getattr(target_reloc_syms, "addrs", [])
+            for i, (w, ms) in enumerate(zip(want, compiled_reloc_syms.strings)):
+                ta = taddrs[i] if i < len(taddrs) else None
+                if ms is None or ta is None:
                     continue
-                at = mod.text_off + int(m2[1], 16)
+                at = mod.text_off + ta
                 ts = mod.base[at:mod.base.find(b"\0", at)]
                 if ts != ms:
                     bad_str.append((w, ts, ms))
