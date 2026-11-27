@@ -3,6 +3,8 @@
 #include "k1.h"
 #include "display_decls.h"
 
+#define IS_USER_ADDR(p) (((u32)(p) >> 31) ^ 1)
+
 INCLUDE_ASM("nonmatchings/display", module_reboot_before);
 
 #if FW_VERSION >= 350
@@ -519,7 +521,27 @@ s32 sceDisplaySetBrightness(s32 level, s32 unk1)
 INCLUDE_ASM("nonmatchings/display", sceDisplaySetBrightness);
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION < 271
+s32 sceDisplayGetBrightness(s32 *level, s32 *unk1)
+{
+    u32 oldK1 = shiftK1Noreorder();
+
+    if ((k1IsUserMode() && IS_USER_ADDR(level) == 0) || (k1IsUserMode() && IS_USER_ADDR(unk1) == 0)) {
+        setK1(oldK1);
+        return 0x80000023;
+    }
+    if (level != NULL) {
+        *level = g_display.brightness;
+    }
+    if (unk1 != NULL) {
+        *unk1 = g_display.brightnessFade;
+    }
+    setK1(oldK1);
+    return 0;
+}
+#endif
+
+#if FW_VERSION == 271
 INCLUDE_ASM("nonmatchings/display", sceDisplayGetBrightness);
 #endif
 
@@ -603,8 +625,8 @@ s32 sceDisplaySetFrameBuf(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
     return sceDisplay_driver_63E22A26(2, (s32) arg0, arg1, arg2, arg3);
 }
 
-s32 sceDisplayGetFrameBuf(void *arg0, void *arg1, void *arg2, s32 arg3) {
-    return sceDisplay_driver_5B5AEFAD(2, (s32) arg0, (s32) arg1, (s32) arg2, arg3);
+s32 sceDisplayGetFrameBuf(void **topaddr, s32 *bufferWidth, s32 *pixelFormat, s32 sync) {
+    return sceDisplay_driver_5B5AEFAD(2, topaddr, bufferWidth, pixelFormat, sync);
 }
 #endif
 
@@ -801,8 +823,8 @@ s32 sceDisplaySetFrameBuf(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
     return sceDisplay_driver_63E22A26(2, (s32) arg0, arg1, arg2, arg3);
 }
 
-s32 sceDisplayGetFrameBuf(void *arg0, void *arg1, void *arg2, s32 arg3) {
-    return sceDisplay_driver_5B5AEFAD(2, (s32) arg0, (s32) arg1, (s32) arg2, arg3);
+s32 sceDisplayGetFrameBuf(void **topaddr, s32 *bufferWidth, s32 *pixelFormat, s32 sync) {
+    return sceDisplay_driver_5B5AEFAD(2, topaddr, bufferWidth, pixelFormat, sync);
 }
 
 s32 sceDisplayIsForeground(void) {
