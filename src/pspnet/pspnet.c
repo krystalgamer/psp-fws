@@ -1914,11 +1914,14 @@ s32 bpf_setif(struct bpf_d *d, struct ifreq *ifr) {
 }
 
 #if FW_VERSION < 201
-void func_00004430(s32 arg0, u8 *arg1) {
-    M2C_FIELD(arg1, s32 *, 0) = (s32) M2C_FIELD(arg0, s32 *, 0x14);
-    M2C_FIELD(arg1, s32 *, 4) = (s32) M2C_FIELD(arg0, s32 *, 0x18);
-    M2C_FIELD(arg1, s32 *, 8) = (s32) M2C_FIELD(arg0, s32 *, 0x1C);
-    M2C_FIELD(arg1, s32 *, 0xC) = (s32) M2C_FIELD(arg0, s32 *, 0x20);
+void func_00004430(struct ifnet *ifp, struct ifreq *ifr) {
+    s32 *src = (s32 *)ifp->if_xname;
+    s32 *dst = (s32 *)ifr->ifr_name;
+
+    dst[0] = src[0];
+    dst[1] = src[1];
+    dst[2] = src[2];
+    dst[3] = src[3];
 }
 #endif
 
@@ -1927,8 +1930,8 @@ INCLUDE_ASM("nonmatchings/pspnet", func_00004430);
 #endif
 
 #if FW_VERSION >= 282
-void func_00004430(s32 arg0, u8 *arg1) {
-    sceNetMemcpy(arg1, arg0 + 0x14, 0x10);
+void func_00004430(struct ifnet *ifp, struct ifreq *ifr) {
+    sceNetMemcpy(ifr->ifr_name, ifp->if_xname, IFNAMSIZ);
 }
 #endif
 

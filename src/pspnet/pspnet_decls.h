@@ -342,14 +342,14 @@ struct bpf_d {
     s32 bd_hlen;                /* 0x14 */
     s32 bd_bufsize;             /* 0x18 */
     struct bpf_if *bd_bif;      /* 0x1C */
-    u32 bd_rtout;               /* 0x20 */
+    unsigned long bd_rtout;     /* 0x20 u_long */
     void *bd_filter;            /* 0x24 struct bpf_insn * */
-    u32 bd_rcount;              /* 0x28 */
-    u32 bd_dcount;              /* 0x2C */
+    unsigned long bd_rcount;    /* 0x28 */
+    unsigned long bd_dcount;    /* 0x2C */
     u8 bd_promisc;              /* 0x30 */
     u8 bd_state;                /* 0x31 */
     u8 bd_immediate;            /* 0x32 */
-    s32 unk34;
+    s32 bd_hdrcmplt;            /* 0x34 */
     s32 bd_sel;                 /* 0x38 selinfo: waiting thread id */
     s32 unk3C;
 };
@@ -437,6 +437,14 @@ struct bpf_program {
     (d)->bd_rcount = 0; \
     (d)->bd_dcount = 0; \
 } while (0)
+struct bpf_stat {
+    u32 bs_recv;
+    u32 bs_drop;
+};
+struct bpf_version {
+    u16 bv_major;
+    u16 bv_minor;
+};
 
 
 s32 sceNetStrcmp(const char *s1, const char *s2);
@@ -654,7 +662,7 @@ void func_00003100(struct SceNetThreadInfo *arg0);
 void func_00003380(void);
 void func_00003400(struct SceNetThreadInfo *arg0);
 void func_000037E4(void);
-void func_00004430(s32 arg0, u8 *arg1);
+void func_00004430(struct ifnet *ifp, struct ifreq *ifr);
 void func_00005404(void *arg0);
 void func_00005744(struct Unk_func_00005744_0 *arg0);
 s32 func_000064CC(struct socket *so, u32 cmd, void *data);
