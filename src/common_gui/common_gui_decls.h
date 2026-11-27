@@ -120,6 +120,7 @@ void func_00002CE8(void);
 void func_00002D08(void);
 void func_00002D28(M2C_UNK **arg0);
 void func_00002D38(M2C_UNK **arg0);
+void func_00002D60(void);
 M2C_UNK func_00002DB8();
 void func_00003508(void **arg0, void *arg1);
 void func_00003528(s32 *arg0, s32 arg1);

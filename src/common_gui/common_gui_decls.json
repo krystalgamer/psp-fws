@@ -42,6 +42,7 @@
   "func_00002D08": "void func_00002D08(void);",
   "func_00002D28": "void func_00002D28(M2C_UNK **arg0);",
   "func_00002D38": "void func_00002D38(M2C_UNK **arg0);",
+  "func_00002D60": "void func_00002D60(void);",
   "func_00002DB8": "M2C_UNK func_00002DB8();",
   "func_00003508": "void func_00003508(void **arg0, void *arg1);",
   "func_00003528": "void func_00003528(s32 *arg0, s32 arg1);",
