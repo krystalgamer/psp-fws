@@ -284,8 +284,8 @@ typedef s32 (*SceThreadmanLogHandler)(s32 id, void *ra, s32 nargs, ...);
 
 #if FW_VERSION == 100
 #define THREADMAN_LOG_OFF 0x6F0
-#elif FW_VERSION < 150
-#define THREADMAN_LOG_OFF 0x6F4 /* 1.02/1.03 */
+#elif FW_VERSION == 102 || FW_VERSION == 103
+#define THREADMAN_LOG_OFF 0x6F4 /* pre-release 1.02/1.03 */
 #elif FW_VERSION < 152
 #define THREADMAN_LOG_OFF 0x738
 #elif FW_VERSION < 201

@@ -30,8 +30,62 @@ def fw(v):
     return int(re.match(r"\d+", v)[0])
 
 
+def chains(text):
+    """[(start, end)] spans of #if ... #endif chains (top level of each nesting) in text."""
+    out, stack = [], []
+    for m in re.finditer(r"^\s*#\s*(if|ifdef|ifndef|endif)\b.*$", text, re.M):
+        if m[1].startswith("if"):
+            stack.append(m.start())
+        elif stack:
+            st = stack.pop()
+            out.append((st, m.end()))
+    return out
+
+
+def top_conds(chain):
+    """Conditions of the #if/#elif lines at the chain's own nesting level."""
+    out, depth = [], 0
+    for m in re.finditer(r"^\s*#\s*(if|ifdef|ifndef|elif|else|endif)\b(.*)$", chain, re.M):
+        kw = m[1]
+        if kw.startswith("if"):
+            depth += 1
+            if depth == 1:
+                out.append(m[2].strip() if kw == "if" else "")
+        elif kw == "elif" and depth == 1:
+            out.append(m[2].strip())
+        elif kw == "endif":
+            depth -= 1
+    return out
+
+
+def branch(conds, v):
+    return next((i for i, c in enumerate(conds) if FM.evaluate(c, v)), len(conds))
+
+
 def rewrite(text, ref, new, versions):
+    # a chain whose conditions already tell NEW apart from REF was written for NEW: leave it
+    protected = []
+    for st, en in chains(text):
+        conds = top_conds(text[st:en])
+        if not conds or not all("FW_VERSION" in c for c in conds):
+            continue
+        try:
+            # NEW and REF already take different branches (e.g. `#if == 100` / `#elif < 150`): written knowing NEW
+            # ... only if the branch NEW takes exists for NEW: some comparison constant lies in (REF, next existing
+            # version after REF], i.e. it could not have been written without knowing NEW
+            nxt = min([v for v in versions if v > ref and v != new] or [1 << 30])
+            consts = [int(n) for c in conds for n in re.findall(r"FW_VERSION\s*(?:==|!=|<=|>=|<|>)\s*(\d+)", c)]
+            knows_new = any(ref < n < nxt for n in consts) or any(
+                re.search(rf"FW_VERSION\s*(?:==|!=)\s*{new}\b", c) for c in conds)
+            if len(conds) > 1 and knows_new and branch(conds, new) != branch(conds, ref):
+                protected.append((st, en))
+        except ValueError:
+            pass
+    keep = lambda pos: any(st <= pos < en for st, en in protected)  # noqa: E731
+
     def sub(m):
+        if keep(m.start()):
+            return m[0]
         op, n = m[1], int(m[2])
         f = lambda v: OPS[op](v, n)  # noqa: E731
         if f(new) == f(ref):
