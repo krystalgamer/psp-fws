@@ -6,7 +6,7 @@ INCLUDE_ASM("nonmatchings/videocodec", sceVideocodecGetEDRAM);
 
 INCLUDE_ASM("nonmatchings/videocodec", sceVideocodecReleaseEDRAM);
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/videocodec", func_0000012C);
 
 INCLUDE_ASM("nonmatchings/videocodec", func_00000244);
@@ -36,7 +36,7 @@ INCLUDE_ASM("nonmatchings/videocodec", sceVideocodecStop);
 INCLUDE_ASM("nonmatchings/videocodec", sceVideocodecDelete);
 #endif
 
-#if FW_VERSION != 102
+#if FW_VERSION == 100 || FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/videocodec", sceVideocodecSetMemory);
 
 INCLUDE_ASM("nonmatchings/videocodec", sceVideocodecScanHeader);
@@ -50,7 +50,7 @@ s32 sceVideocodecStartEntry(void) {
 }
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/videocodec", func_00000A58);
 #endif
 
