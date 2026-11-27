@@ -976,7 +976,7 @@ INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_0000CD18);
 void func_0000CDAC(struct Unk_func_0000CDAC_0 *arg0) {
     s32 temp_v0;
 
-    temp_v0 = scePaf_CD216C47(arg0->unk18->unk4, &D_00024F48);
+    temp_v0 = _ZNK3paf4View8PageRootEPKc(arg0->unk18->unk4, &D_00024F48);
     if (temp_v0 == 0) {
 
     } else {
