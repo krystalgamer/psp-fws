@@ -1,6 +1,10 @@
-/* cflags[100]: -O2 -frename-registers */
+/* cflags[100,102]: -O2 -frename-registers */
 #include "common.h"
 #include "mediasync_decls.h"
+
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/mediasync", func_00000000);
+#endif
 
 #if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/mediasync", D_00006E90);
@@ -36,7 +40,9 @@ INCLUDE_RODATA("nonmatchings/mediasync", D_00006FB0);
 INCLUDE_RODATA("nonmatchings/mediasync", D_00006FB4);
 #endif
 
+#if FW_VERSION != 102
 INCLUDE_ASM("nonmatchings/mediasync", module_start);
+#endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/mediasync", func_0000012C);
@@ -376,6 +382,10 @@ INCLUDE_ASM("nonmatchings/mediasync", func_00005D78);
 INCLUDE_ASM("nonmatchings/mediasync", func_00000298);
 
 INCLUDE_ASM("nonmatchings/mediasync", func_00000454);
+#endif
+
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/mediasync", func_000004DC);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 201
