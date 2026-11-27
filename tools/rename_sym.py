@@ -126,14 +126,23 @@ def main():
             for sec, d in store.items():
                 if not isinstance(d, dict):
                     continue
-                out = {}
-                for k, val in d.items():
+                out, renamed = {}, set()
+                for k0, val in d.items():
+                    k = k0
                     for o, n in src_renames.items():
                         k = re.sub(rf"\b{o}\b", n, k)
                         val = re.sub(rf"\b{o}\b", n, val) if isinstance(val, str) else val
                     if k in out and out[k] != val:
+                        # renaming into an existing name: the existing (named, typed) declaration wins
+                        if k0 != k and k not in renamed:
+                            continue
+                        if k in renamed and k0 == k:
+                            out[k] = val
+                            continue
                         sys.exit(f"{p.name}: {sec} '{k}' gets two different declarations:\n  {out[k]}\n  {val}")
                     out[k] = val
+                    if k0 != k:
+                        renamed.add(k)
                 store[sec] = out
             new[p] = json.dumps(store, indent=1, sort_keys=True)
     if a.dry_run:

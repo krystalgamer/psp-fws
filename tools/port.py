@@ -60,6 +60,7 @@ def main():
     work = ROOT / "tmp/port" / a.module / a.dst_ver
     work.mkdir(parents=True, exist_ok=True)
     matched = []
+    names_needed = {}
     for spec in a.funcs:
         name, _, dname = spec.partition("=")
         dname = dname or name
@@ -82,6 +83,12 @@ def main():
             result = res[-1] if res else (out.strip().splitlines() or ["error"])[-1]
             pairs = re.findall(r"reloc \d+: target (\w+), mine (\w+)", out) + \
                 re.findall(r"call target differs: target (\w+), mine (\w+)", out)
+            # a global named in SRC but still auto-named in DST: hand_try accepts it as an interior label,
+            # but for a port it is usually the same global under its DST name
+            inside = re.findall(r"target label (\w+) assumed inside (\w+);[^\[\n]*(?:\[\w+\+0x([0-9A-F]+)\])?", out)
+            # base address of the global in DST = target label - offset of the reference
+            inside = [(f"D_{int(t[2:], 16) - int(o or '0', 16):08X}", m, int(o or "0", 16)) for t, m, o in inside
+                      if not re.fullmatch(r"D_[0-9A-F]{8}", m)]
             if "RESULT: MATCH" in result or not pairs:
                 break
             for tgt, mine in dict.fromkeys(pairs):
@@ -89,9 +96,25 @@ def main():
                 proto = store["funcs"].get(mine) or store["vars"].get(mine)
                 if proto and tgt not in store["funcs"] and tgt not in store["vars"]:
                     protos.append(re.sub(rf"\b{mine}\b", tgt, proto))
-        print(f"{name} -> {a.dst_ver}:{dname}: {result}")
+        need = sorted(set(inside)) if "RESULT: MATCH" in result else []
+        base, exact = {}, {}
+        for t, m, off in need:
+            if base.setdefault(m, t) != t:
+                base[m] = "conflict"
+            exact[m] = exact.get(m, False) or off == 0
+        note = f" (needs {a.dst_ver} names: " + ", ".join(
+            f"{t}={m}" + ("" if exact[m] else " [base not referenced: name it by hand]") for m, t in base.items()) + ")" if base else ""
+        base = {m: t for m, t in base.items() if t != "conflict" and exact[m]}
+        print(f"{name} -> {a.dst_ver}:{dname}: {result}{note}")
         if "RESULT: MATCH" in result:
             matched.append((cf, df))
+            names_needed.update({m: t for m, t in base.items()})
+    if a.apply and names_needed:
+        # name DST's auto-named globals like SRC's (the base label of each struct global)
+        specs = [f"{a.dst_ver}:{t}={m}" for m, t in names_needed.items()]
+        r = subprocess.run([str(ROOT / ".venv/bin/python"), str(ROOT / "tools/rename_sym.py"), a.module, *specs, "--force"],
+                           cwd=ROOT, capture_output=True, text=True)
+        print(r.stdout.strip().splitlines()[-1] if r.stdout.strip() else r.stderr.strip()[-500:])
     if a.apply and matched:
         decls = work / "_all.h"
         decls.write_text("".join(df.read_text() for _, df in matched))

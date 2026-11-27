@@ -52,7 +52,7 @@ def compiled_reloc_syms(c_text, comp, opt):
         elf = ELFFile(open(o, "rb"))
         symtab = elf.get_section_by_name(".symtab")
         text = elf.get_section_by_name(".text").data()
-        out, strs, hi, calls = [], {}, {}, []
+        out, strs, hi, calls, addend = [], {}, {}, [], {}
         for sec in elf.iter_sections():
             if isinstance(sec, RelocationSection) and sec.name == ".rel.text":
                 for rel in sorted(sec.iter_relocations(), key=lambda r: r["r_offset"]):
@@ -67,6 +67,10 @@ def compiled_reloc_syms(c_text, comp, opt):
                     imm = struct.unpack_from("<I", text, rel["r_offset"])[0] & 0xFFFF
                     if rel["r_info_type"] == 5:
                         hi[rel["r_info_sym"]] = imm
+                    else:
+                        addend[rel["r_offset"]] = (hi.get(rel["r_info_sym"], 0) << 16) + (imm - 0x10000 if imm & 0x8000 else imm)
+                    if rel["r_info_type"] == 5:
+                        pass
                     elif is_sec:
                         target = elf.get_section(sym["st_shndx"])
                         if target.name.startswith(".rodata"):
@@ -76,6 +80,7 @@ def compiled_reloc_syms(c_text, comp, opt):
         names = [n for _, n in sorted(out)]
         compiled_reloc_syms.strings = [strs.get(o2) for o2, _ in sorted(out)]
         compiled_reloc_syms.calls = calls
+        compiled_reloc_syms.addends = [addend.get(o2) for o2, _ in sorted(out)]
         return names
 
 
@@ -313,6 +318,8 @@ def main():
         # splat names an address inside a global's extent D_XXXXXXXX; the C reaches it as sym+off
         # (also auto-named: splat labels each referenced word of a big struct, the C uses the base + field offset)
         def interior(m, w):
+            if w == "PRX_ZERO":  # splat: a second %lo reusing an earlier lui register
+                return True
             if not re.fullmatch(r"D_[0-9A-F]{8}", w):
                 return False
             mm = re.fullmatch(r"D_([0-9A-F]{8})", m)
@@ -325,8 +332,11 @@ def main():
             print("RESULT: words match, RELOCATION SYMBOLS DIFFER (not a match)")
         else:
             print("relocation symbols match")
+            adds = getattr(compiled_reloc_syms, "addends", [])
             for i, w, m in bad:
-                print(f"  (reloc {i}: target label {w} assumed inside {m}; check the offset)")
+                off = adds[i] if i < len(adds) and adds[i] is not None else None
+                print(f"  (reloc {i}: target label {w} assumed inside {m}; check the offset)"
+                      + (f" [{m}+0x{off:X}]" if off is not None else ""))
             # string literals the C emits must equal the original's (hand_try compares no other rodata)
             bad_str = []
             for (w, ms) in zip(want, compiled_reloc_syms.strings):
