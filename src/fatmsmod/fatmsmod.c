@@ -1,5 +1,6 @@
 #include "common.h"
 #include "fatmsmod_decls.h"
+#include "k1.h"
 
 #if FW_VERSION >= 300
 s32 module_start(void) {
@@ -359,7 +360,7 @@ s32 add_drive_name(char *buf, const char *name, s32 unit) {
     if (unit != 0) {
         return 0x80020001;
     }
-    if (D_0001950C != 0) {
+    if (D_0001950C.unit != 0) {
         Kprintf("prfile_mod.c:%s:unit No Fail\n", "add_drive_name");
         return 0x80020001;
     }
@@ -435,8 +436,8 @@ s32 df_close(SceIoIob *iob) {
     if (priv->mode != 0x10) {
         return 0x80010016;
     }
-    if (func_00004D6C(priv->unk4) < 0) {
-        return prErr(func_000050AC());
+    if (stub_pf_fclose(priv->unk4) < 0) {
+        return prErr(stub_pf_errnum());
     }
     ret = func_00000678(priv->fileHeap, priv);
     if (ret > 0) {
@@ -471,15 +472,15 @@ s32 df_read(SceIoIob *iob, void *buf, SceSize size) {
         return 0x80010016;
     }
     fp = priv->unk4;
-    n = func_00004EB0(buf, 1, size, fp);
+    n = stub_pf_fread(buf, 1, size, fp);
     if (n == size) {
         return n;
     }
-    eof = func_00004DF0(fp) == 1;
+    eof = stub_pf_feof(fp) == 1;
     if (n >= 0 && eof) {
         return n;
     }
-    err = func_00004E30(fp);
+    err = stub_pf_ferror(fp);
     if (err == -1) {
         err = 9;
     }
@@ -513,11 +514,11 @@ s32 df_write(SceIoIob *iob, const void *buf, SceSize size) {
         return 0x80010016;
     }
     fp = priv->unk4;
-    n = func_0000501C(buf, 1, size, fp);
+    n = stub_pf_fwrite(buf, 1, size, fp);
     if (n == size) {
         return n;
     }
-    err = func_00004E30(fp);
+    err = stub_pf_ferror(fp);
     if (err == 0) {
         return n;
     }
@@ -553,7 +554,37 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_00001438);
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/fatmsmod", func_0000112C);
+s32 df_ioctl(SceIoIob *iob, s32 cmd, void *indata, SceSize inlen, void *outdata, SceSize outlen) {
+    FatmsPrivate *priv;
+
+    if (iob == NULL) {
+        return 0x80010016;
+    }
+    if (cmd == 0x8002) {
+        return 0;
+    }
+    if (cmd == 0x8013) {
+        return 0;
+    }
+    if (check_reload_status(0, iob->i_private) < 0) {
+        Kprintf(D_00023B8C, "df_ioctl");
+        return 0x80010013;
+    }
+    if (k1IsUserMode()) {
+        return 0x800200D1;
+    }
+    if (cmd == 0x0241D003) {
+        return 0x80020325;
+    }
+    if (cmd != 0x0242D016) {
+        return 0x80020325;
+    }
+    priv = iob->i_private;
+    if (priv->mode != 0x10) {
+        return 0x80010016;
+    }
+    return stub_pf_feof(priv->unk4);
+}
 #endif
 
 #if FW_VERSION == 282
@@ -582,8 +613,8 @@ s32 df_remove(SceIoIob *iob, char *name) {
         func_00000678(heap, path);
         return 0x80010016;
     }
-    if (func_00002E74(path) < 0) {
-        err = func_000050AC();
+    if (stub_pf_remove(path) < 0) {
+        err = stub_pf_errnum();
         func_00000678(heap, path);
         return prErr(err);
     }
@@ -612,8 +643,8 @@ s32 df_mkdir(SceIoIob *iob, char *name, SceMode mode) {
         func_00000678(heap, path);
         return 0x80010016;
     }
-    if (func_00002C20(path) < 0) {
-        err = func_000050AC();
+    if (stub_pf_mkdir(path) < 0) {
+        err = stub_pf_errnum();
         func_00000678(heap, path);
         return prErr(err);
     }
@@ -642,8 +673,8 @@ s32 df_rmdir(SceIoIob *iob, char *name) {
         func_00000678(heap, path);
         return 0x80010016;
     }
-    if (func_00002C60(path) < 0) {
-        err = func_000050AC();
+    if (stub_pf_rmdir(path) < 0) {
+        err = stub_pf_errnum();
         func_00000678(heap, path);
         return prErr(err);
     }
@@ -681,7 +712,43 @@ INCLUDE_RODATA("nonmatchings/fatmsmod", D_00023CD0);
 INCLUDE_RODATA("nonmatchings/fatmsmod", D_00023CEC);
 #endif
 
-INCLUDE_ASM("nonmatchings/fatmsmod", func_00001CD0);
+#if FW_VERSION == 100
+s32 df_dclose(SceIoIob *iob) {
+    FatmsPrivate *priv;
+    s32 ret;
+    const char *fn;
+
+    if (iob == NULL) {
+        return 0x80010016;
+    }
+    priv = iob->i_private;
+    ret = check_reload_status(0, priv);
+    if (ret < 0) {
+        if (ret == -0x3EA) {
+            return 0;
+        }
+        fn = "df_dclose";
+        Kprintf(D_00023B8C, fn);
+        ret = func_00000678(priv->dirHeap, priv);
+        if (ret < 0) {
+            Kprintf("prfile_mod.c:%s:free heap retval:%d(0x%x)\n", fn, ret, ret);
+        }
+        return 0;
+    }
+    if (priv->mode != 2) {
+        return 0x80010016;
+    }
+    if (priv->unk4 == 0x30) {
+        if (func_00002EFC((u8 *)priv + 0x568, 4, 0x80) < 0) {
+            return prErr(stub_pf_errnum());
+        }
+    }
+    func_00000678(priv->dirHeap, priv);
+    return 0;
+}
+#else
+INCLUDE_ASM("nonmatchings/fatmsmod", df_dclose);
+#endif
 
 #if FW_VERSION >= 152 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00001CD8);
@@ -741,7 +808,35 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_00002190);
 
 INCLUDE_ASM("nonmatchings/fatmsmod", func_0000238C);
 
-INCLUDE_ASM("nonmatchings/fatmsmod", func_000025E8);
+#if FW_VERSION == 100
+s32 df_rename(SceIoIob *iob, const char *name, const char *newName) {
+    SceUID heap;
+    char *path;
+    s32 err;
+
+    if (check_reload_status(1, NULL) < 0) {
+        Kprintf(D_00023B8C, "df_rename");
+        return 0x80010013;
+    }
+    path = get_heap(&heap, 0x540);
+    if (path == NULL) {
+        return 0x8001000C;
+    }
+    if (add_drive_name(path, name, iob->i_unit) < 0) {
+        func_00000678(heap, path);
+        return 0x80010016;
+    }
+    if (stub_pf_rename(path, newName) < 0) {
+        err = stub_pf_errnum();
+        func_00000678(heap, path);
+        return prErr(err);
+    }
+    func_00000678(heap, path);
+    return 0;
+}
+#else
+INCLUDE_ASM("nonmatchings/fatmsmod", df_rename);
+#endif
 
 #if FW_VERSION < 282
 s32 func_00001F98(void) {
@@ -758,7 +853,7 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_00002874);
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/fatmsmod", func_000021E0);
+INCLUDE_ASM("nonmatchings/fatmsmod", df_umount);
 
 INCLUDE_ASM("nonmatchings/fatmsmod", func_000022B8);
 #endif
@@ -944,7 +1039,7 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_0000340C);
 
 #if (FW_VERSION >= 150 && FW_VERSION < 201) || (FW_VERSION >= 260 && FW_VERSION < 282)
 void func_0000340C(void) {
-    func_00001CD0();
+    df_dclose();
 }
 #endif
 
@@ -1018,7 +1113,7 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_000037B4);
 INCLUDE_ASM("nonmatchings/fatmsmod", func_000037E8);
 
 void func_0000381C(void) {
-    func_00001CD0();
+    df_dclose();
 }
 
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00003838);
@@ -1128,7 +1223,7 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_000048E8);
 INCLUDE_ASM("nonmatchings/fatmsmod", func_0000491C);
 
 void func_00004950(void) {
-    func_00001CD0();
+    df_dclose();
 }
 
 INCLUDE_ASM("nonmatchings/fatmsmod", func_0000496C);
@@ -1215,7 +1310,7 @@ s32 func_00004C58(s32 a0, s32 a1) {
 }
 
 #if FW_VERSION == 100
-s32 func_00002C20(s32 a0) {
+s32 stub_pf_mkdir(s32 a0) {
     SceMsStubMsg msg;
 
     msg.cmd = 0x9;
@@ -1228,7 +1323,7 @@ s32 func_00002C20(s32 a0) {
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
-s32 func_00002C20(s32 a0, s32 a1) {
+s32 stub_pf_mkdir(s32 a0, s32 a1) {
     SceMsStubMsg msg;
 
     msg.cmd = 0x9;
@@ -1242,7 +1337,7 @@ s32 func_00002C20(s32 a0, s32 a1) {
 #endif
 
 #if FW_VERSION == 100
-s32 func_00002C60(s32 a0) {
+s32 stub_pf_rmdir(s32 a0) {
     SceMsStubMsg msg;
 
     msg.cmd = 0xa;
@@ -1255,7 +1350,7 @@ s32 func_00002C60(s32 a0) {
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
-s32 func_00002C60(s32 a0, s32 a1) {
+s32 stub_pf_rmdir(s32 a0, s32 a1) {
     SceMsStubMsg msg;
 
     msg.cmd = 0xa;
@@ -1305,7 +1400,7 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_00004CE0);
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00004D24);
 #endif
 
-s32 func_00004D6C(s32 a0) {
+s32 stub_pf_fclose(s32 a0) {
     SceMsStubMsg msg;
 
     msg.cmd = 0x2;
@@ -1347,7 +1442,7 @@ s32 func_00002D24(s32 a0, s32 a1) {
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00004DAC);
 #endif
 
-s32 func_00004DF0(s32 a0) {
+s32 stub_pf_feof(s32 a0) {
     SceMsStubMsg msg;
 
     msg.cmd = 0x12;
@@ -1358,7 +1453,7 @@ s32 func_00004DF0(s32 a0) {
     return msg.ret;
 }
 
-s32 func_00004E30(s32 a0) {
+s32 stub_pf_ferror(s32 a0) {
     SceMsStubMsg msg;
 
     msg.cmd = 0x11;
@@ -1370,7 +1465,7 @@ s32 func_00004E30(s32 a0) {
 }
 
 #if FW_VERSION == 100
-s32 func_00002DE4(s32 a0, s32 a1) {
+s32 stub_pf_fopen(s32 a0, s32 a1) {
     SceMsStubMsg msg;
 
     msg.cmd = 0x1;
@@ -1384,7 +1479,7 @@ s32 func_00002DE4(s32 a0, s32 a1) {
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
-s32 func_00002DE4(s32 a0, s32 a1, s32 a2) {
+s32 stub_pf_fopen(s32 a0, s32 a1, s32 a2) {
     SceMsStubMsg msg;
 
     msg.cmd = 0x1;
@@ -1402,7 +1497,7 @@ s32 func_00002DE4(s32 a0, s32 a1, s32 a2) {
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00004E70);
 #endif
 
-s32 func_00004EB0(s32 a0, s32 a1, s32 a2, s32 a3) {
+s32 stub_pf_fread(s32 a0, s32 a1, s32 a2, s32 a3) {
     SceMsStubMsg msg;
 
     msg.p2 = a3;
@@ -1417,7 +1512,7 @@ s32 func_00004EB0(s32 a0, s32 a1, s32 a2, s32 a3) {
 }
 
 #if FW_VERSION == 100
-s32 func_00002E74(s32 a0) {
+s32 stub_pf_remove(s32 a0) {
     SceMsStubMsg msg;
 
     msg.cmd = 0x7;
@@ -1430,7 +1525,7 @@ s32 func_00002E74(s32 a0) {
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
-s32 func_00002E74(s32 a0, s32 a1) {
+s32 stub_pf_remove(s32 a0, s32 a1) {
     SceMsStubMsg msg;
 
     msg.cmd = 0x7;
@@ -1537,7 +1632,7 @@ s32 func_00002F8C(s32 a0, s32 a1, s32 a2) {
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00004FD4);
 #endif
 
-s32 func_0000501C(s32 a0, s32 a1, s32 a2, s32 a3) {
+s32 stub_pf_fwrite(s32 a0, s32 a1, s32 a2, s32 a3) {
     SceMsStubMsg msg;
 
     msg.p2 = a3;
@@ -1563,7 +1658,7 @@ s32 func_00005068(s32 a0, s32 a1) {
     return msg.ret;
 }
 
-s32 func_000050AC(void) {
+s32 stub_pf_errnum(void) {
     SceMsStubMsg msg;
 
     msg.cmd = 0x13;
@@ -1601,7 +1696,7 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_00004DA8);
 #endif
 
 #if FW_VERSION == 100
-s32 func_0000311C(s32 a0, s32 a1) {
+s32 stub_pf_rename(s32 a0, s32 a1) {
     SceMsStubMsg msg;
 
     msg.cmd = 0x8;
@@ -1615,7 +1710,7 @@ s32 func_0000311C(s32 a0, s32 a1) {
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
-s32 func_0000311C(s32 a0, s32 a1, s32 a2) {
+s32 stub_pf_rename(s32 a0, s32 a1, s32 a2) {
     SceMsStubMsg msg;
 
     msg.cmd = 0x8;

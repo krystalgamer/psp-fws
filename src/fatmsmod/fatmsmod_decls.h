@@ -10,6 +10,12 @@ typedef struct {
     void *mem; /* 0x4 */
 } FatmsHeapEnt;
 
+/* prfile_mod.c mount state (0x4C bytes, cleared on the last umount). */
+typedef struct {
+    s32 unit; /* 0x0, -1 = none */
+    u8 pad4[0x48];
+} FatmsMountInfo;
+
 /* Per-iob private block checked by check_heap_alive: mode 0x10 = file (heap at 0x6C), 2 = directory (heap at 0x8). */
 typedef struct {
     s32 mode; /* 0x0 */
@@ -194,8 +200,9 @@ struct Unk_func_00013798_0 {
 extern const char D_00014704[]; /* "FATMS" */
 extern u8 D_000193F8;
 extern u8 D_000193FC;
+extern s32 D_00019500; /* mount count */
 extern s32 D_00019508;
-extern s32 D_0001950C;
+extern FatmsMountInfo D_0001950C;
 extern FatmsHeapEnt D_00019558[128];
 extern M2C_UNK D_00019AD4;
 extern s32 D_00019B00;
@@ -241,7 +248,10 @@ s32 add_drive_name(char *buf, const char *name, s32 unit);
 s32 check_heap_alive(FatmsPrivate *priv);
 s32 check_reload_status(s32 checkMedia, FatmsPrivate *priv);
 s32 df_close(); /* 1.00 df_close(SceIoIob *) */
+s32 df_dclose(); /* 1.00 df_dclose */
+s32 df_ioctl(); /* 1.00 df_ioctl */
 s32 df_read(); /* 1.00 df_read(SceIoIob *, void *, SceSize) */
+s32 df_rename(); /* 1.00 df_rename */
 s32 df_write(); /* 1.00 df_write(SceIoIob *, const void *, SceSize) */
 s32 free_heap_all(void);
 M2C_UNK func_00000020();
@@ -256,7 +266,6 @@ M2C_UNK func_00000E00();
 M2C_UNK func_00000EF8();
 s32 func_00001834(u32 attr);
 char *func_00001A18(char *s);
-M2C_UNK func_00001CD0();
 s32 func_00001F98(void);
 s32 func_000026FC(void);
 M2C_UNK func_00002708();
@@ -264,15 +273,10 @@ s32 func_00002778(s32);
 M2C_UNK func_00002880();
 s32 func_00002B48(void);
 s32 func_00002B98(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
-s32 func_00002C20(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
-s32 func_00002C60(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
 s32 func_00002CA0(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
 s32 func_00002D24(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
-s32 func_00002DE4(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
-s32 func_00002E74(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
 s32 func_00002EFC(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
 s32 func_00002F8C(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
-s32 func_0000311C(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
 void func_0000322C(void);
 void func_00003248(void);
 void func_0000326C(void);
@@ -288,6 +292,7 @@ void func_000036E0(s32 arg0, s32 arg1, s32 arg2);
 void func_000036FC(void);
 void func_0000381C(void);
 void func_00003940(s32 arg0);
+s32 func_00003A34(s32 unit, s32 stat);
 s32 func_00003CD8(void);
 s32 func_00004544(void);
 s8 *func_000045F4(void);
@@ -305,16 +310,10 @@ void func_00004A74(void);
 s32 func_00004B88(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
 s32 func_00004BBC(s32 arg0);
 s32 func_00004C58(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
-s32 func_00004D6C(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
-s32 func_00004DF0(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
-s32 func_00004E30(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
 s32 func_00004E68(s8 *arg0);
-s32 func_00004EB0(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
 s32 func_00004F40(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
 s32 func_00004F88(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
-s32 func_0000501C(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
 s32 func_00005068(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
-s32 func_000050AC(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
 s32 func_000050E4(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
 s32 func_00005118(void);
 s32 func_00005124(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
@@ -465,6 +464,7 @@ s8 func_00022338(s8 arg0);
 s32 func_0002233C(s32 arg0);
 s8 func_00022344(s8 arg0);
 void *get_heap(SceUID *heap, SceSize size);
+void memset(void *s, s32 c, SceSize n);
 s32 module_start(void);
 s32 prErr(s32 err);
 s32 sceFatMS_driver_BCB9DEDB(void);
@@ -489,5 +489,16 @@ s32 sceKernelSetEventFlag(SceUID evf, u32 bits);
 s32 sceKernelWaitEventFlag(SceUID evf, u32 bits, u32 wait, u32 *outBits, u32 *timeout);
 char *strcat(char *d, const char *s);
 u32 strlen(const char *s);
+s32 stub_pf_errnum(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
+s32 stub_pf_fclose(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
+s32 stub_pf_feof(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
+s32 stub_pf_ferror(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
+s32 stub_pf_fopen(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
+s32 stub_pf_fread(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
+s32 stub_pf_fwrite(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
+s32 stub_pf_mkdir(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
+s32 stub_pf_remove(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
+s32 stub_pf_rename(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
+s32 stub_pf_rmdir(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
 
 #endif
