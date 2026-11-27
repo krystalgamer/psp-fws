@@ -1,9 +1,15 @@
 /* cflags[152]: -O2 -frename-registers */
 /* cflags[150]: -O2 -frename-registers */
-/* cflags[100]: -O2 -frename-registers */
+/* cflags[100,102]: -O2 -frename-registers */
 #include "common.h"
 #include "k1.h"
 #include "mpegbase_decls.h"
+
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/mpegbase", func_00000000);
+
+INCLUDE_ASM("nonmatchings/mpegbase", func_00000030);
+#endif
 
 #if FW_VERSION == 260
 INCLUDE_RODATA("nonmatchings/mpegbase", D_0000195C);
@@ -119,7 +125,13 @@ s32 sceMpegbase_driver_0530BE4E(s32 arg0) {
     setK1(oldK1);
     return ret;
 }
-#else
+#endif
+
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/mpegbase", func_0000099C);
+#endif
+
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/mpegbase", sceMpegbase_driver_0530BE4E);
 #endif
 
@@ -167,7 +179,9 @@ INCLUDE_ASM("nonmatchings/mpegbase", func_00001130);
 INCLUDE_ASM("nonmatchings/mpegbase", func_00000EA4);
 #endif
 
+#if FW_VERSION != 102
 INCLUDE_ASM("nonmatchings/mpegbase", sceMpegBasePESpacketCopy);
+#endif
 
 #if FW_VERSION < 250
 INCLUDE_ASM("nonmatchings/mpegbase", func_000014C0);
@@ -205,7 +219,13 @@ void func_00001574(void) {
 }
 #endif
 
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/mpegbase", func_00000C70);
+
+INCLUDE_ASM("nonmatchings/mpegbase", func_00000FC0);
+#else
 INCLUDE_ASM("nonmatchings/mpegbase", sceMpegBaseYCrCbCopy);
+#endif
 
 #if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/mpegbase", sceMpegBaseYCrCbCopyVme);
