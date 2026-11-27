@@ -21,7 +21,8 @@ s32 func_00000184(void);
 s32 func_00000360(void);
 s32 func_0000036C(void);
 M2C_UNK sceKernelCpuResumeIntr(s32);
-s32 sceKernelCpuSuspendIntr();
+void sceKernelCpuResumeIntrWithSync(s32);
+s32 sceKernelCpuSuspendIntr(void);
 M2C_UNK sceKernelSm1RegisterOperations(M2C_UNK *);
 
 #endif

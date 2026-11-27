@@ -10,7 +10,8 @@
   "func_00000360": "s32 func_00000360(void);",
   "func_0000036C": "s32 func_0000036C(void);",
   "sceKernelCpuResumeIntr": "M2C_UNK sceKernelCpuResumeIntr(s32);",
-  "sceKernelCpuSuspendIntr": "s32 sceKernelCpuSuspendIntr();",
+  "sceKernelCpuResumeIntrWithSync": "void sceKernelCpuResumeIntrWithSync(s32);",
+  "sceKernelCpuSuspendIntr": "s32 sceKernelCpuSuspendIntr(void);",
   "sceKernelSm1RegisterOperations": "M2C_UNK sceKernelSm1RegisterOperations(M2C_UNK *);"
  },
  "vars": {

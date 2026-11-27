@@ -43,7 +43,23 @@ INCLUDE_ASM("nonmatchings/sm1", func_00000190);
 
 INCLUDE_ASM("nonmatchings/sm1", func_00000214);
 
-INCLUDE_ASM("nonmatchings/sm1", func_000002D0);
+s32 func_000002D0(s32 arg) {
+    u32 bus = *(volatile u32 *)0xBC100040;
+    s32 intr;
+
+    if (bus & 8) {
+        D_000004C0 = arg;
+        *(volatile u16 *)0xB1800020 = arg;
+        return 0;
+    }
+    intr = sceKernelCpuSuspendIntr();
+    *(volatile u32 *)0xBC100040 = (bus & ~0xC) | 8;
+    D_000004C0 = arg;
+    *(volatile u32 *)0xBC100040 = bus;
+    *(volatile u16 *)0xB1800020 = arg;
+    sceKernelCpuResumeIntrWithSync(intr);
+    return 0;
+}
 
 s32 func_00000360(void) {
     return D_000004C0;
