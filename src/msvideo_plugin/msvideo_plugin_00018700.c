@@ -1,7 +1,13 @@
 #include "common.h"
 #include "msvideo_plugin_decls.h"
 
+#if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/msvideo_plugin_00018700", func_00018700);
+#else
+void func_00018700(s32 arg0) {
+    func_00013884(arg0 - 0x38);
+}
+#endif
 
 #if FW_VERSION < 152
 void func_000138A8(s32 **arg0) {

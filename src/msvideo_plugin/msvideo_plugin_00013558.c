@@ -2,7 +2,9 @@
 #include "msvideo_plugin_decls.h"
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/msvideo_plugin_00013558", func_00013558);
+void func_00013558(s32 arg0) {
+    func_000125EC(arg0 - 0x38);
+}
 
 void func_00013574(s32 arg0, s32 arg1) {
     func_000125F4(arg0 - 0x38, arg1);
