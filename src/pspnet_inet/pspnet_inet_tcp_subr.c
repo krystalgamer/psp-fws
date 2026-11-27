@@ -189,57 +189,15 @@ s32 tcp_freeq(struct tcpcb *tp) {
 INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", func_00022F68);
 #endif
 
-#if FW_VERSION >= 151 && FW_VERSION < 250
-void tcp_mss_from_peer(struct tcpcb *tp, s32 offer) {
-    struct socket *so;
-    struct rtentry *rt;
-    u32 bufsize;
-    s32 mss;
-
-    so = NULL;
-    rt = NULL;
-    if (tp->t_inpcb) {
-        so = tp->t_inpcb->inp_socket;
-        rt = in_pcbrtentry(tp->t_inpcb);
-    }
-    mss = D_0002E8F8;
-    if (offer) {
-        mss = offer;
-    }
-    mss = max(mss, 32);
-    tp->t_peermss = mss;
-    mss -= tcp_optlen(tp);
-    if (tp->t_inpcb) {
-        mss -= ip_optlen(tp->t_inpcb);
-    }
-    if (rt != NULL && rt->rt_rmx.rmx_sendpipe != 0) {
-        bufsize = rt->rt_rmx.rmx_sendpipe;
-    } else {
-        bufsize = so->so_snd.sb_hiwat;
-    }
-    if (bufsize < mss) {
-        mss = bufsize;
-    } else {
-        bufsize = roundup(bufsize, mss);
-        if (bufsize > 0x40000) {
-            bufsize = 0x40000;
-        }
-        (void)sbreserve(&so->so_snd, bufsize);
-    }
-    tp->t_segsz = mss;
-    if (rt != NULL && rt->rt_rmx.rmx_ssthresh) {
-        tp->snd_ssthresh = max(2 * mss, rt->rt_rmx.rmx_ssthresh);
-    }
-}
-#endif
-
 #if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", tcp_mss_from_peer);
 #endif
 
 #if FW_VERSION < 151
 INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", func_00024C00);
+#endif
 
+#if FW_VERSION < 250
 void tcp_mss_from_peer(struct tcpcb *tp, s32 offer) {
     struct socket *so;
     struct rtentry *rt;
@@ -424,13 +382,7 @@ void func_0002544C(void *arg0) {
 }
 #endif
 
-#if FW_VERSION < 151
-void tcp_mtudisc_callback(struct in_addr addr) {
-    in_pcbnotifyall(&tcbtable, addr, 0x7A, tcp_mtudisc);
-}
-#endif
-
-#if FW_VERSION >= 151 && FW_VERSION < 282
+#if FW_VERSION < 282
 void tcp_mtudisc_callback(struct in_addr addr) {
     in_pcbnotifyall(&tcbtable, addr, 0x7A, tcp_mtudisc);
 }
@@ -461,7 +413,7 @@ void tcp_mtudisc(struct inpcb *inp, s32 errno) {
 INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", func_00023CD0);
 #endif
 
-#if FW_VERSION >= 151 && FW_VERSION < 250
+#if FW_VERSION < 250
 u32 tcp_mss_to_advertise(struct ifnet *ifp, s32 af) {
     u32 mss = 0;
     u32 hdrsiz;
@@ -497,61 +449,9 @@ void func_00023AB8(struct Unk_func_00023AB8_0 *arg0) {
 }
 
 INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", func_00023AD4);
-#endif
 
-#if FW_VERSION < 151
-void tcp_mtudisc(struct inpcb *inp, s32 errno) {
-    struct tcpcb *tp = (struct tcpcb *)inp->inp_ppcb;
-    struct rtentry *rt = in_pcbrtentry(inp);
-
-    if (tp != 0) {
-        if (rt != 0) {
-            if ((rt->rt_flags & RTF_HOST) == 0) {
-                in_rtchange(inp, errno);
-                if ((rt = in_pcbrtentry(inp)) == 0) {
-                    return;
-                }
-            }
-            if (rt->rt_rmx.rmx_mtu != 0) {
-                tp->snd_cwnd = TCP_INITIAL_WINDOW(D_0002E910, rt->rt_rmx.rmx_mtu);
-            }
-        }
-        tp->snd_nxt = tp->snd_una;
-        tcp_output(tp);
-    }
-}
-#endif
-
-#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", tcp_mtudisc);
-#endif
 
-#if FW_VERSION < 151
-u32 tcp_mss_to_advertise(struct ifnet *ifp, s32 af) {
-    u32 mss = 0;
-    u32 hdrsiz;
-
-    if (ifp != NULL)
-        mss = ifp->if_mtu;
-    if (tcp_mss_ifmtu == 0)
-        mss = max(in_maxmtu, mss);
-    switch (af) {
-    case AF_INET:
-        hdrsiz = sizeof(struct ip);
-        break;
-    default:
-        hdrsiz = 0;
-        break;
-    }
-    hdrsiz += sizeof(struct tcphdr);
-    if (mss > hdrsiz)
-        mss -= hdrsiz;
-    mss = max((u32)D_0002E8F8, mss);
-    return (mss);
-}
-#endif
-
-#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", func_00023BD8);
 #else
 void tcp_established(struct tcpcb *tp) {
@@ -974,15 +874,10 @@ INCLUDE_RODATA("nonmatchings/pspnet_inet_tcp_subr", D_0002DFB4);
 INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", func_00027304);
 #endif
 
-#if FW_VERSION == 103
-INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", sppp_cp_change_state);
-#endif
-
 #if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", func_00025870);
 #endif
 
-#if FW_VERSION != 103
 void sppp_cp_change_state(const struct cp *cp, struct sppp *sp, s32 newstate) {
     sp->state[cp->protoidx] = newstate;
     _sce_pspnet_callout_stop(sp->ch[cp->protoidx]);
@@ -1002,7 +897,6 @@ void sppp_cp_change_state(const struct cp *cp, struct sppp *sp, s32 newstate) {
         break;
     }
 }
-#endif
 
 INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", func_00025FCC);
 
@@ -1154,17 +1048,7 @@ void sppp_lcp_up(struct sppp *sp) {
     }
 }
 
-#if FW_VERSION == 103 || FW_VERSION >= 271
-INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", sppp_lcp_down);
-
-INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", sppp_lcp_open);
-#endif
-
-#if FW_VERSION == 103
-INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", sppp_lcp_close);
-#endif
-
-#if FW_VERSION < 103 || (FW_VERSION >= 150 && FW_VERSION < 271)
+#if FW_VERSION < 271
 void sppp_lcp_down(struct sppp *sp) {
     const struct cp *cp = &lcp;
 
@@ -1195,7 +1079,11 @@ void sppp_lcp_down(struct sppp *sp) {
     }
     ((struct ifnet *)sp)->if_flags &= ~0x40; /* IFF_RUNNING */
 }
+#else
+INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", sppp_lcp_down);
+#endif
 
+#if FW_VERSION < 271
 void sppp_lcp_open(struct sppp *sp) {
     const struct cp *cp = &lcp;
 
@@ -1224,9 +1112,10 @@ void sppp_lcp_open(struct sppp *sp) {
         break;
     }
 }
+#else
+INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", sppp_lcp_open);
 #endif
 
-#if FW_VERSION != 103
 void sppp_lcp_close(struct sppp *sp) {
     const struct cp *cp = &lcp;
 
@@ -1257,7 +1146,6 @@ void sppp_lcp_close(struct sppp *sp) {
         break;
     }
 }
-#endif
 
 void sppp_lcp_TO(void *arg0) {
     sppp_to_event(&lcp, arg0);
@@ -1358,11 +1246,6 @@ void sppp_ipcp_up(struct sppp *sp) {
     }
 }
 
-#if FW_VERSION == 103
-INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", sppp_ipcp_down);
-
-INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", sppp_ipcp_open);
-#else
 void sppp_ipcp_down(struct sppp *sp) {
     const struct cp *cp = &ipcp;
 
@@ -1422,9 +1305,8 @@ void sppp_ipcp_open(struct sppp *sp) {
         break;
     }
 }
-#endif
 
-#if FW_VERSION < 103 || FW_VERSION == 150
+#if FW_VERSION < 151
 void sppp_ipcp_close(struct sppp *sp) {
     const struct cp *cp = &ipcp;
 
@@ -1733,7 +1615,50 @@ void func_0002A67C(void) {
 #endif
 
 #if FW_VERSION == 103
-INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", sppp_to_event);
+void sppp_to_event(const struct cp *cp, struct sppp *sp) {
+    s32 s;
+
+    s = _sce_pspnet_spllock();
+    if (--sp->rst_counter[cp->protoidx] < 0) {
+        switch (sp->state[cp->protoidx]) {
+        case STATE_CLOSING:
+            (cp->tlf)(sp);
+            sppp_cp_change_state(cp, sp, STATE_CLOSED);
+            sppp_lcp_check_and_close(sp);
+            break;
+        case STATE_STOPPING:
+            (cp->tlf)(sp);
+            sppp_cp_change_state(cp, sp, STATE_STOPPED);
+            sppp_lcp_check_and_close(sp);
+            break;
+        case STATE_REQ_SENT:
+        case STATE_ACK_RCVD:
+        case STATE_ACK_SENT:
+            (cp->tlf)(sp);
+            sppp_cp_change_state(cp, sp, STATE_STOPPED);
+            sppp_lcp_check_and_close(sp);
+            break;
+        }
+    } else {
+        switch (sp->state[cp->protoidx]) {
+        case STATE_CLOSING:
+        case STATE_STOPPING:
+            func_00025638(sp, cp->proto, 5 /* TERM_REQ */, ++sp->pp_seq[cp->protoidx], 0, 0);
+            _sce_pspnet_callout_reset(sp->ch[cp->protoidx], sp->lcp_timeout, cp->TO, sp);
+            break;
+        case STATE_REQ_SENT:
+        case STATE_ACK_RCVD:
+            (cp->scr)(sp);
+            sppp_cp_change_state(cp, sp, STATE_REQ_SENT);
+            break;
+        case STATE_ACK_SENT:
+            (cp->scr)(sp);
+            _sce_pspnet_callout_reset(sp->ch[cp->protoidx], sp->lcp_timeout, cp->TO, sp);
+            break;
+        }
+    }
+    _sce_pspnet_splunlock(s);
+}
 #endif
 
 #if FW_VERSION >= 282
