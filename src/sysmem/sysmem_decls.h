@@ -21,6 +21,39 @@ struct D_0000F8C4_s {
     volatile s32 unk64;
 };
 
+struct SceSysmemUidLookupFunc;
+typedef struct SceSysmemUidCB {
+    struct SceSysmemUidCB *PARENT0; /* 0x00 */
+    struct SceSysmemUidCB *nextChild; /* 0x04 */
+    struct SceSysmemUidCB *meta; /* 0x08: the type */
+    SceUID uid; /* 0x0C */
+    char *name; /* 0x10 */
+    u8 childSize; /* 0x14: in words */
+    u8 size; /* 0x15: in words */
+    u16 attr; /* 0x16 */
+    union {
+        struct SceSysmemUidCB *next;
+        s32 numChild;
+    } next; /* 0x18 */
+    struct SceSysmemUidCB *PARENT1; /* 0x1C */
+    struct SceSysmemUidLookupFunc *funcTable; /* 0x20 */
+} SceSysmemUidCB; /* size 0x24 */
+
+typedef struct {
+    SceSysmemUidCB *root; /* 0x0 */
+    SceSysmemUidCB *metaRoot; /* 0x4 */
+    SceSysmemUidCB *basic; /* 0x8 */
+    s32 count; /* 0xC */
+} SceSysmemUidList;
+
+typedef s32 (*SceSysmemUidFunc)(SceSysmemUidCB *uid, SceSysmemUidCB *uidWithFunc, s32 funcId, __builtin_va_list ap);
+typedef struct SceSysmemUidLookupFunc {
+    s32 id;
+    SceSysmemUidFunc func;
+} SceSysmemUidLookupFunc;
+
+#define UIDCB(id) ((SceSysmemUidCB *)(0x88000000 | (((u32)(id) >> 7) << 2)))
+
 struct Unk_SysMemForKernel_82D3CEE3_0 {
     u8 pad0[0x8];
     s32 unk8;
@@ -230,6 +263,8 @@ s32 func_0000A6B4(s32 arg0);
 s32 func_0000AA28(s32 arg0, s32 arg1);
 s32 func_0000AD04(s32 arg0, s32 arg1);
 s32 func_0000C690(void);
+s32 func_0000C908(void);
+void func_0000C934(s32);
 s32 func_0000C994(s32 arg0);
 s32 func_0000E3C4(s32, s32);
 M2C_UNK *get_ctype_table(void);
@@ -242,6 +277,8 @@ s32 sceKernelApiEvaluationInit(void);
 s32 sceKernelApiEvaluationReport(void);
 s32 sceKernelCallGcovFunction(void);
 s32 sceKernelCallGprofFunction(void);
+s32 sceKernelCallUIDFunction(SceUID id, s32 funcId, ...);
+s32 sceKernelCallUIDObjFunction(SceSysmemUidCB *uid, s32 funcId, ...);
 s32 sceKernelCreateUIDtype(s32, s32, s32, s32, s32);
 s32 sceKernelDebugEcho(void);
 s32 sceKernelDebugEchoSet(s32 arg0);
@@ -276,6 +313,7 @@ s32 sceKernelIsKindOf(struct Unk_SysMemForKernel_82D3CEE3_0 *arg0, s32 arg1);
 s32 sceKernelIsUMDMode(void);
 s32 sceKernelIsValidUserAccess(s32 arg0, s32 arg1, s32 arg2);
 s32 sceKernelJointMemoryBlock(void);
+s32 sceKernelLookupUIDFunction(SceSysmemUidCB *uid, s32 id, SceSysmemUidFunc *func, SceSysmemUidCB **parentUidWithFunc);
 u32 sceKernelMaxFreeMemSize(void);
 void sceKernelMemoryCloseSize(s32 arg0);
 void sceKernelMemoryExtendSize(void);
