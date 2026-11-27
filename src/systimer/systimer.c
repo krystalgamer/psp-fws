@@ -1,4 +1,4 @@
-/* cflags[100,102]: -O2 */
+/* cflags[100,102,103]: -O2 */
 /* cflags: -O2 -frename-registers */
 #include "common.h"
 #include "systimer_decls.h"
