@@ -9,12 +9,13 @@ options:
   compiler: GCC
 
   asm_path: tmp/asm/102/savedata_utility
-  src_path: tmp/av_src/102/savedata_utility
+  src_path: src/savedata_utility
   build_path: tmp/build/102
   ld_script_path: tmp/build/102/savedata_utility.ld
   cache_path: tmp/build/102/.splat_cache.savedata_utility
   symbol_addrs_path:
     - config/102/symbol_addrs.savedata_utility.txt
+    - config/102/func_starts.savedata_utility.txt
     - tmp/build/102/prx_syms.savedata_utility.txt
   reloc_addrs_path: [tmp/build/102/reloc_addrs.savedata_utility.txt]
   asset_path: tmp/assets/102/savedata_utility
@@ -54,6 +55,11 @@ segments:
     subsegments:
       - { start: 0x80, type: asm, name: init, linker_section: .init }
       - [0xA4, c, savedata_utility]
+      - [0x5228, c, savedata_utility_006DD4]
+      - [0xAC0C, c, savedata_utility_010FEC]
+      - [0xF198, c, savedata_utility_015C1C]
+      - [0x1070C, c, savedata_utility_017068]
+      - [0x1EC90, c, savedata_utility_crtend]
       - { start: 0x1F298, type: asm, name: fini, linker_section: .fini }
       - { start: 0x1F2B4, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x1F704, type: prxpad, order: .text }
@@ -72,6 +78,11 @@ segments:
       - { start: 0x1FC78, type: rodata, name: jcr, linker_section: .jcr }
       - { start: 0x1FC7C, type: rodata, name: eh_frame, linker_section: .eh_frame }
       - [0x1FCB0, .rodata, savedata_utility]
+      - [0x201BC, .rodata, savedata_utility_006DD4]
+      - [0x20510, .rodata, savedata_utility_010FEC]
+      - [0x206C0, .rodata, savedata_utility_015C1C]
+      - [0x20788, .rodata, savedata_utility_017068]
+      - [0x20D50, .rodata, savedata_utility_crtend]
       - { start: 0x20E58, type: prxpad, order: .rodata }
   - name: savedata_utility_seg1
     type: code
