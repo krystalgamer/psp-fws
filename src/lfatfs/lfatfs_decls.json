@@ -1,10 +1,6 @@
 {
  "funcs": {
-  "sceIoUnassign": "M2C_UNK sceIoUnassign(M2C_UNK *);",
-  "sceIoAddDrv": "M2C_UNK sceIoAddDrv(M2C_UNK *);",
-  "sceIoDelDrv": "M2C_UNK sceIoDelDrv(s32);",
   "Kprintf": "M2C_UNK Kprintf(M2C_UNK *, M2C_UNK *, s32);",
-  "sceKernelFreeHeapMemory": "M2C_UNK sceKernelFreeHeapMemory(s32, s32);",
   "func_00000000": "s32 func_00000000(s32 arg0);",
   "func_00000000_v310": "s32 func_00000000_v310(s32 arg0);",
   "func_00000000_v311": "s32 func_00000000_v311(s32 arg0);",
@@ -126,18 +122,22 @@
   "func_0000AF98": "s32 func_0000AF98(void);",
   "func_0000B9D4": "void func_0000B9D4(void *arg0);",
   "module_reboot_before": "s32 module_reboot_before(void);",
+  "sceIoAddDrv": "M2C_UNK sceIoAddDrv(M2C_UNK *);",
+  "sceIoDelDrv": "M2C_UNK sceIoDelDrv(s32);",
+  "sceIoUnassign": "M2C_UNK sceIoUnassign(M2C_UNK *);",
   "sceKernelDeleteFpl": "s32 sceKernelDeleteFpl(s32);",
+  "sceKernelFreeHeapMemory": "M2C_UNK sceKernelFreeHeapMemory(s32, s32);",
   "sceKernelLockMutex": "s32 sceKernelLockMutex(s32, s32, void *);",
   "sceKernelPowerLock": "s32 sceKernelPowerLock(s32);",
   "sceKernelPowerUnlock": "s32 sceKernelPowerUnlock(s32);",
+  "sceKernelRegisterSysEventHandler": "M2C_UNK sceKernelRegisterSysEventHandler(M2C_UNK *);",
   "sceKernelSignalSema": "s32 sceKernelSignalSema(s32, s32);",
   "sceKernelUnlockMutex": "s32 sceKernelUnlockMutex(s32, s32);",
+  "sceKernelUnregisterSysEventHandler": "M2C_UNK sceKernelUnregisterSysEventHandler(M2C_UNK *);",
   "sceKernelWaitSema": "s32 sceKernelWaitSema(s32, s32, void *);",
   "sceLFatFs_driver_51C7F7AE": "s32 sceLFatFs_driver_51C7F7AE(void);",
-  "sceLfatfsStop": "s32 sceLfatfsStop(void);",
   "sceLFatFs_driver_F1FBA85F": "s32 sceLFatFs_driver_F1FBA85F(void);",
-  "sceKernelRegisterSysEventHandler": "M2C_UNK sceKernelRegisterSysEventHandler(M2C_UNK *);",
-  "sceKernelUnregisterSysEventHandler": "M2C_UNK sceKernelUnregisterSysEventHandler(M2C_UNK *);"
+  "sceLfatfsStop": "s32 sceLfatfsStop(void);"
  },
  "types": {
   "Unk_Unk_func_00003AE8_0_0": "struct Unk_Unk_func_00003AE8_0_0 {\n    u8 pad0[0x10];\n    s32 unk10;\n};",
