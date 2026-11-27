@@ -359,9 +359,9 @@ func_00006A98 = 0x00006CFC; // type:func rom:0x6D7C
 func_00006B0C = 0x00006D68; // type:func rom:0x6DE8
 func_0000AF30 = 0x00006D88; // type:func rom:0x6E08
 func_0000AF60 = 0x00006DB8; // type:func rom:0x6E38
-func_0000B42C = 0x00006DE8; // type:func rom:0x6E68
-func_0000B490 = 0x00006E4C; // type:func rom:0x6ECC
-func_0000B4F4 = 0x00006EB0; // type:func rom:0x6F30
+_ZN14Class_00024FC8D2Ev = 0x00006DE8; // type:func rom:0x6E68
+_ZN14Class_00024FC8D1Ev = 0x00006E4C; // type:func rom:0x6ECC
+_ZN14Class_00024FC8D0Ev = 0x00006EB0; // type:func rom:0x6F30
 func_00006C9C = 0x00006F1C; // type:func rom:0x6F9C
 func_0000B580 = 0x00006FC4; // type:func rom:0x7044
 func_00006DFC = 0x00007084; // type:func rom:0x7104
@@ -801,3 +801,4 @@ func_0001E7AC = 0x00020744; // type:func rom:0x207C4
 func_00005C8C_v150 = 0x00005C8C; // type:func rom:0x5D0C
 func_0000A46C_v150 = 0x0000A46C; // type:func rom:0xA4EC
 // shared names (tools/add_version.py) end
+_ZN3paf12SurfaceRCPtrINS_7SurfaceEEaSEPS1_ = 0x000087F0; // type:func

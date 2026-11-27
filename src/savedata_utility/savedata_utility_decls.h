@@ -70,20 +70,41 @@ public:
 };
 
 /* job slot with a texture: vtable _ZTV14Class_0001FC80 (vptr D_0001FC80 before 2.82,
-   D_00025300 after) [D1, D0, vfunc08, vfunc0C]; 2.82+ dropped the field at 0x20 */
+   D_00025300 after) [D1, D0, vfunc08, vfunc0C]; 2.71+ dropped the field at 0x20 */
 class Class_0001FC80 : public Class_00025160 {
 public:
     Class_0001FC80(s32 owner, s32 arg2);
     virtual ~Class_0001FC80();
     void LoadTexture();
+    /* inline: both this dtor and Class_00024FC8's contain it */
+    void Clear() {
+        if (unk1C != 0) {
+            delete unk1C;
+            unk1C = 0;
+        }
+#if FW_VERSION >= 150
+        tex = 0;
+#endif
+    }
 
     s32 unk18;                                  /* 0x18 */
     UnkPolyObj *unk1C;                          /* 0x1C */
-#if FW_VERSION < 282
+#if FW_VERSION < 271
     s32 unk20;                                  /* 0x20 */
 #endif
-    paf::SurfaceRCPtr<paf::Surface> tex;        /* 0x24 (2.82+: 0x20) */
-    s32 unk28;                                  /* 0x28 (2.82+: 0x24) */
+    paf::SurfaceRCPtr<paf::Surface> tex;        /* 0x24 (2.71+: 0x20) */
+    s32 unk28;                                  /* 0x28 (2.71+: 0x24) */
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_00024FC8 (vptr D_00024F40 before 2.71, D_00025008 in 2.71, D_00024FC8 from 2.82) */
+class Class_00024FC8 : public Class_0001FC80 {
+public:
+    Class_00024FC8(s32 owner, s32 arg2);
+    virtual ~Class_00024FC8();
+
+    s32 unk2C;  /* 0x2C (2.71+: 0x28) */
 };
 #endif
 
@@ -1010,9 +1031,7 @@ void func_0000AFB8(M2C_UNK **arg0);
 void func_0000AFE0(M2C_UNK **arg0);
 void func_0000B0CC(struct Unk_func_0000B0CC_0 *arg0, struct Unk_func_0000B0CC_1 *arg1);
 void ***func_0000B360(void ***arg0, void *arg1, void **arg2);
-void func_0000B3C4(struct Unk_func_0000B3C4_0 *arg0, s32 arg1, s32 arg2);
 void func_0000B3C8(void *arg0);
-void func_0000B3F8(struct Unk_func_0000B3C4_0 *arg0, s32 arg1, s32 arg2);
 void func_0000B560(struct Unk_func_0000B560_0 *arg0);
 s32 func_0000B580_v250(s32, s32);
 s32 func_0000B634(s32, s32);

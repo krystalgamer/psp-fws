@@ -12,11 +12,7 @@ Class_0001FC80::Class_0001FC80(s32 owner, s32 arg2) : Class_00025160(owner), tex
 }
 
 Class_0001FC80::~Class_0001FC80() {
-    if (unk1C != 0) {
-        delete unk1C;
-        unk1C = 0;
-    }
-    tex = 0;
+    Clear();
 }
 #endif
 
@@ -50,20 +46,9 @@ void func_0000E818(void *arg0, s32 arg1) {
 INCLUDE_ASM("nonmatchings/savedata_utility_015C1C", func_0000E820);
 #endif
 
-#if FW_VERSION == 271
-INCLUDE_ASM("nonmatchings/savedata_utility_015C1C", func_00015700);
-
-INCLUDE_ASM("nonmatchings/savedata_utility_015C1C", func_0000E898);
-
-INCLUDE_ASM("nonmatchings/savedata_utility_015C1C", func_0000E8F0);
-
-INCLUDE_ASM("nonmatchings/savedata_utility_015C1C", func_0000E97C);
-
-INCLUDE_ASM("nonmatchings/savedata_utility_015C1C", func_0000EA08);
-#endif
 
 /* 1.00-2.60: the class is built -O2 but this splat TU is -Os (the real TU starts at the
-   C2 ctor), so the C++ below is used from 2.82 only */
+   C2 ctor), so it stays asm/m2c there */
 #if FW_VERSION < 271
 INCLUDE_ASM("nonmatchings/savedata_utility_015C1C", _ZN14Class_0001FC80C2Eii);
 
@@ -81,6 +66,16 @@ INCLUDE_ASM("nonmatchings/savedata_utility_015C1C", _ZN14Class_0001FC80D2Ev);
 INCLUDE_ASM("nonmatchings/savedata_utility_015C1C", _ZN14Class_0001FC80D1Ev);
 
 INCLUDE_ASM("nonmatchings/savedata_utility_015C1C", _ZN14Class_0001FC80D0Ev);
+#elif FW_VERSION == 271
+Class_0001FC80::Class_0001FC80(s32 owner, s32 arg2) : Class_00025160(owner), tex(0) {
+    unk28 = arg2;
+    unk1C = 0;
+    LoadTexture();
+}
+
+Class_0001FC80::~Class_0001FC80() {
+    Clear();
+}
 #endif
 
 #if FW_VERSION != 271
@@ -271,6 +266,7 @@ INCLUDE_ASM("nonmatchings/savedata_utility_015C1C", func_00016E94);
 INCLUDE_RODATA("nonmatchings/savedata_utility_015C1C", D_00025320);
 
 INCLUDE_RODATA("nonmatchings/savedata_utility_015C1C", D_00025340);
+__asm__(".globl _ZTV14Class_0001FC80\n_ZTV14Class_0001FC80 = D_00025340 - 8\n");
 #endif
 
 #if FW_VERSION >= 250 && FW_VERSION < 271
