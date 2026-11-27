@@ -600,3 +600,9 @@ D_0002197C_v100 = 0x0002197C; // rom:0x219FC
 func_0000015C_v100 = 0x0000015C; // type:func rom:0x1DC
 func_0000F9A8_v100 = 0x0000F9A8; // type:func rom:0xFA28
 // shared names (tools/add_version.py) end
+_ZN14Class_00022578D2Ev = 0x0000C94C; // type:func
+_ZN14Class_00022578D1Ev = 0x0000C95C; // type:func
+_ZN14Class_00022578D0Ev = 0x0000C96C; // type:func
+_ZN14Class_00022560D2Ev = 0x0000CB40; // type:func
+_ZN14Class_00022560D1Ev = 0x0000CB68; // type:func
+_ZN14Class_00022560D0Ev = 0x0000CB90; // type:func

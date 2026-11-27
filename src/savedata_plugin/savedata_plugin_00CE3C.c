@@ -210,17 +210,7 @@ void func_0000CCA4(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0xC) = 0;
 }
 
-void func_0000CCC0(M2C_UNK **arg0) {
-    *arg0 = &D_00023078;
-}
-
-void func_0000CCD0(M2C_UNK **arg0) {
-    *arg0 = &D_00023078;
-}
-
-void func_0000CCE0(M2C_UNK **arg0) {
-    *arg0 = &D_00023078;
-    _ZdlPv(arg0);
+Class_00023078::~Class_00023078() {
 }
 
 INCLUDE_ASM("nonmatchings/savedata_plugin_00CE3C", func_0000CD08);
@@ -1275,17 +1265,7 @@ INCLUDE_ASM("nonmatchings/savedata_plugin_00CE3C", func_0000F1A0);
 #if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/savedata_plugin_00CE3C", func_0000C900);
 
-void func_0000C94C(M2C_UNK **arg0) {
-    *arg0 = &D_00022578;
-}
-
-void func_0000C95C(M2C_UNK **arg0) {
-    *arg0 = &D_00022578;
-}
-
-void func_0000C96C(M2C_UNK **arg0) {
-    *arg0 = &D_00022578;
-    _ZdlPv(arg0);
+Class_00022578::~Class_00022578() {
 }
 
 void func_0000F280(struct Unk_func_000040AC_0 *arg0) {
@@ -1443,20 +1423,7 @@ INCLUDE_ASM("nonmatchings/savedata_plugin_00CE3C", func_0000F3D4);
 INCLUDE_ASM("nonmatchings/savedata_plugin_00CE3C", func_0000F44C);
 
 #if FW_VERSION < 282
-void func_0000CB40(s32 **arg0) {
-    *arg0 = &D_00022560;
-    func_0000C94C(arg0);
-}
-
-void func_0000CB68(s32 **arg0) {
-    *arg0 = &D_00022560;
-    func_0000C94C(arg0);
-}
-
-void func_0000CB90(s32 **arg0) {
-    *arg0 = &D_00022560;
-    func_0000C94C(arg0);
-    _ZdlPv(arg0);
+Class_00022560::~Class_00022560() {
 }
 
 INCLUDE_ASM("nonmatchings/savedata_plugin_00CE3C", func_0000F50C);
@@ -2493,4 +2460,19 @@ INCLUDE_ASM("nonmatchings/savedata_plugin_00CE3C", func_00011C24);
 void func_00011C4C(struct Unk_func_00011C4C_0 *arg0, s32 arg1) {
     arg0->unk10 = arg1;
 }
+#endif
+
+#if FW_VERSION == 100 || FW_VERSION == 150 || FW_VERSION == 152 || FW_VERSION == 201 || FW_VERSION == 250 || FW_VERSION == 260 || FW_VERSION == 271
+/* vtable of Class_00022578 (data) */
+__asm__(".globl _ZTV14Class_00022578\n_ZTV14Class_00022578 = D_00022578 - 8\n");
+#endif
+
+#if FW_VERSION == 100 || FW_VERSION == 150 || FW_VERSION == 152 || FW_VERSION == 201 || FW_VERSION == 250 || FW_VERSION == 260 || FW_VERSION == 271
+/* vtable of Class_00022560 (data) */
+__asm__(".globl _ZTV14Class_00022560\n_ZTV14Class_00022560 = D_00022560 - 8\n");
+#endif
+
+#if FW_VERSION == 260 || FW_VERSION == 271
+/* vtable of Class_00023078 (data) */
+__asm__(".globl _ZTV14Class_00023078\n_ZTV14Class_00023078 = D_00023078 - 8\n");
 #endif

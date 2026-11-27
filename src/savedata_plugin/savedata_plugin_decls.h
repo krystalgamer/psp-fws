@@ -7,7 +7,32 @@
 #ifdef __cplusplus
 #include "paf.h"
 #include "vsh.h"
+#pragma interface
 extern "C" {
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_00022578 (vptr D_00022578) */
+class Class_00022578 {
+public:
+    virtual ~Class_00022578();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_00022560 (vptr D_00022560) */
+class Class_00022560 : public Class_00022578 {
+public:
+    virtual ~Class_00022560();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_00023078 (vptr D_00023078) */
+class Class_00023078 {
+public:
+    virtual ~Class_00023078();
+};
 #endif
 
 struct D_00023028_s {
@@ -866,9 +891,6 @@ void func_0000C844(void);
 void func_0000C860(void);
 void func_0000C87C(void);
 void func_0000C898(void);
-void func_0000C94C(M2C_UNK **arg0);
-void func_0000C95C(M2C_UNK **arg0);
-void func_0000C96C(M2C_UNK **arg0);
 void func_0000C9A4(void *arg0, s32 arg1);
 s32 func_0000CA04(void *arg0, s32 arg1);
 s32 func_0000CA2C(void *arg0);
@@ -879,17 +901,11 @@ s32 func_0000CA78(void *arg0);
 s32 func_0000CAA4(void *arg0, s32 *arg1, s32 *arg2);
 s32 func_0000CB18(void *arg0);
 void func_0000CB34(void *arg0);
-void func_0000CB40(s32 **arg0);
 s32 func_0000CB48(s32);
-void func_0000CB68(s32 **arg0);
 s32 func_0000CB80(void);
-void func_0000CB90(s32 **arg0);
 s32 func_0000CB90_v150(void);
 s32 func_0000CBB8(void);
 void func_0000CCA4(void *arg0, s32 arg1);
-void func_0000CCC0(M2C_UNK **arg0);
-void func_0000CCD0(M2C_UNK **arg0);
-void func_0000CCE0(M2C_UNK **arg0);
 s32 func_0000CD88(struct Unk_func_0000CD88_0 *arg0, u32 arg1);
 void func_0000CDBC(struct Unk_func_0000CDBC_0 *arg0, s32 arg1);
 void func_0000CDEC(struct Unk_func_0000CDEC_0 *arg0, s32 arg1);

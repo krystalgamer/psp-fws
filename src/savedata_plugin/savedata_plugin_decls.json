@@ -1,4 +1,7 @@
 {
+ "cxx_prelude": [
+  "#pragma interface"
+ ],
  "funcs": {
   "Job_Start": "s32 Job_Start(M2C_UNK, M2C_UNK *, void *, M2C_UNK, M2C_UNK, M2C_UNK *);",
   "Job_isCanceled": "s32 Job_isCanceled(s32);",
@@ -229,9 +232,6 @@
   "func_0000C860": "void func_0000C860(void);",
   "func_0000C87C": "void func_0000C87C(void);",
   "func_0000C898": "void func_0000C898(void);",
-  "func_0000C94C": "void func_0000C94C(M2C_UNK **arg0);",
-  "func_0000C95C": "void func_0000C95C(M2C_UNK **arg0);",
-  "func_0000C96C": "void func_0000C96C(M2C_UNK **arg0);",
   "func_0000C9A4": "void func_0000C9A4(void *arg0, s32 arg1);",
   "func_0000CA04": "s32 func_0000CA04(void *arg0, s32 arg1);",
   "func_0000CA2C": "s32 func_0000CA2C(void *arg0);",
@@ -242,17 +242,11 @@
   "func_0000CAA4": "s32 func_0000CAA4(void *arg0, s32 *arg1, s32 *arg2);",
   "func_0000CB18": "s32 func_0000CB18(void *arg0);",
   "func_0000CB34": "void func_0000CB34(void *arg0);",
-  "func_0000CB40": "void func_0000CB40(s32 **arg0);",
   "func_0000CB48": "s32 func_0000CB48(s32);",
-  "func_0000CB68": "void func_0000CB68(s32 **arg0);",
   "func_0000CB80": "s32 func_0000CB80(void);",
-  "func_0000CB90": "void func_0000CB90(s32 **arg0);",
   "func_0000CB90_v150": "s32 func_0000CB90_v150(void);",
   "func_0000CBB8": "s32 func_0000CBB8(void);",
   "func_0000CCA4": "void func_0000CCA4(void *arg0, s32 arg1);",
-  "func_0000CCC0": "void func_0000CCC0(M2C_UNK **arg0);",
-  "func_0000CCD0": "void func_0000CCD0(M2C_UNK **arg0);",
-  "func_0000CCE0": "void func_0000CCE0(M2C_UNK **arg0);",
   "func_0000CD88": "s32 func_0000CD88(struct Unk_func_0000CD88_0 *arg0, u32 arg1);",
   "func_0000CDBC": "void func_0000CDBC(struct Unk_func_0000CDBC_0 *arg0, s32 arg1);",
   "func_0000CDEC": "void func_0000CDEC(struct Unk_func_0000CDEC_0 *arg0, s32 arg1);",
@@ -518,6 +512,9 @@
   "vsh_FA1DE461": "M2C_UNK vsh_FA1DE461(s32, M2C_UNK *, void *);"
  },
  "types": {
+  "Class_00022560": "#ifdef __cplusplus\n/* vtable _ZTV14Class_00022560 (vptr D_00022560) */\nclass Class_00022560 : public Class_00022578 {\npublic:\n    virtual ~Class_00022560();\n};\n#endif",
+  "Class_00022578": "#ifdef __cplusplus\n/* vtable _ZTV14Class_00022578 (vptr D_00022578) */\nclass Class_00022578 {\npublic:\n    virtual ~Class_00022578();\n};\n#endif",
+  "Class_00023078": "#ifdef __cplusplus\n/* vtable _ZTV14Class_00023078 (vptr D_00023078) */\nclass Class_00023078 {\npublic:\n    virtual ~Class_00023078();\n};\n#endif",
   "D_00023028_s": "struct D_00023028_s {\n    s32 unk0;\n    s32 unk4;\n};",
   "Unk_D_00022EE0": "struct Unk_D_00022EE0 {\n    u8 pad0[0x58];\n    void *unk58;\n};",
   "Unk_Unk_Unk_func_00004A94_0_10_24": "struct Unk_Unk_Unk_func_00004A94_0_10_24 {\n    u8 pad0[0x1C];\n    s32 unk1C;\n};",
