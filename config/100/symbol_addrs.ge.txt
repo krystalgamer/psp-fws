@@ -57,7 +57,27 @@ sceSysregAwEdramBusClockEnable = 0x00002674; // type:func
 sceSysregAwEdramBusClockDisable = 0x0000267C; // type:func
 // shared names (tools/add_version.py) begin
 D_00005E34 = 0x00002A2C;
-D_00007FB8 = 0x00003D9C;
-func_00001BA4 = 0x00000B90; // type:func
-func_00004C44 = 0x0000219C; // type:func
+g_cbhook = 0x00003D9C;
+_sceGeSysEventHandler = 0x00000B90; // type:func
+_sceGeQueueEnd = 0x0000219C; // type:func
 // shared names (tools/add_version.py) end
+// ge driver state (1.00 layout)
+g_GeIntrOpt = 0x00002B00; // size:0xC
+g_GeSysEv = 0x00002B0C; // size:0x40
+g_GeSubIntrFunc = 0x00002B50; // size:0x2C
+g_AwQueue = 0x0000337C; // size:0xA18
+g_GeSuspend = 0x00003D94; // size:0x8
+_sceGeReset = 0x00000000; // type:func
+_sceGeInterrupt = 0x00000AC0; // type:func
+_sceGeEdramSuspend = 0x0000102C; // type:func
+_sceGeEdramResume = 0x000010CC; // type:func
+_sceGeQueueSuspend = 0x00001220; // type:func
+_sceGeQueueResume = 0x000012B0; // type:func
+_sceGeFinishInterrupt = 0x00001358; // type:func
+_sceGeListInterrupt = 0x000015B0; // type:func
+_sceGeQueueInit = 0x00002104; // type:func
+_sceGeListEnQueue = 0x000022E0; // type:func
+_aw_ctx = 0x00002B7C;
+g_pAwRegAdr = 0x00002A34;
+save_regs = 0x00002A84;
+_sceGeQueueStatus = 0x000021C4; // type:func
