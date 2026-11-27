@@ -1473,11 +1473,11 @@ INCLUDE_ASM("nonmatchings/dialogmain", func_00003258);
 
 INCLUDE_ASM("nonmatchings/dialogmain", func_00003294);
 
-#if FW_VERSION >= 152 && FW_VERSION < 282
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/dialogmain", func_00003150);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 201
 void func_00003150(void *arg0) {
     if (arg0 != NULL) {
         M2C_FIELD(arg0, s32 *, 0x94) = scePaf_D7215544(D_00009B80, &D_00008D60);
