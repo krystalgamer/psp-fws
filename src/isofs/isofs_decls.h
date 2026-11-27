@@ -30,6 +30,8 @@ struct D_00007608_s {
 #else
 #define ISOFS_V(v100, v150, v152) (v152)
 #endif
+/* same with 1.02/1.03 separate from 1.00 */
+#define ISOFS_V4(v100, v102, v150, v152) ((FW_VERSION == 100) ? (v100) : ISOFS_V(v102, v150, v152))
 
 /* ISO9660 recording date/time (7 bytes) */
 typedef struct __attribute__((packed)) {
@@ -122,6 +124,16 @@ typedef struct {
     u16 second;
     u32 microsecond;
 } ScePspDateTime;
+/* iofilemgr stat (0x58) */
+typedef struct {
+    SceMode st_mode; /* 0x0 */
+    u32 st_attr; /* 0x4 */
+    SceOff st_size; /* 0x8 */
+    ScePspDateTime st_ctime; /* 0x10 */
+    ScePspDateTime st_atime; /* 0x20 */
+    ScePspDateTime st_mtime; /* 0x30 */
+    u32 st_private[6]; /* 0x40 */
+} SceIoStat;
 typedef struct IsofsFdw IsofsFdw;
 typedef struct IsofsUnit IsofsUnit;
 typedef struct IsofsFile IsofsFile;
@@ -312,6 +324,7 @@ s32 func_00000DB4(const char *umdId, u32 lbn, u32 size);
 s32 func_00000E6C(void);
 s32 func_00000EBC(IsofsFdw *fdw, u32 idx, s32 filesCount);
 s32 func_00001A4C(void *arg0);
+s32 func_00001B0C(const char *path, s32 flag);
 s32 func_00001C5C(const char *path);
 void func_00002328(void);
 void func_00002364(struct Unk_func_00002364_0 *arg0);
@@ -358,14 +371,17 @@ s32 func_00007ED8(SceIoIob *iob, s32 cmd, void *indata, SceSize inlen, void *out
 s32 func_00007FC0(s32 arg0);
 s32 func_00007FF0(void);
 IsofsMgr *isofsGetMgr(void);
+IsoDirectory *isofsReadIsoDir(IsofsUnit *unit, char *path, char *name, s32 flag, s32 *outRet);
 s32 isofs_chdir(SceIoIob *iob, char *path);
 s32 isofs_close(SceIoIob *iob);
 s32 isofs_dclose(SceIoIob *iob);
 s32 isofs_devctl(SceIoIob *iob, char *dev, s32 cmd, void *indata, SceSize inlen, void *outdata, SceSize outlen);
 s32 isofs_exec_ioctl_cmd(SceIoIob *iob, s32 cmd, void *indata, SceSize inlen, void *outdata, SceSize outlen);
 s32 isofs_exit(void *entry);
+s32 isofs_getstat(SceIoIob *iob, char *path, SceIoStat *stat);
 s32 isofs_ioctl(SceIoIob *iob, s32 cmd, void *indata, SceSize inlen, void *outdata, SceSize outlen);
 SceOff isofs_lseek(SceIoIob *iob, SceOff ofs, s32 whence);
+s32 isofs_open(SceIoIob *iob, char *path, s32 flags, SceMode mode);
 s32 isofs_read(SceIoIob *iob, void *buf, SceSize size);
 s32 isofs_release_blkdev(void *blkDev, s32 unitNum);
 SceOff isofs_set_lseek(IsofsFile *file, SceOff ofs, s32 whence);
@@ -376,6 +392,9 @@ void *memcpy(void *dst, const void *src, SceSize n);
 void *memset(void *s, s32 c, SceSize n);
 s32 sceBLKInvalidateDeviceName(const char *name);
 s32 sceIoDevctl(const char *dev, u32 cmd, void *indata, SceSize inlen, void *outdata, SceSize outlen);
+s32 sceIsofsCheckVFile(const char *path, u32 *outLbn, u32 *outSize);
+IsofsFile *sceIsofsFileAllocNfile(IsofsUnit *unit, SceIoIob *iob, IsoDirectory *dir, s32 *outRet);
+IsofsFile *sceIsofsFileAllocVfile(IsofsUnit *unit, SceIoIob *iob, u32 lbn, u32 size, s32 *outRet);
 s32 sceIsofsFileInit(IsofsFd *fd, s32 filesCount);
 s32 sceIsofsFileTerm(IsofsFile *files);
 IsofsUnit *sceIsofsGetFileSystem(s32 unitNum);
