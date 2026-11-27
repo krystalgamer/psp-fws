@@ -39,7 +39,7 @@
   "func_00008054": "s32 func_00008054(s32, s32, s32, s32, s32, s32, s32, s32);",
   "func_00008790": "s32 func_00008790(s32, s32, s32);",
   "func_00008794": "s32 func_00008794(s32, s32, s32);",
-  "func_0000885C": "M2C_UNK *func_0000885C(void);",
+  "func_0000885C": "s32 *func_0000885C(void);",
   "module_start": "s32 module_start(void);",
   "module_stop": "s32 module_stop(void);",
   "sceKernelCreateSema": "s32 sceKernelCreateSema(void *, u32, s32, s32, void *);",
@@ -89,7 +89,7 @@
   "sceNet_lib_991FF86D": "s32 sceNet_lib_991FF86D(s32 arg0);",
   "sceNet_lib_A8B6205A": "s32 sceNet_lib_A8B6205A(s32, s32, s32, s32);",
   "sceNet_lib_B3A48B7F": "s32 sceNet_lib_B3A48B7F(s32 arg0, s32 arg1);",
-  "sceNet_lib_B68E1EEA": "M2C_UNK *sceNet_lib_B68E1EEA(void);",
+  "sceNet_lib_B68E1EEA": "s32 *sceNet_lib_B68E1EEA(void);",
   "sceNet_lib_B8C4A858": "s32 sceNet_lib_B8C4A858(s32, s32);",
   "sceNet_lib_B9C780C7": "void sceNet_lib_B9C780C7(s32 *arg0);",
   "sceNet_lib_C21E18B2": "void sceNet_lib_C21E18B2(struct Unk_sceNet_lib_C21E18B2_0 *arg0);",
@@ -119,7 +119,7 @@
  "vars": {
   "D_0000A0D0": "extern s32 D_0000A0D0;",
   "D_0000A0E4": "extern s32 D_0000A0E4;",
-  "D_0000A10D": "extern M2C_UNK D_0000A10D;",
+  "D_0000A10D": "extern s32 D_0000A10D;",
   "D_0000A860": "extern s32 D_0000A860;",
   "D_0000A864": "extern s32 D_0000A864;",
   "D_0000A868": "extern s32 D_0000A868;",
@@ -178,7 +178,7 @@
   "D_0000B3D8": "extern s32 D_0000B3D8;",
   "D_0000B3DC": "extern s32 D_0000B3DC;",
   "D_0000B3E0": "extern s32 D_0000B3E0;",
-  "D_0000B91C": "extern M2C_UNK D_0000B91C;",
+  "D_0000B91C": "extern s32 D_0000B91C;",
   "D_0000BC0C": "extern M2C_UNK D_0000BC0C;",
   "D_0000BE54": "extern u8 D_0000BE54;"
  }

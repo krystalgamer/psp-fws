@@ -83,7 +83,7 @@ struct Unk_sceNet_lib_C9C97945_0 {
 
 extern s32 D_0000A0D0;
 extern s32 D_0000A0E4;
-extern M2C_UNK D_0000A10D;
+extern s32 D_0000A10D;
 extern s32 D_0000A860;
 extern s32 D_0000A864;
 extern s32 D_0000A868;
@@ -142,7 +142,7 @@ extern s32 D_0000B3D4;
 extern s32 D_0000B3D8;
 extern s32 D_0000B3DC;
 extern s32 D_0000B3E0;
-extern M2C_UNK D_0000B91C;
+extern s32 D_0000B91C;
 extern M2C_UNK D_0000BC0C;
 extern u8 D_0000BE54;
 
@@ -185,7 +185,7 @@ u8 *func_00007FE8(u8 *arg0, u8 *arg1);
 s32 func_00008054(s32, s32, s32, s32, s32, s32, s32, s32);
 s32 func_00008790(s32, s32, s32);
 s32 func_00008794(s32, s32, s32);
-M2C_UNK *func_0000885C(void);
+s32 *func_0000885C(void);
 s32 module_start(void);
 s32 module_stop(void);
 s32 sceKernelCreateSema(void *, u32, s32, s32, void *);
@@ -235,7 +235,7 @@ s32 sceNet_lib_94B44F26(void);
 s32 sceNet_lib_991FF86D(s32 arg0);
 s32 sceNet_lib_A8B6205A(s32, s32, s32, s32);
 s32 sceNet_lib_B3A48B7F(s32 arg0, s32 arg1);
-M2C_UNK *sceNet_lib_B68E1EEA(void);
+s32 *sceNet_lib_B68E1EEA(void);
 s32 sceNet_lib_B8C4A858(s32, s32);
 void sceNet_lib_B9C780C7(s32 *arg0);
 void sceNet_lib_C21E18B2(struct Unk_sceNet_lib_C21E18B2_0 *arg0);
