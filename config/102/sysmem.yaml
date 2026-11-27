@@ -9,7 +9,7 @@ options:
   compiler: GCC
 
   asm_path: tmp/asm/102/sysmem
-  src_path: src/sysmem
+  src_path: tmp/av_src/102/sysmem
   build_path: tmp/build/102
   ld_script_path: tmp/build/102/sysmem.ld
   cache_path: tmp/build/102/.splat_cache.sysmem
@@ -52,7 +52,7 @@ segments:
     start: 0x80
     vram: 0x0
     subsegments:
-      - [0x80, asm, sysmem]
+      - [0x80, c, sysmem]
       - { start: 0xAA50, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
       - { start: 0xAA54, type: rodata, name: lib_ent, linker_section: .lib.ent }
       - { start: 0xAAC4, type: rodata, name: lib_ent_btm, linker_section: .lib.ent.btm }
@@ -60,7 +60,7 @@ segments:
       - { start: 0xAACC, type: rodata, name: lib_stub_btm, linker_section: .lib.stub.btm }
       - { start: 0xAAD0, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
       - { start: 0xAB04, type: rodata, name: resident, linker_section: .rodata.sceResident }
-      - [0xAED0, rodata, sysmem]
+      - [0xAED0, .rodata, sysmem]
   - name: sysmem_seg1
     type: code
     start: 0xC590

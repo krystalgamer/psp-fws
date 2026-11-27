@@ -9,12 +9,13 @@ options:
   compiler: GCC
 
   asm_path: tmp/asm/102/sysconf_plugin
-  src_path: tmp/av_src/102/sysconf_plugin
+  src_path: src/sysconf_plugin
   build_path: tmp/build/102
   ld_script_path: tmp/build/102/sysconf_plugin.ld
   cache_path: tmp/build/102/.splat_cache.sysconf_plugin
   symbol_addrs_path:
     - config/102/symbol_addrs.sysconf_plugin.txt
+    - config/102/func_starts.sysconf_plugin.txt
     - tmp/build/102/prx_syms.sysconf_plugin.txt
   reloc_addrs_path: [tmp/build/102/reloc_addrs.sysconf_plugin.txt]
   asset_path: tmp/assets/102/sysconf_plugin
@@ -54,6 +55,7 @@ segments:
     subsegments:
       - { start: 0x80, type: asm, name: init, linker_section: .init }
       - [0xA4, c, sysconf_plugin]
+      - [0xF058, c, sysconf_plugin_crtend]
       - { start: 0xF0B0, type: asm, name: fini, linker_section: .fini }
       - { start: 0xF0CC, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0xF6A4, type: prxpad, order: .text }
@@ -72,6 +74,7 @@ segments:
       - { start: 0xFE50, type: rodata, name: jcr, linker_section: .jcr }
       - { start: 0xFE54, type: rodata, name: eh_frame, linker_section: .eh_frame }
       - [0xFE58, .rodata, sysconf_plugin]
+      - [0x12288, .rodata, sysconf_plugin_crtend]
   - name: sysconf_plugin_seg1
     type: code
     start: 0x122E0
