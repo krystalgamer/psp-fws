@@ -25,6 +25,14 @@ struct ifnet;
     *(head)->tqh_last = (elm); \
     (head)->tqh_last = &(elm)->field.tqe_next; \
 } while (0)
+#define TAILQ_INSERT_HEAD(head, elm, field) do { \
+    if (((elm)->field.tqe_next = (head)->tqh_first) != NULL) \
+        (head)->tqh_first->field.tqe_prev = &(elm)->field.tqe_next; \
+    else \
+        (head)->tqh_last = &(elm)->field.tqe_next; \
+    (head)->tqh_first = (elm); \
+    (elm)->field.tqe_prev = &(head)->tqh_first; \
+} while (0)
 #define TAILQ_REMOVE(head, elm, field) do { \
     if (((elm)->field.tqe_next) != NULL) \
         (elm)->field.tqe_next->field.tqe_prev = (elm)->field.tqe_prev; \
@@ -113,6 +121,7 @@ struct if_data {
     u8 ifi_type;                        /* 0x00 */
     u8 ifi_addrlen;                     /* 0x01 */
     u8 ifi_hdrlen;                      /* 0x02 */
+    s32 ifi_link_state;                 /* 0x04 */
     u64 ifi_mtu;                        /* 0x08 */
     u64 ifi_metric;                     /* 0x10 */
     u64 ifi_baudrate;                   /* 0x18 */
@@ -141,7 +150,11 @@ struct ifnet {
     void (*if_drain)();                 /* 0xC8 */
     struct ifqueue if_snd;              /* 0xCC */
     struct sockaddr_dl *if_sadl;        /* 0xE0 */
+    u8 *if_broadcastaddr;               /* 0xE4 */
 };
+#define if_type if_data.ifi_type
+#define if_addrlen if_data.ifi_addrlen
+#define if_link_state if_data.ifi_link_state
 #define IFF_UP 0x1
 #define IFF_LOOPBACK 0x8
 #define IFF_MULTICAST 0x8000
@@ -176,8 +189,15 @@ struct ifaddr {
     void (*ifa_rtrequest)();            /* 0x28 */
     u32 ifa_flags;                      /* 0x2C */
     s32 ifa_refcnt;                     /* 0x30 */
+    u8 unk34[4];
 };
+typedef char chk_ifaddr[(sizeof(struct ifaddr) == 0x38) ? 1 : -1];
+#define IFAREF(ifa) ((ifa)->ifa_refcnt++)
 #define AF_LINK 18
+#define IFAFREE(ifa) do { \
+    if (--(ifa)->ifa_refcnt == 0) \
+        sceNetFreeInternal(ifa); \
+} while (0)
 
 
 typedef struct {
@@ -256,6 +276,7 @@ struct Unk_sceNet_lib_92633D8D_0 {
 
 extern s32 D_0000A0D0;
 extern s32 D_0000A0E4;
+extern s32 D_0000A0EC;
 extern s32 D_0000A10D;
 extern s32 D_0000A860;
 extern s32 D_0000A864;
@@ -301,7 +322,7 @@ extern s32 D_0000AF68;
 extern s32 D_0000AF6C;
 extern s32 D_0000B06C;
 extern s32 D_0000B0B0;
-extern s32 D_0000B0B8;
+extern struct ifnet **D_0000B0B8;
 extern s32 D_0000B0CC;
 extern s32 D_0000B0D4;
 extern s32 D_0000B0EC;
@@ -324,7 +345,7 @@ extern void (*D_0000B3A0)();
 extern void (*D_0000B3A4)();
 extern s32 D_0000B3AC;
 extern s32 D_0000B3B4;
-extern s32 D_0000B3B8;
+extern struct ifaddr **D_0000B3B8;
 extern s32 D_0000B3BC;
 extern s32 (*D_0000B3C0)();
 extern s32 (*D_0000B3C4)();
@@ -354,6 +375,8 @@ s32 *_sce_pspnet_get_selwait_addr(void);
 struct SceNetThreadInfo *_sce_pspnet_get_threadinfo(SceUID thid);
 void _sce_pspnet_hashdone(void *hashtbl);
 void *_sce_pspnet_hashinit(s32 elements, u32 *hashmask);
+void _sce_pspnet_if_attach(struct ifnet *ifp);
+void _sce_pspnet_if_detach(struct ifnet *ifp);
 void _sce_pspnet_if_down(struct ifnet *ifp);
 s32 _sce_pspnet_if_exist(const char *name);
 s32 _sce_pspnet_if_nulloutput(void);

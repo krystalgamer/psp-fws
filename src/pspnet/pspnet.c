@@ -1849,9 +1849,99 @@ INCLUDE_ASM("nonmatchings/pspnet", func_00005120);
 
 INCLUDE_ASM("nonmatchings/pspnet", func_00005234);
 
-INCLUDE_ASM("nonmatchings/pspnet", _sce_pspnet_if_attach);
+#if FW_VERSION < 152
+void _sce_pspnet_if_attach(struct ifnet *ifp) {
+    u32 socksize, ifasize;
+    s32 namelen, masklen;
+    struct sockaddr_dl *sdl;
+    struct ifaddr *ifa;
+    struct ifnet *p;
+    s32 index;
 
-INCLUDE_ASM("nonmatchings/pspnet", _sce_pspnet_if_detach);
+    TAILQ_INIT(&ifp->if_addrlist);
+    for (index = 1; index < 8; index++) {
+        for (p = TAILQ_FIRST(&D_0000BE54); p != NULL; p = TAILQ_NEXT(p, if_list)) {
+            if (p->if_index == index)
+                break;
+        }
+        if (p == NULL)
+            break;
+    }
+    if (D_0000B0B0 < index)
+        D_0000B0B0 = index;
+    TAILQ_INSERT_TAIL(&D_0000BE54, ifp, if_list);
+    ifp->if_index = index;
+    D_0000B0B8[ifp->if_index] = ifp;
+
+    namelen = func_00008020(ifp->if_xname);
+    masklen = 8 + namelen;
+    socksize = masklen + ifp->if_addrlen;
+#define ROUNDUP(a) (1 + (((a) - 1) | (sizeof(long) - 1)))
+    if (socksize < sizeof(*sdl))
+        socksize = sizeof(*sdl);
+    socksize = ROUNDUP(socksize);
+    ifasize = sizeof(*ifa) + 2 * socksize;
+    ifa = sceNetMallocInternal(ifasize);
+    func_00007CF4(ifa, 0, ifasize);
+    sdl = (struct sockaddr_dl *)(ifa + 1);
+    sdl->sdl_len = socksize;
+    sdl->sdl_family = AF_LINK;
+    func_00007D60(ifp->if_xname, sdl->sdl_data, namelen);
+    sdl->sdl_nlen = namelen;
+    sdl->sdl_index = ifp->if_index;
+    sdl->sdl_type = ifp->if_type;
+    D_0000B3B8[ifp->if_index] = ifa;
+    IFAREF(ifa);
+    ifa->ifa_ifp = ifp;
+    ifa->ifa_rtrequest = _sce_pspnet_link_rtrequest;
+    TAILQ_INSERT_HEAD(&ifp->if_addrlist, ifa, ifa_list);
+    IFAREF(ifa);
+    ifa->ifa_addr = (struct sockaddr *)sdl;
+    ifp->if_sadl = sdl;
+    sdl = (struct sockaddr_dl *)(socksize + (char *)sdl);
+    ifa->ifa_netmask = (struct sockaddr *)sdl;
+    sdl->sdl_len = masklen;
+    while (namelen != 0)
+        sdl->sdl_data[--namelen] = 0xff;
+    if (ifp->if_snd.ifq_maxlen == 0)
+        ifp->if_snd.ifq_maxlen = D_0000A0EC;
+    ifp->if_broadcastaddr = 0;
+    ifp->if_link_state = 0;
+    if (D_0000B3AC > 0)
+        D_0000B37C(ifp);
+}
+#else
+INCLUDE_ASM("nonmatchings/pspnet", _sce_pspnet_if_attach);
+#endif
+
+void _sce_pspnet_if_detach(struct ifnet *ifp) {
+    struct ifaddr *ifa;
+    s32 family;
+    s32 s;
+
+    s = _sce_pspnet_spllock();
+    _sce_pspnet_if_down(ifp);
+    for (ifa = TAILQ_FIRST(&ifp->if_addrlist); ifa != NULL; ifa = TAILQ_FIRST(&ifp->if_addrlist)) {
+        family = ifa->ifa_addr->sa_family;
+        if (family == AF_LINK) {
+            if (D_0000B3AC > 0)
+                D_0000B380(ifa);
+            TAILQ_REMOVE(&ifp->if_addrlist, ifa, ifa_list);
+            IFAFREE(ifa);
+            continue;
+        }
+        if (D_0000B3AC > 0)
+            D_0000B384(ifp, family);
+    }
+    if (D_0000B3AC > 0)
+        D_0000B388(ifp);
+    IFAFREE(D_0000B3B8[ifp->if_index]);
+    D_0000B3B8[ifp->if_index] = NULL;
+    if (D_0000B3AC > 0)
+        D_0000B38C(ifp);
+    TAILQ_REMOVE(&D_0000BE54, ifp, if_list);
+    _sce_pspnet_splunlock(s);
+}
 
 #if FW_VERSION < 271
 void _sce_pspnet_if_down(struct ifnet *ifp) {
@@ -2159,10 +2249,10 @@ s32 _sce_pspnet_get_if_core_variables(s32 *arg0, s32 *arg1, s32 *arg2, struct if
         *arg0 = D_0000B0B0;
     }
     if (arg1 != NULL) {
-        *arg1 = D_0000B0B8;
+        *arg1 = (s32)D_0000B0B8;
     }
     if (arg2 != NULL) {
-        *arg2 = D_0000B3B8;
+        *arg2 = (s32)D_0000B3B8;
     }
     if (arg3 != NULL) {
         *arg3 = D_0000BE54;
@@ -2180,7 +2270,7 @@ s32 _sce_pspnet_get_if_core_variables(s32 *arg0, s32 *arg1, s32 *arg2, struct if
         *arg1 = D_0000B3BC;
     }
     if (arg2 != NULL) {
-        *arg2 = D_0000B3B8;
+        *arg2 = (s32)D_0000B3B8;
     }
     if (arg3 != NULL) {
         sceNetMemcpy(arg3, &D_0000BE54, 8);
