@@ -2,12 +2,16 @@
 #include "common.h"
 #include "music_main_plugin_decls.h"
 
-#if FW_VERSION == 260 || FW_VERSION >= 350
+#if FW_VERSION >= 350
+INCLUDE_ASM("nonmatchings/music_main_plugin_0873D4", _ZN14Class_000A20E0D0Ev);
+#endif
+
+#if FW_VERSION == 260
 INCLUDE_ASM("nonmatchings/music_main_plugin_0873D4", func_000873D4);
 #endif
 
 #if FW_VERSION >= 282 && FW_VERSION < 350
-void func_000873D4(M2C_UNK **arg0) {
+void _ZN14Class_000A20E0D0Ev(M2C_UNK **arg0) {
     *arg0 = &D_000A20E0;
     _ZdlPv(arg0);
 }
@@ -88,27 +92,9 @@ void func_0008743C(struct Unk_func_0008743C_0 *arg0, s32 arg1, s32 arg2) {
     arg0->unk8 = arg2;
 }
 
-void func_00087454(M2C_UNK **arg0) {
-    *arg0 = &D_000A20D0;
+Class_000A20D0::~Class_000A20D0() {
 }
 
-void func_00087464(M2C_UNK **arg0) {
-    *arg0 = &D_000A20D0;
-}
-#endif
-
-#if FW_VERSION >= 350
-INCLUDE_ASM("nonmatchings/music_main_plugin_0873D4", func_00087474);
-#endif
-
-#if FW_VERSION >= 282 && FW_VERSION < 350
-void func_00087474(M2C_UNK **arg0) {
-    *arg0 = &D_000A20D0;
-    _ZdlPv(arg0);
-}
-#endif
-
-#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/music_main_plugin_0873D4", func_0008749C);
 
 INCLUDE_ASM("nonmatchings/music_main_plugin_0873D4", func_0008766C);
@@ -151,29 +137,8 @@ void func_00087830(s32 **arg0, s32 arg1, s32 arg2) {
     *arg0 = &D_000A20F8;
 }
 
-void func_00087860(s32 **arg0) {
-    *arg0 = &D_000A20F8;
-    func_00087454(arg0);
+Class_000A20F8::~Class_000A20F8() {
 }
 
-void func_00087888(s32 **arg0) {
-    *arg0 = &D_000A20F8;
-    func_00087454(arg0);
-}
-#endif
-
-#if FW_VERSION >= 350
-INCLUDE_ASM("nonmatchings/music_main_plugin_0873D4", func_000878B0);
-#endif
-
-#if FW_VERSION >= 282 && FW_VERSION < 350
-void func_000878B0(s32 **arg0) {
-    *arg0 = &D_000A20F8;
-    func_00087454(arg0);
-    _ZdlPv(arg0);
-}
-#endif
-
-#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/music_main_plugin_0873D4", func_000878E8);
 #endif

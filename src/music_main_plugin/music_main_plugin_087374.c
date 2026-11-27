@@ -14,11 +14,11 @@ void func_00087394(struct Unk_func_00087394_0 *arg0, s8 arg1) {
     arg0->unkC = 0;
 }
 
-void func_000873B4(M2C_UNK **arg0) {
+void _ZN14Class_000A20E0D2Ev(M2C_UNK **arg0) {
     *arg0 = &D_000A20E0;
 }
 
-void func_000873C4(M2C_UNK **arg0) {
+void _ZN14Class_000A20E0D1Ev(M2C_UNK **arg0) {
     *arg0 = &D_000A20E0;
 }
 #endif
