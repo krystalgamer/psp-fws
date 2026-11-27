@@ -43,6 +43,7 @@ void func_00000D64(void);
 M2C_UNK func_00000DE8();
 void func_0000104C(void);
 void func_00001054(s32 arg0);
+void func_00001078(void);
 M2C_UNK func_000010D0();
 s32 module_stop(void);
 M2C_UNK scePaf_1941BB4E();

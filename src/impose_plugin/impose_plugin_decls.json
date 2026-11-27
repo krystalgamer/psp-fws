@@ -17,6 +17,7 @@
   "func_00000DE8": "M2C_UNK func_00000DE8();",
   "func_0000104C": "void func_0000104C(void);",
   "func_00001054": "void func_00001054(s32 arg0);",
+  "func_00001078": "void func_00001078(void);",
   "func_000010D0": "M2C_UNK func_000010D0();",
   "module_stop": "s32 module_stop(void);",
   "scePaf_1941BB4E": "M2C_UNK scePaf_1941BB4E();",
