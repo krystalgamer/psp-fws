@@ -66,3 +66,21 @@ sceNetAdhocMatchingStop = 0x00001FF8; // type:func rom:0x2078
 sceNetAdhocMatchingDelete = 0x00002000; // type:func rom:0x2080
 sceUtilityGetSystemParamString = 0x00002018; // type:func rom:0x2098
 // shared names (tools/add_version.py) end
+
+// NID-derived names
+sceNetAdhocDownloadReplySession = 0x000001D8; // type:func
+sceKernelDelayThread = 0x00001F28; // type:func
+sceKernelCreateSema = 0x00001F30; // type:func
+sceKernelCreateEventFlag = 0x00001F50; // type:func
+sceKernelDeleteEventFlag = 0x00001F58; // type:func
+sceKernelWaitEventFlag = 0x00001F68; // type:func
+sceNetGetLocalEtherAddr = 0x00001F98; // type:func
+sceNetAdhocPtpOpen = 0x00001FA8; // type:func
+sceNetAdhocPtpConnect = 0x00001FB0; // type:func
+sceNetAdhocPtpListen = 0x00001FB8; // type:func
+sceNetAdhocPtpAccept = 0x00001FC0; // type:func
+sceNetAdhocPtpSend = 0x00001FC8; // type:func
+sceNetAdhocPtpRecv = 0x00001FD0; // type:func
+sceNetAdhocPtpFlush = 0x00001FD8; // type:func
+sceNetAdhocPtpClose = 0x00001FE0; // type:func
+sceNetAdhocMatchingCancelTarget = 0x00002010; // type:func

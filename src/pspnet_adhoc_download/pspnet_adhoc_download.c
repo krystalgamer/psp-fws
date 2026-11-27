@@ -4,19 +4,11 @@
 #include "common.h"
 #include "pspnet_adhoc_download_decls.h"
 
-#if FW_VERSION == 103
-INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", func_00000000);
-
-INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", func_000001E4);
-#else
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDownloadCreateServer);
-#endif
-
-#if FW_VERSION == 102
-INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", func_000001D8);
-#endif
 
 #if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDownloadReplySession);
+
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", func_00000368);
 #endif
 
@@ -178,11 +170,7 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDownloadAbortReplyS
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDownloadAbortSend);
 #endif
 
-#if FW_VERSION == 103
-INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", func_00000D48);
-#else
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDownloadStopServer);
-#endif
 
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_download", sceNetAdhocDownloadDeleteServer);
 
