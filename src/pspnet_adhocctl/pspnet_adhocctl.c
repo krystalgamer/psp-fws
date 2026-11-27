@@ -76,10 +76,6 @@ INCLUDE_ASM("nonmatchings/pspnet_adhocctl", sceNetAdhocctlGetPeerList);
 INCLUDE_ASM("nonmatchings/pspnet_adhocctl", sceNetAdhocctlGetPeerInfo);
 
 INCLUDE_ASM("nonmatchings/pspnet_adhocctl", sceNetAdhocctlGetAddrByName);
-#endif
-
-#if FW_VERSION >= 151
-INCLUDE_ASM("nonmatchings/pspnet_adhocctl", sceNetAdhocctlTerm);
 #else
 s32 sceNetAdhocctlTerm(void) {
     s32 temp_v0;
@@ -95,6 +91,10 @@ s32 sceNetAdhocctlTerm(void) {
     }
     return var_v1;
 }
+#endif
+
+#if FW_VERSION >= 201
+INCLUDE_ASM("nonmatchings/pspnet_adhocctl", sceNetAdhocctlTerm);
 #endif
 
 INCLUDE_ASM("nonmatchings/pspnet_adhocctl", sceNetAdhocctlConnect);

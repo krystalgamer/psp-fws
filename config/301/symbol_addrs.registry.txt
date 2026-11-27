@@ -61,7 +61,7 @@ g_hiveTail = 0x00006FDC;
 g_catCount = 0x00006FE0;
 g_catHead = 0x00006FE4;
 g_catTail = 0x00006FE8;
-D_00006FDC = 0x00006FEC;
+g_semaId = 0x00006FEC;
 D_00006FE0 = 0x00006FF0;
 D_00006FC8_v301 = 0x00006FC8; // rom:0x7068
 // shared names (tools/add_version.py) end

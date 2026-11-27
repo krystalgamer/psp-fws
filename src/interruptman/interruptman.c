@@ -317,7 +317,15 @@ INCLUDE_ASM("nonmatchings/interruptman", QueryIntrHandlerInfo);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/interruptman", mymemset);
+void *mymemset(void *dst, u8 c, s32 n) {
+    u8 *p = dst;
+
+    if (dst != NULL) {
+        for (; n > 0; n--)
+            *p++ = c;
+    }
+    return dst;
+}
 
 INCLUDE_ASM("nonmatchings/interruptman", IntrDisableLevels);
 

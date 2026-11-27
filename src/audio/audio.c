@@ -19,20 +19,20 @@ static inline void pspSync(void) {
 
 INCLUDE_ASM("nonmatchings/audio", updateAudioBuf);
 
-#if FW_VERSION >= 150
-INCLUDE_ASM("nonmatchings/audio", dmaUpdate);
-#else
+#if FW_VERSION < 201
 s32 dmaUpdate(s32 arg) {
 g_audio.flags &= ~(1 << arg); HW(0xBE000004) = (s8)g_audio.flags;
     sceKernelDmaOpQuit(g_audio.dmaPtr[arg]);
     sceKernelDmaOpDeQueue(g_audio.dmaPtr[arg]);
     return 0;
 }
+#else
+INCLUDE_ASM("nonmatchings/audio", dmaUpdate);
 #endif
 
 INCLUDE_ASM("nonmatchings/audio", audioMixerThread);
 
-#if FW_VERSION == 100
+#if FW_VERSION < 201
 s32 audioOutputDmaCb(s32 unused, s32 arg1) {
     if (arg1 != 0) {
         dmaUpdate(0);

@@ -29,6 +29,7 @@ def main():
     ap.add_argument("module")
     ap.add_argument("specs", nargs="+")
     ap.add_argument("--dry-run", action="store_true")
+    ap.add_argument("--force", action="store_true", help="NEW may already be used (same function/global in other versions)")
     a = ap.parse_args()
     mod = a.module
     allv = sorted(p.parent.name for p in (ROOT / "config").glob(f"*/{mod}.yaml"))
@@ -50,6 +51,12 @@ def main():
             sys.exit(f"bad spec {spec}")
         vers = m[1].split(",") if m[1] else allv
         old, nw = m[2], m[3]
+        csrc = "\n".join(t for p2, t in texts.items() if p2.suffix in (".c", ".h"))
+        csrc = re.sub(r"/\*.*?\*/|//[^\n]*", " ", csrc, flags=re.S)  # comments
+        csrc = re.sub(r'"(?:[^"\\\n]|\\.)*"', '""', csrc)  # string literals
+        if not a.force and nw != old and re.search(rf"\b{nw}\b", csrc) and nw not in src_renames.values():
+            sys.exit(f"{nw}: already used in the module's sources (another function or global?) — pick another name "
+                     f"or rename that one first (--force if it is the same function/global in other versions)")
         for v in vers:
             p = ROOT / "config" / v / f"symbol_addrs.{mod}.txt"
             t = new.get(p, "")
@@ -82,6 +89,20 @@ def main():
         src_renames[old] = nw
         # the source rename is global: OLD must not also name data (INCLUDE_RODATA) or remain in other versions
         rest = [v for v in allv if v not in vers]
+        if rest:
+            import fwmodel as FM
+            fv = sorted({int(re.match(r"\d+", x)[0]) for x in allv})
+            restn = {int(re.match(r"\d+", x)[0]) for x in rest}
+            mine = {int(re.match(r"\d+", x)[0]) for x in vers}
+            for p2, t in texts.items():
+                if p2.suffix != ".c":
+                    continue
+                for e in FM.parse(t, fv):
+                    if e.name == old and e.kind in ("cfunc", "asm") and (e.vers & restn) and not (e.vers <= mine):
+                        other = sorted(e.vers & restn)
+                        sys.exit(f"{old}: {p2.name} has its own {e.kind} entry for versions {other} not being renamed; "
+                                 f"the source rename is global — include those versions (if it is the same function) "
+                                 f"or give that entry a different name first")
         joined = "\n".join(t for p2, t in texts.items() if p2.suffix == ".c")
         if re.search(rf"INCLUDE_RODATA\([^)]*\b{old}\)", joined) and not old.startswith("func_"):
             sys.exit(f"{old}: also an INCLUDE_RODATA entry in the shared source; renaming the C identifier would break "
@@ -107,14 +128,23 @@ def main():
             for sec, d in store.items():
                 if not isinstance(d, dict):
                     continue
-                out = {}
-                for k, val in d.items():
+                out, renamed = {}, set()
+                for k0, val in d.items():
+                    k = k0
                     for o, n in src_renames.items():
                         k = re.sub(rf"\b{o}\b", n, k)
                         val = re.sub(rf"\b{o}\b", n, val) if isinstance(val, str) else val
                     if k in out and out[k] != val:
+                        # renaming into an existing name: the existing (named, typed) declaration wins
+                        if k0 != k and k not in renamed:
+                            continue
+                        if k in renamed and k0 == k:
+                            out[k] = val
+                            continue
                         sys.exit(f"{p.name}: {sec} '{k}' gets two different declarations:\n  {out[k]}\n  {val}")
                     out[k] = val
+                    if k0 != k:
+                        renamed.add(k)
                 store[sec] = out
             new[p] = json.dumps(store, indent=1, sort_keys=True)
     if a.dry_run:

@@ -14,7 +14,8 @@ typedef struct {
 
 /* header of a category's data (system.dreg), key entries follow at 0x20 */
 typedef struct __attribute__((packed)) SceRegCatData {
-    u8 unk0[8];
+    u8 unk0[6];
+    u16 unk6;           /* 0x06: free key slots? (checked when the category has unkC == 4) */
     u16 numEntries;     /* 0x08 */
     u16 unkA;           /* 0x0A */
     u16 numKeys;        /* 0x0C */
@@ -131,11 +132,29 @@ extern s32 g_semaId;
 extern s32 g_vplId;
 extern s32 g_vplMaxUsed;
 
+s32 func_0000086C(s32 index);
+s32 func_000008BC(s32 index);
+s32 func_000009F8(SceRegIndexEntry *cat);
 void func_000010B8(SceRegParam *param, SceRegIregHeader *hdr);
 s32 func_000012B0(const char *name, SceRegIregHeader *hdr);
 s32 func_00001560(const char *name, SceRegIregHeader *hdr);
 s32 func_00001608(s32 fd, u32 size, s32 a, s32 b);
-s32 func_000046A8(s32, s32);
+s32 func_00001E2C(const char *path, u32 count);
+s32 func_00002350(SceRegIndexEntry *cat);
+s32 func_0000236C(SceRegIndexEntry *cat, s32 size);
+s32 func_00002630(s32 index, SceRegIregHeader *hdr, s32 parentIdx, s32 idx, const char *name, SceRegIndexEntry **cat);
+s32 func_0000263C(SceRegIndexEntry *cat);
+s32 func_00002884(SceRegIregHeader *hdr, s32 *index);
+s32 func_00002948(s32 index, SceRegIregHeader *hdr, s32 parentIdx, s32 idx, const char *name, SceRegIndexEntry **cat, SceRegIndexEntry **parentCat);
+s32 func_00002C3C(const char *path, char *parent, char *name);
+s32 func_00002F10(s32 created, SceRegHive *h, SceRegIndexEntry *cat);
+s32 func_000046A8(SceRegIndexEntry *cat, const char *name);
+s32 func_00004778(SceRegIndexEntry *cat, const char *name);
+s32 func_00004AF0(SceRegIndexEntry *cat, const char *name);
+s32 func_00004F2C(SceRegIndexEntry *cat, const char *name);
+s32 func_00005608(SceRegCatData *d, const char *name);
+s32 func_00005718(SceRegCatData *d, s32 type, const char *name, s32 size);
+s32 func_000058D8(SceRegIndexEntry *cat, SceRegCatData *d);
 s32 func_000061B4(s32 arg0);
 s32 func_00006674(s32 arg0);
 s32 func_00006998(s32 arg0);
@@ -188,7 +207,7 @@ void regRemoveOpenCategory(SceRegIndexEntry *cat);
 s32 regSeekFile(s32 fd, s32 offset, s32 whence);
 s32 regSetCatDirty(SceRegIndexEntry *cat);
 s32 regSetHiveDirty(s32 index);
-s32 regStatFile(const char *name, u64 *size);
+s32 regStatFile(const char *name, u32 *size);
 s32 regWriteFile(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 *arg4);
 s32 sceIoClose(s32);
 s32 sceIoDevctl(void *, s32, void *, u32, void *, u32);
@@ -214,6 +233,7 @@ s32 sceKernelTryAllocateVpl(s32, s32, void **);
 s32 sceKernelWaitSema(s32, s32, void *);
 s32 sceRegCloseCategory(s32 hd);
 s32 sceRegCloseRegistry(s32 index);
+s32 sceRegCreateKey(s32 hd, const char *name, s32 type, s32 size);
 M2C_UNK sceRegExit();
 s32 sceRegFlushCategory(s32 arg0);
 s32 sceRegFlushRegistry(s32 arg0);
@@ -222,11 +242,13 @@ s32 sceRegGetKeyInfoByName(s32 hd, const char *name, s32 *type, u32 *size);
 s32 sceRegGetKeyValue(s32 hd, s32 keyId, void *buf, s32 size);
 s32 sceRegGetKeyValueByName(s32 hd, const char *name, void *buf, s32 size);
 s32 sceRegInit(void);
+s32 sceRegOpenCategory(s32 index, const char *path, s32 mode, s32 *hd);
 s32 sceRegOpenRegistry(SceRegParam *param, s32 mode, s32 *handle);
-s32 sceRegRemoveKey(s32 arg0, s32 arg1);
+s32 sceRegRemoveKey(s32 hd, const char *name);
 s32 sceRegRemoveRegistry(SceRegParam *param);
 s32 sceRegSetKeyValue(s32 hd, const char *name, const void *buf, s32 size);
 s32 sprintf(char *, const char *, ...);
 s32 strcmp(const char *, const char *);
+u32 strlen(const char *);
 
 #endif

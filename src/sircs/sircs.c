@@ -176,9 +176,7 @@ s32 func_000013F0(void) {
 
 INCLUDE_ASM("nonmatchings/sircs", func_00001428);
 
-#if FW_VERSION >= 152
-INCLUDE_ASM("nonmatchings/sircs", func_000014DC);
-#else
+#if FW_VERSION < 282
 s32 func_000014DC(void) {
     void *sp0;
     s32 temp_v0;
@@ -192,6 +190,8 @@ s32 func_000014DC(void) {
     func_00001980();
     return var_s0;
 }
+#else
+INCLUDE_ASM("nonmatchings/sircs", func_000014DC);
 #endif
 
 INCLUDE_ASM("nonmatchings/sircs", func_00001528);

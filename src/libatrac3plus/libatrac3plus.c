@@ -317,13 +317,7 @@ u32 func_000021E4(void *arg0) {
 
 #if FW_VERSION < 250
 INCLUDE_ASM("nonmatchings/libatrac3plus", func_00002218);
-#endif
 
-#if FW_VERSION >= 152 && FW_VERSION < 250
-INCLUDE_ASM("nonmatchings/libatrac3plus", func_000022A4);
-#endif
-
-#if FW_VERSION < 152
 s32 func_000022A4(s32 *arg0) {
     s32 var_a0;
 
@@ -333,13 +327,7 @@ s32 func_000022A4(s32 *arg0) {
     }
     return var_a0;
 }
-#endif
 
-#if FW_VERSION >= 152 && FW_VERSION < 250
-INCLUDE_ASM("nonmatchings/libatrac3plus", func_000022C4);
-#endif
-
-#if FW_VERSION < 152
 s32 func_000022C4(s32 *arg0) {
     s32 var_a0;
 

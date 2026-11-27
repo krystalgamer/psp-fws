@@ -41,13 +41,13 @@ def main():
     ap.add_argument("ver")
     ap.add_argument("module")
     ap.add_argument("cfiles", nargs="+", help="one function per file; several files share one final regress")
-    ap.add_argument("--decls", help="applied with the first file")
+    ap.add_argument("--decls", help="applied with every file (idempotent)")
     a = ap.parse_args()
     sd = src_dir(a.ver, a.module)
     snap = {p: p.read_text() for p in list(sd.glob("*.c")) + list(sd.glob("*_decls.*"))}
     done = []
     for i, cf in enumerate(a.cfiles):
-        r = one(a, cf, a.decls if i == 0 else None)
+        r = one(a, cf, a.decls)
         if r:
             done.append(r)
     if not done:
@@ -120,6 +120,15 @@ def one(a, cfile, decls):
         types = "".join(b for b in blocks if not (names(b) and names(b) <= defined))
         if types.strip():
             store.setdefault("types", {})[f"hand_{name}"] = types.strip()
+        import structify
+        structify.SRC[a.module] = sd
+        structify.write_decls(a.module, store)
+    # the function's own prototype follows its definition (a stale m2c guess would conflict)
+    store_p = sd / f"{a.module}_decls.json"
+    store = json.loads(store_p.read_text())
+    sig = re.match(r"^(?!static)([^\n;#{]*?\b" + re.escape(name) + r"\([^;{}]*\))\s*\{", body, re.M)
+    if sig and name in store["funcs"] and store["funcs"][name] != " ".join(sig[1].split()) + ";":
+        store["funcs"][name] = " ".join(sig[1].split()) + ";"
         import structify
         structify.SRC[a.module] = sd
         structify.write_decls(a.module, store)

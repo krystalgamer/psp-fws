@@ -13,6 +13,7 @@ import argparse
 import os
 import difflib
 import re
+import struct
 import subprocess
 import sys
 from pathlib import Path
@@ -50,15 +51,37 @@ def compiled_reloc_syms(c_text, comp, opt):
                        capture_output=True)
         elf = ELFFile(open(o, "rb"))
         symtab = elf.get_section_by_name(".symtab")
-        out = []
+        text = elf.get_section_by_name(".text").data()
+        out, strs, hi, calls, addend = [], {}, {}, [], {}
         for sec in elf.iter_sections():
             if isinstance(sec, RelocationSection) and sec.name == ".rel.text":
-                for rel in sec.iter_relocations():
+                for rel in sorted(sec.iter_relocations(), key=lambda r: r["r_offset"]):
+                    if rel["r_info_type"] == 4:  # R_MIPS_26: call targets, compared with the asm's jal names
+                        sym = symtab.get_symbol(rel["r_info_sym"])
+                        calls.append(sym.name if sym["st_info"]["type"] != "STT_SECTION" else None)
                     if rel["r_info_type"] not in (5, 6):  # HI16/LO16 only; calls to stubs aren't in reloc_addrs
                         continue
                     sym = symtab.get_symbol(rel["r_info_sym"])
-                    out.append((rel["r_offset"], sym.name if sym["st_info"]["type"] != "STT_SECTION" else None))
-        return [n for _, n in sorted(out)]
+                    is_sec = sym["st_info"]["type"] == "STT_SECTION"
+                    out.append((rel["r_offset"], sym.name if not is_sec else None))
+                    imm = struct.unpack_from("<I", text, rel["r_offset"])[0] & 0xFFFF
+                    if rel["r_info_type"] == 5:
+                        hi[rel["r_info_sym"]] = imm
+                    else:
+                        addend[rel["r_offset"]] = (hi.get(rel["r_info_sym"], 0) << 16) + (imm - 0x10000 if imm & 0x8000 else imm)
+                    if rel["r_info_type"] == 5:
+                        pass
+                    elif is_sec:
+                        target = elf.get_section(sym["st_shndx"])
+                        if target.name.startswith(".rodata"):
+                            off = (hi.get(rel["r_info_sym"], 0) << 16) + (imm - 0x10000 if imm & 0x8000 else imm)
+                            d = target.data()
+                            strs[rel["r_offset"]] = d[off:d.find(b"\0", off)] if 0 <= off < len(d) else None
+        names = [n for _, n in sorted(out)]
+        compiled_reloc_syms.strings = [strs.get(o2) for o2, _ in sorted(out)]
+        compiled_reloc_syms.calls = calls
+        compiled_reloc_syms.addends = [addend.get(o2) for o2, _ in sorted(out)]
+        return names
 
 
 def target_reloc_syms(mod, name):
@@ -68,6 +91,19 @@ def target_reloc_syms(mod, name):
         m = re.match(r"rom:(0[xX][0-9A-Fa-f]+) reloc:MIPS_\w+ symbol:(\w+)", line)
         if m and rom <= int(m[1], 16) < end:
             out.append((int(m[1], 16), m[2]))
+    # the address each reloc resolves to, from the original's own HI/LO immediates
+    # (splat's label name may carry another version's address)
+    addrs, hi = [], {}
+    for r, _ in sorted(out):
+        w = struct.unpack_from("<I", mod.base, r)[0]
+        imm = w & 0xFFFF
+        if w >> 26 == 0xF:  # lui
+            hi[(w >> 16) & 31] = imm
+            addrs.append(None)
+        else:
+            base = hi.get((w >> 21) & 31, 0)
+            addrs.append((base << 16) + (imm - 0x10000 if imm & 0x8000 else imm))
+    target_reloc_syms.addrs = addrs
     return [n for _, n in sorted(out)]
 
 
@@ -127,6 +163,7 @@ def variants(text, body, target, comp, opt, jobs):
         print(f"  {sc}: {c}")
     if ok and ok[0][0] == 0:
         print("best variant source:\n" + src_of(ok[0][1]))
+    return src_of(ok[0][1]) if ok else None
 
 
 def climb(pre, lines, idx, target, comp, opt, jobs):
@@ -224,6 +261,7 @@ def main():
                     help="try every order of the body lines tagged //P (own setting); >7 lines: hill-climb over single-line moves")
     ap.add_argument("--variants", action="store_true",
                     help="try every combination of '//V{' ... '//V|' ... '//V}' alternative blocks in the body")
+    ap.add_argument("--write", action="store_true", help="with --variants: write the best combination back to FILE.c")
     ap.add_argument("-j", type=int, default=4, help="processes for --permute")
     ap.add_argument("--opts", help="';'-separated option sets to try instead of the standard list (own setting kept)")
     ap.add_argument("--extra", default="", help="flags appended to every tried setting, e.g. --extra=-mext")
@@ -293,6 +331,8 @@ def main():
         # splat names an address inside a global's extent D_XXXXXXXX; the C reaches it as sym+off
         # (also auto-named: splat labels each referenced word of a big struct, the C uses the base + field offset)
         def interior(m, w):
+            if w == "PRX_ZERO":  # splat: a second %lo reusing an earlier lui register
+                return True
             if not re.fullmatch(r"D_[0-9A-F]{8}", w):
                 return False
             mm = re.fullmatch(r"D_([0-9A-F]{8})", m)
@@ -305,14 +345,54 @@ def main():
             print("RESULT: words match, RELOCATION SYMBOLS DIFFER (not a match)")
         else:
             print("relocation symbols match")
+            adds = getattr(compiled_reloc_syms, "addends", [])
             for i, w, m in bad:
-                print(f"  (reloc {i}: target label {w} assumed inside {m}; check the offset)")
-            print("RESULT: MATCH")
+                off = adds[i] if i < len(adds) and adds[i] is not None else None
+                print(f"  (reloc {i}: target label {w} assumed inside {m}; check the offset)"
+                      + (f" [{m}+0x{off:X}]" if off is not None else ""))
+            # string literals the C emits must equal the original's (hand_try compares no other rodata)
+            bad_str = []
+            taddrs = getattr(target_reloc_syms, "addrs", [])
+            for i, (w, ms) in enumerate(zip(want, compiled_reloc_syms.strings)):
+                ta = taddrs[i] if i < len(taddrs) else None
+                if ms is None or ta is None:
+                    continue
+                at = mod.text_off + ta
+                ts = mod.base[at:mod.base.find(b"\0", at)]
+                if ts != ms:
+                    bad_str.append((w, ts, ms))
+            for w, ts, ms in dict.fromkeys(bad_str):
+                print(f"  string literal for {w} differs: target {ts!r}, mine {ms!r}")
+            # call targets: the original's jal names (from its asm) must be the functions the C calls
+            bad_call = []
+            asm_path = mod.funcs[name][2]
+            if asm_path is not None:
+                # j/jal in program order; local labels (.L) are jumps, not calls
+                want_calls = [None if c.startswith(".") else c
+                              for c in re.findall(r"\bj(?:al)?\s+(\.?[A-Za-z_]\w*)", asm_path.read_text())]
+                got = compiled_reloc_syms.calls
+                if len(want_calls) == len(got):
+                    bad_call = [(w, g) for w, g in zip(want_calls, got) if None not in (w, g) and g != w]
+                else:
+                    wc, gc = [c for c in want_calls if c], [c for c in got if c]
+                    if len(wc) == len(gc):
+                        bad_call = [(w, g) for w, g in zip(wc, gc) if g != w]
+            for w, g in dict.fromkeys(bad_call):
+                print(f"  call target differs: target {w}, mine {g}")
+            if bad_str:
+                print("RESULT: words match, STRING LITERALS DIFFER (not a match)")
+            elif bad_call:
+                print("RESULT: words match, CALL TARGETS DIFFER (not a match)")
+            else:
+                print("RESULT: MATCH")
     elif best is not None:
         sm = difflib.SequenceMatcher(None, target, best, autojunk=False)
         print(f"RESULT: {max(len(target), len(best)) - sum(b.size for b in sm.get_matching_blocks())} off (own setting)")
     if a.variants:
-        variants(text, body, target, comp, own.split(" ", 1)[1], a.j)
+        bestsrc = variants(text, body, target, comp, own.split(" ", 1)[1], a.j)
+        if a.write and bestsrc is not None:
+            Path(a.cfile).write_text(bestsrc)
+            print(f"wrote the best combination to {a.cfile}")
     if a.permute:
         permute(text, body, target, comp, own.split(" ", 1)[1], a.j)
     if a.perm:

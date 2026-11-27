@@ -89,3 +89,4 @@ regHeapDelete = 0x00006A0C; // type:func
 regFree = 0x00006AC0; // type:func
 regOpenFileFd = 0x00001874; // type:func
 regGetFileNames = 0x00001A44; // type:func
+g_semaId = 0x00006FDC;
