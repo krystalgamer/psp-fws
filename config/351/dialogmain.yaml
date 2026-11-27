@@ -15,6 +15,7 @@ options:
   cache_path: tmp/build/351/.splat_cache.dialogmain
   symbol_addrs_path:
     - config/351/symbol_addrs.dialogmain.txt
+    - config/351/func_starts.dialogmain.txt
     - tmp/build/351/prx_syms.dialogmain.txt
   reloc_addrs_path: [tmp/build/351/reloc_addrs.dialogmain.txt]
   asset_path: tmp/assets/351/dialogmain
@@ -53,6 +54,7 @@ segments:
     vram: 0x0
     subsegments:
       - [0xA0, c, dialogmain]
+      - [0x5F08, c, dialogmain_crtend]
       - { start: 0x5F7C, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x636C, type: prxpad, order: .text }
       - { start: 0x6370, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }

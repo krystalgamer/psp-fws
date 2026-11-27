@@ -15,6 +15,7 @@ options:
   cache_path: tmp/build/201/.splat_cache.dialogmain
   symbol_addrs_path:
     - config/201/symbol_addrs.dialogmain.txt
+    - config/201/func_starts.dialogmain.txt
     - tmp/build/201/prx_syms.dialogmain.txt
   reloc_addrs_path: [tmp/build/201/reloc_addrs.dialogmain.txt]
   asset_path: tmp/assets/201/dialogmain
@@ -54,6 +55,7 @@ segments:
     subsegments:
       - { start: 0x80, type: asm, name: init, linker_section: .init }
       - [0xA4, c, dialogmain]
+      - [0x728C, c, dialogmain_crtend]
       - { start: 0x72E4, type: asm, name: fini, linker_section: .fini }
       - { start: 0x7300, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x7788, type: prxpad, order: .text }

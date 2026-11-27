@@ -2845,9 +2845,3 @@ INCLUDE_ASM("nonmatchings/dialogmain", func_000076E8);
 
 INCLUDE_ASM("nonmatchings/dialogmain", func_00007798);
 #endif
-
-INCLUDE_ASM("nonmatchings/dialogmain", func_000078E8);
-
-#if FW_VERSION >= 350
-INCLUDE_ASM("nonmatchings/dialogmain", func_00005EC0);
-#endif
