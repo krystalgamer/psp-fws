@@ -122,7 +122,7 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_000014DC);
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00001624);
 
-#if FW_VERSION < 151
+#if FW_VERSION < 201
 s32 sceNetConfigGetDNS(SceNetBytes4 *primary, SceNetBytes4 *secondary) {
     if (primary != NULL) {
         *primary = dns_primary;
@@ -136,7 +136,7 @@ s32 sceNetConfigGetDNS(SceNetBytes4 *primary, SceNetBytes4 *secondary) {
 INCLUDE_ASM("nonmatchings/pspnet_inet", sceNetConfigGetDNS);
 #endif
 
-#if FW_VERSION < 151
+#if FW_VERSION < 201
 s32 sceNetConfigSetDNS(SceNetBytes4 *primary, SceNetBytes4 *secondary) {
     if (primary != NULL) {
         dns_primary = *primary;
@@ -3773,7 +3773,9 @@ void func_00025468(SceNetBytes4 addr) {
 #endif
 
 #if FW_VERSION >= 151 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_00025468);
+void func_00025468(SceNetBytes4 addr) {
+    func_00013F3C(&D_0002DD10, addr, 0x7A, func_0002373C);
+}
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_0002373C);
 #endif
