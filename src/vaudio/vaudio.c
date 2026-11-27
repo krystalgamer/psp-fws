@@ -1,7 +1,7 @@
 #include "common.h"
 #include "vaudio_decls.h"
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/vaudio", func_00000000);
 
 INCLUDE_ASM("nonmatchings/vaudio", func_0000020C);
@@ -57,7 +57,7 @@ INCLUDE_RODATA("nonmatchings/vaudio", D_0000102C);
 
 INCLUDE_RODATA("nonmatchings/vaudio", D_00000D9C);
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/vaudio", func_000004A4);
 #endif
 
@@ -89,7 +89,7 @@ s32 sceVaudio_driver_DCC18F25(void) {
 }
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/vaudio", func_00000584);
 
 INCLUDE_ASM("nonmatchings/vaudio", func_000005EC);
