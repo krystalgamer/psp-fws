@@ -6,6 +6,10 @@
 /* shiftK1 whose `srl $k1` the assembler can't move into a call's delay slot:
    no power version has it in one (1.00 scePowerIsPowerOnline keeps
    `jal sceSysconIsAcSupplied; nop`). */
+/* The request/resume-count readers access the switch state as volatile (base
+   address kept in a register); its initialisation stores plainly. */
+#define g_PowerSwitchV (*(volatile ScePowerSwitch *)&D_00003E00)
+
 static inline u32 shiftK1NoSlot(void) {
     u32 oldK1;
 
@@ -494,13 +498,13 @@ s32 func_00001364(s32 lockType) {
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
 s32 scePowerIsRequest(void) {
-    return (D_00003E00.curHardwarePowerSwitchRequest | D_00003E00.curSoftwarePowerSwitchRequest) != 0;
+    return (g_PowerSwitchV.curHardwarePowerSwitchRequest | g_PowerSwitchV.curSoftwarePowerSwitchRequest) != 0;
 }
 #endif
 
 #if FW_VERSION < 201
 s32 scePowerIsRequest(void) {
-    return D_00003E00.curHardwarePowerSwitchRequest;
+    return g_PowerSwitchV.curHardwarePowerSwitchRequest;
 }
 #endif
 
@@ -510,8 +514,8 @@ s32 scePowerCancelRequest(void) {
     s32 intr;
 
     intr = sceKernelCpuSuspendIntr();
-    request = D_00003E00.curHardwarePowerSwitchRequest;
-    D_00003E00.curHardwarePowerSwitchRequest = 0;
+    request = g_PowerSwitchV.curHardwarePowerSwitchRequest;
+    g_PowerSwitchV.curHardwarePowerSwitchRequest = 0;
     sceKernelCpuResumeIntr(intr);
     return request;
 }
@@ -568,7 +572,7 @@ INCLUDE_ASM("nonmatchings/power", scePowerRequestColdReset);
 
 #if FW_VERSION < 282
 s32 scePowerGetResumeCount(void) {
-    return D_00003E00.resumeCount;
+    return g_PowerSwitchV.resumeCount;
 }
 
 s32 scePowerSetWakeupCondition(s32 arg0) {

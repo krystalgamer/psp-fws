@@ -85,6 +85,16 @@ typedef struct {
 #endif
 } ScePowerFrequency;
 
+/* sceKernelRegisterPowerHandlers table (1.00: 6 words). */
+typedef struct {
+    s32 size;
+    s32 (*tick)(s32);
+    s32 (*lock)(s32);
+    s32 (*unlock)(s32);
+    s32 (*lockForUser)(s32);
+    s32 (*unlockForUser)(s32);
+} ScePowerHandlers;
+
 /* Idle timer slot (1.00: 0x20 bytes). */
 typedef struct {
     u32 isResetted; /* 0x0 */
@@ -126,13 +136,8 @@ typedef struct {
 #if FW_VERSION >= 150
     u32 unk1C;
 #endif
-    volatile s32 curHardwarePowerSwitchRequest; /* 1.00: 0x18, 1.50: 0x20 */
-#if FW_VERSION >= 201
-    /* volatile from 2.01 on (scePowerIsRequest reads it); a plain store in 1.00 func_00001178 */
-    volatile s32 curSoftwarePowerSwitchRequest; /* 0x24 */
-#else
+    s32 curHardwarePowerSwitchRequest; /* 1.00: 0x18, 1.50: 0x20 */
     s32 curSoftwarePowerSwitchRequest; /* 1.00: 0x1C, 1.50: 0x24 */
-#endif
 #if FW_VERSION >= 150
     u32 isRebootPowerLockExist; /* 0x28 */
 #endif
@@ -140,7 +145,7 @@ typedef struct {
     u32 coldResetMode; /* 0x2C */
 #endif
     u32 wakeupCondition; /* 1.00: 0x20, 1.50: 0x2C, 2.01: 0x30 */
-    volatile s32 resumeCount; /* 1.00: 0x24, 1.50: 0x30, 2.01: 0x34 */
+    s32 resumeCount; /* 1.00: 0x24, 1.50: 0x30, 2.01: 0x34 */
 } ScePowerSwitch;
 
 /* power.c control block (1.00 layout, 0x108 bytes). */
@@ -161,6 +166,7 @@ typedef struct SceSysEventHandler {
     s32 reserved[9];
 } SceSysEventHandler;
 
+extern ScePowerHandlers D_00003B7C;
 extern SceSysEventHandler D_00003C60;
 extern ScePower D_00003CC0;
 extern s32 D_00003DC4;
@@ -223,9 +229,14 @@ extern M2C_UNK func_00002600;
 extern M2C_UNK func_00003220;
 extern M2C_UNK func_00003F14;
 
-s32 func_0000096C(s32, s32, s32);
+void func_0000054C(s32 enable, void *argp);
+s32 func_00000658(SceSize args, void *argp);
+void func_0000096C(s32 clear, s32 set, s32 oneOff);
+void func_00000DD4(s32 enable, void *argp);
 s32 func_000012B4(s32, s32);
-void func_00001624(s32 arg0);
+s32 func_000014A0(s32 lockType, s32 isUserLock);
+s32 func_0000157C(s32 lockType, s32 isUserLock);
+void func_00001624(s32 enable);
 s32 func_00001B1C(void);
 s32 func_00001EF4(s32, s32);
 s32 func_00001FEC(s32, s32);
@@ -233,6 +244,7 @@ s32 func_000024BC(void);
 s32 func_0000250C(void);
 s32 func_00002880(s32, s32);
 void func_00002944(s32 arg0);
+void func_000029BC(s32 enable, void *argp);
 s32 func_00002D70(void);
 s32 func_00002DD0(void);
 s32 func_00002E14(void);
