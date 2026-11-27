@@ -9,7 +9,7 @@ options:
   compiler: GCC
 
   asm_path: tmp/asm/102/mediaman
-  src_path: tmp/av_src/102/mediaman
+  src_path: src/mediaman
   build_path: tmp/build/102
   ld_script_path: tmp/build/102/mediaman.ld
   cache_path: tmp/build/102/.splat_cache.mediaman
