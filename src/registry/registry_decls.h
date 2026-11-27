@@ -188,7 +188,7 @@ void regRemoveOpenCategory(SceRegIndexEntry *cat);
 s32 regSeekFile(s32 fd, s32 offset, s32 whence);
 s32 regSetCatDirty(SceRegIndexEntry *cat);
 s32 regSetHiveDirty(s32 index);
-s32 regStatFile(const char *name, u64 *size);
+s32 regStatFile(const char *name, u32 *size);
 s32 regWriteFile(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 *arg4);
 s32 sceIoClose(s32);
 s32 sceIoDevctl(void *, s32, void *, u32, void *, u32);
