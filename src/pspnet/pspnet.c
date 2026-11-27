@@ -1777,9 +1777,38 @@ s32 module_stop(void) {
     return 0;
 }
 
-INCLUDE_ASM("nonmatchings/pspnet", func_00007BD4);
+void *func_00007BD4(const void *s, s32 c, s32 n) {
+    const u8 *p;
+    u8 ch = c;
 
-INCLUDE_ASM("nonmatchings/pspnet", func_00007C0C);
+    if (s != NULL) {
+        for (p = s; n > 0; n--, p++) {
+            if (*p == ch)
+                return (void *)p;
+        }
+    }
+    return NULL;
+}
+
+void *func_00007C0C(void *dst, const void *src, s32 n) {
+    u8 *d;
+    const u8 *s;
+
+    d = dst;
+    s = src;
+    if (dst == NULL)
+        return NULL;
+    if (d >= s) {
+        for (n--; n >= 0; n--)
+            d[n] = s[n];
+    } else {
+        while (n > 0) {
+            *d++ = *s++;
+            n--;
+        }
+    }
+    return dst;
+}
 
 INCLUDE_ASM("nonmatchings/pspnet", func_00007C80);
 
@@ -1809,7 +1838,16 @@ u8 *func_00007CC0(u8 *arg0, u8 *arg1, s32 arg2) {
     return var_v0;
 }
 
-INCLUDE_ASM("nonmatchings/pspnet", func_00007CF4);
+void *func_00007CF4(void *s, s32 c, s32 n) {
+    u8 *p;
+
+    if (s != NULL) {
+        c &= 0xFF;
+        for (p = s; n > 0; n--)
+            *p++ = c;
+    }
+    return s;
+}
 #endif
 
 #if FW_VERSION == 152
@@ -1821,21 +1859,104 @@ INCLUDE_ASM("nonmatchings/pspnet", func_00007D20);
 #endif
 
 #if FW_VERSION < 201
-void func_00007D60(s32 arg0, s32 arg1) {
-    func_00007C0C(arg1, arg0);
+void func_00007D60(const void *src, void *dst, s32 n) {
+    func_00007C0C(dst, src, n);
 }
 
-INCLUDE_ASM("nonmatchings/pspnet", func_00007D84);
+void func_00007D84(void *s, s32 n) {
+    u8 *p;
 
-INCLUDE_ASM("nonmatchings/pspnet", func_00007DAC);
+    if (s != NULL) {
+        for (p = s; n > 0; n--)
+            *p++ = 0;
+    }
+}
 
-INCLUDE_ASM("nonmatchings/pspnet", func_00007E5C);
+s32 func_00007DAC(const char *s1, const char *s2) {
+    if (s1 == NULL || s2 == NULL) {
+        if (s1 == s2)
+            return 0;
+        return (s1 == NULL) ? -1 : 1;
+    }
+    while (*s1 == *s2++) {
+        if (*s1++ == 0)
+            return 0;
+    }
+    return *s1 - *(s2 - 1);
+}
 
-INCLUDE_ASM("nonmatchings/pspnet", func_00007EA4);
+char *func_00007E2C(const char *s, s32 c) {
+    char ch = c;
 
-INCLUDE_ASM("nonmatchings/pspnet", func_00007F3C);
+    if (s == NULL)
+        return NULL;
+    do {
+        if (*s == ch)
+            return (char *)s;
+    } while (*s++ != 0);
+    return NULL;
+}
 
-INCLUDE_ASM("nonmatchings/pspnet", func_00007FB8);
+char *func_00007E5C(const char *s, s32 c) {
+    const char *p;
+    char ch = c;
+
+    p = s;
+    if (s == NULL)
+        return NULL;
+    while (*p++ != 0)
+        ;
+    p--;
+    do {
+        if (*p == ch)
+            return (char *)p;
+    } while (s < p--);
+    return NULL;
+}
+
+s32 func_00007EA4(const char *s1, const char *s2, s32 n) {
+    if (s1 == NULL || s2 == NULL) {
+        if (s1 == s2)
+            return 0;
+        return (s1 == NULL) ? -1 : 1;
+    }
+    n--;
+    while (n >= 0 && *s1 == *s2++) {
+        if (*s1++ == 0)
+            return 0;
+        n--;
+    }
+    return (n < 0) ? 0 : *s1 - *(s2 - 1);
+}
+
+char *func_00007F3C(char *dst, const char *src, s32 n) {
+    char *d;
+    s32 i;
+
+    d = dst;
+    if (dst == NULL || src == NULL)
+        return NULL;
+    for (i = 0; i < n; i++) {
+        if ((*d++ = *src++) == 0) {
+            for (i++; i < n; i++)
+                *d++ = 0;
+            return dst;
+        }
+    }
+    return dst;
+}
+
+char *func_00007FB8(const char *s, s32 c) {
+    char ch = c;
+
+    if (s == NULL)
+        return NULL;
+    do {
+        if (*s == ch)
+            return (char *)s;
+    } while (*s++ != 0);
+    return NULL;
+}
 
 u8 *func_00007FE8(u8 *arg0, u8 *arg1) {
     u8 *var_a1;
@@ -1858,7 +1979,16 @@ u8 *func_00007FE8(u8 *arg0, u8 *arg1) {
     return var_v0;
 }
 
-INCLUDE_ASM("nonmatchings/pspnet", func_00008020);
+s32 func_00008020(const char *s) {
+    s32 n;
+
+    n = 0;
+    if (s == NULL)
+        return 0;
+    while (*s++ != 0)
+        n++;
+    return n;
+}
 
 INCLUDE_ASM("nonmatchings/pspnet", func_00008054);
 
