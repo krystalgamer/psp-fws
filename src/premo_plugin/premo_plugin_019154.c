@@ -7,7 +7,7 @@ INCLUDE_ASM("nonmatchings/premo_plugin_019154", func_00019154);
 #else
 void func_00019154(M2C_UNK **arg0) {
     *arg0 = &D_0002AFA0;
-    scePaf_6261C0A5((s32) arg0);
+    _ZdlPv((s32) arg0);
 }
 #endif
 
@@ -30,7 +30,7 @@ INCLUDE_ASM("nonmatchings/premo_plugin_019154", func_0001925C);
 #else
 void func_0001925C(M2C_UNK **arg0) {
     *arg0 = &D_0002B000;
-    scePaf_6261C0A5((s32) arg0);
+    _ZdlPv((s32) arg0);
 }
 #endif
 
@@ -56,7 +56,7 @@ INCLUDE_ASM("nonmatchings/premo_plugin_019154", func_000192C8);
 #else
 void func_000192C8(M2C_UNK **arg0) {
     *arg0 = &D_0002B000;
-    scePaf_6261C0A5((s32) arg0);
+    _ZdlPv((s32) arg0);
 }
 #endif
 
@@ -205,27 +205,27 @@ s32 func_0001AA34(struct Unk_func_0001AA34_0 *arg0) {
     func_00020F88(arg0->unkB4, (u8 *)arg0 + 0x90);
     temp_a0 = arg0->unkC8;
     if (temp_a0 != 0) {
-        scePaf_CCFF20ED(temp_a0);
+        _ZdaPv(temp_a0);
         arg0->unkC8 = 0;
     }
     temp_a0_2 = arg0->unkA8;
     if (temp_a0_2 != 0) {
-        scePaf_CCFF20ED(temp_a0_2);
+        _ZdaPv(temp_a0_2);
         arg0->unkA8 = 0;
     }
     temp_a0_3 = arg0->unkA4;
     if (temp_a0_3 != 0) {
-        scePaf_CCFF20ED(temp_a0_3);
+        _ZdaPv(temp_a0_3);
         arg0->unkA4 = 0;
     }
     temp_a0_4 = arg0->unkC0;
     if (temp_a0_4 != 0) {
-        scePaf_CCFF20ED(temp_a0_4);
+        _ZdaPv(temp_a0_4);
         arg0->unkC0 = 0;
     }
     temp_a0_5 = arg0->unkB8;
     if (temp_a0_5 != 0) {
-        scePaf_CCFF20ED(temp_a0_5);
+        _ZdaPv(temp_a0_5);
         arg0->unkB8 = 0;
     }
     return 0;
@@ -293,7 +293,7 @@ INCLUDE_ASM("nonmatchings/premo_plugin_019154", func_0001AC94);
 #else
 void func_0001AC94(M2C_UNK **arg0) {
     *arg0 = &D_0002AED8;
-    scePaf_6261C0A5((s32) arg0);
+    _ZdlPv((s32) arg0);
 }
 #endif
 
@@ -370,7 +370,7 @@ INCLUDE_ASM("nonmatchings/premo_plugin_019154", func_0001AEF0);
 void func_0001AEF0(struct Unk_func_0001AEF0_0 *arg0) {
     arg0->unk0 = &D_0002B158;
     arg0->unk4 = 0;
-    scePaf_6261C0A5((s32) arg0);
+    _ZdlPv((s32) arg0);
 }
 #endif
 
@@ -384,7 +384,7 @@ s32 func_0001AF1C(struct Unk_func_0001AF1C_0 *arg0, s32 arg1) {
 
     arg0->unk4 = arg1;
     arg0->unk8 = 0;
-    temp_v0 = scePaf_4E8B4F27(arg1 * 4);
+    temp_v0 = _Znaj(arg1 * 4);
     arg0->unkC = temp_v0;
     return (temp_v0 != 0) ? 0 : 0x8007000E;
 }
@@ -414,7 +414,7 @@ s32 func_0001AF60(struct Unk_func_0001AF60_0 *arg0) {
     if (temp_v0 == 0) {
 
     } else {
-        scePaf_CCFF20ED(temp_v0);
+        _ZdaPv(temp_v0);
     }
     return 0;
 }
@@ -690,7 +690,7 @@ INCLUDE_ASM("nonmatchings/premo_plugin_019154", func_0001CC84);
 #else
 void func_0001CC84(M2C_UNK **arg0) {
     *arg0 = &D_0002B4C8;
-    scePaf_6261C0A5((s32) arg0);
+    _ZdlPv((s32) arg0);
 }
 #endif
 
@@ -734,7 +734,7 @@ INCLUDE_ASM("nonmatchings/premo_plugin_019154", func_0001CD14);
 #else
 void func_0001CD14(M2C_UNK **arg0) {
     *arg0 = &D_0002AED8;
-    scePaf_6261C0A5((s32) arg0);
+    _ZdlPv((s32) arg0);
 }
 #endif
 
@@ -791,7 +791,7 @@ INCLUDE_ASM("nonmatchings/premo_plugin_019154", func_0001CD94);
 #else
 void func_0001CD94(M2C_UNK **arg0) {
     *arg0 = &D_0002B4C8;
-    scePaf_6261C0A5((s32) arg0);
+    _ZdlPv((s32) arg0);
 }
 #endif
 
@@ -1223,7 +1223,7 @@ INCLUDE_ASM("nonmatchings/premo_plugin_019154", func_0001F460);
 #else
 void func_0001F460(M2C_UNK **arg0) {
     *arg0 = &D_0002AE28;
-    scePaf_6261C0A5((s32) arg0);
+    _ZdlPv((s32) arg0);
 }
 #endif
 
@@ -1236,7 +1236,7 @@ INCLUDE_ASM("nonmatchings/premo_plugin_019154", func_0001F498);
 #else
 void func_0001F498(M2C_UNK **arg0) {
     *arg0 = &D_0002B7F0;
-    scePaf_6261C0A5((s32) arg0);
+    _ZdlPv((s32) arg0);
 }
 #endif
 
@@ -1555,7 +1555,7 @@ s8 func_00020C04(struct Unk_func_00020C04_0 *arg0) {
     s8 var_v1;
 
     var_v1 = 0;
-    if (scePaf_9C0245AF(arg0, (s32) &D_0002C854, 3) == 0) {
+    if (sce_paf_private_memcmp(arg0, (s32) &D_0002C854, 3) == 0) {
         var_v1 = arg0->unk3;
     }
     return var_v1;
@@ -1853,7 +1853,7 @@ s32 func_00023230(struct Unk_func_00023230_0 *arg0, s32 arg1, s32 arg2) {
 #if FW_VERSION == 352
 s32 func_00023230(struct Unk_func_00023230_0 *arg0, s32 arg1, s32 arg2) {
     if (arg1 == 1) {
-        scePaf_3308156F((u8 *)arg0 + 0xD8, arg2, 0x10);
+        sce_paf_private_memcpy((u8 *)arg0 + 0xD8, arg2, 0x10);
         arg0->unkE8 = (s8) arg1;
     }
     return 0;

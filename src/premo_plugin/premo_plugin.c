@@ -691,8 +691,8 @@ void func_00001430(struct Unk_func_00001430_0 *arg0, M2C_UNK arg1) {
     s32 temp_s0;
 
     temp_s0 = (u8 *)arg0 + 0xE;
-    scePaf_9479C11B(temp_s0, 0, 0x80);
-    scePaf_BD5018AA(temp_s0, arg1);
+    sce_paf_private_memset(temp_s0, 0, 0x80);
+    sce_paf_private_strcpy(temp_s0, arg1);
     arg0->unkA5 = 1;
 }
 
@@ -826,7 +826,7 @@ void func_00001A24(struct Unk_func_00001A24_0 *arg0) {
     arg0->unkC = 0;
     arg0->unk10 = 0;
     M2C_FIELD(arg0, s8 *, 0x14) = 0;
-    arg0->unk0 = vsh_AD93F68D(0, &func_00001DC4, &func_00001E50, 0);
+    arg0->unk0 = vsh_8A06C72F(0, &func_00001DC4, &func_00001E50, 0);
     func_00001CA8(arg0);
 }
 #endif
@@ -844,7 +844,7 @@ void func_00001B64(struct Unk_func_00001B64_0 *arg0) {
     func_00001CF4(arg0);
     temp_v0 = arg0->unk0;
     if (temp_v0 != 0) {
-        vsh_63E63668(temp_v0);
+        vsh_FE0FDCDB(temp_v0);
         arg0->unk0 = 0;
     }
     sceKernelDeleteSema(arg0->unk8);
@@ -878,7 +878,7 @@ void func_00001BB4(struct Unk_func_00001B64_0 *arg0) {
     func_00001CF4(arg0);
     temp_v0 = arg0->unk0;
     if (temp_v0 != 0) {
-        vsh_63E63668(temp_v0);
+        vsh_FE0FDCDB(temp_v0);
         arg0->unk0 = 0;
     }
     sceKernelDeleteSema(arg0->unk8);
@@ -930,7 +930,7 @@ void func_00001CA8(struct Unk_func_00001A24_0 *arg0) {
     temp_a0 = arg0->unk0;
     if (temp_a0 != 0) {
         if (arg0->unk14 == 0) {
-            vsh_8C1E8A38(temp_a0);
+            vsh_388428D3(temp_a0);
             arg0->unk14 = 1U;
         }
     }
@@ -962,7 +962,7 @@ void func_00001CF4(struct Unk_func_00001B64_0 *arg0) {
     temp_a0 = arg0->unk0;
     if (temp_a0 != 0) {
         if (arg0->unk14 != 0) {
-            vsh_0E5502FC(temp_a0);
+            vsh_475ABD41(temp_a0);
             arg0->unk14 = 0U;
         }
     }
@@ -990,7 +990,7 @@ INCLUDE_ASM("nonmatchings/premo_plugin", func_00002000);
 void func_00002000(M2C_UNK **arg0) {
     *arg0 = &D_00029720;
     func_000141F0((s32) arg0);
-    scePaf_6261C0A5((s32) arg0);
+    _ZdlPv((s32) arg0);
 }
 #endif
 
@@ -2238,14 +2238,14 @@ void func_00003988(struct Unk_func_00003988_0 *arg0) {
 
     temp_s0 = arg0->unk258;
     if (temp_s0 != 0) {
-        scePaf_8E7F9126(temp_s0);
-        scePaf_6261C0A5(temp_s0);
+        _ZN3paf6ModuleD1Ev(temp_s0);
+        _ZdlPv(temp_s0);
         arg0->unk258 = 0;
     }
     temp_s0_2 = arg0->unk25C;
     if (temp_s0_2 != 0) {
-        scePaf_8E7F9126(temp_s0_2);
-        scePaf_6261C0A5(temp_s0_2);
+        _ZN3paf6ModuleD1Ev(temp_s0_2);
+        _ZdlPv(temp_s0_2);
         arg0->unk25C = 0;
     }
 }
@@ -2356,24 +2356,24 @@ void func_000048EC(struct Unk_func_000048EC_0 *arg0) {
 
     temp_v0 = arg0->unk24;
     if (temp_v0 != 0) {
-        scePaf_CCFF20ED(temp_v0);
+        _ZdaPv(temp_v0);
         arg0->unk24 = 0;
     }
     temp_v0_2 = arg0->unk2C;
     if (temp_v0_2 != 0) {
-        scePaf_CCFF20ED(temp_v0_2);
+        _ZdaPv(temp_v0_2);
         arg0->unk2C = 0;
     }
     temp_s0 = arg0->unk108;
     if (temp_s0 != 0) {
-        scePaf_8E7F9126(temp_s0);
-        scePaf_6261C0A5(temp_s0);
+        _ZN3paf6ModuleD1Ev(temp_s0);
+        _ZdlPv(temp_s0);
         arg0->unk108 = 0;
     }
     temp_s0_2 = arg0->unk104;
     if (temp_s0_2 != 0) {
-        scePaf_8E7F9126(temp_s0_2);
-        scePaf_6261C0A5(temp_s0_2);
+        _ZN3paf6ModuleD1Ev(temp_s0_2);
+        _ZdlPv(temp_s0_2);
         arg0->unk104 = 0;
     }
     func_00004CF8(arg0);
@@ -2387,24 +2387,24 @@ void func_0000499C(struct Unk_func_0000499C_0 *arg0) {
 
     temp_v0 = arg0->unk24;
     if (temp_v0 != 0) {
-        scePaf_CCFF20ED(temp_v0);
+        _ZdaPv(temp_v0);
         arg0->unk24 = 0;
     }
     temp_v0_2 = arg0->unk2C;
     if (temp_v0_2 != 0) {
-        scePaf_CCFF20ED(temp_v0_2);
+        _ZdaPv(temp_v0_2);
         arg0->unk2C = 0;
     }
     temp_s0 = arg0->unk108;
     if (temp_s0 != 0) {
-        scePaf_8E7F9126(temp_s0);
-        scePaf_6261C0A5(temp_s0);
+        _ZN3paf6ModuleD1Ev(temp_s0);
+        _ZdlPv(temp_s0);
         arg0->unk108 = 0;
     }
     temp_s0_2 = arg0->unk104;
     if (temp_s0_2 != 0) {
-        scePaf_8E7F9126(temp_s0_2);
-        scePaf_6261C0A5(temp_s0_2);
+        _ZN3paf6ModuleD1Ev(temp_s0_2);
+        _ZdlPv(temp_s0_2);
         arg0->unk104 = 0;
     }
     func_00004CF8(arg0);
@@ -2422,8 +2422,8 @@ void func_00004BB4(struct Unk_func_00004BB4_0 *arg0, M2C_UNK arg1) {
     s32 temp_s0;
 
     temp_s0 = (u8 *)arg0 + 0x80;
-    if (scePaf_9C0245AF(arg1, temp_s0, 0x10) != 0) {
-        scePaf_3308156F(temp_s0, arg1, 0x10);
+    if (sce_paf_private_memcmp(arg1, temp_s0, 0x10) != 0) {
+        sce_paf_private_memcpy(temp_s0, arg1, 0x10);
         arg0->unkF0 = 1;
     }
 }
@@ -2433,7 +2433,7 @@ void func_00004C20(struct Unk_func_00004C20_0 *arg0, M2C_UNK arg1) {
 
     temp_s0 = (u8 *)arg0 + 0x90;
     if (scePaf_B1975FE1(arg1, temp_s0, 0x41) != 0) {
-        scePaf_7620CFFD(temp_s0, arg1, 0x40);
+        sce_paf_private_strncpy(temp_s0, arg1, 0x40);
         arg0->unkF1 = 1;
     }
 }
@@ -2443,7 +2443,7 @@ void func_00004C8C(struct Unk_func_00004C8C_0 *arg0, s32 arg1) {
 
     temp_s0 = (u8 *)arg0 + 0xD1;
     if (scePaf_B1975FE1(arg1, temp_s0, 0x1F) != 0) {
-        scePaf_7620CFFD(temp_s0, arg1, 0x1E);
+        sce_paf_private_strncpy(temp_s0, arg1, 0x1E);
         arg0->unkF2 = 1;
     }
 }
@@ -2815,7 +2815,7 @@ INCLUDE_ASM("nonmatchings/premo_plugin", func_000084CC);
 
 void func_00008538(struct Unk_func_00008538_0 *arg0) {
     arg0->unk1C = (s32) (arg0->unk1C + 1);
-    scePaf_0CFD27E9();
+    InputDevice_PspPad_Lock();
 }
 
 INCLUDE_ASM("nonmatchings/premo_plugin", func_0000855C);

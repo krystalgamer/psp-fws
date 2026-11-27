@@ -42,7 +42,7 @@ INCLUDE_ASM("nonmatchings/premo_plugin_014300", func_00014430);
 #else
 void func_00014430(M2C_UNK **arg0) {
     *arg0 = &D_0002AAF0;
-    scePaf_6261C0A5((s32) arg0);
+    _ZdlPv((s32) arg0);
 }
 #endif
 

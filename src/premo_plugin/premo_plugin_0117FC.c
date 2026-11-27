@@ -36,7 +36,7 @@ INCLUDE_ASM("nonmatchings/premo_plugin_0117FC", func_00011B18);
 #else
 void func_00011B18(M2C_UNK **arg0) {
     *arg0 = &D_0002A7A8;
-    scePaf_6261C0A5((s32) arg0);
+    _ZdlPv((s32) arg0);
 }
 #endif
 
