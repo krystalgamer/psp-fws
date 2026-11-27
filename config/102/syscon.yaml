@@ -9,7 +9,7 @@ options:
   compiler: GCC
 
   asm_path: tmp/asm/102/syscon
-  src_path: src/syscon
+  src_path: tmp/av_src/102/syscon
   build_path: tmp/build/102
   ld_script_path: tmp/build/102/syscon.ld
   cache_path: tmp/build/102/.splat_cache.syscon
@@ -52,7 +52,7 @@ segments:
     start: 0x80
     vram: 0x0
     subsegments:
-      - [0x80, asm, syscon]
+      - [0x80, c, syscon]
       - { start: 0x3148, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x3238, type: prxpad, order: .text }
       - { start: 0x3240, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
@@ -64,7 +64,7 @@ segments:
       - { start: 0x3310, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
       - { start: 0x3344, type: rodata, name: resident, linker_section: .rodata.sceResident }
       - { start: 0x37B0, type: rodata, name: nid, linker_section: .rodata.sceNid }
-      - [0x3828, rodata, syscon]
+      - [0x3828, .rodata, syscon]
       - { start: 0x3874, type: prxpad, order: .rodata }
   - name: syscon_seg1
     type: code
