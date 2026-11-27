@@ -83,3 +83,21 @@ sceUsbstorRecvData = 0x00004850; // type:func rom:0x48D0
 sceUsbstor_internal_489E6BF1 = 0x00004858; // type:func rom:0x48D8
 sceUsbstor_internal_2CAFEFF1 = 0x00004860; // type:func rom:0x48E0
 // shared names (tools/add_version.py) end
+
+// NID-derived names
+sceKernelCreateFpl = 0x000046E8; // type:func
+sceKernelTryAllocateFpl = 0x000046F8; // type:func
+sceMgrInit = 0x00004700; // type:func
+sceMgrInitSeed = 0x00004728; // type:func
+sceMgrEncryptKcWithKse = 0x00004738; // type:func
+sceMgrDecryptLocalEKB = 0x00004748; // type:func
+sceMgrEncryptKc = 0x00004750; // type:func
+sceMgrDecryptKc = 0x00004758; // type:func
+sceMgrMSInit = 0x00004780; // type:func
+sceMgrMSInvalidateICV = 0x000047A0; // type:func
+sceMgrMSWriteSeqPage = 0x000047A8; // type:func
+sceMgrMSDeauth = 0x000047C0; // type:func
+sceMgr_driver_3EE1140B = 0x000047F8; // type:func
+sceMgrMSSetRd = 0x00004810; // type:func
+sceMgrMSSetMAC2d = 0x00004820; // type:func
+sceMgrMSWriteIBD = 0x00004830; // type:func
