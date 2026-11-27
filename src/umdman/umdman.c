@@ -2243,7 +2243,40 @@ INCLUDE_ASM("nonmatchings/umdman", sceUmdExecModSenseCmd);
 
 INCLUDE_ASM("nonmatchings/umdman", sceUmdExecModSelectCmd);
 
-INCLUDE_ASM("nonmatchings/umdman", sceUmdExecGetEventStatusCmd);
+s32 sceUmdExecGetEventStatusCmd(SceUmdDrive *drive, u16 *param, void *buf) {
+    volatile SceAtaCmdState state;
+    s32 stat;
+    s32 ret;
+
+    if (drive == NULL || drive->ataDrive == NULL || param == NULL || buf == NULL)
+        return 0x80010016;
+    ret = func_0000530C(drive);
+    if (ret != 0)
+        return ret;
+    func_00004EC8(drive->ataDrive->driveId, &stat);
+    ret = func_00004EFC(drive->ataDrive->driveId, stat);
+    if (ret != 0)
+        goto end;
+    ret = func_0000567C(74, drive);
+    if (ret != 0)
+        goto end;
+    {
+        s32 st = stat;
+        ret = 0x80010016;
+        if (drive->ataDrive != NULL) {
+            drive->ataDrive->cmd = (SceAtaCmdState *)&state;
+            state.unkC = (u32)buf;
+            drive->ataDrive->cmd->driveStat = st;
+            ret = sceAtaExecPacketCmd(drive->ataDrive, 1, 0x2000, 0, 0, 74, param);
+            if (ret == 0) {
+                ret = sceAtaAccessDataPort(drive->ataDrive, drive->ataDrive->timeout, 2, param[0]);
+            }
+        }
+    }
+end:
+    func_00005338(drive, ret);
+    return ret;
+}
 
 s32 sceUmdExecMechaStatCmd(SceUmdDrive *drive, u32 size, void *buf) {
     volatile SceAtaCmdState state;
@@ -2666,12 +2699,96 @@ s32 func_00004EFC(s32 id, s32 stat) {
         return 0;
     return sceAtaIsNormalDriveStat(id) ? 0 : 0x80211018;
 }
+#endif
 
+#if FW_VERSION >= 150 && FW_VERSION < 152
+s32 sceUmdExecSetCDSpeedCmd(SceUmdDrive *drive, void *param) {
+    volatile SceAtaCmdState state;
+    s32 stat;
+    s32 ret;
+    SceAtaDrive *ata;
+
+    if (drive == NULL || drive->ataDrive == NULL || param == NULL)
+        return 0x80010016;
+    ret = func_0000530C(drive);
+    if (ret != 0)
+        return ret;
+    func_00004EC8(drive->ataDrive->driveId, &stat);
+    ret = func_00004EFC(drive->ataDrive->driveId, stat);
+    if (ret != 0)
+        goto end;
+    ata = drive->ataDrive;
+    if (ata->unk8 != 0xB0)
+        goto end;
+    {
+        s32 st = stat;
+        ret = 0x80010016;
+        if (ata == NULL)
+            goto end;
+        ata->cmd = (SceAtaCmdState *)&state;
+        state.unkC = 0;
+        ata->cmd->driveStat = st;
+        ata->byteLimit = sceAtaGetByteLimitCount(0x2000);
+    }
+    ret = sceAtaExecPacketCmd(drive->ataDrive, 1, (u16)drive->ataDrive->byteLimit, 0, 0, 0xBB, param);
+    if (ret != 0)
+        goto end;
+    ret = sceAtaCheckPacketCmdComplete(drive->ataDrive, 0);
+end:
+    func_00005338(drive, ret);
+    return ret;
+}
+#endif
+
+#if FW_VERSION == 152
 INCLUDE_ASM("nonmatchings/umdman", sceUmdExecSetCDSpeedCmd);
+#endif
 
+#if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/umdman", sceUmdExecSetStreamingCmd);
 
-INCLUDE_ASM("nonmatchings/umdman", sceUmdExecAdjustDataCmd);
+s32 sceUmdExecAdjustDataCmd(s32 cmd, SceUmdDrive *drive, u16 *param, void *buf) {
+    volatile SceAtaCmdState state;
+    s32 stat;
+    s32 ret;
+    SceAtaDrive *ata;
+
+    if (drive == NULL || drive->ataDrive == NULL || param == NULL || buf == NULL)
+        return 0x80010016;
+    ret = func_0000530C(drive);
+    if (ret != 0)
+        return ret;
+    func_00004EC8(drive->ataDrive->driveId, &stat);
+    ret = func_00004EFC(drive->ataDrive->driveId, stat);
+    if (ret != 0)
+        goto end;
+    ata = drive->ataDrive;
+    if (ata->unk8 != 0xB0)
+        goto end;
+    if (cmd == 0xFC)
+        ata->timeout = 2;
+    else if (cmd == 0xFD)
+        ata->timeout = 4;
+    else
+        return 0x80010016;
+    {
+        s32 st = stat;
+        ret = 0x80010016;
+        if (ata != NULL) {
+            ata->cmd = (SceAtaCmdState *)&state;
+            state.unkC = (u32)buf;
+            ata->cmd->driveStat = st;
+            ret = sceAtaExecPacketCmd(drive->ataDrive, 1, 0x8000, 0, 0, cmd, param);
+            if (ret == 0) {
+                ret = sceAtaAccessDataPort(drive->ataDrive, drive->ataDrive->timeout, 2, param[1]);
+            }
+        }
+    }
+end:
+    func_00005338(drive, ret);
+out:
+    return ret;
+}
 
 s32 func_0000530C(SceUmdDrive *drive) {
     if (drive == NULL)
