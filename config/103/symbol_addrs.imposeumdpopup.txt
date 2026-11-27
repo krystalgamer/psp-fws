@@ -1,0 +1,3 @@
+// NID-derived names
+module_start = 0x00000000; // type:func
+sceImpose_driver_68676C0A = 0x00000024; // type:func
