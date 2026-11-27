@@ -9,7 +9,7 @@ options:
   compiler: GCC
 
   asm_path: tmp/asm/102/libupdown
-  src_path: tmp/av_src/102/libupdown
+  src_path: src/libupdown
   build_path: tmp/build/102
   ld_script_path: tmp/build/102/libupdown.ld
   cache_path: tmp/build/102/.splat_cache.libupdown
