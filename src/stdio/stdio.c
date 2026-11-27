@@ -1,6 +1,6 @@
 /* cflags[152]: -O1 */
 /* cflags[150]: -O1 */
-/* cflags[100]: -O1 */
+/* cflags[100,102]: -O1 */
 /* cflags: -Os -frename-registers */
 #include "common.h"
 #include "k1.h"
@@ -50,7 +50,7 @@ s32 func_00000724(void) {
 INCLUDE_ASM("nonmatchings/stdio", fdprintf);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/stdio", func_0000014C);
 #endif
 
@@ -90,7 +90,7 @@ INCLUDE_ASM("nonmatchings/stdio", fdputs);
 INCLUDE_ASM("nonmatchings/stdio", puts);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 void puts(s32 arg0) {
     fdputs(arg0, 1);
 }
@@ -196,7 +196,7 @@ INCLUDE_RODATA("nonmatchings/stdio", D_0000152C);
 INCLUDE_RODATA("nonmatchings/stdio", D_00000F8C);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/stdio", fdgets);
 #endif
 
@@ -371,7 +371,7 @@ INCLUDE_RODATA("nonmatchings/stdio", D_00001508);
 INCLUDE_RODATA("nonmatchings/stdio", D_0000151C);
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION >= 282
+#if FW_VERSION < 150 || FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/stdio", func_00000C78);
 #endif
 
@@ -431,7 +431,7 @@ s32 sceKernelStderr(void) {
 }
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/stdio", func_00000C0C);
 #endif
 
