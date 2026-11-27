@@ -2645,8 +2645,52 @@ INCLUDE_ASM("nonmatchings/lfatfs", func_0000862C);
 INCLUDE_ASM("nonmatchings/lfatfs", func_000086C4);
 #endif
 
-#if FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/lfatfs", LbnToPbn);
+#if FW_VERSION == 100
+u16 LbnToPbn(LFlashDev *dev, u32 lbn) {
+    u32 segno = lbn / 480;
+    LFlashSegment *seg;
+
+    if (segno >= dev->nSegments) {
+        Kprintf("lflash.c:%s:lbn=%d[0x%x], [segno=%d >= max=%d]\n", "LbnToPbn", lbn, lbn, segno, dev->nSegments);
+        Kprintf(D_0000D874, D_0000C56C, "LbnToPbn", 0x654);
+        sceKernelAssert(0, 0);
+        return 0xFFFF;
+    }
+    seg = &dev->segments[segno];
+    return seg->lpTable[lbn - seg->firstLbn];
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 152
+u16 LbnToPbn(LFlashDev *dev, u32 lbn) {
+    u32 segno = lbn / 480;
+    LFlashSegment *seg;
+
+    if (segno >= dev->nSegments) {
+        Kprintf("lflash.c:%s:lbn=%d[0x%x], [segno=%d >= max=%d]\n", "LbnToPbn", lbn, lbn, segno, dev->nSegments);
+        Kprintf(D_0000D874, D_0000C56C, "LbnToPbn", 0x783);
+        sceKernelAssert(0, 0);
+        return 0xFFFF;
+    }
+    seg = &dev->segments[segno];
+    return seg->lpTable[lbn - seg->firstLbn];
+}
+#endif
+
+#if FW_VERSION == 152
+u16 LbnToPbn(LFlashDev *dev, u32 lbn) {
+    u32 segno = lbn / 480;
+    LFlashSegment *seg;
+
+    if (segno >= dev->nSegments) {
+        Kprintf("lflash.c:%s:lbn=%d[0x%x], [segno=%d >= max=%d]\n", "LbnToPbn", lbn, lbn, segno, dev->nSegments);
+        Kprintf(D_0000D874, D_0000C56C, "LbnToPbn", 0x786);
+        sceKernelAssert(0, 0);
+        return 0xFFFF;
+    }
+    seg = &dev->segments[segno];
+    return seg->lpTable[lbn - seg->firstLbn];
+}
 #endif
 
 #if FW_VERSION >= 282
