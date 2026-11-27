@@ -1,6 +1,12 @@
 {
  "funcs": {
   "SysMemForKernel_EF2EE8C1": "s32 SysMemForKernel_EF2EE8C1();",
+  "func_00000000": "s32 func_00000000(void);",
+  "func_00000AC0": "s32 func_00000AC0(s32 arg0, s32 arg1, s32 arg2);",
+  "func_0000102C": "s32 func_0000102C(void);",
+  "func_000010CC": "s32 func_000010CC(void);",
+  "func_00001220": "s32 func_00001220(void);",
+  "func_000012B0": "s32 func_000012B0(void);",
   "func_00001350": "void func_00001350(u32 attr, u32 unk1, s32 arg2);",
   "func_00001358": "void func_00001358(u32 attr, u32 unk1, s32 arg2);",
   "func_000015B0": "void func_000015B0(u32 attr, u32 unk1, s32 arg2);",
@@ -16,7 +22,9 @@
   "func_00001FA4": "void func_00001FA4(s32 arg0);",
   "func_00001FCC": "void func_00001FCC(s32 arg0, s32 arg1, s32 arg2);",
   "func_00001FF8": "s32 func_00001FF8(void);",
-  "func_000022E0": "s32 func_000022E0(s32, s32, s32, s32, s32);",
+  "func_00002104": "s32 func_00002104(void);",
+  "func_000021C4": "s32 func_000021C4(void);",
+  "func_000022E0": "s32 func_000022E0(void *list, void *stall, s32 cbid, SceGeListArgs *arg, s32 head);",
   "func_00002854": "s32 func_00002854(void);",
   "func_00002990": "s32 func_00002990(s32, s32, s32, s32, s32);",
   "func_0000428C": "s32 func_0000428C(s32, s32, s32, s32, s32);",
@@ -28,10 +36,13 @@
   "sceGeEdramGetAddr": "void *sceGeEdramGetAddr(void);",
   "sceGeEdramGetHwSize": "s32 sceGeEdramGetHwSize(void);",
   "sceGeEdramGetSize": "u32 sceGeEdramGetSize(void);",
+  "sceGeEdramInit": "s32 sceGeEdramInit(void);",
   "sceGeInit": "s32 sceGeInit(void);",
   "sceGeListEnQueue": "s32 sceGeListEnQueue(void *arg0, void *arg1, s32 arg2, void *arg3);",
   "sceGeListEnQueueHead": "s32 sceGeListEnQueueHead(void *arg0, void *arg1, s32 arg2, void *arg3);",
   "sceGeRegisterLogHandler": "s32 sceGeRegisterLogHandler(s32 arg0);",
+  "sceGeRestoreContext": "s32 sceGeRestoreContext(SceGeContext *ctx);",
+  "sceGeSaveContext": "s32 sceGeSaveContext(SceGeContext *ctx);",
   "sceGeSetGeometryClock": "s32 sceGeSetGeometryClock(s32 arg0);",
   "sceKernelDeleteEventFlag": "s32 sceKernelDeleteEventFlag(s32);"
  },
@@ -39,7 +50,7 @@
   "D_00007AC0_s": "struct D_00007AC0_s {\n    u8 pad0[0x18];\n    volatile s32 unk18;\n    volatile s32 unk1C;\n    volatile s32 unk20;\n};",
   "ge0_hw": "/* GE hardware registers */\n#define HW(addr) (*(volatile u32 *)(addr))\n#define HW_GE_RESET HW(0xBD400000)\n#define HW_GE_UNK004 HW(0xBD400004)\n#define HW_GE_EDRAM_HW_SIZE HW(0xBD400008)\n#define HW_GE_EXEC HW(0xBD400100)\n#define HW_GE_UNK104 HW(0xBD400104)\n#define HW_GE_LISTADDR HW(0xBD400108)\n#define HW_GE_STALLADDR HW(0xBD40010C)\n#define HW_GE_RADR1 HW(0xBD400110)\n#define HW_GE_RADR2 HW(0xBD400114)\n#define HW_GE_VADR HW(0xBD400118)\n#define HW_GE_IADR HW(0xBD40011C)\n#define HW_GE_OADR HW(0xBD400120)\n#define HW_GE_OADR1 HW(0xBD400124)\n#define HW_GE_OADR2 HW(0xBD400128)\n#define HW_GE_GEOMETRY_CLOCK HW(0xBD400200)\n#define HW_GE_UNK300 HW(0xBD400300)\n#define HW_GE_INTERRUPT_TYPE1 HW(0xBD400304)\n#define HW_GE_INTERRUPT_TYPE2 HW(0xBD400308)\n#define HW_GE_INTERRUPT_TYPE3 HW(0xBD40030C)\n#define HW_GE_INTERRUPT_TYPE4 HW(0xBD400310)\n#define HW_GE_EDRAM_ENABLED_SIZE HW(0xBD400400)\n#define HW_GE_CMD(i) HW(0xBD400800 + (i) * 4)\n#define HW_GE_EDRAM_REFRESH_UNK1 HW(0xBD500000)\n#define HW_GE_EDRAM_UNK10 HW(0xBD500010)\n#define HW_GE_EDRAM_REFRESH_UNK2 HW(0xBD500020)\n#define HW_GE_EDRAM_REFRESH_UNK3 HW(0xBD500030)\n#define HW_GE_EDRAM_UNK40 HW(0xBD500040)\n#define HW_GE_EDRAM_ADDR_TRANS_DISABLE HW(0xBD500070)\n#define HW_GE_EDRAM_ADDR_TRANS_VALUE HW(0xBD500080)\n#define HW_GE_EDRAM_UNK90 HW(0xBD500090)\n\n#define HW_GE_INTSIG 1\n#define HW_GE_INTEND 2\n#define HW_GE_INTFIN 4\n#define HW_GE_INTERR 8\n\n#define SCE_GE_INTR 25\n\n#define pspSync() __asm__ __volatile__(\"sync\")",
   "ge1_context": "/* GE context saved by sceGeSaveContext (kernel view of SceGeContext) */\ntypedef struct {\n    u32 exec;               /* 0x00 */\n    u32 ladr;               /* 0x04 */\n    u32 sadr;               /* 0x08 */\n    u32 radr1;              /* 0x0C */\n    u32 radr2;              /* 0x10 */\n    u32 vadr;               /* 0x14 */\n    u32 iadr;               /* 0x18 */\n    u32 oadr;               /* 0x1C */\n    u32 oadr1;              /* 0x20 */\n    u32 oadr2;              /* 0x24 */\n    u32 edramTransDisable;  /* 0x28 */\n    u32 edramTransVal;      /* 0x2C */\n    u32 edramRefresh1;      /* 0x30 */\n    u32 edramRefresh2;      /* 0x34 */\n    u32 edramRefresh3;      /* 0x38 */\n    u32 edramUnk40;         /* 0x3C */\n    u32 geometryClock;      /* 0x40 */\n    u32 dl[495];            /* 0x44: command list restoring the state */\n} SceGeContext; /* 0x800 */",
-  "ge2_displaylist": "/* display list (1.00 layout) */\ntypedef struct SceGeDisplayList {\n    struct SceGeDisplayList *next;  /* 0x00 */\n    struct SceGeDisplayList *prev;  /* 0x04 */\n    u16 state;                      /* 0x08: SCE_GE_DL_STATE_* */\n    u16 signal;                     /* 0x0A: SCE_GE_DL_SIGNAL_* */\n    SceGeContext *ctx;              /* 0x0C */\n    void *list;                     /* 0x10 */\n    void *stall;                    /* 0x14 */\n    s32 cbId;                       /* 0x18 */\n    u32 signalData;                 /* 0x1C */\n} SceGeDisplayList; /* 0x20 */\n\n#define SCE_GE_DL_STATE_NONE 0\n#define SCE_GE_DL_STATE_QUEUED 1\n#define SCE_GE_DL_STATE_RUNNING 2\n#define SCE_GE_DL_STATE_COMPLETED 3\n#define SCE_GE_DL_STATE_PAUSED 4\n\n#define SCE_GE_DL_SIGNAL_NONE 0\n#define SCE_GE_DL_SIGNAL_HANDLER_SUSPEND 1\n#define SCE_GE_DL_SIGNAL_BREAK 2\n#define SCE_GE_DL_SIGNAL_PAUSE 3\n\n/* GE call stack entry (1.00: 16 bytes) */\ntypedef struct {\n    u32 listAddr;  /* 0x0 */\n    u32 oadr;      /* 0x4 */\n    u32 radr1;     /* 0x8 */\n    u32 radr2;     /* 0xC */\n} SceGeStack;\n\n/* display list queue (1.00 layout) */\ntypedef struct {\n    SceGeDisplayList *active_first;  /* 0x000: running list */\n    SceGeDisplayList *active_last;   /* 0x004 */\n    SceGeDisplayList *free_first;    /* 0x008 */\n    SceGeDisplayList *free_last;     /* 0x00C */\n    SceGeDisplayList lists[64];      /* 0x010 */\n    SceUID drawingEvFlagId;          /* 0x810 */\n    s32 stackOff;                    /* 0x814 */\n    SceGeStack stack[32];            /* 0x818 */\n} SceGeQueue; /* 0xA18 */\n\n/* saved by _sceGeQueueSuspend (1.00) */\ntypedef struct {\n    u32 intrType;  /* 0x0: HW_GE_INTERRUPT_TYPE1 */\n    u32 unk4;      /* 0x4: HW_GE_UNK004 */\n} SceGeQueueSuspendInfo;\n\ntypedef void (*SceGeCallback)(int id, void *arg);\n\ntypedef struct {\n    SceGeCallback signal_func;  /* 0x0 */\n    void *signal_arg;           /* 0x4 */\n    SceGeCallback finish_func;  /* 0x8 */\n    void *finish_arg;           /* 0xC */\n} SceGeCallbackData;\n\n/* 1.00: 8 bytes */\ntypedef struct {\n    u32 size;           /* 0x0 */\n    SceGeContext *ctx;  /* 0x4 */\n} SceGeListArgs;\n\ntypedef struct {\n    u32 size;\n    u32 attr;\n    void *cb;\n} SceIntrHandler;"
+  "ge2_displaylist": "/* display list (1.00 layout) */\ntypedef struct SceGeDisplayList {\n    struct SceGeDisplayList *next;  /* 0x00 */\n    struct SceGeDisplayList *prev;  /* 0x04 */\n    u16 state;                      /* 0x08: SCE_GE_DL_STATE_* */\n    u16 signal;                     /* 0x0A: SCE_GE_DL_SIGNAL_* */\n    SceGeContext *ctx;              /* 0x0C */\n    u32 list;                       /* 0x10 */\n    u32 stall;                      /* 0x14 */\n    s32 cbId;                       /* 0x18 */\n    u32 signalData;                 /* 0x1C */\n} SceGeDisplayList; /* 0x20 */\n\n#define SCE_GE_DL_STATE_NONE 0\n#define SCE_GE_DL_STATE_QUEUED 1\n#define SCE_GE_DL_STATE_RUNNING 2\n#define SCE_GE_DL_STATE_COMPLETED 3\n#define SCE_GE_DL_STATE_PAUSED 4\n\n#define SCE_GE_DL_SIGNAL_NONE 0\n#define SCE_GE_DL_SIGNAL_HANDLER_SUSPEND 1\n#define SCE_GE_DL_SIGNAL_BREAK 2\n#define SCE_GE_DL_SIGNAL_PAUSE 3\n\n/* GE call stack entry (1.00: 16 bytes) */\ntypedef struct {\n    u32 listAddr;  /* 0x0 */\n    u32 oadr;      /* 0x4 */\n    u32 radr1;     /* 0x8 */\n    u32 radr2;     /* 0xC */\n} SceGeStack;\n\n/* display list queue (1.00 layout) */\ntypedef struct {\n    SceGeDisplayList *active_first;  /* 0x000: running list */\n    SceGeDisplayList *active_last;   /* 0x004 */\n    SceGeDisplayList *free_first;    /* 0x008 */\n    SceGeDisplayList *free_last;     /* 0x00C */\n    SceGeDisplayList lists[64];      /* 0x010 */\n    SceUID drawingEvFlagId;          /* 0x810 */\n    s32 stackOff;                    /* 0x814 */\n    SceGeStack stack[32];            /* 0x818 */\n} SceGeQueue; /* 0xA18 */\n\n/* saved by _sceGeQueueSuspend (1.00) */\ntypedef struct {\n    u32 intrType;  /* 0x0: HW_GE_INTERRUPT_TYPE1 */\n    u32 unk4;      /* 0x4: HW_GE_UNK004 */\n} SceGeQueueSuspendInfo;\n\ntypedef void (*SceGeCallback)(int id, void *arg);\n\ntypedef struct {\n    SceGeCallback signal_func;  /* 0x0 */\n    void *signal_arg;           /* 0x4 */\n    SceGeCallback finish_func;  /* 0x8 */\n    void *finish_arg;           /* 0xC */\n} SceGeCallbackData;\n\n/* 1.00: 8 bytes */\ntypedef struct {\n    u32 size;           /* 0x0 */\n    SceGeContext *ctx;  /* 0x4 */\n} SceGeListArgs;\n\ntypedef struct {\n    u32 size;\n    u32 attr;\n    void *cb;\n} SceIntrHandler;"
  },
  "vars": {
   "D_00002A34": "extern volatile u32 *const D_00002A34[20];",

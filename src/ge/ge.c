@@ -12,7 +12,45 @@ static inline u32 geShiftK1(void) {
     return oldK1;
 }
 
+#if FW_VERSION < 201
+s32 func_00000000(void) {
+    s32 oldIntr = sceKernelCpuSuspendIntr();
+    SceGeContext *ctx = &D_00002B7C;
+
+    sceSysregAwRegABusClockEnable();
+    pspSync();
+    HW_GE_EDRAM_UNK10 = 2;
+    HW_GE_RESET = 1;
+    while ((HW_GE_RESET & 1) != 0)
+        ;
+    sceGeSaveContext(&D_00002B7C);
+    ctx->geometryClock = HW_GE_GEOMETRY_CLOCK;
+    sceSysregAwResetEnable();
+    sceSysregAwResetDisable();
+    HW_GE_EDRAM_UNK10 = 0;
+    HW_GE_EDRAM_ENABLED_SIZE = 4;
+    HW_GE_EXEC = 0;
+    HW_GE_LISTADDR = 0;
+    HW_GE_STALLADDR = 0;
+    HW_GE_RADR1 = 0;
+    HW_GE_RADR2 = 0;
+    HW_GE_VADR = 0;
+    HW_GE_IADR = 0;
+    HW_GE_OADR = 0;
+    HW_GE_OADR1 = 0;
+    HW_GE_OADR2 = 0;
+    HW_GE_INTERRUPT_TYPE2 = HW_GE_INTERR | HW_GE_INTFIN | HW_GE_INTEND;
+    HW_GE_GEOMETRY_CLOCK = ctx->geometryClock;
+    sceSysregSetMasterPriv(64, 1);
+    sceGeRestoreContext(&D_00002B7C);
+    sceSysregSetMasterPriv(64, 0);
+    sceSysregAwRegABusClockDisable();
+    sceKernelCpuResumeIntr(oldIntr);
+    return 0;
+}
+#else
 INCLUDE_ASM("nonmatchings/ge", func_00000000);
+#endif
 
 #if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/ge", D_000059C4);
@@ -222,7 +260,71 @@ INCLUDE_RODATA("nonmatchings/ge", D_00005DB8);
 INCLUDE_ASM("nonmatchings/ge", func_00001A38);
 #endif
 
+#if FW_VERSION == 100
+s32 func_00001BA4(s32 ev, char *name, void *param, s32 *result) {
+    SceGeContext *ctx;
+
+    switch (ev) {
+    case 0x402:
+        return func_000021C4();
+    case 0x4003:
+        sceSysregAwRegABusClockEnable();
+        func_00001220();
+        ctx = &D_00002B7C;
+        sceGeSaveContext(ctx);
+        ctx->edramTransDisable = HW_GE_EDRAM_ADDR_TRANS_DISABLE;
+        ctx->edramTransVal = HW_GE_EDRAM_ADDR_TRANS_VALUE;
+        ctx->edramRefresh1 = HW_GE_EDRAM_REFRESH_UNK1;
+        ctx->edramRefresh2 = HW_GE_EDRAM_REFRESH_UNK2;
+        ctx->edramRefresh3 = HW_GE_EDRAM_REFRESH_UNK3;
+        ctx->edramUnk40 = HW_GE_EDRAM_UNK40;
+        ctx->geometryClock = HW_GE_GEOMETRY_CLOCK;
+        func_0000102C();
+        sceSysregAwRegABusClockDisable();
+        sceSysregAwRegBBusClockDisable();
+        sceSysregAwEdramBusClockDisable();
+        break;
+    case 0x10003:
+        sceSysregAwResetDisable();
+        sceSysregAwRegABusClockEnable();
+        sceSysregAwRegBBusClockEnable();
+        sceSysregAwEdramBusClockEnable();
+        sceGeEdramInit();
+        func_000010CC();
+        HW_GE_EDRAM_ENABLED_SIZE = 4;
+        HW_GE_EXEC = 0;
+        HW_GE_LISTADDR = 0;
+        HW_GE_STALLADDR = 0;
+        HW_GE_RADR1 = 0;
+        HW_GE_RADR2 = 0;
+        HW_GE_VADR = 0;
+        HW_GE_IADR = 0;
+        HW_GE_OADR = 0;
+        HW_GE_OADR1 = 0;
+        HW_GE_OADR2 = 0;
+        HW_GE_INTERRUPT_TYPE2 = HW_GE_INTERR | HW_GE_INTFIN | HW_GE_INTEND;
+        ctx = &D_00002B7C;
+        HW_GE_EDRAM_ADDR_TRANS_DISABLE = ctx->edramTransDisable;
+        HW_GE_EDRAM_ADDR_TRANS_VALUE = ctx->edramTransVal;
+        HW_GE_EDRAM_REFRESH_UNK1 = ctx->edramRefresh1;
+        HW_GE_EDRAM_REFRESH_UNK2 = ctx->edramRefresh2;
+        HW_GE_EDRAM_REFRESH_UNK3 = ctx->edramRefresh3;
+        HW_GE_EDRAM_UNK40 = ctx->edramUnk40;
+        HW_GE_GEOMETRY_CLOCK = ctx->geometryClock;
+        sceSysregSetMasterPriv(64, 1);
+        sceGeRestoreContext(ctx);
+        sceSysregSetMasterPriv(64, 0);
+        func_000012B0();
+        if (func_000021C4() == 0) {
+            sceSysregAwRegABusClockDisable();
+        }
+        break;
+    }
+    return 0;
+}
+#else
 INCLUDE_ASM("nonmatchings/ge", func_00001BA4);
+#endif
 
 s32 module_start(void) {
     sceGeInit();
@@ -612,19 +714,174 @@ INCLUDE_ASM("nonmatchings/ge", func_000029A8);
 INCLUDE_ASM("nonmatchings/ge", func_00002E78);
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION >= 282
+#if FW_VERSION == 100
+s32 sceGeListDeQueue(SceGeDisplayList *dl) {
+    u32 oldK1 = geShiftK1();
+    s32 oldIntr;
+    s32 ret;
+
+    if ((s32)dl < (s32)&g_AwQueue.lists[0] || (s32)dl > (s32)&g_AwQueue.lists[63]) {
+        setK1(oldK1);
+        return 0x80000100;
+    }
+    ret = -1;
+    oldIntr = sceKernelCpuSuspendIntr();
+    if (dl->state == SCE_GE_DL_STATE_QUEUED) {
+        if (g_AwQueue.active_first == dl) {
+            g_AwQueue.active_first = dl->next;
+        }
+        if (g_AwQueue.active_last == dl) {
+            g_AwQueue.active_last = dl->prev;
+        }
+        if (g_AwQueue.free_first != NULL) {
+            g_AwQueue.free_first->prev = dl;
+        }
+        dl->state = SCE_GE_DL_STATE_COMPLETED;
+        ret = 0;
+        g_AwQueue.free_last->next = dl;
+        dl->prev = g_AwQueue.free_last;
+        dl->next = NULL;
+        g_AwQueue.free_last = dl;
+    }
+    sceKernelCpuResumeIntr(oldIntr);
+    setK1(oldK1);
+    return ret;
+}
+#endif
+
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/ge", sceGeListDeQueue);
+#endif
 
+#if FW_VERSION == 100 || FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/ge", sceGeListUpdateStallAddr);
+#endif
 
+#if FW_VERSION == 100
+s32 sceGeListSync(SceGeDisplayList *dl, s32 mode) {
+    u32 oldK1 = geShiftK1();
+    s32 ret;
+
+    if ((s32)dl < (s32)&g_AwQueue.lists[0] || (s32)dl > (s32)&g_AwQueue.lists[63]) {
+        setK1(oldK1);
+        return 0x80000100;
+    }
+    if (mode == 0) {
+        if (dl->state != SCE_GE_DL_STATE_NONE) {
+            while (dl->state != SCE_GE_DL_STATE_COMPLETED) {
+                sceKernelWaitEventFlag(g_AwQueue.drawingEvFlagId, 1, 0, NULL, NULL);
+            }
+        }
+        ret = 0;
+    } else if (mode == 1) {
+        switch (dl->state) {
+        case SCE_GE_DL_STATE_QUEUED:
+            ret = 1;
+            break;
+        case SCE_GE_DL_STATE_RUNNING:
+            ret = (dl->stall == HW_GE_LISTADDR) ? 3 : 2;
+            break;
+        case SCE_GE_DL_STATE_COMPLETED:
+            ret = 0;
+            break;
+        case SCE_GE_DL_STATE_PAUSED:
+            ret = 4;
+            break;
+        default:
+            ret = -1;
+            break;
+        }
+    } else {
+        ret = 0x80000107;
+    }
+    setK1(oldK1);
+    return ret;
+}
+#endif
+
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/ge", sceGeListSync);
+#endif
 
+#if FW_VERSION == 100
+s32 sceGeDrawSync(s32 mode) {
+    u32 oldK1 = geShiftK1();
+    s32 ret;
+    s32 oldIntr;
+    s32 i;
+    SceGeDisplayList *dl;
+    SceGeDisplayList *cur;
+
+    if (mode == 0) {
+        sceKernelWaitEventFlag(g_AwQueue.drawingEvFlagId, 2, 0, NULL, NULL);
+        dl = g_AwQueue.lists;
+        ret = 0;
+        for (i = 0; i < 64; i++, dl++) {
+            if (dl->state == SCE_GE_DL_STATE_COMPLETED) {
+                dl->state = SCE_GE_DL_STATE_NONE;
+            }
+        }
+    } else if (mode == 1) {
+        ret = 0;
+        oldIntr = sceKernelCpuSuspendIntr();
+        cur = g_AwQueue.active_first;
+        if (cur != NULL) {
+            ret = (cur->stall == HW_GE_LISTADDR) ? 3 : 2;
+        }
+        sceKernelCpuResumeIntr(oldIntr);
+    } else {
+        ret = 0x80000107;
+    }
+    setK1(oldK1);
+    return ret;
+}
+#endif
+
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/ge", sceGeDrawSync);
+#endif
 
+#if FW_VERSION == 100 || FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/ge", sceGeBreak);
+#endif
 
+#if FW_VERSION == 100
+s32 sceGeContinue(void) {
+    s32 ret = 0;
+    u32 oldK1 = geShiftK1();
+    s32 oldIntr = sceKernelCpuSuspendIntr();
+    SceGeDisplayList *dl = g_AwQueue.active_first;
+
+    if (dl != NULL) {
+        if (dl->state == SCE_GE_DL_STATE_PAUSED) {
+            dl->state = SCE_GE_DL_STATE_RUNNING;
+            if (dl->signal != SCE_GE_DL_SIGNAL_BREAK) {
+                if (dl->ctx != NULL && dl->signal == SCE_GE_DL_SIGNAL_NONE) {
+                    sceGeSaveContext(dl->ctx);
+                }
+                sceSysregAwRegABusClockEnable();
+                HW_GE_STALLADDR = (u32)dl->stall & 0x1FFFFFFF;
+                HW_GE_LISTADDR = (u32)dl->list & 0x1FFFFFFF;
+                sceKernelClearEventFlag(g_AwQueue.drawingEvFlagId, ~2);
+                HW_GE_EXEC |= 1;
+                pspSync();
+            }
+            dl->signal = SCE_GE_DL_SIGNAL_NONE;
+        } else {
+            ret = -1;
+        }
+    }
+    sceKernelCpuResumeIntr(oldIntr);
+    setK1(oldK1);
+    return ret;
+}
+#endif
+
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/ge", sceGeContinue);
+#endif
 
+#if FW_VERSION == 100 || FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/ge", sceGeSetCallback);
 #endif
 

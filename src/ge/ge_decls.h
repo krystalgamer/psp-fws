@@ -82,8 +82,8 @@ typedef struct SceGeDisplayList {
     u16 state;                      /* 0x08: SCE_GE_DL_STATE_* */
     u16 signal;                     /* 0x0A: SCE_GE_DL_SIGNAL_* */
     SceGeContext *ctx;              /* 0x0C */
-    void *list;                     /* 0x10 */
-    void *stall;                    /* 0x14 */
+    u32 list;                       /* 0x10 */
+    u32 stall;                      /* 0x14 */
     s32 cbId;                       /* 0x18 */
     u32 signalData;                 /* 0x1C */
 } SceGeDisplayList; /* 0x20 */
@@ -168,6 +168,12 @@ extern SceGeQueueSuspendInfo g_GeSuspend;
 extern u8 g_GeSysEv[];
 
 s32 SysMemForKernel_EF2EE8C1();
+s32 func_00000000(void);
+s32 func_00000AC0(s32 arg0, s32 arg1, s32 arg2);
+s32 func_0000102C(void);
+s32 func_000010CC(void);
+s32 func_00001220(void);
+s32 func_000012B0(void);
 void func_00001350(u32 attr, u32 unk1, s32 arg2);
 void func_00001358(u32 attr, u32 unk1, s32 arg2);
 void func_000015B0(u32 attr, u32 unk1, s32 arg2);
@@ -183,7 +189,9 @@ s32 func_00001EF0(void);
 void func_00001FA4(s32 arg0);
 void func_00001FCC(s32 arg0, s32 arg1, s32 arg2);
 s32 func_00001FF8(void);
-s32 func_000022E0(s32, s32, s32, s32, s32);
+s32 func_00002104(void);
+s32 func_000021C4(void);
+s32 func_000022E0(void *list, void *stall, s32 cbid, SceGeListArgs *arg, s32 head);
 s32 func_00002854(void);
 s32 func_00002990(s32, s32, s32, s32, s32);
 s32 func_0000428C(s32, s32, s32, s32, s32);
@@ -195,10 +203,13 @@ s32 module_start(void);
 void *sceGeEdramGetAddr(void);
 s32 sceGeEdramGetHwSize(void);
 u32 sceGeEdramGetSize(void);
+s32 sceGeEdramInit(void);
 s32 sceGeInit(void);
 s32 sceGeListEnQueue(void *arg0, void *arg1, s32 arg2, void *arg3);
 s32 sceGeListEnQueueHead(void *arg0, void *arg1, s32 arg2, void *arg3);
 s32 sceGeRegisterLogHandler(s32 arg0);
+s32 sceGeRestoreContext(SceGeContext *ctx);
+s32 sceGeSaveContext(SceGeContext *ctx);
 s32 sceGeSetGeometryClock(s32 arg0);
 s32 sceKernelDeleteEventFlag(s32);
 
