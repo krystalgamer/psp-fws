@@ -1081,8 +1081,8 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_00003298);
 #endif
 
 #if (FW_VERSION >= 150 && FW_VERSION < 201) || (FW_VERSION >= 260 && FW_VERSION < 282)
-void func_00003298(void) {
-    df_close();
+void func_00003298(SceIoIob *iob) {
+    df_close(iob);
 }
 #endif
 
@@ -1139,8 +1139,8 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_0000340C);
 #endif
 
 #if (FW_VERSION >= 150 && FW_VERSION < 201) || (FW_VERSION >= 260 && FW_VERSION < 282)
-void func_0000340C(void) {
-    df_dclose();
+void func_0000340C(SceIoIob *iob) {
+    df_dclose(iob);
 }
 #endif
 
@@ -1187,8 +1187,8 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_00003624);
 
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00003674);
 
-void func_000036A8(void) {
-    df_close();
+void func_000036A8(SceIoIob *iob) {
+    df_close(iob);
 }
 
 void func_000036C4(s32 arg0, s32 arg1, s32 arg2) {
@@ -1213,8 +1213,8 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_000037B4);
 
 INCLUDE_ASM("nonmatchings/fatmsmod", func_000037E8);
 
-void func_0000381C(void) {
-    df_dclose();
+void func_0000381C(SceIoIob *iob) {
+    df_dclose(iob);
 }
 
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00003838);
@@ -1297,8 +1297,8 @@ void func_00004778(void) {
 
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00004794);
 
-void func_000047C8(void) {
-    df_close();
+void func_000047C8(SceIoIob *iob) {
+    df_close(iob);
 }
 
 void func_000047E4(void) {
@@ -1323,8 +1323,8 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_000048E8);
 
 INCLUDE_ASM("nonmatchings/fatmsmod", func_0000491C);
 
-void func_00004950(void) {
-    df_dclose();
+void func_00004950(SceIoIob *iob) {
+    df_dclose(iob);
 }
 
 INCLUDE_ASM("nonmatchings/fatmsmod", func_0000496C);
