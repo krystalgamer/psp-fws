@@ -265,3 +265,7 @@ icmp_sysctl = 0x000196DC; // type:func
 ip_optcopy = 0x000177A4; // type:func
 in_delmulti = 0x00012684; // type:func
 igmp_joingroup = 0x0001A8E4; // type:func
+save_rte = 0x00015C8C; // type:func
+arp_drain = 0x00010668; // type:func
+llinfo_arp_head = 0x0002CEB4;
+arp_locked = 0x0002CEB8;

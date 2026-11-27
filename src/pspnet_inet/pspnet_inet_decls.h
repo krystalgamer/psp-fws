@@ -1062,6 +1062,42 @@ static __inline void ipq_unlock(void) {
     _sce_pspnet_splunlock(s);
 }
 
+/* ip_input.c source-route save area */
+#define MAX_IPOPTLEN 40
+struct ip_srcrt_s {
+    struct in_addr dst;                 /* 0x00 */
+    char nop;                           /* 0x04 */
+    char srcopt[3];                     /* 0x05 IPOPT_OFFSET + 1 */
+    struct in_addr route[MAX_IPOPTLEN / sizeof(struct in_addr)]; /* 0x08 */
+};
+
+/* struct llinfo_arp (netinet/if_inarp.h, partial) */
+struct llinfo_arp {
+    struct { struct llinfo_arp *le_next; struct llinfo_arp **le_prev; } la_list; /* 0x00 */
+    struct rtentry *la_rt;              /* 0x08 */
+    struct mbuf *la_hold;               /* 0x0C */
+    s32 la_asked;                       /* 0x10 */
+};
+
+extern s32 arp_locked; /* arp_locked */
+static __inline s32 arp_lock_try(void) {
+    s32 s;
+    s = _sce_pspnet_spllock();
+    if (arp_locked) {
+        _sce_pspnet_splunlock(s);
+        return 0;
+    }
+    arp_locked = 1;
+    _sce_pspnet_splunlock(s);
+    return 1;
+}
+static __inline void arp_unlock(void) {
+    s32 s;
+    s = _sce_pspnet_spllock();
+    arp_locked--;
+    _sce_pspnet_splunlock(s);
+}
+
 typedef void (*SceNetInetHook)(void *a, u16 b, void *c);
 
 struct SceNetInetKeyNode {
@@ -1349,8 +1385,6 @@ extern u8 D_0002CC74[]; /* pfslowtimo_ch */
 extern s32 D_0002CCB4;
 extern u8 D_0002CD38[];
 extern s32 D_0002CEB0;
-extern s32 D_0002CEB4;
-extern s32 D_0002CEB8;
 extern s32 D_0002CEBC;
 extern s32 D_0002CEC0;
 extern s32 D_0002CF00;
@@ -1407,6 +1441,7 @@ extern s32 D_0002F50C;
 extern s32 D_0002F510;
 extern struct route D_0002FF98; /* ipforward_rt */
 extern u8 D_00030218[];
+extern s32 arp_locked; /* arp_locked */
 extern const struct cp chap; /* chap */
 extern const struct cp *cps[IDX_COUNT]; /* cps */
 extern SceNetBytes4 dns_primary;
@@ -1415,9 +1450,12 @@ extern struct domain *domains;
 extern TAILQ_HEAD(, in_ifaddr) in_ifaddrhead; /* in_ifaddr */
 extern u32 in_maxmtu;
 extern s32 inetctlerrmap[]; /* inetctlerrmap */
+extern s32 ip_nhops; /* ip_nhops */
+extern struct ip_srcrt_s ip_srcrt; /* ip_srcrt */
 extern const struct cp ipcp; /* ipcp */
 extern struct ifqueue ipintrq; /* ipintrq, exported by sceNetInet_lib_D7928A6D */
 extern const struct cp lcp; /* lcp */
+extern struct { struct llinfo_arp *lh_first; } llinfo_arp_head; /* llinfo_arp */
 extern struct ifnet loif; /* loif */
 extern const struct cp pap; /* pap */
 extern s32 pffasttimo_now; /* pffasttimo_now */
@@ -1675,6 +1713,7 @@ struct radix_node *rn_lookup(void *v_arg, void *m_arg, struct radix_node_head *h
 void rt_maskedcopy(struct sockaddr *src, struct sockaddr *dst, struct sockaddr *netmask);
 void rt_timer_remove_all(struct rtentry *rt);
 void rtfree(struct rtentry *rt);
+void save_rte(u8 *option, struct in_addr dst);
 s32 sb_lock(struct sockbuf *sb);
 struct mbuf *sbcreatecontrol(void *p, s32 size, s32 type, s32 level);
 void sbdrop(struct sockbuf *sb, s32 len);

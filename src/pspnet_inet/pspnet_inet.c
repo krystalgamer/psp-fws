@@ -2450,7 +2450,21 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_0001044C);
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00010528);
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_00010668);
+void arp_drain(void) {
+    struct llinfo_arp *la, *nla;
+    struct mbuf *mold;
+
+    if (arp_lock_try() == 0)
+        return;
+    for (la = llinfo_arp_head.lh_first; la != 0; la = nla) {
+        nla = la->la_list.le_next;
+        mold = la->la_hold;
+        la->la_hold = 0;
+        if (mold)
+            sceNetMFreem(mold);
+    }
+    arp_unlock();
+}
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_000106E0);
@@ -2526,10 +2540,10 @@ void func_00010B98(void) {
     D_0002F510 = 0;
     D_0002F50C = 0;
     D_0002F500 = 0;
-    D_0002CEB8 = 0;
+    arp_locked = 0;
     D_0002EB88 = 0;
     D_0002BF8C.ifq_head = NULL;
-    D_0002CEB4 = 0;
+    llinfo_arp_head.lh_first = 0;
     D_0002EB8C = 0;
     D_0002EB90 = 0;
     D_0002EB94 = 0;
@@ -3747,7 +3761,20 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_000156F8);
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00015BD8);
 #endif
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_00015C8C);
+#if FW_VERSION < 201
+void save_rte(u8 *option, struct in_addr dst) {
+    u32 olen;
+
+    olen = option[1];
+    if (olen > sizeof(ip_srcrt) - (1 + sizeof(dst)))
+        return;
+    func_0002C9B8(option, ip_srcrt.srcopt, olen);
+    ip_nhops = (olen - 2 - 1) / sizeof(struct in_addr);
+    ip_srcrt.dst = dst;
+}
+#else
+INCLUDE_ASM("nonmatchings/pspnet_inet", save_rte);
+#endif
 
 #if FW_VERSION >= 151 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00015888);
@@ -3846,8 +3873,38 @@ void ip_drain(void) {
 
 #if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00016830);
-#else
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_00016D78);
+#endif
+
+#if FW_VERSION < 201
+struct mbuf *ip_srcroute(void) {
+    struct in_addr *p, *q;
+    struct mbuf *m;
+
+    if (ip_nhops == 0)
+        return ((struct mbuf *)0);
+    m = sceNetMGet(1, 4);
+    if (m == 0)
+        return ((struct mbuf *)0);
+
+#define OPTSIZ (sizeof(ip_srcrt.nop) + sizeof(ip_srcrt.srcopt))
+    m->m_len = ip_nhops * sizeof(struct in_addr) + sizeof(struct in_addr) + OPTSIZ;
+    p = &ip_srcrt.route[ip_nhops - 1];
+    *(mtod(m, struct in_addr *)) = *p--;
+    ip_srcrt.nop = 1;
+    ip_srcrt.srcopt[2] = 4;
+    func_0002C9B8((char *)&ip_srcrt.nop, mtod(m, char *) + sizeof(struct in_addr), OPTSIZ);
+    q = (struct in_addr *)(mtod(m, char *) + sizeof(struct in_addr) + OPTSIZ);
+#undef OPTSIZ
+    while (p >= ip_srcrt.route) {
+        *q++ = *p--;
+    }
+    *q = ip_srcrt.dst;
+    return (m);
+}
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 271
+INCLUDE_ASM("nonmatchings/pspnet_inet", ip_srcroute);
 #endif
 
 #if FW_VERSION < 201
