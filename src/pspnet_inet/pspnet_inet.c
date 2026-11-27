@@ -4242,7 +4242,32 @@ void func_00027FA0(void *arg0) {
     func_00028B84(&D_0002BB10, arg0);
 }
 
+#if FW_VERSION < 271
+void func_00027FC4(struct sppp *sp, u8 *h, s32 len) {
+    u8 *buf, *p;
+
+    len -= 4;
+    buf = sceNetMallocInternal(len);
+    if (!buf) {
+        return;
+    }
+    p = h + 4;
+    for (; len > 1 && p[1]; len -= p[1], p += p[1]) {
+        switch (*p) {
+        case 5: /* LCP_OPT_MAGIC */
+            sp->lcp_opts &= ~(1 << 5);
+            sp->lcp_magic = 0;
+            break;
+        case 1: /* LCP_OPT_MRU */
+            sp->lcp_opts &= ~(1 << 1);
+            break;
+        }
+    }
+    sceNetFreeInternal(buf);
+}
+#else
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00027FC4);
+#endif
 
 void func_00028080(struct sppp *sp) {
     s32 i;
@@ -4299,9 +4324,43 @@ void func_00028608(void *arg0) {
     func_00028B84(&D_0002BB54, arg0);
 }
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_0002862C);
+#if FW_VERSION < 271
+void func_0002862C(struct sppp *sp, u8 *h, s32 len) {
+    u8 *p;
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_000286C8);
+    len -= 4;
+    p = h + 4;
+    for (; len > 1 && p[1]; len -= p[1], p += p[1]) {
+        switch (*p) {
+        case 3: /* IPCP_OPT_ADDRESS */
+            sp->ipcp_opts &= ~(1 << 3);
+            break;
+        case 0x81: /* primary DNS */
+            sp->ipcp_opts &= ~(1 << 29);
+            break;
+        case 0x83: /* secondary DNS */
+            sp->ipcp_opts &= ~(1u << 31);
+            break;
+        }
+    }
+}
+#else
+INCLUDE_ASM("nonmatchings/pspnet_inet", func_0002862C);
+#endif
+
+void func_000286C8(struct sppp *sp) {
+    struct ifnet *ifp = (struct ifnet *)sp;
+
+    sp->unk174 = 2;
+    sp->ipcp_flags |= 0x10;
+    if (ifp->if_mtu > sp->lcp_their_mru) {
+        sp->pp_saved_mtu = ifp->if_mtu;
+        ifp->if_mtu = sp->lcp_their_mru;
+    }
+    if (sp->pp_con) {
+        sp->pp_con(sp);
+    }
+}
 
 #if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00028758);

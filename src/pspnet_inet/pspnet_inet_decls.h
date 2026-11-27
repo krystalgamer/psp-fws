@@ -525,7 +525,8 @@ struct sppp {
     s32 pp_flags;                   /* 0x13C PP_* */
     u8 unk140[0x150 - 0x140];
     u32 pp_seq;                     /* 0x150 local sequence number */
-    u8 unk154[0x170 - 0x154];
+    u8 unk154[0x168 - 0x154];
+    u64 pp_saved_mtu;               /* 0x168 SCE: if_mtu before ipcp.tlu clamped it */
     s32 pp_phase;                   /* 0x170 */
     s32 unk174;
     u8 unk178[0x180 - 0x178];
@@ -544,7 +545,9 @@ struct sppp {
     s32 lcp_max_terminate;          /* 0x260 */
     s32 lcp_max_configure;          /* 0x264 */
     s32 lcp_max_failure;            /* 0x268 */
-    u8 unk26C[0x27C - 0x26C];
+    u32 ipcp_opts;                  /* 0x26C ipcp.opts */
+    u32 ipcp_flags;                 /* 0x270 ipcp.flags */
+    u8 unk274[0x27C - 0x274];
     u16 myauth_proto;               /* 0x27C myauth.proto */
     u8 unk27E[0x280 - 0x27E];
     u8 myauth_name[0x80];           /* 0x280 */
@@ -557,6 +560,7 @@ struct sppp {
     u8 unk39C[0x4A8 - 0x39C];
     void (*pp_tls)(struct sppp *sp);    /* 0x4A8 */
     void (*pp_tlf)(struct sppp *sp);    /* 0x4AC */
+    void (*pp_con)(struct sppp *sp);    /* 0x4B0 */
 };
 
 
