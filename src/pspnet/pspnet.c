@@ -2018,7 +2018,20 @@ void func_00005C50(void) {
 }
 #endif
 
-INCLUDE_ASM("nonmatchings/pspnet", func_00005C58);
+void func_00005C58(struct ifnet *ifp) {
+    s32 s;
+
+    s = _sce_pspnet_spllock();
+    ifp->if_output = _sce_pspnet_if_nulloutput;
+    ifp->if_input = func_00005C28;
+    ifp->if_start = func_00005C30;
+    ifp->if_ioctl = func_00005C38;
+    ifp->if_reset = func_00005C40;
+    ifp->if_watchdog = func_00005C48;
+    ifp->if_drain = func_00005C50;
+    ifp->if_snd.ifq_maxlen = 0;
+    _sce_pspnet_splunlock(s);
+}
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet", _sce_pspnet_ifafree);
@@ -2039,7 +2052,20 @@ void _sce_pspnet_if_up(struct ifnet *ifp) {
         D_0000B398(ifp);
 }
 
-INCLUDE_ASM("nonmatchings/pspnet", func_00005D64);
+void func_00005D64(void *arg) {
+    struct ifnet *ifp;
+    s32 s;
+
+    s = _sce_pspnet_spllock();
+    for (ifp = TAILQ_FIRST(&D_0000BE54); ifp != NULL; ifp = TAILQ_NEXT(ifp, if_list)) {
+        if (ifp->if_timer == 0 || --ifp->if_timer)
+            continue;
+        if (ifp->if_watchdog)
+            (*ifp->if_watchdog)(ifp);
+    }
+    _sce_pspnet_splunlock(s);
+    _sce_pspnet_callout_reset(&D_0000BE5C, 100, func_00005D64, NULL);
+}
 
 #if FW_VERSION < 201
 struct ifnet *_sce_pspnet_ifunit(const char *name) {
@@ -2087,11 +2113,41 @@ INCLUDE_ASM("nonmatchings/pspnet", _sce_pspnet_ifioctl_sync);
 
 #if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/pspnet", sceNet_lib_E9D457B6);
+#else
+s32 _sce_pspnet_get_ifindex(const char *name) {
+    struct ifnet *ifp;
+    s32 s;
+    s32 index;
+
+    index = -1;
+    s = _sce_pspnet_spllock();
+    for (ifp = TAILQ_FIRST(&D_0000BE54); ifp != NULL; ifp = TAILQ_NEXT(ifp, if_list)) {
+        if (func_00007EA4(name, ifp->if_xname, IFNAMSIZ) == 0) {
+            index = ifp->if_index;
+            break;
+        }
+    }
+    _sce_pspnet_splunlock(s);
+    return index;
+}
 #endif
 
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/pspnet", _sce_pspnet_get_ifindex);
+#endif
 
-INCLUDE_ASM("nonmatchings/pspnet", _sce_pspnet_ifplookup_index);
+struct ifnet *_sce_pspnet_ifplookup_index(u32 index) {
+    struct ifnet *ifp;
+    s32 s;
+
+    s = _sce_pspnet_spllock();
+    for (ifp = TAILQ_FIRST(&D_0000BE54); ifp != NULL; ifp = TAILQ_NEXT(ifp, if_list)) {
+        if (ifp->if_index == index)
+            break;
+    }
+    _sce_pspnet_splunlock(s);
+    return ifp;
+}
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet", _sce_pspnet_get_if_core_variables);
@@ -2160,11 +2216,37 @@ INCLUDE_ASM("nonmatchings/pspnet", func_00006AA8);
 
 INCLUDE_ASM("nonmatchings/pspnet", func_00006AE8);
 
+#if FW_VERSION < 201
+struct ifnet *_sce_pspnet_ifplookup_lladdr(const void *lladdr) {
+    struct ifnet *ifp;
+
+    for (ifp = TAILQ_FIRST(&D_0000BE54); ifp != NULL; ifp = TAILQ_NEXT(ifp, if_list)) {
+        if (func_00007C80(LLADDR(ifp->if_sadl), lladdr, 6) == 0)
+            break;
+    }
+    return ifp;
+}
+#else
 INCLUDE_ASM("nonmatchings/pspnet", _sce_pspnet_ifplookup_lladdr);
+#endif
 
-INCLUDE_ASM("nonmatchings/pspnet", _sce_pspnet_start_of_inet_module_in_if_ethersubr_core);
+s32 _sce_pspnet_start_of_inet_module_in_if_ethersubr_core(s32 (*f0)(), s32 (*f1)(), s32 (*f2)(), s32 (*f3)()) {
+    D_0000B3C0 = f0;
+    D_0000B3C4 = f1;
+    D_0000B3C8 = f2;
+    D_0000B3CC = f3;
+    D_0000B3D4 = 1;
+    return 0;
+}
 
-INCLUDE_ASM("nonmatchings/pspnet", _sce_pspnet_stop_of_inet_module_in_if_ethersubr_core);
+s32 _sce_pspnet_stop_of_inet_module_in_if_ethersubr_core(void) {
+    D_0000B3D4 = 0;
+    D_0000B3C0 = NULL;
+    D_0000B3C4 = NULL;
+    D_0000B3C8 = NULL;
+    D_0000B3CC = NULL;
+    return 0;
+}
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet", _sce_pspnet_start_of_adhoc_module_in_if_ethersubr_core);
@@ -2206,7 +2288,11 @@ s32 _sce_pspnet_stop_of_adhoc_module_in_if_ethersubr_core(void) {
 
 INCLUDE_ASM("nonmatchings/pspnet", func_00006C8C);
 
-INCLUDE_ASM("nonmatchings/pspnet", func_00007020);
+s32 func_00007020(void *a0, void *a1, void *a2, void *a3) {
+    if (D_0000B3D4 > 0)
+        return D_0000B3C0(a0, a1, a2, a3);
+    return 0;
+}
 
 #if FW_VERSION == 271
 INCLUDE_ASM("nonmatchings/pspnet", func_00007060);

@@ -133,10 +133,12 @@ struct ifnet {
     struct if_data if_data;             /* 0x38 */
     u8 unk58[0xB0 - 0x58];
     s32 (*if_output)();                 /* 0xB0 */
-    void (*if_start)(struct ifnet *ifp); /* 0xB4 */
-    u8 unkB8[4];
-    s32 (*if_ioctl)(struct ifnet *ifp, u32 cmd, void *data); /* 0xBC */
-    u8 unkC0[0xCC - 0xC0];
+    void (*if_input)();                 /* 0xB4 */
+    void (*if_start)();                 /* 0xB8 */
+    s32 (*if_ioctl)();                  /* 0xBC */
+    s32 (*if_reset)();                  /* 0xC0 */
+    void (*if_watchdog)();              /* 0xC4 */
+    void (*if_drain)();                 /* 0xC8 */
     struct ifqueue if_snd;              /* 0xCC */
     struct sockaddr_dl *if_sadl;        /* 0xE0 */
 };
@@ -310,10 +312,10 @@ extern s32 D_0000B3AC;
 extern s32 D_0000B3B4;
 extern s32 D_0000B3B8;
 extern s32 D_0000B3BC;
-extern s32 D_0000B3C0;
-extern s32 D_0000B3C4;
-extern s32 D_0000B3C8;
-extern s32 D_0000B3CC;
+extern s32 (*D_0000B3C0)();
+extern s32 (*D_0000B3C4)();
+extern s32 (*D_0000B3C8)();
+extern s32 (*D_0000B3CC)();
 extern s32 D_0000B3D0;
 extern s32 D_0000B3D4;
 extern s32 D_0000B3D8;
@@ -324,6 +326,7 @@ extern s32 D_0000B91C;
 extern s32 D_0000BC08;
 extern M2C_UNK D_0000BC0C;
 extern struct ifnethead D_0000BE54;
+extern struct callout D_0000BE5C;
 
 void _sce_pspnet_adhoc_sabort(s32 a, s32 b);
 void _sce_pspnet_callout_cleanup(struct callout *c);
@@ -332,6 +335,7 @@ void _sce_pspnet_callout_reset(struct callout *c, u32 ticks, void (*func)(void *
 void _sce_pspnet_callout_reset_usec(struct callout *c, u32 usec, void (*func)(void *), void *arg);
 void _sce_pspnet_callout_stop(struct callout *c);
 s32 _sce_pspnet_get_if_core_variables(s32 *arg0, s32 *arg1, s32 *arg2, u8 *arg3);
+s32 _sce_pspnet_get_ifindex(const char *name);
 s32 *_sce_pspnet_get_selwait_addr(void);
 struct SceNetThreadInfo *_sce_pspnet_get_threadinfo(SceUID thid);
 void _sce_pspnet_hashdone(void *hashtbl);
@@ -342,6 +346,8 @@ s32 _sce_pspnet_if_nulloutput(void);
 void _sce_pspnet_if_up(struct ifnet *ifp);
 void _sce_pspnet_ifafree(void *ifa);
 s32 _sce_pspnet_ifioctl(struct socket *so, u32 cmd, void *data, s32 p);
+struct ifnet *_sce_pspnet_ifplookup_index(u32 index);
+struct ifnet *_sce_pspnet_ifplookup_lladdr(const void *lladdr);
 struct ifnet *_sce_pspnet_ifunit(const char *name);
 void _sce_pspnet_inet_sabort(s32 a);
 void _sce_pspnet_link_rtrequest(s32 cmd, void *rt, void *info);
@@ -357,6 +363,7 @@ void _sce_pspnet_splunlock(s32 arg0);
 s32 _sce_pspnet_start_of_adhoc_module_in_if_ethersubr_core(s32 arg0);
 s32 _sce_pspnet_start_of_adhoc_module_in_netintr(s32 arg0, s32 arg1);
 s32 _sce_pspnet_start_of_adhoc_module_in_sched(void (*sabort)(s32, s32));
+s32 _sce_pspnet_start_of_inet_module_in_if_ethersubr_core(s32 (*f0)(), s32 (*f1)(), s32 (*f2)(), s32 (*f3)());
 s32 _sce_pspnet_start_of_inet_module_in_ifhandle_ether(s32 arg0);
 s32 _sce_pspnet_start_of_inet_module_in_netintr(s32 arg0, s32 arg1);
 s32 _sce_pspnet_start_of_inet_module_in_sched(void (*sleephook)(struct SceNetThreadInfo *), void (*sabort)(s32));
@@ -365,6 +372,7 @@ s32 _sce_pspnet_start_of_pppoe_module_in_netintr(s32 arg0);
 s32 _sce_pspnet_stop_of_adhoc_module_in_if_ethersubr_core(void);
 s32 _sce_pspnet_stop_of_adhoc_module_in_netintr(void);
 s32 _sce_pspnet_stop_of_adhoc_module_in_sched(void);
+s32 _sce_pspnet_stop_of_inet_module_in_if_ethersubr_core(void);
 s32 _sce_pspnet_stop_of_inet_module_in_ifhandle_ether(void);
 s32 _sce_pspnet_stop_of_inet_module_in_netintr(void);
 s32 _sce_pspnet_stop_of_inet_module_in_sched(void);
@@ -414,6 +422,9 @@ s32 func_00005C38(void);
 s32 func_00005C40(void);
 void func_00005C48(void);
 void func_00005C50(void);
+void func_00005C58(struct ifnet *ifp);
+void func_00005D64(void *arg);
+s32 func_00007020(void *a0, void *a1, void *a2, void *a3);
 s32 func_00007678(void);
 s32 func_000076B8(void);
 s32 func_00007738(void);
