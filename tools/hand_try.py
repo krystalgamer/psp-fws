@@ -384,6 +384,10 @@ def main():
                     continue
                 at = mod.text_off + ta
                 ts = mod.base[at:mod.base.find(b"\0", at)]
+                # only compare text (jump tables and other rodata referenced through .rodata relocs aren't strings)
+                printable = lambda b: b and all(32 <= c < 127 or c in (9, 10, 13) for c in b)  # noqa: E731
+                if not (printable(ms) and printable(ts)) and not (printable(ms) and not ts):
+                    continue
                 if ts != ms:
                     bad_str.append((w, ts, ms))
             for w, ts, ms in dict.fromkeys(bad_str):
