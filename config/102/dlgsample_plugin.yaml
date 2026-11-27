@@ -1,0 +1,85 @@
+name: dlgsample_plugin (102)
+sha1: 59db05cb7bd5efe6bc535be088f47e5992f3d1ab
+options:
+  basename: dlgsample_plugin
+  target_path: tmp/baserom/102/dlgsample_plugin.prx
+  elf_path: tmp/build/102/dlgsample_plugin.elf
+  base_path: ../..
+  platform: psp
+  compiler: GCC
+
+  asm_path: tmp/asm/102/dlgsample_plugin
+  src_path: src/dlgsample_plugin
+  build_path: tmp/build/102
+  ld_script_path: tmp/build/102/dlgsample_plugin.ld
+  cache_path: tmp/build/102/.splat_cache.dlgsample_plugin
+  symbol_addrs_path:
+    - config/102/symbol_addrs.dlgsample_plugin.txt
+    - tmp/build/102/prx_syms.dlgsample_plugin.txt
+  reloc_addrs_path: [tmp/build/102/reloc_addrs.dlgsample_plugin.txt]
+  asset_path: tmp/assets/102/dlgsample_plugin
+  extensions_path: tools/splat_ext
+  undefined_funcs_auto_path: tmp/build/102/undefined_funcs_auto.dlgsample_plugin.txt
+  undefined_syms_auto_path: tmp/build/102/undefined_syms_auto.dlgsample_plugin.txt
+
+  find_file_boundaries: true
+  section_order: [".text", ".data", ".rodata", ".bss"]
+  migrate_rodata_to_functions: true
+  use_legacy_include_asm: false
+  asm_function_macro: glabel
+  asm_jtbl_label_macro: jlabel
+  asm_data_macro: dlabel
+  asm_end_label: endlabel
+  string_encoding: ASCII
+  data_string_encoding: ASCII
+  rodata_string_guesser_level: 2
+  data_string_guesser_level: 2
+  gp_value: 0x8030
+  add_set_gp_64: false
+  named_regs_for_c_funcs: false
+  ld_bss_is_noload: true
+  emit_subalign: false
+  ld_align_segment_vram_end: false
+  ld_align_section_vram_end: false
+  disasm_unknown: true
+  global_vram_start: 0x0
+  global_vram_end: 0x564
+
+segments:
+  - [0x0, bin, elf_header]
+  - name: dlgsample_plugin
+    type: code
+    start: 0x80
+    vram: 0x0
+    subsegments:
+      - { start: 0x80, type: asm, name: init, linker_section: .init }
+      - [0xA4, asm, dlgsample_plugin]
+      - { start: 0x3CC, type: asm, name: fini, linker_section: .fini }
+      - { start: 0x3E8, type: asm, name: sceStub, linker_section: .sceStub.text }
+      - { start: 0x438, type: prxpad, order: .text }
+      - { start: 0x440, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
+      - { start: 0x444, type: rodata, name: lib_ent, linker_section: .lib.ent }
+      - { start: 0x454, type: rodata, name: lib_ent_btm, linker_section: .lib.ent.btm }
+      - { start: 0x458, type: rodata, name: lib_stub_top, linker_section: .lib.stub.top }
+      - { start: 0x45C, type: rodata, name: lib_stub, linker_section: .lib.stub }
+      - { start: 0x48C, type: rodata, name: lib_stub_btm, linker_section: .lib.stub.btm }
+      - { start: 0x490, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
+      - { start: 0x4C4, type: rodata, name: resident, linker_section: .rodata.sceResident }
+      - { start: 0x4FC, type: rodata, name: nid, linker_section: .rodata.sceNid }
+      - { start: 0x524, type: rodata, name: rodata_sceVstub, linker_section: .rodata.sceVstub }
+      - { start: 0x538, type: rodata, name: ctors, linker_section: .ctors }
+      - { start: 0x540, type: rodata, name: dtors, linker_section: .dtors }
+      - { start: 0x548, type: rodata, name: jcr, linker_section: .jcr }
+      - { start: 0x54C, type: rodata, name: eh_frame, linker_section: .eh_frame }
+      - [0x550, rodata, dlgsample_plugin]
+      - { start: 0x564, type: prxpad, order: .rodata }
+  - name: dlgsample_plugin_seg1
+    type: code
+    start: 0x570
+    vram: 0x4F0
+    bss_size: 0x2C
+    subsegments:
+      - [0x570, data, dlgsample_plugin_data]
+      - { start: 0x5A8, type: bss, vram: 0x530 }
+  - [0x5A8, bin, elf_trailer]
+  - [0x1040]
