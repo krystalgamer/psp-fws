@@ -137,9 +137,9 @@ INCLUDE_ASM("nonmatchings/reboot_002D0C", strncpy);
 
 INCLUDE_ASM("nonmatchings/reboot_002D0C", strrchr);
 
-#if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/reboot_002D0C", prnt);
 
+#if FW_VERSION == 100
 INCLUDE_RODATA("nonmatchings/reboot_002D0C", D_00012AA8);
 
 INCLUDE_RODATA("nonmatchings/reboot_002D0C", D_00012AB0);
@@ -151,8 +151,6 @@ void func_000029B4(char **pp, s32 c) {
         **pp = 0;
     }
 }
-#else
-INCLUDE_ASM("nonmatchings/reboot_002D0C", prnt);
 #endif
 
 INCLUDE_ASM("nonmatchings/reboot_002D0C", sprintf);
@@ -208,7 +206,15 @@ INCLUDE_ASM("nonmatchings/reboot_002D0C", func_000030F0);
 INCLUDE_ASM("nonmatchings/reboot_002D0C", func_000040CC);
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/reboot_002D0C", func_0000326C);
+s32 func_0000326C(s32 baud) {
+    volatile u32 *uart = (volatile u32 *)0xBE4C0000;
+    u32 div = 96000000 / baud;
+    s32 intr = func_00002C2C();
+    uart[9] = div >> 6;
+    uart[10] = (div + 32) & 0x3F;
+    func_00002C58(intr);
+    return 0;
+}
 #endif
 
 s32 func_00004244(s8 c) {
@@ -236,10 +242,13 @@ s32 func_000033C4(void) {
     return *(volatile u32 *)0xBE4C0000 & 0xFF;
 }
 
-void func_000033EC(void) {
-    do {
+s32 func_000033EC(void) {
+    s32 c;
 
-    } while (func_000033C4() < 0);
+    do {
+        c = func_000033C4();
+    } while (c < 0);
+    return c;
 }
 #else
 INCLUDE_ASM("nonmatchings/reboot_002D0C", func_00004270);
@@ -249,7 +258,23 @@ INCLUDE_ASM("nonmatchings/reboot_002D0C", func_00004298);
 INCLUDE_ASM("nonmatchings/reboot_002D0C", func_0000433C);
 #endif
 
+#if FW_VERSION == 100
+s32 func_0000436C(u8 *buf, s32 n) {
+    s32 i;
+    s32 c;
+
+    for (i = 0; i < n; i++) {
+        c = func_000033EC();
+        if (c < 0) {
+            break;
+        }
+        *buf++ = c;
+    }
+    return i;
+}
+#else
 INCLUDE_ASM("nonmatchings/reboot_002D0C", func_0000436C);
+#endif
 
 void func_000043B8(void) {
     func_000040CC();
