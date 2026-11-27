@@ -218,6 +218,11 @@ def fix_too_few(lines, idx, msg):
     return True
 
 
+def _paren(e):
+    """An expression safe to put after a cast: `(T) (u8 *)p + 0x20` would cast before the add."""
+    return e if re.fullmatch(r"&?[\w.]+(->\w+)*", e) else f"({e})"
+
+
 def _cast_arg(lines, idx, name, argno, typ):
     span = _call_span(lines[idx], name)
     if not span:
@@ -228,7 +233,7 @@ def _cast_arg(lines, idx, name, argno, typ):
     a, b = args[argno - 1]
     arg = lines[idx][a:b]
     lead = arg[:len(arg) - len(arg.lstrip())]
-    lines[idx] = lines[idx][:a] + f"{lead}({typ}) {arg.strip()}" + lines[idx][b:]
+    lines[idx] = lines[idx][:a] + f"{lead}({typ}) {_paren(arg.strip())}" + lines[idx][b:]
     return True
 
 
@@ -327,7 +332,7 @@ def fix_convert_assign(lines, idx, msg):
     am = re.match(r"^(\s*[^=;]*?[^=!<>+\-*/&|^]=)\s*(.+);\s*$", line)
     if not am:
         return False
-    lines[idx] = f"{am[1]} ({m[2]}) {am[2]};"
+    lines[idx] = f"{am[1]} ({m[2]}) {_paren(am[2].strip())};"
     return True
 
 
