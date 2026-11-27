@@ -321,13 +321,17 @@ struct sockaddr_in {
 
 #define AF_INET 2
 
-/* struct rawcb (4.4BSD) */
+/* struct rawcb (NetBSD 1.5 raw_cb.h) */
+struct sockproto {
+    u16 sp_family;
+    u16 sp_protocol;
+};
 struct rawcb {
-    void *rcb_next;             /* 0x00 */
-    void *rcb_prev;             /* 0x04 */
+    struct { struct rawcb *le_next; struct rawcb **le_prev; } rcb_list; /* 0x00 */
     struct socket *rcb_socket;  /* 0x08 */
     struct sockaddr *rcb_faddr; /* 0x0C */
     struct sockaddr *rcb_laddr; /* 0x10 */
+    struct sockproto rcb_proto; /* 0x14 */
 };
 
 /* struct radix_node (4.4BSD radix.h, 0x18) */
@@ -635,6 +639,7 @@ struct ifaddr {
     u8 ifa_data[0x10];                  /* 0x18 struct ifaddr_data (u_quad_t in/out bytes) */
     void (*ifa_rtrequest)(s32 cmd, struct rtentry *rt); /* 0x28 */
     u32 ifa_flags;                      /* 0x2C */
+    s32 ifa_refcnt;                     /* 0x30 */
 };
 
 struct timeval {
@@ -661,7 +666,7 @@ typedef struct {
 /* struct in_ifaddr (NetBSD in_var.h, partial) */
 struct in_ifaddr {
     struct ifaddr ia_ifa;               /* 0x00 */
-    u8 unk30[0x54 - 0x30];
+    u8 unk34[0x54 - 0x34];
     TAILQ_ENTRY(in_ifaddr) ia_list;     /* 0x54 */
     struct sockaddr_in ia_addr;         /* 0x5C */
 };
@@ -1035,6 +1040,8 @@ extern const struct cp D_0002BB94; /* pap */
 extern void (*const D_0002BBCC)(struct sppp *sp); /* pap.scr (split rodata label) */
 extern const struct cp D_0002BBD8; /* chap */
 extern s32 D_0002BEC0;
+extern u32 D_0002BF78; /* raw_sendspace */
+extern u32 D_0002BF7C; /* raw_recvspace */
 extern struct ifqueue D_0002BF8C;
 extern s32 D_0002C01C;
 extern s32 D_0002C020;
@@ -1091,10 +1098,11 @@ extern u8 D_0002CC50[]; /* pffasttimo_ch */
 extern u8 D_0002CC74[]; /* pfslowtimo_ch */
 extern s32 D_0002CC98; /* pffasttimo_now */
 extern struct soqhead D_0002CC9C;
+extern s32 D_0002CCB0; /* rttrash */
 extern s32 D_0002CCB4;
 extern struct radix_node_head *D_0002CCB8[32]; /* rt_tables */
 extern u8 D_0002CD38[];
-extern s32 D_0002CD80;
+extern struct { struct rawcb *lh_first; } D_0002CD80; /* rawcb */
 extern s32 D_0002CEB0;
 extern s32 D_0002CEB4;
 extern s32 D_0002CEB8;
@@ -1161,6 +1169,7 @@ void _sce_pspnet_callout_stop(void *c);
 M2C_UNK _sce_pspnet_get_thread_errno();
 s32 _sce_pspnet_hashinit(s32, void *);
 void _sce_pspnet_if_attach(struct ifnet *ifp);
+void _sce_pspnet_ifafree(struct ifaddr *ifa);
 s32 _sce_pspnet_ifioctl(struct socket *so, u32 cmd, void *data, s32 p);
 void _sce_pspnet_inet_sabort(struct socket *so);
 void _sce_pspnet_microtime(struct timeval *tv);
@@ -1281,7 +1290,9 @@ struct radix_node *func_0000A61C(void *n_arg, s32 search, s32 skip);
 struct radix_node *func_0000B6C0(void *v_arg, void *m_arg, struct radix_node_head *head);
 struct rtentry *func_0000BA10(struct sockaddr *dst, s32 report);
 s32 func_0000BEE0(s32 req, void *dst, void *gateway, void *netmask, s32 flags, struct rtentry **ret_nrt);
+void func_0000C818(struct sockaddr *src, struct sockaddr *dst, struct sockaddr *netmask);
 s32 func_0000C998(s32, s32, s32);
+void func_0000CCE8(struct rtentry *rt);
 void func_0000CE98(void *arg);
 s32 func_0000D128(u32 cmd, void *data);
 void func_0000D15C(struct rtentry *rt);
@@ -1297,6 +1308,7 @@ void func_0000E318(s32 type, struct rt_addrinfo *rtinfo, s32 flags, s32 error);
 s32 func_0000E3F0(s32);
 s32 func_0000E448(s32, s32);
 s32 func_0000E4E4(s32, s32);
+s32 func_0000ED18(struct socket *so, s32 proto);
 void func_0000ED48(void *arg0);
 void func_0000ED94(void *arg0);
 void func_0000EDB8(struct Unk_func_0000EDB8_0 *arg0);
