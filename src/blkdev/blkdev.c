@@ -16,19 +16,11 @@ INCLUDE_RODATA("nonmatchings/blkdev", D_00001014);
 INCLUDE_RODATA("nonmatchings/blkdev", D_00001034);
 #endif
 
-#if FW_VERSION >= 102 && FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/blkdev", func_000005FC);
-#else
 INCLUDE_ASM("nonmatchings/blkdev", sceBLKGetUnitNum);
-#endif
 
 INCLUDE_ASM("nonmatchings/blkdev", sceBLKInvalidateDeviceName);
 
-#if FW_VERSION >= 102 && FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/blkdev", func_000007F0);
-#else
 INCLUDE_ASM("nonmatchings/blkdev", sceBLKGetDeviceData);
-#endif
 
 INCLUDE_ASM("nonmatchings/blkdev", sceBLKUnRegister);
 

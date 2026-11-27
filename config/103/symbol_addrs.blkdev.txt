@@ -26,3 +26,11 @@ sceKernelSignalSema = 0x00000E28; // type:func rom:0xEA8
 sceKernelWaitSema = 0x00000E30; // type:func rom:0xEB0
 D_00000F10_v103 = 0x00000F10; // rom:0xF90
 // shared names (tools/add_version.py) end
+
+// NID-derived names
+sceBLKGetUnitNum = 0x000005FC; // type:func
+sceBLKGetDeviceData = 0x000007F0; // type:func
+sceKernelAssert = 0x00000DC0; // type:func
+Kprintf = 0x00000DC8; // type:func
+strtol = 0x00000DF0; // type:func
+look_ctype_table = 0x00000E10; // type:func
