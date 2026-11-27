@@ -13,7 +13,7 @@ INCLUDE_ASM("nonmatchings/game_install_plugin", func_000000AC);
 
 #if FW_VERSION >= 350
 void func_0000010C(void) {
-    scePaf_3308156F();
+    sce_paf_private_memcpy();
 }
 #else
 void func_0000010C(void) {
@@ -198,7 +198,7 @@ void func_000012E0(s32 arg0, s32 arg1) {
 
     var_v0 = 0;
     if (arg1 != 0) {
-        var_v0 = scePaf_5E4447F6(arg1);
+        var_v0 = sce_paf_private_wcslen(arg1);
     }
     func_000013CC(arg0, arg1, var_v0);
 }
@@ -233,7 +233,7 @@ INCLUDE_ASM("nonmatchings/game_install_plugin", func_000014D4);
 
 #if FW_VERSION >= 350
 void func_000014E0(void) {
-    scePaf_7EED9087();
+    sce_paf_private_memalign();
 }
 #else
 void func_000014E0(void) {
@@ -243,7 +243,7 @@ void func_000014E0(void) {
 
 #if FW_VERSION >= 350
 void func_000014FC(void) {
-    scePaf_4729E549();
+    sce_paf_private_free();
 }
 #else
 void func_000014FC(void) {
@@ -261,7 +261,7 @@ INCLUDE_ASM("nonmatchings/game_install_plugin", func_000015C4);
 
 #if FW_VERSION >= 350
 void func_000015D0(void) {
-    scePaf_B1975FE1();
+    sce_paf_private_strncmp();
 }
 #else
 void func_000015D0(void) {
@@ -271,7 +271,7 @@ void func_000015D0(void) {
 
 #if FW_VERSION >= 350
 void func_000015EC(void) {
-    scePaf_C1B0AA0D();
+    sce_paf_private_strlen();
 }
 #else
 void func_000015EC(void) {
@@ -281,7 +281,7 @@ void func_000015EC(void) {
 
 #if FW_VERSION >= 350
 void func_00001608(void) {
-    scePaf_9479C11B();
+    sce_paf_private_memset();
 }
 #else
 void func_00001608(void) {
@@ -303,7 +303,7 @@ INCLUDE_ASM("nonmatchings/game_install_plugin", func_00001744);
 
 #if FW_VERSION >= 350
 void func_0000183C(void) {
-    sceUtility_private_C36E3C16();
+    sceUtility_private_5BA71568();
 }
 #else
 void func_0000183C(void) {
@@ -318,7 +318,7 @@ INCLUDE_ASM("nonmatchings/game_install_plugin", func_0000193C);
 #if FW_VERSION >= 350
 void func_000019F0(void) {
     func_000015B8(1);
-    scePaf_3EDD45EF(0, &func_00001A34, D_000040C8, -1, -1, &func_00001B1C);
+    Job_Start(0, &func_00001A34, D_000040C8, -1, -1, &func_00001B1C);
 }
 #else
 void func_000019F0(void) {
