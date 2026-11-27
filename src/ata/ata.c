@@ -82,11 +82,7 @@ INCLUDE_ASM("nonmatchings/ata", sceAtaCheckXferReady);
 
 INCLUDE_ASM("nonmatchings/ata", sceAtaAccessDataPort);
 
-#if FW_VERSION >= 102 && FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/ata", func_00000F14);
-#else
 INCLUDE_ASM("nonmatchings/ata", sceAtaCheckPacketCmdComplete);
-#endif
 
 INCLUDE_ASM("nonmatchings/ata", sceAtaScanDevice);
 
@@ -201,19 +197,11 @@ s32 sceAtaGetIntrFlag(void) {
 }
 #endif
 
-#if FW_VERSION >= 102 && FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/ata", func_000014D8);
-
-INCLUDE_ASM("nonmatchings/ata", func_00001598);
-
-INCLUDE_ASM("nonmatchings/ata", func_00001788);
-
-INCLUDE_ASM("nonmatchings/ata", func_000019E4);
-#endif
-
 #if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/ata", func_00000FFC);
+#endif
 
+#if (FW_VERSION >= 102 && FW_VERSION < 150) || FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/ata", sceAtaWaitBusBusyIE);
 
 INCLUDE_ASM("nonmatchings/ata", sceAtaAccessDataPortIE);
@@ -221,7 +209,9 @@ INCLUDE_ASM("nonmatchings/ata", sceAtaAccessDataPortIE);
 INCLUDE_ASM("nonmatchings/ata", sceAtaCheckXferReadyIE);
 
 INCLUDE_ASM("nonmatchings/ata", sceAtaCheckPacketCmdCompleteIE);
+#endif
 
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/ata", sceAtaAccessDataPortTS);
 
 s32 sceAtaGetIntrStateFlag(void) {
@@ -290,11 +280,7 @@ INCLUDE_ASM("nonmatchings/ata", func_000019F0);
 
 INCLUDE_ASM("nonmatchings/ata", sceAtaSetupAtaBlock);
 
-#if FW_VERSION >= 102 && FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/ata", func_00001CF4);
-#else
 INCLUDE_ASM("nonmatchings/ata", sceAtaDoSoftResetBit);
-#endif
 
 INCLUDE_ASM("nonmatchings/ata", sceAtaCheckDeviceReady);
 
@@ -802,8 +788,6 @@ INCLUDE_RODATA("nonmatchings/ata", D_000040D0);
 
 #if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_RODATA("nonmatchings/ata", D_000050CC);
-
-INCLUDE_ASM("nonmatchings/ata", func_000030F4);
 #endif
 
 #if FW_VERSION >= 282
@@ -832,9 +816,7 @@ INCLUDE_ASM("nonmatchings/ata", func_00002B90);
 INCLUDE_ASM("nonmatchings/ata", func_00002C34);
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/ata", sceAtaExecPacketCmd);
-#endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/ata", func_00002CE8);
