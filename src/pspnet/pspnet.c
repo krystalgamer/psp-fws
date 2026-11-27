@@ -3140,7 +3140,23 @@ INCLUDE_ASM("nonmatchings/pspnet", func_00006AA0);
 #endif
 
 #if FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/pspnet", func_00006B10);
+void func_00006B10(struct ifnet *ifp) {
+    struct ethercom *ec = (void *)ifp;
+    struct sockaddr_dl *sdl = ifp->if_sadl;
+    struct ether_multi *enm;
+    s32 s;
+
+    s = _sce_pspnet_spllock();
+    while ((enm = LIST_FIRST(&ec->ec_multiaddrs)) != NULL) {
+        LIST_REMOVE(enm, enm_list);
+        sceNetFreeInternal(enm);
+        ec->ec_multicnt--;
+    }
+    _sce_pspnet_splunlock(s);
+    __builtin_memset(LLADDR(sdl), 0, sizeof(struct ether_addr));
+    sdl->sdl_alen = 0;
+    sdl->sdl_type = 0;
+}
 
 INCLUDE_ASM("nonmatchings/pspnet", func_00006BBC);
 
@@ -3168,7 +3184,26 @@ u32 func_00006C28(const u8 *buf, u32 len) {
 INCLUDE_ASM("nonmatchings/pspnet", func_00006AA8);
 #endif
 
-INCLUDE_ASM("nonmatchings/pspnet", func_00006AE8);
+s32 func_00006AE8(struct sockaddr *sa, u8 *addrlo, u8 *addrhi) {
+    s32 handled;
+    s32 error;
+
+    if (D_0000B3D4 > 0) {
+        handled = 0;
+        error = D_0000B3CC(sa, addrlo, addrhi, &handled);
+        if (handled > 0)
+            return error;
+    }
+    switch (sa->sa_family) {
+    case AF_UNSPEC:
+        sceNetBcopy(sa->sa_data, addrlo, 6);
+        sceNetBcopy(addrlo, addrhi, 6);
+        break;
+    default:
+        return 106;
+    }
+    return 0;
+}
 
 struct ifnet *_sce_pspnet_ifplookup_lladdr(const void *lladdr) {
     struct ifnet *ifp;

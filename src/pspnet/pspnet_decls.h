@@ -303,6 +303,29 @@ typedef char chk_ifaddr[(sizeof(struct ifaddr) == 0x38) ? 1 : -1];
     } \
 }
 
+/* NetBSD 1.5 if_ether.h */
+struct ether_multi {
+    u8 enm_addrlo[6];               /* 0x00 */
+    u8 enm_addrhi[6];               /* 0x06 */
+    struct ethercom *enm_ec;        /* 0x0C */
+    u32 enm_refcount;               /* 0x10 */
+    struct { struct ether_multi *le_next; struct ether_multi **le_prev; } enm_list; /* 0x14 */
+};
+struct ethercom {
+    struct ifnet ec_if;             /* 0x000 */
+    u8 unk110[0x128 - 0x110];
+    struct { struct ether_multi *lh_first; } ec_multiaddrs; /* 0x128 */
+    s32 ec_multicnt;                /* 0x12C */
+};
+typedef char chk_ifnet[(sizeof(struct ifnet) == 0x110) ? 1 : -1];
+#define LIST_FIRST(head) ((head)->lh_first)
+#define LIST_REMOVE(elm, field) do { \
+    if ((elm)->field.le_next != NULL) \
+        (elm)->field.le_next->field.le_prev = (elm)->field.le_prev; \
+    *(elm)->field.le_prev = (elm)->field.le_next; \
+} while (0)
+#define AF_UNSPEC 0
+
 
 #define IFNAMSIZ 16
 
@@ -703,6 +726,8 @@ void func_000044C0(struct ifnet *ifp);
 void func_00005404(void *arg0);
 void func_00005744(struct Unk_func_00005744_0 *arg0);
 s32 func_000064CC(struct socket *so, u32 cmd, void *data);
+s32 func_00006AE8(struct sockaddr *sa, u8 *addrlo, u8 *addrhi);
+void func_00006B10(struct ifnet *ifp);
 u32 func_00006C28(const u8 *buf, u32 len);
 s32 func_00007020(void *a0, void *a1, void *a2, void *a3);
 void func_000075C0(struct ifnet *ifp);
