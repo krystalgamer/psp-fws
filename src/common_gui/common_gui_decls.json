@@ -54,10 +54,10 @@
   "scePaf_D88ADD11": "M2C_UNK scePaf_D88ADD11(s32);",
   "scePaf_DCE3D225": "void *scePaf_DCE3D225(s32, M2C_UNK);",
   "scePaf_FA05BF7B": "M2C_UNK scePaf_FA05BF7B(s32);",
-  "sce_paf_private_wcslen": "s32 sce_paf_private_wcslen(s32);",
   "scePaf_FE575092": "M2C_UNK scePaf_FE575092(s32);",
   "sceVshCommonGui_00FBD201": "void sceVshCommonGui_00FBD201(void);",
   "sceVshCommonGui_0131C97D": "void sceVshCommonGui_0131C97D(s32 *arg0);",
+  "sceVshCommonGui_1CF884A1": "void sceVshCommonGui_1CF884A1(void);",
   "sceVshCommonGui_25AC25C0": "void sceVshCommonGui_25AC25C0(void);",
   "sceVshCommonGui_25D6E91D": "M2C_UNK *sceVshCommonGui_25D6E91D(void);",
   "sceVshCommonGui_30FA68C3": "void sceVshCommonGui_30FA68C3(void);",
@@ -92,7 +92,8 @@
   "sceVshCommonGui_EBB7B7DE": "M2C_UNK *sceVshCommonGui_EBB7B7DE(void);",
   "sceVshCommonGui_EC899EBE": "void sceVshCommonGui_EC899EBE(void);",
   "sceVshCommonGui_F7A03543": "s32 sceVshCommonGui_F7A03543(void);",
-  "sceVshCommonGui_FA1DE461": "void sceVshCommonGui_FA1DE461(void *arg0, s32 arg1, s32 arg2);"
+  "sceVshCommonGui_FA1DE461": "void sceVshCommonGui_FA1DE461(void *arg0, s32 arg1, s32 arg2);",
+  "sce_paf_private_wcslen": "s32 sce_paf_private_wcslen(s32);"
  },
  "types": {
   "Unk_func_000008A8_temp_a0": "struct Unk_func_000008A8_temp_a0 {\n    u8 pad0[0x4];\n    s32 unk4;\n};",
@@ -105,7 +106,7 @@
   "Unk_sceVshCommonGui_ACFE7BE7_temp_a0": "struct Unk_sceVshCommonGui_ACFE7BE7_temp_a0 {\n    u8 pad0[0x84];\n    s32 unk84;\n};"
  },
  "vars": {
-  "D_00003264": "extern M2C_UNK D_00003264;",
+  "D_00003264": "extern s32 D_00003264;",
   "D_00003314": "extern s32 D_00003314;",
   "D_000037F0": "extern M2C_UNK D_000037F0;",
   "D_00003920": "extern M2C_UNK D_00003920;",

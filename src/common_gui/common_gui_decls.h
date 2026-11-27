@@ -62,7 +62,7 @@ struct Unk_sceVshCommonGui_ACFE7BE7_temp_a0 {
     s32 unk84;
 };
 
-extern M2C_UNK D_00003264;
+extern s32 D_00003264;
 extern s32 D_00003314;
 extern M2C_UNK D_000037F0;
 extern M2C_UNK D_00003920;
@@ -128,10 +128,10 @@ s32 scePaf_D4FAE7D0(M2C_UNK *);
 M2C_UNK scePaf_D88ADD11(s32);
 void *scePaf_DCE3D225(s32, M2C_UNK);
 M2C_UNK scePaf_FA05BF7B(s32);
-s32 sce_paf_private_wcslen(s32);
 M2C_UNK scePaf_FE575092(s32);
 void sceVshCommonGui_00FBD201(void);
 void sceVshCommonGui_0131C97D(s32 *arg0);
+void sceVshCommonGui_1CF884A1(void);
 void sceVshCommonGui_25AC25C0(void);
 M2C_UNK *sceVshCommonGui_25D6E91D(void);
 void sceVshCommonGui_30FA68C3(void);
@@ -167,5 +167,6 @@ M2C_UNK *sceVshCommonGui_EBB7B7DE(void);
 void sceVshCommonGui_EC899EBE(void);
 s32 sceVshCommonGui_F7A03543(void);
 void sceVshCommonGui_FA1DE461(void *arg0, s32 arg1, s32 arg2);
+s32 sce_paf_private_wcslen(s32);
 
 #endif

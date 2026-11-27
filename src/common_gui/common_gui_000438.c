@@ -67,8 +67,23 @@ INCLUDE_RODATA("nonmatchings/common_gui_000438", D_00003244);
 INCLUDE_RODATA("nonmatchings/common_gui_000438", D_00003248);
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/common_gui_000438", sceVshCommonGui_80271F41);
+#endif
+
+#if FW_VERSION == 100
+void sceVshCommonGui_80271F41(void) {
+    s32 temp_v0;
+    void *temp_v0_2;
+
+    temp_v0 = scePaf_D4FAE7D0(&D_00003264);
+    if (temp_v0 != 0) {
+        temp_v0_2 = scePaf_338C3774(temp_v0, 1);
+        if (temp_v0_2 != NULL) {
+            M2C_FIELD(temp_v0_2, M2C_UNK (**)(), 0x50)();
+        }
+    }
+}
 #endif
 
 #if FW_VERSION >= 282 && FW_VERSION < 350
@@ -86,8 +101,23 @@ void sceVshCommonGui_80271F41(void) {
 }
 #endif
 
-#if FW_VERSION < 350
+#if FW_VERSION >= 150 && FW_VERSION < 350
 INCLUDE_ASM("nonmatchings/common_gui_000438", sceVshCommonGui_1CF884A1);
+#endif
+
+#if FW_VERSION == 100
+void sceVshCommonGui_1CF884A1(void) {
+    s32 temp_v0;
+    void *temp_v0_2;
+
+    temp_v0 = scePaf_D4FAE7D0(&D_00003264);
+    if (temp_v0 != 0) {
+        temp_v0_2 = scePaf_338C3774(temp_v0, 1);
+        if (temp_v0_2 != NULL) {
+            M2C_FIELD(temp_v0_2, M2C_UNK (**)(), 0x54)();
+        }
+    }
+}
 #endif
 
 INCLUDE_RODATA("nonmatchings/common_gui_000438", D_00003250);
