@@ -48,11 +48,11 @@ INCLUDE_ASM("nonmatchings/pafmini_06598C", func_00065D04);
 
 INCLUDE_ASM("nonmatchings/pafmini_06598C", func_00065DC8);
 
-#if FW_VERSION >= 152 && FW_VERSION < 282
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pafmini_06598C", func_00080CD4);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 152
+#if FW_VERSION >= 150 && FW_VERSION < 201
 void func_00080CD4(void) {
     func_00068F38();
 }

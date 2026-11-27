@@ -274,7 +274,43 @@ void sceKernelAllocHeapMemory(s32 arg0, s32 arg1) {
     sceKernelAllocHeapMemoryWithOption(arg0, arg1, 0);
 }
 
-INCLUDE_ASM("nonmatchings/sysmem", func_00000FCC);
+SceSysmemMemoryPartition *MpidToCB(s32 mpid) {
+    SceSysmemUidCB *uid;
+    SceSysmemMemoryPartition *part;
+    switch (mpid) {
+    case 0:
+        part = NULL;
+        break;
+    case 1:
+        part = D_0000CA84;
+        break;
+    case 2:
+        part = D_0000CA88;
+        break;
+    case 3:
+        part = D_0000CA70;
+        break;
+    case 4:
+        part = D_0000CA74;
+        break;
+    case 5:
+        part = D_0000CA78;
+        break;
+    case 6:
+        part = D_0000CA7C;
+        break;
+    case 7:
+        part = D_0000CA80;
+        break;
+    default:
+        if (sceKernelGetUIDcontrolBlockWithType(mpid, g_PartType, &uid) != 0) {
+            return NULL;
+        }
+        part = UID_CB_TO_DATA(uid, g_PartType, SceSysmemMemoryPartition);
+        break;
+    }
+    return part;
+}
 #endif
 
 #if FW_VERSION < 201
@@ -285,11 +321,20 @@ INCLUDE_RODATA("nonmatchings/sysmem", D_0000AED8);
 INCLUDE_RODATA("nonmatchings/sysmem", D_0000AEE4);
 
 INCLUDE_RODATA("nonmatchings/sysmem", D_0000AF04);
+#endif
 
-INCLUDE_ASM("nonmatchings/sysmem", func_000011E8);
+#if FW_VERSION == 100
+void PartitionServiceInit(void) {
+    if (sceKernelCreateUIDtype("SceSysmemMemoryPartition", sizeof(SceSysmemMemoryPartition), D_0000C220, NULL, &g_PartType) != 0) {
+        Kprintf(D_0000AEE4, D_0000AED8, "PartitionServiceInit", 149);
+        sceKernelAssert(0, 0);
+    }
+}
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 201
+INCLUDE_ASM("nonmatchings/sysmem", PartitionServiceInit);
+
 INCLUDE_ASM("nonmatchings/sysmem", func_00001244);
 
 INCLUDE_RODATA("nonmatchings/sysmem", D_0000DE5C);
@@ -382,50 +427,59 @@ INCLUDE_ASM("nonmatchings/sysmem", func_00001630);
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/sysmem", func_00001750);
+void PartitionInit(SceSysmemMemoryPartition *part) {
+    SceSysmemCtlBlk *ctl;
+    s32 i;
+    if (part->size == 0) {
+        return;
+    }
+    {
+        s32 ok = (part != NULL);
+        if (!ok) {
+            Kprintf(D_0000AEE4, D_0000AED8, "PartitionInit", 336);
+            sceKernelAssert(ok, 0);
+        }
+    }
+    ctl = part->firstCtlBlk;
+    ctl->next = NULL;
+    for (i = 0; i < 20; i++) {
+        ctl->segs[i].next = &ctl->segs[i + 1];
+        ctl->segs[i].word4 = 0;
+        ctl->segs[i].word8 = 0;
+    }
+    ctl->segs[19].next = NULL;
+    ctl->segs[0].size = part->size >> 8;
+    part->ctlBlkCount = 1;
+}
 #endif
 
 #if FW_VERSION < 151
-s32 func_00001810(void *arg0) {
-    u32 temp_v0;
-    u32 var_a1;
-    void *var_a0;
-
-    var_a0 = M2C_FIELD(arg0, s32 *, 0x10) + 4;
-    var_a1 = 0;
-    if (var_a0 != NULL) {
-        do {
-            if (!(M2C_FIELD(var_a0, s32 *, 4) & 1)) {
-                temp_v0 = (u32) M2C_FIELD(var_a0, u32 *, 8) >> 2;
-                if (var_a1 < temp_v0) {
-                    var_a1 = temp_v0;
-                }
+u32 PartitionQueryMaxFreeMemSize(SceSysmemMemoryPartition *part) {
+    SceSysmemSeg *seg = part->firstCtlBlk->segs;
+    u32 max = 0;
+    while (seg != NULL) {
+        if (!seg->used) {
+            if (max < seg->size) {
+                max = seg->size;
             }
-            var_a0 = M2C_FIELD(var_a0, void **, 0);
-        } while (var_a0 != NULL);
+        }
+        seg = seg->next;
     }
-    return var_a1 << 8;
+    return max << 8;
 }
 #endif
 
 #if FW_VERSION >= 151 && FW_VERSION < 201
-s32 func_00001810(void *arg0) {
-    u32 temp_a3;
-    u32 var_a1;
-    void *var_a0;
-
-    var_a0 = M2C_FIELD(arg0, s32 *, 0x10) + 4;
-    var_a1 = 0;
-    if (var_a0 != NULL) {
-        do {
-            if (!(M2C_FIELD(var_a0, s32 *, 4) & 1)) {
-                temp_a3 = (u32) M2C_FIELD(var_a0, u32 *, 8) >> 2;
-                var_a1 = (var_a1 < temp_a3) ? temp_a3 : var_a1;
-            }
-            var_a0 = M2C_FIELD(var_a0, void **, 0);
-        } while (var_a0 != NULL);
+u32 PartitionQueryMaxFreeMemSize(SceSysmemMemoryPartition *part) {
+    SceSysmemSeg *seg = part->firstCtlBlk->segs;
+    u32 max = 0;
+    while (seg != NULL) {
+        if (!seg->used) {
+            max = (max < seg->size) ? seg->size : max;
+        }
+        seg = seg->next;
     }
-    return var_a1 << 8;
+    return max << 8;
 }
 #endif
 
@@ -452,7 +506,16 @@ s32 func_00001318(struct Unk_func_00001318_0 *arg0) {
 }
 #endif
 
+#if FW_VERSION == 100
+u32 SysMemForKernel_E6581468(s32 mpid) {
+    s32 oldIntr = suspendIntr();
+    u32 ret = PartitionQueryMaxFreeMemSize(MpidToCB(mpid));
+    resumeIntr(oldIntr);
+    return ret;
+}
+#else
 INCLUDE_ASM("nonmatchings/sysmem", SysMemForKernel_E6581468);
+#endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 270
 INCLUDE_ASM("nonmatchings/sysmem", sceKernelMaxFreeMemSize);
@@ -491,21 +554,16 @@ void SysMemUserForUser_E6581468(void) {
 #endif
 
 #if FW_VERSION < 201
-s32 func_000018D8(void *arg0) {
-    s32 var_a0;
-    void *var_v1;
-
-    var_v1 = M2C_FIELD(arg0, s32 *, 0x10) + 4;
-    var_a0 = 0;
-    if (var_v1 != NULL) {
-        do {
-            if (!(M2C_FIELD(var_v1, s32 *, 4) & 1)) {
-                var_a0 += (u32) M2C_FIELD(var_v1, u32 *, 8) >> 2;
-            }
-            var_v1 = M2C_FIELD(var_v1, void **, 0);
-        } while (var_v1 != NULL);
+u32 PartitionQueryTotalFreeMemSize(SceSysmemMemoryPartition *part) {
+    SceSysmemSeg *seg = part->firstCtlBlk->segs;
+    s32 total = 0;
+    while (seg != NULL) {
+        if (!seg->used) {
+            total += seg->size;
+        }
+        seg = seg->next;
     }
-    return var_a0 << 8;
+    return total << 8;
 }
 #endif
 
@@ -528,7 +586,16 @@ s32 func_00001478(struct Unk_func_00001478_0 *arg0) {
 }
 #endif
 
+#if FW_VERSION == 100
+u32 SysMemForKernel_9697CD32(s32 mpid) {
+    s32 oldIntr = suspendIntr();
+    u32 ret = PartitionQueryTotalFreeMemSize(MpidToCB(mpid));
+    resumeIntr(oldIntr);
+    return ret;
+}
+#else
 INCLUDE_ASM("nonmatchings/sysmem", SysMemForKernel_9697CD32);
+#endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 270
 INCLUDE_ASM("nonmatchings/sysmem", sceKernelTotalFreeMemSize);
@@ -555,7 +622,14 @@ void SysMemUserForUser_9697CD32(void) {
     setK1(temp_s0);
 }
 
-INCLUDE_ASM("nonmatchings/sysmem", func_00001998);
+void _memset32(void *dst, u32 size, u32 c) {
+    u32 *p = dst;
+    s32 n = size >> 2;
+    while (n > 0) {
+        n--;
+        *p++ = c;
+    }
+}
 #endif
 
 INCLUDE_ASM("nonmatchings/sysmem", sceKernelFillFreeBlock);
@@ -593,17 +667,38 @@ INCLUDE_ASM("nonmatchings/sysmem", sceKernelAllocPartitionMemory);
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/sysmem", func_00001B7C);
+s32 func_00001B7C(SceSysmemUidCB *uid, SceSysmemUidCB *uidWithFunc, s32 funcId, __builtin_va_list ap) {
+    u32 *out = __builtin_va_arg(ap, u32 *);
+    *out = PartitionQueryMaxFreeMemSize(UID_CB_TO_DATA(uid, g_PartType, SceSysmemMemoryPartition));
+    return uid->uid;
+}
 
 INCLUDE_ASM("nonmatchings/sysmem", func_00001BC8);
 
 INCLUDE_ASM("nonmatchings/sysmem", func_00001C4C);
 
-INCLUDE_ASM("nonmatchings/sysmem", func_00001CC0);
+u32 func_00001CC0(SceUID id) {
+    SceSysmemUidCB *uid;
+    SceSysmemMemoryBlock *blk;
+    if (sceKernelGetUIDcontrolBlockWithType(id, g_MemBlockType, &uid) != 0) {
+        return 0;
+    }
+    blk = UID_CB_TO_DATA(uid, g_MemBlockType, SceSysmemMemoryBlock);
+    return blk->addr;
+}
 
 INCLUDE_ASM("nonmatchings/sysmem", func_00001D10);
 
-INCLUDE_ASM("nonmatchings/sysmem", func_00001D60);
+SceUID func_00001D60(u32 addr) {
+    SceSysmemUidCB *cur;
+    for (cur = g_MemBlockType->PARENT0; cur != g_MemBlockType; cur = cur->PARENT0) {
+        SceSysmemMemoryBlock *blk = UID_CB_TO_DATA(cur, g_MemBlockType, SceSysmemMemoryBlock);
+        if (addr >= blk->addr && addr < blk->addr + blk->size) {
+            return cur->uid;
+        }
+    }
+    return -1;
+}
 
 INCLUDE_ASM("nonmatchings/sysmem", func_00001DC8);
 
@@ -802,9 +897,18 @@ INCLUDE_ASM("nonmatchings/sysmem", sceKernelQueryBlockSize);
 
 #if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/sysmem", sceKernelQueryMemoryBlockInfo);
-#endif
 
+u32 sceKernelGetBlockHeadAddr(SceUID id) {
+    u32 oldK1 = shiftK1Noreorder();
+    s32 oldIntr = suspendIntr();
+    u32 addr = func_00001CC0(id);
+    resumeIntr(oldIntr);
+    setK1(oldK1);
+    return addr;
+}
+#else
 INCLUDE_ASM("nonmatchings/sysmem", sceKernelGetBlockHeadAddr);
+#endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/sysmem", func_00003BC4);
@@ -2421,9 +2525,31 @@ void sceKernelRegisterKprintfHandler(s32 arg0, s32 arg1) {
     D_0000C514 = arg1;
 }
 
-INCLUDE_ASM("nonmatchings/sysmem", func_000070E0);
+void *func_000070E0(const void *s, s32 c, s32 n) {
+    const u8 *p = s;
+    u8 ch = c;
+    if (p != NULL) {
+        while (n > 0) {
+            if (*p == ch) {
+                return (void *)p;
+            }
+            p++;
+            n--;
+        }
+    }
+    return NULL;
+}
 
-INCLUDE_ASM("nonmatchings/sysmem", func_00007118);
+s32 func_00007118(const char *s) {
+    s32 len = 0;
+    if (s == NULL) {
+        return 0;
+    }
+    while (*s++ != '\0') {
+        len++;
+    }
+    return len;
+}
 
 INCLUDE_ASM("nonmatchings/sysmem", func_0000714C);
 
@@ -3325,11 +3451,11 @@ INCLUDE_ASM("nonmatchings/sysmem", func_0000C834);
 
 #if FW_VERSION == 100
 s32 func_0000A5D0(s32 arg0) {
-    return (arg0 & 0x1FFFFFFF) | (M2C_FIELD(D_0000CA84, s32 *, 4) & 0xE0000000);
+    return (arg0 & 0x1FFFFFFF) | (D_0000CA84->addr & 0xE0000000);
 }
 
 s32 func_0000A5FC(s32 arg0) {
-    return (arg0 & 0x1FFFFFFF) | (M2C_FIELD(D_0000CA84, s32 *, 4) & 0xE0000000);
+    return (arg0 & 0x1FFFFFFF) | (D_0000CA84->addr & 0xE0000000);
 }
 #endif
 

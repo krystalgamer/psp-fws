@@ -10,6 +10,7 @@ for the module's own setting; --perm writes a decomp-permuter directory
 (tmp/perm/MODULE/FUNC) seeded with the hand C. Nothing in the repository is changed.
 """
 import argparse
+import os
 import difflib
 import re
 import subprocess
@@ -136,7 +137,12 @@ def climb(pre, lines, idx, target, comp, opt, jobs):
     rng = random.Random(1)
     overall = (10 ** 9, start)
     with Pool(jobs) as pool:
+        import time
+        deadline = time.time() + float(os.environ.get("CLIMB_SECONDS", "600"))
         for restart in range(8):
+            if time.time() > deadline:
+                print("climb: time cap (CLIMB_SECONDS) reached")
+                break
             cur = list(start) if restart == 0 else rng.sample(start, len(start))
             best = _perm_score((pre, lines, idx, cur, target, comp, opt))
             best = best[0] if best else 10 ** 9
@@ -150,8 +156,10 @@ def climb(pre, lines, idx, target, comp, opt, jobs):
 
 
 def _climb1(pool, pre, lines, idx, cur, best, target, comp, opt):
+    import time
+    deadline = time.time() + float(os.environ.get("CLIMB_SECONDS", "600"))
     if True:
-        while best:
+        while best and time.time() < deadline:
             moves = []
             for i in range(len(cur)):
                 for j in range(len(cur)):
@@ -251,6 +259,9 @@ def main():
     if a.extra:
         opts = [f"{o} {a.extra}" for o in opts]
         own = f"{own} {a.extra}"
+    if a.variants:  # the raw body holds every alternative; only the combinations are scored
+        opts = []
+        best = None
     for opt in opts:
         words, err = AD.compile_words(text, comp, opt)
         if words is None:
