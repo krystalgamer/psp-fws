@@ -1,3 +1,4 @@
+/* cflags[100]: -O2 -frename-registers */
 /* cflags[152]: -O2 -frename-registers */
 /* cflags[150]: -O2 -frename-registers */
 /* cflags: -Os */
@@ -214,7 +215,16 @@ INCLUDE_ASM("nonmatchings/codec", func_00000BDC);
 INCLUDE_ASM("nonmatchings/codec", sceCodecInitEntry);
 #endif
 
-#if FW_VERSION < 271
+#if FW_VERSION < 201
+s32 sceCodec_driver_4515AE04(u32 arg0) {
+    if (arg0 >= 5) {
+        return 0x80000102;
+    }
+    return sceCodec_driver_56494D70(1, 0, D_00001230[arg0]);
+}
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 271
 INCLUDE_ASM("nonmatchings/codec", sceCodec_driver_4515AE04);
 #endif
 
@@ -270,7 +280,23 @@ INCLUDE_ASM("nonmatchings/codec", func_00000EC4);
 INCLUDE_ASM("nonmatchings/codec", func_00000C50);
 #endif
 
-#if FW_VERSION < 271
+#if FW_VERSION < 201
+s32 func_00000CF8(void) {
+    KDebugUnkIf *p = KDebugForKernel_E892D9A1();
+    s32 type;
+
+    if (p == NULL) {
+        return 0;
+    }
+    if (p->unk10() != 0x534D) {
+        return 0;
+    }
+    type = p->unk18();
+    return type >= 3 && type < 6;
+}
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 271
 INCLUDE_ASM("nonmatchings/codec", func_00000CF8);
 #endif
 
@@ -291,7 +317,22 @@ INCLUDE_RODATA("nonmatchings/codec", D_00001230);
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/codec", func_00000E60);
+s32 func_00000E60(void) {
+    if (D_00001280[0x5D] == 0) {
+        D_00001280[0x5D] = 1;
+        if (D_00001280[0x5C] != 0) {
+            if (sceCodecSetHeadphoneVolume(-D_000011F0[0]) >= 0
+                && sceCodecSetSpeakerVolume(-D_000011F0[0x1F]) >= 0) {
+                D_00001280[0x5C] = 0;
+            }
+        }
+        sceKernelDelayThread(1000);
+        sceGpioPortSet(0x20);
+        sceGpioPortClear(2);
+        func_00000924(-1, -1, -1, -1);
+    }
+    return 0;
+}
 #endif
 
 #if FW_VERSION < 260
