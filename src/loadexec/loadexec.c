@@ -1,4 +1,4 @@
-/* cflags[100,102]: -O2 */
+/* cflags[100,102]: -O2 -mno-split-addresses */
 /* cflags: -O2 -frename-registers */
 #include "common.h"
 #include "loadexec_decls.h"
