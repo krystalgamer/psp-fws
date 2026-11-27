@@ -2,10 +2,6 @@
 #include "common.h"
 #include "vshbridge_decls.h"
 
-#if FW_VERSION == 103
-INCLUDE_ASM("nonmatchings/vshbridge", func_00000000);
-#endif
-
 #if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/vshbridge", D_000041B0);
 
@@ -126,7 +122,9 @@ INCLUDE_RODATA("nonmatchings/vshbridge", D_00004B30);
 
 #if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/vshbridge", D_000036AC);
+#endif
 
+#if FW_VERSION == 103 || (FW_VERSION >= 250 && FW_VERSION < 282)
 INCLUDE_ASM("nonmatchings/vshbridge", _vshVshBridgeStart);
 #endif
 
@@ -872,107 +870,61 @@ INCLUDE_ASM("nonmatchings/vshbridge", func_0000095C);
 #endif
 
 #if FW_VERSION == 103
-INCLUDE_ASM("nonmatchings/vshbridge", func_000008E4);
+INCLUDE_ASM("nonmatchings/vshbridge", vshKernelLoadExecBufferPlain);
 
-INCLUDE_ASM("nonmatchings/vshbridge", func_00000900);
+INCLUDE_ASM("nonmatchings/vshbridge", vshKernelLoadExec);
 
-INCLUDE_ASM("nonmatchings/vshbridge", func_0000091C);
+INCLUDE_ASM("nonmatchings/vshbridge", vshKernelLoadExecFromHost);
 
 INCLUDE_ASM("nonmatchings/vshbridge", func_00000938);
+#endif
 
-INCLUDE_ASM("nonmatchings/vshbridge", func_00000954);
+#if FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/vshbridge", vshKernelExitVSH);
+#endif
 
-INCLUDE_ASM("nonmatchings/vshbridge", func_00000970);
+#if FW_VERSION < 150 || (FW_VERSION >= 152 && FW_VERSION < 330)
+INCLUDE_ASM("nonmatchings/vshbridge", vshKernelLoadExecVSHDiscUpdater);
 
-INCLUDE_ASM("nonmatchings/vshbridge", func_0000098C);
+INCLUDE_ASM("nonmatchings/vshbridge", vshKernelLoadExecVSHDisk);
 
-INCLUDE_ASM("nonmatchings/vshbridge", func_000009A8);
+INCLUDE_ASM("nonmatchings/vshbridge", vshKernelLoadExecBufferVSHUsbWlan);
 
-INCLUDE_ASM("nonmatchings/vshbridge", func_000009C4);
+INCLUDE_ASM("nonmatchings/vshbridge", vshKernelLoadExecVSHMs1);
 
-INCLUDE_ASM("nonmatchings/vshbridge", func_000009E0);
+INCLUDE_ASM("nonmatchings/vshbridge", vshKernelLoadExecVSHMs2);
 
-INCLUDE_ASM("nonmatchings/vshbridge", func_000009FC);
-
-INCLUDE_ASM("nonmatchings/vshbridge", func_00000A18);
-
-INCLUDE_ASM("nonmatchings/vshbridge", func_00000A34);
-
-INCLUDE_ASM("nonmatchings/vshbridge", func_00000A50);
-
-INCLUDE_ASM("nonmatchings/vshbridge", func_00000A6C);
-
-INCLUDE_ASM("nonmatchings/vshbridge", func_00000A88);
+INCLUDE_ASM("nonmatchings/vshbridge", vshKernelLoadExecVSHMs3);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 152
 void func_0000095C(void) {
     sceKernelExitGame();
 }
-#endif
 
-#if FW_VERSION < 103
-INCLUDE_ASM("nonmatchings/vshbridge", vshKernelExitVSH);
-#endif
-
-#if FW_VERSION >= 150 && FW_VERSION < 152
 void vshKernelExitVSH(void) {
     sceKernelExitGame();
 }
-#endif
 
-#if FW_VERSION < 103 || (FW_VERSION >= 152 && FW_VERSION < 330)
-INCLUDE_ASM("nonmatchings/vshbridge", vshKernelLoadExecVSHDiscUpdater);
-#endif
-
-#if FW_VERSION >= 150 && FW_VERSION < 152
 void vshKernelLoadExecVSHDiscUpdater(void) {
     sceKernelLoadExecVSHDiscUpdater();
 }
-#endif
 
-#if FW_VERSION < 103 || (FW_VERSION >= 152 && FW_VERSION < 330)
-INCLUDE_ASM("nonmatchings/vshbridge", vshKernelLoadExecVSHDisk);
-#endif
-
-#if FW_VERSION >= 150 && FW_VERSION < 152
 void vshKernelLoadExecVSHDisk(void) {
     sceKernelLoadExecVSHDisc();
 }
-#endif
 
-#if FW_VERSION < 103 || (FW_VERSION >= 152 && FW_VERSION < 330)
-INCLUDE_ASM("nonmatchings/vshbridge", vshKernelLoadExecBufferVSHUsbWlan);
-#endif
-
-#if FW_VERSION >= 150 && FW_VERSION < 152
 void vshKernelLoadExecBufferVSHUsbWlan(void) {
     sceKernelLoadExecBufferVSHUsbWlan();
 }
-#endif
 
-#if FW_VERSION < 103 || (FW_VERSION >= 152 && FW_VERSION < 330)
-INCLUDE_ASM("nonmatchings/vshbridge", vshKernelLoadExecVSHMs1);
-#endif
-
-#if FW_VERSION >= 150 && FW_VERSION < 152
 void vshKernelLoadExecVSHMs1(void) {
     sceKernelLoadExecVSHMs1();
 }
-#endif
 
-#if FW_VERSION < 103 || (FW_VERSION >= 152 && FW_VERSION < 330)
-INCLUDE_ASM("nonmatchings/vshbridge", vshKernelLoadExecVSHMs2);
-#endif
-
-#if FW_VERSION >= 150 && FW_VERSION < 152
 void vshKernelLoadExecVSHMs2(void) {
     sceKernelLoadExecVSHMs2();
 }
-#endif
-
-#if FW_VERSION < 103 || (FW_VERSION >= 152 && FW_VERSION < 330)
-INCLUDE_ASM("nonmatchings/vshbridge", vshKernelLoadExecVSHMs3);
 #endif
 
 #if FW_VERSION >= 300 && FW_VERSION < 330
@@ -987,7 +939,7 @@ void vshKernelLoadExecVSHMs3(void) {
 }
 #endif
 
-#if FW_VERSION < 103 || (FW_VERSION >= 152 && FW_VERSION < 330)
+#if FW_VERSION < 150 || (FW_VERSION >= 152 && FW_VERSION < 330)
 INCLUDE_ASM("nonmatchings/vshbridge", vshKernelExitVSHVSH);
 #endif
 
@@ -997,7 +949,7 @@ void vshKernelExitVSHVSH(void) {
 }
 #endif
 
-#if FW_VERSION < 103
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/vshbridge", vshKernelLoadExecBufferVSHPlain);
 #endif
 
@@ -1027,7 +979,7 @@ void vshKernelDipswClear(void) {
 }
 #endif
 
-#if FW_VERSION >= 152 && FW_VERSION < 330
+#if FW_VERSION == 103 || (FW_VERSION >= 152 && FW_VERSION < 330)
 INCLUDE_ASM("nonmatchings/vshbridge", vshKernelLoadExecVSHDiscDebug);
 #endif
 
@@ -1037,7 +989,7 @@ void vshKernelLoadExecVSHDiscDebug(void) {
 }
 #endif
 
-#if FW_VERSION >= 152 && FW_VERSION < 330
+#if FW_VERSION == 103 || (FW_VERSION >= 152 && FW_VERSION < 330)
 INCLUDE_ASM("nonmatchings/vshbridge", vshKernelLoadExecBufferVSHUsbWlanDebug);
 #endif
 
@@ -1066,7 +1018,7 @@ void vshKernelLoadExecBufferVSHUsbWlanDebug(void) {
 }
 #endif
 
-#if FW_VERSION < 103
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/vshbridge", vshKernelLoadExecBufferVSHFromHost);
 #endif
 
