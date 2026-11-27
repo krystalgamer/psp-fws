@@ -629,7 +629,7 @@ extern s32 D_0003CF4C;
 extern void *D_0003CF70;
 extern M2C_UNK func_0000155C;
 extern M2C_UNK func_0000436C;
-extern M2C_UNK func_00007E94;
+extern s32 func_00007E94;
 extern M2C_UNK func_0000FBA8;
 extern M2C_UNK func_0000FC30;
 extern M2C_UNK func_0000FE28;

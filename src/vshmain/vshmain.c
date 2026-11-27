@@ -1793,11 +1793,7 @@ INCLUDE_ASM("nonmatchings/vshmain", func_000041B4);
 INCLUDE_ASM("nonmatchings/vshmain", func_0000438C);
 #endif
 
-#if FW_VERSION == 152
-INCLUDE_ASM("nonmatchings/vshmain", func_000041D0);
-#endif
-
-#if FW_VERSION < 152
+#if FW_VERSION < 201
 s32 *func_000041D0(s32 *arg0, s32 arg1, s32 arg2) {
     *arg0 = func_00004524(arg1, arg2);
     return arg0;
@@ -4699,11 +4695,11 @@ void func_0000EC64(void) {
 void func_0000EC84(void) {
     func_0000EBE4(0, 0xFFFF);
 }
+
+INCLUDE_ASM("nonmatchings/vshmain", func_0000ECA4);
 #endif
 
-#if FW_VERSION >= 152
-INCLUDE_ASM("nonmatchings/vshmain", func_0000ECA4);
-#else
+#if FW_VERSION < 201
 void func_0000ECA4(s32 arg0) {
     _ZN3paf9PhHandler11SetCallBackEiPFvPNS_8PhWidgetEPNS_7PhEventEPvES5_(arg0, 0x80004, (s32) &func_0000FBA8, 0);
     _ZN3paf9PhHandler11SetCallBackEiPFvPNS_8PhWidgetEPNS_7PhEventEPvES5_(arg0, 0x10001, (s32) &func_0000FE28, 0);
@@ -5121,7 +5117,16 @@ INCLUDE_ASM("nonmatchings/vshmain", func_00007CF0);
 #endif
 
 #if FW_VERSION == 152
-INCLUDE_ASM("nonmatchings/vshmain", func_00007E44);
+void func_00007E44(s32 arg0) {
+    s32 temp_v0;
+
+    temp_v0 = func_000120FC(arg0);
+    if (temp_v0 != 0) {
+        _ZN3paf4View6UnloadEPS0_PFvPKcE(temp_v0, &func_00007E94);
+    } else {
+        func_00007EC4(M2C_FIELD(D_0003089C, s32 *, 0x390), M2C_FIELD(D_0003089C, s32 *, 0x394));
+    }
+}
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 152
@@ -9116,8 +9121,24 @@ INCLUDE_ASM("nonmatchings/vshmain", func_0001E6F4);
 INCLUDE_ASM("nonmatchings/vshmain", func_0001E960);
 #endif
 
-#if FW_VERSION >= 152
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/vshmain", func_0001E734);
+#endif
+
+#if FW_VERSION == 152
+void func_0001E734(s32 arg0) {
+    void **temp_v0;
+
+    _ZN3paf9PhHandler11SetCallBackEiPFvPNS_8PhWidgetEPNS_7PhEventEPvES5_(arg0, 0x80003, (s32) &func_00014A8C, 0);
+    if (M2C_FIELD(D_0003089C, s32 *, 0xA8) == 0) {
+
+    } else {
+        temp_v0 = _ZNK3paf4View10FindWidgetEPKc(D_00020E80, "mlist_optionmenu");
+        if (temp_v0 != NULL) {
+            _ZN3paf6PhList10SetItemNumEi(temp_v0, func_000165C8((s32) D_0003089C));
+        }
+    }
+}
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 152
@@ -9891,11 +9912,7 @@ INCLUDE_ASM("nonmatchings/vshmain", func_0002053C);
 
 INCLUDE_ASM("nonmatchings/vshmain", func_00020578);
 
-#if FW_VERSION == 152
-INCLUDE_ASM("nonmatchings/vshmain", func_00011988);
-#endif
-
-#if FW_VERSION >= 150 && FW_VERSION < 152
+#if FW_VERSION >= 150 && FW_VERSION < 201
 void func_00011988(void *arg0) {
     if (arg0 != NULL) {
         M2C_FIELD(arg0, s32 *, 0x94) = _ZN3paf4View8GetSoundEPKc(D_000308B4, &D_0002B1F4);
@@ -11349,11 +11366,11 @@ s32 func_00023E70(struct Unk_func_00023E70_0 *arg0) {
 }
 #endif
 
-#if FW_VERSION >= 152 && FW_VERSION < 350
+#if FW_VERSION >= 201 && FW_VERSION < 350
 INCLUDE_ASM("nonmatchings/vshmain", func_00023E78);
 #endif
 
-#if FW_VERSION < 152
+#if FW_VERSION < 201
 void func_00023E78(void *arg0, s32 *arg1) {
     _ZN3paf4View8PageOpenEPKcii(M2C_FIELD(arg0, s32 *, 4), (s32) arg1, 0, 0);
 }
