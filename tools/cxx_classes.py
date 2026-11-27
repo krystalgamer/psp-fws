@@ -129,6 +129,10 @@ def main():
         for v, g in c["by"].items():
             group_of[(v, g["funcs"][0][1])] = (ci, g)
     asm_bases = {}  # class -> {version: group}
+    # vtable label names are shared across versions by different vtables now and then: a class name
+    # that two clusters would get is ambiguous, neither may be converted or used as a base
+    taken = Counter(n for n in cname.values() if n)
+    ambiguous = {n for n, k in taken.items() if k > 1}
 
     def compiled(v):
         """[(file, index, entry)] of the functions version v compiles, in order (per file)."""
@@ -204,7 +208,7 @@ def main():
         plans.append({"cls": cls, "sizes": sizes, "todo": todo, "done": [v for v in c["by"] if v not in todo]})
     # unique class names; bases
     dup = Counter(p["cls"] for p in plans)
-    for p in [p for p in plans if dup[p["cls"]] > 1]:
+    for p in [p for p in plans if dup[p["cls"]] > 1 or p["cls"] in ambiguous]:
         plans.remove(p)
         reasons["vtable shared by groups"] += 1
     d2_of = {}  # (version, D2 name) -> plan
@@ -228,7 +232,8 @@ def main():
                 bases.add(d2_of[(v, b)]["cls"])
             elif b and b.startswith("_Z") and demangled_class(b):
                 bases.add(demangled_class(b))
-            elif b and (v, b) in group_of and cname[group_of[(v, b)][0]] and group_of[(v, b)][1]["vtable_zero"]:
+            elif b and (v, b) in group_of and cname[group_of[(v, b)][0]] and group_of[(v, b)][1]["vtable_zero"] \
+                    and cname[group_of[(v, b)][0]] not in ambiguous:
                 ci, g = group_of[(v, b)]
                 bases.add(cname[ci])
                 asm_bases.setdefault(cname[ci], {})[v] = g
