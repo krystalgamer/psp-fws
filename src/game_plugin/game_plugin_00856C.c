@@ -30,7 +30,7 @@ s32 func_0000856C(s32 arg0) {
 
 #if FW_VERSION >= 350
 s32 func_000085FC(void) {
-    scePaf_4729E549();
+    sce_paf_private_free();
     return 0;
 }
 #endif
@@ -105,7 +105,7 @@ s32 func_00008A50(void) {
     D_0001266C = -1;
     func_00008DB0();
     if (D_0001A5C4 != 0) {
-        scePaf_4729E549(D_0001A5C4);
+        sce_paf_private_free(D_0001A5C4);
         D_0001A5C4 = 0;
     }
     return 0;

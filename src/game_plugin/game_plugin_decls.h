@@ -423,28 +423,17 @@ void func_00010788(s32 arg0, s32 arg1);
 M2C_UNK func_00010A38(...);
 s32 module_stop(void);
 M2C_UNK scePaf_39E62C88(s32, s32, M2C_UNK, M2C_UNK);
-M2C_UNK scePaf_4729E549(...);
-M2C_UNK scePaf_8B38372A(s32);
-M2C_UNK scePaf_A013540A(s32, s32);
-M2C_UNK scePaf_CD216C47(s32);
-M2C_UNK scePaf_F5001144(void *);
 M2C_UNK sceVshCommonGui_57F57F40(s32);
-M2C_UNK sceVshCommonGui_891DD627(M2C_UNK);
-M2C_UNK sceVshCommonGui_F5A16B4D(...);
 M2C_UNK sceVshCommonUtil_0587F20C(M2C_UNK *, M2C_UNK, M2C_UNK);
-M2C_UNK sceVshCommonUtil_21EF453A(M2C_UNK *, s32);
 M2C_UNK sceVshCommonUtil_622815DD(M2C_UNK *, M2C_UNK *);
 M2C_UNK sceVshCommonUtil_8584376D(M2C_UNK *, s32);
-M2C_UNK sceVshCommonUtil_951BC384(M2C_UNK *, M2C_UNK *);
 M2C_UNK sce_paf_private_free(...);
 M2C_UNK sce_paf_private_free2(void *);
 M2C_UNK sce_paf_private_snprintf(M2C_UNK *, M2C_UNK, const char *);
 s32 sce_paf_private_strlen(s32);
 M2C_UNK sce_paf_private_strncpy(M2C_UNK *, s32, M2C_UNK);
 s32 sce_paf_private_wcslen(s32);
-M2C_UNK vsh_1122D59B(...);
 M2C_UNK vsh_B55C095C(M2C_UNK *);
-M2C_UNK vsh_C7D1D06C(...);
 
 #ifdef __cplusplus
 }

@@ -40,7 +40,7 @@ void ***func_00007638(void ***arg0, struct Unk_func_00007638_1 *arg1, void **arg
     temp_s0 = M2C_FIELD(temp_v1, void ***, 4);
     *temp_s0 = M2C_FIELD(temp_v1, void **, 0);
     M2C_FIELD(M2C_FIELD(temp_v1, void **, 0), void ***, 4) = temp_s0;
-    scePaf_F5001144(temp_v1);
+    sce_paf_private_free2(temp_v1);
     *arg0 = temp_s0;
     arg1->unk4 -= 1;
     return arg0;
@@ -278,7 +278,7 @@ INCLUDE_ASM("nonmatchings/game_plugin_0075DC", func_00007490);
 #if FW_VERSION >= 350
 void func_000080FC(struct Unk_func_000080FC_0 *arg0) {
     arg0->unk30 = -1;
-    vsh_1122D59B();
+    _ZN11PageManager4ExitEv();
 }
 #endif
 
@@ -311,7 +311,7 @@ void func_00008160(struct Unk_func_00008160_0 *arg0, s32 arg1) {
 #if FW_VERSION >= 350
 void func_00008180(struct Unk_func_00008180_0 *arg0) {
     arg0->unk30 = -1;
-    vsh_C7D1D06C();
+    _ZN11PageManager5ClearEv();
 }
 #endif
 

@@ -33,7 +33,7 @@ INCLUDE_ASM("nonmatchings/game_plugin_0005CC", func_000006FC);
 
 #if FW_VERSION >= 350
 void func_000006FC(s32 arg0) {
-    sceVshCommonUtil_21EF453A(&D_0001A314, arg0);
+    sceVshCommonUtil_8584376D(&D_0001A314, arg0);
 }
 #endif
 
@@ -81,7 +81,7 @@ INCLUDE_ASM("nonmatchings/game_plugin_0005CC", func_00000664);
 
 #if FW_VERSION >= 350
 void func_0000076C(void) {
-    sceVshCommonUtil_951BC384(&D_0001A314, &func_00000688);
+    sceVshCommonUtil_622815DD(&D_0001A314, &func_00000688);
     func_00008120(&D_0001247C);
 }
 #endif
@@ -615,8 +615,8 @@ INCLUDE_ASM("nonmatchings/game_plugin_0005CC", func_000016C4);
 void func_00001730(s32 arg0) {
     if (arg0 == 0) {
         D_00015B0C = 1;
-        sceVshCommonGui_F5A16B4D();
-        sceVshCommonGui_891DD627(0);
+        _ZN3vsh26ShowButtonNavigation_EnterEb(arg0);
+        _ZN3vsh25ShowButtonNavigation_BackEb(0);
         M2C_FIELD(D_0001A180, M2C_UNK (**)(M2C_UNK, void *), 0x10)(0xE, D_0001A180);
         func_000012D0(D_0001A42C);
     } else {
