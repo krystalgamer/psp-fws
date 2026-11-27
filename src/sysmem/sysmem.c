@@ -205,7 +205,36 @@ s32 sceKernelHeapTotalFreeSize(SceUID id) {
     resumeIntr(oldIntr);
     return ret;
 }
-#else
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 201
+s32 sceKernelHeapTotalFreeSize(SceUID id) {
+    SceSysmemUidCB *uid;
+    SceSysmemHeap *heap;
+    SceSysmemHeapBlock *cur;
+    s32 total;
+    s32 oldIntr = suspendIntr();
+    s32 ret = sceKernelGetUIDcontrolBlockWithType(id, g_HeapType, &uid);
+    if (ret != 0) {
+        resumeIntr(oldIntr);
+        return ret;
+    }
+    heap = UID_CB_TO_DATA(uid, g_HeapType, SceSysmemHeap);
+    total = 0;
+    cur = heap->firstBlock->next;
+    while (1) {
+        total += func_000048E0(cur + 1);
+        if (cur == heap->firstBlock) {
+            break;
+        }
+        cur = cur->next;
+    }
+    resumeIntr(oldIntr);
+    return total;
+}
+#endif
+
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/sysmem", sceKernelHeapTotalFreeSize);
 #endif
 
@@ -549,7 +578,30 @@ u32 SysMemForKernel_E6581468(s32 mpid) {
     resumeIntr(oldIntr);
     return ret;
 }
-#else
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 201
+u32 SysMemForKernel_E6581468(s32 mpid) {
+    s32 oldIntr = suspendIntr();
+    SceSysmemMemoryPartition *part = MpidToCB(mpid);
+    SceSysmemSeg *seg = part->firstCtlBlk->segs;
+    u32 max = 0;
+    u32 ret;
+    while (seg != NULL) {
+        if (!seg->used) {
+            if (max < seg->size) {
+                max = seg->size;
+            }
+        }
+        seg = seg->next;
+    }
+    ret = max << 8;
+    resumeIntr(oldIntr);
+    return ret;
+}
+#endif
+
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/sysmem", SysMemForKernel_E6581468);
 #endif
 
@@ -629,7 +681,28 @@ u32 SysMemForKernel_9697CD32(s32 mpid) {
     resumeIntr(oldIntr);
     return ret;
 }
-#else
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 201
+u32 SysMemForKernel_9697CD32(s32 mpid) {
+    s32 oldIntr = suspendIntr();
+    SceSysmemMemoryPartition *part = MpidToCB(mpid);
+    SceSysmemSeg *seg = part->firstCtlBlk->segs;
+    s32 total = 0;
+    u32 ret;
+    while (seg != NULL) {
+        if (!seg->used) {
+            total += seg->size;
+        }
+        seg = seg->next;
+    }
+    ret = total << 8;
+    resumeIntr(oldIntr);
+    return ret;
+}
+#endif
+
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/sysmem", SysMemForKernel_9697CD32);
 #endif
 
