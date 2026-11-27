@@ -241,9 +241,12 @@ INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_0000A940);
 #endif
 
 #if FW_VERSION < 282
-void func_0000553C(s32 *arg0, s32 arg1) {
-    *arg0 = arg1;
-    func_0000AD38();
+/* paf::SurfaceRCPtr<paf::Surface>::SurfaceRCPtr(paf::Surface *) [C1]: an implicit
+   template instance (.gnu.linkonce.t) emitted at the end of its TU; a plain function
+   with the mangled name until the build places linkonce sections */
+void _ZN3paf12SurfaceRCPtrINS_7SurfaceEEC1EPS1_(void *self, void *p) {
+    *(void **)self = p;
+    _ZN3paf12SurfaceRCPtrINS_7SurfaceEE6AddRefEv(self);
 }
 #endif
 
@@ -272,15 +275,18 @@ INCLUDE_RODATA("nonmatchings/savedata_utility_006DD4", D_00024EC8);
 
 INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_0000AAC8);
 
-void func_0000AC4C(s32 *arg0, s32 arg1) {
-    *arg0 = arg1;
-    func_0000AD38();
+/* paf::SurfaceRCPtr<paf::Surface>::SurfaceRCPtr(paf::Surface *) [C1]: an implicit
+   template instance (.gnu.linkonce.t) emitted at the end of its TU; a plain function
+   with the mangled name until the build places linkonce sections */
+void _ZN3paf12SurfaceRCPtrINS_7SurfaceEEC1EPS1_(void *self, void *p) {
+    *(void **)self = p;
+    _ZN3paf12SurfaceRCPtrINS_7SurfaceEE6AddRefEv(self);
 }
 
 INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_0000AC6C);
 #endif
 
-INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_0000AD38);
+INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", _ZN3paf12SurfaceRCPtrINS_7SurfaceEE6AddRefEv);
 
 INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_0000AD58);
 

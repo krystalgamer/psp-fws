@@ -8,6 +8,10 @@
 extern "C" {
 #endif
 
+#ifdef __cplusplus
+namespace paf { class View; class PhWidget; }
+#endif
+
 struct D_00025C48_s {
     s32 unk0;
     s32 unk4;
@@ -58,16 +62,6 @@ struct Unk_Unk_func_0000CDAC_0_18 {
     s32 unk4;
 };
 
-struct Unk_Unk_func_0000CFD4_0_20 {
-    u8 pad0[0x8];
-    s32 unk8;
-};
-
-struct Unk_Unk_func_00014824_sp0_0 {
-    u8 pad0[0x4];
-    M2C_UNK (*unk4)(void *);
-};
-
 struct Unk_func_00000A78_0 {
     u8 pad0[0x10];
     s32 unk10;
@@ -78,12 +72,15 @@ struct Unk_func_00000A78_0 {
 };
 
 struct Unk_func_00000B08_0 {
-    u8 pad0[0x10];
+    u8 pad0[0xC];
+    s32 unkC;
     s32 unk10;
     s32 unk14;
     u8 pad18[0x34];
     u8 unk4C;
-    u8 pad4D[0x3];
+    u8 pad4D[0x1];
+    s8 unk4E;
+    u8 pad4F[0x1];
     struct Unk_Unk_func_00000B08_0_50 *unk50;
 };
 
@@ -124,26 +121,14 @@ struct Unk_func_000015EC_temp_v0 {
 
 struct Unk_func_00001718_0 {
     u8 pad0[0x4];
-    struct Unk_func_00001718_temp_a0 *unk4;
+    struct Unk_func_00000B08_0 *unk4;
     u8 pad8[0x1];
     u8 unk9;
 };
 
-struct Unk_func_00001718_temp_a0 {
-    u8 pad0[0xC];
-    s32 unkC;
-    u8 pad10[0x3E];
-    s8 unk4E;
-};
-
 struct Unk_func_000017BC_0 {
     u8 pad0[0x4];
-    struct Unk_func_000017BC_temp_a0 *unk4;
-};
-
-struct Unk_func_000017BC_temp_a0 {
-    u8 pad0[0x4E];
-    s8 unk4E;
+    struct Unk_func_00000B08_0 *unk4;
 };
 
 struct Unk_func_00001DF0_0 {
@@ -302,7 +287,7 @@ struct Unk_func_0000CDAC_0 {
 
 struct Unk_func_0000CFD4_0 {
     u8 pad0[0x20];
-    struct Unk_Unk_func_0000CFD4_0_20 *unk20;
+    struct Unk_func_00013558_0 *unk20;
 };
 
 struct Unk_func_0000D588_0 {
@@ -469,11 +454,6 @@ struct Unk_func_00014420_0 {
     s32 unk10;
 };
 
-struct Unk_func_00014824_sp0 {
-    struct Unk_Unk_func_00014824_sp0_0 *unk0;
-    s32 unk4;
-};
-
 struct Unk_func_00015310_0 {
     s32 unk0;
     s32 unk4;
@@ -600,22 +580,17 @@ struct Unk_vt_func_0000671C_arg0 {
     s32 (*unk10)(void **);
 };
 
-struct Unk_vt_func_00014824_arg1 {
-    u8 pad0[0xAC];
-    M2C_UNK (*unkAC)(void **, s32 *, s32);
-};
-
 typedef void (*func_ptr)(void);
 
 extern M2C_UNK D_0001F6D0;
 extern M2C_UNK D_0001F908;
 extern s32 D_0001F958;
-extern s32 D_0001FAAC;
-extern s32 D_0001FABC;
-extern s32 D_0001FAD0;
-extern s32 D_0001FAE4;
-extern s32 D_0001FAF8;
-extern s32 D_0001FB0C;
+extern const char D_0001FAAC[];
+extern const char D_0001FABC[];
+extern const char D_0001FAD0[];
+extern const char D_0001FAE4[];
+extern const char D_0001FAF8[];
+extern const char D_0001FB0C[];
 extern M2C_UNK D_0001FC80;
 extern M2C_UNK D_0001FDAC;
 extern s32 D_000205B0;
@@ -696,18 +671,20 @@ extern s32 func_00012AC8;
 M2C_UNK Job_Cancel(M2C_UNK, s32);
 s32 Job_Start(M2C_UNK, M2C_UNK *, void *, M2C_UNK, M2C_UNK, M2C_UNK *);
 s32 Job_isCanceled(s32);
+void _ZN3paf12SurfaceRCPtrINS_7SurfaceEE6AddRefEv(void *self);
+void _ZN3paf12SurfaceRCPtrINS_7SurfaceEEC1EPS1_(void *self, void *p);
 M2C_UNK _ZN3paf4View12PageActivateEPKc(s32);
 M2C_UNK _ZN3paf4View12PageCloseAllEv(s32);
-s32 _ZN3paf4View4FindEPKc(M2C_UNK *);
+void *_ZN3paf4View4FindEPKc(const char *name);
 s32 _ZN3paf4View8PageOpenEPKcii(s32, s32, s32, s32);
 M2C_UNK _ZN3paf4View9PageCloseEPKc(s32);
-M2C_UNK _ZN3paf4View9PlaySoundEPKc(s32, M2C_UNK *);
+void _ZN3paf4View9PlaySoundEPKc(void *self, const char *name);
 s32 _ZN3paf6Module12SetInterfaceEiPv(s32, s32, s32);
 M2C_UNK _ZN3paf8PhXmList10SetItemNumEi(s32, M2C_UNK);
 M2C_UNK _ZN3paf9PhHandler11KillTimerCBEi(s32, M2C_UNK);
-M2C_UNK _ZN3vsh10OptionMenu4HideEv(void *self);
-M2C_UNK _ZN3vsh10OptionMenu4ShowEv(void *self);
-M2C_UNK _ZN3vsh10OptionMenu5CloseEPN3paf4ViewEPKcS5_(s32, s32, s32);
+void _ZN3vsh10OptionMenu4HideEv(void);
+void _ZN3vsh10OptionMenu4ShowEv(void);
+void _ZN3vsh10OptionMenu5CloseEPN3paf4ViewEPKcS5_(void *view, const char *, const char *);
 M2C_UNK _ZN3vsh13Infobar_CloseEb(M2C_UNK);
 M2C_UNK _ZN3vsh13MessageDialog10HideDeleteEv(s32);
 s32 _ZN3vsh14GetString_BackE6Locale(M2C_UNK);
@@ -719,7 +696,7 @@ s32 _ZN3vsh16GetString_OptionEv(void);
 M2C_UNK _ZN3vsh30SetButtonNavigationString_BackEPKw(void *, s32);
 M2C_UNK _ZN3vsh31SetButtonNavigationString_EnterEPKw(void *, s32);
 M2C_UNK _ZN3vsh32SetButtonNavigationString_OptionEPKw(void *, s32);
-M2C_UNK _ZNK3paf4View10GetTextureEPKc(s32 *, s32, M2C_UNK *);
+void _ZNK3paf4View10GetTextureEPKc(void *ret, void *self, const char *name);
 s32 _ZNK3paf4View8PageRootEPKc(s32, M2C_UNK *);
 s32 _ZNK3paf4View9GetStringEPKc(s32, M2C_UNK *);
 M2C_UNK _ZdaPv(s32);
@@ -775,13 +752,13 @@ void func_00001EBC(void *arg0, s32 arg1, s8 arg2, s8 arg3);
 void func_00002084(struct Unk_func_00002084_0 *arg0, s32 arg1);
 void func_000020F4(struct Unk_func_000020F4_0 *arg0, s32 arg1);
 void func_00002114(void *arg0, s32 arg1);
-void func_00002134(M2C_UNK **arg0, s32 arg1);
-void func_0000216C(M2C_UNK **arg0, s32 arg1);
+void func_00002134(struct Unk_func_00001DF0_0 *arg0, s32 arg1);
+void func_0000216C(struct Unk_func_00001DF0_0 *arg0, s32 arg1);
 void func_00002198(void *arg0, s32 arg1);
 void func_000021EC(M2C_UNK **arg0, s32 arg1);
 void func_00002224(M2C_UNK **arg0, s32 arg1);
 s32 func_000026C0(s32);
-void func_000026EC(M2C_UNK **arg0, s32 arg1);
+void func_000026EC(struct Unk_func_00001DF0_0 *arg0, s32 arg1);
 s32 func_00002738(s32);
 void func_00002854(M2C_UNK **arg0, s32 arg1);
 void func_00002AD8(s32 arg0);
@@ -800,8 +777,8 @@ void func_00003144(struct Unk_func_00003144_0 *arg0, s32 arg1);
 void func_000031E8(void *arg0, s32 arg1);
 void func_0000326C(void *arg0, s32 arg1);
 void func_00003520(struct Unk_func_00003520_0 *arg0);
-void func_000036EC(M2C_UNK **arg0, s32 arg1);
-void func_00003720(M2C_UNK **arg0, s32 arg1);
+void func_000036EC(struct Unk_func_00002D04_0 *arg0, s32 arg1);
+void func_00003720(struct Unk_func_00002D04_0 *arg0, s32 arg1);
 void func_00003724(void *arg0);
 void func_000038E8(M2C_UNK **arg0, s32 arg1);
 void func_0000391C(M2C_UNK **arg0, s32 arg1);
@@ -810,13 +787,12 @@ void func_00003AA0(void *arg0);
 s32 func_00003C60(s32);
 void func_00003EEC(s32 arg0);
 void func_00003F08(s32 arg0);
-void func_00003FE0(M2C_UNK **arg0, s32 arg1);
+void func_00003FE0(struct Unk_func_00002D04_0 *arg0, s32 arg1);
 void func_00004228(M2C_UNK **arg0, s32 arg1);
 void func_00004290(M2C_UNK **arg0);
 void func_000042B8(M2C_UNK **arg0);
 s32 func_00005168(s32, s32, s32);
 void func_00005510(struct Unk_func_00005510_0 *arg0, s32 arg1);
-void func_0000553C(s32 *arg0, s32 arg1);
 void func_000055DC(M2C_UNK **arg0);
 void func_00005604(M2C_UNK **arg0);
 void func_0000562C(M2C_UNK **arg0);
@@ -955,8 +931,6 @@ s32 func_0000A940(s32, s32, s32);
 void func_0000A990(s32 arg0);
 s32 func_0000AAC8(s32, s32, s32);
 s32 func_0000ABD8(void *arg0);
-void func_0000AC4C(s32 *arg0, s32 arg1);
-M2C_UNK func_0000AD38(...);
 void func_0000ADB8(M2C_UNK **arg0);
 s32 func_0000ADC4(s32, s32, s32, s32);
 void func_0000ADE0(M2C_UNK **arg0);
@@ -1019,10 +993,10 @@ M2C_UNK func_0000D570(M2C_UNK);
 s32 func_0000D57C(void);
 s32 func_0000D588(struct Unk_func_0000D588_0 *arg0);
 void func_0000D5FC(void *arg0);
-void func_0000D674(s32 arg0, void **arg1, s32 arg2);
+void func_0000D674(paf::View *view, paf::PhWidget *widget, s32 idx);
 s32 func_0000D678(void *arg0);
 s32 func_0000D828(void *);
-void func_0000D88C(s32 arg0, void **arg1, s32 arg2);
+void func_0000D88C(paf::View *view, paf::PhWidget *widget, s32 idx);
 s32 func_0000DBE0(struct Unk_func_0000DBE0_0 *arg0);
 s32 func_0000DC4C(void *arg0);
 s32 func_0000DEEC(s32);
@@ -1173,7 +1147,7 @@ void func_000143EC(s32 *arg0, s32 arg1, s32 arg2);
 void func_00014410(s32 *arg0, s32 arg1);
 void func_00014420(struct Unk_func_00014420_0 *arg0);
 void func_000145FC(void *arg0);
-void func_00014824(s32 arg0, struct Unk_vt_func_00014824_arg1 **arg1, s32 arg2);
+void func_00014824(paf::View *view, paf::PhWidget *widget, s32 idx);
 s32 func_0001492C(void *arg0);
 void func_00015310(struct Unk_func_00015310_0 *arg0);
 void func_00015374(s32 arg0, s8 arg1);
@@ -1279,14 +1253,11 @@ s32 sceIoOpen(void *, s32, s32);
 M2C_UNK sceIoUnassign(M2C_UNK *);
 s32 scePaf_2CD3AB9E(s32, M2C_UNK *);
 M2C_UNK scePaf_3AC3E06A(...);
-M2C_UNK scePaf_3C5D1D0E(s32 *, s32, M2C_UNK *);
 s32 scePaf_3EDD45EF(M2C_UNK, M2C_UNK *, struct Unk_func_00012928_0 *, M2C_UNK, M2C_UNK, M2C_UNK *);
 M2C_UNK scePaf_4729E549(...);
 M2C_UNK scePaf_47B886E3(M2C_UNK, s32);
-M2C_UNK scePaf_6428A1DE(s32, M2C_UNK *);
 s32 scePaf_723D0C80(s32);
 M2C_UNK scePaf_7EED9087(...);
-s32 scePaf_88784487(M2C_UNK *);
 M2C_UNK scePaf_9479C11B(s32, M2C_UNK, M2C_UNK);
 M2C_UNK scePaf_A76BB96F(s32, M2C_UNK);
 s32 scePaf_BB3CBD19(s32, M2C_UNK *, M2C_UNK);

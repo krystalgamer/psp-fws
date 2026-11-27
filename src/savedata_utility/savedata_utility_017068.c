@@ -1662,7 +1662,7 @@ M2C_UNK *func_0001C3F8(s32 arg0) {
     M2C_UNK *var_v0;
 
     var_v0 = NULL;
-    if (!(arg0 & 0xFF)) {
+    if ((arg0 & 0xFF) == 0) {
         var_v0 = &D_00025730;
     }
     return var_v0;
@@ -1702,7 +1702,7 @@ M2C_UNK *func_0001C3B8(s32 arg0) {
     M2C_UNK *var_v0;
 
     var_v0 = NULL;
-    if (!(arg0 & 0xFF)) {
+    if ((arg0 & 0xFF) == 0) {
         var_v0 = &D_000256A8;
     }
     return var_v0;
