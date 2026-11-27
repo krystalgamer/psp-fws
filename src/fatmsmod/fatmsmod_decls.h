@@ -253,8 +253,11 @@ s32 check_reload_status(s32 checkMedia, FatmsPrivate *priv);
 s32 df_close(); /* 1.00 df_close(SceIoIob *) */
 s32 df_dclose(); /* 1.00 df_dclose */
 s32 df_ioctl(); /* 1.00 df_ioctl */
+s32 df_mkdir(); /* 1.50+ take one more trailing argument */
 s32 df_read(); /* 1.00 df_read(SceIoIob *, void *, SceSize) */
-s32 df_rename(); /* 1.00 df_rename */
+s32 df_remove(); /* 1.50+ take one more trailing argument */
+s32 df_rename(); /* 1.50+ take one more trailing argument */
+s32 df_rmdir(); /* 1.50+ take one more trailing argument */
 s32 df_write(); /* 1.00 df_write(SceIoIob *, const void *, SceSize) */
 s32 free_heap(SceUID heap, void *mem);
 s32 free_heap_all(void);
