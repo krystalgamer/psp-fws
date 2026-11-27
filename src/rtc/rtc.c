@@ -398,7 +398,7 @@ s32 sceRtcGetCurrentClockLocalTime(pspTime *time) {
 }
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/rtc", func_00000C9C);
 #endif
 
