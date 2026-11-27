@@ -194,7 +194,47 @@ INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", func_000231F8);
 #if FW_VERSION < 151
 INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", func_00024C00);
 
-INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", tcp_mss_from_peer);
+void tcp_mss_from_peer(struct tcpcb *tp, s32 offer) {
+    struct socket *so;
+    struct rtentry *rt;
+    u32 bufsize;
+    s32 mss;
+
+    so = NULL;
+    rt = NULL;
+    if (tp->t_inpcb) {
+        so = tp->t_inpcb->inp_socket;
+        rt = in_pcbrtentry(tp->t_inpcb);
+    }
+    mss = D_0002E8F8;
+    if (offer) {
+        mss = offer;
+    }
+    mss = max(mss, 32);
+    tp->t_peermss = mss;
+    mss -= tcp_optlen(tp);
+    if (tp->t_inpcb) {
+        mss -= ip_optlen(tp->t_inpcb);
+    }
+    if (rt != NULL && rt->rt_rmx.rmx_sendpipe != 0) {
+        bufsize = rt->rt_rmx.rmx_sendpipe;
+    } else {
+        bufsize = so->so_snd.sb_hiwat;
+    }
+    if (bufsize < mss) {
+        mss = bufsize;
+    } else {
+        bufsize = roundup(bufsize, mss);
+        if (bufsize > 0x40000) {
+            bufsize = 0x40000;
+        }
+        (void)sbreserve(&so->so_snd, bufsize);
+    }
+    tp->t_segsz = mss;
+    if (rt != NULL && rt->rt_rmx.rmx_ssthresh) {
+        tp->snd_ssthresh = max(2 * mss, rt->rt_rmx.rmx_ssthresh);
+    }
+}
 #endif
 
 #if FW_VERSION >= 282
