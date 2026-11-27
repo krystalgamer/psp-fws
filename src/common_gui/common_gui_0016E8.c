@@ -1,3 +1,4 @@
+/* lang: c++ */
 #include "common.h"
 #include "common_gui_decls.h"
 
@@ -261,7 +262,7 @@ void func_00007210(M2C_UNK **arg0) {
 
 void func_00007220(M2C_UNK **arg0) {
     *arg0 = &D_00008148;
-    _ZdlPv();
+    _ZdlPv(arg0);
 }
 #endif
 
@@ -276,7 +277,7 @@ void func_0000720C(M2C_UNK **arg0) {
 
 void func_0000721C(M2C_UNK **arg0) {
     *arg0 = &D_00008148;
-    _ZdlPv();
+    _ZdlPv(arg0);
 }
 #endif
 
@@ -311,6 +312,6 @@ INCLUDE_ASM("nonmatchings/common_gui_0016E8", func_00002D38);
 #if FW_VERSION >= 282 && FW_VERSION < 350
 void func_00002D38(M2C_UNK **arg0) {
     *arg0 = &D_000037F0;
-    _ZdlPv();
+    _ZdlPv(arg0);
 }
 #endif
