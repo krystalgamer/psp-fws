@@ -15,6 +15,7 @@ options:
   cache_path: tmp/build/103/.splat_cache.netconf_plugin
   symbol_addrs_path:
     - config/103/symbol_addrs.netconf_plugin.txt
+    - config/103/func_starts.netconf_plugin.txt
     - tmp/build/103/prx_syms.netconf_plugin.txt
   reloc_addrs_path: [tmp/build/103/reloc_addrs.netconf_plugin.txt]
   asset_path: tmp/assets/103/netconf_plugin
@@ -53,7 +54,8 @@ segments:
     vram: 0x0
     subsegments:
       - { start: 0x80, type: asm, name: init, linker_section: .init }
-      - [0xA4, asm, netconf_plugin]
+      - [0xA4, c, netconf_plugin]
+      - [0xFB88, c, netconf_plugin_crtend]
       - { start: 0xFBE0, type: asm, name: fini, linker_section: .fini }
       - { start: 0xFBFC, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x1005C, type: prxpad, order: .text }
@@ -71,7 +73,7 @@ segments:
       - { start: 0x10758, type: rodata, name: dtors, linker_section: .dtors }
       - { start: 0x10768, type: rodata, name: jcr, linker_section: .jcr }
       - { start: 0x1076C, type: rodata, name: eh_frame, linker_section: .eh_frame }
-      - [0x10770, rodata, netconf_plugin]
+      - [0x10770, .rodata, netconf_plugin]
       - { start: 0x1338C, type: prxpad, order: .rodata }
   - name: netconf_plugin_seg1
     type: code
