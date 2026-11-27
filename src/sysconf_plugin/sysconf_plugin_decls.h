@@ -474,6 +474,7 @@ void func_00017AC4(struct Unk_func_00017AC4_0 *arg0);
 void func_00017AE0(struct Unk_func_00017AE0_0 *arg0);
 void func_00017AFC(struct Unk_func_00017AFC_0 *arg0);
 void func_00017B18(void *arg0);
+void func_00017B7C(void);
 M2C_UNK func_00017BD4();
 s32 module_stop(void);
 s32 sceKernelCreateEventFlag(void *, u32, u32, void *);

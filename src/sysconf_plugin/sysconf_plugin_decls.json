@@ -306,6 +306,7 @@
   "func_00017AE0": "void func_00017AE0(struct Unk_func_00017AE0_0 *arg0);",
   "func_00017AFC": "void func_00017AFC(struct Unk_func_00017AFC_0 *arg0);",
   "func_00017B18": "void func_00017B18(void *arg0);",
+  "func_00017B7C": "void func_00017B7C(void);",
   "func_00017BD4": "M2C_UNK func_00017BD4();",
   "module_stop": "s32 module_stop(void);",
   "sceKernelCreateEventFlag": "s32 sceKernelCreateEventFlag(void *, u32, u32, void *);",
