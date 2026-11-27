@@ -3,6 +3,9 @@
 #include "k1.h"
 #include "rtc_decls.h"
 
+/* 1 if p is below 0x80000000 (user space); SCE compares the result with 0 */
+#define IS_USER_ADDR(p) (((u32)(p) >> 31) ^ 1)
+
 #if FW_VERSION == 352
 INCLUDE_ASM("nonmatchings/rtc", func_00000000_v352);
 #endif
@@ -440,7 +443,21 @@ INCLUDE_ASM("nonmatchings/rtc", func_00001E10);
 
 INCLUDE_ASM("nonmatchings/rtc", sceRtcSetTime_t);
 
+#if FW_VERSION < 270
+s32 sceRtcTickAddTicks(u64 *destTick, const u64 *srcTick, s64 numTicks) {
+    u32 oldK1 = shiftK1();
+
+    if ((k1IsUserMode() && IS_USER_ADDR(destTick) == 0) || (k1IsUserMode() && IS_USER_ADDR(srcTick) == 0)) {
+        setK1(oldK1);
+        return 0x80000023;
+    }
+    *destTick = *srcTick + numTicks;
+    setK1(oldK1);
+    return 0;
+}
+#else
 INCLUDE_ASM("nonmatchings/rtc", sceRtcTickAddTicks);
+#endif
 
 s32 sceRtcTickAddMicroseconds(u64 *destTick, const u64 *srcTick, s64 num) {
     return sceRtcTickAddTicks(destTick, srcTick, num);
