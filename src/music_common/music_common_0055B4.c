@@ -37,15 +37,7 @@ INCLUDE_ASM("nonmatchings/music_common_0055B4", music_common_9E5A3EE2);
 #if FW_VERSION < 350
 INCLUDE_ASM("nonmatchings/music_common_0055B4", music_common_74CC985E);
 
-void func_00005B40(M2C_UNK **arg0) {
-    *arg0 = &D_0001F2C8;
-}
-
-INCLUDE_ASM("nonmatchings/music_common_0055B4", func_00005B50);
-
-void func_00005B60(M2C_UNK **arg0) {
-    *arg0 = &D_0001F2C8;
-    _ZdlPv(arg0);
+Class_0001F2C8::~Class_0001F2C8() {
 }
 
 s32 music_common_907343F3(struct Unk_music_common_907343F3_0 *arg0) {

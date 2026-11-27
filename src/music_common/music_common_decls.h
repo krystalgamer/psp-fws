@@ -7,7 +7,48 @@
 #ifdef __cplusplus
 #include "paf.h"
 #include "vsh.h"
+#pragma interface
 extern "C" {
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_0001F2C8 is data (vptr = label - 8 + 8) */
+class Class_0001F2C8 {
+public:
+    virtual ~Class_0001F2C8();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_0001F980 is data (vptr = label - 8 + 8) */
+class Class_0001F980 : public paf::PhWidget {
+public:
+    virtual ~Class_0001F980();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_0001FA68 is data (vptr = label - 8 + 8) */
+class Class_0001FA68 {
+public:
+    virtual ~Class_0001FA68();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_000202D8 is data (vptr = label - 8 + 8) */
+class Class_000202D8 {
+public:
+    virtual ~Class_000202D8();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_00025320 is data (vptr = label - 8 + 8) */
+class Class_00025320 : public Class_000202D8 {
+public:
+    virtual ~Class_00025320();
+};
 #endif
 
 struct Unk_func_00002340_0 {
@@ -490,8 +531,23 @@ extern s32 D_00022A00;
 extern s32 D_00025320;
 extern s32 D_00025B94;
 
+void _ZN14Class_0001F2C8D0Ev(M2C_UNK **arg0);
+M2C_UNK _ZN14Class_0001F2C8D1Ev(s32);
+void _ZN14Class_0001F2C8D2Ev(M2C_UNK **arg0);
+void _ZN14Class_0001F980D0Ev(M2C_UNK **arg0);
+void _ZN14Class_0001F980D1Ev(M2C_UNK **arg0);
+void _ZN14Class_0001F980D2Ev(M2C_UNK **arg0);
+void _ZN14Class_0001FA68D0Ev(M2C_UNK **arg0);
+void _ZN14Class_0001FA68D1Ev(M2C_UNK **arg0);
+void _ZN14Class_0001FA68D2Ev(M2C_UNK **arg0);
+void _ZN14Class_000202D8D0Ev(M2C_UNK **arg0);
+void _ZN14Class_000202D8D1Ev(M2C_UNK **arg0);
+void _ZN14Class_000202D8D2Ev(M2C_UNK **arg0);
+void _ZN14Class_00025320D0Ev(s32 **arg0);
+void _ZN14Class_00025320D1Ev(s32 **arg0);
+void _ZN14Class_00025320D2Ev(s32 **arg0);
 M2C_UNK _ZN3paf8PhWidget11UpdateStateEv(s32);
-M2C_UNK _ZN3paf8PhWidgetD2Ev(void);
+M2C_UNK _ZN3paf8PhWidgetD2Ev(void *self);
 M2C_UNK _ZdaPv(s32);
 M2C_UNK _ZdlPv(void *);
 s32 _Znwj(M2C_UNK);
