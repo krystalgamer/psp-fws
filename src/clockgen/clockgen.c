@@ -1,6 +1,6 @@
 /* cflags[152]: -O2 -frename-registers */
 /* cflags[150]: -O2 -frename-registers */
-/* cflags[100,102]: -O2 -frename-registers */
+/* cflags[100,102,103]: -O2 -frename-registers */
 #include "common.h"
 #include "clockgen_decls.h"
 
@@ -65,7 +65,7 @@ s32 func_00000414(void) {
 }
 #endif
 
-#if FW_VERSION == 102 || FW_VERSION >= 201
+#if (FW_VERSION >= 102 && FW_VERSION < 150) || FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/clockgen", func_0000041C);
 #endif
 
