@@ -1257,6 +1257,7 @@ s32 func_0001D7A4(s32, s32, s32, s32);
 s32 func_0001D8DC(s32, s32, s32);
 M2C_UNK func_0001E7AC();
 M2C_UNK func_0001F558(s32);
+s32 func_0001F664(s32, s32);
 s32 func_00022CF0(s32, s32);
 M2C_UNK func_00023820();
 s32 module_stop(void);

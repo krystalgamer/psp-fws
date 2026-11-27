@@ -371,8 +371,16 @@ INCLUDE_ASM("nonmatchings/savedata_utility_017068", func_00017678);
 INCLUDE_ASM("nonmatchings/savedata_utility_017068", func_0001769C);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION >= 152 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/savedata_utility_017068", func_00010898);
+#endif
+
+#if FW_VERSION == 150
+void func_00010898(void *arg0) {
+    sce_paf_private_memset((s32) &D_00025B2C, 0, 0x10);
+    sce_paf_private_memcpy(&D_00025B2C, arg0, 0x10);
+    func_0001F664(M2C_FIELD(arg0, s32 *, 0), M2C_FIELD(arg0, s32 *, 8));
+}
 #endif
 
 #if FW_VERSION == 100

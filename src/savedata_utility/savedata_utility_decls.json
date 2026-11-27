@@ -572,6 +572,7 @@
   "func_0001D8DC": "s32 func_0001D8DC(s32, s32, s32);",
   "func_0001E7AC": "M2C_UNK func_0001E7AC();",
   "func_0001F558": "M2C_UNK func_0001F558(s32);",
+  "func_0001F664": "s32 func_0001F664(s32, s32);",
   "func_00022CF0": "s32 func_00022CF0(s32, s32);",
   "func_00023820": "M2C_UNK func_00023820();",
   "module_stop": "s32 module_stop(void);",
