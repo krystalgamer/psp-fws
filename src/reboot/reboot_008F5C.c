@@ -74,7 +74,7 @@ s32 func_000091C4(struct Unk_func_000091C4_0 *arg0) {
         temp_a0->unk0 = (void *) D_0001734C;
         D_0001734C = temp_a0;
     }
-    func_0000E028(temp_a0);
+    func_0000E028();
     return 0;
 }
 
@@ -135,7 +135,26 @@ INCLUDE_ASM("nonmatchings/reboot_008F5C", func_000099D0);
 
 INCLUDE_ASM("nonmatchings/reboot_008F5C", func_00009AD4);
 
+#if FW_VERSION == 100
+s32 func_00009BC8(UFatUnit *unit, u32 cluster) {
+    u32 next;
+    s32 ret;
+
+    if (cluster != 0) {
+        while ((cluster | ~unit->fatMask) < 0xFFFFFFF6) {
+            next = func_00007350(unit, cluster);
+            ret = func_0000C0B4(unit, cluster);
+            if (ret < 0) {
+                return ret;
+            }
+            cluster = next;
+        }
+    }
+    return 0;
+}
+#else
 INCLUDE_ASM("nonmatchings/reboot_008F5C", func_00009BC8);
+#endif
 
 INCLUDE_ASM("nonmatchings/reboot_008F5C", func_00009C58);
 
@@ -175,9 +194,48 @@ INCLUDE_ASM("nonmatchings/reboot_008F5C", func_0000BDB0);
 
 INCLUDE_ASM("nonmatchings/reboot_008F5C", func_0000BF8C);
 
-INCLUDE_ASM("nonmatchings/reboot_008F5C", func_0000BFFC);
+s32 func_0000BFFC(UFatUnit *unit) {
+    s32 c, ret;
 
-INCLUDE_ASM("nonmatchings/reboot_008F5C", func_0000C0B4);
+    for (c = unit->nextFree; c < unit->nClusters; c++) {
+        ret = func_00007350(unit, c);
+        if (ret < 0) {
+            return ret;
+        }
+        if (ret == 0) {
+            ret = func_0000CD00(unit, c, -8);
+            if (ret < 0) {
+                return ret;
+            }
+            unit->nextFree = c + 1;
+            if (unit->freeCount != -1) {
+                unit->freeCount--;
+            }
+            return c;
+        }
+    }
+    unit->nextFree = 2;
+    return 0x8001001C;
+}
+
+s32 func_0000C0B4(UFatUnit *unit, s32 cluster) {
+    s32 ret;
+
+    if (cluster < 2 || cluster >= unit->nClusters) {
+        return 0x80010005;
+    }
+    ret = func_0000CD00(unit, cluster, 0);
+    if (ret < 0) {
+        return ret;
+    }
+    if (cluster < unit->nextFree) {
+        unit->nextFree = cluster;
+    }
+    if (unit->freeCount != -1) {
+        unit->freeCount++;
+    }
+    return 0;
+}
 
 #if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/reboot_008F5C", func_0000AD20);
@@ -201,9 +259,35 @@ INCLUDE_ASM("nonmatchings/reboot_008F5C", func_0000CEDC);
 
 INCLUDE_ASM("nonmatchings/reboot_008F5C", func_0000CFBC);
 
-INCLUDE_ASM("nonmatchings/reboot_008F5C", func_0000D34C);
+s32 func_0000D34C(UFatUnit *unit) {
+    s32 i, n;
 
-INCLUDE_ASM("nonmatchings/reboot_008F5C", func_0000D3DC);
+    if (unit->freeCount != -1) {
+        return unit->freeCount;
+    }
+    n = 0;
+    for (i = 2; i < unit->nClusters; i++) {
+        if (func_00007350(unit, i) == 0) {
+            n++;
+        }
+    }
+    unit->freeCount = n;
+    return n;
+}
+
+s32 func_0000D3DC(UFatUnit *unit) {
+    u8 ent[32];
+    s32 i, n = 0, off = 0;
+
+    for (i = 0; i < unit->rootEntries; i++, off += 32) {
+        if (func_00009550(unit, (unit->rootDirStart << unit->sectorShift) + off, ent, 32) >= 0) {
+            if (ent[0] == 0 || ent[0] == 0xE5) {
+                n++;
+            }
+        }
+    }
+    return n;
+}
 
 INCLUDE_ASM("nonmatchings/reboot_008F5C", func_0000D480);
 
@@ -299,9 +383,21 @@ INCLUDE_ASM("nonmatchings/reboot_008F5C", func_0000DEF4);
 s32 func_0000E020(void) {
     return 0;
 }
+#else
+s32 func_0000E028(void) {
+    s32 var_v1;
+
+    var_v1 = 0;
+    if ((&D_0001D890 != NULL) && (D_0001D890.unk1B4 != 0)) {
+        var_v1 = func_0000E924(&D_0001D890);
+    }
+    return var_v1;
+}
 #endif
 
+#if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/reboot_008F5C", func_0000E028);
+#endif
 
 s32 func_0000E098(void) {
     func_0000FC60();
