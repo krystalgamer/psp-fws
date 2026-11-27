@@ -1465,11 +1465,11 @@ INCLUDE_ASM("nonmatchings/netconf_plugin", func_00001B90);
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_000065F4);
 #endif
 
-#if FW_VERSION == 100 || (FW_VERSION >= 152 && FW_VERSION < 260) || FW_VERSION >= 282
+#if FW_VERSION == 100 || (FW_VERSION >= 201 && FW_VERSION < 260) || FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_00001C10);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 201
 void func_00001C10(s32 arg0) {
     _ZN3paf6Module12SetInterfaceEiPv(arg0, 1, (s32) &D_0001FFCC);
 }
@@ -4216,13 +4216,11 @@ void func_00004F54(void) {
         _ZN3vsh13Infobar_CloseEb(0);
     }
 }
-#endif
 
-#if FW_VERSION >= 152 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_00003060);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 201
 s32 func_00003060(void) {
     s32 temp_s0;
 
@@ -4687,13 +4685,11 @@ void func_00004A10(s32 arg0) {
         _ZN3paf8PhWidget13UpdateCamerasEv(temp_s0);
     }
 }
-#endif
 
-#if FW_VERSION >= 152 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_00004A90);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 201
 void func_00004A90(s32 arg0) {
     _ZN3paf9PhHandler11SetCallBackEiPFvPNS_8PhWidgetEPNS_7PhEventEPvES5_(arg0, 0x10001, (s32) func_000049D8, 0);
     func_00005C24(0);
@@ -5999,11 +5995,11 @@ INCLUDE_ASM("nonmatchings/netconf_plugin", func_0000AB54);
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_0000653C);
 #endif
 
-#if FW_VERSION >= 152 && FW_VERSION < 282
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_00006D54);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 201
 void func_00006D54(s32 arg0) {
     D_00013DC0 = 1;
     _ZN3paf9PhHandler11SetCallBackEiPFvPNS_8PhWidgetEPNS_7PhEventEPvES5_(arg0, 0x10001, (s32) func_000065E0, 0);
@@ -6654,11 +6650,11 @@ INCLUDE_ASM("nonmatchings/netconf_plugin", func_0000D0F0);
 
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_0000D1E4);
 
-#if FW_VERSION >= 152
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_0000D240);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 201
 void func_0000D240(void *arg0) {
     D_00013DC0 = 1;
     _ZN3paf9PhHandler11SetCallBackEiPFvPNS_8PhWidgetEPNS_7PhEventEPvES5_((s32) arg0, 0x10001, (s32) func_000065E0, 0);
@@ -10083,11 +10079,11 @@ INCLUDE_ASM("nonmatchings/netconf_plugin", func_0000E2A8);
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_00001B90);
 #endif
 
-#if FW_VERSION >= 152 && FW_VERSION < 282
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_0000E378);
 #endif
 
-#if FW_VERSION < 152
+#if FW_VERSION < 201
 s32 func_0000E378(void) {
     sce_paf_private_memset(&D_00020984, 0, 0xC);
     sce_paf_private_memset(&D_00020980, 1, 2);
