@@ -1,3 +1,4 @@
+/* lang: c++ */
 #include "common.h"
 #include "premo_plugin_decls.h"
 
@@ -210,7 +211,7 @@ s32 func_00024E7C(struct Unk_func_00024508_0 *arg0, s32 arg1) {
 s32 func_00024E7C(struct Unk_func_00024508_0 *arg0, s32 arg1) {
     struct Unk_vt_func_00024E7C_temp_a0 **temp_a0;
 
-    if (!(arg1 & 0xFF)) {
+    if ((arg1 & 0xFF) == 0) {
         arg0->unk54 = 0;
     }
     sceHttpSetConnectTimeOut(arg0->unk4, 0x2DC6C0);
@@ -461,8 +462,8 @@ s32 func_000262B0(struct Unk_func_000262B0_0 *arg0) {
 
     temp_a0 = arg0->unkC;
     (*temp_a0)->unk10(temp_a0);
-    func_000244BC(arg0->unkC);
-    func_00024DE0(arg0->unkC);
+    func_000244BC(( Unk_func_000244BC_0*) arg0->unkC);
+    func_00024DE0(( Unk_func_00024DE0_0*) arg0->unkC);
     arg0->unk1C = 1;
     return 0;
 }

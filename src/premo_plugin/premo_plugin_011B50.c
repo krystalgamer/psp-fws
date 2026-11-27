@@ -1,3 +1,4 @@
+/* lang: c++ */
 #include "common.h"
 #include "premo_plugin_decls.h"
 
@@ -172,7 +173,7 @@ void func_00012BF8(struct Unk_func_00012BF8_0 *arg0) {
 
 void func_00012C70(struct Unk_func_00012C70_0 *arg0) {
     arg0->unk40 = 1;
-    func_00012BF8(arg0);
+    func_00012BF8((Unk_func_00012BF8_0*) arg0);
 }
 #endif
 

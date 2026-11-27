@@ -1,3 +1,4 @@
+/* lang: c++ */
 #include "common.h"
 #include "premo_plugin_decls.h"
 
