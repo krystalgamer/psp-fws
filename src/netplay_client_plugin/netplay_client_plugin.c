@@ -199,8 +199,8 @@ void func_0000015C(void) {
     M2C_UNK *temp_s0;
 
     temp_s0 = (M2C_UNK*) "page_netplay_dialog";
-    scePaf_39E62C88(D_0000EAF0, temp_s0, 0, 0);
-    scePaf_A013540A(D_0000EAF0, temp_s0);
+    _ZN3paf4View8PageOpenEPKcii(D_0000EAF0, temp_s0, 0, 0);
+    _ZN3paf4View12PageActivateEPKc(D_0000EAF0, (char*) temp_s0);
 }
 #endif
 
@@ -214,8 +214,8 @@ u8 func_000001D4(void) {
 INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_000001E0);
 #else
 s32 func_000001E0(void) {
-    scePaf_39E62C88(D_0000EAF0, &D_0000E000, 0, 0);
-    scePaf_A013540A(D_0000EAF0, &D_0000E000);
+    _ZN3paf4View8PageOpenEPKcii(D_0000EAF0, &D_0000E000, 0, 0);
+    _ZN3paf4View12PageActivateEPKc(D_0000EAF0, (char*) &D_0000E000);
     return 0;
 }
 #endif
@@ -960,7 +960,7 @@ s32 func_0000260C(void) {
 #if FW_VERSION >= 350
 void func_0000262C(void) {
     void *sp0;
-    sceVshCommonGui_11C48509(&sp0, sceVshCommonGui_EC899EBE());
+    _ZN3vsh30SetButtonNavigationString_BackEPKw(&sp0, _ZN3vsh14GetString_BackEv());
     func_00003E08(&sp0);
     func_00005150((s32) &D_0000E8CC);
     D_0000EAFC = 1;
@@ -1634,13 +1634,13 @@ void func_000051E4(void *arg0, s32 *arg1) {
 
 #if FW_VERSION >= 350
 void func_000051E4(void *arg0, s32 *arg1) {
-    scePaf_39E62C88(M2C_FIELD(arg0, s32 *, 4), arg1, 0, 0);
+    _ZN3paf4View8PageOpenEPKcii(M2C_FIELD(arg0, s32 *, 4), arg1, 0, 0);
 }
 #endif
 
 #if FW_VERSION < 282
-void func_00003AC0(void *arg0) {
-    _ZN3paf4View12PageActivateEPKc(M2C_FIELD(arg0, s32 *, 4));
+void func_00003AC0(void *arg0, s32 arg1) {
+    _ZN3paf4View12PageActivateEPKc(M2C_FIELD(arg0, s32 *, 4), arg1);
 }
 
 void func_00003ADC(void *arg0) {
@@ -1657,14 +1657,14 @@ INCLUDE_ASM("nonmatchings/netplay_client_plugin", func_00005208);
 #endif
 
 #if FW_VERSION >= 282 && FW_VERSION < 350
-void func_00005208(struct Unk_func_00005208_0 *arg0) {
-    _ZN3paf4View12PageActivateEPKc(arg0->unk4);
+void func_00005208(struct Unk_func_00005208_0 *arg0, s32 arg1) {
+    _ZN3paf4View12PageActivateEPKc(arg0->unk4, arg1);
 }
 #endif
 
 #if FW_VERSION >= 350
 void func_00005224(struct Unk_func_00005224_0 *arg0) {
-    scePaf_8B38372A(arg0->unk4);
+    _ZN3paf4View9PageCloseEPKc(arg0->unk4);
 }
 #endif
 
@@ -1676,7 +1676,7 @@ void func_00005224(struct Unk_func_00005224_0 *arg0) {
 
 #if FW_VERSION >= 350
 void func_00005240(struct Unk_func_00005240_0 *arg0) {
-    scePaf_CD216C47(arg0->unk4);
+    _ZNK3paf4View8PageRootEPKc(arg0->unk4);
 }
 #endif
 
