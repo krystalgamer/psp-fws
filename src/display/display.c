@@ -135,11 +135,11 @@ s32 func_00000658(void) {
     s32 temp_v0;
     void *temp_s1;
 
-    if (M2C_VFIELD(&g_display, s32, 0x60) != 0) {
-        if (M2C_VFIELD(&g_display, s32, 0x60) == 1) {
+    if (g_display.unk60 != 0) {
+        if (g_display.unk60 == 1) {
             do {
                 sceDisplayWaitVblankStart();
-            } while (M2C_VFIELD(&g_display, s32, 0x60) == 1);
+            } while (g_display.unk60 == 1);
         }
         func_000021C8();
     }
@@ -163,11 +163,11 @@ s32 func_00000658(void) {
     s32 temp_v0;
     void *temp_s1;
 
-    if (M2C_VFIELD(&g_display, s32, 0x5C) != 0) {
-        if (M2C_VFIELD(&g_display, s32, 0x5C) == 1) {
+    if (g_display.unk5C != 0) {
+        if (g_display.unk5C == 1) {
             do {
                 sceDisplayWaitVblankStart();
-            } while (M2C_VFIELD(&g_display, s32, 0x5C) == 1);
+            } while (g_display.unk5C == 1);
         }
         func_000021C8();
     }
@@ -191,11 +191,11 @@ s32 func_00000658(void) {
     s32 temp_v0;
     void *temp_s1;
 
-    if (M2C_VFIELD(&g_display, s32, 0x5C) != 0) {
-        if (M2C_VFIELD(&g_display, s32, 0x5C) == 1) {
+    if (g_display.unk5C != 0) {
+        if (g_display.unk5C == 1) {
             do {
                 sceDisplayWaitVblankStart();
-            } while (M2C_VFIELD(&g_display, s32, 0x5C) == 1);
+            } while (g_display.unk5C == 1);
         }
         func_000021C8();
     }
@@ -217,11 +217,11 @@ s32 func_00000658(void) {
 s32 func_00000658(void) {
     void *temp_s1;
 
-    if (M2C_VFIELD(&g_display, s32, 0x5C) != 0) {
-        if (M2C_VFIELD(&g_display, s32, 0x5C) == 1) {
+    if (g_display.unk5C != 0) {
+        if (g_display.unk5C == 1) {
             do {
                 sceDisplayWaitVblankStart();
-            } while (M2C_VFIELD(&g_display, s32, 0x5C) == 1);
+            } while (g_display.unk5C == 1);
         }
         func_000021C8();
     }
@@ -309,7 +309,7 @@ INCLUDE_ASM("nonmatchings/display", sceDisplayDisable);
 
 #if FW_VERSION == 271
 s8 sceDisplay_driver_23CE8C51(void) {
-    return D_00003675;
+    return g_display.unk55;
 }
 
 INCLUDE_ASM("nonmatchings/display", sceDisplay_driver_E4E4C018);
@@ -317,21 +317,21 @@ INCLUDE_ASM("nonmatchings/display", sceDisplay_driver_E4E4C018);
 INCLUDE_ASM("nonmatchings/display", sceDisplaySetHoldMode);
 
 s32 sceDisplaySetResumeMode(s32 arg0) {
-    D_000036C0 = arg0;
+    g_display.resumeMode = arg0;
     return 0;
 }
 #endif
 
 #if FW_VERSION < 271
 s32 sceDisplaySetHoldMode(s32 arg0) {
-    D_000021CC = arg0;
+    g_display.holdMode = arg0;
     return 0;
 }
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 271
 s32 sceDisplaySetResumeMode(s32 arg0) {
-    D_00002CE4 = arg0;
+    g_display.resumeMode = arg0;
     return 0;
 }
 #endif
@@ -356,11 +356,11 @@ s32 sceDisplayGetFrameBuf(void *arg0, void *arg1, void *arg2, s32 arg3) {
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
 s32 sceDisplayIsForeground(void) {
-    return D_00002CB0 == 2;
+    return g_display.foregroundLevel == 2;
 }
 
 s8 sceDisplayGetForegroundLevel(void) {
-    return D_00002CB0;
+    return g_display.foregroundLevel;
 }
 #endif
 
@@ -510,7 +510,7 @@ INCLUDE_ASM("nonmatchings/display", sceDisplayDisable);
 
 #if FW_VERSION >= 282
 s8 sceDisplay_driver_23CE8C51(void) {
-    return D_00003E1A;
+    return g_display.unk6A;
 }
 
 INCLUDE_ASM("nonmatchings/display", sceDisplay_driver_E4E4C018);
@@ -518,7 +518,7 @@ INCLUDE_ASM("nonmatchings/display", sceDisplay_driver_E4E4C018);
 INCLUDE_ASM("nonmatchings/display", sceDisplaySetHoldMode);
 
 s32 sceDisplaySetResumeMode(s32 arg0) {
-    D_00003EB0 = arg0;
+    g_display.resumeMode = arg0;
     return 0;
 }
 
@@ -537,11 +537,11 @@ s32 sceDisplayGetFrameBuf(void *arg0, void *arg1, void *arg2, s32 arg3) {
 }
 
 s32 sceDisplayIsForeground(void) {
-    return D_00003E14 == 2;
+    return g_display.foregroundLevel == 2;
 }
 
 s8 sceDisplayGetForegroundLevel(void) {
-    return D_00003E14;
+    return g_display.foregroundLevel;
 }
 
 INCLUDE_ASM("nonmatchings/display", sceDisplaySetBacklightSel);
@@ -575,7 +575,7 @@ INCLUDE_ASM("nonmatchings/display", sceDisplayGetCurrentHcount);
 s32 func_000016F4(void) {
     sceSysregApbTimerClkDisable(1);
     sceKernelReleaseIntrHandler(0x1E);
-    sceKernelDeleteEventFlag(D_000021F0);
+    sceKernelDeleteEventFlag(g_Vblank.evflg);
     return 0;
 }
 #endif
@@ -618,7 +618,7 @@ s32 func_00002A64(void) {
     sceSysregApbTimerClkDisable(1);
     sceKernelReleaseIntrHandler(0x1E);
     sceKernelReleaseIntrHandler(0x32);
-    sceKernelDeleteEventFlag(D_00003EF8);
+    sceKernelDeleteEventFlag(g_Vblank.evflg);
     return 0;
 }
 
@@ -633,7 +633,7 @@ INCLUDE_ASM("nonmatchings/display", func_00002AC8);
 
 #if FW_VERSION >= 282
 s32 func_00002B20(s32 arg0) {
-    D_00003EF4 = arg0;
+    g_Vblank.unk2C = arg0;
     return 0;
 }
 #endif
@@ -642,25 +642,25 @@ s32 func_00002B20(s32 arg0) {
 INCLUDE_ASM("nonmatchings/display", sceDisplayGetVcount);
 #else
 s32 sceDisplayGetVcount(void) {
-    return __builtin_allegrex_ext(D_000021E0, 0, 0x1F);
+    return __builtin_allegrex_ext(g_Vblank.vcount, 0, 0x1F);
 }
 #endif
 
 #if FW_VERSION < 282
 s32 sceDisplayIsVblank(void) {
-    return sceDisplayGetCurrentHcount() < D_000021EC;
+    return sceDisplayGetCurrentHcount() < g_Vblank.vblankStart;
 }
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
 s32 sceDisplayGetVblankRest(void) {
-    return __builtin_allegrex_max(M2C_VFIELD(&g_Vblank, s32, 0x18) - sceDisplayGetCurrentHcount(), -1);
+    return __builtin_allegrex_max(g_Vblank.vblankStart - sceDisplayGetCurrentHcount(), -1);
 }
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 201
 s32 sceDisplayGetVblankRest(void) {
-    return __builtin_allegrex_max(M2C_VFIELD(&g_Vblank, s32, 0x14) - sceDisplayGetCurrentHcount(), -1);
+    return __builtin_allegrex_max(g_Vblank.vblankStart - sceDisplayGetCurrentHcount(), -1);
 }
 #endif
 
@@ -670,7 +670,7 @@ INCLUDE_ASM("nonmatchings/display", sceDisplayIsVsync);
 
 #if FW_VERSION == 100
 s32 sceDisplayGetVblankRest(void) {
-    return __builtin_allegrex_max(M2C_VFIELD(&g_Vblank, s32, 0x10) - sceDisplayGetCurrentHcount(), -1);
+    return __builtin_allegrex_max(g_Vblank.vblankStart - sceDisplayGetCurrentHcount(), -1);
 }
 #endif
 
@@ -688,7 +688,7 @@ s32 sceDisplayWaitVblankStart(void) {
     u32 temp_s1;
 
     temp_s1 = shiftK1();
-    temp_v0 = sceKernelWaitEventFlag(D_000021F0, 1U, 1, NULL, NULL);
+    temp_v0 = sceKernelWaitEventFlag(g_Vblank.evflg, 1U, 1, NULL, NULL);
     if (temp_v0 < 0) {
         Kprintf(&D_00002060, "sceDisplayWaitVblankStart", temp_v0);
     }
@@ -707,7 +707,7 @@ s32 sceDisplayWaitVblankStartCB(void) {
     u32 temp_s1;
 
     temp_s1 = shiftK1();
-    temp_v0 = sceKernelWaitEventFlagCB(D_000021F0, 1U, 1, NULL, NULL);
+    temp_v0 = sceKernelWaitEventFlagCB(g_Vblank.evflg, 1U, 1, NULL, NULL);
     if (temp_v0 < 0) {
         Kprintf(&D_00002060, "sceDisplayWaitVblankStartCB", temp_v0);
     }
@@ -718,17 +718,17 @@ s32 sceDisplayWaitVblankStartCB(void) {
 
 #if FW_VERSION >= 282
 s32 sceDisplayIsVblank(void) {
-    return sceDisplayGetCurrentHcount() < D_00003EE8;
+    return sceDisplayGetCurrentHcount() < g_Vblank.vblankStart;
 }
 
 s32 sceDisplayGetVblankRest(void) {
-    return __builtin_allegrex_max(g_Vblank.unk20 - sceDisplayGetCurrentHcount(), -1);
+    return __builtin_allegrex_max(g_Vblank.vblankStart - sceDisplayGetCurrentHcount(), -1);
 }
 #endif
 
 #if FW_VERSION >= 350
 s32 sceDisplay_driver_66961521(void) {
-    return __builtin_allegrex_max(M2C_VFIELD(&g_Vblank, s32, 0x14) - sceDisplayGetCurrentHcount(), -1);
+    return __builtin_allegrex_max(g_Vblank.unk14 - sceDisplayGetCurrentHcount(), -1);
 }
 #endif
 
@@ -740,7 +740,7 @@ s32 sceDisplayWaitVblankStart(void) {
     u32 temp_s0;
 
     temp_s0 = shiftK1();
-    temp_v0 = sceKernelWaitEventFlag(D_00003EF8, 1U, 1, NULL, NULL);
+    temp_v0 = sceKernelWaitEventFlag(g_Vblank.evflg, 1U, 1, NULL, NULL);
     setK1(temp_s0);
     return temp_v0;
 }
@@ -750,13 +750,13 @@ s32 sceDisplayWaitVblankStartCB(void) {
     u32 temp_s0;
 
     temp_s0 = shiftK1();
-    temp_v0 = sceKernelWaitEventFlagCB(D_00003EF8, 1U, 1, NULL, NULL);
+    temp_v0 = sceKernelWaitEventFlagCB(g_Vblank.evflg, 1U, 1, NULL, NULL);
     setK1(temp_s0);
     return temp_v0;
 }
 
 s32 sceDisplayIsPseudoField(void) {
-    return D_00003EF0 != 0;
+    return g_Vblank.pseudoField != 0;
 }
 #endif
 

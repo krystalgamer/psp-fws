@@ -18,7 +18,7 @@ typedef struct {
 } SceDisplaySm1Ops;
 
 typedef struct {
-#if FW_VERSION == 100
+#if FW_VERSION < 271
     SceDisplayFrameBuf fb[4]; /* 0x00: one per level */
     s8 foregroundLevel;       /* 0x50: level shown, -1 none */
     s8 enabled;               /* 0x51: sceDisplayEnable/Disable */
@@ -26,58 +26,87 @@ typedef struct {
     s8 pwmState;              /* 0x53: backlight PWM 0 off, 1 restart, 2 on */
     s32 bufferWidth;          /* 0x54: format programmed into the DMAC */
     s32 pixelFormat;          /* 0x58 */
-    s32 brightness;           /* 0x5C: target level 0..100 */
-    s32 curBrightness;        /* 0x60 */
-    s32 brightnessFade;       /* 0x64: step curBrightness towards brightness each vblank */
-    s32 curModeIdx;           /* 0x68 */
-    s32 modeIdx;              /* 0x6C */
-    s32 mode;                 /* 0x70 */
-    s32 width;                /* 0x74 */
-    s32 height;               /* 0x78 */
-    s32 holdMode;             /* 0x7C */
-    s32 suspendWait;          /* 0x80: vblanks to wait before allowing suspend */
-    s32 modeChangeWait;       /* 0x84: vblanks left of a mode change */
-    SceDisplaySm1Ops *sm1Ops; /* 0x88 */
+#if FW_VERSION >= 150
+    volatile s32 unk5C;       /* 0x5C */
+#endif
+    s32 brightness;           /* 0x5C (1.50+: 0x60): target level 0..100 */
+    s32 curBrightness;
+    s32 brightnessFade;       /* step curBrightness towards brightness each vblank */
+    s32 curModeIdx;
+    s32 modeIdx;
+    s32 mode;
+    s32 width;
+    s32 height;
+    s32 holdMode;             /* 0x7C (1.50+: 0x80) */
+#if FW_VERSION >= 150
+    s32 resumeMode;           /* 0x84 */
+#endif
+    s32 suspendWait;          /* vblanks to wait before allowing suspend */
+    s32 modeChangeWait;       /* vblanks left of a mode change */
+    SceDisplaySm1Ops *sm1Ops; /* 0x88 (1.50+: 0x90) */
+#elif FW_VERSION < 282
+    u8 pad0[0x50];
+    s8 foregroundLevel;       /* 0x50 */
+    u8 pad51[4];
+    s8 unk55;
+    u8 pad56[0xA];
+    volatile s32 unk60;
+    u8 pad64[0x3C];
+    s32 resumeMode;           /* 0xA0 */
 #else
     u8 pad0[0x60];
     volatile s32 unk60;
+    s8 foregroundLevel;       /* 0x64 */
+#if FW_VERSION < 330
+    u8 pad65[5];
+    s8 unk6A;                 /* 0x6A */
+#if FW_VERSION >= 310
+    u8 pad6B[0x91];
+#else
+    u8 pad6B[0x95];
+#endif
+#else
+    u8 pad65[7];
+    s8 unk6A;                 /* 0x6C */
+#if FW_VERSION >= 350
+    u8 pad6D[0x97];
+#else
+    u8 pad6D[0x93];
+#endif
+#endif
+    s32 resumeMode;           /* 0x100 (3.10: 0xFC, 3.50: 0x104) */
 #endif
 } SceDisplay;
 
 typedef struct {
-#if FW_VERSION == 100
     u32 subIntrMask;          /* 0x00: enabled VBLANK sub interrupts */
     u32 vcount;               /* 0x04 */
+#if FW_VERSION == 100
     s32 unk8;                 /* 0x08 */
     s32 hcountPerFrame;       /* 0x0C */
-    s32 vblankStart;          /* 0x10: hcount where the vblank starts */
-    SceUID evflg;             /* 0x14 */
+#elif FW_VERSION < 201
+    u8 pad8[0xC];
+#elif FW_VERSION < 282
+    u8 pad8[0x10];
 #else
-    u8 pad0[0x20];
-    volatile s32 unk20;
+    u8 pad8[0xC];
+    s32 unk14;
+    u8 pad18[8];
 #endif
+    s32 vblankStart;          /* 0x10 (1.50: 0x14, 2.01: 0x18, 2.82: 0x20): hcount where the vblank starts */
+#if FW_VERSION >= 282
+    s32 unk24;
+    s32 pseudoField;          /* 0x28 */
+    s32 unk2C;
+#endif
+    SceUID evflg;             /* g_Vblank.evflg */
 } SceDisplayVblank;
 
 extern s32 D_00002060;
 extern s32 D_000020D0;
-extern SceDisplay g_display;
-extern s32 D_000021CC;
-extern s32 D_000021E0;
-extern s32 D_000021EC;
-extern s32 D_000021F0;
-extern s8 D_00002CB0;
-extern s32 D_00002CE4;
-extern s8 D_00003675;
-extern s32 D_000036C0;
 extern M2C_UNK D_00003D10;
-extern s8 D_00003E14;
-extern s8 D_00003E1A;
-extern s32 D_00003EB0;
 extern SceDisplayVblank g_Vblank;
-extern s32 D_00003EE8;
-extern s32 D_00003EF0;
-extern s32 D_00003EF4;
-extern s32 D_00003EF8;
+extern SceDisplay g_display;
 
 M2C_UNK Kprintf(M2C_UNK *, M2C_UNK *, s32);
 s32 func_00000658(void);
