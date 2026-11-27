@@ -925,7 +925,14 @@ INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00000DB4);
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000056C);
 
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000059C);
+#endif
 
+#if FW_VERSION >= 102 && FW_VERSION < 150
+Class_0001F5F8::~Class_0001F5F8() {
+}
+#endif
+
+#if FW_VERSION == 100
 void func_000005CC(M2C_UNK **arg0) {
     *arg0 = &D_0001F5F8;
     func_0000E6EC((s32) arg0);
@@ -941,7 +948,9 @@ void func_0000061C(M2C_UNK **arg0) {
     func_0000E6EC((s32) arg0);
     _ZdlPv(arg0);
 }
+#endif
 
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00000654);
 #endif
 
@@ -1161,6 +1170,8 @@ INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0001F5F8);
 #endif
 
 #if FW_VERSION >= 102 && FW_VERSION < 150
+__asm__(".globl _ZTV14Class_0001F5F8\n_ZTV14Class_0001F5F8 = D_0001F5F8 - 8\n");
+
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00001A70);
 
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00001B78);
@@ -1602,7 +1613,12 @@ void func_000027C8(s32 arg0, s32 arg1) {
 }
 #endif
 
-#if FW_VERSION < 150
+#if FW_VERSION >= 102 && FW_VERSION < 150
+Class_0001F790::~Class_0001F790() {
+}
+#endif
+
+#if FW_VERSION == 100
 void func_00002800(M2C_UNK **arg0) {
     *arg0 = &D_0001F790;
     func_0000C664();
@@ -1618,7 +1634,9 @@ void func_00002850(s32 **arg0) {
     func_0000C664();
     _ZdlPv(arg0);
 }
+#endif
 
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00002888);
 
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00002988);
@@ -1719,7 +1737,14 @@ INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00003B6C);
 
 #if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00003C50);
+#endif
 
+#if FW_VERSION >= 102 && FW_VERSION < 150
+Class_0001F988::~Class_0001F988() {
+}
+#endif
+
+#if FW_VERSION == 100
 void func_00003C80(M2C_UNK **arg0) {
     *arg0 = &D_0001F988;
     func_0000A1DC((s32) arg0);
@@ -1735,11 +1760,19 @@ void func_00003CD0(s32 **arg0) {
     func_0000A1DC((s32) arg0);
     _ZdlPv(arg0);
 }
+#endif
 
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00003D08);
 
 INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0001F790);
+#endif
 
+#if FW_VERSION >= 102 && FW_VERSION < 150
+__asm__(".globl _ZTV14Class_0001F790\n_ZTV14Class_0001F790 = D_0001F790 - 8\n");
+#endif
+
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00003DE0);
 
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00004210);
@@ -1796,7 +1829,13 @@ INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00004AF4);
 
 #if FW_VERSION < 150
 INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0001F988);
+#endif
 
+#if FW_VERSION >= 102 && FW_VERSION < 150
+__asm__(".globl _ZTV14Class_0001F988\n_ZTV14Class_0001F988 = D_0001F988 - 8\n");
+#endif
+
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00004C6C);
 
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00004CC4);
@@ -2377,17 +2416,37 @@ void func_00008A24(s32 **arg0, s32 arg1) {
     func_0000BE84(arg0, arg1);
     *arg0 = &D_0001FDE0;
 }
+#endif
 
+#if FW_VERSION == 100
 void func_00008A54(M2C_UNK **arg0) {
     *arg0 = &D_0001FDE0;
     func_0000BEF4((s32) arg0);
 }
+#endif
 
+#if FW_VERSION >= 102 && FW_VERSION < 150
+void func_00008A54(M2C_UNK **arg0) {
+    *arg0 = &D_0001FDE0;
+    _ZN14Class_0001FE90D2Ev((s32) arg0);
+}
+#endif
+
+#if FW_VERSION == 100
 void func_00008A7C(M2C_UNK **arg0) {
     *arg0 = &D_0001FDE0;
     func_0000BEF4((s32) arg0);
 }
+#endif
 
+#if FW_VERSION >= 102 && FW_VERSION < 150
+void func_00008A7C(M2C_UNK **arg0) {
+    *arg0 = &D_0001FDE0;
+    _ZN14Class_0001FE90D2Ev((s32) arg0);
+}
+#endif
+
+#if FW_VERSION == 100
 void func_00008AA4(s32 **arg0) {
     *arg0 = &D_0001FDE0;
     func_0000BEF4((s32) arg0);
@@ -2396,6 +2455,12 @@ void func_00008AA4(s32 **arg0) {
 #endif
 
 #if FW_VERSION >= 102 && FW_VERSION < 150
+void func_00008AA4(s32 **arg0) {
+    *arg0 = &D_0001FDE0;
+    _ZN14Class_0001FE90D2Ev((s32) arg0);
+    _ZdlPv(arg0);
+}
+
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000980C);
 #endif
 
@@ -2405,7 +2470,14 @@ INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00008ADC);
 
 #if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00008CAC);
+#endif
 
+#if FW_VERSION >= 102 && FW_VERSION < 150
+Class_0001FE08::~Class_0001FE08() {
+}
+#endif
+
+#if FW_VERSION == 100
 void func_00008D0C(M2C_UNK **arg0) {
     *arg0 = &D_0001FE08;
 }
@@ -2418,7 +2490,9 @@ void func_00008D2C(s32 **arg0) {
     *arg0 = &D_0001FE08;
     _ZdlPv(arg0);
 }
+#endif
 
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00008D54);
 #endif
 
@@ -2547,13 +2621,33 @@ void func_0000A074(s32 **arg0) {
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000A09C);
 
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000A13C);
+#endif
 
+#if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000A1DC);
+#endif
 
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", _ZN14Class_0001FE30D2Ev);
+#endif
+
+#if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000A230);
+#endif
 
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", _ZN14Class_0001FE30D1Ev);
+#endif
+
+#if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000A284);
+#endif
 
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", _ZN14Class_0001FE30D0Ev);
+#endif
+
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000A2DC);
 
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000A2F4);
@@ -2569,7 +2663,13 @@ INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0001FDE8);
 INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0001FDF8);
 
 INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0001FE08);
+#endif
 
+#if FW_VERSION >= 102 && FW_VERSION < 150
+__asm__(".globl _ZTV14Class_0001FE08\n_ZTV14Class_0001FE08 = D_0001FE08 - 8\n");
+#endif
+
+#if FW_VERSION < 150
 INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0001FE18);
 
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000A358);
@@ -2835,7 +2935,14 @@ void func_0000BCB4(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x10) = -1;
     M2C_FIELD(arg0, s32 *, 0x14) = -1;
 }
+#endif
 
+#if FW_VERSION >= 102 && FW_VERSION < 150
+Class_0001FEA0::~Class_0001FEA0() {
+}
+#endif
+
+#if FW_VERSION == 100
 void func_0000BD00(M2C_UNK **arg0) {
     *arg0 = &D_0001FEA0;
 }
@@ -2848,7 +2955,9 @@ void func_0000BD20(s32 **arg0) {
     *arg0 = &D_0001FEA0;
     _ZdlPv(arg0);
 }
+#endif
 
+#if FW_VERSION < 150
 void func_0000BD48(void *arg0) {
     M2C_FIELD(arg0, s32 *, 8) = 1;
     M2C_FIELD(arg0, s32 *, 0xC) = 0;
@@ -2904,7 +3013,14 @@ void func_0000BEBC(s32 **arg0, s32 arg1) {
     *arg0 = &D_0001FE90;
     func_0000BF7C(arg0);
 }
+#endif
 
+#if FW_VERSION >= 102 && FW_VERSION < 150
+Class_0001FE90::~Class_0001FE90() {
+}
+#endif
+
+#if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000BEF4);
 
 void func_0000BF1C(s32 **arg0) {
@@ -2917,7 +3033,9 @@ void func_0000BF44(s32 **arg0) {
     func_0000BD00(arg0);
     _ZdlPv(arg0);
 }
+#endif
 
+#if FW_VERSION < 150
 void func_0000BF7C(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x18) = 0;
     M2C_FIELD(arg0, s32 *, 0x1C) = 0;
@@ -2958,7 +3076,14 @@ void func_0000C638(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 4) = arg1;
     func_0000C6AC((s32) arg0);
 }
+#endif
 
+#if FW_VERSION >= 102 && FW_VERSION < 150
+Class_0001FFC8::~Class_0001FFC8() {
+}
+#endif
+
+#if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000C664);
 
 void func_0000C674(M2C_UNK **arg0) {
@@ -2969,7 +3094,9 @@ void func_0000C684(s32 **arg0) {
     *arg0 = &D_0001FFC8;
     _ZdlPv(arg0);
 }
+#endif
 
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000C6AC);
 
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000C6BC);
@@ -3021,9 +3148,21 @@ void func_0000CC40(void *arg0) {
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000CC48);
 
 INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0001FE90);
+#endif
 
+#if FW_VERSION >= 102 && FW_VERSION < 150
+__asm__(".globl _ZTV14Class_0001FE90\n_ZTV14Class_0001FE90 = D_0001FE90 - 8\n");
+#endif
+
+#if FW_VERSION < 150
 INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0001FEA0);
+#endif
 
+#if FW_VERSION >= 102 && FW_VERSION < 150
+__asm__(".globl _ZTV14Class_0001FEA0\n_ZTV14Class_0001FEA0 = D_0001FEA0 - 8\n");
+#endif
+
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000CFE4);
 
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000D468);
@@ -3342,13 +3481,33 @@ INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000E65C);
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000E67C);
 
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000E6B4);
+#endif
 
+#if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000E6EC);
+#endif
 
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", _ZN14Class_00020010D2Ev);
+#endif
+
+#if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000E728);
+#endif
 
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", _ZN14Class_00020010D1Ev);
+#endif
+
+#if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000E764);
+#endif
 
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/savedata_auto_dialog", _ZN14Class_00020010D0Ev);
+#endif
+
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000E7A4);
 
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000E7E0);
@@ -3404,7 +3563,13 @@ void func_0000E9F8(void *arg0) {
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000EA3C);
 
 INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0001FFC8);
+#endif
 
+#if FW_VERSION >= 102 && FW_VERSION < 150
+__asm__(".globl _ZTV14Class_0001FFC8\n_ZTV14Class_0001FFC8 = D_0001FFC8 - 8\n");
+#endif
+
+#if FW_VERSION < 150
 INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0001FFD8);
 
 INCLUDE_RODATA("nonmatchings/savedata_auto_dialog", D_0001FFE0);

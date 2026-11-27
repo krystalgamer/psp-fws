@@ -210,16 +210,7 @@ INCLUDE_ASM("nonmatchings/premo_plugin_011B50", func_00013328);
 
 #if FW_VERSION >= 350 && FW_VERSION < 352
 INCLUDE_ASM("nonmatchings/premo_plugin_011B50", func_00013398);
-#endif
-
-#if FW_VERSION == 352
-void func_00013398(void) {
-    _ZN3paf13PhApplication14FinishDispListEv();
-    _ZN3paf13PhApplication13StartDispListEv();
-}
-#endif
-
-#if FW_VERSION < 350
+#else
 void func_00013398(void) {
     _ZN3paf13PhApplication14FinishDispListEv();
     _ZN3paf13PhApplication13StartDispListEv();
@@ -326,15 +317,7 @@ INCLUDE_ASM("nonmatchings/premo_plugin_011B50", func_00013AB4);
 
 #if FW_VERSION >= 350 && FW_VERSION < 352
 INCLUDE_ASM("nonmatchings/premo_plugin_011B50", func_00013AD4);
-#endif
-
-#if FW_VERSION == 352
-void func_00013AD4(s32 arg0) {
-    _ZN3paf9PhSRender8SetStyleEii(arg0 + 8);
-}
-#endif
-
-#if FW_VERSION < 350
+#else
 void func_00013AD4(s32 arg0) {
     _ZN3paf9PhSRender8SetStyleEii(arg0 + 8);
 }
@@ -342,15 +325,7 @@ void func_00013AD4(s32 arg0) {
 
 #if FW_VERSION >= 350 && FW_VERSION < 352
 INCLUDE_ASM("nonmatchings/premo_plugin_011B50", func_00013AF0);
-#endif
-
-#if FW_VERSION == 352
-void func_00013AF0(s32 arg0) {
-    _ZN3paf9PhSRender8SetStyleEif(arg0 + 8);
-}
-#endif
-
-#if FW_VERSION < 350
+#else
 void func_00013AF0(s32 arg0) {
     _ZN3paf9PhSRender8SetStyleEif(arg0 + 8);
 }
@@ -358,15 +333,7 @@ void func_00013AF0(s32 arg0) {
 
 #if FW_VERSION >= 350 && FW_VERSION < 352
 INCLUDE_ASM("nonmatchings/premo_plugin_011B50", func_00013B0C);
-#endif
-
-#if FW_VERSION == 352
-void func_00013B0C(s32 arg0) {
-    _ZN3paf9PhSRender8SetStyleEiRK4vec4(arg0 + 8);
-}
-#endif
-
-#if FW_VERSION < 350
+#else
 void func_00013B0C(s32 arg0) {
     _ZN3paf9PhSRender8SetStyleEiRK4vec4(arg0 + 8);
 }
@@ -410,15 +377,7 @@ void func_00013D24(struct Unk_vt_func_00013D24_arg0 **arg0) {
 
 #if FW_VERSION >= 350 && FW_VERSION < 352
 INCLUDE_ASM("nonmatchings/premo_plugin_011B50", func_00013D48);
-#endif
-
-#if FW_VERSION == 352
-void func_00013D48(s32 arg0) {
-    _ZNK3paf9PhSRender8GetStyleEiRb(arg0 + 8);
-}
-#endif
-
-#if FW_VERSION < 350
+#else
 void func_00013D48(s32 arg0) {
     _ZNK3paf9PhSRender8GetStyleEiRb(arg0 + 8);
 }
@@ -426,15 +385,7 @@ void func_00013D48(s32 arg0) {
 
 #if FW_VERSION >= 350 && FW_VERSION < 352
 INCLUDE_ASM("nonmatchings/premo_plugin_011B50", func_00013D64);
-#endif
-
-#if FW_VERSION == 352
-void func_00013D64(s32 arg0) {
-    _ZNK3paf9PhSRender8GetStyleEiRi(arg0 + 8);
-}
-#endif
-
-#if FW_VERSION < 350
+#else
 void func_00013D64(s32 arg0) {
     _ZNK3paf9PhSRender8GetStyleEiRi(arg0 + 8);
 }
@@ -442,15 +393,7 @@ void func_00013D64(s32 arg0) {
 
 #if FW_VERSION >= 350 && FW_VERSION < 352
 INCLUDE_ASM("nonmatchings/premo_plugin_011B50", func_00013D80);
-#endif
-
-#if FW_VERSION == 352
-void func_00013D80(s32 arg0) {
-    _ZNK3paf9PhSRender8GetStyleEiRf(arg0 + 8);
-}
-#endif
-
-#if FW_VERSION < 350
+#else
 void func_00013D80(s32 arg0) {
     _ZNK3paf9PhSRender8GetStyleEiRf(arg0 + 8);
 }
@@ -458,15 +401,7 @@ void func_00013D80(s32 arg0) {
 
 #if FW_VERSION >= 350 && FW_VERSION < 352
 INCLUDE_ASM("nonmatchings/premo_plugin_011B50", func_00013D9C);
-#endif
-
-#if FW_VERSION == 352
-void func_00013D9C(s32 arg0) {
-    _ZNK3paf9PhSRender8GetStyleEiR4vec4(arg0 + 8);
-}
-#endif
-
-#if FW_VERSION < 350
+#else
 void func_00013D9C(s32 arg0) {
     _ZNK3paf9PhSRender8GetStyleEiR4vec4(arg0 + 8);
 }

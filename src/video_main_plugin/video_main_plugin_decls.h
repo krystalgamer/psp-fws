@@ -7,7 +7,16 @@
 #ifdef __cplusplus
 #include "paf.h"
 #include "vsh.h"
+#pragma interface
 extern "C" {
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_000535A0 is data (vptr = label - 8 + 8) */
+class Class_000535A0 {
+public:
+    virtual ~Class_000535A0();
+};
 #endif
 
 struct Unk_D_000571FC {
@@ -1798,7 +1807,7 @@ M2C_UNK _ZN3paf9PhSRender8SetStyleEiRK4vec4(s32);
 M2C_UNK _ZN3paf9PhSRender8SetStyleEif(s32);
 M2C_UNK _ZN3paf9PhSRender8SetStyleEii(s32);
 M2C_UNK _ZN3vsh10FixedAlloc6UnlockEPKc(s32, M2C_UNK *);
-s32 _ZN3vsh10FixedAlloc8InstanceEv(void *self);
+s32 _ZN3vsh10FixedAlloc8InstanceEv(void);
 M2C_UNK _ZN3vsh13Infobar_CloseEb(M2C_UNK);
 s32 _ZN3vsh14GetString_BackEv(void);
 s32 _ZN3vsh15GetString_EnterEv(void);
@@ -3023,47 +3032,17 @@ s32 sceKernelDeleteSema(s32);
 s32 sceKernelPollSema(s32, s32);
 s32 sceKernelSignalSema(s32, s32);
 s32 sceKernelWaitSema(s32, s32, void *);
-M2C_UNK scePaf_08350B98(s32, s32, M2C_UNK *, M2C_UNK);
 M2C_UNK scePaf_0A4868F1(void *, s32);
 M2C_UNK scePaf_0CC722C1(void *, s32);
-M2C_UNK scePaf_128E46E3(...);
-M2C_UNK scePaf_1A314D65(s32);
-M2C_UNK scePaf_291EBB2C(s32);
-M2C_UNK scePaf_2A5E7BE9(s32);
 M2C_UNK scePaf_3308156F(struct Unk_func_00026E50_1 *, s32, M2C_UNK);
-M2C_UNK scePaf_3AC3E06A(...);
-M2C_UNK scePaf_4729E549(s32);
-s32 scePaf_5E4447F6(s32);
 struct Unk_func_000305D4_0 *scePaf_61A8E8EC(M2C_UNK);
-M2C_UNK scePaf_62231A8B(s32);
 M2C_UNK scePaf_6261C0A5(void *);
-M2C_UNK scePaf_6FAE0AC1(s32);
-s32 scePaf_746499C1(s32);
 M2C_UNK scePaf_7620CFFD(s32, s32, s32);
-M2C_UNK scePaf_77283661(...);
-M2C_UNK scePaf_79542EEA(s32);
-void *scePaf_79A4A59D(s32, const char *, M2C_UNK);
-M2C_UNK scePaf_7EA9C56C(s32);
 void *scePaf_88784487(M2C_UNK *);
-M2C_UNK scePaf_B866A612(...);
-M2C_UNK scePaf_BB8E4390(s32);
-M2C_UNK scePaf_BE0D7212(void *);
-s32 scePaf_C1B0AA0D(s32);
-M2C_UNK scePaf_CC16F76D(void *);
-M2C_UNK scePaf_DA0209EF(s32);
 void *scePaf_DCE3D225(void *, M2C_UNK);
-M2C_UNK scePaf_EF0B4C08(...);
-M2C_UNK scePaf_F5001144(void *);
-M2C_UNK scePaf_F5E9D973(s32);
-void *scePaf_F77E3DC0(...);
 void sceVideo_9DD8CE8E(void);
-M2C_UNK sceVshCommonGui_11C48509(void *, s32);
-M2C_UNK sceVshCommonGui_1F02F9D5(M2C_UNK);
-M2C_UNK sceVshCommonGui_2EBB5C2B(void *, s32);
-s32 sceVshCommonGui_30FA68C3(...);
 M2C_UNK sceVshCommonGui_891DD627(M2C_UNK);
 s32 sceVshCommonGui_EC899EBE(...);
-M2C_UNK sceVshCommonGui_F5A16B4D(M2C_UNK);
 s32 sce_paf_private_atoi(s32);
 M2C_UNK sce_paf_private_free(s32);
 M2C_UNK sce_paf_private_free2(void *);
@@ -3075,8 +3054,6 @@ M2C_UNK sce_paf_private_printf(const char *, s32);
 s32 sce_paf_private_strlen(s32);
 M2C_UNK sce_paf_private_strncpy(void *, s32, u8);
 s32 sce_paf_private_wcslen(s32);
-s32 vsh_36C11185(...);
-M2C_UNK vsh_60EA90BF(s32, M2C_UNK *);
 
 #ifdef __cplusplus
 }

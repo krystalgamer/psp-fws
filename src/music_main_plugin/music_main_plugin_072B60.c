@@ -153,22 +153,8 @@ void func_00075184(M2C_UNK **arg0) {
     *arg0 = &D_000A1668;
 }
 
-void func_00075194(M2C_UNK **arg0) {
-    *arg0 = &D_000A1668;
+Class_000A1668::~Class_000A1668() {
 }
-
-void func_000751A4(M2C_UNK **arg0) {
-    *arg0 = &D_000A1668;
-}
-
-#if FW_VERSION >= 350
-INCLUDE_ASM("nonmatchings/music_main_plugin_072B60", func_000751B4);
-#else
-void func_000751B4(M2C_UNK **arg0) {
-    *arg0 = &D_000A1668;
-    _ZdlPv(arg0);
-}
-#endif
 
 M2C_UNK *func_000751DC(void) {
     return &D_000A5658;

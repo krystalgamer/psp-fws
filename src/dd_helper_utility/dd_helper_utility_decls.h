@@ -7,7 +7,16 @@
 #ifdef __cplusplus
 #include "paf.h"
 #include "vsh.h"
+#pragma interface
 extern "C" {
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_000047C8 is data (vptr = label - 8 + 8) */
+class Class_000047C8 {
+public:
+    virtual ~Class_000047C8();
+};
 #endif
 
 struct Unk_func_000005A4_0 {
@@ -54,6 +63,9 @@ extern M2C_UNK D_00004B7C;
 extern M2C_UNK D_00004B88;
 extern s32 D_00006F3C;
 
+void _ZN14Class_000047C8D0Ev(M2C_UNK **arg0);
+void _ZN14Class_000047C8D1Ev(M2C_UNK **arg0);
+void _ZN14Class_000047C8D2Ev(M2C_UNK **arg0);
 M2C_UNK _ZN3paf4View12PageActivateEPKc(s32, M2C_UNK *);
 M2C_UNK _ZN3paf4View12PageActivateEPv(void *, s32);
 void *_ZN3paf4View4FindEPKc(const char *);

@@ -43,6 +43,30 @@ public:
 #endif
 
 #ifdef __cplusplus
+/* dtor still asm/m2c (not trivial) */
+class Class_000250E0 {
+public:
+    virtual ~Class_000250E0();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_00024E28 is data (vptr = label - 8 + 8) */
+class Class_00024E28 : public Class_000250E0 {
+public:
+    virtual ~Class_00024E28();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_000250F0 is data (vptr = label - 8 + 8) */
+class Class_000250F0 {
+public:
+    virtual ~Class_000250F0();
+};
+#endif
+
+#ifdef __cplusplus
 /* job slot: vtable _ZTV14Class_00025160 [D1, D0] (vptr D_00025160) */
 class Class_00025160 {
 public:
@@ -118,11 +142,59 @@ public:
 #endif
 
 #ifdef __cplusplus
+/* vtable _ZTV14Class_00020470 is data (vptr = label - 8 + 8) */
+class Class_00020470 : public Class_00025148 {
+public:
+    virtual ~Class_00020470();
+};
+#endif
+
+#ifdef __cplusplus
 /* vtable _ZTV14Class_00024FE8 (vptr D_00024FE8) */
 class Class_00024FE8 : public Class_00025148 {
 public:
     Class_00024FE8(s32 owner);
     virtual ~Class_00024FE8();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_00025288 is data (vptr = label - 8 + 8) */
+class Class_00025288 {
+public:
+    virtual ~Class_00025288();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_0001F6D0 is data (vptr = label - 8 + 8) */
+class Class_0001F6D0 : public Class_00025288 {
+public:
+    virtual ~Class_0001F6D0();
+};
+#endif
+
+#ifdef __cplusplus
+/* dtor still asm/m2c (not trivial) */
+class Class_000252B8 {
+public:
+    virtual ~Class_000252B8();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_0001F908 is data (vptr = label - 8 + 8) */
+class Class_0001F908 : public Class_000252B8 {
+public:
+    virtual ~Class_0001F908();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_00027400 is data (vptr = label - 8 + 8) */
+class Class_00027400 : public Class_000250E0 {
+public:
+    virtual ~Class_00027400();
 };
 #endif
 
@@ -771,13 +843,35 @@ extern s32 func_00012AC8;
 M2C_UNK Job_Cancel(M2C_UNK, s32);
 s32 Job_Start(M2C_UNK, M2C_UNK *, void *, M2C_UNK, M2C_UNK, M2C_UNK *);
 s32 Job_isCanceled(s32);
+void _ZN14Class_0001F6D0D0Ev(M2C_UNK **arg0);
+void _ZN14Class_0001F6D0D1Ev(M2C_UNK **arg0);
+void _ZN14Class_0001F6D0D2Ev(M2C_UNK **arg0);
+void _ZN14Class_0001F908D0Ev(M2C_UNK **arg0);
+void _ZN14Class_0001F908D1Ev(M2C_UNK **arg0);
+void _ZN14Class_0001F908D2Ev(M2C_UNK **arg0);
 void _ZN14Class_0001FC8011LoadTextureEv(void *self);
 void _ZN14Class_0001FC80C1Eii(void *self, s32 owner, s32 arg2);
 void _ZN14Class_0001FC80C2Eii(void *self, s32 owner, s32 arg2);
+void _ZN14Class_00024E28D0Ev(M2C_UNK **arg0);
+void _ZN14Class_00024E28D1Ev(M2C_UNK **arg0);
+void _ZN14Class_00024E28D2Ev(M2C_UNK **arg0);
+void _ZN14Class_000250E0D0Ev(M2C_UNK **arg0);
+void _ZN14Class_000250E0D1Ev(M2C_UNK **arg0);
+void _ZN14Class_000250E0D2Ev(M2C_UNK **arg0);
+void _ZN14Class_000250F0D0Ev(s32 **arg0);
+void _ZN14Class_000250F0D1Ev(M2C_UNK **arg0);
+M2C_UNK _ZN14Class_000250F0D2Ev(M2C_UNK);
 void _ZN14Class_00025148D2Ev(void *self);
 void _ZN14Class_000251605ResetEv(void *self);
 void _ZN14Class_00025160C2Ei(void *self, s32 owner);
 void _ZN14Class_00025160D2Ev(void *self);
+void _ZN14Class_00025288D0Ev(M2C_UNK **arg0);
+void _ZN14Class_00025288D1Ev(M2C_UNK **arg0);
+s32 _ZN14Class_00025288D2Ev(void);
+s32 _ZN14Class_000252B8D2Ev(s32);
+void _ZN14Class_00027400D0Ev(s32 **arg0);
+void _ZN14Class_00027400D1Ev(s32 arg0);
+void _ZN14Class_00027400D2Ev(s32 arg0);
 void _ZN3paf12SurfaceRCPtrINS_7SurfaceEE6AddRefEv(void *self);
 void _ZN3paf12SurfaceRCPtrINS_7SurfaceEEC1EPS1_(void *self, void *p);
 M2C_UNK _ZN3paf4View12PageActivateEPKc(s32);
@@ -1147,8 +1241,8 @@ void func_00010E64(void *arg0, s32 *arg1, void **arg2);
 void func_00010F6C(struct Unk_func_00010F6C_0 *arg0, s32 arg1);
 void func_00010F9C(struct Unk_func_00010F9C_0 *arg0, s32 arg1);
 void func_00010FCC(M2C_UNK **arg0);
-void func_00010FDC(s32 **arg0);
-void func_00010FEC(s32 **arg0);
+void func_00010FDC(M2C_UNK **arg0);
+void func_00010FEC(M2C_UNK **arg0);
 s32 func_00011044(struct Unk_func_00011044_0 *arg0);
 s32 func_00011100(s32);
 void func_00011150(s32 arg0);

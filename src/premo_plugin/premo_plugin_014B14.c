@@ -146,6 +146,10 @@ INCLUDE_RODATA("nonmatchings/premo_plugin_014B14", D_0002AAE0);
 
 INCLUDE_RODATA("nonmatchings/premo_plugin_014B14", D_0002AAF0);
 
+#if FW_VERSION >= 310
+__asm__(".globl _ZTV14Class_0002AAF0\n_ZTV14Class_0002AAF0 = D_0002AAF0 - 8\n");
+#endif
+
 INCLUDE_RODATA("nonmatchings/premo_plugin_014B14", D_0002AAF8);
 
 INCLUDE_RODATA("nonmatchings/premo_plugin_014B14", D_0002AB04);
@@ -154,9 +158,7 @@ INCLUDE_ASM("nonmatchings/premo_plugin_014B14", func_00014C6C);
 
 #if FW_VERSION >= 350 && FW_VERSION < 352
 INCLUDE_ASM("nonmatchings/premo_plugin_014B14", func_00014D6C);
-#endif
-
-#if FW_VERSION == 352
+#else
 s32 func_00014D6C(struct Unk_func_00014D6C_0 *arg0) {
     s32 temp_a0;
     s32 temp_a0_2;
@@ -202,49 +204,6 @@ s32 func_00014D6C(struct Unk_func_00014D6C_0 *arg0) {
 #endif
 
 #if FW_VERSION < 350
-s32 func_00014D6C(struct Unk_func_00014D6C_0 *arg0) {
-    s32 temp_a0;
-    s32 temp_a0_2;
-    s32 temp_a0_3;
-    s32 temp_a0_4;
-    s32 temp_a0_5;
-    s32 temp_s1;
-
-    temp_a0 = arg0->unk0;
-    if (temp_a0 != 0) {
-        func_000156C8(temp_a0);
-        temp_s1 = arg0->unk0;
-        if (temp_s1 == 0) {
-            arg0->unk0 = 0;
-        } else {
-            func_00015400(temp_s1);
-            _ZdlPv(temp_s1);
-            arg0->unk0 = 0;
-        }
-    }
-    temp_a0_2 = arg0->unk8;
-    if (temp_a0_2 != 0) {
-        _ZdaPv(temp_a0_2);
-        arg0->unk8 = 0;
-    }
-    temp_a0_3 = arg0->unk4;
-    if (temp_a0_3 != 0) {
-        _ZdaPv(temp_a0_3);
-        arg0->unk4 = 0;
-    }
-    temp_a0_4 = arg0->unkC;
-    if (temp_a0_4 != 0) {
-        _ZdaPv(temp_a0_4);
-        arg0->unkC = 0;
-    }
-    temp_a0_5 = arg0->unk10;
-    if (temp_a0_5 != 0) {
-        _ZdaPv(temp_a0_5);
-        arg0->unk10 = 0;
-    }
-    return 0;
-}
-
 INCLUDE_ASM("nonmatchings/premo_plugin_014B14", func_0000D910);
 #else
 INCLUDE_ASM("nonmatchings/premo_plugin_014B14", func_00014E48);

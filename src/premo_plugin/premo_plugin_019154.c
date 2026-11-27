@@ -376,21 +376,7 @@ void func_0001AEF0(struct Unk_func_0001AEF0_0 *arg0) {
 
 #if FW_VERSION >= 350 && FW_VERSION < 352
 INCLUDE_ASM("nonmatchings/premo_plugin_019154", func_0001AF1C);
-#endif
-
-#if FW_VERSION == 352
-s32 func_0001AF1C(struct Unk_func_0001AF1C_0 *arg0, s32 arg1) {
-    s32 temp_v0;
-
-    arg0->unk4 = arg1;
-    arg0->unk8 = 0;
-    temp_v0 = _Znaj(arg1 * 4);
-    arg0->unkC = temp_v0;
-    return (temp_v0 != 0) ? 0 : 0x8007000E;
-}
-#endif
-
-#if FW_VERSION < 350
+#else
 s32 func_0001AF1C(struct Unk_func_0001AF1C_0 *arg0, s32 arg1) {
     s32 temp_v0;
 
@@ -404,23 +390,7 @@ s32 func_0001AF1C(struct Unk_func_0001AF1C_0 *arg0, s32 arg1) {
 
 #if FW_VERSION >= 350 && FW_VERSION < 352
 INCLUDE_ASM("nonmatchings/premo_plugin_019154", func_0001AF60);
-#endif
-
-#if FW_VERSION == 352
-s32 func_0001AF60(struct Unk_func_0001AF60_0 *arg0) {
-    s32 temp_v0;
-
-    temp_v0 = arg0->unkC;
-    if (temp_v0 == 0) {
-
-    } else {
-        _ZdaPv(temp_v0);
-    }
-    return 0;
-}
-#endif
-
-#if FW_VERSION < 350
+#else
 s32 func_0001AF60(struct Unk_func_0001AF60_0 *arg0) {
     s32 temp_v0;
 

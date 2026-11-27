@@ -31,8 +31,16 @@ void func_00010F9C(struct Unk_func_00010F9C_0 *arg0, s32 arg1) {
 void func_00010FCC(M2C_UNK **arg0) {
     *arg0 = &D_000250F0;
 }
+#endif
 
+#if FW_VERSION >= 282
 void func_00010FDC(M2C_UNK **arg0) {
+    *arg0 = &D_000250F0;
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 282
+void _ZN14Class_000250F0D1Ev(M2C_UNK **arg0) {
     *arg0 = &D_000250F0;
 }
 #endif

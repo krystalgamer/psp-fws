@@ -35,14 +35,26 @@ void func_00037D3C(struct Unk_func_00037D3C_0 *arg0) {
     arg0->unk1014 = 0;
     arg0->unk1018 = 0;
 }
-#endif
 
-#if FW_VERSION != 282
 void func_00037D68(M2C_UNK **arg0) {
     *arg0 = &D_00056480;
 }
+#endif
 
+#if FW_VERSION < 282
+void _ZN14Class_00056480D2Ev(M2C_UNK **arg0) {
+    *arg0 = &D_00056480;
+}
+#endif
+
+#if FW_VERSION >= 303
 void func_00037D78(M2C_UNK **arg0) {
+    *arg0 = &D_00056480;
+}
+#endif
+
+#if FW_VERSION < 282
+void _ZN14Class_00056480D1Ev(M2C_UNK **arg0) {
     *arg0 = &D_00056480;
 }
 #endif

@@ -414,7 +414,7 @@ INCLUDE_ASM("nonmatchings/video_main_plugin_00664C", func_0000BAB0);
 #else
 void func_0000BAB0(void) {
     if (D_00057238 != 0) {
-        vsh_60EA90BF(vsh_36C11185(), &D_00053320);
+        _ZN3vsh10FixedAlloc6UnlockEPKc(_ZN3vsh10FixedAlloc8InstanceEv(), &D_00053320);
         D_00057238 = 0;
         D_0005723C = 0;
         D_00057240 = 0;
@@ -5180,12 +5180,12 @@ void func_0001FEAC(struct Unk_func_0001FEAC_0 *arg0) {
 
     temp_v0 = arg0->unk8;
     if (temp_v0 != 0) {
-        scePaf_4729E549(temp_v0);
+        sce_paf_private_free(temp_v0);
         arg0->unk8 = 0;
     }
     temp_v0_2 = arg0->unkC;
     if (temp_v0_2 != 0) {
-        scePaf_4729E549(temp_v0_2);
+        sce_paf_private_free(temp_v0_2);
         arg0->unkC = 0;
     }
 }
@@ -5406,12 +5406,12 @@ void func_00021280(struct Unk_func_00021280_0 *arg0) {
 
     temp_v0 = arg0->unk8;
     if (temp_v0 != 0) {
-        scePaf_4729E549(temp_v0);
+        sce_paf_private_free(temp_v0);
         arg0->unk8 = 0;
     }
     temp_v0_2 = arg0->unkC;
     if (temp_v0_2 != 0) {
-        scePaf_4729E549(temp_v0_2);
+        sce_paf_private_free(temp_v0_2);
         arg0->unkC = 0;
     }
 }

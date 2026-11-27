@@ -399,3 +399,6 @@ _ZN3vsh16RebootSafeMemory8GetBlockENS0_5BlockEPvj = 0x00050BBC; // type:func
 vsh_78A67F41 = 0x00050BC4; // type:func
 _ZN3vsh10FixedAlloc4LockEPKc = 0x00050BCC; // type:func
 vshRegSysconfOpenRegistry = 0x00050BD4; // type:func
+_ZN14Class_000535A0D2Ev = 0x00024260; // type:func
+_ZN14Class_000535A0D1Ev = 0x00024270; // type:func
+_ZN14Class_000535A0D0Ev = 0x00024280; // type:func

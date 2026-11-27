@@ -88,6 +88,8 @@ INCLUDE_ASM("nonmatchings/lftv_middleware_036D6C", func_00052EE0);
 INCLUDE_RODATA("nonmatchings/lftv_middleware_036D6C", D_00056480);
 
 INCLUDE_RODATA("nonmatchings/lftv_middleware_036D6C", D_0007D8C0);
+
+__asm__(".globl _ZTV14Class_0007D8C0\n_ZTV14Class_0007D8C0 = D_0007D8C0 - 8\n");
 #endif
 
 #if FW_VERSION >= 303

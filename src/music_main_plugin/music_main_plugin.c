@@ -1617,7 +1617,15 @@ INCLUDE_ASM("nonmatchings/music_main_plugin", func_00003798);
 INCLUDE_ASM("nonmatchings/music_main_plugin", func_00003A34);
 #endif
 
-#if FW_VERSION >= 282 && FW_VERSION < 350
+#if FW_VERSION >= 300 && FW_VERSION < 350
+void func_00003A34(struct Unk_func_00003A34_0 *arg0) {
+    arg0->unk0 = &D_00098D90;
+    _ZN3paf9PhHandler11SetCallBackEiPFvPNS_8PhWidgetEPNS_7PhEventEPvES5_(arg0->unk8, 0x100002, 0, 0);
+    _ZN19Class_00097DC8_v271D2Ev((s32) arg0);
+}
+#endif
+
+#if FW_VERSION == 282
 void func_00003A34(struct Unk_func_00003A34_0 *arg0) {
     arg0->unk0 = &D_00098D90;
     _ZN3paf9PhHandler11SetCallBackEiPFvPNS_8PhWidgetEPNS_7PhEventEPvES5_(arg0->unk8, 0x100002, 0, 0);
@@ -1629,7 +1637,16 @@ void func_00003A34(struct Unk_func_00003A34_0 *arg0) {
 INCLUDE_ASM("nonmatchings/music_main_plugin", func_00003A80);
 #endif
 
-#if FW_VERSION >= 282 && FW_VERSION < 350
+#if FW_VERSION >= 300 && FW_VERSION < 350
+void func_00003A80(struct Unk_func_00003A80_0 *arg0) {
+    arg0->unk0 = &D_00098D90;
+    _ZN3paf9PhHandler11SetCallBackEiPFvPNS_8PhWidgetEPNS_7PhEventEPvES5_(arg0->unk8, 0x100002, 0, 0);
+    _ZN19Class_00097DC8_v271D2Ev((s32) arg0);
+    _ZdlPv(arg0);
+}
+#endif
+
+#if FW_VERSION == 282
 void func_00003A80(struct Unk_func_00003A80_0 *arg0) {
     arg0->unk0 = &D_00098D90;
     _ZN3paf9PhHandler11SetCallBackEiPFvPNS_8PhWidgetEPNS_7PhEventEPvES5_(arg0->unk8, 0x100002, 0, 0);
@@ -2082,22 +2099,39 @@ void func_00006DB0(struct Unk_func_00006DB0_0 *arg0, s32 arg1, s32 arg2) {
     arg0->unk4 = arg1;
     arg0->unk8 = arg2;
 }
+#endif
 
+#if FW_VERSION >= 300
+INCLUDE_ASM("nonmatchings/music_main_plugin", _ZN19Class_00097DC8_v271D2Ev);
+#endif
+
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/music_main_plugin", func_00006DC8);
 #endif
 
 #if FW_VERSION >= 350
-INCLUDE_ASM("nonmatchings/music_main_plugin", func_00006DFC);
+INCLUDE_ASM("nonmatchings/music_main_plugin", _ZN19Class_00097DC8_v271D1Ev);
 #endif
 
-#if FW_VERSION >= 282 && FW_VERSION < 350
+#if FW_VERSION >= 300 && FW_VERSION < 350
+void _ZN19Class_00097DC8_v271D1Ev(struct Unk_func_00006DFC_0 *arg0) {
+    arg0->unk0 = &D_00099DB0;
+    _ZN3paf4View9PageCloseEPv(D_000A422C, arg0->unk4);
+}
+#endif
+
+#if FW_VERSION == 282
 void func_00006DFC(struct Unk_func_00006DFC_0 *arg0) {
     arg0->unk0 = &D_00099DB0;
     _ZN3paf4View9PageCloseEPv(D_000A422C, arg0->unk4);
 }
 #endif
 
-#if FW_VERSION >= 282
+#if FW_VERSION >= 300
+INCLUDE_ASM("nonmatchings/music_main_plugin", _ZN19Class_00097DC8_v271D0Ev);
+#endif
+
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/music_main_plugin", func_00006E30);
 #endif
 

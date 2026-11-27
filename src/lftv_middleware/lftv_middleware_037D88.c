@@ -3,11 +3,13 @@
 #include "common.h"
 #include "lftv_middleware_decls.h"
 
-#if FW_VERSION != 282
+#if FW_VERSION >= 303
 INCLUDE_ASM("nonmatchings/lftv_middleware_037D88", func_00037D88);
 #endif
 
 #if FW_VERSION < 282
+INCLUDE_ASM("nonmatchings/lftv_middleware_037D88", _ZN14Class_00056480D0Ev);
+
 INCLUDE_ASM("nonmatchings/lftv_middleware_037D88", func_00037DB0);
 #endif
 
@@ -30,16 +32,13 @@ INCLUDE_ASM("nonmatchings/lftv_middleware_037D88", func_00035DA0);
 #endif
 
 #if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/lftv_middleware_037D88", func_000530A4);
-
-INCLUDE_ASM("nonmatchings/lftv_middleware_037D88", func_000530CC);
-#endif
-
-#if FW_VERSION < 303
-INCLUDE_ASM("nonmatchings/lftv_middleware_037D88", func_000530F4);
+Class_0007D8C0::~Class_0007D8C0() {
+}
 #endif
 
 #if FW_VERSION == 282
+INCLUDE_ASM("nonmatchings/lftv_middleware_037D88", func_000530F4);
+
 INCLUDE_ASM("nonmatchings/lftv_middleware_037D88", func_00035E58);
 
 INCLUDE_ASM("nonmatchings/lftv_middleware_037D88", func_00035F04);
@@ -103,6 +102,8 @@ INCLUDE_ASM("nonmatchings/lftv_middleware_037D88", func_00036BE4);
 INCLUDE_RODATA("nonmatchings/lftv_middleware_037D88", D_000512B0);
 
 INCLUDE_RODATA("nonmatchings/lftv_middleware_037D88", D_00055DE8_v282);
+
+__asm__(".globl _ZTV19Class_00055DE8_v282\n_ZTV19Class_00055DE8_v282 = D_00055DE8_v282 - 8\n");
 #endif
 
 #if FW_VERSION < 282
@@ -238,11 +239,8 @@ INCLUDE_ASM("nonmatchings/lftv_middleware_037D88", func_00037948);
 
 INCLUDE_ASM("nonmatchings/lftv_middleware_037D88", func_00037974);
 
-INCLUDE_ASM("nonmatchings/lftv_middleware_037D88", func_000379A0);
-
-INCLUDE_ASM("nonmatchings/lftv_middleware_037D88", func_000379B0);
-
-INCLUDE_ASM("nonmatchings/lftv_middleware_037D88", func_000379C0);
+Class_00055DE8_v282::~Class_00055DE8_v282() {
+}
 
 INCLUDE_ASM("nonmatchings/lftv_middleware_037D88", func_000379E8);
 

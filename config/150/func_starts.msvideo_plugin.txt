@@ -186,7 +186,6 @@ func_0001D544 = 0x0001D544; // type:func
 func_0001E094 = 0x0001E094; // type:func
 func_0001E618 = 0x0001E618; // type:func
 func_0001E970 = 0x0001E970; // type:func
-func_0001FA14 = 0x0001FA14; // type:func
 func_00020100 = 0x00020100; // type:func
 func_00020140 = 0x00020140; // type:func
 func_00020180 = 0x00020180; // type:func

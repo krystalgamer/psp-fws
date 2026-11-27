@@ -698,11 +698,8 @@ void music_common_9054BC13(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0xC) = 0;
 }
 
-INCLUDE_ASM("nonmatchings/music_common_0043C0", func_00006060);
-
-INCLUDE_ASM("nonmatchings/music_common_0043C0", func_00005B50);
-
-INCLUDE_ASM("nonmatchings/music_common_0043C0", func_00005B60);
+Class_0001F2C8::~Class_0001F2C8() {
+}
 
 s32 music_common_6E70D737(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0xC);

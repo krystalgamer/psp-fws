@@ -474,3 +474,9 @@ func_0000F850_v350 = 0x0000F850; // type:func rom:0xF8F0
 func_000258DC_v350 = 0x000258DC; // type:func rom:0x2597C
 func_000258F8_v350 = 0x000258F8; // type:func rom:0x25998
 // shared names (tools/add_version.py) end
+_ZN14Class_0002AAF0D2Ev = 0x00014410; // type:func
+_ZN14Class_0002AAF0D1Ev = 0x00014420; // type:func
+_ZN14Class_0002AAF0D0Ev = 0x00014430; // type:func
+_ZN14Class_0002C150D2Ev = 0x000243CC; // type:func
+_ZN14Class_0002C150D1Ev = 0x000243DC; // type:func
+_ZN14Class_0002C150D0Ev = 0x000243EC; // type:func

@@ -7,7 +7,96 @@
 #ifdef __cplusplus
 #include "paf.h"
 #include "vsh.h"
+#pragma interface
 extern "C" {
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_000D1ED8 is data (vptr = label - 8 + 8) */
+class Class_000D1ED8 {
+public:
+    virtual ~Class_000D1ED8();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_000D75B0 is data (vptr = label - 8 + 8) */
+class Class_000D75B0 {
+public:
+    virtual ~Class_000D75B0();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_000D8188 is data (vptr = label - 8 + 8) */
+class Class_000D8188 : public paf::PhWidget {
+public:
+    virtual ~Class_000D8188();
+};
+#endif
+
+#ifdef __cplusplus
+/* dtor still asm/m2c (not trivial) */
+class Class_000D8898 {
+public:
+    virtual ~Class_000D8898();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_000D8BF8 is data (vptr = label - 8 + 8) */
+class Class_000D8BF8 : public Class_000D8898 {
+public:
+    virtual ~Class_000D8BF8();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_000DB140 is data (vptr = label - 8 + 8) */
+class Class_000DB140 {
+public:
+    virtual ~Class_000DB140();
+};
+#endif
+
+#ifdef __cplusplus
+/* dtor still asm/m2c (not trivial) */
+class Class_000FF5D8 {
+public:
+    virtual ~Class_000FF5D8();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_000D0798 is data (vptr = label - 8 + 8) */
+class Class_000D0798 : public Class_000FF5D8 {
+public:
+    virtual ~Class_000D0798();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_000D1E30 is data (vptr = label - 8 + 8) */
+class Class_000D1E30 : public Class_000FF5D8 {
+public:
+    virtual ~Class_000D1E30();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_000D1E74 is data (vptr = label - 8 + 8) */
+class Class_000D1E74 : public Class_000FF5D8 {
+public:
+    virtual ~Class_000D1E74();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_000D1EB0 is data (vptr = label - 8 + 8) */
+class Class_000D1EB0 : public Class_000FF5D8 {
+public:
+    virtual ~Class_000D1EB0();
+};
 #endif
 
 struct D_000E164C_s {
@@ -2921,6 +3010,25 @@ void _ZN13PSJSValueImpl11NewFromPoolERK11PSJSContextf(void);
 void _ZN13PSJSValueImpl11NewFromPoolERK11PSJSContexti(void);
 void _ZN13PSJSValueImpl6DecRefEv(void);
 void _ZN13psjsname_impl6DecRefEv(void);
+void _ZN14Class_000D0798D0Ev(M2C_UNK **arg0);
+void _ZN14Class_000D0798D1Ev(M2C_UNK **arg0);
+void _ZN14Class_000D0798D2Ev(M2C_UNK **arg0);
+void _ZN14Class_000D1E30D0Ev(M2C_UNK **arg0);
+void _ZN14Class_000D1E30D1Ev(M2C_UNK **arg0);
+void _ZN14Class_000D1E30D2Ev(M2C_UNK **arg0);
+void _ZN14Class_000D1E74D0Ev(M2C_UNK **arg0);
+void _ZN14Class_000D1E74D1Ev(M2C_UNK **arg0);
+void _ZN14Class_000D1E74D2Ev(M2C_UNK **arg0);
+void _ZN14Class_000D1EB0D0Ev(M2C_UNK **arg0);
+void _ZN14Class_000D1EB0D1Ev(M2C_UNK **arg0);
+void _ZN14Class_000D1EB0D2Ev(M2C_UNK **arg0);
+s32 _ZN14Class_000D8898D2Ev(s32);
+void _ZN14Class_000D8BF8D0Ev(M2C_UNK **arg0);
+void _ZN14Class_000D8BF8D1Ev(M2C_UNK **arg0);
+void _ZN14Class_000D8BF8D2Ev(M2C_UNK **arg0);
+void _ZN14Class_000FF5D8D0Ev(struct Unk_func_00013BB8_0 *arg0);
+void _ZN14Class_000FF5D8D1Ev(struct Unk_func_00013BA4_0 *arg0);
+s32 _ZN14Class_000FF5D8D2Ev(s32);
 void _ZN15psjsstring_impl6DecRefEv(void);
 void _ZN3paf10MessageBox25SetMessageBoxSoundHandlerEPFvNS0_9SoundTypeEE(s32 arg0);
 void _ZN3paf10MessageBox25SetQueryButtonInfoHandlerEPFbNS0_10ButtonTypeEPNS0_10ButtonInfoEE(s32 arg0);

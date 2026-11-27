@@ -10,23 +10,12 @@ void func_00016108(struct Unk_func_00013B68_0 *arg0, s32 arg1) {
     arg0->unk0 = &D_000D1D54;
 }
 
-void func_0001615C(M2C_UNK **arg0) {
-    *arg0 = &D_000D1D54;
-    func_00013B90((s32) arg0);
-}
-
-void func_00016184(M2C_UNK **arg0) {
-    *arg0 = &D_000D1D54;
-    func_00013B90((s32) arg0);
-}
-
-void func_000161AC(M2C_UNK **arg0) {
-    *arg0 = &D_000D1D54;
-    func_00013B90((s32) arg0);
-    _ZdlPv(arg0);
+Class_000D1EB0::~Class_000D1EB0() {
 }
 
 INCLUDE_RODATA("nonmatchings/pafmini_016108", D_000D1CA0);
+
+__asm__(".globl _ZTV14Class_000D1E74\n_ZTV14Class_000D1E74 = D_000D1CA0 - 8\n");
 
 INCLUDE_ASM("nonmatchings/pafmini_016108", func_000161E4);
 
@@ -134,17 +123,17 @@ INCLUDE_ASM("nonmatchings/pafmini_016108", func_000180C0);
 
 void func_00018110(M2C_UNK **arg0) {
     *arg0 = &D_000D1DD0;
-    func_00013B90((s32) arg0);
+    _ZN14Class_000FF5D8D2Ev((s32) arg0);
 }
 
 void func_00018138(M2C_UNK **arg0) {
     *arg0 = &D_000D1DD0;
-    func_00013B90((s32) arg0);
+    _ZN14Class_000FF5D8D2Ev((s32) arg0);
 }
 
 void func_00018160(M2C_UNK **arg0) {
     *arg0 = &D_000D1DD0;
-    func_00013B90((s32) arg0);
+    _ZN14Class_000FF5D8D2Ev((s32) arg0);
     _ZdlPv(arg0);
 }
 #endif

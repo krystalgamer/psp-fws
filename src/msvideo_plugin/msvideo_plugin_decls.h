@@ -7,7 +7,40 @@
 #ifdef __cplusplus
 #include "paf.h"
 #include "vsh.h"
+#pragma interface
 extern "C" {
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_00064420 is data (vptr = label - 8 + 8) */
+class Class_00064420 {
+public:
+    virtual ~Class_00064420();
+};
+#endif
+
+#ifdef __cplusplus
+/* dtor still asm/m2c (not trivial) */
+class Class_000657F8 {
+public:
+    virtual ~Class_000657F8();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_000658B0 is data (vptr = label - 8 + 8) */
+class Class_000658B0 : public Class_000657F8 {
+public:
+    virtual ~Class_000658B0();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_00065968 is data (vptr = label - 8 + 8) */
+class Class_00065968 : public Class_000657F8 {
+public:
+    virtual ~Class_00065968();
+};
 #endif
 
 struct D_00065E24_s {
@@ -2108,6 +2141,13 @@ extern s32 func_000064B0;
 M2C_UNK InputDevice_PspHprm_Unlock(...);
 M2C_UNK InputDevice_PspPad_Unlock(...);
 M2C_UNK Job_Start(M2C_UNK, M2C_UNK *, M2C_UNK *, M2C_UNK, M2C_UNK, M2C_UNK *);
+void _ZN14Class_000657F8D0Ev(s32 **arg0);
+void _ZN14Class_000657F8D1Ev(struct Unk_func_0005A084_0 *arg0);
+s32 _ZN14Class_000657F8D2Ev(s32);
+void _ZN14Class_000658B0D1Ev(M2C_UNK **arg0);
+void _ZN14Class_000658B0D2Ev(M2C_UNK **arg0);
+void _ZN14Class_00065968D1Ev(M2C_UNK **arg0);
+void _ZN14Class_00065968D2Ev(M2C_UNK **arg0);
 M2C_UNK _ZN3paf13PhApplication13StartDispListEv(void);
 M2C_UNK _ZN3paf13PhApplication14FinishDispListEv(void);
 M2C_UNK _ZN3paf4View12PageActivateEPv(s32, s32);

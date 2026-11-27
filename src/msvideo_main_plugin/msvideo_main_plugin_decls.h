@@ -7,7 +7,152 @@
 #ifdef __cplusplus
 #include "paf.h"
 #include "vsh.h"
+#pragma interface
 extern "C" {
+#endif
+
+#ifdef __cplusplus
+/* dtor still asm/m2c (not trivial) */
+class Class_000AE948 {
+public:
+    virtual ~Class_000AE948();
+};
+#endif
+
+#ifdef __cplusplus
+/* dtor still asm/m2c (not trivial) */
+class Class_000AF408 {
+public:
+    virtual ~Class_000AF408();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_000AF5E8 is data (vptr = label - 8 + 8) */
+class Class_000AF5E8 : public Class_000AF408 {
+public:
+    virtual ~Class_000AF5E8();
+};
+#endif
+
+#ifdef __cplusplus
+/* dtor still asm/m2c (not trivial) */
+class Class_000B2040 {
+public:
+    virtual ~Class_000B2040();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_000B2078 is data (vptr = label - 8 + 8) */
+class Class_000B2078 : public Class_000B2040 {
+public:
+    virtual ~Class_000B2078();
+};
+#endif
+
+#ifdef __cplusplus
+/* dtor still asm/m2c (not trivial) */
+class Class_000B2390 {
+public:
+    virtual ~Class_000B2390();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_000B24E0 is data (vptr = label - 8 + 8) */
+class Class_000B24E0 : public Class_000B2390 {
+public:
+    virtual ~Class_000B24E0();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_000B27F8 is data (vptr = label - 8 + 8) */
+class Class_000B27F8 {
+public:
+    virtual ~Class_000B27F8();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_000B2870 is data (vptr = label - 8 + 8) */
+class Class_000B2870 : public Class_000B2390 {
+public:
+    virtual ~Class_000B2870();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_000B2960 is data (vptr = label - 8 + 8) */
+class Class_000B2960 : public Class_000B2390 {
+public:
+    virtual ~Class_000B2960();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_000B2C30 is data (vptr = label - 8 + 8) */
+class Class_000B2C30 : public Class_000B2040 {
+public:
+    virtual ~Class_000B2C30();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_000B2D20 is data (vptr = label - 8 + 8) */
+class Class_000B2D20 : public Class_000B2390 {
+public:
+    virtual ~Class_000B2D20();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_000B31B8 is data (vptr = label - 8 + 8) */
+class Class_000B31B8 : public Class_000AF408 {
+public:
+    virtual ~Class_000B31B8();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_000B31D0 is data (vptr = label - 8 + 8) */
+class Class_000B31D0 : public Class_000AE948 {
+public:
+    virtual ~Class_000B31D0();
+};
+#endif
+
+#ifdef __cplusplus
+/* dtor still asm/m2c (not trivial) */
+class Class_000B4080 {
+public:
+    virtual ~Class_000B4080();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_000B40A0 is data (vptr = label - 8 + 8) */
+class Class_000B40A0 {
+public:
+    virtual ~Class_000B40A0();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_000B4708 is data (vptr = label - 8 + 8) */
+class Class_000B4708 : public Class_000B4080 {
+public:
+    virtual ~Class_000B4708();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_000B4A08 is data (vptr = label - 8 + 8) */
+class Class_000B4A08 {
+public:
+    virtual ~Class_000B4A08();
+};
 #endif
 
 struct Unk_D_000B5FC0 {
@@ -3323,6 +3468,53 @@ M2C_UNK InputDevice_PspPad_Lock(...);
 M2C_UNK InputDevice_PspPad_Unlock(...);
 M2C_UNK Job_Cancel(M2C_UNK, s32);
 s32 Job_Start(M2C_UNK, M2C_UNK *, struct Unk_func_0002B144_0 *, M2C_UNK, M2C_UNK, M2C_UNK *);
+s32 _ZN14Class_000AE948D2Ev(s32);
+s32 _ZN14Class_000AF408D2Ev(s32);
+void _ZN14Class_000AF5E8D0Ev(M2C_UNK **arg0);
+void _ZN14Class_000AF5E8D1Ev(M2C_UNK **arg0);
+void _ZN14Class_000AF5E8D2Ev(M2C_UNK **arg0);
+void _ZN14Class_000B2040D0Ev(M2C_UNK **arg0);
+void _ZN14Class_000B2040D1Ev(M2C_UNK **arg0);
+s32 _ZN14Class_000B2040D2Ev(s32);
+void _ZN14Class_000B2078D0Ev(M2C_UNK **arg0);
+void _ZN14Class_000B2078D1Ev(M2C_UNK **arg0);
+void _ZN14Class_000B2078D2Ev(M2C_UNK **arg0);
+void _ZN14Class_000B2390D0Ev(void *arg0);
+s32 _ZN14Class_000B2390D2Ev(s32);
+void _ZN14Class_000B24E0D0Ev(M2C_UNK **arg0);
+void _ZN14Class_000B24E0D1Ev(M2C_UNK **arg0);
+void _ZN14Class_000B24E0D2Ev(M2C_UNK **arg0);
+void _ZN14Class_000B27F8D0Ev(M2C_UNK **arg0);
+void _ZN14Class_000B27F8D1Ev(M2C_UNK **arg0);
+void _ZN14Class_000B27F8D2Ev(void *self);
+void _ZN14Class_000B2870D0Ev(M2C_UNK **arg0);
+void _ZN14Class_000B2870D1Ev(M2C_UNK **arg0);
+void _ZN14Class_000B2870D2Ev(M2C_UNK **arg0);
+void _ZN14Class_000B2960D0Ev(M2C_UNK **arg0);
+void _ZN14Class_000B2960D1Ev(M2C_UNK **arg0);
+void _ZN14Class_000B2960D2Ev(M2C_UNK **arg0);
+void _ZN14Class_000B2C30D0Ev(M2C_UNK **arg0);
+void _ZN14Class_000B2C30D1Ev(M2C_UNK **arg0);
+void _ZN14Class_000B2C30D2Ev(M2C_UNK **arg0);
+void _ZN14Class_000B2D20D0Ev(M2C_UNK **arg0);
+void _ZN14Class_000B2D20D1Ev(M2C_UNK **arg0);
+s32 _ZN14Class_000B2D20D2Ev(s32);
+void _ZN14Class_000B31B8D0Ev(M2C_UNK **arg0);
+void _ZN14Class_000B31B8D1Ev(M2C_UNK **arg0);
+void _ZN14Class_000B31B8D2Ev(M2C_UNK **arg0);
+void _ZN14Class_000B31D0D0Ev(M2C_UNK **arg0);
+void _ZN14Class_000B31D0D1Ev(M2C_UNK **arg0);
+s32 _ZN14Class_000B31D0D2Ev(s32);
+s32 _ZN14Class_000B4080D2Ev(s32);
+void _ZN14Class_000B40A0D0Ev(M2C_UNK **arg0);
+void _ZN14Class_000B40A0D1Ev(M2C_UNK **arg0);
+void _ZN14Class_000B40A0D2Ev(M2C_UNK **arg0);
+void _ZN14Class_000B4708D0Ev(M2C_UNK **arg0);
+void _ZN14Class_000B4708D1Ev(M2C_UNK **arg0);
+void _ZN14Class_000B4708D2Ev(M2C_UNK **arg0);
+void _ZN14Class_000B4A08D0Ev(M2C_UNK **arg0);
+void _ZN14Class_000B4A08D1Ev(M2C_UNK **arg0);
+void _ZN14Class_000B4A08D2Ev(M2C_UNK **arg0);
 M2C_UNK _ZN3paf13PhApplication13StartDispListEv(void);
 M2C_UNK _ZN3paf13PhApplication14FinishDispListEv(void);
 M2C_UNK _ZN3paf4View12PageActivateEPv(s32, s32);
@@ -3330,8 +3522,13 @@ M2C_UNK _ZN3paf4View4FindEPKc(M2C_UNK *);
 M2C_UNK _ZN3paf4View8PageOpenEPvii(s32, s32, M2C_UNK, M2C_UNK);
 M2C_UNK _ZN3paf4View9PageCloseEPv(s32, s32);
 M2C_UNK _ZN3paf6PhSpin11SetSelectedEi(s32, s32);
+s32 _ZN3paf7Surface4LockEi(void *, M2C_UNK);
+M2C_UNK _ZN3paf7Surface6UnlockEv(void *);
+M2C_UNK _ZN3paf8PhWidget10SetTimeoutEifPFvPS0_PNS_7PhTimerEiPvES4_(s32);
+M2C_UNK _ZN3paf8PhWidget11SetIntervalEifPFvPS0_PNS_7PhTimerEiPvES4_(s32);
 M2C_UNK _ZN3paf8PhWidget13UpdateCamerasEv(struct Unk_func_000258A0_temp_v0 *);
 s32 _ZN3paf8PhWidget9FindChildEPKci(s32, M2C_UNK *, M2C_UNK);
+M2C_UNK _ZN3paf8PhWidgetD2Ev(void *);
 void *_ZN3paf9Framework8InstanceEv(void);
 M2C_UNK _ZN3paf9PhHandler11KillTimerCBEi(s32, M2C_UNK);
 M2C_UNK _ZN3paf9PhSRender8SetStyleEiRK4vec4(s32);
@@ -5234,78 +5431,25 @@ void sceMsVideo_D8E92754(void);
 M2C_UNK sceNetApctlDisconnect(...);
 M2C_UNK sceNetApctlGetState(void *);
 M2C_UNK scePaf_0A4868F1(void *, s32);
-M2C_UNK scePaf_0BF42D26(s32, s32);
-M2C_UNK scePaf_0CFD27E9(...);
-M2C_UNK scePaf_128E46E3(...);
-M2C_UNK scePaf_1A314D65(s32);
-M2C_UNK scePaf_25DBB2B8(void *);
-M2C_UNK scePaf_291EBB2C(s32);
-M2C_UNK scePaf_2A5E7BE9(s32);
-s32 scePaf_2CD3AB9E(s32, M2C_UNK *);
-M2C_UNK scePaf_3308156F(M2C_UNK, s32, s32);
-M2C_UNK scePaf_3AC3E06A(...);
 s32 scePaf_3EDD45EF(M2C_UNK, M2C_UNK *, void *, M2C_UNK, M2C_UNK, M2C_UNK *);
 M2C_UNK scePaf_4729E549(s32 *);
-M2C_UNK scePaf_47B886E3(M2C_UNK, s32);
-M2C_UNK scePaf_581F3612(s32, s32);
-s32 scePaf_5E4447F6(s32);
-s32 scePaf_61A8E8EC(M2C_UNK);
-M2C_UNK scePaf_6261C0A5(s32);
-M2C_UNK scePaf_648CA0C5(...);
-M2C_UNK scePaf_6A82A8C6(s32, M2C_UNK);
-M2C_UNK scePaf_6FAE0AC1(s32);
-M2C_UNK scePaf_79542EEA(s32);
-s32 scePaf_79A4A59D(s32, M2C_UNK *, M2C_UNK);
-s32 scePaf_79CF7608(s32, M2C_UNK, M2C_UNK);
-M2C_UNK scePaf_7EA9C56C(s32);
-M2C_UNK scePaf_88784487(M2C_UNK *);
-M2C_UNK scePaf_9479C11B(s32, M2C_UNK, M2C_UNK);
-M2C_UNK scePaf_9E0CA28F(void *);
-M2C_UNK scePaf_B866A612(...);
 M2C_UNK scePaf_B94FDC08(...);
-M2C_UNK scePaf_BB8E4390(s32);
 M2C_UNK scePaf_BE0D7212(void *);
 s32 scePaf_C1B0AA0D(s32);
-M2C_UNK scePaf_C5DBD12F(s32, s32);
 M2C_UNK scePaf_C9686A21(s32);
-M2C_UNK scePaf_CB4C96CE(...);
-M2C_UNK scePaf_CBDDC9A1(s32);
-M2C_UNK scePaf_CCFF20ED(s32);
-s32 scePaf_D7FA53D2(void *, M2C_UNK);
-s32 scePaf_DCE3D225(s32, M2C_UNK);
-M2C_UNK scePaf_ECB65734(s32);
-M2C_UNK scePaf_F042CC8B(...);
-struct Unk_func_0002B840_temp_v0 *scePaf_F77E3DC0(...);
-M2C_UNK scePaf_F86BD417(s32, s32, M2C_UNK, M2C_UNK);
 M2C_UNK scePower_EBD177D6(M2C_UNK, M2C_UNK, M2C_UNK);
 M2C_UNK sceVshBridge_5317A582(...);
 s32 sceVshBridge_C86E65DC(s32);
-M2C_UNK sceVshCommonGui_11C48509(void *, s32);
-M2C_UNK sceVshCommonGui_1F02F9D5(M2C_UNK);
-M2C_UNK sceVshCommonGui_2EBB5C2B(void *, s32);
-s32 sceVshCommonGui_30FA68C3(...);
-M2C_UNK sceVshCommonGui_3BE24617(s32, s32, M2C_UNK);
-M2C_UNK sceVshCommonGui_6C337347(...);
-M2C_UNK sceVshCommonGui_6DB34C38(...);
-M2C_UNK sceVshCommonGui_891DD627(M2C_UNK);
-M2C_UNK sceVshCommonGui_8F414E35(s32);
 s32 sceVshCommonGui_CBD3BD66(s32, s32, const char *, M2C_UNK, const char *, M2C_UNK, M2C_UNK);
 M2C_UNK sceVshCommonGui_DDDE22B1(s32);
-s32 sceVshCommonGui_EC899EBE(...);
 s32 sceVshCommonGui_F4D1E387(s32, s32, M2C_UNK *, M2C_UNK, M2C_UNK *, M2C_UNK, M2C_UNK);
-M2C_UNK sceVshCommonGui_F5A16B4D(M2C_UNK);
-M2C_UNK sceVshCommonUtil_094B0219(void *, M2C_UNK);
 M2C_UNK sceVshCommonUtil_1EBD43EA(s32);
-M2C_UNK sceVshCommonUtil_21EF453A(s32, s32);
 M2C_UNK sceVshCommonUtil_622815DD(s32, M2C_UNK *);
 M2C_UNK sceVshCommonUtil_8584376D(s32, s32);
-M2C_UNK sceVshCommonUtil_951BC384(s32, M2C_UNK *);
 M2C_UNK sceVshCommonUtil_B9B916C5(s32);
-M2C_UNK sceVshCommonUtil_D24DD449(void *);
-M2C_UNK sceVshCommonUtil_E85C45FF(s32);
-M2C_UNK sceVshCommonUtil_F25CBB92(s32);
 M2C_UNK sce_paf_private_free(s32);
 M2C_UNK sce_paf_private_malloc(...);
+M2C_UNK sce_paf_private_memcpy(M2C_UNK, s32, s32);
 M2C_UNK sce_paf_private_memset(s32, M2C_UNK, M2C_UNK);
 M2C_UNK sce_paf_private_printf(M2C_UNK *, s32);
 s32 sce_paf_private_strlen(M2C_UNK *);
@@ -5315,9 +5459,7 @@ s32 sce_paf_private_wcslen(s32);
 M2C_UNK sce_paf_private_wcsncpy(s32, void *);
 M2C_UNK vshMgVideoEnd(...);
 s32 vshMgVideoEndMovie(s32);
-s32 vsh_36C11185(...);
 M2C_UNK vsh_3B9060A8(M2C_UNK);
-M2C_UNK vsh_60EA90BF(s32, M2C_UNK *);
 
 #ifdef __cplusplus
 }

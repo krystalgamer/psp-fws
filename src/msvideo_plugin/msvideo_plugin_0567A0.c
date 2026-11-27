@@ -459,9 +459,9 @@ void func_00059FCC(struct Unk_func_00059FCC_0 *arg0) {
     arg0->unk784 = 0x400;
 }
 
-INCLUDE_ASM("nonmatchings/msvideo_plugin_0567A0", func_0005A044);
+INCLUDE_ASM("nonmatchings/msvideo_plugin_0567A0", _ZN14Class_000657F8D2Ev);
 
-void func_0005A084(struct Unk_func_0005A084_0 *arg0) {
+void _ZN14Class_000657F8D1Ev(struct Unk_func_0005A084_0 *arg0) {
     s32 temp_a1;
 
     temp_a1 = arg0->unk780;
@@ -473,7 +473,7 @@ void func_0005A084(struct Unk_func_0005A084_0 *arg0) {
     }
 }
 
-void func_0005A0C4(s32 **arg0) {
+void _ZN14Class_000657F8D0Ev(s32 **arg0) {
     s32 temp_v1;
 
     temp_v1 = M2C_FIELD(arg0, s32 *, 0x780);
@@ -857,17 +857,8 @@ void func_0005AD8C(M2C_UNK **arg0) {
     *arg0 = &D_000658B0;
 }
 
-void func_0005ADBC(M2C_UNK **arg0) {
-    *arg0 = &D_000658B0;
-    func_0005A044((s32) arg0);
+Class_000658B0::~Class_000658B0() {
 }
-
-void func_0005ADE4(M2C_UNK **arg0) {
-    *arg0 = &D_000658B0;
-    func_0005A044((s32) arg0);
-}
-
-INCLUDE_ASM("nonmatchings/msvideo_plugin_0567A0", func_0005AE0C);
 
 INCLUDE_RODATA("nonmatchings/msvideo_plugin_0567A0", D_000657F8);
 

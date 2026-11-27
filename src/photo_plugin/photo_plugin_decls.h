@@ -7,7 +7,24 @@
 #ifdef __cplusplus
 #include "paf.h"
 #include "vsh.h"
+#pragma interface
 extern "C" {
+#endif
+
+#ifdef __cplusplus
+/* dtor still asm/m2c (not trivial) */
+class Class_000250D0 {
+public:
+    virtual ~Class_000250D0();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_00025020 is data (vptr = label - 8 + 8) */
+class Class_00025020 : public Class_000250D0 {
+public:
+    virtual ~Class_00025020();
+};
 #endif
 
 struct Unk_D_00031B40 {
@@ -656,6 +673,12 @@ M2C_UNK InputDevice_PspPad_Unlock(...);
 M2C_UNK Job_Cancel2(M2C_UNK, s32);
 M2C_UNK Job_Start(M2C_UNK, void (*)(void ***), void *, M2C_UNK, M2C_UNK, M2C_UNK *);
 s32 Job_isCanceled(...);
+void _ZN14Class_00025020D0Ev(M2C_UNK **arg0);
+void _ZN14Class_00025020D1Ev(M2C_UNK **arg0);
+void _ZN14Class_00025020D2Ev(M2C_UNK **arg0);
+void _ZN14Class_000250D0D0Ev(void *arg0);
+void _ZN14Class_000250D0D1Ev(void *arg0);
+s32 _ZN14Class_000250D0D2Ev(s32);
 M2C_UNK _ZN3paf11SurfacePoolC1EPviPKc(void *, s32, M2C_UNK, M2C_UNK);
 M2C_UNK _ZN3paf4View12PageActivateEPKc(s32, M2C_UNK *);
 M2C_UNK _ZN3paf4View12PageActivateEPv(s32, s32);

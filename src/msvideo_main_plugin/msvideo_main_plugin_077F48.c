@@ -191,7 +191,7 @@ INCLUDE_ASM("nonmatchings/msvideo_main_plugin_077F48", func_000795EC);
 INCLUDE_ASM("nonmatchings/msvideo_main_plugin_077F48", func_00079688);
 #else
 s32 func_00079688(struct Unk_func_0007747C_0 *arg0, M2C_UNK arg1) {
-    scePaf_3308156F(arg1, arg0->unkC, arg0->unk8);
+    sce_paf_private_memcpy(arg1, arg0->unkC, arg0->unk8);
     return 0;
 }
 #endif

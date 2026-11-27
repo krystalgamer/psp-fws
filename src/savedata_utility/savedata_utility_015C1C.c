@@ -19,6 +19,8 @@ Class_0001FC80::~Class_0001FC80() {
 #if FW_VERSION < 250 || FW_VERSION >= 282
 INCLUDE_RODATA("nonmatchings/savedata_utility_015C1C", D_00025288);
 
+__asm__(".globl _ZTV14Class_00025288\n_ZTV14Class_00025288 = D_00025288 - 8\n");
+
 INCLUDE_RODATA("nonmatchings/savedata_utility_015C1C", D_000252A0);
 
 INCLUDE_RODATA("nonmatchings/savedata_utility_015C1C", D_000252A8);

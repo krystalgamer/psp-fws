@@ -7,7 +7,24 @@
 #ifdef __cplusplus
 #include "paf.h"
 #include "vsh.h"
+#pragma interface
 extern "C" {
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_0000AAB8 is data (vptr = label - 8 + 8) */
+class Class_0000AAB8 {
+public:
+    virtual ~Class_0000AAB8();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_0002C078 is data (vptr = label - 8 + 8) */
+class Class_0002C078 {
+public:
+    virtual ~Class_0002C078();
+};
 #endif
 
 struct Unk_func_00000610_0 {
@@ -232,6 +249,12 @@ extern M2C_UNK func_0001C3A4;
 M2C_UNK Job_Cancel2(M2C_UNK, s32);
 M2C_UNK Job_Start(M2C_UNK, void (*)(void *), void *, M2C_UNK, M2C_UNK, M2C_UNK *);
 s32 Job_isCanceled(s32);
+void _ZN14Class_0000AAB8D0Ev(M2C_UNK **arg0);
+void _ZN14Class_0000AAB8D1Ev(M2C_UNK **arg0);
+void _ZN14Class_0000AAB8D2Ev(M2C_UNK **arg0);
+void _ZN14Class_0002C078D0Ev(M2C_UNK **arg0);
+void _ZN14Class_0002C078D1Ev(M2C_UNK **arg0);
+void _ZN14Class_0002C078D2Ev(M2C_UNK **arg0);
 s32 _ZN3paf10PhMenuList10WidgetTypeEv(void);
 M2C_UNK _ZN3paf10PhMenuList11SetSelectedEi(void **, u32);
 M2C_UNK _ZN3paf4View12PageActivateEPKc(s32, M2C_UNK *);

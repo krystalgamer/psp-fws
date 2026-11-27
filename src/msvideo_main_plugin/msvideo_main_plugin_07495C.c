@@ -22,7 +22,7 @@ void func_000749D4(M2C_UNK **arg0) {
     *arg0 = &D_000B48E0;
     func_00075144();
     *arg0 = &D_000AF3E8;
-    scePaf_6261C0A5((s32) arg0);
+    _ZdlPv((s32) arg0);
 }
 #endif
 
@@ -94,15 +94,7 @@ INCLUDE_ASM("nonmatchings/msvideo_main_plugin_07495C", func_00075910);
 
 #if FW_VERSION < 310
 INCLUDE_ASM("nonmatchings/msvideo_main_plugin_07495C", func_000759B0);
-#endif
-
-#if FW_VERSION >= 350
-void func_000759B0(void) {
-    scePaf_CB4C96CE();
-}
-#endif
-
-#if FW_VERSION >= 310 && FW_VERSION < 350
+#else
 void func_000759B0(void) {
     sce_paf_private_wcscasecmp();
 }
@@ -138,19 +130,5 @@ INCLUDE_ASM("nonmatchings/msvideo_main_plugin_07495C", func_0007614C);
 
 INCLUDE_ASM("nonmatchings/msvideo_main_plugin_07495C", func_00076178);
 
-void func_000761A4(M2C_UNK **arg0) {
-    *arg0 = &D_000B4A08;
+Class_000B4A08::~Class_000B4A08() {
 }
-
-void func_000761B4(M2C_UNK **arg0) {
-    *arg0 = &D_000B4A08;
-}
-
-#if FW_VERSION < 352
-INCLUDE_ASM("nonmatchings/msvideo_main_plugin_07495C", func_000761C4);
-#else
-void func_000761C4(M2C_UNK **arg0) {
-    *arg0 = &D_000B4A08;
-    scePaf_6261C0A5((s32) arg0);
-}
-#endif

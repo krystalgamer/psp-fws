@@ -12,7 +12,23 @@ extern "C" {
 #endif
 
 #ifdef __cplusplus
-/* vtable _ZTV14Class_00022578 (vptr D_00022578) */
+/* vtable _ZTV14Class_000224C8 is data (vptr = label - 8 + 8) */
+class Class_000224C8 {
+public:
+    virtual ~Class_000224C8();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_00022508 is data (vptr = label - 8 + 8) */
+class Class_00022508 {
+public:
+    virtual ~Class_00022508();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_00022578 is data (vptr = label - 8 + 8) */
 class Class_00022578 {
 public:
     virtual ~Class_00022578();
@@ -20,10 +36,26 @@ public:
 #endif
 
 #ifdef __cplusplus
-/* vtable _ZTV14Class_00022560 (vptr D_00022560) */
+/* vtable _ZTV14Class_00022560 is data (vptr = label - 8 + 8) */
 class Class_00022560 : public Class_00022578 {
 public:
     virtual ~Class_00022560();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_000226A0 is data (vptr = label - 8 + 8) */
+class Class_000226A0 {
+public:
+    virtual ~Class_000226A0();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_00021E38 is data (vptr = label - 8 + 8) */
+class Class_00021E38 : public Class_000226A0 {
+public:
+    virtual ~Class_00021E38();
 };
 #endif
 

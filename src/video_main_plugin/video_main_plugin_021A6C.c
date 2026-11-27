@@ -164,7 +164,7 @@ INCLUDE_ASM("nonmatchings/video_main_plugin_021A6C", func_0002272C);
 
 #if FW_VERSION >= 350
 s32 func_00022794(s32 arg0, s32 *arg1) {
-    *arg1 = scePaf_746499C1(arg0 + 0x4C);
+    *arg1 = sce_paf_private_atoi(arg0 + 0x4C);
     return 0;
 }
 #else
@@ -502,6 +502,10 @@ void func_0002423C(s32 arg0, M2C_UNK arg1) {
     func_00024998(arg1, arg0);
 }
 
+#if FW_VERSION < 350
+Class_000535A0::~Class_000535A0() {
+}
+#else
 void func_00024260(M2C_UNK **arg0) {
     *arg0 = &D_000535A0;
 }
@@ -510,13 +514,7 @@ void func_00024270(M2C_UNK **arg0) {
     *arg0 = &D_000535A0;
 }
 
-#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/video_main_plugin_021A6C", func_00024280);
-#else
-void func_00024280(M2C_UNK **arg0) {
-    *arg0 = &D_000535A0;
-    _ZdlPv((s32) arg0);
-}
 #endif
 
 void func_000242A8(struct Unk_func_000242A8_0 *arg0) {
@@ -615,6 +613,8 @@ INCLUDE_RODATA("nonmatchings/video_main_plugin_021A6C", D_00053560);
 INCLUDE_RODATA("nonmatchings/video_main_plugin_021A6C", D_00053580);
 
 INCLUDE_RODATA("nonmatchings/video_main_plugin_021A6C", D_000535A0);
+
+__asm__(".globl _ZTV14Class_000535A0\n_ZTV14Class_000535A0 = D_000535A0 - 8\n");
 #endif
 
 INCLUDE_ASM("nonmatchings/video_main_plugin_021A6C", func_000244CC);
@@ -1099,7 +1099,7 @@ INCLUDE_ASM("nonmatchings/video_main_plugin_021A6C", func_00026AB0);
 
 #if FW_VERSION >= 350
 void func_00026ACC(s32 *arg0) {
-    scePaf_62231A8B(*arg0);
+    sce_paf_private_fseek(*arg0);
 }
 #else
 void func_00026ACC(s32 *arg0) {
@@ -1109,7 +1109,7 @@ void func_00026ACC(s32 *arg0) {
 
 #if FW_VERSION >= 350
 void func_00026AE8(s32 *arg0) {
-    scePaf_DA0209EF(*arg0);
+    sce_paf_private_ftell(*arg0);
 }
 #else
 void func_00026AE8(s32 *arg0) {

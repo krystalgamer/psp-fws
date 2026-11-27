@@ -112,6 +112,18 @@ def main():
             for n in ns[1:]:
                 print(f"dropped {n} -> {best} (also {ns[0]})")
                 del mapping[n]
+    # a renamed import takes the old name's prototype; if the two prototypes differ the calls
+    # would change (u8 vs s32 parameter: an extra andi in video_main_plugin 3.51): keep the NID name
+    import json as _json
+    sd0 = src_dir(targets[0], mod)
+    sp0 = sd0 / f"{mod}_decls.json"
+    if sp0.exists():
+        funcs0 = _json.loads(sp0.read_text()).get("funcs", {})
+        for n, best in list(mapping.items()):
+            pn, pb = funcs0.get(n), funcs0.get(best)
+            if pn and pb and not re.search(r"\(\);$|\(\.\.\.\);$", pn) and re.sub(rf"\b{n}\b", best, pn) != pb:
+                print(f"kept {n}: prototype differs from {best} ({pn} / {pb})")
+                del mapping[n]
     if not a.apply or not mapping:
         return
     for v in targets:

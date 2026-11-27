@@ -3,7 +3,6 @@
 #include "common.h"
 #include "camera_plugin_decls.h"
 
-#if FW_VERSION >= 350
 void func_0000CC64(s32 arg0, s32 arg1) {
     s32 var_v0;
 
@@ -13,17 +12,6 @@ void func_0000CC64(s32 arg0, s32 arg1) {
     }
     func_0000CEF0(arg0, arg1, var_v0);
 }
-#else
-void func_0000CC64(s32 arg0, s32 arg1) {
-    s32 var_v0;
-
-    var_v0 = 0;
-    if (arg1 != 0) {
-        var_v0 = sce_paf_private_strlen(arg1);
-    }
-    func_0000CEF0(arg0, arg1, var_v0);
-}
-#endif
 
 INCLUDE_ASM("nonmatchings/camera_plugin_00CC64", func_0000CCB4);
 

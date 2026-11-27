@@ -7,7 +7,32 @@
 #ifdef __cplusplus
 #include "paf.h"
 #include "vsh.h"
+#pragma interface
 extern "C" {
+#endif
+
+#ifdef __cplusplus
+/* dtor still asm/m2c (not trivial) */
+class Class_00022C20 {
+public:
+    virtual ~Class_00022C20();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_00023B30 is data (vptr = label - 8 + 8) */
+class Class_00023B30 {
+public:
+    virtual ~Class_00023B30();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_00023FC0 is data (vptr = label - 8 + 8) */
+class Class_00023FC0 : public Class_00022C20 {
+public:
+    virtual ~Class_00023FC0();
+};
 #endif
 
 struct Unk_D_00166C28 {
@@ -504,6 +529,11 @@ extern s32 func_0000C628;
 M2C_UNK InputDevice_PspPad_Lock(...);
 M2C_UNK InputDevice_PspPad_Unlock(...);
 M2C_UNK Job_Start(M2C_UNK, M2C_UNK *, s32, M2C_UNK, M2C_UNK, void (*)());
+void _ZN14Class_00022C20D0Ev(M2C_UNK **arg0);
+void _ZN14Class_00022C20D1Ev(M2C_UNK **arg0);
+s32 _ZN14Class_00022C20D2Ev(void);
+void _ZN14Class_00023FC0D1Ev(s32 **arg0);
+void _ZN14Class_00023FC0D2Ev(s32 **arg0);
 s32 _ZN3paf4View4FindEPKc(const char *);
 M2C_UNK _ZN3paf6PhSpin11SetSelectedEi(s32, s32);
 M2C_UNK _ZN3paf8PhWidgetD2Ev(void);

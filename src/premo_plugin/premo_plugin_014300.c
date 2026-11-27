@@ -29,6 +29,10 @@ INCLUDE_ASM("nonmatchings/premo_plugin_014300", func_00014368);
 
 INCLUDE_ASM("nonmatchings/premo_plugin_014300", func_000143E4);
 
+#if FW_VERSION >= 310
+Class_0002AAF0::~Class_0002AAF0() {
+}
+#else
 void func_00014410(M2C_UNK **arg0) {
     *arg0 = &D_0002AAF0;
 }
@@ -37,13 +41,7 @@ void func_00014420(M2C_UNK **arg0) {
     *arg0 = &D_0002AAF0;
 }
 
-#if FW_VERSION < 352
 INCLUDE_ASM("nonmatchings/premo_plugin_014300", func_00014430);
-#else
-void func_00014430(M2C_UNK **arg0) {
-    *arg0 = &D_0002AAF0;
-    _ZdlPv((s32) arg0);
-}
 #endif
 
 INCLUDE_RODATA("nonmatchings/premo_plugin_014300", D_0002A9E8);

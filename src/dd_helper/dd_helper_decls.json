@@ -1,8 +1,17 @@
 {
+ "cxx_prelude": [
+  "#pragma interface"
+ ],
  "funcs": {
   "Job_Cancel2": "M2C_UNK Job_Cancel2(M2C_UNK, s32);",
   "Job_Start": "M2C_UNK Job_Start(M2C_UNK, void (*)(void *), void *, M2C_UNK, M2C_UNK, M2C_UNK *);",
   "Job_isCanceled": "s32 Job_isCanceled(s32);",
+  "_ZN14Class_0000AAB8D0Ev": "void _ZN14Class_0000AAB8D0Ev(M2C_UNK **arg0);",
+  "_ZN14Class_0000AAB8D1Ev": "void _ZN14Class_0000AAB8D1Ev(M2C_UNK **arg0);",
+  "_ZN14Class_0000AAB8D2Ev": "void _ZN14Class_0000AAB8D2Ev(M2C_UNK **arg0);",
+  "_ZN14Class_0002C078D0Ev": "void _ZN14Class_0002C078D0Ev(M2C_UNK **arg0);",
+  "_ZN14Class_0002C078D1Ev": "void _ZN14Class_0002C078D1Ev(M2C_UNK **arg0);",
+  "_ZN14Class_0002C078D2Ev": "void _ZN14Class_0002C078D2Ev(M2C_UNK **arg0);",
   "_ZN3paf10PhMenuList10WidgetTypeEv": "s32 _ZN3paf10PhMenuList10WidgetTypeEv();",
   "_ZN3paf10PhMenuList11SetSelectedEi": "M2C_UNK _ZN3paf10PhMenuList11SetSelectedEi(void **, u32);",
   "_ZN3paf4View12PageActivateEPKc": "M2C_UNK _ZN3paf4View12PageActivateEPKc(s32, M2C_UNK *);",
@@ -482,6 +491,8 @@
   "vshMgVideoInit": "M2C_UNK vshMgVideoInit();"
  },
  "types": {
+  "Class_0000AAB8": "#ifdef __cplusplus\n/* vtable _ZTV14Class_0000AAB8 is data (vptr = label - 8 + 8) */\nclass Class_0000AAB8 {\npublic:\n    virtual ~Class_0000AAB8();\n};\n#endif",
+  "Class_0002C078": "#ifdef __cplusplus\n/* vtable _ZTV14Class_0002C078 is data (vptr = label - 8 + 8) */\nclass Class_0002C078 {\npublic:\n    virtual ~Class_0002C078();\n};\n#endif",
   "Unk_func_00000610_0": "struct Unk_func_00000610_0 {\n    M2C_UNK * unk0;\n    s32 unk4;\n    s32 unk8;\n};",
   "Unk_func_00000628_0": "struct Unk_func_00000628_0 {\n    M2C_UNK * unk0;\n    s32 unk4;\n    s32 unk8;\n};",
   "Unk_func_000006A8_temp_v0": "struct Unk_func_000006A8_temp_v0 {\n    u8 pad0[0x1B8];\n    s32 unk1B8;\n};",

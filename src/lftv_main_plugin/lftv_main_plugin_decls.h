@@ -7,7 +7,280 @@
 #ifdef __cplusplus
 #include "paf.h"
 #include "vsh.h"
+#pragma interface
 extern "C" {
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_00057290 is data (vptr = label - 8 + 8) */
+class Class_00057290 {
+public:
+    virtual ~Class_00057290();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_000576E8 is data (vptr = label - 8 + 8) */
+class Class_000576E8 {
+public:
+    virtual ~Class_000576E8();
+};
+#endif
+
+#ifdef __cplusplus
+/* dtor still asm/m2c (not trivial) */
+class Class_0005B860 {
+public:
+    virtual ~Class_0005B860();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_000419D0 is data (vptr = label - 8 + 8) */
+class Class_000419D0 : public Class_0005B860 {
+public:
+    virtual ~Class_000419D0();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_00042B28 is data (vptr = label - 8 + 8) */
+class Class_00042B28 : public Class_0005B860 {
+public:
+    virtual ~Class_00042B28();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_00042E88 is data (vptr = label - 8 + 8) */
+class Class_00042E88 : public Class_0005B860 {
+public:
+    virtual ~Class_00042E88();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_00043118 is data (vptr = label - 8 + 8) */
+class Class_00043118 : public Class_0005B860 {
+public:
+    virtual ~Class_00043118();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_00043CD8 is data (vptr = label - 8 + 8) */
+class Class_00043CD8 : public Class_0005B860 {
+public:
+    virtual ~Class_00043CD8();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_00043D80 is data (vptr = label - 8 + 8) */
+class Class_00043D80 : public Class_0005B860 {
+public:
+    virtual ~Class_00043D80();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_000582A0 is data (vptr = label - 8 + 8) */
+class Class_000582A0 : public Class_0005B860 {
+public:
+    virtual ~Class_000582A0();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_00058488 is data (vptr = label - 8 + 8) */
+class Class_00058488 : public Class_0005B860 {
+public:
+    virtual ~Class_00058488();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_000586B8 is data (vptr = label - 8 + 8) */
+class Class_000586B8 : public Class_0005B860 {
+public:
+    virtual ~Class_000586B8();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_00058820 is data (vptr = label - 8 + 8) */
+class Class_00058820 : public Class_0005B860 {
+public:
+    virtual ~Class_00058820();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_000588E8 is data (vptr = label - 8 + 8) */
+class Class_000588E8 : public Class_0005B860 {
+public:
+    virtual ~Class_000588E8();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_00058970 is data (vptr = label - 8 + 8) */
+class Class_00058970 : public Class_0005B860 {
+public:
+    virtual ~Class_00058970();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_00059118 is data (vptr = label - 8 + 8) */
+class Class_00059118 : public Class_0005B860 {
+public:
+    virtual ~Class_00059118();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_00059930 is data (vptr = label - 8 + 8) */
+class Class_00059930 : public Class_0005B860 {
+public:
+    virtual ~Class_00059930();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_00059D20 is data (vptr = label - 8 + 8) */
+class Class_00059D20 : public Class_0005B860 {
+public:
+    virtual ~Class_00059D20();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_00059E48 is data (vptr = label - 8 + 8) */
+class Class_00059E48 : public Class_0005B860 {
+public:
+    virtual ~Class_00059E48();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_00059F28 is data (vptr = label - 8 + 8) */
+class Class_00059F28 : public Class_0005B860 {
+public:
+    virtual ~Class_00059F28();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_0005A080 is data (vptr = label - 8 + 8) */
+class Class_0005A080 : public Class_0005B860 {
+public:
+    virtual ~Class_0005A080();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_0005A190 is data (vptr = label - 8 + 8) */
+class Class_0005A190 : public Class_0005B860 {
+public:
+    virtual ~Class_0005A190();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_0005A308 is data (vptr = label - 8 + 8) */
+class Class_0005A308 : public Class_0005B860 {
+public:
+    virtual ~Class_0005A308();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_0005A3F8 is data (vptr = label - 8 + 8) */
+class Class_0005A3F8 : public Class_0005B860 {
+public:
+    virtual ~Class_0005A3F8();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_0005A620 is data (vptr = label - 8 + 8) */
+class Class_0005A620 : public Class_0005B860 {
+public:
+    virtual ~Class_0005A620();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_0005A850 is data (vptr = label - 8 + 8) */
+class Class_0005A850 : public Class_0005B860 {
+public:
+    virtual ~Class_0005A850();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_0005A900 is data (vptr = label - 8 + 8) */
+class Class_0005A900 : public Class_0005B860 {
+public:
+    virtual ~Class_0005A900();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_0005AA70 is data (vptr = label - 8 + 8) */
+class Class_0005AA70 : public Class_0005B860 {
+public:
+    virtual ~Class_0005AA70();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_0005AB30 is data (vptr = label - 8 + 8) */
+class Class_0005AB30 : public Class_0005B860 {
+public:
+    virtual ~Class_0005AB30();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_0005B608 is data (vptr = label - 8 + 8) */
+class Class_0005B608 : public Class_0005B860 {
+public:
+    virtual ~Class_0005B608();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_0005B8C0 is data (vptr = label - 8 + 8) */
+class Class_0005B8C0 : public Class_0005B860 {
+public:
+    virtual ~Class_0005B8C0();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_0005C018 is data (vptr = label - 8 + 8) */
+class Class_0005C018 : public paf::PhWidget {
+public:
+    virtual ~Class_0005C018();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_0005D8A0 is data (vptr = label - 8 + 8) */
+class Class_0005D8A0 {
+public:
+    virtual ~Class_0005D8A0();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_0005D948 is data (vptr = label - 8 + 8) */
+class Class_0005D948 {
+public:
+    virtual ~Class_0005D948();
+};
 #endif
 
 struct D_0005EEA0_s {
@@ -1608,6 +1881,92 @@ M2C_UNK _Z29netconf_clear_temporary_apcnfv(void);
 s32 _Z29netconf_write_temporary_apcnfv(void);
 M2C_UNK _ZN13PSJSValueImpl6DecRefEv(s32);
 M2C_UNK _ZN13psjsname_impl6DecRefEv(s32);
+void _ZN14Class_000419D0D0Ev(M2C_UNK **arg0);
+void _ZN14Class_000419D0D1Ev(M2C_UNK **arg0);
+void _ZN14Class_000419D0D2Ev(M2C_UNK **arg0);
+void _ZN14Class_00042B28D0Ev(M2C_UNK **arg0);
+void _ZN14Class_00042B28D1Ev(M2C_UNK **arg0);
+void _ZN14Class_00042B28D2Ev(M2C_UNK **arg0);
+void _ZN14Class_00042E88D0Ev(M2C_UNK **arg0);
+void _ZN14Class_00042E88D1Ev(M2C_UNK **arg0);
+void _ZN14Class_00042E88D2Ev(M2C_UNK **arg0);
+void _ZN14Class_00043118D0Ev(M2C_UNK **arg0);
+void _ZN14Class_00043118D1Ev(M2C_UNK **arg0);
+void _ZN14Class_00043118D2Ev(M2C_UNK **arg0);
+void _ZN14Class_00043CD8D0Ev(M2C_UNK **arg0);
+void _ZN14Class_00043CD8D1Ev(M2C_UNK **arg0);
+void _ZN14Class_00043CD8D2Ev(M2C_UNK **arg0);
+void _ZN14Class_00043D80D0Ev(M2C_UNK **arg0);
+void _ZN14Class_00043D80D1Ev(M2C_UNK **arg0);
+void _ZN14Class_00043D80D2Ev(M2C_UNK **arg0);
+void _ZN14Class_000582A0D0Ev(M2C_UNK **arg0);
+void _ZN14Class_000582A0D1Ev(M2C_UNK **arg0);
+void _ZN14Class_000582A0D2Ev(M2C_UNK **arg0);
+void _ZN14Class_00058488D0Ev(M2C_UNK **arg0);
+void _ZN14Class_00058488D1Ev(M2C_UNK **arg0);
+void _ZN14Class_00058488D2Ev(M2C_UNK **arg0);
+void _ZN14Class_000586B8D0Ev(M2C_UNK **arg0);
+void _ZN14Class_000586B8D1Ev(M2C_UNK **arg0);
+void _ZN14Class_000586B8D2Ev(M2C_UNK **arg0);
+void _ZN14Class_00058820D0Ev(M2C_UNK **arg0);
+void _ZN14Class_00058820D1Ev(M2C_UNK **arg0);
+void _ZN14Class_00058820D2Ev(M2C_UNK **arg0);
+void _ZN14Class_000588E8D0Ev(M2C_UNK **arg0);
+void _ZN14Class_000588E8D1Ev(M2C_UNK **arg0);
+void _ZN14Class_000588E8D2Ev(M2C_UNK **arg0);
+void _ZN14Class_00058970D0Ev(M2C_UNK **arg0);
+void _ZN14Class_00058970D1Ev(M2C_UNK **arg0);
+void _ZN14Class_00058970D2Ev(M2C_UNK **arg0);
+void _ZN14Class_00059118D0Ev(M2C_UNK **arg0);
+void _ZN14Class_00059118D1Ev(M2C_UNK **arg0);
+void _ZN14Class_00059118D2Ev(M2C_UNK **arg0);
+void _ZN14Class_00059930D0Ev(M2C_UNK **arg0);
+void _ZN14Class_00059930D1Ev(M2C_UNK **arg0);
+void _ZN14Class_00059930D2Ev(M2C_UNK **arg0);
+void _ZN14Class_00059D20D0Ev(M2C_UNK **arg0);
+void _ZN14Class_00059D20D1Ev(M2C_UNK **arg0);
+void _ZN14Class_00059D20D2Ev(M2C_UNK **arg0);
+void _ZN14Class_00059E48D0Ev(M2C_UNK **arg0);
+void _ZN14Class_00059E48D1Ev(M2C_UNK **arg0);
+void _ZN14Class_00059E48D2Ev(M2C_UNK **arg0);
+void _ZN14Class_00059F28D0Ev(M2C_UNK **arg0);
+void _ZN14Class_00059F28D1Ev(M2C_UNK **arg0);
+void _ZN14Class_00059F28D2Ev(M2C_UNK **arg0);
+void _ZN14Class_0005A080D0Ev(M2C_UNK **arg0);
+void _ZN14Class_0005A080D1Ev(M2C_UNK **arg0);
+void _ZN14Class_0005A080D2Ev(M2C_UNK **arg0);
+void _ZN14Class_0005A190D0Ev(M2C_UNK **arg0);
+void _ZN14Class_0005A190D1Ev(M2C_UNK **arg0);
+void _ZN14Class_0005A190D2Ev(M2C_UNK **arg0);
+void _ZN14Class_0005A308D0Ev(M2C_UNK **arg0);
+void _ZN14Class_0005A308D1Ev(M2C_UNK **arg0);
+void _ZN14Class_0005A308D2Ev(M2C_UNK **arg0);
+void _ZN14Class_0005A3F8D0Ev(M2C_UNK **arg0);
+void _ZN14Class_0005A3F8D1Ev(M2C_UNK **arg0);
+void _ZN14Class_0005A3F8D2Ev(M2C_UNK **arg0);
+void _ZN14Class_0005A620D0Ev(M2C_UNK **arg0);
+void _ZN14Class_0005A620D1Ev(M2C_UNK **arg0);
+void _ZN14Class_0005A620D2Ev(M2C_UNK **arg0);
+void _ZN14Class_0005A850D0Ev(M2C_UNK **arg0);
+void _ZN14Class_0005A850D1Ev(M2C_UNK **arg0);
+void _ZN14Class_0005A850D2Ev(M2C_UNK **arg0);
+void _ZN14Class_0005A900D0Ev(M2C_UNK **arg0);
+void _ZN14Class_0005A900D1Ev(M2C_UNK **arg0);
+void _ZN14Class_0005A900D2Ev(M2C_UNK **arg0);
+void _ZN14Class_0005AA70D0Ev(M2C_UNK **arg0);
+void _ZN14Class_0005AA70D1Ev(M2C_UNK **arg0);
+void _ZN14Class_0005AA70D2Ev(M2C_UNK **arg0);
+void _ZN14Class_0005AB30D0Ev(M2C_UNK **arg0);
+void _ZN14Class_0005AB30D1Ev(M2C_UNK **arg0);
+void _ZN14Class_0005AB30D2Ev(M2C_UNK **arg0);
+void _ZN14Class_0005B608D0Ev(M2C_UNK **arg0);
+void _ZN14Class_0005B608D1Ev(M2C_UNK **arg0);
+void _ZN14Class_0005B608D2Ev(M2C_UNK **arg0);
+s32 _ZN14Class_0005B860D2Ev(s32);
+void _ZN14Class_0005B8C0D0Ev(M2C_UNK **arg0);
+void _ZN14Class_0005B8C0D1Ev(M2C_UNK **arg0);
+void _ZN14Class_0005B8C0D2Ev(M2C_UNK **arg0);
+void _ZN14Class_0005D948D2Ev(void *self);
 M2C_UNK _ZN3paf10PhMenuListD2Ev(void);
 M2C_UNK _ZN3paf13PhApplication13StartDispListEv(void);
 M2C_UNK _ZN3paf13PhApplication14FinishDispListEv(void);

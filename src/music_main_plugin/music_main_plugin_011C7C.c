@@ -630,7 +630,7 @@ void func_00017280(struct Unk_func_00017280_0 *arg0) {
     arg0->unk0 = &D_0009B818;
     func_00018594();
     sceKernelDeleteSema(arg0->unk90);
-    func_0001B730((s32) arg0);
+    _ZN14Class_0009BCC8D2Ev((s32) arg0);
 }
 #endif
 
@@ -643,7 +643,7 @@ void func_000172C0(struct Unk_func_000172C0_0 *arg0) {
     arg0->unk0 = &D_0009B818;
     func_00018594();
     sceKernelDeleteSema(arg0->unk90);
-    func_0001B730((s32) arg0);
+    _ZN14Class_0009BCC8D2Ev((s32) arg0);
 }
 #endif
 
@@ -656,7 +656,7 @@ void func_00017300(struct Unk_func_00017300_0 *arg0) {
     arg0->unk0 = &D_0009B818;
     func_00018594();
     sceKernelDeleteSema(arg0->unk90);
-    func_0001B730((s32) arg0);
+    _ZN14Class_0009BCC8D2Ev((s32) arg0);
     _ZdlPv(arg0);
 }
 #endif

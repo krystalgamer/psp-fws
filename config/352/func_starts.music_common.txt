@@ -16,7 +16,6 @@ func_00004B68 = 0x00004B68; // type:func
 func_00005AC4 = 0x00005AC4; // type:func
 func_00005B5C = 0x00005B5C; // type:func
 func_00005BE4 = 0x00005BE4; // type:func
-func_00006060 = 0x00006060; // type:func
 func_000060B0 = 0x000060B0; // type:func
 func_00006130 = 0x00006130; // type:func
 func_00007554 = 0x00007554; // type:func

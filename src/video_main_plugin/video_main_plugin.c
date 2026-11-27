@@ -25,7 +25,7 @@ void sceVideo_9DD8CE8E(void) {
 
 #if FW_VERSION >= 350
 s32 func_00044DC4(void) {
-    return M2C_FIELD(scePaf_F77E3DC0(), s32 *, 0x9C);
+    return M2C_FIELD(_ZN3paf9Framework8InstanceEv(), s32 *, 0x9C);
 }
 
 s32 func_00000198(void) {
@@ -35,7 +35,7 @@ s32 func_00000198(void) {
 void func_000001A4(s32 arg0) {
     void *temp_v0;
 
-    temp_v0 = scePaf_F77E3DC0();
+    temp_v0 = _ZN3paf9Framework8InstanceEv();
     if (M2C_FIELD(temp_v0, s32 *, 0x9C) == 0) {
 
     } else {
@@ -708,7 +708,7 @@ INCLUDE_ASM("nonmatchings/video_main_plugin", func_00000B14);
 INCLUDE_ASM("nonmatchings/video_main_plugin", func_000006F0);
 
 void func_00000794(void) {
-    sceVshCommonGui_1F02F9D5(0);
+    _ZN3vsh13Infobar_CloseEb(0);
     func_00036908();
 }
 
@@ -724,7 +724,7 @@ void func_00000C0C(void *arg0) {
 }
 
 s32 func_00000804(s32 arg0) {
-    sceVshCommonGui_1F02F9D5(0);
+    _ZN3vsh13Infobar_CloseEb(0);
     func_00036898();
     func_00000B14(arg0);
     return 1;
@@ -748,7 +748,7 @@ void func_00000F9C(s32 arg0) {
     } else {
         func_00037354(D_00057204, arg0);
     }
-    scePaf_08350B98(arg0, 0x80005, &func_0000566C, 0);
+    _ZN3paf9PhHandler11SetCallBackEiPFvPNS_8PhWidgetEPNS_7PhEventEPvES5_(arg0, 0x80005, &func_0000566C, 0);
 }
 
 void func_00000FFC(void) {

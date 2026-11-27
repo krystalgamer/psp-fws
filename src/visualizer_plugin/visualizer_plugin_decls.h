@@ -7,7 +7,40 @@
 #ifdef __cplusplus
 #include "paf.h"
 #include "vsh.h"
+#pragma interface
 extern "C" {
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_0000CFD8 is data (vptr = label - 8 + 8) */
+class Class_0000CFD8 {
+public:
+    virtual ~Class_0000CFD8();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_0000D908 is data (vptr = label - 8 + 8) */
+class Class_0000D908 {
+public:
+    virtual ~Class_0000D908();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_0000D948 is data (vptr = label - 8 + 8) */
+class Class_0000D948 {
+public:
+    virtual ~Class_0000D948();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_0000DA28 is data (vptr = label - 8 + 8) */
+class Class_0000DA28 {
+public:
+    virtual ~Class_0000DA28();
+};
 #endif
 
 struct Unk_func_0000064C_0 {
@@ -256,6 +289,18 @@ extern s32 D_0000DC18;
 extern s32 D_0000DC20;
 extern void *D_0000E25C;
 
+void _ZN14Class_0000CFD8D0Ev(M2C_UNK **arg0);
+void _ZN14Class_0000CFD8D1Ev(M2C_UNK **arg0);
+void _ZN14Class_0000CFD8D2Ev(M2C_UNK **arg0);
+void _ZN14Class_0000D908D0Ev(M2C_UNK **arg0);
+void _ZN14Class_0000D908D1Ev(M2C_UNK **arg0);
+void _ZN14Class_0000D908D2Ev(M2C_UNK **arg0);
+void _ZN14Class_0000D948D0Ev(M2C_UNK **arg0);
+void _ZN14Class_0000D948D1Ev(M2C_UNK **arg0);
+void _ZN14Class_0000D948D2Ev(M2C_UNK **arg0);
+void _ZN14Class_0000DA28D0Ev(M2C_UNK **arg0);
+void _ZN14Class_0000DA28D1Ev(M2C_UNK **arg0);
+void _ZN14Class_0000DA28D2Ev(M2C_UNK **arg0);
 M2C_UNK _ZN3paf8PhWidgetD2Ev(void **);
 M2C_UNK _ZN3paf9PhHandler11KillTimerCBEi(void **, M2C_UNK);
 M2C_UNK _ZN3paf9PhSRender8SetStyleEiRK4vec4(s32);

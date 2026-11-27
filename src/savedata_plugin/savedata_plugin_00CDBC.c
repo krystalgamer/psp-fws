@@ -31,8 +31,16 @@ void func_0000CDEC(struct Unk_func_0000CDEC_0 *arg0, s32 arg1) {
 void func_0000CE1C(M2C_UNK **arg0) {
     *arg0 = &D_00022508;
 }
+#endif
 
+#if FW_VERSION >= 282
 void func_0000CE2C(M2C_UNK **arg0) {
+    *arg0 = &D_00022508;
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 282
+void _ZN14Class_00022508D1Ev(M2C_UNK **arg0) {
     *arg0 = &D_00022508;
 }
 #endif

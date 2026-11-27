@@ -37,9 +37,7 @@ INCLUDE_ASM("nonmatchings/photo_plugin_012A1C", func_000130B0);
 
 #if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/photo_plugin_012A1C", func_00012D5C);
-#endif
 
-#if FW_VERSION >= 350
 s32 func_00012D7C(s32 *arg0, s32 arg1) {
     s32 temp_v0;
     s32 var_v1;
@@ -51,23 +49,7 @@ s32 func_00012D7C(s32 *arg0, s32 arg1) {
     }
     return var_v1;
 }
-#endif
 
-#if FW_VERSION >= 201 && FW_VERSION < 350
-s32 func_00012D7C(s32 *arg0, s32 arg1) {
-    s32 temp_v0;
-    s32 var_v1;
-
-    temp_v0 = _ZN3paf4View4FindEPKc(arg0);
-    var_v1 = 0;
-    if (temp_v0 != 0) {
-        var_v1 = _ZNK3paf4View12GetInterfaceEi(temp_v0, arg1);
-    }
-    return var_v1;
-}
-#endif
-
-#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/photo_plugin_012A1C", func_00012DC0);
 
 INCLUDE_RODATA("nonmatchings/photo_plugin_012A1C", D_0002FDAC);
@@ -380,13 +362,7 @@ INCLUDE_ASM("nonmatchings/photo_plugin_012A1C", func_00014D14);
 INCLUDE_ASM("nonmatchings/photo_plugin_012A1C", func_000149E4);
 #endif
 
-#if FW_VERSION >= 350
-void func_00014AE8(void) {
-    _ZN3vsh26ShowButtonNavigation_EnterEb(1);
-}
-#endif
-
-#if FW_VERSION >= 201 && FW_VERSION < 350
+#if FW_VERSION >= 201
 void func_00014AE8(void) {
     _ZN3vsh26ShowButtonNavigation_EnterEb(1);
 }

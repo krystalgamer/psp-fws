@@ -20,6 +20,8 @@ INCLUDE_RODATA("nonmatchings/music_main_plugin_076710", D_000A1628);
 
 INCLUDE_RODATA("nonmatchings/music_main_plugin_076710", D_000A1668);
 
+__asm__(".globl _ZTV14Class_000A1668\n_ZTV14Class_000A1668 = D_000A1668 - 8\n");
+
 INCLUDE_ASM("nonmatchings/music_main_plugin_076710", func_00076744);
 
 INCLUDE_ASM("nonmatchings/music_main_plugin_076710", func_00077248);

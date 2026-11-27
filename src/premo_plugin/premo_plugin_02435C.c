@@ -28,6 +28,7 @@ void func_000243B8(struct Unk_func_000243B8_0 *arg0) {
 }
 #endif
 
+#if FW_VERSION < 350
 void func_000243CC(M2C_UNK **arg0) {
     *arg0 = &D_0002C150;
 }
@@ -35,20 +36,17 @@ void func_000243CC(M2C_UNK **arg0) {
 void func_000243DC(M2C_UNK **arg0) {
     *arg0 = &D_0002C150;
 }
+#endif
 
-#if FW_VERSION < 350
+#if FW_VERSION >= 310
+Class_0002C150::~Class_0002C150() {
+}
+#else
 INCLUDE_ASM("nonmatchings/premo_plugin_02435C", func_0001C404);
 
 INCLUDE_ASM("nonmatchings/premo_plugin_02435C", func_0001C414);
-#endif
 
-#if FW_VERSION < 352
 INCLUDE_ASM("nonmatchings/premo_plugin_02435C", func_000243EC);
-#else
-void func_000243EC(M2C_UNK **arg0) {
-    *arg0 = &D_0002C150;
-    _ZdlPv((s32) arg0);
-}
 #endif
 
 INCLUDE_RODATA("nonmatchings/premo_plugin_02435C", D_0002C080);
@@ -143,11 +141,20 @@ void func_00024A24(s32 **arg0) {
     M2C_FIELD(arg0, s32 **, 0) = &D_0002C1D0;
     M2C_FIELD(arg0, M2C_UNK **, 0x4C) = &D_0002B7F0;
     M2C_FIELD(arg0, M2C_UNK **, 0x30) = &D_0002AE78;
-    func_000243CC(arg0);
+    _ZN14Class_0002C150D2Ev(arg0);
 }
 #endif
 
-#if FW_VERSION < 350
+#if FW_VERSION >= 310 && FW_VERSION < 350
+void func_00024A24(s32 **arg0) {
+    M2C_FIELD(arg0, s32 **, 0) = &D_0002C1D0;
+    M2C_FIELD(arg0, M2C_UNK **, 0x44) = &D_0002B7F0;
+    M2C_FIELD(arg0, M2C_UNK **, 0x2C) = &D_0002AE78;
+    _ZN14Class_0002C150D2Ev(arg0);
+}
+#endif
+
+#if FW_VERSION == 300
 void func_00024A24(s32 **arg0) {
     M2C_FIELD(arg0, s32 **, 0) = &D_0002C1D0;
     M2C_FIELD(arg0, M2C_UNK **, 0x44) = &D_0002B7F0;
@@ -167,6 +174,10 @@ INCLUDE_ASM("nonmatchings/premo_plugin_02435C", func_00024B78);
 INCLUDE_ASM("nonmatchings/premo_plugin_02435C", func_00024BE0);
 
 INCLUDE_RODATA("nonmatchings/premo_plugin_02435C", D_0002C150);
+
+#if FW_VERSION >= 310
+__asm__(".globl _ZTV14Class_0002C150\n_ZTV14Class_0002C150 = D_0002C150 - 8\n");
+#endif
 
 INCLUDE_RODATA("nonmatchings/premo_plugin_02435C", D_0002C168);
 
