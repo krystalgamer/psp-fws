@@ -26,3 +26,7 @@ memcpy = 0x00000654; // type:func rom:0x6D4
 sceKernelDcacheWritebackAll = 0x0000065C; // type:func rom:0x6DC
 sceSysregPllUpdateFrequency = 0x00000664; // type:func rom:0x6E4
 // shared names (tools/add_version.py) end
+
+// NID-derived names
+sceDdrSetup = 0x00000164; // type:func
+sceDdrResetDevice = 0x000001FC; // type:func
