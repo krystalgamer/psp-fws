@@ -3,11 +3,15 @@
 #include "common.h"
 #include "umdman_decls.h"
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/umdman", sceUmdManGpioSetup);
 #endif
 
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/umdman", func_00000070);
+#else
 INCLUDE_ASM("nonmatchings/umdman", sceUmdManInit);
+#endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/umdman", func_000002AC);
@@ -21,11 +25,19 @@ INCLUDE_RODATA("nonmatchings/umdman", D_0000F570);
 INCLUDE_ASM("nonmatchings/umdman", func_000003B0);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/umdman", func_000001C8);
 
 INCLUDE_ASM("nonmatchings/umdman", func_00000270);
+#endif
 
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/umdman", func_00000380);
+
+INCLUDE_ASM("nonmatchings/umdman", func_00000420);
+#endif
+
+#if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/umdman", sceUmdManUMDDriveStart);
 
 INCLUDE_ASM("nonmatchings/umdman", sceUmdManSyncState);
@@ -81,10 +93,14 @@ void func_000008D0(s32 arg0, s32 arg1) {
 }
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 s32 sceUmdManGetDriveMode(void) {
     return func_0000A084();
 }
+#endif
+
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/umdman", func_00000838);
 #endif
 
 #if FW_VERSION >= 201
@@ -93,7 +109,9 @@ void func_00000968(s32 arg0, s32 arg1) {
 }
 #endif
 
+#if FW_VERSION != 102
 INCLUDE_ASM("nonmatchings/umdman", sceUmdManCheckDeviceReady);
+#endif
 
 INCLUDE_ASM("nonmatchings/umdman", sceUmdManGetInquiry);
 
@@ -106,6 +124,16 @@ INCLUDE_ASM("nonmatchings/umdman", sceUmdManSetEnableReadAhead);
 INCLUDE_ASM("nonmatchings/umdman", sceUmdManSetReadAheadSize);
 
 INCLUDE_ASM("nonmatchings/umdman", sceUmdManSetDisableReadAhead);
+
+#if FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/umdman", sceUmdManGetDiscInfo);
+#endif
+
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/umdman", func_00001144);
+
+INCLUDE_ASM("nonmatchings/umdman", func_0000124C);
+#endif
 
 #if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/umdman", D_000101A0);
@@ -186,14 +214,14 @@ INCLUDE_RODATA("nonmatchings/umdman", D_00010860);
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/umdman", sceUmdManGetDiscInfo);
-
 INCLUDE_ASM("nonmatchings/umdman", sceUmdManGetDiscInfo4VSH);
 #endif
 
+#if FW_VERSION != 102
 INCLUDE_ASM("nonmatchings/umdman", module_start);
+#endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/umdman", func_000012D4);
 #endif
 
@@ -203,17 +231,31 @@ INCLUDE_ASM("nonmatchings/umdman", func_000016C8);
 INCLUDE_ASM("nonmatchings/umdman", func_00001748);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/umdman", func_00001564);
 
 INCLUDE_ASM("nonmatchings/umdman", func_000016C0);
+#endif
+
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/umdman", func_00001828);
+
+INCLUDE_ASM("nonmatchings/umdman", func_00001894);
+
+INCLUDE_ASM("nonmatchings/umdman", func_00001948);
+
+INCLUDE_ASM("nonmatchings/umdman", func_0000199C);
+
+INCLUDE_ASM("nonmatchings/umdman", func_000019EC);
 #endif
 
 #if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/umdman", func_00001834);
 #endif
 
+#if FW_VERSION != 102
 INCLUDE_ASM("nonmatchings/umdman", sceUmdManValidateUMD);
+#endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/umdman", func_00001A9C);
@@ -335,11 +377,11 @@ void func_00001E24(s32 arg0) {
 }
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION >= 201
+#if FW_VERSION < 150 || FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/umdman", sceUmdManTerm);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 s32 module_reboot_before(void) {
     if (D_0000E940 > 0)
         sceAtaDoSoftResetBit();
@@ -373,11 +415,29 @@ s32 sceUmdManDriveStop(void) {
 void sceUmdManGetMediaFormat(void) {
     func_0000A30C();
 }
+#endif
 
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/umdman", func_00001BB0);
+
+INCLUDE_ASM("nonmatchings/umdman", func_00001BE4);
+
+INCLUDE_ASM("nonmatchings/umdman", func_00001C00);
+#endif
+
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/umdman", func_00001A44);
+#endif
 
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/umdman", func_00001CF0);
+#endif
+
+#if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/umdman", sceUmdManCreateStateManThread);
+#endif
 
+#if FW_VERSION < 150
 void sceUmdMan_driver_7E2A680C(s32 arg0) {
     s32 temp_a0;
 
@@ -393,7 +453,13 @@ void func_00001CF8(s32 arg0) {
 INCLUDE_ASM("nonmatchings/umdman", func_00001D04);
 
 INCLUDE_ASM("nonmatchings/umdman", func_00001E70);
+#endif
 
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/umdman", func_00003800);
+#endif
+
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/umdman", sceUmdManInsertEjectMedia);
 
 s32 func_0000222C(void) {
@@ -410,11 +476,21 @@ s32 func_0000222C(void) {
     }
     return var_s0;
 }
+#endif
 
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/umdman", func_00002724_v102);
+
+INCLUDE_ASM("nonmatchings/umdman", func_000028D0);
+#endif
+
+#if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/umdman", func_00002294);
 
 INCLUDE_ASM("nonmatchings/umdman", func_000023D0);
+#endif
 
+#if FW_VERSION < 150
 s32 func_00002550(void) {
     return D_0000EB90;
 }
@@ -426,7 +502,13 @@ void func_0000255C(s32 arg0) {
 void func_00002568(s32 arg0) {
     D_0000EBA0 = arg0;
 }
+#endif
 
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/umdman", func_00002B40);
+#endif
+
+#if FW_VERSION < 150
 s32 *sceUmdManGetUmdDiscInfo(void) {
     return &D_0000EA80;
 }
@@ -493,11 +575,15 @@ s32 func_00002720(void) {
 }
 #endif
 
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/umdman", func_00002DC0);
+#endif
+
 #if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/umdman", func_0000272C);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 s32 func_0000272C(void) {
     return D_0000EB30;
 }
@@ -514,7 +600,7 @@ s32 func_00001C64(void) {
 }
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 s32 func_00002738(void) {
     return D_0000EB60;
 }
@@ -544,7 +630,7 @@ s32 sceUmdManGetBootFrom(void) {
 }
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 void func_0000279C(void) {
     sceKernelSignalSema(D_0000EB50, 1);
 }
@@ -554,7 +640,7 @@ void func_0000279C(void) {
 INCLUDE_ASM("nonmatchings/umdman", func_00001CAC);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 s32 sceUmdManLeptonAliveOnOff(void) {
     s32 temp_s0;
 
@@ -572,7 +658,15 @@ s32 func_000027F4(void) {
     sceKernelSignalSema(D_0000EB50, 1);
     return temp_s0;
 }
+#endif
 
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/umdman", func_00002F04);
+
+INCLUDE_ASM("nonmatchings/umdman", func_00002F10);
+#endif
+
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/umdman", func_00002848);
 
 INCLUDE_ASM("nonmatchings/umdman", func_00002884);
@@ -584,7 +678,19 @@ INCLUDE_ASM("nonmatchings/umdman", func_00002D1C);
 INCLUDE_ASM("nonmatchings/umdman", func_00002DF4);
 
 INCLUDE_ASM("nonmatchings/umdman", func_00003188);
+#endif
 
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/umdman", func_00003994);
+
+INCLUDE_ASM("nonmatchings/umdman", func_00004738);
+
+INCLUDE_ASM("nonmatchings/umdman", func_00004A74);
+
+INCLUDE_ASM("nonmatchings/umdman", func_00004DF4);
+#endif
+
+#if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/umdman", func_00003800);
 
 INCLUDE_ASM("nonmatchings/umdman", func_00003994);
@@ -594,7 +700,9 @@ INCLUDE_ASM("nonmatchings/umdman", func_00003E58);
 INCLUDE_ASM("nonmatchings/umdman", func_00004084);
 
 INCLUDE_ASM("nonmatchings/umdman", func_000041E0);
+#endif
 
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/umdman", func_0000452C);
 
 INCLUDE_ASM("nonmatchings/umdman", func_00004720);
@@ -669,7 +777,7 @@ INCLUDE_ASM("nonmatchings/umdman", func_000027F8);
 INCLUDE_ASM("nonmatchings/umdman", func_00002884);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/umdman", func_00004B24);
 
 INCLUDE_ASM("nonmatchings/umdman", func_00004BB4);
@@ -693,7 +801,7 @@ INCLUDE_ASM("nonmatchings/umdman", func_00002100);
 INCLUDE_ASM("nonmatchings/umdman", func_00002178);
 #endif
 
-#if FW_VERSION == 100 || (FW_VERSION >= 201 && FW_VERSION < 271)
+#if FW_VERSION < 150 || (FW_VERSION >= 201 && FW_VERSION < 271)
 INCLUDE_ASM("nonmatchings/umdman", func_00002358);
 
 INCLUDE_ASM("nonmatchings/umdman", func_0000242C);
@@ -713,7 +821,7 @@ INCLUDE_ASM("nonmatchings/umdman", func_000028D8);
 INCLUDE_ASM("nonmatchings/umdman", func_000029AC);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/umdman", func_000054FC);
 #endif
 
@@ -731,12 +839,60 @@ INCLUDE_ASM("nonmatchings/umdman", func_00002F0C);
 INCLUDE_ASM("nonmatchings/umdman", func_00002FEC);
 #endif
 
-#if FW_VERSION == 100 || (FW_VERSION >= 201 && FW_VERSION < 271)
+#if FW_VERSION < 150 || (FW_VERSION >= 201 && FW_VERSION < 271)
 INCLUDE_ASM("nonmatchings/umdman", func_00002D00);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/umdman", func_000057A0);
+#endif
+
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/umdman", sceUmdExecReqSenseCmd);
+
+INCLUDE_ASM("nonmatchings/umdman", func_00006938);
+
+INCLUDE_ASM("nonmatchings/umdman", func_00006A88);
+
+INCLUDE_ASM("nonmatchings/umdman", func_00006BC4);
+
+INCLUDE_ASM("nonmatchings/umdman", func_00006EB0);
+
+INCLUDE_ASM("nonmatchings/umdman", func_00007118);
+
+INCLUDE_ASM("nonmatchings/umdman", func_000072A0);
+
+INCLUDE_ASM("nonmatchings/umdman", func_00007430);
+
+INCLUDE_ASM("nonmatchings/umdman", sceUmdExecModSenseCmd);
+
+INCLUDE_ASM("nonmatchings/umdman", sceUmdExecModSelectCmd);
+
+INCLUDE_ASM("nonmatchings/umdman", sceUmdExecGetEventStatusCmd);
+
+INCLUDE_ASM("nonmatchings/umdman", func_00007A74);
+
+INCLUDE_ASM("nonmatchings/umdman", func_00007BE0);
+
+INCLUDE_ASM("nonmatchings/umdman", func_00007D10);
+
+INCLUDE_ASM("nonmatchings/umdman", func_00007E54);
+
+INCLUDE_ASM("nonmatchings/umdman", func_00007FF8);
+
+INCLUDE_ASM("nonmatchings/umdman", func_00008194);
+
+INCLUDE_ASM("nonmatchings/umdman", func_0000832C);
+
+INCLUDE_ASM("nonmatchings/umdman", func_0000845C);
+
+INCLUDE_ASM("nonmatchings/umdman", func_000085B8);
+
+INCLUDE_ASM("nonmatchings/umdman", func_00008714);
+
+INCLUDE_ASM("nonmatchings/umdman", func_00008868);
+
+INCLUDE_ASM("nonmatchings/umdman", func_000089A8);
 #endif
 
 #if FW_VERSION >= 201
@@ -1727,7 +1883,7 @@ end:
 INCLUDE_ASM("nonmatchings/umdman", sceUmdExecGetErrorLogCmd);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 void func_00007C30_v100(s32 id, s32 *stat) {
     s32 dipsw = sceKernelDipswAll();
 
@@ -1751,7 +1907,25 @@ s32 func_00007CA8_v100(s32 id, s32 stat) {
         return 0;
     return sceAtaIsNormalDriveStat(id) ? 0 : 0x80211018;
 }
+#endif
 
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/umdman", func_00008BE4);
+
+INCLUDE_ASM("nonmatchings/umdman", func_00008D84);
+
+INCLUDE_ASM("nonmatchings/umdman", func_00008F4C);
+
+INCLUDE_ASM("nonmatchings/umdman", func_000090CC);
+
+INCLUDE_ASM("nonmatchings/umdman", func_00009114);
+
+INCLUDE_ASM("nonmatchings/umdman", func_00009154);
+
+INCLUDE_ASM("nonmatchings/umdman", func_00009298);
+#endif
+
+#if FW_VERSION == 100
 s32 sceUmdExecSetCDSpeedCmd(SceUmdDrive *drive, void *param) {
     volatile SceAtaCmdState state;
     s32 stat;
@@ -1915,7 +2089,7 @@ INCLUDE_ASM("nonmatchings/umdman", func_00005444);
 INCLUDE_ASM("nonmatchings/umdman", func_00005574);
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION >= 201
+#if FW_VERSION < 150 || FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/umdman", func_00005358);
 #endif
 
@@ -2895,6 +3069,10 @@ s32 func_000058D8(void) {
 INCLUDE_ASM("nonmatchings/umdman", func_000087C4);
 #endif
 
+#if FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/umdman", sceUmdManSPKStartCmd);
+#endif
+
 #if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/umdman", func_00005CE4);
 
@@ -2903,9 +3081,7 @@ INCLUDE_ASM("nonmatchings/umdman", func_00005E08);
 INCLUDE_ASM("nonmatchings/umdman", func_00005EAC);
 #endif
 
-#if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/umdman", sceUmdManSPKStartCmd);
-
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/umdman", sceUmdManSPKStopCmd);
 
 INCLUDE_ASM("nonmatchings/umdman", sceUmdManSPKEndCmd);
@@ -2944,6 +3120,10 @@ void func_00005F0C(u32 *out) {
     __asm__ volatile("sync");
 }
 
+#if FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/umdman", sceUmdManSPKSetupCmd);
+#endif
+
 #if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/umdman", func_0000625C);
 #endif
@@ -2952,10 +3132,6 @@ INCLUDE_ASM("nonmatchings/umdman", func_0000625C);
 INCLUDE_ASM("nonmatchings/umdman", func_00006598);
 
 INCLUDE_ASM("nonmatchings/umdman", func_000066A8);
-#endif
-
-#if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/umdman", sceUmdManSPKSetupCmd);
 #endif
 
 #if FW_VERSION < 152
@@ -3012,7 +3188,7 @@ INCLUDE_ASM("nonmatchings/umdman", func_00006C68);
 INCLUDE_ASM("nonmatchings/umdman", func_00006E30);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/umdman", func_00009370);
 
 INCLUDE_ASM("nonmatchings/umdman", sceUmdManSPKStartStep2);
@@ -3112,6 +3288,14 @@ M2C_UNK *func_0000998C(void) {
 }
 #endif
 
+#if FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/umdman", func_00009998);
+#endif
+
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/umdman", func_0000AD58);
+#endif
+
 #if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/umdman", func_00006F58);
 
@@ -3125,8 +3309,6 @@ void func_00007328(s32 arg0) {
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/umdman", func_00009998);
-
 INCLUDE_ASM("nonmatchings/umdman", func_00009B70);
 #endif
 
@@ -3252,7 +3434,7 @@ s32 func_00007BE8(void) {
 INCLUDE_ASM("nonmatchings/umdman", func_000076F8);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 void sceUmdManSPKEnableIntr(u32 mask) {
     __asm__ volatile("sync");
     *(volatile u32 *)0xBDF00028 |= mask;
@@ -3268,7 +3450,13 @@ void sceUmdManSPKInitConfiguration(void) {
     *(volatile u32 *)0xBDF00038 = v | 4;
     __asm__ volatile("sync");
 }
+#endif
 
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/umdman", func_0000B128);
+#endif
+
+#if FW_VERSION == 100
 s32 func_00009FC4(void) {
     return __builtin_allegrex_min(sceKernelAllocateFpl(D_0000EC10, &D_0000EC80, NULL), 0);
 }
@@ -3379,7 +3567,7 @@ INCLUDE_ASM("nonmatchings/umdman", func_00007954);
 INCLUDE_ASM("nonmatchings/umdman", func_00007CD0);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 s32 func_0000A084(void) {
     u32 v;
 
@@ -3426,7 +3614,7 @@ s32 func_00007B48(void) {
 INCLUDE_ASM("nonmatchings/umdman", func_00007A74);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 s32 sceUmdManSPKStartStep0(void) {
     s32 ret = func_000057C0();
 
@@ -3511,7 +3699,7 @@ s32 func_0000A30C(void) {
 INCLUDE_ASM("nonmatchings/umdman", func_00007B80);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 void sceUmdManSPKDisableIntr(u32 mask) {
     __asm__ volatile("sync");
     *(volatile u32 *)0xBDF0002C |= mask;
@@ -3585,12 +3773,12 @@ INCLUDE_ASM("nonmatchings/umdman", func_00007EDC);
 
 INCLUDE_ASM("nonmatchings/umdman", func_00007F24);
 
-#if FW_VERSION >= 150 && FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/umdman", func_00007E18);
+#if FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/umdman", func_0000A630);
 #endif
 
-#if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/umdman", func_0000A630);
+#if FW_VERSION >= 150 && FW_VERSION < 201
+INCLUDE_ASM("nonmatchings/umdman", func_00007E18);
 #endif
 
 #if FW_VERSION >= 201
@@ -3609,7 +3797,7 @@ s32 func_000080B8(s32 arg0) {
 }
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 s32 func_0000A918(s32 arg0) {
     return (-(arg0 != 0) & 0x7FFEFFEA) - 0x7FFEFFEA;
 }
@@ -3619,7 +3807,9 @@ s32 func_0000A918(s32 arg0) {
 s32 func_00008274(s32 arg0) {
     return (arg0 != 0) ? 0 : 0x80010016;
 }
+#endif
 
+#if FW_VERSION == 102 || FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/umdman", func_00008284);
 #endif
 
@@ -3639,7 +3829,7 @@ s32 func_000082AC(void) {
 }
 #endif
 
-#if FW_VERSION >= 201
+#if FW_VERSION == 102 || FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/umdman", func_000082D4);
 #endif
 
@@ -3656,7 +3846,7 @@ s32 func_000082D4(void) {
 }
 #endif
 
-#if FW_VERSION >= 201
+#if FW_VERSION == 102 || FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/umdman", func_000082FC);
 #endif
 
@@ -3673,7 +3863,7 @@ s32 func_000082FC(void) {
 }
 #endif
 
-#if FW_VERSION >= 201
+#if FW_VERSION == 102 || FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/umdman", func_00008324);
 #endif
 
@@ -3690,7 +3880,7 @@ s32 func_00008324(void) {
 }
 #endif
 
-#if FW_VERSION >= 201
+#if FW_VERSION == 102 || FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/umdman", func_0000834C);
 #endif
 
@@ -3711,8 +3901,10 @@ INCLUDE_ASM("nonmatchings/umdman", func_00008374);
 
 INCLUDE_ASM("nonmatchings/umdman", func_00008410);
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/umdman", func_000084A0);
+
+INCLUDE_ASM("nonmatchings/umdman", sceUmdManLPNCreateCmd);
 #else
 s32 func_000084A0(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     if (arg1 >= 0) {
@@ -3756,10 +3948,6 @@ INCLUDE_RODATA("nonmatchings/umdman", D_0000FC98);
 INCLUDE_RODATA("nonmatchings/umdman", D_0000FCB0);
 
 INCLUDE_ASM("nonmatchings/umdman", func_00008304);
-#endif
-
-#if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/umdman", sceUmdManLPNCreateCmd);
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 271
@@ -3810,7 +3998,7 @@ s32 func_0000AF24(void *arg0, u8 *arg1) {
 }
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 s32 func_0000AF24(void *arg0, u8 *arg1) {
     s32 var_a4;
     s8 *temp_v1;
@@ -3874,7 +4062,7 @@ s32 func_0000AFF0(void *arg0, void *arg1) {
 }
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 s32 func_0000AFF0(void *arg0, void *arg1) {
     s32 var_a3;
     s8 *temp_v1;
@@ -3976,7 +4164,7 @@ INCLUDE_ASM("nonmatchings/umdman", func_00008A3C);
 INCLUDE_ASM("nonmatchings/umdman", func_0000896C);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/umdman", func_0000B1C0);
 #endif
 
@@ -4012,7 +4200,7 @@ s32 func_0000B308(void *arg0, void *arg1) {
 }
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 s32 func_0000B308(void *arg0, void *arg1) {
     s32 var_a3;
     s8 *temp_v1;
@@ -4076,7 +4264,7 @@ s32 func_0000B3F4(void *arg0, void *arg1) {
 }
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 s32 func_0000B3F4(void *arg0, void *arg1) {
     s32 var_a3;
     s8 *temp_v1;
@@ -4186,7 +4374,7 @@ s32 func_00008D08(void) {
 }
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 s32 sceUmdManLPNReadAlive(void) {
     return (sceGpioPortRead() >> 0x18) & 1;
 }
@@ -4212,7 +4400,7 @@ INCLUDE_ASM("nonmatchings/umdman", sceUmdManLPNNegateWakeup);
 INCLUDE_ASM("nonmatchings/umdman", func_00008D94);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 void sceUmdManLPNNegateWakeup(void) {
     sceUmdNegateLeptonWakeup();
 }
@@ -4228,7 +4416,7 @@ M2C_UNK *func_00008E58(void) {
 INCLUDE_ASM("nonmatchings/umdman", func_00008E28);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/umdman", sceUmdManLPNSetVersion);
 
 M2C_UNK *sceUmdManLPNGetVersion(void) {
@@ -4246,12 +4434,24 @@ M2C_UNK *func_0000B634(void) {
 }
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/umdman", func_00008F04);
+#if FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/umdman", sceUmdManPowerOnOff);
 #endif
 
-#if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/umdman", sceUmdManPowerOnOff);
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/umdman", func_0000CB04);
+
+INCLUDE_ASM("nonmatchings/umdman", func_0000CCC0);
+
+INCLUDE_ASM("nonmatchings/umdman", func_0000CF18);
+
+INCLUDE_ASM("nonmatchings/umdman", func_0000D118);
+
+INCLUDE_ASM("nonmatchings/umdman", func_0000D2E8);
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 201
+INCLUDE_ASM("nonmatchings/umdman", func_00008F04);
 #endif
 
 #if FW_VERSION >= 201
@@ -4270,9 +4470,11 @@ M2C_UNK *func_000090AC(void) {
 INCLUDE_ASM("nonmatchings/umdman", func_000090B8);
 #endif
 
+#if FW_VERSION != 102
 INCLUDE_ASM("nonmatchings/umdman", sceUmdManGetPowerStat);
 
 INCLUDE_ASM("nonmatchings/umdman", sceUmdManChangePowerMode);
+#endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/umdman", func_00009628);
@@ -4292,7 +4494,9 @@ INCLUDE_ASM("nonmatchings/umdman", func_00009814);
 INCLUDE_ASM("nonmatchings/umdman", func_00009A68);
 #endif
 
+#if FW_VERSION != 102
 INCLUDE_ASM("nonmatchings/umdman", sceUmdMan_driver_F4AFF62D);
+#endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 201
 void func_00009C78(s32 arg0) {
@@ -4308,7 +4512,7 @@ s32 func_00009CAC(void) {
 }
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 void sceUmdManSetPowerOnOffStat(s32 arg0) {
     s32 temp_a0;
 
@@ -4581,7 +4785,7 @@ void sceUmdManGetIntrStateFlag(void) {
 }
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/umdman", func_0000BF5C);
 #endif
 
@@ -4591,7 +4795,7 @@ void func_0000BFF0(void) {
 }
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 void func_0000BFF0(void) {
     sceKernelRegisterSubIntrHandler(4, 0x18, sceUmdManLeptonAliveOnOff, 0);
 }
@@ -4605,7 +4809,7 @@ void func_0000A760(void) {
 INCLUDE_ASM("nonmatchings/umdman", func_0000A77C);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/umdman", func_0000C01C);
 
 void func_0000C06C(s32 arg0) {
@@ -4638,7 +4842,7 @@ void sceUmdManCancelAlarm(s32 arg0) {
 }
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 void sceUmdManCancelAlarm(s32 arg0) {
     func_0000C06C(0);
     sceKernelCancelAlarm(arg0);
@@ -4663,7 +4867,7 @@ void sceUmdManSetAlarm(u32 arg0) {
 }
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 void sceUmdManSetAlarm(u32 arg0) {
     func_0000C06C(0);
     sceKernelSetAlarm(arg0, (s32) &func_0000B2FC, NULL);
@@ -4683,7 +4887,7 @@ s32 func_0000A920(void) {
 }
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 s32 sceUmdMan_driver_0BDD5754(void) {
     return D_0000FE00;
 }
@@ -4741,7 +4945,7 @@ s32 func_0000C1B8(void) {
 }
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 s32 func_0000C1B8(void) {
     return D_0001BE68;
 }
@@ -4761,7 +4965,7 @@ s32 func_0000AD24(s32 arg0, s32 arg1, s32 arg2) {
 }
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 void sceUmdManSetCommandTimer(s32 arg0) {
     sceSTimerSetHandler(D_0000FE00, arg0, &func_0000FB38, 0);
 }
@@ -4836,7 +5040,7 @@ INCLUDE_RODATA("nonmatchings/umdman", D_00011A0C);
 INCLUDE_ASM("nonmatchings/umdman", func_0000A09C);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 s32 func_0000A190(s32 arg0, s32 arg1, s32 arg2) {
     func_0000C424(arg0, arg1, arg2);
     return -1;
@@ -5190,7 +5394,7 @@ s32 func_0000A92C(s32 arg0, s32 arg1, s32 arg2) {
 INCLUDE_ASM("nonmatchings/umdman", func_0000B2AC);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 u32 func_0000B2FC(void *common) {
     func_0000C06C(1);
     return 0;
@@ -5859,7 +6063,7 @@ void func_0000FB08(void) {
 }
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 s32 func_0000FB38(void) {
     func_0000C06C(1);
     return 0;
@@ -5876,7 +6080,7 @@ void func_0000EAA0(void) {
 INCLUDE_ASM("nonmatchings/umdman", func_0000EAC4);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/umdman", func_0000C424);
 #endif
 

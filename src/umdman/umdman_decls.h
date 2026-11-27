@@ -18,7 +18,7 @@ typedef struct {
     u8 pad1[0x7];
     u32 unk8;
     u32 timeout;              /* 0x0C: per-command timeout, func_00005358 table */
-#if FW_VERSION == 100
+#if FW_VERSION < 150
     u8 pad10[0x8];
 #else
     u8 pad10[0x4];
