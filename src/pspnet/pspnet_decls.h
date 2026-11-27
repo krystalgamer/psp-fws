@@ -8,6 +8,44 @@ typedef __builtin_va_list va_list;
 #define va_start(v, l) __builtin_stdarg_start((v), l)
 #define va_end(v) __builtin_va_end(v)
 
+typedef struct {
+    u32 low;
+    u32 hi;
+} SceKernelSysClock;
+
+/* struct iovec / struct uio (NetBSD uio.h; SCE: 32-bit offset, no segflg/proc) */
+struct iovec {
+    void *iov_base;     /* 0x0 */
+    u32 iov_len;        /* 0x4 */
+};
+enum uio_rw { UIO_READ, UIO_WRITE };
+struct uio {
+    struct iovec *uio_iov;  /* 0x00 */
+    s32 uio_iovcnt;         /* 0x04 */
+    s32 uio_offset;         /* 0x08 */
+    s32 uio_resid;          /* 0x0C */
+    enum uio_rw uio_rw;     /* 0x10 */
+};
+
+
+struct Unk_func_00004974_var_s2 {
+    struct Unk_func_00004974_var_s2 *unk0;
+    u8 pad4[0x4];
+    u8 *unk8;
+    u32 unkC;
+};
+
+struct Unk_func_00005744_0 {
+    struct Unk_func_00005744_var_s0 *unk0;
+    s32 unk4;
+    s32 unk8;
+};
+
+struct Unk_func_00005744_var_s0 {
+    u8 pad0[0x4];
+    struct Unk_func_00005744_var_s0 *unk4;
+};
+
 struct socket;
 struct ifnet;
 static __inline u32 min(u32 a, u32 b) {
@@ -117,7 +155,30 @@ struct mbuf {
     s32 m_len;                  /* 0x0C */
     s16 m_type;                 /* 0x10 */
     s16 m_flags;                /* 0x12 */
+    struct {
+        struct ifnet *rcvif;    /* 0x14 */
+        s32 len;                /* 0x18 */
+        struct mbuf *aux;       /* 0x1C */
+        u8 unk20[0x10];
+    } m_pkthdr;
+    struct {
+        u8 *ext_buf;            /* 0x30 */
+        void (*ext_free)();     /* 0x34 */
+        void *ext_arg;          /* 0x38 */
+        u32 ext_size;           /* 0x3C */
+        s32 ext_type;           /* 0x40 */
+        struct mbuf *ext_nextref; /* 0x44 */
+        struct mbuf *ext_prevref; /* 0x48 */
+    } m_ext;
 };
+#define m_pktdat m_ext.ext_buf
+#define MSIZE 0x100
+#define MHLEN (MSIZE - 0x30)
+#define MCLBYTES 2048
+#define MT_DATA 1
+#define M_EXT 0x0001
+#define M_PKTHDR 0x0002
+#define M_CLUSTER 0x0008
 #define mtod(m, t) ((t)((m)->m_data))
 
 
@@ -155,7 +216,9 @@ struct ifnet {
     s16 if_flags;                       /* 0x30 IFF_* */
     u8 unk32[0x38 - 0x32];
     struct if_data if_data;             /* 0x38 */
-    u8 unk58[0xB0 - 0x58];
+    u8 unk58[0x88 - 0x58];
+    u64 if_obytes;                      /* 0x88 if_data.ifi_obytes */
+    u8 unk90[0xB0 - 0x90];
     s32 (*if_output)();                 /* 0xB0 */
     void (*if_input)();                 /* 0xB4 */
     void (*if_start)();                 /* 0xB8 */
@@ -219,12 +282,54 @@ typedef char chk_ifaddr[(sizeof(struct ifaddr) == 0x38) ? 1 : -1];
     if (--(ifa)->ifa_refcnt == 0) \
         sceNetFreeInternal(ifa); \
 } while (0)
+#define IFF_OACTIVE 0x400
+#define IF_QFULL(ifq) ((ifq)->ifq_len >= (ifq)->ifq_maxlen)
+#define IF_ENQUEUE(ifq, m) { \
+    (m)->m_nextpkt = 0; \
+    if ((ifq)->ifq_tail == 0) \
+        (ifq)->ifq_head = m; \
+    else \
+        (ifq)->ifq_tail->m_nextpkt = m; \
+    (ifq)->ifq_tail = m; \
+    (ifq)->ifq_len++; \
+}
+#define IF_DEQUEUE(ifq, m) { \
+    (m) = (ifq)->ifq_head; \
+    if (m) { \
+        if (((ifq)->ifq_head = (m)->m_nextpkt) == 0) \
+            (ifq)->ifq_tail = 0; \
+        (m)->m_nextpkt = 0; \
+        (ifq)->ifq_len--; \
+    } \
+}
 
+/* NetBSD 1.5 if_ether.h */
+struct ether_multi {
+    u8 enm_addrlo[6];               /* 0x00 */
+    u8 enm_addrhi[6];               /* 0x06 */
+    struct ethercom *enm_ec;        /* 0x0C */
+    u32 enm_refcount;               /* 0x10 */
+    struct { struct ether_multi *le_next; struct ether_multi **le_prev; } enm_list; /* 0x14 */
+};
+struct ethercom {
+    struct ifnet ec_if;             /* 0x000 */
+    u8 unk110[0x128 - 0x110];
+    struct { struct ether_multi *lh_first; } ec_multiaddrs; /* 0x128 */
+    s32 ec_multicnt;                /* 0x12C */
+};
+typedef char chk_ifnet[(sizeof(struct ifnet) == 0x110) ? 1 : -1];
+#define LIST_FIRST(head) ((head)->lh_first)
+#define LIST_REMOVE(elm, field) do { \
+    if ((elm)->field.le_next != NULL) \
+        (elm)->field.le_next->field.le_prev = (elm)->field.le_prev; \
+    *(elm)->field.le_prev = (elm)->field.le_next; \
+} while (0)
+#define AF_UNSPEC 0
+#define if_hdrlen if_data.ifi_hdrlen
+#define if_mtu if_data.ifi_mtu
+#define if_baudrate if_data.ifi_baudrate
+#define IFT_ETHER 0x6
 
-typedef struct {
-    u32 low;
-    u32 hi;
-} SceKernelSysClock;
 
 #define IFNAMSIZ 16
 
@@ -256,6 +361,11 @@ struct SceNetIfEvent {
     s32 unk4;
 };
 
+struct ifconf {
+    s32 ifc_len;                /* 0x0 */
+    struct ifreq *ifc_req;      /* 0x4 */
+};
+
 
 /* NetBSD 1.5 bpfdesc.h, SCE layout (0x40 bytes) */
 struct bpf_if;
@@ -268,14 +378,14 @@ struct bpf_d {
     s32 bd_hlen;                /* 0x14 */
     s32 bd_bufsize;             /* 0x18 */
     struct bpf_if *bd_bif;      /* 0x1C */
-    u32 bd_rtout;               /* 0x20 */
+    unsigned long bd_rtout;     /* 0x20 u_long */
     void *bd_filter;            /* 0x24 struct bpf_insn * */
-    u32 bd_rcount;              /* 0x28 */
-    u32 bd_dcount;              /* 0x2C */
+    unsigned long bd_rcount;    /* 0x28 */
+    unsigned long bd_dcount;    /* 0x2C */
     u8 bd_promisc;              /* 0x30 */
     u8 bd_state;                /* 0x31 */
     u8 bd_immediate;            /* 0x32 */
-    s32 unk34;
+    s32 bd_hdrcmplt;            /* 0x34 */
     s32 bd_sel;                 /* 0x38 selinfo: waiting thread id */
     s32 unk3C;
 };
@@ -348,21 +458,56 @@ struct bpf_insn {
 #define BPF_JA 0x00
 #define BPF_K 0x00
 #define BPF_MEMWORDS 16
-
-
-/* struct iovec / struct uio (NetBSD uio.h; SCE: 32-bit offset, no segflg/proc) */
-struct iovec {
-    void *iov_base;     /* 0x0 */
-    u32 iov_len;        /* 0x4 */
+struct bpf_program {
+    u32 bf_len;
+    struct bpf_insn *bf_insns;
 };
-enum uio_rw { UIO_READ, UIO_WRITE };
-struct uio {
-    struct iovec *uio_iov;  /* 0x00 */
-    s32 uio_iovcnt;         /* 0x04 */
-    s32 uio_offset;         /* 0x08 */
-    s32 uio_resid;          /* 0x0C */
-    enum uio_rw uio_rw;     /* 0x10 */
+#define BPF_MAXINSNS 512
+#define reset_d(d) do { \
+    if ((d)->bd_hbuf) { \
+        (d)->bd_fbuf = (d)->bd_hbuf; \
+        (d)->bd_hbuf = 0; \
+    } \
+    (d)->bd_slen = 0; \
+    (d)->bd_hlen = 0; \
+    (d)->bd_rcount = 0; \
+    (d)->bd_dcount = 0; \
+} while (0)
+struct bpf_stat {
+    u32 bs_recv;
+    u32 bs_drop;
 };
+struct bpf_version {
+    u16 bv_major;
+    u16 bv_minor;
+};
+#define BPF_LDX 0x01
+#define BPF_STX 0x03
+#define BPF_MISC 0x07
+#define BPF_W 0x00
+#define BPF_H 0x08
+#define BPF_B 0x10
+#define BPF_IMM 0x00
+#define BPF_ABS 0x20
+#define BPF_IND 0x40
+#define BPF_LEN 0x80
+#define BPF_MSH 0xa0
+#define BPF_ADD 0x00
+#define BPF_SUB 0x10
+#define BPF_MUL 0x20
+#define BPF_OR 0x40
+#define BPF_AND 0x50
+#define BPF_LSH 0x60
+#define BPF_RSH 0x70
+#define BPF_NEG 0x80
+#define BPF_JEQ 0x10
+#define BPF_JGT 0x20
+#define BPF_JGE 0x30
+#define BPF_JSET 0x40
+#define BPF_X 0x08
+#define BPF_A 0x10
+#define BPF_TAX 0x00
+#define BPF_TXA 0x80
 
 
 s32 sceNetStrcmp(const char *s1, const char *s2);
@@ -389,27 +534,10 @@ extern __inline__ struct ifnet *ifunit_inline(const char *name) {
     return NULL;
 }
 
-struct Unk_func_00004974_var_s2 {
-    struct Unk_func_00004974_var_s2 *unk0;
-    u8 pad4[0x4];
-    u8 *unk8;
-    u32 unkC;
-};
-
-struct Unk_func_00005744_0 {
-    struct Unk_func_00005744_var_s0 *unk0;
-    s32 unk4;
-    s32 unk8;
-};
-
-struct Unk_func_00005744_var_s0 {
-    u8 pad0[0x4];
-    struct Unk_func_00005744_var_s0 *unk4;
-};
-
 extern s32 D_0000A0D0;
 extern s32 D_0000A0E4;
 extern s32 D_0000A0EC;
+extern u8 D_0000A0F0[6];
 extern s32 D_0000A0FC;
 extern s32 D_0000A10D;
 extern s32 D_0000A860;
@@ -434,8 +562,10 @@ extern s32 D_0000AC30;
 extern s32 D_0000AC34;
 extern s32 D_0000AC38;
 extern s32 D_0000AC3C;
+extern struct calloutq D_0000AC4C;
 extern void (*D_0000AC58)(struct SceNetThreadInfo *);
 extern struct slpque D_0000AC6C[SLPQUE_TABLESIZE];
+extern s32 D_0000AE70;
 extern s32 D_0000AF18;
 extern s32 D_0000AF1C;
 extern s32 D_0000AF20;
@@ -450,12 +580,15 @@ extern s32 D_0000AF40;
 extern struct SceNetThreadList D_0000AF44;
 extern struct calloutq D_0000AF4C;
 extern struct calloutq D_0000AF54;
+extern struct calloutq D_0000AF58;
 extern void (*D_0000AF5C)(struct SceNetThreadInfo *);
 extern void (*D_0000AF60)(s32, s32);
 extern void (*D_0000AF64)(s32);
 extern s32 D_0000AF68;
 extern s32 D_0000AF6C;
 extern s32 D_0000B06C;
+extern void (*D_0000B0A4)();
+extern s32 D_0000B0AC;
 extern s32 D_0000B0B0;
 extern struct ifnet **D_0000B0B8;
 extern s32 D_0000B0CC;
@@ -493,6 +626,8 @@ extern s32 D_0000B3DC;
 extern s32 D_0000B3E0;
 extern u32 D_0000B3E4[521];
 extern s32 D_0000B91C;
+extern struct ifaddr *D_0000BB24[8];
+extern struct ifnet *D_0000BB44[8];
 extern s32 D_0000BC08;
 extern M2C_UNK D_0000BC0C;
 extern struct bpf_if *D_0000BC10;
@@ -530,10 +665,10 @@ void _sce_pspnet_microtime(struct timeval *tv);
 void _sce_pspnet_schednetintr(s32 arg0);
 void _sce_pspnet_schednetintr_with_evf(s32 arg0);
 void _sce_pspnet_selrecord(struct SceNetThreadInfo *ti, s32 *sip);
-void _sce_pspnet_selwakeup(s32 *sip);
+void _sce_pspnet_selwakeup(s32 *arg0);
 s32 _sce_pspnet_spllock(void);
 s32 _sce_pspnet_spllock_owner(void);
-void _sce_pspnet_splunlock(s32 arg0);
+void _sce_pspnet_splunlock(s32 s);
 s32 _sce_pspnet_start_of_adhoc_module_in_if_ethersubr_core(s32 arg0);
 s32 _sce_pspnet_start_of_adhoc_module_in_netintr(s32 arg0, s32 arg1);
 s32 _sce_pspnet_start_of_adhoc_module_in_sched(void (*sabort)(s32, s32));
@@ -556,8 +691,8 @@ s32 _sce_pspnet_stop_of_ipv6_module_in_netintr(void);
 s32 _sce_pspnet_stop_of_pppoe_module_in_netintr(void);
 void _sce_pspnet_tabort(struct SceNetThreadInfo *arg0);
 s32 _sce_pspnet_thread_busycount(void);
-struct SceNetThreadInfo *_sce_pspnet_thread_enter(void);
-s32 _sce_pspnet_thread_leave(struct SceNetThreadInfo *ti, s32 err);
+struct SceNetThreadInfo *_sce_pspnet_thread_enter(); /* 2.01+: (s32 *errp) */
+s32 _sce_pspnet_thread_leave(struct SceNetThreadInfo *arg0, s32 arg1);
 void _sce_pspnet_tiwakeup(SceUID thid, void *ident);
 s32 _sce_pspnet_tsleep(void *ident, u32 timo);
 s32 _sce_pspnet_tsleep_usec(void *ident, u32 usec);
@@ -565,23 +700,31 @@ s32 _sce_pspnet_uiomove(void *buf, s32 n, struct uio *uio);
 void _sce_pspnet_unlock_threadinfo(struct SceNetThreadInfo *arg0);
 void _sce_pspnet_wakeup(void *ident);
 s32 bpf_allocbufs(struct bpf_d *d);
-u32 bpf_filter(void *pc, u8 *p, u32 wirelen, u32 buflen);
+u32 bpf_filter(struct bpf_insn *pc, u8 *p, u32 wirelen, u32 buflen);
 u8 *bpf_mcpy(u8 *arg0, void *arg1, u32 arg2);
 void bpf_mtap(void *arg, struct mbuf *m);
+s32 bpf_setf(struct bpf_d *d, struct bpf_program *fp);
+s32 bpf_setif(struct bpf_d *d, struct ifreq *ifr);
 s32 bpf_validate(struct bpf_insn *f, s32 len);
 void bpfattach(struct bpf_if **driverp, struct ifnet *ifp, u32 dlt, u32 hdrlen);
 s32 bpfclose(s32 minor);
+void bpfdetach(struct ifnet *ifp);
 void bpfilterattach(s32 n);
-s32 bpfioctl(s32 fd, u32 cmd, void *data);
+s32 bpfioctl(s32 minor, u32 cmd, void *addr);
 s32 bpfopen(s32 minor);
 s32 bpfpoll(s32 minor, s32 events, struct SceNetThreadInfo *p);
-s32 bpfread(s32 fd, struct uio *uio);
+s32 bpfread(s32 minor, struct uio *uio);
 s32 bpfwrite(s32 fd, struct uio *uio);
 u32 callout_alarm(void *common);
 void callout_shutdown(void);
 s32 callout_startup(s32 prio, s32 stackSize);
 s32 callout_thread(SceSize args, void *argp);
 void catchpacket(struct bpf_d *d, u8 *pkt, u32 pktlen, u32 snaplen, u8 *(*cpfn)());
+u32 ether_crc32_be(const u8 *buf, u32 len);
+void ether_ifattach(struct ifnet *ifp, const u8 *lla);
+void ether_ifdetach(struct ifnet *ifp);
+void ether_input();
+s32 ether_multiaddr(struct sockaddr *sa, u8 *addrlo, u8 *addrhi);
 void func_00001E74(void);
 s32 func_00002248(void);
 void func_0000260C(void);
@@ -590,11 +733,12 @@ void func_00003100(struct SceNetThreadInfo *arg0);
 void func_00003380(void);
 void func_00003400(struct SceNetThreadInfo *arg0);
 void func_000037E4(void);
-void func_00004430(s32 arg0, u8 *arg1);
+void func_00004430(struct ifnet *ifp, struct ifreq *ifr);
 void func_00005404(void *arg0);
 void func_00005744(struct Unk_func_00005744_0 *arg0);
 s32 func_000064CC(struct socket *so, u32 cmd, void *data);
 s32 func_00007020(void *a0, void *a1, void *a2, void *a3);
+void func_000075C0(struct ifnet *ifp);
 s32 func_00007678(s32 poolSize);
 s32 func_000076B8(void);
 s32 func_00007738(s32 poolSize);
@@ -606,6 +750,7 @@ s32 func_000079E4(void);
 s32 func_00007A68(char c);
 char func_00007B50(char c);
 M2C_UNK *func_00007BBC(void);
+void *func_00007C0C(void *dst, const void *src, s32 n);
 s32 func_00007D20(const void *s1, const void *s2, s32 n);
 s32 func_00007E3C(void (*putc)(char **pp, s32 c), char **pp, const char *fmt, va_list ap);
 s32 func_00007E50(void (*putc)(char **pp, s32 c), char **pp, const char *fmt, va_list ap);
@@ -624,6 +769,8 @@ s32 if_nullreset(void);
 void if_nullstart(void);
 void if_nullwatchdog(void);
 void if_slowtimo(void *arg);
+s32 ifconf(u32 cmd, void *data);
+void ifinit(void);
 s32 m_xhalf(struct mbuf *m, s32 k, s32 *err);
 s32 m_xword(struct mbuf *m, s32 k, s32 *err);
 s32 module_start(void);
@@ -631,6 +778,7 @@ s32 module_stop(void);
 s32 netintr_init(s32 prio, s32 stackSize);
 s32 netintr_term(void);
 s32 netintr_thread(SceSize args, void *argp);
+s32 sceKernelCheckThreadStack(void);
 s32 sceKernelCreateSema(void *, u32, s32, s32, void *);
 s32 sceKernelDeleteEventFlag(s32);
 s32 sceKernelDeleteSema(s32);
@@ -655,10 +803,11 @@ void sceNetEtherNtostr(const u8 *mac, char *buf);
 void sceNetEtherStrton(const char *str, u8 *mac);
 void sceNetFreeInternal(void *p);
 s32 sceNetFreeThreadinfo(SceUID thid);
-void sceNetGetMallocStat(void);
-M2C_UNK sceNetGetMallocStatInternal();
+s32 sceNetGetMallocStat(void *stat);
+s32 sceNetGetMallocStatInternal(void *stat);
 u32 sceNetGetSystemClockSec(void);
 s64 sceNetGetSystemClockUsec(void);
+s32 sceNetIfhandleIfStart(struct ifnet *ifp, struct mbuf *m);
 s32 sceNetIfhandlePollSema(s32 sema, s32 n);
 s32 sceNetIfhandleSignalSema(s32 sema, s32 n);
 M2C_UNK sceNetIfhandleTerm();
@@ -668,7 +817,7 @@ M2C_UNK sceNetIfhandle_lib_29ED84C5();
 char *sceNetIndex(const char *s, s32 c);
 s32 sceNetInit(s32 poolSize, s32 calloutPrio, s32 calloutStack, s32 netintrPrio, s32 netintrStack);
 char sceNetLook_ctype_table(s32 c);
-M2C_UNK sceNetMFreem(void *);
+void sceNetMFreem(struct mbuf *m);
 void *sceNetMallocInternal(u32 size);
 void *sceNetMemchr(const void *s, s32 c, s32 n);
 s32 sceNetMemcmp(const void *s1, const void *s2, s32 n);
