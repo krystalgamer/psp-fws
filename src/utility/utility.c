@@ -1,6 +1,6 @@
 /* cflags[152]: -O0 */
 /* cflags[150]: -O0 */
-/* cflags[100,102]: -O0 */
+/* cflags[100,102,103]: -O0 */
 /* cflags: -O2 -frename-registers */
 #include "common.h"
 #include "k1.h"
@@ -84,7 +84,7 @@ INCLUDE_RODATA("nonmatchings/utility", D_00006C98);
 
 INCLUDE_ASM("nonmatchings/utility", sceUtilityInit);
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/utility", func_00000120);
 #endif
 
@@ -269,7 +269,7 @@ INCLUDE_ASM("nonmatchings/utility", sceUtilityDialogCtrlGetSamplingMode);
 INCLUDE_ASM("nonmatchings/utility", func_000001B8);
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/utility", func_000001E0);
 
 INCLUDE_ASM("nonmatchings/utility", func_0000027C);
@@ -393,7 +393,7 @@ INCLUDE_ASM("nonmatchings/utility", func_00000C08);
 INCLUDE_ASM("nonmatchings/utility", func_00000D08);
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/utility", func_00000C98);
 
 INCLUDE_ASM("nonmatchings/utility", func_00000CEC);
@@ -653,7 +653,7 @@ s32 sceUtility_private_19461966(void) {
 INCLUDE_ASM("nonmatchings/utility", sceUtilityDialogSetThreadId);
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/utility", func_00000F5C);
 
 INCLUDE_ASM("nonmatchings/utility", func_00001154);
@@ -2909,7 +2909,7 @@ INCLUDE_RODATA("nonmatchings/utility", D_0000782C);
 INCLUDE_RODATA("nonmatchings/utility", D_00007848);
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/utility", func_00001DDC);
 
 INCLUDE_ASM("nonmatchings/utility", func_00001F38);
@@ -2921,7 +2921,7 @@ INCLUDE_RODATA("nonmatchings/utility", D_00007854);
 INCLUDE_RODATA("nonmatchings/utility", D_0000786C);
 #endif
 
-#if FW_VERSION != 102
+#if FW_VERSION == 100 || FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/utility", sceUtilityGetSystemParamInt);
 #endif
 
