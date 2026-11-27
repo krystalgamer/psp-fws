@@ -8,7 +8,18 @@ INCLUDE_ASM("nonmatchings/pwm", scePwmStart);
 
 INCLUDE_ASM("nonmatchings/pwm", scePwmStop);
 
-INCLUDE_ASM("nonmatchings/pwm", scePwmChangeDuty);
+s32 scePwmChangeDuty(u32 id, u16 duty, u16 cycle) {
+    if (id >= 3) {
+        return 0x80000102;
+    }
+    if (D_00000590[id] == 2) {
+        return 0x80000021;
+    }
+    ((volatile ScePwmHw *)0xBE300000)[id].duty = duty;
+    ((volatile ScePwmHw *)0xBE300000)[id].cycle = cycle;
+    ((volatile ScePwmHw *)0xBE300000)[id].load = 1;
+    return 0;
+}
 
 INCLUDE_ASM("nonmatchings/pwm", scePwmReferDuty);
 

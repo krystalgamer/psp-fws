@@ -4,6 +4,17 @@
 #include "common.h"
 #include "m2c_macros.h"
 
+typedef struct {
+    u32 unk0;
+    u32 unk4;
+    u32 load;
+    u32 unkC;
+    u32 duty;
+    u32 cycle;
+    u32 unk18;
+    u32 unk1C;
+} ScePwmHw;
+
 extern s32 D_00000550;
 extern u8 D_00000590[];
 

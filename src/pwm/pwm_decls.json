@@ -11,6 +11,9 @@
   "sceSysregPwmIoDisable": "s32 sceSysregPwmIoDisable(void);",
   "sceSysregPwmIoEnable": "s32 sceSysregPwmIoEnable(void);"
  },
+ "types": {
+  "hand_scePwmChangeDuty": "typedef struct {\n    u32 unk0;\n    u32 unk4;\n    u32 load;\n    u32 unkC;\n    u32 duty;\n    u32 cycle;\n    u32 unk18;\n    u32 unk1C;\n} ScePwmHw;"
+ },
  "vars": {
   "D_00000550": "extern s32 D_00000550;",
   "D_00000590": "extern u8 D_00000590[];"
