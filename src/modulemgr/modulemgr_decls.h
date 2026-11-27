@@ -116,6 +116,7 @@ struct Unk_func_000004C0_1 {
 };
 
 extern u32 D_00005AF0;
+extern char D_00005DE0[];
 extern s32 D_00006DA0;
 extern u32 D_00007160;
 extern s32 D_00008174;
@@ -179,7 +180,7 @@ SceUID sceKernelLoadModuleBufferWithApitype(void *buf, s32 flags, s32 apiType, S
 s32 sceKernelLoadModuleByIDBootInitConfig(void);
 SceUID sceKernelLoadModuleWithApitype(const char *path, s32 flags, s32 apiType, SceKernelLMOption *option);
 s32 sceKernelLockMutex(s32, s32, void *);
-s32 sceKernelModuleFromUID(s32);
+SceModule *sceKernelModuleFromUID(SceUID modId);
 s32 sceKernelModuleMgrMode(void);
 M2C_UNK sceKernelProbeExecutableObject();
 M2C_UNK sceKernelRegisterLibrary();

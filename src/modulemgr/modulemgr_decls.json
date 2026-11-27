@@ -58,7 +58,7 @@
   "sceKernelLoadModuleByIDBootInitConfig": "s32 sceKernelLoadModuleByIDBootInitConfig(void);",
   "sceKernelLoadModuleWithApitype": "SceUID sceKernelLoadModuleWithApitype(const char *path, s32 flags, s32 apiType, SceKernelLMOption *option);",
   "sceKernelLockMutex": "s32 sceKernelLockMutex(s32, s32, void *);",
-  "sceKernelModuleFromUID": "s32 sceKernelModuleFromUID(s32);",
+  "sceKernelModuleFromUID": "SceModule *sceKernelModuleFromUID(SceUID modId);",
   "sceKernelModuleMgrMode": "s32 sceKernelModuleMgrMode(void);",
   "sceKernelProbeExecutableObject": "M2C_UNK sceKernelProbeExecutableObject();",
   "sceKernelRegisterLibrary": "M2C_UNK sceKernelRegisterLibrary();",
@@ -85,6 +85,7 @@
  },
  "vars": {
   "D_00005AF0": "extern u32 D_00005AF0;",
+  "D_00005DE0": "extern char D_00005DE0[];",
   "D_00006DA0": "extern s32 D_00006DA0;",
   "D_00007160": "extern u32 D_00007160;",
   "D_00008174": "extern s32 D_00008174;",

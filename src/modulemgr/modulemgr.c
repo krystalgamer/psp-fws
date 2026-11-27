@@ -4,6 +4,13 @@
 #include "modulemgr_decls.h"
 #include "k1.h"
 
+static inline void *getRa(void) {
+    void *ra;
+
+    __asm__("move %0, $31" : "=r"(ra));
+    return ra;
+}
+
 #if FW_VERSION == 271
 INCLUDE_ASM("nonmatchings/modulemgr", func_00000000_v271);
 #endif
@@ -1074,13 +1081,154 @@ INCLUDE_ASM("nonmatchings/modulemgr", sceKernelLoadModuleBufferUsbWlan);
 
 INCLUDE_ASM("nonmatchings/modulemgr", sceKernelLoadModuleBufferVSH);
 
-INCLUDE_ASM("nonmatchings/modulemgr", sceKernelStartModule);
+s32 sceKernelStartModule(SceUID modId, SceSize argSize, void *argp, s32 *pStatus, SceKernelSMOption *option) {
+    SceModuleMgrParam modParams;
+    s32 oldK1;
+    s32 ret;
+
+    memset(&modParams, 0, sizeof(modParams));
+    oldK1 = shiftK1Noreorder();
+    if (argp != NULL && k1IsUserMode() && (s32)((u32)argp | argSize | ((u32)argp + argSize)) < 0) {
+        setK1(oldK1);
+        return 0x800200D3;
+    }
+    if (pStatus != NULL && k1IsUserMode() && (s32)pStatus < 0) {
+        setK1(oldK1);
+        return 0x800200D3;
+    }
+    if (option != NULL && k1IsUserMode() && (s32)((u32)option | ((u32)option + sizeof(*option))) < 0) {
+        setK1(oldK1);
+        return 0x800200D3;
+    }
+    if (sceKernelIsIntrContext()) {
+        setK1(oldK1);
+        return 0x80020064;
+    }
+    memset(&modParams, 0, sizeof(modParams));
+    modParams.modeStart = CMD_START_MODULE;
+    modParams.modeFinish = CMD_START_MODULE;
+    modParams.modId = modId;
+    modParams.argSize = argSize;
+    modParams.argp = argp;
+    modParams.pStatus = pStatus;
+    if (option != NULL) {
+        modParams.threadMpIdStack = option->mpIdStack;
+        modParams.stackSize = option->stackSize;
+        modParams.threadPriority = option->priority;
+        modParams.threadAttr = option->attribute;
+    } else {
+        modParams.threadMpIdStack = 0;
+        modParams.stackSize = 0;
+        modParams.threadPriority = 0;
+        modParams.threadAttr = 0;
+    }
+    ret = func_0000253C(&modParams);
+    if (ret < 0) {
+        Kprintf("modulemgr.c:%s:result = 0x%08x\n", "sceKernelStartModule", ret);
+    }
+    setK1(oldK1);
+    return ret;
+}
 
 INCLUDE_RODATA("nonmatchings/modulemgr", D_00005DE0);
 
-INCLUDE_ASM("nonmatchings/modulemgr", func_00003870);
+s32 func_00003870(SceUID modId, SceUID callerModId, SceSize argSize, void *argp, s32 *pStatus, SceKernelSMOption *option) {
+    SceModuleMgrParam modParams;
+    s32 status;
+    SceModule *mod;
 
-INCLUDE_ASM("nonmatchings/modulemgr", sceKernelStopModule);
+    memset(&modParams, 0, sizeof(modParams));
+    mod = sceKernelModuleFromUID(modId);
+    modParams.pMod = mod;
+    if (mod != NULL && (mod->attribute & 1)) {
+        Kprintf(D_00005DE0, "StopModuleApiBody");
+        return 0x80020136;
+    }
+    modParams.modeStart = CMD_STOP_MODULE;
+    modParams.modeFinish = CMD_STOP_MODULE;
+    modParams.modId = modId;
+    modParams.callerModId = callerModId;
+    modParams.argSize = argSize;
+    modParams.argp = argp;
+    if (pStatus != NULL) {
+        modParams.pStatus = pStatus;
+    } else {
+        modParams.pStatus = &status;
+    }
+    if (option != NULL) {
+        modParams.threadMpIdStack = option->mpIdStack;
+        modParams.stackSize = option->stackSize;
+        modParams.threadPriority = option->priority;
+        modParams.threadAttr = option->attribute;
+    } else {
+        modParams.threadMpIdStack = 0;
+        modParams.stackSize = 0;
+        modParams.threadPriority = 0;
+        modParams.threadAttr = 0;
+    }
+    return func_0000253C(&modParams);
+}
+
+s32 sceKernelStopModule(SceUID modId, SceSize argSize, void *argp, s32 *pStatus, SceKernelSMOption *option) {
+    SceModuleMgrParam modParams;
+    u32 ra = (u32)getRa();
+    s32 oldK1 = shiftK1Noreorder();
+    SceModule *caller;
+    SceModule *mod;
+    s32 ret;
+
+    if (argp != NULL && k1IsUserMode() && (s32)((u32)argp | argSize | ((u32)argp + argSize)) < 0) {
+        setK1(oldK1);
+        return 0x800200D3;
+    }
+    if (pStatus != NULL && k1IsUserMode() && (s32)((u32)pStatus | ((u32)pStatus + sizeof(*pStatus))) < 0) {
+        setK1(oldK1);
+        return 0x800200D3;
+    }
+    if (option != NULL && k1IsUserMode() && (s32)((u32)option | ((u32)option + sizeof(option))) < 0) {
+        setK1(oldK1);
+        return 0x800200D3;
+    }
+    if (sceKernelIsIntrContext()) {
+        setK1(oldK1);
+        return 0x80020064;
+    }
+    caller = sceKernelFindModuleByAddress(ra);
+    if (caller == NULL) {
+        Kprintf("StopModule(): panic !!! call from unknown Module !!!\n");
+        setK1(oldK1);
+        return 0x80020136;
+    }
+    memset(&modParams, 0, sizeof(modParams));
+    mod = sceKernelModuleFromUID(modId);
+    modParams.pMod = mod;
+    if (mod != NULL && (mod->attribute & 1)) {
+        Kprintf(D_00005DE0, "sceKernelStopModule");
+        setK1(oldK1);
+        return 0x80020136;
+    }
+    modParams.modeStart = CMD_STOP_MODULE;
+    modParams.modeFinish = CMD_STOP_MODULE;
+    modParams.modId = modId;
+    modParams.callerModId = caller->modId;
+    modParams.argSize = argSize;
+    modParams.argp = argp;
+    modParams.pStatus = pStatus;
+    if (option != NULL) {
+        modParams.threadMpIdStack = option->mpIdStack;
+        modParams.stackSize = option->stackSize;
+        modParams.threadPriority = option->priority;
+        modParams.threadAttr = option->attribute;
+    } else {
+        modParams.threadMpIdStack = 0;
+        modParams.stackSize = 0;
+        modParams.threadPriority = 0;
+        modParams.threadAttr = 0;
+    }
+    ret = func_0000253C(&modParams);
+    setK1(oldK1);
+    return ret;
+}
 
 s32 sceKernelUnloadModule(SceUID modId) {
     SceModuleMgrParam modParams;
