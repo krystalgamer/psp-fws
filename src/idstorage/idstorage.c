@@ -67,7 +67,7 @@ INCLUDE_RODATA("nonmatchings/idstorage", D_0000217C);
 INCLUDE_ASM("nonmatchings/idstorage", sceIdStorageInit);
 
 #if FW_VERSION < 201
-s32 func_000002A4(s32 id, char *name, void *param, s32 *res) {
+s32 _sceIdStorageSysEventHandler(s32 id, char *name, void *param, s32 *res) {
     if (id == 256) {
         if (sceIdStorageIsDirty()) {
             return 0x80000021;
@@ -76,7 +76,7 @@ s32 func_000002A4(s32 id, char *name, void *param, s32 *res) {
     return 0;
 }
 #else
-INCLUDE_ASM("nonmatchings/idstorage", func_000002A4);
+INCLUDE_ASM("nonmatchings/idstorage", _sceIdStorageSysEventHandler);
 #endif
 
 #if FW_VERSION < 201
@@ -186,7 +186,7 @@ INCLUDE_ASM("nonmatchings/idstorage", func_00001C30);
 INCLUDE_ASM("nonmatchings/idstorage", func_00001CA0);
 
 #if FW_VERSION < 201
-s32 func_00001D20(u16 id) {
+s32 _sceIdStorageFindKeyPos(u16 id) {
     s32 i;
     s32 pos = -1;
 
@@ -202,5 +202,5 @@ s32 func_00001D20(u16 id) {
     return pos;
 }
 #else
-INCLUDE_ASM("nonmatchings/idstorage", func_00001D20);
+INCLUDE_ASM("nonmatchings/idstorage", _sceIdStorageFindKeyPos);
 #endif

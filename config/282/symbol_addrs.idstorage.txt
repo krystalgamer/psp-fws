@@ -52,3 +52,5 @@ sceKernelPowerUnlock = 0x00001E4C; // type:func
 sceKernelPowerLock = 0x00001E54; // type:func
 sceKernelRegisterSysEventHandler = 0x00001E5C; // type:func
 sceKernelUnregisterSysEventHandler = 0x00001E64; // type:func
+_sceIdStorageSysEventHandler = 0x000002A4; // type:func
+_sceIdStorageFindKeyPos = 0x00001D20; // type:func

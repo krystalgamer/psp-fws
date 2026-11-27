@@ -55,7 +55,7 @@ sceKernelUnregisterSysEventHandler = 0x00001D98; // type:func
 D_0000217C = 0x000020B0; // rom:0x2150
 D_00006644 = 0x00006580;
 D_00006645 = 0x00006581;
-func_000002A4 = 0x000002A0; // type:func rom:0x340
+_sceIdStorageSysEventHandler = 0x000002A0; // type:func rom:0x340
 func_00001CA0 = 0x00001BDC; // type:func rom:0x1C7C
-func_00001D20 = 0x00001C5C; // type:func rom:0x1CFC
+_sceIdStorageFindKeyPos = 0x00001C5C; // type:func rom:0x1CFC
 // shared names (tools/add_version.py) end

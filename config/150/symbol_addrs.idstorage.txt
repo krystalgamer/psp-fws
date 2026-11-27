@@ -59,9 +59,9 @@ D_00006630 = 0x000065F0;
 D_00006644 = 0x00006604;
 D_00006645 = 0x00006605;
 D_00006650 = 0x00006610;
-func_000002A4 = 0x0000028C; // type:func rom:0x30C
+_sceIdStorageSysEventHandler = 0x0000028C; // type:func rom:0x30C
 func_00001C30 = 0x00001C18; // type:func rom:0x1C98
 func_00001CA0 = 0x00001C88; // type:func rom:0x1D08
-func_00001D20 = 0x00001D08; // type:func rom:0x1D88
+_sceIdStorageFindKeyPos = 0x00001D08; // type:func rom:0x1D88
 D_000021F0_v150 = 0x000021F0;
 // shared names (tools/add_version.py) end
