@@ -259,7 +259,10 @@ def main():
         for n, (d, k, ex) in pairs.items():
             print(f"{n} -> {d}" + (" exact" if ex else " masked") + (f" ({k} candidates)" if k > 1 else ""))
         return
-    sstore = json.loads((src_dir(a.src_ver, a.src_mod) / f"{a.src_mod}_decls.json").read_text())
+    sj = src_dir(a.src_ver, a.src_mod) / f"{a.src_mod}_decls.json"
+    sstore = json.loads(sj.read_text()) if sj.exists() else {}
+    for k in ("types", "vars", "funcs"):
+        sstore.setdefault(k, {})
     # file-scope externs between SRC's functions (e.g. `extern char D_000169E8[];` after its INCLUDE_RODATA)
     for f in src_dir(a.src_ver, a.src_mod).glob("*.c"):
         for m in re.finditer(r"^extern [^;(]*?\b(\w+)\s*(?:\[[^\]]*\])*;$", f.read_text(), re.M):
