@@ -291,11 +291,18 @@ def main():
         p["base_cls"] = bases.pop()
         state[id(p)] = True
         return True
+    # a class declared already (by an earlier run, for other versions) must keep its base
+    declared = {}
+    for t in json.loads((sd / f"{mod}_decls.json").read_text()).get("types", {}).values():
+        for m in re.finditer(r"^class (\w+)(?: : public ([\w:]+))? \{", t, re.M):
+            declared[m[1]] = m[2]
     for p in plans:
-        if resolve(p):
-            ok.append(p)
-        else:
+        if not resolve(p):
             reasons["base not a class"] += 1
+        elif p["cls"] in declared and declared[p["cls"]] != p["base_cls"]:
+            reasons["declared with another base"] += 1
+        else:
+            ok.append(p)
     ok.sort(key=lambda p: (p["base_cls"] or "") in {q["cls"] for q in ok})  # bases first in the decls
     if a.limit:
         ok = ok[:a.limit]
