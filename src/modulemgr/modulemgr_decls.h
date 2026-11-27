@@ -121,7 +121,7 @@ typedef struct {
     SceModuleLink list;
 } SceModuleManagerCB;
 
-#if FW_VERSION == 100
+#if FW_VERSION < 201
 typedef struct SceModuleMgrParam {
     u8 modeStart;
     u8 modeFinish;
@@ -149,6 +149,9 @@ typedef struct SceModuleMgrParam {
     SceUID eventId;
     u32 unk54;
     u32 unk58;
+#if FW_VERSION >= 152
+    u32 unk5C;
+#endif
 } SceModuleMgrParam;
 #else
 typedef struct SceModuleMgrParam SceModuleMgrParam;
@@ -198,6 +201,12 @@ struct Unk_func_000004C0_1 {
     u8 unk11;
 };
 
+#if FW_VERSION >= 150 && FW_VERSION < 201
+s32 func_000004B0(SceModuleMgrParam *modParams, SceKernelLMOption *option);
+#else
+void func_000004B0(void *arg0, void *arg1);
+#endif
+
 extern char D_00004C90[];
 extern char D_00004CF0[];
 extern char D_0000515C[];
@@ -244,11 +253,10 @@ void func_000003E8(void);
 void func_00000404(void *libStubTable, SceSize size);
 s32 func_00000420(void *libEntry);
 s32 func_00000474(void *libEntry);
-void func_000004B0(void *arg0, void *arg1);
 void func_000004C0(struct Unk_func_000004C0_0 *arg0, struct Unk_func_000004C0_1 *arg1);
 void func_00000594(void *arg0);
 s32 func_000026F8(SceModuleMgrParam *modParams, SceKernelLMOption *option);
-s32 func_00003210(s32);
+s32 func_00003210(SceModuleMgrParam *modParams);
 void func_00004750(void);
 s32 func_00004BA4(s32);
 s32 func_0000552C(s32);

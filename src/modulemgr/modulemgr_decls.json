@@ -25,11 +25,10 @@
   "func_00000404": "void func_00000404(void *libStubTable, SceSize size);",
   "func_00000420": "s32 func_00000420(void *libEntry);",
   "func_00000474": "s32 func_00000474(void *libEntry);",
-  "func_000004B0": "void func_000004B0(void *arg0, void *arg1);",
   "func_000004C0": "void func_000004C0(struct Unk_func_000004C0_0 *arg0, struct Unk_func_000004C0_1 *arg1);",
   "func_00000594": "void func_00000594(void *arg0);",
   "func_000026F8": "s32 func_000026F8(SceModuleMgrParam *modParams, SceKernelLMOption *option);",
-  "func_00003210": "s32 func_00003210(s32);",
+  "func_00003210": "s32 func_00003210(SceModuleMgrParam *modParams);",
   "func_00004750": "void func_00004750(void);",
   "func_00004BA4": "s32 func_00004BA4(s32);",
   "func_0000552C": "s32 func_0000552C(s32);",
@@ -100,12 +99,13 @@
   "SceLoadCoreExecFileInfo": "#if FW_VERSION == 100\ntypedef struct {\n    u8 unk0[0x14];\n    SceSize maxAllocSize;\n    SceUID decompressionMemId;\n    u8 unk1C[0x14];\n    SceSize modCodeSize;\n    u8 unk34[0x20];\n    u32 isCompressed;\n    u8 unk58[0x68];\n} SceLoadCoreExecFileInfo;\n#else\ntypedef struct SceLoadCoreExecFileInfo SceLoadCoreExecFileInfo;\n#endif",
   "SceModule": "typedef struct SceModule {\n    struct SceModule *next;\n    u16 attribute;\n    u8 version[2];\n    char modName[27];\n    char terminal;\n    u16 status;\n    u16 padding;\n    SceUID secId;\n    SceUID modId;\n#if FW_VERSION == 100\n    SceUID userModThid;\n    SceUID memId;\n    SceUID mpIdText;\n    SceUID mpIdData;\n    void *entTop;\n    SceSize entSize;\n    void *stubTop;\n    SceSize stubSize;\n    void *moduleStart;\n    void *moduleStop;\n    void *moduleBootstart;\n    void *moduleRebootBefore;\n    u32 entryAddr;\n    u32 gpValue;\n    u32 textAddr;\n    SceSize textSize;\n    SceSize dataSize;\n    SceSize bssSize;\n    u8 nSegment;\n    u8 padding2[3];\n    u32 segmentAddr[4];\n    SceSize segmentSize[4];\n#endif\n} SceModule;",
   "SceModuleManagerCB": "typedef struct SceModuleLink {\n    struct SceModuleLink *next;\n    struct SceModuleLink *prev;\n} SceModuleLink;\n\ntypedef struct {\n    SceUID threadId;\n    SceUID semaId;\n    SceUID eventId;\n    SceUID userThreadId;\n    SceModuleLink list;\n} SceModuleManagerCB;",
-  "SceModuleMgrParam": "#if FW_VERSION == 100\ntypedef struct SceModuleMgrParam {\n    u8 modeStart;\n    u8 modeFinish;\n    u8 position;\n    u8 access;\n    u32 apiType;\n    SceUID *pResult;\n    SceModule *pMod;\n    SceUID mpIdText;\n    SceUID mpIdData;\n    SceUID threadMpIdStack;\n    SceSize stackSize;\n    s32 threadPriority;\n    u32 threadAttr;\n    SceUID modId;\n    SceUID callerModId;\n    SceUID fd;\n    void *pExecInfo;\n    void *fileBase;\n    SceSize argSize;\n    void *argp;\n    u32 unk44;\n    u32 unk48;\n    s32 *pStatus;\n    SceUID eventId;\n    u32 unk54;\n    u32 unk58;\n} SceModuleMgrParam;\n#else\ntypedef struct SceModuleMgrParam SceModuleMgrParam;\n#endif",
+  "SceModuleMgrParam": "#if FW_VERSION < 201\ntypedef struct SceModuleMgrParam {\n    u8 modeStart;\n    u8 modeFinish;\n    u8 position;\n    u8 access;\n    u32 apiType;\n    SceUID *pResult;\n    SceModule *pMod;\n    SceUID mpIdText;\n    SceUID mpIdData;\n    SceUID threadMpIdStack;\n    SceSize stackSize;\n    s32 threadPriority;\n    u32 threadAttr;\n    SceUID modId;\n    SceUID callerModId;\n    SceUID fd;\n    void *pExecInfo;\n    void *fileBase;\n    SceSize argSize;\n    void *argp;\n    u32 unk44;\n    u32 unk48;\n    s32 *pStatus;\n    SceUID eventId;\n    u32 unk54;\n    u32 unk58;\n#if FW_VERSION >= 152\n    u32 unk5C;\n#endif\n} SceModuleMgrParam;\n#else\ntypedef struct SceModuleMgrParam SceModuleMgrParam;\n#endif",
   "SceOff": "typedef s64 SceOff;",
   "SceResidentLibraryEntryTable": "typedef struct {\n    const char *libName;\n    u8 version[2];\n    s16 attribute;\n    u8 len;\n    u8 vStubCount;\n    u16 stubCount;\n    void *entryTable;\n} SceResidentLibraryEntryTable;",
   "SceSysmemPartitionInfo": "typedef struct {\n    SceSize size;\n    u32 startAddr;\n    u32 memSize;\n    u32 attr;\n} SceSysmemPartitionInfo;",
   "Unk_func_000004C0_0": "struct Unk_func_000004C0_0 {\n    u8 pad0[0x2];\n    u8 unk2;\n    u8 unk3;\n    u8 pad4[0x10];\n    s32 unk14;\n    s32 unk18;\n    u8 pad1C[0x20];\n    s32 unk3C;\n    u8 pad40[0xC];\n    s32 unk4C;\n    s32 unk50;\n    u8 pad54[0xC];\n    s32 unk60;\n};",
-  "Unk_func_000004C0_1": "struct Unk_func_000004C0_1 {\n    u8 pad0[0x4];\n    s32 unk4;\n    s32 unk8;\n    u8 padC[0x4];\n    u8 unk10;\n    u8 unk11;\n};"
+  "Unk_func_000004C0_1": "struct Unk_func_000004C0_1 {\n    u8 pad0[0x4];\n    s32 unk4;\n    s32 unk8;\n    u8 padC[0x4];\n    u8 unk10;\n    u8 unk11;\n};",
+  "zzVersionProtos": "#if FW_VERSION >= 150 && FW_VERSION < 201\ns32 func_000004B0(SceModuleMgrParam *modParams, SceKernelLMOption *option);\n#else\nvoid func_000004B0(void *arg0, void *arg1);\n#endif"
  },
  "vars": {
   "D_00004C90": "extern char D_00004C90[];",

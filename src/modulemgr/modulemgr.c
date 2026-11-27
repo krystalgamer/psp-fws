@@ -90,23 +90,23 @@ void func_000004B0(void *arg0, void *arg1) {
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 201
-void func_000004B0(void *arg0, void *arg1) {
-    if (arg1 != NULL) {
-        M2C_FIELD(arg0, s32 *, 0x10) = (s32) M2C_FIELD(arg1, s32 *, 4);
-        M2C_FIELD(arg0, s32 *, 0x14) = (s32) M2C_FIELD(arg1, s32 *, 8);
-        M2C_FIELD(arg0, u8 *, 2) = (u8) M2C_FIELD(arg1, u8 *, 0x10);
-        M2C_FIELD(arg0, u8 *, 3) = (u8) M2C_FIELD(arg1, u8 *, 0x11);
+s32 func_000004B0(SceModuleMgrParam *modParams, SceKernelLMOption *option) {
+    if (option != NULL) {
+        modParams->mpIdText = option->mpIdText;
+        modParams->mpIdData = option->mpIdData;
+        modParams->position = option->position;
+        modParams->access = option->access;
     } else {
-        M2C_FIELD(arg0, u8 *, 3) = 1U;
-        M2C_FIELD(arg0, s32 *, 0x10) = 0;
-        M2C_FIELD(arg0, s32 *, 0x14) = 0;
-        M2C_FIELD(arg0, u8 *, 2) = 0U;
+        modParams->access = 1;
+        modParams->mpIdText = 0;
+        modParams->mpIdData = 0;
+        modParams->position = 0;
     }
-    M2C_FIELD(arg0, s32 *, 0x44) = 0;
-    M2C_FIELD(arg0, s32 *, 0x48) = 0;
-    M2C_FIELD(arg0, s32 *, 0x58) = 0;
-    M2C_FIELD(arg0, s32 *, 0x34) = 0;
-    func_00003210((s32) arg0);
+    modParams->unk44 = 0;
+    modParams->unk48 = 0;
+    modParams->unk58 = 0;
+    modParams->pExecInfo = NULL;
+    return func_00003210(modParams);
 }
 #endif
 
