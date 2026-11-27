@@ -15,6 +15,7 @@ options:
   cache_path: tmp/build/303/.splat_cache.pspnet_inet
   symbol_addrs_path:
     - config/303/symbol_addrs.pspnet_inet.txt
+    - config/303/func_starts.pspnet_inet.txt
     - tmp/build/303/prx_syms.pspnet_inet.txt
   reloc_addrs_path: [tmp/build/303/reloc_addrs.pspnet_inet.txt]
   asset_path: tmp/assets/303/pspnet_inet
@@ -53,6 +54,7 @@ segments:
     vram: 0x0
     subsegments:
       - [0xA0, c, pspnet_inet]
+      - [0x22474, c, pspnet_inet_tcp_subr]
       - { start: 0x2B1DC, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x2B474, type: prxpad, order: .text }
       - { start: 0x2B480, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
@@ -65,6 +67,7 @@ segments:
       - { start: 0x2B54C, type: rodata, name: resident, linker_section: .rodata.sceResident }
       - { start: 0x2B7C4, type: rodata, name: nid, linker_section: .rodata.sceNid }
       - [0x2B910, .rodata, pspnet_inet]
+      - [0x2BCDC, .rodata, pspnet_inet_tcp_subr]
       - { start: 0x2C0F4, type: prxpad, order: .rodata }
   - name: pspnet_inet_seg1
     type: code
