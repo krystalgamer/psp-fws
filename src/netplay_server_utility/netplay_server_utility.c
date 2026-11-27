@@ -223,9 +223,9 @@ INCLUDE_ASM("nonmatchings/netplay_server_utility", func_000005FC);
 INCLUDE_ASM("nonmatchings/netplay_server_utility", func_00000678);
 #else
 void func_00000678(s32 arg0, s32 arg1) {
-    scePaf_8B38372A(D_000045F0, arg0);
-    scePaf_39E62C88(D_000045F0, arg1, 0, 0);
-    scePaf_A013540A(D_000045F0, arg1);
+    _ZN3paf4View9PageCloseEPKc(D_000045F0, arg0);
+    _ZN3paf4View8PageOpenEPKcii(D_000045F0, arg1, 0, 0);
+    _ZN3paf4View12PageActivateEPKc(D_000045F0, arg1);
 }
 #endif
 
@@ -572,8 +572,8 @@ INCLUDE_ASM("nonmatchings/netplay_server_utility", func_00000F58);
 
 #if FW_VERSION >= 350
 s32 func_00001048(void) {
-    scePaf_82CF97B0(0xC8);
-    scePaf_D1447DB7(D_000045F0);
+    _ZN3paf5SleepEi(0xC8);
+    _ZN3paf4View12PageCloseAllEv(D_000045F0);
     func_00002A38();
     return 0;
 }
@@ -618,10 +618,10 @@ void func_00001724(void) {
 void func_0000172C(s32 arg0) {
     void *sp0;
     D_000045E4 = 4;
-    sceVshCommonGui_11C48509(&sp0, sceVshCommonGui_6BC16C05());
+    _ZN3vsh30SetButtonNavigationString_BackEPKw(&sp0, _ZN3vsh16GetString_CancelEv());
     func_000017D0(&sp0);
-    sceVshCommonGui_F5A16B4D(0);
-    scePaf_3EDD45EF(0, &func_00000E38, arg0, -1, -1, &func_00000F58);
+    _ZN3vsh26ShowButtonNavigation_EnterEb(0);
+    Job_Start(0, &func_00000E38, arg0, -1, -1, &func_00000F58);
 }
 #endif
 
@@ -660,7 +660,7 @@ void func_00001800(s32 arg0, s32 arg1) {
 
     var_v0 = 0;
     if (arg1 != 0) {
-        var_v0 = scePaf_5E4447F6(arg1);
+        var_v0 = sce_paf_private_wcslen(arg1);
     }
     func_000018EC(arg0, arg1, var_v0);
 }
@@ -834,17 +834,17 @@ void func_00001F00(void *arg0, s32 arg1) {
 
 #if FW_VERSION >= 350
 void func_00001F00(void *arg0, s32 arg1) {
-    scePaf_39E62C88(M2C_FIELD(arg0, s32 *, 4), arg1, 0, 0);
+    _ZN3paf4View8PageOpenEPKcii(M2C_FIELD(arg0, s32 *, 4), arg1, 0, 0);
 }
 #endif
 
 #if FW_VERSION < 282
-void func_00001A98(void *arg0) {
-    _ZN3paf4View12PageActivateEPKc(M2C_FIELD(arg0, s32 *, 4));
+void func_00001A98(void *arg0, s32 arg1) {
+    _ZN3paf4View12PageActivateEPKc(M2C_FIELD(arg0, s32 *, 4), arg1);
 }
 
-void func_00001AB4(void *arg0) {
-    _ZN3paf4View9PageCloseEPKc(M2C_FIELD(arg0, s32 *, 4));
+void func_00001AB4(void *arg0, s32 arg1) {
+    _ZN3paf4View9PageCloseEPKc(M2C_FIELD(arg0, s32 *, 4), arg1);
 }
 
 void func_00001AD0(void *arg0) {
@@ -857,8 +857,8 @@ INCLUDE_ASM("nonmatchings/netplay_server_utility", func_00001F24);
 #endif
 
 #if FW_VERSION >= 282 && FW_VERSION < 350
-void func_00001F24(struct Unk_func_00001F24_0 *arg0) {
-    _ZN3paf4View12PageActivateEPKc(arg0->unk4);
+void func_00001F24(struct Unk_func_00001F24_0 *arg0, s32 arg1) {
+    _ZN3paf4View12PageActivateEPKc(arg0->unk4, arg1);
 }
 #endif
 
@@ -867,14 +867,14 @@ INCLUDE_ASM("nonmatchings/netplay_server_utility", func_00001F40);
 #endif
 
 #if FW_VERSION >= 282 && FW_VERSION < 350
-void func_00001F40(struct Unk_func_00001F40_0 *arg0) {
-    _ZN3paf4View9PageCloseEPKc(arg0->unk4);
+void func_00001F40(struct Unk_func_00001F40_0 *arg0, s32 arg1) {
+    _ZN3paf4View9PageCloseEPKc(arg0->unk4, arg1);
 }
 #endif
 
 #if FW_VERSION >= 350
 void func_00001F5C(struct Unk_func_00001F5C_0 *arg0) {
-    scePaf_CD216C47(arg0->unk4);
+    _ZNK3paf4View8PageRootEPKc(arg0->unk4);
 }
 #endif
 
@@ -1102,7 +1102,7 @@ void func_000036E8(s32 arg0, s32 arg1) {
 
     var_v0 = 0;
     if (arg1 != 0) {
-        var_v0 = scePaf_C1B0AA0D(arg1);
+        var_v0 = sce_paf_private_strlen(arg1);
     }
     func_000038F0(arg0, arg1, var_v0);
 }
