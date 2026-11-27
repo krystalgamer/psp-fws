@@ -1,3 +1,4 @@
+/* lang: c++ */
 #include "common.h"
 #include "htmlviewer_plugin_decls.h"
 
@@ -220,7 +221,7 @@ s32 func_000004F4(void *arg0) {
     s32 var_v1;
 
     var_v1 = M2C_FIELD(arg0, s32 *, 8);
-    if (!(var_v1 & 1)) {
+    if ((var_v1 & 1) == 0) {
         if (var_v1 & 2) {
             func_000015CC(3);
             var_v1 = M2C_FIELD(arg0, s32 *, 8);
@@ -229,7 +230,7 @@ s32 func_000004F4(void *arg0) {
         func_00001368();
         var_v1 = M2C_FIELD(arg0, s32 *, 8);
     }
-    if (!(var_v1 & 4)) {
+    if ((var_v1 & 4) == 0) {
         M2C_FIELD(arg0, s32 *, 8) = 0;
     } else {
         if (func_0000398C() >= 2) {
@@ -250,7 +251,7 @@ s32 func_000004F4(void *arg0) {
     s32 var_v1;
 
     var_v1 = M2C_FIELD(arg0, s32 *, 8);
-    if (!(var_v1 & 1)) {
+    if ((var_v1 & 1) == 0) {
         if (var_v1 & 2) {
             func_00001468(3);
             var_v1 = M2C_FIELD(arg0, s32 *, 8);
@@ -259,7 +260,7 @@ s32 func_000004F4(void *arg0) {
         func_00001368();
         var_v1 = M2C_FIELD(arg0, s32 *, 8);
     }
-    if (!(var_v1 & 4)) {
+    if ((var_v1 & 4) == 0) {
         M2C_FIELD(arg0, s32 *, 8) = 0;
     } else {
         if (func_0000398C() >= 2) {
@@ -521,7 +522,7 @@ s32 func_0000055C(struct Unk_func_0000055C_0 *arg0) {
     s32 var_v1;
 
     var_v1 = arg0->unk8;
-    if (!(var_v1 & 1)) {
+    if ((var_v1 & 1) == 0) {
         if (var_v1 & 2) {
             func_0000156C(3);
             var_v1 = arg0->unk8;
@@ -530,7 +531,7 @@ s32 func_0000055C(struct Unk_func_0000055C_0 *arg0) {
         func_00001368();
         var_v1 = arg0->unk8;
     }
-    if (!(var_v1 & 4)) {
+    if ((var_v1 & 4) == 0) {
         arg0->unk8 = 0;
     } else {
         if (func_0000398C() >= 2) {
@@ -1599,12 +1600,12 @@ s32 func_00001208(void) {
 #endif
 
 #if FW_VERSION >= 350
-void func_00001238(void) {
+void func_00001238(s32 arg0) {
     vsh_BF3477CB();
 }
 #else
-void func_00001238(void) {
-    _ZN3vsh15RaiseFatalErrorEj();
+void func_00001238(s32 arg0) {
+    _ZN3vsh15RaiseFatalErrorEj(arg0);
 }
 #endif
 

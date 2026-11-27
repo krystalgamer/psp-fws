@@ -1,3 +1,4 @@
+/* lang: c++ */
 #include "common.h"
 #include "htmlviewer_plugin_decls.h"
 
@@ -90,7 +91,7 @@ INCLUDE_ASM("nonmatchings/htmlviewer_plugin_0039A4", func_00003D74);
 #endif
 
 #if FW_VERSION >= 300 && FW_VERSION < 310
-M2C_UNK *func_00005554(void) {
+const char *func_00005554(void) {
     return "http://manuals.playstation.net/document/pspindex.html";
 }
 #endif
