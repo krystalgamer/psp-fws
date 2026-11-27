@@ -290,7 +290,26 @@ def fix_convert_assign(lines, idx, msg):
     return True
 
 
-FIXERS = [fix_too_few, fix_convert_arg, fix_convert_passing, fix_convert_assign]
+def fix_ptr_int_compare(lines, idx, msg):
+    """`ISO C++ forbids comparison between pointer and integer`: m2c typed a local `void *` that holds a
+    value (e.g. an ioctl result read back through &sp0); make the local s32, or cast a non-local."""
+    if "comparison between pointer and integer" not in msg:
+        return False
+    j, _ = _enclosing_def(lines, idx)
+    for m in re.finditer(r"\b(\w+)\s*(?:==|!=|<=|>=|<|>)\s*-?(?:0x[0-9A-Fa-f]+|\d+)\b", lines[idx]):
+        name = m[1]
+        if j is not None:
+            for k in range(j + 1, idx):
+                dm = re.match(rf"^(\s*)void \*{name};\s*$", lines[k])
+                if dm:
+                    lines[k] = f"{dm[1]}s32 {name};"
+                    return True
+        lines[idx] = lines[idx][:m.start()] + f"(s32) {name}" + lines[idx][m.start() + len(name):]
+        return True
+    return False
+
+
+FIXERS = [fix_too_few, fix_convert_arg, fix_convert_passing, fix_convert_assign, fix_ptr_int_compare]
 
 
 # ---------------------------------------------------------------- driver
