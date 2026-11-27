@@ -52,10 +52,13 @@ def compiled_reloc_syms(c_text, comp, opt):
         elf = ELFFile(open(o, "rb"))
         symtab = elf.get_section_by_name(".symtab")
         text = elf.get_section_by_name(".text").data()
-        out, strs, hi = [], {}, {}
+        out, strs, hi, calls = [], {}, {}, []
         for sec in elf.iter_sections():
             if isinstance(sec, RelocationSection) and sec.name == ".rel.text":
                 for rel in sorted(sec.iter_relocations(), key=lambda r: r["r_offset"]):
+                    if rel["r_info_type"] == 4:  # R_MIPS_26: call targets, compared with the asm's jal names
+                        sym = symtab.get_symbol(rel["r_info_sym"])
+                        calls.append(sym.name if sym["st_info"]["type"] != "STT_SECTION" else None)
                     if rel["r_info_type"] not in (5, 6):  # HI16/LO16 only; calls to stubs aren't in reloc_addrs
                         continue
                     sym = symtab.get_symbol(rel["r_info_sym"])
@@ -72,6 +75,7 @@ def compiled_reloc_syms(c_text, comp, opt):
                             strs[rel["r_offset"]] = d[off:d.find(b"\0", off)] if 0 <= off < len(d) else None
         names = [n for _, n in sorted(out)]
         compiled_reloc_syms.strings = [strs.get(o2) for o2, _ in sorted(out)]
+        compiled_reloc_syms.calls = calls
         return names
 
 
@@ -333,7 +337,22 @@ def main():
                     bad_str.append((w, ts, ms))
             for w, ts, ms in dict.fromkeys(bad_str):
                 print(f"  string literal for {w} differs: target {ts!r}, mine {ms!r}")
-            print("RESULT: words match, STRING LITERALS DIFFER (not a match)" if bad_str else "RESULT: MATCH")
+            # call targets: the original's jal names (from its asm) must be the functions the C calls
+            bad_call = []
+            asm_path = mod.funcs[name][2]
+            if asm_path is not None:
+                want_calls = re.findall(r"\bjal\s+(\w+)", asm_path.read_text())
+                got = compiled_reloc_syms.calls
+                if len(want_calls) == len(got):
+                    bad_call = [(w, g) for w, g in zip(want_calls, got) if g is not None and g != w]
+            for w, g in dict.fromkeys(bad_call):
+                print(f"  call target differs: target {w}, mine {g}")
+            if bad_str:
+                print("RESULT: words match, STRING LITERALS DIFFER (not a match)")
+            elif bad_call:
+                print("RESULT: words match, CALL TARGETS DIFFER (not a match)")
+            else:
+                print("RESULT: MATCH")
     elif best is not None:
         sm = difflib.SequenceMatcher(None, target, best, autojunk=False)
         print(f"RESULT: {max(len(target), len(best)) - sum(b.size for b in sm.get_matching_blocks())} off (own setting)")
