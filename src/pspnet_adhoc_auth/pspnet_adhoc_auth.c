@@ -37,10 +37,6 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc_auth", func_000000D8);
 
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_auth", func_0000025C);
 
-#if FW_VERSION >= 102 && FW_VERSION < 152
-INCLUDE_ASM("nonmatchings/pspnet_adhoc_auth", func_0000035C);
-#endif
-
 #if FW_VERSION >= 152 && FW_VERSION < 303
 s32 sceNetAdhocAuthTerm(void) {
     u32 temp_s0;
@@ -117,21 +113,13 @@ INCLUDE_RODATA("nonmatchings/pspnet_adhoc_auth", D_0000491C);
 INCLUDE_RODATA("nonmatchings/pspnet_adhoc_auth", D_00004954);
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION >= 152
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_auth", _sce_pspnet_adhoc_prp_start);
-#endif
 
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_auth", _sce_pspnet_adhoc_prp_stop);
 
-#if FW_VERSION >= 102 && FW_VERSION < 152
-INCLUDE_ASM("nonmatchings/pspnet_adhoc_auth", func_00000870);
-
-INCLUDE_ASM("nonmatchings/pspnet_adhoc_auth", func_000009D4);
-#else
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_auth", sceNetAdhocAuth_driver_6CE209A3);
 
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_auth", sceNetAdhocAuth_driver_2AD8C677);
-#endif
 
 INCLUDE_ASM("nonmatchings/pspnet_adhoc_auth", _sce_pspnet_adhoc_prp_get_peer_list);
 
