@@ -491,7 +491,7 @@ INCLUDE_ASM("nonmatchings/auth_plugin", func_00001F64);
 INCLUDE_ASM("nonmatchings/auth_plugin", func_00001FCC);
 #endif
 
-#if FW_VERSION >= 150
+#if FW_VERSION >= 152
 INCLUDE_ASM("nonmatchings/auth_plugin", func_00002058);
 #else
 void func_00002058(s32 arg0) {
