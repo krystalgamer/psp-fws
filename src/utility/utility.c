@@ -84,8 +84,8 @@ INCLUDE_RODATA("nonmatchings/utility", D_00006C98);
 
 INCLUDE_ASM("nonmatchings/utility", sceUtilityInit);
 
-#if FW_VERSION >= 102 && FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/utility", func_00000120);
+#if (FW_VERSION >= 102 && FW_VERSION < 150) || FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/utility", sceUtilityEnd);
 #endif
 
 #if FW_VERSION >= 250 && FW_VERSION < 282
@@ -113,10 +113,6 @@ s32 module_start(void) {
     sceUtilityInit();
     return 0;
 }
-#endif
-
-#if FW_VERSION == 201
-INCLUDE_ASM("nonmatchings/utility", sceUtilityEnd);
 #endif
 
 #if FW_VERSION == 152
@@ -393,22 +389,18 @@ INCLUDE_ASM("nonmatchings/utility", func_00000C08);
 INCLUDE_ASM("nonmatchings/utility", func_00000D08);
 #endif
 
-#if FW_VERSION >= 102 && FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/utility", func_00000C98);
-
-INCLUDE_ASM("nonmatchings/utility", func_00000CEC);
-
-INCLUDE_ASM("nonmatchings/utility", func_00000D34);
-
-INCLUDE_ASM("nonmatchings/utility", func_00000D88);
-
-INCLUDE_ASM("nonmatchings/utility", func_00000DD0);
-
-INCLUDE_ASM("nonmatchings/utility", func_00000E24);
-#endif
-
-#if FW_VERSION == 201
+#if (FW_VERSION >= 102 && FW_VERSION < 150) || FW_VERSION == 201
 INCLUDE_ASM("nonmatchings/utility", sceUtility_private_17CB4D96);
+
+INCLUDE_ASM("nonmatchings/utility", sceUtility_private_EE7AC503);
+
+INCLUDE_ASM("nonmatchings/utility", sceUtility_private_5FF96ED3);
+
+INCLUDE_ASM("nonmatchings/utility", sceUtility_private_9C9DD5BC);
+
+INCLUDE_ASM("nonmatchings/utility", sceUtility_private_4405BA38);
+
+INCLUDE_ASM("nonmatchings/utility", sceUtility_private_1DFA62EF);
 #endif
 
 #if FW_VERSION == 152
@@ -433,10 +425,6 @@ s32 sceUtility_private_17CB4D96(void) {
 }
 #endif
 
-#if FW_VERSION == 201
-INCLUDE_ASM("nonmatchings/utility", sceUtility_private_EE7AC503);
-#endif
-
 #if FW_VERSION == 152
 s32 sceUtility_private_EE7AC503(void) {
     s32 sp0;
@@ -457,10 +445,6 @@ s32 sceUtility_private_EE7AC503(void) {
     func_00001200(sp0);
     return 0;
 }
-#endif
-
-#if FW_VERSION == 201
-INCLUDE_ASM("nonmatchings/utility", sceUtility_private_5FF96ED3);
 #endif
 
 #if FW_VERSION == 152
@@ -485,10 +469,6 @@ s32 sceUtility_private_5FF96ED3(void) {
 }
 #endif
 
-#if FW_VERSION == 201
-INCLUDE_ASM("nonmatchings/utility", sceUtility_private_9C9DD5BC);
-#endif
-
 #if FW_VERSION == 152
 s32 sceUtility_private_9C9DD5BC(void) {
     s32 sp0;
@@ -511,10 +491,6 @@ s32 sceUtility_private_9C9DD5BC(void) {
 }
 #endif
 
-#if FW_VERSION == 201
-INCLUDE_ASM("nonmatchings/utility", sceUtility_private_4405BA38);
-#endif
-
 #if FW_VERSION == 152
 s32 sceUtility_private_4405BA38(void) {
     s32 sp0;
@@ -535,10 +511,6 @@ s32 sceUtility_private_4405BA38(void) {
     func_00001200(sp0);
     return 0;
 }
-#endif
-
-#if FW_VERSION == 201
-INCLUDE_ASM("nonmatchings/utility", sceUtility_private_1DFA62EF);
 #endif
 
 #if FW_VERSION == 152
@@ -654,11 +626,11 @@ INCLUDE_ASM("nonmatchings/utility", sceUtilityDialogSetThreadId);
 #endif
 
 #if FW_VERSION >= 102 && FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/utility", func_00000F5C);
+INCLUDE_ASM("nonmatchings/utility", sceUtilityDialogLoadModule);
 
-INCLUDE_ASM("nonmatchings/utility", func_00001154);
+INCLUDE_ASM("nonmatchings/utility", sceUtilityDialogPowerLock);
 
-INCLUDE_ASM("nonmatchings/utility", func_0000119C);
+INCLUDE_ASM("nonmatchings/utility", sceUtilityDialogPowerUnlock);
 
 INCLUDE_ASM("nonmatchings/utility", func_000011E4);
 #endif
@@ -2909,21 +2881,13 @@ INCLUDE_RODATA("nonmatchings/utility", D_0000782C);
 INCLUDE_RODATA("nonmatchings/utility", D_00007848);
 #endif
 
-#if FW_VERSION >= 102 && FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/utility", func_00001DDC);
-
-INCLUDE_ASM("nonmatchings/utility", func_00001F38);
-#endif
-
 #if FW_VERSION >= 282
 INCLUDE_RODATA("nonmatchings/utility", D_00007854);
 
 INCLUDE_RODATA("nonmatchings/utility", D_0000786C);
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/utility", sceUtilityGetSystemParamInt);
-#endif
 
 #if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/utility", func_000038DC);
@@ -2931,11 +2895,9 @@ INCLUDE_ASM("nonmatchings/utility", func_000038DC);
 INCLUDE_ASM("nonmatchings/utility", func_00003A78);
 #endif
 
-#if FW_VERSION == 100 || (FW_VERSION >= 150 && FW_VERSION < 250)
-INCLUDE_ASM("nonmatchings/utility", sceUtilityGetSystemParamString);
-#endif
-
 #if FW_VERSION < 250
+INCLUDE_ASM("nonmatchings/utility", sceUtilityGetSystemParamString);
+
 INCLUDE_ASM("nonmatchings/utility", func_00001EA4);
 #endif
 

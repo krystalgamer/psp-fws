@@ -260,3 +260,27 @@ D_000050E4_v103 = 0x000050E4; // rom:0x5164
 D_000050EC_v103 = 0x000050EC; // rom:0x516C
 D_0000510C_v103 = 0x0000510C; // rom:0x518C
 // shared names (tools/add_version.py) end
+
+// NID-derived names
+sceUtilityEnd = 0x00000120; // type:func
+sceUtility_private_17CB4D96 = 0x00000C98; // type:func
+sceUtility_private_EE7AC503 = 0x00000CEC; // type:func
+sceUtility_private_5FF96ED3 = 0x00000D34; // type:func
+sceUtility_private_9C9DD5BC = 0x00000D88; // type:func
+sceUtility_private_4405BA38 = 0x00000DD0; // type:func
+sceUtility_private_1DFA62EF = 0x00000E24; // type:func
+sceUtilityDialogLoadModule = 0x00000F5C; // type:func
+sceUtilityDialogPowerLock = 0x00001154; // type:func
+sceUtilityDialogPowerUnlock = 0x0000119C; // type:func
+sceUtilityGetSystemParamInt = 0x00001DDC; // type:func
+sceUtilityGetSystemParamString = 0x00001F38; // type:func
+strcmp = 0x00004598; // type:func
+strncpy = 0x000045A0; // type:func
+memcpy = 0x000045B0; // type:func
+sprintf = 0x000045C0; // type:func
+sceKernelCreateEventFlag = 0x000045D0; // type:func
+sceKernelCreateThread = 0x000045F8; // type:func
+sceKernelDeleteThread = 0x00004600; // type:func
+sceKernelStartThread = 0x00004608; // type:func
+sceRtcSetConf = 0x00004698; // type:func
+sceKernelRegisterSysEventHandler = 0x000046B0; // type:func
