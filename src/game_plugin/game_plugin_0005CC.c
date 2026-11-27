@@ -322,13 +322,7 @@ void func_00000558(void) {
     sce_paf_private_snprintf(&D_000129D8, 0x80, "disc0:/PSP_GAME/SYSDIR/EBOOT.BIN");
     func_000071AC(0);
 }
-#endif
 
-#if FW_VERSION == 152
-INCLUDE_ASM("nonmatchings/game_plugin_0005CC", func_0000058C);
-#endif
-
-#if FW_VERSION == 150
 void func_0000058C(void) {
     sce_paf_private_snprintf(&D_000129D8, 0x80, "disc0:/PSP_GAME/SYSDIR/UPDATE/EBOOT.BIN");
     func_000071AC(1);
@@ -341,11 +335,7 @@ void func_0000058C(void) {
 }
 #endif
 
-#if FW_VERSION == 152
-INCLUDE_ASM("nonmatchings/game_plugin_0005CC", func_000005C0);
-#endif
-
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 201
 void func_000005C0(s32 arg0, s32 arg1, s32 arg2) {
     sce_paf_private_snprintf(&D_000129D8, 0x80, (s32 *) arg0);
     D_00012A70 = arg1;
@@ -381,11 +371,7 @@ void func_00000638(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5) {
 }
 #endif
 
-#if FW_VERSION == 152
-INCLUDE_ASM("nonmatchings/game_plugin_0005CC", func_00000620);
-#endif
-
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 201
 void func_00000620(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     sce_paf_private_snprintf(&D_000129D8, 0x80, "usb:");
     D_00012A58 = arg0;
@@ -394,9 +380,7 @@ void func_00000620(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     D_00012A74 = arg3;
     func_000075F4(&D_0001157C);
 }
-#endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/game_plugin_0005CC", func_000006A8);
 #endif
 
@@ -529,21 +513,21 @@ INCLUDE_ASM("nonmatchings/game_plugin_0005CC", func_00000EA0);
 INCLUDE_ASM("nonmatchings/game_plugin_0005CC", func_00000DEC);
 #endif
 
-#if FW_VERSION >= 152 && FW_VERSION < 271
+#if FW_VERSION >= 201 && FW_VERSION < 271
 INCLUDE_ASM("nonmatchings/game_plugin_0005CC", func_00000E68);
 #endif
 
-#if FW_VERSION < 152
+#if FW_VERSION < 201
 void func_00000E68(s32 **arg0) {
     *arg0 = &D_00011890;
 }
 #endif
 
-#if FW_VERSION >= 152 && FW_VERSION < 271
+#if FW_VERSION >= 201 && FW_VERSION < 271
 INCLUDE_ASM("nonmatchings/game_plugin_0005CC", func_00000E78);
 #endif
 
-#if FW_VERSION < 152
+#if FW_VERSION < 201
 void func_00000E78(s32 **arg0) {
     *arg0 = &D_00011890;
     scePaf_4E67BB08();
