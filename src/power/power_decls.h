@@ -25,9 +25,148 @@ struct D_0000B3AC_s {
     s32 unk28;
 };
 
-extern s32 D_00003C60;
+/* battery.c state (1.00 layout, 0x50 bytes; prefix up to 0x18 shared by 1.50-2.71). */
+typedef struct {
+    SceUID batteryEventFlagId; /* 0x0 */
+    SceUID workerThreadId; /* 0x4 */
+    s32 innerTempStatus; /* 0x8, -1 at init, 0 when syscon lacks the command */
+    s32 forceSuspendCapacity; /* 0xC */
+    s32 lowBatteryCapacity; /* 0x10 */
+    u32 isBatteryPollingSuspended; /* 0x14 */
+    u32 batteryForbidChargingNetCounter; /* 0x18 */
+#if FW_VERSION == 100
+    s32 workerThreadNextOp; /* 0x1C */
+    u32 powerSupplyStatus; /* 0x20 */
+    float innerTemp; /* 0x24 */
+    u32 batteryAvailabilityStatus; /* 0x28, 2 = battery info valid */
+    u32 batteryStatus; /* 0x2C */
+    s32 batteryRemainingCapacity; /* 0x30 */
+    s32 batteryLifePercentage; /* 0x34 */
+    s32 batteryFullCapacity; /* 0x38 */
+    s32 minimumFullCapacity; /* 0x3C */
+    s32 limitTime; /* 0x40 */
+    s32 batteryTemp; /* 0x44 */
+    s32 batteryElec; /* 0x48 */
+    s32 batteryVoltage; /* 0x4C */
+#endif
+} ScePowerBattery;
+
+/* A registered power callback slot (1.00: 8 bytes). */
+typedef struct {
+    SceUID cbid; /* 0x0, < 0: free slot */
+    s32 delayedCallbacksAccumulatedOneOffArg; /* 0x4 */
+} ScePowerCallbackCB;
+
+/* clockFrequency.c state (1.00 layout, 0x44 bytes). */
+typedef struct {
+    SceUID semaId; /* 0x0 */
+#if FW_VERSION == 100
+    s32 pllOutSelect; /* 0x4 */
+    s32 pllClockFrequencyInt; /* 0x8 */
+    s32 cpuClockFrequencyInt; /* 0xC */
+    s32 busClockFrequencyInt; /* 0x10 */
+    u32 clkcCpuGearNumerator; /* 0x14 */
+    u32 clkcCpuGearDenominator; /* 0x18 */
+    u32 clkcBusGearNumerator; /* 0x1C */
+    u32 clkcBusGearDenominator; /* 0x20 */
+    u32 isTachyonMaxVoltage; /* 0x24 */
+    s16 tachyonMaxVoltage; /* 0x28 */
+    s16 tachyonDefaultVoltage; /* 0x2A */
+    u16 unk2C; /* 0x2C */
+    s16 scCpuClockLowerLimit; /* 0x2E */
+    s16 scCpuClockUpperLimit; /* 0x30 */
+    s16 scBusClockLowerLimit; /* 0x32 */
+    s16 scBusClockUpperLimit; /* 0x34 */
+    s16 pllClockLowerLimit; /* 0x36 */
+    s16 pllClockUpperLimit; /* 0x38 */
+    u16 unk3A; /* 0x3A */
+    s32 geEdramRefreshMode; /* 0x3C */
+    s32 oldGeEdramRefreshMode; /* 0x40 */
+#endif
+} ScePowerFrequency;
+
+/* sceKernelRegisterPowerHandlers table (1.00: 6 words). */
+typedef struct {
+    s32 size;
+    s32 (*tick)(s32);
+    s32 (*lock)(s32);
+    s32 (*unlock)(s32);
+    s32 (*lockForUser)(s32);
+    s32 (*unlockForUser)(s32);
+} ScePowerHandlers;
+
+/* Idle timer slot (1.00: 0x20 bytes). */
+typedef struct {
+    u32 isResetted; /* 0x0 */
+    s32 isDueTimeReached; /* 0x4, -1 after registration */
+    u32 attr; /* 0x8 */
+    u32 baseTime; /* 0xC */
+    u32 dueTime; /* 0x10 */
+    s32 (*callback)(s32 slot, s32 isDue, void *arg); /* 0x14 */
+    u32 gp; /* 0x18 */
+    void *callbackArg; /* 0x1C */
+} ScePowerIdleTimerCb;
+
+/* idleTimer.c state (1.00: 0x104 bytes). */
+typedef struct {
+    u32 curSystemTime; /* 0x0 */
+    ScePowerIdleTimerCb idleTimerCb[8]; /* 0x4 */
+} ScePowerIdle;
+
+/* Suspend/resume save area (1.00 layout, 0x5040 bytes). */
+typedef struct {
+    u8 scratchpad[0x4000]; /* 0x0 */
+    u8 hwResetVector[0x1000]; /* 0x4000, copy of 0xBFC00000 */
+    s32 pllOutSelect; /* 0x5000 */
+    s32 powerDownCounter; /* 0x5004 */
+    u8 resumeInfo[0x38]; /* 0x5008, ScePowerResumeInfo (size word first) */
+} ScePowerResume;
+
+/* powerSwitch.c state (1.00: 0x28 bytes; 1.50-2.71 offsets from the shared C). */
+typedef struct {
+    SceUID eventId; /* 0x0 */
+#if FW_VERSION >= 150
+    SceUID volatileMemorySemaId; /* 0x4 */
+#endif
+    SceUID workerThreadId; /* 1.00: 0x4 */
+    u32 mode; /* 1.00: 0x8, 1.50: 0xC */
+    u32 powerLockForUserShouldForceWait; /* 1.00: 0xC */
+    s32 numPowerLocksUser; /* 1.00: 0x10 */
+    s32 numPowerLocksKernel; /* 1.00: 0x14 */
+#if FW_VERSION >= 150
+    u32 unk1C;
+#endif
+    s32 curHardwarePowerSwitchRequest; /* 1.00: 0x18, 1.50: 0x20 */
+    s32 curSoftwarePowerSwitchRequest; /* 1.00: 0x1C, 1.50: 0x24 */
+#if FW_VERSION >= 150
+    u32 isRebootPowerLockExist; /* 0x28 */
+#endif
+#if FW_VERSION >= 201
+    u32 coldResetMode; /* 0x2C */
+#endif
+    u32 wakeupCondition; /* 1.00: 0x20, 1.50: 0x2C, 2.01: 0x30 */
+    s32 resumeCount; /* 1.00: 0x24, 1.50: 0x30, 2.01: 0x34 */
+} ScePowerSwitch;
+
+/* power.c control block (1.00 layout, 0x108 bytes). */
+typedef struct {
+    ScePowerCallbackCB powerCallbackCBs[32]; /* 0x0 */
+    u32 curPowerStateForCallbackArg; /* 0x100 */
+    u32 isWlanSuppressChargingEnabled; /* 0x104, IdStorage key 4 byte 0x19 */
+} ScePower;
+
+typedef struct SceSysEventHandler {
+    s32 size;
+    char *name;
+    s32 typeMask;
+    s32 (*handler)(s32 eventId, char *eventName, void *param, s32 *result);
+    s32 gp;
+    s32 busy;
+    struct SceSysEventHandler *next;
+    s32 reserved[9];
+} SceSysEventHandler;
+
 extern s32 D_00003DC4;
-extern s32 D_00003E00;
 extern s32 D_00003E08;
 extern s32 D_00003E20;
 extern u8 D_00004FC5;
@@ -42,10 +181,7 @@ extern u8 D_0000614E;
 extern struct D_00006180_s D_00006180;
 extern s32 D_0000618C;
 extern s32 D_000061B8;
-extern s32 D_00008E80;
-extern s32 D_00008F84;
 extern s32 D_00008F90;
-extern s32 D_00008FC8;
 extern s32 D_00008FD4;
 extern s32 D_00008FD8;
 extern s32 D_00008FDC;
@@ -80,29 +216,43 @@ extern s32 D_0000B3DC;
 extern s32 D_0000B404;
 extern s32 D_0000B40C;
 extern s32 D_0000B7D4;
-extern M2C_UNK func_00001978;
-extern M2C_UNK func_00002600;
-extern M2C_UNK func_00003220;
-extern M2C_UNK func_00003F14;
+extern ScePowerBattery g_Battery;
+extern ScePower g_Power;
+extern ScePowerFrequency g_PowerFreq;
+extern ScePowerHandlers g_PowerHandler;
+extern ScePowerIdle g_PowerIdle;
+extern ScePowerSwitch g_PowerSwitch;
+extern SceSysEventHandler g_PowerSysEv;
+extern ScePowerResume g_Resume;
 
-s32 func_0000096C(s32, s32, s32);
+void _scePowerLowBatteryCallback(s32 enable, void *argp);
+s32 _scePowerOffThread(SceSize args, void *argp);
+void _scePowerNotifyCallback(s32 clear, s32 set, s32 oneOff);
+void _scePowerAcSupplyCallback(s32 enable, void *argp);
 s32 func_000012B4(s32, s32);
-void func_00001624(s32 arg0);
-s32 func_00001B1C(void);
+s32 _scePowerLock(s32 lockType, s32 isUserLock);
+s32 _scePowerUnlock(s32 lockType, s32 isUserLock);
+void _scePowerPowerSwCallback(s32 enable);
+s32 _scePowerVblankInterrupt(s32 subIntr, void *arg);
+s32 _scePowerIdleEnd(void);
 s32 func_00001EF4(s32, s32);
 s32 func_00001FEC(s32, s32);
-s32 func_000024BC(void);
+s32 _scePowerFreqEnd(void);
 s32 func_0000250C(void);
+s32 _scePowerBatteryThread(SceSize args, void *argp);
 s32 func_00002880(s32, s32);
 void func_00002944(s32 arg0);
-s32 func_00002D70(void);
-s32 func_00002DD0(void);
-s32 func_00002E14(void);
+void _scePowerHoldSwCallback(s32 enable, void *argp);
+s32 _scePowerBatteryInit(void);
+s32 _scePowerIdleInit(void);
+s32 _scePowerBatteryEnd(void);
 s32 func_00002E48(void);
-s32 func_00002E6C(s32 arg0, s32 arg1);
-s32 func_00002EFC(void);
+s32 _scePowerBatterySetParam(s32 arg0, s32 arg1);
+s32 _scePowerBatteryIsBusy(void);
+s32 func_00003220(SceSize args, void *argp);
 s32 func_000032EC(s32, s32, s32);
 s32 func_00003A98(void);
+s32 func_00003F14(SceSize args, void *argp);
 s32 func_00004B54(void);
 s32 func_00004BF8(void);
 s32 func_00004C50(s32 arg0, s32 arg1, s32 arg2);
@@ -111,6 +261,10 @@ s32 func_00004FE0(void);
 s32 func_00005250(void);
 M2C_UNK memset(M2C_UNK *, M2C_UNK, M2C_UNK);
 s32 module_reboot_before(void);
+float sceClkcGetBusFrequency(void);
+float sceClkcGetCpuFrequency(void);
+s32 sceClkcSetBusFrequency(float freq);
+s32 sceClkcSetCpuFrequency(float freq);
 s32 sceKernelClearEventFlag(s32, u32);
 void sceKernelCpuResumeIntr(s32);
 s32 sceKernelCpuSuspendIntr(void);
@@ -130,6 +284,7 @@ M2C_UNK sceKernelRegisterSubIntrHandler(M2C_UNK, M2C_UNK, M2C_UNK *, M2C_UNK);
 M2C_UNK sceKernelReleaseSubIntrHandler(M2C_UNK, M2C_UNK);
 M2C_UNK sceKernelSetDdrMemoryProtection(s32, M2C_UNK, M2C_UNK);
 s32 sceKernelSetEventFlag(s32, u32);
+void **sceKernelSm1ReferOperations(void);
 s32 sceKernelStartThread(s32, u32, void *);
 M2C_UNK sceKernelUnregisterSysEventHandler(M2C_UNK *);
 s32 sceKernelWaitThreadEnd(s32, void *);
@@ -148,7 +303,7 @@ s32 scePowerGetDdrStrength(s32 *arg0, s32 *arg1);
 s32 scePowerGetDdrVoltage(s32 *arg0, s32 *arg1);
 s32 scePowerGetForceSuspendCapacity(void);
 s32 scePowerGetGeEdramRefreshMode(void);
-s32 scePowerGetInnerTemp(void);
+s32 scePowerGetInnerTemp(float *temp);
 u8 scePowerGetLedOffTiming(void);
 s32 scePowerGetLowBatteryCapacity(void);
 s32 scePowerGetPllClockFrequencyInt(void);
