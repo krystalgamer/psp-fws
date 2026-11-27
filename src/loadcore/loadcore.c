@@ -1,3 +1,4 @@
+/* cflags[100-103]: -O2 */
 /* cflags[152]: -O2 -frename-registers */
 /* cflags[151]: -O2 -frename-registers */
 /* cflags[150]: -O2 -frename-registers */
@@ -1373,17 +1374,14 @@ INCLUDE_ASM("nonmatchings/loadcore", func_00004DBC);
 
 INCLUDE_ASM("nonmatchings/loadcore", sceKernelModuleAssign);
 
-s32 sceKernelAllocModule(s32 arg0) {
-    s32 temp_v0;
-    s32 var_v0;
+s32 sceKernelAllocModule(s32 execInfo) {
+    void *mod;
 
-    temp_v0 = sceKernelCreateModule();
-    var_v0 = 0;
-    if (temp_v0 != 0) {
-        sceKernelModuleAssign(temp_v0, arg0);
-        var_v0 = temp_v0;
-    }
-    return var_v0;
+    mod = (void *)sceKernelCreateModule();
+    if (mod == NULL)
+        return 0;
+    sceKernelModuleAssign((s32)mod, execInfo);
+    return (s32)mod;
 }
 
 void sceKernelFreeModule(void *arg0) {
