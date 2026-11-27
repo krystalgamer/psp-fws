@@ -221,15 +221,7 @@ struct SceNetInetWaiter {
     struct socket *sockets;     /* 0x54 list linked by so_selnext */
 };
 
-/* struct inpcb (partial) */
-struct inpcb {
-    u8 unk0[0x18];
-    u16 inp_fport;              /* 0x18 */
-    u16 inp_lport;              /* 0x1A */
-    u8 unk1C[0x44 - 0x1C];
-    struct in_addr inp_laddr;   /* 0x44 */
-    struct in_addr inp_faddr;   /* 0x48 */
-};
+
 
 /* struct rtentry (4.4BSD route.h, partial) */
 struct rtentry {
@@ -306,6 +298,37 @@ struct sppp {
     u8 unk39C[0x4A8 - 0x39C];
     void (*pp_tls)(struct sppp *sp);    /* 0x4A8 */
     void (*pp_tlf)(struct sppp *sp);    /* 0x4AC */
+};
+
+/* struct ifqueue (4.4BSD if.h) */
+struct ifqueue {
+    struct mbuf *ifq_head;      /* 0x00 */
+    struct mbuf *ifq_tail;      /* 0x04 */
+    s32 ifq_len;                /* 0x08 */
+    s32 ifq_maxlen;             /* 0x0C */
+    s32 ifq_drops;              /* 0x10 */
+};
+#define IFQ_MAXLEN 50
+
+/* struct ip_moptions (4.4BSD ip_var.h) */
+struct ip_moptions {
+    struct ifnet *imo_multicast_ifp;    /* 0x0 */
+    u8 imo_multicast_ttl;               /* 0x4 */
+    u8 imo_multicast_loop;              /* 0x5 */
+    u16 imo_num_memberships;            /* 0x6 */
+    struct in_multi *imo_membership[1]; /* 0x8 */
+};
+
+/* struct inpcb (partial) */
+struct inpcb {
+    u8 unk0[0x18];
+    u16 inp_fport;              /* 0x18 */
+    u16 inp_lport;              /* 0x1A */
+    u8 unk1C[0x20 - 0x1C];
+    struct route inp_route;     /* 0x20 */
+    u8 unk34[0x44 - 0x34];
+    struct in_addr inp_laddr;   /* 0x44 */
+    struct in_addr inp_faddr;   /* 0x48 */
 };
 
 struct SceTailqHead {
@@ -582,7 +605,7 @@ extern M2C_UNK D_0002BB94;
 extern void (*const D_0002BBCC)(struct sppp *sp); /* pap.scr (split rodata label) */
 extern M2C_UNK D_0002BBD8;
 extern s32 D_0002BEC0;
-extern s32 D_0002BF8C;
+extern struct ifqueue D_0002BF8C; /* ipintrq */
 extern s32 D_0002C01C;
 extern s32 D_0002C020;
 extern struct SceTailqHead D_0002C024;
@@ -626,7 +649,7 @@ extern s32 D_0002C588;
 extern s32 D_0002C58C;
 extern s32 D_0002C590;
 extern s32 D_0002C594;
-extern s32 D_0002C5BC;
+extern s32 *D_0002C5BC;
 extern s32 D_0002C5D8;
 extern u8 D_0002C5DC[];
 extern struct soqhead D_0002CC9C;
@@ -656,6 +679,10 @@ extern s32 D_0002DF50;
 extern s32 D_0002E480;
 extern s32 D_0002E5EC;
 extern s32 D_0002E5F0;
+extern s32 D_0002E798;
+extern s32 D_0002E79C;
+extern s32 D_0002E7A4;
+extern s32 D_0002E8D8;
 extern s32 D_0002E918;
 extern s32 D_0002E924;
 extern s32 D_0002E95C;
@@ -666,6 +693,14 @@ extern s32 D_0002EB44;
 extern SceNetBytes4 D_0002EB48;
 extern SceNetBytes4 D_0002EB4C;
 extern s32 D_0002EB54;
+extern s32 D_0002EB88;
+extern s32 D_0002EB8C;
+extern s32 D_0002EB90;
+extern s32 D_0002EB94;
+extern char D_0002F288[18] __attribute__((aligned(4)));
+extern s32 D_0002F500;
+extern s32 D_0002F50C;
+extern s32 D_0002F510;
 extern SceNetBytes4 D_0002F544;
 extern u8 D_00030218[];
 extern struct Unk_func_00013ED4_0 D_000302C8;
@@ -689,8 +724,11 @@ M2C_UNK _sce_pspnet_stop_of_inet_module_in_ifhandle_ether();
 M2C_UNK _sce_pspnet_stop_of_inet_module_in_netintr();
 M2C_UNK _sce_pspnet_stop_of_inet_module_in_sched();
 M2C_UNK _sce_pspnet_stop_of_pppoe_module_in_netintr();
+s32 _sce_pspnet_thread_enter(void);
+s32 _sce_pspnet_thread_leave(s32 t, s32 error);
 s32 _sce_pspnet_tsleep(void *chan, s32 timo);
 void func_00001320(void);
+s32 func_00001334(s32 req, struct sockaddr_in *dst, struct sockaddr_in *gateway, struct sockaddr_in *netmask, s32 flags);
 void func_00001584(void);
 void func_00001BA0(void);
 void func_00001BC8(void);
@@ -703,6 +741,7 @@ void func_00001DF4(void);
 void func_00001FA4(void);
 s32 func_00002028(s32, s32);
 s32 func_000023A8(s32);
+s32 func_0000243C(struct socket *so);
 void func_000040FC(void);
 s32 func_00004124(struct socket *so, struct mbuf *nam);
 s32 func_0000431C(struct socket *so, struct mbuf *nam);
@@ -713,6 +752,7 @@ void func_000048B8(struct socket *so, struct sockbuf *sb);
 void func_00004A3C(struct sockbuf *sb);
 void func_00005008(struct sockbuf *sb);
 void func_00005050(struct sockbuf *sb, s32 len);
+struct socket *func_00005700(s32 s);
 void func_00005778(struct socket *so);
 void func_0000588C(struct socket *so);
 void func_000058CC(struct socket *so);
@@ -792,6 +832,7 @@ void func_0000F27C(struct Unk_func_0000F27C_0 *arg0, struct Unk_func_0000F27C_1 
 void func_0000F2A8(struct Unk_func_0000F2A8_0 *arg0, struct Unk_func_0000F2A8_1 *arg1);
 s32 func_000106E0(void);
 s32 func_00010700(void);
+void func_00012684(struct in_multi *inm);
 void func_000138B4(struct Unk_func_000138B4_0 *arg0);
 void func_00013ED4(struct Unk_func_00013ED4_0 *arg0, s32 arg1, s32 arg2);
 void func_00014614(void *a, SceNetBytes4 addr, s32 c, void *d);
@@ -864,6 +905,7 @@ s32 sceNetConfigGetArpInfo(s32, s32);
 M2C_UNK sceNetFreeInternal(void *);
 s32 sceNetInetInetAddr(s32 arg0);
 void sceNetInetInetAton(s32 arg0, s32 arg1);
+const char *sceNetInetInetNtop(s32 af, const void *src, char *dst, s32 size);
 s32 *sceNetInet_lib_D7928A6D(void);
 M2C_UNK sceNetMFreem(s32);
 M2C_UNK sceNetMemset(M2C_UNK *, M2C_UNK, M2C_UNK);
