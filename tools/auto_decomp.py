@@ -72,6 +72,7 @@ class Module:
         self.compiler, self.setting = self.file_setting(self.src)
         self.stats = {}
         self.scores = {}
+        self.setscores = {}  # name -> {setting: best score}, for version_flags without exact matches
         # Functions already defined in the source fix their own prototypes.
         for f in self.files:
             if f.exists():
@@ -515,6 +516,8 @@ def _try_func(mod, name, header_ctx, target, seen):
         sm = difflib.SequenceMatcher(None, target, words, autojunk=False)
         score = max(len(target), len(words)) - sum(b.size for b in sm.get_matching_blocks())
         best = score if best is None else min(best, score)
+        ss = mod.setscores.setdefault(name, {})
+        ss[setting] = min(ss.get(setting, score), score)
     mod.stats[name] = sorted(set(mod.stats.get(name, [])) | matching)
     prev = mod.scores.get(name)
     if best is not None and (not prev or prev[0] is None or best < prev[0]):
@@ -665,11 +668,13 @@ def main():
     print(f"matched {matched}/{len(names)}")
     stats_path = ROOT / "tmp/auto_stats" / f"{args.version}_{args.module}.json"
     stats_path.parent.mkdir(exist_ok=True)
-    stats = {"compiler": mod.setting, "tried": len(names), "matched": matched, "funcs": mod.stats, "scores": mod.scores}
+    stats = {"compiler": mod.setting, "tried": len(names), "matched": matched, "funcs": mod.stats, "scores": mod.scores,
+             "setscores": mod.setscores}
     if (args.grep or args.only or args.names) and stats_path.exists():
         old = json.loads(stats_path.read_text())
         old["funcs"].update(mod.stats)
         old["scores"].update(mod.scores)
+        old.setdefault("setscores", {}).update(mod.setscores)
         stats = old
     if not FAST:  # keep the per-setting evidence of full runs
         stats_path.write_text(json.dumps(stats))
@@ -687,7 +692,7 @@ def _prescreen_one(name):
         res = try_func(mod, name, header)
     except subprocess.TimeoutExpired:
         res = None
-    return name, bool(res), mod.stats.get(name, []), mod.scores.get(name)
+    return name, bool(res), mod.stats.get(name, []), mod.scores.get(name), mod.setscores.get(name, {})
 
 
 def prescreen(mod, names, jobs, failed, key_of, stats_only):
@@ -698,8 +703,11 @@ def prescreen(mod, names, jobs, failed, key_of, stats_only):
     _PS["mod"], _PS["header"] = mod, mod.header()
     hits = set()
     with mp.get_context("fork").Pool(jobs) as pool:
-        for k, (n, ok, st, sc) in enumerate(pool.imap_unordered(_prescreen_one, todo, chunksize=4)):
+        for k, (n, ok, st, sc, ss) in enumerate(pool.imap_unordered(_prescreen_one, todo, chunksize=4)):
             mod.stats[n] = sorted(set(mod.stats.get(n, [])) | set(st))
+            for setting, v in ss.items():
+                cur = mod.setscores.setdefault(n, {})
+                cur[setting] = min(cur.get(setting, v), v)
             if sc is not None:
                 mod.scores[n] = sc
             if ok:

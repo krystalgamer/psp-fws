@@ -33,7 +33,9 @@ def main():
         stats = ROOT / "tmp/auto_stats" / f"{ver}_{mod}.json"
     if not stats.exists():
         sys.exit(f"{ver}:{mod}: no stats")
-    funcs = json.loads(stats.read_text())["funcs"]
+    data = json.loads(stats.read_text())
+    funcs = data["funcs"]
+    setscores = data.get("setscores", {})
     sd = src_dir(ver, mod)
     fv = sorted({int(re.match(r"\d+", x)[0]) for x in sharing_versions(ver, mod)})
     changes = {}
@@ -44,6 +46,21 @@ def main():
         c = collections.Counter(s.split(" ", 1)[1] for n in names for s in funcs.get(n, [])
                                 if s.startswith(comp + " ") and "variant" not in s and "volatile" not in s)
         if not c:
+            # no draft matches exactly: the setting with clearly the lowest total score
+            # over the functions scored under every setting of this compiler
+            per = [{k.split(" ", 1)[1]: v for k, v in setscores[n].items() if k.startswith(comp + " ")}
+                   for n in names if n in setscores]
+            opts = set().union(*per) if per else set()
+            per = [p for p in per if opts and set(p) == opts]
+            tot = {o: sum(p[o] for p in per) for o in opts}
+            if len(per) >= 3 and own in tot:
+                # near-ties: prefer options the file uses for its other versions
+                others = {cc_of.setting(text, str(x), mod)[1] for x in fv if x != v}
+                low = min(tot.values())
+                best = min(tot, key=lambda o: (tot[o] > low * 1.02, o not in others, tot[o]))
+                if best != own and tot[best] <= 0.9 * tot[own]:
+                    print(f"{ver}:{mod} {f.name}: no exact matches; total score {own}={tot[own]} {best}={tot[best]} ({len(per)} functions)")
+                    changes[f] = (own, best, 1, 0)
             continue
         best, k = c.most_common(1)[0]
         if best != own and k > c.get(own, 0):
