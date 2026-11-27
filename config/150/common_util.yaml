@@ -15,6 +15,7 @@ options:
   cache_path: tmp/build/150/.splat_cache.common_util
   symbol_addrs_path:
     - config/150/symbol_addrs.common_util.txt
+    - config/150/func_starts.common_util.txt
     - tmp/build/150/prx_syms.common_util.txt
   reloc_addrs_path: [tmp/build/150/reloc_addrs.common_util.txt]
   asset_path: tmp/assets/150/common_util
@@ -54,6 +55,7 @@ segments:
     subsegments:
       - { start: 0x80, type: asm, name: init, linker_section: .init }
       - [0xA4, c, common_util]
+      - [0xA8D0, c, common_util_crtend]
       - { start: 0xA928, type: asm, name: fini, linker_section: .fini }
       - { start: 0xA944, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0xAADC, type: prxpad, order: .text }
@@ -72,6 +74,7 @@ segments:
       - { start: 0xAF1C, type: rodata, name: jcr, linker_section: .jcr }
       - { start: 0xAF20, type: rodata, name: eh_frame, linker_section: .eh_frame }
       - [0xAF24, .rodata, common_util]
+      - [0xBB54, .rodata, common_util_crtend]
       - { start: 0xBB5C, type: prxpad, order: .rodata }
   - name: common_util_seg1
     type: code

@@ -1460,15 +1460,3 @@ INCLUDE_ASM("nonmatchings/common_util", func_00007F30);
 INCLUDE_ASM("nonmatchings/common_util", func_00008034);
 
 INCLUDE_ASM("nonmatchings/common_util", func_000081A4);
-
-INCLUDE_ASM("nonmatchings/common_util", func_00008378);
-
-#if FW_VERSION >= 350
-INCLUDE_ASM("nonmatchings/common_util", func_000083D0);
-#endif
-
-#if FW_VERSION == 201
-INCLUDE_RODATA("nonmatchings/common_util", D_00008030);
-#endif
-
-INCLUDE_RODATA("nonmatchings/common_util", D_00008B70);
