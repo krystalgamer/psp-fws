@@ -980,7 +980,22 @@ INCLUDE_ASM("nonmatchings/sysmem", sceKernelSizeLockMemoryBlock);
 
 INCLUDE_ASM("nonmatchings/sysmem", func_00003A1C);
 
+#if FW_VERSION >= 150 && FW_VERSION < 201
+s32 sceKernelFreePartitionMemory(SceUID id) {
+    SceSysmemUidCB *uid;
+    s32 oldIntr = suspendIntr();
+    s32 ret = sceKernelGetUIDcontrolBlockWithType(id, g_MemBlockType, &uid);
+    if (ret != 0) {
+        resumeIntr(oldIntr);
+        return ret;
+    }
+    ret = sceKernelDeleteUID(id);
+    resumeIntr(oldIntr);
+    return ret;
+}
+#else
 INCLUDE_ASM("nonmatchings/sysmem", sceKernelFreePartitionMemory);
+#endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/sysmem", func_000038C0);
@@ -1015,7 +1030,24 @@ u32 sceKernelGetBlockHeadAddr(SceUID id) {
     setK1(oldK1);
     return addr;
 }
-#else
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 201
+u32 sceKernelGetBlockHeadAddr(SceUID id) {
+    SceSysmemUidCB *uid;
+    u32 addr;
+    s32 oldIntr = suspendIntr();
+    addr = 0;
+    if (sceKernelGetUIDcontrolBlockWithType(id, g_MemBlockType, &uid) == 0) {
+        SceSysmemMemoryBlock *blk = UID_CB_TO_DATA(uid, g_MemBlockType, SceSysmemMemoryBlock);
+        addr = blk->addr;
+    }
+    resumeIntr(oldIntr);
+    return addr;
+}
+#endif
+
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/sysmem", sceKernelGetBlockHeadAddr);
 #endif
 
