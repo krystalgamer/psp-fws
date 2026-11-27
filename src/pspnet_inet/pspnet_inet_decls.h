@@ -735,7 +735,8 @@ struct in_multi {
     u32 inm_refcount;                   /* 0x0C */
     u32 inm_timer;                      /* 0x10 */
     struct { struct in_multi *le_next; struct in_multi **le_prev; } inm_list; /* 0x14 */
-    u8 inm_unk1C[0x8];                  /* 0x1C */
+    s32 inm_state;                      /* 0x1C */
+    struct router_info *inm_rti;        /* 0x20 */
 };
 typedef char chk_in_multi[(sizeof(struct in_multi) == 0x24) ? 1 : -1];
 
@@ -1108,6 +1109,38 @@ struct pollfd {
 #define POLLHUP 0x0010
 #define POLLNVAL 0x0020
 
+/* struct router_info (netinet/in_var.h) */
+struct router_info {
+    struct ifnet *rti_ifp;              /* 0x00 */
+    s32 rti_type;                       /* 0x04 */
+    s32 rti_age;                        /* 0x08 */
+    struct router_info *rti_next;       /* 0x0C */
+};
+extern struct router_info *rti_head; /* rti_head */
+void *sceNetMallocInternal(u32 size);
+static __inline s32 rti_fill(struct in_multi *inm) {
+    struct router_info *rti;
+
+    for (rti = rti_head; rti != 0; rti = rti->rti_next) {
+        if (rti->rti_ifp == inm->inm_ifp) {
+            inm->inm_rti = rti;
+            if (rti->rti_type == 1)
+                return (0x12);
+            else
+                return (0x16);
+        }
+    }
+    rti = (struct router_info *)sceNetMallocInternal(sizeof(struct router_info));
+    if (rti == NULL)
+        return (0x16);
+    rti->rti_ifp = inm->inm_ifp;
+    rti->rti_type = 2;
+    rti->rti_next = rti_head;
+    rti_head = rti;
+    inm->inm_rti = rti;
+    return (0x16);
+}
+
 typedef void (*SceNetInetHook)(void *a, u16 b, void *c);
 
 struct SceNetInetKeyNode {
@@ -1388,7 +1421,6 @@ extern s32 D_0002C590;
 extern s32 D_0002C594;
 extern s32 D_0002C5B4; /* icmpmaskrepl */
 extern struct { struct SceNetInetKeyNode *lh_first; } D_0002C5B8;
-extern s32 *D_0002C5BC;
 extern s32 D_0002C5D8;
 extern u8 D_0002C5DC[];
 extern u8 D_0002CC50[]; /* pffasttimo_ch */
@@ -1406,7 +1438,6 @@ extern s32 D_0002D944; /* ipq_locked */
 extern struct ipstat D_0002D960; /* ipstat */
 extern struct { struct ipq *lh_first; } D_0002DA48; /* ipq */
 extern u8 D_0002DA50[0x170]; /* icmpstat */
-extern s32 D_0002DBC0;
 extern M2C_UNK D_0002DBC8;
 extern s32 D_0002DC30;
 extern struct inpcbtable D_0002DC78;
@@ -1460,6 +1491,7 @@ extern SceNetBytes4 dns_secondary;
 extern struct domain *domains;
 extern u8 ether_ipmulticast_max[6]; /* ether_ipmulticast_max */
 extern u8 ether_ipmulticast_min[6]; /* ether_ipmulticast_min */
+extern s32 igmp_timers_are_running; /* igmp_timers_are_running */
 extern TAILQ_HEAD(, in_ifaddr) in_ifaddrhead; /* in_ifaddr */
 extern u32 in_maxmtu;
 extern s32 inetctlerrmap[]; /* inetctlerrmap */
@@ -1633,7 +1665,6 @@ void func_00019C00(struct rtentry *rt);
 s32 func_0001A410(void);
 void func_0001A49C(void);
 void func_0001A548(struct rtentry *rt);
-s32 func_0001A714(s32, s32);
 void func_0001A8AC(void);
 void func_0001AA20(struct Unk_func_0001AA20_0 *arg0);
 void func_0001C208(void);
@@ -1689,6 +1720,7 @@ s32 if_rtdel(struct rtentry *rt, void *arg);
 struct ifaddr *ifa_ifwithaddr(struct sockaddr *addr);
 struct ifaddr *ifa_ifwithladdr(struct sockaddr *addr);
 void igmp_leavegroup(void *arg0);
+void igmp_sendpkt(struct in_multi *inm, s32 type);
 s32 in_cksum(struct mbuf *m, s32 len);
 void in_delmulti(struct in_multi *inm);
 void in_losing(struct inpcb *inp);

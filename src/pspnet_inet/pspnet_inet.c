@@ -4402,13 +4402,13 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_00019C5C);
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_0001A5C8);
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_0001A714);
+INCLUDE_ASM("nonmatchings/pspnet_inet", igmp_sendpkt);
 
 #if FW_VERSION < 201
 void func_0001B398(void) {
     func_0002C94C(&D_00030218, 0, 0x48);
-    D_0002DBC0 = 0;
-    D_0002C5BC = 0;
+    igmp_timers_are_running = 0;
+    rti_head = 0;
 }
 #endif
 
@@ -4419,12 +4419,25 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_0001B398);
 #if FW_VERSION >= 282
 void func_0001A8AC(void) {
     sceNetMemset(&D_0002DBC8, 0, 0x48);
-    D_0002DBC0 = 0;
-    D_0002C5BC = 0;
+    igmp_timers_are_running = 0;
+    rti_head = 0;
 }
 #endif
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", igmp_joingroup);
+void igmp_joingroup(struct in_multi *inm) {
+    s32 s = _sce_pspnet_spllock();
+
+    inm->inm_state = 2;
+    if ((inm->inm_addr.s_addr & __builtin_allegrex_wsbw(0xffffff00)) != __builtin_allegrex_wsbw(0xe0000000) &&
+        (inm->inm_ifp->if_flags & IFF_LOOPBACK) == 0) {
+        igmp_sendpkt(inm, rti_fill(inm));
+        inm->inm_state = 1;
+        inm->inm_timer = sceNetRand() % (10 * 5) + 1;
+        igmp_timers_are_running = 1;
+    } else
+        inm->inm_timer = 0;
+    _sce_pspnet_splunlock(s);
+}
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_inet", igmp_leavegroup);
@@ -4439,7 +4452,7 @@ void igmp_leavegroup(void *arg0) {
     temp_v1 = M2C_FIELD(arg0, u32 *, 0x1C);
     if ((temp_v1 != 0) && (temp_a3 = __builtin_allegrex_wsbw(-0x100), temp_v1_2 = __builtin_allegrex_wsbw(0xE0000000), ((temp_v1 < 3U) != 0))) {
         if (((M2C_FIELD(arg0, s32 *, 0) & temp_a3) != temp_v1_2) && !(M2C_FIELD(M2C_FIELD(arg0, void **, 4), u16 *, 0x30) & 8) && (M2C_FIELD(M2C_FIELD(arg0, void **, 0x20), s32 *, 4) != 1)) {
-            func_0001A714((s32) arg0, 0x17);
+            igmp_sendpkt((struct in_multi *)arg0, 0x17);
         }
     }
 }
@@ -4454,19 +4467,19 @@ void func_0001AA20(struct Unk_func_0001AA20_0 *arg0) {
     temp_v1 = arg0->unk1C;
     if ((temp_v1 != 0) && (temp_a3 = __builtin_allegrex_wsbw(-0x100), temp_v1_2 = __builtin_allegrex_wsbw(0xE0000000), ((temp_v1 < 3U) != 0))) {
         if (((arg0->unk0 & temp_a3) != temp_v1_2) && !(arg0->unk4->unk30 & 8) && (arg0->unk20->unk4 != 1)) {
-            func_0001A714((s32) arg0, 0x17);
+            igmp_sendpkt((struct in_multi *)arg0, 0x17);
         }
     }
 }
 #endif
 
-void func_0001AA90(void) {
+void igmp_slowtimo(void) {
     s32 s = _sce_pspnet_spllock();
-    s32 *p;
-    for (p = D_0002C5BC; p != NULL; p = (s32 *)p[3]) {
-        if (p[1] == 1) {
-            if (++p[2] >= 0x21C) {
-                p[1] = 2;
+    struct router_info *rti;
+    for (rti = rti_head; rti != NULL; rti = rti->rti_next) {
+        if (rti->rti_type == 1) {
+            if (++rti->rti_age >= 0x21C) {
+                rti->rti_type = 2;
             }
         }
     }

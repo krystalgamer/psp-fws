@@ -531,3 +531,7 @@ ifaof_ifpforaddr = 0x00008FC8; // type:func
 ifa_ifwithnet = 0x00008E40; // type:func
 ifa_ifwithdstaddr = 0x00009240; // type:func
 rn_refines = 0x0000B5E0; // type:func
+igmp_sendpkt = 0x0001A714; // type:func
+igmp_slowtimo = 0x0001AA90; // type:func
+rti_head = 0x0002C5BC;
+igmp_timers_are_running = 0x0002DBC0;
