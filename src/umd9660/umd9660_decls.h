@@ -137,6 +137,19 @@ typedef struct {
         } \
     } while (0)
 
+/* per-version constant (assert line numbers) for 1.00, 1.02, 1.03, 1.50/1.51, 1.52 */
+#if FW_VERSION == 100
+#define UMD9660_V(v100, v102, v103, v150, v152) (v100)
+#elif FW_VERSION == 102
+#define UMD9660_V(v100, v102, v103, v150, v152) (v102)
+#elif FW_VERSION == 103
+#define UMD9660_V(v100, v102, v103, v150, v152) (v103)
+#elif FW_VERSION < 152
+#define UMD9660_V(v100, v102, v103, v150, v152) (v150)
+#else
+#define UMD9660_V(v100, v102, v103, v150, v152) (v152)
+#endif
+
 struct Unk_Unk_func_00003FF0_0_64 {
     u8 pad0[0xC];
     s32 unkC;
@@ -278,13 +291,13 @@ u8 func_000053F0(void);
 void func_00005B20(s32 arg0);
 void func_00005B2C(s32 arg0);
 s32 module_start(void);
-s32 sceAtaIsDvdDrive();
+s32 sceAtaIsDvdDrive(void);
 M2C_UNK sceIoAddDrv(M2C_UNK *);
 void sceKernelAssert(s32 ok, s32 lvl);
 void sceKernelCpuResumeIntr(s32);
 s32 sceKernelCpuSuspendIntr(void);
 s32 sceKernelDipsw(M2C_UNK);
-s32 sceKernelDipswAll();
+u32 sceKernelDipswAll(void);
 SceUmd9660Drive *sceUmd9660GetDrive(s32 unit);
 s32 sceUmd9660Init(void);
 s32 sceUmd9660Term(void);

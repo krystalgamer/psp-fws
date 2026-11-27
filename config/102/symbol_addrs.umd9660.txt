@@ -202,3 +202,4 @@ sceUmdMan_driver_A869CAB3 = 0x000056FC; // type:func
 sceUmdManGetCommandTimerFlag = 0x00005704; // type:func
 sceUmdManSetAlarm = 0x0000570C; // type:func
 sceUmdManCancelAlarm = 0x00005714; // type:func
+sceUmd9660Term = 0x0000361C; // type:func
