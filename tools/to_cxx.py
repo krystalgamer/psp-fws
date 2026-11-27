@@ -123,9 +123,11 @@ def compile_errors(path, ver):
             if pending is not None:
                 errs.append((int(m[2]), pending))
                 pending = None
-        elif here:
+        elif here and not re.match(r"too (few|many) arguments to function", m[4]):
             errs.append((int(m[2]), m[4]))
         else:
+            # reported at the callee's declaration (header or earlier in this file); located by the
+            # following "at this point in file"
             pending = m[4]
     if cc.returncode and not errs:
         errs.append((0, (cc.stderr.strip() or "cc1plus failed")[-300:]))
@@ -348,7 +350,25 @@ def fix_ptr_int_compare(lines, idx, msg):
     return False
 
 
-FIXERS = [fix_too_few, fix_too_many, fix_convert_arg, fix_convert_passing, fix_convert_assign, fix_ptr_int_compare]
+def fix_convert_return(lines, idx, msg):
+    """`cannot convert `A*' to `M2C_UNK*' in return`: m2c's return type guess; return A *."""
+    m = re.search(r"cannot convert `(.+?)\*' to `(?:M2C_UNK|s32|u32|void|s8|u8)\*' in return", msg)
+    if not m:
+        return False
+    j, _ = _enclosing_def(lines, idx)
+    if j is None:
+        return False
+    dm = re.match(r"^((?:static )?)(M2C_UNK|s32|u32|void|s8|u8) \*(\w+)\((.*)$", lines[j])
+    if not dm:
+        return dm is None and False
+    typ = m[1].strip()
+    lines[j] = f"{dm[1]}{typ} *{dm[3]}({dm[4]}"
+    proto = lines[j].rstrip().rstrip("{").rstrip() + ";"
+    CHANGED_PROTOS[dm[3]] = proto[len(dm[1]):] if dm[1] else proto
+    return True
+
+
+FIXERS = [fix_too_few, fix_too_many, fix_convert_return, fix_convert_arg, fix_convert_passing, fix_convert_assign, fix_ptr_int_compare]
 
 
 # ---------------------------------------------------------------- driver
@@ -390,7 +410,8 @@ def main():
     print(f"{mod}: {len(files)} units marked C++, {nots} `!(x & K)` rewritten, versions {' '.join(vers)}")
 
     left = []
-    for rnd in range(a.rounds):
+    for rnd in range(a.rounds + 1):
+        last = rnd == a.rounds  # the extra round only verifies
         jobs = [(f, v) for f in files for v in vers]
         with ThreadPoolExecutor(max(1, a.jobs * 2)) as ex:
             res = list(ex.map(lambda fv: (fv[0], compile_errors(*fv)), jobs))
@@ -404,6 +425,9 @@ def main():
             break
         fixed = 0
         left = []
+        if last:
+            left = [(f.name, l, msg) for f, by_line in errs.items() for l, msg in sorted(by_line.items())]
+            break
         for f, by_line in errs.items():
             lines = f.read_text().split("\n")
             for l, msg in sorted(by_line.items()):
