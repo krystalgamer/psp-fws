@@ -259,7 +259,7 @@ void func_000006B8(void) {
 
 #if FW_VERSION >= 282
 s32 func_000004E8(s32 arg0) {
-    func_00008160((Unk_func_00008160_0*) &D_0001247C, arg0);
+    func_00008160(( Unk_func_00008160_0*) &D_0001247C, arg0);
     return 0;
 }
 
