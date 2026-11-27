@@ -362,3 +362,19 @@ sceSysregMsifClkSelect = 0x00012DE0; // type:func rom:0x12E60
 sceSysregMsifIoEnable = 0x00012DE8; // type:func rom:0x12E68
 sceSysregMsifIoDisable = 0x00012DF0; // type:func rom:0x12E70
 // shared names (tools/add_version.py) end
+
+// NID-derived names
+sceWlanDevInit = 0x000000C8; // type:func
+sceWlanSetWakeUp = 0x00002AFC; // type:func
+memmove = 0x00012BB8; // type:func
+sceKernelChangeThreadPriority = 0x00012CB8; // type:func
+sceLedSetMode = 0x00012CD8; // type:func
+sceNetCreateIfhandleEther = 0x00012CE0; // type:func
+sceNetAttachIfhandleEther = 0x00012CF0; // type:func
+sceNetSetIfhandleOpt = 0x00012D28; // type:func
+scePowerWlanActivate = 0x00012D58; // type:func
+scePowerWlanDeactivate = 0x00012D60; // type:func
+sceKernelRegisterSysEventHandler = 0x00012D68; // type:func
+sceSysconIsLowBattery = 0x00012D80; // type:func
+sceSysconGetWlanSwitch = 0x00012D88; // type:func
+sceSysconGetWlanPowerStatus = 0x00012D90; // type:func
