@@ -9,7 +9,7 @@ options:
   compiler: GCC
 
   asm_path: tmp/asm/102/display
-  src_path: src/display
+  src_path: tmp/av_src/102/display
   build_path: tmp/build/102
   ld_script_path: tmp/build/102/display.ld
   cache_path: tmp/build/102/.splat_cache.display
@@ -52,7 +52,7 @@ segments:
     start: 0x80
     vram: 0x0
     subsegments:
-      - [0x80, asm, display]
+      - [0x80, c, display]
       - { start: 0x1D10, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x1EA8, type: prxpad, order: .text }
       - { start: 0x1EB0, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
@@ -64,7 +64,7 @@ segments:
       - { start: 0x1FF4, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
       - { start: 0x2028, type: rodata, name: resident, linker_section: .rodata.sceResident }
       - { start: 0x22E0, type: rodata, name: nid, linker_section: .rodata.sceNid }
-      - [0x23AC, rodata, display]
+      - [0x23AC, .rodata, display]
       - { start: 0x24E4, type: prxpad, order: .rodata }
   - name: display_seg1
     type: code
