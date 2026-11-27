@@ -103,3 +103,4 @@ sceKernelDeleteUID = 0x0000627C; // type:func rom:0x62FC
 D_00006610_v103 = 0x00006610; // rom:0x6690
 D_00007278_v103 = 0x00007278; // rom:0x72F8
 // shared names (tools/add_version.py) end
+func_00000214 = 0x00000214; // type:func

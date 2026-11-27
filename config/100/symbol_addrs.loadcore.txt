@@ -66,3 +66,4 @@ func_00006688 = 0x00005938; // type:func
 func_000066B0 = 0x00005960; // type:func
 func_000066F0 = 0x000059A0; // type:func
 // shared names (tools/add_version.py) end
+func_00000214 = 0x00000214; // type:func

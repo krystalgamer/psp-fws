@@ -6,15 +6,66 @@
 #include "common.h"
 #include "loadcore_decls.h"
 
+#if FW_VERSION < 150
+s32 func_00000000(void) {
+    s32 i;
+
+    D_00007278[0].next = NULL;
+    for (i = 1; i < 30; i++)
+        D_00007278[i].next = &D_00007278[i - 1];
+    D_00007260 = &D_00007278[29];
+    return 0;
+}
+#else
 INCLUDE_ASM("nonmatchings/loadcore", func_00000000);
+#endif
 
+#if FW_VERSION < 150
+SceResidentLibrary *func_00000048(void) {
+    SceResidentLibrary *lib;
+
+    if (D_00007260 != NULL) {
+        lib = D_00007260;
+        D_00007260 = lib->next;
+        lib->next = NULL;
+    } else {
+        lib = sceKernelAllocHeapMemory(func_00000C08(), sizeof(SceResidentLibrary));
+    }
+    return lib;
+}
+#else
 INCLUDE_ASM("nonmatchings/loadcore", func_00000048);
+#endif
 
-#if FW_VERSION < 282
+#if FW_VERSION < 150
+SceResidentLibrary *func_00000098(SceResidentLibrary *lib) {
+    if (lib >= &D_00007278[0] && lib < &D_00007278[30]) {
+        lib->next = D_00007260;
+        D_00007260 = lib;
+        return lib;
+    }
+    sceKernelFreeHeapMemory(func_00000C08(), lib);
+    return D_00007260;
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/loadcore", func_00000098);
 #endif
 
-#if FW_VERSION < 270
+#if FW_VERSION < 150
+s32 func_0000010C(void) {
+    s32 i;
+
+    D_000076B0[0].freeNext = NULL;
+    for (i = 1; i < 90; i++)
+        D_000076B0[i].freeNext = &D_000076B0[i - 1];
+    D_00007264 = &D_000076B0[89];
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 270
 INCLUDE_ASM("nonmatchings/loadcore", func_0000010C);
 #endif
 
@@ -26,19 +77,70 @@ INCLUDE_ASM("nonmatchings/loadcore", func_000000A0);
 INCLUDE_ASM("nonmatchings/loadcore", func_00000154);
 #endif
 
-INCLUDE_ASM("nonmatchings/loadcore", func_0000019C);
-
 #if FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/loadcore", func_000001A0);
+SceStubLibrary *func_0000019C(void) {
+    SceStubLibrary *stub;
 
-INCLUDE_ASM("nonmatchings/loadcore", func_00000280);
+    if (D_00007264 != NULL) {
+        stub = D_00007264;
+        D_00007264 = stub->freeNext;
+    } else {
+        stub = sceKernelAllocHeapMemory(func_00000C08(), sizeof(SceStubLibrary));
+    }
+    return stub;
+}
+#else
+INCLUDE_ASM("nonmatchings/loadcore", func_0000019C);
 #endif
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/loadcore", func_000002CC);
+#if FW_VERSION < 150
+SceStubLibrary *func_000001A0(SceStubLibrary *stub) {
+    if (stub >= &D_000076B0[0] && stub < &D_000076B0[90]) {
+        stub->freeNext = D_00007264;
+        D_00007264 = stub;
+        return stub;
+    }
+    sceKernelFreeHeapMemory(func_00000C08(), stub);
+    return D_00007264;
+}
+
+s32 func_00000214(void) {
+    s32 i;
+
+    Kprintf("systable.c:%s:()\n", "InitSysEntTable");
+    D_00008628[0].next = NULL;
+    for (i = 1; i < 60; i++)
+        D_00008628[i].next = &D_00008628[i - 1];
+    D_00007268 = &D_00008628[59];
+    return 0;
+}
+
+SceSysCallEntryTable *func_00000280(void) {
+    SceSysCallEntryTable *ent;
+
+    if (D_00007268 != NULL) {
+        ent = D_00007268;
+        D_00007268 = ent->next;
+    } else {
+        ent = sceKernelAllocHeapMemory(func_00000C08(), sizeof(SceSysCallEntryTable));
+    }
+    return ent;
+}
+
+SceSysCallEntryTable *func_000002CC(SceSysCallEntryTable *p) {
+    if (p >= &D_00008628[0] && p < &D_00008628[60]) {
+        p->next = D_00007268;
+        D_00007268 = p;
+        return p;
+    }
+    sceKernelFreeHeapMemory(func_00000C08(), p);
+    return D_00007268;
+}
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
+INCLUDE_ASM("nonmatchings/loadcore", func_000002CC);
+
 INCLUDE_ASM("nonmatchings/loadcore", func_00000214);
 
 INCLUDE_ASM("nonmatchings/loadcore", func_00000368);
@@ -125,11 +227,116 @@ INCLUDE_ASM("nonmatchings/loadcore", func_0000145C);
 INCLUDE_ASM("nonmatchings/loadcore", func_00001224);
 #endif
 
-#if FW_VERSION < 150
+#if FW_VERSION == 100
+s32 func_00000370(u32 seed, SceSyscallTable **syscallTable) {
+    s32 i;
+    s32 status;
+    SceSyscallTable *tbl;
+    SceSysCallEntryTable *ent;
+
+    tbl = sceKernelAllocHeapMemory(func_00000C08(), sizeof(SceSyscallTable));
+    if (tbl == NULL) {
+        Kprintf("systable.c:%s:No Heap Memory\n", "SyscallTableInit");
+        return 0x80020001;
+    }
+    tbl->next = NULL;
+    tbl->seed = seed << 2;
+    tbl->funcTableSize = (seed << 2) + 0x3FFC;
+    tbl->tableSize = sizeof(SceSyscallTable);
+    for (i = 0; i < 4096; i++)
+        tbl->syscalls[i] = (void (*)())func_00000340;
+    ent = func_00000280();
+    D_0000726C = ent;
+    ent->inUse = 0;
+    ent->next = NULL;
+    ent->startAddr = 0;
+    ent->numEntries = 0x1000;
+    status = sceKernelRegisterSystemCallTable(tbl);
+    if (status != 0) {
+        Kprintf("systable.c:%s:sceKernelRegisterSystemCallTable failed: 0x%X\n", "SyscallTableInit", status);
+        sceKernelFreeHeapMemory(func_00000C08(), tbl);
+        return status;
+    }
+    *syscallTable = tbl;
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/loadcore", func_00000370);
+#endif
 
+#if FW_VERSION == 100
+s32 func_00000488(s32 numEntries) {
+    SceSysCallEntryTable *cur;
+    SceSysCallEntryTable *ent;
+
+    for (cur = D_0000726C; cur != NULL; cur = cur->next) {
+        if ((cur->inUse & 1) == 0) {
+            if (cur->numEntries == numEntries) {
+                cur->inUse |= 1;
+                return cur->startAddr;
+            }
+            if (cur->numEntries > numEntries) {
+                ent = func_00000280();
+                ent->inUse = 0;
+                ent->startAddr = cur->startAddr + (u16)numEntries;
+                ent->next = cur->next;
+                ent->numEntries = cur->numEntries - numEntries;
+                cur->inUse |= 1;
+                cur->numEntries = numEntries;
+                cur->next = ent;
+                return cur->startAddr;
+            }
+        }
+    }
+    Kprintf("systable.c:%s:Automatic SyscallTable grow needed\n", "AllocSysTable");
+    return 0x80020001;
+}
+#endif
+
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/loadcore", func_00000488);
+#endif
 
+#if FW_VERSION == 100
+SceSysCallEntryTable *func_00000570(u32 addr) {
+    SceSysCallEntryTable *cur;
+    SceSysCallEntryTable *prev;
+    SceSysCallEntryTable *next;
+
+    prev = NULL;
+    for (cur = D_0000726C; cur != NULL; cur = cur->next) {
+        if (cur->startAddr == addr)
+            break;
+        prev = cur;
+    }
+    if (cur == NULL) {
+        Kprintf("systable.c:%s:Cannot found index %d\n", "FreeSysTable", addr);
+        return NULL;
+    }
+    if ((cur->inUse & 1) == 0) {
+        Kprintf("systable.c:%s:try to Release unused table: %d\n", "FreeSysTable", addr);
+        return NULL;
+    }
+    cur->inUse &= ~1;
+    if (prev != NULL && prev->inUse == 0) {
+        prev->numEntries += cur->numEntries;
+        prev->next = cur->next;
+        func_000002CC(cur);
+        cur = prev;
+    }
+    next = cur->next;
+    if (next == NULL || next->inUse != 0)
+        return cur;
+    cur->numEntries += next->numEntries;
+    cur->next = next->next;
+    func_000002CC(next);
+    return cur;
+}
+#endif
+
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/loadcore", func_00000570);
 #endif
 
