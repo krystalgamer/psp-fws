@@ -415,8 +415,15 @@ INCLUDE_ASM("nonmatchings/loadexec", sceKernelLoadExecBufferPlain);
 INCLUDE_ASM("nonmatchings/loadexec", sceKernelLoadExecFromHost);
 #endif
 
-#if FW_VERSION < 201
+#if FW_VERSION >= 102 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/loadexec", sceKernelRegisterExitCallback);
+#endif
+
+#if FW_VERSION == 100
+s32 sceKernelRegisterExitCallback(s32 arg0) {
+    D_00003060 = arg0;
+    return 0;
+}
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 201
@@ -561,7 +568,14 @@ INCLUDE_ASM("nonmatchings/loadexec", sceKernelInvokeExitCallback);
 INCLUDE_ASM("nonmatchings/loadexec", LoadExecForKernel_11412288);
 #endif
 
+#if FW_VERSION >= 102
 INCLUDE_ASM("nonmatchings/loadexec", module_bootstart);
+#else
+s32 module_bootstart(void) {
+    D_00003060 = 0;
+    return 0;
+}
+#endif
 
 #if FW_VERSION == 280 || FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/loadexec", D_00001F7C);
