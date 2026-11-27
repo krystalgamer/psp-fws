@@ -1,6 +1,6 @@
 /* cflags[152]: -O1 */
 /* cflags[150]: -O1 */
-/* cflags[100,102]: -O1 */
+/* cflags[100,102,103]: -O1 */
 /* cflags: -Os -frename-registers */
 #include "common.h"
 #include "k1.h"
