@@ -104,3 +104,4 @@ EpilogueModule = 0x00001108; // type:func
 func_0000054C = 0x0000054C; // type:func
 shrink_file_block = 0x000004C8; // type:func
 LoadDeviceCheck = 0x000028EC; // type:func
+StartModule = 0x00001BD8; // type:func

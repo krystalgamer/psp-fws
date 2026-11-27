@@ -1265,7 +1265,45 @@ INCLUDE_ASM("nonmatchings/modulemgr", func_000013F4);
 
 INCLUDE_ASM("nonmatchings/modulemgr", func_00001994);
 
-INCLUDE_ASM("nonmatchings/modulemgr", func_00001BD8);
+s32 StartModule(SceModuleMgrParam *modParams, SceModule *mod, SceSize argSize, void *argp, s32 *pStatus) {
+    s32 status;
+
+    if ((mod->status & 0xF) != 3) {
+        Kprintf("modulemgr.c:%s:Illegal parameter: %d\n", "StartModule", mod->status & 0xF);
+        return 0x80020001;
+    }
+    mod->status = (mod->status & ~0xF) | 4;
+    status = func_00000E7C(modParams, mod);
+    if (status < 0) {
+        Kprintf("modulemgr.c:%s:prologue_module failed: 0x%08x\n", "StartModule", status);
+        return status;
+    }
+    sceKernelDcacheWritebackAll();
+    if (mod->userModThid == -1) {
+        Kprintf("modulemgr.c:%s:Warning:There is no start thread\n", "StartModule");
+        status = 0;
+    } else {
+        modMgrCB.userThreadId = mod->userModThid;
+        if (sceKernelStartThread(mod->userModThid, argSize, argp) == 0) {
+            status = sceKernelWaitThreadEnd(mod->userModThid, NULL);
+            if (status < 0) {
+                Kprintf("modulemgr.c:%s:Start failed: 0x%08x\n", "StartModule", status);
+            }
+        }
+        modMgrCB.userThreadId = -1;
+        sceKernelDeleteThread(mod->userModThid);
+        mod->userModThid = -1;
+    }
+    if (status == 0) {
+        mod->status = (mod->status & 0xFFF0) | 5;
+    } else {
+        EpilogueModule(mod);
+        mod->status = (mod->status & ~0xF) | 7;
+        UnloadModule(mod);
+        mod->status = (mod->status & ~0xF) | 8;
+    }
+    return status;
+}
 
 INCLUDE_ASM("nonmatchings/modulemgr", func_00001D78);
 
