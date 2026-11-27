@@ -70,9 +70,80 @@ INCLUDE_RODATA("nonmatchings/interruptman", D_00004130);
 
 #if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/interruptman", sceKernelRegisterIntrHandler);
+#endif
 
+#if FW_VERSION >= 150 && FW_VERSION < 152
+s32 sceKernelSetUserModeIntrHanlerAcceptable(u32 intrNum, s32 subIntrNum, s32 setBit) {
+    s32 ret = 0;
+    s32 oldIntr;
+    Interrupt *intr;
+    s32 i;
+
+    if (sceKernelIsIntrContext() != 0)
+        return 0x80020064;
+    if (intrNum >= 67)
+        return 0x80020065;
+    oldIntr = sceKernelCpuSuspendIntr();
+    intr = &g_intrInfo.intr[intrNum];
+    if (intr->handler == 0 || (intr->handler & 3) == 3)
+        ret = 0x80020068;
+    else if (subIntrNum < 0 || subIntrNum >= intr->numSubIntrs)
+        ret = 0x80020065;
+    else {
+        intr->subIntrs[subIntrNum]->userAcceptable = (setBit != 0);
+        intr->hasUserSub = 0;
+        for (i = 0; i < intr->numSubIntrs; i++) {
+            if (intr->subIntrs[subIntrNum]->userAcceptable) {
+                intr->hasUserSub = 1;
+                break;
+            }
+        }
+        if (intr->hasUserSub)
+            sceKernelSetIntrLevel(intrNum, 2);
+    }
+    sceKernelCpuResumeIntr(oldIntr);
+    return ret;
+}
+#endif
+
+#if FW_VERSION >= 152
 INCLUDE_ASM("nonmatchings/interruptman", sceKernelSetUserModeIntrHanlerAcceptable);
+#endif
 
+#if FW_VERSION >= 150 && FW_VERSION < 152
+s32 sceKernelSetIntrLevel(u32 intrNum, s32 level) {
+    s32 oldIntr;
+    Interrupt *intr;
+
+    if (intrNum >= 64)
+        return 0x80020065;
+    if ((u32)(level - 1) >= 3)
+        return 0x80020069;
+    oldIntr = sceKernelCpuSuspendIntr();
+    intr = &g_intrInfo.intr[intrNum];
+    if (intr->handler == 0 || (intr->handler & 3) == 3) {
+        sceKernelCpuResumeIntr(oldIntr);
+        return 0x80020068;
+    }
+    if (intr->hasUserSub && level != 2) {
+        sceKernelCpuResumeIntr(oldIntr);
+        return 0x80020069;
+    }
+    if (IntrIsEnabled(intrNum)) {
+        if (intr->level < level)
+            IntrDisableLevels(intrNum);
+        intr->level = level;
+        IntrEnableLevels(intrNum);
+        IntrUpdateMask();
+    } else {
+        intr->level = level;
+    }
+    sceKernelCpuResumeIntr(oldIntr);
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 152
 INCLUDE_ASM("nonmatchings/interruptman", sceKernelSetIntrLevel);
 #endif
 
@@ -646,25 +717,13 @@ void *mymemset(void *dst, u8 c, s32 n) {
 }
 
 INCLUDE_ASM("nonmatchings/interruptman", IntrDisableLevels);
-#endif
 
-#if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/interruptman", IntrEnableLevels);
 
 INCLUDE_ASM("nonmatchings/interruptman", IntrIsEnabled);
 
 INCLUDE_ASM("nonmatchings/interruptman", IntrDisableAll);
-#endif
 
-#if FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/interruptman", IntrEnableLevels);
-
-INCLUDE_ASM("nonmatchings/interruptman", IntrIsEnabled);
-
-INCLUDE_ASM("nonmatchings/interruptman", IntrDisableAll);
-#endif
-
-#if FW_VERSION == 100 || FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/interruptman", IntrUpdateMask);
 #endif
 
