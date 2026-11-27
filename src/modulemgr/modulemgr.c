@@ -610,9 +610,72 @@ INCLUDE_RODATA("nonmatchings/modulemgr", D_000078BC);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 152
-INCLUDE_ASM("nonmatchings/modulemgr", sceKernelLoadModuleBufferWithApitype);
+SceUID sceKernelLoadModuleBufferWithApitype(void *buf, s32 flags, s32 apiType, SceKernelLMOption *option) {
+    SceModuleMgrParam modParams;
+    s32 oldK1;
+    s32 ret;
 
-INCLUDE_ASM("nonmatchings/modulemgr", sceKernelLoadModuleByID);
+    memset(&modParams, 0, sizeof(modParams));
+    oldK1 = shiftK1Noreorder();
+    if (k1IsUserMode()) {
+        Kprintf("modulemgr.c:%s:SCE_KERNEL_ERROR_ILLEGAL_PERM_CALL\n", "sceKernelLoadModuleBufferWithApitype");
+        setK1(oldK1);
+        return 0x80020149;
+    }
+    if (option != NULL && k1IsUserMode() && (s32)((u32)option | ((u32)option + sizeof(*option))) < 0) {
+        setK1(oldK1);
+        return 0x800200D3;
+    }
+    if (sceKernelIsIntrContext()) {
+        setK1(oldK1);
+        return 0x80020064;
+    }
+    modParams.modeStart = CMD_RELOCATE_MODULE;
+    modParams.apiType = apiType;
+    modParams.modeFinish = CMD_RELOCATE_MODULE;
+    modParams.fileBase = buf;
+    modParams.fd = (SceUID)buf;
+    ret = func_000004B0(&modParams, option);
+    setK1(oldK1);
+    return ret;
+}
+
+SceUID sceKernelLoadModuleByID(SceUID fd, s32 flags, SceKernelLMOption *option) {
+    SceModuleMgrParam modParams;
+    s32 oldK1;
+    s32 ret;
+
+    memset(&modParams, 0, sizeof(modParams));
+    oldK1 = shiftK1Noreorder();
+    if (option != NULL && k1IsUserMode() && (s32)((u32)option | ((u32)option + sizeof(*option))) < 0) {
+        setK1(oldK1);
+        return 0x800200D3;
+    }
+    if (sceKernelIsIntrContext()) {
+        setK1(oldK1);
+        return 0x80020064;
+    }
+    if (k1IsUserMode()) {
+        modParams.apiType = 0x10;
+    } else {
+        modParams.apiType = 0;
+    }
+    if (k1IsUserMode()) {
+        ret = sceIoIoctl(fd, 0x8001, NULL, 0, NULL, 0);
+        if (ret < 0) {
+            Kprintf("modulemgr.c:%s:SCE_IOCTL_PERMIT_LOADMODULE - 0x%08x\n", "sceKernelLoadModuleByID", ret);
+            setK1(oldK1);
+            return 0x80020146;
+        }
+    }
+    modParams.modeStart = CMD_LOAD_MODULE;
+    modParams.modeFinish = CMD_RELOCATE_MODULE;
+    modParams.fd = fd;
+    modParams.fileBase = NULL;
+    ret = func_000004B0(&modParams, option);
+    setK1(oldK1);
+    return ret;
+}
 
 INCLUDE_ASM("nonmatchings/modulemgr", sceKernelLoadModuleWithApitype);
 #endif
@@ -826,13 +889,154 @@ INCLUDE_ASM("nonmatchings/modulemgr", sceKernelLoadModuleVSHPlain);
 INCLUDE_ASM("nonmatchings/modulemgr", sceKernelLoadModuleBufferUsbWlan);
 
 INCLUDE_ASM("nonmatchings/modulemgr", sceKernelLoadModuleBufferVSH);
+
+s32 sceKernelStartModule(SceUID modId, SceSize argSize, void *argp, s32 *pStatus, SceKernelSMOption *option) {
+    SceModuleMgrParam modParams;
+    s32 oldK1;
+    s32 ret;
+
+    memset(&modParams, 0, sizeof(modParams));
+    oldK1 = shiftK1Noreorder();
+    if (argp != NULL && k1IsUserMode() && (s32)((u32)argp | argSize | ((u32)argp + argSize)) < 0) {
+        setK1(oldK1);
+        return 0x800200D3;
+    }
+    if (pStatus != NULL && k1IsUserMode() && (s32)pStatus < 0) {
+        setK1(oldK1);
+        return 0x800200D3;
+    }
+    if (option != NULL && k1IsUserMode() && (s32)((u32)option | ((u32)option + sizeof(*option))) < 0) {
+        setK1(oldK1);
+        return 0x800200D3;
+    }
+    if (sceKernelIsIntrContext()) {
+        setK1(oldK1);
+        return 0x80020064;
+    }
+    modParams.modeStart = CMD_START_MODULE;
+    modParams.modeFinish = CMD_START_MODULE;
+    modParams.modId = modId;
+    modParams.argSize = argSize;
+    modParams.argp = argp;
+    modParams.pStatus = pStatus;
+    if (option != NULL) {
+        modParams.threadMpIdStack = option->mpIdStack;
+        modParams.stackSize = option->stackSize;
+        modParams.threadPriority = option->priority;
+        modParams.threadAttr = option->attribute;
+    } else {
+        modParams.threadMpIdStack = 0;
+        modParams.stackSize = 0;
+        modParams.threadPriority = 0;
+        modParams.threadAttr = 0;
+    }
+    ret = func_00003210(&modParams);
+    if (ret < 0) {
+        Kprintf("modulemgr.c:%s:result = 0x%08x\n", "sceKernelStartModule", ret);
+    }
+    setK1(oldK1);
+    return ret;
+}
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION >= 152 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/modulemgr", sceKernelStartModule);
+#endif
 
+#if FW_VERSION >= 150 && FW_VERSION < 152
+s32 sceKernelStopModule(SceUID modId, SceSize argSize, void *argp, s32 *pStatus, SceKernelSMOption *option) {
+    SceModuleMgrParam modParams;
+    u32 ra = (u32)getRa();
+    s32 oldK1 = shiftK1Noreorder();
+    SceModule *caller;
+    SceModule *mod;
+    s32 ret;
+
+    if (argp != NULL && k1IsUserMode() && (s32)((u32)argp | argSize | ((u32)argp + argSize)) < 0) {
+        setK1(oldK1);
+        return 0x800200D3;
+    }
+    if (pStatus != NULL && k1IsUserMode() && (s32)((u32)pStatus | ((u32)pStatus + sizeof(*pStatus))) < 0) {
+        setK1(oldK1);
+        return 0x800200D3;
+    }
+    if (option != NULL && k1IsUserMode() && (s32)((u32)option | ((u32)option + sizeof(option))) < 0) {
+        setK1(oldK1);
+        return 0x800200D3;
+    }
+    if (sceKernelIsIntrContext()) {
+        setK1(oldK1);
+        return 0x80020064;
+    }
+    caller = sceKernelFindModuleByAddress(ra);
+    if (caller == NULL) {
+        Kprintf("StopModule(): panic !!! call from unknown Module !!!\n");
+        setK1(oldK1);
+        return 0x80020136;
+    }
+    memset(&modParams, 0, sizeof(modParams));
+    mod = sceKernelGetModuleFromUID(modId);
+    modParams.pMod = mod;
+    if (mod != NULL && (mod->attribute & 1)) {
+        Kprintf("modulemgr.c:%s:module has SCE_MODULE_ATTR_CANT_STOP attribute\n", "sceKernelStopModule");
+        setK1(oldK1);
+        return 0x80020136;
+    }
+    modParams.modeStart = CMD_STOP_MODULE;
+    modParams.modeFinish = CMD_STOP_MODULE;
+    modParams.modId = modId;
+    modParams.callerModId = caller->modId;
+    modParams.argSize = argSize;
+    modParams.argp = argp;
+    modParams.pStatus = pStatus;
+    if (option != NULL) {
+        modParams.threadMpIdStack = option->mpIdStack;
+        modParams.stackSize = option->stackSize;
+        modParams.threadPriority = option->priority;
+        modParams.threadAttr = option->attribute;
+    } else {
+        modParams.threadMpIdStack = 0;
+        modParams.stackSize = 0;
+        modParams.threadPriority = 0;
+        modParams.threadAttr = 0;
+    }
+    ret = func_00003210(&modParams);
+    setK1(oldK1);
+    return ret;
+}
+#endif
+
+#if FW_VERSION >= 152 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/modulemgr", sceKernelStopModule);
+#endif
 
+#if FW_VERSION >= 150 && FW_VERSION < 152
+s32 sceKernelSelfStopUnloadModule(s32 unk, SceSize argSize, void *argp) {
+    u32 ra = (u32)getRa();
+    s32 oldK1 = shiftK1Noreorder();
+    s32 ret;
+
+    if (argp != NULL && k1IsUserMode() && (s32)((u32)argp | argSize | ((u32)argp + argSize)) < 0) {
+        setK1(oldK1);
+        return 0x800200D3;
+    }
+    if (sceKernelIsIntrContext()) {
+        setK1(oldK1);
+        return 0x80020064;
+    }
+    if (k1IsUserMode()) {
+        ra = ThreadManForKernel_DD55A192();
+    }
+    ret = func_000036B0(ra, argSize, argp, NULL, NULL);
+    if (ret < 0) {
+        Kprintf("modulemgr.c:%s:SelfSTopUnloadModule failed: 0x%08x\n", "sceKernelSelfStopUnloadModule", ret);
+    }
+    setK1(oldK1);
+    return ret;
+}
+#endif
+
+#if FW_VERSION >= 152 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/modulemgr", sceKernelSelfStopUnloadModule);
 #endif
 
@@ -1776,7 +1980,31 @@ s32 sceKernelUnloadModule(SceUID modId) {
 }
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION >= 150 && FW_VERSION < 152
+s32 sceKernelUnloadModule(SceUID modId) {
+    SceModuleMgrParam modParams;
+    s32 oldK1;
+    s32 ret;
+
+    memset(&modParams, 0, sizeof(modParams));
+    oldK1 = shiftK1Noreorder();
+    if (sceKernelIsIntrContext()) {
+        setK1(oldK1);
+        return 0x80020064;
+    }
+    modParams.modeStart = CMD_UNLOAD_MODULE;
+    modParams.modeFinish = CMD_UNLOAD_MODULE;
+    modParams.modId = modId;
+    modParams.argSize = 0;
+    modParams.argp = NULL;
+    modParams.pStatus = NULL;
+    ret = func_00003210(&modParams);
+    setK1(oldK1);
+    return ret;
+}
+#endif
+
+#if FW_VERSION >= 152 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/modulemgr", sceKernelUnloadModule);
 #endif
 

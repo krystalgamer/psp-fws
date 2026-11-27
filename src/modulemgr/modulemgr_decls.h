@@ -209,6 +209,11 @@ void func_000004B0(void *arg0, void *arg1);
 
 extern char D_00004C90[];
 extern char D_00004CF0[];
+extern char D_00005018[];
+extern char D_0000504C[];
+extern char D_0000505C[];
+extern char D_00005070[];
+extern char D_00005088[];
 extern char D_0000515C[];
 extern u32 D_00005AF0;
 extern char D_00005B90[];
@@ -257,6 +262,8 @@ void func_000004C0(struct Unk_func_000004C0_0 *arg0, struct Unk_func_000004C0_1 
 void func_00000594(void *arg0);
 s32 func_000026F8(SceModuleMgrParam *modParams, SceKernelLMOption *option);
 s32 func_00003210(SceModuleMgrParam *modParams);
+s32 func_0000340C(SceUID fd, s32 apiType);
+s32 func_000036B0(u32 ra, SceSize argSize, void *argp, s32 *pStatus, SceKernelSMOption *option);
 void func_00004750(void);
 s32 func_00004BA4(s32);
 s32 func_0000552C(s32);
@@ -285,6 +292,7 @@ SceModule *sceKernelFindModuleByName(const char *name);
 SceModule *sceKernelFindModuleByUID(SceUID modId);
 s32 sceKernelFreeModule(s32);
 M2C_UNK sceKernelFreePartitionMemory(s32);
+SceModule *sceKernelGetModuleFromUID(SceUID modId);
 SceUID sceKernelGetThreadId(void);
 s32 sceKernelGetUserLevel(void);
 s32 sceKernelIsIntrContext(void);
