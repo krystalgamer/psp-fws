@@ -62,10 +62,10 @@ typedef struct {
     SceUID sema;                /* 0x00 command lock */
     SceUID evf;                 /* 0x04 */
     u32 base;                   /* 0x08 controller base, 0xBD300000 = MSIF0 */
-    u32 unkC;
+    volatile u32 *cmdReg;       /* 0x0C */
     u32 unk10;
-    u32 unk14;
-    volatile u32 *reg;          /* 0x18 */
+    volatile u32 *statusReg;    /* 0x14 */
+    volatile u32 *reg;          /* 0x18 control */
     u8 unk1C[0x30 - 0x1C];
 } SceWlanBus;
 
@@ -114,7 +114,8 @@ struct SceWlanMac {
 #endif
     SceWlanMlmeSync *sync;      /* 0x07C mode data */
     void (*modeStop)(SceWlanMac *);  /* 0x080 */
-    u32 unk84[5];               /* 0x084 */
+    u32 unk84[4];               /* 0x084 */
+    s32 (*regWrite)(SceWlanMac *, s32, void *);  /* 0x094 */
     s32 (*gpSend)(SceWlanMac *, s32, void *, u32);              /* 0x098 */
     s32 (*gpRecv)(SceWlanMac *, s32, void *, u32, s32 *);       /* 0x09C */
     u32 unkA0;
