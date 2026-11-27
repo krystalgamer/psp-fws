@@ -51,7 +51,11 @@ typedef struct {
     s8 unk55;
     u8 pad56[0xA];
     volatile s32 unk60;
-    u8 pad64[0x3C];
+    u8 pad64[0x18];
+    s32 brightness;           /* 0x7C */
+    s32 unk80;
+    s32 brightnessFade;       /* 0x84 */
+    u8 pad88[0x18];
     s32 resumeMode;           /* 0xA0 */
 #else
     u8 pad0[0x60];
@@ -63,7 +67,11 @@ typedef struct {
 #if FW_VERSION >= 310
     u8 pad6B[0x91];
 #else
-    u8 pad6B[0x95];
+    u8 pad6B[0x6D];
+    s32 brightness;           /* 0xD8 */
+    s32 unkDC;
+    s32 brightnessFade;       /* 0xE0 */
+    u8 padE4[0x1C];
 #endif
 #else
     u8 pad65[7];

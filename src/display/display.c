@@ -4,6 +4,7 @@
 #include "display_decls.h"
 
 #define IS_USER_ADDR(p) (((u32)(p) >> 31) ^ 1)
+#define K1_BAD_ADDR(p) ((-k1IsUserMode() & (u32)(p)) >> 31)
 
 INCLUDE_ASM("nonmatchings/display", module_reboot_before);
 
@@ -579,7 +580,23 @@ s32 sceDisplayGetBrightness(s32 *level, s32 *unk1)
 #endif
 
 #if FW_VERSION == 271
-INCLUDE_ASM("nonmatchings/display", sceDisplayGetBrightness);
+s32 sceDisplayGetBrightness(s32 *level, s32 *unk1)
+{
+    u32 oldK1 = shiftK1Noreorder();
+
+    if (K1_BAD_ADDR(level) || K1_BAD_ADDR(unk1)) {
+        setK1(oldK1);
+        return 0x80000023;
+    }
+    if (level != NULL) {
+        *level = g_display.brightness;
+    }
+    if (unk1 != NULL) {
+        *unk1 = g_display.brightnessFade;
+    }
+    setK1(oldK1);
+    return 0;
+}
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 152
@@ -821,9 +838,33 @@ INCLUDE_ASM("nonmatchings/display", sceDisplay_driver_5B5AEFAD);
 INCLUDE_ASM("nonmatchings/display", sceDisplayGetBacklightSel);
 
 INCLUDE_ASM("nonmatchings/display", sceDisplaySetBrightness);
+#endif
 
+#if FW_VERSION >= 282 && FW_VERSION < 310
+s32 sceDisplayGetBrightness(s32 *level, s32 *unk1)
+{
+    u32 oldK1 = shiftK1Noreorder();
+
+    if (K1_BAD_ADDR(level) || K1_BAD_ADDR(unk1)) {
+        setK1(oldK1);
+        return 0x80000023;
+    }
+    if (level != NULL) {
+        *level = g_display.brightness;
+    }
+    if (unk1 != NULL) {
+        *unk1 = g_display.brightnessFade;
+    }
+    setK1(oldK1);
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 310
 INCLUDE_ASM("nonmatchings/display", sceDisplayGetBrightness);
+#endif
 
+#if FW_VERSION >= 282
 s32 module_start(void) {
     sceDisplayInit();
     return 0;
