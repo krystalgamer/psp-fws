@@ -4,6 +4,136 @@
 #include "common.h"
 #include "m2c_macros.h"
 
+typedef int SceMode;
+typedef s64 SceOff;
+typedef s32 SceSSize;
+typedef struct SceIoStat SceIoStat;
+typedef struct SceIoDirent SceIoDirent;
+typedef struct SceIoIob SceIoIob;
+typedef struct SceIoDeviceEntry SceIoDeviceEntry;
+typedef struct SceIoDeviceTable SceIoDeviceTable;
+typedef struct SceIoDeviceFunction SceIoDeviceFunction;
+
+/* 1.00: 8 bytes (no d_userfd_count yet). */
+struct SceIoDeviceEntry {
+    SceIoDeviceTable *d_dp; /* 0x0 */
+    void *d_private; /* 0x4 */
+};
+
+/* Driver function table (22 entries in 1.00, e.g. _nullcon_function). */
+struct SceIoDeviceFunction {
+    s32 (*df_init)(SceIoDeviceEntry *); /* 0x0 */
+    s32 (*df_exit)(SceIoDeviceEntry *); /* 0x4 */
+    s32 (*df_open)(SceIoIob *, char *, s32, SceMode); /* 0x8 */
+    s32 (*df_close)(SceIoIob *); /* 0xC */
+    SceSSize (*df_read)(SceIoIob *, void *, SceSize); /* 0x10 */
+    SceSSize (*df_write)(SceIoIob *, const void *, SceSize); /* 0x14 */
+    SceOff (*df_lseek)(SceIoIob *, SceOff, s32); /* 0x18 */
+    s32 (*df_ioctl)(SceIoIob *, s32, void *, SceSize, void *, SceSize); /* 0x1C */
+    s32 (*df_remove)(SceIoIob *, char *); /* 0x20 */
+    s32 (*df_mkdir)(SceIoIob *, char *, SceMode); /* 0x24 */
+    s32 (*df_rmdir)(SceIoIob *, char *); /* 0x28 */
+    s32 (*df_dopen)(SceIoIob *, char *); /* 0x2C */
+    s32 (*df_dclose)(SceIoIob *); /* 0x30 */
+    s32 (*df_dread)(SceIoIob *, SceIoDirent *); /* 0x34 */
+    s32 (*df_getstat)(SceIoIob *, char *, SceIoStat *); /* 0x38 */
+    s32 (*df_chstat)(SceIoIob *, char *, SceIoStat *, u32); /* 0x3C */
+    s32 (*df_rename)(SceIoIob *, const char *, const char *); /* 0x40 */
+    s32 (*df_chdir)(SceIoIob *, char *); /* 0x44 */
+    s32 (*df_mount)(SceIoIob *, const char *, const char *, s32, void *, s32); /* 0x48 */
+    s32 (*df_umount)(SceIoIob *, char *); /* 0x4C */
+    s32 (*df_devctl)(SceIoIob *, char *, s32, void *, SceSize, void *, SceSize); /* 0x50 */
+    s32 (*df_cancel)(SceIoIob *); /* 0x54 */
+};
+
+/* Driver descriptor passed to sceIoAddDrv (0x14 bytes). */
+struct SceIoDeviceTable {
+    char *dt_string; /* 0x0, device name */
+    s32 dt_type; /* 0x4 */
+    s32 dt_size; /* 0x8 */
+    char *dt_desc; /* 0xC */
+    SceIoDeviceFunction *dt_func; /* 0x10 */
+};
+
+/* File descriptor block. 1.00/1.50: static table g_iob[64] of 0x80 bytes, fd = index. */
+struct SceIoIob {
+    s32 i_flgs; /* 0x0, 1 = read, 2 = write, 0x8 = dir, 0x1000000 = thread-owned, 0x2000000 = power lock */
+    s32 i_unit; /* 0x4 */
+    SceIoDeviceEntry *i_de; /* 0x8 */
+    s32 d_type; /* 0xC */
+    void *i_private; /* 0x10 */
+    void *i_cwd; /* 0x14 */
+    SceOff i_fpos; /* 0x18 */
+    SceUID i_thread; /* 0x20 */
+    s32 unk24; /* 0x24 */
+    s32 fd; /* 0x28, own index; -1 = free */
+    SceUID curThread; /* 0x2C */
+    s32 userMode; /* 0x30 */
+    s32 powerLocked; /* 0x34 */
+    s32 asyncPrio; /* 0x38 */
+    SceUID asyncThread; /* 0x3C */
+    SceUID asyncSema; /* 0x40 */
+    SceUID asyncEvFlag; /* 0x44 */
+    SceUID asyncCb; /* 0x48 */
+    void *asyncCbArgp; /* 0x4C */
+    s32 asyncClosed; /* 0x50, uOFW unk050: free the iob when the async result is collected */
+    char *asyncCwd; /* 0x54, copy of the caller's cwd for an async open */
+    u32 k1; /* 0x58 */
+    s32 asyncCmd; /* 0x5C, 0 = close (deleted dev), 1 = open, 2 = close, 3 = read, 4 = write, 5 = lseek, 6 = ioctl */
+    s64 asyncRet; /* 0x60 */
+    s32 asyncArgs[6]; /* 0x68 */
+};
+
+typedef struct SceKernelMsgPacket {
+    struct SceKernelMsgPacket *next; /* 0x0 */
+    u8 msgPriority; /* 0x4 */
+    u8 dummy[3]; /* 0x5 */
+} SceKernelMsgPacket;
+
+/* Request passed by the FcpSendMsg wrappers to the MS stub thread (on the caller's stack).
+   cmd selects the PrFILE call; the argument words are per-command. 1.50 added p7 (one more
+   argument word before ret); 2.01 grew the tail to x7; 3.00+ widened cmd to a word. */
+typedef struct {
+    SceUID evf; /* 0x0, set by FcpSendMsg: signalled when the request is done */
+    s32 prio; /* 0x4, caller's thread priority */
+#if FW_VERSION < 300
+    u8 cmd; /* 0x8 */
+    s8 drive; /* 0x9, drive letter for drive-level commands */
+    u8 pad0A[2];
+#else
+    s32 cmd; /* 0x8 */
+    s8 drive; /* 0xC */
+    u8 pad0D[3];
+#endif
+    s32 p0; /* 0xC (3.00+: 0x10) */
+    s32 p1;
+    s32 p2;
+    s32 p3;
+    s32 p4;
+    s32 p5;
+    s32 p6;
+#if FW_VERSION >= 150
+    s32 p7;
+#endif
+    s32 ret; /* 0x28 (1.50-2.82: 0x2C, 3.00+: 0x30) */
+    s32 x0;
+    s32 x1;
+    s32 x2;
+#if FW_VERSION >= 201
+    s32 x3;
+    s32 x4;
+    s32 x5;
+    s32 x6;
+    s32 x7;
+#endif
+} SceMsStubMsg; /* 1.00: 0x38, 1.50: 0x3C, 2.01-2.82: 0x50, 3.00+: 0x54 */
+
+/* Mailbox packet built by FcpSendMsg: header + a copy of the request. */
+typedef struct {
+    SceKernelMsgPacket hdr; /* 0x0 */
+    u8 body[sizeof(SceMsStubMsg)]; /* 0x8 */
+} SceMsStubPacket;
+
 struct Unk_Unk_func_00013798_0_FA78 {
     u8 pad0[0x40];
     u32 unk40;
@@ -51,7 +181,7 @@ extern u8 D_000193FC;
 extern M2C_UNK D_00019AD4;
 extern s32 D_00019B00;
 extern s8 D_00019B04;
-extern s32 D_00019E00;
+extern SceUID D_00019E00;
 extern s32 D_00019E08;
 extern s32 D_00019E28;
 extern s32 D_0001A040;
@@ -73,12 +203,13 @@ extern s32 D_0002BD1C;
 extern s32 D_0002C7CC;
 extern s32 D_0002D054;
 extern s8 D_0002D730;
-extern s32 D_0002DA00;
+extern SceUID D_0002DA00;
 extern s32 D_0002DC10;
 extern s32 D_0002EF50;
 extern void *D_0003F728;
 extern M2C_UNK D_00042A80;
 
+s32 Kprintf(const char *fmt, ...);
 M2C_UNK func_00000020();
 void func_00000048(void);
 M2C_UNK func_00000134();
@@ -98,6 +229,16 @@ M2C_UNK func_00002708();
 s32 func_00002778(s32);
 M2C_UNK func_00002880();
 s32 func_00002B48(void);
+s32 func_00002B98(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
+s32 func_00002C20(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
+s32 func_00002C60(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
+s32 func_00002CA0(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
+s32 func_00002D24(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
+s32 func_00002DE4(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
+s32 func_00002E74(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
+s32 func_00002EFC(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
+s32 func_00002F8C(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
+s32 func_0000311C(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
 void func_0000322C(void);
 void func_00003248(void);
 void func_0000326C(void);
@@ -127,9 +268,26 @@ void func_0000481C(void);
 void func_00004950(void);
 void func_00004A58(void);
 void func_00004A74(void);
+s32 func_00004B88(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
 s32 func_00004BBC(s32 arg0);
+s32 func_00004C58(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
+s32 func_00004D6C(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
+s32 func_00004DF0(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
+s32 func_00004E30(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
 s32 func_00004E68(s8 *arg0);
+s32 func_00004EB0(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
+s32 func_00004F40(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
+s32 func_00004F88(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
+s32 func_0000501C(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
+s32 func_00005068(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
+s32 func_000050AC(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
+s32 func_000050E4(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
 s32 func_00005118(void);
+s32 func_00005124(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
+s32 func_000051F8(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
+s32 func_00005238(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
+s32 func_0000527C(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
+s32 func_000052D0(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
 void func_000053FC(void);
 s32 func_0000565C(void);
 void func_000057CC(s32 arg0);
@@ -141,6 +299,8 @@ s32 func_000067E0(void);
 s32 func_000067EC(void);
 s32 func_00006918(void);
 s32 func_00006960(void);
+s32 func_00006988(SceMsStubMsg *msg);
+s32 func_000075CC(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
 s32 func_0000764C(void);
 s32 func_000076F4(s32, s32);
 void *func_00007718(void *dst0, const void *src0, u32 length);
@@ -270,9 +430,15 @@ s32 sceFatMS_driver_BCB9DEDB(void);
 s32 sceIoClose(s32);
 M2C_UNK sceIoDelDrv(s32);
 s32 sceIoDevctl(void *, s32, void *, u32, void *, u32);
-s32 sceKernelCreateMbx(void *, u32, void *);
-s32 sceKernelDeleteEventFlag(s32);
+SceUID sceKernelCreateEventFlag(const char *name, s32 attr, s32 bits, void *opt);
+SceUID sceKernelCreateMbx(const char *name, u32 attr, void *opt);
+s32 sceKernelDeleteEventFlag(SceUID evf);
 M2C_UNK sceKernelDeleteFpl();
-s32 sceKernelDeleteMbx(s32);
+s32 sceKernelDeleteMbx(SceUID mbx);
+s32 sceKernelGetThreadCurrentPriority(void);
+s32 sceKernelReceiveMbx(SceUID mbx, void **msg, u32 *timeout);
+s32 sceKernelSendMbx(SceUID mbx, void *msg);
+s32 sceKernelSetEventFlag(SceUID evf, u32 bits);
+s32 sceKernelWaitEventFlag(SceUID evf, u32 bits, u32 wait, u32 *outBits, u32 *timeout);
 
 #endif
