@@ -112,6 +112,8 @@ struct Unk_func_00017AFC_0 {
     s32 unk4;
 };
 
+typedef void (*func_ptr)(void);
+
 extern M2C_UNK D_000108D4;
 extern M2C_UNK D_00012708;
 extern M2C_UNK D_0001386C;
@@ -127,6 +129,7 @@ extern s32 D_00018214;
 extern s32 D_00018244;
 extern M2C_UNK D_000187C8;
 extern s32 D_00018854;
+extern func_ptr D_00018D9C[];
 extern s32 D_00019820;
 extern s32 D_00019830;
 extern s32 D_00019F98;

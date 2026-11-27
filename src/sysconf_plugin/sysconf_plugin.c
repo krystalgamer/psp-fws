@@ -7273,11 +7273,3 @@ INCLUDE_ASM("nonmatchings/sysconf_plugin", func_0000EE64);
 #endif
 
 INCLUDE_ASM("nonmatchings/sysconf_plugin", func_00017B40);
-
-INCLUDE_ASM("nonmatchings/sysconf_plugin", func_00017B7C);
-
-#if FW_VERSION >= 350
-INCLUDE_ASM("nonmatchings/sysconf_plugin", func_00017BD4);
-#endif
-
-INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_0001EF18);

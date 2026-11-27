@@ -15,6 +15,7 @@ options:
   cache_path: tmp/build/340/.splat_cache.sysconf_plugin
   symbol_addrs_path:
     - config/340/symbol_addrs.sysconf_plugin.txt
+    - config/340/func_starts.sysconf_plugin.txt
     - tmp/build/340/prx_syms.sysconf_plugin.txt
   reloc_addrs_path: [tmp/build/340/reloc_addrs.sysconf_plugin.txt]
   asset_path: tmp/assets/340/sysconf_plugin
@@ -54,6 +55,7 @@ segments:
     subsegments:
       - { start: 0xA0, type: asm, name: init, linker_section: .init }
       - [0xC4, c, sysconf_plugin]
+      - [0x19A50, c, sysconf_plugin_crtend]
       - { start: 0x19AA8, type: asm, name: fini, linker_section: .fini }
       - { start: 0x19AC4, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x1A34C, type: prxpad, order: .text }
@@ -73,6 +75,7 @@ segments:
       - { start: 0x1AE38, type: rodata, name: eh_frame, linker_section: .eh_frame }
       - { start: 0x1AE3C, type: prxpad, order: .rodata }
       - [0x1AE40, .rodata, sysconf_plugin]
+      - [0x211B0, .rodata, sysconf_plugin_crtend]
   - name: sysconf_plugin_seg1
     type: code
     start: 0x21200
