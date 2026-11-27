@@ -1,7 +1,7 @@
 #include "common.h"
 #include "sm1_decls.h"
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102
 INCLUDE_ASM("nonmatchings/sm1", func_00000000);
 #else
 INCLUDE_ASM("nonmatchings/sm1", module_start);
