@@ -76,11 +76,6 @@ M2C_UNK func_00002638(...);
 void func_00002658(void);
 M2C_UNK func_000026B0(...);
 s32 module_stop(void);
-M2C_UNK scePaf_39E62C88(s32, M2C_UNK *, M2C_UNK, M2C_UNK);
-s32 scePaf_5E4447F6(s32);
-M2C_UNK scePaf_8B38372A(s32, M2C_UNK *);
-M2C_UNK scePaf_A013540A(s32, M2C_UNK *);
-s32 scePaf_C1B0AA0D(s32);
 s32 sce_paf_private_strlen(s32);
 s32 sce_paf_private_wcslen(s32);
 
