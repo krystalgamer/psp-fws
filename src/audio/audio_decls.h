@@ -5,6 +5,12 @@
 #include "m2c_macros.h"
 
 typedef struct {
+    u32 src;
+    u32 dst;
+    u32 next;
+    u32 ctrl;
+} SceAudioDmaLink;
+typedef struct {
     void *buf;
     s32 curSampleCnt;
     u16 sampleCount;
@@ -18,7 +24,7 @@ typedef struct {
     u8 buf240[272];
     u8 buf512[240];
     u8 buf752[272];
-    u32 hwBuf[48];
+    SceAudioDmaLink dmaLink[12];
 #if FW_VERSION < 201
     SceAudioChannel chans[8];
     void *dmaPtr[3];
@@ -102,14 +108,17 @@ M2C_UNK sceCodecSetVolumeOffset(s32);
 void sceKernelCpuResumeIntr(s32);
 s32 sceKernelCpuSuspendIntr(void);
 s32 sceKernelDeleteEventFlag(SceUID id);
+s32 sceKernelDmaOpAssign(void *op, s32 a1, s32 a2, s32 a3, s32 a4);
 s32 sceKernelDmaOpDeQueue(void *op);
 s32 sceKernelDmaOpEnQueue(void *op);
 s32 sceKernelDmaOpFree(void *op);
 s32 sceKernelDmaOpQuit(void *op);
+s32 sceKernelDmaOpSetCallback(void *op, s32 (*cb)(s32, s32), s32 arg);
+s32 sceKernelDmaOpSetupLink(void *op, s32 ctrl, void *link);
 s32 sceKernelRegisterSysEventHandler(SceSysEventHandler *handler);
 s32 sceKernelSetEventFlag(SceUID id, u32 bits);
 s32 sceKernelUnregisterSysEventHandler(SceSysEventHandler *handler);
 s32 sceKernelWaitEventFlag(SceUID id, u32 bits, u32 wait, u32 *outBits, void *timeout);
-void updateAudioBuf(s32 arg);
+s32 updateAudioBuf(s32 arg);
 
 #endif
