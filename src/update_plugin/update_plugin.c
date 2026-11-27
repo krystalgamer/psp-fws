@@ -283,14 +283,14 @@ void func_000002A4(void) {
     struct Unk_func_000002A4_temp_v0 *temp_v0;
 
     D_00007ED0 = 1;
-    temp_v0 = (Unk_func_000002A4_temp_v0*) func_00005364();
+    temp_v0 = func_00005364();
     if (temp_v0->unk61 == 0) {
 
     } else {
         sceUpdateDownloadAbort();
     }
     sceKernelWaitSema(D_00007EC0, 1, NULL);
-    func_00005CA0((Unk_func_00005CA0_0*) temp_v0);
+    func_00005CA0(temp_v0);
     func_00000210();
 }
 
@@ -1075,7 +1075,7 @@ INCLUDE_ASM("nonmatchings/update_plugin", func_00001E88);
 
 #if FW_VERSION >= 250 && FW_VERSION < 282
 void func_00001E88(s32 arg0) {
-    struct Unk_ret_func_00005364 *temp_s0;
+    struct Unk_func_000002A4_temp_v0 *temp_s0;
     void *temp_v0;
 
     temp_s0 = func_00005364();
@@ -1138,8 +1138,8 @@ INCLUDE_ASM("nonmatchings/update_plugin", func_000016A4);
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
 void func_000017B4(s32 arg0) {
-    struct Unk_ret_func_00005364 *temp_a0;
-    struct Unk_ret_func_00005364 *temp_v0;
+    struct Unk_func_000002A4_temp_v0 *temp_a0;
+    struct Unk_func_000002A4_temp_v0 *temp_v0;
 
     temp_v0 = func_00005364();
     temp_a0 = temp_v0;
@@ -1153,8 +1153,8 @@ void func_000017B4(s32 arg0) {
 
 #if FW_VERSION < 201
 void func_000017B4(s32 arg0) {
-    struct Unk_ret_func_00005364 *temp_a0;
-    struct Unk_ret_func_00005364 *temp_v0;
+    struct Unk_func_000002A4_temp_v0 *temp_a0;
+    struct Unk_func_000002A4_temp_v0 *temp_v0;
 
     func_00002128();
     temp_v0 = func_00005364();
@@ -1498,7 +1498,7 @@ INCLUDE_ASM("nonmatchings/update_plugin", func_00003084);
 
 #if FW_VERSION == 201
 void func_00003084(s32 arg0) {
-    struct Unk_ret_func_00005364 *temp_v0;
+    struct Unk_func_000002A4_temp_v0 *temp_v0;
 
     temp_v0 = func_00005364();
     if (M2C_FIELD(temp_v0, u8 *, 0x88) != 0) {
@@ -1522,7 +1522,7 @@ void func_00002858(void) {
 
 #if FW_VERSION == 152
 void func_00002870_v152(s32 arg0) {
-    struct Unk_ret_func_00005364 *temp_v0;
+    struct Unk_func_000002A4_temp_v0 *temp_v0;
 
     temp_v0 = func_00005364();
     if (temp_v0->pad50[0x20] != 0) {
@@ -1536,7 +1536,7 @@ void func_00002870_v152(s32 arg0) {
 
 #if FW_VERSION == 150
 void func_00002874_v150(s32 arg0) {
-    struct Unk_ret_func_00005364 *temp_v0;
+    struct Unk_func_000002A4_temp_v0 *temp_v0;
 
     temp_v0 = func_00005364();
     if (temp_v0->pad50[0x20] != 0) {
@@ -1589,7 +1589,7 @@ INCLUDE_ASM("nonmatchings/update_plugin", func_00003358);
 void func_00003358(s32 arg0) {
     struct Unk_func_00003358_temp_v0 *temp_v0;
 
-    temp_v0 = (Unk_func_00003358_temp_v0*) func_00005364();
+    temp_v0 = (Unk_func_00003358_temp_v0*) (func_00005364());
     if (temp_v0->unk84 != 0) {
 
     } else {
@@ -2241,7 +2241,7 @@ INCLUDE_ASM("nonmatchings/update_plugin", func_00005C10);
 #endif
 
 #if FW_VERSION >= 350
-s32 func_00005CA0(struct Unk_func_00005CA0_0 *arg0) {
+s32 func_00005CA0(struct Unk_func_000002A4_temp_v0 *arg0) {
     s32 temp_s1;
 
     if (arg0->unk61 != 0) {
@@ -2261,7 +2261,7 @@ s32 func_00005CA0(struct Unk_func_00005CA0_0 *arg0) {
 #endif
 
 #if FW_VERSION >= 300 && FW_VERSION < 350
-s32 func_00005CA0(struct Unk_func_00005CA0_0 *arg0) {
+s32 func_00005CA0(struct Unk_func_000002A4_temp_v0 *arg0) {
     s32 temp_s1;
 
     if (arg0->unk61 != 0) {
@@ -2281,7 +2281,7 @@ s32 func_00005CA0(struct Unk_func_00005CA0_0 *arg0) {
 #endif
 
 #if FW_VERSION == 282
-s32 func_00005CA0(struct Unk_func_00005CA0_0 *arg0) {
+s32 func_00005CA0(struct Unk_func_000002A4_temp_v0 *arg0) {
     s32 temp_s1;
 
     if (arg0->unk61 != 0) {
