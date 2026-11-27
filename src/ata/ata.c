@@ -82,7 +82,7 @@ INCLUDE_ASM("nonmatchings/ata", sceAtaCheckXferReady);
 
 INCLUDE_ASM("nonmatchings/ata", sceAtaAccessDataPort);
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/ata", func_00000F14);
 #else
 INCLUDE_ASM("nonmatchings/ata", sceAtaCheckPacketCmdComplete);
@@ -201,7 +201,7 @@ s32 sceAtaGetIntrFlag(void) {
 }
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/ata", func_000014D8);
 
 INCLUDE_ASM("nonmatchings/ata", func_00001598);
@@ -290,7 +290,7 @@ INCLUDE_ASM("nonmatchings/ata", func_000019F0);
 
 INCLUDE_ASM("nonmatchings/ata", sceAtaSetupAtaBlock);
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/ata", func_00001CF4);
 #else
 INCLUDE_ASM("nonmatchings/ata", sceAtaDoSoftResetBit);
@@ -800,7 +800,7 @@ INCLUDE_RODATA("nonmatchings/ata", D_00004008);
 INCLUDE_RODATA("nonmatchings/ata", D_000040D0);
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_RODATA("nonmatchings/ata", D_000050CC);
 
 INCLUDE_ASM("nonmatchings/ata", func_000030F4);
@@ -832,7 +832,7 @@ INCLUDE_ASM("nonmatchings/ata", func_00002B90);
 INCLUDE_ASM("nonmatchings/ata", func_00002C34);
 #endif
 
-#if FW_VERSION != 102
+#if FW_VERSION == 100 || FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/ata", sceAtaExecPacketCmd);
 #endif
 
@@ -862,11 +862,15 @@ INCLUDE_ASM("nonmatchings/ata", func_0000349C);
 INCLUDE_ASM("nonmatchings/ata", func_000029DC);
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_RODATA("nonmatchings/ata", D_000050EC);
+#endif
 
+#if FW_VERSION == 102
 INCLUDE_RODATA("nonmatchings/ata", D_0000510C);
+#endif
 
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/ata", func_00003378);
 
 INCLUDE_ASM("nonmatchings/ata", func_00003570);
@@ -978,7 +982,7 @@ s32 func_0000371C(void) {
 }
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/ata", func_000046C0);
 #else
 INCLUDE_ASM("nonmatchings/ata", sceAta_driver_BE07B3A7);
