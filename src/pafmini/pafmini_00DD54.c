@@ -1649,23 +1649,11 @@ void func_00020EC4(void *arg0) {
 }
 
 INCLUDE_ASM("nonmatchings/pafmini_00DD54", func_00020ED4);
-#endif
 
-#if FW_VERSION == 152
-INCLUDE_ASM("nonmatchings/pafmini_00DD54", func_00020F14);
-#endif
-
-#if FW_VERSION < 152
 void func_00020F14(void *arg0) {
     func_00021570(arg0);
 }
-#endif
 
-#if FW_VERSION == 152
-INCLUDE_ASM("nonmatchings/pafmini_00DD54", func_00020F30);
-#endif
-
-#if FW_VERSION < 152
 void func_00020F30(void) {
     func_00021580();
 }
@@ -2484,29 +2472,15 @@ void func_00029F58(s32 arg0, s32 *arg1, s32 arg2, s32 arg3) {
 }
 
 INCLUDE_ASM("nonmatchings/pafmini_00DD54", _ZN8psjsnameC1ERK11PSJSContextPKti);
-#endif
 
-#if FW_VERSION == 152
-INCLUDE_ASM("nonmatchings/pafmini_00DD54", func_00029F98);
-#endif
-
-#if FW_VERSION < 152
 void func_00029F98(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     func_0002A0C0(arg0, arg1, arg2, arg3);
 }
-#endif
 
-#if FW_VERSION == 152
-INCLUDE_ASM("nonmatchings/pafmini_00DD54", func_00029FB4);
-#endif
-
-#if FW_VERSION < 152
 void func_00029FB4(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     func_0002A0C0(arg0, arg1, arg2, arg3);
 }
-#endif
 
-#if FW_VERSION < 201
 void func_00029FD0(void) {
     _Z11PSJS_Mallocj();
 }
