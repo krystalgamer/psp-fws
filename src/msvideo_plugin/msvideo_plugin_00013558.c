@@ -463,7 +463,7 @@ void func_00013600(s32 **arg0) {
 #endif
 
 #if FW_VERSION == 152
-void func_00013600(M2C_UNK **arg0) {
+void func_00013600(s32 **arg0) {
     *arg0 = &D_00063588;
 }
 #endif
@@ -979,7 +979,7 @@ void func_00013844(s32 **arg0) {
 #endif
 
 #if FW_VERSION == 152
-void func_00013844(M2C_UNK **arg0) {
+void func_00013844(s32 **arg0) {
     *arg0 = &D_000636E0;
 }
 #endif

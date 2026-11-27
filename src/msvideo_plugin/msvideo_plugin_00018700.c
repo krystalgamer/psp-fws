@@ -25,7 +25,7 @@ void func_000138A8(s32 **arg0) {
 #endif
 
 #if FW_VERSION == 152
-void func_000138A8(M2C_UNK **arg0) {
+void func_000138A8(s32 **arg0) {
     *arg0 = &D_000636E0;
 }
 #endif
@@ -265,7 +265,7 @@ void func_0001932C(s32 **arg0) {
     func_0000EC84((s32) arg0);
 }
 #else
-void func_0001932C(M2C_UNK **arg0) {
+void func_0001932C(s32 **arg0) {
     *arg0 = &D_00063900;
     D_0007E540 = 0;
     func_0000EC84((s32) arg0);
@@ -296,7 +296,7 @@ void func_00014570(s32 **arg0) {
 #endif
 
 #if FW_VERSION == 152
-void func_00014570(M2C_UNK **arg0) {
+void func_00014570(s32 **arg0) {
     *arg0 = &D_00062138;
     D_0007E584 = 0;
     func_0000EC84((s32) arg0);
@@ -316,7 +316,7 @@ void func_000194F0(M2C_UNK **arg0) {
     func_0000EC84((s32) arg0);
 }
 
-void func_0001951C(M2C_UNK **arg0) {
+void func_0001951C(s32 **arg0) {
     *arg0 = &D_00062138;
     D_0007E584 = 0;
     func_0000EC84((s32) arg0);
@@ -527,7 +527,7 @@ void func_0001BA68(s32 **arg0) {
     func_0000EC84((s32) arg0);
 }
 #else
-void func_0001BA68(M2C_UNK **arg0) {
+void func_0001BA68(s32 **arg0) {
     *arg0 = &D_00063BC8;
     D_0007E590 = NULL;
     func_0000EC84((s32) arg0);
@@ -592,7 +592,7 @@ void func_0001C020(s32 **arg0) {
     func_0000EC84((s32) arg0);
 }
 #else
-void func_0001C020(M2C_UNK **arg0) {
+void func_0001C020(s32 **arg0) {
     *arg0 = &D_00063C38;
     D_0007E594 = 0;
     func_0000EC84((s32) arg0);
@@ -888,7 +888,7 @@ void func_00019D5C(s32 **arg0) {
 #endif
 
 #if FW_VERSION == 152
-void func_00019D5C(M2C_UNK **arg0) {
+void func_00019D5C(s32 **arg0) {
     *arg0 = &D_000481D0;
     D_0004E4DC = 0;
 }
@@ -902,7 +902,7 @@ void func_00019D74(s32 **arg0) {
 #endif
 
 #if FW_VERSION == 152
-void func_00019D74(M2C_UNK **arg0) {
+void func_00019D74(s32 **arg0) {
     *arg0 = &D_000481D0;
     D_0004E4DC = 0;
 }
@@ -1337,7 +1337,7 @@ void func_0001C418(s32 **arg0) {
 #endif
 
 #if FW_VERSION == 152
-void func_0001C418(M2C_UNK **arg0) {
+void func_0001C418(s32 **arg0) {
     *arg0 = &D_000641B0;
 }
 #endif
@@ -2306,7 +2306,7 @@ void func_00025D0C(struct Unk_func_00025D0C_0 *arg0) {
     arg0->unk8 = 0;
 }
 
-void func_00025D24(M2C_UNK **arg0) {
+void func_00025D24(s32 **arg0) {
     *arg0 = &D_00064670;
 }
 
@@ -2444,7 +2444,7 @@ void func_00026794(struct Unk_func_00026794_0 *arg0) {
     arg0->unk8 = 0;
 }
 
-void func_000267AC(M2C_UNK **arg0) {
+void func_000267AC(s32 **arg0) {
     *arg0 = &D_00064930;
 }
 

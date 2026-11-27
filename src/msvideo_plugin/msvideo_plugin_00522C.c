@@ -337,7 +337,7 @@ void func_00006ED4(s32 **arg0) {
     func_0000EC84((s32) arg0);
 }
 #else
-void func_00006ED4(M2C_UNK **arg0) {
+void func_00006ED4(s32 **arg0) {
     *arg0 = &D_00061AA8;
     D_00065FB0 = 0;
     func_0000EC84((s32) arg0);
@@ -368,7 +368,7 @@ void func_00005E9C(s32 **arg0) {
 #endif
 
 #if FW_VERSION == 152
-void func_00005E9C(M2C_UNK **arg0) {
+void func_00005E9C(s32 **arg0) {
     *arg0 = &D_00061BA0;
     D_00065FB4 = 0;
     func_0000EC84((s32) arg0);
@@ -388,7 +388,7 @@ void func_00007024(M2C_UNK **arg0) {
     func_0000EC84((s32) arg0);
 }
 
-void func_00007050(M2C_UNK **arg0) {
+void func_00007050(s32 **arg0) {
     *arg0 = &D_00061BA0;
     D_00065FB4 = 0;
     func_0000EC84((s32) arg0);
@@ -533,7 +533,7 @@ void func_00008038(s32 **arg0) {
     func_0000EC84((s32) arg0);
 }
 #else
-void func_00008038(M2C_UNK **arg0) {
+void func_00008038(s32 **arg0) {
     *arg0 = &D_00061C48;
     D_00065FB8 = 0;
     func_0000EC84((s32) arg0);
@@ -564,7 +564,7 @@ void func_00006D50(s32 **arg0) {
 #endif
 
 #if FW_VERSION == 152
-void func_00006D50(M2C_UNK **arg0) {
+void func_00006D50(s32 **arg0) {
     *arg0 = &D_00061CC8;
     D_00065FBC = 0;
     func_0000EC84((s32) arg0);
@@ -584,7 +584,7 @@ void func_000081A0(M2C_UNK **arg0) {
     func_0000EC84((s32) arg0);
 }
 
-void func_000081CC(M2C_UNK **arg0) {
+void func_000081CC(s32 **arg0) {
     *arg0 = &D_00061CC8;
     D_00065FBC = 0;
     func_0000EC84((s32) arg0);
@@ -783,7 +783,7 @@ void func_00009340(s32 **arg0) {
     func_0000EC84((s32) arg0);
 }
 #else
-void func_00009340(M2C_UNK **arg0) {
+void func_00009340(s32 **arg0) {
     *arg0 = &D_00062138;
     D_00065FC0 = 0;
     func_0000EC84((s32) arg0);
@@ -820,7 +820,7 @@ s32 func_000093B4(void) {
     return 1;
 }
 
-void func_000093BC(M2C_UNK **arg0) {
+void func_000093BC(s32 **arg0) {
     *arg0 = &D_00062138;
     func_0000EC84((s32) arg0);
 }
@@ -896,7 +896,7 @@ void func_00009A58(s32 **arg0) {
     *arg0 = &D_000621A8;
 }
 #else
-void func_00009A58(M2C_UNK **arg0) {
+void func_00009A58(s32 **arg0) {
     *arg0 = &D_000621A8;
 }
 
@@ -1632,7 +1632,7 @@ void func_0000C9D8(s32 **arg0) {
 #endif
 
 #if FW_VERSION == 152
-void func_0000C9D8(M2C_UNK **arg0) {
+void func_0000C9D8(s32 **arg0) {
     *arg0 = &D_00062138;
     D_000663F8 = NULL;
     func_0000EC84((s32) arg0);
@@ -1652,7 +1652,7 @@ void func_0000F598(M2C_UNK **arg0) {
     func_0000EC84((s32) arg0);
 }
 
-void func_0000F5C4(M2C_UNK **arg0) {
+void func_0000F5C4(s32 **arg0) {
     *arg0 = &D_00062138;
     D_000663F8 = 0;
     func_0000EC84((s32) arg0);
@@ -1853,7 +1853,7 @@ void func_0000D638(s32 **arg0) {
 #endif
 
 #if FW_VERSION < 150
-void func_0000D638(M2C_UNK **arg0) {
+void func_0000D638(s32 **arg0) {
     *arg0 = &D_00047050;
     _ZN3paf9PhHandler11KillTimerCBEi((s32) arg0, 0x01000009);
     _ZN3paf9PhHandler11KillTimerCBEi((s32) arg0, 0x0100000A);
@@ -1936,7 +1936,7 @@ void func_0000DA48(s32 **arg0) {
 #endif
 
 #if FW_VERSION == 152
-void func_0000DA48(M2C_UNK **arg0) {
+void func_0000DA48(s32 **arg0) {
     *arg0 = &D_00047120;
 }
 #endif
@@ -2079,7 +2079,7 @@ void func_0000F268(s32 **arg0) {
 #endif
 
 #if FW_VERSION == 152
-void func_0000F268(M2C_UNK **arg0) {
+void func_0000F268(s32 **arg0) {
     *arg0 = &D_00062A70;
 }
 #endif

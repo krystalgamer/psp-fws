@@ -13,21 +13,14 @@ void func_0005B424(M2C_UNK **arg0) {
     *arg0 = &D_00065968;
 }
 
-void func_0005B454(M2C_UNK **arg0) {
-    *arg0 = &D_00065968;
-    func_0005A044((s32) arg0);
+Class_00065968::~Class_00065968() {
 }
-
-void func_0005B47C(M2C_UNK **arg0) {
-    *arg0 = &D_00065968;
-    func_0005A044((s32) arg0);
-}
-
-INCLUDE_ASM("nonmatchings/msvideo_plugin_05AE90", func_0005B4A4);
 
 INCLUDE_RODATA("nonmatchings/msvideo_plugin_05AE90", D_00065890);
 
 INCLUDE_RODATA("nonmatchings/msvideo_plugin_05AE90", D_000658B0);
+
+__asm__(".globl _ZTV14Class_000658B0\n_ZTV14Class_000658B0 = D_000658B0 - 8\n");
 
 INCLUDE_ASM("nonmatchings/msvideo_plugin_05AE90", func_0005B4DC);
 

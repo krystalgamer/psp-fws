@@ -82,6 +82,8 @@ INCLUDE_RODATA("nonmatchings/msvideo_plugin_05B564", D_00065948);
 INCLUDE_RODATA("nonmatchings/msvideo_plugin_05B564", D_00049300);
 #else
 INCLUDE_RODATA("nonmatchings/msvideo_plugin_05B564", D_00065968);
+
+__asm__(".globl _ZTV14Class_00065968\n_ZTV14Class_00065968 = D_00065968 - 8\n");
 #endif
 
 INCLUDE_ASM("nonmatchings/msvideo_plugin_05B564", func_0005BCB0);
