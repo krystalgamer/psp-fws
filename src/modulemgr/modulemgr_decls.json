@@ -1,6 +1,6 @@
 {
  "funcs": {
-  "Kprintf": "void Kprintf(const char *fmt, ...);",
+  "Kprintf": "s32 Kprintf(const char *fmt, ...);",
   "SelfStopUnloadModule": "s32 SelfStopUnloadModule(u32 ra, SceSize argSize, void *argp, s32 *pStatus, SceKernelSMOption *option);",
   "ThreadManForKernel_DD55A192": "u32 ThreadManForKernel_DD55A192(void);",
   "exe_thread": "s32 exe_thread(SceSize argSize, void *argp);",

@@ -180,7 +180,7 @@ extern s32 D_00008174;
 extern s32 D_00008184;
 extern SceModuleManagerCB modMgrCB;
 
-void Kprintf(const char *fmt, ...);
+s32 Kprintf(const char *fmt, ...);
 s32 SelfStopUnloadModule(u32 ra, SceSize argSize, void *argp, s32 *pStatus, SceKernelSMOption *option);
 u32 ThreadManForKernel_DD55A192(void);
 s32 exe_thread(SceSize argSize, void *argp);

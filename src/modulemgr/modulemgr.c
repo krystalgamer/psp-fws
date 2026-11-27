@@ -912,7 +912,47 @@ s32 UnloadModule(SceModule *mod) {
 
 INCLUDE_ASM("nonmatchings/modulemgr", exe_thread);
 
-INCLUDE_ASM("nonmatchings/modulemgr", start_exe_thread);
+s32 start_exe_thread(SceModuleMgrParam *modParams) {
+    u8 unused[0x70];
+    s32 result;
+    u32 outBits;
+    SceUID threadId;
+    s32 ret;
+
+    if (sceKernelIsIntrContext()) {
+        Kprintf("modulemgr.c:%s:SCE_KERNEL_ERROR_ILLEGAL_CONTEXT\n", "start_exe_thread");
+        return 0x80020064;
+    }
+    threadId = sceKernelGetThreadId();
+    if (threadId < 0) {
+        Kprintf("modulemgr.c:%s:mythid = 0x%08x\n", "start_exe_thread", threadId);
+        return threadId;
+    }
+    if (threadId == modMgrCB.userThreadId) {
+        Kprintf("module managaer busy.\n");
+        return 0x80020143;
+    }
+    modParams->pResult = &result;
+    modParams->eventId = modMgrCB.eventId;
+    ret = sceKernelWaitSema(modMgrCB.semaId, 1, NULL);
+    if (ret < 0) {
+        Kprintf("modulemgr.c:%s:wresult=0x%08x for 0x%x\n", "start_exe_thread", ret, modMgrCB.semaId);
+        Kprintf(D_00006D34, D_00006D64, "start_exe_thread", 0x906);
+        sceKernelAssert(0, 0);
+        return ret;
+    }
+    ret = sceKernelStartThread(modMgrCB.threadId, sizeof(SceModuleMgrParam), modParams);
+    if (ret < 0) {
+        Kprintf("modulemgr.c:%s:sceKernelStartThread failed: 0x%08x\n", "start_exe_thread", ret);
+    } else {
+        sceKernelWaitEventFlag(modMgrCB.eventId, 1, 0x11, &outBits, NULL);
+    }
+    ret = sceKernelSignalSema(modMgrCB.semaId, 1);
+    if (ret < 0) {
+        Kprintf("modulemgr.c:%s:sceKernelSignalSema failed: 0x%08x\n", "start_exe_thread", ret);
+    }
+    return result;
+}
 
 s32 func_000026F8(SceModuleMgrParam *modParams, SceKernelLMOption *option) {
     if (option != NULL) {
@@ -1162,11 +1202,122 @@ INCLUDE_RODATA("nonmatchings/modulemgr", D_00005C3C);
 
 INCLUDE_RODATA("nonmatchings/modulemgr", D_00005C64);
 
-INCLUDE_ASM("nonmatchings/modulemgr", sceKernelLoadModuleVSH);
+SceUID sceKernelLoadModuleVSH(const char *path, s32 flags, SceKernelLMOption *option) {
+    SceModuleMgrParam modParams;
+    s32 oldK1;
+    SceUID fd;
+    s32 ret;
+
+    memset(&modParams, 0, sizeof(modParams));
+    oldK1 = shiftK1Noreorder();
+    if (path == NULL) {
+        return 0x800200D3;
+    }
+    if (k1IsUserMode() && (s32)path < 0) {
+        goto bad;
+    }
+    if (option != NULL && k1IsUserMode() && (s32)((u32)option | ((u32)option + sizeof(*option))) < 0) {
+        Kprintf(D_00005B90, "sceKernelLoadModuleVSH");
+        goto bad;
+    }
+    if (sceKernelIsIntrContext()) {
+        setK1(oldK1);
+        return 0x80020064;
+    }
+    if (k1IsUserMode() && sceKernelGetUserLevel() != 4) {
+        Kprintf(D_00005C3C, "sceKernelLoadModuleVSH");
+        setK1(oldK1);
+        return 0x80020149;
+    }
+    fd = sceIoOpen(path, 1, 0x1FF);
+    if (fd < 0) {
+        Kprintf(D_00005CB0, "sceKernelLoadModuleVSH", path, fd);
+        return fd;
+    }
+    ret = sceIoIoctl(fd, 0x8003, NULL, 0, NULL, 0);
+    if (ret < 0) {
+        Kprintf(D_00005BBC, "sceKernelLoadModuleVSH", ret);
+        sceIoClose(fd);
+        setK1(oldK1);
+        return 0x80020146;
+    }
+    memset(&modParams, 0, sizeof(modParams));
+    modParams.apiType = 0x20;
+    modParams.modeStart = CMD_LOAD_MODULE;
+    modParams.modeFinish = CMD_RELOCATE_MODULE;
+    modParams.fileBase = NULL;
+    modParams.fd = fd;
+    ret = func_000026F8(&modParams, option);
+    sceIoClose(fd);
+    if (ret < 0) {
+        Kprintf(D_00005C64, "sceKernelLoadModuleVSH", ret);
+    }
+    setK1(oldK1);
+    return ret;
+bad:
+    setK1(oldK1);
+    return 0x800200D3;
+}
 
 INCLUDE_RODATA("nonmatchings/modulemgr", D_00005CB0);
 
-INCLUDE_ASM("nonmatchings/modulemgr", sceKernelLoadModuleVSHPlain);
+SceUID sceKernelLoadModuleVSHPlain(const char *path, s32 flags, SceKernelLMOption *option) {
+    SceModuleMgrParam modParams;
+    s32 oldK1;
+    SceUID fd;
+    s32 ret;
+
+    memset(&modParams, 0, sizeof(modParams));
+    oldK1 = shiftK1Noreorder();
+    if (path == NULL) {
+        return 0x800200D3;
+    }
+    if (k1IsUserMode() && (s32)path < 0) {
+        goto bad;
+    }
+    if (option != NULL && k1IsUserMode() && (s32)((u32)option | ((u32)option + sizeof(*option))) < 0) {
+        Kprintf(D_00005B90, "sceKernelLoadModuleVSHPlain");
+        goto bad;
+    }
+    if (sceKernelIsIntrContext()) {
+        setK1(oldK1);
+        return 0x80020064;
+    }
+    if (k1IsUserMode() && sceKernelGetUserLevel() != 4) {
+        Kprintf(D_00005C14, "sceKernelLoadModuleVSHPlain");
+        setK1(oldK1);
+        return 0x80020149;
+    }
+    fd = sceIoOpen(path, 1, 0x1FF);
+    if (fd < 0) {
+        Kprintf(D_00005CB0, "sceKernelLoadModuleVSHPlain", path, fd);
+        return fd;
+    }
+    if (k1IsUserMode()) {
+        ret = sceIoIoctl(fd, 0x8003, NULL, 0, NULL, 0);
+        if (ret < 0) {
+            Kprintf("modulemgr.c:%s:SCE_IOCTL_PERMIT_LOADMODULE_VSH failed 0x%08x\n", "sceKernelLoadModuleVSHPlain", ret);
+            setK1(oldK1);
+            return 0x80020146;
+        }
+    }
+    memset(&modParams, 0, sizeof(modParams));
+    modParams.apiType = 0;
+    modParams.modeStart = CMD_LOAD_MODULE;
+    modParams.modeFinish = CMD_RELOCATE_MODULE;
+    modParams.fileBase = NULL;
+    modParams.fd = fd;
+    ret = func_000026F8(&modParams, option);
+    sceIoClose(fd);
+    if (ret < 0) {
+        Kprintf(D_00005C64, "sceKernelLoadModuleVSHPlain", ret);
+        return ret;
+    }
+    return ret;
+bad:
+    setK1(oldK1);
+    return 0x800200D3;
+}
 
 SceUID sceKernelLoadModuleBufferUsbWlan(SceSize bufSize, void *buf, s32 flags, SceKernelLMOption *option) {
     SceModuleMgrParam modParams;
