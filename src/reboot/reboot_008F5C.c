@@ -235,7 +235,14 @@ void func_00009290(s32 arg0, M2C_UNK arg1, M2C_UNK arg2) {
 
 INCLUDE_ASM("nonmatchings/reboot_008F5C", func_000092DC);
 
+#if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/reboot_008F5C", UFatRename);
+#else
+s32 UFatRename(s32 arg0, s32 arg1, s32 arg2) {
+    Kprintf("%s: iob=%p oldname=%s newname=%s\n", "UFatRename", arg0, arg1, arg2);
+    return 0x8001B000;
+}
+#endif
 
 s32 UFatChdir(s32 arg0, s32 arg1) {
     Kprintf((s32) "%s: iob=%p name=%s\n", (s32) "UFatChdir", arg0, arg1);
@@ -469,7 +476,25 @@ INCLUDE_ASM("nonmatchings/reboot_008F5C", func_0000D82C);
 
 INCLUDE_ASM("nonmatchings/reboot_008F5C", func_0000D964);
 
+#if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/reboot_008F5C", func_0000D9E0);
+#else
+void func_0000D9E0(void *arg0, s32 arg1, u8 *arg2) {
+    s32 temp_v1;
+    u8 temp_a5;
+    u8 temp_a6;
+
+    temp_v1 = M2C_FIELD(arg0, s32 *, 0x18C);
+    memcpy(M2C_FIELD(arg0, u8 **, 0x1B8) + (arg1 * temp_v1), arg2, temp_v1);
+    if (arg1 == 0) {
+        temp_a5 = *arg2;
+        temp_a6 = *M2C_FIELD(arg0, u8 **, 0x1B8);
+        if (temp_a6 != temp_a5) {
+            Kprintf("lflash.c:%s:buffer[0] = 0x%02x, data=0x%02x\n", "LFlashBlockBufferWritePage", temp_a6, temp_a5);
+        }
+    }
+}
+#endif
 
 INCLUDE_ASM("nonmatchings/reboot_008F5C", func_0000DA70);
 
@@ -575,7 +600,17 @@ s32 func_0000E098(void) {
     return 0;
 }
 
+#if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/reboot_008F5C", func_0000E0B8);
+#else
+s32 func_0000E0B8(void) {
+    M2C_UNK *temp_v0;
+
+    temp_v0 = "del_lflash_driver";
+    Kprintf("lflash.c:%s:()\n", temp_v0, temp_v0);
+    return 0;
+}
+#endif
 
 void func_0000E0E8(void) {
     func_0000E2F0((s32) &D_0001D890);
@@ -878,7 +913,19 @@ s32 sceNandReadPages(u32 ppn, void *user, void *spare, u32 len) {
     return ret;
 }
 
+#if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/reboot_008F5C", sceNandWritePages);
+#else
+s32 sceNandWritePages(u32 ppn, void *user, void *spare, u32 len) {
+    s32 var_a4;
+
+    var_a4 = (user == NULL) * 0x10;
+    if (spare == NULL) {
+        var_a4 |= 0x20;
+    }
+    return func_000115B8(ppn, user, spare, len, var_a4);
+}
+#endif
 
 s32 sceNandReadPagesRawExtra(u32 ppn, void *user, void *spare, u32 len) {
     return func_000113DC(ppn, user, spare, len, 0x20);

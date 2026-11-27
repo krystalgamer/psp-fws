@@ -346,7 +346,18 @@ void func_00003B50(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x48) = 0;
 }
 
-INCLUDE_ASM("nonmatchings/reboot_002D0C", func_00003B68);
+s32 func_00003B68(s32 arg0, void *arg1) {
+    s32 temp_v0;
+    s32 var_v0;
+
+    var_v0 = 0x8002013A;
+    if (D_00014EE4 != NULL) {
+        temp_v0 = D_00014EE4(arg0, M2C_FIELD(arg1, s32 *, 0x10));
+        func_00003B50(arg1, temp_v0);
+        var_v0 = temp_v0;
+    }
+    return var_v0;
+}
 
 INCLUDE_ASM("nonmatchings/reboot_002D0C", func_00003BC4_v100);
 
