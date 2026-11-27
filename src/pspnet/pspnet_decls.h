@@ -692,7 +692,7 @@ s32 _sce_pspnet_stop_of_pppoe_module_in_netintr(void);
 void _sce_pspnet_tabort(struct SceNetThreadInfo *arg0);
 s32 _sce_pspnet_thread_busycount(void);
 struct SceNetThreadInfo *_sce_pspnet_thread_enter(); /* 2.01+: (s32 *errp) */
-s32 _sce_pspnet_thread_leave(struct SceNetThreadInfo *ti, s32 err);
+s32 _sce_pspnet_thread_leave(struct SceNetThreadInfo *arg0, s32 arg1);
 void _sce_pspnet_tiwakeup(SceUID thid, void *ident);
 s32 _sce_pspnet_tsleep(void *ident, u32 timo);
 s32 _sce_pspnet_tsleep_usec(void *ident, u32 usec);

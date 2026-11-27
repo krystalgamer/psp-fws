@@ -1081,8 +1081,14 @@ s32 _sce_pspnet_thread_leave(struct SceNetThreadInfo *ti, s32 err) {
 }
 #endif
 
-#if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet", _sce_pspnet_thread_leave);
+#if FW_VERSION >= 152 && FW_VERSION < 282
+s32 _sce_pspnet_thread_leave(struct SceNetThreadInfo *arg0, s32 arg1) {
+    sceKernelWaitSema(D_0000A868, 1, NULL);
+    arg0->ti_errno = arg1;
+    arg0->ti_refcnt -= 1;
+    sceKernelSignalSema(D_0000A868, 1);
+    return (arg1 == 0) ? 0 : -1;
+}
 #endif
 
 #if FW_VERSION == 150
@@ -1092,16 +1098,6 @@ s32 _sce_pspnet_thread_leave(struct SceNetThreadInfo *arg0, s32 arg1) {
     arg0->ti_refcnt -= 1;
     sceKernelSignalSema(D_0000A868, 1);
     return (arg1 == 0) - 1;
-}
-#endif
-
-#if FW_VERSION == 152
-s32 _sce_pspnet_thread_leave(struct SceNetThreadInfo *arg0, s32 arg1) {
-    sceKernelWaitSema(D_0000A868, 1, NULL);
-    arg0->ti_errno = arg1;
-    arg0->ti_refcnt -= 1;
-    sceKernelSignalSema(D_0000A868, 1);
-    return (arg1 == 0) ? 0 : -1;
 }
 #endif
 
@@ -1740,11 +1736,7 @@ s32 _sce_pspnet_tsleep(void *ident, u32 timo) {
     return _sce_pspnet_tsleep_usec(ident, timo * 10000);
 }
 
-#if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet", func_00003100);
-#endif
-
-#if FW_VERSION >= 150 && FW_VERSION < 201
+#if FW_VERSION >= 150 && FW_VERSION < 282
 void func_00003100(struct SceNetThreadInfo *arg0) {
     sceKernelWaitSema(D_0000A874, 1, NULL);
     if (arg0->ti_wchan == NULL) {
@@ -2484,11 +2476,7 @@ void bpfattach(struct bpf_if **driverp, struct ifnet *ifp, u32 dlt, u32 hdrlen) 
 INCLUDE_ASM("nonmatchings/pspnet", bpfattach);
 #endif
 
-#if FW_VERSION < 152 || (FW_VERSION >= 201 && FW_VERSION < 282)
-INCLUDE_ASM("nonmatchings/pspnet", bpf_mcpy);
-#endif
-
-#if FW_VERSION == 152
+#if FW_VERSION >= 152 && FW_VERSION < 282
 u8 *bpf_mcpy(u8 *arg0, void *arg1, u32 arg2) {
     u32 temp_a2;
     u32 temp_s0;
@@ -2513,6 +2501,10 @@ u8 *bpf_mcpy(u8 *arg0, void *arg1, u32 arg2) {
     }
     return arg0;
 }
+#endif
+
+#if FW_VERSION < 152
+INCLUDE_ASM("nonmatchings/pspnet", bpf_mcpy);
 #endif
 
 #if FW_VERSION >= 282
