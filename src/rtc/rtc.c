@@ -209,17 +209,7 @@ s32 module_start(void) {
     sceKernelRegisterSysEventHandler(&rtc_handler);
     return 0;
 }
-#endif
 
-#if FW_VERSION >= 270 && FW_VERSION < 282
-s32 module_reboot_before(void) {
-    sceSysconSetAlarmCallback(NULL, NULL);
-    sceKernelUnregisterSysEventHandler(&rtc_handler);
-    return 0;
-}
-#endif
-
-#if FW_VERSION < 270
 s32 module_reboot_before(void) {
     sceKernelUnregisterSysEventHandler(&rtc_handler);
     return 0;
@@ -240,13 +230,17 @@ s32 module_start(void) {
     sceKernelRegisterSysEventHandler(&rtc_handler);
     return 0;
 }
+#endif
 
+#if FW_VERSION >= 270
 s32 module_reboot_before(void) {
     sceSysconSetAlarmCallback(NULL, NULL);
     sceKernelUnregisterSysEventHandler(&rtc_handler);
     return 0;
 }
+#endif
 
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/rtc", sceRtcInit);
 #endif
 
@@ -404,6 +398,10 @@ s32 sceRtcGetCurrentClockLocalTime(pspTime *time) {
 }
 #endif
 
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/rtc", func_00000C9C);
+#endif
+
 #if FW_VERSION >= 250 && FW_VERSION < 270
 s32 sceRtcGetCurrentClockLocalTime(pspTime *time) {
     s32 ret;
@@ -429,7 +427,9 @@ u64 sceRtcGetAccumlativeTime(void) {
 
     return base + (sceKernelGetSystemTimeWide() - g_rtc.sysTimeAtSync);
 }
-#else
+#endif
+
+#if FW_VERSION >= 150
 u64 sceRtcGetAccumlativeTime(void) {
     u64 base = (u64)g_rtc.clockAdjust * 500000 + g_rtc.clockUs;
 
@@ -445,20 +445,7 @@ s32 sceRtcConvertLocalTimeToUTC(const u64 *tickLocal, u64 *tickUTC) {
     return sceRtcTickAddMinutes(tickUTC, tickLocal, -(g_rtc.unkC + g_rtc.unk8));
 }
 
-#if FW_VERSION < 282
-s32 sysEventHandler(s32 arg0) {
-    switch (arg0) {                                 /* irregular */
-    case 0x400:
-        break;
-    case 0x100000:
-        sceRtcSynchronize();
-        break;
-    }
-    return 0;
-}
-#endif
-
-#if FW_VERSION == 282
+#if FW_VERSION < 300
 s32 sysEventHandler(s32 arg0) {
     switch (arg0) {                                 /* irregular */
     case 0x400:
@@ -766,19 +753,11 @@ INCLUDE_ASM("nonmatchings/rtc", sceRtcFormatRFC2822);
 
 INCLUDE_ASM("nonmatchings/rtc", sceRtcFormatRFC3339);
 
-#if FW_VERSION < 282
 char *formatDigits2(char *buf, s32 n) {
     buf[0] = (n / 10) % 10 + '0';
     buf[1] = n % 10 + '0';
     return buf + 2;
 }
-#else
-char *formatDigits2(char *buf, s32 n) {
-    buf[0] = (n / 10) % 10 + '0';
-    buf[1] = n % 10 + '0';
-    return buf + 2;
-}
-#endif
 
 char *formatDigits4(char *buf, s32 n) {
     buf[3] = n % 10 + '0';
