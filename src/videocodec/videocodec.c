@@ -6,9 +6,27 @@ INCLUDE_ASM("nonmatchings/videocodec", sceVideocodecGetEDRAM);
 
 INCLUDE_ASM("nonmatchings/videocodec", sceVideocodecReleaseEDRAM);
 
-INCLUDE_ASM("nonmatchings/videocodec", sceVideocodecOpen);
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/videocodec", func_0000012C);
 
-#if FW_VERSION < 250
+INCLUDE_ASM("nonmatchings/videocodec", func_00000244);
+
+INCLUDE_ASM("nonmatchings/videocodec", func_00000370);
+
+INCLUDE_ASM("nonmatchings/videocodec", func_000004EC);
+
+INCLUDE_ASM("nonmatchings/videocodec", func_00000624);
+
+INCLUDE_ASM("nonmatchings/videocodec", func_00000714);
+
+INCLUDE_ASM("nonmatchings/videocodec", func_00000800);
+
+INCLUDE_ASM("nonmatchings/videocodec", func_0000097C);
+#else
+INCLUDE_ASM("nonmatchings/videocodec", sceVideocodecOpen);
+#endif
+
+#if FW_VERSION == 100 || (FW_VERSION >= 150 && FW_VERSION < 250)
 INCLUDE_ASM("nonmatchings/videocodec", sceVideocodecInit);
 
 INCLUDE_ASM("nonmatchings/videocodec", sceVideocodecDecode);
@@ -18,16 +36,22 @@ INCLUDE_ASM("nonmatchings/videocodec", sceVideocodecStop);
 INCLUDE_ASM("nonmatchings/videocodec", sceVideocodecDelete);
 #endif
 
+#if FW_VERSION != 102
 INCLUDE_ASM("nonmatchings/videocodec", sceVideocodecSetMemory);
 
 INCLUDE_ASM("nonmatchings/videocodec", sceVideocodecScanHeader);
 
 INCLUDE_ASM("nonmatchings/videocodec", sceVideocodecGetVersion);
+#endif
 
 #if FW_VERSION < 201
 s32 sceVideocodecStartEntry(void) {
     return 0;
 }
+#endif
+
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/videocodec", func_00000A58);
 #endif
 
 #if FW_VERSION == 100
