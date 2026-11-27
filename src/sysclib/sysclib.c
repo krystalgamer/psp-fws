@@ -1,4 +1,4 @@
-/* cflags[100]: -O2 */
+/* cflags[100,102]: -O2 */
 /* cflags: -O2 -frename-registers */
 #include "common.h"
 #include "sysclib_decls.h"
@@ -71,7 +71,7 @@ INCLUDE_ASM("nonmatchings/sysclib", strstr);
 
 INCLUDE_ASM("nonmatchings/sysclib", strtok);
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/sysclib", strtok_r);
 
 INCLUDE_ASM("nonmatchings/sysclib", strtol);
@@ -79,7 +79,7 @@ INCLUDE_ASM("nonmatchings/sysclib", strtol);
 
 INCLUDE_ASM("nonmatchings/sysclib", atob);
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/sysclib", strtoul);
 #endif
 
@@ -97,7 +97,7 @@ INCLUDE_ASM("nonmatchings/sysclib", strchr);
 
 INCLUDE_ASM("nonmatchings/sysclib", strcmp);
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 u8 *strcpy(u8 *arg0, u8 *arg1) {
     u8 *var_a1;
     u8 *var_a2;
@@ -169,7 +169,7 @@ INCLUDE_RODATA("nonmatchings/sysclib", D_00001EE8);
 INCLUDE_RODATA("nonmatchings/sysclib", D_00001ED0);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_RODATA("nonmatchings/sysclib", D_00001EF0);
 #endif
 
@@ -181,7 +181,7 @@ INCLUDE_ASM("nonmatchings/sysclib", __udivdi3);
 
 INCLUDE_ASM("nonmatchings/sysclib", __umoddi3);
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/sysclib", func_00001ABC);
 #endif
 
@@ -193,7 +193,7 @@ INCLUDE_ASM("nonmatchings/sysclib", func_00001CE4);
 INCLUDE_ASM("nonmatchings/sysclib", func_00001B30);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 s32 module_start(void) {
     return func_00001B7C();
 }
