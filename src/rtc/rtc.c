@@ -63,15 +63,39 @@ INCLUDE_ASM("nonmatchings/rtc", sceRtcSetCurrentTick);
 
 INCLUDE_ASM("nonmatchings/rtc", sceRtcSetCurrentSecureTick);
 
+#if FW_VERSION < 270
+s32 sceRtcSetAlarmTick(const u64 *tick) {
+    u32 alarm = -1;
+    s32 ret;
+    s32 intr;
+
+    if (tick != NULL && *tick != 0 && g_rtc.baseTick != 0) {
+        alarm = (*tick - g_rtc.baseTick) / 500000;
+    }
+    ret = sceSysconWriteAlarm(alarm);
+    if (ret < 0) {
+        return ret;
+    }
+    intr = sceKernelCpuSuspendIntr();
+    if (tick != NULL) {
+        g_rtc.alarmTick = *tick;
+    } else {
+        g_rtc.alarmTick = 0;
+    }
+    sceKernelCpuResumeIntr(intr);
+    return 0;
+}
+#else
 INCLUDE_ASM("nonmatchings/rtc", sceRtcSetAlarmTick);
 
-#if FW_VERSION >= 270
 INCLUDE_ASM("nonmatchings/rtc", sceRtcIsAlarmed);
 
 INCLUDE_ASM("nonmatchings/rtc", sceRtcRegisterCallback);
 
 INCLUDE_ASM("nonmatchings/rtc", sceRtcUnregisterCallback);
-#else
+#endif
+
+#if FW_VERSION < 270
 s32 sceRtcGetCurrentTick(u64 *tick) {
     s32 ret;
     u32 oldK1 = shiftK1();
@@ -90,9 +114,7 @@ s32 sceRtcGetCurrentTick(u64 *tick) {
     setK1(oldK1);
     return ret;
 }
-#endif
-
-#if FW_VERSION >= 270
+#else
 s32 sceRtcGetCurrentTick(u64 *tick) {
     s32 ret;
     u32 oldK1 = shiftK1();
@@ -111,7 +133,9 @@ s32 sceRtcGetCurrentTick(u64 *tick) {
     setK1(oldK1);
     return ret;
 }
-#else
+#endif
+
+#if FW_VERSION < 270
 s32 sceRtcGetCurrentSecureTick(u64 *tick) {
     s32 ret;
     u32 oldK1 = shiftK1();
@@ -130,9 +154,7 @@ s32 sceRtcGetCurrentSecureTick(u64 *tick) {
     setK1(oldK1);
     return ret;
 }
-#endif
-
-#if FW_VERSION >= 270
+#else
 s32 sceRtcGetCurrentSecureTick(u64 *tick) {
     s32 ret;
     u32 oldK1 = shiftK1();
