@@ -376,9 +376,9 @@ def main():
     for f in files:
         t = f.read_text()
         if MARK not in t:
-            t = MARK + "\n" + t
-        t, n = rewrite_not(t)
-        nots += n
+            # only C written for cc1: a unit that is already C++ may use `!` on purpose (xori form)
+            t, n = rewrite_not(MARK + "\n" + t)
+            nots += n
         f.write_text(t)
     store_p = sd / f"{mod}_decls.json"
     structify.SRC[mod] = sd
