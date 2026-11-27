@@ -1,3 +1,4 @@
+/* cflags: -O2 -frename-registers */
 #include "common.h"
 #include "blkdev_decls.h"
 
@@ -25,7 +26,18 @@ INCLUDE_ASM("nonmatchings/blkdev", sceBLKUnRegister);
 
 INCLUDE_ASM("nonmatchings/blkdev", sceBLKStartFeatures);
 
-INCLUDE_ASM("nonmatchings/blkdev", sceBLKTerm);
+s32 sceBLKTerm(void) {
+    s32 i;
+
+    for (i = D_00000F30 - 1; i >= 0; i--) {
+        s32 *e = D_00001000[D_00000F30];
+
+        sceBLKUnRegister(e, e[9]);
+    }
+    D_00000F30 = 0;
+    sceKernelDeleteHeap(D_00000F10);
+    return sceKernelDeleteSema(D_00000F10);
+}
 
 s32 module_start(void) {
     sceBLKInit();

@@ -1,7 +1,14 @@
 {
  "funcs": {
   "module_start": "s32 module_start(void);",
-  "sceBLKInit": "M2C_UNK sceBLKInit();"
+  "sceBLKInit": "M2C_UNK sceBLKInit();",
+  "sceBLKUnRegister": "s32 sceBLKUnRegister(s32 *, s32);",
+  "sceKernelDeleteHeap": "s32 sceKernelDeleteHeap(s32);",
+  "sceKernelDeleteSema": "s32 sceKernelDeleteSema(s32);"
  },
- "vars": {}
+ "vars": {
+  "D_00000F10": "extern s32 D_00000F10;",
+  "D_00000F30": "extern s32 D_00000F30;",
+  "D_00001000": "extern s32 *D_00001000[];"
+ }
 }
