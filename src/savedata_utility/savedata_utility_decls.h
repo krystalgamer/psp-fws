@@ -12,6 +12,36 @@ extern "C" {
 namespace paf { class View; class PhWidget; }
 #endif
 
+#ifdef __cplusplus
+/* base class of Class_00024F10: ctor/dtor are single out-of-line copies (C2/D2 only:
+   header inlines too big to inline, or another TU's linkonce); fields not typed yet */
+class Class_000119A0 {
+public:
+    Class_000119A0(s32 arg1, s32 arg2);
+    virtual void vfunc00();
+    virtual void vfunc04();
+#if FW_VERSION >= 150
+    virtual void vfunc08();
+#endif
+    virtual ~Class_000119A0();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_00024F10 (vptr D_00024F10, -fno-rtti: typeinfo slot 0):
+   1.00 [vfunc00, vfunc04, D1, D0, vfunc10], 1.50+ [vfunc00, vfunc04, vfunc08, D1, D0, vfunc14] */
+class Class_00024F10 : public Class_000119A0 {
+public:
+    Class_00024F10(s32 arg1, s32 arg2);
+    virtual void vfunc00();
+#if FW_VERSION >= 150
+    virtual void vfunc08();
+#endif
+    virtual ~Class_00024F10();
+    virtual void vfunc_last();
+};
+#endif
+
 struct D_00025C48_s {
     s32 unk0;
     s32 unk4;
@@ -793,9 +823,6 @@ void func_00004290(M2C_UNK **arg0);
 void func_000042B8(M2C_UNK **arg0);
 s32 func_00005168(s32, s32, s32);
 void func_00005510(struct Unk_func_00005510_0 *arg0, s32 arg1);
-void func_000055DC(M2C_UNK **arg0);
-void func_00005604(M2C_UNK **arg0);
-void func_0000562C(M2C_UNK **arg0);
 void func_00005738(s32 arg0);
 void func_0000576C(s32 arg0);
 void func_000057D8(void *arg0, s32 arg1);
@@ -916,7 +943,6 @@ s32 func_0000998C(s32 arg0);
 s32 func_000099E8(s32 arg0);
 s32 func_00009AEC(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
 void func_00009C94(M2C_UNK **arg0);
-s32 func_00009DFC(s32);
 void func_0000A108(s32 arg0);
 s32 func_0000A114(void);
 void func_0000A230(void *arg0);
@@ -931,10 +957,7 @@ s32 func_0000A940(s32, s32, s32);
 void func_0000A990(s32 arg0);
 s32 func_0000AAC8(s32, s32, s32);
 s32 func_0000ABD8(void *arg0);
-void func_0000ADB8(M2C_UNK **arg0);
 s32 func_0000ADC4(s32, s32, s32, s32);
-void func_0000ADE0(M2C_UNK **arg0);
-void func_0000AE08(M2C_UNK **arg0);
 void func_0000AED4(struct Unk_func_0000AED4_0 *arg0, s32 arg1);
 s32 func_0000AEF0(s32, s32);
 void func_0000AF7C(void);
@@ -1080,7 +1103,6 @@ s32 func_000117A8(s32);
 void func_00011968(M2C_UNK **arg0);
 void func_00011978(M2C_UNK **arg0);
 s32 func_000119A0_v250(s32, s32, s32, s32, s32);
-s32 func_00011A98(s32);
 s32 func_00011B44(s32, s32, s32, s32, s32);
 void func_00011D68(M2C_UNK **arg0);
 void func_00011F5C(struct Unk_func_00011F5C_0 *arg0);

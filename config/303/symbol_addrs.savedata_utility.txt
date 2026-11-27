@@ -665,3 +665,12 @@ D_00025458_v303 = 0x00025458; // rom:0x254F8
 D_000254E4_v303 = 0x000254E4; // rom:0x25584
 D_000254EC_v303 = 0x000254EC; // rom:0x2558C
 // shared names (tools/add_version.py) end
+_ZN3paf12SurfaceRCPtrINS_7SurfaceEEC1EPS1_ = 0x0000AC4C; // type:func
+_ZN3paf12SurfaceRCPtrINS_7SurfaceEE6AddRefEv = 0x0000AD38; // type:func
+_ZN14Class_00024F10C2Eii = 0x0000AD58; // type:func
+_ZN14Class_00024F10C1Eii = 0x0000AD88; // type:func
+_ZN14Class_00024F10D2Ev = 0x0000ADB8; // type:func
+_ZN14Class_00024F10D1Ev = 0x0000ADE0; // type:func
+_ZN14Class_00024F10D0Ev = 0x0000AE08; // type:func
+_ZN14Class_000119A0C2Eii = 0x000119A0; // type:func
+_ZN14Class_000119A0D2Ev = 0x00011A98; // type:func

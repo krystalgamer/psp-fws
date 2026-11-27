@@ -288,27 +288,14 @@ INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_0000AC6C);
 
 INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", _ZN3paf12SurfaceRCPtrINS_7SurfaceEE6AddRefEv);
 
-INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_0000AD58);
+/* the key function (vfunc00) is still asm, so the vtable stays data */
+Class_00024F10::Class_00024F10(s32 arg1, s32 arg2) : Class_000119A0(arg1, arg2) {
+}
 
-INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_0000AD88);
+Class_00024F10::~Class_00024F10() {
+}
 
 #if FW_VERSION < 282
-void func_000055DC(M2C_UNK **arg0) {
-    *arg0 = &D_00024F10;
-    func_00009DFC((s32) arg0);
-}
-
-void func_00005604(M2C_UNK **arg0) {
-    *arg0 = &D_00024F10;
-    func_00009DFC((s32) arg0);
-}
-
-void func_0000562C(M2C_UNK **arg0) {
-    *arg0 = &D_00024F10;
-    func_00009DFC((s32) arg0);
-    _ZdlPv(arg0);
-}
-
 INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_00005664);
 #endif
 
@@ -469,6 +456,8 @@ INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_00006650);
 
 #if FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/savedata_utility_006DD4", D_00024F10);
+/* the vtable is still data: offset-to-top and typeinfo (0, -fno-rtti) precede the vptr target */
+__asm__(".globl _ZTV14Class_00024F10\n_ZTV14Class_00024F10 = D_00024F10 - 8\n");
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
@@ -494,27 +483,12 @@ INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_00006B0C);
 #endif
 
 #if FW_VERSION >= 282
-void func_0000ADB8(M2C_UNK **arg0) {
-    *arg0 = &D_00024F10;
-    func_00011A98((s32) arg0);
-}
-
-void func_0000ADE0(M2C_UNK **arg0) {
-    *arg0 = &D_00024F10;
-    func_00011A98((s32) arg0);
-}
 #endif
 
 #if FW_VERSION >= 350
-INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_0000AE08);
 #endif
 
 #if FW_VERSION >= 282 && FW_VERSION < 350
-void func_0000AE08(M2C_UNK **arg0) {
-    *arg0 = &D_00024F10;
-    func_00011A98((s32) arg0);
-    _ZdlPv(arg0);
-}
 #endif
 
 #if FW_VERSION >= 282
@@ -577,6 +551,8 @@ INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_0000B218);
 INCLUDE_RODATA("nonmatchings/savedata_utility_006DD4", D_00024EF8);
 
 INCLUDE_RODATA("nonmatchings/savedata_utility_006DD4", D_00024F10);
+/* the vtable is still data: offset-to-top and typeinfo (0, -fno-rtti) precede the vptr target */
+__asm__(".globl _ZTV14Class_00024F10\n_ZTV14Class_00024F10 = D_00024F10 - 8\n");
 
 INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_0000B29C);
 
@@ -1865,7 +1841,7 @@ void func_00009C94(M2C_UNK **arg0) {
     _ZdlPv(arg0);
 }
 
-INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_000119A0);
+INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", _ZN14Class_000119A0C2Eii);
 #endif
 
 #if FW_VERSION == 271
@@ -1877,7 +1853,7 @@ INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_00009D5C);
 #endif
 
 #if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_00009DFC);
+INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", _ZN14Class_000119A0D2Ev);
 
 INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_00009E50);
 

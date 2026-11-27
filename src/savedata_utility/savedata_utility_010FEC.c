@@ -107,11 +107,11 @@ void func_00011978(M2C_UNK **arg0) {
 #endif
 
 #if FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_000119A0);
+INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", _ZN14Class_000119A0C2Eii);
 
 INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_00011A1C);
 
-INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_00011A98);
+INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", _ZN14Class_000119A0D2Ev);
 
 INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_00011AD4);
 
