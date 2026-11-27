@@ -152,6 +152,8 @@ INCLUDE_RODATA("nonmatchings/lftv_middleware_0346EC", D_00056480);
 
 INCLUDE_RODATA("nonmatchings/lftv_middleware_0346EC", D_0007D8C0);
 
+__asm__(".globl _ZTV14Class_0007D8C0\n_ZTV14Class_0007D8C0 = D_0007D8C0 - 8\n");
+
 INCLUDE_RODATA("nonmatchings/lftv_middleware_0346EC", D_0007D910);
 #endif
 
