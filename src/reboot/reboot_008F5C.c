@@ -570,7 +570,21 @@ INCLUDE_ASM("nonmatchings/reboot_008F5C", func_0000DAC0);
 
 INCLUDE_RODATA("nonmatchings/reboot_008F5C", D_00015C64);
 
-INCLUDE_ASM("nonmatchings/reboot_008F5C", func_0000DBB8);
+s32 func_0000DBB8(void *arg) {
+    LFlashDev *dev = &D_0001D890;
+    s32 ret;
+
+    ret = func_0000F0FC(dev);
+    if (ret < 0) {
+        Kprintf("lflash.c:%s:Initialize failed\n", "df_init");
+        return ret;
+    }
+    if (dev->nSegments < 4) {
+        Kprintf("lflash.c:%s:Cannot work\n", "df_init");
+        return 0x80270001;
+    }
+    return 0;
+}
 
 #if FW_VERSION == 100
 s32 func_0000DC4C(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
