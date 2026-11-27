@@ -1,4 +1,4 @@
-/* cflags[100]: -Os */
+/* cflags[100,102]: -Os */
 #include "common.h"
 #include "msstor_decls.h"
 
@@ -70,7 +70,7 @@ void func_000018AC(s32 *arg0, s32 arg1) {
 
 INCLUDE_ASM("nonmatchings/msstor_0015A0", func_000018D8);
 
-#if FW_VERSION >= 150 && FW_VERSION < 201
+#if FW_VERSION >= 102 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/msstor_0015A0", func_00001550);
 #endif
 
@@ -239,7 +239,7 @@ INCLUDE_ASM("nonmatchings/msstor_0015A0", func_00004664);
 
 INCLUDE_ASM("nonmatchings/msstor_0015A0", func_000046FC);
 
-#if FW_VERSION >= 150 && FW_VERSION < 201
+#if FW_VERSION >= 102 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/msstor_0015A0", func_000047C8);
 
 INCLUDE_ASM("nonmatchings/msstor_0015A0", func_000048D4);
@@ -317,6 +317,10 @@ s32 module_reboot_before(void) {
 
 INCLUDE_RODATA("nonmatchings/msstor_0015A0", D_00009284);
 
+#if FW_VERSION == 102
+INCLUDE_RODATA("nonmatchings/msstor_0015A0", D_000082D8);
+#endif
+
 #if FW_VERSION == 152
 INCLUDE_RODATA("nonmatchings/msstor_0015A0", D_000084F8);
 #endif
@@ -369,6 +373,10 @@ s32 func_00004990(void) {
 }
 #endif
 
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/msstor_0015A0", func_00004990);
+#endif
+
 #if FW_VERSION == 100
 s32 func_00004990(void) {
     if (M2C_FIELD(&D_00008934, s32 *, 0) > 0) {
@@ -412,7 +420,7 @@ s32 func_00004C88(void *arg0) {
 }
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 s32 func_00004A0C(void *arg0, s32 arg1, s32 arg2) {
     s32 var_v1;
 
