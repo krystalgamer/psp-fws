@@ -547,7 +547,7 @@ INCLUDE_ASM("nonmatchings/lftv_main_plugin_004FAC", func_000063B0);
 #endif
 
 #if FW_VERSION >= 282 && FW_VERSION < 330
-u16 func_000063B0(struct Unk_func_000063B0_0 *arg0) {
+u16 func_000063B0(struct Unk_func_000063A0_0 *arg0) {
     return arg0->unk444;
 }
 #endif

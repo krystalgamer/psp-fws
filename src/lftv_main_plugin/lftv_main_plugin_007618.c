@@ -245,8 +245,8 @@ void func_000087B4(struct Unk_func_00008208_0 *arg0) {
     s32 temp_v1;
     s32 temp_v1_2;
     u8 temp_v1_3;
-    struct Unk_func_000087B4_temp_a0 *temp_a0;
-    struct Unk_func_000087B4_temp_v0 *temp_v0;
+    struct Unk_func_000063A0_0 *temp_a0;
+    struct Unk_func_000063A0_0 *temp_v0;
 
     temp_v0 = arg0->unk4;
     if (temp_v0 != NULL) {
@@ -254,13 +254,13 @@ void func_000087B4(struct Unk_func_00008208_0 *arg0) {
         if (arg0->unk14 != temp_v1) {
             arg0->unk14 = temp_v1;
         }
-        if (arg0->unk18 != func_000063A0((Unk_func_000063A0_0*) arg0->unk4)) {
-            arg0->unk18 = func_000063A0((Unk_func_000063A0_0*) arg0->unk4);
+        if (arg0->unk18 != func_000063A0(arg0->unk4)) {
+            arg0->unk18 = func_000063A0(arg0->unk4);
         }
-        if (arg0->unk28 != func_000063B0((Unk_func_000063B0_0*) arg0->unk4)) {
-            arg0->unk28 = func_000063B0((Unk_func_000063B0_0*) arg0->unk4);
+        if (arg0->unk28 != func_000063B0(arg0->unk4)) {
+            arg0->unk28 = func_000063B0(arg0->unk4);
         }
-        temp_a0 = (Unk_func_000087B4_temp_a0*) arg0->unk4;
+        temp_a0 = arg0->unk4;
         temp_v1_2 = temp_a0->unk448;
         if (arg0->unk2C != temp_v1_2) {
             arg0->unk2C = temp_v1_2;
@@ -3196,7 +3196,7 @@ INCLUDE_ASM("nonmatchings/lftv_main_plugin_007618", func_00015184);
 #if FW_VERSION >= 282 && FW_VERSION < 350
 void func_00015184(s32 arg0, s32 arg1) {
     s32 temp_v0;
-    struct Unk_func_00015184_temp_s0 *temp_s0;
+    struct Unk_D_0005F7C8 *temp_s0;
     void *var_a0;
 
     if (arg1 != 1) {
@@ -3217,7 +3217,7 @@ void func_00015184(s32 arg0, s32 arg1) {
             func_0002D8D4();
             func_00038B30(1, 1, 1);
             _ZN3vsh12BusyIcon_IncEv();
-            temp_s0 = (Unk_func_00015184_temp_s0*) D_0005F7C8;
+            temp_s0 = D_0005F7C8;
             if ((temp_s0 == NULL) || (temp_v0 = Job_Start(0, &func_0001527C, 0, -1, -1, &func_00015444), temp_s0->unk24 = temp_v0, (temp_v0 == 0))) {
                 _ZN3vsh12BusyIcon_DecEv();
             }
@@ -3960,7 +3960,7 @@ void func_0001879C(void) {
     temp_s0 = D_0005F7D4;
     if ((temp_s0 != NULL) && (temp_s0->unkC == 0)) {
         func_0002CF90((s32) temp_s0);
-        func_0002D0DC((Unk_func_0002D0DC_0*) temp_s0);
+        func_0002D0DC(temp_s0);
     }
     func_00019278();
 }
@@ -4066,7 +4066,7 @@ void func_00019224(s32 arg0, s32 arg1) {
         temp_s0 = D_0005F114;
         if (temp_s0 != NULL) {
             func_0002CF90((s32) temp_s0);
-            func_0002D0DC((struct Unk_func_0002D0DC_0 *) temp_s0);
+            func_0002D0DC((struct Unk_func_0001879C_temp_s0 *) temp_s0);
         }
         func_000127D8();
     }

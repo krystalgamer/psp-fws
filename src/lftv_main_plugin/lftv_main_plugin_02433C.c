@@ -1838,7 +1838,7 @@ INCLUDE_ASM("nonmatchings/lftv_main_plugin_02433C", func_0002CFF8);
 
 INCLUDE_ASM("nonmatchings/lftv_main_plugin_02433C", func_0002D09C);
 
-s32 func_0002D0DC(struct Unk_func_0002D0DC_0 *arg0) {
+s32 func_0002D0DC(struct Unk_func_0001879C_temp_s0 *arg0) {
     if (arg0->unkC != 0) {
         if (arg0->unk14 == 0) {
 
@@ -2660,7 +2660,7 @@ void func_00033BDC(s32 arg0, s32 arg1) {
     s32 temp_s0;
     s32 temp_v0;
     s32 temp_v0_2;
-    struct Unk_func_00033BDC_temp_s0_2 *temp_s0_2;
+    struct Unk_D_0005F8E8 *temp_s0_2;
 
     if (arg1 != 1) {
         if (D_0005F8E8 != NULL) {
@@ -2681,7 +2681,7 @@ void func_00033BDC(s32 arg0, s32 arg1) {
                 } else {
                     _ZN3vsh12BusyIcon_IncEv();
                     InputDevice_PspPad_Lock();
-                    temp_s0_2 = (Unk_func_00033BDC_temp_s0_2*) D_0005F8E8;
+                    temp_s0_2 = D_0005F8E8;
                     if ((temp_s0_2 == NULL) || (temp_v0_2 = Job_Start(0, &func_00033D08, 0, -1, -1, (s32 *) func_00033DB4), temp_s0_2->unkC = temp_v0_2, (temp_v0_2 == 0))) {
                         InputDevice_PspPad_Unlock();
                         _ZN3vsh12BusyIcon_DecEv();

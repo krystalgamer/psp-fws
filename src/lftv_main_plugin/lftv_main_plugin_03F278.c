@@ -2278,11 +2278,11 @@ void func_0004A0A0(void) {
 INCLUDE_ASM("nonmatchings/lftv_main_plugin_03F278", func_0004A0A8);
 #else
 void *func_0004A0A8(struct Unk_func_0004A070_0 *arg0, struct Unk_func_0004A0A8_1 *arg1) {
-    struct Unk_func_0004A0A8_temp_s0 *temp_s0;
+    struct Unk_func_00049EA8_0 *temp_s0;
     struct Unk_func_0004A0A8_temp_s2 *temp_s2;
 
     temp_s0 = arg1->unk0;
-    if ((temp_s0 == NULL) || (temp_s2 = temp_s0->unk3C + arg1->unk4, (func_00049EA8((Unk_func_00049EA8_0*) temp_s0, temp_s2->unk8) == 0))) {
+    if ((temp_s0 == NULL) || (temp_s2 = temp_s0->unk3C + arg1->unk4, (func_00049EA8(temp_s0, temp_s2->unk8) == 0))) {
         func_0004A070(arg0);
     } else {
         func_0004A08C(arg0, temp_s0, temp_s2->unk8);
@@ -2292,11 +2292,11 @@ void *func_0004A0A8(struct Unk_func_0004A070_0 *arg0, struct Unk_func_0004A0A8_1
 #endif
 
 void *func_0004A120(struct Unk_func_0004A070_0 *arg0, struct Unk_func_0004A120_1 *arg1) {
-    struct Unk_func_0004A120_temp_s0 *temp_s0;
+    struct Unk_func_00049EA8_0 *temp_s0;
     struct Unk_func_0004A120_temp_s2 *temp_s2;
 
     temp_s0 = arg1->unk0;
-    if ((temp_s0 == NULL) || (temp_s2 = temp_s0->unk3C + arg1->unk4, (func_00049EA8((Unk_func_00049EA8_0*) temp_s0, temp_s2->unk10) == 0))) {
+    if ((temp_s0 == NULL) || (temp_s2 = temp_s0->unk3C + arg1->unk4, (func_00049EA8(temp_s0, temp_s2->unk10) == 0))) {
         func_0004A070(arg0);
     } else {
         func_0004A08C(arg0, temp_s0, temp_s2->unk10);
@@ -2373,7 +2373,7 @@ INCLUDE_ASM("nonmatchings/lftv_main_plugin_03F278", func_0004A738);
 
 s32 func_0004A7BC(struct Unk_func_0004A7BC_0 *arg0, s32 *arg1) {
     s32 var_a2;
-    struct Unk_func_0004A7BC_temp_a0 *temp_a0;
+    struct Unk_func_00049F24_0 *temp_a0;
     struct Unk_func_0004A7BC_temp_a1 *temp_a1;
 
     temp_a0 = arg0->unk0;
@@ -2381,7 +2381,7 @@ s32 func_0004A7BC(struct Unk_func_0004A7BC_0 *arg0, s32 *arg1) {
     if (temp_a0 != NULL) {
         temp_a1 = temp_a0->unk3C + arg0->unk4;
         if (temp_a1->unk4 == 7) {
-            *arg1 = func_00049F24((Unk_func_00049F24_0*) temp_a0, temp_a1->unk8);
+            *arg1 = func_00049F24(temp_a0, temp_a1->unk8);
             var_a2 = 1;
         }
     }
@@ -3764,7 +3764,7 @@ INCLUDE_ASM("nonmatchings/lftv_main_plugin_03F278", func_000519A4);
 
 void func_00051ADC(struct Unk_func_00051ADC_0 *arg0, s32 arg1, s32 arg2) {
     arg0->unk0 = &D_0005DAA0;
-    func_00051824((Unk_func_00051824_0*) ((u8 *)arg0 + 4), arg2);
+    func_00051824((Unk_func_00051824_0*) (((u8 *)arg0 + 4)), arg2);
     func_00050CDC((Unk_func_00050CDC_0*) &arg0->unk14, arg1, arg2, 0x10, 0);
     arg0->unk14 = &D_0005DAD0;
     func_00050BD4((Unk_func_00050BD4_0*) &arg0->unk2C, arg2, 0x10, 0);
@@ -3773,7 +3773,7 @@ void func_00051ADC(struct Unk_func_00051ADC_0 *arg0, s32 arg1, s32 arg2) {
 
 void func_00051B68(struct Unk_func_00051B68_0 *arg0, s32 arg1, s32 arg2) {
     arg0->unk0 = &D_0005DAA0;
-    func_00051824((Unk_func_00051824_0*) ((u8 *)arg0 + 4), arg2);
+    func_00051824((Unk_func_00051824_0*) (((u8 *)arg0 + 4)), arg2);
     func_00050CDC((Unk_func_00050CDC_0*) &arg0->unk14, arg1, arg2, 0x10, 0);
     arg0->unk14 = &D_0005DAD0;
     func_00050BD4((Unk_func_00050BD4_0*) &arg0->unk2C, arg2, 0x10, 0);
