@@ -15,6 +15,7 @@ options:
   cache_path: tmp/build/282/.splat_cache.video_plugin
   symbol_addrs_path:
     - config/282/symbol_addrs.video_plugin.txt
+    - config/282/func_starts.video_plugin.txt
     - tmp/build/282/prx_syms.video_plugin.txt
   reloc_addrs_path: [tmp/build/282/reloc_addrs.video_plugin.txt]
   asset_path: tmp/assets/282/video_plugin
@@ -54,6 +55,7 @@ segments:
     subsegments:
       - { start: 0xA0, type: asm, name: init, linker_section: .init }
       - [0xC4, c, video_plugin]
+      - [0x2140, c, video_plugin_crtend]
       - { start: 0x2198, type: asm, name: fini, linker_section: .fini }
       - { start: 0x21B4, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x2354, type: prxpad, order: .text }

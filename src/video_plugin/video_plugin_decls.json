@@ -1241,11 +1241,13 @@
  },
  "types": {
   "Unk_func_00000550_temp_v0_2": "struct Unk_func_00000550_temp_v0_2 {\n    u8 pad0[0x8];\n    M2C_UNK (*unk8)(M2C_UNK);\n};",
-  "Unk_func_00000B84_temp_v0": "struct Unk_func_00000B84_temp_v0 {\n    u8 pad0[0x4];\n    M2C_UNK (*unk4)(M2C_UNK *, M2C_UNK);\n};"
+  "Unk_func_00000B84_temp_v0": "struct Unk_func_00000B84_temp_v0 {\n    u8 pad0[0x4];\n    M2C_UNK (*unk4)(M2C_UNK *, M2C_UNK);\n};",
+  "hand_func_000020A0": "typedef void (*func_ptr)(void);"
  },
  "vars": {
   "D_000022F8": "extern M2C_UNK D_000022F8;",
   "D_00002340": "extern M2C_UNK D_00002340;",
+  "D_00002558": "extern func_ptr D_00002558[];",
   "D_00002570": "extern s32 D_00002570;",
   "D_00002614": "extern M2C_UNK D_00002614;",
   "D_00002624": "extern s32 D_00002624;",
