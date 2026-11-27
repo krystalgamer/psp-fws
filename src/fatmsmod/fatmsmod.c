@@ -1243,12 +1243,95 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_0000760C);
 #endif
 
 #if FW_VERSION == 100 || FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/fatmsmod", func_00007718);
+void *func_00007718(void *dst0, const void *src0, u32 length) {
+    char *dst = dst0;
+    const char *src = src0;
+    volatile u32 t;
+
+    if (length == 0 || dst == src) {
+        goto done;
+    }
+    if ((u32)dst < (u32)src) {
+        t = (u32)src;
+        if ((t | (u32)dst) & 3) {
+            if (((t ^ (u32)dst) & 3) || length < 4) {
+                t = length;
+            } else {
+                t = 4 - (t & 3);
+            }
+            length -= t;
+            do {
+                *dst++ = *src++;
+            } while (--t);
+        }
+        t = length / 4;
+        if (t) {
+            do {
+                *(long *)dst = *(long *)src;
+                src += 4;
+                dst += 4;
+            } while (--t);
+        }
+        t = length & 3;
+        if (t) {
+            do {
+                *dst++ = *src++;
+            } while (--t);
+        }
+    } else {
+        src += length;
+        dst += length;
+        t = (u32)src;
+        if ((t | (u32)dst) & 3) {
+            if (((t ^ (u32)dst) & 3) || length <= 4) {
+                t = length;
+            } else {
+                t &= 3;
+            }
+            length -= t;
+            do {
+                *--dst = *--src;
+            } while (--t);
+        }
+        t = length / 4;
+        if (t) {
+            do {
+                src -= 4;
+                dst -= 4;
+                *(long *)dst = *(long *)src;
+            } while (--t);
+        }
+        t = length & 3;
+        if (t) {
+            do {
+                *--dst = *--src;
+            } while (--t);
+        }
+    }
+done:
+    return dst0;
+}
 #endif
 
-INCLUDE_ASM("nonmatchings/fatmsmod", func_0000793C);
+void *func_0000793C(void *s, s32 c, u32 n) {
+    u8 *p = s;
+    while (n-- > 0) {
+        *p++ = c;
+    }
+    return s;
+}
 
-INCLUDE_ASM("nonmatchings/fatmsmod", func_00007968);
+s32 func_00007968(const void *s1, const void *s2, u32 n) {
+    const u8 *a = s1;
+    const u8 *b = s2;
+    while (n != 0) {
+        n--;
+        if (*a++ != *b++) {
+            return a[-1] - b[-1];
+        }
+    }
+    return 0;
+}
 
 #if FW_VERSION < 282
 s32 func_00004E68(s8 *arg0) {
@@ -1276,15 +1359,58 @@ s32 func_000079A8(s8 *arg0) {
 }
 #endif
 
-INCLUDE_ASM("nonmatchings/fatmsmod", func_000079CC);
+char *func_000079CC(char *dst, const char *src) {
+    char *ret = dst;
+    while ((*dst = *src) != 0) {
+        src++;
+        dst++;
+    }
+    return ret;
+}
 
-INCLUDE_ASM("nonmatchings/fatmsmod", func_000079F8);
+char *func_000079F8(const char *s, s32 c) {
+    do {
+        if (*s == (char)c) {
+            return (char *)s;
+        }
+    } while (*s++ != 0);
+    return NULL;
+}
 
-INCLUDE_ASM("nonmatchings/fatmsmod", func_00007A20);
+char *func_00007A20(char *dst, const char *src) {
+    char *d = dst;
+    while (*d != 0) {
+        d++;
+    }
+    for (;; src++) {
+        *d++ = *src;
+        if (*src == 0) break;
+    }
+    return dst;
+}
 
-INCLUDE_ASM("nonmatchings/fatmsmod", func_00007A5C);
+s32 func_00007A5C(const char *s1, const char *s2) {
+    while (*s1 == *s2++) {
+        if (*s1++ == 0) {
+            return 0;
+        }
+    }
+    return *(u8 *)s1 - *(u8 *)(s2 - 1);
+}
 
-INCLUDE_ASM("nonmatchings/fatmsmod", func_00007AB4);
+char *func_00007AB4(char *dst, const char *src, u32 n) {
+    char *d = dst;
+    while (n != 0) {
+        if (*src == 0) {
+            *d = 0;
+        } else {
+            *d = *src++;
+        }
+        n--;
+        d++;
+    }
+    return dst;
+}
 
 #if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00007AEC);
