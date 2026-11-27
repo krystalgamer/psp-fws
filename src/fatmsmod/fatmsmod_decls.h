@@ -594,7 +594,7 @@ s32 func_00007BB0(s32 arg0);
 u32 func_00007BD4(u32 sector);
 s32 func_00008274(s32, s32, s32, s32);
 s32 func_00008314(u32 cl, u32 *off, u32 *sector); /* locate the FAT entry and load its sector */
-s32 func_000085D4(u32 sector, u8 **buf); /* read a FAT sector */
+s32 func_000085D4(u32 sector, u8 **buf);
 s32 func_000086E8(u32 cl, u32 *next); /* get FAT entry */
 s32 func_00008708(s32 arg0);
 s32 func_000088F8(s32 arg0);

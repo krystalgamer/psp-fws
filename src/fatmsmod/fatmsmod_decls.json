@@ -112,7 +112,7 @@
   "func_00007BD4": "u32 func_00007BD4(u32 sector);",
   "func_00008274": "s32 func_00008274(s32, s32, s32, s32);",
   "func_00008314": "s32 func_00008314(u32 cl, u32 *off, u32 *sector); /* locate the FAT entry and load its sector */",
-  "func_000085D4": "s32 func_000085D4(u32 sector, u8 **buf); /* read a FAT sector */",
+  "func_000085D4": "s32 func_000085D4(u32 sector, u8 **buf);",
   "func_000086E8": "s32 func_000086E8(u32 cl, u32 *next); /* get FAT entry */",
   "func_00008708": "s32 func_00008708(s32 arg0);",
   "func_000088F8": "s32 func_000088F8(s32 arg0);",

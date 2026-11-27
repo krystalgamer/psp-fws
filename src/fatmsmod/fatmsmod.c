@@ -3286,7 +3286,41 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_00008028);
 #if FW_VERSION < 271
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00008314);
 
-INCLUDE_ASM("nonmatchings/fatmsmod", func_000085D4);
+s32 func_000085D4(u32 sector, u8 **buf) {
+    u32 first;
+    u32 end;
+    u32 over;
+    u32 count;
+    u8 *src;
+    u8 *dst;
+    u32 i;
+    u16 j;
+
+    end = sector - D_0002790C.fatStart + D_0001BCC4.cacheSectors;
+    first = sector;
+    if (end > D_0002790C.fatSectors) {
+        over = end - D_0002790C.fatSectors;
+        dst = *buf;
+        src = dst + (D_0001BCC4.cacheSectors - over) * D_0002790C.bytesPerSector;
+        sector -= over;
+        for (i = 0; i < over; i++) {
+            for (j = 0; j < D_0002790C.bytesPerSector; j++) {
+                *dst++ = *src++;
+            }
+        }
+        count = D_0001BCC4.cacheSectors - over;
+        *buf = dst;
+        D_000276E4->fatBufSector = sector;
+    } else {
+        count = D_0001BCC4.cacheSectors;
+        D_000276E4->fatBufSector = sector;
+    }
+    if (func_0000A714(*buf, first, count) == -1) {
+        D_000276E4->fatBufSector = -1;
+        return -1;
+    }
+    return 0;
+}
 
 INCLUDE_ASM("nonmatchings/fatmsmod", func_000086E8);
 
