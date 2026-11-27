@@ -30,6 +30,13 @@ typedef struct {
 #endif
 } FatmsPrivate;
 
+typedef struct {
+    s32 unk0;
+    s32 unk4;
+    s32 unk8;
+    char path[0x104]; /* 0xC */
+} PfCwd;
+
 /* PrFILE set-time arguments (stub cmd 0x22). */
 typedef struct {
     u32 year;
@@ -42,6 +49,11 @@ typedef struct {
     u32 minute;
     u32 second;
 } PfTime;
+
+typedef struct {
+    u8 pad0[0x30];
+    u32 sector; /* 0x30 */
+} PfDirCursor;
 
 /* PrFILE directory search record (stub cmd 6), kept at FatmsPrivate + 0x568. */
 typedef struct {
@@ -57,10 +69,38 @@ typedef struct {
     u16 adate; /* 0x340 */
 } PfDirInfo;
 
-/* PrFILE open-file record (partial). */
+/* Mounted FAT volume geometry (D_0001BCC4). */
 typedef struct {
-    u8 pad0[0x20];
+    u32 rootStart; /* 0x0, first root-directory sector */
+    u32 dataStart; /* 0x4, first sector of cluster 2 */
+    u32 unk8;
+    u32 unkC;
+    u32 unk10;
+    u32 unk14;
+    u32 clusterShift; /* 0x18, log2(sectors per cluster) */
+    u32 unk1C;
+    u32 rootSectors; /* 0x20 */
+} PfFatInfo;
+
+/* PrFILE open-file record (0x264 bytes, table D_0001BEFC[10]). */
+typedef struct {
+    u8 pad0[0xD];
+    s8 flags; /* 0xD, bit 7 = in use */
+    u8 padE[0xE];
+    u32 size; /* 0x1C */
     u32 pos; /* 0x20, current file position */
+    s32 unk24;
+    s32 unk28;
+    u8 pad2C[4];
+    s32 unk30;
+    u8 pad34[8];
+    s32 unk3C;
+    s32 unk40;
+    u8 pad44[8];
+    s32 unk4C;
+    s32 unk50;
+    u8 unk54;
+    u8 pad55[0x264 - 0x55];
 } PfFile;
 
 /* PrFILE stat result (stub cmd 0xC), FAT DOS date/time words. */
@@ -80,6 +120,13 @@ typedef struct {
     u16 pad1A;
     u8 pad1C[4];
 } PfStat;
+
+/* PrFILE volume / drive record (partial; D_000276E4 points at the current one). */
+typedef struct {
+    u32 flags; /* 0x0, bit 0 = mounted */
+    u8 pad4[0x18];
+    s32 unk1C; /* 0x1C */
+} PfVolume;
 
 typedef int SceMode;
 typedef s64 SceOff;
@@ -298,7 +345,7 @@ extern M2C_UNK D_00019AD4;
 extern s32 D_00019B00;
 extern s8 D_00019B04;
 extern s32 D_00019E04;
-extern s32 D_00019E08;
+extern s32 D_00019E08; /* PrFILE errnum */
 extern s8 D_00019E0C; /* current drive letter */
 extern s32 D_00019E10[26]; /* last driver error per drive, index drive - 'A' */
 extern s32 D_00019E28;
@@ -308,17 +355,21 @@ extern s32 D_0001B248;
 extern FatmsHeapEnt D_0001B298[128];
 extern s32 D_0001B6A4;
 extern s32 D_0001B790;
-extern M2C_UNK D_0001BCC4;
+extern PfFatInfo D_0001BCC4;
 extern s32 D_0001BCE4;
+extern PfCwd D_0001BCE8;
+extern PfFile D_0001BEFC[10];
 extern char D_00023B8C[]; /* "prfile_mod.c:%s:driver deleted\n" */
 extern M2C_UNK D_0002411C;
 extern char D_000243D8[]; /* 2.50-2.71 "prfile_mod.c:%s:driver deleted\n" */
-extern void *D_000276E4;
+extern PfVolume *D_000276E4; /* current volume */
 extern s32 (*D_000276E8)(s32, s32, s32);
 extern s32 (*D_000276EC)(s32, s32, s32);
-extern void *D_00027800;
+extern PfDirCursor *D_00027800;
 extern M2C_UNK D_00027804;
 extern s32 D_00027908;
+extern u16 D_0002790C;
+extern u16 D_0002790E; /* sectors per cluster */
 extern M2C_UNK D_00027934;
 extern s32 D_0002B568;
 extern s32 D_0002B5CC;

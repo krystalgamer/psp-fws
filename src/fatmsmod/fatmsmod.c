@@ -3200,7 +3200,7 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_000078D8);
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00007A88);
 
 s32 func_00007BB0(s32 arg0) {
-    return ((arg0 - 2) << M2C_VFIELD(&D_0001BCC4, s32, 0x18)) + M2C_VFIELD(&D_0001BCC4, s32, 4);
+    return ((arg0 - 2) << D_0001BCC4.clusterShift) + D_0001BCC4.dataStart;
 }
 
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00007BD4);
@@ -3528,7 +3528,7 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_00012D40);
 void func_0000B57C(void) {
     D_000193FC = D_000193F8;
     func_00007718((s32) (&D_000193FC + 2), (s32) &D_00027804, 0x102);
-    D_00027908 = M2C_FIELD(D_000276E4, s32 *, 0x1C);
+    D_00027908 = D_000276E4->unk1C;
 }
 #endif
 
@@ -3745,7 +3745,7 @@ void func_0000BAF8(u32 arg0) {
 void func_0000BAF8(u32 arg0) {
     u32 temp_a1;
 
-    temp_a1 = M2C_FIELD(D_00027800, u32 *, 0x30);
+    temp_a1 = D_00027800->sector;
     if ((temp_a1 < arg0) && (arg0 < (u32) (temp_a1 + D_0001BCE4))) {
         M2C_VFIELD(&D_00027934, s32, 0x4C) = 0;
         M2C_VFIELD(&D_00027934, s32, 0x30) = 0;
