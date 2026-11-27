@@ -68,6 +68,42 @@ def target_reloc_syms(mod, name):
     return [n for _, n in sorted(out)]
 
 
+def _perm_score(args):
+    pre, lines, idx, perm, target, comp, opt = args
+    L = list(lines)
+    for i, l in zip(idx, perm):
+        L[i] = l
+    w, _ = AD.compile_words(pre + "\n".join(L), comp, opt)
+    if w is None:
+        return None
+    sm = difflib.SequenceMatcher(None, target, w, autojunk=False)
+    return max(len(target), len(w)) - sum(b.size for b in sm.get_matching_blocks()), [l.strip() for l in perm]
+
+
+def permute(text, body, target, comp, opt, jobs):
+    """Brute-force the order of the //P-tagged body lines (store order, statement order)."""
+    import itertools
+    from multiprocessing import Pool
+    pre = text[:len(text) - len(body)]
+    lines = body.split("\n")
+    idx = [i for i, l in enumerate(lines) if "//P" in l]
+    if len(idx) > 8:
+        sys.exit(f"{len(idx)} //P lines: at most 8 (8! orders)")
+    jobsl = ((pre, lines, idx, p, target, comp, opt) for p in itertools.permutations([lines[i] for i in idx]))
+    res = []
+    with Pool(jobs) as pool:
+        for r in pool.imap_unordered(_perm_score, jobsl, chunksize=4):
+            if r:
+                res.append(r)
+                if r[0] == 0:
+                    pool.terminate()
+                    break
+    res.sort(key=lambda r: r[0])
+    print(f"permute: {len(res)} orders compiled")
+    for sc, p in res[:3]:
+        print(f"  {sc}:", " | ".join(p))
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("ver")
@@ -75,6 +111,9 @@ def main():
     ap.add_argument("cfile")
     ap.add_argument("--decls")
     ap.add_argument("--diff", action="store_true")
+    ap.add_argument("--permute", action="store_true",
+                    help="try every order of the body lines tagged //P (own setting), print the best")
+    ap.add_argument("-j", type=int, default=4, help="processes for --permute")
     ap.add_argument("--extra", default="", help="flags appended to every tried setting, e.g. --extra=-mext")
     ap.add_argument("--perm", action="store_true", help="write tmp/perm/MODULE/FUNC for decomp-permuter (own setting)")
     a = ap.parse_args()
@@ -126,10 +165,17 @@ def main():
             print("relocation symbols differ:")
             for i, w, m in bad:
                 print(f"  reloc {i}: target {w}, mine {m}")
+            print("RESULT: words match, RELOCATION SYMBOLS DIFFER (not a match)")
         else:
             print("relocation symbols match")
             for i, w, m in bad:
                 print(f"  (reloc {i}: target label {w} assumed inside {m}; check the offset)")
+            print("RESULT: MATCH")
+    elif best is not None:
+        sm = difflib.SequenceMatcher(None, target, best, autojunk=False)
+        print(f"RESULT: {max(len(target), len(best)) - sum(b.size for b in sm.get_matching_blocks())} off (own setting)")
+    if a.permute:
+        permute(text, body, target, comp, own.split(" ", 1)[1], a.j)
     if a.perm:
         import perm_near
         d = perm_near.write_perm_dir(mod, name, text, comp, own.split(" ", 1)[1])

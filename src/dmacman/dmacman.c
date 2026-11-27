@@ -224,10 +224,83 @@ INCLUDE_ASM("nonmatchings/dmacman", sceKernelDmaSoftRequest);
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/dmacman", sceKernelDmaOpAlloc);
-#endif
+SceDmaOp *sceKernelDmaOpAlloc(void)
+{
+    s32 intr;
+    SceDmaOp *op;
 
+    intr = sceKernelCpuSuspendIntr();
+    op = g_dmaFreeOp;
+    if (op != NULL) {
+        if (!(op->flag & SCE_DMAOP_FREE)) {
+            sceKernelCpuResumeIntr(intr);
+            return NULL;
+        }
+        op->flag = 0;
+        op->chMask0 = -1;
+        op->ch = -1;
+        op->chMask1 = -1;
+        op->callback = NULL;
+        op->evid = sceKernelCreateEventFlag("SceDmacmanEvflag", 0, 0, NULL);
+        g_dmaFreeOp = op->next;
+        op->child = NULL;
+        op->parent = NULL;
+        sceKernelCpuResumeIntr(intr);
+        return op;
+    }
+    sceKernelCpuResumeIntr(intr);
+    return NULL;
+}
+
+s32 sceKernelDmaOpFree(SceDmaOp *op)
+{
+    s32 ret;
+    s32 intr;
+    SceDmaOp *free;
+
+    ret = 0x800202CF;
+    intr = sceKernelCpuSuspendIntr();
+    if (op == NULL)
+        goto end;
+    ret = 0x800202C3;
+    if (op->flag & SCE_DMAOP_FREE)
+        goto end;
+    ret = 0x800202BE;
+    if (op->flag & SCE_DMAOP_QUEUED)
+        goto end;
+    if (!(op->flag & SCE_DMAOP_RUNNING))
+        goto free;
+    ret = 0x800202C0;
+end:
+    sceKernelCpuResumeIntr(intr);
+    return ret;
+
+free:
+    free = g_dmaFreeOp;
+    op->ch = -1;
+    op->unk34 = 0;
+    op->srcAddr = 0;
+    op->next = free;
+    op->dstAddr = 0;
+    op->prev = NULL;
+    op->lli = 0;
+    op->unk38 = 0;
+    op->control = 0;
+    op->unk3C = 0;
+    op->config = 0;
+    op->headLLI = NULL;
+    op->callback = NULL;
+    if (free != NULL)
+        free->prev = op;
+    op->flag = SCE_DMAOP_FREE;
+    g_dmaFreeOp = op;
+    sceKernelDeleteEventFlag(op->evid);
+    sceKernelCpuResumeIntr(intr);
+    return 0;
+}
+#else
 INCLUDE_ASM("nonmatchings/dmacman", sceKernelDmaOpFree);
+#endif
 
 #if FW_VERSION == 100
 s32 sceKernelDmaOpAssign(SceDmaOp *op, s32 chMask0, s32 chMask1, u32 config)
