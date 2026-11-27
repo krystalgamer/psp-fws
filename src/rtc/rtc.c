@@ -854,8 +854,8 @@ s32 registerFunctions(void) {
     return sceKernelRegisterLibcRtcFunc(clockHandler, timeHandler, getTimeOfDayHandler);
 }
 #else
-void func_00003D9C(void) {
-    sceKernelRegisterRtcFunc(clockHandler, timeHandler, getTimeOfDayHandler, sceRtcGetCurrentSecureTick);
+s32 func_00003D9C(void) {
+    return sceKernelRegisterRtcFunc(clockHandler, timeHandler, getTimeOfDayHandler, sceRtcGetCurrentSecureTick);
 }
 #endif
 

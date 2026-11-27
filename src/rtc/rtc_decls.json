@@ -1,22 +1,19 @@
 {
  "funcs": {
-  "__udivdi3": "u64 __udivdi3(u64 a, u64 b);",
   "alarmCallback": "void alarmCallback(s32 arg0, void *arg1);",
-  "sysEventHandler": "s32 sysEventHandler(s32 arg0);",
-  "func_0000138C": "s32 func_0000138C(s32 arg0);",
-  "parseDigits2": "s32 parseDigits2(const char *s);",
-  "formatDigits2": "char *formatDigits2(char *buf, s32 n);",
-  "parseDigits4": "s32 parseDigits4(const char *s);",
-  "registerFunctions": "s32 registerFunctions(void);",
-  "func_00003AF8": "char *func_00003AF8(char *buf, s32 n);",
-  "formatDigits4": "char *formatDigits4(char *buf, s32 n);",
-  "getTimeOfDayHandler": "s32 getTimeOfDayHandler(SceKernelTimeval *tv, SceKernelTimezone *tz);",
-  "func_00003D9C": "void func_00003D9C(void);",
   "clockHandler": "u32 clockHandler(void);",
-  "timeHandler": "u32 timeHandler(u32 *t);",
+  "formatDigits2": "char *formatDigits2(char *buf, s32 n);",
+  "formatDigits4": "char *formatDigits4(char *buf, s32 n);",
+  "func_0000138C": "s32 func_0000138C(s32 arg0);",
+  "func_00003AF8": "char *func_00003AF8(char *buf, s32 n);",
+  "func_00003D9C": "s32 func_00003D9C(void);",
+  "getTimeOfDayHandler": "s32 getTimeOfDayHandler(SceKernelTimeval *tv, SceKernelTimezone *tz);",
   "memset": "void *memset(void *s, s32 c, u32 n);",
   "module_reboot_before": "s32 module_reboot_before(void);",
   "module_start": "s32 module_start(void);",
+  "parseDigits2": "s32 parseDigits2(const char *s);",
+  "parseDigits4": "s32 parseDigits4(const char *s);",
+  "registerFunctions": "s32 registerFunctions(void);",
   "sceKernelCpuResumeIntr": "void sceKernelCpuResumeIntr(s32 intr);",
   "sceKernelCpuSuspendIntr": "s32 sceKernelCpuSuspendIntr(void);",
   "sceKernelDipswCpTime": "u32 sceKernelDipswCpTime(void);",
@@ -80,7 +77,9 @@
   "sceSysconSetAlarmCallback": "s32 sceSysconSetAlarmCallback(void (*cb)(s32, void *), void *arg);",
   "sceSysconWriteAlarm": "s32 sceSysconWriteAlarm(u32 alarm);",
   "sceSysconWriteClock": "s32 sceSysconWriteClock(u32 clock);",
-  "sceSysconWriteScratchPad": "s32 sceSysconWriteScratchPad(u32 dst, void *src, u32 size);"
+  "sceSysconWriteScratchPad": "s32 sceSysconWriteScratchPad(u32 dst, void *src, u32 size);",
+  "sysEventHandler": "s32 sysEventHandler(s32 arg0);",
+  "timeHandler": "u32 timeHandler(u32 *t);"
  },
  "types": {
   "0_pspTime": "typedef struct {\n    u16 year;\n    u16 month;\n    u16 day;\n    u16 hour;\n    u16 minutes;\n    u16 seconds;\n    u32 microseconds;\n} pspTime;",
@@ -88,10 +87,10 @@
   "1_SceRtcState": "typedef struct {\n    s32 unk0;               /* 0x00: sceRtcSetConf arg 0 */\n    s32 unk4;               /* 0x04: sceRtcSetConf arg 1 */\n    s32 unk8;               /* 0x08: sceRtcSetConf arg 3; local time = UTC + unk8 + unkC minutes */\n    s32 unkC;               /* 0x0C: sceRtcSetConf arg 2 */\n    s32 tickValid;          /* 0x10: tickOffset valid (sceRtcGetCurrentTick) */\n    s32 secureTickValid;    /* 0x14: secureTickOffset valid */\n#if FW_VERSION >= 270\n    s32 unk18;\n    SceUID cbId;            /* 0x1C: sceRtcRegisterCallback, -1 none */\n#endif\n    u64 clockUs;            /* 0x18 (2.70+: 0x20): syscon clock (0.5 s units) * 500000 at the last sync */\n    u64 sysTimeAtSync;      /* sceKernelGetSystemTimeWide() at the last sync */\n    u64 baseTick;           /* tick at syscon clock 0 (scratchpad 0x10, 40 bits << 19) */\n    u64 secureBaseTick;     /* scratchpad 0x18 */\n    u64 tickOffset;         /* current tick - system time */\n    u64 secureTickOffset;   /* secure tick - system time */\n    u64 alarmTick;          /* 0x48 (2.70+: 0x50) */\n    u32 clockAdjust;        /* 0x50 (2.70+: 0x58): scratchpad 8, sum of syscon clocks overwritten by SetCurrentTick */\n} SceRtcState;"
  },
  "vars": {
-  "rtc_handler": "extern s32 rtc_handler;",
-  "g_daysInMonth": "extern const s8 g_daysInMonth[2][12];",
   "D_00004530": "extern s32 D_00004530;",
   "D_00004540": "extern M2C_UNK D_00004540;",
-  "g_rtc": "extern SceRtcState g_rtc;"
+  "g_daysInMonth": "extern const s8 g_daysInMonth[2][12];",
+  "g_rtc": "extern SceRtcState g_rtc;",
+  "rtc_handler": "extern s32 rtc_handler;"
  }
 }
