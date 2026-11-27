@@ -673,7 +673,23 @@ INCLUDE_ASM("nonmatchings/modulemgr", func_00006390);
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/modulemgr", IsKernelOnlyModulePartition);
+s32 IsKernelOnlyModulePartition(SceUID mpid) {
+    SceSysmemPartitionInfo info;
+    s32 ret;
+
+    info.size = sizeof(info);
+    ret = sceKernelQueryMemoryPartitionInfo(mpid, &info);
+    if (ret < 0) {
+        Kprintf(D_00006DF4, "IsKernelOnlyModulePartition", D_00006E28, ret, mpid);
+        return ret;
+    }
+    ret = 0x800200D1;
+    if (info.attr == 0xC) {
+        return 0;
+    }
+    Kprintf(D_00004C90, "IsKernelOnlyModulePartition", mpid);
+    return ret;
+}
 #endif
 
 #if FW_VERSION == 100 || (FW_VERSION >= 282 && FW_VERSION < 310)
