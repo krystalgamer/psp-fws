@@ -1,3 +1,4 @@
+/* lang: c++ */
 /* cflags: -Os */
 #include "common.h"
 #include "game_plugin_decls.h"
@@ -27,6 +28,12 @@ s32 module_stop(void) {
 INCLUDE_ASM("nonmatchings/game_plugin", func_0000015C);
 
 INCLUDE_ASM("nonmatchings/game_plugin", func_000003DC);
+
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/game_plugin", func_00000480);
+
+INCLUDE_ASM("nonmatchings/game_plugin", func_0000050C);
+#endif
 
 #if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/game_plugin", D_000183F0);
@@ -86,9 +93,15 @@ INCLUDE_RODATA("nonmatchings/game_plugin", D_00011574);
 INCLUDE_RODATA("nonmatchings/game_plugin", D_00011578);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 103
 INCLUDE_ASM("nonmatchings/game_plugin", func_00000458);
+#endif
 
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/game_plugin", func_00000544);
+#endif
+
+#if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/game_plugin", func_00000474);
 
 INCLUDE_RODATA("nonmatchings/game_plugin", D_00010698);
@@ -98,7 +111,9 @@ INCLUDE_ASM("nonmatchings/game_plugin", func_000004D0);
 INCLUDE_ASM("nonmatchings/game_plugin", func_000005D4);
 #endif
 
+#if FW_VERSION == 100 || FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/game_plugin", func_0000045C);
+#endif
 
 #if FW_VERSION == 271
 INCLUDE_RODATA("nonmatchings/game_plugin", D_00011730_v271);
@@ -258,7 +273,7 @@ void func_000006B8(void) {
 
 #if FW_VERSION >= 282
 s32 func_000004E8(s32 arg0) {
-    func_00008160(&D_0001247C, arg0);
+    func_00008160((Unk_func_00008160_0*) &D_0001247C, arg0);
     return 0;
 }
 

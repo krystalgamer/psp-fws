@@ -1,3 +1,4 @@
+/* lang: c++ */
 #include "common.h"
 #include "license_plugin_decls.h"
 
@@ -34,7 +35,7 @@ void func_000003D4(s32 arg0) {
 INCLUDE_ASM("nonmatchings/license_plugin", func_00000438);
 
 s32 func_00000478(s32 arg0) {
-    func_000072A0(&D_0000FEAC, arg0);
+    func_000072A0(( Unk_func_000072A0_0*) &D_0000FEAC, arg0);
     return 0;
 }
 
@@ -67,7 +68,7 @@ INCLUDE_ASM("nonmatchings/license_plugin", func_00000608);
 void func_00000608(void) {
     sceVshBridge_E1941520(0);
     func_00000BB0();
-    func_000071B4(&D_0000FEAC);
+    func_000071B4(( Unk_func_000071B4_0*) &D_0000FEAC);
     func_0000668C((s32) &D_0000FF18);
 }
 #endif
@@ -90,7 +91,7 @@ INCLUDE_ASM("nonmatchings/license_plugin", func_0000099C);
 
 void func_000009F8(M2C_UNK **arg0) {
     *arg0 = &D_0000F498;
-    _ZdlPv();
+    _ZdlPv(arg0);
 }
 
 INCLUDE_ASM("nonmatchings/license_plugin", func_00000A20);
@@ -379,7 +380,7 @@ INCLUDE_ASM("nonmatchings/license_plugin", func_00004850);
 
 void func_00004914(M2C_UNK **arg0) {
     *arg0 = &D_0000F890;
-    _ZdlPv();
+    _ZdlPv(arg0);
 }
 
 INCLUDE_ASM("nonmatchings/license_plugin", func_0000493C);

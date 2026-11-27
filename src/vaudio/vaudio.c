@@ -1,9 +1,17 @@
 #include "common.h"
 #include "vaudio_decls.h"
 
-INCLUDE_ASM("nonmatchings/vaudio", sceVaudioOutputBlocking);
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/vaudio", func_00000000);
 
-#if FW_VERSION < 310
+INCLUDE_ASM("nonmatchings/vaudio", func_0000020C);
+
+INCLUDE_ASM("nonmatchings/vaudio", func_00000340);
+#else
+INCLUDE_ASM("nonmatchings/vaudio", sceVaudioOutputBlocking);
+#endif
+
+#if FW_VERSION == 100 || (FW_VERSION >= 150 && FW_VERSION < 310)
 INCLUDE_ASM("nonmatchings/vaudio", sceVaudioChReserve);
 #endif
 
@@ -49,6 +57,10 @@ INCLUDE_RODATA("nonmatchings/vaudio", D_0000102C);
 
 INCLUDE_RODATA("nonmatchings/vaudio", D_00000D9C);
 
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/vaudio", func_000004A4);
+#endif
+
 #if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/vaudio", module_start);
 #endif
@@ -63,7 +75,7 @@ void sceVaudioChReserveBuffering(s32 arg0, s32 arg1, s32 arg2) {
 }
 #endif
 
-#if FW_VERSION < 271
+#if FW_VERSION == 100 || (FW_VERSION >= 150 && FW_VERSION < 271)
 INCLUDE_ASM("nonmatchings/vaudio", sceVaudioInit);
 #endif
 
@@ -77,11 +89,17 @@ s32 sceVaudio_driver_DCC18F25(void) {
 }
 #endif
 
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/vaudio", func_00000584);
+
+INCLUDE_ASM("nonmatchings/vaudio", func_000005EC);
+#endif
+
 #if FW_VERSION == 271
 INCLUDE_ASM("nonmatchings/vaudio", module_stop);
 #endif
 
-#if FW_VERSION < 271
+#if FW_VERSION == 100 || (FW_VERSION >= 150 && FW_VERSION < 271)
 INCLUDE_ASM("nonmatchings/vaudio", sceVaudioGetEffectString);
 #endif
 
@@ -93,7 +111,7 @@ INCLUDE_ASM("nonmatchings/vaudio", func_000006D8);
 INCLUDE_ASM("nonmatchings/vaudio", func_000006E4);
 #endif
 
-#if FW_VERSION < 271
+#if FW_VERSION == 100 || (FW_VERSION >= 150 && FW_VERSION < 271)
 INCLUDE_ASM("nonmatchings/vaudio", sceVaudioEnd);
 #endif
 

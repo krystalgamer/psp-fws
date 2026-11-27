@@ -120,6 +120,10 @@ void func_000003E8(void *arg0) {
 }
 #endif
 
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/isofs", func_000003E8);
+#endif
+
 #if FW_VERSION == 100
 void func_000003E8(void *arg0) {
     s32 temp_s0;
@@ -620,7 +624,7 @@ INCLUDE_ASM("nonmatchings/isofs", func_00002DDC);
 INCLUDE_ASM("nonmatchings/isofs", func_00003308);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/isofs", func_000032D8);
 #endif
 
@@ -632,7 +636,7 @@ INCLUDE_ASM("nonmatchings/isofs", func_000034EC);
 INCLUDE_ASM("nonmatchings/isofs", func_0000376C);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/isofs", func_000036B0);
 #endif
 
@@ -869,7 +873,7 @@ INCLUDE_ASM("nonmatchings/isofs", func_000053C0);
 INCLUDE_ASM("nonmatchings/isofs", func_00005440);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/isofs", func_000053D4);
 #endif
 
@@ -895,7 +899,7 @@ INCLUDE_RODATA("nonmatchings/isofs", D_00006318);
 INCLUDE_ASM("nonmatchings/isofs", func_00005CD4);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/isofs", func_00005C50);
 #endif
 
@@ -1033,8 +1037,12 @@ INCLUDE_ASM("nonmatchings/isofs", func_000074FC);
 INCLUDE_ASM("nonmatchings/isofs", func_0000756C);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/isofs", func_000073FC);
+#endif
+
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/isofs", func_000075C0);
 #endif
 
 #if FW_VERSION >= 201
@@ -1065,7 +1073,9 @@ INCLUDE_RODATA("nonmatchings/isofs", D_000059C4);
 INCLUDE_ASM("nonmatchings/isofs", func_000048CC);
 #endif
 
+#if FW_VERSION == 100 || FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/isofs", module_start);
+#endif
 
 #if FW_VERSION < 201
 s32 func_00007700(void) {
@@ -1077,7 +1087,7 @@ s32 func_00007700(void) {
 INCLUDE_ASM("nonmatchings/isofs", module_reboot_before);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 s32 func_0000770C(void) {
     return 0x8001B000;
 }
@@ -1121,6 +1131,10 @@ INCLUDE_ASM("nonmatchings/isofs", func_00007B0C);
 INCLUDE_ASM("nonmatchings/isofs", func_00007E48);
 #endif
 
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/isofs", func_00007F88);
+#endif
+
 #if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/isofs", func_00007FC0);
 #endif
@@ -1137,6 +1151,10 @@ s32 func_00007FF0(void) {
     sceUmdManUnRegisterInsertEjectUMDCallBack(0);
     return 0;
 }
+#endif
+
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/isofs", func_00007FF0);
 #endif
 
 #if FW_VERSION == 100

@@ -4,6 +4,23 @@
 #include "common.h"
 #include "m2c_macros.h"
 
+/* FAT on-disk directory entry (32 bytes). */
+typedef struct {
+    char name[8]; /* 0x0 */
+    char ext[3]; /* 0x8 */
+    u8 attr; /* 0xB */
+    u8 ntres; /* 0xC */
+    u8 ctimeTenth; /* 0xD */
+    u16 ctime; /* 0xE */
+    u16 cdate; /* 0x10 */
+    u16 adate; /* 0x12 */
+    u16 clusterHi; /* 0x14 */
+    u16 wtime; /* 0x16 */
+    u16 wdate; /* 0x18 */
+    u16 clusterLo; /* 0x1A */
+    u32 size; /* 0x1C */
+} FatDirEnt;
+
 /* prfile_mod.c heap bookkeeping (g_heapTbl, 128 entries). mem = -1 while being created. */
 typedef struct {
     SceUID heap; /* 0x0 */
@@ -30,38 +47,94 @@ typedef struct {
 #endif
 } FatmsPrivate;
 
+typedef struct {
+    s32 unk0;
+    s32 unk4;
+    s32 unk8;
+    char path[0x104]; /* 0xC */
+} PfCwd;
+
 /* PrFILE set-time arguments (stub cmd 0x22). */
 typedef struct {
-    u32 year;
-    u32 month;
-    u32 day;
+    s32 year;
+    s32 month;
+    s32 day;
 } PfDate;
 
 typedef struct {
-    u32 hour;
-    u32 minute;
-    u32 second;
+    s32 hour;
+    s32 minute;
+    s32 second;
 } PfTime;
 
-/* PrFILE directory search record (stub cmd 6), kept at FatmsPrivate + 0x568. */
+/* PrFILE directory cursor: the current directory entry and its position (D_00027934; D_00027800 points at one).
+   Fields past 0x30 are only known for 1.x (2.01+ grew the record). */
 typedef struct {
-    u8 pad0[0x118];
-    u16 mtime; /* 0x118 */
-    u16 mdate; /* 0x11A */
-    u32 size; /* 0x11C */
-    s8 attr; /* 0x120 */
-    char shortName[13]; /* 0x121 */
-    char longName[0x20E]; /* 0x12E */
-    u16 ctime; /* 0x33C */
-    u16 cdate; /* 0x33E */
-    u16 adate; /* 0x340 */
-} PfDirInfo;
+    FatDirEnt de; /* 0x0 */
+#if FW_VERSION >= 201
+    u8 pad20[0x20];
+#else
+    u8 pad20[0x10];
+#endif
+    u32 sector; /* 0x30 (2.01+: 0x40), sector holding the entry */
+    u8 pad34[4];
+    s32 unk38; /* 0x38 */
+    u32 dirtyMask; /* 0x3C, dirty sectors of the directory buffer */
+    u8 pad40[4];
+    s32 unk44; /* 0x44 */
+    u8 pad48[4];
+    u32 unk4C; /* 0x4C (2.01+: 0x5C), flags: 2 = buffer dirty, 0x10 */
+    u8 pad50[8];
+    s32 unk58; /* 0x58 */
+#if FW_VERSION < 201
+    u8 pad5C[0x100];
+    char path[0x104]; /* 0x15C */
+    s8 drive; /* 0x260 */
+    u8 pad261[3];
+#endif
+} PfDirCursor;
 
-/* PrFILE open-file record (partial). */
+/* Drive count word: cleared as a word, read as its low byte. */
+typedef union {
+    s32 word;
+    u8 count;
+} PfDrives;
+
+/* Mounted FAT volume geometry (D_0001BCC4). */
 typedef struct {
-    u8 pad0[0x20];
-    u32 pos; /* 0x20, current file position */
-} PfFile;
+    u32 rootStart; /* 0x0, first root-directory sector */
+    u32 dataStart; /* 0x4, first sector of cluster 2 */
+    u32 unk8;
+    u32 clusterCount; /* 0xC, first invalid cluster number */
+    u32 cacheSectors; /* 0x10, FAT sectors held in the FAT buffer */
+    u32 unk14;
+    u32 clusterShift; /* 0x18, log2(sectors per cluster) */
+    u32 unk1C;
+    u32 rootSectors; /* 0x20 */
+} PfFatInfo;
+
+/* Current volume geometry (D_0002790C, 0x28 bytes copied from PfDrive.geometry). */
+typedef struct {
+    u16 bytesPerSector; /* 0x0 */
+    u16 sectorsPerCluster; /* 0x2 */
+    u16 fatStart; /* 0x4, first FAT sector */
+    u8 pad6[0xA];
+    u32 fatSectors; /* 0x10, sectors per FAT */
+    u8 pad14[4];
+    u16 unk18; /* 0x18 */
+    u8 pad1A[0xE];
+} PfGeometry;
+typedef char chk_PfGeometry[(sizeof(PfGeometry) == 0x28) ? 1 : -1];
+
+/* Saved directory-entry position (D_00019E2C), restored by func_00013E3C. */
+typedef struct {
+    s32 unk0; /* 0x0 */
+    s32 unk4; /* 0x4 */
+    s32 unk8; /* 0x8 */
+    s8 drive; /* 0xC */
+    char path[0x104]; /* 0xD */
+    s8 pending; /* 0x111 */
+} PfSavedEnt;
 
 /* PrFILE stat result (stub cmd 0xC), FAT DOS date/time words. */
 typedef struct {
@@ -80,6 +153,65 @@ typedef struct {
     u16 pad1A;
     u8 pad1C[4];
 } PfStat;
+
+/* PrFILE directory search record (stub cmd 6), kept at FatmsPrivate + 0x568. */
+typedef struct {
+    u8 pad0[0x118];
+    u16 mtime; /* 0x118 */
+    u16 mdate; /* 0x11A */
+    u32 size; /* 0x11C */
+    s8 attr; /* 0x120 */
+    char shortName[13]; /* 0x121 */
+    char longName[0x20E]; /* 0x12E */
+    u16 ctime; /* 0x33C */
+    u16 cdate; /* 0x33E */
+    u16 adate; /* 0x340 */
+} PfDirInfo;
+
+/* PrFILE volume / drive record (partial; D_000276E4 points at the current one). */
+typedef struct {
+    unsigned long flags; /* 0x0, bit 0 = mounted, 0x8000 = FAT16, 0x1000 = FAT32 (neither = FAT12) */
+    u32 fatBufSector; /* 0x4, first sector in fatBuf (-1 = invalid) */
+    u8 pad8[4];
+    u8 *fatBuf; /* 0xC, FAT sector buffer */
+    u8 pad10[0xC];
+    s32 unk1C; /* 0x1C */
+} PfVolume;
+
+/* PrFILE open-file record (table D_0001BEFC[10]; 0x264 bytes in 1.x, 0x700 in 2.01+). */
+typedef struct {
+    u8 pad0[0xD];
+    s8 flags; /* 0xD, bit 7 = in use */
+    u8 padE[0xE];
+    u32 size; /* 0x1C */
+    u32 pos; /* 0x20, current file position */
+#if FW_VERSION >= 201
+    u8 pad24_201[0x10]; /* placement of the 2.01 insertion within 0x24..0x60 is a guess */
+#endif
+    s32 unk24;
+    s32 unk28;
+    u8 pad2C[4];
+    s32 unk30;
+    u8 pad34[8];
+    s32 unk3C;
+    s32 unk40;
+    u8 pad44[8];
+    s32 unk4C;
+    s32 unk50; /* 0x50 (2.01+: 0x60) */
+    u8 unk54;
+#if FW_VERSION >= 201
+    u8 pad55[0x700 - 0x65];
+#else
+    u8 pad55[0x264 - 0x55];
+#endif
+} PfFile;
+
+/* PrFILE drive registration (D_00027CC8[drive - A]). */
+typedef struct {
+    void *ops; /* 0x0, 0x10 bytes of driver functions copied to D_000276E8 */
+    void *geometry; /* 0x4, 0x28 bytes copied to D_0002790C */
+    PfVolume *vol; /* 0x8 */
+} PfDrive;
 
 typedef int SceMode;
 typedef s64 SceOff;
@@ -288,6 +420,7 @@ struct Unk_func_00013798_0 {
 #endif
 
 extern const char D_00014704[]; /* "FATMS" */
+extern const char D_00015B80[]; /* "FATMS" (1.5x) */
 extern u8 D_000193F8;
 extern u8 D_000193FC;
 extern s32 D_00019500; /* mount count */
@@ -298,30 +431,43 @@ extern M2C_UNK D_00019AD4;
 extern s32 D_00019B00;
 extern s8 D_00019B04;
 extern s32 D_00019E04;
-extern s32 D_00019E08;
+extern s32 D_00019E08; /* PrFILE errnum */
 extern s8 D_00019E0C; /* current drive letter */
 extern s32 D_00019E10[26]; /* last driver error per drive, index drive - 'A' */
-extern s32 D_00019E28;
+extern s8 D_00019E1C;
+extern PfDrives D_00019E28;
+extern PfSavedEnt D_00019E2C;
 extern s32 D_0001A040;
 extern s32 D_0001B0C8;
 extern s32 D_0001B248;
 extern FatmsHeapEnt D_0001B298[128];
 extern s32 D_0001B6A4;
 extern s32 D_0001B790;
-extern M2C_UNK D_0001BCC4;
+extern PfFatInfo D_0001BCC4;
 extern s32 D_0001BCE4;
+extern PfCwd D_0001BCE8;
+extern PfFile D_0001BEFC[10];
 extern char D_00023B8C[]; /* "prfile_mod.c:%s:driver deleted\n" */
 extern M2C_UNK D_0002411C;
 extern char D_000243D8[]; /* 2.50-2.71 "prfile_mod.c:%s:driver deleted\n" */
-extern void *D_000276E4;
+extern const char D_00024BF0[]; /* characters not allowed in names */
+extern PfVolume *D_000276E4; /* current volume */
 extern s32 (*D_000276E8)(s32, s32, s32);
 extern s32 (*D_000276EC)(s32, s32, s32);
-extern void *D_00027800;
-extern M2C_UNK D_00027804;
+extern char D_000276FC[0x104];
+extern PfDirCursor *D_00027800;
+extern char D_00027804[0x104]; /* current path */
 extern s32 D_00027908;
-extern M2C_UNK D_00027934;
+extern PfGeometry D_0002790C;
+extern PfDirCursor D_00027934;
+extern char D_00027B98[]; /* name being created */
+extern u32 D_00027CC4[1]; /* per drive: first freed cluster hint */
+extern PfDrive *D_00027CC8[1]; /* per drive (index drive - A; one drive in 1.00) */
+extern u8 D_00027DD0[26];
+extern s32 D_00027DD4;
 extern s32 D_0002B568;
 extern s32 D_0002B5CC;
+extern s32 D_0002B8C8;
 extern s32 D_0002BA10[1][32];
 extern s32 D_0002BA90[1]; /* per-unit media status, 0x1022 = ? */
 extern M2C_UNK D_0002BAA0;
@@ -332,6 +478,7 @@ extern s32 D_0002D054;
 extern s8 D_0002D730;
 extern s32 D_0002DC10;
 extern s32 D_0002EF50;
+extern PfFile D_0002F578[10];
 extern void *D_0003F728;
 extern M2C_UNK D_00042A80;
 extern SceUID g_msStubMbx;
@@ -391,6 +538,7 @@ void func_000036E0(s32 arg0, s32 arg1, s32 arg2);
 void func_000036FC(void);
 void func_0000381C(SceIoIob *iob);
 void func_00003940(s32 arg0);
+s32 func_000039E8(void);
 s32 func_00003A34(s32 unit, s32 stat);
 s32 func_00003CD8(void);
 s32 func_00004544(void);
@@ -429,10 +577,12 @@ s32 func_000067E0(void);
 s32 func_000067EC(void);
 s32 func_00006918(void);
 s32 func_00006960(void);
+void func_00006B10(PfDate *date, PfTime *time);
 s32 func_000075CC(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
 s32 func_0000764C(void);
 s32 func_000076F4(s32, s32);
 void *func_00007718(void *dst0, const void *src0, u32 length);
+void func_00007814(PfDirCursor *cur);
 void *func_0000793C(void *s, s32 c, u32 n);
 s32 func_00007968(const void *s1, const void *s2, u32 n);
 s32 func_000079A8(s8 *arg0);
@@ -442,28 +592,42 @@ char *func_00007A20(char *dst, const char *src);
 s32 func_00007A5C(const char *s1, const char *s2);
 char *func_00007AB4(char *dst, const char *src, u32 n);
 s32 func_00007BB0(s32 arg0);
+u32 func_00007BD4(u32 sector);
 s32 func_00008274(s32, s32, s32, s32);
+s32 func_00008314(u32 cl, u32 *off, u32 *sector); /* locate the FAT entry and load its sector */
+s32 func_000085D4(u32 sector, u8 **buf);
+s32 func_000086E8(u32 cl, u32 *next);
 s32 func_00008708(s32 arg0);
 s32 func_000088F8(s32 arg0);
 s8 func_00008900(s8 arg0);
+s32 func_00008954(u32 cl, u32 value); /* set FAT entry */
+s32 func_000090A8(u32 cl, u32 *newcl); /* allocate a free cluster after cl */
 s32 func_0000931C(void);
+s32 func_00009BF0(void);
 void func_00009C74(void);
 s32 func_00009D50(void);
 s32 func_00009E3C(void);
+void func_00009F08(u16 *date, u16 *time);
+void func_00009F90(FatDirEnt *de, s8 create);
 s32 func_00009FA0(s32);
+void func_0000A128(void);
 s32 func_0000A3AC(s32);
+s32 func_0000A460(s8 drive, s32 a1, s32 a2, s32 a3, s32 a4);
 s32 func_0000A698(s32 a0, s32 a1, s32 a2);
 s32 func_0000A714(s32 a0, s32 a1, s32 n);
-s32 func_0000A744(s32 a0, s32 a1, s32 a2);
+s32 func_0000A744(s32 a0, s32 a1, s32 a2); /* driver write (buf, sector, count) */
 s32 func_0000A7C0(const u8 *s);
 s32 func_0000A8F8(s32);
+s32 func_0000ACF8(void);
 s32 func_0000AE30(void);
 s32 func_0000B1D8(s32, s32);
 void func_0000B418(u8 *p, u32 v);
 s32 func_0000B440_v201(s32, s32, s32);
+s32 func_0000B50C(s8 drive, u8 *index);
 void func_0000B574(s32 arg0, s32 arg1, s32 arg2);
 void func_0000B57C(void);
 s32 func_0000B59C(s32, s32, s32);
+s32 func_0000B5CC(void);
 s32 func_0000B71C(s32, s32);
 s32 func_0000B738(s32, s32, s32, s32);
 s32 func_0000B7E4(void *arg0);
@@ -471,10 +635,15 @@ void func_0000B818(s32 arg0);
 s32 func_0000B978(s32, s32);
 void func_0000BA20(void *arg0);
 void func_0000BAF8(u32 arg0);
+s32 func_0000BB3C(const u8 *end, const u8 *p);
 s32 func_0000BBAC(s32);
+void func_0000BC38(s32 a0, const char *path);
+void func_0000BC84(void);
+s32 func_0000BCF0(void);
 s32 func_0000C108(s32 drv);
 s32 func_0000C120(s32);
 s32 func_0000C7A8(s32, s32, s32, s32);
+s32 func_0000C7E8(s8 drive, u32 mode);
 s32 func_0000CC88(void);
 s32 func_0000D440(s32, s32);
 void func_0000D70C(s32 arg0, s32 arg1, s8 arg2, s8 arg3);
@@ -491,6 +660,9 @@ s32 func_0000E3CC(void *arg0, u32 arg1);
 s32 func_0000E3D8(struct Unk_func_0000E3D8_0 *arg0, u32 arg1);
 s32 func_0000E5E8(void);
 s32 func_0000E5F8(s32);
+s32 func_0000F8A4(PfFile *fp);
+s32 func_0000F8F8(PfFile *fp);
+void func_0000FD04(PfFile *fp);
 s32 func_00010238(s32, s32, s32);
 s32 func_00010A64(s32);
 s32 func_00011318(s32);
@@ -500,6 +672,7 @@ s32 func_000118E4(const char *s);
 s32 func_00012280(void);
 void func_000122FC(void);
 s32 func_00012480(s32);
+s32 func_00012710(s32 mode);
 s32 func_00012788(void);
 s32 func_000128A4(s32, s32);
 s32 func_00012964(s32, s32);
@@ -536,6 +709,7 @@ s32 func_00017164(s32, s32);
 s32 func_00017A14(s32, s32);
 void func_000183CC(s32 arg0, s32 arg1);
 s32 func_00018520(s32, s32);
+s32 func_00018570(s8 drive);
 void func_00018638(s32 arg0, s32 arg1);
 s32 func_00019430(s32);
 void func_00019A48(s32 arg0);

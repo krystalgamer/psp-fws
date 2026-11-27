@@ -1,3 +1,4 @@
+/* lang: c++ */
 #include "common.h"
 #include "msvideo_plugin_decls.h"
 
@@ -544,7 +545,7 @@ INCLUDE_ASM("nonmatchings/msvideo_plugin_0567A0", func_00044988);
 INCLUDE_ASM("nonmatchings/msvideo_plugin_0567A0", func_00044A74);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/msvideo_plugin_0567A0", func_000412E8);
 #endif
 
@@ -632,7 +633,7 @@ s32 func_000416E0(void *arg0, u32 arg1, s32 *arg2, s32 *arg3, s32 *arg4, s32 *ar
 }
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 s32 func_000416E0(void *arg0, u32 arg1, s32 *arg2, s32 *arg3, s32 *arg4, s32 *arg5, s32 *arg6, s32 *arg7) {
     void *temp_v1;
 
@@ -779,7 +780,7 @@ void func_0004188C(void *arg0) {
 }
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION == 152
+#if FW_VERSION < 150 || FW_VERSION == 152
 void func_0004188C(void *arg0) {
     M2C_FIELD(arg0, M2C_UNK **, 0) = &D_00065A58;
     M2C_FIELD(arg0, s32 *, 4) = 0;
@@ -847,12 +848,12 @@ void func_0005AD3C(void) {
 }
 
 void func_0005AD5C(M2C_UNK **arg0) {
-    func_00059F54(arg0);
+    func_00059F54((Unk_func_00059F54_0*) arg0);
     *arg0 = &D_000658B0;
 }
 
 void func_0005AD8C(M2C_UNK **arg0) {
-    func_00059F54(arg0);
+    func_00059F54((Unk_func_00059F54_0*) arg0);
     *arg0 = &D_000658B0;
 }
 

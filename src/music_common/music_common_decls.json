@@ -1,5 +1,10 @@
 {
  "funcs": {
+  "_ZN3paf8PhWidget11UpdateStateEv": "M2C_UNK _ZN3paf8PhWidget11UpdateStateEv(s32);",
+  "_ZN3paf8PhWidgetD2Ev": "M2C_UNK _ZN3paf8PhWidgetD2Ev();",
+  "_ZdaPv": "M2C_UNK _ZdaPv(s32);",
+  "_ZdlPv": "M2C_UNK _ZdlPv(void *);",
+  "_Znwj": "s32 _Znwj(M2C_UNK);",
   "func_00000000": "M2C_UNK func_00000000();",
   "func_00000164": "M2C_UNK func_00000164(M2C_UNK, M2C_UNK);",
   "func_00000324": "s32 func_00000324(s32, s32);",
@@ -389,22 +394,11 @@
   "sceKernelDeleteSema": "s32 sceKernelDeleteSema(s32);",
   "sceKernelGetThreadId": "M2C_UNK sceKernelGetThreadId();",
   "sceKernelSetEventFlag": "s32 sceKernelSetEventFlag(s32);",
-  "sce_paf_private_wcscmp": "M2C_UNK sce_paf_private_wcscmp(s32, s32);",
-  "_ZN3paf8PhWidget11UpdateStateEv": "M2C_UNK _ZN3paf8PhWidget11UpdateStateEv(s32);",
-  "_ZdlPv": "M2C_UNK _ZdlPv(void *);",
-  "scePaf_61A8E8EC": "s32 scePaf_61A8E8EC(M2C_UNK);",
-  "scePaf_6261C0A5": "M2C_UNK scePaf_6261C0A5(s32 **);",
-  "sce_paf_private_strcmp": "M2C_UNK sce_paf_private_strcmp(s32, s32);",
-  "_ZN3paf8PhWidgetD2Ev": "M2C_UNK _ZN3paf8PhWidgetD2Ev();",
   "sce_paf_private_free2": "M2C_UNK sce_paf_private_free2(void *, void *);",
-  "scePaf_8A902F65": "M2C_UNK scePaf_8A902F65(s32);",
-  "_ZdaPv": "M2C_UNK _ZdaPv(s32);",
-  "_Znwj": "s32 _Znwj(M2C_UNK);",
-  "scePaf_CB4C96CE": "M2C_UNK scePaf_CB4C96CE();",
-  "scePaf_CCFF20ED": "M2C_UNK scePaf_CCFF20ED(s32);",
   "sce_paf_private_strcasecmp": "s32 sce_paf_private_strcasecmp(s32, s32);",
-  "scePaf_F5001144": "M2C_UNK scePaf_F5001144(void *, void *);",
-  "sce_paf_private_wcscasecmp": "s32 sce_paf_private_wcscasecmp();"
+  "sce_paf_private_strcmp": "M2C_UNK sce_paf_private_strcmp(s32, s32);",
+  "sce_paf_private_wcscasecmp": "s32 sce_paf_private_wcscasecmp();",
+  "sce_paf_private_wcscmp": "M2C_UNK sce_paf_private_wcscmp(s32, s32);"
  },
  "types": {
   "Unk_func_00002340_0": "struct Unk_func_00002340_0 {\n    u8 pad0[0x8];\n    u8 unk8;\n};",

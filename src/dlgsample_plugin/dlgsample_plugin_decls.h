@@ -4,6 +4,12 @@
 #include "common.h"
 #include "m2c_macros.h"
 
+#ifdef __cplusplus
+#include "paf.h"
+#include "vsh.h"
+extern "C" {
+#endif
+
 typedef void (*func_ptr)(void);
 
 extern func_ptr D_000004B8[];
@@ -28,7 +34,11 @@ void func_00000298(void);
 void func_000002A0(s32 arg0);
 s32 func_000002C4(s32);
 void func_000002F4(void);
-M2C_UNK func_0000034C();
+M2C_UNK func_0000034C(...);
 s32 module_stop(void);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

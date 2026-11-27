@@ -1,3 +1,4 @@
+/* lang: c++ */
 /* cflags: -O1 */
 #include "common.h"
 #include "common_gui_decls.h"
@@ -96,11 +97,15 @@ INCLUDE_ASM("nonmatchings/common_gui_0008C8", sceVshCommonGui_4B8E817A);
 
 INCLUDE_ASM("nonmatchings/common_gui_0008C8", func_00001100);
 
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/common_gui_0008C8", func_00005DAC);
+#endif
+
 #if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/common_gui_0008C8", sceVshCommonGui_605DF0DB);
 
 void sceVshCommonGui_8F414E35(s32 *arg0) {
-    scePaf_CA8AFB1B(*arg0);
+    _ZN3paf10MessageBox10HideDeleteEv(*arg0);
 }
 
 void sceVshCommonGui_82535BC4(s32 *arg0) {
@@ -133,9 +138,13 @@ void sceVshCommonGui_9F41313E(void *arg0, s32 arg1, s32 arg2) {
 }
 
 INCLUDE_ASM("nonmatchings/common_gui_0008C8", sceVshCommonGui_2025D016);
-#else
-INCLUDE_ASM("nonmatchings/common_gui_0008C8", sceVshCommonGui_FE305D6D);
+#endif
 
+#if FW_VERSION == 100 || (FW_VERSION >= 150 && FW_VERSION < 350)
+INCLUDE_ASM("nonmatchings/common_gui_0008C8", sceVshCommonGui_FE305D6D);
+#endif
+
+#if FW_VERSION < 350
 void _ZN3vsh13MessageDialog10HideDeleteEv(s32 *arg0) {
     _ZN3paf10MessageBox10HideDeleteEv(*arg0);
 }
@@ -177,6 +186,10 @@ s32 _ZN3vsh13MessageDialog12GetBasePlaneEv(void **arg0) {
     }
     return var_v0;
 }
+#endif
+
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/common_gui_0008C8", func_00005F5C);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 350

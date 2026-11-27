@@ -4,6 +4,12 @@
 #include "common.h"
 #include "m2c_macros.h"
 
+#ifdef __cplusplus
+#include "paf.h"
+#include "vsh.h"
+extern "C" {
+#endif
+
 struct D_00065E24_s {
     s8 unk0;
     u8 pad1[0x7F];
@@ -2099,11 +2105,11 @@ extern s32 func_00005C64;
 extern M2C_UNK func_00006258;
 extern s32 func_000064B0;
 
-M2C_UNK InputDevice_PspHprm_Unlock();
-M2C_UNK InputDevice_PspPad_Unlock();
+M2C_UNK InputDevice_PspHprm_Unlock(...);
+M2C_UNK InputDevice_PspPad_Unlock(...);
 M2C_UNK Job_Start(M2C_UNK, M2C_UNK *, M2C_UNK *, M2C_UNK, M2C_UNK, M2C_UNK *);
-M2C_UNK _ZN3paf13PhApplication13StartDispListEv();
-M2C_UNK _ZN3paf13PhApplication14FinishDispListEv();
+M2C_UNK _ZN3paf13PhApplication13StartDispListEv(void);
+M2C_UNK _ZN3paf13PhApplication14FinishDispListEv(void);
 M2C_UNK _ZN3paf4View12PageActivateEPv(s32, s32);
 s32 _ZN3paf4View4FindEPKc(M2C_UNK *);
 M2C_UNK _ZN3paf4View8PageOpenEPvii(s32, s32, M2C_UNK, M2C_UNK);
@@ -2117,8 +2123,8 @@ s32 _ZN3paf9PhHandler11KillTimerCBEi(s32, s32);
 M2C_UNK _ZN3paf9PhSRender8SetStyleEiRK4vec4(s32);
 M2C_UNK _ZN3paf9PhSRender8SetStyleEif(s32);
 M2C_UNK _ZN3paf9PhSRender8SetStyleEii(s32);
-M2C_UNK _ZN3vsh10OptionMenu4HideEv();
-M2C_UNK _ZN3vsh10OptionMenu4ShowEv();
+M2C_UNK _ZN3vsh10OptionMenu4HideEv(void);
+M2C_UNK _ZN3vsh10OptionMenu4ShowEv(void);
 M2C_UNK _ZN3vsh10OptionMenu5CloseEPN3paf4ViewEPKcS5_(s32, s32, M2C_UNK);
 M2C_UNK _ZN3vsh13MessageDialog10HideDeleteEv(s32);
 s32 _ZN3vsh14GetString_BackE6Locale(M2C_UNK);
@@ -2141,7 +2147,7 @@ s32 func_00000CF4(void);
 s32 func_00000E24(void);
 void func_00000E5C(void);
 void func_00000F8C(void);
-M2C_UNK func_00000FA8();
+M2C_UNK func_00000FA8(...);
 s32 func_00001980(s32);
 s32 func_0000198C(s32);
 void func_00001A70(void);
@@ -2150,7 +2156,7 @@ s32 func_00001E3C(s32, s32, s32);
 void func_00001F84(void);
 void func_00002844(s32 arg0);
 void func_00002868(s32 *arg0, s32 arg1);
-M2C_UNK func_00002888();
+M2C_UNK func_00002888(...);
 s32 func_000028A8(s32);
 s32 func_00002DE0(s32);
 void func_00002F58(void *arg0);
@@ -2757,9 +2763,9 @@ void func_0001872C(s32 **arg0);
 s32 func_00018794(void);
 void func_000189E4(void *arg0);
 void func_00018A14(void *arg0, s32 arg1);
-M2C_UNK func_00018CC4();
+M2C_UNK func_00018CC4(...);
 void func_00018D38(void);
-M2C_UNK func_00018D54();
+M2C_UNK func_00018D54(...);
 void func_00018DB0(void);
 s32 func_00018ECC(void);
 s32 func_00018ED4(void);
@@ -2836,11 +2842,11 @@ s32 func_0001CDA0(s32, s32);
 void func_0001CE70(s32 arg0);
 void func_0001D0D4(void);
 void func_0001D144(struct Unk_func_0001D144_0 *arg0, s32 arg1);
-s32 func_0001D1BC();
+s32 func_0001D1BC(...);
 void func_0001D340(s32 arg0, s32 arg1, s32 arg2);
 void func_0001D368(s32 arg0, s32 arg1);
 void func_0001D384(void);
-M2C_UNK func_0001D38C();
+M2C_UNK func_0001D38C(...);
 void func_0001D38C_v100(M2C_UNK **arg0);
 s32 func_0001D800(void *arg0);
 s32 func_0001D820(void);
@@ -2876,7 +2882,7 @@ s32 func_0001FFBC(void *arg0);
 s32 func_0001FFD8(void *arg0);
 s32 func_0002011C(void *arg0, s32 *arg1);
 void func_00020220(s32 *arg0, s32 arg1);
-M2C_UNK func_000202B8();
+M2C_UNK func_000202B8(...);
 s32 func_00020300(void *arg0, s32 arg1);
 M2C_UNK func_00020360(s32);
 M2C_UNK func_000203F4(s32);
@@ -3342,7 +3348,7 @@ void func_00033ADC(struct Unk_func_00033ADC_0 *arg0);
 s32 func_00033C28(struct Unk_func_00033C28_0 *arg0);
 s32 func_00033C48(void);
 s32 func_00033C6C(struct Unk_func_00033C6C_0 *arg0);
-s32 func_00033C7C();
+s32 func_00033C7C(...);
 s32 func_00033C84(struct Unk_func_00033C84_0 *arg0);
 void func_00033C8C(struct Unk_func_00033C8C_0 *arg0, s32 arg1);
 void func_00033C94(struct Unk_func_00033C94_0 *arg0, s32 arg1);
@@ -3410,10 +3416,10 @@ s32 func_00035FAC(s32);
 M2C_UNK func_00036148(s32 *);
 s32 func_00036458(u32 *arg0, u32 arg1);
 void func_00036BB4(struct Unk_func_00036BB4_0 *arg0);
-M2C_UNK func_00036F48();
+M2C_UNK func_00036F48(...);
 s32 func_000371A0(s32, M2C_UNK, s32 *);
 void func_000371BC(void);
-M2C_UNK func_000376D8();
+M2C_UNK func_000376D8(...);
 void func_000376F0(void);
 s32 func_0003770C(s32 *arg0);
 void func_000377A0(struct Unk_func_000377A0_0 *arg0);
@@ -3581,7 +3587,7 @@ void func_0004218C(void);
 s32 func_00042278(s32, s32);
 s32 func_000422B8(struct Unk_func_000422B8_0 *arg0, s32 *arg1);
 s32 func_00042410(struct Unk_func_00042410_0 *arg0, u32 arg1, u32 arg2, s32 arg3);
-M2C_UNK func_00042FEC();
+M2C_UNK func_00042FEC(...);
 s32 func_00043180(void *arg0, s32 *arg1);
 s32 func_00043614(u8, M2C_UNK);
 void func_00043734(s32 arg0);
@@ -3599,8 +3605,8 @@ s32 func_00044274(u32 *arg0, u32 arg1);
 void func_00044448(void *arg0);
 void func_0004447C(void *arg0);
 void func_000444CC(void *arg0);
-s32 func_0004461C();
-M2C_UNK func_00044B78();
+s32 func_0004461C(...);
+M2C_UNK func_00044B78(...);
 s32 func_00045054(s32, s32);
 void func_000450A8(void);
 void func_000450C8(void *arg0);
@@ -3612,13 +3618,13 @@ void func_00048BB0(struct Unk_func_00048BB0_0 *arg0, s32 arg1);
 void func_00048D54(struct Unk_func_00048D54_0 *arg0, s32 arg1);
 void func_00048DC0(struct Unk_func_00048DC0_0 *arg0, s32 arg1);
 void func_00048E14(struct Unk_func_00048E14_0 *arg0, s32 arg1);
-M2C_UNK func_00049388();
+M2C_UNK func_00049388(...);
 s32 func_000495C8(s32 *arg0, s32 *arg1);
 s32 func_000495D8(struct Unk_func_000495D8_0 *arg0, s32 *arg1);
 s32 func_000495E8(struct Unk_func_000495E8_0 *arg0, s32 *arg1);
 s32 func_0004A140(s32);
 void func_0004A274(void);
-M2C_UNK func_0004A290();
+M2C_UNK func_0004A290(...);
 s32 func_0004B7A0(struct Unk_func_0004B7A0_0 *arg0, u32 arg1, s32 arg2);
 s32 func_0004B8C8(struct Unk_func_0004B8C8_0 *arg0, u32 arg1, s32 arg2);
 s32 func_0004CFA0(s32);
@@ -3781,21 +3787,21 @@ void func_0005E504(struct Unk_func_0005E504_0 *arg0);
 M2C_UNK func_0005EBB0(void *);
 s32 func_0005ECC4(struct Unk_func_0005ECC4_0 *arg0);
 void func_0005ECE0(void);
-M2C_UNK func_0005FF5C();
+M2C_UNK func_0005FF5C(...);
 s32 module_stop(void);
 s32 sceIoDevctl(void *, s32, void *, u32, void *, u32);
 s32 sceKernelCreateEventFlag(M2C_UNK, M2C_UNK, M2C_UNK, M2C_UNK);
 M2C_UNK sceKernelDelayThread(s32);
-s32 sceKernelDeleteEventFlag();
+s32 sceKernelDeleteEventFlag(...);
 s32 sceKernelDeleteSema(s32);
-s32 sceKernelSetEventFlag();
+s32 sceKernelSetEventFlag(...);
 s32 sceMpegBaseCscAvc(s32, M2C_UNK, s32, void *);
-M2C_UNK sceMpegDelete();
+M2C_UNK sceMpegDelete(...);
 s32 sceVideocodecDelete(s32, s32);
 s32 sceVideocodecReleaseEDRAM(s32);
 M2C_UNK sceVshCommonGui_614630E6(s32, s32, M2C_UNK *, M2C_UNK, M2C_UNK *, M2C_UNK, M2C_UNK);
 M2C_UNK sceVshCommonGui_7B52F0E6(s32, s32, M2C_UNK *, M2C_UNK, M2C_UNK *, M2C_UNK);
-M2C_UNK sceVshCommonGui_F4D1E387(s32, s32, M2C_UNK *, M2C_UNK, M2C_UNK *, M2C_UNK, M2C_UNK);
+M2C_UNK sceVshCommonGui_F4D1E387(s32, s32, const char *, M2C_UNK, const char *, M2C_UNK, M2C_UNK);
 M2C_UNK sce_paf_private_calloc(M2C_UNK, s32);
 M2C_UNK sce_paf_private_free(void *);
 s32 *sce_paf_private_malloc(M2C_UNK);
@@ -3803,5 +3809,9 @@ M2C_UNK sce_paf_private_memset(void *, M2C_UNK, M2C_UNK);
 M2C_UNK sce_paf_private_printf(M2C_UNK *, s32);
 s32 sce_paf_private_strcmp(s32, s32);
 s32 sce_paf_private_strlen(s32);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

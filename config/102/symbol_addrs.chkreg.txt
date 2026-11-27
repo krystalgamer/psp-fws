@@ -1,0 +1,17 @@
+// shared names (tools/add_version.py) begin
+g_pIdStorageUMDConfig = 0x00000470; // rom:0x500
+g_numUMDRegionCodeInfoEntries = 0x00000480;
+g_isUMDRegionCodesObtained = 0x00000484;
+D_00000970 = 0x00000570;
+g_semaId = 0x00000EC0;
+_sceChkregLookupUMDRegionCodeInfo = 0x00000000; // type:func rom:0x80
+_sceChkregCheckRegion = 0x00000128; // type:func rom:0x1A8
+module_start = 0x00000190; // type:func rom:0x210
+module_stop = 0x00000200; // type:func rom:0x280
+sceChkregCheckRegion = 0x00000288; // type:func rom:0x308
+sceKernelCreateSema = 0x00000334; // type:func rom:0x3B4
+sceKernelDeleteSema = 0x0000033C; // type:func rom:0x3BC
+sceKernelSignalSema = 0x00000344; // type:func rom:0x3C4
+sceKernelWaitSema = 0x0000034C; // type:func rom:0x3CC
+sceIdStorageReadLeaf = 0x00000354; // type:func rom:0x3D4
+// shared names (tools/add_version.py) end

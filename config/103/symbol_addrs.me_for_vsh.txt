@@ -1,0 +1,4 @@
+// shared names (tools/add_version.py) begin
+sceMe4VSH_driver_99CBCF35 = 0x00000000; // type:func rom:0x80
+sceMeWrapper_driver_3D5F109C = 0x00000020; // type:func rom:0xA0
+// shared names (tools/add_version.py) end

@@ -1,3 +1,4 @@
+/* lang: c++ */
 #include "common.h"
 #include "music_common_decls.h"
 
@@ -95,7 +96,7 @@ INCLUDE_ASM("nonmatchings/music_common_01CC30", func_0001D55C);
 
 #if FW_VERSION >= 350
 void func_0001D55C(void) {
-    scePaf_CB4C96CE();
+    sce_paf_private_wcscasecmp();
 }
 #endif
 
@@ -159,7 +160,7 @@ void func_00021FBC(s32 **arg0) {
 void func_00021FE4(s32 **arg0) {
     *arg0 = &D_00025320;
     func_0001D7A0(arg0);
-    scePaf_6261C0A5(arg0);
+    _ZdlPv(arg0);
 }
 #endif
 

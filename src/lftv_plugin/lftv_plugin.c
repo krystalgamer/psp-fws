@@ -1,3 +1,4 @@
+/* lang: c++ */
 /* cflags: -Os */
 #include "common.h"
 #include "lftv_plugin_decls.h"
@@ -285,7 +286,7 @@ s32 func_000012C0(void) {
 
     var_v1 = -1;
     if (D_00003CD0 != 0) {
-        sceVshCommonGui_8F414E35(D_00003CD0);
+        _ZN3vsh13MessageDialog10HideDeleteEv(D_00003CD0);
         D_00003CD0 = 0;
         var_v1 = 0;
     }
@@ -322,14 +323,14 @@ void func_000016F4(s32 arg0) {
     void *temp_v0_3;
 
     func_00003138(0x10000, 0);
-    temp_v0 = scePaf_DCE3D225(arg0, 1);
+    temp_v0 = _ZNK3paf4View12GetInterfaceEi(arg0, 1);
     if (temp_v0 != NULL) {
         M2C_FIELD(temp_v0, M2C_UNK (**)(M2C_UNK *, M2C_UNK), 4)(&func_00001770, 0);
     }
     func_000012C0();
-    temp_v0_2 = scePaf_88784487(&D_000031AC);
+    temp_v0_2 = _ZN3paf4View4FindEPKc(&D_000031AC);
     if (temp_v0_2 != 0) {
-        temp_v0_3 = scePaf_DCE3D225(temp_v0_2, 1);
+        temp_v0_3 = _ZNK3paf4View12GetInterfaceEi(temp_v0_2, 1);
         if (temp_v0_3 != NULL) {
             M2C_FIELD(temp_v0_3, M2C_UNK (**)(), 0x70)();
         }
@@ -442,7 +443,7 @@ void func_0000241C(s32 arg0, s32 arg1) {
 
     var_v0 = 0;
     if (arg1 != 0) {
-        var_v0 = scePaf_C1B0AA0D(arg1);
+        var_v0 = sce_paf_private_strlen(arg1);
     }
     func_000027BC(arg0, arg1, var_v0);
 }
@@ -466,7 +467,7 @@ void func_00002500(s32 arg0, s32 arg1) {
 
     var_v0 = 0;
     if (arg1 != 0) {
-        var_v0 = scePaf_5E4447F6(arg1);
+        var_v0 = sce_paf_private_wcslen(arg1);
     }
     func_00002868(arg0, arg1, var_v0);
 }
@@ -542,7 +543,7 @@ INCLUDE_ASM("nonmatchings/lftv_plugin", func_00002B84);
 
 #if FW_VERSION >= 350
 void func_00002F70(void) {
-    sceVshCommonUtil_951BC384(&D_00003D1C, &func_00003164);
+    sceVshCommonUtil_622815DD(&D_00003D1C, &func_00003164);
 }
 #endif
 
@@ -573,9 +574,9 @@ s32 func_000031CC(void) {
     s32 temp_v0;
     void *temp_v0_2;
 
-    temp_v0 = scePaf_88784487("netconf_plugin");
+    temp_v0 = _ZN3paf4View4FindEPKc(( M2C_UNK*) ("netconf_plugin"));
     if (temp_v0 != 0) {
-        temp_v0_2 = scePaf_DCE3D225(temp_v0, 1);
+        temp_v0_2 = _ZNK3paf4View12GetInterfaceEi(temp_v0, 1);
         if (temp_v0_2 != NULL) {
             func_000030E8(0x04000000, -1);
             M2C_FIELD(temp_v0_2, M2C_UNK (**)(), 4)();
@@ -591,7 +592,7 @@ s32 func_000031CC(void) {
     s32 temp_v0;
     void *temp_v0_2;
 
-    temp_v0 = _ZN3paf4View4FindEPKc("netconf_plugin");
+    temp_v0 = _ZN3paf4View4FindEPKc(( M2C_UNK*) ("netconf_plugin"));
     if (temp_v0 != 0) {
         temp_v0_2 = _ZNK3paf4View12GetInterfaceEi(temp_v0, 1);
         if (temp_v0_2 != NULL) {
@@ -609,9 +610,9 @@ s32 func_0000323C(void) {
     s32 temp_v0;
     void *temp_v0_2;
 
-    temp_v0 = scePaf_88784487("osk");
+    temp_v0 = _ZN3paf4View4FindEPKc(( M2C_UNK*) ("osk"));
     if (temp_v0 != 0) {
-        temp_v0_2 = scePaf_DCE3D225(temp_v0, 1);
+        temp_v0_2 = _ZNK3paf4View12GetInterfaceEi(temp_v0, 1);
         if (temp_v0_2 != NULL) {
             func_000030E8(0x400000, -1);
             M2C_FIELD(temp_v0_2, M2C_UNK (**)(), 4)();
@@ -627,7 +628,7 @@ s32 func_0000323C(void) {
     s32 temp_v0;
     void *temp_v0_2;
 
-    temp_v0 = _ZN3paf4View4FindEPKc("osk");
+    temp_v0 = _ZN3paf4View4FindEPKc(( M2C_UNK*) ("osk"));
     if (temp_v0 != 0) {
         temp_v0_2 = _ZNK3paf4View12GetInterfaceEi(temp_v0, 1);
         if (temp_v0_2 != NULL) {

@@ -9,8 +9,18 @@ void func_00000000(u32 arg0) {
 }
 #endif
 
-#if FW_VERSION == 100 || (FW_VERSION >= 151 && FW_VERSION < 282)
+#if FW_VERSION < 150 || (FW_VERSION >= 151 && FW_VERSION < 282)
 INCLUDE_ASM("nonmatchings/impose", func_00000028);
+#endif
+
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/impose", func_00000070);
+
+INCLUDE_ASM("nonmatchings/impose", func_000000C8);
+
+INCLUDE_ASM("nonmatchings/impose", func_00000120);
+
+INCLUDE_ASM("nonmatchings/impose", func_00000298_v102);
 #endif
 
 #if FW_VERSION == 150
@@ -69,7 +79,7 @@ INCLUDE_ASM("nonmatchings/impose", func_00000594);
 INCLUDE_ASM("nonmatchings/impose", func_00000590);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/impose", func_00000444);
 #endif
 
@@ -81,7 +91,19 @@ s32 func_000004C4(void) {
     func_000025F0(4);
     return 0;
 }
+#endif
 
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/impose", func_000005EC);
+
+INCLUDE_ASM("nonmatchings/impose", func_00000750);
+
+INCLUDE_ASM("nonmatchings/impose", func_00000840);
+
+INCLUDE_ASM("nonmatchings/impose", func_00000B5C);
+#endif
+
+#if FW_VERSION == 100 || (FW_VERSION >= 150 && FW_VERSION < 270)
 INCLUDE_ASM("nonmatchings/impose", sceImposeSetStatus);
 
 INCLUDE_ASM("nonmatchings/impose", sceImposeGetParam);
@@ -345,6 +367,10 @@ INCLUDE_RODATA("nonmatchings/impose", D_0000FFE0);
 
 INCLUDE_RODATA("nonmatchings/impose", D_0000F2E4);
 
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_RODATA("nonmatchings/impose", D_00005370);
+#endif
+
 #if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/impose", D_00006024);
 #endif
@@ -383,8 +409,12 @@ INCLUDE_ASM("nonmatchings/impose", sceImposeGetBatteryIconStatus);
 INCLUDE_ASM("nonmatchings/impose", func_00000DFC);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_RODATA("nonmatchings/impose", D_00004D00);
+#endif
+
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/impose", func_00000BFC);
 #endif
 
 #if FW_VERSION >= 282
@@ -525,10 +555,50 @@ INCLUDE_ASM("nonmatchings/impose", sceImposeCheckVideoOut);
 INCLUDE_ASM("nonmatchings/impose", sceImpose_A9884B00);
 #endif
 
+#if FW_VERSION == 100 || FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/impose", sceImposeInit);
+#endif
 
 #if FW_VERSION < 270
 INCLUDE_ASM("nonmatchings/impose", sceImposeEnd);
+#endif
+
+#if FW_VERSION == 103
+INCLUDE_ASM("nonmatchings/impose", func_000011FC);
+
+INCLUDE_ASM("nonmatchings/impose", func_00001274);
+
+INCLUDE_ASM("nonmatchings/impose", func_0000131C);
+#endif
+
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/impose", func_000011F8);
+
+INCLUDE_ASM("nonmatchings/impose", func_000012DC);
+#endif
+
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/impose", func_000013B4);
+
+INCLUDE_ASM("nonmatchings/impose", func_000013C4);
+#endif
+
+#if FW_VERSION == 103
+INCLUDE_ASM("nonmatchings/impose", func_000014B8);
+#endif
+
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/impose", func_000013D8);
+#endif
+
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/impose", func_00001428);
+
+INCLUDE_ASM("nonmatchings/impose", func_00001478);
+#endif
+
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/impose", func_000014BC);
 #endif
 
 #if FW_VERSION >= 350
@@ -997,7 +1067,9 @@ s32 module_reboot_phase(s32 arg0) {
 }
 #endif
 
+#if FW_VERSION == 100 || FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/impose", sceImposeResume);
+#endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
 s32 sceAudioRoutingSetMode(s32 arg0) {
@@ -1065,7 +1137,7 @@ INCLUDE_ASM("nonmatchings/impose", func_000025F0);
 INCLUDE_ASM("nonmatchings/impose", func_0000255C);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/impose", func_00001650);
 #endif
 
@@ -1079,6 +1151,16 @@ INCLUDE_ASM("nonmatchings/impose", func_00002D08);
 
 #if FW_VERSION < 310
 INCLUDE_ASM("nonmatchings/impose", func_00002B0C);
+#endif
+
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/impose", func_00002010);
+
+INCLUDE_ASM("nonmatchings/impose", func_00002160);
+#endif
+
+#if FW_VERSION == 103
+INCLUDE_ASM("nonmatchings/impose", func_00002288);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
@@ -1231,7 +1313,9 @@ void func_00001E08(s32 arg0) {
         M2C_FIELD(D_00018648, s32 *, 0xB4) = 0;
     }
 }
+#endif
 
+#if FW_VERSION < 103
 void func_00001E78(s32 arg0) {
     if (arg0 & 0x80000) {
         M2C_FIELD(D_00018648, s32 *, 0x40) = 1;
@@ -1240,7 +1324,25 @@ void func_00001E78(s32 arg0) {
     }
     func_00000000(0x20U);
 }
+#endif
 
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/impose", func_00002208);
+#endif
+
+#if FW_VERSION == 103
+INCLUDE_ASM("nonmatchings/impose", func_00002428);
+#endif
+
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/impose", func_0000234C);
+#endif
+
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/impose", func_00002890);
+#endif
+
+#if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/impose", func_00001EC0);
 
 INCLUDE_ASM("nonmatchings/impose", func_00002008);
@@ -1354,6 +1456,10 @@ INCLUDE_RODATA("nonmatchings/impose", D_0000F448);
 INCLUDE_RODATA("nonmatchings/impose", D_0000F464);
 
 INCLUDE_RODATA("nonmatchings/impose", D_0000F478);
+
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_RODATA("nonmatchings/impose", D_000054D0);
+#endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/impose", D_000061A8);
@@ -1584,6 +1690,20 @@ INCLUDE_ASM("nonmatchings/impose", func_00004954);
 
 INCLUDE_ASM("nonmatchings/impose", func_00004A08);
 
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/impose", func_00003B48);
+
+INCLUDE_ASM("nonmatchings/impose", func_00003BB0);
+#endif
+
+#if FW_VERSION == 103
+INCLUDE_ASM("nonmatchings/impose", func_00003C8C);
+#endif
+
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/impose", func_00003C2C);
+#endif
+
 #if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/impose", func_00004590);
 
@@ -1612,16 +1732,16 @@ INCLUDE_ASM("nonmatchings/impose", func_000036E8);
 INCLUDE_ASM("nonmatchings/impose", func_00003C58);
 #endif
 
+#if FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/impose", func_000044CC);
+#endif
+
 #if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/impose", func_000055FC);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/impose", func_0000553C);
-#endif
-
-#if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/impose", func_000044CC);
 #endif
 
 #if FW_VERSION >= 282

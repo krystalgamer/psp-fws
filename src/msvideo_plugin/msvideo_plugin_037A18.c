@@ -1,5 +1,6 @@
+/* lang: c++ */
 /* cflags[150]: -Os */
-/* cflags[100]: -Os */
+/* cflags[100,103]: -Os */
 #include "common.h"
 #include "msvideo_plugin_decls.h"
 
@@ -161,7 +162,7 @@ INCLUDE_ASM("nonmatchings/msvideo_plugin_037A18", func_0003877C);
 
 INCLUDE_ASM("nonmatchings/msvideo_plugin_037A18", func_00038820);
 
-#if FW_VERSION == 100 || FW_VERSION == 152
+#if FW_VERSION < 150 || FW_VERSION == 152
 INCLUDE_ASM("nonmatchings/msvideo_plugin_037A18", func_0002BA14);
 #endif
 

@@ -1,3 +1,4 @@
+/* lang: c++ */
 #include "common.h"
 #include "lftv_main_plugin_decls.h"
 
@@ -328,7 +329,7 @@ INCLUDE_ASM("nonmatchings/lftv_main_plugin_037634", func_000383A0);
 #if FW_VERSION >= 282 && FW_VERSION < 350
 void func_000383A0(M2C_UNK **arg0) {
     *arg0 = &D_0005C018;
-    _ZN3paf8PhWidgetD2Ev();
+    _ZN3paf8PhWidgetD2Ev(arg0);
 }
 #endif
 
@@ -343,7 +344,7 @@ INCLUDE_ASM("nonmatchings/lftv_main_plugin_037634", func_000383C8);
 #if FW_VERSION >= 282 && FW_VERSION < 350
 void func_000383C8(M2C_UNK **arg0) {
     *arg0 = &D_0005C018;
-    _ZN3paf8PhWidgetD2Ev();
+    _ZN3paf8PhWidgetD2Ev(arg0);
 }
 #endif
 
@@ -373,7 +374,7 @@ INCLUDE_ASM("nonmatchings/lftv_main_plugin_037634", func_000383F0);
 #if FW_VERSION >= 282 && FW_VERSION < 350
 void func_000383F0(M2C_UNK **arg0) {
     *arg0 = &D_0005C018;
-    _ZN3paf8PhWidgetD2Ev();
+    _ZN3paf8PhWidgetD2Ev(arg0);
     _ZdlPv(arg0);
 }
 #endif
@@ -612,7 +613,7 @@ INCLUDE_ASM("nonmatchings/lftv_main_plugin_037634", func_00039B00);
 #if FW_VERSION >= 282 && FW_VERSION < 350
 void func_00039B00(M2C_UNK **arg0) {
     *arg0 = &D_0005C300;
-    _ZN3paf8PhWidgetD2Ev();
+    _ZN3paf8PhWidgetD2Ev(arg0);
 }
 #endif
 
@@ -623,7 +624,7 @@ INCLUDE_ASM("nonmatchings/lftv_main_plugin_037634", func_00039B28);
 #if FW_VERSION >= 282 && FW_VERSION < 350
 void func_00039B28(M2C_UNK **arg0) {
     *arg0 = &D_0005C300;
-    _ZN3paf8PhWidgetD2Ev();
+    _ZN3paf8PhWidgetD2Ev(arg0);
     _ZdlPv(arg0);
 }
 #endif
@@ -670,7 +671,7 @@ INCLUDE_ASM("nonmatchings/lftv_main_plugin_037634", func_00039C94);
 INCLUDE_ASM("nonmatchings/lftv_main_plugin_037634", func_00039CB4);
 #else
 void func_00039CB4(void) {
-    func_00004914(&D_0005F028);
+    func_00004914((Unk_func_00004914_0*) &D_0005F028);
 }
 #endif
 
@@ -680,7 +681,7 @@ s32 func_0002D184(void) {
 }
 #else
 void func_00039CD4(void) {
-    func_00004AB8(&D_0005F028);
+    func_00004AB8((Unk_func_00004AB8_0*) &D_0005F028);
 }
 
 INCLUDE_ASM("nonmatchings/lftv_main_plugin_037634", func_00039CF4);
@@ -690,7 +691,7 @@ INCLUDE_ASM("nonmatchings/lftv_main_plugin_037634", func_00039CF4);
 INCLUDE_ASM("nonmatchings/lftv_main_plugin_037634", func_00039D14);
 #else
 void func_00039D14(void) {
-    func_00004AD0(&D_0005F028);
+    func_00004AD0((Unk_func_00004AD0_0*) &D_0005F028);
 }
 #endif
 

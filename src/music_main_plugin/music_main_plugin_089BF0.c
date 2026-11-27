@@ -1,3 +1,4 @@
+/* lang: c++ */
 #include "common.h"
 #include "music_main_plugin_decls.h"
 
@@ -11,14 +12,14 @@ INCLUDE_ASM("nonmatchings/music_main_plugin_089BF0", func_00089CB8);
 INCLUDE_ASM("nonmatchings/music_main_plugin_089BF0", func_00089D1C);
 
 void func_00089E34(struct Unk_func_00086F9C_0 *arg0, s32 arg1) {
-    func_00086A54(arg0, arg1);
+    func_00086A54((Unk_func_00086A54_0*) arg0, arg1);
     M2C_FIELD(arg0, s32 **, 0) = &D_000A2338;
     arg0->unk18 = 0;
     arg0->unk1C = 0;
 }
 
 void func_00089E6C(struct Unk_func_00089E6C_0 *arg0, s32 arg1) {
-    func_00086A54(arg0, arg1);
+    func_00086A54((Unk_func_00086A54_0*) arg0, arg1);
     arg0->unk0 = &D_000A2338;
     arg0->unk18 = 0;
     arg0->unk1C = 0;
@@ -50,12 +51,12 @@ u16 func_00089F2C(struct Unk_func_00089F2C_0 *arg0) {
 }
 
 void func_00089F34(s32 **arg0, s32 arg1, s32 arg2) {
-    func_00086B4C(arg0, arg1, arg2);
+    func_00086B4C((Unk_func_00086B4C_0*) arg0, arg1, arg2);
     *arg0 = &D_000A2328;
 }
 
 void func_00089F64(s32 **arg0, s32 arg1, s32 arg2) {
-    func_00086B4C(arg0, arg1, arg2);
+    func_00086B4C((Unk_func_00086B4C_0*) arg0, arg1, arg2);
     *arg0 = &D_000A2328;
 }
 
@@ -83,7 +84,7 @@ void func_00089FE4(s32 **arg0) {
 INCLUDE_ASM("nonmatchings/music_main_plugin_089BF0", func_0008A01C);
 
 void func_0008A19C(M2C_UNK **arg0) {
-    func_00086A54(arg0, (s32) &D_000A2350);
+    func_00086A54((Unk_func_00086A54_0*) arg0, (s32) &D_000A2350);
     *arg0 = &D_000A2370;
 }
 
@@ -98,12 +99,12 @@ s32 func_0008A25C(struct Unk_func_0008A25C_0 *arg0) {
 }
 
 void func_0008A264(s32 **arg0, s32 arg1, s32 arg2) {
-    func_00086B4C(arg0, arg1, arg2);
+    func_00086B4C((Unk_func_00086B4C_0*) arg0, arg1, arg2);
     *arg0 = &D_000A2360;
 }
 
 void func_0008A294(s32 **arg0, s32 arg1, s32 arg2) {
-    func_00086B4C(arg0, arg1, arg2);
+    func_00086B4C((Unk_func_00086B4C_0*) arg0, arg1, arg2);
     *arg0 = &D_000A2360;
 }
 
@@ -338,7 +339,7 @@ void func_0008B04C(M2C_UNK **arg0) {
 INCLUDE_ASM("nonmatchings/music_main_plugin_089BF0", func_0008B084);
 
 void func_0008B390(struct Unk_func_0008B390_0 *arg0) {
-    func_00086A54(arg0, (s32) &D_000A2470);
+    func_00086A54((Unk_func_00086A54_0*) arg0, (s32) &D_000A2470);
     arg0->unk0 = &D_000A2490;
     arg0->unk18 = 0;
 }
@@ -358,12 +359,12 @@ s32 func_0008B454(struct Unk_func_0008B454_0 *arg0) {
 }
 
 void func_0008B45C(s32 **arg0, s32 arg1, s32 arg2) {
-    func_00086B4C(arg0, arg1, arg2);
+    func_00086B4C((Unk_func_00086B4C_0*) arg0, arg1, arg2);
     *arg0 = &D_000A2480;
 }
 
 void func_0008B48C(s32 **arg0, s32 arg1, s32 arg2) {
-    func_00086B4C(arg0, arg1, arg2);
+    func_00086B4C((Unk_func_00086B4C_0*) arg0, arg1, arg2);
     *arg0 = &D_000A2480;
 }
 #endif
@@ -410,7 +411,7 @@ INCLUDE_ASM("nonmatchings/music_main_plugin_089BF0", func_0008B544);
 INCLUDE_ASM("nonmatchings/music_main_plugin_089BF0", func_0008B5D4);
 
 void func_0008B6B8(M2C_UNK **arg0) {
-    func_00086A54(arg0, (s32) &D_000A24A0);
+    func_00086A54((Unk_func_00086A54_0*) arg0, (s32) &D_000A24A0);
     *arg0 = &D_000A24C0;
 }
 #endif
@@ -425,12 +426,12 @@ INCLUDE_ASM("nonmatchings/music_main_plugin_089BF0", func_0008B718);
 INCLUDE_ASM("nonmatchings/music_main_plugin_089BF0", func_0008B740);
 
 void func_0008B778(s32 **arg0, s32 arg1, s32 arg2) {
-    func_00086B4C(arg0, arg1, arg2);
+    func_00086B4C((Unk_func_00086B4C_0*) arg0, arg1, arg2);
     *arg0 = &D_000A24B0;
 }
 
 void func_0008B7A8(s32 **arg0, s32 arg1, s32 arg2) {
-    func_00086B4C(arg0, arg1, arg2);
+    func_00086B4C((Unk_func_00086B4C_0*) arg0, arg1, arg2);
     *arg0 = &D_000A24B0;
 }
 #endif
@@ -477,13 +478,13 @@ s32 func_0008B860(struct Unk_func_0008B860_0 *arg0) {
 INCLUDE_ASM("nonmatchings/music_main_plugin_089BF0", func_0008B868);
 
 void func_0008B908(struct Unk_func_0008B908_0 *arg0) {
-    func_00086A54(arg0, (s32) &D_000A24D0);
+    func_00086A54((Unk_func_00086A54_0*) arg0, (s32) &D_000A24D0);
     arg0->unk0 = &D_000A24F0;
     arg0->unk18 = 0;
 }
 
 void func_0008B944(struct Unk_func_0008B944_0 *arg0) {
-    func_00086A54(arg0, (s32) &D_000A24D0);
+    func_00086A54((Unk_func_00086A54_0*) arg0, (s32) &D_000A24D0);
     arg0->unk0 = &D_000A24F0;
     arg0->unk18 = 0;
 }
@@ -505,7 +506,7 @@ s32 func_0008BA08(struct Unk_func_0008BA08_0 *arg0) {
 INCLUDE_ASM("nonmatchings/music_main_plugin_089BF0", func_0008BA14);
 
 void func_0008BA44(s32 **arg0, s32 arg1, s32 arg2) {
-    func_00086B4C(arg0, arg1, arg2);
+    func_00086B4C((Unk_func_00086B4C_0*) arg0, arg1, arg2);
     *arg0 = &D_000A24E0;
 }
 #endif

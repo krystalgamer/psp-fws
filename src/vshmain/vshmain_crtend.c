@@ -1,3 +1,4 @@
+/* lang: c++ */
 /* cflags: -O2 */
 #include "common.h"
 #include "vshmain_decls.h"

@@ -4,6 +4,12 @@
 #include "common.h"
 #include "m2c_macros.h"
 
+#ifdef __cplusplus
+#include "paf.h"
+#include "vsh.h"
+extern "C" {
+#endif
+
 struct Unk_func_00000790_temp_v0_2 {
     u8 pad0[0x10];
     M2C_UNK (*unk10)(M2C_UNK);
@@ -22,10 +28,10 @@ extern M2C_UNK D_00003F04;
 extern s32 D_0001045C;
 extern s8 D_00010480;
 
-s32 _ZN3paf4View4FindEPKc(M2C_UNK *);
+s32 _ZN3paf4View4FindEPKc(const char *);
 s32 _ZN3paf6Module12SetInterfaceEiPv(s32, s32, s32);
 void *_ZNK3paf4View12GetInterfaceEi(s32, M2C_UNK);
-M2C_UNK _ZdlPv();
+M2C_UNK _ZdlPv(void *);
 s32 func_00000570(void);
 void func_0000076C(void);
 void func_00000790(void);
@@ -38,11 +44,11 @@ void func_00000E08(s32 arg0, s32 arg1);
 void func_00000E84(s32 arg0);
 void func_00000ED8(s32 *arg0, s32 arg1);
 void func_00000EF8(s32 arg0, s32 arg1);
-M2C_UNK func_00000F48();
+M2C_UNK func_00000F48(...);
 M2C_UNK func_00000F78(s32, s32, s32);
 void func_00000FFC(M2C_UNK **arg0);
 void func_00001024(void);
-M2C_UNK func_0000107C();
+M2C_UNK func_0000107C(...);
 s32 func_000010EC(s32, s32);
 void func_00001194(void);
 void func_000011B4(void);
@@ -56,11 +62,12 @@ s32 sceAtracReleaseAtracID(s32);
 s32 sceKernelPowerUnlock(s32);
 M2C_UNK scePaf_37219A3B(s32, s32, M2C_UNK *);
 M2C_UNK scePaf_39E62C88(s32, M2C_UNK *, M2C_UNK, M2C_UNK);
-s32 scePaf_88784487(M2C_UNK *);
-s32 scePaf_C1B0AA0D(s32);
 s32 scePaf_CD216C47(s32, M2C_UNK *);
-void *scePaf_DCE3D225(s32, M2C_UNK);
-M2C_UNK scePowerCancelRequest();
+M2C_UNK scePowerCancelRequest(...);
 s32 sce_paf_private_strlen(s32);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

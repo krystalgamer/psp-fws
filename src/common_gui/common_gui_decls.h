@@ -4,6 +4,12 @@
 #include "common.h"
 #include "m2c_macros.h"
 
+#ifdef __cplusplus
+#include "paf.h"
+#include "vsh.h"
+extern "C" {
+#endif
+
 struct Unk_func_000008A8_temp_a0 {
     u8 pad0[0x4];
     s32 unk4;
@@ -97,8 +103,8 @@ void _ZN3vsh15GetString_EnterEv(void);
 void _ZN3vsh16GetString_CancelEv(void);
 void _ZN3vsh16GetString_OptionEv(void);
 void *_ZNK3paf4View12GetInterfaceEi(s32, M2C_UNK);
-M2C_UNK _ZdlPv();
-M2C_UNK func_00000000();
+M2C_UNK _ZdlPv(void *);
+M2C_UNK func_00000000(...);
 void func_00000438(s32 arg0, s32 arg1);
 s32 func_00000488(s32, s32, s32);
 s32 func_000005CC(s32);
@@ -121,7 +127,7 @@ void func_00002D08(void);
 void func_00002D28(M2C_UNK **arg0);
 void func_00002D38(M2C_UNK **arg0);
 void func_00002D60(void);
-M2C_UNK func_00002DB8();
+M2C_UNK func_00002DB8(...);
 void func_00003508(void **arg0, void *arg1);
 void func_00003528(s32 *arg0, s32 arg1);
 void func_00003548(s32 *arg0, s32 arg1);
@@ -138,15 +144,11 @@ void func_00007220(M2C_UNK **arg0);
 s32 module_start(void);
 s32 module_stop(void);
 M2C_UNK scePaf_4208F869(s32);
-s32 scePaf_5E4447F6(s32);
 M2C_UNK scePaf_6615D1B8(s32);
 M2C_UNK scePaf_6C3BBB68(s32);
 M2C_UNK scePaf_7C960C90(s32);
-s32 scePaf_88784487(M2C_UNK *);
 M2C_UNK scePaf_9ADF22F7(s32);
-M2C_UNK scePaf_CA8AFB1B(s32);
 M2C_UNK scePaf_D88ADD11(s32);
-void *scePaf_DCE3D225(s32, M2C_UNK);
 M2C_UNK scePaf_FA05BF7B(s32);
 M2C_UNK scePaf_FE575092(s32);
 void sceVshCommonGui_00FBD201(void);
@@ -173,5 +175,9 @@ void sceVshCommonGui_E9B8D6AB(void);
 M2C_UNK *sceVshCommonGui_EBB7B7DE(void);
 void sceVshCommonGui_EC899EBE(void);
 s32 sce_paf_private_wcslen(s32);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

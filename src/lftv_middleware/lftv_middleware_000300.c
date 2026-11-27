@@ -1,3 +1,4 @@
+/* lang: c++ */
 /* cflags: -O0 */
 #include "common.h"
 #include "lftv_middleware_decls.h"

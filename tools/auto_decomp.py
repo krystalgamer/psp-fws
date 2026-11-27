@@ -168,11 +168,8 @@ class Module:
         """C context for m2c and test compiles: struct types, globals, prototypes."""
         import structify
         cxx = any("/* lang: c++ */" in f.read_text() for f in self.srcdir.glob("*.c"))
-        funcs = [structify.cxx_proto(v) if cxx else v for v in self.store["funcs"].values()]
-        body = ("\n".join(self.store.get("types", {})[k] for k in sorted(self.store.get("types", {}))) + "\n"
-                + "\n".join(self.store["vars"].values()) + "\n" + "\n".join(funcs) + "\n")
-        if cxx:
-            body = '#ifdef __cplusplus\nextern "C" {\n#endif\n' + body + '#ifdef __cplusplus\n}\n#endif\n'
+        structify.SRC[self.mod] = self.srcdir
+        body = "\n".join(structify.decls_body(self.mod, self.store, cxx)) + "\n"
         return '#include "common.h"\n#include "k1.h"\n#include "m2c_macros.h"\n' + body + extra
 
     def write_decls(self):

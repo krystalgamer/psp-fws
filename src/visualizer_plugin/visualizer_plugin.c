@@ -1,3 +1,4 @@
+/* lang: c++ */
 #include "common.h"
 #include "visualizer_plugin_decls.h"
 
@@ -123,7 +124,7 @@ INCLUDE_ASM("nonmatchings/visualizer_plugin", func_00000674);
 void func_00000674(struct Unk_func_00000674_0 *arg0) {
     arg0->unk0 = &D_0000CEB0;
     arg0->unk4 = 0;
-    scePaf_6261C0A5();
+    _ZdlPv((void**) arg0);
 }
 #endif
 
@@ -139,7 +140,7 @@ void func_000006EC(struct Unk_func_000006EC_0 *arg0) {
 
     temp_s0 = arg0->unk4;
     M2C_FIELD(*temp_s0, M2C_UNK (**)(void **, M2C_UNK), 0x58)(temp_s0, 1);
-    scePaf_6A82A8C6(temp_s0, 0x01000003);
+    _ZN3paf9PhHandler11KillTimerCBEi(temp_s0, 0x01000003);
 }
 #endif
 
@@ -159,7 +160,7 @@ void func_000006EC(struct Unk_func_000006EC_0 *arg0) {
 
     temp_s0 = arg0->unk4;
     (*temp_s0)->unk58(temp_s0, 1);
-    scePaf_6A82A8C6(temp_s0, 0x01000003);
+    _ZN3paf9PhHandler11KillTimerCBEi(temp_s0, 0x01000003);
 }
 #endif
 
@@ -220,8 +221,8 @@ INCLUDE_ASM("nonmatchings/visualizer_plugin", func_00000948);
 void func_00000A0C(void **arg0) {
     M2C_FIELD(arg0, void **, 0) = &D_0000CEF8;
     M2C_FIELD(arg0, s32 *, 0x330) = 0;
-    scePaf_6A82A8C6(arg0, 0);
-    scePaf_9E0CA28F(arg0);
+    _ZN3paf9PhHandler11KillTimerCBEi(arg0, 0);
+    _ZN3paf8PhWidgetD2Ev(arg0);
 }
 #else
 void func_00000A0C(void **arg0) {
@@ -236,9 +237,9 @@ void func_00000A0C(void **arg0) {
 void func_00000A4C(void **arg0) {
     M2C_FIELD(arg0, void **, 0) = &D_0000CEF8;
     M2C_FIELD(arg0, s32 *, 0x330) = 0;
-    scePaf_6A82A8C6(arg0, 0);
-    scePaf_9E0CA28F(arg0);
-    scePaf_6261C0A5(arg0);
+    _ZN3paf9PhHandler11KillTimerCBEi(arg0, 0);
+    _ZN3paf8PhWidgetD2Ev(arg0);
+    _ZdlPv(arg0);
 }
 #else
 void func_00000A4C(void **arg0) {
@@ -324,7 +325,7 @@ INCLUDE_ASM("nonmatchings/visualizer_plugin", func_00000DA8);
 #else
 void func_00000DA8(M2C_UNK **arg0) {
     *arg0 = &D_0000CFD8;
-    scePaf_6261C0A5();
+    _ZdlPv(arg0);
 }
 #endif
 
@@ -442,7 +443,7 @@ INCLUDE_ASM("nonmatchings/visualizer_plugin", func_000019C8);
 #else
 void func_000019C8(M2C_UNK **arg0) {
     *arg0 = &D_0000D1D0;
-    scePaf_6261C0A5();
+    _ZdlPv(arg0);
 }
 #endif
 
@@ -461,7 +462,7 @@ INCLUDE_ASM("nonmatchings/visualizer_plugin", func_00001A48);
 
 #if FW_VERSION >= 350
 void func_00001A68(s32 arg0) {
-    scePaf_BB8E4390(arg0 + 8);
+    _ZN3paf9PhSRender8SetStyleEii(arg0 + 8);
 }
 #else
 void func_00001A68(s32 arg0) {
@@ -471,7 +472,7 @@ void func_00001A68(s32 arg0) {
 
 #if FW_VERSION >= 350
 void func_00001A84(s32 arg0) {
-    scePaf_79542EEA(arg0 + 8);
+    _ZN3paf9PhSRender8SetStyleEif(arg0 + 8);
 }
 #else
 void func_00001A84(s32 arg0) {
@@ -481,7 +482,7 @@ void func_00001A84(s32 arg0) {
 
 #if FW_VERSION >= 350
 void func_00001AA0(s32 arg0) {
-    scePaf_291EBB2C(arg0 + 8);
+    _ZN3paf9PhSRender8SetStyleEiRK4vec4(arg0 + 8);
 }
 #else
 void func_00001AA0(s32 arg0) {
@@ -527,7 +528,7 @@ void func_00001CB8(struct Unk_vt_func_00001CB8_arg0 **arg0) {
 
 #if FW_VERSION >= 350
 void func_00001CDC(s32 arg0) {
-    scePaf_1A314D65(arg0 + 8);
+    _ZNK3paf9PhSRender8GetStyleEiRb(arg0 + 8);
 }
 #else
 void func_00001CDC(s32 arg0) {
@@ -537,7 +538,7 @@ void func_00001CDC(s32 arg0) {
 
 #if FW_VERSION >= 350
 void func_00001CF8(s32 arg0) {
-    scePaf_6FAE0AC1(arg0 + 8);
+    _ZNK3paf9PhSRender8GetStyleEiRi(arg0 + 8);
 }
 #else
 void func_00001CF8(s32 arg0) {
@@ -547,7 +548,7 @@ void func_00001CF8(s32 arg0) {
 
 #if FW_VERSION >= 350
 void func_00001D14(s32 arg0) {
-    scePaf_2A5E7BE9(arg0 + 8);
+    _ZNK3paf9PhSRender8GetStyleEiRf(arg0 + 8);
 }
 #else
 void func_00001D14(s32 arg0) {
@@ -557,7 +558,7 @@ void func_00001D14(s32 arg0) {
 
 #if FW_VERSION >= 350
 void func_00001D30(s32 arg0) {
-    scePaf_7EA9C56C(arg0 + 8);
+    _ZNK3paf9PhSRender8GetStyleEiR4vec4(arg0 + 8);
 }
 #else
 void func_00001D30(s32 arg0) {
@@ -723,7 +724,7 @@ INCLUDE_ASM("nonmatchings/visualizer_plugin", func_00005938);
 #else
 void func_00005938(M2C_UNK **arg0) {
     *arg0 = &D_0000D518;
-    scePaf_6261C0A5();
+    _ZdlPv(arg0);
 }
 #endif
 
@@ -736,7 +737,7 @@ INCLUDE_ASM("nonmatchings/visualizer_plugin", func_00005970);
 #else
 void func_00005970(M2C_UNK **arg0) {
     *arg0 = &D_0000D508;
-    scePaf_6261C0A5();
+    _ZdlPv(arg0);
 }
 #endif
 
@@ -827,7 +828,7 @@ INCLUDE_ASM("nonmatchings/visualizer_plugin", func_00007D04);
 #else
 void func_00007D04(M2C_UNK **arg0) {
     *arg0 = &D_0000D908;
-    scePaf_6261C0A5();
+    _ZdlPv(arg0);
 }
 #endif
 
@@ -837,7 +838,7 @@ void func_00007D2C(struct Unk_func_00007D2C_0 *arg0, s32 arg1) {
 
 #if FW_VERSION >= 350
 void func_00007D34(struct Unk_func_00007D34_0 *arg0) {
-    scePaf_0AC29BBC(6, 0x19D, arg0->unk8 * 2, 0, arg0->unk4);
+    sceGumDrawArray(6, 0x19D, arg0->unk8 * 2, 0, arg0->unk4);
 }
 #else
 void func_00007D34(struct Unk_func_00007D34_0 *arg0) {
@@ -871,7 +872,7 @@ INCLUDE_ASM("nonmatchings/visualizer_plugin", func_00007FD4);
 void func_00007FD4(struct Unk_func_00007FD4_0 *arg0, s32 arg1, s32 arg2) {
     arg0->unk0 = &D_0000D948;
     arg0->unk8 = 0;
-    scePaf_9479C11B(arg2, 0, func_00007FC0(arg1));
+    sce_paf_private_memset(arg2, 0, func_00007FC0(arg1));
     arg0->unk4 = arg2;
 }
 #endif
@@ -882,7 +883,7 @@ INCLUDE_ASM("nonmatchings/visualizer_plugin", func_0000802C);
 void func_0000802C(struct Unk_func_0000802C_0 *arg0, s32 arg1, s32 arg2) {
     arg0->unk0 = &D_0000D948;
     arg0->unk8 = 0;
-    scePaf_9479C11B(arg2, 0, func_00007FC0(arg1));
+    sce_paf_private_memset(arg2, 0, func_00007FC0(arg1));
     arg0->unk4 = arg2;
 }
 #endif
@@ -900,7 +901,7 @@ INCLUDE_ASM("nonmatchings/visualizer_plugin", func_000080A4);
 #else
 void func_000080A4(M2C_UNK **arg0) {
     *arg0 = &D_0000D948;
-    scePaf_6261C0A5();
+    _ZdlPv(arg0);
 }
 #endif
 
@@ -924,7 +925,7 @@ void func_00008338(struct Unk_func_00008338_0 *arg0) {
 
     temp_v0 = arg0->unk8;
     if (temp_v0 > 0) {
-        scePaf_0AC29BBC(3, 0x183, (temp_v0 * 0xC) + 6, 0, arg0->unk4);
+        sceGumDrawArray(3, 0x183, (temp_v0 * 0xC) + 6, 0, arg0->unk4);
     }
 }
 #else
@@ -978,7 +979,7 @@ INCLUDE_ASM("nonmatchings/visualizer_plugin", func_000091E8);
 void func_000091E8(struct Unk_func_000091E8_0 *arg0) {
     arg0->unk0 = &D_0000D970;
     sceKernelDeleteSema(arg0->unk4);
-    scePaf_6261C0A5(arg0);
+    _ZdlPv((void**) arg0);
 }
 #endif
 
@@ -1085,7 +1086,7 @@ INCLUDE_ASM("nonmatchings/visualizer_plugin", func_0000A17C);
 #else
 void func_0000A17C(M2C_UNK **arg0) {
     *arg0 = &D_0000DA28;
-    scePaf_6261C0A5();
+    _ZdlPv(arg0);
 }
 #endif
 

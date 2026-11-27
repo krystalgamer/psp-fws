@@ -23,7 +23,7 @@ INCLUDE_ASM("nonmatchings/utils", func_00000148);
 INCLUDE_ASM("nonmatchings/utils", func_00000198);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/utils", func_00000070);
 
 INCLUDE_ASM("nonmatchings/utils", func_000000D4);
@@ -59,9 +59,17 @@ INCLUDE_ASM("nonmatchings/utils", func_00000704);
 INCLUDE_ASM("nonmatchings/utils", func_000007EC);
 
 INCLUDE_ASM("nonmatchings/utils", func_000008F0);
+#endif
 
+#if FW_VERSION == 103
+INCLUDE_ASM("nonmatchings/utils", func_00000A14);
+#endif
+
+#if FW_VERSION < 103 || (FW_VERSION >= 150 && FW_VERSION < 201)
 INCLUDE_ASM("nonmatchings/utils", sceUtilsKernelDcacheWBinvRange);
+#endif
 
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/utils", func_00000AFC);
 
 INCLUDE_ASM("nonmatchings/utils", func_00000BE4);
@@ -83,7 +91,7 @@ INCLUDE_ASM("nonmatchings/utils", func_00000E38);
 INCLUDE_ASM("nonmatchings/utils", func_00000E64);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/utils", func_00000CCC);
 
 INCLUDE_ASM("nonmatchings/utils", func_00000D30);
@@ -105,7 +113,7 @@ INCLUDE_ASM("nonmatchings/utils", func_00000F50);
 INCLUDE_ASM("nonmatchings/utils", func_00000F84);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/utils", func_00000F98);
 
 INCLUDE_ASM("nonmatchings/utils", func_00001514);
@@ -127,7 +135,7 @@ INCLUDE_ASM("nonmatchings/utils", sceKernelUtilsMd5BlockUpdate);
 INCLUDE_ASM("nonmatchings/utils", sceKernelUtilsMd5BlockResult);
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION >= 201
+#if FW_VERSION < 150 || FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/utils", sceKernelUtilsMd5Digest);
 
 INCLUDE_ASM("nonmatchings/utils", sceKernelUtilsMd5BlockInit);
@@ -151,7 +159,7 @@ INCLUDE_ASM("nonmatchings/utils", sceKernelUtilsSha1BlockUpdate);
 INCLUDE_ASM("nonmatchings/utils", sceKernelUtilsSha1BlockResult);
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION >= 201
+#if FW_VERSION < 150 || FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/utils", sceKernelUtilsSha1Digest);
 
 INCLUDE_ASM("nonmatchings/utils", sceKernelUtilsSha1BlockInit);
@@ -179,7 +187,7 @@ void sceKernelSetGPIMask(s32 arg0, s32 arg1) {
 }
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 void sceKernelSetGPIMask(s32 arg0, s32 arg1) {
     D_00004704 = (D_00004704 & ~arg0) | arg1;
 }
@@ -191,7 +199,7 @@ void sceKernelSetGPOMask(s32 arg0, s32 arg1) {
 }
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 void sceKernelSetGPOMask(s32 arg0, s32 arg1) {
     D_00004700 = (D_00004700 & ~arg0) | arg1;
 }
@@ -214,7 +222,7 @@ s32 sceKernelRegisterLibcRtcFunc(s32 arg0, s32 arg1, s32 arg2) {
 }
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 s32 sceKernelRegisterLibcRtcFunc(s32 arg0, s32 arg1, s32 arg2) {
     D_00004764 = arg0;
     D_00004768 = arg1;
@@ -236,7 +244,7 @@ s32 sceKernelReleaseLibcRtcFunc(void) {
 }
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 s32 sceKernelReleaseLibcRtcFunc(void) {
     D_00004764 = 0;
     D_00004768 = 0;
@@ -259,7 +267,7 @@ INCLUDE_ASM("nonmatchings/utils", sceKernelGzipGetInfo);
 INCLUDE_ASM("nonmatchings/utils", sceKernelGzipGetCompressedData);
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION >= 201
+#if FW_VERSION < 150 || FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/utils", sceKernelGzipIsValid);
 #endif
 
@@ -339,7 +347,7 @@ s32 sceKernelGzipGetComment(s32 arg0) {
 }
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 s32 sceKernelGzipGetCompressedData(s32 arg0) {
     void *sp0;
     s32 var_v1;
@@ -360,7 +368,7 @@ s32 func_000010E0(void) {
 }
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 s32 func_000026B4(void) {
     return 0;
 }
@@ -416,7 +424,7 @@ INCLUDE_ASM("nonmatchings/utils", func_00001680);
 INCLUDE_ASM("nonmatchings/utils", func_00002B3C);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/utils", sceKernelIcacheInvalidateRange);
 #endif
 
@@ -490,6 +498,10 @@ INCLUDE_ASM("nonmatchings/utils", func_000024A0);
 
 INCLUDE_RODATA("nonmatchings/utils", D_00002940);
 
+#if FW_VERSION == 103
+INCLUDE_RODATA("nonmatchings/utils", D_000045C0);
+#else
 INCLUDE_RODATA("nonmatchings/utils", D_00002A40);
+#endif
 
 INCLUDE_RODATA("nonmatchings/utils", D_00002A80);

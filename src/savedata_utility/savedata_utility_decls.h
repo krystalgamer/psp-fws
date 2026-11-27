@@ -5,16 +5,11 @@
 #include "m2c_macros.h"
 
 #ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-/* vtables are still data (rodata asm): don't let cc1plus emit them (linkonce .gnu.linkonce.r) */
-#pragma interface
-extern "C++" {
 #include "paf.h"
 #include "vsh.h"
-}
+/* vtables are still data (rodata asm): keep cc1plus from emitting them */
+#pragma interface
+extern "C" {
 #endif
 
 #ifdef __cplusplus
@@ -1328,29 +1323,9 @@ s32 module_stop(void);
 s32 sceIoClose(s32);
 s32 sceIoOpen(void *, s32, s32);
 M2C_UNK sceIoUnassign(M2C_UNK *);
-s32 scePaf_2CD3AB9E(s32, M2C_UNK *);
-M2C_UNK scePaf_3AC3E06A(...);
-s32 scePaf_3EDD45EF(M2C_UNK, M2C_UNK *, struct Unk_func_00012928_0 *, M2C_UNK, M2C_UNK, M2C_UNK *);
-M2C_UNK scePaf_4729E549(...);
-M2C_UNK scePaf_47B886E3(M2C_UNK, s32);
-s32 scePaf_723D0C80(s32);
-M2C_UNK scePaf_7EED9087(...);
-M2C_UNK scePaf_9479C11B(s32, M2C_UNK, M2C_UNK);
-M2C_UNK scePaf_A76BB96F(s32, M2C_UNK);
 s32 scePaf_BB3CBD19(s32, M2C_UNK *, M2C_UNK);
-s32 scePaf_CD216C47(s32, M2C_UNK *);
-M2C_UNK scePaf_F5001144(void *);
-M2C_UNK scePaf_F6921CAB(...);
 s32 sceVshCommonGui_10906D79(s32, s32, s32, s32, s32, s32, s32);
-M2C_UNK sceVshCommonGui_11C48509(void *, s32);
 s32 sceVshCommonGui_1A6F3382(s32, s32, s32, s32, s32, s32, s32);
-M2C_UNK sceVshCommonGui_2EBB5C2B(void *, s32);
-s32 sceVshCommonGui_30FA68C3(...);
-M2C_UNK sceVshCommonGui_73765E63(void *, s32);
-M2C_UNK sceVshCommonGui_8F414E35(s32);
-s32 sceVshCommonGui_C9529428(...);
-s32 sceVshCommonGui_D728DEEA(s32, s32, s32, s32, s32, s32, s32);
-s32 sceVshCommonGui_EC899EBE(...);
 M2C_UNK sceVshCommonGui_F4D1E387(s32, s32, s32, s32, s32, s32, M2C_UNK);
 M2C_UNK sce_paf_private_free(...);
 M2C_UNK sce_paf_private_free2(void *);

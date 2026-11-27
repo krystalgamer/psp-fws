@@ -1,3 +1,4 @@
+/* lang: c++ */
 #include "common.h"
 #include "lftv_main_plugin_decls.h"
 
@@ -2204,7 +2205,7 @@ INCLUDE_ASM("nonmatchings/lftv_main_plugin_02433C", func_0002E044);
 
 #if FW_VERSION >= 282 && FW_VERSION < 350
 s32 func_0002E044(s32 arg0) {
-    return sce_paf_private_strncmp("TAB", arg0, 3) == 0;
+    return sce_paf_private_strncmp((M2C_UNK*) ("TAB"), arg0, 3) == 0;
 }
 #endif
 
@@ -2655,7 +2656,7 @@ INCLUDE_ASM("nonmatchings/lftv_main_plugin_02433C", func_00033BDC);
 
 #if FW_VERSION >= 282 && FW_VERSION < 350
 void func_00033BDC(s32 arg0, s32 arg1) {
-    void *sp0;
+    s32 sp0;
     s32 temp_s0;
     s32 temp_v0;
     s32 temp_v0_2;
@@ -2680,7 +2681,7 @@ void func_00033BDC(s32 arg0, s32 arg1) {
                 } else {
                     _ZN3vsh12BusyIcon_IncEv();
                     InputDevice_PspPad_Lock();
-                    temp_s0_2 = D_0005F8E8;
+                    temp_s0_2 = (Unk_func_00033BDC_temp_s0_2*) D_0005F8E8;
                     if ((temp_s0_2 == NULL) || (temp_v0_2 = Job_Start(0, &func_00033D08, 0, -1, -1, (s32 *) func_00033DB4), temp_s0_2->unkC = temp_v0_2, (temp_v0_2 == 0))) {
                         InputDevice_PspPad_Unlock();
                         _ZN3vsh12BusyIcon_DecEv();

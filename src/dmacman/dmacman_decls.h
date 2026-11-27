@@ -21,7 +21,7 @@ typedef struct SceDmaOp {
     struct SceDmaOp *parent;  /* 0x08 AssignMultiple chain */
     struct SceDmaOp *child;   /* 0x0C */
     volatile u32 flag;        /* 0x10 SCE_DMAOP_* */
-#if FW_VERSION == 100
+#if FW_VERSION < 150
     s32 chMask0;              /* 0x14 DMAC0 channel mask */
     s32 chMask1;              /* 0x18 DMAC1 channel mask */
 #else
@@ -53,7 +53,7 @@ typedef struct SceDmaOp {
 
 typedef struct {
     SceDmaOp *op[16];   /* 0x00 op running on channel */
-#if FW_VERSION == 100
+#if FW_VERSION < 150
     u32 excluded[2];    /* 0x40 per DMAC, bit = channel */
     u32 reserved[2];    /* 0x48 */
 #else

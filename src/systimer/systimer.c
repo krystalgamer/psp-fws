@@ -1,4 +1,4 @@
-/* cflags[100]: -O2 */
+/* cflags[100,102,103]: -O2 */
 /* cflags: -O2 -frename-registers */
 #include "common.h"
 #include "systimer_decls.h"
@@ -74,7 +74,7 @@ s32 module_reboot_before(void) {
     return 0;
 }
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 void func_00000128(SceSTimerInfo *timer) {
     timer->regadr->timerData = 0x80000000;
     timer->regadr->prsclNumerator = -1;
@@ -166,7 +166,7 @@ s32 sceSTimerSetPrscl(s32 timerId, s32 numerator, s32 denominator) {
     return 0;
 }
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 s32 systimerhandler(s32 arg0, SceSTimerInfo *timer, s32 arg2) {
     u32 data;
     u32 intrCount;
@@ -227,7 +227,7 @@ s32 sceSTimerStopCount(s32 timerId) {
     return 0;
 }
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 void _sceSTimerStopCount(SceSTimerInfo *timer) {
     timer->regadr->timerData = timer->regadr->nowData & 0x7F7FFFFF;
 }
@@ -260,7 +260,7 @@ s32 sceSTimerGetCount(s32 timerId, s32 *count) {
     return 0;
 }
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 s32 _sceSTimerGetCount(SceSTimerInfo *timer) {
     u32 now = timer->regadr->nowData & 0x3FFFFF;
     u32 base = timer->regadr->baseTime & 0x3FFFFF;

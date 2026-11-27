@@ -1,3 +1,4 @@
+/* lang: c++ */
 /* cflags: -O2 -frename-registers */
 #include "common.h"
 #include "lftv_middleware_decls.h"
@@ -242,7 +243,7 @@ INCLUDE_ASM("nonmatchings/lftv_middleware_01C52C", func_0001D36C);
 s32 func_0001D3B8(struct Unk_func_0001D3B8_0 *arg0) {
     s32 temp_v0;
 
-    if (!(arg0->unk40 & 1)) {
+    if ((arg0->unk40 & 1) == 0) {
 
     } else {
         temp_v0 = func_00038348();
@@ -254,7 +255,7 @@ s32 func_0001D3B8(struct Unk_func_0001D3B8_0 *arg0) {
 }
 
 s32 func_0001D400(struct Unk_func_0001D400_0 *arg0) {
-    if (!(arg0->unk40 & 1)) {
+    if ((arg0->unk40 & 1) == 0) {
 
     } else {
         func_00038354();
@@ -267,7 +268,7 @@ INCLUDE_ASM("nonmatchings/lftv_middleware_01C52C", func_0001D434);
 s32 func_0001D47C(struct Unk_func_0001D47C_0 *arg0) {
     s32 temp_v0;
 
-    if (!(arg0->unk40 & 1)) {
+    if ((arg0->unk40 & 1) == 0) {
 
     } else {
         temp_v0 = func_00038348();

@@ -1,3 +1,4 @@
+/* lang: c++ */
 /* cflags: -Os -frename-registers */
 #include "common.h"
 #include "lftv_middleware_decls.h"
@@ -31,7 +32,7 @@ INCLUDE_ASM("nonmatchings/lftv_middleware_037308", func_000377E8);
 
 #if FW_VERSION >= 303 && FW_VERSION < 352
 void func_000377E8(struct Unk_func_000377E8_0 *arg0) {
-    func_00039DEC(arg0);
+    func_00039DEC((Unk_func_00039DEC_0*) arg0);
     arg0->unk0 = &D_00056460;
     memset((u8 *)arg0 + 0x40, 0, 0x6C);
     arg0->unkAC = 0;
@@ -47,7 +48,7 @@ INCLUDE_ASM("nonmatchings/lftv_middleware_037308", func_00037838);
 
 #if FW_VERSION >= 303 && FW_VERSION < 352
 void func_00037838(struct Unk_func_00037838_0 *arg0) {
-    func_00039DEC(arg0);
+    func_00039DEC((Unk_func_00039DEC_0*) arg0);
     arg0->unk0 = &D_00056460;
     memset((u8 *)arg0 + 0x40, 0, 0x6C);
     arg0->unkAC = 0;

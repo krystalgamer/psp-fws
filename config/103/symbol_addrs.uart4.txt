@@ -1,0 +1,25 @@
+// shared names (tools/add_version.py) begin
+D_000007F0 = 0x000007E0;
+func_00000154 = 0x00000158; // type:func rom:0x1D8
+sceKernelUart4Init = 0x000001CC; // type:func rom:0x24C
+sceKernelUart4SetBps = 0x000002E8; // type:func rom:0x368
+sceKernelUart4PostChar = 0x00000348; // type:func rom:0x3C8
+sceKernelUart4SendChar = 0x00000374; // type:func rom:0x3F4
+sceKernelUart4SendBytes = 0x000003A4; // type:func rom:0x424
+func_00000458 = 0x00000440; // type:func rom:0x4C0
+func_00000480 = 0x00000468; // type:func rom:0x4E8
+func_0000034C = 0x00000488; // type:func rom:0x508
+func_00000504 = 0x000004EC; // type:func rom:0x56C
+sceKernelUart4SendCharFix = 0x00000508; // type:func rom:0x588
+sceKernelUart4SendBytesFix = 0x00000524; // type:func rom:0x5A4
+sceKernelUart4ReceiveBytesFix = 0x00000544; // type:func rom:0x5C4
+module_bootstart = 0x00000564; // type:func rom:0x5E4
+sceKernelCpuSuspendIntr = 0x000005C4; // type:func rom:0x644
+sceKernelCpuResumeIntr = 0x000005CC; // type:func rom:0x64C
+sceKernelRegisterDebugPutchar = 0x000005D4; // type:func rom:0x654
+sceKernelRegisterDebugWrite = 0x000005DC; // type:func rom:0x65C
+sceKernelRegisterDebugRead = 0x000005E4; // type:func rom:0x664
+sceKernelDebugEchoSet = 0x000005EC; // type:func rom:0x66C
+sceKernelRegisterSuspendHandler = 0x000005F4; // type:func rom:0x674
+sceKernelRegisterResumeHandler = 0x000005FC; // type:func rom:0x67C
+// shared names (tools/add_version.py) end

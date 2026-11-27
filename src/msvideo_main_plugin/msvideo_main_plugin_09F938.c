@@ -1,3 +1,4 @@
+/* lang: c++ */
 #include "common.h"
 #include "msvideo_main_plugin_decls.h"
 
@@ -519,7 +520,7 @@ INCLUDE_ASM("nonmatchings/msvideo_main_plugin_09F938", func_000A5000);
 void func_000A5070(struct Unk_func_000A5070_0 *arg0) {
     arg0->unk0 = 8;
     if (arg0->unk8 != 0) {
-        func_000A50C0(&arg0->unk8);
+        func_000A50C0((Unk_func_000A50C0_0*) &arg0->unk8);
         arg0->unk0 = (s32) (arg0->unk0 + arg0->unk8);
     }
 }

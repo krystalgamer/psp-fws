@@ -75,27 +75,148 @@ def _cxx_param(t):
     return "void *" if stars or core else "void *"  # class/struct/enum/function types: opaque
 
 
-def cxx_proto(line):
+def cxx_proto(line, static=False):
     """C++ units: an unprototyped `R f();` is `R f(void)` in C++. Mangled names give the real parameters
-    (member functions get `void *self` first); other unknown prototypes become `(...)`."""
+    (member functions get `void *self` first unless `static`); other unknown prototypes become `(...)`."""
     m = re.match(r"^(.*?)\b(\w+)\(\);$", line)
     if not m:
         return line
     ret, name = m[1], m[2]
     if name.startswith("_Z"):
-        dm = subprocess.run(["c++filt", name], capture_output=True, text=True).stdout.strip()
+        dm = _demangle(name)
         pm = re.match(r"^(.*?)\((.*)\)( const)?$", dm)
         if pm and dm != name:
             qual, args = pm[1], pm[2]
             params = [] if args in ("", "void") else [_cxx_param(a) for a in _split_args(args)]
-            # Ns::Class::method / ctor / dtor -> this; plain Ns::func can't be told apart, assume member
-            # unless the qualifier is a single namespace level known to be free functions
-            if "::" in qual and not re.match(r"^(vsh|paf|sce\w*)::\w+$", qual):
-                params = ["void *self"] + params
-            elif re.match(r"^(vsh|paf)::[A-Z]\w*::", qual + "::") and qual.count("::") >= 1 and not re.match(r"^(vsh|paf)::\w+$", qual):
+            if not static and _is_member(qual):
                 params = ["void *self"] + params
             return f"{ret}{name}({', '.join(params) or 'void'});"
     return f"{ret}{name}(...);"
+
+
+_DEMANGLED = {}
+
+
+def _demangle(name):
+    if name not in _DEMANGLED:
+        _DEMANGLED[name] = subprocess.run(["c++filt", name], capture_output=True, text=True).stdout.strip()
+    return _DEMANGLED[name]
+
+
+def _is_member(qual):
+    """Ns::Class::method (and ctors/dtors) take `this`; a single namespace level (vsh::f, paf::f) doesn't."""
+    if "::" not in qual:
+        return False
+    return not re.match(r"^(vsh|paf|sce\w*)::\w+$", qual)
+
+
+def mangled_params(name):
+    """Number of declared parameters of a mangled function (without `this`), or None."""
+    dm = _demangle(name)
+    pm = re.match(r"^(.*?)\((.*)\)( const)?$", dm)
+    if not pm or dm == name:
+        return None, False
+    return (0 if pm[2] in ("", "void") else len(_split_args(pm[2]))), _is_member(pm[1])
+
+
+def _call_arities(texts, name):
+    """Argument counts of every call `name(...)` in the module's C (definitions excluded)."""
+    out = set()
+    for text in texts:
+        for m in re.finditer(rf"(?<![\w.>:]){name}\(", text):
+            line_start = text.rfind("\n", 0, m.start()) + 1
+            if m.start() > line_start and not text[line_start].isspace():
+                continue  # a file-scope definition / declaration
+            i, depth, n, nonempty = m.end(), 1, 0, False
+            while i < len(text) and depth:
+                c = text[i]
+                if c in "([":
+                    depth += 1
+                elif c in ")]":
+                    depth -= 1
+                elif c == "," and depth == 1:
+                    n += 1
+                elif not c.isspace():
+                    nonempty = True
+                i += 1
+            out.add(n + 1 if nonempty else 0)
+    return out
+
+
+def static_members(mod, store):
+    """Mangled member-looking imports that are static: marked in store["cxx_static"], or every call in the
+    module passes exactly the declared parameters (no `this`), e.g. vsh::OptionMenu::Show()."""
+    marked = set(store.get("cxx_static", []))
+    texts = [f.read_text() for f in sdir(mod).glob("*.c")]
+    for name, proto in store["funcs"].items():
+        if not name.startswith("_Z") or not re.search(r"\(\);$", proto):
+            continue
+        nparams, member = mangled_params(name)
+        if not member or nparams is None:
+            continue
+        ar = _call_arities(texts, name)
+        if ar and ar == {nparams}:
+            marked.add(name)
+    return marked
+
+
+# C++ units get these headers outside the extern "C" block (class declarations of the imports)
+CXX_PRELUDE = ['#include "paf.h"', '#include "vsh.h"']
+
+
+def _type_names(text):
+    """Names a type entry defines (struct/class/union/enum tags, typedef names)."""
+    names = set(re.findall(r"\b(?:struct|class|union|enum)\s+(\w+)\s*(?::[^;{]*)?\{", text))
+    names |= set(re.findall(r"\btypedef\b[^;]*?\b(\w+)\s*(?:\[[^\]]*\])?\s*;", text))
+    names |= set(re.findall(r"\btypedef\b[^;]*?\(\s*\*\s*(\w+)\s*\)", text))
+    return names
+
+
+def ordered_types(types):
+    """Type entries in dependency order (a type after the types it uses by value or derives from);
+    pointer uses need no order. Ties keep the sorted key order, cycles fall back to it."""
+    keys = sorted(types)
+    defs = {k: _type_names(types[k]) for k in keys}
+    owner = {n: k for k in keys for n in defs[k]}
+    deps = {}
+    for k in keys:
+        body = re.sub(r"/\*.*?\*/", "", types[k], flags=re.S)
+        d = set()
+        for m in re.finditer(r"\b(\w+)\b(?!\s*\*)", body):
+            o = owner.get(m[1])
+            if o and o != k and m[1] not in defs[k]:
+                d.add(o)
+        deps[k] = d
+    out, done = [], set()
+    pending = list(keys)
+    while pending:
+        for k in pending:
+            if deps[k] <= done:
+                break
+        else:
+            k = pending[0]  # cycle
+        pending.remove(k)
+        done.add(k)
+        out.append(k)
+    return out
+
+
+def decls_body(mod, store, cxx):
+    """Header text after the includes: C++ prelude, then types (dependency order), globals and prototypes,
+    inside extern "C" for C++ units."""
+    lines = []
+    if cxx:
+        prelude = CXX_PRELUDE + store.get("cxx_prelude", [])
+        lines += ["#ifdef __cplusplus"] + prelude + ['extern "C" {', "#endif", ""]
+    types = store.get("types", {})
+    lines += [types[k] + "\n" for k in ordered_types(types)]
+    lines += [store["vars"][k] for k in sorted(store["vars"])]
+    lines.append("")
+    statics = static_members(mod, store) if cxx else set()
+    lines += [cxx_proto(store["funcs"][k], k in statics) if cxx else store["funcs"][k] for k in sorted(store["funcs"])]
+    if cxx:
+        lines += ["", "#ifdef __cplusplus", "}", "#endif"]
+    return lines
 
 
 def _split_args(args):
@@ -116,14 +237,7 @@ def write_decls(mod, store):
              '#include "common.h"', '#include "m2c_macros.h"', ""]
     # C++ units: the decompiled names keep C linkage (a later definition inherits it)
     cxx = any("/* lang: c++ */" in f.read_text() for f in src.glob("*.c"))
-    if cxx:
-        lines += ["#ifdef __cplusplus", 'extern "C" {', "#endif", ""]
-    lines += [store["types"][k] + "\n" for k in sorted(store.get("types", {}))]
-    lines += [store["vars"][k] for k in sorted(store["vars"])]
-    lines.append("")
-    lines += [cxx_proto(store["funcs"][k]) if cxx else store["funcs"][k] for k in sorted(store["funcs"])]
-    if cxx:
-        lines += ["", "#ifdef __cplusplus", "}", "#endif"]
+    lines += decls_body(mod, store, cxx)
     lines += ["", "#endif", ""]
     (src / f"{mod}_decls.h").write_text("\n".join(lines))
 

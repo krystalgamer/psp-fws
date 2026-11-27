@@ -4,6 +4,12 @@
 #include "common.h"
 #include "m2c_macros.h"
 
+#ifdef __cplusplus
+#include "paf.h"
+#include "vsh.h"
+extern "C" {
+#endif
+
 struct Unk_func_0000036C_0 {
     M2C_UNK *unk0;
     s32 unk4;
@@ -70,6 +76,8 @@ extern M2C_UNK D_00003D30;
 extern M2C_UNK D_00003D40;
 extern M2C_UNK D_00003DB0;
 
+s32 Job_isCanceled(...);
+M2C_UNK _ZdlPv(void *);
 s32 func_0000028C(void);
 M2C_UNK func_000002B0(M2C_UNK, M2C_UNK);
 void func_0000032C(void);
@@ -85,27 +93,25 @@ void func_000028BC(s32 arg0, s32 arg1);
 void func_00002948(void **arg0);
 void func_00002A20(void);
 void func_00002A3C(void);
-M2C_UNK func_00002A58();
+M2C_UNK func_00002A58(...);
 M2C_UNK func_00002A78(s32, s32, s32);
 M2C_UNK func_00002B24(s32, s32, s32);
-M2C_UNK func_00002BD8();
-M2C_UNK func_00002C30();
+M2C_UNK func_00002BD8(...);
+M2C_UNK func_00002C30(...);
 void func_00002D28(M2C_UNK **arg0);
 s32 func_00002D50(void);
 void func_00002D70(M2C_UNK **arg0);
 void func_00002D80(M2C_UNK **arg0);
-M2C_UNK func_00003278();
+M2C_UNK func_00003278(...);
 M2C_UNK memset(void *, M2C_UNK, M2C_UNK);
 s32 module_stop(void);
 s32 sceKernelCreateSema(void *, u32, s32, s32, void *);
-M2C_UNK _ZdlPv();
-s32 scePaf_5E4447F6(s32);
-s32 scePaf_723D0C80();
-s32 Job_isCanceled();
 M2C_UNK sce_paf_private_free2(void *);
-s32 scePaf_C1B0AA0D(s32);
 s32 sce_paf_private_strlen(s32);
-M2C_UNK scePaf_F5001144(void *);
 s32 sce_paf_private_wcslen(s32);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

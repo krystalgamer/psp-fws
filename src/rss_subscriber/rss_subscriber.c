@@ -1,3 +1,4 @@
+/* lang: c++ */
 /* cflags: -Os */
 #include "common.h"
 #include "rss_subscriber_decls.h"
@@ -109,7 +110,7 @@ void func_0000036C(struct Unk_func_0000036C_0 *arg0) {
     arg0->unk10 = 0;
     arg0->unk14 = 0;
     arg0->unk18 = 0;
-    func_000027A4((u8 *)arg0 + 0x1C, 0);
+    func_000027A4((s32*) ((u8 *)arg0 + 0x1C), 0);
     arg0->unk20 = 0;
     arg0->unk24 = 0;
     arg0->unk28 = 0;
@@ -138,7 +139,7 @@ void func_0000044C(struct Unk_func_0000044C_0 *arg0) {
     arg0->unk10 = 0;
     arg0->unk14 = 0;
     arg0->unk18 = 0;
-    func_000027A4((u8 *)arg0 + 0x1C, 0);
+    func_000027A4((s32*) ((u8 *)arg0 + 0x1C), 0);
     arg0->unk20 = 0;
     arg0->unk24 = 0;
     arg0->unk28 = 0;
@@ -307,7 +308,7 @@ void func_000027C4(s32 arg0, s32 arg1) {
 
     var_v0 = 0;
     if (arg1 != 0) {
-        var_v0 = scePaf_C1B0AA0D(arg1);
+        var_v0 = sce_paf_private_strlen(arg1);
     }
     func_00002A78(arg0, arg1, var_v0);
 }
@@ -333,7 +334,7 @@ void func_000028BC(s32 arg0, s32 arg1) {
 
     var_v0 = 0;
     if (arg1 != 0) {
-        var_v0 = scePaf_5E4447F6(arg1);
+        var_v0 = sce_paf_private_wcslen(arg1);
     }
     func_00002B24(arg0, arg1, var_v0);
 }
@@ -362,12 +363,12 @@ void func_00002948(void **arg0) {
     if (var_v0 != var_a0) {
         do {
             temp_s0 = M2C_FIELD(var_v0, void **, 4);
-            scePaf_F5001144(var_v0);
+            sce_paf_private_free2(var_v0);
             var_a0 = *arg0;
             var_v0 = temp_s0;
         } while (temp_s0 != var_a0);
     }
-    scePaf_F5001144(var_a0);
+    sce_paf_private_free2(var_a0);
 }
 #else
 void func_00002948(void **arg0) {
@@ -416,13 +417,13 @@ INCLUDE_ASM("nonmatchings/rss_subscriber", func_00002D28);
 #else
 void func_00002D28(M2C_UNK **arg0) {
     *arg0 = &D_00003D40;
-    _ZdlPv();
+    _ZdlPv(arg0);
 }
 #endif
 
 #if FW_VERSION >= 350
 s32 func_00002D50(void) {
-    return scePaf_723D0C80() != 0;
+    return Job_isCanceled() != 0;
 }
 #else
 s32 func_00002D50(void) {
@@ -439,7 +440,7 @@ INCLUDE_ASM("nonmatchings/rss_subscriber", func_00002D80);
 #else
 void func_00002D80(M2C_UNK **arg0) {
     *arg0 = &D_00003D30;
-    _ZdlPv();
+    _ZdlPv(arg0);
 }
 #endif
 

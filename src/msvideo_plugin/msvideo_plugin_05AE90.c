@@ -1,3 +1,4 @@
+/* lang: c++ */
 /* cflags: -Os */
 #include "common.h"
 #include "msvideo_plugin_decls.h"
@@ -8,7 +9,7 @@ INCLUDE_ASM("nonmatchings/msvideo_plugin_05AE90", func_0005AE90);
 INCLUDE_ASM("nonmatchings/msvideo_plugin_05AE90", func_0005AECC);
 
 void func_0005B424(M2C_UNK **arg0) {
-    func_00059F54(arg0);
+    func_00059F54((Unk_func_00059F54_0*) arg0);
     *arg0 = &D_00065968;
 }
 

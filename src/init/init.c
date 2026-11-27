@@ -1,7 +1,7 @@
 /* cflags[152]: -O1 */
 /* cflags[151]: -O1 */
 /* cflags[150]: -O1 */
-/* cflags[100]: -O1 */
+/* cflags[100,102,103]: -O1 */
 #include "common.h"
 #include "init_decls.h"
 
@@ -15,11 +15,19 @@ INCLUDE_RODATA("nonmatchings/init", D_00001EB8);
 INCLUDE_RODATA("nonmatchings/init", D_00001DC8);
 #endif
 
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/init", func_00000028);
+
+INCLUDE_ASM("nonmatchings/init", func_0000007C);
+
+INCLUDE_ASM("nonmatchings/init", func_000000DC);
+#else
 INCLUDE_ASM("nonmatchings/init", sceKernelGetChunk);
 
 INCLUDE_ASM("nonmatchings/init", sceKernelRegisterChunk);
 
 INCLUDE_ASM("nonmatchings/init", sceKernelReleaseChunk);
+#endif
 
 #if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/init", D_00001B10);
@@ -95,7 +103,7 @@ s32 sceKernelApplicationType(void) {
 }
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/init", func_0000013C);
 
 INCLUDE_ASM("nonmatchings/init", func_000001F0);
@@ -109,6 +117,12 @@ INCLUDE_ASM("nonmatchings/init", func_00000358);
 INCLUDE_ASM("nonmatchings/init", func_00000488);
 #endif
 
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_RODATA("nonmatchings/init", D_00002008);
+
+INCLUDE_RODATA("nonmatchings/init", D_00002038);
+#endif
+
 #if FW_VERSION >= 150 && FW_VERSION < 152
 INCLUDE_ASM("nonmatchings/init", func_00000248);
 #endif
@@ -117,7 +131,7 @@ INCLUDE_ASM("nonmatchings/init", func_00000248);
 INCLUDE_RODATA("nonmatchings/init", D_00002010);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/init", func_00000598);
 
 INCLUDE_ASM("nonmatchings/init", func_00000720);
@@ -135,7 +149,7 @@ INCLUDE_ASM("nonmatchings/init", func_000006CC);
 INCLUDE_ASM("nonmatchings/init", func_00001088);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/init", func_00000908);
 
 INCLUDE_RODATA("nonmatchings/init", D_00002184);
@@ -145,9 +159,21 @@ INCLUDE_ASM("nonmatchings/init", func_00000A5C);
 INCLUDE_ASM("nonmatchings/init", func_00000C18);
 
 INCLUDE_RODATA("nonmatchings/init", D_00002248_v100);
+#endif
 
+#if FW_VERSION == 103
+INCLUDE_RODATA("nonmatchings/init", D_0000226C);
+#endif
+
+#if FW_VERSION == 102
+INCLUDE_RODATA("nonmatchings/init", D_00002260);
+#endif
+
+#if FW_VERSION == 100
 INCLUDE_RODATA("nonmatchings/init", D_00002280);
+#endif
 
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/init", func_00001008);
 
 INCLUDE_ASM("nonmatchings/init", func_000012D0);
@@ -157,7 +183,11 @@ INCLUDE_ASM("nonmatchings/init", func_00001328);
 INCLUDE_ASM("nonmatchings/init", func_00001404);
 #endif
 
-#if FW_VERSION < 201 || FW_VERSION >= 310
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/init", func_00001968);
+#endif
+
+#if FW_VERSION == 100 || (FW_VERSION >= 150 && FW_VERSION < 201) || FW_VERSION >= 310
 INCLUDE_ASM("nonmatchings/init", module_bootstart);
 #endif
 
@@ -173,6 +203,18 @@ s32 module_reboot_before(void) {
 s32 sceKernelInitApitype(void) {
     return D_00002620;
 }
+#endif
+
+#if FW_VERSION == 103
+INCLUDE_ASM("nonmatchings/init", func_00001A98);
+#endif
+
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/init", func_00001A7C);
+#endif
+
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/init", func_00001AC4);
 #endif
 
 #if (FW_VERSION >= 150 && FW_VERSION < 201) || FW_VERSION >= 350

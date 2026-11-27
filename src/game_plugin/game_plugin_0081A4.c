@@ -1,3 +1,4 @@
+/* lang: c++ */
 /* cflags: -Os */
 #include "common.h"
 #include "game_plugin_decls.h"
@@ -31,7 +32,7 @@ s32 func_00008274(struct Unk_func_00008274_0 *arg0) {
     var_v0 = -1;
     if (temp_v0 != 0) {
         scePaf_39E62C88(arg0->unk4, temp_v0, 0, 0);
-        scePaf_A013540A(arg0->unk4, temp_v0);
+        _ZN3paf4View12PageActivateEPKc(arg0->unk4, temp_v0);
         var_v0 = 0;
     }
     return var_v0;
@@ -144,37 +145,15 @@ void func_00008490(struct Unk_func_00008490_0 *arg0, s32 arg1) {
 }
 #endif
 
-#if FW_VERSION >= 350
-void func_000084B4(struct Unk_func_000084B4_0 *arg0, s32 arg1) {
-    scePaf_A013540A(arg0->unk4, arg1);
-}
-#endif
-
-#if FW_VERSION >= 282 && FW_VERSION < 350
+#if FW_VERSION >= 282
 void func_000084B4(struct Unk_func_000084B4_0 *arg0, s32 arg1) {
     _ZN3paf4View12PageActivateEPKc(arg0->unk4, arg1);
 }
-#endif
 
-#if FW_VERSION >= 350
-void func_000084D0(struct Unk_func_000084D0_0 *arg0) {
-    scePaf_8B38372A(arg0->unk4);
-}
-#endif
-
-#if FW_VERSION >= 282 && FW_VERSION < 350
 void func_000084D0(struct Unk_func_000084D0_0 *arg0) {
     _ZN3paf4View9PageCloseEPKc(arg0->unk4);
 }
-#endif
 
-#if FW_VERSION >= 350
-void func_000084EC(struct Unk_func_000084EC_0 *arg0) {
-    scePaf_CD216C47(arg0->unk4);
-}
-#endif
-
-#if FW_VERSION >= 282 && FW_VERSION < 350
 void func_000084EC(struct Unk_func_000084EC_0 *arg0) {
     _ZNK3paf4View8PageRootEPKc(arg0->unk4);
 }

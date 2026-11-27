@@ -62,7 +62,7 @@ typedef struct {
     SceUID stackMpid;
 } SceKernelThreadOptParam;
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 typedef struct {
     u8 unk0[0x14];
     SceSize maxAllocSize;
@@ -87,7 +87,7 @@ typedef struct SceModule {
     u16 padding;
     SceUID secId;
     SceUID modId;
-#if FW_VERSION == 100
+#if FW_VERSION < 150
     SceUID userModThid;
     SceUID memId;
     SceUID mpIdText;

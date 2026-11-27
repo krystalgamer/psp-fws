@@ -1,0 +1,27 @@
+// shared names (tools/add_version.py) begin
+module_bootstart = 0x00000000; // type:func rom:0x80
+sceKernelRegisterExceptionHandler = 0x00000140; // type:func rom:0x1C0
+sceKernelRegisterPriorityExceptionHandler = 0x00000160; // type:func rom:0x1E0
+sceKernelRegisterDefaultExceptionHandler = 0x0000025C; // type:func rom:0x2DC
+sceKernelReleaseExceptionHandler = 0x000002F0; // type:func rom:0x370
+sceKernelGetActiveDefaultExceptionHandler = 0x000003B4; // type:func rom:0x434
+sceKernelReleaseDefaultExceptionHandler = 0x000003DC; // type:func rom:0x45C
+func_000004AC = 0x0000054C; // type:func rom:0x5CC
+func_000004E8 = 0x00000588; // type:func rom:0x608
+func_000005C0 = 0x000005BC; // type:func rom:0x63C
+func_00000600 = 0x000005E0; // type:func rom:0x660
+func_00000690 = 0x00000640; // type:func rom:0x6C0
+func_000006B8 = 0x00000668; // type:func rom:0x6E8
+func_000006C8 = 0x00000678; // type:func rom:0x6F8
+func_000006D8 = 0x00000688; // type:func rom:0x708
+func_000006F8 = 0x000006A8; // type:func rom:0x728
+func_00000A80 = 0x000006B8; // type:func rom:0x738
+func_00000AAC = 0x000006E4; // type:func rom:0x764
+func_00000AD4 = 0x0000070C; // type:func rom:0x78C
+func_00000B14 = 0x0000074C; // type:func rom:0x7CC
+func_00000B20 = 0x00000758; // type:func rom:0x7D8
+sceKernelRegisterNmiHandler = 0x000007D4; // type:func rom:0x854
+sceKernelReleaseNmiHandler = 0x0000083C; // type:func rom:0x8BC
+func_00000C80 = 0x000008B8; // type:func rom:0x938
+func_00000CB0 = 0x000008E8; // type:func rom:0x968
+// shared names (tools/add_version.py) end

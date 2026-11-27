@@ -1,3 +1,4 @@
+/* lang: c++ */
 #include "common.h"
 #include "premo_plugin_decls.h"
 
@@ -79,7 +80,7 @@ s32 func_00011C14(s32 arg0) {
 
     sceKernelWaitSema(D_0002CC00, 1, 0);
     temp_s1 = sceMlnBridgeSetDKS(arg0, 0);
-    scePaf_3308156F((s32) &D_0002CC10, arg0, 0x10);
+    sce_paf_private_memcpy((s32) &D_0002CC10, arg0, 0x10);
     sceKernelSignalSema(D_0002CC00, 1);
     return temp_s1;
 }
@@ -172,7 +173,7 @@ void func_00012BF8(struct Unk_func_00012BF8_0 *arg0) {
 
 void func_00012C70(struct Unk_func_00012C70_0 *arg0) {
     arg0->unk40 = 1;
-    func_00012BF8(arg0);
+    func_00012BF8((Unk_func_00012BF8_0*) arg0);
 }
 #endif
 
@@ -213,8 +214,8 @@ INCLUDE_ASM("nonmatchings/premo_plugin_011B50", func_00013398);
 
 #if FW_VERSION == 352
 void func_00013398(void) {
-    scePaf_128E46E3();
-    scePaf_B866A612();
+    _ZN3paf13PhApplication14FinishDispListEv();
+    _ZN3paf13PhApplication13StartDispListEv();
 }
 #endif
 
@@ -264,7 +265,7 @@ INCLUDE_ASM("nonmatchings/premo_plugin_011B50", func_000139C4);
 #else
 void func_000139C4(M2C_UNK **arg0) {
     *arg0 = &D_0002A9D0;
-    scePaf_6261C0A5((s32) arg0);
+    _ZdlPv((s32) arg0);
 }
 #endif
 
@@ -285,7 +286,7 @@ INCLUDE_ASM("nonmatchings/premo_plugin_011B50", func_00013A34);
 #if FW_VERSION == 352
 void func_000139FC(M2C_UNK **arg0) {
     *arg0 = &D_0002A9C0;
-    scePaf_6261C0A5((s32) arg0);
+    _ZdlPv((s32) arg0);
 }
 
 void func_00013A24(M2C_UNK **arg0) {
@@ -294,7 +295,7 @@ void func_00013A24(M2C_UNK **arg0) {
 
 void func_00013A34(M2C_UNK **arg0) {
     *arg0 = &D_0002A9A8;
-    scePaf_6261C0A5((s32) arg0);
+    _ZdlPv((s32) arg0);
 }
 #else
 INCLUDE_ASM("nonmatchings/premo_plugin_011B50", func_00013A5C);
@@ -313,7 +314,7 @@ INCLUDE_ASM("nonmatchings/premo_plugin_011B50", func_00013A78);
 void func_00013A78(struct Unk_func_00013A78_0 *arg0) {
     arg0->unk0 = &D_0002A910;
     arg0->unk8 = &D_0002A9C0;
-    scePaf_6261C0A5((s32) arg0);
+    _ZdlPv((s32) arg0);
 }
 #endif
 
@@ -329,7 +330,7 @@ INCLUDE_ASM("nonmatchings/premo_plugin_011B50", func_00013AD4);
 
 #if FW_VERSION == 352
 void func_00013AD4(s32 arg0) {
-    scePaf_BB8E4390(arg0 + 8);
+    _ZN3paf9PhSRender8SetStyleEii(arg0 + 8);
 }
 #endif
 
@@ -345,7 +346,7 @@ INCLUDE_ASM("nonmatchings/premo_plugin_011B50", func_00013AF0);
 
 #if FW_VERSION == 352
 void func_00013AF0(s32 arg0) {
-    scePaf_79542EEA(arg0 + 8);
+    _ZN3paf9PhSRender8SetStyleEif(arg0 + 8);
 }
 #endif
 
@@ -361,7 +362,7 @@ INCLUDE_ASM("nonmatchings/premo_plugin_011B50", func_00013B0C);
 
 #if FW_VERSION == 352
 void func_00013B0C(s32 arg0) {
-    scePaf_291EBB2C(arg0 + 8);
+    _ZN3paf9PhSRender8SetStyleEiRK4vec4(arg0 + 8);
 }
 #endif
 
@@ -413,7 +414,7 @@ INCLUDE_ASM("nonmatchings/premo_plugin_011B50", func_00013D48);
 
 #if FW_VERSION == 352
 void func_00013D48(s32 arg0) {
-    scePaf_1A314D65(arg0 + 8);
+    _ZNK3paf9PhSRender8GetStyleEiRb(arg0 + 8);
 }
 #endif
 
@@ -429,7 +430,7 @@ INCLUDE_ASM("nonmatchings/premo_plugin_011B50", func_00013D64);
 
 #if FW_VERSION == 352
 void func_00013D64(s32 arg0) {
-    scePaf_6FAE0AC1(arg0 + 8);
+    _ZNK3paf9PhSRender8GetStyleEiRi(arg0 + 8);
 }
 #endif
 
@@ -445,7 +446,7 @@ INCLUDE_ASM("nonmatchings/premo_plugin_011B50", func_00013D80);
 
 #if FW_VERSION == 352
 void func_00013D80(s32 arg0) {
-    scePaf_2A5E7BE9(arg0 + 8);
+    _ZNK3paf9PhSRender8GetStyleEiRf(arg0 + 8);
 }
 #endif
 
@@ -461,7 +462,7 @@ INCLUDE_ASM("nonmatchings/premo_plugin_011B50", func_00013D9C);
 
 #if FW_VERSION == 352
 void func_00013D9C(s32 arg0) {
-    scePaf_7EA9C56C(arg0 + 8);
+    _ZNK3paf9PhSRender8GetStyleEiR4vec4(arg0 + 8);
 }
 #endif
 

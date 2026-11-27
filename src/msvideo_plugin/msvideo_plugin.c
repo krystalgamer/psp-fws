@@ -1,3 +1,4 @@
+/* lang: c++ */
 #include "common.h"
 #include "msvideo_plugin_decls.h"
 
@@ -42,13 +43,13 @@ INCLUDE_ASM("nonmatchings/msvideo_plugin", func_000005A4);
 
 INCLUDE_ASM("nonmatchings/msvideo_plugin", func_00000680);
 
-#if FW_VERSION >= 150
+#if FW_VERSION >= 103
 INCLUDE_ASM("nonmatchings/msvideo_plugin", func_000006C4);
 #endif
 
 INCLUDE_ASM("nonmatchings/msvideo_plugin", func_00000718);
 
-#if FW_VERSION >= 150 && FW_VERSION < 201
+#if FW_VERSION >= 103 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/msvideo_plugin", func_000007F0);
 #endif
 
@@ -222,7 +223,7 @@ INCLUDE_ASM("nonmatchings/msvideo_plugin", func_0000148C);
 
 INCLUDE_ASM("nonmatchings/msvideo_plugin", func_000014C0);
 
-#if FW_VERSION >= 150 && FW_VERSION < 201
+#if FW_VERSION >= 103 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/msvideo_plugin", func_0000193C);
 
 INCLUDE_ASM("nonmatchings/msvideo_plugin", func_00001980);
@@ -262,6 +263,10 @@ INCLUDE_ASM("nonmatchings/msvideo_plugin", func_00001C30);
 INCLUDE_ASM("nonmatchings/msvideo_plugin", func_00001A44);
 
 INCLUDE_ASM("nonmatchings/msvideo_plugin", func_00001AD0);
+#endif
+
+#if FW_VERSION == 103
+INCLUDE_ASM("nonmatchings/msvideo_plugin", func_00001DA8);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 201

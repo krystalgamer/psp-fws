@@ -384,7 +384,7 @@
   "func_000143FC": "void func_000143FC(void);",
   "func_00014418": "M2C_UNK func_00014418();",
   "func_0001445C": "s32 func_0001445C(struct Unk_func_0001445C_0 *arg0);",
-  "func_000144AC": "M2C_UNK *func_000144AC(void);",
+  "func_000144AC": "D_0001C24C_s *func_000144AC(void);",
   "func_000144B8": "s32 func_000144B8(s32 arg0);",
   "func_00014554": "s32 func_00014554(s32);",
   "func_0001456C": "s32 func_0001456C(s32, s32, s32);",

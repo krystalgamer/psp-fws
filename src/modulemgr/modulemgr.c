@@ -1,4 +1,4 @@
-/* cflags[100]: -O2 -fno-builtin */
+/* cflags[100,102,103]: -O2 -fno-builtin */
 /* cflags: -O2 -frename-registers */
 #include "common.h"
 #include "modulemgr_decls.h"
@@ -10,6 +10,12 @@ static inline void *getRa(void) {
     __asm__("move %0, $31" : "=r"(ra));
     return ra;
 }
+
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/modulemgr", func_00000000);
+
+INCLUDE_ASM("nonmatchings/modulemgr", func_00000050);
+#endif
 
 #if FW_VERSION == 271
 INCLUDE_ASM("nonmatchings/modulemgr", func_00000000_v271);
@@ -375,7 +381,7 @@ s32 module_bootstart(SceSize argSize, void *argp) {
 INCLUDE_ASM("nonmatchings/modulemgr", module_bootstart);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 SceModule *func_00000108(void) {
     s32 intr;
     SceModule *mod;
@@ -680,8 +686,12 @@ SceUID sceKernelLoadModuleByID(SceUID fd, s32 flags, SceKernelLMOption *option) 
 INCLUDE_ASM("nonmatchings/modulemgr", sceKernelLoadModuleWithApitype);
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION == 282
+#if FW_VERSION < 150 || FW_VERSION == 282
 INCLUDE_RODATA("nonmatchings/modulemgr", D_00006DA0);
+#endif
+
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/modulemgr", func_00000420);
 #endif
 
 #if FW_VERSION == 100
@@ -694,7 +704,13 @@ s32 func_00000420(void *libEntry) {
     }
     return ret;
 }
+#endif
 
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/modulemgr", func_00000474);
+#endif
+
+#if FW_VERSION == 100
 s32 func_00000474(void *libEntry) {
     s32 ret;
 
@@ -704,7 +720,13 @@ s32 func_00000474(void *libEntry) {
     }
     return ret;
 }
+#endif
 
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/modulemgr", func_00000518);
+#endif
+
+#if FW_VERSION == 100
 s32 shrink_file_block(SceLoadCoreExecFileInfo *execInfo) {
     s32 ret;
 
@@ -732,7 +754,9 @@ s32 func_0000054C(u32 addr, SceSize size, u32 base, SceSize baseSize) {
     }
     return 0;
 }
+#endif
 
+#if FW_VERSION < 150
 void func_00000594(SceModule *mod) {
     sceKernelFreePartitionMemory(mod->memId);
     func_00000268(mod);
@@ -743,8 +767,12 @@ void func_00000594(SceModule *mod) {
 INCLUDE_ASM("nonmatchings/modulemgr", func_00004998);
 #endif
 
-#if FW_VERSION == 100 || (FW_VERSION >= 282 && FW_VERSION < 330)
+#if FW_VERSION < 150 || (FW_VERSION >= 282 && FW_VERSION < 330)
 INCLUDE_RODATA("nonmatchings/modulemgr", D_00006DF4);
+#endif
+
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/modulemgr", func_00000614);
 #endif
 
 #if FW_VERSION >= 310
@@ -777,13 +805,19 @@ s32 IsKernelOnlyModulePartition(SceUID mpid) {
 }
 #endif
 
-#if FW_VERSION == 100 || (FW_VERSION >= 282 && FW_VERSION < 310)
+#if FW_VERSION < 150 || (FW_VERSION >= 282 && FW_VERSION < 310)
 INCLUDE_RODATA("nonmatchings/modulemgr", D_00006E28);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_RODATA("nonmatchings/modulemgr", D_00004C90);
+#endif
 
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/modulemgr", func_000006BC);
+#endif
+
+#if FW_VERSION == 100
 s32 IsUserModulePartition(SceUID mpid) {
     SceSysmemPartitionInfo info;
     s32 ret;
@@ -800,11 +834,13 @@ s32 IsUserModulePartition(SceUID mpid) {
     }
     return 0;
 }
+#endif
 
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/modulemgr", func_00000718);
 #endif
 
-#if FW_VERSION == 100 || (FW_VERSION >= 282 && FW_VERSION < 310)
+#if FW_VERSION < 150 || (FW_VERSION >= 282 && FW_VERSION < 310)
 INCLUDE_RODATA("nonmatchings/modulemgr", D_00006E3C);
 #endif
 
@@ -812,11 +848,11 @@ INCLUDE_RODATA("nonmatchings/modulemgr", D_00006E3C);
 INCLUDE_RODATA("nonmatchings/modulemgr", D_00007994);
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION == 282
+#if FW_VERSION < 150 || FW_VERSION == 282
 INCLUDE_RODATA("nonmatchings/modulemgr", D_00006E78);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_RODATA("nonmatchings/modulemgr", D_00004E70);
 
 INCLUDE_RODATA("nonmatchings/modulemgr", D_00004EA4);
@@ -824,7 +860,13 @@ INCLUDE_RODATA("nonmatchings/modulemgr", D_00004EA4);
 INCLUDE_ASM("nonmatchings/modulemgr", func_00000984);
 
 INCLUDE_ASM("nonmatchings/modulemgr", func_00000C4C);
+#endif
 
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/modulemgr", func_00000E1C);
+#endif
+
+#if FW_VERSION == 100
 s32 ModuleReleaseLibraries(SceModule *mod) {
     u32 *cur;
     u32 *end;
@@ -853,7 +895,7 @@ s32 ModuleReleaseLibraries(SceModule *mod) {
 INCLUDE_ASM("nonmatchings/modulemgr", ModuleReleaseLibraries);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/modulemgr", func_00000E7C);
 #endif
 
@@ -1113,6 +1155,10 @@ INCLUDE_RODATA("nonmatchings/modulemgr", D_00005124);
 INCLUDE_RODATA("nonmatchings/modulemgr", D_0000515C);
 #endif
 
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/modulemgr", func_00001158);
+#endif
+
 #if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/modulemgr", sceKernelRebootPhaseForKernel);
 
@@ -1199,7 +1245,9 @@ end:
     }
     return ret;
 }
+#endif
 
+#if FW_VERSION < 150
 s32 func_000011E8(SceUID fd) {
     s32 size;
 
@@ -1207,7 +1255,15 @@ s32 func_000011E8(SceUID fd) {
     sceIoLseek(fd, 0, 0);
     return size;
 }
+#endif
 
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/modulemgr", func_00001294);
+
+INCLUDE_ASM("nonmatchings/modulemgr", func_00001334);
+#endif
+
+#if FW_VERSION == 100
 u32 CheckMsHeader(PBPHeader *header, SceSize *pSize) {
     s8 *magic = header->magic;
 
@@ -1260,11 +1316,19 @@ s32 ReadFile(SceUID fd, void *buf, SceSize size) {
     }
     return total;
 }
+#endif
 
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/modulemgr", func_000013F4);
 
 INCLUDE_ASM("nonmatchings/modulemgr", func_00001994);
+#endif
 
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/modulemgr", func_00001C28);
+#endif
+
+#if FW_VERSION == 100
 s32 StartModule(SceModuleMgrParam *modParams, SceModule *mod, SceSize argSize, void *argp, s32 *pStatus) {
     s32 status;
 
@@ -1304,9 +1368,21 @@ s32 StartModule(SceModuleMgrParam *modParams, SceModule *mod, SceSize argSize, v
     }
     return status;
 }
+#endif
 
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/modulemgr", func_00001D78);
+#endif
 
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/modulemgr", func_000020E0);
+
+INCLUDE_ASM("nonmatchings/modulemgr", func_00002190);
+
+INCLUDE_ASM("nonmatchings/modulemgr", start_exe_thread);
+#endif
+
+#if FW_VERSION == 100
 s32 UnloadModule(SceModule *mod) {
     u32 status;
 
@@ -1370,7 +1446,15 @@ s32 start_exe_thread(SceModuleMgrParam *modParams) {
     }
     return result;
 }
+#endif
 
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/modulemgr", func_000026F8);
+
+INCLUDE_ASM("nonmatchings/modulemgr", sceKernelLoadModuleBufferWithApitype);
+#endif
+
+#if FW_VERSION == 100
 s32 func_000026F8(SceModuleMgrParam *modParams, SceKernelLMOption *option) {
     if (option != NULL) {
         modParams->mpIdText = option->mpIdText;
@@ -1437,6 +1521,14 @@ SceUID sceKernelLoadModuleBufferWithApitype(void *buf, s32 flags, s32 apiType, S
 SceUID sceKernelLoadModuleBuffer(void *buf, s32 flags, SceKernelLMOption *option) {
     return sceKernelLoadModuleBufferWithApitype(buf, flags, 0, option);
 }
+#endif
+
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/modulemgr", func_0000293C);
+
+INCLUDE_ASM("nonmatchings/modulemgr", func_00002BFC);
+
+INCLUDE_ASM("nonmatchings/modulemgr", sceKernelLoadModuleWithApitype);
 #endif
 
 #if FW_VERSION >= 152 && FW_VERSION < 282
@@ -1642,11 +1734,17 @@ SceUID ModuleMgrForKernel_710F61B5(const char *path, s32 flags, SceKernelLMOptio
 }
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_RODATA("nonmatchings/modulemgr", D_00005B90);
 
 INCLUDE_RODATA("nonmatchings/modulemgr", D_00005BBC);
+#endif
 
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/modulemgr", func_00002F1C);
+#endif
+
+#if FW_VERSION == 100
 SceUID sceKernelLoadModuleVSHByID(SceUID fd, s32 flags, SceKernelLMOption *option) {
     SceModuleMgrParam modParams;
     s32 oldK1;
@@ -1684,13 +1782,25 @@ SceUID sceKernelLoadModuleVSHByID(SceUID fd, s32 flags, SceKernelLMOption *optio
     setK1(oldK1);
     return ret;
 }
+#endif
 
+#if FW_VERSION < 150
 INCLUDE_RODATA("nonmatchings/modulemgr", D_00005C14);
+#endif
 
+#if FW_VERSION == 100
 INCLUDE_RODATA("nonmatchings/modulemgr", D_00005C3C);
+#endif
 
+#if FW_VERSION < 150
 INCLUDE_RODATA("nonmatchings/modulemgr", D_00005C64);
+#endif
 
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/modulemgr", func_0000308C);
+#endif
+
+#if FW_VERSION == 100
 SceUID sceKernelLoadModuleVSH(const char *path, s32 flags, SceKernelLMOption *option) {
     SceModuleMgrParam modParams;
     s32 oldK1;
@@ -1747,9 +1857,27 @@ bad:
     setK1(oldK1);
     return 0x800200D3;
 }
+#endif
 
+#if FW_VERSION < 150
 INCLUDE_RODATA("nonmatchings/modulemgr", D_00005CB0);
+#endif
 
+#if FW_VERSION == 102
+INCLUDE_RODATA("nonmatchings/modulemgr", D_00005D7C);
+#endif
+
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/modulemgr", func_000032AC);
+
+INCLUDE_ASM("nonmatchings/modulemgr", func_000034B8);
+
+INCLUDE_ASM("nonmatchings/modulemgr", func_000035F8);
+
+INCLUDE_ASM("nonmatchings/modulemgr", func_00003738);
+#endif
+
+#if FW_VERSION == 100
 SceUID sceKernelLoadModuleVSHPlain(const char *path, s32 flags, SceKernelLMOption *option) {
     SceModuleMgrParam modParams;
     s32 oldK1;
@@ -1928,9 +2056,19 @@ s32 sceKernelStartModule(SceUID modId, SceSize argSize, void *argp, s32 *pStatus
     setK1(oldK1);
     return ret;
 }
+#endif
 
+#if FW_VERSION < 150
 INCLUDE_RODATA("nonmatchings/modulemgr", D_00005DE0);
+#endif
 
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/modulemgr", func_000038D0);
+
+INCLUDE_ASM("nonmatchings/modulemgr", func_000039E8);
+#endif
+
+#if FW_VERSION == 100
 s32 StopModuleApiBody(SceUID modId, SceUID callerModId, SceSize argSize, void *argp, s32 *pStatus, SceKernelSMOption *option) {
     SceModuleMgrParam modParams;
     s32 status;
@@ -2028,7 +2166,9 @@ s32 sceKernelStopModule(SceUID modId, SceSize argSize, void *argp, s32 *pStatus,
     setK1(oldK1);
     return ret;
 }
+#endif
 
+#if FW_VERSION < 150
 s32 sceKernelUnloadModule(SceUID modId) {
     SceModuleMgrParam modParams;
     s32 oldK1;
@@ -2051,6 +2191,14 @@ s32 sceKernelUnloadModule(SceUID modId) {
     setK1(oldK1);
     return ret;
 }
+#endif
+
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/modulemgr", func_00003C5C);
+
+INCLUDE_ASM("nonmatchings/modulemgr", func_00003D58);
+
+INCLUDE_ASM("nonmatchings/modulemgr", func_00003E58);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 152
@@ -2186,7 +2334,7 @@ INCLUDE_ASM("nonmatchings/modulemgr", sceKernelStopUnloadSelfModule);
 INCLUDE_ASM("nonmatchings/modulemgr", sceKernelSearchModuleByName);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 SceUID sceKernelSearchModuleByName(const char *name) {
     SceUID ret;
     SceModule *mod;
@@ -2212,6 +2360,10 @@ SceUID sceKernelSearchModuleByAddress(u32 addr) {
     }
     return ret;
 }
+#endif
+
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/modulemgr", func_00004020);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
@@ -2286,6 +2438,10 @@ INCLUDE_ASM("nonmatchings/modulemgr", sceKernelQueryModuleInfo);
 INCLUDE_RODATA("nonmatchings/modulemgr", D_0000602C);
 #endif
 
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/modulemgr", func_000041B0);
+#endif
+
 #if FW_VERSION >= 260 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/modulemgr", D_000065D8);
 #endif
@@ -2356,6 +2512,10 @@ INCLUDE_ASM("nonmatchings/modulemgr", func_0000443C);
 INCLUDE_RODATA("nonmatchings/modulemgr", D_000060C8);
 
 INCLUDE_RODATA("nonmatchings/modulemgr", D_00006100);
+#endif
+
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/modulemgr", func_000043F8);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 152

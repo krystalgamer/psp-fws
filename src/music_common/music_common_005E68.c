@@ -1,3 +1,4 @@
+/* lang: c++ */
 #include "common.h"
 #include "music_common_decls.h"
 
@@ -177,9 +178,9 @@ void func_00006838(void *arg0) {
 
 #if FW_VERSION < 300
 void func_00006008(struct Unk_func_00006008_0 *arg0) {
-    func_00005CC4((u8 *)arg0 + 4);
+    func_00005CC4(( Unk_func_00005CC4_0*) ((u8 *)arg0 + 4));
     arg0->unk14 = 0;
-    func_00005CC4((u8 *)arg0 + 0x18);
+    func_00005CC4(( Unk_func_00005CC4_0*) ((u8 *)arg0 + 0x18));
 }
 #endif
 
@@ -450,12 +451,12 @@ void music_common_DD1980DD(struct Unk_music_common_DD1980DD_0 *arg0) {
 
 #if FW_VERSION < 300
 void music_common_DD1980DD(struct Unk_music_common_DD1980DD_0 *arg0) {
-    func_00005CC4(arg0);
-    func_00005CC4((u8 *)arg0 + 0x10);
-    func_00005CC4((u8 *)arg0 + 0x20);
-    func_00005CC4((u8 *)arg0 + 0x30);
-    func_00005CC4((u8 *)arg0 + 0x40);
-    func_00006008((u8 *)arg0 + 0x50);
+    func_00005CC4((Unk_func_00005CC4_0*) arg0);
+    func_00005CC4(( Unk_func_00005CC4_0*) ((u8 *)arg0 + 0x10));
+    func_00005CC4(( Unk_func_00005CC4_0*) ((u8 *)arg0 + 0x20));
+    func_00005CC4(( Unk_func_00005CC4_0*) ((u8 *)arg0 + 0x30));
+    func_00005CC4(( Unk_func_00005CC4_0*) ((u8 *)arg0 + 0x40));
+    func_00006008(( Unk_func_00006008_0*) ((u8 *)arg0 + 0x50));
     arg0->unk78 = 0;
 }
 #endif
@@ -645,7 +646,7 @@ void ***func_000079E4(void ***arg0, struct Unk_func_000079E4_1 *arg1, void **arg
     temp_a1 = M2C_FIELD(temp_v1, void **, 0);
     *temp_s0 = temp_a1;
     M2C_FIELD(M2C_FIELD(temp_v1, void **, 0), void ***, 4) = temp_s0;
-    scePaf_F5001144(temp_v1, temp_a1);
+    sce_paf_private_free2(temp_v1, temp_a1);
     *arg0 = temp_s0;
     arg1->unk4 -= 1;
     return arg0;
@@ -1148,7 +1149,7 @@ s32 func_0000D278(void *arg0) {
 
     temp_v0 = M2C_FIELD(arg0, s32 *, 0x45C);
     if (temp_v0 != 0) {
-        scePaf_CCFF20ED(temp_v0);
+        _ZdaPv(temp_v0);
         M2C_FIELD(arg0, s32 *, 0x45C) = 0;
     }
     return 0;
@@ -2061,7 +2062,7 @@ INCLUDE_ASM("nonmatchings/music_common_005E68", func_00010A3C);
 #if FW_VERSION >= 350
 void func_00010AA0(s32 arg0) {
     func_00010ACC(arg0);
-    scePaf_8A902F65(arg0);
+    _ZN3paf8PhWidget11UpdateStateEv(arg0);
 }
 #endif
 
@@ -2716,7 +2717,7 @@ void func_00010DB0(struct Unk_func_00010DB0_0 *arg0) {
     func_000115E8((s32) arg0);
     func_00011CE8((s32) arg0);
     arg0->unkB3 = 0;
-    func_000046F4((u8 *)arg0 + 0x90);
+    func_000046F4(( Unk_func_000046F4_0*) ((u8 *)arg0 + 0x90));
 }
 
 void func_00010E00(struct Unk_func_00010E00_0 *arg0) {
@@ -2725,7 +2726,7 @@ void func_00010E00(struct Unk_func_00010E00_0 *arg0) {
     func_000115E8((s32) arg0);
     func_00011CE8((s32) arg0);
     arg0->unkB3 = 0;
-    func_000046F4((u8 *)arg0 + 0x90);
+    func_000046F4(( Unk_func_000046F4_0*) ((u8 *)arg0 + 0x90));
 }
 #endif
 
@@ -2740,7 +2741,7 @@ void func_00010E50(struct Unk_func_00010E50_0 *arg0) {
     func_000115E8((s32) arg0);
     func_00011CE8((s32) arg0);
     arg0->unkB3 = 0;
-    func_000046F4((u8 *)arg0 + 0x90);
+    func_000046F4(( Unk_func_000046F4_0*) ((u8 *)arg0 + 0x90));
     _ZdlPv(arg0);
 }
 
@@ -2932,7 +2933,7 @@ void ***func_00017184(void ***arg0, struct Unk_func_00017184_1 *arg1, void **arg
     temp_a1 = M2C_FIELD(temp_v1, void **, 0);
     *temp_s0 = temp_a1;
     M2C_FIELD(M2C_FIELD(temp_v1, void **, 0), void ***, 4) = temp_s0;
-    scePaf_F5001144(temp_v1, temp_a1);
+    sce_paf_private_free2(temp_v1, temp_a1);
     *arg0 = temp_s0;
     arg1->unk4 -= 1;
     return arg0;

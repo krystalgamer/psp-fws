@@ -136,9 +136,11 @@ INCLUDE_RODATA("nonmatchings/savedata_utility_010FEC", D_00025158);
 INCLUDE_RODATA("nonmatchings/savedata_utility_010FEC", D_00025138);
 
 INCLUDE_RODATA("nonmatchings/savedata_utility_010FEC", D_00025148);
+
 __asm__(".globl _ZTV14Class_00025148\n_ZTV14Class_00025148 = D_00025148 - 8\n");
 
 INCLUDE_RODATA("nonmatchings/savedata_utility_010FEC", D_00025160);
+
 __asm__(".globl _ZTV14Class_00025160\n_ZTV14Class_00025160 = D_00025160 - 8\n");
 
 INCLUDE_RODATA("nonmatchings/savedata_utility_010FEC", D_000251B0);
@@ -150,11 +152,13 @@ INCLUDE_RODATA("nonmatchings/savedata_utility_010FEC", D_0001F9F8);
 INCLUDE_RODATA("nonmatchings/savedata_utility_010FEC", D_00025138);
 
 INCLUDE_RODATA("nonmatchings/savedata_utility_010FEC", D_00025148);
+
 __asm__(".globl _ZTV14Class_00025148\n_ZTV14Class_00025148 = D_00025148 - 8\n");
 #endif
 
 #if FW_VERSION == 260
 INCLUDE_RODATA("nonmatchings/savedata_utility_010FEC", D_00025160);
+
 __asm__(".globl _ZTV14Class_00025160\n_ZTV14Class_00025160 = D_00025160 - 8\n");
 #endif
 
@@ -182,7 +186,7 @@ void func_0000BE88(void) {
 }
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_0000A190);
 #endif
 
@@ -304,6 +308,10 @@ void func_0000A938(void) {
 }
 #endif
 
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_0000B554);
+#endif
+
 #if FW_VERSION >= 150 && FW_VERSION < 250
 s32 func_0000C620(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0xC) != 0;
@@ -316,6 +324,10 @@ INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_0001244C);
 void func_0000A990(s32 arg0) {
     func_00012CF0(arg0 + 8);
 }
+#endif
+
+#if FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_0000A9AC);
 #endif
 
 #if FW_VERSION >= 260 && FW_VERSION < 282
@@ -336,9 +348,7 @@ INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_00012AC8);
 INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_0000C6A0);
 #endif
 
-#if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_0000A9AC);
-
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_0000AB4C);
 #endif
 
@@ -396,21 +406,11 @@ void func_0000AF9C(void) {
 INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_00012970);
 #else
 INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_00012848);
-#endif
 
-#if FW_VERSION >= 350
-void func_00012928(struct Unk_func_00012928_0 *arg0) {
-    arg0->unk38 = scePaf_3EDD45EF(0, &func_000124B8, arg0, -1, -1, &func_0001250C);
-}
-#endif
-
-#if FW_VERSION >= 282 && FW_VERSION < 350
 void func_00012928(struct Unk_func_00012928_0 *arg0) {
     arg0->unk38 = Job_Start(0, &func_000124B8, arg0, -1, -1, &func_0001250C);
 }
-#endif
 
-#if FW_VERSION >= 282
 void func_00012970(struct Unk_func_00012970_0 *arg0) {
     arg0->unk0 = 0;
     arg0->unk4 = 0;
@@ -452,7 +452,7 @@ INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_00012AF0);
 
 INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_00012B78);
 
-#if FW_VERSION < 282
+#if FW_VERSION < 282 || FW_VERSION >= 350
 void func_00012BB4(void **arg0) {
     void *temp_s0;
     void *var_a0;
@@ -470,29 +470,7 @@ void func_00012BB4(void **arg0) {
     }
     sce_paf_private_free2(var_a0);
 }
-#endif
-
-#if FW_VERSION >= 350
-void func_00012BB4(void **arg0) {
-    void *temp_s0;
-    void *var_a0;
-    void *var_v0;
-
-    var_a0 = *arg0;
-    var_v0 = M2C_FIELD(var_a0, void **, 4);
-    if (var_v0 != var_a0) {
-        do {
-            temp_s0 = M2C_FIELD(var_v0, void **, 4);
-            scePaf_F5001144(var_v0);
-            var_a0 = *arg0;
-            var_v0 = temp_s0;
-        } while (temp_s0 != var_a0);
-    }
-    scePaf_F5001144(var_a0);
-}
-#endif
-
-#if FW_VERSION >= 282 && FW_VERSION < 350
+#else
 void func_00012BB4(void **arg0) {
     void *temp_s0;
     struct Unk_func_00012BB4_var_a0 *var_a0;
@@ -510,11 +488,11 @@ void func_00012BB4(void **arg0) {
     }
     sce_paf_private_free2(var_a0);
 }
-#else
-INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_00012C0C);
 #endif
 
-#if FW_VERSION >= 282 && FW_VERSION < 350
+#if FW_VERSION < 282 || FW_VERSION >= 350
+INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_00012C0C);
+#else
 void func_00012C0C(struct Unk_func_00012C0C_0 *arg0) {
     M2C_UNK *temp_v0;
     M2C_UNK *var_v1;
@@ -588,6 +566,10 @@ INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_00012D64);
 
 INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_00012E6C);
 
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_0000BEFC);
+#endif
+
 #if FW_VERSION >= 150 && FW_VERSION < 282
 void ***func_0000CFF0(void ***arg0, void *arg1, void **arg2) {
     void **temp_s0;
@@ -613,7 +595,7 @@ void ***func_00012F10(void ***arg0, struct Unk_func_00012F10_1 *arg1, void **arg
     temp_s0 = M2C_FIELD(temp_v1, void ***, 4);
     *temp_s0 = M2C_FIELD(temp_v1, void **, 0);
     M2C_FIELD(M2C_FIELD(temp_v1, void **, 0), void ***, 4) = temp_s0;
-    scePaf_F5001144(temp_v1);
+    sce_paf_private_free2(temp_v1);
     *arg0 = temp_s0;
     arg1->unk4 -= 1;
     return arg0;
@@ -666,58 +648,41 @@ void func_0000B850(void) {
 void func_0000B86C(void) {
     sce_paf_private_qsort();
 }
-#else
+#endif
+
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", _ZN14Class_00025160C2Ei);
+
+INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_0000C390);
+
+INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_0000C3DC);
+
+INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", _ZN14Class_00025160D1Ev);
+
+INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", _ZN14Class_00025160D0Ev);
+#endif
+
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_00013214);
-#endif
 
-#if FW_VERSION >= 350
-void func_000132F0(void) {
-    scePaf_3AC3E06A();
-}
-#endif
-
-#if FW_VERSION >= 282 && FW_VERSION < 350
 void func_000132F0(void) {
     sce_paf_private_malloc();
 }
-#endif
 
-#if FW_VERSION >= 350
-void func_0001330C(void) {
-    scePaf_7EED9087();
-}
-#endif
-
-#if FW_VERSION >= 282 && FW_VERSION < 350
 void func_0001330C(void) {
     sce_paf_private_memalign();
 }
-#endif
 
-#if FW_VERSION >= 350
-void func_00013328(void) {
-    scePaf_4729E549();
-}
-#endif
-
-#if FW_VERSION >= 282 && FW_VERSION < 350
 void func_00013328(void) {
     sce_paf_private_free();
 }
-#endif
 
-#if FW_VERSION >= 350
-void func_00013344(void) {
-    scePaf_F6921CAB();
-}
-#endif
-
-#if FW_VERSION >= 282 && FW_VERSION < 350
 void func_00013344(void) {
     sce_paf_private_qsort();
 }
 #endif
 
+#if FW_VERSION == 100 || FW_VERSION >= 150
 Class_00025160::Class_00025160(s32 owner) {
     Reset();
     this->owner = owner;
@@ -727,6 +692,7 @@ Class_00025160::Class_00025160(s32 owner) {
 
 Class_00025160::~Class_00025160() {
 }
+#endif
 
 INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", _ZN14Class_000251605ResetEv);
 
@@ -816,6 +782,20 @@ void func_0000BA5C(void *arg0) {
 }
 #endif
 
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_0000C560);
+
+INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", _ZN14Class_00025148C1Ei);
+
+INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_0000C5D0);
+
+INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", _ZN14Class_00025148D1Ev);
+
+INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", _ZN14Class_00025148D0Ev);
+
+INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_0000C658);
+#endif
+
 #if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_000134B8);
 
@@ -833,21 +813,7 @@ s32 func_00013568(struct Unk_func_00013568_0 *arg0, s32 arg1) {
     }
     return 0;
 }
-#endif
 
-#if FW_VERSION >= 350
-void func_00013594(struct Unk_func_00013594_0 *arg0) {
-    s32 temp_v0;
-
-    temp_v0 = arg0->unkC;
-    if (temp_v0 != 0) {
-        scePaf_47B886E3(0, temp_v0);
-        arg0->unkC = 0;
-    }
-}
-#endif
-
-#if FW_VERSION >= 282 && FW_VERSION < 350
 void func_00013594(struct Unk_func_00013594_0 *arg0) {
     s32 temp_v0;
 
@@ -859,6 +825,7 @@ void func_00013594(struct Unk_func_00013594_0 *arg0) {
 }
 #endif
 
+#if FW_VERSION == 100 || FW_VERSION >= 150
 Class_00025148::Class_00025148(s32 owner) : Class_00025160(owner) {
     Init();
 }
@@ -870,6 +837,7 @@ void Class_00025148::Init() {
     unk18 = 0;
     unk1C = 0;
 }
+#endif
 
 INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_000136D8);
 
@@ -1017,21 +985,7 @@ void func_0000C69C(void) {
 
 #if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_000141B8);
-#endif
 
-#if FW_VERSION >= 350
-void func_0001425C(void) {
-    void *sp0;
-    sceVshCommonGui_2EBB5C2B(&sp0, sceVshCommonGui_30FA68C3());
-    func_00006934(&sp0);
-    sceVshCommonGui_11C48509(&sp0, sceVshCommonGui_EC899EBE());
-    func_00006934(&sp0);
-    sceVshCommonGui_73765E63(&sp0, sceVshCommonGui_C9529428());
-    func_00006934(&sp0);
-}
-#endif
-
-#if FW_VERSION >= 282 && FW_VERSION < 350
 void func_0001425C(void) {
     void *sp0;
     _ZN3vsh31SetButtonNavigationString_EnterEPKw(&sp0, _ZN3vsh15GetString_EnterEv());
@@ -1061,7 +1015,11 @@ void func_0000C784(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s
 }
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION == 103
+INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_0000C784);
+#endif
+
+#if FW_VERSION < 103
 void func_0000C784(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, s32 arg7) {
     func_0000C824(arg0);
     M2C_FIELD(arg0, s32 *, 8) = arg3;
@@ -1079,7 +1037,11 @@ void func_0000C860(void *arg0) {
 }
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION == 103
+INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_0000C860);
+#endif
+
+#if FW_VERSION < 103
 void func_0000C860(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0xC) = 0;
 }
@@ -1093,17 +1055,19 @@ void func_0000E42C(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5,
 }
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_0000C868);
 #endif
 
 #if FW_VERSION < 250
 INCLUDE_RODATA("nonmatchings/savedata_utility_010FEC", D_00025148);
+
 __asm__(".globl _ZTV14Class_00025148\n_ZTV14Class_00025148 = D_00025148 - 8\n");
 #endif
 
 #if FW_VERSION < 260
 INCLUDE_RODATA("nonmatchings/savedata_utility_010FEC", D_00025160);
+
 __asm__(".globl _ZTV14Class_00025160\n_ZTV14Class_00025160 = D_00025160 - 8\n");
 #endif
 
@@ -1165,6 +1129,10 @@ INCLUDE_RODATA("nonmatchings/savedata_utility_010FEC", D_00027770);
 INCLUDE_RODATA("nonmatchings/savedata_utility_010FEC", D_00025174);
 #endif
 
+#if FW_VERSION == 103
+INCLUDE_RODATA("nonmatchings/savedata_utility_010FEC", D_0002091C);
+#endif
+
 #if FW_VERSION >= 150 && FW_VERSION < 271
 INCLUDE_RODATA("nonmatchings/savedata_utility_010FEC", D_00021C28);
 #endif
@@ -1181,7 +1149,7 @@ INCLUDE_RODATA("nonmatchings/savedata_utility_010FEC", D_0001FAA4);
 INCLUDE_RODATA("nonmatchings/savedata_utility_010FEC", D_0002679C);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_RODATA("nonmatchings/savedata_utility_010FEC", D_0001FAAC);
 
 INCLUDE_RODATA("nonmatchings/savedata_utility_010FEC", D_0001FABC);
@@ -1209,35 +1177,13 @@ INCLUDE_RODATA("nonmatchings/savedata_utility_010FEC", D_0001FB7C);
 INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_0000D154);
 #endif
 
-#if FW_VERSION >= 350
-void func_00014344(struct Unk_func_00014344_0 *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, s32 arg7) {
-    func_000143E4(arg0);
-    arg0->unkC = arg3;
-    arg0->unk10 = sceVshCommonGui_D728DEEA(arg1, arg2, arg3, arg4, arg5, arg6, arg7);
-}
-#endif
-
-#if FW_VERSION >= 282 && FW_VERSION < 350
+#if FW_VERSION >= 282
 void func_00014344(struct Unk_func_00014344_0 *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, s32 arg7) {
     func_000143E4(arg0);
     arg0->unkC = arg3;
     arg0->unk10 = sceVshCommonGui_10906D79(arg1, arg2, arg3, arg4, arg5, arg6, arg7);
 }
-#endif
 
-#if FW_VERSION >= 350
-void func_000143E4(struct Unk_func_00014344_0 *arg0) {
-    s32 temp_v0;
-
-    temp_v0 = arg0->unk10;
-    if (temp_v0 != 0) {
-        sceVshCommonGui_8F414E35(temp_v0);
-        arg0->unk10 = 0;
-    }
-}
-#endif
-
-#if FW_VERSION >= 282 && FW_VERSION < 350
 void func_000143E4(struct Unk_func_00014344_0 *arg0) {
     s32 temp_v0;
 
@@ -1247,25 +1193,29 @@ void func_000143E4(struct Unk_func_00014344_0 *arg0) {
         arg0->unk10 = 0;
     }
 }
-#endif
 
-#if FW_VERSION >= 282
 void func_00014420(struct Unk_func_00014420_0 *arg0) {
     arg0->unk10 = 0;
 }
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION >= 282
+#if FW_VERSION < 150 || FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_00014428);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_0000D338);
+#endif
 
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_0000DF40);
+#endif
+
+#if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_0000D48C);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 250
+#if FW_VERSION >= 102 && FW_VERSION < 250
 INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_0000D674);
 #endif
 
@@ -1298,6 +1248,10 @@ INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_0000F718);
 INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_0000F95C);
 #endif
 
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_0000D88C);
+#endif
+
 #if FW_VERSION == 100
 void func_0000D88C(paf::View *view, paf::PhWidget *widget, s32 idx) {
     widget->SetTexture(paf::SurfaceRCPtr<paf::Surface>(0), (idx << 16) | 1);
@@ -1308,8 +1262,14 @@ void func_0000D88C(paf::View *view, paf::PhWidget *widget, s32 idx) {
     widget->SetStyle((idx << 16) | 0xE, 0x19, 3);
     widget->SetTexture(view->GetTexture(D_0001FB0C), (idx << 16) | 0xE);
 }
+#endif
 
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_0000DAA4);
+#endif
+
+#if FW_VERSION == 103
+INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_0000E8C0);
 #endif
 
 #if FW_VERSION >= 282
@@ -1320,9 +1280,11 @@ INCLUDE_RODATA("nonmatchings/savedata_utility_010FEC", D_00025118);
 INCLUDE_RODATA("nonmatchings/savedata_utility_010FEC", D_00025138);
 
 INCLUDE_RODATA("nonmatchings/savedata_utility_010FEC", D_00025148);
+
 __asm__(".globl _ZTV14Class_00025148\n_ZTV14Class_00025148 = D_00025148 - 8\n");
 
 INCLUDE_RODATA("nonmatchings/savedata_utility_010FEC", D_00025160);
+
 __asm__(".globl _ZTV14Class_00025160\n_ZTV14Class_00025160 = D_00025160 - 8\n");
 
 INCLUDE_RODATA("nonmatchings/savedata_utility_010FEC", D_00025170);
@@ -1334,36 +1296,14 @@ INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_000145D4);
 INCLUDE_RODATA("nonmatchings/savedata_utility_010FEC", D_00025194);
 
 INCLUDE_RODATA("nonmatchings/savedata_utility_010FEC", D_0002519C);
-#endif
 
-#if FW_VERSION >= 350
 void func_00014824(paf::View *view, paf::PhWidget *widget, s32 idx) {
     widget->SetTexture(paf::SurfaceRCPtr<paf::Surface>(0), (idx << 16) | 1);
     widget->SetTexture(view->GetTexture("tex_broken_data"), idx << 16);
     widget->SetTexture(view->GetTexture("tex_broken_data_f"), (idx << 16) | 7);
     widget->SetTexture(view->GetTexture("tex_broken_data_s"), (idx << 16) | 0xE);
 }
-#endif
 
-#if FW_VERSION >= 300 && FW_VERSION < 350
-void func_00014824(paf::View *view, paf::PhWidget *widget, s32 idx) {
-    widget->SetTexture(paf::SurfaceRCPtr<paf::Surface>(0), (idx << 16) | 1);
-    widget->SetTexture(view->GetTexture("tex_broken_data"), idx << 16);
-    widget->SetTexture(view->GetTexture("tex_broken_data_f"), (idx << 16) | 7);
-    widget->SetTexture(view->GetTexture("tex_broken_data_s"), (idx << 16) | 0xE);
-}
-#endif
-
-#if FW_VERSION == 282
-void func_00014824(paf::View *view, paf::PhWidget *widget, s32 idx) {
-    widget->SetTexture(paf::SurfaceRCPtr<paf::Surface>(0), (idx << 16) | 1);
-    widget->SetTexture(view->GetTexture("tex_broken_data"), idx << 16);
-    widget->SetTexture(view->GetTexture("tex_broken_data_f"), (idx << 16) | 7);
-    widget->SetTexture(view->GetTexture("tex_broken_data_s"), (idx << 16) | 0xE);
-}
-#endif
-
-#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_000149D8);
 
 INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_00014B8C);
@@ -1435,7 +1375,7 @@ INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_000154BC);
 INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_00015534);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_0000E098);
 #endif
 
@@ -1457,21 +1397,18 @@ INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_00015798);
 
 INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_000157C0);
 
-#if FW_VERSION >= 350
-void func_000157FC(s32 arg0) {
-    scePaf_9479C11B(arg0 + 0xA20, 0, 0x10);
-    func_00015834(arg0);
-}
-#endif
-
-#if FW_VERSION >= 271 && FW_VERSION < 350
+#if FW_VERSION >= 271
 void func_000157FC(s32 arg0) {
     sce_paf_private_memset(arg0 + 0xA20, 0, 0x10);
     func_00015834(arg0);
 }
 #endif
 
-#if FW_VERSION < 271
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_000157FC);
+#endif
+
+#if FW_VERSION == 100 || (FW_VERSION >= 150 && FW_VERSION < 271)
 void func_000157FC(s32 arg0) {
     M2C_FIELD(arg0, s32 *, 0xA34) = 0;
     sce_paf_private_memset(arg0 + 0xA20, 0, 0x10);
@@ -1489,7 +1426,11 @@ INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_00015924);
 INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_0001598C);
 #endif
 
-#if FW_VERSION < 271
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_0000E454);
+#endif
+
+#if FW_VERSION == 100 || (FW_VERSION >= 150 && FW_VERSION < 271)
 void func_0000E454(void *arg0) {
     s32 temp_v0;
 
@@ -1499,7 +1440,13 @@ void func_0000E454(void *arg0) {
         M2C_FIELD(arg0, s32 *, 0xA34) = 0;
     }
 }
+#endif
 
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_0000EE2C);
+#endif
+
+#if FW_VERSION < 271
 INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_0000E490);
 
 INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_0000E520);
@@ -1515,7 +1462,11 @@ INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_0001599C);
 
 INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_000159B8);
 
-#if FW_VERSION < 282
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_0000E618);
+#endif
+
+#if FW_VERSION == 100 || (FW_VERSION >= 150 && FW_VERSION < 282)
 void func_0000E618(void *arg0) {
     s32 temp_v0;
 

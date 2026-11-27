@@ -1,0 +1,21 @@
+// shared names (tools/add_version.py) begin
+D_00000D9C = 0x0000090C; // rom:0x98C
+D_00000990 = 0x00000A00;
+func_0000020C = 0x00000210; // type:func rom:0x290
+func_00000340 = 0x00000344; // type:func rom:0x3C4
+sceVaudioSetEffectType = 0x00000410; // type:func rom:0x490
+func_000004A4 = 0x000004A8; // type:func rom:0x528
+sceVaudio_driver_DCC18F25 = 0x00000580; // type:func rom:0x600
+func_00000584 = 0x00000588; // type:func rom:0x608
+func_000005EC = 0x000005F0; // type:func rom:0x670
+func_000005DC = 0x00000648; // type:func rom:0x6C8
+func_000006D4 = 0x000006D8; // type:func rom:0x758
+sceKernelSignalSema = 0x000006E0; // type:func rom:0x760
+sceKernelWaitSema = 0x000006E8; // type:func rom:0x768
+func_000006F4 = 0x000006F8; // type:func rom:0x778
+func_00000704 = 0x00000708; // type:func rom:0x788
+func_0000070C = 0x00000710; // type:func rom:0x790
+func_00000714 = 0x00000718; // type:func rom:0x798
+func_0000071C = 0x00000720; // type:func rom:0x7A0
+func_00000734 = 0x00000738; // type:func rom:0x7B8
+// shared names (tools/add_version.py) end

@@ -121,7 +121,7 @@ s32 sceNetGetIfhandleOpt(struct Unk_sceNetIfhandle_driver_D5AD6DEA_0 *arg0) {
 }
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/ifhandle", sceNetIfhandle_driver_0542835F);
 #endif
 

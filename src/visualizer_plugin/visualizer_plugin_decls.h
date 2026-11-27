@@ -4,6 +4,12 @@
 #include "common.h"
 #include "m2c_macros.h"
 
+#ifdef __cplusplus
+#include "paf.h"
+#include "vsh.h"
+extern "C" {
+#endif
+
 struct Unk_func_0000064C_0 {
     M2C_UNK * unk0;
     s32 unk4;
@@ -236,7 +242,7 @@ struct Unk_vt_func_00001CB8_arg0 {
 
 extern M2C_UNK D_0000CE40;
 extern M2C_UNK D_0000CEB0;
-extern void D_0000CEF8;
+extern u8 D_0000CEF8;
 extern M2C_UNK D_0000CFD8;
 extern M2C_UNK D_0000D138;
 extern M2C_UNK D_0000D1D0;
@@ -250,6 +256,16 @@ extern s32 D_0000DC18;
 extern s32 D_0000DC20;
 extern void *D_0000E25C;
 
+M2C_UNK _ZN3paf8PhWidgetD2Ev(void **);
+M2C_UNK _ZN3paf9PhHandler11KillTimerCBEi(void **, M2C_UNK);
+M2C_UNK _ZN3paf9PhSRender8SetStyleEiRK4vec4(s32);
+M2C_UNK _ZN3paf9PhSRender8SetStyleEif(s32);
+M2C_UNK _ZN3paf9PhSRender8SetStyleEii(s32);
+M2C_UNK _ZNK3paf9PhSRender8GetStyleEiR4vec4(s32);
+M2C_UNK _ZNK3paf9PhSRender8GetStyleEiRb(s32);
+M2C_UNK _ZNK3paf9PhSRender8GetStyleEiRf(s32);
+M2C_UNK _ZNK3paf9PhSRender8GetStyleEiRi(s32);
+M2C_UNK _ZdlPv(void **);
 s32 func_0000026C(void);
 s32 func_00000274(M2C_UNK (*arg0)(M2C_UNK));
 void func_000003A0(void);
@@ -320,7 +336,7 @@ s32 func_00001E7C(void);
 s32 func_00001E84(void);
 void func_00001E8C(void);
 void func_00002BA0(s32 *arg0, s32 arg1);
-M2C_UNK func_00002C38();
+M2C_UNK func_00002C38(...);
 void func_00005650(void *arg0, s32 arg1);
 void func_00005928(M2C_UNK **arg0);
 void func_00005938(M2C_UNK **arg0);
@@ -360,31 +376,14 @@ void func_0000A14C(M2C_UNK **arg0);
 void func_0000A15C(M2C_UNK **arg0);
 void func_0000A16C(M2C_UNK **arg0);
 void func_0000A17C(M2C_UNK **arg0);
-M2C_UNK func_0000C7B0();
+M2C_UNK func_0000C7B0(...);
 s32 module_stop(void);
 void sceGumDrawArray(s32, s32, s32, void *, void *);
 s32 sceKernelDeleteSema(s32);
-M2C_UNK scePaf_0AC29BBC(M2C_UNK, M2C_UNK, s32, M2C_UNK, s32);
-M2C_UNK _ZN3paf9PhSRender8SetStyleEiRK4vec4(s32);
-M2C_UNK scePaf_1A314D65(s32);
-M2C_UNK _ZN3paf9PhSRender8SetStyleEif(s32);
-M2C_UNK scePaf_291EBB2C(s32);
-M2C_UNK scePaf_2A5E7BE9(s32);
-M2C_UNK _ZdlPv(void **);
-M2C_UNK scePaf_6261C0A5();
-M2C_UNK scePaf_6A82A8C6(void **, M2C_UNK);
-M2C_UNK scePaf_6FAE0AC1(s32);
-M2C_UNK _ZN3paf8PhWidgetD2Ev(void **);
-M2C_UNK scePaf_79542EEA(s32);
-M2C_UNK scePaf_7EA9C56C(s32);
-M2C_UNK scePaf_9479C11B(s32, M2C_UNK, s32);
-M2C_UNK _ZNK3paf9PhSRender8GetStyleEiRb(s32);
-M2C_UNK scePaf_9E0CA28F(void **);
-M2C_UNK _ZNK3paf9PhSRender8GetStyleEiR4vec4(s32);
-M2C_UNK _ZNK3paf9PhSRender8GetStyleEiRf(s32);
-M2C_UNK scePaf_BB8E4390(s32);
-M2C_UNK _ZN3paf9PhSRender8SetStyleEii(s32);
-M2C_UNK _ZN3paf9PhHandler11KillTimerCBEi(void **, M2C_UNK);
-M2C_UNK _ZNK3paf9PhSRender8GetStyleEiRi(s32);
+M2C_UNK sce_paf_private_memset(s32, M2C_UNK, s32);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

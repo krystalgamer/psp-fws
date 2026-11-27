@@ -1,3 +1,4 @@
+/* lang: c++ */
 #include "common.h"
 #include "premo_plugin_decls.h"
 
@@ -85,8 +86,8 @@ void func_00009840(struct Unk_func_00009840_0 *arg0) {
     s32 temp_v0;
 
     if (arg0->unk10 == 0) {
-        temp_v0 = scePaf_61A8E8EC(4);
-        sceVshCommonUtil_094B0219(temp_v0, 0);
+        temp_v0 = _Znwj(4);
+        _ZN3vsh9PowerLockC1Ei(temp_v0, 0);
         arg0->unk10 = temp_v0;
     }
 }
@@ -228,7 +229,7 @@ void func_00009CA4(s32 arg0) {
     } else {
         ((M2C_UNK (*)()) D_0002CB40)();
     }
-    temp_v0 = scePaf_DCE3D225(arg0, 1);
+    temp_v0 = _ZNK3paf4View12GetInterfaceEi(arg0, 1);
     if (temp_v0 != NULL) {
         temp_v0->unk10(func_00009C5C);
     }
@@ -345,7 +346,7 @@ void func_0000A91C(struct Unk_func_0000A91C_0 *arg0) {
 
     temp_v0 = arg0->unk8;
     if (temp_v0 != 0) {
-        sceVshCommonGui_8F414E35(temp_v0);
+        _ZN3vsh13MessageDialog10HideDeleteEv(temp_v0);
         arg0->unk8 = 0;
     }
 }
@@ -457,7 +458,7 @@ INCLUDE_ASM("nonmatchings/premo_plugin_009598", func_0000B6A0);
 void func_0000B6A0(struct Unk_func_0000B6A0_0 *arg0) {
     arg0->unk0 = &D_0002A310;
     sceKernelDeleteSema(arg0->unk4);
-    scePaf_6261C0A5((s32) arg0);
+    _ZdlPv((s32) arg0);
 }
 #endif
 
@@ -497,7 +498,7 @@ s32 func_0000BBD8(struct Unk_func_0000BBD8_0 *arg0, s32 arg1) {
     s32 temp_s1;
 
     sceKernelWaitSema(arg0->unk4, 1, 0);
-    temp_s1 = scePaf_9C0245AF((s32) ((u8 *)arg0 + 8), arg1, 0x10);
+    temp_s1 = sce_paf_private_memcmp((s32) ((u8 *)arg0 + 8), arg1, 0x10);
     sceKernelSignalSema(arg0->unk4, 1);
     return temp_s1;
 }
@@ -599,7 +600,7 @@ INCLUDE_ASM("nonmatchings/premo_plugin_009598", func_0000C928);
 
 #if FW_VERSION == 352
 void func_0000C928(void) {
-    sceVshCommonGui_F5A16B4D(0);
+    _ZN3vsh26ShowButtonNavigation_EnterEb(0);
     sceVshCommonGui_891DD627(0);
     if (func_000019A0() != 0) {
 
@@ -844,7 +845,7 @@ void func_0000D8D4(void) {
     if (M2C_FIELD(temp_v0, u8 *, 0x274) == 0) {
         if (func_000019A0() == 0) {
             temp_s0 = func_00009A08();
-            if (scePaf_88784487(&D_0002A44C) != 0) {
+            if (_ZN3paf4View4FindEPKc(&D_0002A44C) != 0) {
                 func_00009380();
                 func_0000A008((s32) temp_s0, 0, (s32) &func_0000D9E8);
                 func_000093BC();
@@ -1441,7 +1442,7 @@ void func_00010F44(void) {
     func_00008538(temp_v0 + 4);
     func_00006E3C(temp_v0, 6);
     func_00008854(1);
-    sceVshCommonGui_F5A16B4D(0);
+    _ZN3vsh26ShowButtonNavigation_EnterEb(0);
     sceVshCommonGui_891DD627(0);
 }
 #endif
@@ -1558,7 +1559,7 @@ s32 func_00011574(struct Unk_func_00011574_0 *arg0, s32 arg1) {
     s32 temp_s1;
 
     temp_s1 = (u8 *)arg0 + 0x20;
-    scePaf_9479C11B(temp_s1, 0, 0x80);
+    sce_paf_private_memset(temp_s1, 0, 0x80);
     temp_a0 = arg0->unk4;
     arg0->unk1C = 0x84;
     if ((temp_a0 == 0) || ((u32) (arg1 - 1) >= 3U)) {

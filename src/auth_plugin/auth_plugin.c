@@ -1,3 +1,4 @@
+/* lang: c++ */
 /* cflags: -Os */
 #include "common.h"
 #include "auth_plugin_decls.h"
@@ -153,19 +154,7 @@ INCLUDE_ASM("nonmatchings/auth_plugin", func_00000194);
 INCLUDE_ASM("nonmatchings/auth_plugin", func_00000328);
 
 INCLUDE_ASM("nonmatchings/auth_plugin", func_000004B0);
-#endif
 
-#if FW_VERSION >= 350
-void func_00000574(void) {
-    func_0000222C((s32) &D_00002C88, (s32) &D_00002AEC);
-    func_0000222C((s32) &D_00002C94, (s32) &D_00002AEC);
-    scePaf_8B38372A(D_00002C7C, &D_00002AE0);
-    scePaf_39E62C88(D_00002C7C, &D_00002AE0, 0, 0);
-    scePaf_A013540A(D_00002C7C, &D_00002AE0);
-}
-#endif
-
-#if FW_VERSION >= 282 && FW_VERSION < 350
 void func_00000574(void) {
     func_0000222C((s32) &D_00002C88, (s32) &D_00002AEC);
     func_0000222C((s32) &D_00002C94, (s32) &D_00002AEC);
@@ -173,9 +162,7 @@ void func_00000574(void) {
     _ZN3paf4View8PageOpenEPKcii(D_00002C7C, &D_00002AE0, 0, 0);
     _ZN3paf4View12PageActivateEPKc(D_00002C7C, &D_00002AE0);
 }
-#endif
 
-#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/auth_plugin", func_000005F8);
 
 INCLUDE_ASM("nonmatchings/auth_plugin", func_00000954);
@@ -274,7 +261,13 @@ INCLUDE_RODATA("nonmatchings/auth_plugin", D_00001D38);
 
 #if FW_VERSION < 201
 INCLUDE_RODATA("nonmatchings/auth_plugin", D_00001D54);
+#endif
 
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_RODATA("nonmatchings/auth_plugin", D_00001D74);
+#endif
+
+#if FW_VERSION == 100 || (FW_VERSION >= 150 && FW_VERSION < 201)
 INCLUDE_RODATA("nonmatchings/auth_plugin", D_00001D70);
 #endif
 
@@ -583,21 +576,7 @@ INCLUDE_ASM("nonmatchings/auth_plugin", func_00002A64);
 
 #if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/auth_plugin", func_000021FC);
-#endif
 
-#if FW_VERSION >= 350
-void func_0000222C(s32 arg0, s32 arg1) {
-    s32 var_v0;
-
-    var_v0 = 0;
-    if (arg1 != 0) {
-        var_v0 = scePaf_C1B0AA0D(arg1);
-    }
-    func_000024D8(arg0, arg1, var_v0);
-}
-#endif
-
-#if FW_VERSION >= 282 && FW_VERSION < 350
 void func_0000222C(s32 arg0, s32 arg1) {
     s32 var_v0;
 
@@ -607,21 +586,7 @@ void func_0000222C(s32 arg0, s32 arg1) {
     }
     func_000024D8(arg0, arg1, var_v0);
 }
-#endif
 
-#if FW_VERSION >= 350
-void func_0000227C(s32 arg0, s32 arg1) {
-    s32 var_v0;
-
-    var_v0 = 0;
-    if (arg1 != 0) {
-        var_v0 = scePaf_5E4447F6(arg1);
-    }
-    func_00002584(arg0, arg1, var_v0);
-}
-#endif
-
-#if FW_VERSION >= 282 && FW_VERSION < 350
 void func_0000227C(s32 arg0, s32 arg1) {
     s32 var_v0;
 
@@ -631,9 +596,7 @@ void func_0000227C(s32 arg0, s32 arg1) {
     }
     func_00002584(arg0, arg1, var_v0);
 }
-#endif
 
-#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/auth_plugin", func_000022CC);
 #endif
 

@@ -4,6 +4,12 @@
 #include "common.h"
 #include "m2c_macros.h"
 
+#ifdef __cplusplus
+#include "paf.h"
+#include "vsh.h"
+extern "C" {
+#endif
+
 struct Unk_D_00002D50 {
     u8 pad0[0x1C];
     s32 unk1C;
@@ -48,7 +54,7 @@ void func_00001454(void);
 void func_00001474(void);
 void func_00001494(s32 arg0, s32 arg1);
 void func_00001514(s32 arg0, s32 arg1);
-M2C_UNK func_000018E0();
+M2C_UNK func_000018E0(...);
 void func_00001CFC(void);
 void func_00001D7C(void);
 void func_00001DB8(void);
@@ -66,16 +72,15 @@ void func_000023A4(s32 *arg0, s32 arg1);
 void func_00002444(void);
 M2C_UNK func_000024D8(s32, s32, s32);
 M2C_UNK func_00002584(s32, s32, s32);
-M2C_UNK func_00002638();
+M2C_UNK func_00002638(...);
 void func_00002658(void);
-M2C_UNK func_000026B0();
+M2C_UNK func_000026B0(...);
 s32 module_stop(void);
-M2C_UNK scePaf_39E62C88(s32, M2C_UNK *, M2C_UNK, M2C_UNK);
-s32 scePaf_5E4447F6(s32);
-M2C_UNK scePaf_8B38372A(s32, M2C_UNK *);
-M2C_UNK scePaf_A013540A(s32, M2C_UNK *);
-s32 scePaf_C1B0AA0D(s32);
 s32 sce_paf_private_strlen(s32);
 s32 sce_paf_private_wcslen(s32);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

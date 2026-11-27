@@ -1,0 +1,11 @@
+// shared names (tools/add_version.py) begin
+g_openPsidSema = 0x00000400;
+g_openPsidCert = 0x00000440;
+module_start = 0x000000E8; // type:func rom:0x168
+sceOpenPSIDGetOpenPSID = 0x00000148; // type:func rom:0x1C8
+sceKernelCreateSema = 0x00000254; // type:func rom:0x2D4
+sceKernelSignalSema = 0x0000025C; // type:func rom:0x2DC
+sceKernelWaitSema = 0x00000264; // type:func rom:0x2E4
+sceIdStorageLookup = 0x0000026C; // type:func rom:0x2EC
+sceUtilsBufferCopyWithRange = 0x00000274; // type:func rom:0x2F4
+// shared names (tools/add_version.py) end

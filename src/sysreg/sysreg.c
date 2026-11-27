@@ -1,6 +1,6 @@
 /* cflags[150]: -Os -frename-registers */
 /* cflags[152]: -Os -frename-registers */
-/* cflags[100]: -Os -frename-registers */
+/* cflags[100,102,103]: -Os -frename-registers */
 /* cflags: -O2 -frename-registers */
 #include "common.h"
 #include "sysreg_decls.h"
@@ -64,6 +64,10 @@ INCLUDE_ASM("nonmatchings/sysreg", sceSysregGenerateVblankIRQ);
 #endif
 
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregSetMasterPriv);
+
+#if FW_VERSION == 103
+INCLUDE_ASM("nonmatchings/sysreg", func_000002F0);
+#endif
 
 #if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregGetFuseId);
@@ -611,10 +615,18 @@ INCLUDE_ASM("nonmatchings/sysreg", sceClkcSetBusGear);
 
 INCLUDE_ASM("nonmatchings/sysreg", sceClkcGetBusGear);
 
+#if FW_VERSION == 103
+INCLUDE_ASM("nonmatchings/sysreg", func_00002398);
+#else
 INCLUDE_ASM("nonmatchings/sysreg", sceClkcSetCpuFrequency);
+#endif
 
 INCLUDE_ASM("nonmatchings/sysreg", sceClkcGetCpuFrequency);
 
+#if FW_VERSION == 103
+INCLUDE_ASM("nonmatchings/sysreg", func_00002448);
+#else
 INCLUDE_ASM("nonmatchings/sysreg", sceClkcSetBusFrequency);
+#endif
 
 INCLUDE_ASM("nonmatchings/sysreg", sceClkcGetBusFrequency);

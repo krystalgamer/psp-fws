@@ -1,5 +1,6 @@
+/* lang: c++ */
 /* cflags[150]: -Os */
-/* cflags[100]: -Os */
+/* cflags[100,103]: -Os */
 #include "common.h"
 #include "msvideo_plugin_decls.h"
 

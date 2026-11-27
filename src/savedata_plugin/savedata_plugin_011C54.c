@@ -1,3 +1,4 @@
+/* lang: c++ */
 /* cflags: -Os */
 #include "common.h"
 #include "savedata_plugin_decls.h"
@@ -6,7 +7,7 @@
 void func_00011C54(struct Unk_func_00011C54_0 *arg0, s32 arg1, s32 arg2) {
     func_0000F1A0(arg0, arg1);
     arg0->unk0 = &D_00022718;
-    func_000020A4((u8 *)arg0 + 0x20, 0);
+    func_000020A4((s32*) ((u8 *)arg0 + 0x20), 0);
     arg0->unk24 = arg2;
     arg0->unk1C = 0;
     func_00011ED4(arg0);
@@ -15,7 +16,7 @@ void func_00011C54(struct Unk_func_00011C54_0 *arg0, s32 arg1, s32 arg2) {
 void func_00011CAC(struct Unk_func_00011CAC_0 *arg0, s32 arg1, s32 arg2) {
     func_0000F1A0(arg0, arg1);
     arg0->unk0 = &D_00022718;
-    func_000020A4((u8 *)arg0 + 0x20, 0);
+    func_000020A4((s32*) ((u8 *)arg0 + 0x20), 0);
     arg0->unk24 = arg2;
     arg0->unk1C = 0;
     func_00011ED4(arg0);
@@ -34,6 +35,10 @@ INCLUDE_RODATA("nonmatchings/savedata_plugin_011C54", D_000226A0);
 INCLUDE_RODATA("nonmatchings/savedata_plugin_011C54", D_000226B8);
 
 INCLUDE_RODATA("nonmatchings/savedata_plugin_011C54", D_000226C0);
+#endif
+
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/savedata_plugin_011C54", func_0000FD28);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 250
@@ -104,16 +109,16 @@ void func_0000F8C4(s32 arg0, s32 arg1, s32 arg2) {
 INCLUDE_ASM("nonmatchings/savedata_plugin_011C54", func_0000F91C);
 #endif
 
+#if FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/savedata_plugin_011C54", func_0000F9A8_v100);
+#endif
+
 #if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/savedata_plugin_011C54", func_00010BA8);
 #endif
 
 #if FW_VERSION == 201
 INCLUDE_ASM("nonmatchings/savedata_plugin_011C54", func_00010984);
-#endif
-
-#if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/savedata_plugin_011C54", func_0000F9A8_v100);
 #endif
 
 #if FW_VERSION < 282
@@ -164,6 +169,12 @@ INCLUDE_ASM("nonmatchings/savedata_plugin_011C54", func_0001209C);
 
 INCLUDE_ASM("nonmatchings/savedata_plugin_011C54", func_00012170);
 
+#if FW_VERSION < 201
+INCLUDE_ASM("nonmatchings/savedata_plugin_011C54", func_0000FC20);
+
+INCLUDE_ASM("nonmatchings/savedata_plugin_011C54", func_0000FCFC);
+#endif
+
 #if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/savedata_plugin_011C54", func_00010DBC);
 #endif
@@ -173,10 +184,6 @@ INCLUDE_ASM("nonmatchings/savedata_plugin_011C54", func_00012C54_v260);
 #endif
 
 #if FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/savedata_plugin_011C54", func_0000FC20);
-
-INCLUDE_ASM("nonmatchings/savedata_plugin_011C54", func_0000FCFC);
-
 INCLUDE_ASM("nonmatchings/savedata_plugin_011C54", func_0000FDE4);
 #endif
 
@@ -240,7 +247,7 @@ s32 func_00012860(void) {
 
 INCLUDE_ASM("nonmatchings/savedata_plugin_011C54", func_00012868);
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_RODATA("nonmatchings/savedata_plugin_011C54", D_00021238);
 
 INCLUDE_RODATA("nonmatchings/savedata_plugin_011C54", D_00021258);
@@ -270,7 +277,7 @@ s32 func_00010994(void *arg0) {
 }
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/savedata_plugin_011C54", func_0001099C);
 #endif
 
@@ -301,6 +308,10 @@ INCLUDE_RODATA("nonmatchings/savedata_plugin_011C54", D_00022738);
 #endif
 
 INCLUDE_ASM("nonmatchings/savedata_plugin_011C54", func_00012EF8);
+
+#if FW_VERSION == 103
+INCLUDE_ASM("nonmatchings/savedata_plugin_011C54", func_00011728);
+#endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/savedata_plugin_011C54", func_00011D6C);
@@ -334,6 +345,10 @@ void func_00010BE0(void **arg0) {
 INCLUDE_ASM("nonmatchings/savedata_plugin_011C54", func_00010C38);
 #endif
 
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/savedata_plugin_011C54", func_000112B4);
+#endif
+
 #if FW_VERSION >= 350
 void func_00013048(void **arg0) {
     void *temp_s0;
@@ -345,12 +360,12 @@ void func_00013048(void **arg0) {
     if (var_v0 != var_a0) {
         do {
             temp_s0 = M2C_FIELD(var_v0, void **, 4);
-            scePaf_F5001144(var_v0);
+            sce_paf_private_free2(var_v0);
             var_a0 = *arg0;
             var_v0 = temp_s0;
         } while (temp_s0 != var_a0);
     }
-    scePaf_F5001144(var_a0);
+    sce_paf_private_free2(var_a0);
 }
 #endif
 

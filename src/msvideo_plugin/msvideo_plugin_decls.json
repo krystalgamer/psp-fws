@@ -1696,7 +1696,7 @@
   "sceVideocodecReleaseEDRAM": "s32 sceVideocodecReleaseEDRAM(s32);",
   "sceVshCommonGui_614630E6": "M2C_UNK sceVshCommonGui_614630E6(s32, s32, M2C_UNK *, M2C_UNK, M2C_UNK *, M2C_UNK, M2C_UNK);",
   "sceVshCommonGui_7B52F0E6": "M2C_UNK sceVshCommonGui_7B52F0E6(s32, s32, M2C_UNK *, M2C_UNK, M2C_UNK *, M2C_UNK);",
-  "sceVshCommonGui_F4D1E387": "M2C_UNK sceVshCommonGui_F4D1E387(s32, s32, M2C_UNK *, M2C_UNK, M2C_UNK *, M2C_UNK, M2C_UNK);",
+  "sceVshCommonGui_F4D1E387": "M2C_UNK sceVshCommonGui_F4D1E387(s32, s32, const char *, M2C_UNK, const char *, M2C_UNK, M2C_UNK);",
   "sce_paf_private_calloc": "M2C_UNK sce_paf_private_calloc(M2C_UNK, s32);",
   "sce_paf_private_free": "M2C_UNK sce_paf_private_free(void *);",
   "sce_paf_private_malloc": "s32 *sce_paf_private_malloc(M2C_UNK);",

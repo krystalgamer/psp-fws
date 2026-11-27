@@ -1,3 +1,4 @@
+/* lang: c++ */
 #include "common.h"
 #include "lftv_main_plugin_decls.h"
 
@@ -168,7 +169,7 @@ s32 func_00008208(struct Unk_func_00008208_0 *arg0, s32 arg1) {
     s32 var_v0;
 
     var_v0 = 0x80070057;
-    if (!(arg0->unk18 & 8)) {
+    if ((arg0->unk18 & 8) == 0) {
 
     } else {
         var_v0 = func_00008278((s32) arg0, arg1);
@@ -180,7 +181,7 @@ s32 func_00008240(struct Unk_func_00008208_0 *arg0, s32 arg1) {
     s32 var_v0;
 
     var_v0 = 0x80070057;
-    if (!(arg0->unk18 & 6)) {
+    if ((arg0->unk18 & 6) == 0) {
 
     } else {
         var_v0 = func_00008278((s32) arg0, arg1);
@@ -253,13 +254,13 @@ void func_000087B4(struct Unk_func_00008208_0 *arg0) {
         if (arg0->unk14 != temp_v1) {
             arg0->unk14 = temp_v1;
         }
-        if (arg0->unk18 != func_000063A0(arg0->unk4)) {
-            arg0->unk18 = func_000063A0(arg0->unk4);
+        if (arg0->unk18 != func_000063A0((Unk_func_000063A0_0*) arg0->unk4)) {
+            arg0->unk18 = func_000063A0((Unk_func_000063A0_0*) arg0->unk4);
         }
-        if (arg0->unk28 != func_000063B0(arg0->unk4)) {
-            arg0->unk28 = func_000063B0(arg0->unk4);
+        if (arg0->unk28 != func_000063B0((Unk_func_000063B0_0*) arg0->unk4)) {
+            arg0->unk28 = func_000063B0((Unk_func_000063B0_0*) arg0->unk4);
         }
-        temp_a0 = arg0->unk4;
+        temp_a0 = (Unk_func_000087B4_temp_a0*) arg0->unk4;
         temp_v1_2 = temp_a0->unk448;
         if (arg0->unk2C != temp_v1_2) {
             arg0->unk2C = temp_v1_2;
@@ -3216,7 +3217,7 @@ void func_00015184(s32 arg0, s32 arg1) {
             func_0002D8D4();
             func_00038B30(1, 1, 1);
             _ZN3vsh12BusyIcon_IncEv();
-            temp_s0 = D_0005F7C8;
+            temp_s0 = (Unk_func_00015184_temp_s0*) D_0005F7C8;
             if ((temp_s0 == NULL) || (temp_v0 = Job_Start(0, &func_0001527C, 0, -1, -1, &func_00015444), temp_s0->unk24 = temp_v0, (temp_v0 == 0))) {
                 _ZN3vsh12BusyIcon_DecEv();
             }
@@ -3641,7 +3642,7 @@ void func_00017788(s32 arg0) {
     } else {
         func_0002D1AC((s32) D_0005F7D4, arg0);
     }
-    temp_v0 = _ZN3paf8PhWidget9FindChildEPKci(arg0, "lftv_page190_group000_text000", 0);
+    temp_v0 = _ZN3paf8PhWidget9FindChildEPKci(arg0, (M2C_UNK*) ("lftv_page190_group000_text000"), 0);
     if (temp_v0 != NULL) {
         M2C_FIELD(*temp_v0, M2C_UNK (**)(void **, M2C_UNK, M2C_UNK), 0x70)(temp_v0, 0xF, 0x20);
     }
@@ -3959,7 +3960,7 @@ void func_0001879C(void) {
     temp_s0 = D_0005F7D4;
     if ((temp_s0 != NULL) && (temp_s0->unkC == 0)) {
         func_0002CF90((s32) temp_s0);
-        func_0002D0DC(temp_s0);
+        func_0002D0DC((Unk_func_0002D0DC_0*) temp_s0);
     }
     func_00019278();
 }
@@ -4674,7 +4675,7 @@ void func_00015450(s32 arg0) {
     } else {
         func_0002D1AC(D_00049030, arg0);
     }
-    temp_v0 = _ZN3paf8PhWidget9FindChildEPKci(arg0, "lftv_page195_group000_text000", 0);
+    temp_v0 = _ZN3paf8PhWidget9FindChildEPKci(arg0, (M2C_UNK*) ("lftv_page195_group000_text000"), 0);
     if (temp_v0 != NULL) {
         M2C_FIELD(*temp_v0, M2C_UNK (**)(void **, M2C_UNK, M2C_UNK), 0x70)(temp_v0, 0xF, 0x20);
     }

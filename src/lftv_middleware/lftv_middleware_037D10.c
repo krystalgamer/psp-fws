@@ -1,3 +1,4 @@
+/* lang: c++ */
 /* cflags: -O1 -frename-registers */
 #include "common.h"
 #include "lftv_middleware_decls.h"

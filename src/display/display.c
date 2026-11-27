@@ -6,7 +6,11 @@
 #define IS_USER_ADDR(p) (((u32)(p) >> 31) ^ 1)
 #define K1_BAD_ADDR(p) ((-k1IsUserMode() & (u32)(p)) >> 31)
 
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/display", func_00000000);
+#else
 INCLUDE_ASM("nonmatchings/display", module_reboot_before);
+#endif
 
 #if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/display", D_00003A68);
@@ -131,6 +135,10 @@ s32 sceDisplayEnd(void) {
     func_000016F4();
     return 0;
 }
+#endif
+
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/display", func_00000688);
 #endif
 
 #if FW_VERSION == 271
@@ -295,7 +303,13 @@ s32 func_00000468(s32 id, char *name, void *param, s32 *result)
     }
     return 0;
 }
+#endif
 
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/display", func_00000578);
+#endif
+
+#if FW_VERSION == 100
 s32 func_00000578(void)
 {
     s32 i;
@@ -418,11 +432,15 @@ s32 func_0000092C(s32 mode, s32 width, s32 height, s32 bufferWidth, s32 pixelFor
 }
 #endif
 
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/display", func_00000C44);
+#endif
+
 #if FW_VERSION == 271
 INCLUDE_ASM("nonmatchings/display", func_0000092C);
 #endif
 
-#if FW_VERSION < 271
+#if FW_VERSION == 100 || (FW_VERSION >= 150 && FW_VERSION < 271)
 s32 sceDisplaySetMode(s32 mode, s32 width, s32 height)
 {
     s32 idx;
@@ -659,6 +677,10 @@ s32 sceDisplaySetHoldMode(s32 arg0) {
 }
 #endif
 
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/display", func_00001378);
+#endif
+
 #if FW_VERSION >= 150 && FW_VERSION < 282
 s32 sceDisplaySetResumeMode(s32 arg0) {
     g_display.resumeMode = arg0;
@@ -684,6 +706,12 @@ s32 sceDisplayGetFrameBuf(void **topaddr, s32 *bufferWidth, s32 *pixelFormat, s3
 }
 #endif
 
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/display", func_0000140C);
+
+INCLUDE_ASM("nonmatchings/display", func_00001420);
+#endif
+
 #if FW_VERSION >= 150 && FW_VERSION < 282
 s32 sceDisplayIsForeground(void) {
     return g_display.foregroundLevel == 2;
@@ -702,7 +730,7 @@ INCLUDE_ASM("nonmatchings/display", sceDisplaySetBacklightSel);
 INCLUDE_RODATA("nonmatchings/display", D_00002C30);
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION >= 282
+#if FW_VERSION < 150 || FW_VERSION >= 282
 INCLUDE_RODATA("nonmatchings/display", D_00003B94);
 #endif
 
@@ -960,7 +988,15 @@ void func_000023B8(void)
 INCLUDE_RODATA("nonmatchings/display", D_00001FF8);
 
 INCLUDE_RODATA("nonmatchings/display", D_00002018);
+#endif
 
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/display", func_00001708);
+
+INCLUDE_ASM("nonmatchings/display", func_000017A4);
+#endif
+
+#if FW_VERSION == 100 || (FW_VERSION >= 150 && FW_VERSION < 282)
 s32 sceDisplayWaitVblank(void)
 {
     u32 oldK1 = shiftK1();
@@ -978,11 +1014,13 @@ s32 sceDisplayWaitVblank(void)
     setK1(oldK1);
     return ret;
 }
-#else
+#endif
+
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/display", sceDisplayWaitVblank);
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION == 100 || (FW_VERSION >= 150 && FW_VERSION < 282)
 s32 sceDisplayWaitVblankCB(void)
 {
     u32 oldK1 = shiftK1();
@@ -1000,7 +1038,9 @@ s32 sceDisplayWaitVblankCB(void)
     setK1(oldK1);
     return ret;
 }
-#else
+#endif
+
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/display", sceDisplayWaitVblankCB);
 #endif
 
@@ -1077,7 +1117,7 @@ s32 sceDisplayGetAccumulatedHcount(void)
 INCLUDE_ASM("nonmatchings/display", sceDisplayGetAccumulatedHcount);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 s32 sceDisplayGetCurrentHcount(void)
 {
     s32 i = 0;
@@ -1125,6 +1165,10 @@ s32 func_00001728(void) {
 }
 #endif
 
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/display", func_00001728);
+#endif
+
 #if FW_VERSION == 100
 s32 func_00001728(void) {
     sceSysregApbTimerClkDisable(1);
@@ -1132,7 +1176,7 @@ s32 func_00001728(void) {
 }
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 201
+#if FW_VERSION >= 102 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/display", func_00001748);
 #endif
 
@@ -1166,7 +1210,7 @@ s32 func_00002AA0(void) {
 }
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 s32 func_00002AC8(void)
 {
     s32 a, b, c;
@@ -1212,11 +1256,17 @@ INCLUDE_ASM("nonmatchings/display", sceDisplayIsVsync);
 INCLUDE_RODATA("nonmatchings/display", D_00002060);
 #endif
 
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/display", func_00001B00);
+
+INCLUDE_ASM("nonmatchings/display", func_00001B7C);
+#endif
+
 #if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/display", sceDisplayWaitVblankStart);
 #endif
 
-#if FW_VERSION < 201
+#if FW_VERSION == 100 || (FW_VERSION >= 150 && FW_VERSION < 201)
 s32 sceDisplayWaitVblankStart(void) {
     s32 temp_v0;
     u32 temp_s1;
@@ -1235,7 +1285,7 @@ s32 sceDisplayWaitVblankStart(void) {
 INCLUDE_ASM("nonmatchings/display", sceDisplayWaitVblankStartCB);
 #endif
 
-#if FW_VERSION < 201
+#if FW_VERSION == 100 || (FW_VERSION >= 150 && FW_VERSION < 201)
 s32 sceDisplayWaitVblankStartCB(void) {
     s32 temp_v0;
     u32 temp_s1;

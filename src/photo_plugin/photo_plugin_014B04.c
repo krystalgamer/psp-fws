@@ -1,3 +1,4 @@
+/* lang: c++ */
 #include "common.h"
 #include "photo_plugin_decls.h"
 
@@ -29,7 +30,7 @@ void func_00015390(void) {
         }
     } else {
         func_0000B8A4();
-        scePaf_C5DBD12F(D_00032F68, scePaf_2898DB9A(D_00032F68));
+        _ZN3paf4View12PageActivateEPv(D_00032F68, _ZNK3paf4View10GetTopPageEv(D_00032F68));
     }
 }
 #endif

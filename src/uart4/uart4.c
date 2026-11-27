@@ -5,7 +5,7 @@
 
 INCLUDE_ASM("nonmatchings/uart4", func_00000000);
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/uart4", func_00000088);
 
 INCLUDE_ASM("nonmatchings/uart4", func_00000110);

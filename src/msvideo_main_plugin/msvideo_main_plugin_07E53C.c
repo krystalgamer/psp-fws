@@ -1,3 +1,4 @@
+/* lang: c++ */
 #include "common.h"
 #include "msvideo_main_plugin_decls.h"
 
@@ -112,8 +113,8 @@ s32 func_0007ED7C(struct Unk_func_0007ED7C_0 *arg0) {
     } else {
         do {
             if (func_000815B8(arg0, var_s2) != NULL) {
-                temp_s0 = func_000815B8(arg0, var_s2);
-                if (temp_s0->unk29C != ((u8 *)func_000815B8(arg0, var_s2) + 0x180)) {
+                temp_s0 = (Unk_func_0007ED7C_temp_s0*) (func_000815B8(arg0, var_s2));
+                if ((s32) temp_s0->unk29C != (s32) (((u8 *)func_000815B8(arg0, var_s2) + 0x180))) {
                     func_000A4400(func_000815B8(arg0, var_s2)->unk29C);
                 }
                 func_000815B8(arg0, var_s2)->unk29C = 0;
@@ -133,7 +134,7 @@ void func_0007EF3C(struct Unk_func_0007EF3C_0 *arg0) {
 
     arg0->unk0 = 8;
     var_s1 = 0;
-    func_0007EFF4(&arg0->unk8);
+    func_0007EFF4((Unk_func_0007EFF4_0*) &arg0->unk8);
     arg0->unk0 = (s32) (arg0->unk0 + arg0->unk8);
     if (arg0->unk34 == 0) {
 

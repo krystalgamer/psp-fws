@@ -1,3 +1,4 @@
+/* lang: c++ */
 #include "common.h"
 #include "music_main_plugin_decls.h"
 
@@ -123,11 +124,11 @@ INCLUDE_RODATA("nonmatchings/music_main_plugin_02EE90", D_0009C970);
 
 INCLUDE_RODATA("nonmatchings/music_main_plugin_02EE90", D_0009C9D0);
 
-M2C_UNK *func_0002FDDC(void) {
+const char *func_0002FDDC(void) {
     return "ms0:";
 }
 
-M2C_UNK *func_0002FDE8(void) {
+const char *func_0002FDE8(void) {
     return "/HIFI";
 }
 
@@ -7864,7 +7865,7 @@ INCLUDE_ASM("nonmatchings/music_main_plugin_02EE90", func_00059BC0);
 INCLUDE_ASM("nonmatchings/music_main_plugin_02EE90", func_00059C68);
 
 void func_00059C9C(void) {
-    D_000A5248 = &D_000A5220;
+    D_000A5248 = (Unk_D_000A5248*) &D_000A5220;
     D_000A524C.unk0 = 0;
     D_000A524C.unk14 = 3;
     D_000A524C.unk18 = 1;
@@ -7941,7 +7942,7 @@ s32 func_0005A3DC(s32 arg0) {
 
     var_v0 = 0;
     if (arg0 != D_000A524C.unk18) {
-        func_0005B0A8(arg0, &sp0, &sp4);
+        func_0005B0A8(arg0, (s32*) &sp0, &sp4);
         var_v0 = D_000A5248->unkC(sp4, sp0);
         if (var_v0 == 0) {
             D_000A524C.unk18 = arg0;

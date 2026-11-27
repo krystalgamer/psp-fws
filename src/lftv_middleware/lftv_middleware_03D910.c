@@ -1,3 +1,4 @@
+/* lang: c++ */
 /* cflags: -Os -frename-registers */
 #include "common.h"
 #include "lftv_middleware_decls.h"
@@ -34,7 +35,7 @@ INCLUDE_ASM("nonmatchings/lftv_middleware_03D910", func_0003D9AC);
 #else
 void func_0003D9AC(s32 arg0) {
     if (arg0 != 0) {
-        _ZdaPv();
+        _ZdaPv(arg0);
     }
 }
 #endif
@@ -672,7 +673,7 @@ s32 func_00041DB0(struct Unk_func_00041DB0_0 *arg0) {
     arg0->unk4 = 0;
     temp_s0 = func_00044718((s32) ((u8 *)arg0 + 8));
     temp_s1 = temp_s0 + func_000411C8((s32) ((u8 *)arg0 + 0x1C));
-    return temp_s1 + func_0003DF2C((u8 *)arg0 + 0x34) + 2;
+    return temp_s1 + func_0003DF2C((Unk_func_0003DF2C_0*) ((u8 *)arg0 + 0x34)) + 2;
 }
 
 INCLUDE_ASM("nonmatchings/lftv_middleware_03D910", func_00041E0C);
@@ -824,22 +825,22 @@ INCLUDE_ASM("nonmatchings/lftv_middleware_03D910", func_00043D5C);
 INCLUDE_ASM("nonmatchings/lftv_middleware_03D910", func_00043D8C);
 
 void func_00043DBC(M2C_UNK **arg0, s32 arg1, s32 arg2) {
-    func_0004171C(arg0, arg1, arg2);
+    func_0004171C((Unk_func_0004171C_0*) arg0, arg1, arg2);
     *arg0 = &D_00056B90;
 }
 
 void func_00043DEC(M2C_UNK **arg0, s32 arg1, s32 arg2) {
-    func_0004171C(arg0, arg1, arg2);
+    func_0004171C((Unk_func_0004171C_0*) arg0, arg1, arg2);
     *arg0 = &D_00056B90;
 }
 
 void func_00043E1C(M2C_UNK **arg0, s32 arg1, s32 arg2, s32 arg3) {
-    func_000417FC(arg0, arg1, arg2, arg3);
+    func_000417FC((Unk_func_000417FC_0*) arg0, arg1, arg2, arg3);
     *arg0 = &D_00056B90;
 }
 
 void func_00043E4C(M2C_UNK **arg0, s32 arg1, s32 arg2, s32 arg3) {
-    func_000417FC(arg0, arg1, arg2, arg3);
+    func_000417FC((Unk_func_000417FC_0*) arg0, arg1, arg2, arg3);
     *arg0 = &D_00056B90;
 }
 
@@ -849,24 +850,24 @@ INCLUDE_ASM("nonmatchings/lftv_middleware_03D910", func_00043EAC);
 
 void func_00043EDC(M2C_UNK **arg0) {
     *arg0 = &D_00056B90;
-    func_00041BC4(arg0);
+    func_00041BC4((Unk_func_00041BC4_0*) arg0);
 }
 
 void func_00043F04(M2C_UNK **arg0) {
     *arg0 = &D_00056B90;
-    func_00041BC4(arg0);
+    func_00041BC4((Unk_func_00041BC4_0*) arg0);
 }
 
 INCLUDE_ASM("nonmatchings/lftv_middleware_03D910", func_00043F2C);
 
 void func_00043F64(struct Unk_func_00043F64_0 *arg0) {
     arg0->unk4 = 0;
-    func_00041CEC(arg0);
+    func_00041CEC((Unk_func_00041CEC_0*) arg0);
 }
 
 void func_00043F84(struct Unk_func_00043F84_0 *arg0) {
     arg0->unk4 = 0;
-    func_00041CF8(arg0);
+    func_00041CF8((Unk_func_00041CF8_0*) arg0);
 }
 
 INCLUDE_ASM("nonmatchings/lftv_middleware_03D910", func_00043FA4);
@@ -874,19 +875,19 @@ INCLUDE_ASM("nonmatchings/lftv_middleware_03D910", func_00043FA4);
 INCLUDE_ASM("nonmatchings/lftv_middleware_03D910", func_00043FD4);
 
 void func_00044004(M2C_UNK **arg0, s32 arg1, s32 arg2) {
-    func_0004171C(arg0, arg1, arg2);
+    func_0004171C((Unk_func_0004171C_0*) arg0, arg1, arg2);
     *arg0 = &D_00056BA8;
 }
 
 void func_00044034(M2C_UNK **arg0, s32 arg1, s32 arg2) {
-    func_0004171C(arg0, arg1, arg2);
+    func_0004171C((Unk_func_0004171C_0*) arg0, arg1, arg2);
     *arg0 = &D_00056BA8;
 }
 
 INCLUDE_ASM("nonmatchings/lftv_middleware_03D910", func_00044064);
 
 void func_00044094(M2C_UNK **arg0, s32 arg1, s32 arg2, s32 arg3) {
-    func_000417FC(arg0, arg1, arg2, arg3);
+    func_000417FC((Unk_func_000417FC_0*) arg0, arg1, arg2, arg3);
     *arg0 = &D_00056BA8;
 }
 
@@ -898,7 +899,7 @@ INCLUDE_ASM("nonmatchings/lftv_middleware_03D910", func_00044124);
 
 void func_0004414C(M2C_UNK **arg0) {
     *arg0 = &D_00056BA8;
-    func_00041BC4(arg0);
+    func_00041BC4((Unk_func_00041BC4_0*) arg0);
 }
 
 INCLUDE_ASM("nonmatchings/lftv_middleware_03D910", func_00044174);
@@ -965,12 +966,12 @@ INCLUDE_ASM("nonmatchings/lftv_middleware_03D910", func_00044718);
 INCLUDE_ASM("nonmatchings/lftv_middleware_03D910", func_00044770);
 
 void func_00044844(M2C_UNK **arg0, s32 arg1, s32 arg2, s32 arg3) {
-    func_000442B0(arg0, arg1, arg2, arg3);
+    func_000442B0((Unk_func_000442B0_0*) arg0, arg1, arg2, arg3);
     *arg0 = &D_00056BD8;
 }
 
 void func_00044874(M2C_UNK **arg0, s32 arg1, s32 arg2, s32 arg3) {
-    func_000442B0(arg0, arg1, arg2, arg3);
+    func_000442B0((Unk_func_000442B0_0*) arg0, arg1, arg2, arg3);
     *arg0 = &D_00056BD8;
 }
 
@@ -999,12 +1000,12 @@ s32 func_0004495C(struct Unk_func_0004495C_0 *arg0) {
 }
 
 void func_00044968(M2C_UNK **arg0, s32 arg1, s32 arg2, s32 arg3) {
-    func_000442B0(arg0, arg1, arg2, arg3);
+    func_000442B0((Unk_func_000442B0_0*) arg0, arg1, arg2, arg3);
     *arg0 = &D_00056BC0;
 }
 
 void func_00044998(M2C_UNK **arg0, s32 arg1, s32 arg2, s32 arg3) {
-    func_000442B0(arg0, arg1, arg2, arg3);
+    func_000442B0((Unk_func_000442B0_0*) arg0, arg1, arg2, arg3);
     *arg0 = &D_00056BC0;
 }
 

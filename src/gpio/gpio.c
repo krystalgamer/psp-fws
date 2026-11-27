@@ -8,6 +8,10 @@ INCLUDE_ASM("nonmatchings/gpio", sceGpioGetPortMode);
 
 INCLUDE_RODATA("nonmatchings/gpio", D_00000DE4);
 
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/gpio", func_000001A4);
+#endif
+
 #if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/gpio", D_00000DC8);
 
@@ -20,7 +24,9 @@ INCLUDE_RODATA("nonmatchings/gpio", D_00000DEC);
 INCLUDE_RODATA("nonmatchings/gpio", D_00000E18);
 #endif
 
+#if FW_VERSION == 100 || FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/gpio", sceGpioSetIntrMode);
+#endif
 
 INCLUDE_ASM("nonmatchings/gpio", sceGpioGetIntrMode);
 
@@ -56,7 +62,11 @@ s32 sceGpioSuspend(void) {
     return 0;
 }
 
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/gpio", func_000004CC);
+#else
 INCLUDE_ASM("nonmatchings/gpio", sceGpioResume);
+#endif
 
 INCLUDE_ASM("nonmatchings/gpio", sceGpioPortRead);
 

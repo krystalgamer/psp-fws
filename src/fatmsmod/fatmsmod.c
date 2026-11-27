@@ -1,3 +1,4 @@
+/* cflags[271-352]: -O2 -mext */
 #include "common.h"
 #include "fatmsmod_decls.h"
 #include "k1.h"
@@ -252,7 +253,36 @@ s32 check_reload_status(s32 checkMedia, FatmsPrivate *priv) {
 }
 #endif
 
-#if FW_VERSION == 151 || (FW_VERSION >= 201 && FW_VERSION < 300)
+#if FW_VERSION == 201
+s32 check_reload_status(s32 checkMedia, FatmsPrivate *priv) {
+    s32 ret = 0;
+    s32 intr;
+
+    intr = sceKernelCpuSuspendIntr();
+    if (D_0002B8C8 == -0xF) {
+        sceKernelCpuResumeIntr(intr);
+        Kprintf("prfile_mod.c:%s:Formatting!!\n", "check_reload_status");
+        return -2;
+    }
+    if (checkMedia != 0 && D_0002BA90[0] == 0x1022) {
+        ret = -1;
+    }
+    sceKernelCpuResumeIntr(intr);
+    if (ret < 0) {
+        return ret;
+    }
+    ret = 0;
+    if (priv != NULL) {
+        ret = check_heap_alive(priv);
+        if (ret < 0) {
+            return -0x3EA;
+        }
+    }
+    return ret;
+}
+#endif
+
+#if FW_VERSION == 151 || (FW_VERSION >= 250 && FW_VERSION < 300)
 INCLUDE_ASM("nonmatchings/fatmsmod", check_reload_status);
 #endif
 
@@ -260,7 +290,37 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_00000134);
 
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00000264);
 
-#if FW_VERSION >= 151
+#if FW_VERSION >= 151 && FW_VERSION < 260
+void *get_heap(SceUID *heap, SceSize size) {
+    s32 intr;
+    FatmsHeapEnt *p;
+    void *mem;
+
+    intr = sceKernelCpuSuspendIntr();
+    p = D_0001B298;
+    while (p->mem != NULL) {
+        p++;
+        if (p > &D_0001B298[128]) {
+            sceKernelCpuResumeIntr(intr);
+            return NULL;
+        }
+    }
+    p->mem = (void *)-1;
+    sceKernelCpuResumeIntr(intr);
+    *heap = sceKernelCreateHeap(1, size, 1, D_00015B80);
+    if (*heap < 0) {
+        Kprintf("prfile_mod.c:%s:Cannot create heap:0x%x\n", "get_heap", *heap);
+        p->mem = NULL;
+        return NULL;
+    }
+    mem = sceKernelAllocHeapMemory(*heap, size);
+    p->mem = mem;
+    p->heap = *heap;
+    return mem;
+}
+#endif
+
+#if FW_VERSION >= 260
 INCLUDE_ASM("nonmatchings/fatmsmod", get_heap);
 #endif
 
@@ -961,6 +1021,7 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_0000203C);
 
 #if FW_VERSION < 151
 #if FW_VERSION >= 150
+
 s32 df_getstat(SceIoIob *iob, char *name, SceIoStat *stat, s32 arg) {
 #else
 s32 df_getstat(SceIoIob *iob, char *name, SceIoStat *stat) {
@@ -1260,65 +1321,29 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_000041B0);
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00004330);
 #endif
 
-#if FW_VERSION >= 201 && FW_VERSION < 260
-INCLUDE_ASM("nonmatchings/fatmsmod", func_0000322C);
-#endif
-
-#if (FW_VERSION >= 150 && FW_VERSION < 201) || (FW_VERSION >= 260 && FW_VERSION < 282)
+#if FW_VERSION >= 150 && FW_VERSION < 282
 void func_0000322C(void) {
     func_00000134();
 }
-#endif
 
-#if FW_VERSION >= 201 && FW_VERSION < 260
-INCLUDE_ASM("nonmatchings/fatmsmod", func_00003248);
-#endif
-
-#if (FW_VERSION >= 150 && FW_VERSION < 201) || (FW_VERSION >= 260 && FW_VERSION < 282)
 void func_00003248(void) {
     func_00000264();
 }
-#endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00003264);
-#endif
 
-#if FW_VERSION >= 201 && FW_VERSION < 260
-INCLUDE_ASM("nonmatchings/fatmsmod", func_00003298);
-#endif
-
-#if (FW_VERSION >= 150 && FW_VERSION < 201) || (FW_VERSION >= 260 && FW_VERSION < 282)
 void func_00003298(SceIoIob *iob) {
     df_close(iob);
 }
-#endif
 
-#if FW_VERSION >= 201 && FW_VERSION < 260
-INCLUDE_ASM("nonmatchings/fatmsmod", func_000032B4);
-#endif
-
-#if (FW_VERSION >= 150 && FW_VERSION < 201) || (FW_VERSION >= 260 && FW_VERSION < 282)
 void func_000032B4(s32 arg0, s32 arg1, s32 arg2) {
     df_read(arg0, arg1, arg2);
 }
-#endif
 
-#if FW_VERSION >= 201 && FW_VERSION < 260
-INCLUDE_ASM("nonmatchings/fatmsmod", func_000032D0);
-#endif
-
-#if (FW_VERSION >= 150 && FW_VERSION < 201) || (FW_VERSION >= 260 && FW_VERSION < 282)
 void func_000032D0(s32 arg0, s32 arg1, s32 arg2) {
     df_write(arg0, arg1, arg2);
 }
-#endif
 
-#if FW_VERSION >= 201 && FW_VERSION < 260
-INCLUDE_ASM("nonmatchings/fatmsmod", func_000032EC);
-#endif
-
-#if (FW_VERSION >= 150 && FW_VERSION < 201) || (FW_VERSION >= 260 && FW_VERSION < 282)
 void func_000032EC(void) {
     func_00000EF8();
 }
@@ -1340,19 +1365,11 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_00003370);
 INCLUDE_ASM("nonmatchings/fatmsmod", func_000033A4);
 
 INCLUDE_ASM("nonmatchings/fatmsmod", func_000033D8);
-#endif
 
-#if FW_VERSION >= 201 && FW_VERSION < 260
-INCLUDE_ASM("nonmatchings/fatmsmod", func_0000340C);
-#endif
-
-#if (FW_VERSION >= 150 && FW_VERSION < 201) || (FW_VERSION >= 260 && FW_VERSION < 282)
 void func_0000340C(SceIoIob *iob) {
     df_dclose(iob);
 }
-#endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00003428);
 
 INCLUDE_ASM("nonmatchings/fatmsmod", func_0000345C);
@@ -1364,13 +1381,7 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_000034C4);
 INCLUDE_ASM("nonmatchings/fatmsmod", func_000034F8);
 
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00003514);
-#endif
 
-#if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/fatmsmod", func_00003530);
-#endif
-
-#if FW_VERSION >= 150 && FW_VERSION < 201
 void func_00003530(s32 arg0) {
     func_00002778(arg0);
 }
@@ -2873,7 +2884,31 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_00009118);
 #endif
 
 #if FW_VERSION < 271
-INCLUDE_ASM("nonmatchings/fatmsmod", func_0000565C);
+s32 func_0000565C(void) {
+    s32 ret = 0;
+    s32 i;
+    char c1;
+    char c2;
+
+    for (i = 0; i < 0x103; i++) {
+        c1 = D_000276FC[i];
+        c2 = D_00027804[i];
+        if (c1 == 0 && c2 == 0) {
+            break;
+        }
+        if (c1 == 0 || c2 == 0) {
+            ret = 1;
+            break;
+        }
+        if (c1 != c2) {
+            if ((c1 != '\\' && c1 != '/') || (c2 != '\\' && c2 != '/')) {
+                ret = 1;
+                break;
+            }
+        }
+    }
+    return ret;
+}
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 271
@@ -3086,7 +3121,29 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_000070E0);
 
 #if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/fatmsmod", func_000072F0);
+#endif
 
+#if FW_VERSION < 271
+s32 func_0000764C(void) {
+    s32 n = 0;
+    s32 q;
+    char *p = D_00027B98;
+
+    while (*p != '\0') {
+        p += (func_0000A7C0((u8 *)p) != 0);
+        p++;
+        n++;
+    }
+    if (n != 0) {
+        q = n % 13;
+        n = n / 13 + (q != 0);
+        n++;
+    }
+    return n;
+}
+#endif
+
+#if FW_VERSION == 271
 INCLUDE_ASM("nonmatchings/fatmsmod", func_0000764C);
 #endif
 
@@ -3200,10 +3257,21 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_000078D8);
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00007A88);
 
 s32 func_00007BB0(s32 arg0) {
-    return ((arg0 - 2) << M2C_VFIELD(&D_0001BCC4, s32, 0x18)) + M2C_VFIELD(&D_0001BCC4, s32, 4);
+    return ((arg0 - 2) << D_0001BCC4.clusterShift) + D_0001BCC4.dataStart;
 }
 
-INCLUDE_ASM("nonmatchings/fatmsmod", func_00007BD4);
+u32 func_00007BD4(u32 sector) {
+    u32 n = 0;
+
+    if (sector < D_0001BCC4.dataStart) {
+        if (sector >= D_0001BCC4.rootStart) {
+            n = __builtin_allegrex_min(D_0001BCC4.dataStart - sector, D_0001BCC4.rootSectors);
+        }
+    } else {
+        n = D_0002790C.sectorsPerCluster - (sector - D_0001BCC4.dataStart) % D_0002790C.sectorsPerCluster;
+    }
+    return n;
+}
 
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00007C30);
 #endif
@@ -3219,9 +3287,89 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_00008028);
 #if FW_VERSION < 271
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00008314);
 
-INCLUDE_ASM("nonmatchings/fatmsmod", func_000085D4);
+s32 func_000085D4(u32 sector, u8 **buf) {
+    u32 first;
+    u32 end;
+    u32 over;
+    u32 count;
+    u8 *src;
+    u8 *dst;
+    u32 i;
+    u16 j;
 
-INCLUDE_ASM("nonmatchings/fatmsmod", func_000086E8);
+    end = sector - D_0002790C.fatStart + D_0001BCC4.cacheSectors;
+    first = sector;
+    if (end > D_0002790C.fatSectors) {
+        over = end - D_0002790C.fatSectors;
+        dst = *buf;
+        src = dst + (D_0001BCC4.cacheSectors - over) * D_0002790C.bytesPerSector;
+        sector -= over;
+        for (i = 0; i < over; i++) {
+            for (j = 0; j < D_0002790C.bytesPerSector; j++) {
+                *dst++ = *src++;
+            }
+        }
+        count = D_0001BCC4.cacheSectors - over;
+        *buf = dst;
+        D_000276E4->fatBufSector = sector;
+    } else {
+        count = D_0001BCC4.cacheSectors;
+        D_000276E4->fatBufSector = sector;
+    }
+    if (func_0000A714(*buf, first, count) == -1) {
+        D_000276E4->fatBufSector = -1;
+        return -1;
+    }
+    return 0;
+}
+
+s32 func_000086E8(u32 cl, u32 *next) {
+    u8 tmp[2];
+    u32 off;
+    u32 sector;
+    u8 *buf;
+    u8 *p;
+    u32 val;
+
+    *next = 0;
+    if (cl >= D_0001BCC4.clusterCount) {
+        return -1;
+    }
+    if (cl < 2) {
+        D_00019E04 = 0x800;
+        return -1;
+    }
+    if (func_00008314(cl, &off, &sector) == -1) {
+        return -1;
+    }
+    buf = D_000276E4->fatBuf;
+    if (off == D_0002790C.bytesPerSector * D_0001BCC4.cacheSectors - 1) {
+        tmp[0] = buf[off];
+        if (func_00009BF0() == -1) {
+            return -1;
+        }
+        sector++;
+        if (func_000085D4(sector, &buf) == -1) {
+            return -1;
+        }
+        tmp[1] = buf[0];
+        *next = (u16)(tmp[0] + (tmp[1] << 8));
+    } else {
+        p = buf + off;
+        val = (p[1] << 8) + p[0];
+        *next = val;
+        if (D_000276E4->flags & 0x1000) {
+            *next = val + ((p[3] << 24) + (p[2] << 16));
+        }
+    }
+    if (!(D_000276E4->flags & 0x9000)) {
+        if (cl & 1) {
+            *next = *next >> 4;
+        }
+        *next &= 0xFFF;
+    }
+    return 0;
+}
 
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00008878);
 
@@ -3265,9 +3413,28 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_00009DC0);
 #endif
 
 #if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/fatmsmod", func_00009F08);
+void func_00009F08(u16 *date, u16 *time) {
+    PfDate d;
+    PfTime t;
 
-INCLUDE_ASM("nonmatchings/fatmsmod", func_00009F90);
+    func_00006B10(&d, &t);
+    *date = ((d.year - 1980) << 9) | (d.month << 5) | d.day;
+    *time = (t.hour << 11) | (t.minute << 5) | (t.second / 2);
+}
+
+void func_00009F90(FatDirEnt *de, s8 create) {
+    u16 date;
+    u16 time;
+
+    func_00009F08(&date, &time);
+    de->wdate = date;
+    de->wtime = time;
+    if (create == 1) {
+        de->ctime = time;
+        de->cdate = date;
+    }
+    de->adate = date;
+}
 #endif
 
 #if FW_VERSION == 271
@@ -3428,7 +3595,17 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_0000AB38);
 #if FW_VERSION < 271
 INCLUDE_ASM("nonmatchings/fatmsmod", func_0000ABF8);
 
-INCLUDE_ASM("nonmatchings/fatmsmod", func_0000ACF8);
+s32 func_0000ACF8(void) {
+    if (!(D_000276E4->flags & 1)) {
+        D_00019E08 = 0xD;
+        return -1;
+    }
+    if (D_0002790C.bytesPerSector == 0) {
+        D_00019E08 = 0xD;
+        return -1;
+    }
+    return 0;
+}
 
 INCLUDE_ASM("nonmatchings/fatmsmod", func_0000AD4C);
 
@@ -3517,7 +3694,16 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_00012D24);
 #if FW_VERSION < 271
 INCLUDE_ASM("nonmatchings/fatmsmod", func_0000B440);
 
-INCLUDE_ASM("nonmatchings/fatmsmod", func_0000B50C);
+s32 func_0000B50C(s8 drive, u8 *index) {
+    drive = func_00004BBC(drive);
+    *index = drive - 'A';
+    if ((u8)(drive - 'A') >= D_00019E28.count) {
+        D_00019E08 = 0x16;
+        return -1;
+    }
+    D_00019E0C = drive;
+    return 0;
+}
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 271
@@ -3528,12 +3714,27 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_00012D40);
 void func_0000B57C(void) {
     D_000193FC = D_000193F8;
     func_00007718((s32) (&D_000193FC + 2), (s32) &D_00027804, 0x102);
-    D_00027908 = M2C_FIELD(D_000276E4, s32 *, 0x1C);
+    D_00027908 = D_000276E4->unk1C;
 }
 #endif
 
 #if FW_VERSION < 271
-INCLUDE_ASM("nonmatchings/fatmsmod", func_0000B5CC);
+s32 func_0000B5CC(void) {
+    s8 cur;
+
+    if (D_00019E0C != (s8)D_000193F8) {
+        cur = D_00019E0C;
+        D_00019E0C = D_000193F8;
+        D_000193F8 = cur;
+        if (func_00009FF4() == -1) {
+            D_000193F8 = cur;
+            D_00019E08 = D_00019E04;
+            return -1;
+        }
+        D_000193F8 = D_00019E0C;
+    }
+    return 0;
+}
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 271
@@ -3735,8 +3936,8 @@ void func_0000BAF8(u32 arg0) {
 
     temp_a1 = M2C_FIELD(D_0003F728, u32 *, 0x40);
     if ((temp_a1 < arg0) && (arg0 < (u32) (temp_a1 + D_0002EF50))) {
-        M2C_VFIELD(&D_00027934, s32, 0x5C) = 0;
-        M2C_VFIELD(&D_00027934, s32, 0x40) = 0;
+        D_00027934.sector = 0;
+        D_00027934.unk4C = 0;
     }
 }
 #endif
@@ -3745,17 +3946,39 @@ void func_0000BAF8(u32 arg0) {
 void func_0000BAF8(u32 arg0) {
     u32 temp_a1;
 
-    temp_a1 = M2C_FIELD(D_00027800, u32 *, 0x30);
+    temp_a1 = D_00027800->sector;
     if ((temp_a1 < arg0) && (arg0 < (u32) (temp_a1 + D_0001BCE4))) {
-        M2C_VFIELD(&D_00027934, s32, 0x4C) = 0;
-        M2C_VFIELD(&D_00027934, s32, 0x30) = 0;
+        D_00027934.sector = 0;
+        D_00027934.unk4C = 0;
     }
 }
 #endif
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/fatmsmod", func_0000BB3C);
+#if FW_VERSION < 271
+s32 func_0000BB3C(const u8 *end, const u8 *p) {
+    s32 single = 0;
 
+    while (1) {
+        if (p > end) {
+            break;
+        }
+        if (func_0000A7C0(p) == 1) {
+            single = 0;
+            p += 2;
+        } else {
+            p++;
+            single = 1;
+        }
+    }
+    return single;
+}
+#endif
+
+#if FW_VERSION == 271
+INCLUDE_ASM("nonmatchings/fatmsmod", func_0000BB3C);
+#endif
+
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/fatmsmod", func_0000BBAC);
 #endif
 
@@ -3790,10 +4013,23 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_00013B74);
 #endif
 
 #if FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/fatmsmod", func_0000BC38);
+void func_0000BC38(s32 a0, const char *path) {
+    func_0000BC84();
+    D_0001BCE8.unk0 = a0;
+    func_00007718(D_0001BCE8.path, path, sizeof(D_0001BCE8.path));
+}
+
+void func_0000BC84(void) {
+    if (D_00027800->sector < D_0001BCC4.dataStart) {
+        D_0001BCE8.unk4 = 0;
+    } else {
+        D_0001BCE8.unk4 = (D_00027800->sector - D_0001BCC4.dataStart) / D_0002790C.sectorsPerCluster + 2;
+    }
+    D_0001BCE8.unk8 = D_00027800->sector;
+}
 #endif
 
-#if FW_VERSION < 271
+#if FW_VERSION >= 201 && FW_VERSION < 271
 INCLUDE_ASM("nonmatchings/fatmsmod", func_0000BC84);
 #endif
 
@@ -3812,7 +4048,12 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_000141A0);
 #endif
 
 #if FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/fatmsmod", func_0000BCF0);
+s32 func_0000BCF0(void) {
+    if (D_0001BCE8.unk0 != 0 || D_0001BCE8.unk4 != 0 || D_0001BCE8.unk8 != 0 || D_0001BCE8.path[0] != 0) {
+        return 1;
+    }
+    return 0;
+}
 #endif
 
 #if FW_VERSION < 271
@@ -3916,7 +4157,24 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_00016270);
 #endif
 
 #if FW_VERSION < 271
-INCLUDE_ASM("nonmatchings/fatmsmod", func_0000C7E8);
+s32 func_0000C7E8(s8 drive, u32 mode) {
+    s8 idx;
+
+    func_0000A128();
+    if (func_0000B50C(drive, (u8 *)&idx) == -1) {
+        return -1;
+    }
+    if (!(D_00027CC8[idx]->vol->flags & 1)) {
+        D_00019E08 = 0xD;
+        return -1;
+    }
+    if (mode >= 2) {
+        D_00019E08 = 0x16;
+        return -1;
+    }
+    D_00027DD0[idx] = mode;
+    return 0;
+}
 #endif
 
 #if FW_VERSION >= 282
@@ -4449,7 +4707,25 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_0000D950);
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00018234);
 #endif
 
+#if FW_VERSION < 271
+s32 func_00018570(s8 drive) {
+    u8 buf[16];
+
+    if (func_0000B50C(drive, buf) == -1) {
+        return -1;
+    }
+    if (func_0000AAC4() == -1) {
+        return -1;
+    }
+    if (func_0000ACF8() == -1) {
+        func_0000B5CC();
+        return -1;
+    }
+    return 0;
+}
+#else
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00018570);
+#endif
 
 #if FW_VERSION == 271
 INCLUDE_ASM("nonmatchings/fatmsmod", func_000185E4);
@@ -4495,7 +4771,7 @@ void func_00019A48(s32 arg0) {
 INCLUDE_ASM("nonmatchings/fatmsmod", func_0000E318);
 
 s32 func_0000E5E8(void) {
-    D_00019E28 = 0;
+    D_00019E28.word = 0;
     return 0;
 }
 
@@ -4681,13 +4957,79 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_00010C6C);
 
 #if FW_VERSION < 271
 INCLUDE_ASM("nonmatchings/fatmsmod", func_0000F7D8);
+#endif
 
-INCLUDE_ASM("nonmatchings/fatmsmod", func_0000F8A4);
+#if FW_VERSION < 201
+s32 func_0000F8A4(PfFile *fp) {
+    s32 i;
 
-INCLUDE_ASM("nonmatchings/fatmsmod", func_0000F8F8);
+    for (i = 0; i < 10; i++) {
+        if (fp == &D_0001BEFC[i]) {
+            break;
+        }
+    }
+    if (i == 10 || fp->flags >= 0) {
+        return -1;
+    }
+    if (fp->pos < fp->size) {
+        return 0;
+    }
+    return 1;
+}
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 271
+s32 func_0000F8A4(PfFile *fp) {
+    s32 i;
+
+    for (i = 0; i < 10; i++) {
+        if (fp == &D_0002F578[i]) {
+            break;
+        }
+    }
+    if (i == 10 || fp->flags >= 0) {
+        return -1;
+    }
+    if (fp->pos < fp->size) {
+        return 0;
+    }
+    return 1;
+}
+#endif
+
+#if FW_VERSION < 201
+s32 func_0000F8F8(PfFile *fp) {
+    s32 i;
+
+    func_0000A128();
+    for (i = 0; i < 10; i++) {
+        if (fp == &D_0001BEFC[i]) {
+            break;
+        }
+    }
+    if (i == 10 || fp->flags >= 0) {
+        return -1;
+    }
+    return fp->unk50;
+}
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 271
+s32 func_0000F8F8(PfFile *fp) {
+    s32 i;
+
+    func_0000A128();
+    for (i = 0; i < 10; i++) {
+        if (fp == &D_0002F578[i]) {
+            break;
+        }
+    }
+    if (i == 10 || fp->flags >= 0) {
+        return -1;
+    }
+    return fp->unk50;
+}
+
 INCLUDE_ASM("nonmatchings/fatmsmod", func_0001BEB0);
 #endif
 
@@ -4720,7 +5062,18 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_0001C594);
 #if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/fatmsmod", func_0000F95C);
 
-INCLUDE_ASM("nonmatchings/fatmsmod", func_0000FD04);
+void func_0000FD04(PfFile *fp) {
+    fp->flags = 0x80;
+    fp->unk54++;
+    fp->unk30 = 0;
+    fp->unk4C = 0;
+    fp->unk50 = 0;
+    fp->pos = 0;
+    fp->unk3C = 0;
+    fp->unk24 = 0;
+    fp->unk28 = 0;
+    fp->unk40 = 0;
+}
 
 INCLUDE_ASM("nonmatchings/fatmsmod", func_0000FD3C);
 
@@ -4870,7 +5223,24 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_0001F554);
 #endif
 
 #if FW_VERSION < 271
-INCLUDE_ASM("nonmatchings/fatmsmod", func_00012710);
+s32 func_00012710(s32 mode) {
+    s32 ret;
+
+    if (mode == 1) {
+        if (D_00019E04 == 0) {
+            D_00019E04 = 0x11;
+        }
+        D_00019E08 = D_00019E04;
+        func_0000B650();
+        return -1;
+    }
+    if (D_00027934.de.attr & 1) {
+        D_00019E08 = 0xD;
+        func_0000B650();
+        return -1;
+    }
+    return 0;
+}
 
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00012788);
 #endif

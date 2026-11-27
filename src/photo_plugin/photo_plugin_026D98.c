@@ -1,3 +1,4 @@
+/* lang: c++ */
 /* cflags: -Os */
 #include "common.h"
 #include "photo_plugin_decls.h"
@@ -128,7 +129,7 @@ INCLUDE_ASM("nonmatchings/photo_plugin_026D98", func_00028814);
 
 #if FW_VERSION >= 350
 s32 func_000288C0(void) {
-    return scePaf_723D0C80() != 0;
+    return Job_isCanceled() != 0;
 }
 #endif
 

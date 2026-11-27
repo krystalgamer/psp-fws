@@ -4,6 +4,12 @@
 #include "common.h"
 #include "m2c_macros.h"
 
+#ifdef __cplusplus
+#include "paf.h"
+#include "vsh.h"
+extern "C" {
+#endif
+
 struct Unk_func_00005C88_temp_v0_2 {
     u8 pad0[0xC];
     M2C_UNK (*unkC)(M2C_UNK, M2C_UNK *, M2C_UNK, M2C_UNK);
@@ -219,11 +225,11 @@ extern M2C_UNK func_00006B7C;
 extern M2C_UNK func_00006F0C;
 extern M2C_UNK func_00007058;
 
-M2C_UNK InputDevice_PspPad_Unlock();
+M2C_UNK InputDevice_PspPad_Unlock(...);
 M2C_UNK _ZN11PageManager13ReturnTopmenuEi(M2C_UNK *, M2C_UNK);
-M2C_UNK _ZN11PageManager4ExitEv();
-M2C_UNK _ZN11PageManager5ClearEv();
-M2C_UNK _ZN11PageManagerC2Ei();
+M2C_UNK _ZN11PageManager4ExitEv(void);
+M2C_UNK _ZN11PageManager5ClearEv(void);
+M2C_UNK _ZN11PageManagerC2Ei(void *self, s32);
 M2C_UNK _ZN3paf4View12PageActivateEPKc(s32, s32);
 s32 _ZN3paf4View4FindEPKc(M2C_UNK *);
 M2C_UNK _ZN3paf4View8PageOpenEPKcii(s32, s32, M2C_UNK, M2C_UNK);
@@ -235,7 +241,7 @@ M2C_UNK _ZN3vsh25ShowButtonNavigation_BackEb(M2C_UNK);
 M2C_UNK _ZN3vsh26ShowButtonNavigation_EnterEb(M2C_UNK);
 void *_ZNK3paf4View12GetInterfaceEi(s32, M2C_UNK);
 M2C_UNK _ZNK3paf4View8PageRootEPKc(s32);
-M2C_UNK _ZdlPv();
+M2C_UNK _ZdlPv(void *);
 s32 func_000004E8(s32 arg0);
 void func_00000510(void);
 void func_0000052C(void);
@@ -261,9 +267,9 @@ void func_00000958(void);
 void func_00000978(s32 *arg0, s32 arg1);
 void func_00000998(s32 *arg0, s32 arg1);
 void func_000009B8(s32 *arg0, s32 arg1);
-M2C_UNK func_00000A58();
-M2C_UNK func_00000A78();
-M2C_UNK func_00000AA8();
+M2C_UNK func_00000A58(...);
+M2C_UNK func_00000A78(...);
+M2C_UNK func_00000AA8(...);
 void func_00000BC8(void);
 s32 func_00000C20(s32, s32);
 void func_00000CCC(void);
@@ -309,7 +315,7 @@ M2C_UNK func_00003F78(s32, s32, s32);
 void func_0000403C(M2C_UNK **arg0);
 void func_000040DC(M2C_UNK **arg0);
 void func_0000412C(M2C_UNK **arg0);
-M2C_UNK func_000042D8();
+M2C_UNK func_000042D8(...);
 void func_000043D4(void);
 void func_00004638(void);
 void func_00005C88(void);
@@ -322,7 +328,7 @@ void func_0000610C(void);
 void func_0000612C(void *arg0);
 void func_000062D4(void);
 void func_000062F0(s32 arg0, s32 arg1);
-M2C_UNK func_00006340();
+M2C_UNK func_00006340(...);
 M2C_UNK func_0000636C(s32, s32, s32);
 void func_00006580(void);
 void func_00006584(void);
@@ -340,8 +346,8 @@ s32 func_00006F48(void);
 void func_00007024(s32 arg0);
 s32 func_000071AC(s32);
 void func_0000731C(s32 *arg0, s32 arg1);
-void func_000073D4(void *arg0);
-void func_0000740C(void *arg0);
+void func_000073D4(void *arg0, s32 arg1);
+void func_0000740C(void *arg0, s32 arg1);
 s32 func_0000744C(s32);
 s32 func_00007490(s32);
 void func_000074E0(void *arg0, s32 arg1);
@@ -351,7 +357,7 @@ void func_000075DC(struct Unk_func_000075DC_0 *arg0);
 s32 func_000075F4(void *arg0);
 void ***func_00007638(void ***arg0, struct Unk_func_00007638_1 *arg1, void **arg2);
 s32 func_00007678(s32, s32);
-M2C_UNK func_000076A0();
+M2C_UNK func_000076A0(...);
 void func_000076CC(void);
 void func_00007720(void);
 void func_00007740(void);
@@ -374,15 +380,15 @@ s32 func_00007E08(void);
 void func_00007E98(void);
 void func_00007EB8(void);
 void func_00007F88(s32 *arg0, s32 arg1);
-M2C_UNK func_00008020();
-void func_00008040(struct Unk_func_00008040_0 *arg0);
-void func_00008078(struct Unk_func_00008078_0 *arg0);
+M2C_UNK func_00008020(...);
+void func_00008040(struct Unk_func_00008040_0 *arg0, s32 arg1);
+void func_00008078(struct Unk_func_00008078_0 *arg0, s32 arg1);
 void func_000080FC(struct Unk_func_000080FC_0 *arg0);
-M2C_UNK func_00008120();
+M2C_UNK func_00008120(...);
 void func_00008160(struct Unk_func_00008160_0 *arg0, s32 arg1);
 void func_00008180(struct Unk_func_00008180_0 *arg0);
 s32 func_000081A4(s32);
-s32 func_000081FC();
+s32 func_000081FC(...);
 s32 func_00008274(struct Unk_func_00008274_0 *arg0);
 s32 func_00008458(struct Unk_func_00008458_0 *arg0);
 s32 func_00008460(struct Unk_func_00008460_0 *arg0);
@@ -411,33 +417,26 @@ s32 func_0000B43C(s32, s32);
 void func_0000B53C(void);
 void func_0000B55C(void);
 s32 func_0000F620(s32, s32, s32, s32);
-M2C_UNK func_0000FC3C();
+M2C_UNK func_0000FC3C(...);
 void func_0001040C(void);
 void func_00010788(s32 arg0, s32 arg1);
-M2C_UNK func_00010A38();
+M2C_UNK func_00010A38(...);
 s32 module_stop(void);
 M2C_UNK scePaf_39E62C88(s32, s32, M2C_UNK, M2C_UNK);
-M2C_UNK scePaf_4729E549();
-M2C_UNK scePaf_8B38372A(s32);
-M2C_UNK scePaf_A013540A(s32, s32);
-M2C_UNK scePaf_CD216C47(s32);
-M2C_UNK scePaf_F5001144(void *);
 M2C_UNK sceVshCommonGui_57F57F40(s32);
-M2C_UNK sceVshCommonGui_891DD627(M2C_UNK);
-M2C_UNK sceVshCommonGui_F5A16B4D();
 M2C_UNK sceVshCommonUtil_0587F20C(M2C_UNK *, M2C_UNK, M2C_UNK);
-M2C_UNK sceVshCommonUtil_21EF453A(M2C_UNK *, s32);
 M2C_UNK sceVshCommonUtil_622815DD(M2C_UNK *, M2C_UNK *);
 M2C_UNK sceVshCommonUtil_8584376D(M2C_UNK *, s32);
-M2C_UNK sceVshCommonUtil_951BC384(M2C_UNK *, M2C_UNK *);
-M2C_UNK sce_paf_private_free();
+M2C_UNK sce_paf_private_free(...);
 M2C_UNK sce_paf_private_free2(void *);
-M2C_UNK sce_paf_private_snprintf(M2C_UNK *, M2C_UNK, M2C_UNK *);
+M2C_UNK sce_paf_private_snprintf(M2C_UNK *, M2C_UNK, const char *);
 s32 sce_paf_private_strlen(s32);
 M2C_UNK sce_paf_private_strncpy(M2C_UNK *, s32, M2C_UNK);
 s32 sce_paf_private_wcslen(s32);
-M2C_UNK vsh_1122D59B();
 M2C_UNK vsh_B55C095C(M2C_UNK *);
-M2C_UNK vsh_C7D1D06C();
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

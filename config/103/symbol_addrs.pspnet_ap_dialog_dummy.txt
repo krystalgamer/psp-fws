@@ -1,0 +1,20 @@
+// shared names (tools/add_version.py) begin
+D_00000980 = 0x000009A0; // rom:0xA20
+D_00000990 = 0x000009B0;
+D_00000804 = 0x000009B4;
+D_00000808 = 0x000009B8;
+D_0000080C = 0x000009BC;
+sceNetApDialogDummyConnect = 0x00000000; // type:func rom:0x80
+sceNetApDialogDummyInit = 0x000000B8; // type:func rom:0x138
+sceNetApDialogDummyTerm = 0x00000158; // type:func rom:0x1D8
+sceNetApDialogDummyGetState = 0x000001B0; // type:func rom:0x230
+module_start = 0x00000560; // type:func rom:0x5E0
+module_stop = 0x00000568; // type:func rom:0x5E8
+sceNetApctlConnect = 0x00000818; // type:func rom:0x898
+sceNetApctlGetState = 0x00000820; // type:func rom:0x8A0
+sceNetApctlAddHandler = 0x00000828; // type:func rom:0x8A8
+sceNetApctlDelHandler = 0x00000830; // type:func rom:0x8B0
+sceUtilityCreateNetParam = 0x00000838; // type:func rom:0x8B8
+sceUtilityDeleteNetParam = 0x00000840; // type:func rom:0x8C0
+sceUtilitySetNetParam = 0x00000848; // type:func rom:0x8C8
+// shared names (tools/add_version.py) end

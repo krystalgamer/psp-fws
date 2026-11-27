@@ -4,6 +4,12 @@
 #include "common.h"
 #include "m2c_macros.h"
 
+#ifdef __cplusplus
+#include "paf.h"
+#include "vsh.h"
+extern "C" {
+#endif
+
 struct Unk_func_00000F3C_temp_v0 {
     u8 pad0[0x4];
     M2C_UNK (*unk4)(M2C_UNK *, M2C_UNK);
@@ -258,26 +264,26 @@ extern M2C_UNK func_00000FC8;
 extern M2C_UNK func_00000FF8;
 extern M2C_UNK func_0001F18C;
 
-s32 Job_isCanceled();
+s32 Job_isCanceled(...);
 s32 _ZN3paf4View4FindEPKc(M2C_UNK *);
 M2C_UNK _ZN3paf4View6UnloadEPS0_PFvPKcE(s32, M2C_UNK);
 M2C_UNK _ZN3paf4View8PageOpenEPKcii(s32, M2C_UNK *, M2C_UNK, M2C_UNK);
 s32 _ZN3paf6Module12SetInterfaceEiPv(s32, s32, s32);
 M2C_UNK _ZN3paf8PhWidget13UpdateCamerasEv(void **);
 void **_ZN3paf8PhWidget9FindChildEPKci(s32, M2C_UNK *, M2C_UNK);
-M2C_UNK _ZN3paf8PhWidgetD2Ev();
+M2C_UNK _ZN3paf8PhWidgetD2Ev(void);
 s32 _ZN3vsh10FixedAlloc4LockEPKc(s32, s32);
 M2C_UNK _ZN3vsh10FixedAlloc6UnlockEPKc(s32, s32);
-s32 _ZN3vsh10FixedAlloc8InstanceEv();
-M2C_UNK _ZN3vsh12BusyIcon_DecEv();
+s32 _ZN3vsh10FixedAlloc8InstanceEv(void);
+M2C_UNK _ZN3vsh12BusyIcon_DecEv(void);
 void *_ZNK3paf4View12GetInterfaceEi(s32, M2C_UNK);
-M2C_UNK _ZdaPv();
+M2C_UNK _ZdaPv(void *);
 M2C_UNK _ZdlPv(M2C_UNK **);
 s32 _Znaj(s32, s32);
 s32 *_Znwj(M2C_UNK);
 void func_0000015C(s32 arg0);
 void func_00000318(void);
-M2C_UNK func_0000046C();
+M2C_UNK func_0000046C(...);
 s32 func_000009D4(void);
 void func_00000A04(s32 arg0);
 void func_00000A54(s32 arg0);
@@ -292,7 +298,7 @@ void func_00001000(void);
 void func_00001050(void);
 void func_00001074(void);
 void func_00001080(void);
-void func_00001140();
+void func_00001140(...);
 void func_000011A0(void);
 M2C_UNK func_000011C4(M2C_UNK, M2C_UNK);
 void func_00001250(void);
@@ -303,9 +309,9 @@ void func_00001340(s32 arg0, s32 arg1);
 void func_00001390(void);
 M2C_UNK func_0000150C(s32, s32, s32);
 M2C_UNK func_000015C0(s32, s32, s32);
-M2C_UNK func_0000166C();
+M2C_UNK func_0000166C(...);
 void func_00001B64(void);
-M2C_UNK func_00001BBC();
+M2C_UNK func_00001BBC(...);
 s32 func_00002BA8(s32);
 s32 func_00004AFC(s32, s32, s32, s32);
 void func_000058D8(s32 *arg0);
@@ -535,7 +541,7 @@ s32 func_000223B0(void);
 s32 func_000223DC(void);
 s32 func_00022498(s32);
 s32 func_00023094(s32, s32, s32, s32, s32, s32, s32);
-M2C_UNK *func_00023864(void);
+const char *func_00023864(void);
 s32 func_00023870(s32);
 s32 func_00023A1C(s32 arg0);
 s32 func_00023A24(s32 arg0);
@@ -560,8 +566,8 @@ s32 func_00024D50(s32 arg0);
 void func_00024DE4(void);
 void func_00024DEC(void);
 void func_00024DF4(void);
-M2C_UNK *func_00024EF4(void);
-M2C_UNK *func_00024F00(void);
+const char *func_00024EF4(void);
+const char *func_00024F00(void);
 s32 func_00025158(s32);
 void func_00025180(s32 arg0);
 s32 func_00025818(s32);
@@ -1322,14 +1328,8 @@ s32 sceKernelExitThread(s32);
 s32 sceKernelGetThreadId(void);
 s32 sceKernelSetEventFlag(s32, u32);
 s32 sceKernelTerminateDeleteThread(s32);
-M2C_UNK scePaf_58DF4B4F(s32, void (*)());
-s32 scePaf_5E4447F6(s32);
-s32 scePaf_88784487(M2C_UNK *);
-s32 scePaf_C1B0AA0D(s32);
 M2C_UNK sceVshCommonUtil_0587F20C(M2C_UNK *, M2C_UNK, s32);
-M2C_UNK sceVshCommonUtil_21EF453A(M2C_UNK *, s32);
 M2C_UNK sceVshCommonUtil_8584376D(M2C_UNK *, s32);
-M2C_UNK sceVshCommonUtil_F6567B66(M2C_UNK *, M2C_UNK, s32);
 M2C_UNK sce_paf_private_free2(void *);
 s32 sce_paf_private_memcmp(s32, s32, s32);
 M2C_UNK sce_paf_private_memcpy(s32);
@@ -1339,7 +1339,11 @@ s32 sce_paf_private_strlen(s32);
 s8 *sce_paf_private_strrchr(s32, M2C_UNK);
 s32 sce_paf_private_wcslen(s32);
 M2C_UNK vshIoDevctl(M2C_UNK *, M2C_UNK, M2C_UNK, M2C_UNK, M2C_UNK, M2C_UNK);
-M2C_UNK vshMSAudioEndTrack();
-s32 vshMSAudioGetICVInfo();
+M2C_UNK vshMSAudioEndTrack(...);
+s32 vshMSAudioGetICVInfo(...);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

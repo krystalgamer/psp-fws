@@ -1,3 +1,4 @@
+/* lang: c++ */
 /* cflags: -Os */
 #include "common.h"
 #include "msgdialog_plugin_decls.h"
@@ -37,12 +38,12 @@ void func_0000015C(void) {
 
 #if FW_VERSION >= 350
 void func_0000015C(void) {
-    scePaf_39E62C88(D_00001A6C, &D_000012F0, 0, 0);
-    scePaf_A013540A(D_00001A6C, &D_000012F0);
+    _ZN3paf4View8PageOpenEPKcii(D_00001A6C, &D_000012F0, 0, 0);
+    _ZN3paf4View12PageActivateEPKc(D_00001A6C, &D_000012F0);
 }
 #endif
 
-#if FW_VERSION >= 150
+#if FW_VERSION >= 102
 INCLUDE_ASM("nonmatchings/msgdialog_plugin", func_000001AC);
 #else
 void func_000001AC(void) {
@@ -114,7 +115,7 @@ void func_00000384(void) {
 
 #if FW_VERSION >= 350
 void func_000003C8(void) {
-    scePaf_D1447DB7(D_00001A6C);
+    _ZN3paf4View12PageCloseAllEv(D_00001A6C);
     D_00001A68 = 0;
 }
 #endif
@@ -358,6 +359,12 @@ INCLUDE_RODATA("nonmatchings/msgdialog_plugin", D_000018B8);
 
 INCLUDE_RODATA("nonmatchings/msgdialog_plugin", D_000018E0);
 
+#if FW_VERSION == 103
+INCLUDE_RODATA("nonmatchings/msgdialog_plugin", D_00001294);
+
+INCLUDE_RODATA("nonmatchings/msgdialog_plugin", D_000012AC);
+#endif
+
 #if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/msgdialog_plugin", D_00001604);
 #endif
@@ -452,17 +459,7 @@ void func_00000998(void) {
 }
 #endif
 
-#if FW_VERSION >= 350
-void func_00000C0C(void) {
-    void *sp0;
-    sceVshCommonGui_2EBB5C2B(&sp0, sceVshCommonGui_30FA68C3());
-    func_00000E88(&sp0);
-    sceVshCommonGui_11C48509(&sp0, sceVshCommonGui_EC899EBE());
-    func_00000E88(&sp0);
-}
-#endif
-
-#if FW_VERSION >= 282 && FW_VERSION < 350
+#if FW_VERSION >= 282
 void func_00000C0C(void) {
     void *sp0;
     _ZN3vsh31SetButtonNavigationString_EnterEPKw(&sp0, _ZN3vsh15GetString_EnterEv());
@@ -486,21 +483,7 @@ void func_00000B68(s32 arg0, s32 arg1) {
     }
     func_00000F08(arg0, arg1, var_v0);
 }
-#endif
-
-#if FW_VERSION >= 350
-void func_00000EB8(s32 arg0, s32 arg1) {
-    s32 var_v0;
-
-    var_v0 = 0;
-    if (arg1 != 0) {
-        var_v0 = scePaf_5E4447F6(arg1);
-    }
-    func_00000F08(arg0, arg1, var_v0);
-}
-#endif
-
-#if FW_VERSION >= 282 && FW_VERSION < 350
+#else
 void func_00000EB8(s32 arg0, s32 arg1) {
     s32 var_v0;
 

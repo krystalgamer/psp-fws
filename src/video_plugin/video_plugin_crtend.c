@@ -1,3 +1,4 @@
+/* lang: c++ */
 /* cflags: -O2 */
 #include "common.h"
 #include "video_plugin_decls.h"
@@ -52,7 +53,7 @@ INCLUDE_RODATA("nonmatchings/video_plugin_crtend", D_000450B0);
 INCLUDE_RODATA("nonmatchings/video_plugin_crtend", D_00045158);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_RODATA("nonmatchings/video_plugin_crtend", D_000451C0);
 #endif
 

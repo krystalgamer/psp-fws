@@ -2,7 +2,7 @@
 #include "common.h"
 #include "dmacman_decls.h"
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 s32 module_start(SceSize args, void *argp)
 {
     s32 intr;
@@ -172,7 +172,7 @@ INCLUDE_ASM("nonmatchings/dmacman", sceKernelDmaExit);
 INCLUDE_ASM("nonmatchings/dmacman", sceKernelDmaRegisterDdrFlush);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 s32 _sceDmacManSuspendHandler(s32 unk, void *param)
 {
     s32 i;
@@ -272,7 +272,7 @@ s32 sceKernelDmaSoftRequest(s32 dmac, s32 ch, s32 burst, s32 last)
     return 0;
 }
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 SceDmaOp *sceKernelDmaOpAlloc(void)
 {
     s32 intr;
@@ -353,7 +353,7 @@ free:
 INCLUDE_ASM("nonmatchings/dmacman", sceKernelDmaOpFree);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 s32 sceKernelDmaOpAssign(SceDmaOp *op, s32 chMask0, s32 chMask1, u32 config)
 {
     if (op == NULL)
@@ -576,7 +576,7 @@ INCLUDE_ASM("nonmatchings/dmacman", sceKernelDmaOpQuit);
 
 INCLUDE_ASM("nonmatchings/dmacman", sceKernelDmaOpConcatenate);
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 s32 _sceKernelDmaOpChCheck(SceDmaOp **ops, u32 n) {
     SceDmaOp *op;
     u32 count;
@@ -748,7 +748,7 @@ s32 sceKernelDmaOnDebugMode(void) {
     return 0;
 }
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 s32 sceKernelDmaOpFreeLink(SceDmaOp *op)
 {
     if (op == NULL)
@@ -836,7 +836,7 @@ void _sceKernelDmacClkEnable(u32 dmac)
 INCLUDE_ASM("nonmatchings/dmacman", _sceKernelDmacClkEnable);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/dmacman", _sceKernelDmaInterrupt);
 
 INCLUDE_ASM("nonmatchings/dmacman", _sceKernelDmaSchedule);
