@@ -81,7 +81,7 @@ void func_0000235C(s32 arg0, s32 arg1) {
 }
 #endif
 
-#if FW_VERSION != 102
+#if FW_VERSION == 100 || FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00002388);
 #endif
 
@@ -211,7 +211,7 @@ s32 func_00001BC0(void) {
 }
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00001DB8_v102);
 #endif
 
@@ -344,7 +344,7 @@ INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00003E70);
 
 INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00003EF0);
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_000021B8);
 
 INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_000024D4);
@@ -376,7 +376,7 @@ INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00002408);
 INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00002818);
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00002BA4);
 
 INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00002FC0);

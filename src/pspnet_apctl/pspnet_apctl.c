@@ -1,7 +1,7 @@
 /* cflags[152]: -O2 -frename-registers */
 /* cflags[151]: -O2 -frename-registers */
 /* cflags[150]: -O2 -frename-registers */
-/* cflags[100,102]: -O2 -frename-registers */
+/* cflags[100,102,103]: -O2 -frename-registers */
 /* cflags: -Os -frename-registers */
 #include "common.h"
 #include "pspnet_apctl_decls.h"
@@ -25,7 +25,7 @@ s32 sceNetApctlTerm(void) {
 }
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/pspnet_apctl", func_000000B0);
 
 INCLUDE_ASM("nonmatchings/pspnet_apctl", func_000000D8);
@@ -149,7 +149,7 @@ void sceNetApctlGetInfo(s32 arg0, s32 arg1) {
 }
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/pspnet_apctl", func_000001B8);
 
 INCLUDE_ASM("nonmatchings/pspnet_apctl", func_000001E0);
@@ -378,7 +378,7 @@ INCLUDE_ASM("nonmatchings/pspnet_apctl", func_00000D60);
 INCLUDE_ASM("nonmatchings/pspnet_apctl", func_00000CB0);
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/pspnet_apctl", func_00000F00);
 
 INCLUDE_ASM("nonmatchings/pspnet_apctl", func_00000EC8);
