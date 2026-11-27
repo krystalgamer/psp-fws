@@ -192,7 +192,7 @@ s32 func_000006AC(s32 arg0) {
     } else {
         temp_v0 = sceKernelWaitSema(D_0000EC14, 1, NULL);
         if (temp_v0 != 0) {
-            Kprintf(&D_0000C5B4, "_sceLfatfsSysEventHandler", temp_v0);
+            Kprintf(D_0000C5B4, "_sceLfatfsSysEventHandler", temp_v0);
         } else {
             func_000005EC();
             sceKernelSignalSema(D_0000EC14, 1);
@@ -211,7 +211,7 @@ s32 func_000006AC(s32 arg0) {
     } else {
         temp_v0 = sceKernelWaitSema(D_0000E554, 1, NULL);
         if (temp_v0 != 0) {
-            Kprintf(&D_0000C5B4, "_sceLfatfsSysEventHandler", temp_v0);
+            Kprintf(D_0000C5B4, "_sceLfatfsSysEventHandler", temp_v0);
         } else {
             func_000005EC();
             sceKernelSignalSema(D_0000E554, 1);
@@ -230,7 +230,7 @@ s32 func_000006AC(s32 arg0) {
     } else {
         temp_v0 = sceKernelWaitSema(D_0000E094, 1, NULL);
         if (temp_v0 != 0) {
-            Kprintf(&D_0000C5B4, "_sceLfatfsSysEventHandler", temp_v0);
+            Kprintf(D_0000C5B4, "_sceLfatfsSysEventHandler", temp_v0);
         } else {
             func_000005EC();
             sceKernelSignalSema(D_0000E094, 1);
@@ -660,9 +660,9 @@ s32 func_000022A4(void *arg0) {
     sceKernelPowerLock(0);
     temp_v0 = sceKernelWaitSema(temp_s0, 1, NULL);
     if (temp_v0 != 0) {
-        Kprintf(&D_0000CF84, &D_0000CF6C, temp_v0);
+        Kprintf(D_0000CF84, D_0000CF6C, temp_v0);
         sceKernelPowerUnlock(0);
-        Kprintf(&D_0000CF9C, "UFatDclose", temp_v0);
+        Kprintf(D_0000CF9C, "UFatDclose", temp_v0);
         var_v0 = 0x80010005;
     } else {
         func_00009150();
@@ -686,9 +686,9 @@ s32 func_000022A4(void *arg0) {
     sceKernelPowerLock(0);
     temp_v0 = sceKernelWaitSema(temp_s0, 1, NULL);
     if (temp_v0 != 0) {
-        Kprintf(&D_0000C5B4, &D_0000CF6C, temp_v0);
+        Kprintf(D_0000C5B4, D_0000CF6C, temp_v0);
         sceKernelPowerUnlock(0);
-        Kprintf(&D_0000CF9C, "UFatDclose", temp_v0);
+        Kprintf(D_0000CF9C, "UFatDclose", temp_v0);
         var_v0 = 0x80010005;
     } else {
         func_00009150();
@@ -712,9 +712,9 @@ s32 func_000022A4(void *arg0) {
     sceKernelPowerLock(0);
     temp_v0 = sceKernelWaitSema(temp_s0, 1, NULL);
     if (temp_v0 != 0) {
-        Kprintf(&D_0000C5B4, &D_0000CF6C, temp_v0);
+        Kprintf(D_0000C5B4, D_0000CF6C, temp_v0);
         sceKernelPowerUnlock(0);
-        Kprintf(&D_0000CF9C, "UFatDclose", temp_v0);
+        Kprintf(D_0000CF9C, "UFatDclose", temp_v0);
         var_v0 = 0x80010005;
     } else {
         func_00009150();
@@ -743,9 +743,9 @@ s32 func_000022A4(void *arg0) {
     sceKernelPowerLock(0);
     temp_v0 = sceKernelWaitSema(temp_s0, 1, NULL);
     if (temp_v0 != 0) {
-        Kprintf(&D_0000C5B4, &D_0000CF6C, temp_v0);
+        Kprintf(D_0000C5B4, D_0000CF6C, temp_v0);
         sceKernelPowerUnlock(0);
-        Kprintf(&D_0000CF9C, "UFatDclose", temp_v0);
+        Kprintf(D_0000CF9C, "UFatDclose", temp_v0);
         var_v0 = 0x80010005;
     } else {
         func_00009150();
@@ -788,9 +788,9 @@ s32 func_0000286C(struct Unk_func_0000286C_0 *arg0) {
     sceKernelPowerLock(0);
     temp_v0 = sceKernelWaitSema(temp_s0, 1, NULL);
     if (temp_v0 != 0) {
-        Kprintf(&D_0000CF6C, &D_0000CF5C, temp_v0);
+        Kprintf(D_0000CF6C, D_0000CF5C, temp_v0);
         sceKernelPowerUnlock(0);
-        Kprintf(&D_0000CF9C, "UFatDclose", temp_v0);
+        Kprintf(D_0000CF9C, "UFatDclose", temp_v0);
         var_v0 = 0x80010005;
     } else {
         func_00009F04();
@@ -814,9 +814,9 @@ s32 func_0000286C(struct Unk_func_0000286C_0 *arg0) {
     sceKernelPowerLock(0);
     temp_v0 = sceKernelWaitSema(temp_s0, 1, NULL);
     if (temp_v0 != 0) {
-        Kprintf(&D_0000CF6C, &D_0000CF5C, temp_v0);
+        Kprintf(D_0000CF6C, D_0000CF5C, temp_v0);
         sceKernelPowerUnlock(0);
-        Kprintf(&D_0000CF9C, "UFatDclose", temp_v0);
+        Kprintf(D_0000CF9C, "UFatDclose", temp_v0);
         var_v0 = 0x80010005;
     } else {
         func_00009F04();
@@ -1995,7 +1995,7 @@ s32 func_00009934(void) {
     if (temp_v0 >= 0) {
 
     } else {
-        Kprintf(&D_0000DCE0, "test_close", temp_v0);
+        Kprintf(D_0000DCE0, "test_close", temp_v0);
     }
     return temp_v0;
 }
@@ -2119,7 +2119,7 @@ s32 func_00009F98(void) {
     s32 *temp_v1;
 
     temp_v1 = "del_lflash_driver";
-    Kprintf(&D_0000D22C, temp_v1, (s32) temp_v1);
+    Kprintf(D_0000D22C, temp_v1, (s32) temp_v1);
     sceIoDelDrv(D_0000D72C);
     return 0;
 }
@@ -2252,12 +2252,12 @@ INCLUDE_ASM("nonmatchings/lfatfs", func_0000A36C);
 INCLUDE_RODATA("nonmatchings/lfatfs", D_0000E160);
 
 s32 func_0000A3A0(struct Unk_func_0000A3A0_0 *arg0) {
-    Kprintf(&D_0000E160, "df_dclose", **arg0->unk8);
+    Kprintf(D_0000E160, "df_dclose", **arg0->unk8);
     return 0x80010086;
 }
 
 s32 func_0000A3DC(struct Unk_func_0000A3DC_0 *arg0) {
-    Kprintf(&D_0000E160, "df_dread", **arg0->unk8);
+    Kprintf(D_0000E160, "df_dread", **arg0->unk8);
     return 0x80010086;
 }
 
@@ -2615,28 +2615,28 @@ INCLUDE_RODATA("nonmatchings/lfatfs", D_0000D084);
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
 s32 func_0000ADC0(void *arg0) {
-    Kprintf(&D_0000D084, "df_dclose", **M2C_FIELD(arg0, s32 ***, 8));
+    Kprintf(D_0000D084, "df_dclose", **M2C_FIELD(arg0, s32 ***, 8));
     return 0x80010086;
 }
 #endif
 
 #if FW_VERSION < 201
 s32 func_0000ADC0(void *arg0) {
-    Kprintf(&D_0000D084, "df_dclose", **M2C_FIELD(arg0, s32 ***, 8));
+    Kprintf(D_0000D084, "df_dclose", **M2C_FIELD(arg0, s32 ***, 8));
     return 0x8001B000;
 }
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
 s32 func_0000ADFC(void *arg0) {
-    Kprintf(&D_0000D084, "df_dread", **M2C_FIELD(arg0, s32 ***, 8));
+    Kprintf(D_0000D084, "df_dread", **M2C_FIELD(arg0, s32 ***, 8));
     return 0x80010086;
 }
 #endif
 
 #if FW_VERSION < 201
 s32 func_0000ADFC(void *arg0) {
-    Kprintf(&D_0000D084, "df_dread", **M2C_FIELD(arg0, s32 ***, 8));
+    Kprintf(D_0000D084, "df_dread", **M2C_FIELD(arg0, s32 ***, 8));
     return 0x8001B000;
 }
 #endif
