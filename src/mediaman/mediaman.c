@@ -1,10 +1,14 @@
 /* cflags[152]: -O2 -frename-registers */
 /* cflags[151]: -O2 -frename-registers */
 /* cflags[150]: -O2 -frename-registers */
-/* cflags[100,102]: -O2 -frename-registers */
+/* cflags[100,102,103]: -O2 -frename-registers */
 #include "common.h"
 #include "k1.h"
 #include "mediaman_decls.h"
+
+#if FW_VERSION == 103
+INCLUDE_ASM("nonmatchings/mediaman", func_00000000_v103);
+#endif
 
 #if FW_VERSION == 102
 INCLUDE_ASM("nonmatchings/mediaman", func_00000000_v102);
@@ -191,7 +195,7 @@ INCLUDE_ASM("nonmatchings/mediaman", func_000007C4);
 INCLUDE_ASM("nonmatchings/mediaman", func_000008B4);
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/mediaman", func_00000A00);
 #endif
 
@@ -222,7 +226,7 @@ s32 sceUmdUnRegisterPowerOnOffUMDCallBack(void) {
 }
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/mediaman", func_00000EF8);
 #endif
 
@@ -270,7 +274,7 @@ void sceUmdUnRegisterActivateDVDCallBack(void) {
 }
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/mediaman", func_00000000);
 #endif
 
@@ -295,7 +299,7 @@ void sceUmdSetDriveStatus(u32 arg0) {
 }
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/mediaman", func_000014C4);
 #endif
 
@@ -311,7 +315,7 @@ void func_00001448(s32 arg0) {
 }
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/mediaman", func_000015CC);
 #endif
 
@@ -329,7 +333,7 @@ s32 sceUmdGetAssignedFlag(void) {
 }
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/mediaman", func_000016E0);
 
 INCLUDE_ASM("nonmatchings/mediaman", func_00001758);
@@ -386,7 +390,7 @@ s32 func_00001934(void) {
 }
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/mediaman", func_00001B2C);
 #endif
 
@@ -402,7 +406,7 @@ s32 sceUmdGetUserEventFlagId(void) {
 INCLUDE_ASM("nonmatchings/mediaman", sceUmdRegisterPowerOnOffUMDCallBack);
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/mediaman", func_00001BC0);
 
 INCLUDE_ASM("nonmatchings/mediaman", func_00001C24);
@@ -607,27 +611,33 @@ s32 sceUmdUnRegisterGetUMDPowerOnOffCallBack(void) {
 }
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/mediaman", sceUmdGetDriveStatus);
+#endif
+
+#if FW_VERSION == 103
+INCLUDE_ASM("nonmatchings/mediaman", func_00001F2C);
 #endif
 
 #if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/mediaman", func_00000000);
 #endif
 
-#if FW_VERSION < 150
+#if FW_VERSION < 103
 void func_00001C60(void) {
     sceUmdDisableUMDDetectIntr();
     func_00001448(0x80000021);
     sceKernelSetEventFlag(D_00002B90, 0x100U);
 }
+#endif
 
+#if FW_VERSION < 150
 s32 func_00001C98(void) {
     return D_00002B40;
 }
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/mediaman", func_00001CA4);
 #endif
 
@@ -671,7 +681,7 @@ s32 sceUmd_0F7E578A(void) {
 }
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/mediaman", func_00001E9C);
 #endif
 
@@ -729,7 +739,7 @@ INCLUDE_ASM("nonmatchings/mediaman", sceUmdDeactivate);
 INCLUDE_ASM("nonmatchings/mediaman", sceUmdWaitDriveStatWithTimer);
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/mediaman", func_00002014);
 #endif
 
@@ -827,6 +837,12 @@ void sceUmdGetDriveStat(void) {
 INCLUDE_ASM("nonmatchings/mediaman", sceUmdGetErrorStat);
 #endif
 
+#if FW_VERSION == 103
+INCLUDE_ASM("nonmatchings/mediaman", func_0000252C);
+
+INCLUDE_ASM("nonmatchings/mediaman", func_00002538);
+#endif
+
 #if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/mediaman", func_0000221C);
 
@@ -853,7 +869,7 @@ s32 sceUmdDisableUMDDetectIntr(void) {
 }
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/mediaman", func_00002480);
 #endif
 
