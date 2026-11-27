@@ -1780,9 +1780,6 @@ func_00024184 = 0x00039104; // type:func rom:0x391A4
 func_0002420C = 0x0003918C; // type:func rom:0x3922C
 func_00024214 = 0x00039194; // type:func rom:0x39234
 func_0002423C = 0x000391BC; // type:func rom:0x3925C
-func_00024260 = 0x000391E0; // type:func rom:0x39280
-func_00024270 = 0x000391F0; // type:func rom:0x39290
-func_00024280 = 0x00039200; // type:func rom:0x392A0
 func_000242A8 = 0x00039228; // type:func rom:0x392C8
 func_000242C0 = 0x00039240; // type:func rom:0x392E0
 func_000242D8 = 0x00039258; // type:func rom:0x392F8
@@ -2187,3 +2184,6 @@ func_00020EB0_v271 = 0x00020EB0; // type:func rom:0x20F50
 func_0004A6D0_v271 = 0x0004A6D0; // type:func rom:0x4A770
 func_0004C7B8_v271 = 0x0004C7B8; // type:func rom:0x4C858
 // shared names (tools/add_version.py) end
+_ZN14Class_000535A0D2Ev = 0x000391E0; // type:func
+_ZN14Class_000535A0D1Ev = 0x000391F0; // type:func
+_ZN14Class_000535A0D0Ev = 0x00039200; // type:func

@@ -1,4 +1,7 @@
 {
+ "cxx_prelude": [
+  "#pragma interface"
+ ],
  "funcs": {
   "_Z11PSJS_Mallocj": "M2C_UNK _Z11PSJS_Mallocj();",
   "_Z9PSJS_FreePv": "M2C_UNK _Z9PSJS_FreePv();",
@@ -1295,6 +1298,7 @@
   "vsh_60EA90BF": "M2C_UNK vsh_60EA90BF(s32, M2C_UNK *);"
  },
  "types": {
+  "Class_000535A0": "#ifdef __cplusplus\n/* vtable _ZTV14Class_000535A0 is data (vptr = label - 8 + 8) */\nclass Class_000535A0 {\npublic:\n    virtual ~Class_000535A0();\n};\n#endif",
   "Unk_D_000571FC": "struct Unk_D_000571FC {\n    u8 pad0[0x94];\n    u8 unk94;\n};",
   "Unk_D_0005721C": "struct Unk_D_0005721C {\n    u8 pad0[0x20];\n    s32 unk20;\n};",
   "Unk_D_00081D70": "struct Unk_D_00081D70 {\n    u8 pad0[0x94];\n    u8 unk94;\n};",

@@ -502,6 +502,10 @@ void func_0002423C(s32 arg0, M2C_UNK arg1) {
     func_00024998(arg1, arg0);
 }
 
+#if FW_VERSION < 350
+Class_000535A0::~Class_000535A0() {
+}
+#else
 void func_00024260(M2C_UNK **arg0) {
     *arg0 = &D_000535A0;
 }
@@ -510,13 +514,7 @@ void func_00024270(M2C_UNK **arg0) {
     *arg0 = &D_000535A0;
 }
 
-#if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/video_main_plugin_021A6C", func_00024280);
-#else
-void func_00024280(M2C_UNK **arg0) {
-    *arg0 = &D_000535A0;
-    _ZdlPv((s32) arg0);
-}
 #endif
 
 void func_000242A8(struct Unk_func_000242A8_0 *arg0) {
@@ -615,6 +613,8 @@ INCLUDE_RODATA("nonmatchings/video_main_plugin_021A6C", D_00053560);
 INCLUDE_RODATA("nonmatchings/video_main_plugin_021A6C", D_00053580);
 
 INCLUDE_RODATA("nonmatchings/video_main_plugin_021A6C", D_000535A0);
+
+__asm__(".globl _ZTV14Class_000535A0\n_ZTV14Class_000535A0 = D_000535A0 - 8\n");
 #endif
 
 INCLUDE_ASM("nonmatchings/video_main_plugin_021A6C", func_000244CC);
