@@ -252,7 +252,36 @@ s32 check_reload_status(s32 checkMedia, FatmsPrivate *priv) {
 }
 #endif
 
-#if FW_VERSION == 151 || (FW_VERSION >= 201 && FW_VERSION < 300)
+#if FW_VERSION == 201
+s32 check_reload_status(s32 checkMedia, FatmsPrivate *priv) {
+    s32 ret = 0;
+    s32 intr;
+
+    intr = sceKernelCpuSuspendIntr();
+    if (D_0002B8C8 == -0xF) {
+        sceKernelCpuResumeIntr(intr);
+        Kprintf("prfile_mod.c:%s:Formatting!!\n", "check_reload_status");
+        return -2;
+    }
+    if (checkMedia != 0 && D_0002BA90[0] == 0x1022) {
+        ret = -1;
+    }
+    sceKernelCpuResumeIntr(intr);
+    if (ret < 0) {
+        return ret;
+    }
+    ret = 0;
+    if (priv != NULL) {
+        ret = check_heap_alive(priv);
+        if (ret < 0) {
+            return -0x3EA;
+        }
+    }
+    return ret;
+}
+#endif
+
+#if FW_VERSION == 151 || (FW_VERSION >= 250 && FW_VERSION < 300)
 INCLUDE_ASM("nonmatchings/fatmsmod", check_reload_status);
 #endif
 
@@ -1291,65 +1320,29 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_000041B0);
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00004330);
 #endif
 
-#if FW_VERSION >= 201 && FW_VERSION < 260
-INCLUDE_ASM("nonmatchings/fatmsmod", func_0000322C);
-#endif
-
-#if (FW_VERSION >= 150 && FW_VERSION < 201) || (FW_VERSION >= 260 && FW_VERSION < 282)
+#if FW_VERSION >= 150 && FW_VERSION < 282
 void func_0000322C(void) {
     func_00000134();
 }
-#endif
 
-#if FW_VERSION >= 201 && FW_VERSION < 260
-INCLUDE_ASM("nonmatchings/fatmsmod", func_00003248);
-#endif
-
-#if (FW_VERSION >= 150 && FW_VERSION < 201) || (FW_VERSION >= 260 && FW_VERSION < 282)
 void func_00003248(void) {
     func_00000264();
 }
-#endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00003264);
-#endif
 
-#if FW_VERSION >= 201 && FW_VERSION < 260
-INCLUDE_ASM("nonmatchings/fatmsmod", func_00003298);
-#endif
-
-#if (FW_VERSION >= 150 && FW_VERSION < 201) || (FW_VERSION >= 260 && FW_VERSION < 282)
 void func_00003298(SceIoIob *iob) {
     df_close(iob);
 }
-#endif
 
-#if FW_VERSION >= 201 && FW_VERSION < 260
-INCLUDE_ASM("nonmatchings/fatmsmod", func_000032B4);
-#endif
-
-#if (FW_VERSION >= 150 && FW_VERSION < 201) || (FW_VERSION >= 260 && FW_VERSION < 282)
 void func_000032B4(s32 arg0, s32 arg1, s32 arg2) {
     df_read(arg0, arg1, arg2);
 }
-#endif
 
-#if FW_VERSION >= 201 && FW_VERSION < 260
-INCLUDE_ASM("nonmatchings/fatmsmod", func_000032D0);
-#endif
-
-#if (FW_VERSION >= 150 && FW_VERSION < 201) || (FW_VERSION >= 260 && FW_VERSION < 282)
 void func_000032D0(s32 arg0, s32 arg1, s32 arg2) {
     df_write(arg0, arg1, arg2);
 }
-#endif
 
-#if FW_VERSION >= 201 && FW_VERSION < 260
-INCLUDE_ASM("nonmatchings/fatmsmod", func_000032EC);
-#endif
-
-#if (FW_VERSION >= 150 && FW_VERSION < 201) || (FW_VERSION >= 260 && FW_VERSION < 282)
 void func_000032EC(void) {
     func_00000EF8();
 }
@@ -1371,19 +1364,11 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_00003370);
 INCLUDE_ASM("nonmatchings/fatmsmod", func_000033A4);
 
 INCLUDE_ASM("nonmatchings/fatmsmod", func_000033D8);
-#endif
 
-#if FW_VERSION >= 201 && FW_VERSION < 260
-INCLUDE_ASM("nonmatchings/fatmsmod", func_0000340C);
-#endif
-
-#if (FW_VERSION >= 150 && FW_VERSION < 201) || (FW_VERSION >= 260 && FW_VERSION < 282)
 void func_0000340C(SceIoIob *iob) {
     df_dclose(iob);
 }
-#endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00003428);
 
 INCLUDE_ASM("nonmatchings/fatmsmod", func_0000345C);
@@ -1395,13 +1380,7 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_000034C4);
 INCLUDE_ASM("nonmatchings/fatmsmod", func_000034F8);
 
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00003514);
-#endif
 
-#if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/fatmsmod", func_00003530);
-#endif
-
-#if FW_VERSION >= 150 && FW_VERSION < 201
 void func_00003530(s32 arg0) {
     func_00002778(arg0);
 }
@@ -3288,7 +3267,7 @@ u32 func_00007BD4(u32 sector) {
             n = __builtin_allegrex_min(D_0001BCC4.dataStart - sector, D_0001BCC4.rootSectors);
         }
     } else {
-        n = D_0002790E - (sector - D_0001BCC4.dataStart) % D_0002790E;
+        n = D_0002790C.sectorsPerCluster - (sector - D_0001BCC4.dataStart) % D_0002790C.sectorsPerCluster;
     }
     return n;
 }
@@ -3307,7 +3286,41 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_00008028);
 #if FW_VERSION < 271
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00008314);
 
-INCLUDE_ASM("nonmatchings/fatmsmod", func_000085D4);
+s32 func_000085D4(u32 sector, u8 **buf) {
+    u32 first;
+    u32 end;
+    u32 over;
+    u32 count;
+    u8 *src;
+    u8 *dst;
+    u32 i;
+    u16 j;
+
+    end = sector - D_0002790C.fatStart + D_0001BCC4.cacheSectors;
+    first = sector;
+    if (end > D_0002790C.fatSectors) {
+        over = end - D_0002790C.fatSectors;
+        dst = *buf;
+        src = dst + (D_0001BCC4.cacheSectors - over) * D_0002790C.bytesPerSector;
+        sector -= over;
+        for (i = 0; i < over; i++) {
+            for (j = 0; j < D_0002790C.bytesPerSector; j++) {
+                *dst++ = *src++;
+            }
+        }
+        count = D_0001BCC4.cacheSectors - over;
+        *buf = dst;
+        D_000276E4->fatBufSector = sector;
+    } else {
+        count = D_0001BCC4.cacheSectors;
+        D_000276E4->fatBufSector = sector;
+    }
+    if (func_0000A714(*buf, first, count) == -1) {
+        D_000276E4->fatBufSector = -1;
+        return -1;
+    }
+    return 0;
+}
 
 INCLUDE_ASM("nonmatchings/fatmsmod", func_000086E8);
 
@@ -3540,7 +3553,7 @@ s32 func_0000ACF8(void) {
         D_00019E08 = 0xD;
         return -1;
     }
-    if (D_0002790C == 0) {
+    if (D_0002790C.bytesPerSector == 0) {
         D_00019E08 = 0xD;
         return -1;
     }
@@ -3963,7 +3976,7 @@ void func_0000BC84(void) {
     if (D_00027800->sector < D_0001BCC4.dataStart) {
         D_0001BCE8.unk4 = 0;
     } else {
-        D_0001BCE8.unk4 = (D_00027800->sector - D_0001BCC4.dataStart) / D_0002790E + 2;
+        D_0001BCE8.unk4 = (D_00027800->sector - D_0001BCC4.dataStart) / D_0002790C.sectorsPerCluster + 2;
     }
     D_0001BCE8.unk8 = D_00027800->sector;
 }
