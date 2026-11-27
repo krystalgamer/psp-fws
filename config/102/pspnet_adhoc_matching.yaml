@@ -9,7 +9,7 @@ options:
   compiler: GCC
 
   asm_path: tmp/asm/102/pspnet_adhoc_matching
-  src_path: tmp/av_src/102/pspnet_adhoc_matching
+  src_path: src/pspnet_adhoc_matching
   build_path: tmp/build/102
   ld_script_path: tmp/build/102/pspnet_adhoc_matching.ld
   cache_path: tmp/build/102/.splat_cache.pspnet_adhoc_matching
