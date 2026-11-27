@@ -1,3 +1,4 @@
+/* cflags[100-103]: -O2 */
 /* cflags[152]: -O2 -frename-registers */
 /* cflags[151]: -O2 -frename-registers */
 /* cflags[150]: -O2 -frename-registers */
@@ -5,15 +6,66 @@
 #include "common.h"
 #include "loadcore_decls.h"
 
+#if FW_VERSION < 150
+s32 func_00000000(void) {
+    s32 i;
+
+    g_LoadCoreLibEntries[0].next = NULL;
+    for (i = 1; i < 30; i++)
+        g_LoadCoreLibEntries[i].next = &g_LoadCoreLibEntries[i - 1];
+    g_FreeLibEnt = &g_LoadCoreLibEntries[29];
+    return 0;
+}
+#else
 INCLUDE_ASM("nonmatchings/loadcore", func_00000000);
+#endif
 
+#if FW_VERSION < 150
+SceResidentLibrary *func_00000048(void) {
+    SceResidentLibrary *lib;
+
+    if (g_FreeLibEnt != NULL) {
+        lib = g_FreeLibEnt;
+        g_FreeLibEnt = lib->next;
+        lib->next = NULL;
+    } else {
+        lib = sceKernelAllocHeapMemory(func_00000C08(), sizeof(SceResidentLibrary));
+    }
+    return lib;
+}
+#else
 INCLUDE_ASM("nonmatchings/loadcore", func_00000048);
+#endif
 
-#if FW_VERSION < 282
+#if FW_VERSION < 150
+SceResidentLibrary *func_00000098(SceResidentLibrary *lib) {
+    if (lib >= &g_LoadCoreLibEntries[0] && lib < &g_LoadCoreLibEntries[30]) {
+        lib->next = g_FreeLibEnt;
+        g_FreeLibEnt = lib;
+        return lib;
+    }
+    sceKernelFreeHeapMemory(func_00000C08(), lib);
+    return g_FreeLibEnt;
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/loadcore", func_00000098);
 #endif
 
-#if FW_VERSION < 270
+#if FW_VERSION < 150
+s32 func_0000010C(void) {
+    s32 i;
+
+    g_LoadCoreLibStubs[0].freeNext = NULL;
+    for (i = 1; i < 90; i++)
+        g_LoadCoreLibStubs[i].freeNext = &g_LoadCoreLibStubs[i - 1];
+    g_FreeLibStub = &g_LoadCoreLibStubs[89];
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 270
 INCLUDE_ASM("nonmatchings/loadcore", func_0000010C);
 #endif
 
@@ -25,19 +77,70 @@ INCLUDE_ASM("nonmatchings/loadcore", func_000000A0);
 INCLUDE_ASM("nonmatchings/loadcore", func_00000154);
 #endif
 
-INCLUDE_ASM("nonmatchings/loadcore", func_0000019C);
-
 #if FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/loadcore", func_000001A0);
+SceStubLibrary *func_0000019C(void) {
+    SceStubLibrary *stub;
 
-INCLUDE_ASM("nonmatchings/loadcore", func_00000280);
+    if (g_FreeLibStub != NULL) {
+        stub = g_FreeLibStub;
+        g_FreeLibStub = stub->freeNext;
+    } else {
+        stub = sceKernelAllocHeapMemory(func_00000C08(), sizeof(SceStubLibrary));
+    }
+    return stub;
+}
+#else
+INCLUDE_ASM("nonmatchings/loadcore", func_0000019C);
 #endif
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/loadcore", func_000002CC);
+#if FW_VERSION < 150
+SceStubLibrary *func_000001A0(SceStubLibrary *stub) {
+    if (stub >= &g_LoadCoreLibStubs[0] && stub < &g_LoadCoreLibStubs[90]) {
+        stub->freeNext = g_FreeLibStub;
+        g_FreeLibStub = stub;
+        return stub;
+    }
+    sceKernelFreeHeapMemory(func_00000C08(), stub);
+    return g_FreeLibStub;
+}
+
+s32 func_00000214(void) {
+    s32 i;
+
+    Kprintf("systable.c:%s:()\n", "InitSysEntTable");
+    initialSysEntTable[0].next = NULL;
+    for (i = 1; i < 60; i++)
+        initialSysEntTable[i].next = &initialSysEntTable[i - 1];
+    D_00007268 = &initialSysEntTable[59];
+    return 0;
+}
+
+SceSysCallEntryTable *func_00000280(void) {
+    SceSysCallEntryTable *ent;
+
+    if (D_00007268 != NULL) {
+        ent = D_00007268;
+        D_00007268 = ent->next;
+    } else {
+        ent = sceKernelAllocHeapMemory(func_00000C08(), sizeof(SceSysCallEntryTable));
+    }
+    return ent;
+}
+
+SceSysCallEntryTable *func_000002CC(SceSysCallEntryTable *p) {
+    if (p >= &initialSysEntTable[0] && p < &initialSysEntTable[60]) {
+        p->next = D_00007268;
+        D_00007268 = p;
+        return p;
+    }
+    sceKernelFreeHeapMemory(func_00000C08(), p);
+    return D_00007268;
+}
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
+INCLUDE_ASM("nonmatchings/loadcore", func_000002CC);
+
 INCLUDE_ASM("nonmatchings/loadcore", func_00000214);
 
 INCLUDE_ASM("nonmatchings/loadcore", func_00000368);
@@ -125,11 +228,100 @@ INCLUDE_ASM("nonmatchings/loadcore", func_00001224);
 #endif
 
 #if FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/loadcore", func_00000370);
+s32 func_00000370(u32 seed, SceSyscallTable **syscallTable) {
+    s32 i;
+    s32 status;
+    SceSyscallTable *tbl;
+    SceSysCallEntryTable *ent;
 
-INCLUDE_ASM("nonmatchings/loadcore", func_00000488);
+    tbl = sceKernelAllocHeapMemory(func_00000C08(), sizeof(SceSyscallTable));
+    if (tbl == NULL) {
+        Kprintf("systable.c:%s:No Heap Memory\n", "SyscallTableInit");
+        return 0x80020001;
+    }
+    tbl->next = NULL;
+    tbl->seed = seed << 2;
+    tbl->funcTableSize = (seed << 2) + 0x3FFC;
+    tbl->tableSize = sizeof(SceSyscallTable);
+    for (i = 0; i < 4096; i++)
+        tbl->syscalls[i] = (void (*)())func_00000340;
+    ent = func_00000280();
+    g_pSysEntControl = ent;
+    ent->inUse = 0;
+    ent->next = NULL;
+    ent->startAddr = 0;
+    ent->numEntries = 0x1000;
+    status = sceKernelRegisterSystemCallTable(tbl);
+    if (status != 0) {
+        Kprintf("systable.c:%s:sceKernelRegisterSystemCallTable failed: 0x%X\n", "SyscallTableInit", status);
+        sceKernelFreeHeapMemory(func_00000C08(), tbl);
+        return status;
+    }
+    *syscallTable = tbl;
+    return 0;
+}
 
-INCLUDE_ASM("nonmatchings/loadcore", func_00000570);
+s32 func_00000488(s32 numEntries) {
+    SceSysCallEntryTable *cur;
+    SceSysCallEntryTable *ent;
+
+    for (cur = g_pSysEntControl; cur != NULL; cur = cur->next) {
+        if ((cur->inUse & 1) == 0) {
+            if (cur->numEntries == numEntries) {
+                cur->inUse |= 1;
+                return cur->startAddr;
+            }
+            if (cur->numEntries > numEntries) {
+                ent = func_00000280();
+                ent->inUse = 0;
+                ent->startAddr = cur->startAddr + (u16)numEntries;
+                ent->next = cur->next;
+                ent->numEntries = cur->numEntries - numEntries;
+                cur->inUse |= 1;
+                cur->numEntries = numEntries;
+                cur->next = ent;
+                return cur->startAddr;
+            }
+        }
+    }
+    Kprintf("systable.c:%s:Automatic SyscallTable grow needed\n", "AllocSysTable");
+    return 0x80020001;
+}
+
+SceSysCallEntryTable *func_00000570(u32 addr) {
+    SceSysCallEntryTable *cur;
+    SceSysCallEntryTable *prev;
+    SceSysCallEntryTable *next;
+
+    prev = NULL;
+    for (cur = g_pSysEntControl; cur != NULL; cur = cur->next) {
+        if (cur->startAddr == addr)
+            break;
+        prev = cur;
+    }
+    if (cur == NULL) {
+        Kprintf("systable.c:%s:Cannot found index %d\n", "FreeSysTable", addr);
+        return NULL;
+    }
+    if ((cur->inUse & 1) == 0) {
+        Kprintf("systable.c:%s:try to Release unused table: %d\n", "FreeSysTable", addr);
+        return NULL;
+    }
+    cur->inUse &= ~1;
+    if (prev != NULL && prev->inUse == 0) {
+        prev->numEntries += cur->numEntries;
+        prev->next = cur->next;
+        func_000002CC(cur);
+        cur = prev;
+    }
+    next = cur->next;
+    if (next == NULL || next->inUse != 0)
+        return cur;
+    cur->numEntries += next->numEntries;
+    cur->next = next->next;
+    func_000002CC(next);
+    return cur;
+}
 #endif
 
 #if FW_VERSION < 152
@@ -161,21 +353,40 @@ INCLUDE_RODATA("nonmatchings/loadcore", D_000068AC);
 #endif
 
 #if FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/loadcore", func_00000A7C);
+void func_00000A7C(u32 *src, u32 *dst, s32 n) {
+    s32 i;
 
-void func_00000AAC(void *arg0, void *arg1) {
-    func_00005338(M2C_FIELD(arg0, s32 *, 4), M2C_FIELD(arg1, s32 *, 4));
+    for (i = n - 1; i >= 0; i--)
+        dst[i] = src[i];
 }
 
-INCLUDE_ASM("nonmatchings/loadcore", func_00000ACC);
+void func_00000AAC(SceResidentLibrary *a, SceResidentLibrary *b) {
+    func_00005338(a->libName, b->libName);
+}
 
-INCLUDE_ASM("nonmatchings/loadcore", func_00000ADC);
+s32 func_00000ACC(SceResidentLibrary *a, SceResidentLibrary *b) {
+    return a->version - b->version;
+}
 
-INCLUDE_ASM("nonmatchings/loadcore", func_00000AEC);
+s32 func_00000ADC(SceResidentLibrary *lib, SceStubLibrary *stub) {
+    return lib->version - stub->version;
+}
 
-INCLUDE_ASM("nonmatchings/loadcore", func_00000B10);
+s32 func_00000AEC(SceResidentLibrary *lib, SceStubLibrary *stub) {
+    return func_00005338(stub->libName, lib->libName);
+}
 
-INCLUDE_ASM("nonmatchings/loadcore", func_00000B28);
+s32 func_00000B10(SceResidentLibrary *lib, SceStubLibrary *stub) {
+    return (lib->version >> 8) - (stub->version >> 8);
+}
+
+s32 func_00000B28(SceStubLibrary *list, SceStubLibrary *stub) {
+    for (; list != NULL; list = list->next) {
+        if (list->unk20 == stub->unk20)
+            return 1;
+    }
+    return 0;
+}
 
 INCLUDE_ASM("nonmatchings/loadcore", func_00000B58);
 
@@ -183,7 +394,21 @@ INCLUDE_ASM("nonmatchings/loadcore", func_00000B98);
 
 INCLUDE_ASM("nonmatchings/loadcore", func_00000C08);
 
-INCLUDE_ASM("nonmatchings/loadcore", func_00000CC0);
+void func_00000CC0(SceStubLibrary *stub) {
+    u32 i;
+    u32 *p;
+
+    i = stub->stubCount;
+    if (i != 0) {
+        p = stub->stubTable;
+        do {
+            i--;
+            p[0] = 0x03E00008;
+            p[1] = 0;
+            p += 2;
+        } while (i != 0);
+    }
+}
 #endif
 
 #if FW_VERSION < 152
@@ -480,12 +705,18 @@ INCLUDE_ASM("nonmatchings/loadcore", sceKernelUnLinkLibraryEntries);
 INCLUDE_ASM("nonmatchings/loadcore", sceKernelMaskLibraryEntries);
 #endif
 
-#if FW_VERSION < 150 || (FW_VERSION >= 201 && FW_VERSION < 282)
+#if FW_VERSION < 150
+void *sceKernelQueryLoadCoreCB(void) {
+    return &g_loadCore;
+}
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/loadcore", sceKernelQueryLoadCoreCB);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 201
-s32 *sceKernelQueryLoadCoreCB(void) {
+void *sceKernelQueryLoadCoreCB(void) {
     return &D_00008C40;
 }
 #endif
@@ -729,7 +960,7 @@ s32 sceKernelMaskLibraryEntries(void) {
 #endif
 
 #if FW_VERSION >= 282
-M2C_UNK *sceKernelQueryLoadCoreCB(void) {
+void *sceKernelQueryLoadCoreCB(void) {
     return &D_000097AC;
 }
 #endif
@@ -772,7 +1003,14 @@ s32 sceKernelLoadCoreMode(void) {
 INCLUDE_ASM("nonmatchings/loadcore", func_00002808);
 #endif
 
-#if FW_VERSION < 150 || FW_VERSION == 282
+#if FW_VERSION < 150
+s32 func_000029D8(void *func) {
+    D_00007270 = func;
+    return 0;
+}
+#endif
+
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/loadcore", func_000029D8);
 #endif
 
@@ -887,9 +1125,17 @@ INCLUDE_ASM("nonmatchings/loadcore", func_00002AE0);
 #endif
 
 #if FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/loadcore", func_00002AA0);
+void func_00002AA0(SceLoadCoreExecFileInfo *execInfo, s32 ret) {
+    if (ret == 0) {
+        execInfo->isDecrypted = 1;
+        return;
+    }
+    execInfo->isDecrypted = 0;
+}
 
-INCLUDE_ASM("nonmatchings/loadcore", func_00002AB8);
+u32 func_00002AB8(SceModule *mod) {
+    return mod->attribute & 0x1E00;
+}
 
 INCLUDE_ASM("nonmatchings/loadcore", func_00002AC4);
 #endif
@@ -1226,17 +1472,38 @@ INCLUDE_ASM("nonmatchings/loadcore", func_000054B4);
 #endif
 
 #if FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/loadcore", func_00004A00);
+void func_00004A00(u32 *src, u32 *dst, u32 size) {
+    u32 *end;
+    u32 *p;
 
-INCLUDE_ASM("nonmatchings/loadcore", func_00004A80);
+    if (dst == src)
+        return;
+    if (dst < src) {
+        end = src + (size >> 2);
+        while (src < end)
+            *dst++ = *src++;
+    } else {
+        p = src + (size >> 2);
+        dst += size >> 2;
+        while (src < p)
+            *--dst = *--p;
+    }
+}
+
+void func_00004A80(u32 *p, s32 n) {
+    while (n > 0) {
+        n--;
+        *p++ = 0;
+    }
+}
 
 INCLUDE_ASM("nonmatchings/loadcore", func_00004AA0);
 #endif
 
 #if FW_VERSION < 282
-s32 func_00004B28(void *arg0) {
-    sceKernelCallUIDObjCommonFunction();
-    return M2C_FIELD(arg0, s32 *, 0xC);
+SceUID func_00004B28(SceSysmemUidCB *cb, SceSysmemUidCB *uidWithFunc, s32 funcId, void *ap) {
+    sceKernelCallUIDObjCommonFunction(cb, uidWithFunc, funcId, ap);
+    return cb->uid;
 }
 #endif
 
@@ -1246,12 +1513,67 @@ INCLUDE_ASM("nonmatchings/loadcore", func_00004B50);
 INCLUDE_ASM("nonmatchings/loadcore", func_00004BD4);
 #endif
 
-#if FW_VERSION >= 102 && FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/loadcore", func_00004CD8);
+#if FW_VERSION == 102
+SceModule *sceKernelModuleFromUID(SceUID uid) {
+    SceSysmemUidCB *cb;
+    SceModule *mod;
+    s32 intr;
+    s32 ret;
+
+    intr = func_0000665C();
+    ret = func_000061BC(uid, g_ModuleType, &cb);
+    if (ret < 0) {
+        mod = sceKernelFindModuleByUID(uid);
+        if (mod == NULL)
+            Kprintf("module.c:%s:failed: uid[0x%08x] ret=0x%08x\n", "sceKernelModuleFromUID", uid, ret);
+    } else {
+        mod = (SceModule *)((u8 *)cb + g_ModuleType->size * 4);
+    }
+    func_00006688(intr);
+    return mod;
+}
+#endif
+
+#if FW_VERSION == 103
+SceModule *sceKernelModuleFromUID(SceUID uid) {
+    SceSysmemUidCB *cb;
+    SceModule *mod;
+    s32 intr;
+    s32 ret;
+
+    intr = func_0000665C();
+    ret = func_00006284(uid, g_ModuleType, &cb);
+    if (ret < 0) {
+        mod = sceKernelFindModuleByUID(uid);
+        if (mod == NULL)
+            Kprintf("module.c:%s:failed: uid[0x%08x] ret=0x%08x\n", "sceKernelModuleFromUID", uid, ret);
+    } else {
+        mod = (SceModule *)((u8 *)cb + g_ModuleType->size * 4);
+    }
+    func_00006688(intr);
+    return mod;
+}
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/loadcore", sceKernelModuleFromUID);
+SceModule *sceKernelModuleFromUID(SceUID uid) {
+    SceSysmemUidCB *cb;
+    SceModule *mod;
+    s32 intr;
+    s32 ret;
+
+    intr = func_0000665C();
+    ret = sceKernelGetUIDcontrolBlockWithType(uid, g_ModuleType, &cb);
+    if (ret < 0) {
+        mod = sceKernelFindModuleByUID(uid);
+        if (mod == NULL)
+            Kprintf("module.c:%s:failed: uid[0x%08x] ret=0x%08x\n", "sceKernelModuleFromUID", uid, ret);
+    } else {
+        mod = (SceModule *)((u8 *)cb + g_ModuleType->size * 4);
+    }
+    func_00006688(intr);
+    return mod;
+}
 #endif
 
 #if FW_VERSION >= 282
@@ -1320,7 +1642,76 @@ INCLUDE_ASM("nonmatchings/loadcore", func_0000584C);
 INCLUDE_RODATA("nonmatchings/loadcore", D_000073A0);
 #endif
 
-#if FW_VERSION < 150 || FW_VERSION >= 282
+#if FW_VERSION == 100
+SceModule *sceKernelCreateModule(void) {
+    SceSysmemUidCB *cb;
+    SceModule *mod;
+
+    sceKernelCreateUID(g_ModuleType, "module", 0, &cb);
+    mod = (SceModule *)((u8 *)cb + g_ModuleType->size * 4);
+    if (mod == NULL)
+        return NULL;
+    mod->modId = cb->uid;
+    mod->moduleStartThreadPriority = -1;
+    mod->moduleStartThreadStacksize = -1;
+    mod->moduleStartThreadAttr = -1;
+    mod->moduleStopThreadPriority = -1;
+    mod->moduleStopThreadStacksize = -1;
+    mod->moduleStopThreadAttr = -1;
+    mod->moduleRebootBeforeThreadPriority = -1;
+    mod->moduleRebootBeforeThreadStacksize = -1;
+    mod->moduleRebootBeforeThreadAttr = -1;
+    return mod;
+}
+#endif
+
+#if FW_VERSION == 102
+SceModule *sceKernelCreateModule(void) {
+    SceSysmemUidCB *cb;
+    SceModule *mod;
+
+    func_000061AC(g_ModuleType, "module", 0, &cb);
+    mod = (SceModule *)((u8 *)cb + g_ModuleType->size * 4);
+    if (mod == NULL)
+        return NULL;
+    mod->modId = cb->uid;
+    mod->moduleStartThreadPriority = -1;
+    mod->moduleStartThreadStacksize = -1;
+    mod->moduleStartThreadAttr = -1;
+    mod->moduleStopThreadPriority = -1;
+    mod->moduleStopThreadStacksize = -1;
+    mod->moduleStopThreadAttr = -1;
+    mod->moduleRebootBeforeThreadPriority = -1;
+    mod->moduleRebootBeforeThreadStacksize = -1;
+    mod->moduleRebootBeforeThreadAttr = -1;
+    return mod;
+}
+#endif
+
+#if FW_VERSION == 103
+SceModule *sceKernelCreateModule(void) {
+    SceSysmemUidCB *cb;
+    SceModule *mod;
+
+    func_00006274(g_ModuleType, "module", 0, &cb);
+    mod = (SceModule *)((u8 *)cb + g_ModuleType->size * 4);
+    if (mod == NULL)
+        return NULL;
+    mod->modId = cb->uid;
+    mod->moduleStartThreadPriority = -1;
+    mod->moduleStartThreadStacksize = -1;
+    mod->moduleStartThreadAttr = -1;
+    mod->moduleStopThreadPriority = -1;
+    mod->moduleStopThreadStacksize = -1;
+    mod->moduleStopThreadAttr = -1;
+    mod->moduleRebootBeforeThreadPriority = -1;
+    mod->moduleRebootBeforeThreadStacksize = -1;
+    mod->moduleRebootBeforeThreadAttr = -1;
+    return mod;
+}
+#endif
+
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/loadcore", sceKernelCreateModule);
 #endif
 
@@ -1359,8 +1750,8 @@ INCLUDE_ASM("nonmatchings/loadcore", sceKernelGetModuleFromUID);
 #endif
 
 #if FW_VERSION < 150
-void sceKernelDeleteModule(void *arg0) {
-    sceKernelDeleteUID(M2C_FIELD(arg0, s32 *, 0x2C));
+void sceKernelDeleteModule(SceModule *mod) {
+    sceKernelDeleteUID(mod->modId);
 }
 #endif
 
@@ -1369,25 +1760,27 @@ INCLUDE_ASM("nonmatchings/loadcore", sceKernelDeleteModule);
 #endif
 
 #if FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/loadcore", func_00004DBC);
+void func_00004DBC(SceModule *mod) {
+    char *name = mod->modName;
+
+    if (mod->moduleBlockId > 0)
+        sceKernelRenameUID(mod->moduleBlockId, name);
+}
 
 INCLUDE_ASM("nonmatchings/loadcore", sceKernelModuleAssign);
 
-s32 sceKernelAllocModule(s32 arg0) {
-    s32 temp_v0;
-    s32 var_v0;
+SceModule *sceKernelAllocModule(SceLoadCoreExecFileInfo *execInfo) {
+    SceModule *mod;
 
-    temp_v0 = sceKernelCreateModule();
-    var_v0 = 0;
-    if (temp_v0 != 0) {
-        sceKernelModuleAssign(temp_v0, arg0);
-        var_v0 = temp_v0;
-    }
-    return var_v0;
+    mod = sceKernelCreateModule();
+    if (mod == NULL)
+        return NULL;
+    sceKernelModuleAssign(mod, execInfo);
+    return mod;
 }
 
-void sceKernelFreeModule(void *arg0) {
-    sceKernelDeleteModule(arg0);
+void sceKernelFreeModule(SceModule *mod) {
+    sceKernelDeleteModule(mod);
 }
 #endif
 
@@ -1395,33 +1788,92 @@ void sceKernelFreeModule(void *arg0) {
 INCLUDE_ASM("nonmatchings/loadcore", sceKernelCreateAssignModule);
 #endif
 
-#if FW_VERSION < 150 || FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/loadcore", sceKernelRegisterModule);
-#endif
+#if FW_VERSION < 150
+s32 sceKernelRegisterModule(SceModule *mod) {
+    SceModule *prev;
 
-#if FW_VERSION >= 102 && FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/loadcore", func_00005118);
-#endif
-
-#if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/loadcore", sceKernelReleaseModule);
-#endif
-
-#if FW_VERSION < 150 || FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/loadcore", sceKernelFindModuleByName);
-
-INCLUDE_ASM("nonmatchings/loadcore", sceKernelFindModuleByAddress);
-#endif
-
-#if FW_VERSION >= 102 && FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/loadcore", func_0000524C);
+    func_00004DBC(mod);
+    prev = (SceModule *)&g_loadCore.registeredMods;
+    mod->secId = g_loadCore.secModId++;
+    for (; prev->next != NULL; prev = prev->next)
+        ;
+    mod->next = prev->next;
+    prev->next = mod;
+    g_loadCore.regModCount++;
+    return 0;
+}
 #endif
 
 #if FW_VERSION >= 282
+INCLUDE_ASM("nonmatchings/loadcore", sceKernelRegisterModule);
+#endif
+
+#if FW_VERSION < 150
+s32 sceKernelReleaseModule(SceModule *mod) {
+    SceModule *prev;
+
+    if (mod == NULL)
+        return 0x80020324;
+    for (prev = (SceModule *)&g_loadCore.registeredMods; prev->next != NULL; prev = prev->next) {
+        if (prev->next == mod) {
+            prev->next = mod->next;
+            g_loadCore.regModCount--;
+            return 0;
+        }
+    }
+    Kprintf("module.c:%s:Cannot found modcb 0x%p\n", "sceKernelReleaseModule", mod);
+    return 0x80020001;
+}
+
+SceModule *sceKernelFindModuleByName(const char *name) {
+    s32 intr;
+    SceModule *mod;
+
+    intr = func_0000665C();
+    mod = func_00004BD4(name);
+    func_00006688(intr);
+    return mod;
+}
+#endif
+
+#if FW_VERSION >= 282
+INCLUDE_ASM("nonmatchings/loadcore", sceKernelFindModuleByName);
+#endif
+
+#if FW_VERSION < 150
+SceModule *sceKernelFindModuleByAddress(u32 addr) {
+    SceModule *mod;
+
+    for (mod = g_loadCore.registeredMods; mod != NULL; mod = mod->next) {
+        if (addr >= mod->textAddr && addr < mod->textAddr + mod->textSize + mod->dataSize + mod->bssSize)
+            return mod;
+    }
+    return NULL;
+}
+#endif
+
+#if FW_VERSION >= 282
+INCLUDE_ASM("nonmatchings/loadcore", sceKernelFindModuleByAddress);
+
 INCLUDE_ASM("nonmatchings/loadcore", sceKernelGetModuleGPByAddressForKernel);
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION >= 282
+#if FW_VERSION < 150
+SceModule *sceKernelFindModuleByUID(SceUID uid) {
+    SceModule *mod;
+
+    for (mod = g_loadCore.registeredMods; mod != NULL; mod = mod->next) {
+        if (mod->modId == uid)
+            return mod;
+        if (mod->secId == uid)
+            return mod;
+    }
+    Kprintf("module.c:%s:0x%08x not found\n", "sceKernelFindModuleByUID", uid);
+    return NULL;
+}
+#endif
+
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/loadcore", sceKernelFindModuleByUID);
 #endif
 
@@ -1433,14 +1885,21 @@ INCLUDE_ASM("nonmatchings/loadcore", sceKernelGetModuleListWithAlloc);
 s32 sceKernelModuleCount(void) {
     return D_00008914;
 }
-#endif
 
-#if FW_VERSION >= 102 && FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/loadcore", func_000052BC);
-#endif
+s32 sceKernelGetModuleList(u32 size, SceUID *list) {
+    SceModule *mod;
 
-#if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/loadcore", sceKernelGetModuleList);
+    if (size < g_loadCore.regModCount) {
+        Kprintf("module.c:%s:size 0x%x < 0x%x\n", "sceKernelGetModuleList", size, g_loadCore.regModCount);
+        return 0x80020145;
+    }
+    for (mod = g_loadCore.registeredMods; mod != NULL; mod = mod->next)
+        *list++ = mod->modId;
+    return 0;
+}
+
+/* zero words after module.c's strings (start of the next object's .rodata?) */
+const u32 g_rodataPad[13] = { 0 };
 #endif
 
 #if FW_VERSION >= 282
@@ -1520,7 +1979,16 @@ INCLUDE_ASM("nonmatchings/loadcore", func_0000646C);
 
 INCLUDE_ASM("nonmatchings/loadcore", func_000064E8);
 
-INCLUDE_ASM("nonmatchings/loadcore", func_00006550);
+s32 func_00006550(const char *s) {
+    s32 len;
+
+    len = 0;
+    if (s == NULL)
+        return len;
+    while (*s++ != '\0')
+        len++;
+    return len;
+}
 
 INCLUDE_ASM("nonmatchings/loadcore", func_00006584);
 
