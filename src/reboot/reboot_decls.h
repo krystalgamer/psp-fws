@@ -292,6 +292,7 @@ struct Unk_func_0000D694_0 {
 
 extern void *D_00014D00;
 extern s32 (*D_00014EE4)(s32, s32) SDATA;
+extern char D_00015D38[];
 extern const SceNandChipEntry D_00016C14[17];
 extern s32 D_00016DE4 SDATA;
 extern s32 D_00016DE8 SDATA;

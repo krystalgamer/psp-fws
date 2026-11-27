@@ -298,7 +298,22 @@ s32 func_00009BC8(UFatUnit *unit, u32 cluster) {
     return 0;
 }
 #else
-INCLUDE_ASM("nonmatchings/reboot_008F5C", func_00009BC8);
+s32 func_00009BC8(UFatUnit *unit, u32 cluster) {
+    u32 next;
+    s32 ret;
+
+    if (cluster != 0) {
+        while ((s32)(cluster | ~unit->fatMask) < -10) {
+            next = func_00007350(unit, cluster);
+            ret = func_0000C0B4(unit, cluster);
+            if (ret < 0) {
+                return ret;
+            }
+            cluster = next;
+        }
+    }
+    return 0;
+}
 #endif
 
 INCLUDE_ASM("nonmatchings/reboot_008F5C", func_00009C58);
@@ -541,7 +556,18 @@ s32 func_0000E028(void) {
 #endif
 
 #if FW_VERSION >= 150
-INCLUDE_ASM("nonmatchings/reboot_008F5C", func_0000E028);
+s32 func_0000E028(void) {
+    s32 ret;
+
+    ret = 0;
+    if ((&D_0001D890 != NULL) && (D_0001D890.unk1B4 != 0)) {
+        ret = func_0000E924(&D_0001D890);
+        if (ret < 0) {
+            Kprintf(D_00015D38, "LFlashSync", ret);
+        }
+    }
+    return ret;
+}
 #endif
 
 s32 func_0000E098(void) {

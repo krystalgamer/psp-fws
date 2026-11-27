@@ -171,6 +171,7 @@
  "vars": {
   "D_00014D00": "extern void *D_00014D00;",
   "D_00014EE4": "extern s32 (*D_00014EE4)(s32, s32) SDATA;",
+  "D_00015D38": "extern char D_00015D38[];",
   "D_00016C14": "extern const SceNandChipEntry D_00016C14[17];",
   "D_00016DE4": "extern s32 D_00016DE4 SDATA;",
   "D_00016DE8": "extern s32 D_00016DE8 SDATA;",
