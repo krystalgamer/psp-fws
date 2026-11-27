@@ -173,3 +173,20 @@ sceSysregUsbIoEnable = 0x00008BB0; // type:func
 sceSysregUsbIoDisable = 0x00008BB8; // type:func
 sceSysreg_driver_A46E9CA8 = 0x00008BC8; // type:func
 sceSysregUsbGetConnectStatus = 0x00008BD0; // type:func
+
+// NID-derived names
+sceUsbActivate = 0x00000000; // type:func
+sceUsbDeactivate = 0x00000318; // type:func
+sceUsbWaitState = 0x00000598; // type:func
+module_stop = 0x00002B90; // type:func
+module_reboot_before = 0x00002C60; // type:func
+sceUsbbdReqCancelAll = 0x00002E74; // type:func
+module_start = 0x00002F3C; // type:func
+sceUsbbdClearFIFO = 0x00005A24; // type:func
+sceUsbbdStall = 0x00005A74; // type:func
+sceUsbStart = 0x000077F4; // type:func
+sceUsbStop = 0x00007B04; // type:func
+sceUsbGetDrvList = 0x00007DE4; // type:func
+sceUsbGetDrvState = 0x000080B0; // type:func
+sceUsbbdRegister = 0x00008350; // type:func
+sceUsbbdUnregister = 0x000084F4; // type:func
