@@ -45,19 +45,25 @@ typedef struct {
     u32 clockAdjust;        /* 0x50 (2.70+: 0x58): scratchpad 8, sum of syscon clocks overwritten by SetCurrentTick */
 } SceRtcState;
 
-extern s32 rtc_handler;
-extern M2C_UNK rtc_handler;
+typedef struct SceSysEventHandler {
+    s32 size;                           /* 0x40 */
+    const char *name;                   /* "SceRtc" */
+    s32 typeMask;
+    s32 (*handler)(s32 ev, const char *name, void *param, s32 *result);
+    s32 gp;
+    s32 busy;
+    struct SceSysEventHandler *next;
+    s32 reserved[9];
+} SceSysEventHandler;
+
 extern const s8 g_daysInMonth[2][12];
 extern SceRtcState g_rtc;
-extern s32 rtc_handler;
+extern SceSysEventHandler rtc_handler;
 
 void alarmCallback(s32 arg0, void *arg1);
 u32 clockHandler(void);
 char *formatDigits2(char *buf, s32 n);
 char *formatDigits4(char *buf, s32 n);
-s32 sysEventHandler(s32 arg0);
-char *formatDigits2(char *buf, s32 n);
-s32 registerFunctions(void);
 s32 getTimeOfDayHandler(SceKernelTimeval *tv, SceKernelTimezone *tz);
 void *memset(void *s, s32 c, u32 n);
 s32 module_reboot_before(void);
@@ -73,8 +79,8 @@ s32 sceKernelPowerLock(s32 type);
 s32 sceKernelPowerUnlock(s32 type);
 s32 sceKernelRegisterLibcRtcFunc(u32 (*clock)(void), u32 (*time)(u32 *), s32 (*gettimeofday)(SceKernelTimeval *, SceKernelTimezone *));
 s32 sceKernelRegisterRtcFunc(u32 (*clock)(void), u32 (*time)(u32 *), s32 (*gettimeofday)(SceKernelTimeval *, SceKernelTimezone *), s32 (*getSecureTick)(u64 *));
-M2C_UNK sceKernelRegisterSysEventHandler(M2C_UNK *);
-M2C_UNK sceKernelUnregisterSysEventHandler(M2C_UNK *);
+s32 sceKernelRegisterSysEventHandler(SceSysEventHandler *handler);
+s32 sceKernelUnregisterSysEventHandler(SceSysEventHandler *handler);
 s32 sceRtcCheckValid(const pspTime *date);
 s32 sceRtcCompareTick(const u64 *tick1, const u64 *tick2);
 s32 sceRtcConvertLocalTimeToUTC(const u64 *tickLocal, u64 *tickUTC);
