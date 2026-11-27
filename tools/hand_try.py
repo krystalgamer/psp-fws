@@ -75,6 +75,7 @@ def main():
     ap.add_argument("cfile")
     ap.add_argument("--decls")
     ap.add_argument("--diff", action="store_true")
+    ap.add_argument("--extra", default="", help="flags appended to every tried setting, e.g. --extra=-mext")
     ap.add_argument("--perm", action="store_true", help="write tmp/perm/MODULE/FUNC for decomp-permuter (own setting)")
     a = ap.parse_args()
     mod = AD.Module(a.ver, a.module)
@@ -99,7 +100,11 @@ def main():
     target = mod.target_words(name)
     comp, own = AD.Module.file_setting(mod.file_of(name))
     best = None
-    for opt in AD.OPTS:
+    opts = AD.OPTS
+    if a.extra:
+        opts = [f"{o} {a.extra}" for o in AD.OPTS]
+        own = f"{own} {a.extra}"
+    for opt in opts:
         words, err = AD.compile_words(text, comp, opt)
         if words is None:
             print(f"{comp} {opt}: compile error\n{(err or '')[-800:]}")

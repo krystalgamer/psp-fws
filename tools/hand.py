@@ -71,6 +71,21 @@ def main():
                 store["funcs"][fm[1]] = line.strip()
         types = "\n".join(l for l in extra.splitlines()
                           if not re.match(r"^\s*extern\b", l) and not re.match(r"^(?!typedef|struct|union|enum)[\w\s\*]+?\b\w+\(.*\);\s*$", l))
+        # drop type definitions the store already has (re-runs with the same --decls)
+        have = "\n".join(v for k2, v in store.get("types", {}).items() if k2 != f"hand_{name}")
+        defined = set(re.findall(r"\b(?:struct|union|enum)\s+(\w+)\s*\{", have)) | \
+            set(re.findall(r"\}\s*(\w+)\s*;", have)) | set(re.findall(r"^typedef\b[^{;]*?\b(\w+)\s*;", have, re.M))
+        blocks, cur, depth = [], "", 0
+        for ch in types:
+            cur += ch
+            depth += (ch == "{") - (ch == "}")
+            if ch == ";" and depth == 0:
+                blocks.append(cur); cur = ""
+        blocks.append(cur)
+        def names(b):
+            return set(re.findall(r"\b(?:struct|union|enum)\s+(\w+)\s*\{", b)) | \
+                set(re.findall(r"\}\s*(\w+)\s*;", b)) | set(re.findall(r"^\s*typedef\b[^{;]*?\b(\w+)\s*;", b, re.M))
+        types = "".join(b for b in blocks if not (names(b) and names(b) <= defined))
         if types.strip():
             store.setdefault("types", {})[f"hand_{name}"] = types.strip()
         import structify
