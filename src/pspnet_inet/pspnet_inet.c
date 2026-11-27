@@ -3839,10 +3839,10 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_0001B094);
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_0001B1B0);
 
-void func_0001B5C0(void) {
+void rip_init(void) {
     D_0002C30C = 0x2000;
     D_0002C310 = 0x2000;
-    in_pcbinit(&udbtable, 1, 1);
+    in_pcbinit(&rawcbtable, 1, 1);
 }
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_0001B5FC);
@@ -3882,28 +3882,28 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_0001BC98);
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_0001BEDC);
 
 #if FW_VERSION < 201
-void func_0001CE38(void) {
+void udp_init(void) {
     D_0002C31C = 0x2400;
     D_0002C320 = 0xA280;
     D_0002C314 = 1;
     func_0002C94C(&D_0002DC30, 0, 0x48);
-    in_pcbinit(&tcbtable, D_0002E8D8, D_0002E8D8);
+    in_pcbinit(&udbtable, D_0002E8D8, D_0002E8D8);
 }
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_0001CE38);
+INCLUDE_ASM("nonmatchings/pspnet_inet", udp_init);
 #endif
 
 #if FW_VERSION >= 151 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet", tcp_ctlinput);
+INCLUDE_ASM("nonmatchings/pspnet_inet", udp_ctlinput);
 #endif
 
 #if FW_VERSION < 151
-void *tcp_ctlinput(s32 cmd, struct sockaddr *sa, void *v) {
+void *udp_ctlinput(s32 cmd, struct sockaddr *sa, void *v) {
     struct ip *ip = v;
     struct tcphdr *th;
-    void (*notify)() = func_0001D1E4;
+    void (*notify)() = udp_notify;
     s32 errno;
 
     if (sa->sa_family != AF_INET || sa->sa_len != sizeof(struct sockaddr_in)) {
@@ -3922,9 +3922,9 @@ void *tcp_ctlinput(s32 cmd, struct sockaddr *sa, void *v) {
     }
     if (ip) {
         th = (struct tcphdr *)((u8 *)ip + ((ip->ip_hl_v & 0xF) << 2));
-        in_pcbnotify(&tcbtable, ((struct sockaddr_in *)sa)->sin_addr, th->th_dport, ip->ip_src, th->th_sport, errno, notify);
+        in_pcbnotify(&udbtable, ((struct sockaddr_in *)sa)->sin_addr, th->th_dport, ip->ip_src, th->th_sport, errno, notify);
     } else {
-        in_pcbnotifyall(&tcbtable, ((struct sockaddr_in *)sa)->sin_addr, errno, notify);
+        in_pcbnotifyall(&udbtable, ((struct sockaddr_in *)sa)->sin_addr, errno, notify);
     }
     return NULL;
 }
@@ -3942,18 +3942,18 @@ void func_0001C208(void) {
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_0001C26C);
 #endif
 
-s32 tcp_sysctl(s32 *name, u32 namelen, void *oldp, u32 *oldlenp, void *newp, u32 newlen) {
+s32 udp_sysctl(s32 *name, u32 namelen, void *oldp, u32 *oldlenp, void *newp, u32 newlen) {
     if (namelen != 1) {
         return 20; /* ENOTDIR */
     }
     switch (name[0]) {
-    case 1: /* TCPCTL_RFC1323 */
+    case 1: /* UDPCTL_CHECKSUM */
         return sysctl_int(oldp, oldlenp, newp, newlen, &D_0002C314);
-    case 2: /* TCPCTL_SENDSPACE */
+    case 2: /* UDPCTL_SENDSPACE */
         return sysctl_int(oldp, oldlenp, newp, newlen, &D_0002C31C);
-    case 3: /* TCPCTL_RECVSPACE */
+    case 3: /* UDPCTL_RECVSPACE */
         return sysctl_int(oldp, oldlenp, newp, newlen, &D_0002C320);
-    case 4: /* SCE: tcpstat */
+    case 4: /* SCE: udpstat */
         return sysctl_rdstruct(oldp, oldlenp, newp, &D_0002DC30, 0x48);
     default:
         return 109; /* ENOPROTOOPT */
@@ -3963,11 +3963,11 @@ s32 tcp_sysctl(s32 *name, u32 namelen, void *oldp, u32 *oldlenp, void *newp, u32
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_0001C448);
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_0001D1E4);
+INCLUDE_ASM("nonmatchings/pspnet_inet", udp_notify);
 #endif
 
 #if FW_VERSION < 201
-void func_0001D1E4(void *arg0, s16 arg1) {
+void udp_notify(void *arg0, s16 arg1) {
     void *var_a2;
 
     var_a2 = M2C_FIELD(arg0, void **, 0x1C);
@@ -4450,14 +4450,14 @@ void func_0002544C(void *arg0) {
 #endif
 
 #if FW_VERSION < 151
-void func_00025468(struct in_addr addr) {
-    in_pcbnotifyall(&D_0002DD10, addr, 0x7A, func_00023B08);
+void tcp_mtudisc_callback(struct in_addr addr) {
+    in_pcbnotifyall(&tcbtable, addr, 0x7A, tcp_mtudisc);
 }
 #endif
 
 #if FW_VERSION >= 151 && FW_VERSION < 282
-void func_00025468(struct in_addr addr) {
-    in_pcbnotifyall(&D_0002DD10, addr, 0x7A, func_0002373C);
+void tcp_mtudisc_callback(struct in_addr addr) {
+    in_pcbnotifyall(&tcbtable, addr, 0x7A, func_0002373C);
 }
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_0002373C);
@@ -4485,7 +4485,7 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_00023AD4);
 #endif
 
 #if FW_VERSION < 151 || FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_00023B08);
+INCLUDE_ASM("nonmatchings/pspnet_inet", tcp_mtudisc);
 #endif
 
 #if FW_VERSION < 151

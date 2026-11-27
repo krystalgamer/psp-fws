@@ -1272,7 +1272,6 @@ extern s32 D_0002DC30;
 extern struct inpcbtable D_0002DC78;
 extern struct SceTailqHead D_0002DC98[13];
 extern s32 D_0002DD04;
-extern struct inpcbtable D_0002DD10;
 extern s32 D_0002DF50;
 extern s32 D_0002E5EC;
 extern s32 D_0002E5F0;
@@ -1329,6 +1328,7 @@ extern s32 pfslowtimo_now; /* pfslowtimo_now (SCE tcp timers are absolute slowti
 extern u32 raw_recvspace; /* raw_recvspace */
 extern u32 raw_sendspace; /* raw_sendspace */
 extern struct { struct rawcb *lh_first; } rawcb; /* rawcb */
+extern struct inpcbtable rawcbtable;
 extern struct radix_node_head *rt_tables[32]; /* rt_tables */
 extern s32 rttrash; /* rttrash */
 extern struct soqhead so_list;
@@ -1492,16 +1492,13 @@ void func_0001B50C(void *arg0);
 void func_0001C208(void);
 void func_0001C2E0(struct inpcb *inp);
 void func_0001C57C(struct Unk_func_0001C57C_0 *arg0, s16 arg1);
-void func_0001D1E4(void *arg0, s16 arg1);
 s32 func_000232C0(struct Unk_func_000232C0_0 *arg0);
 void func_0002373C(struct inpcb *inp, s32 errno);
 s32 func_00023828(struct Unk_func_00023828_0 *arg0);
 void func_00023AB8(struct Unk_func_00023AB8_0 *arg0);
-void func_00023B08(struct inpcb *inp, s32 errno);
 void func_000244B0(void);
 s32 func_000251A4(void *arg0);
 void func_0002544C(void *arg0);
-void func_00025468(struct in_addr addr);
 void func_00025638(struct sppp *sp, u16 proto, u8 type, u8 ident, u16 len, void *data);
 void func_00025E94(void);
 void func_00026FF4(const struct cp *cp, struct sppp *sp, u32 type, u32 id, ...);
@@ -1624,12 +1621,15 @@ void syn_cache_cleanup(struct tcpcb *tp);
 s32 sysctl_int(void *oldp, u32 *oldlenp, void *newp, u32 newlen, s32 *valp);
 s32 sysctl_rdstruct(void *oldp, u32 *oldlenp, void *newp, const void *sp, u32 len);
 struct tcpcb *tcp_close(struct tcpcb *tp);
-void *tcp_ctlinput(s32 cmd, struct sockaddr *sa, void *v);
 struct tcpcb *tcp_drop(struct tcpcb *tp, s32 errno);
 s32 tcp_freeq(struct tcpcb *tp);
+void tcp_mtudisc(struct inpcb *inp, s32 errno);
+void tcp_mtudisc_callback(struct in_addr addr);
 struct tcpcb *tcp_newtcpcb(s32 family, void *aux);
 void tcp_notify(struct inpcb *inp, s32 error);
 s32 tcp_output(struct tcpcb *tp);
-s32 tcp_sysctl(s32 *name, u32 namelen, void *oldp, u32 *oldlenp, void *newp, u32 newlen);
+void *udp_ctlinput(s32 cmd, struct sockaddr *sa, void *v);
+void udp_notify(void *arg0, s16 arg1);
+s32 udp_sysctl(s32 *name, u32 namelen, void *oldp, u32 *oldlenp, void *newp, u32 newlen);
 
 #endif
