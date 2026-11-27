@@ -422,6 +422,21 @@ struct bpf_insn {
 #define BPF_JA 0x00
 #define BPF_K 0x00
 #define BPF_MEMWORDS 16
+struct bpf_program {
+    u32 bf_len;
+    struct bpf_insn *bf_insns;
+};
+#define BPF_MAXINSNS 512
+#define reset_d(d) do { \
+    if ((d)->bd_hbuf) { \
+        (d)->bd_fbuf = (d)->bd_hbuf; \
+        (d)->bd_hbuf = 0; \
+    } \
+    (d)->bd_slen = 0; \
+    (d)->bd_hlen = 0; \
+    (d)->bd_rcount = 0; \
+    (d)->bd_dcount = 0; \
+} while (0)
 
 
 s32 sceNetStrcmp(const char *s1, const char *s2);
@@ -637,6 +652,8 @@ void func_00003100(struct SceNetThreadInfo *arg0);
 void func_00003380(void);
 void func_00003400(struct SceNetThreadInfo *arg0);
 void func_000037E4(void);
+s32 func_000041D8(struct bpf_d *d, struct bpf_program *fp);
+s32 func_000042FC(struct bpf_d *d, struct ifreq *ifr);
 void func_00004430(s32 arg0, u8 *arg1);
 void func_00005404(void *arg0);
 void func_00005744(struct Unk_func_00005744_0 *arg0);

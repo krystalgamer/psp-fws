@@ -1834,9 +1834,84 @@ INCLUDE_ASM("nonmatchings/pspnet", bpfwrite);
 
 INCLUDE_ASM("nonmatchings/pspnet", bpfioctl);
 
-INCLUDE_ASM("nonmatchings/pspnet", func_000041D8);
+s32 func_000041D8(struct bpf_d *d, struct bpf_program *fp) {
+    struct bpf_insn *fcode, *old;
+    u32 flen, size;
+    s32 s;
 
-INCLUDE_ASM("nonmatchings/pspnet", func_000042FC);
+    old = d->bd_filter;
+    if (fp->bf_insns == 0) {
+        if (fp->bf_len != 0)
+            return 22;
+        s = _sce_pspnet_spllock();
+        d->bd_filter = 0;
+        reset_d(d);
+        _sce_pspnet_splunlock(s);
+        if (old != 0)
+            sceNetFreeInternal(old);
+        return 0;
+    }
+    flen = fp->bf_len;
+    if (flen > BPF_MAXINSNS)
+        return 22;
+
+    size = flen * sizeof(*fp->bf_insns);
+    fcode = sceNetMallocInternal(size);
+    if (fcode == NULL)
+        return 12;
+    sceNetBcopy(fp->bf_insns, fcode, size);
+    if (bpf_validate(fcode, (s32)flen)) {
+        s = _sce_pspnet_spllock();
+        d->bd_filter = fcode;
+        reset_d(d);
+        _sce_pspnet_splunlock(s);
+        if (old != 0)
+            sceNetFreeInternal(old);
+        return 0;
+    }
+    sceNetFreeInternal(fcode);
+    return 22;
+}
+
+s32 func_000042FC(struct bpf_d *d, struct ifreq *ifr) {
+    struct bpf_if *bp;
+    s32 s, error;
+
+    for (bp = D_0000BC10; bp != 0; bp = bp->bif_next) {
+        struct ifnet *ifp = bp->bif_ifp;
+
+        if (ifp == 0 ||
+            sceNetStrcmp(ifp->if_xname, ifr->ifr_name) != 0)
+            continue;
+        if (d->bd_sbuf == 0) {
+            error = bpf_allocbufs(d);
+            if (error != 0)
+                return error;
+        }
+        s = _sce_pspnet_spllock();
+        if (bp != d->bd_bif) {
+            if (d->bd_bif) {
+                struct bpf_if *obp = d->bd_bif;
+                struct bpf_d **p = &obp->bif_dlist;
+
+                while (*p != d)
+                    p = &(*p)->bd_next;
+                *p = (*p)->bd_next;
+                if (obp->bif_dlist == NULL)
+                    *obp->bif_driverp = NULL;
+                d->bd_bif = NULL;
+            }
+            d->bd_bif = bp;
+            d->bd_next = bp->bif_dlist;
+            bp->bif_dlist = d;
+            *bp->bif_driverp = bp;
+        }
+        reset_d(d);
+        _sce_pspnet_splunlock(s);
+        return 0;
+    }
+    return 6;
+}
 
 #if FW_VERSION < 201
 void func_00004430(s32 arg0, u8 *arg1) {
