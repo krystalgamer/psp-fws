@@ -713,7 +713,24 @@ s32 func_00001A4C(void *arg0) {
 
 INCLUDE_ASM("nonmatchings/isofs", func_00001B0C);
 
+#if FW_VERSION < 151
+s32 func_00001C5C(const char *path) {
+    s32 ret = 0;
+
+    if (path != NULL) {
+        if (path[0] != '/') {
+            ret = 2;
+            if (strchr(path, '/') == NULL) {
+                return ret;
+            }
+        }
+        ret = (strncmp(path, D_000061C8, 8) == 0) ? 3 : 2;
+    }
+    return ret;
+}
+#else
 INCLUDE_ASM("nonmatchings/isofs", func_00001C5C);
+#endif
 
 #if FW_VERSION >= 330
 INCLUDE_ASM("nonmatchings/isofs", func_00001CC8);
@@ -757,8 +774,33 @@ INCLUDE_ASM("nonmatchings/isofs", func_0000376C);
 INCLUDE_ASM("nonmatchings/isofs", func_000036B0);
 #endif
 
-#if FW_VERSION < 201
+#if FW_VERSION < 150
+s32 func_00003A24(IsofsUnit *unit, u32 lbn, void *buf) {
+    IsofsMgr *mgr = isofsGetMgr();
+    u32 args[8];
+
+    args[1] = (FW_VERSION == 100) ? 1 : 3;
+    args[4] = 0x1000;
+    args[5] = 0x1000;
+    args[0] = 0;
+    args[3] = 2;
+    args[6] = 0;
+    args[7] = 0;
+    if (mgr->driveType == 2) {
+        args[2] = func_0000506C(lbn);
+    } else {
+        args[2] = lbn;
+    }
+    return sceIoDevctl(unit->blockDev, 0x1E380C0, args, 0x20, buf, args[4]);
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/isofs", func_00003A24);
+#endif
+
+#if FW_VERSION < 201
+INCLUDE_ASM("nonmatchings/isofs", func_00003AC8);
 
 void func_00003AE8(void *arg0) {
     M2C_FIELD(arg0, s8 *, 0) = 0x2E;

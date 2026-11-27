@@ -164,3 +164,4 @@ sceUmdRegisterInsertEjectUMDCallBack = 0x00008168; // type:func
 sceUmdUnRegisterInsertEjectUMDCallBack = 0x00008178; // type:func
 sceUmdSetDriveStatus = 0x00008188; // type:func
 func_00004F74 = 0x00004F7C; // type:func
+func_00003AC8 = 0x00003B00; // type:func

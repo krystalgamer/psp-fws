@@ -76,3 +76,4 @@ g_isofsMgr = 0x00009C40;
 isofsGetMgr = 0x00007700; // type:func
 func_000003C8 = 0x000003C8; // type:func
 func_00004F74 = 0x00004F74; // type:func
+func_00003AC8 = 0x00003AC8; // type:func
