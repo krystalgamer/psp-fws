@@ -1,11 +1,11 @@
 /* cflags[152]: -O2 -frename-registers */
 /* cflags[150]: -O2 -frename-registers */
-/* cflags[100,102]: -O2 -frename-registers */
+/* cflags[100,102,103]: -O2 -frename-registers */
 #include "common.h"
 #include "k1.h"
 #include "mpegbase_decls.h"
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/mpegbase", func_00000000);
 
 INCLUDE_ASM("nonmatchings/mpegbase", func_00000030);
@@ -127,7 +127,7 @@ s32 sceMpegbase_driver_0530BE4E(s32 arg0) {
 }
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/mpegbase", func_0000099C);
 #endif
 
@@ -179,7 +179,7 @@ INCLUDE_ASM("nonmatchings/mpegbase", func_00001130);
 INCLUDE_ASM("nonmatchings/mpegbase", func_00000EA4);
 #endif
 
-#if FW_VERSION != 102
+#if FW_VERSION == 100 || FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/mpegbase", sceMpegBasePESpacketCopy);
 #endif
 
@@ -219,7 +219,7 @@ void func_00001574(void) {
 }
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/mpegbase", func_00000C70);
 
 INCLUDE_ASM("nonmatchings/mpegbase", func_00000FC0);
