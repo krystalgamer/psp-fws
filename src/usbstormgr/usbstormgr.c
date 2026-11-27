@@ -1,3 +1,4 @@
+/* cflags[151]: -Os */
 #include "common.h"
 #include "usbstormgr_decls.h"
 
@@ -56,9 +57,33 @@ INCLUDE_ASM("nonmatchings/usbstormgr", func_000003C4);
 INCLUDE_ASM("nonmatchings/usbstormgr", func_00000480);
 #endif
 
+#if FW_VERSION != 151
 INCLUDE_ASM("nonmatchings/usbstormgr", func_000004E0);
+#else
+s32 func_000004E0(s32 arg0, s32 arg1) {
+    s32 var_v1;
 
+    var_v1 = 0;
+    if (sceUsbstorSendData(arg0, arg1, 0xF4240) < 0) {
+        var_v1 = -1;
+    }
+    return var_v1;
+}
+#endif
+
+#if FW_VERSION != 151
 INCLUDE_ASM("nonmatchings/usbstormgr", func_0000050C);
+#else
+s32 func_0000050C(s32 arg0, s32 arg1) {
+    s32 var_v1;
+
+    var_v1 = 0;
+    if (sceUsbstorRecvData(arg0, arg1, 0xF4240) < 0) {
+        var_v1 = -1;
+    }
+    return var_v1;
+}
+#endif
 
 INCLUDE_ASM("nonmatchings/usbstormgr", func_00000538);
 

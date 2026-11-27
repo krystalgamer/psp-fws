@@ -62,9 +62,13 @@ extern M2C_UNK D_000051A0_v250;
 s32 func_00000170(struct Unk_func_00000170_0 *arg0, struct Unk_func_00000170_1 *arg1, s32 arg2);
 s32 func_0000019C(struct Unk_func_0000019C_0 *arg0, struct Unk_func_0000019C_1 *arg1, s32 arg2);
 s32 func_000001CC(struct Unk_func_000001CC_0 *arg0, struct Unk_func_000001CC_1 *arg1, s32 arg2);
+s32 func_000004E0(s32 arg0, s32 arg1);
+s32 func_0000050C(s32 arg0, s32 arg1);
 s32 func_000017C4(void);
 s32 func_00001840(void);
 void func_00003610(void);
 void func_00003B58(void);
+s32 sceUsbstorRecvData(s32, s32, s32);
+s32 sceUsbstorSendData(s32, s32, s32);
 
 #endif
