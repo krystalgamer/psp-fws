@@ -218,6 +218,7 @@
   "ip_drain": "void ip_drain(void);",
   "ip_freef": "void ip_freef();",
   "ip_input": "void ip_input(struct mbuf *m);",
+  "ip_optcopy": "s32 ip_optcopy(struct ip *ip, struct ip *jp);",
   "ip_optlen": "s32 ip_optlen(void *inp);",
   "ip_output": "s32 ip_output(struct mbuf *m0, struct mbuf *opt, struct route *ro, s32 flags, struct ip_moptions *imo);",
   "ip_rtaddr": "struct in_ifaddr *ip_rtaddr(struct in_addr dst);",

@@ -511,3 +511,4 @@ ip_output = 0x000169EC; // type:func
 ip_savecontrol = 0x000160E4; // type:func
 ip_stripoptions = 0x00016938; // type:func
 icmp_sysctl = 0x000196DC; // type:func
+ip_optcopy = 0x000177A4; // type:func

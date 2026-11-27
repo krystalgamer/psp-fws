@@ -1620,6 +1620,7 @@ struct sockaddr_in *in_selectsrc(struct sockaddr_in *sin, struct route *ro, s32 
 void ip_drain(void);
 void ip_freef();
 void ip_input(struct mbuf *m);
+s32 ip_optcopy(struct ip *ip, struct ip *jp);
 s32 ip_optlen(void *inp);
 s32 ip_output(struct mbuf *m0, struct mbuf *opt, struct route *ro, s32 flags, struct ip_moptions *imo);
 struct in_ifaddr *ip_rtaddr(struct in_addr dst);

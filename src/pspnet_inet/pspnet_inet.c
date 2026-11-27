@@ -3651,7 +3651,41 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", ip_output);
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_000175DC);
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_000177A4);
+#if FW_VERSION < 201
+s32 ip_optcopy(struct ip *ip, struct ip *jp) {
+    u8 *cp, *dp;
+    s32 opt, optlen, cnt;
+
+    cp = (u8 *)(ip + 1);
+    dp = (u8 *)(jp + 1);
+    cnt = ((ip->ip_hl_v & 0xF) << 2) - sizeof(struct ip);
+    for (; cnt > 0; cnt -= optlen, cp += optlen) {
+        opt = cp[0];
+        if (opt == 0) { /* IPOPT_EOL */
+            break;
+        }
+        if (opt == 1) { /* IPOPT_NOP */
+            *dp++ = 1;
+            optlen = 1;
+            continue;
+        }
+        optlen = cp[1];
+        if (optlen > cnt) {
+            optlen = cnt;
+        }
+        if (opt & 0x80) { /* IPOPT_COPIED */
+            func_0002C9B8(cp, dp, (u32)optlen);
+            dp += optlen;
+        }
+    }
+    for (optlen = dp - (u8 *)(jp + 1); optlen & 0x3; optlen++) {
+        *dp++ = 0;
+    }
+    return optlen;
+}
+#else
+INCLUDE_ASM("nonmatchings/pspnet_inet", ip_optcopy);
+#endif
 
 #if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_0001788C);
