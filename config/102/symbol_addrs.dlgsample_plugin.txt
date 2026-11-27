@@ -1,0 +1,29 @@
+// shared names (tools/add_version.py) begin
+D_000004B8 = 0x000004BC; // rom:0x53C
+D_000004C4 = 0x000004C8; // rom:0x548
+D_000004C8 = 0x000004CC; // rom:0x54C
+D_000004CC = 0x000004D0; // rom:0x550
+D_000004D4 = 0x000004D8; // rom:0x558
+D_000004E4 = 0x000004F4; // rom:0x574
+D_000004E8 = 0x000004F8; // rom:0x578
+D_00000500 = 0x00000510; // rom:0x590
+D_0000050C = 0x0000051C; // rom:0x59C
+D_00000520 = 0x00000530;
+D_00000524 = 0x00000534;
+D_0000053C = 0x0000054C;
+D_00000540 = 0x00000550;
+module_start = 0x0000010C; // type:func rom:0x18C
+module_stop = 0x0000013C; // type:func rom:0x1BC
+sce_paf_private_free2 = 0x00000368; // type:func rom:0x3E8
+_ZN3paf4View12PageActivateEPKc = 0x00000370; // type:func rom:0x3F0
+_ZN3paf4View9PageCloseEPKc = 0x00000378; // type:func rom:0x3F8
+_ZN3paf4View15SetEventHandlerEPKNS_18EventFunctionEntryE = 0x00000380; // type:func rom:0x400
+_ZN3paf4View12SetInterfaceEiPv = 0x00000388; // type:func rom:0x408
+_ZN3paf4View8PageOpenEPKcii = 0x00000390; // type:func rom:0x410
+_ZN3paf6Module12SetInterfaceEiPv = 0x00000398; // type:func rom:0x418
+_ZN3vsh14GetString_BackE6Locale = 0x000003A0; // type:func rom:0x420
+_ZN3vsh25ShowButtonNavigation_BackEb = 0x000003A8; // type:func rom:0x428
+_ZN3vsh30SetButtonNavigationString_BackEPKw = 0x000003B0; // type:func rom:0x430
+D_000004B8_v102 = 0x000004B8; // rom:0x538
+D_000004C4_v102 = 0x000004C4; // rom:0x544
+// shared names (tools/add_version.py) end

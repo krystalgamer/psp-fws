@@ -1,5 +1,5 @@
 /* lang: c++ */
-/* cflags[100]: -Os */
+/* cflags[100,102]: -Os */
 #include "common.h"
 #include "dlgsample_plugin_decls.h"
 
@@ -48,4 +48,3 @@ void func_000002A0(s32 arg0) {
 }
 
 INCLUDE_ASM("nonmatchings/dlgsample_plugin", func_000002C4);
-

@@ -15,6 +15,7 @@ options:
   cache_path: tmp/build/102/.splat_cache.dlgsample_plugin
   symbol_addrs_path:
     - config/102/symbol_addrs.dlgsample_plugin.txt
+    - config/102/func_starts.dlgsample_plugin.txt
     - tmp/build/102/prx_syms.dlgsample_plugin.txt
   reloc_addrs_path: [tmp/build/102/reloc_addrs.dlgsample_plugin.txt]
   asset_path: tmp/assets/102/dlgsample_plugin
@@ -53,7 +54,8 @@ segments:
     vram: 0x0
     subsegments:
       - { start: 0x80, type: asm, name: init, linker_section: .init }
-      - [0xA4, asm, dlgsample_plugin]
+      - [0xA4, c, dlgsample_plugin]
+      - [0x374, c, dlgsample_plugin_0002F4]
       - { start: 0x3CC, type: asm, name: fini, linker_section: .fini }
       - { start: 0x3E8, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x438, type: prxpad, order: .text }
@@ -71,7 +73,7 @@ segments:
       - { start: 0x540, type: rodata, name: dtors, linker_section: .dtors }
       - { start: 0x548, type: rodata, name: jcr, linker_section: .jcr }
       - { start: 0x54C, type: rodata, name: eh_frame, linker_section: .eh_frame }
-      - [0x550, rodata, dlgsample_plugin]
+      - [0x550, .rodata, dlgsample_plugin_0002F4]
       - { start: 0x564, type: prxpad, order: .rodata }
   - name: dlgsample_plugin_seg1
     type: code
