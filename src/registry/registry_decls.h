@@ -137,6 +137,7 @@ void func_000010B8(SceRegParam *param, SceRegIregHeader *hdr);
 s32 func_000012B0(const char *name, SceRegIregHeader *hdr);
 s32 func_00001560(const char *name, SceRegIregHeader *hdr);
 s32 func_00001608(s32 fd, u32 size, s32 a, s32 b);
+s32 func_00002350(SceRegIndexEntry *cat);
 s32 func_000046A8(s32, s32);
 s32 func_000061B4(s32 arg0);
 s32 func_00006674(s32 arg0);
