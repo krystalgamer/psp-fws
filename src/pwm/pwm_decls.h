@@ -14,8 +14,8 @@ s32 scePwmEnd(void);
 s32 scePwmInit(void);
 s32 scePwmResume(void);
 s32 sceSysregPwmClkDisable(void);
-M2C_UNK sceSysregPwmClkEnable();
+s32 sceSysregPwmClkEnable(void);
 s32 sceSysregPwmIoDisable(void);
-M2C_UNK sceSysregPwmIoEnable();
+s32 sceSysregPwmIoEnable(void);
 
 #endif

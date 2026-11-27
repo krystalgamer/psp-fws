@@ -59,6 +59,23 @@ s32 scePwmResume(void) {
     return 0;
 }
 
-INCLUDE_ASM("nonmatchings/pwm", func_00000350);
+s32 func_00000350(s32 ev_id) {
+    s32 i;
+
+    switch (ev_id) {
+    case 0x4004:
+        sceSysregPwmIoDisable();
+        sceSysregPwmClkDisable();
+        for (i = 0; i < 3; i++) {
+            D_00000590[i] = 0;
+        }
+        break;
+    case 0x10004:
+        sceSysregPwmClkEnable();
+        sceSysregPwmIoEnable();
+        break;
+    }
+    return 0;
+}
 
 INCLUDE_RODATA("nonmatchings/pwm", D_00000548);

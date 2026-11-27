@@ -7,9 +7,9 @@
   "scePwmInit": "s32 scePwmInit(void);",
   "scePwmResume": "s32 scePwmResume(void);",
   "sceSysregPwmClkDisable": "s32 sceSysregPwmClkDisable(void);",
-  "sceSysregPwmClkEnable": "M2C_UNK sceSysregPwmClkEnable();",
+  "sceSysregPwmClkEnable": "s32 sceSysregPwmClkEnable(void);",
   "sceSysregPwmIoDisable": "s32 sceSysregPwmIoDisable(void);",
-  "sceSysregPwmIoEnable": "M2C_UNK sceSysregPwmIoEnable();"
+  "sceSysregPwmIoEnable": "s32 sceSysregPwmIoEnable(void);"
  },
  "vars": {
   "D_00000550": "extern s32 D_00000550;",
