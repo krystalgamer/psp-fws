@@ -15,6 +15,7 @@ options:
   cache_path: tmp/build/260/.splat_cache.music_plugin
   symbol_addrs_path:
     - config/260/symbol_addrs.music_plugin.txt
+    - config/260/func_starts.music_plugin.txt
     - tmp/build/260/prx_syms.music_plugin.txt
   reloc_addrs_path: [tmp/build/260/reloc_addrs.music_plugin.txt]
   asset_path: tmp/assets/260/music_plugin
@@ -54,6 +55,7 @@ segments:
     subsegments:
       - { start: 0x80, type: asm, name: init, linker_section: .init }
       - [0xA4, c, music_plugin]
+      - [0x1BB4, c, music_plugin_crtend]
       - { start: 0x1C0C, type: asm, name: fini, linker_section: .fini }
       - { start: 0x1C28, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x1DA0, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }

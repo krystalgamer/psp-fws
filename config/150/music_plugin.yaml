@@ -15,6 +15,7 @@ options:
   cache_path: tmp/build/150/.splat_cache.music_plugin
   symbol_addrs_path:
     - config/150/symbol_addrs.music_plugin.txt
+    - config/150/func_starts.music_plugin.txt
     - tmp/build/150/prx_syms.music_plugin.txt
   reloc_addrs_path: [tmp/build/150/reloc_addrs.music_plugin.txt]
   asset_path: tmp/assets/150/music_plugin
@@ -54,6 +55,7 @@ segments:
     subsegments:
       - { start: 0x80, type: asm, name: init, linker_section: .init }
       - [0xA4, c, music_plugin]
+      - [0x5C714, c, music_plugin_crtend]
       - { start: 0x5DFD8, type: asm, name: fini, linker_section: .fini }
       - { start: 0x5DFF4, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x5E9F4, type: prxpad, order: .text }
@@ -73,6 +75,7 @@ segments:
       - { start: 0x5F4C8, type: rodata, name: eh_frame, linker_section: .eh_frame }
       - { start: 0x5F4FC, type: prxpad, order: .rodata }
       - [0x5F500, .rodata, music_plugin]
+      - [0x65BC0, .rodata, music_plugin_crtend]
       - { start: 0x65DC8, type: prxpad, order: .rodata }
   - name: music_plugin_seg1
     type: code
