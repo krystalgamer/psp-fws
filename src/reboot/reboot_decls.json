@@ -126,7 +126,8 @@
   "func_000138A0": "void func_000138A0(void);",
   "func_000138D8": "void func_000138D8(void);",
   "func_000138F8": "void func_000138F8(void);",
-  "func_00013AAC": "M2C_UNK func_00013AAC(M2C_UNK, M2C_UNK);",
+  "func_00013A60": "s32 func_00013A60(u32 bit, s32 on);",
+  "func_00013AAC": "s32 func_00013AAC(u32 mask, s32 on);",
   "module_bootstart": "s32 module_bootstart(void);"
  },
  "types": {

@@ -419,7 +419,8 @@ void func_00013880(void);
 void func_000138A0(void);
 void func_000138D8(void);
 void func_000138F8(void);
-M2C_UNK func_00013AAC(M2C_UNK, M2C_UNK);
+s32 func_00013A60(u32 bit, s32 on);
+s32 func_00013AAC(u32 mask, s32 on);
 s32 module_bootstart(void);
 
 #endif

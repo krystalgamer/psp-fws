@@ -54,9 +54,19 @@ void func_0001328C(void) {
     func_000135C4(0x10, 0);
 }
 
-INCLUDE_ASM("nonmatchings/reboot_012C04", func_000132AC);
+s32 func_000132AC(u32 n) {
+    if (n < 2) {
+        return func_000135C4(0x20 << n, 1);
+    }
+    return 0x80000102;
+}
 
-INCLUDE_ASM("nonmatchings/reboot_012C04", func_000132F0);
+s32 func_000132F0(u32 n) {
+    if (n < 2) {
+        return func_000135C4(0x20 << n, 0);
+    }
+    return 0x80000102;
+}
 
 void func_00013334(void) {
     func_000135C4(0x80, 1);
@@ -82,9 +92,19 @@ void func_000133D4(void) {
     func_000135C4(0x200, 0);
 }
 
-INCLUDE_ASM("nonmatchings/reboot_012C04", func_000133F4);
+s32 func_000133F4(u32 n) {
+    if (n < 2) {
+        return func_000135C4(0x400 << n, 1);
+    }
+    return 0x80000102;
+}
 
-INCLUDE_ASM("nonmatchings/reboot_012C04", func_00013438);
+s32 func_00013438(u32 n) {
+    if (n < 2) {
+        return func_000135C4(0x400 << n, 0);
+    }
+    return 0x80000102;
+}
 
 void func_0001347C(void) {
     func_000135C4(0x1000, 1);
@@ -110,9 +130,19 @@ void func_0001351C(void) {
     func_000135C4(0x4000, 0);
 }
 
-INCLUDE_ASM("nonmatchings/reboot_012C04", func_0001353C);
+s32 func_0001353C(u32 n) {
+    if (n < 2) {
+        return func_000135C4(0x8000 << n, 1);
+    }
+    return 0x80000102;
+}
 
-INCLUDE_ASM("nonmatchings/reboot_012C04", func_00013580);
+s32 func_00013580(u32 n) {
+    if (n < 2) {
+        return func_000135C4(0x8000 << n, 0);
+    }
+    return 0x80000102;
+}
 
 #if FW_VERSION == 100
 s32 func_000135C4(u32 mask, s32 on) {
@@ -153,9 +183,19 @@ void func_00013690(void) {
     func_00013AAC(8, 0);
 }
 
-INCLUDE_ASM("nonmatchings/reboot_012C04", func_000136B0);
+s32 func_000136B0(u32 n) {
+    if (n < 2) {
+        return func_00013AAC(0x10 << n, 1);
+    }
+    return 0x80000102;
+}
 
-INCLUDE_ASM("nonmatchings/reboot_012C04", func_000136F4);
+s32 func_000136F4(u32 n) {
+    if (n < 2) {
+        return func_00013AAC(0x10 << n, 0);
+    }
+    return 0x80000102;
+}
 
 void func_00013738(void) {
     func_00013AAC(0x40, 1);
@@ -165,9 +205,19 @@ void func_00013758(void) {
     func_00013AAC(0x40, 0);
 }
 
-INCLUDE_ASM("nonmatchings/reboot_012C04", func_00013778);
+s32 func_00013778(u32 n) {
+    if (n < 2) {
+        return func_00013AAC(0x80 << n, 1);
+    }
+    return 0x80000102;
+}
 
-INCLUDE_ASM("nonmatchings/reboot_012C04", func_000137BC);
+s32 func_000137BC(u32 n) {
+    if (n < 2) {
+        return func_00013AAC(0x80 << n, 0);
+    }
+    return 0x80000102;
+}
 
 void func_00013800(void) {
     func_00013AAC(0x200, 1);
@@ -209,13 +259,33 @@ void func_000138F8(void) {
     func_00013AAC(0x2000, 0);
 }
 
-INCLUDE_ASM("nonmatchings/reboot_012C04", func_00013918);
+s32 func_00013918(u32 n) {
+    if (n < 6) {
+        return func_00013AAC(0x10000 << n, 1);
+    }
+    return 0x80000102;
+}
 
-INCLUDE_ASM("nonmatchings/reboot_012C04", func_0001395C);
+s32 func_0001395C(u32 n) {
+    if (n < 6) {
+        return func_00013AAC(0x10000 << n, 0);
+    }
+    return 0x80000102;
+}
 
-INCLUDE_ASM("nonmatchings/reboot_012C04", func_000139A0);
+s32 func_000139A0(u32 n) {
+    if (n < 6) {
+        return func_00013AAC(0x1000000 << n, 1);
+    }
+    return 0x80000102;
+}
 
-INCLUDE_ASM("nonmatchings/reboot_012C04", func_000139E4);
+s32 func_000139E4(u32 n) {
+    if (n < 6) {
+        return func_00013AAC(0x1000000 << n, 0);
+    }
+    return 0x80000102;
+}
 
 s32 func_00013A28(s32 a0) {
     return func_00013A60(a0, 1);
@@ -227,9 +297,20 @@ s32 func_00013A44(s32 a0) {
 
 INCLUDE_ASM("nonmatchings/reboot_012C04", func_00013A60);
 
+#if FW_VERSION == 100
+s32 func_00013AAC(u32 mask, s32 on) {
+    u32 v = *(volatile u32 *)0xBC100078;
+    u32 n = v & ~mask;
+    s32 old = (v & mask) != 0;
+    if (on) {
+        n = v | mask;
+    }
+    *(volatile u32 *)0xBC100078 = n;
+    return old;
+}
+#else
 INCLUDE_ASM("nonmatchings/reboot_012C04", func_00013AAC);
 
-#if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/reboot_012C04", func_00013AD8);
 
 INCLUDE_ASM("nonmatchings/reboot_012C04", func_0001404C);
