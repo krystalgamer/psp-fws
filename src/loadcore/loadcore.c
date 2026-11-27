@@ -421,10 +421,6 @@ INCLUDE_RODATA("nonmatchings/loadcore", D_00006604);
 INCLUDE_RODATA("nonmatchings/loadcore", D_00006610);
 #endif
 
-#if FW_VERSION >= 102 && FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/loadcore", func_00000CF4);
-#endif
-
 #if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/loadcore", func_000001F0);
 
@@ -462,7 +458,7 @@ INCLUDE_ASM("nonmatchings/loadcore", func_00000840);
 INCLUDE_ASM("nonmatchings/loadcore", func_000009D4);
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION >= 282
+#if FW_VERSION < 150 || FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/loadcore", module_bootstart);
 #endif
 
@@ -617,17 +613,9 @@ INCLUDE_ASM("nonmatchings/loadcore", func_00001888);
 INCLUDE_ASM("nonmatchings/loadcore", func_00001A00);
 #endif
 
-#if FW_VERSION >= 102 && FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/loadcore", func_00001A34);
-
-INCLUDE_ASM("nonmatchings/loadcore", func_00001ACC);
-#endif
-
-#if FW_VERSION == 100 || (FW_VERSION >= 150 && FW_VERSION < 282)
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/loadcore", sceKernelReleaseLibrary);
-#endif
-
-#if FW_VERSION >= 282
+#else
 INCLUDE_ASM("nonmatchings/loadcore", func_00000DB8);
 #endif
 
@@ -645,7 +633,7 @@ void sceKernelRegisterLibrary(s32 arg0) {
 INCLUDE_ASM("nonmatchings/loadcore", func_0000141C);
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION >= 282
+#if FW_VERSION < 150 || FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/loadcore", sceKernelCanReleaseLibrary);
 #endif
 
@@ -1014,10 +1002,6 @@ s32 func_000029D8(void *func) {
 INCLUDE_ASM("nonmatchings/loadcore", func_000029D8);
 #endif
 
-#if FW_VERSION >= 102 && FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/loadcore", func_000029E8);
-#endif
-
 #if FW_VERSION >= 282
 void func_00002B40(void) {
     sceKernelIcacheClearAll();
@@ -1104,9 +1088,7 @@ INCLUDE_ASM("nonmatchings/loadcore", func_00003008);
 INCLUDE_ASM("nonmatchings/loadcore", func_000031C8);
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/loadcore", sceKernelCheckPspConfig);
-#endif
 
 #if FW_VERSION >= 310
 INCLUDE_ASM("nonmatchings/loadcore", func_00003B74);
