@@ -54,7 +54,7 @@ extern M2C_UNK D_0002DBF4;
 
 s32 func_00000000(s32);
 void func_00000768(s32 arg0);
-s32 func_00001B78(s32, s32, s32, s32);
+s32 func_00001B78(const char *fmt, ...);
 s32 func_00001CB4(void);
 s32 func_00001D14(void);
 s32 func_00001D2C(s32 arg0);

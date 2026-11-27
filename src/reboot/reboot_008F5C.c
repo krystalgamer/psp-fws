@@ -438,27 +438,69 @@ INCLUDE_ASM("nonmatchings/reboot_008F5C", func_00010AC0);
 
 INCLUDE_RODATA("nonmatchings/reboot_008F5C", D_000169E8);
 
-INCLUDE_ASM("nonmatchings/reboot_008F5C", func_00010BDC);
+extern char D_000169E8[];
 
-INCLUDE_ASM("nonmatchings/reboot_008F5C", func_00010C10);
+s32 func_00010BDC(void *iob, char *name) {
+    func_00001B78(D_000169E8, "df_remove", name);
+    return 0x8001B000;
+}
 
-INCLUDE_ASM("nonmatchings/reboot_008F5C", func_00010C44);
+extern char D_000169E8[];
 
-INCLUDE_ASM("nonmatchings/reboot_008F5C", func_00010C78);
+s32 func_00010C10(void *iob, char *name) {
+    func_00001B78(D_000169E8, "df_mkdir", name);
+    return 0x8001B000;
+}
+
+extern char D_000169E8[];
+
+s32 func_00010C44(void *iob, char *name) {
+    func_00001B78(D_000169E8, "df_rmdir", name);
+    return 0x8001B000;
+}
+
+extern char D_000169E8[];
+
+s32 func_00010C78(void *iob, char *name) {
+    func_00001B78(D_000169E8, "df_dopen", name);
+    return 0x8001B000;
+}
 
 INCLUDE_RODATA("nonmatchings/reboot_008F5C", D_00016A30);
 
-INCLUDE_ASM("nonmatchings/reboot_008F5C", func_00010CAC);
+extern char D_00016A30[];
 
-INCLUDE_ASM("nonmatchings/reboot_008F5C", func_00010CE8);
+s32 func_00010CAC(void *arg0) {
+    func_00001B78(D_00016A30, "df_dclose", **M2C_FIELD(arg0, s32 ***, 8));
+    return 0x8001B000;
+}
 
-INCLUDE_ASM("nonmatchings/reboot_008F5C", func_00010D24);
+extern char D_00016A30[];
 
-INCLUDE_ASM("nonmatchings/reboot_008F5C", func_00010D6C);
+s32 func_00010CE8(void *arg0) {
+    func_00001B78(D_00016A30, "df_dread", **M2C_FIELD(arg0, s32 ***, 8));
+    return 0x8001B000;
+}
 
-INCLUDE_ASM("nonmatchings/reboot_008F5C", func_00010DA0);
+s32 func_00010D24(void *iob, char *name, void *stat) {
+    func_00001B78("lflash.c:%s:\n", "df_getstat");
+    return (stat == NULL) ? 0x80010016 : 0x8001B000;
+}
 
-INCLUDE_ASM("nonmatchings/reboot_008F5C", func_00010DD4);
+s32 func_00010D6C(void *iob, char *name) {
+    func_00001B78("lflash.c:%s:filename:%s\n", "df_chstat", name);
+    return 0x8001B000;
+}
+
+s32 func_00010DA0(void *iob, const char *oldname) {
+    func_00001B78("lflash.c:%s:oldfile: %s\n", "df_rename", oldname);
+    return 0x8001B000;
+}
+
+s32 func_00010DD4(void *iob, char *name) {
+    func_00001B78("lflash.c:%s:, path name: %s\n", "df_chdir", name);
+    return 0x8001B000;
+}
 
 s32 func_00010E08(void) {
     return 0x8001B000;
