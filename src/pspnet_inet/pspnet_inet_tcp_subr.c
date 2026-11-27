@@ -590,7 +590,92 @@ INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", func_00024B04);
 #endif
 
 #if FW_VERSION < 250
-INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", func_000263E0);
+s32 tcp_ctloutput(s32 op, struct socket *so, s32 level, s32 optname, struct mbuf **mp) {
+    s32 error = 0, s;
+    struct inpcb *inp;
+    struct tcpcb *tp;
+    struct mbuf *m;
+    s32 i;
+    s32 family;
+
+    family = so->so_proto->pr_domain->dom_family;
+    s = _sce_pspnet_spllock();
+    switch (family) {
+    case AF_INET:
+        inp = (struct inpcb *)so->so_pcb;
+        break;
+    default:
+        _sce_pspnet_splunlock(s);
+        return 0x6A;
+    }
+    if (inp == NULL) {
+        _sce_pspnet_splunlock(s);
+        if (op == 1 && *mp)
+            (void)sceNetMFree(*mp);
+        return (0x68);
+    }
+    if (level != 6) {
+        switch (family) {
+        case AF_INET:
+            error = ip_ctloutput(op, so, level, optname, mp);
+            break;
+        }
+        _sce_pspnet_splunlock(s);
+        return (error);
+    }
+    if (inp)
+        tp = (struct tcpcb *)inp->inp_ppcb;
+    else
+        tp = NULL;
+
+    switch (op) {
+    case 1:
+        m = *mp;
+        switch (optname) {
+        case 1:
+            if (m == NULL || m->m_len < sizeof(s32))
+                error = 0x16;
+            else if (*mtod(m, s32 *))
+                tp->t_flags |= 0x4;
+            else
+                tp->t_flags &= ~0x4;
+            break;
+        case 2:
+            if (m && (i = *mtod(m, s32 *)) > 0 && i <= tp->t_peermss)
+                tp->t_peermss = i;
+            else
+                error = 0x16;
+            break;
+        default:
+            error = 0x6D;
+            break;
+        }
+        if (m)
+            (void)sceNetMFree(m);
+        break;
+    case 0:
+        *mp = m = sceNetMGet(0, 4);
+        if (m == NULL) {
+            error = 0x69;
+            break;
+        }
+        m->m_len = sizeof(s32);
+        switch (optname) {
+        case 1:
+            *mtod(m, s32 *) = tp->t_flags & 0x4;
+            break;
+        case 2:
+            *mtod(m, s32 *) = tp->t_peermss;
+            break;
+        default:
+            error = 0x6D;
+            break;
+        }
+        break;
+    }
+    _sce_pspnet_splunlock(s);
+    return (error);
+}
 #endif
 
 #if FW_VERSION >= 282

@@ -540,3 +540,4 @@ inet_ntoa = 0x000129D0; // type:func
 in_pcblookup_port = 0x000139A4; // type:func
 rip_disconnect = 0x0001C2E0; // type:func
 tcp_mss_ifmtu = 0x0002EC1C;
+tcp_ctloutput = 0x000263E0; // type:func

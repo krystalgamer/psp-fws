@@ -535,3 +535,4 @@ _sce_pspnet_start_of_inet_module_in_ifhandle_ether = 0x0002D668; // type:func ro
 _sce_pspnet_stop_of_inet_module_in_ifhandle_ether = 0x0002D670; // type:func rom:0x2D6F0
 // shared names (tools/add_version.py) end
 tcp_mss_ifmtu = 0x0002EC1C;
+tcp_ctloutput = 0x000263E0; // type:func
