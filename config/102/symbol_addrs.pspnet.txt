@@ -147,3 +147,5 @@ sceNetGetMallocStatInternal = 0x00009424; // type:func
 sceNetIfhandle_lib_0FB8AE0D = 0x0000942C; // type:func
 sceNetMAdj = 0x00009434; // type:func
 sceNetMFreem = 0x0000943C; // type:func
+ifconf = 0x00005614; // type:func
+sceNetIndex = 0x00007DE0; // type:func
