@@ -263,6 +263,9 @@ void sceUsbBus_driver_7B87815D(void);
 s32 sceUsbBus_driver_8A3EB5D2(void);
 void sceUsbBus_driver_90B82F55(void);
 void sceUsbBus_driver_FBA2072B(void);
+s32 sceUsbDeactivate();
+s32 sceUsbGetDrvList(u32 flags, void *list, s32 size);
+s32 sceUsbStop(const char *name, s32 args, void *argp);
 s32 sceUsbWaitState(u32 arg0, s32 arg1, void *arg2);
 s32 sceUsbWaitStateCB(u32 arg0, s32 arg1, void *arg2);
 

@@ -70,6 +70,9 @@
   "sceUsbBus_driver_8A3EB5D2": "s32 sceUsbBus_driver_8A3EB5D2(void);",
   "sceUsbBus_driver_90B82F55": "void sceUsbBus_driver_90B82F55(void);",
   "sceUsbBus_driver_FBA2072B": "void sceUsbBus_driver_FBA2072B(void);",
+  "sceUsbDeactivate": "s32 sceUsbDeactivate();",
+  "sceUsbGetDrvList": "s32 sceUsbGetDrvList(u32 flags, void *list, s32 size);",
+  "sceUsbStop": "s32 sceUsbStop(const char *name, s32 args, void *argp);",
   "sceUsbWaitState": "s32 sceUsbWaitState(u32 arg0, s32 arg1, void *arg2);",
   "sceUsbWaitStateCB": "s32 sceUsbWaitStateCB(u32 arg0, s32 arg1, void *arg2);"
  },

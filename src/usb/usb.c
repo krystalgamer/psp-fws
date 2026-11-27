@@ -512,11 +512,49 @@ INCLUDE_RODATA("nonmatchings/usb", D_00009B28);
 
 #if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/usb", func_00002C60);
-#else
+#endif
+
+#if FW_VERSION == 100 || (FW_VERSION >= 150 && FW_VERSION < 282)
+s32 module_reboot_before(void) {
+    struct {
+        s32 size;
+        char name[0x2C];
+    } info;
+    s32 ret;
+
+    if (g_usbbd.started == 1) {
+        if (g_usbbd.actState == 0x200) {
+            sceUsbDeactivate();
+        }
+        info.size = 0x30;
+        while (sceUsbGetDrvList(1, &info, 1) > 0) {
+            ret = sceUsbStop(info.name, 0, NULL);
+            if (ret < 0) {
+                Kprintf("usbbd ERROR : Cannot stop %s : 0x%08x\n", info.name, ret);
+                break;
+            }
+        }
+        ret = sceUsbStop("USBBusDriver", 0, NULL);
+        if (ret < 0) {
+            Kprintf("usbbd ERROR : Cannot stop %s : 0x%08x\n", "USBBusDriver", ret);
+        }
+    }
+    ret = sceKernelDeleteSema(g_usbbd.sema);
+    if (ret < 0) {
+        Kprintf(D_00009B28, ret);
+    }
+    g_usbbd.sema = 0;
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/usb", module_reboot_before);
 #endif
 
-INCLUDE_ASM("nonmatchings/usb", sceUsbGetState);
+s32 sceUsbGetState(void) {
+    return g_usbbd.actState | g_usbbd.cableState | g_usbbd.connState;
+}
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
 s32 sceUsbWaitState(u32 arg0, s32 arg1, void *arg2) {
@@ -813,7 +851,29 @@ INCLUDE_ASM("nonmatchings/usb", func_000034D8);
 INCLUDE_ASM("nonmatchings/usb", func_000036A0);
 #endif
 
+#if FW_VERSION < 201
+s32 func_00003734(SceUsbdDeviceRequest *req) {
+    switch (req->bRequest) {
+    case 6:
+        return func_00001FC4();
+    case 0:
+    case 1:
+    case 3:
+    case 5:
+    case 8:
+    case 9:
+    case 10:
+    case 11:
+    case 12:
+        Kprintf("usbbd ERROR : standard request 0x%x is handled by hardware only\n", req->bRequest);
+    default:
+        func_00001D94();
+        return -1;
+    }
+}
+#else
 INCLUDE_ASM("nonmatchings/usb", func_00003734);
+#endif
 
 INCLUDE_ASM("nonmatchings/usb", func_000037C4);
 
@@ -956,7 +1016,19 @@ void func_0000581C(void) {
 }
 #endif
 
+#if FW_VERSION == 100
+void func_00005B1C(void) {
+    sceSysregUsbResetEnable();
+    sceSysregUsbResetDisable();
+    if (sceSysregUsbQueryIntr() & 4) {
+        sceSysregUsbAcquireIntr(4);
+    }
+    __asm__ __volatile__("sync");
+    sceKernelEnableIntr(0x39);
+}
+#else
 INCLUDE_ASM("nonmatchings/usb", func_00005B1C);
+#endif
 
 #if FW_VERSION == 100
 void func_00005914(void) {
