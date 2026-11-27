@@ -74,3 +74,16 @@ sceKernelPowerUnlock = 0x00002D30; // type:func rom:0x2DB0
 D_00003080_v102 = 0x00003080; // rom:0x3100
 D_00003090_v102 = 0x00003090; // rom:0x3110
 // shared names (tools/add_version.py) end
+
+// NID-derived names
+sceMSAudioInit = 0x00000628; // type:func
+sceMSAudioInvalidateICV = 0x00001584; // type:func
+sceMSAudioClearMACEntry = 0x0000175C; // type:func
+Kprintf = 0x00002C00; // type:func
+memset = 0x00002C08; // type:func
+sceKernelSignalSema = 0x00002C28; // type:func
+sceKernelWaitSema = 0x00002C30; // type:func
+sceMgrInit = 0x00002C38; // type:func
+sceMgrMSInit = 0x00002CB0; // type:func
+sceMgrMSInvalidateICV = 0x00002CD0; // type:func
+sceMgrMSWriteSeqPage = 0x00002CD8; // type:func
