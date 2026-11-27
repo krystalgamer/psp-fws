@@ -1,6 +1,6 @@
 /* compiler[151]: 1.6.1 */
 /* compiler[150]: 1.6.1 */
-/* cflags[100]: -O2 -frename-registers */
+/* cflags[100,150,151]: -O2 -frename-registers */
 #include "common.h"
 #include "reboot_decls.h"
 
@@ -193,21 +193,13 @@ void func_000138A0(void) {
     func_00013AAC(0x800, 0);
 }
 
-#if FW_VERSION == 100
 s32 func_000138C0(void) {
     return 0x80000004;
 }
-#else
-INCLUDE_ASM("nonmatchings/reboot_012C04", func_000138C0);
-#endif
 
-#if FW_VERSION == 100
 s32 func_000138CC(void) {
     return 0x80000004;
 }
-#else
-INCLUDE_ASM("nonmatchings/reboot_012C04", func_000138CC);
-#endif
 
 void func_000138D8(void) {
     func_00013AAC(0x2000, 1);
