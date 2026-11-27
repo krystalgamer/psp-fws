@@ -378,19 +378,19 @@ s32 sceNetInit(s32 poolSize, s32 calloutPrio, s32 calloutStack, s32 netintrPrio,
     if (ret < 0)
         goto fail;
     sceNetIfhandle_lib_0FB8AE0D();
-    ret = func_00002E8C(calloutPrio, calloutStack);
+    ret = callout_startup(calloutPrio, calloutStack);
     if (ret < 0)
         goto fail;
-    ret = func_00003790();
+    ret = spl_init();
     if (ret < 0)
         goto fail;
-    ret = func_0000331C();
+    ret = slpque_init();
     if (ret < 0)
         goto fail;
-    ret = func_00001F0C();
+    ret = threadinfo_init();
     if (ret < 0)
         goto fail;
-    ret = func_00001CE0(netintrPrio, netintrStack);
+    ret = netintr_init(netintrPrio, netintrStack);
     if (ret < 0)
         goto fail;
     func_000057D8();
@@ -398,11 +398,11 @@ s32 sceNetInit(s32 poolSize, s32 calloutPrio, s32 calloutStack, s32 netintrPrio,
     return 0;
 
 fail:
-    func_00001B7C();
-    func_00002300();
-    func_00003028();
-    func_0000348C();
-    func_00002C34();
+    netintr_term();
+    threadinfo_term();
+    slpque_term();
+    spl_term();
+    callout_shutdown();
     func_00007778();
     return ret;
 }
@@ -417,19 +417,19 @@ s32 sceNetInit(s32 poolSize, s32 calloutPrio, s32 calloutStack, s32 netintrPrio,
     if (ret < 0)
         goto fail;
     sceNetIfhandle_lib_0FB8AE0D();
-    ret = func_00002E8C(calloutPrio, calloutStack);
+    ret = callout_startup(calloutPrio, calloutStack);
     if (ret < 0)
         goto fail;
-    ret = func_00003790();
+    ret = spl_init();
     if (ret < 0)
         goto fail;
-    ret = func_0000331C();
+    ret = slpque_init();
     if (ret < 0)
         goto fail;
-    ret = func_00001F0C();
+    ret = threadinfo_init();
     if (ret < 0)
         goto fail;
-    ret = func_00001CE0(netintrPrio, netintrStack);
+    ret = netintr_init(netintrPrio, netintrStack);
     if (ret < 0)
         goto fail;
     func_000057D8();
@@ -449,11 +449,11 @@ INCLUDE_ASM("nonmatchings/pspnet", sceNetInit);
 
 #if FW_VERSION >= 150 && FW_VERSION < 201
 s32 sceNetTerm(void) {
-    func_00001B7C();
-    func_00002300();
-    func_00003028();
-    func_0000348C();
-    func_00002C34();
+    netintr_term();
+    threadinfo_term();
+    slpque_term();
+    spl_term();
+    callout_shutdown();
     func_00007778();
     sceWlanDrv_lib_8D5F551B(0x10000);
     return 0;
@@ -462,11 +462,11 @@ s32 sceNetTerm(void) {
 
 #if FW_VERSION == 100
 s32 sceNetTerm(void) {
-    func_00001B7C();
-    func_00002300();
-    func_00003028();
-    func_0000348C();
-    func_00002C34();
+    netintr_term();
+    threadinfo_term();
+    slpque_term();
+    spl_term();
+    callout_shutdown();
     func_00007778();
     return 0;
 }
@@ -485,7 +485,7 @@ INCLUDE_ASM("nonmatchings/pspnet", func_0000195C);
 #endif
 
 #if FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/pspnet", func_000016BC);
+INCLUDE_ASM("nonmatchings/pspnet", netintr_thread);
 #endif
 
 #if FW_VERSION >= 282
@@ -493,7 +493,7 @@ INCLUDE_ASM("nonmatchings/pspnet", func_00001980);
 #endif
 
 #if FW_VERSION < 201
-s32 func_00001CE0(s32 prio, s32 stackSize) {
+s32 netintr_init(s32 prio, s32 stackSize) {
     s32 ret;
 
     D_0000AC38 = 0;
@@ -501,7 +501,7 @@ s32 func_00001CE0(s32 prio, s32 stackSize) {
     if (ret < 0)
         goto fail;
     D_0000A0D0 = ret;
-    ret = sceKernelCreateThread("SceNetNetintr", func_000016BC, prio, stackSize, 0, NULL);
+    ret = sceKernelCreateThread("SceNetNetintr", netintr_thread, prio, stackSize, 0, NULL);
     if (ret < 0)
         goto fail;
     D_0000AC3C = ret;
@@ -525,7 +525,7 @@ fail:
     return ret;
 }
 #else
-INCLUDE_ASM("nonmatchings/pspnet", func_00001CE0);
+INCLUDE_ASM("nonmatchings/pspnet", netintr_init);
 #endif
 
 #if FW_VERSION < 282
@@ -538,7 +538,7 @@ void _sce_pspnet_schednetintr_with_evf(s32 arg0) {
     sceKernelSetEventFlag(D_0000A0D0, 0x10U);
 }
 
-s32 func_00001B7C(void) {
+s32 netintr_term(void) {
     if (D_0000AC3C >= 0) {
         sceKernelTerminateThread(D_0000AC3C);
         sceKernelDeleteThread(D_0000AC3C);
@@ -811,7 +811,7 @@ INCLUDE_ASM("nonmatchings/pspnet", sceNetFreeThreadinfo);
 #endif
 
 #if FW_VERSION < 282
-s32 func_00001F0C(void) {
+s32 threadinfo_init(void) {
     s32 ret;
 
     TAILQ_INIT(&D_0000AF44);
@@ -1004,7 +1004,7 @@ s32 _sce_pspnet_thread_busycount(void) {
 #endif
 
 #if FW_VERSION < 250
-void func_00002300(void) {
+void threadinfo_term(void) {
     if (D_0000A868 >= 0)
         sceKernelDeleteSema(D_0000A868);
     D_0000A868 = -1;
@@ -1012,7 +1012,7 @@ void func_00002300(void) {
 #endif
 
 #if FW_VERSION >= 250 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet", func_00002300);
+INCLUDE_ASM("nonmatchings/pspnet", threadinfo_term);
 #endif
 
 #if FW_VERSION >= 282
@@ -1199,7 +1199,7 @@ s32 sceNetBpfIoctl(s32 fd, u32 cmd, void *data) {
 INCLUDE_ASM("nonmatchings/pspnet", sceNetBpfIoctl);
 #endif
 
-void func_00002C34(void) {
+void callout_shutdown(void) {
     struct callout *c;
     s32 s;
 
@@ -1240,7 +1240,7 @@ void _sce_pspnet_callout_reset_usec(struct callout *c, u32 usec, void (*func)(vo
     c->c_time = usec;
     c->c_qlink.tqe_next = NULL;
     c->c_qlink.tqe_prev = NULL;
-    c->c_alarm = sceKernelSetAlarm(usec, func_000030A8, c);
+    c->c_alarm = sceKernelSetAlarm(usec, callout_alarm, c);
     TAILQ_INSERT_TAIL(&D_0000AF54, c, c_link);
     sceKernelCpuResumeIntr(s);
 }
@@ -1273,7 +1273,7 @@ INCLUDE_ASM("nonmatchings/pspnet", _sce_pspnet_callout_stop);
 #endif
 
 #if FW_VERSION < 201
-s32 func_00002E8C(s32 prio, s32 stackSize) {
+s32 callout_startup(s32 prio, s32 stackSize) {
     s32 ret;
 
     TAILQ_INIT(&D_0000AF4C);
@@ -1281,7 +1281,7 @@ s32 func_00002E8C(s32 prio, s32 stackSize) {
     D_0000A86C = sceKernelCreateSema("SceNetCalloutQueue", 0, 0, 1, NULL);
     if (D_0000A86C < 0)
         return D_0000A86C;
-    D_0000A870 = sceKernelCreateThread("SceNetCallout", func_00002FD8, prio, stackSize, 0, NULL);
+    D_0000A870 = sceKernelCreateThread("SceNetCallout", callout_thread, prio, stackSize, 0, NULL);
     if (D_0000A870 < 0)
         return D_0000A870;
     ret = sceKernelStartThread(D_0000A870, 0, NULL);
@@ -1290,7 +1290,7 @@ s32 func_00002E8C(s32 prio, s32 stackSize) {
     return ret;
 }
 #else
-INCLUDE_ASM("nonmatchings/pspnet", func_00002E8C);
+INCLUDE_ASM("nonmatchings/pspnet", callout_startup);
 #endif
 
 #if FW_VERSION < 201
@@ -1336,9 +1336,9 @@ void _sce_pspnet_callout_reset(struct callout *c, u32 ticks, void (*func)(void *
     }
 }
 
-INCLUDE_ASM("nonmatchings/pspnet", func_00002FD8);
+INCLUDE_ASM("nonmatchings/pspnet", callout_thread);
 
-u32 func_000030A8(void *common) {
+u32 callout_alarm(void *common) {
     struct callout *c = common;
 
     TAILQ_INSERT_TAIL(&D_0000AF4C, c, c_qlink);
@@ -1454,7 +1454,7 @@ out:
 #if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/pspnet", _sce_pspnet_tsleep_usec);
 #else
-s32 func_0000331C(void) {
+s32 slpque_init(void) {
     s32 i;
     s32 ret;
 
@@ -1469,11 +1469,11 @@ s32 func_0000331C(void) {
 #endif
 
 #if FW_VERSION >= 271
-INCLUDE_ASM("nonmatchings/pspnet", func_0000331C);
+INCLUDE_ASM("nonmatchings/pspnet", slpque_init);
 #endif
 
 #if FW_VERSION < 282
-void func_00003028(void) {
+void slpque_term(void) {
     if (D_0000A874 >= 0)
         sceKernelDeleteSema(D_0000A874);
     D_0000A874 = -1;
@@ -1668,7 +1668,7 @@ s32 _sce_pspnet_stop_of_inet_module_in_sched(void) {
     return 0;
 }
 #else
-s32 func_00003790(void) {
+s32 spl_init(void) {
     D_0000A0E4 = sceKernelCreateSema("SceNetSpl", 0, 1, 1, NULL);
     if (D_0000A0E4 < 0)
         return D_0000A0E4;
@@ -1678,9 +1678,9 @@ s32 func_00003790(void) {
 #endif
 
 #if FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/pspnet", func_00003790);
+INCLUDE_ASM("nonmatchings/pspnet", spl_init);
 #else
-void func_0000348C(void) {
+void spl_term(void) {
     if (D_0000A0E4 >= 0)
         sceKernelDeleteSema(D_0000A0E4);
     D_0000A0E4 = -1;
