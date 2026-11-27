@@ -183,6 +183,21 @@ struct SceNetIfEvent {
 };
 
 
+/* struct iovec / struct uio (NetBSD uio.h; SCE: 32-bit offset, no segflg/proc) */
+struct iovec {
+    void *iov_base;     /* 0x0 */
+    u32 iov_len;        /* 0x4 */
+};
+enum uio_rw { UIO_READ, UIO_WRITE };
+struct uio {
+    struct iovec *uio_iov;  /* 0x00 */
+    s32 uio_iovcnt;         /* 0x04 */
+    s32 uio_offset;         /* 0x08 */
+    s32 uio_resid;          /* 0x0C */
+    enum uio_rw uio_rw;     /* 0x10 */
+};
+
+
 struct Unk_func_00004974_var_s2 {
     struct Unk_func_00004974_var_s2 *unk0;
     u8 pad4[0x4];
@@ -336,6 +351,7 @@ s32 _sce_pspnet_thread_leave(struct SceNetThreadInfo *ti, s32 err);
 void _sce_pspnet_tiwakeup(SceUID thid, void *ident);
 s32 _sce_pspnet_tsleep(void *ident, u32 timo);
 s32 _sce_pspnet_tsleep_usec(void *ident, u32 usec);
+s32 _sce_pspnet_uiomove(void *buf, s32 n, struct uio *uio);
 void _sce_pspnet_unlock_threadinfo(struct SceNetThreadInfo *arg0);
 void _sce_pspnet_wakeup(void *ident);
 s32 func_00001B7C(void);
@@ -357,7 +373,12 @@ void func_00003400(struct SceNetThreadInfo *arg0);
 void func_0000348C(void);
 s32 func_00003790(void);
 void func_000037E4(void);
+s32 func_00003B30(s32 fd, struct uio *uio);
+s32 func_00003C98(s32 fd, struct uio *uio);
+s32 func_00003E78(s32 fd, u32 cmd, void *data);
 void func_00004430(s32 arg0, u8 *arg1);
+s32 func_0000460C(s32 minor);
+s32 func_00004678(s32 fd);
 u8 *func_00004974(u8 *arg0, void *arg1, u32 arg2);
 void func_00005404(void *arg0);
 void func_00005744(struct Unk_func_00005744_0 *arg0);
@@ -416,6 +437,11 @@ s32 sceKernelSysClock2USec(SceKernelSysClock *clock, u32 *sec, u32 *usec);
 s32 sceKernelTerminateThread(s32);
 s32 sceKernelWaitSema(s32, s32, void *);
 void sceNetAtoi(s32 arg0);
+s32 sceNetBpfClose(s32 fd);
+s32 sceNetBpfIoctl(s32 fd, u32 cmd, void *data);
+s32 sceNetBpfOpen(void);
+s32 sceNetBpfRead(s32 fd, void *buf, s32 len);
+s32 sceNetBpfWrite(s32 fd, void *buf, s32 len);
 void sceNetEtherNtostr(struct Unk_sceNetEtherNtostr_0 *arg0, s32 arg1);
 void sceNetEtherStrton(const char *str, u8 *mac);
 void sceNetFreeInternal(void *p);

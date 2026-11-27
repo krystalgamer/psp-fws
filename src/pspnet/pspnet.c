@@ -1005,15 +1005,89 @@ INCLUDE_ASM("nonmatchings/pspnet", sceNetThreadAbort);
 
 INCLUDE_ASM("nonmatchings/pspnet", sceNetBpfPoll);
 
+#if FW_VERSION < 201
+s32 sceNetBpfOpen(void) {
+    struct SceNetThreadInfo *ti;
+    s32 error;
+    s32 fd;
+    s32 i;
+
+    fd = 0;
+    i = 0;
+    ti = _sce_pspnet_thread_enter();
+    if (ti == NULL)
+        return -1;
+again:
+    error = func_0000460C(i);
+    if (error == 0) {
+        fd = i;
+    } else if (error == 16) {
+        i++;
+        goto again;
+    }
+    if (_sce_pspnet_thread_leave(ti, error) < 0)
+        return -1;
+    return fd;
+}
+#else
 INCLUDE_ASM("nonmatchings/pspnet", sceNetBpfOpen);
+#endif
 
+#if FW_VERSION < 201
+s32 sceNetBpfClose(s32 fd) {
+    struct SceNetThreadInfo *ti;
+
+    ti = _sce_pspnet_thread_enter();
+    if (ti == NULL)
+        return -1;
+    return _sce_pspnet_thread_leave(ti, func_00004678(fd));
+}
+#else
 INCLUDE_ASM("nonmatchings/pspnet", sceNetBpfClose);
+#endif
 
+#if FW_VERSION < 201
+s32 sceNetBpfRead(s32 fd, void *buf, s32 len) {
+    struct SceNetThreadInfo *ti;
+    struct uio uio;
+    struct iovec iov;
+    s32 error;
+    s32 ret;
+
+    ti = _sce_pspnet_thread_enter();
+    if (ti == NULL)
+        return -1;
+    uio.uio_iov = &iov;
+    uio.uio_iovcnt = 1;
+    iov.iov_base = buf;
+    uio.uio_rw = UIO_READ;
+    uio.uio_offset = 0;
+    uio.uio_resid = len;
+    iov.iov_len = len;
+    error = func_00003B30(fd, &uio);
+    ret = len - uio.uio_resid;
+    if (_sce_pspnet_thread_leave(ti, error) < 0)
+        return -1;
+    return ret;
+}
+#else
 INCLUDE_ASM("nonmatchings/pspnet", sceNetBpfRead);
+#endif
 
 INCLUDE_ASM("nonmatchings/pspnet", sceNetBpfWrite);
 
+#if FW_VERSION < 201
+s32 sceNetBpfIoctl(s32 fd, u32 cmd, void *data) {
+    struct SceNetThreadInfo *ti;
+
+    ti = _sce_pspnet_thread_enter();
+    if (ti == NULL)
+        return -1;
+    return _sce_pspnet_thread_leave(ti, func_00003E78(fd, cmd, data));
+}
+#else
 INCLUDE_ASM("nonmatchings/pspnet", sceNetBpfIoctl);
+#endif
 
 void func_00002C34(void) {
     struct callout *c;
