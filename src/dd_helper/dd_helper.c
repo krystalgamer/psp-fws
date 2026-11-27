@@ -1,3 +1,4 @@
+/* lang: c++ */
 #include "common.h"
 #include "dd_helper_decls.h"
 
@@ -251,7 +252,7 @@ void func_00000650(M2C_UNK **arg0) {
 
 void func_00000660(M2C_UNK **arg0) {
     *arg0 = &D_0000AAB8;
-    _ZdlPv();
+    _ZdlPv(arg0);
 }
 
 INCLUDE_ASM("nonmatchings/dd_helper", func_00000688);
@@ -271,7 +272,7 @@ INCLUDE_RODATA("nonmatchings/dd_helper", D_0000AA40);
 void func_000006A8(void) {
     void *temp_v0;
 
-    temp_v0 = _ZN3paf4View4FindEPKc("htmlviewer_plugin");
+    temp_v0 = _ZN3paf4View4FindEPKc((M2C_UNK* ) ("htmlviewer_plugin"));
     if (temp_v0 != NULL) {
         _ZN3paf4View12PageActivateEPv(temp_v0, M2C_FIELD(temp_v0, s32 *, 0x1B8));
     }
@@ -283,7 +284,7 @@ void func_000006A8(void) {
 void func_000006A8(void) {
     void *temp_v0;
 
-    temp_v0 = _ZN3paf4View4FindEPKc("htmlviewer_plugin");
+    temp_v0 = _ZN3paf4View4FindEPKc((M2C_UNK* ) ("htmlviewer_plugin"));
     if (temp_v0 != NULL) {
         _ZN3paf4View12PageActivateEPv(temp_v0, M2C_FIELD(temp_v0, s32 *, 0x1B8));
     }
@@ -298,7 +299,7 @@ INCLUDE_ASM("nonmatchings/dd_helper", func_000006E0);
 void func_000006A8(void) {
     struct Unk_func_000006A8_temp_v0 *temp_v0;
 
-    temp_v0 = _ZN3paf4View4FindEPKc("htmlviewer_plugin");
+    temp_v0 = _ZN3paf4View4FindEPKc((M2C_UNK* ) ("htmlviewer_plugin"));
     if (temp_v0 != NULL) {
         _ZN3paf4View12PageActivateEPv(temp_v0, temp_v0->unk1B8);
     }
@@ -1295,7 +1296,7 @@ INCLUDE_ASM("nonmatchings/dd_helper", func_00005F40);
 #if FW_VERSION >= 300 && FW_VERSION < 350
 void func_00005F40(M2C_UNK **arg0) {
     *arg0 = &D_00013880;
-    _ZdlPv();
+    _ZdlPv(arg0);
 }
 #endif
 
@@ -3137,7 +3138,7 @@ INCLUDE_ASM("nonmatchings/dd_helper", func_00013770);
 #if FW_VERSION >= 330 && FW_VERSION < 350
 void func_00013770(M2C_UNK **arg0) {
     *arg0 = &D_0002B880;
-    _ZdlPv();
+    _ZdlPv(arg0);
 }
 #endif
 
@@ -3357,7 +3358,7 @@ INCLUDE_ASM("nonmatchings/dd_helper", func_00014B20);
 #if FW_VERSION >= 330 && FW_VERSION < 350
 void func_00014B20(M2C_UNK **arg0) {
     *arg0 = &D_0002B9F8;
-    _ZdlPv();
+    _ZdlPv(arg0);
 }
 #endif
 
@@ -4765,7 +4766,7 @@ INCLUDE_ASM("nonmatchings/dd_helper", func_0001CE2C);
 #if FW_VERSION >= 330 && FW_VERSION < 350
 void func_0001CE2C(M2C_UNK **arg0) {
     *arg0 = &D_0002BFA0;
-    _ZdlPv();
+    _ZdlPv(arg0);
 }
 #endif
 
@@ -4880,7 +4881,7 @@ INCLUDE_ASM("nonmatchings/dd_helper", func_0001E098);
 #if FW_VERSION >= 330 && FW_VERSION < 350
 void func_0001E098(M2C_UNK **arg0) {
     *arg0 = &D_0002C078;
-    _ZdlPv();
+    _ZdlPv(arg0);
 }
 #endif
 
@@ -4998,7 +4999,7 @@ INCLUDE_ASM("nonmatchings/dd_helper", func_0001E774);
 #if FW_VERSION >= 330 && FW_VERSION < 350
 void func_0001E774(M2C_UNK **arg0) {
     *arg0 = &D_0002C0A8;
-    _ZdlPv();
+    _ZdlPv(arg0);
 }
 #endif
 
