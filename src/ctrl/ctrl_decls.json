@@ -20,6 +20,7 @@
   "module_start": "s32 module_start(void);",
   "sceCtrlEnd": "M2C_UNK sceCtrlEnd();",
   "sceCtrlGetIdleCancelKey": "s32 sceCtrlGetIdleCancelKey(s32 *arg0, s32 *arg1, s32 *arg2, s32 *arg3);",
+  "sceCtrlGetSuspendingExtraSamples": "s32 sceCtrlGetSuspendingExtraSamples(void);",
   "sceCtrlInit": "M2C_UNK sceCtrlInit();",
   "sceCtrlPeekBufferNegative": "s32 sceCtrlPeekBufferNegative(void *arg0, s32 arg1);",
   "sceCtrlPeekBufferPositive": "s32 sceCtrlPeekBufferPositive(void *arg0, s32 arg1);",
@@ -28,12 +29,13 @@
   "sceCtrlSetIdleCancelKey": "s32 sceCtrlSetIdleCancelKey(s32 arg0, s32 arg1, s32 arg2, s32 arg3);",
   "sceCtrlSetPollingMode": "s32 sceCtrlSetPollingMode(s8 arg0);",
   "sceCtrlSetSuspendingExtraSamples": "s32 sceCtrlSetSuspendingExtraSamples(u32 arg0);",
-  "sceCtrlGetSuspendingExtraSamples": "s32 sceCtrlGetSuspendingExtraSamples(void);",
   "sceCtrl_driver_CC70B61E": "s32 sceCtrl_driver_CC70B61E(void);",
+  "sceKernelCpuResumeIntr": "void sceKernelCpuResumeIntr(s32);",
+  "sceKernelCpuSuspendIntr": "s32 sceKernelCpuSuspendIntr(void);",
   "sceKernelSetEventFlag": "s32 sceKernelSetEventFlag(s32, u32);"
  },
  "types": {
-  "D_00001D70_s": "struct D_00001D70_s {\n    u8 pad0[0xA34];\n    volatile s32 unkA34;\n    volatile s32 unkA38;\n    volatile s32 unkA3C;\n    volatile s32 unkA40;\n};"
+  "D_00001D70_s": "typedef struct {\n    u32 uiMask;\n    u32 uiTrigger;\n    u32 uiTarget;\n    u8 uiDelay;\n    u8 uiMake;\n    u8 uiBreak;\n    u8 unkF;\n} SceCtrlRapidFire;\nstruct D_00001D70_s {\n    u8 pad0[0xC];\n    s32 samplingMode;\n    u8 padC[0x91C - 0x10];\n    SceCtrlRapidFire rapidFire[16];\n    u8 padA1C[0x10];\n    u32 maskSupportButtons;\n    u32 maskApplyButtons;\n    volatile s32 unkA34;\n    volatile s32 unkA38;\n    volatile s32 unkA3C;\n    volatile s32 unkA40;\n};"
  },
  "vars": {
   "D_00001BFC": "extern u32 D_00001BFC;",

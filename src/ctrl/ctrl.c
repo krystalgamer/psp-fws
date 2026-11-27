@@ -98,7 +98,27 @@ INCLUDE_ASM("nonmatchings/ctrl", sceCtrlGetIdleCancelThreshold);
 
 INCLUDE_ASM("nonmatchings/ctrl", sceCtrlSetButtonIntercept);
 
+#if FW_VERSION == 100
+s32 sceCtrlGetButtonIntercept(u32 mask) {
+    s32 intr;
+    s32 ret = 0;
+    u32 support;
+    u32 apply;
+
+    intr = sceKernelCpuSuspendIntr();
+    support = D_00001D70.maskSupportButtons & mask;
+    apply = D_00001D70.maskApplyButtons & mask;
+    if (support == 0) {
+        ret = 1;
+    } else if (apply != 0) {
+        ret = 2;
+    }
+    sceKernelCpuResumeIntr(intr);
+    return ret;
+}
+#else
 INCLUDE_ASM("nonmatchings/ctrl", sceCtrlGetButtonIntercept);
+#endif
 
 INCLUDE_ASM("nonmatchings/ctrl", sceCtrlSetRapidFire);
 
@@ -117,7 +137,19 @@ INCLUDE_ASM("nonmatchings/ctrl", sceCtrlSuspend);
 INCLUDE_ASM("nonmatchings/ctrl", sceCtrlResume);
 
 #if FW_VERSION < 260
-INCLUDE_ASM("nonmatchings/ctrl", sceCtrlSetSamplingMode);
+s32 sceCtrlSetSamplingMode(u32 mode) {
+    s32 intr;
+    s32 prev;
+
+    if (mode >= 2) {
+        return 0x80000107;
+    }
+    intr = sceKernelCpuSuspendIntr();
+    prev = D_00001D70.samplingMode;
+    D_00001D70.samplingMode = mode;
+    sceKernelCpuResumeIntr(intr);
+    return prev;
+}
 
 INCLUDE_ASM("nonmatchings/ctrl", sceCtrlGetSamplingMode);
 #endif
@@ -278,7 +310,17 @@ s32 sceCtrl_driver_CC70B61E(void) {
 }
 #endif
 
+#if FW_VERSION == 100 || (FW_VERSION >= 260 && FW_VERSION < 350)
+s32 sceCtrlClearRapidFire(u32 slot) {
+    if (slot >= 16) {
+        return 0x80000102;
+    }
+    D_00001D70.rapidFire[slot].uiMask = 0;
+    return 0;
+}
+#else
 INCLUDE_ASM("nonmatchings/ctrl", sceCtrlClearRapidFire);
+#endif
 
 #if FW_VERSION < 282
 s32 func_000011E4(void) {

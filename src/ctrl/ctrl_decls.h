@@ -4,8 +4,23 @@
 #include "common.h"
 #include "m2c_macros.h"
 
+typedef struct {
+    u32 uiMask;
+    u32 uiTrigger;
+    u32 uiTarget;
+    u8 uiDelay;
+    u8 uiMake;
+    u8 uiBreak;
+    u8 unkF;
+} SceCtrlRapidFire;
 struct D_00001D70_s {
-    u8 pad0[0xA34];
+    u8 pad0[0xC];
+    s32 samplingMode;
+    u8 padC[0x91C - 0x10];
+    SceCtrlRapidFire rapidFire[16];
+    u8 padA1C[0x10];
+    u32 maskSupportButtons;
+    u32 maskApplyButtons;
     volatile s32 unkA34;
     volatile s32 unkA38;
     volatile s32 unkA3C;
@@ -49,6 +64,7 @@ s32 module_reboot_before(void);
 s32 module_start(void);
 M2C_UNK sceCtrlEnd();
 s32 sceCtrlGetIdleCancelKey(s32 *arg0, s32 *arg1, s32 *arg2, s32 *arg3);
+s32 sceCtrlGetSuspendingExtraSamples(void);
 M2C_UNK sceCtrlInit();
 s32 sceCtrlPeekBufferNegative(void *arg0, s32 arg1);
 s32 sceCtrlPeekBufferPositive(void *arg0, s32 arg1);
@@ -57,8 +73,9 @@ s32 sceCtrlReadBufferPositive(void *arg0, s32 arg1);
 s32 sceCtrlSetIdleCancelKey(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
 s32 sceCtrlSetPollingMode(s8 arg0);
 s32 sceCtrlSetSuspendingExtraSamples(u32 arg0);
-s32 sceCtrlGetSuspendingExtraSamples(void);
 s32 sceCtrl_driver_CC70B61E(void);
+void sceKernelCpuResumeIntr(s32);
+s32 sceKernelCpuSuspendIntr(void);
 s32 sceKernelSetEventFlag(s32, u32);
 
 #endif
