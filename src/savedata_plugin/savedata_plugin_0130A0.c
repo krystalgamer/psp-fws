@@ -590,8 +590,15 @@ INCLUDE_ASM("nonmatchings/savedata_plugin_0130A0", func_00013D04);
 INCLUDE_ASM("nonmatchings/savedata_plugin_0130A0", func_00014888);
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/savedata_plugin_0130A0", func_00011A84);
+#endif
+
+#if FW_VERSION == 100
+void func_00011A84(void *arg0) {
+    sce_paf_private_memset((s32) &D_00022F0C, 0, 0x10);
+    sce_paf_private_memcpy(&D_00022F0C, arg0, 0x10);
+}
 #endif
 
 #if FW_VERSION == 271

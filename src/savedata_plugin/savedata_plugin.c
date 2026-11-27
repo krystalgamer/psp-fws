@@ -2578,11 +2578,11 @@ INCLUDE_ASM("nonmatchings/savedata_plugin", func_00008550);
 INCLUDE_ASM("nonmatchings/savedata_plugin", func_00007900);
 #endif
 
-#if FW_VERSION == 100 || (FW_VERSION >= 201 && FW_VERSION < 282)
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/savedata_plugin", func_00007984);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 201
+#if FW_VERSION < 201
 void func_00007984(void *arg0, void *arg1) {
     s32 sp10;
     void **temp_a0;
