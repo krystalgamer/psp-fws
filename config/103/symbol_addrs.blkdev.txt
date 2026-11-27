@@ -1,0 +1,28 @@
+// shared names (tools/add_version.py) begin
+D_00000F00 = 0x00001080;
+D_00000F10 = 0x00001090;
+D_00000F20 = 0x000010A0;
+D_00000F30 = 0x000010B0;
+D_00001000 = 0x00001180;
+sceBLKInit = 0x00000000; // type:func rom:0x80
+sceBLKRegister = 0x000000F0; // type:func rom:0x170
+sceBLKStart = 0x00000304; // type:func rom:0x384
+sceBLKStop = 0x00000480; // type:func rom:0x500
+sceBLKInvalidateDeviceName = 0x00000714; // type:func rom:0x794
+sceBLKUnRegister = 0x00000958; // type:func rom:0x9D8
+sceBLKStartFeatures = 0x00000B7C; // type:func rom:0xBFC
+sceBLKTerm = 0x00000D20; // type:func rom:0xDA0
+module_start = 0x00000DA0; // type:func rom:0xE20
+sceKernelCreateHeap = 0x00000DD0; // type:func rom:0xE50
+sceKernelDeleteHeap = 0x00000DD8; // type:func rom:0xE58
+sceKernelAllocHeapMemory = 0x00000DE0; // type:func rom:0xE60
+sceKernelFreeHeapMemory = 0x00000DE8; // type:func rom:0xE68
+strncmp = 0x00000DF8; // type:func rom:0xE78
+strncpy = 0x00000E00; // type:func rom:0xE80
+strlen = 0x00000E08; // type:func rom:0xE88
+sceKernelCreateSema = 0x00000E18; // type:func rom:0xE98
+sceKernelDeleteSema = 0x00000E20; // type:func rom:0xEA0
+sceKernelSignalSema = 0x00000E28; // type:func rom:0xEA8
+sceKernelWaitSema = 0x00000E30; // type:func rom:0xEB0
+D_00000F10_v103 = 0x00000F10; // rom:0xF90
+// shared names (tools/add_version.py) end
