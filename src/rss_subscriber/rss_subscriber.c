@@ -1,3 +1,4 @@
+/* lang: c++ */
 /* cflags: -Os */
 #include "common.h"
 #include "rss_subscriber_decls.h"
@@ -109,7 +110,7 @@ void func_0000036C(struct Unk_func_0000036C_0 *arg0) {
     arg0->unk10 = 0;
     arg0->unk14 = 0;
     arg0->unk18 = 0;
-    func_000027A4((u8 *)arg0 + 0x1C, 0);
+    func_000027A4((s32*) ((u8 *)arg0 + 0x1C), 0);
     arg0->unk20 = 0;
     arg0->unk24 = 0;
     arg0->unk28 = 0;
@@ -138,7 +139,7 @@ void func_0000044C(struct Unk_func_0000044C_0 *arg0) {
     arg0->unk10 = 0;
     arg0->unk14 = 0;
     arg0->unk18 = 0;
-    func_000027A4((u8 *)arg0 + 0x1C, 0);
+    func_000027A4((s32*) ((u8 *)arg0 + 0x1C), 0);
     arg0->unk20 = 0;
     arg0->unk24 = 0;
     arg0->unk28 = 0;
@@ -416,7 +417,7 @@ INCLUDE_ASM("nonmatchings/rss_subscriber", func_00002D28);
 #else
 void func_00002D28(M2C_UNK **arg0) {
     *arg0 = &D_00003D40;
-    _ZdlPv();
+    _ZdlPv(arg0);
 }
 #endif
 
@@ -439,7 +440,7 @@ INCLUDE_ASM("nonmatchings/rss_subscriber", func_00002D80);
 #else
 void func_00002D80(M2C_UNK **arg0) {
     *arg0 = &D_00003D30;
-    _ZdlPv();
+    _ZdlPv(arg0);
 }
 #endif
 
