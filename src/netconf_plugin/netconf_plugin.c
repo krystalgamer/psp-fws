@@ -1465,8 +1465,14 @@ INCLUDE_ASM("nonmatchings/netconf_plugin", func_00001B90);
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_000065F4);
 #endif
 
-#if FW_VERSION < 260 || FW_VERSION >= 282
+#if FW_VERSION == 100 || (FW_VERSION >= 152 && FW_VERSION < 260) || FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_00001C10);
+#endif
+
+#if FW_VERSION == 150
+void func_00001C10(s32 arg0) {
+    _ZN3paf6Module12SetInterfaceEiPv(arg0, 1, (s32) &D_0001FFCC);
+}
 #endif
 
 #if FW_VERSION < 260
@@ -4212,8 +4218,26 @@ void func_00004F54(void) {
 }
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION >= 152 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_00003060);
+#endif
+
+#if FW_VERSION == 150
+s32 func_00003060(void) {
+    s32 temp_s0;
+
+    temp_s0 = func_0000D204();
+    func_00005798();
+    M2C_FIELD(temp_s0, s32 *, 0x98) = 0;
+    M2C_FIELD(temp_s0, s32 *, 0xA0) = 0;
+    M2C_FIELD(temp_s0, s32 *, 0xC0) = 0;
+    M2C_FIELD(temp_s0, s32 *, 0xBC) = 0;
+    M2C_FIELD(temp_s0, s32 *, 0xB8) = 0;
+    M2C_FIELD(temp_s0, s32 *, 0xCC) = 0;
+    _ZN3paf4View8PageOpenEPKcii(temp_s0, &D_0001D098, 0, 0);
+    func_00002C90(0);
+    return func_00005C24(0);
+}
 #endif
 
 #if FW_VERSION == 100
@@ -4665,8 +4689,16 @@ void func_00004A10(s32 arg0) {
 }
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION >= 152 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_00004A90);
+#endif
+
+#if FW_VERSION == 150
+void func_00004A90(s32 arg0) {
+    _ZN3paf9PhHandler11SetCallBackEiPFvPNS_8PhWidgetEPNS_7PhEventEPvES5_(arg0, 0x10001, (s32) func_000049D8, 0);
+    func_00005C24(0);
+    func_00002C90(3);
+}
 #endif
 
 #if FW_VERSION == 100
@@ -5967,8 +5999,17 @@ INCLUDE_ASM("nonmatchings/netconf_plugin", func_0000AB54);
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_0000653C);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION >= 152 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_00006D54);
+#endif
+
+#if FW_VERSION == 150
+void func_00006D54(s32 arg0) {
+    D_00013DC0 = 1;
+    _ZN3paf9PhHandler11SetCallBackEiPFvPNS_8PhWidgetEPNS_7PhEventEPvES5_(arg0, 0x10001, (s32) func_000065E0, 0);
+    func_0000647C(M2C_FIELD(arg0, s32 *, 0x1D0));
+    func_00006458();
+}
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
@@ -6613,9 +6654,21 @@ INCLUDE_ASM("nonmatchings/netconf_plugin", func_0000D0F0);
 
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_0000D1E4);
 
-#if FW_VERSION >= 150
+#if FW_VERSION >= 152
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_0000D240);
-#else
+#endif
+
+#if FW_VERSION == 150
+void func_0000D240(void *arg0) {
+    D_00013DC0 = 1;
+    _ZN3paf9PhHandler11SetCallBackEiPFvPNS_8PhWidgetEPNS_7PhEventEPvES5_((s32) arg0, 0x10001, (s32) func_000065E0, 0);
+    func_0000D1E4(_ZN3paf8PhWidget9FindChildEPKci(M2C_FIELD(arg0, s32 *, 0x1D0), &D_0001DDF8, 0));
+    func_00005C24(3);
+    func_00002C90(5);
+}
+#endif
+
+#if FW_VERSION == 100
 void func_0000D240(void *arg0) {
     func_0000D1E4(_ZN3paf8PhWidget9FindChildEPKci(M2C_FIELD(arg0, s32 *, 0x1D0), &D_0001DDF8, 0));
     func_00005C24(3);
@@ -10030,11 +10083,11 @@ INCLUDE_ASM("nonmatchings/netconf_plugin", func_0000E2A8);
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_00001B90);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION >= 152 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/netconf_plugin", func_0000E378);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 152
 s32 func_0000E378(void) {
     sce_paf_private_memset(&D_00020984, 0, 0xC);
     sce_paf_private_memset(&D_00020980, 1, 2);
