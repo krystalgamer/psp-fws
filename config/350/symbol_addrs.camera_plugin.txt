@@ -389,3 +389,6 @@ D_00023EB0_v350 = 0x00023EB0; // rom:0x23F50
 D_00023FA0_v350 = 0x00023FA0; // rom:0x24040
 func_00017E7C_v350 = 0x00017E7C; // type:func rom:0x17F1C
 // shared names (tools/add_version.py) end
+_ZN14Class_00023B30D2Ev = 0x0000E7B8; // type:func
+_ZN14Class_00023B30D1Ev = 0x0000E7C8; // type:func
+_ZN14Class_00023B30D0Ev = 0x0000E7D8; // type:func

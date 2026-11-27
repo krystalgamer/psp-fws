@@ -270,3 +270,6 @@ vshRegSysconfCloseRegistry = 0x000209B0; // type:func
 vshRegSysconfGetRegistry = 0x000209B8; // type:func
 vshRegSysconfOpenRegistry = 0x000209C0; // type:func
 _ZN3vsh10FixedAlloc4LockEPKc = 0x000209C8; // type:func
+_ZN14Class_00023B30D2Ev = 0x0000E7B8; // type:func
+_ZN14Class_00023B30D1Ev = 0x0000E7C8; // type:func
+_ZN14Class_00023B30D0Ev = 0x0000E7D8; // type:func
