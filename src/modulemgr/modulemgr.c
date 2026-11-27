@@ -1,4 +1,4 @@
-/* cflags[100]: -O2 */
+/* cflags[100]: -O2 -fno-builtin */
 /* cflags: -O2 -frename-registers */
 #include "common.h"
 #include "modulemgr_decls.h"
@@ -376,84 +376,84 @@ INCLUDE_ASM("nonmatchings/modulemgr", module_bootstart);
 #endif
 
 #if FW_VERSION == 100
-s32 func_00000108(void) {
-    s32 temp_s0;
-    s32 temp_s1;
+SceModule *func_00000108(void) {
+    s32 intr;
+    SceModule *mod;
 
-    temp_s0 = sceKernelCpuSuspendIntr();
-    temp_s1 = sceKernelCreateModule();
-    sceKernelCpuResumeIntr(temp_s0);
-    return temp_s1;
+    intr = sceKernelCpuSuspendIntr();
+    mod = sceKernelCreateModule();
+    sceKernelCpuResumeIntr(intr);
+    return mod;
 }
 
-s32 func_00000148(s32 arg0) {
-    s32 temp_s0;
-    s32 temp_s1;
+SceModule *func_00000148(s32 arg0) {
+    SceModule *ret;
+    s32 intr;
 
-    temp_s1 = sceKernelCpuSuspendIntr();
-    temp_s0 = sceKernelAllocModule(arg0);
-    sceKernelCpuResumeIntr(temp_s1);
-    return temp_s0;
+    intr = sceKernelCpuSuspendIntr();
+    ret = sceKernelAllocModule(arg0);
+    sceKernelCpuResumeIntr(intr);
+    return ret;
 }
 
-s32 func_00000190(s32 arg0) {
-    s32 temp_s0;
-    s32 temp_s1;
+s32 func_00000190(SceModule *mod) {
+    s32 ret;
+    s32 intr;
 
-    temp_s1 = sceKernelCpuSuspendIntr();
-    temp_s0 = sceKernelRegisterModule(arg0);
-    sceKernelCpuResumeIntr(temp_s1);
-    return temp_s0;
+    intr = sceKernelCpuSuspendIntr();
+    ret = sceKernelRegisterModule(mod);
+    sceKernelCpuResumeIntr(intr);
+    return ret;
 }
 
-s32 func_000001D8(s32 arg0) {
-    s32 temp_s0;
-    s32 temp_s1;
+s32 func_000001D8(SceModule *mod) {
+    s32 ret;
+    s32 intr;
 
-    temp_s1 = sceKernelCpuSuspendIntr();
-    temp_s0 = sceKernelReleaseModule(arg0);
-    sceKernelCpuResumeIntr(temp_s1);
-    return temp_s0;
+    intr = sceKernelCpuSuspendIntr();
+    ret = sceKernelReleaseModule(mod);
+    sceKernelCpuResumeIntr(intr);
+    return ret;
 }
 
-s32 func_00000220(s32 arg0) {
-    s32 temp_s0;
-    s32 temp_s1;
+s32 func_00000220(SceModule *mod) {
+    s32 ret;
+    s32 intr;
 
-    temp_s1 = sceKernelCpuSuspendIntr();
-    temp_s0 = sceKernelDeleteModule(arg0);
-    sceKernelCpuResumeIntr(temp_s1);
-    return temp_s0;
+    intr = sceKernelCpuSuspendIntr();
+    ret = sceKernelDeleteModule(mod);
+    sceKernelCpuResumeIntr(intr);
+    return ret;
 }
 
-s32 func_00000268(s32 arg0) {
-    s32 temp_s0;
-    s32 temp_s1;
+s32 func_00000268(SceModule *mod) {
+    s32 ret;
+    s32 intr;
 
-    temp_s1 = sceKernelCpuSuspendIntr();
-    temp_s0 = sceKernelFreeModule(arg0);
-    sceKernelCpuResumeIntr(temp_s1);
-    return temp_s0;
+    intr = sceKernelCpuSuspendIntr();
+    ret = sceKernelFreeModule(mod);
+    sceKernelCpuResumeIntr(intr);
+    return ret;
 }
 
-s32 func_000002B0(s32 arg0) {
-    s32 temp_s0;
-    s32 temp_s1;
+SceModule *func_000002B0(SceUID modId) {
+    SceModule *ret;
+    s32 intr;
 
-    temp_s1 = sceKernelCpuSuspendIntr();
-    temp_s0 = sceKernelModuleFromUID(arg0);
-    sceKernelCpuResumeIntr(temp_s1);
-    return temp_s0;
+    intr = sceKernelCpuSuspendIntr();
+    ret = sceKernelModuleFromUID(modId);
+    sceKernelCpuResumeIntr(intr);
+    return ret;
 }
 
-s32 func_000002F8(s32 arg0) {
-    s32 temp_s0;
-    s32 temp_s1;
+SceModule *func_000002F8(SceUID modId) {
+    SceModule *ret;
+    s32 intr;
 
-    temp_s1 = sceKernelCpuSuspendIntr();
-    temp_s0 = sceKernelFindModuleByUID(arg0);
-    sceKernelCpuResumeIntr(temp_s1);
-    return temp_s0;
+    intr = sceKernelCpuSuspendIntr();
+    ret = sceKernelFindModuleByUID(modId);
+    sceKernelCpuResumeIntr(intr);
+    return ret;
 }
 
 void func_00000340(void) {
@@ -733,9 +733,9 @@ s32 func_0000054C(u32 addr, SceSize size, u32 base, SceSize baseSize) {
     return 0;
 }
 
-void func_00000594(void *arg0) {
-    sceKernelFreePartitionMemory(M2C_FIELD(arg0, s32 *, 0x34));
-    func_00000268((s32) arg0);
+void func_00000594(SceModule *mod) {
+    sceKernelFreePartitionMemory(mod->memId);
+    func_00000268(mod);
 }
 #endif
 
@@ -866,7 +866,42 @@ INCLUDE_RODATA("nonmatchings/modulemgr", D_0000504C);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 152
-INCLUDE_ASM("nonmatchings/modulemgr", sceKernelLoadModuleVSHByID);
+SceUID sceKernelLoadModuleVSHByID(SceUID fd, s32 flags, SceKernelLMOption *option) {
+    SceModuleMgrParam modParams;
+    s32 oldK1;
+    s32 ret;
+
+    memset(&modParams, 0, sizeof(modParams));
+    oldK1 = shiftK1Noreorder();
+    if (option != NULL && k1IsUserMode() && (s32)((u32)option | ((u32)option + sizeof(*option))) < 0) {
+        Kprintf(D_00005018, "sceKernelLoadModuleVSHByID");
+        setK1(oldK1);
+        return 0x800200D3;
+    }
+    if (sceKernelIsIntrContext()) {
+        setK1(oldK1);
+        return 0x80020064;
+    }
+    if (k1IsUserMode() && sceKernelGetUserLevel() != 4) {
+        Kprintf("modulemgr.c:%s:This API for VSH only (%d)\n", "sceKernelLoadModuleVSHByID", sceKernelGetUserLevel());
+        setK1(oldK1);
+        return 0x80020149;
+    }
+    ret = sceIoIoctl(fd, 0x8003, NULL, 0, NULL, 0);
+    if (ret < 0) {
+        Kprintf(D_0000504C, "sceKernelLoadModuleVSHByID", ret);
+        setK1(oldK1);
+        return 0x80020146;
+    }
+    modParams.apiType = 0x20;
+    modParams.modeStart = CMD_LOAD_MODULE;
+    modParams.modeFinish = CMD_RELOCATE_MODULE;
+    modParams.fd = fd;
+    modParams.fileBase = NULL;
+    ret = func_000004B0(&modParams, option);
+    setK1(oldK1);
+    return ret;
+}
 #endif
 
 #if FW_VERSION < 152
@@ -1230,7 +1265,45 @@ INCLUDE_ASM("nonmatchings/modulemgr", func_000013F4);
 
 INCLUDE_ASM("nonmatchings/modulemgr", func_00001994);
 
-INCLUDE_ASM("nonmatchings/modulemgr", func_00001BD8);
+s32 StartModule(SceModuleMgrParam *modParams, SceModule *mod, SceSize argSize, void *argp, s32 *pStatus) {
+    s32 status;
+
+    if ((mod->status & 0xF) != 3) {
+        Kprintf("modulemgr.c:%s:Illegal parameter: %d\n", "StartModule", mod->status & 0xF);
+        return 0x80020001;
+    }
+    mod->status = (mod->status & ~0xF) | 4;
+    status = func_00000E7C(modParams, mod);
+    if (status < 0) {
+        Kprintf("modulemgr.c:%s:prologue_module failed: 0x%08x\n", "StartModule", status);
+        return status;
+    }
+    sceKernelDcacheWritebackAll();
+    if (mod->userModThid == -1) {
+        Kprintf("modulemgr.c:%s:Warning:There is no start thread\n", "StartModule");
+        status = 0;
+    } else {
+        modMgrCB.userThreadId = mod->userModThid;
+        if (sceKernelStartThread(mod->userModThid, argSize, argp) == 0) {
+            status = sceKernelWaitThreadEnd(mod->userModThid, NULL);
+            if (status < 0) {
+                Kprintf("modulemgr.c:%s:Start failed: 0x%08x\n", "StartModule", status);
+            }
+        }
+        modMgrCB.userThreadId = -1;
+        sceKernelDeleteThread(mod->userModThid);
+        mod->userModThid = -1;
+    }
+    if (status == 0) {
+        mod->status = (mod->status & 0xFFF0) | 5;
+    } else {
+        EpilogueModule(mod);
+        mod->status = (mod->status & ~0xF) | 7;
+        UnloadModule(mod);
+        mod->status = (mod->status & ~0xF) | 8;
+    }
+    return status;
+}
 
 INCLUDE_ASM("nonmatchings/modulemgr", func_00001D78);
 
@@ -1250,7 +1323,7 @@ s32 UnloadModule(SceModule *mod) {
     wmemset((void *)mod->textAddr, 0x4D, mod->textSize);
     memset((void *)(mod->textAddr + mod->textSize), -1, mod->dataSize + mod->bssSize);
     func_00000594(mod);
-    func_000001D8((s32)mod);
+    func_000001D8(mod);
     return 0;
 }
 
@@ -2418,7 +2491,43 @@ INCLUDE_ASM("nonmatchings/modulemgr", func_0000428C);
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/modulemgr", sceKernelRebootBeforeForKernel);
+s32 sceKernelRebootBeforeForKernel(void *arg) {
+    s32 count;
+    SceUID blk;
+    SceUID *list;
+    SceModule *mod;
+    s32 ret;
+    s32 i;
+
+    count = sceKernelModuleCount();
+    if (count < 0) {
+        Kprintf(D_00006100, "sceKernelRebootBeforeForKernel", count);
+        return count;
+    }
+    blk = sceKernelAllocPartitionMemory(1, D_0000602C, 1, count * sizeof(SceUID), 0);
+    if (blk < 0) {
+        Kprintf(D_00006E3C, "sceKernelRebootBeforeForKernel", blk);
+        return blk;
+    }
+    list = sceKernelGetBlockHeadAddr(blk);
+    ret = sceKernelGetModuleList(count, list);
+    if (ret < 0) {
+        Kprintf(D_000060C8, "sceKernelRebootBeforeForKernel", ret);
+        return ret;
+    }
+    for (i = count; i > 0; i--) {
+        mod = func_000002F8(list[i - 1]);
+        if (mod != NULL && (s32)mod->moduleRebootBefore != -1 && !(mod->status & 0x100)) {
+            mod->moduleRebootBefore(arg);
+        }
+    }
+    ret = sceKernelFreePartitionMemory(blk);
+    if (ret < 0) {
+        Kprintf(D_00006060, "sceKernelRebootBeforeForKernel", list, ret);
+        return ret;
+    }
+    return 0;
+}
 #endif
 
 #if FW_VERSION >= 282 && FW_VERSION < 350
