@@ -76,11 +76,11 @@ void func_00030770(void *arg0) {
 }
 #endif
 
-#if FW_VERSION >= 152
+#if FW_VERSION == 201
 INCLUDE_ASM("nonmatchings/msvideo_plugin_030680", func_000307C0);
 #endif
 
-#if FW_VERSION == 150
+#if FW_VERSION >= 150 && FW_VERSION < 201
 void func_000307C0(s32 **arg0) {
     s32 temp_v1;
 

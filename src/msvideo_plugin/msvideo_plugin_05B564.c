@@ -47,9 +47,7 @@ void func_0005BB14(struct Unk_func_0005BB14_0 *arg0) {
         }
     }
 }
-#endif
 
-#if FW_VERSION >= 152
 INCLUDE_ASM("nonmatchings/msvideo_plugin_05B564", func_0005BB6C);
 #else
 void func_0005BB6C(s32 **arg0) {

@@ -109,8 +109,22 @@ s32 func_0003848C(void **arg0) {
 
 INCLUDE_ASM("nonmatchings/msvideo_plugin_037A18", func_000384CC);
 
-#if FW_VERSION == 100 || FW_VERSION == 152
+#if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/msvideo_plugin_037A18", func_0002B6C8);
+#endif
+
+#if FW_VERSION == 152
+s32 func_0002B6C8(void **arg0) {
+    s32 var_v1;
+    void *temp_v0;
+
+    var_v1 = 0x80610103;
+    if (arg0 != NULL) {
+        temp_v0 = *arg0;
+        var_v1 = (func_0002BA14(M2C_FIELD(temp_v0, s32 *, 0), M2C_FIELD(temp_v0, void **, 8)) == 0) ? 0 : 0x80618006;
+    }
+    return var_v1;
+}
 #endif
 
 #if FW_VERSION == 150
