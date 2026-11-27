@@ -1657,9 +1657,18 @@ s32 func_00008274(s32 arg0) {
 }
 #endif
 
-#if FW_VERSION >= 150
+#if FW_VERSION >= 151
 INCLUDE_ASM("nonmatchings/umdman", func_00008284);
+#endif
 
+#if FW_VERSION == 150
+s32 func_00008284(void) {
+    sceKernelSetEventFlag(D_00012C00, 0x10U);
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 151
 INCLUDE_ASM("nonmatchings/umdman", func_000082AC);
 #else
 s32 func_000082AC(void) {
@@ -1668,33 +1677,69 @@ s32 func_000082AC(void) {
 }
 #endif
 
-#if FW_VERSION >= 150
+#if FW_VERSION >= 151
 INCLUDE_ASM("nonmatchings/umdman", func_000082D4);
-#else
+#endif
+
+#if FW_VERSION == 150
+s32 func_000082D4(void) {
+    sceKernelSetEventFlag(D_00012C00, 0x40U);
+    return 0;
+}
+#endif
+
+#if FW_VERSION == 100
 s32 func_000082D4(void) {
     return __builtin_allegrex_min(sceKernelSetEventFlag(D_00012C00, 0x40U), 0);
 }
 #endif
 
-#if FW_VERSION >= 150
+#if FW_VERSION >= 151
 INCLUDE_ASM("nonmatchings/umdman", func_000082FC);
-#else
+#endif
+
+#if FW_VERSION == 150
+s32 func_000082FC(void) {
+    sceKernelSetEventFlag(D_00012C00, 0x80U);
+    return 0;
+}
+#endif
+
+#if FW_VERSION == 100
 s32 func_000082FC(void) {
     return __builtin_allegrex_min(sceKernelSetEventFlag(D_00012C00, 0x80U), 0);
 }
 #endif
 
-#if FW_VERSION >= 150
+#if FW_VERSION >= 151
 INCLUDE_ASM("nonmatchings/umdman", func_00008324);
-#else
+#endif
+
+#if FW_VERSION == 150
+s32 func_00008324(void) {
+    sceKernelSetEventFlag(D_00012C00, 0x100U);
+    return 0;
+}
+#endif
+
+#if FW_VERSION == 100
 s32 func_00008324(void) {
     return __builtin_allegrex_min(sceKernelSetEventFlag(D_00012C00, 0x100U), 0);
 }
 #endif
 
-#if FW_VERSION >= 150
+#if FW_VERSION >= 151
 INCLUDE_ASM("nonmatchings/umdman", func_0000834C);
-#else
+#endif
+
+#if FW_VERSION == 150
+s32 func_0000834C(void) {
+    sceKernelSetEventFlag(D_00012C00, 0x200U);
+    return 0;
+}
+#endif
+
+#if FW_VERSION == 100
 s32 func_0000834C(void) {
     return __builtin_allegrex_min(sceKernelSetEventFlag(D_00012C00, 0x200U), 0);
 }
@@ -3262,9 +3307,19 @@ void func_0000BA48(s32 arg0) {
 s32 sceUmdManGetReadyFlag(void) {
     return D_00019B3C;
 }
+#endif
 
+#if FW_VERSION >= 151 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/umdman", sceUmdManGetUmdDiscInfo);
+#endif
 
+#if FW_VERSION == 150
+s32 *sceUmdManGetUmdDiscInfo(void) {
+    return &D_00019AC0;
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/umdman", func_0000BA94);
 #endif
 
