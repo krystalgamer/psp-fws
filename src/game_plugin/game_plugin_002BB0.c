@@ -1,3 +1,4 @@
+/* lang: c++ */
 /* cflags: -Os */
 #include "common.h"
 #include "game_plugin_decls.h"
@@ -170,7 +171,7 @@ INCLUDE_ASM("nonmatchings/game_plugin_002BB0", func_00003F78);
 #if FW_VERSION >= 250 && FW_VERSION < 282
 void func_000040DC(M2C_UNK **arg0) {
     *arg0 = &D_00011AC8;
-    _ZdlPv();
+    _ZdlPv(arg0);
 }
 
 INCLUDE_ASM("nonmatchings/game_plugin_002BB0", func_00004104);
@@ -179,7 +180,7 @@ INCLUDE_ASM("nonmatchings/game_plugin_002BB0", func_00004104);
 #if FW_VERSION < 282
 void func_00003F18(M2C_UNK **arg0) {
     *arg0 = &D_00011AE8;
-    _ZdlPv();
+    _ZdlPv(arg0);
 }
 #endif
 
@@ -190,7 +191,7 @@ INCLUDE_ASM("nonmatchings/game_plugin_002BB0", func_0000403C);
 #if FW_VERSION >= 282 && FW_VERSION < 350
 void func_0000403C(M2C_UNK **arg0) {
     *arg0 = &D_00011AD8;
-    _ZdlPv();
+    _ZdlPv(arg0);
 }
 #endif
 
@@ -205,7 +206,7 @@ INCLUDE_ASM("nonmatchings/game_plugin_002BB0", func_0000412C);
 #if FW_VERSION >= 282 && FW_VERSION < 350
 void func_0000412C(M2C_UNK **arg0) {
     *arg0 = &D_00011AE8;
-    _ZdlPv();
+    _ZdlPv(arg0);
 }
 #endif
 

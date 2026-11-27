@@ -1,3 +1,4 @@
+/* lang: c++ */
 /* cflags: -O2 */
 #include "common.h"
 #include "game_plugin_decls.h"
@@ -8,7 +9,7 @@ void func_000005CC(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     D_000125F4 = arg1;
     D_00012608 = arg2;
     D_0001260C = arg3;
-    func_00008274(&D_0001247C);
+    func_00008274((Unk_func_00008274_0*) &D_0001247C);
 }
 
 void func_00000610(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5) {
@@ -18,7 +19,7 @@ void func_00000610(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5) {
     D_000125FC = arg3;
     D_00012608 = arg4;
     D_0001260C = arg5;
-    func_00008274(&D_0001247C);
+    func_00008274((Unk_func_00008274_0*) &D_0001247C);
 }
 #endif
 
@@ -162,7 +163,7 @@ INCLUDE_ASM("nonmatchings/game_plugin_0005CC", func_00000E78);
 #if FW_VERSION >= 282 && FW_VERSION < 350
 void func_00000E78(M2C_UNK **arg0) {
     *arg0 = &D_00011890;
-    _ZdlPv();
+    _ZdlPv(arg0);
 }
 #endif
 
@@ -337,7 +338,7 @@ void func_0000058C(void) {
 
 #if FW_VERSION >= 150 && FW_VERSION < 201
 void func_000005C0(s32 arg0, s32 arg1, s32 arg2) {
-    sce_paf_private_snprintf(&D_000129D8, 0x80, (s32 *) arg0);
+    sce_paf_private_snprintf(&D_000129D8, 0x80, (const char*) (s32 *) arg0);
     D_00012A70 = arg1;
     D_00012A74 = arg2;
     func_000075F4(&D_0001157C);
@@ -538,7 +539,7 @@ INCLUDE_ASM("nonmatchings/game_plugin_0005CC", func_00000E78);
 #if FW_VERSION < 201
 void func_00000E78(s32 **arg0) {
     *arg0 = &D_00011890;
-    _ZdlPv();
+    _ZdlPv(arg0);
 }
 #endif
 
