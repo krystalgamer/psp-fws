@@ -1058,17 +1058,17 @@ INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_00008644);
 
 void func_00008674(M2C_UNK **arg0) {
     *arg0 = &D_00024FE8;
-    func_00013644((s32) arg0);
+    _ZN14Class_00025148D2Ev(arg0);
 }
 
 void func_0000869C(M2C_UNK **arg0) {
     *arg0 = &D_00024FE8;
-    func_00013644((s32) arg0);
+    _ZN14Class_00025148D2Ev(arg0);
 }
 
 void func_000086C4(M2C_UNK **arg0) {
     *arg0 = &D_00024FE8;
-    func_00013644((s32) arg0);
+    _ZN14Class_00025148D2Ev(arg0);
     _ZdlPv(arg0);
 }
 #endif
@@ -1490,12 +1490,12 @@ INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_0000A184);
 #if FW_VERSION >= 282
 void func_0000D3F4(M2C_UNK **arg0) {
     *arg0 = &D_00024FE8;
-    func_00013644((s32) arg0);
+    _ZN14Class_00025148D2Ev(arg0);
 }
 
 void func_0000D41C(M2C_UNK **arg0) {
     *arg0 = &D_00024FE8;
-    func_00013644((s32) arg0);
+    _ZN14Class_00025148D2Ev(arg0);
 }
 #endif
 
@@ -1506,7 +1506,7 @@ INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_0000D444);
 #if FW_VERSION >= 282 && FW_VERSION < 350
 void func_0000D444(M2C_UNK **arg0) {
     *arg0 = &D_00024FE8;
-    func_00013644((s32) arg0);
+    _ZN14Class_00025148D2Ev(arg0);
     _ZdlPv(arg0);
 }
 #endif

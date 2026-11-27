@@ -109,6 +109,19 @@ public:
 };
 #endif
 
+#ifdef __cplusplus
+/* job slot: vtable _ZTV14Class_00025148 [D1, D0] (vptr D_00025148) */
+class Class_00025148 : public Class_00025160 {
+public:
+    Class_00025148(s32 owner);
+    virtual ~Class_00025148();
+    void Init();
+
+    s32 unk18;  /* 0x18 */
+    s32 unk1C;  /* 0x1C */
+};
+#endif
+
 struct D_00025C48_s {
     s32 unk0;
     s32 unk4;
@@ -529,12 +542,6 @@ struct Unk_func_00013594_0 {
     s32 unkC;
 };
 
-struct Unk_func_000136CC_0 {
-    u8 pad0[0x18];
-    s32 unk18;
-    s32 unk1C;
-};
-
 struct Unk_func_00013D44_0 {
     M2C_UNK * unk0;
     s32 unk4;
@@ -763,6 +770,7 @@ s32 Job_isCanceled(s32);
 void _ZN14Class_0001FC8011LoadTextureEv(void *self);
 void _ZN14Class_0001FC80C1Eii(void *self, s32 owner, s32 arg2);
 void _ZN14Class_0001FC80C2Eii(void *self, s32 owner, s32 arg2);
+void _ZN14Class_00025148D2Ev(void *self);
 void _ZN14Class_000251605ResetEv(void *self);
 void _ZN14Class_00025160C2Ei(void *self, s32 owner);
 void _ZN14Class_00025160D2Ev(void *self);
@@ -1046,8 +1054,6 @@ s32 func_0000BA20(void *arg0, s32 arg1);
 s32 func_0000BA4C(void *arg0);
 void func_0000BA5C(void *arg0);
 void func_0000BAD8(void *arg0);
-void func_0000BB3C(s32 **arg0);
-void func_0000BB64(s32 **arg0);
 M2C_UNK func_0000BCEC(s32, M2C_UNK);
 s32 func_0000BCF0(s32, s32);
 s32 func_0000BE0C(s32, s32, s32);
@@ -1196,10 +1202,6 @@ s32 func_0001354C(struct Unk_func_0001354C_0 *arg0);
 s32 func_00013558(struct Unk_func_00013558_0 *arg0);
 s32 func_00013568(struct Unk_func_00013568_0 *arg0, s32 arg1);
 void func_00013594(struct Unk_func_00013594_0 *arg0);
-s32 func_00013644(s32);
-void func_0001366C(s32 **arg0);
-void func_00013694(s32 **arg0);
-void func_000136CC(struct Unk_func_000136CC_0 *arg0);
 s32 func_000138D0(s32);
 s32 func_00013A48(s32);
 s32 func_00013B3C(s32 arg0);
