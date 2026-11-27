@@ -4,6 +4,12 @@
 #include "common.h"
 #include "m2c_macros.h"
 
+#ifdef __cplusplus
+#include "paf.h"
+#include "vsh.h"
+extern "C" {
+#endif
+
 struct Unk_func_0000186C_temp_v0_2 {
     u8 pad0[0x70];
     M2C_UNK (*unk70)();
@@ -24,6 +30,10 @@ extern M2C_UNK func_00001770;
 extern M2C_UNK func_000018E0;
 extern M2C_UNK func_00003164;
 
+s32 _ZN3paf4View4FindEPKc(M2C_UNK *);
+M2C_UNK _ZN3paf4View6UnloadEPS0_PFvPKcE(s32, M2C_UNK *);
+M2C_UNK _ZN3vsh13MessageDialog10HideDeleteEv(s32);
+void *_ZNK3paf4View12GetInterfaceEi(s32, M2C_UNK);
 s32 func_00000AB0(s32 arg0);
 s32 func_00000AC0(s32 arg0);
 M2C_UNK *func_00000B3C(void);
@@ -50,11 +60,11 @@ void func_000022E4(void);
 void func_00002334(void);
 void func_0000241C(s32 arg0, s32 arg1);
 void func_00002500(s32 arg0, s32 arg1);
-M2C_UNK func_00002580();
+M2C_UNK func_00002580(...);
 M2C_UNK func_000027BC(s32, s32, s32);
 void *func_00002848(void **arg0);
 M2C_UNK func_00002868(s32, s32, s32);
-M2C_UNK func_00002CD8();
+M2C_UNK func_00002CD8(...);
 void func_00002F70(void);
 s32 func_0000301C(s32);
 s32 func_000030E8(s32, s32);
@@ -69,18 +79,18 @@ s32 module_stop(void);
 M2C_UNK sceKernelDelayThread(M2C_UNK);
 M2C_UNK sceKernelPowerLock(M2C_UNK);
 M2C_UNK sceKernelPowerUnlock(M2C_UNK);
-M2C_UNK _ZN3paf4View6UnloadEPS0_PFvPKcE(s32, M2C_UNK *);
-void *_ZNK3paf4View12GetInterfaceEi(s32, M2C_UNK);
 s32 scePaf_5E4447F6(s32);
 s32 scePaf_88784487(M2C_UNK *);
 s32 scePaf_C1B0AA0D(s32);
-s32 sce_paf_private_strlen(s32);
-s32 _ZN3paf4View4FindEPKc(M2C_UNK *);
 void *scePaf_DCE3D225(s32, M2C_UNK);
-s32 sce_paf_private_wcslen(s32);
-M2C_UNK _ZN3vsh13MessageDialog10HideDeleteEv(s32);
 M2C_UNK sceVshCommonGui_8F414E35(s32);
 M2C_UNK sceVshCommonUtil_622815DD(M2C_UNK *, M2C_UNK *);
 M2C_UNK sceVshCommonUtil_951BC384(M2C_UNK *, M2C_UNK *);
+s32 sce_paf_private_strlen(s32);
+s32 sce_paf_private_wcslen(s32);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

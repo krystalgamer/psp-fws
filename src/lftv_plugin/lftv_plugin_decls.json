@@ -1,5 +1,9 @@
 {
  "funcs": {
+  "_ZN3paf4View4FindEPKc": "s32 _ZN3paf4View4FindEPKc(M2C_UNK *);",
+  "_ZN3paf4View6UnloadEPS0_PFvPKcE": "M2C_UNK _ZN3paf4View6UnloadEPS0_PFvPKcE(s32, M2C_UNK *);",
+  "_ZN3vsh13MessageDialog10HideDeleteEv": "M2C_UNK _ZN3vsh13MessageDialog10HideDeleteEv(s32);",
+  "_ZNK3paf4View12GetInterfaceEi": "void *_ZNK3paf4View12GetInterfaceEi(s32, M2C_UNK);",
   "func_00000AB0": "s32 func_00000AB0(s32 arg0);",
   "func_00000AC0": "s32 func_00000AC0(s32 arg0);",
   "func_00000B3C": "M2C_UNK *func_00000B3C(void);",
@@ -45,19 +49,15 @@
   "sceKernelDelayThread": "M2C_UNK sceKernelDelayThread(M2C_UNK);",
   "sceKernelPowerLock": "M2C_UNK sceKernelPowerLock(M2C_UNK);",
   "sceKernelPowerUnlock": "M2C_UNK sceKernelPowerUnlock(M2C_UNK);",
-  "_ZN3paf4View6UnloadEPS0_PFvPKcE": "M2C_UNK _ZN3paf4View6UnloadEPS0_PFvPKcE(s32, M2C_UNK *);",
-  "_ZNK3paf4View12GetInterfaceEi": "void *_ZNK3paf4View12GetInterfaceEi(s32, M2C_UNK);",
   "scePaf_5E4447F6": "s32 scePaf_5E4447F6(s32);",
   "scePaf_88784487": "s32 scePaf_88784487(M2C_UNK *);",
   "scePaf_C1B0AA0D": "s32 scePaf_C1B0AA0D(s32);",
-  "sce_paf_private_strlen": "s32 sce_paf_private_strlen(s32);",
-  "_ZN3paf4View4FindEPKc": "s32 _ZN3paf4View4FindEPKc(M2C_UNK *);",
   "scePaf_DCE3D225": "void *scePaf_DCE3D225(s32, M2C_UNK);",
-  "sce_paf_private_wcslen": "s32 sce_paf_private_wcslen(s32);",
-  "_ZN3vsh13MessageDialog10HideDeleteEv": "M2C_UNK _ZN3vsh13MessageDialog10HideDeleteEv(s32);",
   "sceVshCommonGui_8F414E35": "M2C_UNK sceVshCommonGui_8F414E35(s32);",
   "sceVshCommonUtil_622815DD": "M2C_UNK sceVshCommonUtil_622815DD(M2C_UNK *, M2C_UNK *);",
-  "sceVshCommonUtil_951BC384": "M2C_UNK sceVshCommonUtil_951BC384(M2C_UNK *, M2C_UNK *);"
+  "sceVshCommonUtil_951BC384": "M2C_UNK sceVshCommonUtil_951BC384(M2C_UNK *, M2C_UNK *);",
+  "sce_paf_private_strlen": "s32 sce_paf_private_strlen(s32);",
+  "sce_paf_private_wcslen": "s32 sce_paf_private_wcslen(s32);"
  },
  "types": {
   "Unk_func_0000186C_temp_v0_2": "struct Unk_func_0000186C_temp_v0_2 {\n    u8 pad0[0x70];\n    M2C_UNK (*unk70)();\n};"

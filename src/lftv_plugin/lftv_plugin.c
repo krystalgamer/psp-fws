@@ -1,3 +1,4 @@
+/* lang: c++ */
 /* cflags: -Os */
 #include "common.h"
 #include "lftv_plugin_decls.h"
@@ -573,7 +574,7 @@ s32 func_000031CC(void) {
     s32 temp_v0;
     void *temp_v0_2;
 
-    temp_v0 = scePaf_88784487("netconf_plugin");
+    temp_v0 = scePaf_88784487(( M2C_UNK*) ("netconf_plugin"));
     if (temp_v0 != 0) {
         temp_v0_2 = scePaf_DCE3D225(temp_v0, 1);
         if (temp_v0_2 != NULL) {
@@ -591,7 +592,7 @@ s32 func_000031CC(void) {
     s32 temp_v0;
     void *temp_v0_2;
 
-    temp_v0 = _ZN3paf4View4FindEPKc("netconf_plugin");
+    temp_v0 = _ZN3paf4View4FindEPKc(( M2C_UNK*) ("netconf_plugin"));
     if (temp_v0 != 0) {
         temp_v0_2 = _ZNK3paf4View12GetInterfaceEi(temp_v0, 1);
         if (temp_v0_2 != NULL) {
@@ -609,7 +610,7 @@ s32 func_0000323C(void) {
     s32 temp_v0;
     void *temp_v0_2;
 
-    temp_v0 = scePaf_88784487("osk");
+    temp_v0 = scePaf_88784487(( M2C_UNK*) ("osk"));
     if (temp_v0 != 0) {
         temp_v0_2 = scePaf_DCE3D225(temp_v0, 1);
         if (temp_v0_2 != NULL) {
@@ -627,7 +628,7 @@ s32 func_0000323C(void) {
     s32 temp_v0;
     void *temp_v0_2;
 
-    temp_v0 = _ZN3paf4View4FindEPKc("osk");
+    temp_v0 = _ZN3paf4View4FindEPKc(( M2C_UNK*) ("osk"));
     if (temp_v0 != 0) {
         temp_v0_2 = _ZNK3paf4View12GetInterfaceEi(temp_v0, 1);
         if (temp_v0_2 != NULL) {
