@@ -65,3 +65,14 @@ sceSysregAwResetDisable = 0x00002940; // type:func rom:0x29C0
 sceSysregAwRegABusClockEnable = 0x00002948; // type:func rom:0x29C8
 sceSysregAwRegABusClockDisable = 0x00002950; // type:func rom:0x29D0
 // shared names (tools/add_version.py) end
+
+// NID-derived names
+sceKernelRegisterIntrHandler = 0x00002890; // type:func
+sceKernelSetUserModeIntrHanlerAcceptable = 0x00002898; // type:func
+sceKernelEnableIntr = 0x000028A8; // type:func
+sceKernelCreateEventFlag = 0x000028F0; // type:func
+sceKernelRegisterSysEventHandler = 0x00002928; // type:func
+sceSysregAwRegBBusClockEnable = 0x00002958; // type:func
+sceSysregAwRegBBusClockDisable = 0x00002960; // type:func
+sceSysregAwEdramBusClockEnable = 0x00002968; // type:func
+sceSysregAwEdramBusClockDisable = 0x00002970; // type:func
