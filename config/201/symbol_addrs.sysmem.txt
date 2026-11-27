@@ -163,3 +163,4 @@ obj_do_delete = 0x000075F4; // type:func
 obj_no_op = 0x000075EC; // type:func
 obj_do_type = 0x0000769C; // type:func
 g_PartType = 0x0000FD8C;
+g_sysEventHandlers = 0x0000F92C;

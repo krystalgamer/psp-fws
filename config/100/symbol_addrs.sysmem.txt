@@ -172,3 +172,4 @@ g_MemPartOther2 = 0x0000CA74;
 g_MemPartVshell = 0x0000CA78;
 g_MemPartScUser = 0x0000CA7C;
 g_MemPartMeUser = 0x0000CA80;
+g_sysEventHandlers = 0x0000C524;

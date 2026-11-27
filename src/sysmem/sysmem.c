@@ -1876,7 +1876,21 @@ s32 sceKernelLookupUIDFunction(SceSysmemUidCB *uid, s32 id, SceSysmemUidFunc *fu
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/sysmem", sceKernelCallUIDObjCommonFunction);
+s32 sceKernelCallUIDObjCommonFunction(SceSysmemUidCB *uid, SceSysmemUidCB *uidWithFunc, s32 funcId, __builtin_va_list ap) {
+    SceSysmemUidFunc func;
+    s32 oldIntr;
+    s32 ret;
+
+    oldIntr = suspendIntr();
+    sceKernelLookupUIDFunction(uidWithFunc->PARENT1, funcId, &func, &uidWithFunc);
+    if (func != NULL) {
+        ret = func(uid, uidWithFunc, funcId, ap);
+    } else {
+        ret = sceKernelCallUIDObjFunction(uid, 0xB9970352, funcId);
+    }
+    resumeIntr(oldIntr);
+    return ret;
+}
 #endif
 
 #if FW_VERSION == 100
@@ -2183,9 +2197,6 @@ s32 obj_no_op(SceSysmemUidCB *uid, SceSysmemUidCB *uidWithFunc, s32 funcId, __bu
     return uid->uid;
 }
 
-#if FW_VERSION >= 150
-INCLUDE_ASM("nonmatchings/sysmem", obj_do_delete);
-#else
 s32 obj_do_delete(SceSysmemUidCB *uid, SceSysmemUidCB *uidWithFunc, s32 funcId, __builtin_va_list ap) {
     SceSysmemUidCB *parent = uid->PARENT0;
     uid->meta = NULL;
@@ -2198,7 +2209,6 @@ s32 obj_do_delete(SceSysmemUidCB *uid, SceSysmemUidCB *uidWithFunc, s32 funcId, 
     FreeSceUIDobjectCB(uid);
     return 0;
 }
-#endif
 
 s32 obj_do_name(SceSysmemUidCB *uid, SceSysmemUidCB *uidWithFunc, s32 funcId, __builtin_va_list ap) {
     s32 len = __builtin_va_arg(ap, s32);
@@ -2390,34 +2400,53 @@ void func_000065F8(u8 *arg0, u8 *arg1) {
     }
     *var_a0 = 0;
 }
-
-s32 func_00006620(void) {
-    D_0000C524 = 0;
-    return 0;
-}
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 201
+#if FW_VERSION < 201
 s32 func_00006620(void) {
-    D_0000F874 = 0;
+    g_sysEventHandlers = NULL;
     return 0;
 }
-#endif
-
-#if FW_VERSION >= 201
+#else
 s32 func_00008160(void) {
-    D_0000F92C = 0;
+    g_sysEventHandlers = NULL;
     return 0;
 }
 #endif
 
-INCLUDE_ASM("nonmatchings/sysmem", sceKernelIsRegisterSysEventHandler);
+s32 sceKernelIsRegisterSysEventHandler(SceSysEventHandler *handler) {
+    s32 oldIntr = suspendIntr();
+    SceSysEventHandler *cur;
+    for (cur = g_sysEventHandlers; cur != NULL; cur = cur->next) {
+        if (cur == handler) {
+            break;
+        }
+    }
+    resumeIntr(oldIntr);
+    return cur != NULL;
+}
 
+#if FW_VERSION == 100
+s32 sceKernelRegisterSysEventHandler(SceSysEventHandler *handler) {
+    s32 oldIntr = suspendIntr();
+    s32 gp;
+    if (sceKernelIsRegisterSysEventHandler(handler)) {
+        resumeIntr(oldIntr);
+        return 0x80020067;
+    }
+    handler->busy = 0;
+    __asm__ __volatile__("move %0, $gp" : "=r"(gp));
+    handler->gp = gp;
+    handler->next = g_sysEventHandlers;
+    g_sysEventHandlers = handler;
+    resumeIntr(oldIntr);
+    return 0;
+}
+#else
 INCLUDE_ASM("nonmatchings/sysmem", sceKernelRegisterSysEventHandler);
 
-#if FW_VERSION >= 150 && FW_VERSION < 201
-s32 sceKernelReferSysEventHandlers(void) {
-    return D_0000F874;
+SceSysEventHandler *sceKernelReferSysEventHandlers(void) {
+    return g_sysEventHandlers;
 }
 #endif
 
@@ -2425,12 +2454,6 @@ s32 sceKernelReferSysEventHandlers(void) {
 INCLUDE_ASM("nonmatchings/sysmem", sceKernelUnregisterSysEventHandler);
 
 INCLUDE_ASM("nonmatchings/sysmem", sceKernelSysEventDispatch);
-#endif
-
-#if FW_VERSION >= 201
-s32 sceKernelReferSysEventHandlers(void) {
-    return D_0000F92C;
-}
 #endif
 
 INCLUDE_ASM("nonmatchings/sysmem", func_00008284);

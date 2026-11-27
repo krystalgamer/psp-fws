@@ -143,6 +143,7 @@
   "sceKernelIsDevelopmentToolMode": "s32 sceKernelIsDevelopmentToolMode(void);",
   "sceKernelIsHold": "s32 sceKernelIsHold(SceSysmemUidCB *uid0, SceSysmemUidCB *uid1);",
   "sceKernelIsKindOf": "s32 sceKernelIsKindOf(SceSysmemUidCB *uid, SceSysmemUidCB *type);",
+  "sceKernelIsRegisterSysEventHandler": "s32 sceKernelIsRegisterSysEventHandler(SceSysEventHandler *handler);",
   "sceKernelIsUMDMode": "s32 sceKernelIsUMDMode(void);",
   "sceKernelIsValidUserAccess": "s32 sceKernelIsValidUserAccess(s32 arg0, s32 arg1, s32 arg2);",
   "sceKernelJointMemoryBlock": "s32 sceKernelJointMemoryBlock(void);",
@@ -155,7 +156,7 @@
   "sceKernelPowerTick": "s32 sceKernelPowerTick(s32 arg0);",
   "sceKernelPowerUnlock": "s32 sceKernelPowerUnlock(s32 arg0);",
   "sceKernelQueryMemoryPartitionInfo": "s32 sceKernelQueryMemoryPartitionInfo(s32 mpid, SceSysmemPartitionInfo *info);",
-  "sceKernelReferSysEventHandlers": "s32 sceKernelReferSysEventHandlers(void);",
+  "sceKernelReferSysEventHandlers": "SceSysEventHandler *sceKernelReferSysEventHandlers(void);",
   "sceKernelRegisterApiEvaluation": "s32 sceKernelRegisterApiEvaluation(void);",
   "sceKernelRegisterAssertHandler": "void sceKernelRegisterAssertHandler(s32 arg0);",
   "sceKernelRegisterDebugPutchar": "void sceKernelRegisterDebugPutchar(s32 arg0);",
@@ -188,6 +189,7 @@
  },
  "types": {
   "D_0000F8C4_s": "struct D_0000F8C4_s {\n    volatile s32 unk0;\n    volatile s32 unk4;\n    volatile s8 unk8;\n    u8 pad9[0xF];\n    volatile s8 unk18;\n    u8 pad19[0x27];\n    volatile s32 unk40;\n    volatile s8 unk44;\n    u8 pad45[0xF];\n    volatile s32 unk54;\n    volatile s32 unk58;\n    volatile s32 unk5C;\n    volatile s32 unk60;\n    volatile s32 unk64;\n};",
+  "SceSysEventHandler": "typedef struct SceSysEventHandler {\n    s32 size; /* 0x00 */\n    char *name; /* 0x04 */\n    s32 typeMask; /* 0x08 */\n    s32 (*handler)(s32 eventId, char *eventName, void *param, s32 *result); /* 0x0C */\n    s32 gp; /* 0x10 */\n    s32 busy; /* 0x14 */\n    struct SceSysEventHandler *next; /* 0x18 */\n    s32 reserved[9]; /* 0x1C */\n} SceSysEventHandler;",
   "SceSysmemHeap": "typedef struct SceSysmemHeapBlock {\n    struct SceSysmemHeapBlock *next; /* 0x0 */\n    struct SceSysmemHeapBlock *prev; /* 0x4 */\n    /* followed by the low heap */\n} SceSysmemHeapBlock;\ntypedef struct {\n    s32 size; /* 0x0: bit 0 = attr */\n    s32 partId; /* 0x4 */\n    SceSysmemHeapBlock *firstBlock; /* 0x8 */\n} SceSysmemHeap; /* 1.00-2.xx: 12 bytes (6.60 adds partAddr/partSize) */",
   "SceSysmemHeapAllocOption": "typedef struct {\n    u32 size; /* 0x0 */\n    u32 align; /* 0x4 */\n} SceSysmemHeapAllocOption;",
   "SceSysmemHold": "typedef struct SceSysmemHoldElem {\n    struct SceSysmemHoldElem *next; /* 0x0 */\n    struct SceSysmemHoldElem *prev; /* 0x4 */\n} SceSysmemHoldElem;\ntypedef struct {\n    SceSysmemHoldElem hold0; /* 0x00 */\n    SceSysmemHoldElem hold1; /* 0x08 */\n    s32 count1; /* 0x10 */\n    s32 count2; /* 0x14 */\n} SceSysmemHoldHead; /* 0x18 */\ntypedef struct {\n    SceSysmemHoldElem hold0; /* 0x00 */\n    SceSysmemHoldElem hold1; /* 0x08 */\n    struct SceSysmemUidCB *uid1; /* 0x10 */\n    struct SceSysmemUidCB *uid0; /* 0x14 */\n} SceSysmemHoldElement; /* 0x18 */",
@@ -222,7 +224,6 @@
   "D_0000C510": "extern s32 D_0000C510;",
   "D_0000C514": "extern s32 D_0000C514;",
   "D_0000C518": "extern s32 D_0000C518;",
-  "D_0000C524": "extern s32 D_0000C524;",
   "D_0000C528": "extern s32 D_0000C528;",
   "D_0000C82C": "extern s32 D_0000C82C;",
   "D_0000C830": "extern s32 D_0000C830;",
@@ -240,7 +241,6 @@
   "D_0000F860": "extern s32 D_0000F860;",
   "D_0000F864": "extern s32 D_0000F864;",
   "D_0000F868": "extern s32 D_0000F868;",
-  "D_0000F874": "extern s32 D_0000F874;",
   "D_0000F878": "extern s32 D_0000F878;",
   "D_0000F87C": "extern s32 D_0000F87C;",
   "D_0000F8B0": "extern s32 D_0000F8B0;",
@@ -249,7 +249,6 @@
   "D_0000F8C0": "extern M2C_UNK D_0000F8C0;",
   "D_0000F8C4": "extern struct D_0000F8C4_s D_0000F8C4;",
   "D_0000F8DD": "extern M2C_UNK D_0000F8DD;",
-  "D_0000F92C": "extern s32 D_0000F92C;",
   "D_0000F930": "extern s32 D_0000F930;",
   "D_0000F934": "extern s32 D_0000F934;",
   "D_0000FB80": "extern s32 D_0000FB80;",
@@ -305,6 +304,7 @@
   "g_MemPartUser": "extern SceSysmemMemoryPartition *g_MemPartUser;",
   "g_MemPartVshell": "extern SceSysmemMemoryPartition *g_MemPartVshell;",
   "g_PartType": "extern SceSysmemUidCB *g_PartType;",
+  "g_sysEventHandlers": "extern SceSysEventHandler *g_sysEventHandlers;",
   "g_uidTypeList": "extern SceSysmemUidList g_uidTypeList;"
  }
 }
