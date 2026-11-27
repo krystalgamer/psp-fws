@@ -537,3 +537,5 @@ rti_head = 0x0002C5BC;
 igmp_timers_are_running = 0x0002DBC0;
 igmp_fasttimo = 0x0001A5C8; // type:func
 rip_ctloutput = 0x0001B094; // type:func
+udp4_sendup = 0x0001C448; // type:func
+sbappendaddr = 0x00004B40; // type:func

@@ -821,7 +821,7 @@ void func_00004A3C(struct sockbuf *sb) {
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00004A68);
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_00004B40);
+INCLUDE_ASM("nonmatchings/pspnet_inet", sbappendaddr);
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00004E28);
 
@@ -4778,7 +4778,36 @@ s32 udp_sysctl(s32 *name, u32 namelen, void *oldp, u32 *oldlenp, void *newp, u32
     }
 }
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_0001C448);
+void udp4_sendup(struct mbuf *m, s32 off, struct sockaddr *src, struct socket *so) {
+    struct mbuf *opts = NULL;
+    struct mbuf *n;
+    struct inpcb *inp = NULL;
+
+    if (!so)
+        return;
+    switch (so->so_proto->pr_domain->dom_family) {
+    case AF_INET:
+        inp = (struct inpcb *)so->so_pcb;
+        break;
+    default:
+        return;
+    }
+
+    if ((n = sceNetMCopym(m, 0, 1000000000, 1)) != NULL) {
+        if (inp && (inp->inp_flags & 0x87 || so->so_options & 0x400)) {
+            struct ip *ip = mtod(n, struct ip *);
+            ip_savecontrol(inp, &opts, ip, n);
+        }
+
+        sceNetMAdj(n, off);
+        if (sbappendaddr(&so->so_rcv, src, n, opts) == 0) {
+            sceNetMFreem(n);
+            if (opts)
+                sceNetMFreem(opts);
+        } else
+            sorwakeup(so);
+    }
+}
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_inet", udp_notify);
