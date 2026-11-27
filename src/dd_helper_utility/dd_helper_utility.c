@@ -170,7 +170,14 @@ void func_000005BC(struct Unk_func_000005BC_0 *arg0, s32 arg1, s32 arg2) {
     arg0->unk4 = arg1;
     arg0->unk8 = arg2;
 }
+#endif
 
+#if FW_VERSION >= 300 && FW_VERSION < 330
+Class_000047C8::~Class_000047C8() {
+}
+#endif
+
+#if FW_VERSION == 282
 void func_000005D4(M2C_UNK **arg0) {
     *arg0 = &D_000047C8;
 }
@@ -178,11 +185,13 @@ void func_000005D4(M2C_UNK **arg0) {
 void func_000005E4(M2C_UNK **arg0) {
     *arg0 = &D_000047C8;
 }
-#else
+#endif
+
+#if FW_VERSION >= 330
 INCLUDE_ASM("nonmatchings/dd_helper_utility", func_000005F4);
 #endif
 
-#if FW_VERSION < 330
+#if FW_VERSION == 282
 void func_000005F4(M2C_UNK **arg0) {
     *arg0 = &D_000047C8;
     _ZdlPv(arg0);
@@ -193,7 +202,7 @@ INCLUDE_ASM("nonmatchings/dd_helper_utility", func_0000061C);
 
 INCLUDE_RODATA("nonmatchings/dd_helper_utility", D_00004770);
 
-#if FW_VERSION >= 350
+#if FW_VERSION >= 300
 void func_0000063C(void) {
     void *temp_v0;
 
@@ -203,21 +212,7 @@ void func_0000063C(void) {
     }
     sceHtmlViewerHelper_05E0C3D4(0);
 }
-#endif
-
-#if FW_VERSION >= 300 && FW_VERSION < 350
-void func_0000063C(void) {
-    void *temp_v0;
-
-    temp_v0 = _ZN3paf4View4FindEPKc("htmlviewer_plugin");
-    if (temp_v0 != NULL) {
-        _ZN3paf4View12PageActivateEPv(temp_v0, M2C_FIELD(temp_v0, s32 *, 0x1B8));
-    }
-    sceHtmlViewerHelper_05E0C3D4(0);
-}
-#endif
-
-#if FW_VERSION == 282
+#else
 void func_0000063C(void) {
     struct Unk_func_0000063C_temp_v0 *temp_v0;
 
@@ -252,9 +247,7 @@ void func_000006AC(struct Unk_func_000006AC_0 *arg0) {
 void func_000006AC(struct Unk_func_000006AC_0 *arg0) {
     sceHtmlViewerHelper_F27998C2(arg0->unk8);
 }
-#endif
-
-#if FW_VERSION >= 350
+#else
 void func_00000774(void) {
     sceHtmlViewerHelper_C92C71B7();
 }
@@ -269,12 +262,6 @@ void func_00000790_v352(void) {
 #if FW_VERSION == 351
 void func_00000790_v351(void) {
     sceHtmlViewerHelper_4FA8ECCA();
-}
-#endif
-
-#if FW_VERSION >= 330 && FW_VERSION < 350
-void func_00000774(void) {
-    sceHtmlViewerHelper_C92C71B7();
 }
 #endif
 
@@ -319,7 +306,6 @@ void func_0000088C(void) {
 
 INCLUDE_ASM("nonmatchings/dd_helper_utility", func_00000894);
 
-#if FW_VERSION >= 350
 s32 func_000008C4(s32 arg0, struct Unk_func_000008C4_1 *arg1) {
     s32 temp_s0;
     s32 temp_v0;
@@ -333,21 +319,6 @@ s32 func_000008C4(s32 arg0, struct Unk_func_000008C4_1 *arg1) {
     }
     return arg0;
 }
-#else
-s32 func_000008C4(s32 arg0, struct Unk_func_000008C4_1 *arg1) {
-    s32 temp_s0;
-    s32 temp_v0;
-
-    temp_s0 = (arg1->unk4 * 2) + 2;
-    temp_v0 = sce_paf_private_malloc(temp_s0);
-    if (temp_v0 != 0) {
-        sceCccUTF8toUTF16(temp_v0, temp_s0, arg1->unk0);
-        func_00001CFC(arg0, temp_v0);
-        sce_paf_private_free(temp_v0);
-    }
-    return arg0;
-}
-#endif
 
 #if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/dd_helper_utility", func_00000944);
@@ -408,6 +379,10 @@ INCLUDE_RODATA("nonmatchings/dd_helper_utility", D_000047B4);
 
 #if FW_VERSION < 330
 INCLUDE_RODATA("nonmatchings/dd_helper_utility", D_000047C8);
+#endif
+
+#if FW_VERSION >= 300 && FW_VERSION < 330
+__asm__(".globl _ZTV14Class_000047C8\n_ZTV14Class_000047C8 = D_000047C8 - 8\n");
 #endif
 
 INCLUDE_RODATA("nonmatchings/dd_helper_utility", D_000047E0);
@@ -536,7 +511,6 @@ INCLUDE_ASM("nonmatchings/dd_helper_utility", func_00001D4C);
 
 INCLUDE_ASM("nonmatchings/dd_helper_utility", func_00001E18);
 
-#if FW_VERSION >= 350
 void func_00001ECC(s32 arg0, s32 arg1) {
     s32 var_v0;
 
@@ -546,17 +520,6 @@ void func_00001ECC(s32 arg0, s32 arg1) {
     }
     func_00001F1C(arg0, arg1, var_v0);
 }
-#else
-void func_00001ECC(s32 arg0, s32 arg1) {
-    s32 var_v0;
-
-    var_v0 = 0;
-    if (arg1 != 0) {
-        var_v0 = sce_paf_private_strlen(arg1);
-    }
-    func_00001F1C(arg0, arg1, var_v0);
-}
-#endif
 
 INCLUDE_ASM("nonmatchings/dd_helper_utility", func_00001F1C);
 
@@ -713,9 +676,7 @@ void func_00002128(void *arg0) {
     sceHttpDeleteTemplate(M2C_FIELD(arg0, s32 *, 4));
     sceKernelDeleteSema(M2C_FIELD(arg0, s32 *, 0x18));
 }
-#endif
 
-#if FW_VERSION >= 350
 void func_00002150(void *arg0) {
     s32 temp_v0;
     s32 temp_v1;
@@ -733,29 +694,7 @@ void func_00002150(void *arg0) {
     sceKernelDeleteSema(M2C_FIELD(arg0, s32 *, 0x18));
     _ZdlPv(arg0);
 }
-#endif
 
-#if FW_VERSION >= 300 && FW_VERSION < 350
-void func_00002150(void *arg0) {
-    s32 temp_v0;
-    s32 temp_v1;
-
-    temp_v1 = M2C_FIELD(arg0, s32 *, 0xC);
-    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_00004AC8;
-    if (temp_v1 > 0) {
-        sceHttpDeleteRequest(temp_v1);
-    }
-    temp_v0 = M2C_FIELD(arg0, s32 *, 8);
-    if (temp_v0 > 0) {
-        sceHttpDeleteConnection(temp_v0);
-    }
-    sceHttpDeleteTemplate(M2C_FIELD(arg0, s32 *, 4));
-    sceKernelDeleteSema(M2C_FIELD(arg0, s32 *, 0x18));
-    _ZdlPv(arg0);
-}
-#endif
-
-#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/dd_helper_utility", func_000034A4);
 
 INCLUDE_ASM("nonmatchings/dd_helper_utility", func_0000356C);
@@ -899,17 +838,10 @@ s32 *func_00003208(s32 *arg0, M2C_UNK arg1, M2C_UNK arg2) {
 
 INCLUDE_ASM("nonmatchings/dd_helper_utility", func_00003240);
 
-#if FW_VERSION >= 350
 void func_00003298(s32 *arg0) {
     func_00003014();
     sce_paf_private_free2(*arg0);
 }
-#else
-void func_00003298(s32 *arg0) {
-    func_00003014();
-    sce_paf_private_free2(*arg0);
-}
-#endif
 
 INCLUDE_ASM("nonmatchings/dd_helper_utility", func_000032C4);
 

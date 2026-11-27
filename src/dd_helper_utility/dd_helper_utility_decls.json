@@ -1,5 +1,11 @@
 {
+ "cxx_prelude": [
+  "#pragma interface"
+ ],
  "funcs": {
+  "_ZN14Class_000047C8D0Ev": "void _ZN14Class_000047C8D0Ev(M2C_UNK **arg0);",
+  "_ZN14Class_000047C8D1Ev": "void _ZN14Class_000047C8D1Ev(M2C_UNK **arg0);",
+  "_ZN14Class_000047C8D2Ev": "void _ZN14Class_000047C8D2Ev(M2C_UNK **arg0);",
   "_ZN3paf4View12PageActivateEPKc": "M2C_UNK _ZN3paf4View12PageActivateEPKc(s32, M2C_UNK *);",
   "_ZN3paf4View12PageActivateEPv": "M2C_UNK _ZN3paf4View12PageActivateEPv(void *, s32);",
   "_ZN3paf4View4FindEPKc": "void *_ZN3paf4View4FindEPKc(const char *);",
@@ -101,6 +107,7 @@
   "sce_paf_private_wcslen": "s32 sce_paf_private_wcslen(s32);"
  },
  "types": {
+  "Class_000047C8": "#ifdef __cplusplus\n/* vtable _ZTV14Class_000047C8 is data (vptr = label - 8 + 8) */\nclass Class_000047C8 {\npublic:\n    virtual ~Class_000047C8();\n};\n#endif",
   "Unk_func_000005A4_0": "struct Unk_func_000005A4_0 {\n    M2C_UNK * unk0;\n    s32 unk4;\n    s32 unk8;\n};",
   "Unk_func_000005BC_0": "struct Unk_func_000005BC_0 {\n    M2C_UNK * unk0;\n    s32 unk4;\n    s32 unk8;\n};",
   "Unk_func_0000063C_temp_v0": "struct Unk_func_0000063C_temp_v0 {\n    u8 pad0[0x1B8];\n    s32 unk1B8;\n};",
