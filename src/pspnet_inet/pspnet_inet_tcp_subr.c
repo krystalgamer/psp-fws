@@ -441,7 +441,28 @@ INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", tcp_mtudisc);
 #endif
 
 #if FW_VERSION < 151
-INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", func_0002559C);
+u32 func_0002559C(struct ifnet *ifp, s32 af) {
+    u32 mss = 0;
+    u32 hdrsiz;
+
+    if (ifp != NULL)
+        mss = ifp->if_mtu;
+    if (D_0002EC1C == 0)
+        mss = max(in_maxmtu, mss);
+    switch (af) {
+    case AF_INET:
+        hdrsiz = sizeof(struct ip);
+        break;
+    default:
+        hdrsiz = 0;
+        break;
+    }
+    hdrsiz += sizeof(struct tcphdr);
+    if (mss > hdrsiz)
+        mss -= hdrsiz;
+    mss = max((u32)D_0002E8F8, mss);
+    return (mss);
+}
 #endif
 
 #if FW_VERSION >= 282
