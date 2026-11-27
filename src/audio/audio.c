@@ -107,7 +107,57 @@ INCLUDE_ASM("nonmatchings/audio", sceAudioOutputPanned);
 
 INCLUDE_ASM("nonmatchings/audio", sceAudioOutputPannedBlocking);
 
+#if FW_VERSION < 260
+s32 sceAudioChReserve(s32 channel, s32 sampleCount, s32 format) {
+    u32 oldK1;
+    s32 oldIntr;
+    s32 i;
+    s32 bps;
+    SceAudioChannel *chan;
+
+    oldK1 = pspShiftK1();
+    oldIntr = sceKernelCpuSuspendIntr();
+    if (channel < 0) {
+        for (i = 7; i >= 0; i--) {
+            if (g_audio.chans[i].sampleCount == 0 && g_audio.chans[i].buf == NULL)
+                break;
+        }
+        channel = i;
+        if (channel < 0) {
+            sceKernelCpuResumeIntr(oldIntr);
+            setK1(oldK1);
+            return 0x80260005;
+        }
+    } else if ((u32)channel >= 9 || g_audio.chans[channel].sampleCount != 0) {
+        sceKernelCpuResumeIntr(oldIntr);
+        setK1(oldK1);
+        return 0x80260003;
+    }
+    if (sampleCount <= 0 || (sampleCount & 0x3F) != 0 || (u32)sampleCount > 0xFFC0) {
+        sceKernelCpuResumeIntr(oldIntr);
+        setK1(oldK1);
+        return 0x80260006;
+    }
+    chan = &g_audio.chans[channel];
+    if (format == 0)
+        chan->bytesPerSample = 4;
+    else if (format == 0x10)
+        chan->bytesPerSample = 2;
+    else {
+        sceKernelCpuResumeIntr(oldIntr);
+        setK1(oldK1);
+        return 0x80260007;
+    }
+    chan->sampleCount = sampleCount;
+    chan->rightVol = 0;
+    chan->leftVol = 0;
+    sceKernelCpuResumeIntr(oldIntr);
+    setK1(oldK1);
+    return channel;
+}
+#else
 INCLUDE_ASM("nonmatchings/audio", sceAudioChReserve);
+#endif
 
 INCLUDE_ASM("nonmatchings/audio", sceAudioOneshotOutput);
 
@@ -196,7 +246,45 @@ s32 sceAudioChangeChannelVolume(u32 chanId, s32 leftVol, s32 rightVol) {
 INCLUDE_ASM("nonmatchings/audio", sceAudioChangeChannelVolume);
 #endif
 
+#if FW_VERSION < 201
+s32 sceAudioChangeChannelConfig(u32 chanId, s32 format) {
+    u32 oldK1;
+    s32 oldIntr;
+    SceAudioChannel *chan;
+
+    if (chanId >= 9)
+        return 0x80260003;
+    oldK1 = pspShiftK1();
+    oldIntr = sceKernelCpuSuspendIntr();
+    if (g_audio.chans[chanId].curSampleCnt != 0 || g_audio.chans[chanId].unk10 != 0) {
+        sceKernelCpuResumeIntr(oldIntr);
+        setK1(oldK1);
+        return 0x80260002;
+    }
+    if (g_audio.chans[chanId].sampleCount == 0) {
+        sceKernelCpuResumeIntr(oldIntr);
+        setK1(oldK1);
+        return 0x80260008;
+    }
+    chan = &g_audio.chans[chanId];
+    if (format == 0)
+        chan->bytesPerSample = 4;
+    else if (format == 0x10)
+        chan->bytesPerSample = 2;
+    else
+        goto err;
+    sceKernelCpuResumeIntr(oldIntr);
+    setK1(oldK1);
+    return 0;
+
+err:
+    sceKernelCpuResumeIntr(oldIntr);
+    setK1(oldK1);
+    return 0x80260007;
+}
+#else
 INCLUDE_ASM("nonmatchings/audio", sceAudioChangeChannelConfig);
+#endif
 
 #if FW_VERSION >= 250
 INCLUDE_ASM("nonmatchings/audio", sceAudioOutput2ChangeLength);
