@@ -164,7 +164,36 @@ INCLUDE_RODATA("nonmatchings/fatmsmod", D_00023950);
 INCLUDE_RODATA("nonmatchings/fatmsmod", D_00023958);
 #endif
 
-#if FW_VERSION < 300
+#if FW_VERSION == 100
+s32 func_00000068(s32 checkMedia, FatmsPrivate *priv) {
+    s32 ret = 0;
+    s32 intr;
+
+    intr = sceKernelCpuSuspendIntr();
+    if (D_00019508 == -0xF) {
+        sceKernelCpuResumeIntr(intr);
+        Kprintf("prfile_mod.c:%s:Formatting!!\n", "check_reload_status");
+        return -2;
+    }
+    if (checkMedia != 0 && D_0002BA90[0] == 0x1022) {
+        ret = -1;
+    }
+    sceKernelCpuResumeIntr(intr);
+    if (ret < 0) {
+        return ret;
+    }
+    ret = 0;
+    if (priv != NULL) {
+        ret = func_000007C0(priv);
+        if (ret < 0) {
+            return -0x3EA;
+        }
+    }
+    return ret;
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 300
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00000068);
 #endif
 
@@ -176,7 +205,37 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_00000264);
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00000318);
 #endif
 
-#if FW_VERSION < 260
+#if FW_VERSION == 100
+void *func_00000594(SceUID *heap, SceSize size) {
+    s32 intr;
+    FatmsHeapEnt *p;
+    void *mem;
+
+    intr = sceKernelCpuSuspendIntr();
+    p = D_00019558;
+    while (p->mem != NULL) {
+        p++;
+        if (p > &D_00019558[128]) {
+            sceKernelCpuResumeIntr(intr);
+            return NULL;
+        }
+    }
+    p->mem = (void *)-1;
+    sceKernelCpuResumeIntr(intr);
+    *heap = sceKernelCreateHeap(1, size, 1, D_00014704);
+    if (*heap < 0) {
+        Kprintf("prfile_mod.c:%s:Cannot create heap:0x%x\n", "get_heap", *heap);
+        p->mem = NULL;
+        return NULL;
+    }
+    mem = sceKernelAllocHeapMemory(*heap, size);
+    p->mem = mem;
+    p->heap = *heap;
+    return mem;
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 260
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00000594);
 #endif
 
@@ -185,7 +244,33 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_00000910);
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/fatmsmod", func_00000678);
+s32 func_00000678(SceUID heap, void *mem) {
+    s32 ret;
+    s32 intr;
+    FatmsHeapEnt *p;
+
+    ret = sceKernelFreeHeapMemory(heap, mem);
+    if (ret != 0) {
+        return ret;
+    }
+    ret = sceKernelDeleteHeap(heap);
+    if (ret != 0) {
+        return ret;
+    }
+    intr = sceKernelCpuSuspendIntr();
+    p = D_00019558;
+    while (p->heap != heap) {
+        p++;
+        if (p > &D_00019558[128]) {
+            sceKernelCpuResumeIntr(intr);
+            return 0x800002FF;
+        }
+    }
+    sceKernelCpuResumeIntr(intr);
+    p->heap = 0;
+    p->mem = NULL;
+    return 0;
+}
 #endif
 
 #if FW_VERSION >= 282
@@ -194,7 +279,22 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_00000320);
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00000444);
 #endif
 
+#if FW_VERSION == 100
+s32 func_000004F4(void) {
+    FatmsHeapEnt *p;
+
+    for (p = D_00019558; p < &D_00019558[128]; p++) {
+        if (p->mem != NULL) {
+            if (func_00000678(p->heap, p->mem) < 0) {
+                Kprintf("prfile_mod.c:%s:free heap error\n", "free_heap_all");
+            }
+        }
+    }
+    return 0;
+}
+#else
 INCLUDE_ASM("nonmatchings/fatmsmod", func_000004F4);
+#endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00000A58);
@@ -235,9 +335,40 @@ INCLUDE_RODATA("nonmatchings/fatmsmod", D_00023A64);
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/fatmsmod", func_000007C0);
+s32 func_000007C0(FatmsPrivate *priv) {
+    SceUID heap;
+    FatmsHeapEnt *p;
 
-INCLUDE_ASM("nonmatchings/fatmsmod", func_00000850);
+    if (priv->mode == 0x10) {
+        heap = priv->fileHeap;
+    } else if (priv->mode == 2) {
+        heap = priv->dirHeap;
+    } else {
+        Kprintf("prfile_mod.c:%s:Unknown private mode\n", "check_heap_alive");
+        return -1;
+    }
+    for (p = D_00019558; p < &D_00019558[128]; p++) {
+        if (p->heap == heap) {
+            return 0;
+        }
+    }
+    return -1;
+}
+
+s32 func_00000850(char *buf, const char *name, s32 unit) {
+    if (unit != 0) {
+        return 0x80020001;
+    }
+    if (D_0001950C != 0) {
+        Kprintf("prfile_mod.c:%s:unit No Fail\n", "add_drive_name");
+        return 0x80020001;
+    }
+    buf[0] = 'A';
+    buf[1] = ':';
+    buf[2] = '\0';
+    strcat(buf, name);
+    return 0;
+}
 #endif
 
 #if FW_VERSION >= 282
@@ -280,13 +411,128 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_0000098C);
 INCLUDE_RODATA("nonmatchings/fatmsmod", D_00023BD8);
 #endif
 
-INCLUDE_ASM("nonmatchings/fatmsmod", func_00000BFC);
+#if FW_VERSION == 100
+s32 func_00000BFC(SceIoIob *iob) {
+    FatmsPrivate *priv;
+    s32 ret;
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/fatmsmod", func_00000DC8);
-
-INCLUDE_ASM("nonmatchings/fatmsmod", func_00000ED4);
+    if (iob == NULL) {
+        return 0x80010016;
+    }
+    priv = iob->i_private;
+    ret = func_00000068(0, priv);
+    if (ret < 0) {
+        if (ret == -0x3EA) {
+            return 0;
+        }
+        ret = func_00000678(priv->fileHeap, priv);
+        if (ret < 0) {
+            Kprintf("prfile_mod.c:%s:cannot free heap\n", "df_close");
+        }
+        Kprintf("prfile_mod.c:%s:driver deleted, er:0x%x\n", "df_close", ret);
+        return 0;
+    }
+    if (priv->mode != 0x10) {
+        return 0x80010016;
+    }
+    if (func_00004D6C(priv->unk4) < 0) {
+        return func_000006E8(func_000050AC());
+    }
+    ret = func_00000678(priv->fileHeap, priv);
+    if (ret > 0) {
+        ret = 0;
+    }
+    return ret;
+}
 #else
+INCLUDE_ASM("nonmatchings/fatmsmod", func_00000BFC);
+#endif
+
+#if FW_VERSION == 100
+s32 func_00000DC8(SceIoIob *iob, void *buf, SceSize size) {
+    FatmsPrivate *priv;
+    s32 fp;
+    s32 n;
+    s32 err;
+    s32 eof;
+
+    if (iob == NULL) {
+        return 0x80010016;
+    }
+    priv = iob->i_private;
+    if (func_00000068(0, priv) < 0) {
+        Kprintf(D_00023B8C, "df_read");
+        return 0x80010013;
+    }
+    if (size == 0) {
+        return 0;
+    }
+    if (priv->mode != 0x10) {
+        return 0x80010016;
+    }
+    fp = priv->unk4;
+    n = func_00004EB0(buf, 1, size, fp);
+    if (n == size) {
+        return n;
+    }
+    eof = func_00004DF0(fp) == 1;
+    if (n >= 0 && eof) {
+        return n;
+    }
+    err = func_00004E30(fp);
+    if (err == -1) {
+        err = 9;
+    }
+    return func_000006E8(err);
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 282
+INCLUDE_ASM("nonmatchings/fatmsmod", func_00000DC8);
+#endif
+
+#if FW_VERSION == 100
+s32 func_00000ED4(SceIoIob *iob, const void *buf, SceSize size) {
+    FatmsPrivate *priv;
+    s32 fp;
+    s32 n;
+    s32 err;
+
+    if (iob == NULL) {
+        return 0x80010016;
+    }
+    priv = iob->i_private;
+    if (func_00000068(0, priv) < 0) {
+        Kprintf(D_00023B8C, "df_write");
+        return 0x80010013;
+    }
+    if (size == 0) {
+        return 0;
+    }
+    if (priv->mode != 0x10) {
+        return 0x80010016;
+    }
+    fp = priv->unk4;
+    n = func_0000501C(buf, 1, size, fp);
+    if (n == size) {
+        return n;
+    }
+    err = func_00004E30(fp);
+    if (err == 0) {
+        return n;
+    }
+    if (err == -1) {
+        err = 9;
+    }
+    return func_000006E8(err);
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 282
+INCLUDE_ASM("nonmatchings/fatmsmod", func_00000ED4);
+#endif
+
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00000CE4);
 
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00000E00);
@@ -318,11 +564,95 @@ INCLUDE_RODATA("nonmatchings/fatmsmod", D_00023C78);
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00001064);
 #endif
 
+#if FW_VERSION == 100
+s32 func_0000170C(SceIoIob *iob, char *name) {
+    SceUID heap;
+    char *path;
+    s32 err;
+
+    if (func_00000068(1, NULL) < 0) {
+        Kprintf(D_00023B8C, "df_remove");
+        return 0x80010013;
+    }
+    path = func_00000594(&heap, 0x540);
+    if (path == NULL) {
+        return 0x8001000C;
+    }
+    if (func_00000850(path, name, iob->i_unit) < 0) {
+        func_00000678(heap, path);
+        return 0x80010016;
+    }
+    if (func_00002E74(path) < 0) {
+        err = func_000050AC();
+        func_00000678(heap, path);
+        return func_000006E8(err);
+    }
+    func_00000678(heap, path);
+    return 0;
+}
+#else
 INCLUDE_ASM("nonmatchings/fatmsmod", func_0000170C);
+#endif
 
+#if FW_VERSION == 100
+s32 func_00001810(SceIoIob *iob, char *name, SceMode mode) {
+    SceUID heap;
+    char *path;
+    s32 err;
+
+    if (func_00000068(1, NULL) < 0) {
+        Kprintf(D_00023B8C, "df_mkdir");
+        return 0x80010013;
+    }
+    path = func_00000594(&heap, 0x540);
+    if (path == NULL) {
+        return 0x8001000C;
+    }
+    if (func_00000850(path, name, iob->i_unit) < 0) {
+        func_00000678(heap, path);
+        return 0x80010016;
+    }
+    if (func_00002C20(path) < 0) {
+        err = func_000050AC();
+        func_00000678(heap, path);
+        return func_000006E8(err);
+    }
+    func_00000678(heap, path);
+    return 0;
+}
+#else
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00001810);
+#endif
 
+#if FW_VERSION == 100
+s32 func_00001914(SceIoIob *iob, char *name) {
+    SceUID heap;
+    char *path;
+    s32 err;
+
+    if (func_00000068(1, NULL) < 0) {
+        Kprintf(D_00023B8C, "df_rmdir");
+        return 0x80010013;
+    }
+    path = func_00000594(&heap, 0x540);
+    if (path == NULL) {
+        return 0x8001000C;
+    }
+    if (func_00000850(path, name, iob->i_unit) < 0) {
+        func_00000678(heap, path);
+        return 0x80010016;
+    }
+    if (func_00002C60(path) < 0) {
+        err = func_000050AC();
+        func_00000678(heap, path);
+        return func_000006E8(err);
+    }
+    func_00000678(heap, path);
+    return 0;
+}
+#else
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00001914);
+#endif
 
 char *func_00001A18(char *s) {
     if (s == NULL) {
@@ -445,9 +775,22 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_00002880);
 INCLUDE_ASM("nonmatchings/fatmsmod", func_000029E4);
 #endif
 
-INCLUDE_ASM("nonmatchings/fatmsmod", func_000039E8);
+s32 func_000039E8(void) {
+    s32 i, j;
 
-INCLUDE_ASM("nonmatchings/fatmsmod", func_00003A34);
+    for (i = 0; i < 1; i++) {
+        D_0002BA90[i] = 0x1022;
+        for (j = 0; j < 32; j++) {
+            D_0002BA10[i][j] = 0;
+        }
+    }
+    return 0;
+}
+
+s32 func_00003A34(s32 unit, s32 stat) {
+    D_0002BA90[unit] = stat;
+    return 0;
+}
 
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00003A50);
 

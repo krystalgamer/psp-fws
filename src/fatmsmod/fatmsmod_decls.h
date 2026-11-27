@@ -4,6 +4,21 @@
 #include "common.h"
 #include "m2c_macros.h"
 
+/* prfile_mod.c heap bookkeeping (g_heapTbl, 128 entries). mem = -1 while being created. */
+typedef struct {
+    SceUID heap; /* 0x0 */
+    void *mem; /* 0x4 */
+} FatmsHeapEnt;
+
+/* Per-iob private block checked by check_heap_alive: mode 0x10 = file (heap at 0x6C), 2 = directory (heap at 0x8). */
+typedef struct {
+    s32 mode; /* 0x0 */
+    s32 unk4; /* 0x4 */
+    SceUID dirHeap; /* 0x8 */
+    u8 padC[0x60];
+    SceUID fileHeap; /* 0x6C */
+} FatmsPrivate;
+
 typedef int SceMode;
 typedef s64 SceOff;
 typedef s32 SceSSize;
@@ -176,8 +191,12 @@ struct Unk_func_00013798_0 {
     s32 unkFAE0;
 };
 
+extern const char D_00014704[]; /* "FATMS" */
 extern u8 D_000193F8;
 extern u8 D_000193FC;
+extern s32 D_00019508;
+extern s32 D_0001950C;
+extern FatmsHeapEnt D_00019558[128];
 extern M2C_UNK D_00019AD4;
 extern s32 D_00019B00;
 extern s8 D_00019B04;
@@ -191,6 +210,7 @@ extern s32 D_0001B6A4;
 extern s32 D_0001B790;
 extern M2C_UNK D_0001BCC4;
 extern s32 D_0001BCE4;
+extern char D_00023B8C[]; /* "prfile_mod.c:%s:driver deleted\n" */
 extern M2C_UNK D_0002411C;
 extern void *D_000276E4;
 extern s32 (*D_000276E8)(s32, s32, s32);
@@ -201,6 +221,8 @@ extern s32 D_00027908;
 extern M2C_UNK D_00027934;
 extern s32 D_0002B568;
 extern s32 D_0002B5CC;
+extern s32 D_0002BA10[1][32];
+extern s32 D_0002BA90[1]; /* per-unit media status, 0x1022 = ? */
 extern M2C_UNK D_0002BAA0;
 extern s32 D_0002BAC0;
 extern s32 D_0002BD1C;
@@ -216,15 +238,22 @@ extern SceUID g_msStubMbx;
 s32 Kprintf(const char *fmt, ...);
 M2C_UNK func_00000020();
 void func_00000048(void);
+s32 func_00000068(s32 checkMedia, FatmsPrivate *priv);
 M2C_UNK func_00000134();
 void func_0000022C(void);
 M2C_UNK func_00000264();
 void func_000004B8(void);
-M2C_UNK func_00000BFC();
+s32 func_000004F4(void);
+void *func_00000594(SceUID *heap, SceSize size);
+s32 func_00000678(SceUID heap, void *mem);
+s32 func_000006E8(s32 err);
+s32 func_000007C0(FatmsPrivate *priv);
+s32 func_00000850(char *buf, const char *name, s32 unit);
+s32 func_00000BFC(); /* 1.00 df_close(SceIoIob *) */
 M2C_UNK func_00000CE4();
-s32 func_00000DC8(s32, s32, s32);
+s32 func_00000DC8(); /* 1.00 df_read(SceIoIob *, void *, SceSize) */
 M2C_UNK func_00000E00();
-s32 func_00000ED4(s32, s32, s32);
+s32 func_00000ED4(); /* 1.00 df_write(SceIoIob *, const void *, SceSize) */
 M2C_UNK func_00000EF8();
 s32 func_00001834(u32 attr);
 char *func_00001A18(char *s);
@@ -442,16 +471,23 @@ s32 sceFatMS_driver_BCB9DEDB(void);
 s32 sceIoClose(s32);
 M2C_UNK sceIoDelDrv(s32);
 s32 sceIoDevctl(void *, s32, void *, u32, void *, u32);
+void *sceKernelAllocHeapMemory(SceUID heapid, SceSize size);
+void sceKernelCpuResumeIntr(s32 intr);
+s32 sceKernelCpuSuspendIntr(void);
 SceUID sceKernelCreateEventFlag(const char *name, s32 attr, s32 bits, void *opt);
+SceUID sceKernelCreateHeap(SceUID partitionid, SceSize size, s32 unk, const char *name);
 SceUID sceKernelCreateMbx(const char *name, u32 attr, void *opt);
 s32 sceKernelDeleteEventFlag(SceUID evf);
 M2C_UNK sceKernelDeleteFpl();
+s32 sceKernelDeleteHeap(SceUID heapid);
 s32 sceKernelDeleteMbx(SceUID mbx);
+s32 sceKernelFreeHeapMemory(SceUID heapid, void *block);
 s32 sceKernelGetThreadCurrentPriority(void);
 s32 sceKernelReceiveMbx(SceUID mbx, void **msg, u32 *timeout);
 s32 sceKernelSendMbx(SceUID mbx, void *msg);
 s32 sceKernelSetEventFlag(SceUID evf, u32 bits);
 s32 sceKernelWaitEventFlag(SceUID evf, u32 bits, u32 wait, u32 *outBits, u32 *timeout);
+char *strcat(char *d, const char *s);
 u32 strlen(const char *s);
 
 #endif
