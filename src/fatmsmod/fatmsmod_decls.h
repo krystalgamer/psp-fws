@@ -600,6 +600,7 @@ s32 func_000118E4(const char *s);
 s32 func_00012280(void);
 void func_000122FC(void);
 s32 func_00012480(s32);
+s32 func_00012710(s32 mode);
 s32 func_00012788(void);
 s32 func_000128A4(s32, s32);
 s32 func_00012964(s32, s32);

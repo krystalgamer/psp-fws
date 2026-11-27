@@ -5016,7 +5016,24 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_0001F554);
 #endif
 
 #if FW_VERSION < 271
-INCLUDE_ASM("nonmatchings/fatmsmod", func_00012710);
+s32 func_00012710(s32 mode) {
+    s32 ret;
+
+    if (mode == 1) {
+        if (D_00019E04 == 0) {
+            D_00019E04 = 0x11;
+        }
+        D_00019E08 = D_00019E04;
+        func_0000B650();
+        return -1;
+    }
+    if (D_00027934.de.attr & 1) {
+        D_00019E08 = 0xD;
+        func_0000B650();
+        return -1;
+    }
+    return 0;
+}
 
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00012788);
 #endif
