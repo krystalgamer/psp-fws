@@ -835,7 +835,35 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_00005050);
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00005308);
 
+#if FW_VERSION < 201
+struct mbuf *func_00005440(void *p, s32 size, s32 type, s32 level) {
+    struct cmsghdr *cp;
+    struct mbuf *m;
+
+    if (CMSG_SPACE(size) > MCLBYTES) {
+        return NULL;
+    }
+    if ((m = sceNetMGet(M_DONTWAIT, MT_CONTROL)) == NULL) {
+        return NULL;
+    }
+    if (CMSG_SPACE(size) > MLEN) {
+        MCLGET(m, M_DONTWAIT);
+        if ((m->m_flags & M_EXT) == 0) {
+            sceNetMFree(m);
+            return NULL;
+        }
+    }
+    cp = mtod(m, struct cmsghdr *);
+    func_0002C918(CMSG_DATA(cp), p, size);
+    m->m_len = CMSG_SPACE(size);
+    cp->cmsg_len = CMSG_LEN(size);
+    cp->cmsg_level = level;
+    cp->cmsg_type = type;
+    return m;
+}
+#else
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00005440);
+#endif
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_0000562C);
 
@@ -4286,7 +4314,7 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_0002C8D8);
 #endif
 
 #if FW_VERSION < 201
-u8 *func_0002C918(u8 *arg0, u8 *arg1, s32 arg2) {
+u8 *func_0002C918(u8 *arg0, const u8 *arg1, s32 arg2) {
     s32 var_a2;
     u8 *var_a1;
     u8 *var_v0;

@@ -188,7 +188,7 @@ struct mbuf {
     u8 *m_data;                 /* 0x08 */
     s32 m_len;                  /* 0x0C */
     s16 m_type;                 /* 0x10 MT_* */
-    u16 m_flags;                /* 0x12 M_* */
+    s16 m_flags;                /* 0x12 M_* */
     struct {
         struct ifnet *rcvif;    /* 0x14 */
         s32 len;                /* 0x18 */
@@ -197,6 +197,69 @@ struct mbuf {
     } m_pkthdr;
     struct m_ext m_ext;         /* 0x30 (M_EXT) */
 };
+#define M_CLUSTER   0x0008
+#define MLEN        (MSIZE - 0x14)
+#define MCLISREFERENCED(m) ((m)->m_ext.ext_nextref != (m))
+#define _MCLDEREFERENCE(m) do { \
+        (m)->m_ext.ext_nextref->m_ext.ext_prevref = (m)->m_ext.ext_prevref; \
+        (m)->m_ext.ext_prevref->m_ext.ext_nextref = (m)->m_ext.ext_nextref; \
+    } while (0)
+#define MCLINITREFERENCE(m) do { \
+        (m)->m_ext.ext_prevref = (m); \
+        (m)->m_ext.ext_nextref = (m); \
+    } while (0)
+/* SCE: clusters come from sceNetMallocInternal, m_reclaim dropped */
+#define MCLGET(m, how) do { \
+    (m)->m_ext.ext_buf = sceNetMallocInternal(MCLBYTES); \
+    if ((m)->m_ext.ext_buf == NULL) { \
+        (m)->m_ext.ext_buf = sceNetMallocInternal(MCLBYTES); \
+    } \
+    if ((m)->m_ext.ext_buf != NULL) { \
+        (m)->m_data = (m)->m_ext.ext_buf; \
+        (m)->m_flags |= M_EXT | M_CLUSTER; \
+        (m)->m_ext.ext_size = MCLBYTES; \
+        (m)->m_ext.ext_free = NULL; \
+        (m)->m_ext.ext_arg = NULL; \
+        MCLINITREFERENCE(m); \
+    } \
+} while (0)
+#define _MEXTREMOVE(m) do { \
+    if (MCLISREFERENCED(m)) { \
+        _MCLDEREFERENCE(m); \
+    } else if ((m)->m_flags & M_CLUSTER) { \
+        sceNetFreeInternal((m)->m_ext.ext_buf); \
+    } else if ((m)->m_ext.ext_free) { \
+        (*((m)->m_ext.ext_free))((m)->m_ext.ext_buf, (m)->m_ext.ext_size, (m)->m_ext.ext_arg); \
+    } else { \
+        sceNetFreeInternal((m)->m_ext.ext_buf); \
+    } \
+    (m)->m_flags &= ~(M_CLUSTER | M_EXT); \
+    (m)->m_ext.ext_size = 0; \
+} while (0)
+#define MFREE(m, n) do { \
+    if (((m)->m_flags & M_PKTHDR) != 0 && (m)->m_pkthdr.aux) { \
+        sceNetMFreem((m)->m_pkthdr.aux); \
+        (m)->m_pkthdr.aux = NULL; \
+    } \
+    if ((m)->m_flags & M_EXT) { \
+        _MEXTREMOVE((m)); \
+    } \
+    (n) = (m)->m_next; \
+    sceNetFreeInternal((m)); \
+} while (0)
+
+/* struct cmsghdr (socket.h); SCE ALIGNBYTES is a function (func_00005D70, returns 3) */
+struct cmsghdr {
+    u32 cmsg_len;
+    s32 cmsg_level;
+    s32 cmsg_type;
+};
+#define ALIGNBYTES func_00005D70()
+#define CMSG_ALIGN(n) (((n) + ALIGNBYTES) & ~ALIGNBYTES)
+#define CMSG_DATA(cmsg) ((u8 *)(cmsg) + CMSG_ALIGN(sizeof(struct cmsghdr)))
+#define CMSG_SPACE(l) (CMSG_ALIGN(sizeof(struct cmsghdr)) + CMSG_ALIGN(l))
+#define CMSG_LEN(l) (CMSG_ALIGN(sizeof(struct cmsghdr)) + (l))
+
 #define MT_DATA     1
 #define MT_HEADER   2
 #define MT_SONAME   3
@@ -1132,6 +1195,8 @@ void func_00004A68(struct sockbuf *sb, struct mbuf *m0);
 void func_00004E28(struct sockbuf *sb, struct mbuf *m, struct mbuf *n);
 void func_00005008(struct sockbuf *sb);
 void func_00005050(struct sockbuf *sb, s32 len);
+void func_00005308(struct sockbuf *sb);
+struct mbuf *func_00005440(void *p, s32 size, s32 type, s32 level);
 struct socket *func_00005700(s32 s);
 void func_00005778(struct socket *so);
 void func_0000588C(struct socket *so);
@@ -1277,7 +1342,7 @@ void func_0002BDB4(void *arg0);
 s32 func_0002C4CC(s32, s32, s32);
 s32 *func_0002C820(void);
 void *func_0002C864(void *dst, const void *src, s32 n);
-u8 *func_0002C918(u8 *arg0, u8 *arg1, s32 arg2);
+u8 *func_0002C918(u8 *dst, const u8 *src, s32 n);
 void *func_0002C94C(void *p, s32 c, s32 n);
 void func_0002C9B8(const void *src, void *dst, s32 len);
 u8 *func_0002CC40(u8 *arg0, u8 *arg1);
@@ -1296,7 +1361,9 @@ s32 sceNetInetInetAddr(s32 arg0);
 void sceNetInetInetAton(s32 arg0, s32 arg1);
 const char *sceNetInetInetNtop(s32 af, const void *src, char *dst, s32 size);
 struct ifqueue *sceNetInet_lib_D7928A6D(void);
+struct mbuf *sceNetMFree(struct mbuf *m);
 void sceNetMFreem(struct mbuf *m);
+struct mbuf *sceNetMGet(s32 how, s32 type);
 void *sceNetMallocInternal(u32 size);
 M2C_UNK sceNetMemset(M2C_UNK *, M2C_UNK, M2C_UNK);
 u32 sceNetRand(void);
