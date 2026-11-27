@@ -866,7 +866,42 @@ INCLUDE_RODATA("nonmatchings/modulemgr", D_0000504C);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 152
-INCLUDE_ASM("nonmatchings/modulemgr", sceKernelLoadModuleVSHByID);
+SceUID sceKernelLoadModuleVSHByID(SceUID fd, s32 flags, SceKernelLMOption *option) {
+    SceModuleMgrParam modParams;
+    s32 oldK1;
+    s32 ret;
+
+    memset(&modParams, 0, sizeof(modParams));
+    oldK1 = shiftK1Noreorder();
+    if (option != NULL && k1IsUserMode() && (s32)((u32)option | ((u32)option + sizeof(*option))) < 0) {
+        Kprintf(D_00005018, "sceKernelLoadModuleVSHByID");
+        setK1(oldK1);
+        return 0x800200D3;
+    }
+    if (sceKernelIsIntrContext()) {
+        setK1(oldK1);
+        return 0x80020064;
+    }
+    if (k1IsUserMode() && sceKernelGetUserLevel() != 4) {
+        Kprintf("modulemgr.c:%s:This API for VSH only (%d)\n", "sceKernelLoadModuleVSHByID", sceKernelGetUserLevel());
+        setK1(oldK1);
+        return 0x80020149;
+    }
+    ret = sceIoIoctl(fd, 0x8003, NULL, 0, NULL, 0);
+    if (ret < 0) {
+        Kprintf(D_0000504C, "sceKernelLoadModuleVSHByID", ret);
+        setK1(oldK1);
+        return 0x80020146;
+    }
+    modParams.apiType = 0x20;
+    modParams.modeStart = CMD_LOAD_MODULE;
+    modParams.modeFinish = CMD_RELOCATE_MODULE;
+    modParams.fd = fd;
+    modParams.fileBase = NULL;
+    ret = func_000004B0(&modParams, option);
+    setK1(oldK1);
+    return ret;
+}
 #endif
 
 #if FW_VERSION < 152
