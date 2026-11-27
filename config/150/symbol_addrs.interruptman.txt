@@ -92,3 +92,10 @@ func_00003970 = 0x00003508; // type:func rom:0x3588
 func_00003980 = 0x00003518; // type:func rom:0x3598
 func_0000399C = 0x00003534; // type:func rom:0x35B4
 // shared names (tools/add_version.py) end
+g_intrInfo = 0x00003910; // rom:0x39C0
+mymemset = 0x000015B4; // type:func
+IntrIsEnabled = 0x000016FC; // type:func
+IntrEnableLevels = 0x0000165C; // type:func
+IntrUpdateMask = 0x00001818; // type:func
+IntrDisableLevels = 0x000015E4; // type:func
+IntrDisableAll = 0x00001764; // type:func

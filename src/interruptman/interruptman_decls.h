@@ -4,16 +4,7 @@
 #include "common.h"
 #include "m2c_macros.h"
 
-struct D_00003E00_s {
-    u8 pad0[0x1AC];
-    volatile s32 unk1AC;
-    volatile s32 unk1B0;
-    u8 pad1B4[0xECC];
-    volatile s32 unk1080;
-    volatile s32 unk1084;
-};
-
-/* 1.00: one interrupt or sub-interrupt entry, 0x38 bytes */
+/* one interrupt or sub-interrupt entry, 0x38 bytes (1.00-3.52) */
 typedef struct Interrupt {
     s32 handler;    /* 0x00: func | 2 (user) / 1 (released) */
     s32 gp;         /* 0x04 */
@@ -37,7 +28,7 @@ typedef struct Interrupt {
     s32 unk34;
 } Interrupt;
 
-/* 1.00 interrupt manager state, 0x107C bytes (memset by module_bootstart) */
+/* interrupt manager state, memset by module_bootstart: 0x107C bytes (1.00-2.71), 0x1088 (2.82+); same layout up to 0x107C in every version */
 typedef struct InterruptInfo {
     u64 levelMasks[12];         /* 0x000: intrs enabled at each level (4 used by SetIntrLevel) */
     Interrupt *intrPtrs[67];    /* 0x060 */
@@ -54,8 +45,8 @@ typedef struct InterruptInfo {
     s32 (*hookBefore)(void);    /* 0x1A0 */
     void *intrStack;            /* 0x1A4 */
     s32 intrStackSize;          /* 0x1A8 */
-    s32 userIntrStack;          /* 0x1AC */
-    s32 userIntrStackSize;      /* 0x1B0 */
+    volatile s32 userIntrStack;     /* 0x1AC */
+    volatile s32 userIntrStackSize; /* 0x1B0 */
     s32 unk1B4;                 /* 0x1B4 */
     void *syscallTable;         /* 0x1B8 */
     s32 heapId;                 /* 0x1BC */
@@ -64,6 +55,11 @@ typedef struct InterruptInfo {
     s32 count;                  /* 0x1CC: cop0 Count saved at suspend */
     s32 compare;                /* 0x1D0: cop0 Compare saved at suspend */
     Interrupt intr[67];         /* 0x1D4 */
+#if FW_VERSION >= 282
+    s32 unk107C;
+    volatile s32 subIntrMonitorBefore; /* 0x1080 */
+    volatile s32 subIntrMonitorAfter;  /* 0x1084 */
+#endif
 } InterruptInfo;
 
 typedef struct SceIntrCb {
@@ -92,13 +88,10 @@ typedef struct SceModule {
     s32 gpValue; /* 0x64 */
 } SceModule;
 
-extern s32 D_00003910;
-extern InterruptInfo D_00003950;
 extern s32 D_00003AA8;
 extern s32 D_00003AAC;
 extern s32 D_00003AB0;
 extern s32 D_00003B0C;
-extern struct D_00003E00_s D_00003E00;
 extern s32 D_00003F6C;
 extern s32 D_00003F8C;
 extern s32 D_00003F90;
@@ -108,6 +101,7 @@ extern s32 D_00003F9C;
 extern s32 D_00003FA0;
 extern s32 D_00004ABC;
 extern s32 D_00004E7C;
+extern InterruptInfo g_intrInfo;
 
 s32 InterruptManagerForKernel_53991063(void);
 void *QueryInterruptManCB(void);
@@ -122,12 +116,12 @@ u32 func_00000000(s32 intrNum);
 s32 func_00000274(void);
 Interrupt **func_000002B8(s32 num);
 void func_00000348(void *ptr);
-void *func_000015F8(void *dst, u8 c, s32 n);
-void func_00001628(s32 intrNum);
-void func_00001850(void);
-void func_00001DF8(s32 intrNum);
-s32 func_00001E9C(s32 intrNum);
-void func_00001F04(s32 intrNum);
+void *mymemset(void *dst, u8 c, s32 n);
+void IntrDisableLevels(s32 intrNum);
+void IntrUpdateMask(void);
+void IntrEnableLevels(s32 intrNum);
+s32 IntrIsEnabled(s32 intrNum);
+void IntrDisableAll(s32 intrNum);
 s32 func_00002FDC(s32 arg0);
 s32 func_00002FE4(void);
 s32 func_000030AC(s32 arg0);

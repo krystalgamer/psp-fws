@@ -1,4 +1,5 @@
 /* cflags[100]: -O2 */
+/* cflags[150-151]: -O2 -frename-registers -mext */
 /* cflags: -O2 -frename-registers */
 #include "common.h"
 #include "interruptman_decls.h"
@@ -67,15 +68,108 @@ INCLUDE_RODATA("nonmatchings/interruptman", D_00004124);
 INCLUDE_RODATA("nonmatchings/interruptman", D_00004130);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/interruptman", sceKernelRegisterIntrHandler);
+#endif
 
+#if FW_VERSION >= 150 && FW_VERSION < 152
+s32 sceKernelSetUserModeIntrHanlerAcceptable(u32 intrNum, s32 subIntrNum, s32 setBit) {
+    s32 ret = 0;
+    s32 oldIntr;
+    Interrupt *intr;
+    s32 i;
+
+    if (sceKernelIsIntrContext() != 0)
+        return 0x80020064;
+    if (intrNum >= 67)
+        return 0x80020065;
+    oldIntr = sceKernelCpuSuspendIntr();
+    intr = &g_intrInfo.intr[intrNum];
+    if (intr->handler == 0 || (intr->handler & 3) == 3)
+        ret = 0x80020068;
+    else if (subIntrNum < 0 || subIntrNum >= intr->numSubIntrs)
+        ret = 0x80020065;
+    else {
+        intr->subIntrs[subIntrNum]->userAcceptable = (setBit != 0);
+        intr->hasUserSub = 0;
+        for (i = 0; i < intr->numSubIntrs; i++) {
+            if (intr->subIntrs[subIntrNum]->userAcceptable) {
+                intr->hasUserSub = 1;
+                break;
+            }
+        }
+        if (intr->hasUserSub)
+            sceKernelSetIntrLevel(intrNum, 2);
+    }
+    sceKernelCpuResumeIntr(oldIntr);
+    return ret;
+}
+#endif
+
+#if FW_VERSION >= 152
 INCLUDE_ASM("nonmatchings/interruptman", sceKernelSetUserModeIntrHanlerAcceptable);
+#endif
 
+#if FW_VERSION >= 150 && FW_VERSION < 152
+s32 sceKernelSetIntrLevel(u32 intrNum, s32 level) {
+    s32 oldIntr;
+    Interrupt *intr;
+
+    if (intrNum >= 64)
+        return 0x80020065;
+    if ((u32)(level - 1) >= 3)
+        return 0x80020069;
+    oldIntr = sceKernelCpuSuspendIntr();
+    intr = &g_intrInfo.intr[intrNum];
+    if (intr->handler == 0 || (intr->handler & 3) == 3) {
+        sceKernelCpuResumeIntr(oldIntr);
+        return 0x80020068;
+    }
+    if (intr->hasUserSub && level != 2) {
+        sceKernelCpuResumeIntr(oldIntr);
+        return 0x80020069;
+    }
+    if (IntrIsEnabled(intrNum)) {
+        if (intr->level < level)
+            IntrDisableLevels(intrNum);
+        intr->level = level;
+        IntrEnableLevels(intrNum);
+        IntrUpdateMask();
+    } else {
+        intr->level = level;
+    }
+    sceKernelCpuResumeIntr(oldIntr);
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 152
 INCLUDE_ASM("nonmatchings/interruptman", sceKernelSetIntrLevel);
+#endif
 
+#if FW_VERSION >= 150 && FW_VERSION < 271
+s32 sceKernelSetIntrLogging(u32 intrNum, s32 enable) {
+    s32 oldIntr;
+    Interrupt *intr;
+
+    if (intrNum >= 67)
+        return 0x80020065;
+    oldIntr = sceKernelCpuSuspendIntr();
+    intr = &g_intrInfo.intr[intrNum];
+    if (enable != 0)
+        intr->noLogging = 0;
+    else
+        intr->noLogging = 1;
+    sceKernelCpuResumeIntr(oldIntr);
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/interruptman", sceKernelSetIntrLogging);
+#endif
 
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/interruptman", sceKernelEnableIntr);
 
 INCLUDE_ASM("nonmatchings/interruptman", sceKernelSuspendIntr);
@@ -105,7 +199,26 @@ INCLUDE_ASM("nonmatchings/interruptman", sceKernelRegisterSubIntrHandler);
 
 INCLUDE_ASM("nonmatchings/interruptman", sceKernelReleaseSubIntrHandler);
 
-INCLUDE_ASM("nonmatchings/interruptman", sceKernelSuspendSubIntr);
+s32 sceKernelSuspendSubIntr(u32 intrNum, s32 subIntrNum, s32 *state) {
+    s32 ret;
+    s32 oldIntr;
+    Interrupt *intr;
+
+    if (intrNum >= 67)
+        return 0x80020065;
+    oldIntr = sceKernelCpuSuspendIntr();
+    intr = &g_intrInfo.intr[intrNum];
+    if (subIntrNum < 0 || subIntrNum >= intr->numSubIntrs)
+        ret = 0x80020065;
+    else if (intr->handler == 0 || intr->cb == NULL || intr->cb->cbSuspend == NULL) {
+        ret = 0x80020068;
+        if (state != NULL)
+            *state = 0;
+    } else
+        ret = intr->cb->cbSuspend(intrNum, subIntrNum, state);
+    sceKernelCpuResumeIntr(oldIntr);
+    return ret;
+}
 #endif
 
 #if FW_VERSION >= 152 && FW_VERSION < 282
@@ -117,17 +230,17 @@ INCLUDE_ASM("nonmatchings/interruptman", QueryIntrHandlerInfo);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/interruptman", func_000015B4);
+INCLUDE_ASM("nonmatchings/interruptman", mymemset);
 
-INCLUDE_ASM("nonmatchings/interruptman", func_000015E4);
+INCLUDE_ASM("nonmatchings/interruptman", IntrDisableLevels);
 
-INCLUDE_ASM("nonmatchings/interruptman", func_0000165C);
+INCLUDE_ASM("nonmatchings/interruptman", IntrEnableLevels);
 
-INCLUDE_ASM("nonmatchings/interruptman", func_000016FC);
+INCLUDE_ASM("nonmatchings/interruptman", IntrIsEnabled);
 
-INCLUDE_ASM("nonmatchings/interruptman", func_00001764);
+INCLUDE_ASM("nonmatchings/interruptman", IntrDisableAll);
 
-INCLUDE_ASM("nonmatchings/interruptman", func_00001818);
+INCLUDE_ASM("nonmatchings/interruptman", IntrUpdateMask);
 
 INCLUDE_ASM("nonmatchings/interruptman", sceKernelSetPrimarySyscallHandler);
 #endif
@@ -140,17 +253,13 @@ INCLUDE_ASM("nonmatchings/interruptman", sceKernelCpuEnableIntr);
 INCLUDE_ASM("nonmatchings/interruptman", QueryInterruptManCB);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 201
+#if FW_VERSION < 201
 void *QueryInterruptManCB(void) {
-    return &D_00003910;
+    return &g_intrInfo;
 }
 #endif
 
 #if FW_VERSION == 100
-void *QueryInterruptManCB(void) {
-    return &D_00003950;
-}
-
 INCLUDE_ASM("nonmatchings/interruptman", func_000001E0);
 
 INCLUDE_ASM("nonmatchings/interruptman", func_00000230);
@@ -162,7 +271,7 @@ s32 func_00000274(void) {
     temp_v0 = sceKernelCreateHeap(1, 0x100, 1, "interruptman_heap");
     var_v1 = temp_v0;
     if (temp_v0 > 0) {
-        D_00003B0C = var_v1;
+        g_intrInfo.heapId = var_v1;
         var_v1 = 0;
     }
     return var_v1;
@@ -173,9 +282,9 @@ Interrupt **func_000002B8(s32 num) {
     Interrupt *subs;
     s32 i;
 
-    ptrs = sceKernelAllocHeapMemory(D_00003950.heapId, num * 60);
+    ptrs = sceKernelAllocHeapMemory(g_intrInfo.heapId, num * 60);
     if (ptrs != NULL) {
-        func_000015F8(ptrs, 0, num * 60);
+        mymemset(ptrs, 0, num * 60);
         subs = (Interrupt *)&ptrs[num];
         for (i = 0; i < num; i++)
             ptrs[i] = &subs[i];
@@ -191,15 +300,9 @@ INCLUDE_ASM("nonmatchings/interruptman", func_00000348);
 #if FW_VERSION == 100
 void func_00000348(void *ptr) {
     if (ptr != NULL)
-        sceKernelFreeHeapMemory(D_00003B0C, ptr);
+        sceKernelFreeHeapMemory(g_intrInfo.heapId, ptr);
 }
-#endif
 
-#if FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/interruptman", sceKernelRegisterIntrHandler);
-#endif
-
-#if FW_VERSION == 100
 s32 sceKernelRegisterIntrHandler(u32 intrNum, s32 arg1, void *func, void *arg, SceIntrHandler *handler) {
     s32 ret = 0;
     s32 oldIntr;
@@ -213,12 +316,12 @@ s32 sceKernelRegisterIntrHandler(u32 intrNum, s32 arg1, void *func, void *arg, S
     if (handler != NULL && handler->size != 12)
         return 0x8002006B;
     oldIntr = sceKernelCpuSuspendIntr();
-    if (handler != NULL && handler->numSubIntrs > 0 && D_00003950.heapId == 0) {
+    if (handler != NULL && handler->numSubIntrs > 0 && g_intrInfo.heapId == 0) {
         ret = func_00000274();
         if (ret != 0)
             goto end;
     }
-    intr = &D_00003950.intr[intrNum];
+    intr = &g_intrInfo.intr[intrNum];
     if (intr->handler != 0) {
         ret = 0x80020067;
     } else if ((s32)func >= 0) {
@@ -258,9 +361,7 @@ end:
     sceKernelCpuResumeIntr(oldIntr);
     return ret;
 }
-#endif
 
-#if FW_VERSION == 100
 s32 sceKernelSetUserModeIntrHanlerAcceptable(u32 intrNum, s32 subIntrNum, s32 setBit) {
     s32 ret = 0;
     s32 oldIntr;
@@ -272,7 +373,7 @@ s32 sceKernelSetUserModeIntrHanlerAcceptable(u32 intrNum, s32 subIntrNum, s32 se
     if (intrNum >= 67)
         return 0x80020065;
     oldIntr = sceKernelCpuSuspendIntr();
-    intr = &D_00003950.intr[intrNum];
+    intr = &g_intrInfo.intr[intrNum];
     if (intr->handler == 0 || (intr->handler & 3) == 3)
         ret = 0x80020068;
     else if (subIntrNum < 0 || subIntrNum >= intr->numSubIntrs)
@@ -292,13 +393,7 @@ s32 sceKernelSetUserModeIntrHanlerAcceptable(u32 intrNum, s32 subIntrNum, s32 se
     sceKernelCpuResumeIntr(oldIntr);
     return ret;
 }
-#endif
 
-#if FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/interruptman", sceKernelSetUserModeIntrHanlerAcceptable);
-#endif
-
-#if FW_VERSION == 100
 s32 sceKernelReleaseIntrHandler(u32 intrNum) {
     s32 ret = 0;
     s32 oldIntr;
@@ -309,7 +404,7 @@ s32 sceKernelReleaseIntrHandler(u32 intrNum) {
     if (intrNum >= 67)
         return 0x80020065;
     oldIntr = sceKernelCpuSuspendIntr();
-    intr = &D_00003950.intr[intrNum];
+    intr = &g_intrInfo.intr[intrNum];
     if (intr->handler == 0) {
         ret = 0x80020068;
     } else {
@@ -342,7 +437,7 @@ s32 sceKernelSetIntrLevel(u32 intrNum, s32 level) {
     if ((u32)(level - 1) >= 3)
         return 0x80020069;
     oldIntr = sceKernelCpuSuspendIntr();
-    intr = &D_00003950.intr[intrNum];
+    intr = &g_intrInfo.intr[intrNum];
     if (intr->handler == 0 || (intr->handler & 3) == 3) {
         sceKernelCpuResumeIntr(oldIntr);
         return 0x80020068;
@@ -351,25 +446,19 @@ s32 sceKernelSetIntrLevel(u32 intrNum, s32 level) {
         sceKernelCpuResumeIntr(oldIntr);
         return 0x80020069;
     }
-    if (func_00001E9C(intrNum)) {
+    if (IntrIsEnabled(intrNum)) {
         if (intr->level < level)
-            func_00001628(intrNum);
+            IntrDisableLevels(intrNum);
         intr->level = level;
-        func_00001DF8(intrNum);
-        func_00001850();
+        IntrEnableLevels(intrNum);
+        IntrUpdateMask();
     } else {
         intr->level = level;
     }
     sceKernelCpuResumeIntr(oldIntr);
     return 0;
 }
-#endif
 
-#if FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/interruptman", sceKernelSetIntrLevel);
-#endif
-
-#if FW_VERSION == 100
 s32 sceKernelSetIntrLogging(u32 intrNum, s32 enable) {
     s32 oldIntr;
     Interrupt *intr;
@@ -377,7 +466,7 @@ s32 sceKernelSetIntrLogging(u32 intrNum, s32 enable) {
     if (intrNum >= 67)
         return 0x80020065;
     oldIntr = sceKernelCpuSuspendIntr();
-    intr = &D_00003950.intr[intrNum];
+    intr = &g_intrInfo.intr[intrNum];
     if (enable != 0)
         intr->noLogging = 0;
     else
@@ -387,9 +476,7 @@ s32 sceKernelSetIntrLogging(u32 intrNum, s32 enable) {
 }
 #endif
 
-#if FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/interruptman", sceKernelSetIntrLogging);
-#else
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/interruptman", sceKernelIsInterruptOccurred);
 #endif
 
@@ -414,7 +501,7 @@ s32 sceKernelSuspendIntr(u32 intrNum, s32 *state) {
         return 0x80020065;
     oldIntr = sceKernelCpuSuspendIntr();
     mask = func_00000000(intrNum);
-    intr = &D_00003950.intr[intrNum];
+    intr = &g_intrInfo.intr[intrNum];
     if (intr->handler == 0) {
         ret = 0x80020068;
         if (state != NULL)
@@ -424,10 +511,10 @@ s32 sceKernelSuspendIntr(u32 intrNum, s32 *state) {
             status = getCop0Status() & 0xFF00;
             *state = status & mask;
         } else
-            *state = func_00001E9C(intrNum);
+            *state = IntrIsEnabled(intrNum);
     }
     if ((s32)intrNum < 64)
-        func_00001F04(intrNum);
+        IntrDisableAll(intrNum);
     else {
         bits = mask & 0xFF00;
         setCop0Status(getCop0Status() & ~bits);
@@ -505,7 +592,7 @@ INCLUDE_ASM("nonmatchings/interruptman", sceKernelRegisterSubIntrHandler);
 INCLUDE_ASM("nonmatchings/interruptman", sceKernelReleaseSubIntrHandler);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 282
 s32 sceKernelEnableSubIntr(u32 intrNum, s32 subIntrNum) {
     s32 ret;
     s32 oldIntr;
@@ -514,7 +601,7 @@ s32 sceKernelEnableSubIntr(u32 intrNum, s32 subIntrNum) {
     if (intrNum >= 67)
         return 0x80020065;
     oldIntr = sceKernelCpuSuspendIntr();
-    intr = &D_00003950.intr[intrNum];
+    intr = &g_intrInfo.intr[intrNum];
     if (subIntrNum < 0 || subIntrNum >= intr->numSubIntrs)
         ret = 0x80020065;
     else if (intr->handler == 0 || intr->cb == NULL || intr->cb->cbEnable == NULL)
@@ -524,13 +611,7 @@ s32 sceKernelEnableSubIntr(u32 intrNum, s32 subIntrNum) {
     sceKernelCpuResumeIntr(oldIntr);
     return ret;
 }
-#endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/interruptman", sceKernelEnableSubIntr);
-#endif
-
-#if FW_VERSION == 100
 s32 sceKernelDisableSubIntr(u32 intrNum, s32 subIntrNum) {
     s32 ret;
     s32 oldIntr;
@@ -539,7 +620,7 @@ s32 sceKernelDisableSubIntr(u32 intrNum, s32 subIntrNum) {
     if (intrNum >= 67)
         return 0x80020065;
     oldIntr = sceKernelCpuSuspendIntr();
-    intr = &D_00003950.intr[intrNum];
+    intr = &g_intrInfo.intr[intrNum];
     if (subIntrNum < 0 || subIntrNum >= intr->numSubIntrs)
         ret = 0x80020065;
     else if (intr->handler == 0 || intr->cb == NULL || intr->cb->cbDisable == NULL)
@@ -551,10 +632,6 @@ s32 sceKernelDisableSubIntr(u32 intrNum, s32 subIntrNum) {
 }
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/interruptman", sceKernelDisableSubIntr);
-#endif
-
 #if FW_VERSION == 100
 s32 sceKernelSuspendSubIntr(u32 intrNum, s32 subIntrNum, s32 *state) {
     s32 ret;
@@ -564,7 +641,7 @@ s32 sceKernelSuspendSubIntr(u32 intrNum, s32 subIntrNum, s32 *state) {
     if (intrNum >= 67)
         return 0x80020065;
     oldIntr = sceKernelCpuSuspendIntr();
-    intr = &D_00003950.intr[intrNum];
+    intr = &g_intrInfo.intr[intrNum];
     if (subIntrNum < 0 || subIntrNum >= intr->numSubIntrs)
         ret = 0x80020065;
     else if (intr->handler == 0 || intr->cb == NULL || intr->cb->cbSuspend == NULL) {
@@ -580,9 +657,7 @@ s32 sceKernelSuspendSubIntr(u32 intrNum, s32 subIntrNum, s32 *state) {
 
 #if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/interruptman", sceKernelSuspendSubIntr);
-#endif
-
-#if FW_VERSION == 100
+#else
 s32 sceKernelResumeSubIntr(u32 intrNum, s32 subIntrNum, s32 state) {
     s32 ret;
     s32 oldIntr;
@@ -591,7 +666,7 @@ s32 sceKernelResumeSubIntr(u32 intrNum, s32 subIntrNum, s32 state) {
     if (intrNum >= 67)
         return 0x80020065;
     oldIntr = sceKernelCpuSuspendIntr();
-    intr = &D_00003950.intr[intrNum];
+    intr = &g_intrInfo.intr[intrNum];
     if (subIntrNum < 0 || subIntrNum >= intr->numSubIntrs)
         ret = 0x80020065;
     else if (intr->handler == 0 || intr->cb == NULL || intr->cb->cbResume == NULL)
@@ -601,13 +676,7 @@ s32 sceKernelResumeSubIntr(u32 intrNum, s32 subIntrNum, s32 state) {
     sceKernelCpuResumeIntr(oldIntr);
     return ret;
 }
-#endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/interruptman", sceKernelResumeSubIntr);
-#endif
-
-#if FW_VERSION == 100
 s32 sceKernelIsSubInterruptOccurred(u32 intrNum, s32 subIntrNum) {
     s32 ret;
     s32 oldIntr;
@@ -616,7 +685,7 @@ s32 sceKernelIsSubInterruptOccurred(u32 intrNum, s32 subIntrNum) {
     if (intrNum >= 67)
         return 0x80020065;
     oldIntr = sceKernelCpuSuspendIntr();
-    intr = &D_00003950.intr[intrNum];
+    intr = &g_intrInfo.intr[intrNum];
     if (subIntrNum < 0 || subIntrNum >= intr->numSubIntrs)
         ret = 0x80020065;
     else if (intr->handler == 0 || intr->cb == NULL || intr->cb->cbIsOccurred == NULL)
@@ -628,18 +697,8 @@ s32 sceKernelIsSubInterruptOccurred(u32 intrNum, s32 subIntrNum) {
 }
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/interruptman", sceKernelIsSubInterruptOccurred);
-#endif
-
 #if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/interruptman", QueryIntrHandlerInfo);
-#endif
-
-#if FW_VERSION >= 152 && FW_VERSION < 282
-s32 QueryIntrHandlerInfo(void) {
-    return 0x80020001;
-}
 #endif
 
 #if FW_VERSION >= 282
@@ -647,7 +706,7 @@ INCLUDE_ASM("nonmatchings/interruptman", sceKernelQueryIntrHandlerInfo);
 #endif
 
 #if FW_VERSION == 100 || FW_VERSION >= 282
-void *func_000015F8(void *dst, u8 c, s32 n) {
+void *mymemset(void *dst, u8 c, s32 n) {
     u8 *p = dst;
 
     if (dst != NULL) {
@@ -657,50 +716,34 @@ void *func_000015F8(void *dst, u8 c, s32 n) {
     return dst;
 }
 
-INCLUDE_ASM("nonmatchings/interruptman", func_00001628);
+INCLUDE_ASM("nonmatchings/interruptman", IntrDisableLevels);
+
+INCLUDE_ASM("nonmatchings/interruptman", IntrEnableLevels);
+
+INCLUDE_ASM("nonmatchings/interruptman", IntrIsEnabled);
+
+INCLUDE_ASM("nonmatchings/interruptman", IntrDisableAll);
+
+INCLUDE_ASM("nonmatchings/interruptman", IntrUpdateMask);
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/interruptman", func_00001DF8);
+s32 sceKernelRegisterUserSpaceIntrStack(s32 stack, s32 size) {
+    s32 oldIntr;
+    s32 ret;
 
-INCLUDE_ASM("nonmatchings/interruptman", func_00001E9C);
-
-INCLUDE_ASM("nonmatchings/interruptman", func_00001F04);
-#endif
-
-#if FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/interruptman", func_000016A0);
-
-INCLUDE_ASM("nonmatchings/interruptman", func_00001740);
-
-INCLUDE_ASM("nonmatchings/interruptman", func_0000179C);
-#endif
-
-#if FW_VERSION == 100 || FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/interruptman", func_00001850);
-#endif
-
-#if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/interruptman", sceKernelRegisterUserSpaceIntrStack);
-#endif
-
-#if FW_VERSION >= 150 && FW_VERSION < 282
-s32 sceKernelRegisterUserSpaceIntrStack(s32 arg0, s32 arg1) {
-    s32 temp_a0;
-    s32 var_s0;
-
-    temp_a0 = sceKernelCpuSuspendIntr();
-    var_s0 = 0x8002006D;
-    if (M2C_VFIELD(&D_00003910, s32, 0x1AC) == 0) {
-        var_s0 = 0x8002006C;
-        if (arg0 >= 0) {
-            M2C_VFIELD(&D_00003910, s32, 0x1B0) = arg1;
-            var_s0 = 0;
-            M2C_VFIELD(&D_00003910, s32, 0x1AC) = arg0;
+    oldIntr = sceKernelCpuSuspendIntr();
+    ret = 0x8002006D;
+    if (g_intrInfo.userIntrStack == 0) {
+        ret = 0x8002006C;
+        if (stack >= 0) {
+            g_intrInfo.userIntrStackSize = size;
+            ret = 0;
+            g_intrInfo.userIntrStack = stack;
         }
     }
-    sceKernelCpuResumeIntr(temp_a0);
-    return var_s0;
+    sceKernelCpuResumeIntr(oldIntr);
+    return ret;
 }
 #endif
 
@@ -716,7 +759,7 @@ INCLUDE_ASM("nonmatchings/interruptman", module_reboot_before);
 INCLUDE_ASM("nonmatchings/interruptman", sceKernelCpuEnableIntr);
 
 void *QueryInterruptManCB(void) {
-    return &D_00003E00;
+    return &g_intrInfo;
 }
 #endif
 
@@ -745,13 +788,13 @@ void RegisterContextHooks(s32 arg0, s32 arg1) {
 }
 
 void RegisterSubIntrruptMonitor(s32 arg0, s32 arg1) {
-    D_00003E00.unk1084 = arg1;
-    D_00003E00.unk1080 = arg0;
+    g_intrInfo.subIntrMonitorAfter = arg1;
+    g_intrInfo.subIntrMonitorBefore = arg0;
 }
 
 void ReleaseSubIntrruptMonitor(void) {
-    D_00003E00.unk1084 = 0;
-    D_00003E00.unk1080 = 0;
+    g_intrInfo.subIntrMonitorAfter = 0;
+    g_intrInfo.subIntrMonitorBefore = 0;
 }
 
 INCLUDE_ASM("nonmatchings/interruptman", UnSupportIntr);
@@ -769,23 +812,27 @@ INCLUDE_ASM("nonmatchings/interruptman", sceKernelDisableSubIntr);
 INCLUDE_ASM("nonmatchings/interruptman", sceKernelResumeSubIntr);
 
 INCLUDE_ASM("nonmatchings/interruptman", sceKernelIsSubInterruptOccurred);
+#endif
 
+#if FW_VERSION >= 152
 s32 QueryIntrHandlerInfo(void) {
     return 0x80020001;
 }
+#endif
 
+#if FW_VERSION >= 150
 s32 sceKernelRegisterUserSpaceIntrStack(s32 arg0, s32 arg1) {
     s32 temp_a0;
     s32 var_s0;
 
     temp_a0 = sceKernelCpuSuspendIntr();
     var_s0 = 0x8002006D;
-    if (D_00003E00.unk1AC == 0) {
+    if (g_intrInfo.userIntrStack == 0) {
         var_s0 = 0x8002006C;
         if (arg0 >= 0) {
-            D_00003E00.unk1B0 = arg1;
+            g_intrInfo.userIntrStackSize = arg1;
             var_s0 = 0;
-            D_00003E00.unk1AC = arg0;
+            g_intrInfo.userIntrStack = arg0;
         }
     }
     sceKernelCpuResumeIntr(temp_a0);
@@ -795,26 +842,22 @@ s32 sceKernelRegisterUserSpaceIntrStack(s32 arg0, s32 arg1) {
 
 INCLUDE_ASM("nonmatchings/interruptman", sceKernelGetCpuClockCounter);
 
-#if FW_VERSION == 100
 u64 sceKernelGetCpuClockCounterWide(void) {
     s32 oldIntr = sceKernelCpuSuspendIntr();
-    u32 hi = D_00003950.clockCounterHi;
+    u32 hi = g_intrInfo.clockCounterHi;
     u32 lo = getCop0Count();
 
-    if (lo < D_00003950.clockCounterLo)
+    if (lo < g_intrInfo.clockCounterLo)
         hi++;
     else
-        D_00003950.clockCounterLo = lo;
+        g_intrInfo.clockCounterLo = lo;
     sceKernelCpuResumeIntr(oldIntr);
     return ((u64)hi << 32) | lo;
 }
-#else
-INCLUDE_ASM("nonmatchings/interruptman", sceKernelGetCpuClockCounterWide);
-#endif
 
 #if FW_VERSION == 100
 s32 _sceKernelGetCpuClockCounterLow(void) {
-    return D_00003950.clockCounterLo;
+    return g_intrInfo.clockCounterLo;
 }
 #else
 s32 _sceKernelGetCpuClockCounterLow(void) {
@@ -824,7 +867,7 @@ s32 _sceKernelGetCpuClockCounterLow(void) {
 
 #if FW_VERSION == 100
 s32 _sceKernelGetCpuClockCounterHigh(void) {
-    return D_00003950.clockCounterHi;
+    return g_intrInfo.clockCounterHi;
 }
 #endif
 
