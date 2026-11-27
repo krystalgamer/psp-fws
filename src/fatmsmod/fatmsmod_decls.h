@@ -67,9 +67,19 @@ typedef struct {
     s32 second;
 } PfTime;
 
+/* PrFILE directory cursor: the current directory entry and its position (D_00027934; D_00027800 points at one). */
 typedef struct {
-    u8 pad0[0x30];
-    u32 sector; /* 0x30 */
+    FatDirEnt de; /* 0x0 */
+#if FW_VERSION >= 260
+    u8 pad20[0x20];
+#else
+    u8 pad20[0x10];
+#endif
+    u32 sector; /* 0x30 (2.60: 0x40), sector holding the entry */
+    u8 pad34[0x18];
+    s32 unk4C; /* 0x4C (2.60: 0x5C) */
+    u8 pad50[8];
+    s32 unk58; /* 0x58 */
 } PfDirCursor;
 
 /* PrFILE directory search record (stub cmd 6), kept at FatmsPrivate + 0x568. */
@@ -395,7 +405,8 @@ extern M2C_UNK D_00027804;
 extern s32 D_00027908;
 extern u16 D_0002790C;
 extern u16 D_0002790E; /* sectors per cluster */
-extern M2C_UNK D_00027934;
+extern PfDirCursor D_00027934;
+extern s32 D_00027DD4;
 extern s32 D_0002B568;
 extern s32 D_0002B5CC;
 extern s32 D_0002BA10[1][32];

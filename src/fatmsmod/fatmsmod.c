@@ -3785,8 +3785,8 @@ void func_0000BAF8(u32 arg0) {
 
     temp_a1 = M2C_FIELD(D_0003F728, u32 *, 0x40);
     if ((temp_a1 < arg0) && (arg0 < (u32) (temp_a1 + D_0002EF50))) {
-        M2C_VFIELD(&D_00027934, s32, 0x5C) = 0;
-        M2C_VFIELD(&D_00027934, s32, 0x40) = 0;
+        D_00027934.sector = 0;
+        D_00027934.unk4C = 0;
     }
 }
 #endif
@@ -3797,8 +3797,8 @@ void func_0000BAF8(u32 arg0) {
 
     temp_a1 = D_00027800->sector;
     if ((temp_a1 < arg0) && (arg0 < (u32) (temp_a1 + D_0001BCE4))) {
-        M2C_VFIELD(&D_00027934, s32, 0x4C) = 0;
-        M2C_VFIELD(&D_00027934, s32, 0x30) = 0;
+        D_00027934.sector = 0;
+        D_00027934.unk4C = 0;
     }
 }
 #endif
