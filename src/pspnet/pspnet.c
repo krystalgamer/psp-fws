@@ -1834,7 +1834,7 @@ INCLUDE_ASM("nonmatchings/pspnet", bpfwrite);
 
 INCLUDE_ASM("nonmatchings/pspnet", bpfioctl);
 
-s32 func_000041D8(struct bpf_d *d, struct bpf_program *fp) {
+s32 bpf_setf(struct bpf_d *d, struct bpf_program *fp) {
     struct bpf_insn *fcode, *old;
     u32 flen, size;
     s32 s;
@@ -1873,7 +1873,7 @@ s32 func_000041D8(struct bpf_d *d, struct bpf_program *fp) {
     return 22;
 }
 
-s32 func_000042FC(struct bpf_d *d, struct ifreq *ifr) {
+s32 bpf_setif(struct bpf_d *d, struct ifreq *ifr) {
     struct bpf_if *bp;
     s32 s, error;
 
