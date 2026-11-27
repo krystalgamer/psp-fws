@@ -975,9 +975,17 @@ void func_00000580(void) {
 }
 #endif
 
-#if FW_VERSION < 271
+#if FW_VERSION >= 150 && FW_VERSION < 271
 INCLUDE_ASM("nonmatchings/sysconf_plugin", func_000005EC);
+#endif
 
+#if FW_VERSION == 100
+void func_000005EC(s32 arg0) {
+    _ZN3paf6Module12SetInterfaceEiPv(arg0, 1, (s32) &D_00012708);
+}
+#endif
+
+#if FW_VERSION < 271
 INCLUDE_ASM("nonmatchings/sysconf_plugin", func_000005D8);
 
 void func_00000684(void) {
@@ -2253,9 +2261,19 @@ INCLUDE_ASM("nonmatchings/sysconf_plugin", func_000033D0);
 void func_000034E4(void) {
 
 }
+#endif
 
+#if FW_VERSION >= 150 && FW_VERSION < 260
 INCLUDE_ASM("nonmatchings/sysconf_plugin", func_000034EC);
+#endif
 
+#if FW_VERSION == 100
+void func_000034EC(s32 arg0) {
+    _ZN3paf9PhHandler11SetCallBackEiPFvPNS_8PhWidgetEPNS_7PhEventEPvES5_(arg0, 0x10001, (s32) func_000034E4, 0);
+}
+#endif
+
+#if FW_VERSION < 260
 INCLUDE_ASM("nonmatchings/sysconf_plugin", func_00003518);
 #endif
 
@@ -2283,8 +2301,14 @@ INCLUDE_ASM("nonmatchings/sysconf_plugin", func_000036A4);
 INCLUDE_ASM("nonmatchings/sysconf_plugin", func_0000370C);
 #endif
 
-#if FW_VERSION < 260
+#if FW_VERSION >= 150 && FW_VERSION < 260
 INCLUDE_ASM("nonmatchings/sysconf_plugin", func_0000377C);
+#endif
+
+#if FW_VERSION == 100
+void func_0000377C(s32 arg0) {
+    _ZN3paf9PhHandler11SetCallBackEiPFvPNS_8PhWidgetEPNS_7PhEventEPvES5_(arg0, 0x10001, (s32) func_000034E4, 0);
+}
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 260
@@ -2705,8 +2729,16 @@ INCLUDE_ASM("nonmatchings/sysconf_plugin", func_000054FC);
 void func_0000407C(void) {
 
 }
+#endif
 
+#if FW_VERSION >= 150 && FW_VERSION < 260
 INCLUDE_ASM("nonmatchings/sysconf_plugin", func_00004084);
+#endif
+
+#if FW_VERSION == 100
+void func_00004084(s32 arg0) {
+    _ZN3paf9PhHandler11SetCallBackEiPFvPNS_8PhWidgetEPNS_7PhEventEPvES5_(arg0, 0x10001, (s32) func_0000407C, 0);
+}
 #endif
 
 #if FW_VERSION >= 282
@@ -3519,8 +3551,14 @@ void func_000069F8(void) {
 }
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/sysconf_plugin", func_00006A00);
+#endif
+
+#if FW_VERSION == 100
+void func_00006A00(s32 arg0) {
+    _ZN3paf9PhHandler11SetCallBackEiPFvPNS_8PhWidgetEPNS_7PhEventEPvES5_(arg0, 0x10001, (s32) func_000069F8, 0);
+}
 #endif
 
 #if FW_VERSION >= 260 && FW_VERSION < 282
@@ -3877,8 +3915,14 @@ INCLUDE_ASM("nonmatchings/sysconf_plugin", func_0000A770);
 INCLUDE_ASM("nonmatchings/sysconf_plugin", func_0000A79C);
 #endif
 
-#if FW_VERSION < 260
+#if FW_VERSION >= 150 && FW_VERSION < 260
 INCLUDE_ASM("nonmatchings/sysconf_plugin", func_00006C90);
+#endif
+
+#if FW_VERSION == 100
+void func_00006C90(s32 arg0) {
+    _ZN3paf9PhHandler11SetCallBackEiPFvPNS_8PhWidgetEPNS_7PhEventEPvES5_(arg0, 0x10001, (s32) func_000069F8, 0);
+}
 #endif
 
 #if FW_VERSION < 282
@@ -4076,8 +4120,16 @@ INCLUDE_ASM("nonmatchings/sysconf_plugin", func_000078BC);
 void func_000079C4(void) {
 
 }
+#endif
 
+#if FW_VERSION >= 150 && FW_VERSION < 260
 INCLUDE_ASM("nonmatchings/sysconf_plugin", func_000079CC);
+#endif
+
+#if FW_VERSION == 100
+void func_000079CC(s32 arg0) {
+    _ZN3paf9PhHandler11SetCallBackEiPFvPNS_8PhWidgetEPNS_7PhEventEPvES5_(arg0, 0x10001, (s32) func_000079C4, 0);
+}
 #endif
 
 #if FW_VERSION >= 282
@@ -4124,8 +4176,14 @@ INCLUDE_ASM("nonmatchings/sysconf_plugin", func_00007BEC);
 INCLUDE_ASM("nonmatchings/sysconf_plugin", func_0000B764);
 #endif
 
-#if FW_VERSION < 260 || FW_VERSION >= 282
+#if (FW_VERSION >= 150 && FW_VERSION < 260) || FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/sysconf_plugin", func_0000B79C);
+#endif
+
+#if FW_VERSION == 100
+void func_0000B79C(s32 arg0) {
+    _ZN3paf9PhHandler11SetCallBackEiPFvPNS_8PhWidgetEPNS_7PhEventEPvES5_(arg0, 0x10001, (s32) func_000079C4, 0);
+}
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 260
@@ -5589,8 +5647,14 @@ INCLUDE_ASM("nonmatchings/sysconf_plugin", func_0000F064_v260);
 INCLUDE_ASM("nonmatchings/sysconf_plugin", func_0000A92C);
 #endif
 
-#if FW_VERSION < 260
+#if FW_VERSION >= 150 && FW_VERSION < 260
 INCLUDE_ASM("nonmatchings/sysconf_plugin", func_0000A9F0);
+#endif
+
+#if FW_VERSION == 100
+void func_0000A9F0(s32 arg0) {
+    _ZN3paf9PhHandler11SetCallBackEiPFvPNS_8PhWidgetEPNS_7PhEventEPvES5_(arg0, 0x10001, (s32) func_0000A748, 0);
+}
 #endif
 
 #if FW_VERSION >= 282
@@ -6136,8 +6200,16 @@ INCLUDE_ASM("nonmatchings/sysconf_plugin", func_0000C4EC);
 void func_0000C5B8(void) {
 
 }
+#endif
 
+#if FW_VERSION >= 150 && FW_VERSION < 260
 INCLUDE_ASM("nonmatchings/sysconf_plugin", func_0000C5C0);
+#endif
+
+#if FW_VERSION == 100
+void func_0000C5C0(s32 arg0) {
+    _ZN3paf9PhHandler11SetCallBackEiPFvPNS_8PhWidgetEPNS_7PhEventEPvES5_(arg0, 0x10001, (s32) func_0000C5B8, 0);
+}
 #endif
 
 #if FW_VERSION >= 282
@@ -6188,8 +6260,14 @@ INCLUDE_ASM("nonmatchings/sysconf_plugin", func_0000C7E0);
 INCLUDE_ASM("nonmatchings/sysconf_plugin", func_00014DEC);
 #endif
 
-#if FW_VERSION < 260 || FW_VERSION >= 282
+#if (FW_VERSION >= 150 && FW_VERSION < 260) || FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/sysconf_plugin", func_00014E24);
+#endif
+
+#if FW_VERSION == 100
+void func_00014E24(s32 arg0) {
+    _ZN3paf9PhHandler11SetCallBackEiPFvPNS_8PhWidgetEPNS_7PhEventEPvES5_(arg0, 0x10001, (s32) func_0000C5B8, 0);
+}
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
@@ -6288,8 +6366,14 @@ INCLUDE_RODATA("nonmatchings/sysconf_plugin", D_00015040);
 INCLUDE_ASM("nonmatchings/sysconf_plugin", func_00013FD0);
 #endif
 
-#if FW_VERSION < 260
+#if FW_VERSION >= 150 && FW_VERSION < 260
 INCLUDE_ASM("nonmatchings/sysconf_plugin", func_0000CE78);
+#endif
+
+#if FW_VERSION == 100
+void func_0000CE78(s32 arg0) {
+    _ZN3paf9PhHandler11SetCallBackEiPFvPNS_8PhWidgetEPNS_7PhEventEPvES5_(arg0, 0x10001, (s32) func_0000CE70, 0);
+}
 #endif
 
 #if FW_VERSION < 282
@@ -6320,8 +6404,14 @@ INCLUDE_ASM("nonmatchings/sysconf_plugin", func_0000D030);
 INCLUDE_ASM("nonmatchings/sysconf_plugin", func_0000D098);
 #endif
 
-#if FW_VERSION < 260
+#if FW_VERSION >= 150 && FW_VERSION < 260
 INCLUDE_ASM("nonmatchings/sysconf_plugin", func_0000D108);
+#endif
+
+#if FW_VERSION == 100
+void func_0000D108(s32 arg0) {
+    _ZN3paf9PhHandler11SetCallBackEiPFvPNS_8PhWidgetEPNS_7PhEventEPvES5_(arg0, 0x10001, (s32) func_0000CE70, 0);
+}
 #endif
 
 #if FW_VERSION < 282
@@ -6878,8 +6968,16 @@ INCLUDE_ASM("nonmatchings/sysconf_plugin", func_000175F8);
 
 #if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/sysconf_plugin", func_0000E680);
+#endif
 
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/sysconf_plugin", func_0000E6A4);
+#endif
+
+#if FW_VERSION == 100
+void func_0000E6A4(void *arg0) {
+    _ZN3paf4View8PageOpenEPKcii(M2C_FIELD(arg0, s32 *, 4), &D_0001EE04, 0, 0);
+}
 #endif
 
 #if FW_VERSION >= 350
