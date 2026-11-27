@@ -158,11 +158,23 @@ s32 func_00008F5C(s32 arg0, s32 arg1, s32 arg2) {
     return temp_s1;
 }
 
-INCLUDE_ASM("nonmatchings/reboot_008F5C", func_00008FB4);
+s64 func_00008FB4(void *iob, SceOff off, s32 whence) {
+    if ((off >> 31) > 0) {
+        return 0x80010016;
+    }
+    return func_00008368(iob, (s32)off, whence);
+}
 
 INCLUDE_ASM("nonmatchings/reboot_008F5C", func_0000900C);
 
-INCLUDE_ASM("nonmatchings/reboot_008F5C", func_00009094);
+s32 func_00009094(s32 arg0, s32 arg1) {
+    s32 ret;
+
+    func_0000E028();
+    ret = func_0000A654(arg0, arg1);
+    func_0000E028();
+    return ret;
+}
 
 s32 func_000090DC(s32 arg0, s32 arg1, s32 arg2) {
     s32 temp_s1;
@@ -496,7 +508,16 @@ void func_0000D9E0(void *arg0, s32 arg1, u8 *arg2) {
 }
 #endif
 
-INCLUDE_ASM("nonmatchings/reboot_008F5C", func_0000DA70);
+s32 func_0000DA70(LFlashDev *dev) {
+    dev->unk1D0 = -1;
+    dev->unk1D2 = -1;
+    dev->segments = (LFlashSegment *)D_000309F4;
+    dev->blockBuf = D_00030AD4;
+    dev->unk1BC = D_0001DA68;
+    dev->unk1C0 = D_00019690;
+    dev->unk1C4 = D_00029BE8;
+    return 0;
+}
 
 INCLUDE_ASM("nonmatchings/reboot_008F5C", func_0000DAC0);
 
@@ -620,7 +641,16 @@ void func_0000E108(void) {
     func_0000F3D8((s32) &D_0001D890);
 }
 
-INCLUDE_ASM("nonmatchings/reboot_008F5C", func_0000E128);
+s32 func_0000E128(void) {
+    u8 buf[16];
+
+    if (!(D_000184C0 & 1)) {
+        func_0000FC60();
+        func_0000DBB8(buf);
+        D_000184C0 |= 1;
+    }
+    return 0;
+}
 
 INCLUDE_ASM("nonmatchings/reboot_008F5C", func_0000E178);
 

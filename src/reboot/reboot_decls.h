@@ -106,7 +106,7 @@ struct LFlashSegment {
 };
 
 typedef struct LFlashDev LFlashDev;
-/* lflash device state (D_0000EED0), 1.00: 0x1C8 bytes */
+/* lflash device state (D_0000EED0), reboot 1.00: at least 0x1D4 bytes (lfatfs 1.00: 0x1C8) */
 struct LFlashDev {
     u8 pad0[0x18C];
     u32 pageSize; /* 0x18C */
@@ -117,7 +117,13 @@ struct LFlashDev {
     LFlashSegment *segments; /* 0x1B0 */
     s32 unk1B4; /* 0x1B4 */
     u8 *blockBuf; /* 0x1B8 */
-    u8 pad1BC[0xC];
+    void *unk1BC; /* 0x1BC */
+    void *unk1C0; /* 0x1C0 */
+    void *unk1C4; /* 0x1C4 */
+    u32 unk1C8; /* 0x1C8 */
+    u32 unk1CC; /* 0x1CC */
+    u16 unk1D0; /* 0x1D0 */
+    u16 unk1D2; /* 0x1D2 */
 };
 
 typedef struct LFlashPart LFlashPart;
@@ -196,7 +202,7 @@ typedef struct {
     void *stubEnd; /* 0x30 */
 } SceModuleInfo;
 
-/* loadcore exec file info (1.00 copy in loadelf.c). Offsets 0x8, 0x10, 0x20, 0x48-0x58 confirmed in the 1.00 asm;
+/* loadcore exec file info (1.00 copy in loadelf.c). Offsets 0x8, 0x10, 0x20, 0x28, 0x34-0x3C, 0x48-0x58, 0x70-0x80 confirmed in the 1.00 asm;
    names from uOFW (6.60 layout, same offsets up to here). */
 typedef struct {
     u32 unk0;
@@ -223,6 +229,16 @@ typedef struct {
     u32 isCompressed; /* 0x54 */
     u16 modInfoAttribute; /* 0x58 */
     u16 execAttribute; /* 0x5A */
+    u32 decSize; /* 0x5C */
+    u32 isDecompressed; /* 0x60 */
+    u32 isSignChecked; /* 0x64 */
+    char *secureInstallId; /* 0x68 */
+    u32 overlapSize; /* 0x6C */
+    void *exportsInfo; /* 0x70 */
+    u32 exportsSize; /* 0x74 */
+    void *importsInfo; /* 0x78 */
+    u32 importsSize; /* 0x7C */
+    char *strtab; /* 0x80 */
 } SceLoadCoreExecFileInfo;
 /* "~SCE" wrapper header in front of a module (magic 0x4543537E, size at 4) */
 typedef struct {
@@ -405,13 +421,19 @@ extern void *D_0001734C;
 extern u32 D_00017364;
 extern u8 D_00018468[];
 extern u8 D_00018490[];
+extern u32 D_000184C0;
 extern SceNandInfo D_00018BCC;
 extern u32 D_00018BD0;
 extern u32 D_00018BD4;
+extern u8 D_00019690[];
 extern LFlashDev D_0001D890;
+extern u8 D_0001DA68[];
+extern u8 D_00029BE8[];
 extern M2C_UNK D_0002B79C;
 extern M2C_UNK D_0002DB34;
 extern M2C_UNK D_0002DBF4;
+extern u8 D_000309F4[];
+extern u8 D_00030AD4[];
 
 s32 Kprintf(const char *fmt, ...);
 s32 UFatChdir(s32 arg0, s32 arg1);
@@ -452,6 +474,7 @@ s32 func_00001D58(void);
 s32 func_00001D64(s32 arg0);
 s32 func_00001D68(s32 arg0);
 s32 func_00001D74(void);
+s32 func_00001F84(const char *a, const char *b);
 void func_00002A00(u8 *arg0, u8 *arg1);
 void func_00002A4C(u8 *arg0, u8 *arg1, u32 arg2);
 s32 func_00002C2C(void);
