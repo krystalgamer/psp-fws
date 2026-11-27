@@ -430,6 +430,7 @@ extern s32 D_000194E4;
 extern SceWlanMsg D_0002A060;
 extern SceWlanMsg D_0002A07C;
 extern SceWlanMsg D_0002A098;
+extern SceWlanMsg D_0002A83C;
 extern s32 D_0002D7A8;
 extern s32 D_0002D7AC;
 extern s32 D_0002D7B0;
@@ -443,6 +444,7 @@ extern s32 D_0002E3DC;
 extern s32 D_0002EE00;
 extern M2C_UNK func_00003F08;
 
+s32 func_000010E0(SceSize args, void *argp);
 s32 func_00001118(SceSize args, void *argp);
 void func_00002188(void *arg0);
 void func_000021AC(void *arg0);

@@ -1,5 +1,6 @@
 {
  "funcs": {
+  "func_000010E0": "s32 func_000010E0(SceSize args, void *argp);",
   "func_00001118": "s32 func_00001118(SceSize args, void *argp);",
   "func_00002188": "void func_00002188(void *arg0);",
   "func_000021AC": "void func_000021AC(void *arg0);",
@@ -211,6 +212,7 @@
   "D_0002A060": "extern SceWlanMsg D_0002A060;",
   "D_0002A07C": "extern SceWlanMsg D_0002A07C;",
   "D_0002A098": "extern SceWlanMsg D_0002A098;",
+  "D_0002A83C": "extern SceWlanMsg D_0002A83C;",
   "D_0002D7A8": "extern s32 D_0002D7A8;",
   "D_0002D7AC": "extern s32 D_0002D7AC;",
   "D_0002D7B0": "extern s32 D_0002D7B0;",
