@@ -35,10 +35,10 @@
   "sceDisplay_driver_63E22A26": "s32 sceDisplay_driver_63E22A26(s32, s32, s32, s32, s32);",
   "sceDisplay_driver_66961521": "s32 sceDisplay_driver_66961521(void);",
   "sceGeEdramGetAddr": "void * sceGeEdramGetAddr(void);",
+  "sceGeEdramGetHwSize": "s32 sceGeEdramGetHwSize();",
   "sceGeEdramGetSize": "u32 sceGeEdramGetSize(void);",
   "sceGeEdramSetAddrTranslation": "s32 sceGeEdramSetAddrTranslation(s32);",
   "sceGeEdramSetSize": "M2C_UNK sceGeEdramSetSize(s32);",
-  "sceGeEdramGetHwSize": "s32 sceGeEdramGetHwSize();",
   "sceKernelDcacheWritebackAll": "void sceKernelDcacheWritebackAll(void);",
   "sceKernelDeleteEventFlag": "s32 sceKernelDeleteEventFlag(s32);",
   "sceKernelDisableIntr": "M2C_UNK sceKernelDisableIntr(M2C_UNK);",
@@ -54,13 +54,15 @@
   "sceSysregVblankIRQPolar": "M2C_UNK sceSysregVblankIRQPolar(M2C_UNK);"
  },
  "types": {
-  "D_00003DB0_s": "struct D_00003DB0_s {\n    u8 pad0[0x60];\n    volatile s32 unk60;\n};",
-  "D_00003EC8_s": "struct D_00003EC8_s {\n    u8 pad0[0x20];\n    volatile s32 unk20;\n};"
+  "0_SceDisplayFrameBuf": "typedef struct {\n    s32 changed;      /* 0x00: new topaddr pending for the next vblank */\n    void *topaddr;    /* 0x04: requested frame buffer */\n    void *curTopaddr; /* 0x08: frame buffer being displayed */\n    s32 bufferWidth;  /* 0x0C */\n    s32 pixelFormat;  /* 0x10 */\n} SceDisplayFrameBuf; /* 0x14 */",
+  "1_SceDisplaySm1Ops": "typedef struct {\n    void *unk0[9];\n    s32 (*unk24)(s32);\n} SceDisplaySm1Ops;",
+  "2_SceDisplay": "typedef struct {\n#if FW_VERSION == 100\n    SceDisplayFrameBuf fb[4]; /* 0x00: one per level */\n    s8 foregroundLevel;       /* 0x50: level shown, -1 none */\n    s8 enabled;               /* 0x51: sceDisplayEnable/Disable */\n    s8 lcdOn;                 /* 0x52: last enabled state written to GPIO 1 */\n    s8 pwmState;              /* 0x53: backlight PWM 0 off, 1 restart, 2 on */\n    s32 bufferWidth;          /* 0x54: format programmed into the DMAC */\n    s32 pixelFormat;          /* 0x58 */\n    s32 brightness;           /* 0x5C: target level 0..100 */\n    s32 curBrightness;        /* 0x60 */\n    s32 brightnessFade;       /* 0x64: step curBrightness towards brightness each vblank */\n    s32 curModeIdx;           /* 0x68 */\n    s32 modeIdx;              /* 0x6C */\n    s32 mode;                 /* 0x70 */\n    s32 width;                /* 0x74 */\n    s32 height;               /* 0x78 */\n    s32 holdMode;             /* 0x7C */\n    s32 suspendWait;          /* 0x80: vblanks to wait before allowing suspend */\n    s32 modeChangeWait;       /* 0x84: vblanks left of a mode change */\n    SceDisplaySm1Ops *sm1Ops; /* 0x88 */\n#else\n    u8 pad0[0x60];\n    volatile s32 unk60;\n#endif\n} SceDisplay;",
+  "3_SceDisplayVblank": "typedef struct {\n#if FW_VERSION == 100\n    u32 subIntrMask;          /* 0x00: enabled VBLANK sub interrupts */\n    u32 vcount;               /* 0x04 */\n    s32 unk8;                 /* 0x08 */\n    s32 hcountPerFrame;       /* 0x0C */\n    s32 vblankStart;          /* 0x10: hcount where the vblank starts */\n    SceUID evflg;             /* 0x14 */\n#else\n    u8 pad0[0x20];\n    volatile s32 unk20;\n#endif\n} SceDisplayVblank;"
  },
  "vars": {
   "D_00002060": "extern s32 D_00002060;",
   "D_000020D0": "extern s32 D_000020D0;",
-  "D_00002150": "extern M2C_UNK D_00002150;",
+  "g_display": "extern SceDisplay g_display;",
   "D_000021CC": "extern s32 D_000021CC;",
   "D_000021E0": "extern s32 D_000021E0;",
   "D_000021EC": "extern s32 D_000021EC;",
@@ -70,11 +72,10 @@
   "D_00003675": "extern s8 D_00003675;",
   "D_000036C0": "extern s32 D_000036C0;",
   "D_00003D10": "extern M2C_UNK D_00003D10;",
-  "D_00003DB0": "extern struct D_00003DB0_s D_00003DB0;",
   "D_00003E14": "extern s8 D_00003E14;",
   "D_00003E1A": "extern s8 D_00003E1A;",
   "D_00003EB0": "extern s32 D_00003EB0;",
-  "D_00003EC8": "extern struct D_00003EC8_s D_00003EC8;",
+  "g_Vblank": "extern SceDisplayVblank g_Vblank;",
   "D_00003EE8": "extern s32 D_00003EE8;",
   "D_00003EF0": "extern s32 D_00003EF0;",
   "D_00003EF4": "extern s32 D_00003EF4;",

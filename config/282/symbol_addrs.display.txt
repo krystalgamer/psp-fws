@@ -119,3 +119,5 @@ sceSysregGenerateVblankIRQ = 0x0000346C; // type:func
 sceSysregApbTimerClkEnable = 0x00003474; // type:func
 sceSysregVblankIRQPolar = 0x0000347C; // type:func
 sceSysregApbTimerClkDisable = 0x00003484; // type:func
+g_display = 0x00003DB0;
+g_Vblank = 0x00003EC8;
