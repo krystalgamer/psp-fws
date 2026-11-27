@@ -136,7 +136,7 @@ s32 module_reboot_before(void) {
 }
 #endif
 
-#if FW_VERSION >= 201 && FW_VERSION < 282
+#if FW_VERSION >= 201 && FW_VERSION < 310
 s32 module_reboot_phase(s32 arg0) {
     switch (arg0) {                                 /* irregular */
     case 0:
@@ -156,19 +156,6 @@ s32 module_reboot_phase(s32 arg0) {
         break;
     case 2:
         sceKernelLockMutex(D_0000706C, 1, NULL);
-        break;
-    }
-    return 0;
-}
-#endif
-
-#if FW_VERSION >= 282 && FW_VERSION < 310
-s32 module_reboot_phase(s32 arg0) {
-    switch (arg0) {                                 /* irregular */
-    case 0:
-        break;
-    case 2:
-        sceKernelWaitSema(g_semaId, 1, NULL);
         break;
     }
     return 0;
@@ -336,7 +323,30 @@ end:
 }
 #endif
 
-#if FW_VERSION >= 282
+#if FW_VERSION >= 282 && FW_VERSION < 310
+s32 sceRegFlushRegistry(s32 index) {
+    s32 res;
+    s32 ret;
+    u32 oldK1;
+
+    oldK1 = shiftK1();
+    res = sceKernelWaitSema(g_semaId, 1, NULL);
+    ret = 0x80082733;
+    if (res != 0)
+        goto end;
+    ret = func_0000086C(index);
+end:
+    if (res == 0) {
+        res = sceKernelSignalSema(g_semaId, 1);
+        if (res != 0)
+            ret = 0x80082734;
+    }
+    setK1(oldK1);
+    return ret;
+}
+#endif
+
+#if FW_VERSION >= 310
 INCLUDE_ASM("nonmatchings/registry", sceRegFlushRegistry);
 #endif
 
@@ -1518,7 +1528,7 @@ end:
 }
 #endif
 
-#if FW_VERSION == 271
+#if FW_VERSION >= 271 && FW_VERSION < 310
 s32 sceRegGetKeyValue(s32 hd, s32 keyId, void *buf, s32 size) {
     s32 res;
     s32 ret;
@@ -1545,7 +1555,7 @@ end:
 }
 #endif
 
-#if FW_VERSION == 150 || FW_VERSION >= 282
+#if FW_VERSION == 150 || FW_VERSION >= 310
 INCLUDE_ASM("nonmatchings/registry", sceRegGetKeyValue);
 #endif
 
