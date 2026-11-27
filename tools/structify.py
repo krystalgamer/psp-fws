@@ -167,8 +167,22 @@ CXX_PRELUDE = ['#include "paf.h"', '#include "vsh.h"']
 def _type_names(text):
     """Names a type entry defines (struct/class/union/enum tags, typedef names)."""
     names = set(re.findall(r"\b(?:struct|class|union|enum)\s+(\w+)\s*(?::[^;{]*)?\{", text))
-    names |= set(re.findall(r"\btypedef\b[^;]*?\b(\w+)\s*(?:\[[^\]]*\])?\s*;", text))
-    names |= set(re.findall(r"\btypedef\b[^;]*?\(\s*\*\s*(\w+)\s*\)", text))
+    # brace bodies removed (nested), so `typedef struct {...} Name;` ends at the right ';' and fields don't count
+    flat, depth = [], 0
+    for ch in re.sub(r"/\*.*?\*/", "", text, flags=re.S):
+        if ch == "{":
+            depth += 1
+            if depth == 1:
+                flat.append("{}")
+            continue
+        if ch == "}":
+            depth -= 1
+            continue
+        if depth == 0:
+            flat.append(ch)
+    flat = "".join(flat)
+    names |= set(re.findall(r"\btypedef\b[^;]*?\b(\w+)\s*(?:\[[^\]]*\])?\s*;", flat))
+    names |= set(re.findall(r"\btypedef\b[^;]*?\(\s*\*\s*(\w+)\s*\)", flat))
     return names
 
 

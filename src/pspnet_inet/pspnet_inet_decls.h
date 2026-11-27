@@ -4,15 +4,6 @@
 #include "common.h"
 #include "m2c_macros.h"
 
-struct SceTailqHead {
-    void *tqh_first;
-    void **tqh_last;
-};
-
-typedef struct {
-    s8 b[4];
-} SceNetBytes4;
-
 /* NetBSD-derived (4.4BSD-Lite2 + NetBSD 1.3-1.5 socket layer) types, offsets checked in 1.00 */
 struct mbuf;
 struct socket;
@@ -1186,6 +1177,15 @@ struct in_multistep {
     (step).i_inm = NULL; \
     IN_NEXT_MULTI((step), (inm)); \
 }
+
+struct SceTailqHead {
+    void *tqh_first;
+    void **tqh_last;
+};
+
+typedef struct {
+    s8 b[4];
+} SceNetBytes4;
 
 typedef void (*SceNetInetHook)(void *a, u16 b, void *c);
 
