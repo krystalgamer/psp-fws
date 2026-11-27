@@ -2722,7 +2722,29 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_00012730);
 #endif
 
 #if FW_VERSION < 151
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_00012BE8);
+s32 in_broadcast(struct in_addr in, struct ifnet *ifp) {
+    struct ifaddr *ifa;
+
+    if (in.s_addr == __builtin_allegrex_wsbw(0xFFFFFFFF) ||
+        in.s_addr == __builtin_allegrex_wsbw(0))
+        return 1;
+    if ((ifp->if_flags & 0x2) == 0)
+        return 0;
+#define ia ((struct in_ifaddr *)ifa)
+    for (ifa = ifp->if_addrlist.tqh_first; ifa; ifa = ifa->ifa_list.tqe_next)
+        if (ifa->ifa_addr->sa_family == AF_INET &&
+            in.s_addr != ia->ia_addr.sin_addr.s_addr &&
+            (in.s_addr == ia->ia_broadaddr.sin_addr.s_addr ||
+             in.s_addr == ia->ia_netbroadcast.s_addr ||
+             (D_0002C020 &&
+              (in.s_addr == ia->ia_subnet ||
+               in.s_addr == ia->ia_net))))
+            return 1;
+    return 0;
+#undef ia
+}
+
+INCLUDE_ASM("nonmatchings/pspnet_inet", func_00012CD8);
 #endif
 
 #if FW_VERSION >= 282

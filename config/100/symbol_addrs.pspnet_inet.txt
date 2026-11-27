@@ -524,3 +524,5 @@ ip_init = 0x00014890; // type:func
 in_socktrim = 0x0001298C; // type:func (unreferenced, was merged into in_canforward)
 in_localaddr = 0x00012818; // type:func
 in_canforward = 0x000128EC; // type:func
+func_00012CD8 = 0x00012CD8; // type:func (split from func_00012BE8)
+in_broadcast = 0x00012BE8; // type:func
