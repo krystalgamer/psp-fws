@@ -242,6 +242,34 @@ struct SceNetIfEvent {
 };
 
 
+/* NetBSD 1.5 bpfdesc.h, SCE layout (0x40 bytes) */
+struct bpf_if;
+struct bpf_d {
+    struct bpf_d *bd_next;      /* 0x00 */
+    char *bd_sbuf;              /* 0x04 */
+    char *bd_hbuf;              /* 0x08 */
+    char *bd_fbuf;              /* 0x0C */
+    s32 bd_slen;                /* 0x10 */
+    s32 bd_hlen;                /* 0x14 */
+    s32 bd_bufsize;             /* 0x18 */
+    struct bpf_if *bd_bif;      /* 0x1C */
+    u32 bd_rtout;               /* 0x20 */
+    void *bd_filter;            /* 0x24 struct bpf_insn * */
+    u32 bd_rcount;              /* 0x28 */
+    u32 bd_dcount;              /* 0x2C */
+    u8 unk30[0x40 - 0x30];
+};
+typedef char chk_bpf_d[(sizeof(struct bpf_d) == 0x40) ? 1 : -1];
+struct bpf_if {
+    struct bpf_if *bif_next;    /* 0x00 */
+    struct bpf_d *bif_dlist;    /* 0x04 */
+    struct bpf_if **bif_driverp; /* 0x08 */
+};
+#define NBPFILTER 8
+#define D_ISFREE(d) ((d) == (d)->bd_next)
+#define D_MARKFREE(d) ((d)->bd_next = (d))
+
+
 /* struct iovec / struct uio (NetBSD uio.h; SCE: 32-bit offset, no segflg/proc) */
 struct iovec {
     void *iov_base;     /* 0x0 */
@@ -316,6 +344,7 @@ extern SceUID D_0000A86C;
 extern SceUID D_0000A870;
 extern s32 D_0000A874;
 extern s32 D_0000A878;
+extern s32 D_0000A87C;
 extern const char D_0000A88C[];
 extern M2C_UNK D_0000A88D;
 extern s32 D_0000AC10;
@@ -391,6 +420,8 @@ extern u32 D_0000B3E4[521];
 extern s32 D_0000B91C;
 extern s32 D_0000BC08;
 extern M2C_UNK D_0000BC0C;
+extern struct bpf_if *D_0000BC10;
+extern struct bpf_d D_0000BC14[NBPFILTER];
 extern struct ifnethead D_0000BE54;
 extern struct callout D_0000BE5C;
 
@@ -483,8 +514,10 @@ s32 func_00003B30(s32 fd, struct uio *uio);
 s32 func_00003C98(s32 fd, struct uio *uio);
 s32 func_00003E78(s32 fd, u32 cmd, void *data);
 void func_00004430(s32 arg0, u8 *arg1);
+s32 func_0000445C(struct bpf_d *d);
+void func_000045CC(s32 n);
 s32 func_0000460C(s32 minor);
-s32 func_00004678(s32 fd);
+s32 func_00004678(s32 minor);
 u8 *func_00004974(u8 *arg0, void *arg1, u32 arg2);
 void func_00005404(void *arg0);
 void func_00005744(struct Unk_func_00005744_0 *arg0);

@@ -1875,15 +1875,78 @@ void func_00004430(s32 arg0, u8 *arg1) {
 }
 #endif
 
-INCLUDE_ASM("nonmatchings/pspnet", func_0000445C);
+s32 func_0000445C(struct bpf_d *d) {
+    d->bd_fbuf = sceNetMallocInternal(d->bd_bufsize);
+    if (d->bd_fbuf == NULL)
+        return 12;
+    d->bd_sbuf = sceNetMallocInternal(d->bd_bufsize);
+    if (d->bd_sbuf == NULL) {
+        sceNetFreeInternal(d->bd_fbuf);
+        return 12;
+    }
+    d->bd_slen = 0;
+    d->bd_hlen = 0;
+    return 0;
+}
 
 INCLUDE_ASM("nonmatchings/pspnet", func_000044C0);
 
-INCLUDE_ASM("nonmatchings/pspnet", func_000045CC);
+void func_000045CC(s32 n) {
+    s32 i;
 
+    D_0000A87C = 0x2000;
+    D_0000BC10 = NULL;
+    for (i = 0; i < NBPFILTER; ++i)
+        D_MARKFREE(&D_0000BC14[i]);
+}
+
+#if FW_VERSION < 201
+s32 func_0000460C(s32 minor) {
+    struct bpf_d *d;
+
+    if ((u32)minor >= NBPFILTER)
+        return 6;
+    d = &D_0000BC14[minor];
+    if (!D_ISFREE(d))
+        return 16;
+    func_00007CF4(d, 0, sizeof(*d));
+    d->bd_bufsize = D_0000A87C;
+    return 0;
+}
+#else
 INCLUDE_ASM("nonmatchings/pspnet", func_0000460C);
+#endif
 
-INCLUDE_ASM("nonmatchings/pspnet", func_00004678);
+s32 func_00004678(s32 minor) {
+    struct bpf_d *d = &D_0000BC14[minor];
+    struct bpf_if *bp;
+    struct bpf_d **p;
+    s32 s;
+
+    s = _sce_pspnet_spllock();
+    if (d->bd_bif) {
+        bp = d->bd_bif;
+        p = &bp->bif_dlist;
+        while (*p != d)
+            p = &(*p)->bd_next;
+        *p = (*p)->bd_next;
+        if (bp->bif_dlist == NULL)
+            *bp->bif_driverp = NULL;
+        d->bd_bif = NULL;
+    }
+    _sce_pspnet_splunlock(s);
+    if (d->bd_sbuf != NULL) {
+        sceNetFreeInternal(d->bd_sbuf);
+        if (d->bd_hbuf != NULL)
+            sceNetFreeInternal(d->bd_hbuf);
+        if (d->bd_fbuf != NULL)
+            sceNetFreeInternal(d->bd_fbuf);
+    }
+    if (d->bd_filter)
+        sceNetFreeInternal(d->bd_filter);
+    D_MARKFREE(d);
+    return 0;
+}
 
 INCLUDE_ASM("nonmatchings/pspnet", func_00004770);
 
