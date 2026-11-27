@@ -378,7 +378,24 @@ s32 sceLfatfsStop(void) {
 }
 #endif
 
-#if FW_VERSION != 271
+#if FW_VERSION == 100
+s32 module_reboot_before(void) {
+    s32 ret;
+
+    ret = sceIoUnassign(D_0000CD94);
+    if (ret < 0) {
+        Kprintf("lfatfs.c:%s:sceIoUnassign(%s) failed 0x%08x\n", "_sceLfatfsRebootBefore", D_0000CD94, ret);
+    }
+    ret = sceIoUnassign(D_0000CDB4);
+    if (ret < 0) {
+        Kprintf("lfatfs.c:%s:sceIoUnassign(%s) failed 0x%08x\n", "_sceLfatfsRebootBefore", D_0000CDB4, ret);
+    }
+    func_00008914();
+    return 0;
+}
+#endif
+
+#if (FW_VERSION >= 150 && FW_VERSION < 271) || FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/lfatfs", module_reboot_before);
 #endif
 
@@ -1332,8 +1349,46 @@ INCLUDE_ASM("nonmatchings/lfatfs", func_00005DC0);
 #if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/lfatfs", func_00005EC4);
 
-INCLUDE_ASM("nonmatchings/lfatfs", func_00005F7C);
+s32 func_00005F7C(UFatUnit *unit, s32 cluster) {
+    s32 ret;
 
+    if (cluster < 2 || cluster >= unit->nClusters) {
+        return 0x80010005;
+    }
+    ret = func_000075C8(unit, cluster, 0);
+    if (ret < 0) {
+        return ret;
+    }
+    if (cluster < unit->nextFree) {
+        unit->nextFree = cluster;
+    }
+    if (unit->freeCount != -1) {
+        unit->freeCount++;
+    }
+    return 0;
+}
+#endif
+
+#if FW_VERSION == 100
+s32 func_00006008(UFatUnit *unit, u32 cluster) {
+    u32 next;
+    s32 ret;
+
+    if (cluster != 0) {
+        while ((cluster | ~unit->fatMask) < 0xFFFFFFF6) {
+            next = func_00000FF8(unit, cluster);
+            ret = func_00005F7C(unit, cluster);
+            if (ret < 0) {
+                return ret;
+            }
+            cluster = next;
+        }
+    }
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/lfatfs", func_00006008);
 #endif
 
@@ -1442,9 +1497,35 @@ INCLUDE_ASM("nonmatchings/lfatfs", func_0000466C);
 #endif
 
 #if FW_VERSION < 201 || FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/lfatfs", func_000047E4);
+s32 func_000047E4(UFatUnit *unit) {
+    s32 i, n;
 
-INCLUDE_ASM("nonmatchings/lfatfs", func_00004874);
+    if (unit->freeCount != -1) {
+        return unit->freeCount;
+    }
+    n = 0;
+    for (i = 2; i < unit->nClusters; i++) {
+        if (func_00000FF8(unit, i) == 0) {
+            n++;
+        }
+    }
+    unit->freeCount = n;
+    return n;
+}
+
+s32 func_00004874(UFatUnit *unit) {
+    u8 ent[32];
+    s32 i, n = 0, off = 0;
+
+    for (i = 0; i < unit->rootEntries; i++, off += 32) {
+        if (func_00004180(unit, (unit->rootDirStart << unit->sectorShift) + off, ent, 32) >= 0) {
+            if (ent[0] == 0 || ent[0] == 0xE5) {
+                n++;
+            }
+        }
+    }
+    return n;
+}
 #endif
 
 #if FW_VERSION >= 282
@@ -1737,7 +1818,16 @@ INCLUDE_ASM("nonmatchings/lfatfs", func_0000860C_v311);
 INCLUDE_ASM("nonmatchings/lfatfs", func_0000860C_v310);
 #endif
 
-#if FW_VERSION == 100 || (FW_VERSION >= 282 && FW_VERSION < 310)
+#if FW_VERSION == 100 || FW_VERSION == 282
+void func_00008AE4(LFlashDev *dev, s32 page, u8 *data) {
+    memcpy(dev->blockBuf + page * dev->pageSize, data, dev->pageSize);
+    if (page == 0 && dev->blockBuf[0] != data[0]) {
+        Kprintf("lflash.c:%s:buffer[0] = 0x%02x, data=0x%02x\n", "LFlashBlockBufferWritePage", dev->blockBuf[0], data[0]);
+    }
+}
+#endif
+
+#if FW_VERSION >= 300 && FW_VERSION < 310
 INCLUDE_ASM("nonmatchings/lfatfs", func_00008AE4);
 #endif
 
@@ -2594,7 +2684,19 @@ INCLUDE_RODATA("nonmatchings/lfatfs", D_0000CD6C);
 #endif
 
 #if FW_VERSION < 250
-INCLUDE_ASM("nonmatchings/lfatfs", func_00009DB0);
+s32 func_00009DB0(LFlashDev *dev, s32 block) {
+    s32 ret = sceKernelCheckThreadKernelStack();
+
+    if (ret < 0) {
+        Kprintf(D_0000CD6C, "IsBadBlock", ret, ret);
+        for (;;) {
+        }
+    }
+    sceNandLock(0);
+    ret = sceNandIsBadBlock(block * dev->pagesPerBlock + (dev->pagesPerBlock << 6));
+    sceNandUnlock();
+    return ret;
+}
 
 INCLUDE_ASM("nonmatchings/lfatfs", func_00009E40);
 #endif
@@ -2668,7 +2770,7 @@ s32 func_0000AC4C(SceIoIob *iob, s32 cmd, void *indata, SceSize inlen, void *out
         bzero(info, sizeof(LFlashDevInfo));
         info->unk10 = part->unk4;
         info->unk14 = part->unkC;
-        info->unk18 = dev->unk18C;
+        info->unk18 = dev->pageSize;
         info->unk1C = dev->unk190;
         return 0;
     }

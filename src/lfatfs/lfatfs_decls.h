@@ -73,13 +73,15 @@ typedef struct LFlashDev LFlashDev;
 /* lflash device state (D_0000EED0), 1.00: 0x1C8 bytes */
 struct LFlashDev {
     u8 pad0[0x18C];
-    s32 unk18C; /* 0x18C */
+    u32 pageSize; /* 0x18C */
     s32 unk190; /* 0x190 */
-    u8 pad194[0x18];
+    u32 pagesPerBlock; /* 0x194 */
+    u8 pad198[0x14];
     u32 nSegments; /* 0x1AC */
     LFlashSegment *segments; /* 0x1B0 */
     s32 unk1B4; /* 0x1B4 */
-    u8 pad1B8[0x10];
+    u8 *blockBuf; /* 0x1B8 */
+    u8 pad1BC[0xC];
 };
 
 typedef struct LFlashPart LFlashPart;
@@ -273,8 +275,9 @@ struct Unk_func_0000A3DC_0 {
 
 extern char D_0000C56C[];
 extern char D_0000C5B4[];
-extern M2C_UNK D_0000CD94;
-extern M2C_UNK D_0000CDB4;
+extern char D_0000CD6C[];
+extern char D_0000CD94[];
+extern char D_0000CDB4[];
 extern char D_0000CF5C[];
 extern char D_0000CF6C[];
 extern char D_0000CF84[];
