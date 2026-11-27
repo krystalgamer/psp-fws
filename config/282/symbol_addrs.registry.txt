@@ -57,3 +57,4 @@ g_catHead = 0x00006FD4;
 g_catTail = 0x00006FD8;
 g_vplId = 0x00006FB0; // rom:0x7050
 g_vplMaxUsed = 0x00006FB4; // rom:0x7054
+g_initialized = 0x00006FC0;

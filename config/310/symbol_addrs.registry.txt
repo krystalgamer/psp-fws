@@ -119,3 +119,5 @@ func_00006AC0 = 0x00006B38; // type:func rom:0x6BD8
 D_00006FC8_v310 = 0x00006FC8; // rom:0x7068
 D_00006FD8_v310 = 0x00006FD8; // rom:0x7078
 // shared names (tools/add_version.py) end
+g_initialized = 0x00007050;
+g_openMode = 0x00007070;

@@ -37,9 +37,38 @@ INCLUDE_RODATA("nonmatchings/registry", D_00006FDC);
 INCLUDE_RODATA("nonmatchings/registry", D_00006FE0);
 #endif
 
-#if FW_VERSION < 310
+#if FW_VERSION < 282
+s32 sceRegInit(void) {
+    s32 id;
+    u32 oldK1;
+
+    oldK1 = shiftK1();
+    g_semaId = -1;
+    g_openMode = 0;
+    g_hiveCount = 0;
+    g_hiveHead = NULL;
+    g_hiveTail = NULL;
+    g_catCount = 0;
+    g_catHead = NULL;
+    g_catTail = NULL;
+    g_initialized = 0;
+    id = sceKernelCreateSema("SceRegBlockAPI", 0, 1, 1, NULL);
+    if (id < 0)
+        return 0x80082732;
+    g_semaId = id;
+    if (func_000069A0(0, 0x8000) < 0)
+        return 0x8008272B;
+    g_initialized = 1;
+    setK1(oldK1);
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 282 && FW_VERSION < 310
 INCLUDE_ASM("nonmatchings/registry", sceRegInit);
-#else
+#endif
+
+#if FW_VERSION >= 310
 s32 sceRegInit(void) {
     s32 temp_v0;
     s32 var_v0;
@@ -47,19 +76,19 @@ s32 sceRegInit(void) {
 
     temp_s0 = shiftK1();
     D_0000706C = -1;
-    D_00007070 = 0;
+    g_openMode = 0;
     g_hiveCount = 0;
     g_hiveHead = 0;
     g_hiveTail = 0;
     g_catCount = 0;
     g_catHead = 0;
     g_catTail = 0;
-    D_00007050 = 0;
+    g_initialized = 0;
     temp_v0 = sceKernelCreateMutex("SceRegBlockAPI", 0U, 0, NULL);
     if (temp_v0 >= 0) {
         D_0000706C = temp_v0;
         if (func_000069A0(0, 0x8000) >= 0) {
-            D_00007050 = 1;
+            g_initialized = 1;
             setK1(temp_s0);
             var_v0 = 0;
         } else {
@@ -75,9 +104,30 @@ s32 sceRegInit(void) {
 }
 #endif
 
+#if FW_VERSION == 100
+s32 sceRegExit(void) {
+    s32 ret;
+    u32 oldK1;
+
+    oldK1 = shiftK1();
+    ret = 0x8008272C;
+    if (g_initialized == 0)
+        goto end;
+    if (g_semaId > 0) {
+        sceKernelDeleteSema(g_semaId);
+        g_semaId = -1;
+    }
+    func_00006228();
+    g_openMode = 0;
+    g_initialized = 0;
+    setK1(oldK1);
+    ret = 0;
+end:
+    return ret;
+}
+#else
 INCLUDE_ASM("nonmatchings/registry", sceRegExit);
 
-#if FW_VERSION >= 150
 s32 module_reboot_before(void) {
     sceRegExit();
     return 0;
@@ -173,7 +223,7 @@ s32 sceRegFlushCategory(s32 arg0) {
     ret = 0x80082733;
     if (sceKernelWaitSema(g_semaId, 1, NULL) != 0)
         goto out;
-    ret = func_000008E4(arg0);
+    ret = func_000008E4((SceRegIndexEntry *)arg0);
     if (sceKernelSignalSema(g_semaId, 1) != 0) {
         ret = 0x80082734;
     }
@@ -550,9 +600,13 @@ INCLUDE_ASM("nonmatchings/registry", func_00003260);
 #endif
 
 #if FW_VERSION < 152
-INCLUDE_ASM("nonmatchings/registry", func_000033C4);
+void func_000033C4(SceRegIndexEntry *cat) {
+    cat->opened->refCount++;
+}
 
-INCLUDE_ASM("nonmatchings/registry", func_00003414);
+u16 func_00003414(SceRegIndexEntry *cat) {
+    return --cat->opened->refCount;
+}
 #endif
 
 #if FW_VERSION >= 282
@@ -627,7 +681,29 @@ INCLUDE_ASM("nonmatchings/registry", func_00003604);
 #endif
 
 #if FW_VERSION < 152
-INCLUDE_ASM("nonmatchings/registry", func_00003910);
+void func_00003910(SceRegIndexEntry *cat) {
+    SceRegCatNode *prev = NULL;
+    SceRegCatNode *n = g_catHead;
+    s32 i;
+
+    for (i = 0; i < g_catCount; i++) {
+        if (n->cat == cat)
+            break;
+        prev = n;
+        n = n->next;
+    }
+    if (n == NULL)
+        return;
+    if (n == g_catHead) {
+        g_catHead = n->next;
+    } else {
+        prev->next = n->next;
+        if (n == g_catTail)
+            g_catTail = prev;
+    }
+    func_000062E0(n);
+    g_catCount--;
+}
 #endif
 
 #if FW_VERSION >= 282
@@ -709,7 +785,18 @@ s32 func_00003EE8(s32 index) {
 INCLUDE_ASM("nonmatchings/registry", func_00003F2C);
 #endif
 
-INCLUDE_ASM("nonmatchings/registry", func_00003FE4);
+s32 func_00003FE4(s32 index) {
+    s32 ret;
+    SceRegHive *h;
+
+    h = func_00000B6C(index);
+    ret = 0x80082715;
+    if (h != NULL) {
+        h->unk4 = 0;
+        ret = 0;
+    }
+    return ret;
+}
 
 #if FW_VERSION >= 282
 s32 func_00004024(SceRegIndexEntry *cat) {
@@ -748,10 +835,36 @@ INCLUDE_ASM("nonmatchings/registry", func_00004058);
 #endif
 
 #if FW_VERSION < 152
-INCLUDE_ASM("nonmatchings/registry", func_00003B2C);
+s32 func_00003B2C(s32 index) {
+    s32 ret;
+    SceRegHive *h;
+
+    h = func_00000B6C(index);
+    ret = 0x80082715;
+    if (h != NULL) {
+        if (h->unk4 == 1)
+            ret = 0;
+        else
+            ret = 0x8008272F;
+    }
+    return ret;
+}
 #endif
 
-INCLUDE_ASM("nonmatchings/registry", func_000040A0);
+s32 func_000040A0(SceRegIndexEntry *cat) {
+    s32 ret;
+    SceRegCatNode *n;
+
+    n = func_00003EA4(cat);
+    ret = 0x8008272E;
+    if (n != NULL) {
+        if (n->unk4 == 1)
+            ret = 0;
+        else
+            ret = 0x80082730;
+    }
+    return ret;
+}
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/registry", func_000045B8);

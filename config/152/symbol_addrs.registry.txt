@@ -123,3 +123,5 @@ g_hiveHead = 0x00006738;
 g_hiveTail = 0x0000673C;
 g_vplMaxUsed = 0x00006724; // rom:0x67A4
 g_semaId = 0x0000674C;
+g_initialized = 0x00006730;
+g_openMode = 0x00006750;

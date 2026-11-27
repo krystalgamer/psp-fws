@@ -85,3 +85,5 @@ g_hiveTail = 0x0000670C;
 g_vplId = 0x000066F0; // rom:0x6770
 g_vplMaxUsed = 0x000066F4; // rom:0x6774
 g_semaId = 0x0000671C;
+g_initialized = 0x00006700;
+g_openMode = 0x00006720;
