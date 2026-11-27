@@ -11,6 +11,15 @@ static inline u32 shiftK1(void) {
     return oldK1;
 }
 
+/* Same, but in a noreorder block: as never moves the srl into a following
+   branch delay slot (SCE's macro in 1.x kernel modules). */
+static inline u32 shiftK1Noreorder(void) {
+    u32 oldK1;
+
+    __asm__ __volatile__(".set noreorder\n\tmove %0, $27\n\tsrl $27, $27, 16\n\t.set reorder" : "=r"(oldK1));
+    return oldK1;
+}
+
 static inline int k1IsUserMode(void) {
     int ret;
 
