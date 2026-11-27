@@ -15,6 +15,7 @@ options:
   cache_path: tmp/build/103/.splat_cache.video_plugin
   symbol_addrs_path:
     - config/103/symbol_addrs.video_plugin.txt
+    - config/103/func_starts.video_plugin.txt
     - tmp/build/103/prx_syms.video_plugin.txt
   reloc_addrs_path: [tmp/build/103/reloc_addrs.video_plugin.txt]
   asset_path: tmp/assets/103/video_plugin
@@ -53,7 +54,9 @@ segments:
     vram: 0x0
     subsegments:
       - { start: 0x80, type: asm, name: init, linker_section: .init }
-      - [0xA4, asm, video_plugin]
+      - [0xA4, c, video_plugin]
+      - [0x23020, c, video_plugin_000214F0]
+      - [0x42344, c, video_plugin_crtend]
       - { start: 0x4239C, type: asm, name: fini, linker_section: .fini }
       - { start: 0x423B8, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x42F78, type: prxpad, order: .text }
@@ -71,7 +74,9 @@ segments:
       - { start: 0x439C8, type: rodata, name: dtors, linker_section: .dtors }
       - { start: 0x439D8, type: rodata, name: jcr, linker_section: .jcr }
       - { start: 0x439DC, type: rodata, name: eh_frame, linker_section: .eh_frame }
-      - [0x439E0, rodata, video_plugin]
+      - [0x439E0, .rodata, video_plugin]
+      - [0x46208, .rodata, video_plugin_000214F0]
+      - [0x47F60, .rodata, video_plugin_crtend]
       - { start: 0x48188, type: prxpad, order: .rodata }
   - name: video_plugin_seg1
     type: code
