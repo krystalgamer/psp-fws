@@ -48,7 +48,7 @@ typedef struct {
 extern s32 D_00003BF0;
 extern s32 D_00004530;
 extern M2C_UNK D_00004540;
-extern SceRtcState D_00004580;
+extern SceRtcState g_rtc;
 
 u64 __udivdi3(u64 a, u64 b);
 void func_00000000(s32 arg0, void *arg1);

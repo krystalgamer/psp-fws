@@ -88,6 +88,6 @@
   "D_00003BF0": "extern s32 D_00003BF0;",
   "D_00004530": "extern s32 D_00004530;",
   "D_00004540": "extern M2C_UNK D_00004540;",
-  "D_00004580": "extern SceRtcState D_00004580;"
+  "g_rtc": "extern SceRtcState g_rtc;"
  }
 }

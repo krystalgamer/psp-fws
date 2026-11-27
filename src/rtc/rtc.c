@@ -78,13 +78,13 @@ INCLUDE_ASM("nonmatchings/rtc", sceRtcGetLastAdjustedTime);
 
 #if FW_VERSION >= 270 && FW_VERSION < 282
 s32 module_start(void) {
-    memset(&D_00004580, 0, sizeof(D_00004580));
-    D_00004580.cbId = -1;
+    memset(&g_rtc, 0, sizeof(g_rtc));
+    g_rtc.cbId = -1;
     func_0000358C();
-    D_00004580.unk0 = 0;
-    D_00004580.unk4 = 0;
-    D_00004580.unkC = 0;
-    D_00004580.unk8 = 0;
+    g_rtc.unk0 = 0;
+    g_rtc.unk4 = 0;
+    g_rtc.unkC = 0;
+    g_rtc.unk8 = 0;
     sceRtcSynchronize();
     sceSysconSetAlarmCallback(func_00000000, NULL);
     sceKernelRegisterSysEventHandler(&D_00004530);
@@ -94,12 +94,12 @@ s32 module_start(void) {
 
 #if FW_VERSION < 270
 s32 module_start(void) {
-    memset(&D_00004580, 0, sizeof(D_00004580));
+    memset(&g_rtc, 0, sizeof(g_rtc));
     func_0000358C();
-    D_00004580.unk0 = 0;
-    D_00004580.unk4 = 0;
-    D_00004580.unkC = 0;
-    D_00004580.unk8 = 0;
+    g_rtc.unk0 = 0;
+    g_rtc.unk4 = 0;
+    g_rtc.unkC = 0;
+    g_rtc.unk8 = 0;
     sceRtcSynchronize();
     sceKernelRegisterSysEventHandler(&D_00003BF0);
     return 0;
@@ -123,12 +123,12 @@ s32 module_reboot_before(void) {
 
 #if FW_VERSION >= 282
 s32 module_start(void) {
-    memset(&D_00004580, 0, sizeof(D_00004580));
-    D_00004580.cbId = -1;
-    D_00004580.unk0 = 0;
-    D_00004580.unk4 = 0;
-    D_00004580.unkC = 0;
-    D_00004580.unk8 = 0;
+    memset(&g_rtc, 0, sizeof(g_rtc));
+    g_rtc.cbId = -1;
+    g_rtc.unk0 = 0;
+    g_rtc.unk4 = 0;
+    g_rtc.unkC = 0;
+    g_rtc.unk8 = 0;
     sceRtcSynchronize();
     func_00003D9C();
     sceSysconSetAlarmCallback(func_00000000, NULL);
@@ -147,13 +147,13 @@ INCLUDE_ASM("nonmatchings/rtc", sceRtcInit);
 
 #if FW_VERSION >= 270 && FW_VERSION < 282
 s32 sceRtcInit(void) {
-    memset(&D_00004580, 0, sizeof(D_00004580));
-    D_00004580.cbId = -1;
+    memset(&g_rtc, 0, sizeof(g_rtc));
+    g_rtc.cbId = -1;
     func_0000358C();
-    D_00004580.unk0 = 0;
-    D_00004580.unk4 = 0;
-    D_00004580.unkC = 0;
-    D_00004580.unk8 = 0;
+    g_rtc.unk0 = 0;
+    g_rtc.unk4 = 0;
+    g_rtc.unkC = 0;
+    g_rtc.unk8 = 0;
     sceRtcSynchronize();
     sceSysconSetAlarmCallback(func_00000000, NULL);
     sceKernelRegisterSysEventHandler(&D_00004530);
@@ -163,12 +163,12 @@ s32 sceRtcInit(void) {
 
 #if FW_VERSION < 270
 s32 sceRtcInit(void) {
-    memset(&D_00004580, 0, sizeof(D_00004580));
+    memset(&g_rtc, 0, sizeof(g_rtc));
     func_0000358C();
-    D_00004580.unk0 = 0;
-    D_00004580.unk4 = 0;
-    D_00004580.unkC = 0;
-    D_00004580.unk8 = 0;
+    g_rtc.unk0 = 0;
+    g_rtc.unk4 = 0;
+    g_rtc.unkC = 0;
+    g_rtc.unk8 = 0;
     sceRtcSynchronize();
     sceKernelRegisterSysEventHandler(&D_00003BF0);
     return 0;
@@ -205,8 +205,8 @@ s32 sceRtcResume(void) {
 
 #if FW_VERSION >= 270
 s32 sceRtcReset(void) {
-    D_00004580.tickValid = 0;
-    D_00004580.secureTickValid = 0;
+    g_rtc.tickValid = 0;
+    g_rtc.secureTickValid = 0;
     return 0;
 }
 #endif
