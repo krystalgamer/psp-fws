@@ -46,6 +46,7 @@ typedef struct {
 } SceRtcState;
 
 extern s32 D_00003BF0;
+extern const s8 D_000044DC[2][12];
 extern s32 D_00004530;
 extern M2C_UNK D_00004540;
 extern SceRtcState g_rtc;
@@ -54,9 +55,11 @@ u64 __udivdi3(u64 a, u64 b);
 void func_00000000(s32 arg0, void *arg1);
 s32 func_00000DB0(s32 arg0);
 s32 func_0000138C(s32 arg0);
+s32 func_0000328C(const char *s);
 char *func_000032D0(char *buf, s32 n);
 s32 func_0000358C(void);
 char *func_00003AF8(char *buf, s32 n);
+char *func_00003B60(char *buf, s32 n);
 s32 func_00003D10(SceKernelTimeval *tv, SceKernelTimezone *tz);
 void func_00003D9C(void);
 u32 func_00003DD4(void);

@@ -4,9 +4,11 @@
   "func_00000000": "void func_00000000(s32 arg0, void *arg1);",
   "func_00000DB0": "s32 func_00000DB0(s32 arg0);",
   "func_0000138C": "s32 func_0000138C(s32 arg0);",
+  "func_0000328C": "s32 func_0000328C(const char *s);",
   "func_000032D0": "char *func_000032D0(char *buf, s32 n);",
   "func_0000358C": "s32 func_0000358C(void);",
   "func_00003AF8": "char *func_00003AF8(char *buf, s32 n);",
+  "func_00003B60": "char *func_00003B60(char *buf, s32 n);",
   "func_00003D10": "s32 func_00003D10(SceKernelTimeval *tv, SceKernelTimezone *tz);",
   "func_00003D9C": "void func_00003D9C(void);",
   "func_00003DD4": "u32 func_00003DD4(void);",
@@ -86,6 +88,7 @@
  },
  "vars": {
   "D_00003BF0": "extern s32 D_00003BF0;",
+  "D_000044DC": "extern const s8 D_000044DC[2][12];",
   "D_00004530": "extern s32 D_00004530;",
   "D_00004540": "extern M2C_UNK D_00004540;",
   "g_rtc": "extern SceRtcState g_rtc;"

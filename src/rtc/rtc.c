@@ -441,7 +441,23 @@ INCLUDE_ASM("nonmatchings/rtc", sceRtcSetTime64_t);
 INCLUDE_ASM("nonmatchings/rtc", func_00001E10);
 #endif
 
+#if FW_VERSION < 152
+s32 sceRtcSetTime_t(pspTime *date, u32 time) {
+    u64 tick;
+    u32 oldK1 = shiftK1();
+
+    if (k1IsUserMode() && (s32)date < 0) {
+        setK1(oldK1);
+        return 0x80000023;
+    }
+    tick = (u64)time * 1000000 + 62135596800000000ULL;
+    sceRtcSetTick(date, &tick);
+    setK1(oldK1);
+    return 0;
+}
+#else
 INCLUDE_ASM("nonmatchings/rtc", sceRtcSetTime_t);
+#endif
 
 #if FW_VERSION < 270
 s32 sceRtcTickAddTicks(u64 *destTick, const u64 *srcTick, s64 numTicks) {
@@ -635,11 +651,50 @@ char *func_00003AF8(char *buf, s32 n) {
 }
 #endif
 
-INCLUDE_ASM("nonmatchings/rtc", func_00003B60);
+char *func_00003B60(char *buf, s32 n) {
+    buf[3] = n % 10 + '0';
+    n /= 10;
+    buf[2] = n % 10 + '0';
+    n /= 10;
+    buf[1] = n % 10 + '0';
+    n /= 10;
+    buf[0] = n % 10 + '0';
+    return buf + 4;
+}
 
+#if FW_VERSION < 270
+s32 sceRtcFormatRFC2822LocalTime(char *pszDateTime, const u64 *pUtc) {
+    s32 ret;
+    u32 oldK1 = shiftK1();
+
+    if ((k1IsUserMode() && IS_USER_ADDR(pszDateTime) == 0) || (k1IsUserMode() && IS_USER_ADDR(pUtc) == 0)) {
+        setK1(oldK1);
+        return 0x80000023;
+    }
+    ret = sceRtcFormatRFC2822(pszDateTime, pUtc, g_rtc.unkC + g_rtc.unk8);
+    setK1(oldK1);
+    return ret;
+}
+#else
 INCLUDE_ASM("nonmatchings/rtc", sceRtcFormatRFC2822LocalTime);
+#endif
 
+#if FW_VERSION < 270
+s32 sceRtcFormatRFC3339LocalTime(char *pszDateTime, const u64 *pUtc) {
+    s32 ret;
+    u32 oldK1 = shiftK1();
+
+    if ((k1IsUserMode() && IS_USER_ADDR(pszDateTime) == 0) || (k1IsUserMode() && IS_USER_ADDR(pUtc) == 0)) {
+        setK1(oldK1);
+        return 0x80000023;
+    }
+    ret = sceRtcFormatRFC3339(pszDateTime, pUtc, g_rtc.unkC + g_rtc.unk8);
+    setK1(oldK1);
+    return ret;
+}
+#else
 INCLUDE_ASM("nonmatchings/rtc", sceRtcFormatRFC3339LocalTime);
+#endif
 
 INCLUDE_ASM("nonmatchings/rtc", func_00003D10);
 
