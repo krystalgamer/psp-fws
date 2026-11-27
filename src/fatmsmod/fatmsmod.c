@@ -4097,7 +4097,24 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_00016270);
 #endif
 
 #if FW_VERSION < 271
-INCLUDE_ASM("nonmatchings/fatmsmod", func_0000C7E8);
+s32 func_0000C7E8(s8 drive, u32 mode) {
+    s8 idx;
+
+    func_0000A128();
+    if (func_0000B50C(drive, (u8 *)&idx) == -1) {
+        return -1;
+    }
+    if (!(D_00027CC8[idx]->vol->flags & 1)) {
+        D_00019E08 = 0xD;
+        return -1;
+    }
+    if (mode >= 2) {
+        D_00019E08 = 0x16;
+        return -1;
+    }
+    D_00027DD0[idx] = mode;
+    return 0;
+}
 #endif
 
 #if FW_VERSION >= 282

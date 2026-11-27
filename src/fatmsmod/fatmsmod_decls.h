@@ -67,7 +67,8 @@ typedef struct {
     s32 second;
 } PfTime;
 
-/* PrFILE directory cursor: the current directory entry and its position (D_00027934; D_00027800 points at one). */
+/* PrFILE directory cursor: the current directory entry and its position (D_00027934; D_00027800 points at one).
+   Fields past 0x30 are only known for 1.x (2.01+ grew the record). */
 typedef struct {
     FatDirEnt de; /* 0x0 */
 #if FW_VERSION >= 201
@@ -76,10 +77,20 @@ typedef struct {
     u8 pad20[0x10];
 #endif
     u32 sector; /* 0x30 (2.01+: 0x40), sector holding the entry */
-    u8 pad34[0x18];
+    u8 pad34[4];
+    s32 unk38; /* 0x38 */
+    u8 pad3C[8];
+    s32 unk44; /* 0x44 */
+    u8 pad48[4];
     s32 unk4C; /* 0x4C (2.01+: 0x5C) */
     u8 pad50[8];
     s32 unk58; /* 0x58 */
+#if FW_VERSION < 201
+    u8 pad5C[0x100];
+    char path[0x104]; /* 0x15C */
+    s8 drive; /* 0x260 */
+    u8 pad261[3];
+#endif
 } PfDirCursor;
 
 /* Drive count word: cleared as a word, read as its low byte. */
@@ -100,6 +111,16 @@ typedef struct {
     u32 unk1C;
     u32 rootSectors; /* 0x20 */
 } PfFatInfo;
+
+/* Saved directory-entry position (D_00019E2C), restored by func_00013E3C. */
+typedef struct {
+    s32 unk0; /* 0x0 */
+    s32 unk4; /* 0x4 */
+    s32 unk8; /* 0x8 */
+    s8 drive; /* 0xC */
+    char path[0x104]; /* 0xD */
+    s8 pending; /* 0x111 */
+} PfSavedEnt;
 
 /* PrFILE stat result (stub cmd 0xC), FAT DOS date/time words. */
 typedef struct {
@@ -167,6 +188,13 @@ typedef struct {
     u8 pad55[0x264 - 0x55];
 #endif
 } PfFile;
+
+/* PrFILE drive registration (D_00027CC8[drive - A]). */
+typedef struct {
+    void *ops; /* 0x0, 0x10 bytes of driver functions copied to D_000276E8 */
+    void *geometry; /* 0x4, 0x28 bytes copied to D_0002790C */
+    PfVolume *vol; /* 0x8 */
+} PfDrive;
 
 typedef int SceMode;
 typedef s64 SceOff;
@@ -391,6 +419,7 @@ extern s8 D_00019E0C; /* current drive letter */
 extern s32 D_00019E10[26]; /* last driver error per drive, index drive - 'A' */
 extern s8 D_00019E1C;
 extern PfDrives D_00019E28;
+extern PfSavedEnt D_00019E2C;
 extern s32 D_0001A040;
 extern s32 D_0001B0C8;
 extern s32 D_0001B248;
@@ -416,6 +445,9 @@ extern u16 D_0002790C;
 extern u16 D_0002790E; /* sectors per cluster */
 extern PfDirCursor D_00027934;
 extern char D_00027B98[]; /* name being created */
+extern u32 D_00027CC4[1]; /* per drive: first freed cluster hint */
+extern PfDrive *D_00027CC8[1]; /* per drive (index drive - A; one drive in 1.00) */
+extern u8 D_00027DD0[26];
 extern s32 D_00027DD4;
 extern s32 D_0002B568;
 extern s32 D_0002B5CC;
@@ -533,6 +565,7 @@ s32 func_000075CC(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
 s32 func_0000764C(void);
 s32 func_000076F4(s32, s32);
 void *func_00007718(void *dst0, const void *src0, u32 length);
+void func_00007814(PfDirCursor *cur);
 void *func_0000793C(void *s, s32 c, u32 n);
 s32 func_00007968(const void *s1, const void *s2, u32 n);
 s32 func_000079A8(s8 *arg0);
@@ -544,6 +577,7 @@ char *func_00007AB4(char *dst, const char *src, u32 n);
 s32 func_00007BB0(s32 arg0);
 u32 func_00007BD4(u32 sector);
 s32 func_00008274(s32, s32, s32, s32);
+s32 func_000086E8(u32 cl, u32 *next); /* get FAT entry */
 s32 func_00008708(s32 arg0);
 s32 func_000088F8(s32 arg0);
 s8 func_00008900(s8 arg0);
@@ -558,6 +592,7 @@ void func_00009F90(FatDirEnt *de, s8 create);
 s32 func_00009FA0(s32);
 void func_0000A128(void);
 s32 func_0000A3AC(s32);
+s32 func_0000A460(s8 drive, s32 a1, s32 a2, s32 a3, s32 a4);
 s32 func_0000A698(s32 a0, s32 a1, s32 a2);
 s32 func_0000A714(s32 a0, s32 a1, s32 n);
 s32 func_0000A744(s32 a0, s32 a1, s32 a2);
@@ -588,6 +623,7 @@ s32 func_0000BCF0(void);
 s32 func_0000C108(s32 drv);
 s32 func_0000C120(s32);
 s32 func_0000C7A8(s32, s32, s32, s32);
+s32 func_0000C7E8(s8 drive, u32 mode);
 s32 func_0000CC88(void);
 s32 func_0000D440(s32, s32);
 void func_0000D70C(s32 arg0, s32 arg1, s8 arg2, s8 arg3);
