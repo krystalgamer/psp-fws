@@ -1247,7 +1247,70 @@ INCLUDE_ASM("nonmatchings/registry", func_000040E4);
 INCLUDE_ASM("nonmatchings/registry", func_00004270);
 #endif
 
+#if FW_VERSION == 100
+s32 sceRegCreateKey(s32 hd, const char *name, s32 type, s32 size) {
+    SceRegIndexEntry *cat = (SceRegIndexEntry *)hd;
+    SceRegCatData *d;
+    s32 ret;
+    u32 oldK1;
+
+    oldK1 = shiftK1();
+    ret = 0x80082733;
+    if (sceKernelWaitSema(g_semaId, 1, NULL) != 0)
+        goto end;
+    ret = 0x80082737;
+    if (name == NULL)
+        goto end;
+    ret = 0x8008272E;
+    if (regIsCategoryOpen(cat) == NULL)
+        goto end;
+    ret = 0x80082736;
+    if (strlen(name) >= 27)
+        goto end;
+    d = cat->opened->buf;
+    if (cat->unkC == 4) {
+        ret = 0x8008271B;
+        if (d->unk6 == 0)
+            goto end;
+    }
+    ret = regKeyExists(d, name);
+    if (ret != 0)
+        goto end;
+    ret = func_0000236C(cat, size);
+    if (ret == 0) {
+        ret = func_000058D8(cat, d);
+        if (ret != 0)
+            goto end;
+        d = cat->opened->buf;
+    } else if (ret != 0x8008271F && ret != 0x80082720) {
+        goto end;
+    }
+    switch (type) {
+    case 2:
+        ret = func_00005608(d, name);
+        break;
+    case 3:
+    case 4:
+        ret = func_00005718(d, type, name, size);
+        break;
+    default:
+        ret = 0x8008271C;
+        goto end;
+    }
+    if (ret != 0)
+        goto end;
+    d->numKeys++;
+    cat->numKeys++;
+    regSetCatDirty(cat);
+end:
+    if (sceKernelSignalSema(g_semaId, 1) != 0)
+        ret = 0x80082734;
+    setK1(oldK1);
+    return ret;
+}
+#else
 INCLUDE_ASM("nonmatchings/registry", sceRegCreateKey);
+#endif
 
 #if FW_VERSION == 100
 s32 sceRegSetKeyValue(s32 hd, const char *name, const void *buf, s32 size) {
