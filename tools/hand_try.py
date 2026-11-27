@@ -202,13 +202,24 @@ def permute(text, body, target, comp, opt, jobs):
         print(f"  {sc}:", " | ".join(p))
 
 
+def lock_shared():
+    """Wait while tools/hand.py rewrites this tree's sources (it holds the lock exclusively)."""
+    import fcntl
+    (ROOT / "tmp").mkdir(exist_ok=True)
+    f = open(ROOT / "tmp" / "hand.lock", "a")
+    fcntl.flock(f, fcntl.LOCK_SH)
+    return f
+
+
 def main():
+    _lk = lock_shared()  # noqa: F841
     ap = argparse.ArgumentParser()
     ap.add_argument("ver")
     ap.add_argument("module")
     ap.add_argument("cfile")
     ap.add_argument("--decls")
     ap.add_argument("--diff", action="store_true")
+    ap.add_argument("--diff-opt", help="with --diff: show the diff for this option set (e.g. '-O2') instead of the own one")
     ap.add_argument("--permute", action="store_true",
                     help="try every order of the body lines tagged //P (own setting); >7 lines: hill-climb over single-line moves")
     ap.add_argument("--variants", action="store_true",
@@ -249,7 +260,7 @@ def main():
     text = f"#define FW_VERSION {fwv}\n#define FW_VARIANT {fwvar}\n" + hdr + "\n" + prelude + "\n" + extra + "\n" + body
     target = mod.target_words(name)
     comp, own = AD.Module.file_setting(mod.file_of(name))
-    best = None
+    best = diff_words = None
     opts = list(AD.OPTS)
     if own.split(" ", 1)[1] not in opts:  # file flags beyond the standard sets (e.g. -fno-merge-constants)
         opts.append(own.split(" ", 1)[1])
@@ -273,6 +284,8 @@ def main():
         print(f"{comp} {opt}: {score}{' MATCH' if words == target else ''}{mark}")
         if f"{comp} {opt}" == own:
             best = words
+        if a.diff_opt and opt == a.diff_opt:
+            diff_words = words
     if best == target:
         # words are compared with relocated fields masked; check the symbols too
         mine = compiled_reloc_syms(text, comp, own.split(" ", 1)[1])
@@ -306,6 +319,11 @@ def main():
         import perm_near
         d = perm_near.write_perm_dir(mod, name, text, comp, own.split(" ", 1)[1])
         print(f"permuter dir: {d}")
+    if a.diff and a.diff_opt:
+        if a.diff_opt not in opts:
+            opts.append(a.diff_opt)
+            diff_words, _ = AD.compile_words(text, comp, a.diff_opt)
+        best = diff_words
     if a.diff and best is not None:
         for l in difflib.unified_diff(disasm(target), disasm(best), "target", "mine", lineterm="", n=2):
             print(l)

@@ -80,6 +80,21 @@ def main():
                 continue
             print(f"{v}: {old} -> {nw}")
         src_renames[old] = nw
+        # the source rename is global: OLD must not also name data (INCLUDE_RODATA) or remain in other versions
+        rest = [v for v in allv if v not in vers]
+        joined = "\n".join(t for p2, t in texts.items() if p2.suffix == ".c")
+        if re.search(rf"INCLUDE_RODATA\([^)]*\b{old}\)", joined) and not old.startswith("func_"):
+            sys.exit(f"{old}: also an INCLUDE_RODATA entry in the shared source; renaming the C identifier would break "
+                     f"the versions that include it as data — rename per version by hand")
+        if AUTO.match(old) and old.startswith("func_") and len(vers) > 1:
+            sizes = {}
+            for v in vers:
+                f = next((ROOT / "tmp/asm" / v / mod / "nonmatchings").glob(f"*/{old}.s"), None)
+                if f:
+                    sizes[v] = len(re.findall(r"^\s*/\* [0-9A-F]+ [0-9A-F]+ [0-9A-F]{8} \*/", f.read_text(), re.M))
+            if sizes and max(sizes.values()) > 1.5 * max(1, min(sizes.values())):
+                print(f"WARNING: {old} has very different sizes across versions {sizes} — "
+                      f"possibly different functions sharing an auto name; restrict with VERS:")
     for p, t in list(new.items()):
         if p.suffix in (".c", ".h"):
             for o, n in src_renames.items():

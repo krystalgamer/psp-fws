@@ -33,6 +33,10 @@ def build(v, mod):
 
 
 def main():
+    import fcntl
+    (ROOT / "tmp").mkdir(exist_ok=True)
+    _lk = open(ROOT / "tmp" / "hand.lock", "a")
+    fcntl.flock(_lk, fcntl.LOCK_EX)  # hand_try in this tree waits until the sources are consistent again
     ap = argparse.ArgumentParser()
     ap.add_argument("ver")
     ap.add_argument("module")
