@@ -90,7 +90,24 @@ s32 sceRtcGetCurrentTick(u64 *tick) {
 #endif
 
 #if FW_VERSION >= 270
-INCLUDE_ASM("nonmatchings/rtc", sceRtcGetCurrentTick);
+s32 sceRtcGetCurrentTick(u64 *tick) {
+    s32 ret;
+    u32 oldK1 = shiftK1();
+
+    if ((s32)(-k1IsUserMode() & (u32)tick) < 0) {
+        setK1(oldK1);
+        return 0x80000023;
+    }
+    if (g_rtc.tickValid != 0) {
+        *tick = g_rtc.tickOffset + sceKernelGetSystemTimeWide();
+        ret = 0;
+    } else {
+        *tick = 0x00DDDEF8B3A14000ULL;
+        ret = 0x80000001;
+    }
+    setK1(oldK1);
+    return ret;
+}
 #else
 s32 sceRtcGetCurrentSecureTick(u64 *tick) {
     s32 ret;
@@ -113,7 +130,24 @@ s32 sceRtcGetCurrentSecureTick(u64 *tick) {
 #endif
 
 #if FW_VERSION >= 270
-INCLUDE_ASM("nonmatchings/rtc", sceRtcGetCurrentSecureTick);
+s32 sceRtcGetCurrentSecureTick(u64 *tick) {
+    s32 ret;
+    u32 oldK1 = shiftK1();
+
+    if ((s32)(-k1IsUserMode() & (u32)tick) < 0) {
+        setK1(oldK1);
+        return 0x80000023;
+    }
+    if (g_rtc.secureTickValid != 0) {
+        *tick = g_rtc.secureTickOffset + sceKernelGetSystemTimeWide();
+        ret = 0;
+    } else {
+        *tick = 0x00DDDEF8B3A14000ULL;
+        ret = 0x80000001;
+    }
+    setK1(oldK1);
+    return ret;
+}
 #endif
 
 #if FW_VERSION >= 201
