@@ -9,7 +9,7 @@ typedef struct {
     struct {
         u16 start;
         u16 num;
-    } runs[];
+    } runs[4];
 } SceRegBlockRuns;
 
 /* open-category list node */
@@ -35,8 +35,8 @@ typedef struct __attribute__((packed)) SceRegHive {
 
 /* system.ireg index entry (one per category), 0x3A bytes, unaligned */
 typedef struct __attribute__((packed)) SceRegIndexEntry {
-    u16 unk0;               /* 0x00 */
-    u32 unk2;               /* 0x02 */
+    struct SceRegHive *hive; /* 0x00: runtime only */
+    u16 unk4;               /* 0x04 */
     u32 unk6;               /* 0x06 */
     u8 unkA[4];             /* 0x0A */
     char name[0x1B];        /* 0x0E */
@@ -110,7 +110,7 @@ extern s32 g_semaId;
 extern s32 g_vplId;
 extern s32 g_vplMaxUsed;
 
-s32 func_000006CC(s32);
+s32 func_000006CC(s32 index);
 s32 func_000008E4(SceRegIndexEntry *cat);
 SceRegHive *func_00000B6C(s32 index);
 s32 func_00000CA0(u32 *regType, SceRegHive **hive, s32 *index);
@@ -180,6 +180,8 @@ s32 sceKernelDeleteSema(s32);
 s32 sceKernelDeleteVpl(s32);
 s32 sceKernelFreeVpl(s32, void *);
 s32 sceKernelLockMutex(s32, s32, void *);
+s32 sceKernelPowerLock(s32);
+s32 sceKernelPowerUnlock(s32);
 s32 sceKernelReferVplStatus(s32, void *);
 s32 sceKernelSignalSema(s32, s32);
 s32 sceKernelTryAllocateVpl(s32, s32, void **);
@@ -191,6 +193,7 @@ s32 sceRegGetKeyInfo(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
 s32 sceRegGetKeyInfoByName(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
 s32 sceRegInit(void);
 s32 sceRegRemoveKey(s32 arg0, s32 arg1);
+s32 sceRegRemoveRegistry(SceRegParam *param);
 s32 sprintf(char *, const char *, ...);
 
 #endif

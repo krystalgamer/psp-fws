@@ -177,11 +177,39 @@ INCLUDE_ASM("nonmatchings/registry", sceRegOpenRegistry);
 
 INCLUDE_ASM("nonmatchings/registry", sceRegCloseRegistry);
 
+#if FW_VERSION == 100
+s32 sceRegRemoveRegistry(SceRegParam *param) {
+    const char *ireg;
+    const char *dreg;
+    s32 ret;
+    u32 oldK1;
+
+    oldK1 = shiftK1();
+    ret = 0x80082733;
+    if (sceKernelWaitSema(g_semaId, 1, NULL) != 0)
+        goto end;
+    ret = 0;
+    sceKernelPowerLock(0);
+    ireg = NULL;
+    dreg = NULL;
+    func_00001908(param->regType, &ireg, &dreg);
+    func_00005F78(ireg);
+    func_00005F78(dreg);
+end:
+    sceKernelPowerUnlock(0);
+    if (sceKernelSignalSema(g_semaId, 1) != 0) {
+        ret = 0x80082734;
+    }
+    setK1(oldK1);
+    return ret;
+}
+#else
 INCLUDE_ASM("nonmatchings/registry", sceRegRemoveRegistry);
 
-#if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/registry", sceRegFlushRegistry);
-#else
+#endif
+
+#if FW_VERSION == 100
 s32 sceRegFlushRegistry(s32 arg0) {
     s32 ret;
     u32 oldK1;
@@ -205,7 +233,35 @@ INCLUDE_ASM("nonmatchings/registry", func_000008BC);
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/registry", func_000006CC);
+s32 func_000006CC(s32 index) {
+    SceRegHive *h;
+    SceRegIregHeader *hdr;
+    s32 size;
+    s32 written;
+    s32 ret;
+
+    ret = 0x80082715;
+    sceKernelPowerLock(0);
+    h = func_00000B6C(index);
+    if (h == NULL)
+        goto end;
+    if (func_00003B2C(index) != 0)
+        goto ok;
+    hdr = h->ireg;
+    size = hdr->bitmapSize + hdr->entriesSize + 0x28;
+    ret = func_00006888(h->iregFd, 0, 0);
+    if (ret != 0)
+        goto end;
+    ret = func_000067A0(hdr, 1, size, h->iregFd, &written);
+    if (ret != 0)
+        goto end;
+    func_00003FE4(index);
+ok:
+    ret = 0;
+end:
+    sceKernelPowerUnlock(0);
+    return ret;
+}
 #endif
 
 #if FW_VERSION >= 282
@@ -231,11 +287,55 @@ out:
     setK1(oldK1);
     return ret;
 }
+
+s32 func_000008E4(SceRegIndexEntry *cat) {
+    SceRegBlockRuns runs;
+    s32 written;
+    SceRegOpenCat *o;
+    SceRegHive *h;
+    u8 *buf;
+    s32 i;
+    s32 ret;
+
+    ret = 0x80082715;
+    sceKernelPowerLock(0);
+    if (func_00003E60(cat) == NULL)
+        goto end;
+    if (func_000040A0(cat) != 0)
+        goto ok;
+    h = cat->hive;
+    o = cat->opened;
+    ret = 0x80082735;
+    if (o == NULL)
+        goto end;
+    buf = o->buf;
+    ret = func_00006888(h->dregFd, 0, 0);
+    if (ret != 0)
+        goto end;
+    memset(&runs, 0, sizeof(runs));
+    func_00001AC4(&runs, cat->blocks);
+    for (i = 0; i < runs.count; i++) {
+        ret = func_00006888(h->dregFd, runs.runs[i].start << 9, 0);
+        if (ret != 0)
+            goto end;
+        ret = func_000067A0(buf + i * 0x200, 1, runs.runs[i].num << 9, h->dregFd, &written);
+        if (ret != 0)
+            goto end;
+    }
+    func_00004058(cat);
+ok:
+    ret = 0;
+end:
+    sceKernelPowerUnlock(0);
+    return ret;
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 282
+INCLUDE_ASM("nonmatchings/registry", func_000008E4);
 #endif
 
 #if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/registry", func_000008E4);
-
 SceRegHive *func_00000B6C(s32 index) {
     SceRegHive *h;
     s32 i;
@@ -498,7 +598,25 @@ INCLUDE_ASM("nonmatchings/registry", func_00002A5C);
 #endif
 
 #if FW_VERSION < 152
-INCLUDE_ASM("nonmatchings/registry", func_00002228);
+s32 func_00002228(SceRegIndexEntry *cat) {
+    s32 ret;
+
+    if (func_00003E60(cat) == NULL)
+        return 0x80082715;
+    ret = func_000008E4(cat);
+    if (ret != 0)
+        return ret;
+    if (cat != NULL && cat->opened == NULL)
+        return 0x80082735;
+    func_00003414(cat);
+    if (cat->opened->refCount == 0) {
+        func_000062E0(cat->opened->buf);
+        func_000062E0(cat->opened);
+        cat->opened = NULL;
+        func_00003910(cat);
+    }
+    return 0;
+}
 #endif
 
 #if FW_VERSION < 201
@@ -622,8 +740,8 @@ INCLUDE_ASM("nonmatchings/registry", func_000039A4);
 #endif
 
 void func_000039E0(SceRegIndexEntry *e) {
-    e->unk0 = 0;
-    e->unk2 = 0;
+    e->hive = NULL;
+    e->unk4 = 0;
     e->unk6 = -1;
     memset(e->name, 0, sizeof(e->name));
     memset(e->blocks, 0xFFFF, sizeof(e->blocks));
