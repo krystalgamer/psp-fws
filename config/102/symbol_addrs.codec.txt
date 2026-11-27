@@ -1,0 +1,26 @@
+// shared names (tools/add_version.py) begin
+D_00001160 = 0x00001210; // rom:0x1290
+D_000011B8 = 0x00001268; // rom:0x12E8
+D_0000108C = 0x00001270; // rom:0x12F0
+D_000011F0 = 0x00001280; // rom:0x1300
+D_00001230 = 0x000012C0; // rom:0x1340
+D_00001234 = 0x000012C4; // rom:0x1344
+D_00001280 = 0x00001310;
+D_000012DC = 0x0000136C;
+sceCodecSetHeadphoneVolume = 0x00000120; // type:func rom:0x1A0
+sceCodecSetSpeakerVolume = 0x00000248; // type:func rom:0x2C8
+sceCodecSetFrequency = 0x00000364; // type:func rom:0x3E4
+sceCodec_driver_56494D70 = 0x000006B0; // type:func rom:0x730
+sceCodecSetOutputVolume = 0x00000848; // type:func rom:0x8C8
+sceCodec_driver_4515AE04 = 0x000009BC; // type:func rom:0xA3C
+sceCodecStopEntry = 0x00000A00; // type:func rom:0xA80
+func_00000924 = 0x00000ACC; // type:func rom:0xB4C
+func_00000CF8 = 0x00000E78; // type:func rom:0xEF8
+func_00000D5C = 0x00000EDC; // type:func rom:0xF5C
+sceKernelSm1ReferOperations = 0x00000FB8; // type:func rom:0x1038
+sceKernelDeleteSema = 0x00000FD0; // type:func rom:0x1050
+sceKernelSignalSema = 0x00000FD8; // type:func rom:0x1058
+sceKernelWaitSema = 0x00000FE0; // type:func rom:0x1060
+sceI2cMasterTransmit = 0x00001000; // type:func rom:0x1080
+sceKernelUnregisterSysEventHandler = 0x00001010; // type:func rom:0x1090
+// shared names (tools/add_version.py) end
