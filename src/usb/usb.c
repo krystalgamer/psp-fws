@@ -228,7 +228,52 @@ INCLUDE_ASM("nonmatchings/usb", func_000014DC);
 INCLUDE_ASM("nonmatchings/usb", func_000016C0);
 #endif
 
+#if FW_VERSION < 201
+s32 func_00001790(void) {
+    u32 size;
+    u8 *buf;
+
+    size = USBBD_ALIGN64(((UsbbdConfig *)g_usbbd.unk108->desc)->wTotalLength) + 12;
+    if (g_usbbd.unk100 != NULL) {
+        size = USBBD_ALIGN64(((UsbbdConfig *)g_usbbd.unk108->desc)->wTotalLength) + 12
+             + USBBD_ALIGN64(((UsbbdConfig *)g_usbbd.unk100->desc)->wTotalLength) + 12;
+    }
+    g_usbbd.unk180 = sceKernelCreateFpl("SceUsbGetDescData", 1, 0x100, size, 1, NULL);
+    if (g_usbbd.unk180 < 0) {
+        Kprintf("usbbd ERROR : cannot create FPL for get descriptor data\n");
+        return -1;
+    }
+    if (sceKernelTryAllocateFpl(g_usbbd.unk180, (void **)&buf) < 0) {
+        Kprintf("usbbd ERROR : cannot allocate memory for get descriptor data\n");
+        if (sceKernelDeleteFpl(g_usbbd.unk180) < 0) {
+            Kprintf("usbbd ERROR : cannot delete FPL for get descriptor data\n");
+        }
+        return -1;
+    }
+    g_usbbd.unk11C = buf;
+    buf += usbbdAlign64(((UsbbdConfig *)g_usbbd.unk108->desc)->wTotalLength);
+    if (g_usbbd.unk100 != NULL) {
+        g_usbbd.unk118 = buf;
+        buf += usbbdAlign64(((UsbbdConfig *)g_usbbd.unk100->desc)->wTotalLength);
+    }
+    g_usbbd.unk114 = buf;
+    buf += 12;
+    if (g_usbbd.unk100 != NULL) {
+        g_usbbd.unk110 = buf;
+        buf += 12;
+    }
+    func_0000192C(g_usbbd.unk104, g_usbbd.unk114);
+    func_00001984(g_usbbd.unk108->desc, g_usbbd.unk11C);
+    if (g_usbbd.unk100 != NULL) {
+        func_0000192C(g_usbbd.unkFC, g_usbbd.unk110);
+        func_00001984(g_usbbd.unk100->desc, g_usbbd.unk118);
+    }
+    sceKernelDcacheWritebackRange(g_usbbd.unk11C, size);
+    return 0;
+}
+#else
 INCLUDE_ASM("nonmatchings/usb", func_00001790);
+#endif
 
 void func_0000192C(u8 *src, u8 *dst) {
     func_000005E4(dst, src, 8);

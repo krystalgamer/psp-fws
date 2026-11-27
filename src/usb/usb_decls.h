@@ -196,6 +196,11 @@ typedef struct UsbbdConfig {
     UsbbdInterface *interfaces;
 } UsbbdConfig;
 
+#define USBBD_ALIGN64(x) ((((x) - 1) | 0x3F) + 1)
+static inline u32 usbbdAlign64(u32 x) {
+    return ((x - 1) | 0x3F) + 1;
+}
+
 struct Unk_func_00008318_0 {
     u8 pad0[0x40];
     struct Unk_func_00008318_temp_a0 *unk40;
