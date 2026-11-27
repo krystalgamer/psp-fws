@@ -1615,20 +1615,7 @@ void func_00003EC0(s32 arg0, s32 arg1) {
 #endif
 
 #if FW_VERSION < 282
-void func_00003EF0(M2C_UNK **arg0) {
-    *arg0 = &D_00021E38;
-    func_0000FBB0();
-}
-
-void func_00003F18(M2C_UNK **arg0) {
-    *arg0 = &D_00021E38;
-    func_0000FBB0();
-}
-
-void func_00003F40(M2C_UNK **arg0) {
-    *arg0 = &D_00021E38;
-    func_0000FBB0();
-    _ZdlPv(arg0);
+Class_00021E38::~Class_00021E38() {
 }
 #endif
 
@@ -1684,26 +1671,7 @@ void func_00005D20(struct Unk_func_00005D20_0 *arg0, s32 arg1) {
     arg0->unk18 = 0;
 }
 
-void func_00005D5C(M2C_UNK **arg0) {
-    *arg0 = &D_00021E38;
-    func_0000FBB0();
-}
-
-void func_00005D84(M2C_UNK **arg0) {
-    *arg0 = &D_00021E38;
-    func_0000FBB0();
-}
-#endif
-
-#if FW_VERSION >= 350
-INCLUDE_ASM("nonmatchings/savedata_plugin", func_00005DAC);
-#endif
-
-#if FW_VERSION >= 282 && FW_VERSION < 350
-void func_00005DAC(M2C_UNK **arg0) {
-    *arg0 = &D_00021E38;
-    func_0000FBB0();
-    _ZdlPv(arg0);
+Class_00021E38::~Class_00021E38() {
 }
 #endif
 
@@ -1984,6 +1952,8 @@ INCLUDE_ASM("nonmatchings/savedata_plugin", func_000063F0);
 INCLUDE_RODATA("nonmatchings/savedata_plugin", D_000229E4);
 
 INCLUDE_RODATA("nonmatchings/savedata_plugin", D_00021E38);
+
+__asm__(".globl _ZTV14Class_00021E38\n_ZTV14Class_00021E38 = D_00021E38 - 8\n");
 #endif
 
 #if FW_VERSION == 271
@@ -2181,6 +2151,8 @@ INCLUDE_RODATA("nonmatchings/savedata_plugin", D_00021E24);
 
 #if FW_VERSION < 260 || FW_VERSION >= 282
 INCLUDE_RODATA("nonmatchings/savedata_plugin", D_00021E38);
+
+__asm__(".globl _ZTV14Class_00021E38\n_ZTV14Class_00021E38 = D_00021E38 - 8\n");
 
 INCLUDE_RODATA("nonmatchings/savedata_plugin", D_00021E48);
 #endif
@@ -3483,27 +3455,9 @@ void func_0000C50C(struct Unk_func_0000C50C_0 *arg0, s32 arg1) {
     arg0->unkC = 0;
 }
 
-void func_0000C528(M2C_UNK **arg0) {
-    *arg0 = &D_000224C8;
+Class_000224C8::~Class_000224C8() {
 }
 
-void func_0000C538(M2C_UNK **arg0) {
-    *arg0 = &D_000224C8;
-}
-#endif
-
-#if FW_VERSION >= 350
-INCLUDE_ASM("nonmatchings/savedata_plugin", func_0000C548);
-#endif
-
-#if FW_VERSION >= 282 && FW_VERSION < 350
-void func_0000C548(M2C_UNK **arg0) {
-    *arg0 = &D_000224C8;
-    _ZdlPv(arg0);
-}
-#endif
-
-#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/savedata_plugin", func_0000C570);
 
 INCLUDE_ASM("nonmatchings/savedata_plugin", func_0000C66C);

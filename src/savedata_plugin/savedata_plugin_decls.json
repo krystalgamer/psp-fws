@@ -512,8 +512,12 @@
   "vsh_FA1DE461": "M2C_UNK vsh_FA1DE461(s32, M2C_UNK *, void *);"
  },
  "types": {
-  "Class_00022560": "#ifdef __cplusplus\n/* vtable _ZTV14Class_00022560 (vptr D_00022560) */\nclass Class_00022560 : public Class_00022578 {\npublic:\n    virtual ~Class_00022560();\n};\n#endif",
-  "Class_00022578": "#ifdef __cplusplus\n/* vtable _ZTV14Class_00022578 (vptr D_00022578) */\nclass Class_00022578 {\npublic:\n    virtual ~Class_00022578();\n};\n#endif",
+  "Class_00021E38": "#ifdef __cplusplus\n/* vtable _ZTV14Class_00021E38 is data (vptr = label - 8 + 8) */\nclass Class_00021E38 : public Class_000226A0 {\npublic:\n    virtual ~Class_00021E38();\n};\n#endif",
+  "Class_000224C8": "#ifdef __cplusplus\n/* vtable _ZTV14Class_000224C8 is data (vptr = label - 8 + 8) */\nclass Class_000224C8 {\npublic:\n    virtual ~Class_000224C8();\n};\n#endif",
+  "Class_00022508": "#ifdef __cplusplus\n/* vtable _ZTV14Class_00022508 is data (vptr = label - 8 + 8) */\nclass Class_00022508 {\npublic:\n    virtual ~Class_00022508();\n};\n#endif",
+  "Class_00022560": "#ifdef __cplusplus\n/* vtable _ZTV14Class_00022560 is data (vptr = label - 8 + 8) */\nclass Class_00022560 : public Class_00022578 {\npublic:\n    virtual ~Class_00022560();\n};\n#endif",
+  "Class_00022578": "#ifdef __cplusplus\n/* vtable _ZTV14Class_00022578 is data (vptr = label - 8 + 8) */\nclass Class_00022578 {\npublic:\n    virtual ~Class_00022578();\n};\n#endif",
+  "Class_000226A0": "#ifdef __cplusplus\n/* vtable _ZTV14Class_000226A0 is data (vptr = label - 8 + 8) */\nclass Class_000226A0 {\npublic:\n    virtual ~Class_000226A0();\n};\n#endif",
   "Class_00023078": "#ifdef __cplusplus\n/* vtable _ZTV14Class_00023078 (vptr D_00023078) */\nclass Class_00023078 {\npublic:\n    virtual ~Class_00023078();\n};\n#endif",
   "D_00023028_s": "struct D_00023028_s {\n    s32 unk0;\n    s32 unk4;\n};",
   "Unk_D_00022EE0": "struct Unk_D_00022EE0 {\n    u8 pad0[0x58];\n    void *unk58;\n};",

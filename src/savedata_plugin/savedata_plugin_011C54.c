@@ -32,6 +32,8 @@ INCLUDE_ASM("nonmatchings/savedata_plugin_011C54", func_00011E34);
 #if FW_VERSION < 250 || FW_VERSION >= 282
 INCLUDE_RODATA("nonmatchings/savedata_plugin_011C54", D_000226A0);
 
+__asm__(".globl _ZTV14Class_000226A0\n_ZTV14Class_000226A0 = D_000226A0 - 8\n");
+
 INCLUDE_RODATA("nonmatchings/savedata_plugin_011C54", D_000226B8);
 
 INCLUDE_RODATA("nonmatchings/savedata_plugin_011C54", D_000226C0);
