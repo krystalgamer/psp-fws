@@ -30,6 +30,44 @@ typedef struct {
 #endif
 } FatmsPrivate;
 
+/* PrFILE directory search record (stub cmd 6), kept at FatmsPrivate + 0x568. */
+typedef struct {
+    u8 pad0[0x118];
+    u16 mtime; /* 0x118 */
+    u16 mdate; /* 0x11A */
+    u32 size; /* 0x11C */
+    s8 attr; /* 0x120 */
+    char shortName[13]; /* 0x121 */
+    char longName[0x20E]; /* 0x12E */
+    u16 ctime; /* 0x33C */
+    u16 cdate; /* 0x33E */
+    u16 adate; /* 0x340 */
+} PfDirInfo;
+
+/* PrFILE open-file record (partial). */
+typedef struct {
+    u8 pad0[0x20];
+    u32 pos; /* 0x20, current file position */
+} PfFile;
+
+/* PrFILE stat result (stub cmd 0xC), FAT DOS date/time words. */
+typedef struct {
+    u16 mtime; /* 0x0 */
+    u16 pad2;
+    u16 mdate; /* 0x4 */
+    u16 pad6;
+    u32 size; /* 0x8 */
+    s8 attr; /* 0xC */
+    u8 padD[3];
+    u16 ctime; /* 0x10 */
+    u16 pad12;
+    u16 cdate; /* 0x14 */
+    u16 pad16;
+    u16 adate; /* 0x18 */
+    u16 pad1A;
+    u8 pad1C[4];
+} PfStat;
+
 typedef int SceMode;
 typedef s64 SceOff;
 typedef s32 SceSSize;
@@ -160,6 +198,33 @@ typedef struct {
     u8 body[sizeof(SceMsStubMsg)]; /* 0x8 */
 } SceMsStubPacket;
 
+typedef struct {
+    u16 year;
+    u16 month;
+    u16 day;
+    u16 hour;
+    u16 minute;
+    u16 second;
+    u32 microsecond;
+} ScePspDateTime;
+
+struct SceIoStat {
+    SceMode st_mode; /* 0x0 */
+    u32 st_attr; /* 0x4 */
+    SceOff st_size; /* 0x8 */
+    ScePspDateTime st_ctime; /* 0x10 */
+    ScePspDateTime st_atime; /* 0x20 */
+    ScePspDateTime st_mtime; /* 0x30 */
+    u32 st_private[6]; /* 0x40 */
+};
+
+struct SceIoDirent {
+    SceIoStat d_stat; /* 0x0 */
+    char d_name[256]; /* 0x58 */
+    void *d_private; /* 0x158 */
+    s32 dummy; /* 0x15C */
+};
+
 struct Unk_Unk_func_00013798_0_FA78 {
     u8 pad0[0x40];
     u32 unk40;
@@ -284,7 +349,9 @@ M2C_UNK func_00000CE4();
 M2C_UNK func_00000E00();
 M2C_UNK func_00000EF8();
 s32 func_00001834(u32 attr);
+s32 func_00001994(); /* 1.00 df_dread */
 char *func_00001A18(char *s);
+s32 func_00001DCC(FatmsPrivate *priv, SceIoDirent *dirent);
 s32 func_00001F98(void);
 s32 func_000026FC(void);
 M2C_UNK func_00002708();
@@ -331,7 +398,7 @@ s32 func_00004BBC(s32 arg0);
 s32 func_00004C58(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
 s32 func_00004E68(s8 *arg0);
 s32 func_00004F40(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
-s32 func_00004F88(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
+s32 func_00004F88(); /* stub cmd 6: dir find first (pattern != NULL) / next */
 s32 func_00005068(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
 s32 func_000050E4(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
 s32 func_00005118(void);
@@ -506,8 +573,10 @@ s32 sceKernelReceiveMbx(SceUID mbx, void **msg, u32 *timeout);
 s32 sceKernelSendMbx(SceUID mbx, void *msg);
 s32 sceKernelSetEventFlag(SceUID evf, u32 bits);
 s32 sceKernelWaitEventFlag(SceUID evf, u32 bits, u32 wait, u32 *outBits, u32 *timeout);
+s32 sceRtcSetDosTime(ScePspDateTime *date, u32 dosTime);
 char *strcat(char *d, const char *s);
 u32 strlen(const char *s);
+char *strncpy(char *d, const char *s, SceSize n);
 s32 stub_pf_errnum(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
 s32 stub_pf_fclose(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
 s32 stub_pf_feof(); /* FcpSendMsg wrapper; 1.50+ take one more argument */

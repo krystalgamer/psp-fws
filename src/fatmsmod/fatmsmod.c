@@ -913,7 +913,44 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_00001F8C);
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/fatmsmod", func_00001994);
+s32 func_00001994(SceIoIob *iob, SceIoDirent *dirent) {
+    FatmsPrivate *priv;
+    s32 ret;
+    s32 err;
+    void *info;
+
+    if (iob == NULL || dirent == NULL) {
+        return 0x80010016;
+    }
+    priv = iob->i_private;
+    if (check_reload_status(0, priv) < 0) {
+        Kprintf(STR_DRIVER_DELETED, "df_dread");
+        return 0x80010013;
+    }
+    if (priv->mode != 2) {
+        return 0x80010016;
+    }
+    info = (u8 *)priv + 0x568;
+    if (priv->unk4 == 0) {
+        ret = func_00004F88((u8 *)priv + 0xC, 0x80, info);
+        priv->unk4 = 0x30;
+    } else if (priv->unk4 == 0x30) {
+        ret = func_00004F88(NULL, 0, info);
+    } else {
+        return 0x80010016;
+    }
+    if (ret < 0) {
+        err = stub_pf_errnum();
+        if (err == 2) {
+            return 0;
+        }
+        return prErr(err);
+    }
+    if (func_00001DCC(priv, dirent) < 0) {
+        return 0x80010016;
+    }
+    return 1;
+}
 #endif
 
 #if FW_VERSION >= 282
