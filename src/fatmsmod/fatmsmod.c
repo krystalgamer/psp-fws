@@ -2874,7 +2874,31 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_00009118);
 #endif
 
 #if FW_VERSION < 271
-INCLUDE_ASM("nonmatchings/fatmsmod", func_0000565C);
+s32 func_0000565C(void) {
+    s32 ret = 0;
+    s32 i;
+    char c1;
+    char c2;
+
+    for (i = 0; i < 0x103; i++) {
+        c1 = D_000276FC[i];
+        c2 = D_00027804[i];
+        if (c1 == 0 && c2 == 0) {
+            break;
+        }
+        if (c1 == 0 || c2 == 0) {
+            ret = 1;
+            break;
+        }
+        if (c1 != c2) {
+            if ((c1 != '\\' && c1 != '/') || (c2 != '\\' && c2 != '/')) {
+                ret = 1;
+                break;
+            }
+        }
+    }
+    return ret;
+}
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 271
@@ -3087,7 +3111,29 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_000070E0);
 
 #if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/fatmsmod", func_000072F0);
+#endif
 
+#if FW_VERSION < 271
+s32 func_0000764C(void) {
+    s32 n = 0;
+    s32 q;
+    char *p = D_00027B98;
+
+    while (*p != '\0') {
+        p += (func_0000A7C0((u8 *)p) != 0);
+        p++;
+        n++;
+    }
+    if (n != 0) {
+        q = n % 13;
+        n = n / 13 + (q != 0);
+        n++;
+    }
+    return n;
+}
+#endif
+
+#if FW_VERSION == 271
 INCLUDE_ASM("nonmatchings/fatmsmod", func_0000764C);
 #endif
 

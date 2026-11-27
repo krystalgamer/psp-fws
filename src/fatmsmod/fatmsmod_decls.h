@@ -400,12 +400,14 @@ extern const char D_00024BF0[]; /* characters not allowed in names */
 extern PfVolume *D_000276E4; /* current volume */
 extern s32 (*D_000276E8)(s32, s32, s32);
 extern s32 (*D_000276EC)(s32, s32, s32);
+extern char D_000276FC[0x104];
 extern PfDirCursor *D_00027800;
-extern M2C_UNK D_00027804;
+extern char D_00027804[0x104]; /* current path */
 extern s32 D_00027908;
 extern u16 D_0002790C;
 extern u16 D_0002790E; /* sectors per cluster */
 extern PfDirCursor D_00027934;
+extern char D_00027B98[]; /* name being created */
 extern s32 D_00027DD4;
 extern s32 D_0002B568;
 extern s32 D_0002B5CC;
@@ -478,6 +480,7 @@ void func_000036E0(s32 arg0, s32 arg1, s32 arg2);
 void func_000036FC(void);
 void func_0000381C(SceIoIob *iob);
 void func_00003940(s32 arg0);
+s32 func_000039E8(void);
 s32 func_00003A34(s32 unit, s32 stat);
 s32 func_00003CD8(void);
 s32 func_00004544(void);
