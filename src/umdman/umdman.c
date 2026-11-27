@@ -409,7 +409,9 @@ void func_00002568(s32 arg0) {
     D_0000EBA0 = arg0;
 }
 
-INCLUDE_ASM("nonmatchings/umdman", sceUmdManGetUmdDiscInfo);
+s32 *sceUmdManGetUmdDiscInfo(void) {
+    return &D_0000EA80;
+}
 
 s32 sceUmdManReset(void) {
     void *sp0;
@@ -1657,17 +1659,46 @@ s32 func_00008274(s32 arg0) {
 
 #if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/umdman", func_00008284);
-#endif
 
 INCLUDE_ASM("nonmatchings/umdman", func_000082AC);
+#else
+s32 func_000082AC(void) {
+    sceKernelSetEventFlag(D_00012C00, 0x20U);
+    return 0;
+}
+#endif
 
+#if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/umdman", func_000082D4);
+#else
+s32 func_000082D4(void) {
+    return __builtin_allegrex_min(sceKernelSetEventFlag(D_00012C00, 0x40U), 0);
+}
+#endif
 
+#if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/umdman", func_000082FC);
+#else
+s32 func_000082FC(void) {
+    return __builtin_allegrex_min(sceKernelSetEventFlag(D_00012C00, 0x80U), 0);
+}
+#endif
 
+#if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/umdman", func_00008324);
+#else
+s32 func_00008324(void) {
+    return __builtin_allegrex_min(sceKernelSetEventFlag(D_00012C00, 0x100U), 0);
+}
+#endif
 
+#if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/umdman", func_0000834C);
+#else
+s32 func_0000834C(void) {
+    return __builtin_allegrex_min(sceKernelSetEventFlag(D_00012C00, 0x200U), 0);
+}
+#endif
 
 INCLUDE_ASM("nonmatchings/umdman", func_00008374);
 
