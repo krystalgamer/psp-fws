@@ -918,7 +918,51 @@ fail:
 #endif
 
 #if FW_VERSION >= 201
-INCLUDE_ASM("nonmatchings/pspnet", _sce_pspnet_thread_enter);
+struct SceNetThreadInfo *_sce_pspnet_thread_enter(s32 *errp) {
+    SceUID thid;
+    struct SceNetThreadInfo *ti;
+    s32 ret;
+
+    thid = sceKernelGetThreadId();
+    if (thid < 0) {
+        *errp = thid;
+        return NULL;
+    }
+    ret = sceKernelWaitSema(D_0000A868, 1, NULL);
+    if (ret < 0) {
+        *errp = ret;
+        return NULL;
+    }
+    for (ti = TAILQ_FIRST(&D_0000AF44); ti != NULL; ti = TAILQ_NEXT(ti, ti_link)) {
+        if (ti->ti_thid == thid)
+            break;
+    }
+    if (ti == NULL) {
+        ti = sceNetMallocInternal(sizeof(struct SceNetThreadInfo));
+        if (ti == NULL) {
+            *errp = 0x80410001;
+            goto fail;
+        }
+        sceNetMemset(ti, 0, sizeof(struct SceNetThreadInfo));
+        TAILQ_INSERT_TAIL(&D_0000AF44, ti, ti_link);
+        ti->ti_thid = thid;
+        ti->ti_sema = sceKernelCreateSema("SceNetThreadInfo", 0, 0, 1, NULL);
+        if (ti->ti_sema < 0) {
+            ti->ti_errno = 0x2E;
+            *errp = ti->ti_sema;
+            goto fail;
+        }
+    }
+    ti->ti_refcnt++;
+    ti->ti_errno = 0;
+    *errp = 0;
+    sceKernelSignalSema(D_0000A868, 1);
+    return ti;
+
+fail:
+    sceKernelSignalSema(D_0000A868, 1);
+    return NULL;
+}
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 201
