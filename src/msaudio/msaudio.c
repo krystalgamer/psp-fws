@@ -238,7 +238,7 @@ s32 func_0000035C(s32 *arg0) {
 }
 #endif
 
-#if FW_VERSION == 102 || (FW_VERSION >= 250 && FW_VERSION < 340)
+#if (FW_VERSION >= 102 && FW_VERSION < 151) || (FW_VERSION >= 250 && FW_VERSION < 340)
 INCLUDE_ASM("nonmatchings/msaudio", func_000003A4);
 
 INCLUDE_ASM("nonmatchings/msaudio", func_00000424);
@@ -334,7 +334,7 @@ s32 module_stop(void) {
     return 0;
 }
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 151
 INCLUDE_ASM("nonmatchings/msaudio", func_00000628);
 #endif
 
@@ -346,7 +346,7 @@ INCLUDE_RODATA("nonmatchings/msaudio", D_00006A88);
 INCLUDE_RODATA("nonmatchings/msaudio", D_000069F0);
 #endif
 
-#if FW_VERSION != 102
+#if FW_VERSION == 100 || FW_VERSION >= 151
 INCLUDE_ASM("nonmatchings/msaudio", sceMSAudioInit);
 #endif
 
@@ -455,7 +455,7 @@ s32 sceMSAudioEndFringe(void) {
 
 INCLUDE_ASM("nonmatchings/msaudio", sceMSAudioDecryptTrack);
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 151
 INCLUDE_ASM("nonmatchings/msaudio", func_00001584);
 #else
 INCLUDE_ASM("nonmatchings/msaudio", sceMSAudioInvalidateICV);
@@ -463,7 +463,7 @@ INCLUDE_ASM("nonmatchings/msaudio", sceMSAudioInvalidateICV);
 
 INCLUDE_ASM("nonmatchings/msaudio", sceMSAudioReadMACList);
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 151
 INCLUDE_ASM("nonmatchings/msaudio", func_0000175C);
 #endif
 
@@ -487,7 +487,7 @@ INCLUDE_ASM("nonmatchings/msaudio", func_00003F10);
 INCLUDE_ASM("nonmatchings/msaudio", sceMSAudio_driver_2685C036);
 #endif
 
-#if FW_VERSION != 102
+#if FW_VERSION == 100 || FW_VERSION >= 151
 INCLUDE_ASM("nonmatchings/msaudio", sceMSAudioClearMACEntry);
 #endif
 
