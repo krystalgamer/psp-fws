@@ -195,11 +195,11 @@ INCLUDE_ASM("nonmatchings/mgr", func_00000FE8);
 
 INCLUDE_ASM("nonmatchings/mgr", func_00001308);
 
-#if FW_VERSION >= 152 && FW_VERSION < 340
+#if FW_VERSION >= 201 && FW_VERSION < 340
 INCLUDE_ASM("nonmatchings/mgr", func_000013C8);
 #endif
 
-#if FW_VERSION < 152
+#if FW_VERSION < 201
 s32 *func_000013C8(void) {
     s32 *var_v1;
 
@@ -211,11 +211,11 @@ s32 *func_000013C8(void) {
 }
 #endif
 
-#if FW_VERSION >= 152 && FW_VERSION < 340
+#if FW_VERSION >= 201 && FW_VERSION < 340
 INCLUDE_ASM("nonmatchings/mgr", func_000013E8);
 #endif
 
-#if FW_VERSION < 152
+#if FW_VERSION < 201
 s32 *func_000013E8(void) {
     s32 *var_v1;
 
@@ -233,21 +233,21 @@ M2C_UNK *func_00001394(void) {
 }
 #endif
 
-#if FW_VERSION >= 152 && FW_VERSION < 340
+#if FW_VERSION >= 201 && FW_VERSION < 340
 INCLUDE_ASM("nonmatchings/mgr", func_00001414);
 #endif
 
-#if FW_VERSION < 152
+#if FW_VERSION < 201
 s32 *func_00001414(void) {
     return &D_00009C38;
 }
 #endif
 
-#if FW_VERSION >= 152 && FW_VERSION < 340
+#if FW_VERSION >= 201 && FW_VERSION < 340
 INCLUDE_ASM("nonmatchings/mgr", func_00001420);
 #endif
 
-#if FW_VERSION < 152
+#if FW_VERSION < 201
 s32 *func_00001420(void) {
     return &D_00009C40;
 }
@@ -530,11 +530,11 @@ void func_000027EC(void) {
 
 INCLUDE_ASM("nonmatchings/mgr", sceMgrInitSeed);
 
-#if FW_VERSION >= 152 && FW_VERSION < 340
+#if FW_VERSION >= 201 && FW_VERSION < 340
 INCLUDE_ASM("nonmatchings/mgr", sceMgrRandom);
 #endif
 
-#if FW_VERSION < 152
+#if FW_VERSION < 201
 s32 sceMgrRandom(s32 arg0, s32 arg1) {
     s32 temp_v0;
     s32 var_s2;
@@ -566,11 +566,11 @@ s32 sceMgrRandom(s32 arg0, M2C_UNK arg1) {
 
 INCLUDE_ASM("nonmatchings/mgr", func_00002934);
 
-#if FW_VERSION >= 152 && FW_VERSION < 340
+#if FW_VERSION >= 201 && FW_VERSION < 340
 INCLUDE_ASM("nonmatchings/mgr", sceMgrCreateKc);
 #endif
 
-#if FW_VERSION < 152
+#if FW_VERSION < 201
 s32 sceMgrCreateKc(s32 arg0, s32 arg1) {
     s32 temp_v0;
     s32 temp_v0_2;
@@ -748,11 +748,11 @@ s32 sceMgrDecryptKicv(s32 arg0, s32 arg1, s32 arg2) {
     return var_s1;
 }
 
-#if FW_VERSION >= 152 && FW_VERSION < 340
+#if FW_VERSION >= 201 && FW_VERSION < 340
 INCLUDE_ASM("nonmatchings/mgr", sceMgrGenerateKb);
 #endif
 
-#if FW_VERSION < 152
+#if FW_VERSION < 201
 s32 sceMgrGenerateKb(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     s32 temp_v0;
     s32 temp_v0_2;
@@ -815,11 +815,11 @@ INCLUDE_ASM("nonmatchings/mgr", func_0000310C);
 
 INCLUDE_ASM("nonmatchings/mgr", func_000031C8);
 
-#if FW_VERSION >= 152 && FW_VERSION < 340
+#if FW_VERSION >= 201 && FW_VERSION < 340
 INCLUDE_ASM("nonmatchings/mgr", sceMgrDecryptWithKbCBC);
 #endif
 
-#if FW_VERSION < 152
+#if FW_VERSION < 201
 s32 sceMgrDecryptWithKbCBC(s32 arg0, s32 arg1, s32 *arg2, u32 arg3, s32 arg4) {
     s32 *var_v1;
     s32 var_a7;
@@ -840,11 +840,11 @@ s32 sceMgrDecryptWithKbCBC(s32 arg0, s32 arg1, s32 *arg2, u32 arg3, s32 arg4) {
 }
 #endif
 
-#if FW_VERSION >= 152 && FW_VERSION < 340
+#if FW_VERSION >= 201 && FW_VERSION < 340
 INCLUDE_ASM("nonmatchings/mgr", sceMgrEncryptWithKbCBC);
 #endif
 
-#if FW_VERSION < 152
+#if FW_VERSION < 201
 s32 sceMgrEncryptWithKbCBC(s32 arg0, s32 arg1, s32 *arg2, u32 arg3, s32 arg4) {
     s32 *var_v1;
     s32 var_a7;
@@ -865,11 +865,11 @@ s32 sceMgrEncryptWithKbCBC(s32 arg0, s32 arg1, s32 *arg2, u32 arg3, s32 arg4) {
 }
 #endif
 
-#if FW_VERSION >= 152 && FW_VERSION < 340
+#if FW_VERSION >= 201 && FW_VERSION < 340
 INCLUDE_ASM("nonmatchings/mgr", sceMgrGenerateMACWithKbCBC);
 #endif
 
-#if FW_VERSION < 152
+#if FW_VERSION < 201
 s32 sceMgrGenerateMACWithKbCBC(s32 arg0, s32 arg1, s32 *arg2, s32 arg3, s32 arg4) {
     s32 *var_a2;
     s32 var_v1;
@@ -896,11 +896,11 @@ void sceMgrEncryptWithKse(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
 }
 #endif
 
-#if FW_VERSION >= 152 && FW_VERSION < 340
+#if FW_VERSION >= 201 && FW_VERSION < 340
 INCLUDE_ASM("nonmatchings/mgr", sceMgrGenerateMACWithKseCBC);
 #endif
 
-#if FW_VERSION < 152
+#if FW_VERSION < 201
 void sceMgrGenerateMACWithKseCBC(s32 arg0, s32 arg1, s32 *arg2, s32 arg3) {
     s32 *var_a2;
 
