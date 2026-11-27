@@ -80,17 +80,9 @@ INCLUDE_RODATA("nonmatchings/syscon", D_000044B8);
 INCLUDE_ASM("nonmatchings/syscon", func_00000360);
 
 INCLUDE_ASM("nonmatchings/syscon", sceSysconCmdExec);
-#endif
 
-#if FW_VERSION == 103
-INCLUDE_ASM("nonmatchings/syscon", func_00000AE0);
-#endif
-
-#if FW_VERSION < 103 || (FW_VERSION >= 150 && FW_VERSION < 282)
 INCLUDE_ASM("nonmatchings/syscon", sceSysconCmdExecAsync);
-#endif
 
-#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/syscon", sceSysconCmdCancel);
 #endif
 
@@ -99,10 +91,6 @@ INCLUDE_ASM("nonmatchings/syscon", func_00000350);
 #endif
 
 INCLUDE_RODATA("nonmatchings/syscon", D_0000453C);
-
-#if FW_VERSION == 103
-INCLUDE_ASM("nonmatchings/syscon", func_00000E40);
-#endif
 
 #if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/syscon", func_00000580);
@@ -128,9 +116,7 @@ INCLUDE_ASM("nonmatchings/syscon", sceSysconCmdExecAsync);
 INCLUDE_ASM("nonmatchings/syscon", sceSysconCmdCancel);
 #endif
 
-#if FW_VERSION != 103
 INCLUDE_ASM("nonmatchings/syscon", sceSysconCmdSync);
-#endif
 
 INCLUDE_ASM("nonmatchings/syscon", func_00001444);
 
@@ -183,8 +169,8 @@ s32 sceSysconSetDebugHandlers(s32 arg0) {
 }
 #endif
 
-#if FW_VERSION == 103
-INCLUDE_ASM("nonmatchings/syscon", func_0000137C);
+#if FW_VERSION == 103 || FW_VERSION >= 310
+INCLUDE_ASM("nonmatchings/syscon", sceSysconSetPollingMode);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
@@ -205,10 +191,6 @@ s32 sceSysconSetAffirmativeRertyMode(s32 arg0) {
 s32 _sceSysconGetBaryonVersion(void) {
     return M2C_VFIELD(&D_00004600, s32, 0x108);
 }
-#endif
-
-#if FW_VERSION >= 310
-INCLUDE_ASM("nonmatchings/syscon", sceSysconSetPollingMode);
 #endif
 
 #if FW_VERSION >= 282 && FW_VERSION < 310
