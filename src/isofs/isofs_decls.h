@@ -94,9 +94,25 @@ typedef struct {
 } IsofsCacheEntry;
 typedef char chk_IsofsCacheEntry[(sizeof(IsofsCacheEntry) == 0x30) ? 1 : -1];
 
+/* open directory (iob->i_private for dopen) */
+typedef struct {
+    IsoDirectory *isoDir; /* 0x0 */
+    void *paths; /* 0x4 */
+    void *fplData; /* 0x8 */
+} IsofsDir;
+
 typedef s64 SceOff;
 typedef int SceMode;
-typedef struct SceIoIob SceIoIob;
+/* iofilemgr file descriptor block (1.00, 0x80) */
+typedef struct SceIoIob {
+    s32 i_flgs; /* 0x0 */
+    s32 i_unit; /* 0x4 */
+    void *i_de; /* 0x8 */
+    s32 d_type; /* 0xC */
+    void *i_private; /* 0x10 */
+    void *i_cwd; /* 0x14 */
+    SceOff i_fpos; /* 0x18 */
+} SceIoIob;
 typedef struct {
     u16 year;
     u16 month;
@@ -247,8 +263,8 @@ extern s32 D_00005F98;
 extern char D_00005FCC[];
 extern char D_00005FE0[];
 extern char D_00006070[];
-extern s32 D_00006200;
-extern s32 D_00006224;
+extern char D_00006200[];
+extern char D_00006224[];
 extern s32 D_000065C0;
 extern s32 D_000065C4;
 extern s32 D_000067C4;
@@ -310,6 +326,7 @@ s32 func_00004024(IsofsUnit *unit, s32 unitNum);
 s32 func_00004064(s32 arg0);
 s32 func_00004DB0(void);
 s32 func_00004E30(s32);
+s32 func_00004F08();
 void func_00004FC4(void);
 s32 func_00004FE8(void);
 s32 func_00004FF4(void);
@@ -325,11 +342,16 @@ u8 func_00005060(void);
 s32 func_0000506C(u32 arg0);
 void func_000050CC(void *arg0);
 s32 func_000054D4(s32 arg0);
+s32 func_0000576C(void *blkDev, s32 unitNum);
 s32 func_00005908(void *arg0);
 s32 func_00005970(s32 arg0);
 s32 func_000059DC(void);
 s32 func_00005E10(void);
 void func_00005E1C(s32 arg0, void *arg1, u32 arg2);
+s32 func_00005F50(SceIoIob *iob);
+s32 func_00006028(SceIoIob *iob);
+s32 func_00006114(SceIoIob *iob);
+s32 func_00006248(void *entry);
 s32 func_0000664C(s32 arg0);
 s32 func_00006720(s32 arg0);
 s32 func_0000770C(void);
@@ -352,9 +374,9 @@ void sceKernelCpuResumeIntr(s32);
 s32 sceKernelCpuSuspendIntr(void);
 SceUID sceKernelCreateFpl(const char *name, s32 part, s32 attr, SceSize size, SceSize blocks, void *opt);
 s32 sceKernelDeleteFpl(s32);
-M2C_UNK sceKernelDeleteHeap(s32);
+s32 sceKernelDeleteHeap(SceUID heapId);
 s32 sceKernelDeleteSema(SceUID semaId);
-s32 sceKernelFreeFpl(s32, void *);
+s32 sceKernelFreeFpl(SceUID fplId, void *data);
 s32 sceKernelSignalSema(SceUID semaId, s32 count);
 s32 sceKernelWaitSema(SceUID semaId, s32 count, u32 *timeout);
 u32 sceUmd9660_driver_2C6C3F4C();
