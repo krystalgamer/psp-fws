@@ -6,7 +6,7 @@
 #define IS_USER_ADDR(p) (((u32)(p) >> 31) ^ 1)
 #define K1_BAD_ADDR(p) ((-k1IsUserMode() & (u32)(p)) >> 31)
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/display", func_00000000);
 #else
 INCLUDE_ASM("nonmatchings/display", module_reboot_before);
@@ -137,7 +137,7 @@ s32 sceDisplayEnd(void) {
 }
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/display", func_00000688);
 #endif
 
@@ -305,7 +305,7 @@ s32 func_00000468(s32 id, char *name, void *param, s32 *result)
 }
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/display", func_00000578);
 #endif
 
@@ -432,7 +432,7 @@ s32 func_0000092C(s32 mode, s32 width, s32 height, s32 bufferWidth, s32 pixelFor
 }
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/display", func_00000C44);
 #endif
 
@@ -677,7 +677,7 @@ s32 sceDisplaySetHoldMode(s32 arg0) {
 }
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/display", func_00001378);
 #endif
 
@@ -706,7 +706,7 @@ s32 sceDisplayGetFrameBuf(void **topaddr, s32 *bufferWidth, s32 *pixelFormat, s3
 }
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/display", func_0000140C);
 
 INCLUDE_ASM("nonmatchings/display", func_00001420);
@@ -990,7 +990,7 @@ INCLUDE_RODATA("nonmatchings/display", D_00001FF8);
 INCLUDE_RODATA("nonmatchings/display", D_00002018);
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/display", func_00001708);
 
 INCLUDE_ASM("nonmatchings/display", func_000017A4);
@@ -1165,7 +1165,7 @@ s32 func_00001728(void) {
 }
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/display", func_00001728);
 #endif
 
@@ -1256,7 +1256,7 @@ INCLUDE_ASM("nonmatchings/display", sceDisplayIsVsync);
 INCLUDE_RODATA("nonmatchings/display", D_00002060);
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/display", func_00001B00);
 
 INCLUDE_ASM("nonmatchings/display", func_00001B7C);
