@@ -1,6 +1,6 @@
 /* cflags[152]: -O2 -frename-registers */
 /* cflags[150]: -O2 -frename-registers */
-/* cflags[100]: -O2 -frename-registers */
+/* cflags[100,102]: -O2 -frename-registers */
 /* cflags: -Os -frename-registers */
 #include "common.h"
 #include "mpeg_vsh_decls.h"
@@ -53,6 +53,12 @@ INCLUDE_ASM("nonmatchings/mpeg_vsh", sceMpegUnRegistStream);
 INCLUDE_ASM("nonmatchings/mpeg_vsh", sceMpegRegistStream);
 #endif
 
+#if FW_VERSION == 102
+INCLUDE_RODATA("nonmatchings/mpeg_vsh", D_00007A30);
+
+INCLUDE_ASM("nonmatchings/mpeg_vsh", func_0000033C);
+#endif
+
 #if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/mpeg_vsh", D_000096DC);
 #endif
@@ -73,17 +79,27 @@ INCLUDE_ASM("nonmatchings/mpeg_vsh", func_00000AD4);
 INCLUDE_ASM("nonmatchings/mpeg_vsh", func_00000B80);
 #endif
 
-#if FW_VERSION < 271
+#if FW_VERSION == 100 || (FW_VERSION >= 150 && FW_VERSION < 271)
 INCLUDE_RODATA("nonmatchings/mpeg_vsh", D_00007A30);
 
 INCLUDE_ASM("nonmatchings/mpeg_vsh", sceMpegInit);
+#endif
 
+#if FW_VERSION < 271
 INCLUDE_ASM("nonmatchings/mpeg_vsh", sceMpegFinish);
 
 INCLUDE_ASM("nonmatchings/mpeg_vsh", sceMpegQueryMemSize);
+#endif
 
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/mpeg_vsh", func_00000500);
+#endif
+
+#if FW_VERSION == 100 || (FW_VERSION >= 150 && FW_VERSION < 271)
 INCLUDE_ASM("nonmatchings/mpeg_vsh", sceMpegCreate);
+#endif
 
+#if FW_VERSION < 271
 INCLUDE_ASM("nonmatchings/mpeg_vsh", sceMpegDelete);
 
 INCLUDE_ASM("nonmatchings/mpeg_vsh", sceMpegInitAu);
@@ -145,11 +161,17 @@ INCLUDE_ASM("nonmatchings/mpeg_vsh", sceMpegAvcDecodeDetail2);
 INCLUDE_ASM("nonmatchings/mpeg_vsh", sceMpegAvcDecodeGetDecodeSEI);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/mpeg_vsh", sceMpegAvcDecodeDetail);
 #endif
 
-#if FW_VERSION < 271
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/mpeg_vsh", func_00000D20);
+
+INCLUDE_ASM("nonmatchings/mpeg_vsh", func_00000F14);
+#endif
+
+#if FW_VERSION == 100 || (FW_VERSION >= 150 && FW_VERSION < 271)
 INCLUDE_ASM("nonmatchings/mpeg_vsh", sceMpegAvcDecode);
 
 INCLUDE_ASM("nonmatchings/mpeg_vsh", sceMpegAvcDecodeStop);
@@ -307,11 +329,15 @@ INCLUDE_RODATA("nonmatchings/mpeg_vsh", D_00009B88);
 
 INCLUDE_RODATA("nonmatchings/mpeg_vsh", D_00009B98);
 
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/mpeg_vsh", func_00001168);
+#endif
+
 #if FW_VERSION == 271
 INCLUDE_ASM("nonmatchings/mpeg_vsh", func_00001E8C);
 #endif
 
-#if FW_VERSION < 271
+#if FW_VERSION == 100 || (FW_VERSION >= 150 && FW_VERSION < 271)
 INCLUDE_ASM("nonmatchings/mpeg_vsh", sceMpegQueryStreamOffset);
 #endif
 
@@ -421,7 +447,7 @@ INCLUDE_ASM("nonmatchings/mpeg_vsh", func_000019B0);
 INCLUDE_ASM("nonmatchings/mpeg_vsh", func_000029AC);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/mpeg_vsh", func_00002040_v100);
 #endif
 
@@ -564,7 +590,7 @@ INCLUDE_ASM("nonmatchings/mpeg_vsh", sceMpeg_C345DED2);
 INCLUDE_ASM("nonmatchings/mpeg_vsh", sceMpegGetAtracAu);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION >= 102 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/mpeg_vsh", func_000050D8);
 #endif
 
@@ -619,6 +645,12 @@ s32 func_00004D20(void *arg0, s32 arg1) {
 }
 #endif
 
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/mpeg_vsh", func_00004D2C);
+
+INCLUDE_ASM("nonmatchings/mpeg_vsh", func_00005250);
+#endif
+
 #if FW_VERSION >= 250 && FW_VERSION < 282
 void func_00006484(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     func_00005444(arg0, arg1, 3, arg2, arg3);
@@ -647,7 +679,7 @@ INCLUDE_ASM("nonmatchings/mpeg_vsh", func_0000657C);
 INCLUDE_ASM("nonmatchings/mpeg_vsh", func_000057A4);
 #endif
 
-#if FW_VERSION < 260
+#if FW_VERSION == 100 || (FW_VERSION >= 150 && FW_VERSION < 260)
 INCLUDE_ASM("nonmatchings/mpeg_vsh", func_00004D2C);
 #endif
 
@@ -1002,7 +1034,7 @@ s32 sceMpegInitAu(void *arg0, s32 arg1, void *arg2) {
 }
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 s32 func_0000572C(void) {
     M2C_VFIELD(&D_00007D00, s16, 0x14) = 1;
     M2C_VFIELD(&D_00007D00, s16, 0) = 0x95;
