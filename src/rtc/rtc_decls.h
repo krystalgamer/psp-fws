@@ -25,24 +25,24 @@ typedef struct {
 } SceKernelTimezone;
 
 typedef struct {
-    volatile s32 unk0;          /* 0x00: sceRtcSetConf arg 0 */
-    volatile s32 unk4;          /* 0x04: sceRtcSetConf arg 1 */
-    volatile s32 unk8;          /* 0x08: sceRtcSetConf arg 3; local time = UTC + unk8 + unkC minutes */
-    volatile s32 unkC;          /* 0x0C: sceRtcSetConf arg 2 */
-    volatile s32 tickValid;     /* 0x10: tickOffset valid (sceRtcGetCurrentTick) */
-    volatile s32 secureTickValid; /* 0x14: secureTickOffset valid */
+    s32 unk0;               /* 0x00: sceRtcSetConf arg 0 */
+    s32 unk4;               /* 0x04: sceRtcSetConf arg 1 */
+    s32 unk8;               /* 0x08: sceRtcSetConf arg 3; local time = UTC + unk8 + unkC minutes */
+    s32 unkC;               /* 0x0C: sceRtcSetConf arg 2 */
+    s32 tickValid;          /* 0x10: tickOffset valid (sceRtcGetCurrentTick) */
+    s32 secureTickValid;    /* 0x14: secureTickOffset valid */
 #if FW_VERSION >= 270
-    volatile s32 unk18;
-    volatile SceUID cbId;       /* 0x1C: sceRtcRegisterCallback, -1 none */
+    s32 unk18;
+    SceUID cbId;            /* 0x1C: sceRtcRegisterCallback, -1 none */
 #endif
-    u64 clockUs;                /* 0x18 (2.70+: 0x20): syscon clock (0.5 s units) * 500000 at the last sync */
-    u64 sysTimeAtSync;          /* sceKernelGetSystemTimeWide() at the last sync */
-    u64 baseTick;               /* tick at syscon clock 0 (scratchpad 0x10, 40 bits << 19) */
-    u64 secureBaseTick;         /* scratchpad 0x18 */
-    u64 tickOffset;             /* current tick - system time */
-    u64 secureTickOffset;       /* secure tick - system time */
-    u64 alarmTick;              /* 0x48 (2.70+: 0x50) */
-    u32 clockAdjust;            /* 0x50 (2.70+: 0x58): scratchpad 8, sum of syscon clocks overwritten by SetCurrentTick */
+    u64 clockUs;            /* 0x18 (2.70+: 0x20): syscon clock (0.5 s units) * 500000 at the last sync */
+    u64 sysTimeAtSync;      /* sceKernelGetSystemTimeWide() at the last sync */
+    u64 baseTick;           /* tick at syscon clock 0 (scratchpad 0x10, 40 bits << 19) */
+    u64 secureBaseTick;     /* scratchpad 0x18 */
+    u64 tickOffset;         /* current tick - system time */
+    u64 secureTickOffset;   /* secure tick - system time */
+    u64 alarmTick;          /* 0x48 (2.70+: 0x50) */
+    u32 clockAdjust;        /* 0x50 (2.70+: 0x58): scratchpad 8, sum of syscon clocks overwritten by SetCurrentTick */
 } SceRtcState;
 
 extern s32 D_00003BF0;

@@ -82,9 +82,9 @@ s32 module_start(void) {
     D_00004580.cbId = -1;
     func_0000358C();
     D_00004580.unk0 = 0;
-    D_00004580.unk8 = 0;
     D_00004580.unk4 = 0;
     D_00004580.unkC = 0;
+    D_00004580.unk8 = 0;
     sceRtcSynchronize();
     sceSysconSetAlarmCallback(func_00000000, NULL);
     sceKernelRegisterSysEventHandler(&D_00004530);
@@ -97,9 +97,9 @@ s32 module_start(void) {
     memset(&D_00004580, 0, sizeof(D_00004580));
     func_0000358C();
     D_00004580.unk0 = 0;
-    D_00004580.unk8 = 0;
     D_00004580.unk4 = 0;
     D_00004580.unkC = 0;
+    D_00004580.unk8 = 0;
     sceRtcSynchronize();
     sceKernelRegisterSysEventHandler(&D_00003BF0);
     return 0;
@@ -126,9 +126,9 @@ s32 module_start(void) {
     memset(&D_00004580, 0, sizeof(D_00004580));
     D_00004580.cbId = -1;
     D_00004580.unk0 = 0;
-    D_00004580.unk8 = 0;
     D_00004580.unk4 = 0;
     D_00004580.unkC = 0;
+    D_00004580.unk8 = 0;
     sceRtcSynchronize();
     func_00003D9C();
     sceSysconSetAlarmCallback(func_00000000, NULL);
@@ -151,9 +151,9 @@ s32 sceRtcInit(void) {
     D_00004580.cbId = -1;
     func_0000358C();
     D_00004580.unk0 = 0;
-    D_00004580.unk8 = 0;
     D_00004580.unk4 = 0;
     D_00004580.unkC = 0;
+    D_00004580.unk8 = 0;
     sceRtcSynchronize();
     sceSysconSetAlarmCallback(func_00000000, NULL);
     sceKernelRegisterSysEventHandler(&D_00004530);
@@ -166,9 +166,9 @@ s32 sceRtcInit(void) {
     memset(&D_00004580, 0, sizeof(D_00004580));
     func_0000358C();
     D_00004580.unk0 = 0;
-    D_00004580.unk8 = 0;
     D_00004580.unk4 = 0;
     D_00004580.unkC = 0;
+    D_00004580.unk8 = 0;
     sceRtcSynchronize();
     sceKernelRegisterSysEventHandler(&D_00003BF0);
     return 0;
@@ -205,8 +205,8 @@ s32 sceRtcResume(void) {
 
 #if FW_VERSION >= 270
 s32 sceRtcReset(void) {
-    D_00004580.secureTickValid = 0;
     D_00004580.tickValid = 0;
+    D_00004580.secureTickValid = 0;
     return 0;
 }
 #endif
