@@ -15,6 +15,7 @@ options:
   cache_path: tmp/build/102/.splat_cache.opening_plugin
   symbol_addrs_path:
     - config/102/symbol_addrs.opening_plugin.txt
+    - config/102/func_starts.opening_plugin.txt
     - tmp/build/102/prx_syms.opening_plugin.txt
   reloc_addrs_path: [tmp/build/102/reloc_addrs.opening_plugin.txt]
   asset_path: tmp/assets/102/opening_plugin
@@ -53,7 +54,8 @@ segments:
     vram: 0x0
     subsegments:
       - { start: 0x80, type: asm, name: init, linker_section: .init }
-      - [0xA4, asm, opening_plugin]
+      - [0xA4, c, opening_plugin]
+      - [0x10D4, c, opening_plugin_crtend]
       - { start: 0x112C, type: asm, name: fini, linker_section: .fini }
       - { start: 0x1148, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x12A8, type: prxpad, order: .text }
@@ -71,7 +73,8 @@ segments:
       - { start: 0x1420, type: rodata, name: dtors, linker_section: .dtors }
       - { start: 0x1428, type: rodata, name: jcr, linker_section: .jcr }
       - { start: 0x142C, type: rodata, name: eh_frame, linker_section: .eh_frame }
-      - [0x1430, rodata, opening_plugin]
+      - [0x1430, .rodata, opening_plugin]
+      - [0x16F0, .rodata, opening_plugin_crtend]
       - { start: 0x1708, type: prxpad, order: .rodata }
   - name: opening_plugin_seg1
     type: code
