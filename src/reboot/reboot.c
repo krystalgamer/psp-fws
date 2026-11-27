@@ -68,7 +68,34 @@ void func_000003C8(s32 test, s32 lvl) {
 #if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/reboot", func_00000554);
 
-INCLUDE_ASM("nonmatchings/reboot", func_00000684);
+u32 func_00000684(char **pp) {
+    char *p = *pp;
+    u32 v = 0;
+    s32 c;
+
+    while (*p == ' ' || *p == '\t') {
+        p++;
+    }
+    if (*p == '0' && (p[1] == 'x' || p[1] == 'X')) {
+        p += 2;
+    }
+    for (;;) {
+        c = *p++;
+        if ((u32)(c - '0') < 10) {
+            c -= '0';
+        } else if ((u32)(c - 'a') < 6) {
+            c -= 'a' - 10;
+        } else if ((u32)(c - 'A') < 6) {
+            c -= 'A' - 10;
+        } else {
+            break;
+        }
+        v = v * 16 + c;
+    }
+    p--;
+    *pp = p;
+    return v;
+}
 
 void func_00000768(s32 arg0) {
     func_00000000(arg0);
