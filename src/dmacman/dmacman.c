@@ -72,7 +72,49 @@ fail:
 INCLUDE_ASM("nonmatchings/dmacman", module_start);
 #endif
 
+#if FW_VERSION == 100
+s32 sceKernelDmaExit(void)
+{
+    s32 intr;
+    s32 i;
+    s32 j;
+    s32 k;
+    SceDmacChRegs *ch;
+    SceDmacRegs *regs;
+
+    intr = sceKernelCpuSuspendIntr();
+    for (j = 0; j < 2; j++) {
+        for (i = 0; i < 8; i++) {
+            ch = (SceDmacChRegs *)(((j == 0) ? 0xBC900100 : 0xBCA00100) + i * 32);
+            ch->config |= 0x40000;
+            while (ch->config & 0x20000)
+                ;
+            ch->config &= ~1;
+        }
+    }
+    sceKernelDmaOpAllCancel();
+    for (j = 0; j < 2; j++) {
+        regs = (SceDmacRegs *)((j == 0) ? DMAC0_BASE : DMAC1_BASE);
+        regs->config &= ~1;
+    }
+    if (sceKernelReleaseIntrHandler(22) < 0) {
+        sceKernelReleaseIntrHandler(23);
+        goto fail;
+    }
+    if (sceKernelReleaseIntrHandler(23) < 0) {
+        sceKernelReleaseIntrHandler(22);
+        goto fail;
+    }
+    sceKernelCpuResumeIntr(intr);
+    return 0;
+
+fail:
+    sceKernelCpuResumeIntr(intr);
+    return 0x800202BC;
+}
+#else
 INCLUDE_ASM("nonmatchings/dmacman", sceKernelDmaExit);
+#endif
 
 #if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/dmacman", sceKernelDmaRegisterDdrFlush);
