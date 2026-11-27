@@ -4484,7 +4484,30 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_0001CBCC);
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_0001F088);
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_0001F30C);
+#if FW_VERSION < 201
+void tcp_pulloutofband(struct socket *so, struct tcphdr *th, struct mbuf *m, s32 off) {
+    s32 cnt = off + th->th_urp - 1;
+
+    while (cnt >= 0) {
+        if (m->m_len > cnt) {
+            char *cp = mtod(m, char *) + cnt;
+            struct tcpcb *tp = (struct tcpcb *)((struct inpcb *)so->so_pcb)->inp_ppcb;
+
+            tp->t_iobc = *cp;
+            tp->t_oobflags |= 0x1;
+            func_0002C9B8(cp + 1, cp, (u32)(m->m_len - cnt - 1));
+            m->m_len--;
+            return;
+        }
+        cnt -= m->m_len;
+        m = m->m_next;
+        if (m == 0)
+            break;
+    }
+}
+#else
+INCLUDE_ASM("nonmatchings/pspnet_inet", tcp_pulloutofband);
+#endif
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_0001F3B0);
 
@@ -5127,9 +5150,29 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_000249FC);
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00024C58);
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_00024D44);
+struct tcpcb *tcp_disconnect(struct tcpcb *tp) {
+    struct socket *so;
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_00024DF8);
+    if (tp->t_inpcb)
+        so = tp->t_inpcb->inp_socket;
+    else
+        so = NULL;
+
+    if (tp->t_state < 4)
+        tp = tcp_close(tp);
+    else if ((so->so_options & 0x80) && so->so_linger == 0)
+        tp = tcp_drop(tp, 0);
+    else {
+        soisdisconnecting(so);
+        sbflush(&so->so_rcv);
+        tp = tcp_usrclosed(tp);
+        if (tp)
+            (void)tcp_output(tp);
+    }
+    return (tp);
+}
+
+INCLUDE_ASM("nonmatchings/pspnet_inet", tcp_usrclosed);
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00024EC4);
 
@@ -5169,7 +5212,18 @@ void sppp_flush(struct sppp *sp) {
     }
 }
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_0002534C);
+struct mbuf *sppp_dequeue(struct sppp *sp) {
+    struct mbuf *m;
+    s32 s;
+
+    s = _sce_pspnet_spllock();
+    IF_DEQUEUE(&sp->pp_cpq, m);
+    if (m == NULL && sppp_ncp_check(sp)) {
+        IF_DEQUEUE(&sp->pp_fastq, m);
+    }
+    _sce_pspnet_splunlock(s);
+    return m;
+}
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_000253FC);
 

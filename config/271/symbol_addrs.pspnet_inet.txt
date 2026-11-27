@@ -518,3 +518,7 @@ save_rte = 0x00015C8C; // type:func
 arp_drain = 0x00010668; // type:func
 llinfo_arp_head = 0x0002CEB4;
 arp_locked = 0x0002CEB8;
+tcp_pulloutofband = 0x0001F30C; // type:func
+sppp_dequeue = 0x0002534C; // type:func
+tcp_disconnect = 0x00024D44; // type:func
+tcp_usrclosed = 0x00024DF8; // type:func

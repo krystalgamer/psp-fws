@@ -540,7 +540,7 @@ struct cp {
 /* struct sppp (NetBSD if_spppsubr, partial; callouts are 0x24 bytes) */
 struct sppp {
     u8 unk0[0xCC];
-    struct ifqueue pp_fastq;        /* 0xCC */
+    struct ifqueue pp_fastq;        /* 0xCC really pp_if.if_snd (SCE has no fastq) */
     u8 unkE0[0x128 - 0xE0];
     struct ifqueue pp_cpq;          /* 0x128 */
     s32 pp_flags;                   /* 0x13C PP_* */
@@ -661,7 +661,7 @@ struct ifnet {
     void (*if_start)(struct ifnet *ifp); /* 0xB8 */
     s32 (*if_ioctl)(struct ifnet *ifp, u32 cmd, void *data); /* 0xBC */
     u8 unkC0[0xCC - 0xC0];
-    u8 if_snd[0xE0 - 0xCC];             /* 0xCC struct ifqueue */
+    struct ifqueue if_snd;              /* 0xCC */
     struct sockaddr_dl *if_sadl;        /* 0xE0 */
     u8 *if_broadcastaddr;               /* 0xE4 */
 };
