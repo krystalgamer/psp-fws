@@ -1778,7 +1778,57 @@ M2C_UNK *_sce_pspnet_get_selwait_addr(void) {
 }
 #endif
 
+#if FW_VERSION < 201
+s32 bpfread(s32 minor, struct uio *uio) {
+    struct bpf_d *d = &D_0000BC14[minor];
+    s32 error;
+    s32 s;
+
+    if (uio->uio_resid != d->bd_bufsize)
+        return 22;
+
+    s = _sce_pspnet_spllock();
+    while (d->bd_hbuf == 0) {
+        if (d->bd_immediate) {
+            if (d->bd_slen == 0) {
+                _sce_pspnet_splunlock(s);
+                return 11;
+            }
+            ROTATE_BUFFERS(d);
+            break;
+        }
+        if (d->bd_rtout != -1)
+            error = _sce_pspnet_tsleep(d, d->bd_rtout);
+        else
+            error = 11;
+        if (error == 11) {
+            if (d->bd_hbuf)
+                break;
+            if (d->bd_slen == 0) {
+                _sce_pspnet_splunlock(s);
+                return 0;
+            }
+            ROTATE_BUFFERS(d);
+            break;
+        }
+        if (error != 0)
+            goto done;
+    }
+    _sce_pspnet_splunlock(s);
+
+    error = _sce_pspnet_uiomove(d->bd_hbuf, d->bd_hlen, uio);
+
+    s = _sce_pspnet_spllock();
+    d->bd_fbuf = d->bd_hbuf;
+    d->bd_hbuf = 0;
+    d->bd_hlen = 0;
+done:
+    _sce_pspnet_splunlock(s);
+    return error;
+}
+#else
 INCLUDE_ASM("nonmatchings/pspnet", bpfread);
+#endif
 
 INCLUDE_ASM("nonmatchings/pspnet", bpfwrite);
 

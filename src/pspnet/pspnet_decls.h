@@ -155,7 +155,30 @@ struct mbuf {
     s32 m_len;                  /* 0x0C */
     s16 m_type;                 /* 0x10 */
     s16 m_flags;                /* 0x12 */
+    struct {
+        struct ifnet *rcvif;    /* 0x14 */
+        s32 len;                /* 0x18 */
+        struct mbuf *aux;       /* 0x1C */
+        u8 unk20[0x10];
+    } m_pkthdr;
+    struct {
+        u8 *ext_buf;            /* 0x30 */
+        void (*ext_free)();     /* 0x34 */
+        void *ext_arg;          /* 0x38 */
+        u32 ext_size;           /* 0x3C */
+        s32 ext_type;           /* 0x40 */
+        struct mbuf *ext_nextref; /* 0x44 */
+        struct mbuf *ext_prevref; /* 0x48 */
+    } m_ext;
 };
+#define m_pktdat m_ext.ext_buf
+#define MSIZE 0x100
+#define MHLEN (MSIZE - 0x30)
+#define MCLBYTES 2048
+#define MT_DATA 1
+#define M_EXT 0x0001
+#define M_PKTHDR 0x0002
+#define M_CLUSTER 0x0008
 #define mtod(m, t) ((t)((m)->m_data))
 
 
@@ -193,7 +216,9 @@ struct ifnet {
     s16 if_flags;                       /* 0x30 IFF_* */
     u8 unk32[0x38 - 0x32];
     struct if_data if_data;             /* 0x38 */
-    u8 unk58[0xB0 - 0x58];
+    u8 unk58[0x88 - 0x58];
+    u64 if_obytes;                      /* 0x88 if_data.ifi_obytes */
+    u8 unk90[0xB0 - 0x90];
     s32 (*if_output)();                 /* 0xB0 */
     void (*if_input)();                 /* 0xB4 */
     void (*if_start)();                 /* 0xB8 */
@@ -257,6 +282,17 @@ typedef char chk_ifaddr[(sizeof(struct ifaddr) == 0x38) ? 1 : -1];
     if (--(ifa)->ifa_refcnt == 0) \
         sceNetFreeInternal(ifa); \
 } while (0)
+#define IFF_OACTIVE 0x400
+#define IF_QFULL(ifq) ((ifq)->ifq_len >= (ifq)->ifq_maxlen)
+#define IF_ENQUEUE(ifq, m) { \
+    (m)->m_nextpkt = 0; \
+    if ((ifq)->ifq_tail == 0) \
+        (ifq)->ifq_head = m; \
+    else \
+        (ifq)->ifq_tail->m_nextpkt = m; \
+    (ifq)->ifq_tail = m; \
+    (ifq)->ifq_len++; \
+}
 
 
 #define IFNAMSIZ 16
@@ -586,7 +622,7 @@ void bpfilterattach(s32 n);
 s32 bpfioctl(s32 fd, u32 cmd, void *data);
 s32 bpfopen(s32 minor);
 s32 bpfpoll(s32 minor, s32 events, struct SceNetThreadInfo *p);
-s32 bpfread(s32 fd, struct uio *uio);
+s32 bpfread(s32 minor, struct uio *uio);
 s32 bpfwrite(s32 fd, struct uio *uio);
 u32 callout_alarm(void *common);
 void callout_shutdown(void);
@@ -682,7 +718,7 @@ M2C_UNK sceNetIfhandle_lib_29ED84C5();
 char *sceNetIndex(const char *s, s32 c);
 s32 sceNetInit(s32 poolSize, s32 calloutPrio, s32 calloutStack, s32 netintrPrio, s32 netintrStack);
 char sceNetLook_ctype_table(s32 c);
-M2C_UNK sceNetMFreem(void *);
+void sceNetMFreem(struct mbuf *m);
 void *sceNetMallocInternal(u32 size);
 void *sceNetMemchr(const void *s, s32 c, s32 n);
 s32 sceNetMemcmp(const void *s1, const void *s2, s32 n);
