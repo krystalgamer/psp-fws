@@ -4,7 +4,17 @@
 #include "common.h"
 #include "reboot_decls.h"
 
-INCLUDE_ASM("nonmatchings/reboot_012C04", sceNandWriteBlock);
+s32 sceNandWriteBlock(u32 ppn, void *user, void *spare) {
+    s32 ret = sceNandEraseBlockWithRetry(ppn);
+    if (ret < 0) {
+        return ret;
+    }
+    ret = sceNandWritePages(ppn, user, spare, D_00018BD0);
+    if (ret >= 0) {
+        return 0;
+    }
+    return ret;
+}
 
 INCLUDE_ASM("nonmatchings/reboot_012C04", sceNandCalcEcc);
 

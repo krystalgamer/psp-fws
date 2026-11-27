@@ -628,7 +628,21 @@ INCLUDE_ASM("nonmatchings/reboot_008F5C", sceNandSetWriteProtect);
 
 INCLUDE_ASM("nonmatchings/reboot_008F5C", func_000112F8);
 
-INCLUDE_ASM("nonmatchings/reboot_008F5C", sceNandReadId);
+s32 sceNandReadId(u8 *buf, s32 len) {
+    s32 i;
+    u8 v;
+
+    *(volatile u32 *)0xBD101008 = 0x90;
+    *(volatile u32 *)0xBD10100C = 0;
+    for (i = 0; i < len; i++) {
+        v = *(volatile u32 *)0xBD101300;
+        if (buf != NULL) {
+            buf[i] = v;
+        }
+    }
+    *(volatile u32 *)0xBD101014 = 1;
+    return 0;
+}
 
 INCLUDE_ASM("nonmatchings/reboot_008F5C", func_000113DC);
 
@@ -685,28 +699,34 @@ s32 func_00011AB0(void) {
     return 0;
 }
 
-INCLUDE_ASM("nonmatchings/reboot_008F5C", sceNandReadPages);
+s32 sceNandReadPages(u32 ppn, void *user, void *spare, u32 len) {
+    s32 ret = func_000113DC(ppn, user, spare, len, 0);
+    if (spare == NULL && ret == 0x80230009) {
+        ret = 0;
+    }
+    return ret;
+}
 
 INCLUDE_ASM("nonmatchings/reboot_008F5C", sceNandWritePages);
 
-s32 sceNandReadPagesRawExtra(s32 a0, s32 a1, s32 a2, s32 a3) {
-    return func_000113DC(a0, a1, a2, a3, 0x20);
+s32 sceNandReadPagesRawExtra(u32 ppn, void *user, void *spare, u32 len) {
+    return func_000113DC(ppn, user, spare, len, 0x20);
 }
 
 #if FW_VERSION == 100
-s32 sceNandWritePagesRawExtra(s32 a0, s32 a1, s32 a2, s32 a3) {
-    return func_000115B8(a0, a1, a2, a3, (a1 == 0) ? 0x30 : 0x20);
+s32 sceNandWritePagesRawExtra(u32 ppn, void *user, void *spare, u32 len) {
+    return func_000115B8(ppn, user, spare, len, (user == NULL) ? 0x30 : 0x20);
 }
 #else
 INCLUDE_ASM("nonmatchings/reboot_008F5C", sceNandWritePagesRawExtra);
 #endif
 
-s32 sceNandReadPagesRawAll(s32 a0, s32 a1, s32 a2, s32 a3) {
-    return func_000113DC(a0, a1, a2, a3, 0x31);
+s32 sceNandReadPagesRawAll(u32 ppn, void *user, void *spare, u32 len) {
+    return func_000113DC(ppn, user, spare, len, 0x31);
 }
 
-void sceNandWritePagesRawAll(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
-    func_000115B8(arg0, arg1, arg2, arg3, 0x31);
+s32 sceNandWritePagesRawAll(u32 ppn, void *user, void *spare, u32 len) {
+    return func_000115B8(ppn, user, spare, len, 0x31);
 }
 
 INCLUDE_ASM("nonmatchings/reboot_008F5C", func_00011B9C);
@@ -719,11 +739,39 @@ INCLUDE_ASM("nonmatchings/reboot_008F5C", sceNandDetectChip);
 
 INCLUDE_ASM("nonmatchings/reboot_008F5C", sceNandWriteBlockWithVerify);
 
-INCLUDE_ASM("nonmatchings/reboot_008F5C", sceNandReadBlockWithRetry);
+s32 sceNandReadBlockWithRetry(u32 ppn, void *user, void *spare) {
+    s32 i;
+    s32 ret;
+
+    for (i = 0; i < 4; i++) {
+        ret = sceNandReadPages(ppn, user, spare, D_00018BCC.pagesPerBlock);
+        if (ret >= 0) {
+            break;
+        }
+    }
+    if (ret < 0) {
+        return ret;
+    }
+    return 0;
+}
 
 INCLUDE_ASM("nonmatchings/reboot_008F5C", sceNandVerifyBlockWithRetry);
 
-INCLUDE_ASM("nonmatchings/reboot_008F5C", sceNandEraseBlockWithRetry);
+s32 sceNandEraseBlockWithRetry(u32 ppn) {
+    s32 i;
+    s32 ret;
+
+    if (ppn % D_00018BD0 != 0) {
+        return 0x80230008;
+    }
+    for (i = 0; i < 4; i++) {
+        ret = func_00011788(ppn);
+        if (ret >= 0) {
+            return 0;
+        }
+    }
+    return ret;
+}
 
 INCLUDE_ASM("nonmatchings/reboot_008F5C", sceNandIsBadBlock);
 
@@ -736,7 +784,7 @@ INCLUDE_ASM("nonmatchings/reboot_008F5C", func_000128FC);
 INCLUDE_ASM("nonmatchings/reboot_008F5C", sceNandTestBlock);
 
 s32 func_00012BE0(void) {
-    return D_00018BCC;
+    return D_00018BCC.pageSize;
 }
 
 s32 func_00012BEC(void) {

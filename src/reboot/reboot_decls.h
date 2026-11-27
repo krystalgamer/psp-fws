@@ -161,6 +161,25 @@ struct UFatBuf {
     u8 *data; /* 0x14 */
 };
 
+/* NAND chip geometry (D_00018BCC); filled by sceNandDetectChip */
+typedef struct {
+    u32 pageSize; /* 0x0 */
+    u32 pagesPerBlock; /* 0x4 */
+    u32 totalBlocks; /* 0x8 */
+    u8 makerId; /* 0xC */
+    u8 deviceId; /* 0xD */
+    u8 padE[2];
+} SceNandInfo;
+/* known chip table entry (D_00016C14, 17 entries) */
+typedef struct {
+    u8 makerId; /* 0x0 */
+    u8 deviceId; /* 0x1 */
+    u16 pageSize; /* 0x2 */
+    u16 pagesPerBlock; /* 0x4 */
+    u16 unk6;
+    u32 totalBlocks; /* 0x8 */
+} SceNandChipEntry;
+
 /* 1.00: 8 bytes (no d_userfd_count yet). */
 struct SceIoDeviceEntry {
     SceIoDeviceTable *d_dp; /* 0x0 */
@@ -273,6 +292,7 @@ struct Unk_func_0000D694_0 {
 
 extern void *D_00014D00;
 extern s32 (*D_00014EE4)(s32, s32) SDATA;
+extern const SceNandChipEntry D_00016C14[17];
 extern s32 D_00016DE4 SDATA;
 extern s32 D_00016DE8 SDATA;
 extern s32 D_00016DEC SDATA;
@@ -287,9 +307,9 @@ extern s32 D_00017148 SDATA;
 extern void *D_00017344;
 extern void **D_00017348;
 extern void *D_0001734C;
-extern s32 D_00018BCC;
-extern s32 D_00018BD0;
-extern s32 D_00018BD4;
+extern SceNandInfo D_00018BCC;
+extern u32 D_00018BD0;
+extern u32 D_00018BD4;
 extern LFlashDev D_0001D890;
 extern M2C_UNK D_0002B79C;
 extern M2C_UNK D_0002DB34;
@@ -371,7 +391,8 @@ s32 func_00010960(void);
 s32 func_00010E08(void);
 s32 func_00010E14(void);
 s32 func_00010EBC(void);
-s32 func_000115B8(s32, s32, s32, s32, s32);
+s32 func_000113DC(u32 ppn, void *user, void *spare, u32 len, s32 mode);
+s32 func_000115B8(u32 ppn, void *user, void *spare, u32 len, s32 mode);
 s32 func_000119F0(void);
 s32 func_00011AB0(void);
 s32 func_00012BE0(void);
@@ -419,7 +440,16 @@ void *memmove(void *dst, const void *src, s32 n);
 void *memset(void *s, s32 c, s32 n);
 s32 module_bootstart(void);
 s32 prnt(void (*put)(char **, s32), char **arg, const char *fmt, void *ap);
-void sceNandWritePagesRawAll(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
+s32 sceNandEraseBlockWithRetry(u32 ppn);
+s32 sceNandReadId(u8 *buf, s32 len);
+s32 sceNandReadPages(u32 ppn, void *user, void *spare, u32 len);
+s32 sceNandReadPagesRawAll(u32 ppn, void *user, void *spare, u32 len);
+s32 sceNandReadPagesRawExtra(u32 ppn, void *user, void *spare, u32 len);
+s32 sceNandVerifyBlockWithRetry(u32 ppn, void *user, void *spare);
+s32 sceNandWriteBlock(u32 ppn, void *user, void *spare);
+s32 sceNandWritePages(u32 ppn, void *user, void *spare, u32 len);
+s32 sceNandWritePagesRawAll(u32 ppn, void *user, void *spare, u32 len);
+s32 sceNandWritePagesRawExtra(u32 ppn, void *user, void *spare, u32 len);
 void sceSysregApbBusClockDisable(void);
 void sceSysregApbBusClockEnable(void);
 void sceSysregAudioClkoutIoDisable(void);
