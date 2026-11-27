@@ -1,3 +1,4 @@
+/* cflags[271-352]: -O2 -mext */
 #include "common.h"
 #include "fatmsmod_decls.h"
 #include "k1.h"
@@ -3322,7 +3323,53 @@ s32 func_000085D4(u32 sector, u8 **buf) {
     return 0;
 }
 
-INCLUDE_ASM("nonmatchings/fatmsmod", func_000086E8);
+s32 func_000086E8(u32 cl, u32 *next) {
+    u8 tmp[2];
+    u32 off;
+    u32 sector;
+    u8 *buf;
+    u8 *p;
+    u32 val;
+
+    *next = 0;
+    if (cl >= D_0001BCC4.clusterCount) {
+        return -1;
+    }
+    if (cl < 2) {
+        D_00019E04 = 0x800;
+        return -1;
+    }
+    if (func_00008314(cl, &off, &sector) == -1) {
+        return -1;
+    }
+    buf = D_000276E4->fatBuf;
+    if (off == D_0002790C.bytesPerSector * D_0001BCC4.cacheSectors - 1) {
+        tmp[0] = buf[off];
+        if (func_00009BF0() == -1) {
+            return -1;
+        }
+        sector++;
+        if (func_000085D4(sector, &buf) == -1) {
+            return -1;
+        }
+        tmp[1] = buf[0];
+        *next = (u16)(tmp[0] + (tmp[1] << 8));
+    } else {
+        p = buf + off;
+        val = (p[1] << 8) + p[0];
+        *next = val;
+        if (D_000276E4->flags & 0x1000) {
+            *next = val + ((p[3] << 24) + (p[2] << 16));
+        }
+    }
+    if (!(D_000276E4->flags & 0x9000)) {
+        if (cl & 1) {
+            *next = *next >> 4;
+        }
+        *next &= 0xFFF;
+    }
+    return 0;
+}
 
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00008878);
 
