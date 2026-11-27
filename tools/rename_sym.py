@@ -85,6 +85,10 @@ def main():
             else:
                 print(f"{v}: {old} not found, skipped")
                 continue
+            fs = ROOT / "config" / v / f"func_starts.{mod}.txt"
+            if fs.exists():
+                ft = new.setdefault(fs, texts.setdefault(fs, fs.read_text()))
+                new[fs] = re.sub(rf"^(\s*){old}(\s*=)", rf"\g<1>{nw}\g<2>", ft, flags=re.M)
             print(f"{v}: {old} -> {nw}")
         src_renames[old] = nw
         # the source rename is global: OLD must not also name data (INCLUDE_RODATA) or remain in other versions

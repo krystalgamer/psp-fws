@@ -547,7 +547,7 @@ void tcp_fasttimo(void) {
 INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", tcp_fasttimo);
 #endif
 
-void func_00024490(u8 *arg0) {
+void tcp_canceltimers(u8 *arg0) {
     s32 i;
     u32 *p = (u32 *)(arg0 + 8);
     for (i = 3; i >= 0; i--) {
