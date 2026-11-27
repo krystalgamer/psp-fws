@@ -244,3 +244,5 @@ tcp_output = 0x000215C4; // type:func
 tcp_close = 0x00023030; // type:func
 tcp_fasttimo = 0x00024430; // type:func
 ip_input = 0x0001486C; // type:func
+tcp_newtcpcb = 0x00022E84; // type:func
+syn_cache_cleanup = 0x0001FE88; // type:func

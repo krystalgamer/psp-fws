@@ -4058,7 +4058,7 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_0001F5A0);
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_0001FA38);
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_0001FE88);
+INCLUDE_ASM("nonmatchings/pspnet_inet", syn_cache_cleanup);
 
 #if FW_VERSION >= 151 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_0001FBBC);
@@ -4153,42 +4153,168 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_00022714);
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_000228BC);
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_00022E84);
+#if FW_VERSION < 201
+struct tcpcb *tcp_newtcpcb(s32 family, void *aux) {
+    struct tcpcb *tp;
 
+    switch (family) {
+    case AF_INET:
+        break;
+    default:
+        return NULL;
+    }
+    tp = sceNetMallocInternal(sizeof(struct tcpcb));
+    if (tp == NULL) {
+        return NULL;
+    }
+    func_0002C94C(tp, 0, sizeof(struct tcpcb));
+    tp->segq = NULL;
+    tp->timeq = NULL;
+    tp->t_family = family;
+    tp->t_peermss = D_0002E8F8;
+    tp->t_ourmss = D_0002E8F8;
+    tp->t_segsz = D_0002E8F8;
+    tp->t_sc = NULL;
+    tp->t_flags = 0;
+    if (D_0002E900 && D_0002E908) {
+        tp->t_flags |= 0x20; /* TF_REQ_SCALE */
+    }
+    if (D_0002E900 && D_0002E90C) {
+        tp->t_flags |= 0x80; /* TF_REQ_TSTMP */
+    }
+    if (D_0002E904 == 2) {
+        tp->t_flags |= 0x800; /* TF_WILL_SACK */
+    } else if (D_0002E904 == 1) {
+        tp->t_flags |= 0x800 | 0x2000; /* TF_WILL_SACK | TF_IGNR_RXSACK */
+    }
+    tp->t_flags |= 0x1000; /* TF_CANT_TXSACK */
+    switch (family) {
+    case AF_INET:
+        tp->t_inpcb = (struct inpcb *)aux;
+        tp->t_mtudisc = D_0002E7BC;
+        break;
+    }
+    tp->t_srtt = 0;
+    tp->t_rttvar = D_0002E8FC * 2 << (2 + 2 - 1);
+    tp->t_rttmin = 2;
+    tp->t_rxtcur = ((tp->t_srtt >> 3) + tp->t_rttvar) >> 2;
+    if (tp->t_rxtcur < 2) {
+        tp->t_rxtcur = 2;
+    } else if (tp->t_rxtcur > 128) {
+        tp->t_rxtcur = 128;
+    }
+    tp->snd_cwnd = 65535 << 14;
+    tp->snd_ssthresh = 65535 << 14;
+    if (family == AF_INET) {
+        struct inpcb *inp = (struct inpcb *)aux;
+        inp->inp_ip.ip_ttl = D_0002E7B0;
+        inp->inp_ppcb = tp;
+    }
+    return tp;
+}
+#else
+INCLUDE_ASM("nonmatchings/pspnet_inet", tcp_newtcpcb);
+#endif
+
+#if FW_VERSION < 151
+struct tcpcb *tcp_close(struct tcpcb *tp) {
+    struct inpcb *inp;
+    struct socket *so;
+    struct rtentry *rt;
+    struct route *ro;
+    s32 s;
+
+    inp = tp->t_inpcb;
+    so = NULL;
+    ro = NULL;
+    if (inp) {
+        so = inp->inp_socket;
+        ro = &inp->inp_route;
+    }
+    if ((s32)(tp->iss + so->so_snd.sb_hiwat * 16 - tp->snd_max) < 0 &&
+        ro && (rt = ro->ro_rt) &&
+        ((struct sockaddr_in *)rt->rt_nodes[0].rn_key)->sin_addr.s_addr != __builtin_allegrex_wsbw(0)) {
+        u32 i = 0;
+
+        if ((rt->rt_rmx.rmx_locks & RTV_RTT) == 0) {
+            i = tp->t_srtt * ((1000000 / 2) >> (3 + 2));
+            if (rt->rt_rmx.rmx_rtt && i) {
+                rt->rt_rmx.rmx_rtt = (rt->rt_rmx.rmx_rtt + i) / 2;
+            } else {
+                rt->rt_rmx.rmx_rtt = i;
+            }
+        }
+        if ((rt->rt_rmx.rmx_locks & RTV_RTTVAR) == 0) {
+            i = tp->t_rttvar * ((1000000 / 2) >> (2 + 2));
+            if (rt->rt_rmx.rmx_rttvar && i) {
+                rt->rt_rmx.rmx_rttvar = (rt->rt_rmx.rmx_rttvar + i) / 2;
+            } else {
+                rt->rt_rmx.rmx_rttvar = i;
+            }
+        }
+        if (((rt->rt_rmx.rmx_locks & RTV_SSTHRESH) == 0 &&
+             (i = tp->snd_ssthresh) && rt->rt_rmx.rmx_ssthresh) ||
+            i < (rt->rt_rmx.rmx_sendpipe / 2)) {
+            i = (i + tp->t_segsz / 2) / tp->t_segsz;
+            if (i < 2) {
+                i = 2;
+            }
+            i *= (u32)(tp->t_segsz + 0x28 /* sizeof(struct tcpiphdr) */);
+            if (rt->rt_rmx.rmx_ssthresh) {
+                rt->rt_rmx.rmx_ssthresh = (rt->rt_rmx.rmx_ssthresh + i) / 2;
+            } else {
+                rt->rt_rmx.rmx_ssthresh = i;
+            }
+        }
+    }
+    s = _sce_pspnet_spllock();
+    if ((tp->t_flags & 0x4000) == 0) { /* TF_REASSEMBLING */
+        tp->t_flags |= 0x4000;
+    }
+    _sce_pspnet_splunlock(s);
+    (void)tcp_freeq(tp);
+    s = _sce_pspnet_spllock();
+    tp->t_flags &= ~0x4000;
+    _sce_pspnet_splunlock(s);
+    if (tp->t_flags & 0x2) { /* TF_DELACK */
+        tp->t_flags &= ~0x2;
+        LIST_REMOVE(tp, t_delack);
+    }
+    syn_cache_cleanup(tp);
+    if (tp->t_template) {
+        sceNetMFree(tp->t_template);
+        tp->t_template = NULL;
+    }
+    sceNetFreeInternal(tp);
+    if (inp) {
+        inp->inp_ppcb = NULL;
+        soisdisconnected(so);
+        in_pcbdetach(inp);
+    }
+    tcp_stat.tcps_closed++;
+    return NULL;
+}
+#else
 INCLUDE_ASM("nonmatchings/pspnet_inet", tcp_close);
+#endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_00024B7C);
+INCLUDE_ASM("nonmatchings/pspnet_inet", tcp_freeq);
 #endif
 
 #if FW_VERSION < 201
-s32 func_00024B7C(void *arg0) {
-    s32 var_v0;
-    void *temp_v1;
-    void *temp_v1_2;
-    void *var_s0;
+s32 tcp_freeq(struct tcpcb *tp) {
+    struct ipqent *qe;
+    s32 rv = 0;
 
-    var_v0 = 0;
-    var_s0 = M2C_FIELD(arg0, void **, 4);
-    if (var_s0 != NULL) {
-        do {
-            temp_v1 = M2C_FIELD(var_s0, void **, 0);
-            if (temp_v1 != NULL) {
-                M2C_FIELD(temp_v1, void ***, 4) = (void **) M2C_FIELD(var_s0, void ***, 4);
-            }
-            *M2C_FIELD(var_s0, void ***, 4) = temp_v1;
-            temp_v1_2 = M2C_FIELD(var_s0, void **, 0x14);
-            if (temp_v1_2 != NULL) {
-                M2C_FIELD(temp_v1_2, void ***, 0x18) = (void **) M2C_FIELD(var_s0, void ***, 0x18);
-            }
-            *M2C_FIELD(var_s0, void ***, 0x18) = temp_v1_2;
-            sceNetMFreem(M2C_FIELD(var_s0, s32 *, 0xC));
-            sceNetFreeInternal(var_s0);
-            var_s0 = M2C_FIELD(arg0, void **, 4);
-            var_v0 = 1;
-        } while (var_s0 != NULL);
+    while ((qe = tp->segq) != NULL) {
+        LIST_REMOVE(qe, ipqe_q);
+        LIST_REMOVE(qe, ipqe_timeq);
+        sceNetMFreem(qe->ipqe_m);
+        sceNetFreeInternal(qe);
+        rv = 1;
     }
-    return var_v0;
+    return rv;
 }
 #endif
 

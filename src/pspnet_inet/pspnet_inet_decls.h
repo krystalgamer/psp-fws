@@ -406,6 +406,9 @@ struct rt_metrics {
     u32 rmx_pksent;     /* 0x24 */
 };
 #define RTV_MTU 0x1
+#define RTV_SSTHRESH 0x20
+#define RTV_RTT 0x40
+#define RTV_RTTVAR 0x80
 
 /* struct rtentry (NetBSD 1.4 route.h) */
 struct rtentry {
@@ -737,7 +740,16 @@ struct sockaddr_dl {
     } \
 }
 
-/* struct tcpcb (NetBSD 1.5 tcp_var.h, partial; SCE timers hold absolute tcp_now ticks) */
+/* struct ipqent (NetBSD 1.5 ip_var.h, partial) */
+struct ipqent {
+    struct { struct ipqent *le_next; struct ipqent **le_prev; } ipqe_q; /* 0x00 */
+    void *ipqe_ip;                  /* 0x08 */
+    struct mbuf *ipqe_m;            /* 0x0C */
+    u8 ipqe_mff;                    /* 0x10 */
+    struct { struct ipqent *le_next; struct ipqent **le_prev; } ipqe_timeq; /* 0x14 */
+};
+
+/* struct tcpcb (NetBSD 1.5 tcp_var.h; SCE timers hold absolute pfslowtimo ticks) */
 #define TCPT_NTIMERS 4
 #define TCPT_REXMT 0
 #define TCPT_PERSIST 1
@@ -745,7 +757,7 @@ struct sockaddr_dl {
 #define TCPT_2MSL 3
 struct tcpcb {
     s32 t_family;               /* 0x00 */
-    void *segq;                 /* 0x04 LIST_HEAD (NetBSD 1.5: TAILQ) */
+    struct ipqent *segq;        /* 0x04 LIST_HEAD (NetBSD 1.5: TAILQ) */
     s32 t_timer[TCPT_NTIMERS];  /* 0x08 */
     s16 t_state;                /* 0x18 */
     s16 t_rxtshift;             /* 0x1A */
@@ -786,7 +798,18 @@ struct tcpcb {
     s8 t_oobflags;              /* 0x94 */
     s8 t_iobc;                  /* 0x95 */
     s16 t_softerror;            /* 0x96 */
+    u8 snd_scale;               /* 0x98 */
+    u8 rcv_scale;               /* 0x99 */
+    u8 request_r_scale;         /* 0x9A */
+    u8 requested_s_scale;       /* 0x9B */
+    u32 ts_recent;              /* 0x9C */
+    u32 ts_recent_age;          /* 0xA0 */
+    u32 last_ack_sent;          /* 0xA4 */
+    void *timeq;                /* 0xA8 LIST_HEAD */
+    s32 t_mtudisc;              /* 0xAC */
+    void *t_sc;                 /* 0xB0 LIST_HEAD */
 };
+typedef char chk_tcpcb[(sizeof(struct tcpcb) == 0xB4) ? 1 : -1];
 #define TCPS_CLOSED 0
 #define TCPS_SYN_RECEIVED 3
 #define TCPS_ESTABLISHED 4
@@ -800,6 +823,7 @@ struct tcpstat {
     u64 tcps_connects;          /* 0x10 */
     u64 tcps_drops;             /* 0x18 */
     u64 tcps_conndrops;         /* 0x20 */
+    u64 tcps_closed;            /* 0x28 */
 };
 #define TCPTV_PERSMIN 10
 #define TCPTV_PERSMAX 120
@@ -1257,11 +1281,18 @@ extern s32 D_0002E5F8; /* lowportmax */
 extern s32 D_0002E798;
 extern s32 D_0002E79C;
 extern s32 D_0002E7A4;
+extern s32 D_0002E7B0; /* ip_defttl */
+extern s32 D_0002E7BC; /* ip_mtudisc */
 extern struct sockaddr_in D_0002E834 __attribute__((aligned(4)));
 extern struct sockaddr_in D_0002E844 __attribute__((aligned(4)));
 extern struct sockaddr_in D_0002E854 __attribute__((aligned(4)));
 extern s32 D_0002E8D8;
-extern u32 D_0002E8F8;
+extern s32 D_0002E8F8; /* tcp_mssdflt */
+extern s32 D_0002E8FC; /* tcp_rttdflt */
+extern s32 D_0002E900; /* tcp_do_rfc1323 */
+extern s32 D_0002E904; /* tcp_do_sack */
+extern s32 D_0002E908; /* tcp_do_win_scale */
+extern s32 D_0002E90C; /* tcp_do_timestamps */
 extern s32 D_0002E918;
 extern s32 D_0002E924;
 extern s32 D_0002E95C;
@@ -1468,7 +1499,6 @@ s32 func_00023828(struct Unk_func_00023828_0 *arg0);
 void func_00023AB8(struct Unk_func_00023AB8_0 *arg0);
 void func_00023B08(struct inpcb *inp, s32 errno);
 void func_000244B0(void);
-s32 func_00024B7C(void *arg0);
 s32 func_000251A4(void *arg0);
 void func_0002544C(void *arg0);
 void func_00025468(struct in_addr addr);
@@ -1590,11 +1620,14 @@ void sppp_lcp_tld(struct sppp *sp);
 void sppp_lcp_up(struct sppp *sp);
 void sppp_pap_TO(void *arg);
 void sppp_to_event(const struct cp *cp, struct sppp *sp);
+void syn_cache_cleanup(struct tcpcb *tp);
 s32 sysctl_int(void *oldp, u32 *oldlenp, void *newp, u32 newlen, s32 *valp);
 s32 sysctl_rdstruct(void *oldp, u32 *oldlenp, void *newp, const void *sp, u32 len);
 struct tcpcb *tcp_close(struct tcpcb *tp);
 void *tcp_ctlinput(s32 cmd, struct sockaddr *sa, void *v);
 struct tcpcb *tcp_drop(struct tcpcb *tp, s32 errno);
+s32 tcp_freeq(struct tcpcb *tp);
+struct tcpcb *tcp_newtcpcb(s32 family, void *aux);
 void tcp_notify(struct inpcb *inp, s32 error);
 s32 tcp_output(struct tcpcb *tp);
 s32 tcp_sysctl(s32 *name, u32 namelen, void *oldp, u32 *oldlenp, void *newp, u32 newlen);
