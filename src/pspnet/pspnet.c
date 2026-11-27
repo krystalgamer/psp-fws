@@ -2036,7 +2036,7 @@ void func_00005C58(struct ifnet *ifp) {
 #if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet", _sce_pspnet_ifafree);
 #else
-void _sce_pspnet_ifafree(void *ifa) {
+void _sce_pspnet_ifafree(struct ifaddr *ifa) {
     sceNetFreeInternal(ifa);
 }
 #endif
@@ -2154,7 +2154,7 @@ INCLUDE_ASM("nonmatchings/pspnet", _sce_pspnet_get_if_core_variables);
 #endif
 
 #if FW_VERSION < 201
-s32 _sce_pspnet_get_if_core_variables(s32 *arg0, s32 *arg1, s32 *arg2, u8 *arg3) {
+s32 _sce_pspnet_get_if_core_variables(s32 *arg0, s32 *arg1, s32 *arg2, struct ifnethead *arg3) {
     if (arg0 != NULL) {
         *arg0 = D_0000B0B0;
     }
@@ -2165,15 +2165,14 @@ s32 _sce_pspnet_get_if_core_variables(s32 *arg0, s32 *arg1, s32 *arg2, u8 *arg3)
         *arg2 = D_0000B3B8;
     }
     if (arg3 != NULL) {
-        M2C_FIELD(arg3, s32 *, 0) = (s32) M2C_FIELD(&D_0000BE54, s32 *, 0);
-        M2C_FIELD(arg3, s32 *, 4) = (s32) M2C_FIELD(&D_0000BE54, s32 *, 4);
+        *arg3 = D_0000BE54;
     }
     return 0;
 }
 #endif
 
 #if FW_VERSION >= 282
-s32 _sce_pspnet_get_if_core_variables(s32 *arg0, s32 *arg1, s32 *arg2, u8 *arg3) {
+s32 _sce_pspnet_get_if_core_variables(s32 *arg0, s32 *arg1, s32 *arg2, struct ifnethead *arg3) {
     if (arg0 != NULL) {
         *arg0 = D_0000B3B4;
     }
@@ -2190,9 +2189,71 @@ s32 _sce_pspnet_get_if_core_variables(s32 *arg0, s32 *arg1, s32 *arg2, u8 *arg3)
 }
 #endif
 
-INCLUDE_ASM("nonmatchings/pspnet", _sce_pspnet_start_of_inet_module_in_if_core);
+s32 _sce_pspnet_start_of_inet_module_in_if_core(void (*f0)(), void (*f1)(), void (*f2)(), void (*f3)(), void (*f4)(), void (*f5)(), void (*f6)(), void (*f7)(), void (*f8)(), void (*f9)(), void (*f10)(), void (*f11)(), void (*f12)()) {
+    struct ifnet *ifp;
 
-INCLUDE_ASM("nonmatchings/pspnet", _sce_pspnet_stop_of_inet_module_in_if_core);
+    D_0000B374 = f0;
+    D_0000B378 = f1;
+    D_0000B37C = f2;
+    D_0000B380 = f3;
+    D_0000B384 = f4;
+    D_0000B388 = f5;
+    D_0000B38C = f6;
+    D_0000B390 = f7;
+    D_0000B394 = f8;
+    D_0000B398 = f9;
+    D_0000B39C = f10;
+    D_0000B3A0 = f11;
+    D_0000B3A4 = f12;
+    for (ifp = TAILQ_FIRST(&D_0000BE54); ifp != NULL; ifp = TAILQ_NEXT(ifp, if_list)) {
+        f2(ifp);
+        if (ifp->if_flags & IFF_UP)
+            f9(ifp);
+    }
+    D_0000B3AC = 1;
+    return 0;
+}
+
+s32 _sce_pspnet_stop_of_inet_module_in_if_core(void) {
+    struct ifnet *ifp;
+    struct ifaddr *ifa;
+    s32 family;
+    s32 s;
+
+    D_0000B3AC = 0;
+    for (ifp = TAILQ_FIRST(&D_0000BE54); ifp != NULL; ifp = TAILQ_NEXT(ifp, if_list)) {
+        s = _sce_pspnet_spllock();
+        _sce_pspnet_if_down(ifp);
+        ifa = TAILQ_FIRST(&ifp->if_addrlist);
+        while (ifa != NULL) {
+            family = ifa->ifa_addr->sa_family;
+            if (family == AF_LINK) {
+                D_0000B380(ifa);
+                ifa = TAILQ_NEXT(ifa, ifa_list);
+                continue;
+            }
+            D_0000B384(ifp, family);
+            ifa = TAILQ_FIRST(&ifp->if_addrlist);
+        }
+        D_0000B388(ifp);
+        D_0000B38C(ifp);
+        _sce_pspnet_splunlock(s);
+    }
+    D_0000B374 = NULL;
+    D_0000B378 = NULL;
+    D_0000B37C = NULL;
+    D_0000B380 = NULL;
+    D_0000B384 = NULL;
+    D_0000B388 = NULL;
+    D_0000B38C = NULL;
+    D_0000B390 = NULL;
+    D_0000B394 = NULL;
+    D_0000B398 = NULL;
+    D_0000B39C = NULL;
+    D_0000B3A0 = NULL;
+    D_0000B3A4 = NULL;
+    return 0;
+}
 
 INCLUDE_ASM("nonmatchings/pspnet", func_000064CC);
 

@@ -165,6 +165,20 @@ struct ether_addr {
 
 TAILQ_HEAD(ifnethead, ifnet);
 
+/* struct ifaddr (NetBSD 1.5 if.h, partial) */
+struct ifaddr {
+    struct sockaddr *ifa_addr;          /* 0x00 */
+    struct sockaddr *ifa_dstaddr;       /* 0x04 */
+    struct sockaddr *ifa_netmask;       /* 0x08 */
+    struct ifnet *ifa_ifp;              /* 0x0C */
+    TAILQ_ENTRY(ifaddr) ifa_list;       /* 0x10 */
+    u8 ifa_data[0x10];                  /* 0x18 */
+    void (*ifa_rtrequest)();            /* 0x28 */
+    u32 ifa_flags;                      /* 0x2C */
+    s32 ifa_refcnt;                     /* 0x30 */
+};
+#define AF_LINK 18
+
 
 typedef struct {
     u32 low;
@@ -334,7 +348,7 @@ void _sce_pspnet_callout_init(struct callout *c);
 void _sce_pspnet_callout_reset(struct callout *c, u32 ticks, void (*func)(void *), void *arg);
 void _sce_pspnet_callout_reset_usec(struct callout *c, u32 usec, void (*func)(void *), void *arg);
 void _sce_pspnet_callout_stop(struct callout *c);
-s32 _sce_pspnet_get_if_core_variables(s32 *arg0, s32 *arg1, s32 *arg2, u8 *arg3);
+s32 _sce_pspnet_get_if_core_variables(s32 *arg0, s32 *arg1, s32 *arg2, struct ifnethead *arg3);
 s32 _sce_pspnet_get_ifindex(const char *name);
 s32 *_sce_pspnet_get_selwait_addr(void);
 struct SceNetThreadInfo *_sce_pspnet_get_threadinfo(SceUID thid);
@@ -344,7 +358,7 @@ void _sce_pspnet_if_down(struct ifnet *ifp);
 s32 _sce_pspnet_if_exist(const char *name);
 s32 _sce_pspnet_if_nulloutput(void);
 void _sce_pspnet_if_up(struct ifnet *ifp);
-void _sce_pspnet_ifafree(void *ifa);
+void _sce_pspnet_ifafree(struct ifaddr *ifa);
 s32 _sce_pspnet_ifioctl(struct socket *so, u32 cmd, void *data, s32 p);
 struct ifnet *_sce_pspnet_ifplookup_index(u32 index);
 struct ifnet *_sce_pspnet_ifplookup_lladdr(const void *lladdr);
@@ -363,6 +377,7 @@ void _sce_pspnet_splunlock(s32 arg0);
 s32 _sce_pspnet_start_of_adhoc_module_in_if_ethersubr_core(s32 arg0);
 s32 _sce_pspnet_start_of_adhoc_module_in_netintr(s32 arg0, s32 arg1);
 s32 _sce_pspnet_start_of_adhoc_module_in_sched(void (*sabort)(s32, s32));
+s32 _sce_pspnet_start_of_inet_module_in_if_core(void (*f0)(), void (*f1)(), void (*f2)(), void (*f3)(), void (*f4)(), void (*f5)(), void (*f6)(), void (*f7)(), void (*f8)(), void (*f9)(), void (*f10)(), void (*f11)(), void (*f12)());
 s32 _sce_pspnet_start_of_inet_module_in_if_ethersubr_core(s32 (*f0)(), s32 (*f1)(), s32 (*f2)(), s32 (*f3)());
 s32 _sce_pspnet_start_of_inet_module_in_ifhandle_ether(s32 arg0);
 s32 _sce_pspnet_start_of_inet_module_in_netintr(s32 arg0, s32 arg1);
@@ -372,6 +387,7 @@ s32 _sce_pspnet_start_of_pppoe_module_in_netintr(s32 arg0);
 s32 _sce_pspnet_stop_of_adhoc_module_in_if_ethersubr_core(void);
 s32 _sce_pspnet_stop_of_adhoc_module_in_netintr(void);
 s32 _sce_pspnet_stop_of_adhoc_module_in_sched(void);
+s32 _sce_pspnet_stop_of_inet_module_in_if_core(void);
 s32 _sce_pspnet_stop_of_inet_module_in_if_ethersubr_core(void);
 s32 _sce_pspnet_stop_of_inet_module_in_ifhandle_ether(void);
 s32 _sce_pspnet_stop_of_inet_module_in_netintr(void);
