@@ -1,4 +1,4 @@
-/* cflags[100]: -O2 */
+/* cflags[100,102]: -O2 */
 /* cflags: -O2 -frename-registers */
 #include "common.h"
 #include "memlmd_decls.h"
@@ -129,7 +129,7 @@ INCLUDE_ASM("nonmatchings/memlmd", func_00001270);
 
 INCLUDE_ASM("nonmatchings/memlmd", func_0000133C);
 
-#if FW_VERSION == 100
+#if FW_VERSION < 152
 s32 func_000013C8(s32 ev_id) {
     switch (ev_id) {
     case 0x4000:
@@ -143,7 +143,7 @@ s32 func_000013C8(s32 ev_id) {
 INCLUDE_ASM("nonmatchings/memlmd", func_000013C8);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 152
 s32 func_00001414(void) {
     sceKernelUnregisterSysEventHandler(&D_00002B44);
     sceKernelReleaseIntrHandler(0x18);
