@@ -268,19 +268,129 @@ struct protosw *func_00001E2C(s32 family, s32 type) {
     return NULL;
 }
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_00001EA8);
+struct protosw *func_00001EA8(s32 family, s32 protocol, s32 type) {
+    struct domain *dp;
+    struct protosw *pr;
+    struct protosw *maybe = NULL;
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_00001F64);
+    if (family == 0) {
+        return NULL;
+    }
+    for (dp = D_0002C500; dp != NULL; dp = dp->dom_next) {
+        if (dp->dom_family == family) {
+            break;
+        }
+    }
+    if (dp == NULL) {
+        return NULL;
+    }
+    for (pr = dp->dom_protosw; pr < dp->dom_protoswNPROTOSW; pr++) {
+        if ((pr->pr_protocol == protocol) && (pr->pr_type == type)) {
+            return pr;
+        }
+        if (type == 3 && pr->pr_type == 3 && pr->pr_protocol == 0 && maybe == NULL) {
+            maybe = pr;
+        }
+    }
+    return maybe;
+}
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_00002028);
+s32 func_00001F64(s32 *name, u32 namelen, void *oldp, u32 *oldlenp, void *newp, u32 newlen) {
+    struct domain *dp;
+    struct protosw *pr;
+    s32 family, protocol;
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_000020C4);
+    if (namelen < 2) {
+        return 21; /* EISDIR */
+    }
+    family = name[0];
+    if (family == 0) {
+        return 0;
+    }
+    for (dp = D_0002C500; dp != NULL; dp = dp->dom_next) {
+        if (dp->dom_family == family) {
+            break;
+        }
+    }
+    if (dp == NULL) {
+        return 109; /* ENOPROTOOPT */
+    }
+    if (namelen < 3) {
+        return 21;
+    }
+    protocol = name[1];
+    for (pr = dp->dom_protosw; pr < dp->dom_protoswNPROTOSW; pr++) {
+        if (pr->pr_protocol == protocol && pr->pr_sysctl) {
+            return pr->pr_sysctl(name + 2, namelen - 2, oldp, oldlenp, newp, newlen);
+        }
+    }
+    return 109;
+}
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_00002168);
+void func_00002028(s32 cmd, struct sockaddr *sa) {
+    struct domain *dp;
+    struct protosw *pr;
+
+    for (dp = D_0002C500; dp != NULL; dp = dp->dom_next) {
+        for (pr = dp->dom_protosw; pr < dp->dom_protoswNPROTOSW; pr++) {
+            if (pr->pr_ctlinput) {
+                pr->pr_ctlinput(cmd, sa, NULL);
+            }
+        }
+    }
+}
+
+void func_000020C4(void *arg) {
+    struct domain *dp;
+    struct protosw *pr;
+
+    D_0002CC4C++;
+    for (dp = D_0002C500; dp != NULL; dp = dp->dom_next) {
+        for (pr = dp->dom_protosw; pr < dp->dom_protoswNPROTOSW; pr++) {
+            if (pr->pr_slowtimo) {
+                pr->pr_slowtimo();
+            }
+        }
+    }
+    _sce_pspnet_callout_reset(D_0002CC74, 100 / 2, func_000020C4, NULL);
+}
+
+void func_00002168(void *arg) {
+    struct domain *dp;
+    struct protosw *pr;
+
+    D_0002CC98++;
+    for (dp = D_0002C500; dp != NULL; dp = dp->dom_next) {
+        for (pr = dp->dom_protosw; pr < dp->dom_protoswNPROTOSW; pr++) {
+            if (pr->pr_fasttimo) {
+                pr->pr_fasttimo();
+            }
+        }
+    }
+    _sce_pspnet_callout_reset(D_0002CC50, 100 / 5, func_00002168, NULL);
+}
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_0000220C);
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_000023A8);
+void func_000023A8(struct socket *so) {
+    if (so->so_pcb || (so->so_state & SS_NOFDREF) == 0) {
+        return;
+    }
+    if (so->so_head) {
+        if (!func_00004838(so, 0)) {
+            return;
+        }
+    }
+    func_00004A3C(&so->so_snd);
+    func_000038BC(so);
+    if (so->so_list.tqe_next != NULL) {
+        so->so_list.tqe_next->so_list.tqe_prev = so->so_list.tqe_prev;
+    } else {
+        D_0002CC9C.tqh_last = so->so_list.tqe_prev;
+    }
+    *so->so_list.tqe_prev = so->so_list.tqe_next;
+    sceNetFreeInternal(so);
+}
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_0000243C);
 
@@ -360,9 +470,31 @@ s32 func_00004124(struct socket *so, struct mbuf *nam) {
     _sce_pspnet_splunlock(s);
     return error;
 }
+#else
+s32 func_00004190(struct socket *so, s32 backlog) {
+    s32 s = _sce_pspnet_spllock();
+    s32 error;
+
+    error = so->so_proto->pr_usrreq(so, PRU_LISTEN, NULL, NULL, NULL);
+    if (error) {
+        _sce_pspnet_splunlock(s);
+        return error;
+    }
+    if (so->so_q.tqh_first == NULL) {
+        so->so_options |= 0x2; /* SO_ACCEPTCONN */
+    }
+    if (backlog < 0) {
+        backlog = 0;
+    }
+    so->so_qlimit = min(backlog, D_0002E480);
+    _sce_pspnet_splunlock(s);
+    return 0;
+}
 #endif
 
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00004190);
+#endif
 
 #if FW_VERSION < 271
 s32 func_00004248(struct socket *so, struct mbuf *nam) {
@@ -384,7 +516,20 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_00004248);
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_000042D4);
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_00004404);
+s32 func_00004404(struct socket *so, s32 how) {
+    struct protosw *pr = so->so_proto;
+
+    if (!(how == 0 || how == 1 || how == 2)) {
+        return 22; /* EINVAL */
+    }
+    if (how == 0 || how == 2) {
+        func_000038BC(so);
+    }
+    if (how == 1 || how == 2) {
+        return pr->pr_usrreq(so, PRU_SHUTDOWN, NULL, NULL, NULL);
+    }
+    return 0;
+}
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_000046A8);
@@ -481,10 +626,27 @@ void func_000048B8(struct socket *so, struct sockbuf *sb) {
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_000048B8);
 #endif
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_00004944);
-
-static inline u32 min(u32 a, u32 b) {
-    return (a < b) ? a : b;
+s32 func_00004944(struct socket *so, u32 sndcc, u32 rcvcc) {
+    if (func_000049EC(&so->so_snd, sndcc) == 0) {
+        goto bad;
+    }
+    if (func_000049EC(&so->so_rcv, rcvcc) == 0) {
+        goto bad2;
+    }
+    if (so->so_rcv.sb_lowat == 0) {
+        so->so_rcv.sb_lowat = 1;
+    }
+    if (so->so_snd.sb_lowat == 0) {
+        so->so_snd.sb_lowat = MCLBYTES;
+    }
+    if (so->so_snd.sb_lowat > so->so_snd.sb_hiwat) {
+        so->so_snd.sb_lowat = so->so_snd.sb_hiwat;
+    }
+    return 0;
+bad2:
+    func_00004A3C(&so->so_snd);
+bad:
+    return 105; /* ENOBUFS */
 }
 
 s32 func_000049EC(struct sockbuf *sb, u32 cc) {

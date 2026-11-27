@@ -8,6 +8,20 @@
 struct mbuf;
 struct socket;
 
+/* libkern.h */
+static __inline u32 min(u32 a, u32 b) {
+    return (a < b) ? a : b;
+}
+static __inline u32 max(u32 a, u32 b) {
+    return (a > b) ? a : b;
+}
+static __inline s32 imin(s32 a, s32 b) {
+    return (a < b) ? a : b;
+}
+static __inline s32 imax(s32 a, s32 b) {
+    return (a > b) ? a : b;
+}
+
 #define TAILQ_HEAD(name, type) struct name { struct type *tqh_first; struct type **tqh_last; }
 #define TAILQ_ENTRY(type) struct { struct type *tqe_next; struct type **tqe_prev; }
 
@@ -47,14 +61,14 @@ struct protosw {
     s16 pr_flags;                   /* 0x0A */
     void (*pr_input)();             /* 0x0C */
     s32 (*pr_output)();             /* 0x10 */
-    void *(*pr_ctlinput)();         /* 0x14 */
+    void *(*pr_ctlinput)(s32 cmd, struct sockaddr *sa, void *v); /* 0x14 */
     s32 (*pr_ctloutput)();          /* 0x18 */
     s32 (*pr_usrreq)(struct socket *so, s32 req, struct mbuf *m, struct mbuf *nam, struct mbuf *control); /* 0x1C */
     void (*pr_init)(void);          /* 0x20 */
     void (*pr_fasttimo)(void);      /* 0x24 */
     void (*pr_slowtimo)(void);      /* 0x28 */
     void (*pr_drain)(void);         /* 0x2C */
-    s32 (*pr_sysctl)();             /* 0x30 */
+    s32 (*pr_sysctl)(s32 *name, u32 namelen, void *oldp, u32 *oldlenp, void *newp, u32 newlen); /* 0x30 */
 };
 
 #define PRU_ATTACH      0
@@ -111,11 +125,42 @@ struct socket {
 #define SS_CANTSENDMORE     0x010
 #define SS_CANTRCVMORE      0x020
 #define SS_RCVATMARK        0x040
-#define SS_PRIV             0x080
-#define SS_NBIO             0x100
-#define SS_ASYNC            0x200
-#define SS_ISCONFIRMING     0x400
+#define SS_NBIO             0x080
+#define SS_ASYNC            0x100
+#define SS_ISCONFIRMING     0x200
+#define SS_MORETOCOME       0x400
 #define SS_ISDISCONNECTED   0x800
+
+#define PR_ATOMIC       0x01
+#define PR_ADDR         0x02
+#define PR_CONNREQUIRED 0x04
+#define PR_WANTRCVD     0x08
+#define PR_RIGHTS       0x10
+
+#define M_WAITOK 0
+#define M_DONTWAIT 1
+
+#define sb_notify(sb) (((sb)->sb_flags & (SB_WAIT | SB_SEL | SB_ASYNC | SB_UPCALL)) != 0)
+#define sbspace(sb) \
+    ((s32)imin((s32)((sb)->sb_hiwat - (sb)->sb_cc), (s32)((sb)->sb_mbmax - (sb)->sb_mbcnt)))
+#define sblock(sb, wf) ((sb)->sb_flags & SB_LOCK ? \
+        (((wf) == M_WAITOK) ? func_00005934(sb) : 11) : \
+        ((sb)->sb_flags |= SB_LOCK), 0)
+#define sbunlock(sb) { \
+    (sb)->sb_flags &= ~SB_LOCK; \
+    if ((sb)->sb_flags & SB_WANT) { \
+        (sb)->sb_flags &= ~SB_WANT; \
+        _sce_pspnet_wakeup(&(sb)->sb_flags); \
+    } \
+}
+#define sorwakeup(so) do { \
+        if (sb_notify(&(so)->so_rcv)) \
+            func_000048B8((so), &(so)->so_rcv); \
+    } while (0)
+#define sowwakeup(so) do { \
+        if (sb_notify(&(so)->so_snd)) \
+            func_000048B8((so), &(so)->so_snd); \
+    } while (0)
 
 /* struct ifqueue (4.4BSD if.h) */
 struct ifqueue {
@@ -127,23 +172,51 @@ struct ifqueue {
 };
 #define IFQ_MAXLEN 50
 
-/* struct mbuf (MSIZE 0x100); allocated by pspnet ifhandle (sceNetMGet...) */
+/* struct mbuf (NetBSD 1.5 mbuf.h; MSIZE 0x100; SCE pkthdr is 0x1C bytes) */
+struct m_ext {
+    u8 *ext_buf;                /* 0x30 */
+    void (*ext_free)(u8 *buf, u32 size, void *arg); /* 0x34 */
+    void *ext_arg;              /* 0x38 */
+    u32 ext_size;               /* 0x3C */
+    s32 ext_type;               /* 0x40 */
+    struct mbuf *ext_nextref;   /* 0x44 */
+    struct mbuf *ext_prevref;   /* 0x48 */
+};
 struct mbuf {
     struct mbuf *m_next;        /* 0x00 */
     struct mbuf *m_nextpkt;     /* 0x04 */
     u8 *m_data;                 /* 0x08 */
     s32 m_len;                  /* 0x0C */
-    s16 m_type;                 /* 0x10 */
+    s16 m_type;                 /* 0x10 MT_* */
     u16 m_flags;                /* 0x12 M_* */
-    void *m_pkthdr_rcvif;       /* 0x14 */
-    s32 m_pkthdr_len;           /* 0x18 */
-    struct mbuf *m_pkthdr_aux;  /* 0x1C */
-    u8 unk20[0x3C - 0x20];
-    u32 m_ext_size;             /* 0x3C */
-    u8 unk40[4];
-    struct mbuf *m_ext_nextref; /* 0x44 */
-    struct mbuf *m_ext_prevref; /* 0x48 */
+    struct {
+        struct ifnet *rcvif;    /* 0x14 */
+        s32 len;                /* 0x18 */
+        struct mbuf *aux;       /* 0x1C */
+        u8 unk20[0x10];
+    } m_pkthdr;
+    struct m_ext m_ext;         /* 0x30 (M_EXT) */
 };
+#define MT_DATA     1
+#define MT_HEADER   2
+#define MT_SONAME   3
+#define MT_SOOPTS   4
+#define MT_CONTROL  6
+#define MT_OOBDATA  7
+#define MCLBYTES    2048
+
+#define sballoc(sb, m) { \
+    (sb)->sb_cc += (m)->m_len; \
+    (sb)->sb_mbcnt += MSIZE; \
+    if ((m)->m_flags & M_EXT) \
+        (sb)->sb_mbcnt += (m)->m_ext.ext_size; \
+}
+#define sbfree(sb, m) { \
+    (sb)->sb_cc -= (m)->m_len; \
+    (sb)->sb_mbcnt -= MSIZE; \
+    if ((m)->m_flags & M_EXT) \
+        (sb)->sb_mbcnt -= (m)->m_ext.ext_size; \
+}
 
 #define M_EXT       0x0001
 #define M_PKTHDR    0x0002
@@ -158,7 +231,7 @@ struct domain {
     char *dom_name;                     /* 0x04 */
     void (*dom_init)(void);             /* 0x08 */
     s32 (*dom_externalize)();           /* 0x0C */
-    void (*dom_dispose)();              /* 0x10 */
+    void (*dom_dispose)(struct mbuf *m); /* 0x10 */
     struct protosw *dom_protosw;        /* 0x14 */
     struct protosw *dom_protoswNPROTOSW; /* 0x18 */
     struct domain *dom_next;            /* 0x1C */
@@ -928,7 +1001,10 @@ extern s32 *D_0002C5BC;
 extern u32 D_0002C5D4; /* tcp_iss_seq */
 extern s32 D_0002C5D8;
 extern u8 D_0002C5DC[];
-extern s32 D_0002CC4C; /* tcp_now */
+extern s32 D_0002CC4C; /* pfslowtimo_now (SCE tcp timers are absolute slowtimo ticks) */
+extern u8 D_0002CC50[]; /* pffasttimo_ch */
+extern u8 D_0002CC74[]; /* pfslowtimo_ch */
+extern s32 D_0002CC98; /* pffasttimo_now */
 extern struct soqhead D_0002CC9C;
 extern s32 D_0002CCB4;
 extern struct radix_node_head *D_0002CCB8[32]; /* rt_tables */
@@ -955,7 +1031,7 @@ extern struct SceTailqHead D_0002DC98[13];
 extern s32 D_0002DD04;
 extern u8 D_0002DD10[];
 extern s32 D_0002DF50;
-extern s32 D_0002E480;
+extern s32 D_0002E480; /* somaxconn */
 extern s32 D_0002E5EC;
 extern s32 D_0002E5F0;
 extern s32 D_0002E798;
@@ -1028,23 +1104,35 @@ s32 func_00001D78(void);
 void func_00001DD8(struct socket *so);
 void func_00001DF4(void);
 void func_00001FA4(void);
-s32 func_00002028(s32, s32);
-s32 func_000023A8(s32);
+void func_00002028(s32 cmd, struct sockaddr *sa);
+void func_000020C4(void *arg);
+void func_00002168(void *arg);
+void func_000023A8(struct socket *so);
 s32 func_0000243C(struct socket *so);
+void func_000038BC(struct socket *so);
 void func_000040FC(void);
 s32 func_00004124(struct socket *so, struct mbuf *nam);
+s32 func_00004190(struct socket *so, s32 backlog);
 s32 func_0000431C(struct socket *so, struct mbuf *nam);
+s32 func_00004404(struct socket *so, s32 how);
 void func_000044AC(struct socket *so);
+void func_0000453C(struct socket *so);
 void func_000046A8(struct socket *so);
 void func_000047DC(struct socket *head, struct socket *so, s32 q);
+s32 func_00004838(struct socket *so, s32 q);
 void func_000048B8(struct socket *so, struct sockbuf *sb);
+s32 func_00004944(struct socket *so, u32 sndcc, u32 rcvcc);
+s32 func_000049EC(struct sockbuf *sb, u32 cc);
 void func_00004A3C(struct sockbuf *sb);
+void func_00004A68(struct sockbuf *sb, struct mbuf *m0);
+void func_00004E28(struct sockbuf *sb, struct mbuf *m, struct mbuf *n);
 void func_00005008(struct sockbuf *sb);
 void func_00005050(struct sockbuf *sb, s32 len);
 struct socket *func_00005700(s32 s);
 void func_00005778(struct socket *so);
 void func_0000588C(struct socket *so);
 void func_000058CC(struct socket *so);
+s32 func_00005934(struct sockbuf *sb);
 void func_00005964(struct socket *so);
 void func_00005A78(struct socket *so);
 void func_00005AB8(struct socket *so);
@@ -1199,7 +1287,7 @@ s32 sceNetConfigAddArp(s32, s32);
 s32 sceNetConfigDelArp(s32, s32);
 s32 sceNetConfigGetArpInfo(s32, s32);
 s32 sceNetConfigGetRouteInfo(s32 *len, void *buf);
-M2C_UNK sceNetFreeInternal(void *);
+void sceNetFreeInternal(void *p);
 s32 sceNetInetInetAddr(s32 arg0);
 void sceNetInetInetAton(s32 arg0, s32 arg1);
 const char *sceNetInetInetNtop(s32 af, const void *src, char *dst, s32 size);
