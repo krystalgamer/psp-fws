@@ -3,6 +3,16 @@
 #include "k1.h"
 #include "power_decls.h"
 
+/* shiftK1 whose `srl $k1` the assembler can't move into a call's delay slot:
+   no power version has it in one (1.00 scePowerIsPowerOnline keeps
+   `jal sceSysconIsAcSupplied; nop`). */
+static inline u32 shiftK1NoSlot(void) {
+    u32 oldK1;
+
+    __asm__ __volatile__(".set noreorder\n\tmove %0, $27\n\tsrl $27, $27, 16\n\t.set reorder" : "=r"(oldK1));
+    return oldK1;
+}
+
 INCLUDE_ASM("nonmatchings/power", scePowerInit);
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
@@ -442,10 +452,23 @@ void scePower_D6D016EF(s32 arg0) {
 }
 #endif
 
+#if FW_VERSION == 100
+s32 scePower_CA3D34C1(s32 lockType) {
+    s32 ret;
+    u32 oldK1 = shiftK1();
+
+    ret = func_000014A0(lockType, 1);
+    setK1(oldK1);
+    return ret;
+}
+#else
 INCLUDE_ASM("nonmatchings/power", scePower_CA3D34C1);
+#endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/power", scePower_driver_CA3D34C1);
+void scePower_driver_CA3D34C1(s32 arg0) {
+    func_000014A0(arg0, 0);
+}
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
@@ -455,9 +478,18 @@ void scePower_driver_CA3D34C1(s32 arg0) {
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/power", func_00001334);
+s32 func_00001334(s32 lockType) {
+    s32 ret;
+    u32 oldK1 = shiftK1();
 
-INCLUDE_ASM("nonmatchings/power", func_00001364);
+    ret = func_0000157C(lockType, 1);
+    setK1(oldK1);
+    return ret;
+}
+
+s32 func_00001364(s32 lockType) {
+    return func_0000157C(lockType, 0);
+}
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
@@ -532,16 +564,13 @@ s32 scePowerRequestSuspendTouchAndGo(void) {
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/power", scePowerRequestColdReset);
-
 #endif
 
 #if FW_VERSION < 282
 s32 scePowerGetResumeCount(void) {
     return D_00003E00.resumeCount;
 }
-#endif
 
-#if FW_VERSION < 282
 s32 scePowerSetWakeupCondition(s32 arg0) {
     D_00003E00.wakeupCondition = arg0;
     return 0;
@@ -725,7 +754,12 @@ s32 scePowerIdleTimerDisable(void) {
 INCLUDE_ASM("nonmatchings/power", scePowerIdleTimerDisable);
 #endif
 
-INCLUDE_ASM("nonmatchings/power", func_00002F98);
+u32 func_00002F98(void) {
+    u32 gp;
+
+    __asm__ __volatile__("move %0, $gp" : "=r"(gp));
+    return gp;
+}
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/power", func_0000294C);
@@ -890,11 +924,35 @@ s32 scePowerGetDdrStrength(s32 *arg0, s32 *arg1) {
 INCLUDE_ASM("nonmatchings/power", scePowerSetDdrStrength);
 #endif
 
+#if FW_VERSION == 100
+s32 scePowerLimitScCpuClock(s32 lower, s32 upper) {
+    D_00008F84.scCpuClockLowerLimit = lower;
+    D_00008F84.scCpuClockUpperLimit = upper;
+    return 0;
+}
+#else
 INCLUDE_ASM("nonmatchings/power", scePowerLimitScCpuClock);
+#endif
 
+#if FW_VERSION == 100
+s32 scePowerLimitScBusClock(s32 lower, s32 upper) {
+    D_00008F84.scBusClockLowerLimit = lower;
+    D_00008F84.scBusClockUpperLimit = upper;
+    return 0;
+}
+#else
 INCLUDE_ASM("nonmatchings/power", scePowerLimitScBusClock);
+#endif
 
+#if FW_VERSION == 100
+s32 scePowerLimitPllClock(s32 lower, s32 upper) {
+    D_00008F84.pllClockLowerLimit = lower;
+    D_00008F84.pllClockUpperLimit = upper;
+    return 0;
+}
+#else
 INCLUDE_ASM("nonmatchings/power", scePowerLimitPllClock);
+#endif
 
 #if FW_VERSION >= 350
 s32 scePower_driver_F06B96D4(s32 arg0) {
@@ -1046,9 +1104,16 @@ INCLUDE_ASM("nonmatchings/power", scePowerGetBatteryChargingStatus);
 
 INCLUDE_ASM("nonmatchings/power", scePowerIsSuspendRequired);
 
+#if FW_VERSION == 100
+s32 scePowerGetBatteryRemainCapacity(void) {
+    if (D_00008FC8.batteryAvailabilityStatus != 2) {
+        return 0x802B0100;
+    }
+    return D_00008FC8.batteryRemainingCapacity;
+}
+#else
 INCLUDE_ASM("nonmatchings/power", scePowerGetBatteryRemainCapacity);
 
-#if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/power", scePowerGetBatteryLifeTime);
 #endif
 
@@ -1286,7 +1351,14 @@ INCLUDE_ASM("nonmatchings/power", scePowerBatteryForbidCharging);
 INCLUDE_ASM("nonmatchings/power", scePowerBatteryPermitCharging);
 #endif
 
-INCLUDE_ASM("nonmatchings/power", scePowerIsPowerOnline);
+s32 scePowerIsPowerOnline(void) {
+    s32 ret;
+    u32 oldK1 = shiftK1NoSlot();
+
+    ret = sceSysconIsAcSupplied();
+    setK1(oldK1);
+    return ret;
+}
 
 #if FW_VERSION >= 150
 s32 scePowerIsBatteryExist(void) {
@@ -1313,17 +1385,56 @@ s32 scePowerIsBatteryCharging(void) {
 
 INCLUDE_ASM("nonmatchings/power", scePowerIsLowBattery);
 
-INCLUDE_ASM("nonmatchings/power", scePowerGetBatteryFullCapacity);
-
-INCLUDE_ASM("nonmatchings/power", scePowerGetBatteryLifePercent);
-
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/power", scePowerGetBatteryLifeTime);
+s32 scePowerGetBatteryFullCapacity(void) {
+    if (D_00008FC8.batteryAvailabilityStatus != 2) {
+        return 0x802B0100;
+    }
+    return D_00008FC8.batteryFullCapacity;
+}
+#else
+INCLUDE_ASM("nonmatchings/power", scePowerGetBatteryFullCapacity);
 #endif
 
-INCLUDE_ASM("nonmatchings/power", scePowerGetBatteryTemp);
+#if FW_VERSION == 100
+s32 scePowerGetBatteryLifePercent(void) {
+    if (D_00008FC8.batteryAvailabilityStatus != 2) {
+        return 0x802B0100;
+    }
+    return D_00008FC8.batteryLifePercentage;
+}
+#else
+INCLUDE_ASM("nonmatchings/power", scePowerGetBatteryLifePercent);
+#endif
 
+#if FW_VERSION == 100
+s32 scePowerGetBatteryLifeTime(void) {
+    if (D_00008FC8.batteryAvailabilityStatus != 2) {
+        return 0x802B0100;
+    }
+    return D_00008FC8.limitTime;
+}
+
+s32 scePowerGetBatteryTemp(void) {
+    if (D_00008FC8.batteryAvailabilityStatus != 2) {
+        return 0x802B0100;
+    }
+    return D_00008FC8.batteryTemp;
+}
+#else
+INCLUDE_ASM("nonmatchings/power", scePowerGetBatteryTemp);
+#endif
+
+#if FW_VERSION == 100
+s32 scePowerGetBatteryVolt(void) {
+    if (D_00008FC8.batteryAvailabilityStatus != 2) {
+        return 0x802B0100;
+    }
+    return D_00008FC8.batteryVoltage;
+}
+#else
 INCLUDE_ASM("nonmatchings/power", scePowerGetBatteryVolt);
+#endif
 
 #if FW_VERSION >= 310
 INCLUDE_ASM("nonmatchings/power", scePowerGetBatteryChargeCycle);
