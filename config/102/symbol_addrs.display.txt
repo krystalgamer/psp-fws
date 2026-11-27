@@ -73,3 +73,35 @@ sceSysregApbTimerClkDisable = 0x00001E18; // type:func rom:0x1E98
 sceSysregApbTimerClkSelect = 0x00001E20; // type:func rom:0x1EA0
 D_000020D0_v102 = 0x000020D0; // rom:0x2150
 // shared names (tools/add_version.py) end
+
+// NID-derived names
+module_reboot_before = 0x00000000; // type:func
+sceKernelInitApitype = 0x00001C90; // type:func
+sceKernelRegisterIntrHandler = 0x00001CB0; // type:func
+sceKernelSetUserModeIntrHanlerAcceptable = 0x00001CB8; // type:func
+sceKernelEnableIntr = 0x00001CC8; // type:func
+sceKernelDisableIntr = 0x00001CD0; // type:func
+sceKernelRegisterSubIntrHandler = 0x00001CE0; // type:func
+sceKernelEnableSubIntr = 0x00001CF0; // type:func
+Kprintf = 0x00001CF8; // type:func
+sceKernelSm1ReferOperations = 0x00001D00; // type:func
+memcpy = 0x00001D08; // type:func
+memset = 0x00001D10; // type:func
+sceKernelCreateEventFlag = 0x00001D18; // type:func
+sceKernelWaitEventFlag = 0x00001D38; // type:func
+sceKernelWaitEventFlagCB = 0x00001D40; // type:func
+sceKernelDcacheWritebackAll = 0x00001D48; // type:func
+sceDmacplusLcdcSetBaseAddr = 0x00001D50; // type:func
+sceDmacplusLcdcGetBaseAddr = 0x00001D58; // type:func
+sceDmacplusLcdcGetFormat = 0x00001D68; // type:func
+sceGeEdramGetSize = 0x00001D80; // type:func
+sceGeEdramGetAddr = 0x00001D88; // type:func
+sceGpioPortRead = 0x00001D90; // type:func
+sceGpioPortSet = 0x00001D98; // type:func
+sceGpioPortClear = 0x00001DA0; // type:func
+sceGpioSetPortMode = 0x00001DA8; // type:func
+sceLcdcCheckMode = 0x00001DB0; // type:func
+sceLcdcReset = 0x00001DC0; // type:func
+scePwmReferDuty = 0x00001DF0; // type:func
+sceKernelRegisterSysEventHandler = 0x00001DF8; // type:func
+sceSysregVblankIRQPolar = 0x00001E08; // type:func
