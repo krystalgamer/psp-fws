@@ -55,6 +55,7 @@ segments:
     subsegments:
       - { start: 0xA0, type: asm, name: init, linker_section: .init }
       - [0xC4, c, music_plugin]
+      - [0x1B04, c, music_plugin_04DA94]
       - [0x1FD0, c, music_plugin_crtend]
       - { start: 0x2028, type: asm, name: fini, linker_section: .fini }
       - { start: 0x2044, type: asm, name: sceStub, linker_section: .sceStub.text }

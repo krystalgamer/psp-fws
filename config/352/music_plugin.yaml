@@ -54,6 +54,7 @@ segments:
     vram: 0x0
     subsegments:
       - [0xA0, c, music_plugin]
+      - [0x1DEC, c, music_plugin_04DA94]
       - [0x22B8, c, music_plugin_crtend]
       - { start: 0x232C, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x24EC, type: prxpad, order: .text }

@@ -55,6 +55,7 @@ segments:
     subsegments:
       - { start: 0x80, type: asm, name: init, linker_section: .init }
       - [0xA4, c, music_plugin]
+      - [0x519E4, c, music_plugin_04DA94]
       - [0x5C714, c, music_plugin_crtend]
       - { start: 0x5DFD8, type: asm, name: fini, linker_section: .fini }
       - { start: 0x5DFF4, type: asm, name: sceStub, linker_section: .sceStub.text }
@@ -75,6 +76,7 @@ segments:
       - { start: 0x5F4C8, type: rodata, name: eh_frame, linker_section: .eh_frame }
       - { start: 0x5F4FC, type: prxpad, order: .rodata }
       - [0x5F500, .rodata, music_plugin]
+      - [0x65350, .rodata, music_plugin_04DA94]
       - [0x65BC0, .rodata, music_plugin_crtend]
       - { start: 0x65DC8, type: prxpad, order: .rodata }
   - name: music_plugin_seg1

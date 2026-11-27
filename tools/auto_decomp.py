@@ -778,6 +778,8 @@ def full_build_ok(args):
 
 
 def verify_and_revert(mod, args, accepted_now=()):
+    if os.environ.get("AUTO_KEEP_BROKEN"):  # debugging: leave the unverified state
+        return
     _verify_functions(mod, args)
     if full_build_ok(args):
         return
