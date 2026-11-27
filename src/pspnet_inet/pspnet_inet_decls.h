@@ -826,23 +826,23 @@ struct tcpcb {
     u32 snd_wl1;                /* 0x4C */
     u32 snd_wl2;                /* 0x50 */
     u32 iss;                    /* 0x54 */
-    u32 snd_wnd;                /* 0x58 */
+    unsigned long snd_wnd;                /* 0x58 */
     u32 snd_recover;            /* 0x5C */
-    u32 rcv_wnd;                /* 0x60 */
+    unsigned long rcv_wnd;                /* 0x60 */
     u32 rcv_nxt;                /* 0x64 */
     u32 rcv_up;                 /* 0x68 */
     u32 irs;                    /* 0x6C */
     u32 rcv_adv;                /* 0x70 */
     u32 snd_max;                /* 0x74 */
-    u32 snd_cwnd;               /* 0x78 */
-    u32 snd_ssthresh;           /* 0x7C */
+    unsigned long snd_cwnd;               /* 0x78 */
+    unsigned long snd_ssthresh;           /* 0x7C */
     s16 t_idle;                 /* 0x80 */
     s16 t_rtt;                  /* 0x82 */
     u32 t_rtseq;                /* 0x84 */
     s16 t_srtt;                 /* 0x88 */
     s16 t_rttvar;               /* 0x8A */
     s16 t_rttmin;               /* 0x8C */
-    u32 max_sndwnd;             /* 0x90 */
+    unsigned long max_sndwnd;             /* 0x90 */
     s8 t_oobflags;              /* 0x94 */
     s8 t_iobc;                  /* 0x95 */
     s16 t_softerror;            /* 0x96 */
