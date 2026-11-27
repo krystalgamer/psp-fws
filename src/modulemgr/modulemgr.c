@@ -683,7 +683,22 @@ INCLUDE_RODATA("nonmatchings/modulemgr", D_00006E28);
 #if FW_VERSION == 100
 INCLUDE_RODATA("nonmatchings/modulemgr", D_00004C90);
 
-INCLUDE_ASM("nonmatchings/modulemgr", func_0000066C);
+s32 func_0000066C(SceUID mpid) {
+    SceSysmemPartitionInfo info;
+    s32 ret;
+
+    info.size = sizeof(info);
+    ret = sceKernelQueryMemoryPartitionInfo(mpid, &info);
+    if (ret < 0) {
+        Kprintf(D_00006DF4, "IsUserModulePartition", D_00006E28, ret, mpid);
+        return ret;
+    }
+    if ((info.attr & 3) == 0) {
+        Kprintf("modulemgr.c:%s:SCE_KERNEL_ERROR_ILLEGAL_PERM: 0x%08x [for user]\n", "IsUserModulePartition", mpid);
+        return 0x800200D1;
+    }
+    return 0;
+}
 
 INCLUDE_ASM("nonmatchings/modulemgr", func_00000718);
 #endif
@@ -875,7 +890,25 @@ INCLUDE_ASM("nonmatchings/modulemgr", func_00001BD8);
 
 INCLUDE_ASM("nonmatchings/modulemgr", func_00001D78);
 
-INCLUDE_ASM("nonmatchings/modulemgr", func_00002090);
+s32 func_00002090(SceModule *mod) {
+    u32 status;
+
+    status = mod->status & 0xF;
+    switch (status) {
+    case 2:
+    case 3:
+    case 7:
+        break;
+    default:
+        Kprintf("modulemgr.c:%s:SCE_KERNEL_ERROR_NOT_REMOVABLE: 0x%x\n", "UnloadModule", status);
+        return 0x80020138;
+    }
+    wmemset((void *)mod->textAddr, 0x4D, mod->textSize);
+    memset((void *)(mod->textAddr + mod->textSize), -1, mod->dataSize + mod->bssSize);
+    func_00000594(mod);
+    func_000001D8((s32)mod);
+    return 0;
+}
 
 INCLUDE_ASM("nonmatchings/modulemgr", func_00002140);
 

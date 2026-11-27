@@ -70,6 +70,7 @@
   "sceKernelModuleFromUID": "SceModule *sceKernelModuleFromUID(SceUID modId);",
   "sceKernelModuleMgrMode": "s32 sceKernelModuleMgrMode(void);",
   "sceKernelProbeExecutableObject": "M2C_UNK sceKernelProbeExecutableObject();",
+  "sceKernelQueryMemoryPartitionInfo": "s32 sceKernelQueryMemoryPartitionInfo(SceUID mpid, SceSysmemPartitionInfo *info);",
   "sceKernelRegisterLibrary": "M2C_UNK sceKernelRegisterLibrary();",
   "sceKernelRegisterLibraryForUser": "M2C_UNK sceKernelRegisterLibraryForUser();",
   "sceKernelRegisterModule": "s32 sceKernelRegisterModule(s32);",
@@ -79,20 +80,24 @@
   "sceKernelSearchModuleByName": "SceUID sceKernelSearchModuleByName(const char *name);",
   "sceKernelSuspendThread": "s32 sceKernelSuspendThread(u32);",
   "sceKernelUnLinkLibraryEntries": "M2C_UNK sceKernelUnLinkLibraryEntries();",
-  "sceKernelWaitSema": "s32 sceKernelWaitSema(s32, s32, void *);"
+  "sceKernelWaitSema": "s32 sceKernelWaitSema(s32, s32, void *);",
+  "wmemset": "void *wmemset(void *s, s32 c, SceSize n);"
  },
  "types": {
   "ModuleMgrExecModes": "enum ModuleMgrExecModes {\n    CMD_LOAD_MODULE,\n    CMD_RELOCATE_MODULE,\n    CMD_START_MODULE,\n    CMD_STOP_MODULE,\n    CMD_UNLOAD_MODULE\n};",
   "SceKernelLMOption": "typedef struct {\n    SceSize size;\n    SceUID mpIdText;\n    SceUID mpIdData;\n    u32 flags;\n    u8 position;\n    u8 access;\n    u8 cReserved[2];\n} SceKernelLMOption;",
   "SceKernelSMOption": "typedef struct {\n    SceSize size;\n    SceUID mpIdStack;\n    SceSize stackSize;\n    s32 priority;\n    u32 attribute;\n} SceKernelSMOption;",
-  "SceModule": "typedef struct SceModule {\n    struct SceModule *next;\n    u16 attribute;\n    u8 version[2];\n    char modName[27];\n    char terminal;\n    u16 status;\n    u16 padding;\n    SceUID secId;\n    SceUID modId;\n} SceModule;",
+  "SceModule": "typedef struct SceModule {\n    struct SceModule *next;\n    u16 attribute;\n    u8 version[2];\n    char modName[27];\n    char terminal;\n    u16 status;\n    u16 padding;\n    SceUID secId;\n    SceUID modId;\n#if FW_VERSION == 100\n    SceUID userModThid;\n    SceUID memId;\n    SceUID mpIdText;\n    SceUID mpIdData;\n    void *entTop;\n    SceSize entSize;\n    void *stubTop;\n    SceSize stubSize;\n    void *moduleStart;\n    void *moduleStop;\n    void *moduleBootstart;\n    void *moduleRebootBefore;\n    u32 entryAddr;\n    u32 gpValue;\n    u32 textAddr;\n    SceSize textSize;\n    SceSize dataSize;\n    SceSize bssSize;\n#endif\n} SceModule;",
   "SceModuleManagerCB": "typedef struct SceModuleLink {\n    struct SceModuleLink *next;\n    struct SceModuleLink *prev;\n} SceModuleLink;\n\ntypedef struct {\n    SceUID threadId;\n    SceUID semaId;\n    SceUID eventId;\n    SceUID userThreadId;\n    SceModuleLink list;\n} SceModuleManagerCB;",
   "SceModuleMgrParam": "#if FW_VERSION == 100\ntypedef struct SceModuleMgrParam {\n    u8 modeStart;\n    u8 modeFinish;\n    u8 position;\n    u8 access;\n    u32 apiType;\n    SceUID *pResult;\n    SceModule *pMod;\n    SceUID mpIdText;\n    SceUID mpIdData;\n    SceUID threadMpIdStack;\n    SceSize stackSize;\n    s32 threadPriority;\n    u32 threadAttr;\n    SceUID modId;\n    SceUID callerModId;\n    SceUID fd;\n    void *pExecInfo;\n    void *fileBase;\n    SceSize argSize;\n    void *argp;\n    u32 unk44;\n    u32 unk48;\n    s32 *pStatus;\n    SceUID eventId;\n    u32 unk54;\n    u32 unk58;\n} SceModuleMgrParam;\n#else\ntypedef struct SceModuleMgrParam SceModuleMgrParam;\n#endif",
   "SceOff": "typedef s64 SceOff;",
+  "SceSysmemPartitionInfo": "typedef struct {\n    SceSize size;\n    u32 startAddr;\n    u32 memSize;\n    u32 attr;\n} SceSysmemPartitionInfo;",
   "Unk_func_000004C0_0": "struct Unk_func_000004C0_0 {\n    u8 pad0[0x2];\n    u8 unk2;\n    u8 unk3;\n    u8 pad4[0x10];\n    s32 unk14;\n    s32 unk18;\n    u8 pad1C[0x20];\n    s32 unk3C;\n    u8 pad40[0xC];\n    s32 unk4C;\n    s32 unk50;\n    u8 pad54[0xC];\n    s32 unk60;\n};",
   "Unk_func_000004C0_1": "struct Unk_func_000004C0_1 {\n    u8 pad0[0x4];\n    s32 unk4;\n    s32 unk8;\n    u8 padC[0x4];\n    u8 unk10;\n    u8 unk11;\n};"
  },
  "vars": {
+  "D_00004C90": "extern char D_00004C90[];",
+  "D_00004CF0": "extern char D_00004CF0[];",
   "D_00005AF0": "extern u32 D_00005AF0;",
   "D_00005B90": "extern char D_00005B90[];",
   "D_00005BBC": "extern char D_00005BBC[];",
@@ -105,6 +110,8 @@
   "D_00006D34": "extern char D_00006D34[];",
   "D_00006D64": "extern char D_00006D64[];",
   "D_00006DA0": "extern s32 D_00006DA0;",
+  "D_00006DF4": "extern char D_00006DF4[];",
+  "D_00006E28": "extern char D_00006E28[];",
   "D_00007160": "extern u32 D_00007160;",
   "D_00008174": "extern s32 D_00008174;",
   "D_00008184": "extern s32 D_00008184;"

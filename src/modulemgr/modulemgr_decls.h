@@ -40,6 +40,26 @@ typedef struct SceModule {
     u16 padding;
     SceUID secId;
     SceUID modId;
+#if FW_VERSION == 100
+    SceUID userModThid;
+    SceUID memId;
+    SceUID mpIdText;
+    SceUID mpIdData;
+    void *entTop;
+    SceSize entSize;
+    void *stubTop;
+    SceSize stubSize;
+    void *moduleStart;
+    void *moduleStop;
+    void *moduleBootstart;
+    void *moduleRebootBefore;
+    u32 entryAddr;
+    u32 gpValue;
+    u32 textAddr;
+    SceSize textSize;
+    SceSize dataSize;
+    SceSize bssSize;
+#endif
 } SceModule;
 
 typedef struct SceModuleLink {
@@ -90,6 +110,13 @@ typedef struct SceModuleMgrParam SceModuleMgrParam;
 
 typedef s64 SceOff;
 
+typedef struct {
+    SceSize size;
+    u32 startAddr;
+    u32 memSize;
+    u32 attr;
+} SceSysmemPartitionInfo;
+
 struct Unk_func_000004C0_0 {
     u8 pad0[0x2];
     u8 unk2;
@@ -115,6 +142,8 @@ struct Unk_func_000004C0_1 {
     u8 unk11;
 };
 
+extern char D_00004C90[];
+extern char D_00004CF0[];
 extern u32 D_00005AF0;
 extern char D_00005B90[];
 extern char D_00005BBC[];
@@ -127,6 +156,8 @@ extern SceModuleManagerCB D_00006160;
 extern char D_00006D34[];
 extern char D_00006D64[];
 extern s32 D_00006DA0;
+extern char D_00006DF4[];
+extern char D_00006E28[];
 extern u32 D_00007160;
 extern s32 D_00008174;
 extern s32 D_00008184;
@@ -201,6 +232,7 @@ s32 sceKernelLockMutex(s32, s32, void *);
 SceModule *sceKernelModuleFromUID(SceUID modId);
 s32 sceKernelModuleMgrMode(void);
 M2C_UNK sceKernelProbeExecutableObject();
+s32 sceKernelQueryMemoryPartitionInfo(SceUID mpid, SceSysmemPartitionInfo *info);
 M2C_UNK sceKernelRegisterLibrary();
 M2C_UNK sceKernelRegisterLibraryForUser();
 s32 sceKernelRegisterModule(s32);
@@ -211,5 +243,6 @@ SceUID sceKernelSearchModuleByName(const char *name);
 s32 sceKernelSuspendThread(u32);
 M2C_UNK sceKernelUnLinkLibraryEntries();
 s32 sceKernelWaitSema(s32, s32, void *);
+void *wmemset(void *s, s32 c, SceSize n);
 
 #endif
