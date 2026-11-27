@@ -1352,7 +1352,91 @@ end:
     setK1(oldK1);
     return ret;
 }
-#else
+#endif
+
+#if FW_VERSION == 152
+s32 sceRegGetKeyValue(s32 hd, s32 keyId, void *buf, s32 size) {
+    s32 res;
+    s32 ret;
+    u32 oldK1;
+
+    oldK1 = shiftK1();
+    res = sceKernelWaitSema(g_semaId, 1, NULL);
+    ret = 0x80082733;
+    if (res != 0)
+        goto end;
+    if ((k1IsUserMode() && IS_USER_ADDR(keyId) == 0) ||
+        (k1IsUserMode() && IS_USER_ADDR((u32)buf | size | ((u32)buf + size)) == 0)) {
+        ret = 0x8008273B;
+        goto end;
+    }
+    ret = regGetKeyValue((SceRegIndexEntry *)hd, keyId, buf, size);
+end:
+    if (res == 0) {
+        res = sceKernelSignalSema(g_semaId, 1);
+        if (res != 0)
+            ret = 0x80082734;
+    }
+    setK1(oldK1);
+    return ret;
+}
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 271
+s32 sceRegGetKeyValue(s32 hd, s32 keyId, void *buf, s32 size) {
+    s32 res;
+    s32 ret;
+    u32 oldK1;
+
+    oldK1 = shiftK1();
+    res = sceKernelWaitSema(g_semaId, 1, NULL);
+    ret = 0x80082733;
+    if (res != 0)
+        goto end;
+    if (k1IsUserMode() && IS_USER_ADDR((u32)buf | size | ((u32)buf + size)) == 0) {
+        ret = 0x8008273B;
+        goto end;
+    }
+    ret = regGetKeyValue((SceRegIndexEntry *)hd, keyId, buf, size);
+end:
+    if (res == 0) {
+        res = sceKernelSignalSema(g_semaId, 1);
+        if (res != 0)
+            ret = 0x80082734;
+    }
+    setK1(oldK1);
+    return ret;
+}
+#endif
+
+#if FW_VERSION == 271
+s32 sceRegGetKeyValue(s32 hd, s32 keyId, void *buf, s32 size) {
+    s32 res;
+    s32 ret;
+    u32 oldK1;
+
+    oldK1 = shiftK1();
+    res = sceKernelWaitSema(g_semaId, 1, NULL);
+    ret = 0x80082733;
+    if (res != 0)
+        goto end;
+    if ((s32)(-k1IsUserMode() & (((u32)buf + size) | (u32)buf | size)) < 0) {
+        ret = 0x8008273B;
+        goto end;
+    }
+    ret = regGetKeyValue((SceRegIndexEntry *)hd, keyId, buf, size);
+end:
+    if (res == 0) {
+        res = sceKernelSignalSema(g_semaId, 1);
+        if (res != 0)
+            ret = 0x80082734;
+    }
+    setK1(oldK1);
+    return ret;
+}
+#endif
+
+#if FW_VERSION == 150 || FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/registry", sceRegGetKeyValue);
 #endif
 
