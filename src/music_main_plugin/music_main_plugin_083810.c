@@ -508,14 +508,14 @@ INCLUDE_ASM("nonmatchings/music_main_plugin_083810", func_00086BC4);
 
 INCLUDE_ASM("nonmatchings/music_main_plugin_083810", func_00086D80);
 
-void func_00086F9C(struct Unk_func_00086F9C_0 *arg0) {
+void func_00086F9C(struct Unk_func_00086A54_0 *arg0) {
     func_00089E34(arg0, (s32) &D_000A2098);
     arg0->unk0 = &D_000A20B8;
     arg0->unk20 = 0;
     arg0->unk24 = 0;
 }
 
-void func_00086FDC(struct Unk_func_00086F9C_0 *arg0) {
+void func_00086FDC(struct Unk_func_00086A54_0 *arg0) {
     func_00089E34(arg0, (s32) &D_000A2098);
     arg0->unk0 = &D_000A20B8;
     arg0->unk20 = 0;
