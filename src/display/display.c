@@ -293,7 +293,104 @@ s32 func_00000468(s32 id, char *name, void *param, s32 *result)
     return 0;
 }
 
-INCLUDE_ASM("nonmatchings/display", func_00000578);
+s32 func_00000578(void)
+{
+    s32 i;
+    s32 found;
+    void *addr;
+    s32 bufferWidth;
+    s32 pixelFormat;
+    s32 diff;
+    s32 level;
+    SceDisplayFrameBuf *fb;
+
+    if (g_display.curModeIdx != g_display.modeIdx) {
+        if (g_display.modeChangeWait >= 2) {
+            g_display.modeChangeWait--;
+            sceDmacplusLcdcSetBaseAddr(NULL);
+        } else if (g_display.modeChangeWait == 1) {
+            g_display.modeChangeWait = 0;
+            func_0000092C(g_display.modeIdx, g_display.width, g_display.height, g_display.bufferWidth, g_display.pixelFormat);
+            if (g_display.modeIdx == 0) {
+                g_display.sm1Ops->unk24(3);
+            } else {
+                g_display.sm1Ops->unk24(0);
+            }
+        } else {
+            sceLcdcReset();
+            g_display.curModeIdx = g_display.modeIdx;
+        }
+    } else {
+        found = -1;
+        addr = NULL;
+        fb = g_display.fb;
+        for (i = 0; i < 4; i++, fb++) {
+            if (fb->changed) {
+                fb->changed = 0;
+                fb->curTopaddr = fb->topaddr;
+            }
+            if (found == -1 && fb->curTopaddr != NULL) {
+                addr = fb->curTopaddr;
+                found = i;
+            }
+        }
+        if (found < 0) {
+            g_display.foregroundLevel = found;
+            sceDmacplusLcdcSetBaseAddr(NULL);
+        } else {
+            pixelFormat = g_display.fb[found].pixelFormat;
+            bufferWidth = g_display.fb[found].bufferWidth;
+            if (g_display.pixelFormat == pixelFormat && g_display.bufferWidth == bufferWidth) {
+                g_display.foregroundLevel = found;
+                sceDmacplusLcdcSetBaseAddr(addr);
+            } else if (sceDisplayGetVblankRest() < 3) {
+                g_display.fb[found].changed = 1;
+                g_display.fb[found].topaddr = g_display.fb[found].curTopaddr;
+                found = g_display.foregroundLevel;
+                addr = NULL;
+                if (found >= 0) {
+                    addr = g_display.fb[i].curTopaddr;
+                }
+                sceDmacplusLcdcSetBaseAddr(addr);
+            } else {
+                g_display.foregroundLevel = found;
+                sceDmacplusLcdcSetBaseAddr(addr);
+                func_0000092C(g_display.modeIdx, g_display.width, g_display.height, bufferWidth, pixelFormat);
+            }
+        }
+    }
+    if (g_display.lcdOn != g_display.enabled) {
+        g_display.lcdOn = g_display.enabled;
+        if (g_display.lcdOn) {
+            sceGpioPortSet(1);
+        } else {
+            sceGpioPortClear(1);
+        }
+    }
+    if (g_display.brightnessFade) {
+        level = g_display.curBrightness;
+        diff = g_display.brightness - level;
+        if (diff > 2) {
+            level += 2;
+        } else if (diff < 2) {
+            level -= 2;
+        } else {
+            g_display.brightnessFade = 0;
+            level = g_display.brightness;
+        }
+        func_00000868(level);
+    }
+    if (g_display.pwmState == 2) {
+        g_display.pwmState = 1;
+    } else if (g_display.pwmState == 1) {
+        g_display.pwmState = 0;
+        scePwmStart(1, 0x18, 0x19, 0x19);
+    }
+    if (g_display.suspendWait > 0) {
+        g_display.suspendWait--;
+    }
+    return -1;
+}
 #endif
 
 #if FW_VERSION < 271
