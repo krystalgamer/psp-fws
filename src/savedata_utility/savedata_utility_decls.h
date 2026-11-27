@@ -122,6 +122,15 @@ public:
 };
 #endif
 
+#ifdef __cplusplus
+/* vtable _ZTV14Class_00024FE8 (vptr D_00024FE8) */
+class Class_00024FE8 : public Class_00025148 {
+public:
+    Class_00024FE8(s32 owner);
+    virtual ~Class_00024FE8();
+};
+#endif
+
 struct D_00025C48_s {
     s32 unk0;
     s32 unk4;
@@ -988,9 +997,6 @@ s32 func_0000827C(s32, s32, s32, s32);
 s32 func_000082A4(s32 arg0);
 s32 func_000082C4(void *arg0, s32 arg1);
 s32 func_000084B0(s32, s32);
-void func_00008674(M2C_UNK **arg0);
-void func_0000869C(M2C_UNK **arg0);
-void func_000086C4(M2C_UNK **arg0);
 s32 func_00008754(void *arg0, s32 arg1);
 void func_00008D74(M2C_UNK **arg0);
 void func_00008D9C(M2C_UNK **arg0);
@@ -1072,10 +1078,7 @@ void func_0000CDAC(struct Unk_func_0000CDAC_0 *arg0);
 s32 func_0000CF6C(s32);
 s32 func_0000CFD4(struct Unk_func_0000CFD4_0 *arg0);
 void ***func_0000CFF0(void ***arg0, void *arg1, void **arg2);
-void func_0000D3F4(M2C_UNK **arg0);
 void func_0000D414(void *arg0);
-void func_0000D41C(M2C_UNK **arg0);
-void func_0000D444(M2C_UNK **arg0);
 M2C_UNK func_0000D570(M2C_UNK);
 s32 func_0000D57C(void);
 s32 func_0000D588(struct Unk_func_0000D588_0 *arg0);

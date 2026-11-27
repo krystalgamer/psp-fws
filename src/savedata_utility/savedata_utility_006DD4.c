@@ -1049,27 +1049,17 @@ INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_0000D98C);
 INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_0000D2E8);
 #endif
 
-#if FW_VERSION < 250 || FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_0000D3C4);
+/* 2.50-2.71 and 2.82+: the C2 copy has no symbol (only C1 is called), so it is still
+   part of the preceding asm function there */
+#if FW_VERSION < 250
+Class_00024FE8::Class_00024FE8(s32 owner) : Class_00025148(owner) {
+}
+#else
+INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", _ZN14Class_00024FE8C1Ei);
 #endif
 
 #if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_00008644);
-
-void func_00008674(M2C_UNK **arg0) {
-    *arg0 = &D_00024FE8;
-    _ZN14Class_00025148D2Ev(arg0);
-}
-
-void func_0000869C(M2C_UNK **arg0) {
-    *arg0 = &D_00024FE8;
-    _ZN14Class_00025148D2Ev(arg0);
-}
-
-void func_000086C4(M2C_UNK **arg0) {
-    *arg0 = &D_00024FE8;
-    _ZN14Class_00025148D2Ev(arg0);
-    _ZdlPv(arg0);
+Class_00024FE8::~Class_00024FE8() {
 }
 #endif
 
@@ -1488,26 +1478,7 @@ INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_0000A184);
 #endif
 
 #if FW_VERSION >= 282
-void func_0000D3F4(M2C_UNK **arg0) {
-    *arg0 = &D_00024FE8;
-    _ZN14Class_00025148D2Ev(arg0);
-}
-
-void func_0000D41C(M2C_UNK **arg0) {
-    *arg0 = &D_00024FE8;
-    _ZN14Class_00025148D2Ev(arg0);
-}
-#endif
-
-#if FW_VERSION >= 350
-INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_0000D444);
-#endif
-
-#if FW_VERSION >= 282 && FW_VERSION < 350
-void func_0000D444(M2C_UNK **arg0) {
-    *arg0 = &D_00024FE8;
-    _ZN14Class_00025148D2Ev(arg0);
-    _ZdlPv(arg0);
+Class_00024FE8::~Class_00024FE8() {
 }
 #endif
 
@@ -2089,3 +2060,6 @@ INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_00010E7C);
 
 INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_00010EF8);
 #endif
+
+/* vtable of Class_00024FE8 (data; every version includes D_00024FE8 above) */
+__asm__(".globl _ZTV14Class_00024FE8\n_ZTV14Class_00024FE8 = D_00024FE8 - 8\n");
