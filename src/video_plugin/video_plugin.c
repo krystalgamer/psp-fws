@@ -1,3 +1,4 @@
+/* lang: c++ */
 /* cflags[152]: -O2 */
 /* cflags[150]: -O2 */
 /* cflags[100]: -O2 */
@@ -2544,14 +2545,14 @@ INCLUDE_ASM("nonmatchings/video_plugin", func_0000A350);
 #if FW_VERSION < 201
 void func_0000A350(s32 **arg0) {
     *arg0 = &D_00041668;
-    _ZdlPv();
+    _ZdlPv(arg0);
 }
 #endif
 
 #if FW_VERSION == 260
 void func_0000A350(M2C_UNK **arg0) {
     *arg0 = &D_00041668;
-    _ZdlPv();
+    _ZdlPv(arg0);
 }
 #endif
 
@@ -4797,14 +4798,14 @@ INCLUDE_ASM("nonmatchings/video_plugin", func_0001384C);
 #if FW_VERSION < 201
 void func_0001384C(s32 **arg0) {
     *arg0 = &D_00042760;
-    _ZdlPv();
+    _ZdlPv(arg0);
 }
 #endif
 
 #if FW_VERSION == 260
 void func_0001384C(M2C_UNK **arg0) {
     *arg0 = &D_00042760;
-    _ZdlPv();
+    _ZdlPv(arg0);
 }
 #endif
 
@@ -5552,7 +5553,7 @@ INCLUDE_ASM("nonmatchings/video_plugin", func_00019ED4);
 #if FW_VERSION == 260
 void func_00019ED4(M2C_UNK **arg0) {
     *arg0 = &D_00044830;
-    _ZdlPv();
+    _ZdlPv(arg0);
 }
 #endif
 
@@ -6126,7 +6127,7 @@ INCLUDE_ASM("nonmatchings/video_plugin", func_0001CE1C);
 #endif
 
 #if FW_VERSION == 260
-M2C_UNK *func_0001CE1C(void) {
+const char *func_0001CE1C(void) {
     return "play";
 }
 #endif
@@ -6156,7 +6157,7 @@ INCLUDE_ASM("nonmatchings/video_plugin", func_0001CE54);
 #endif
 
 #if FW_VERSION == 260
-M2C_UNK *func_0001CE54(void) {
+const char *func_0001CE54(void) {
     return "stop";
 }
 #endif
@@ -6182,7 +6183,7 @@ INCLUDE_ASM("nonmatchings/video_plugin", func_0001CE84);
 #endif
 
 #if FW_VERSION == 260
-M2C_UNK *func_0001CE84(void) {
+const char *func_0001CE84(void) {
     return "resume";
 }
 #endif
@@ -6200,7 +6201,7 @@ INCLUDE_ASM("nonmatchings/video_plugin", func_0001CEB4);
 #endif
 
 #if FW_VERSION == 260
-M2C_UNK *func_0001CEB4(void) {
+const char *func_0001CEB4(void) {
     return "playStep";
 }
 #endif
@@ -6214,7 +6215,7 @@ INCLUDE_ASM("nonmatchings/video_plugin", func_0001CF2C);
 #endif
 
 #if FW_VERSION == 260
-M2C_UNK *func_0001CF2C(void) {
+const char *func_0001CF2C(void) {
     return "changeStream";
 }
 #endif
@@ -6240,7 +6241,7 @@ INCLUDE_ASM("nonmatchings/video_plugin", func_0001CF60);
 #endif
 
 #if FW_VERSION == 260
-M2C_UNK *func_0001CF60(void) {
+const char *func_0001CF60(void) {
     return "changeResumeInfo";
 }
 #endif
@@ -6292,8 +6293,8 @@ INCLUDE_ASM("nonmatchings/video_plugin", func_0001CA60);
 #endif
 
 #if FW_VERSION < 201 || FW_VERSION == 260
-void func_0001CA60(void) {
-    _Z11PSJS_Mallocj();
+void func_0001CA60(s32 arg0) {
+    _Z11PSJS_Mallocj(arg0);
 }
 #endif
 
@@ -6302,8 +6303,8 @@ INCLUDE_ASM("nonmatchings/video_plugin", func_0001CA7C);
 #endif
 
 #if FW_VERSION < 201 || FW_VERSION == 260
-void func_0001CA7C(void) {
-    _Z9PSJS_FreePv();
+void func_0001CA7C(s32 arg0) {
+    _Z9PSJS_FreePv(arg0);
 }
 #endif
 
@@ -6312,8 +6313,8 @@ INCLUDE_ASM("nonmatchings/video_plugin", func_0001CA98);
 #endif
 
 #if FW_VERSION < 201 || FW_VERSION == 260
-void func_0001CA98(void) {
-    _Z11PSJS_Mallocj();
+void func_0001CA98(s32 arg0) {
+    _Z11PSJS_Mallocj(arg0);
 }
 #endif
 
@@ -6322,8 +6323,8 @@ INCLUDE_ASM("nonmatchings/video_plugin", func_0001CAB4);
 #endif
 
 #if FW_VERSION < 201 || FW_VERSION == 260
-void func_0001CAB4(void) {
-    _Z9PSJS_FreePv();
+void func_0001CAB4(s32 arg0) {
+    _Z9PSJS_FreePv(arg0);
 }
 #endif
 
@@ -6332,8 +6333,8 @@ INCLUDE_ASM("nonmatchings/video_plugin", func_0001CAD0);
 #endif
 
 #if FW_VERSION < 201 || FW_VERSION == 260
-void func_0001CAD0(void) {
-    _Z11PSJS_Mallocj();
+void func_0001CAD0(s32 arg0) {
+    _Z11PSJS_Mallocj(arg0);
 }
 #endif
 
@@ -6342,8 +6343,8 @@ INCLUDE_ASM("nonmatchings/video_plugin", func_0001CAEC);
 #endif
 
 #if FW_VERSION < 201 || FW_VERSION == 260
-void func_0001CAEC(void) {
-    _Z9PSJS_FreePv();
+void func_0001CAEC(s32 arg0) {
+    _Z9PSJS_FreePv(arg0);
 }
 #endif
 
@@ -6352,8 +6353,8 @@ INCLUDE_ASM("nonmatchings/video_plugin", func_0001CB08);
 #endif
 
 #if FW_VERSION < 201 || FW_VERSION == 260
-void func_0001CB08(void) {
-    _Z11PSJS_Mallocj();
+void func_0001CB08(s32 arg0) {
+    _Z11PSJS_Mallocj(arg0);
 }
 #endif
 
@@ -6362,8 +6363,8 @@ INCLUDE_ASM("nonmatchings/video_plugin", func_0001CB24);
 #endif
 
 #if FW_VERSION < 201 || FW_VERSION == 260
-void func_0001CB24(void) {
-    _Z9PSJS_FreePv();
+void func_0001CB24(s32 arg0) {
+    _Z9PSJS_FreePv(arg0);
 }
 #endif
 
@@ -6372,8 +6373,8 @@ INCLUDE_ASM("nonmatchings/video_plugin", func_0001CB40);
 #endif
 
 #if FW_VERSION < 201 || FW_VERSION == 260
-void func_0001CB40(void) {
-    _Z11PSJS_Mallocj();
+void func_0001CB40(s32 arg0) {
+    _Z11PSJS_Mallocj(arg0);
 }
 #endif
 
@@ -6382,8 +6383,8 @@ INCLUDE_ASM("nonmatchings/video_plugin", func_0001CB5C);
 #endif
 
 #if FW_VERSION < 201 || FW_VERSION == 260
-void func_0001CB5C(void) {
-    _Z9PSJS_FreePv();
+void func_0001CB5C(s32 arg0) {
+    _Z9PSJS_FreePv(arg0);
 }
 #endif
 
@@ -6446,24 +6447,24 @@ void func_0001EFDC(M2C_UNK **arg0) {
 #endif
 
 #if FW_VERSION == 100
-void func_0001CB78(void) {
-    _Z11PSJS_Mallocj();
+void func_0001CB78(s32 arg0) {
+    _Z11PSJS_Mallocj(arg0);
 }
 
-void func_0001CB94(void) {
-    _Z9PSJS_FreePv();
+void func_0001CB94(s32 arg0) {
+    _Z9PSJS_FreePv(arg0);
 }
 
-void func_0001CBB0(void) {
-    _Z11PSJS_Mallocj();
+void func_0001CBB0(s32 arg0) {
+    _Z11PSJS_Mallocj(arg0);
 }
 
-void func_0001CBCC(void) {
-    _Z9PSJS_FreePv();
+void func_0001CBCC(s32 arg0) {
+    _Z9PSJS_FreePv(arg0);
 }
 
-void func_0001CBE8(void) {
-    _Z11PSJS_Mallocj();
+void func_0001CBE8(s32 arg0) {
+    _Z11PSJS_Mallocj(arg0);
 }
 #endif
 
@@ -6474,20 +6475,20 @@ INCLUDE_ASM("nonmatchings/video_plugin", func_0001CC04);
 #if FW_VERSION >= 150 && FW_VERSION < 201
 void func_0001CC04(s32 **arg0) {
     *arg0 = &D_00047FE0;
-    func_0001CB5C();
+    func_0001CB5C(arg0);
 }
 #endif
 
 #if FW_VERSION == 100
 void func_0001CC04(s32 **arg0) {
-    _Z9PSJS_FreePv();
+    _Z9PSJS_FreePv(arg0);
 }
 #endif
 
 #if FW_VERSION == 260
 void func_0001CC04(M2C_UNK **arg0) {
     *arg0 = &D_00047FE0;
-    func_0001CB5C();
+    func_0001CB5C(arg0);
 }
 #endif
 
@@ -6514,20 +6515,20 @@ INCLUDE_ASM("nonmatchings/video_plugin", func_0001CC20);
 #if FW_VERSION >= 150 && FW_VERSION < 201
 void func_0001CC20(s32 **arg0) {
     *arg0 = &D_00047FE0;
-    func_0001CB5C();
+    func_0001CB5C(arg0);
 }
 #endif
 
 #if FW_VERSION == 100
 void func_0001CC20(s32 **arg0) {
-    _Z11PSJS_Mallocj();
+    _Z11PSJS_Mallocj(arg0);
 }
 #endif
 
 #if FW_VERSION == 260
 void func_0001CC20(M2C_UNK **arg0) {
     *arg0 = &D_00047FE0;
-    func_0001CB5C();
+    func_0001CB5C(arg0);
 }
 #endif
 
@@ -6554,20 +6555,20 @@ INCLUDE_ASM("nonmatchings/video_plugin", func_0001CC3C);
 #if FW_VERSION >= 150 && FW_VERSION < 201
 void func_0001CC3C(s32 **arg0) {
     *arg0 = &D_00047FE0;
-    func_0001CB5C();
+    func_0001CB5C(arg0);
 }
 #endif
 
 #if FW_VERSION == 100
 void func_0001CC3C(s32 **arg0) {
-    _Z9PSJS_FreePv();
+    _Z9PSJS_FreePv(arg0);
 }
 #endif
 
 #if FW_VERSION == 260
 void func_0001CC3C(M2C_UNK **arg0) {
     *arg0 = &D_00047FE0;
-    func_0001CB5C();
+    func_0001CB5C(arg0);
 }
 #endif
 
@@ -6594,20 +6595,20 @@ INCLUDE_ASM("nonmatchings/video_plugin", func_0001CC58);
 #if FW_VERSION >= 150 && FW_VERSION < 201
 void func_0001CC58(s32 **arg0) {
     *arg0 = &D_00047FE0;
-    func_0001CB5C();
+    func_0001CB5C(arg0);
 }
 #endif
 
 #if FW_VERSION == 100
 void func_0001CC58(s32 **arg0) {
-    _Z11PSJS_Mallocj();
+    _Z11PSJS_Mallocj(arg0);
 }
 #endif
 
 #if FW_VERSION == 260
 void func_0001CC58(M2C_UNK **arg0) {
     *arg0 = &D_00047FE0;
-    func_0001CB5C();
+    func_0001CB5C(arg0);
 }
 #endif
 
@@ -6634,20 +6635,20 @@ INCLUDE_ASM("nonmatchings/video_plugin", func_0001CC74);
 #if FW_VERSION >= 150 && FW_VERSION < 201
 void func_0001CC74(s32 **arg0) {
     *arg0 = &D_00047FE0;
-    func_0001CB5C();
+    func_0001CB5C(arg0);
 }
 #endif
 
 #if FW_VERSION == 100
 void func_0001CC74(s32 **arg0) {
-    _Z9PSJS_FreePv();
+    _Z9PSJS_FreePv(arg0);
 }
 #endif
 
 #if FW_VERSION == 260
 void func_0001CC74(M2C_UNK **arg0) {
     *arg0 = &D_00047FE0;
-    func_0001CB5C();
+    func_0001CB5C(arg0);
 }
 #endif
 
@@ -6674,20 +6675,20 @@ INCLUDE_ASM("nonmatchings/video_plugin", func_0001CC90);
 #if FW_VERSION >= 150 && FW_VERSION < 201
 void func_0001CC90(s32 **arg0) {
     *arg0 = &D_00047FE0;
-    func_0001CB5C();
+    func_0001CB5C(arg0);
 }
 #endif
 
 #if FW_VERSION == 100
 void func_0001CC90(s32 **arg0) {
-    _Z11PSJS_Mallocj();
+    _Z11PSJS_Mallocj(arg0);
 }
 #endif
 
 #if FW_VERSION == 260
 void func_0001CC90(M2C_UNK **arg0) {
     *arg0 = &D_00047FE0;
-    func_0001CB5C();
+    func_0001CB5C(arg0);
 }
 #endif
 
@@ -6714,20 +6715,20 @@ INCLUDE_ASM("nonmatchings/video_plugin", func_0001CCAC);
 #if FW_VERSION >= 150 && FW_VERSION < 201
 void func_0001CCAC(s32 **arg0) {
     *arg0 = &D_00047FE0;
-    func_0001CB5C();
+    func_0001CB5C(arg0);
 }
 #endif
 
 #if FW_VERSION == 100
 void func_0001CCAC(s32 **arg0) {
-    _Z9PSJS_FreePv();
+    _Z9PSJS_FreePv(arg0);
 }
 #endif
 
 #if FW_VERSION == 260
 void func_0001CCAC(M2C_UNK **arg0) {
     *arg0 = &D_00047FE0;
-    func_0001CB5C();
+    func_0001CB5C(arg0);
 }
 #endif
 
