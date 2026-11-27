@@ -441,13 +441,13 @@ INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", tcp_mtudisc);
 #endif
 
 #if FW_VERSION < 151
-u32 func_0002559C(struct ifnet *ifp, s32 af) {
+u32 tcp_mss_to_advertise(struct ifnet *ifp, s32 af) {
     u32 mss = 0;
     u32 hdrsiz;
 
     if (ifp != NULL)
         mss = ifp->if_mtu;
-    if (D_0002EC1C == 0)
+    if (tcp_mss_ifmtu == 0)
         mss = max(in_maxmtu, mss);
     switch (af) {
     case AF_INET:

@@ -1523,7 +1523,6 @@ extern s32 D_0002EB8C;
 extern s32 D_0002EB90;
 extern s32 D_0002EB94;
 extern char D_0002EBB0[16]; /* inet_ntoa buf */
-extern s32 D_0002EC1C;
 extern char D_0002F288[18] __attribute__((aligned(4)));
 extern s32 D_0002F500;
 extern s32 D_0002F50C;
@@ -1566,6 +1565,7 @@ extern s32 tcp_compat_42; /* tcp_compat_42 */
 extern struct tcpcb *tcp_delacks; /* tcp_delacks */
 extern u32 tcp_iss_seq; /* tcp_iss_seq */
 extern s32 tcp_maxidle;
+extern s32 tcp_mss_ifmtu;
 extern struct tcpstat tcp_stat;
 extern struct inpcbtable udbtable;
 extern struct in_addr zeroin_addr; /* zeroin_addr */
