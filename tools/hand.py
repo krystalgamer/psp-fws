@@ -96,21 +96,23 @@ def main():
     ents.insert(k, FM.Entry(cand, "cfunc", name, body))
     f.write_text(FM.emit(ents, fv))
     keep, drop, fails = [], [], {}
+    # versions build into their own tmp/build/<v>: build them in parallel
+    import os
+    from concurrent.futures import ThreadPoolExecutor
+    allv = [(n, v) for n in sorted(cand) for v in byfw[n]]
+    with ThreadPoolExecutor(int(os.environ.get("HAND_JOBS", "4"))) as ex:
+        res = dict(zip(allv, ex.map(lambda nv: build(nv[1], a.module), allv)))
     for n in sorted(cand):
-        ok = True
-        for v in byfw[n]:
-            good, out = build(v, a.module)
-            if not good:
-                ok = False
-                fails.setdefault(n, out)
-                break
-        (keep if ok else drop).append(n)
+        bad = [res[(n, v)][1] for v in byfw[n] if not res[(n, v)][0]]
+        if bad:
+            fails.setdefault(n, bad[0])
+        (drop if bad else keep).append(n)
     if not keep:
         out = fails.get(fw(a.ver)) or next(iter(fails.values()), "")
         for p, t in orig.items():
             p.write_text(t)
         build(a.ver, a.module)
-        errs = [l for l in out.splitlines() if re.search(r"error|Error|differ|FAIL|mismatch", l)]
+        errs = [l for l in out.splitlines() if re.search(r"error:|warning: implicit|differ|FAILED|mismatch", l)]
         print(f"{name}: no version matches; build output for {a.ver}:")
         print("\n".join((errs or out.splitlines())[-15:]))
         sys.exit(1)
