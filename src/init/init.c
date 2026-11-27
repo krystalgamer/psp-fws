@@ -15,15 +15,11 @@ INCLUDE_RODATA("nonmatchings/init", D_00001EB8);
 INCLUDE_RODATA("nonmatchings/init", D_00001DC8);
 #endif
 
-#if FW_VERSION >= 102 && FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/init", func_00000028);
+#if (FW_VERSION >= 102 && FW_VERSION < 150) || FW_VERSION >= 201
+INCLUDE_ASM("nonmatchings/init", sceKernelGetChunk);
 
-INCLUDE_ASM("nonmatchings/init", func_0000007C);
-
-INCLUDE_ASM("nonmatchings/init", func_000000DC);
-#endif
-
-#if FW_VERSION == 100 || (FW_VERSION >= 150 && FW_VERSION < 201)
+INCLUDE_ASM("nonmatchings/init", sceKernelRegisterChunk);
+#else
 s32 sceKernelGetChunk(s32 arg0) {
     s32 var_v0;
 
@@ -35,13 +31,7 @@ s32 sceKernelGetChunk(s32 arg0) {
     }
     return var_v0;
 }
-#endif
 
-#if FW_VERSION >= 201
-INCLUDE_ASM("nonmatchings/init", sceKernelGetChunk);
-#endif
-
-#if FW_VERSION == 100 || (FW_VERSION >= 150 && FW_VERSION < 201)
 s32 sceKernelRegisterChunk(u32 chunkId, s32 blockId) {
     if (chunkId < 16) {
         D_00002248[chunkId] = blockId;
@@ -50,10 +40,6 @@ s32 sceKernelRegisterChunk(u32 chunkId, s32 blockId) {
     Kprintf(D_00001DC8, "sceKernelRegisterChunk");
     return 0x800200DE;
 }
-#endif
-
-#if FW_VERSION >= 201
-INCLUDE_ASM("nonmatchings/init", sceKernelRegisterChunk);
 #endif
 
 #if FW_VERSION == 100 || (FW_VERSION >= 150 && FW_VERSION < 152)
@@ -65,9 +51,7 @@ s32 sceKernelReleaseChunk(u32 chunkId) {
     Kprintf(D_00001DC8, "sceKernelReleaseChunk");
     return 0x800200DE;
 }
-#endif
-
-#if FW_VERSION >= 152
+#else
 INCLUDE_ASM("nonmatchings/init", sceKernelReleaseChunk);
 #endif
 
@@ -247,20 +231,12 @@ s32 sceKernelInitApitype(void) {
 }
 #endif
 
-#if FW_VERSION == 103
-INCLUDE_ASM("nonmatchings/init", func_00001A98);
-#endif
-
-#if FW_VERSION == 102
-INCLUDE_ASM("nonmatchings/init", func_00001A7C);
+#if (FW_VERSION >= 102 && FW_VERSION < 201) || FW_VERSION >= 350
+INCLUDE_ASM("nonmatchings/init", sceKernelBootFrom);
 #endif
 
 #if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/init", func_00001AC4);
-#endif
-
-#if (FW_VERSION >= 150 && FW_VERSION < 201) || FW_VERSION >= 350
-INCLUDE_ASM("nonmatchings/init", sceKernelBootFrom);
 #endif
 
 #if FW_VERSION == 150
