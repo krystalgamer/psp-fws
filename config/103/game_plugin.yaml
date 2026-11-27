@@ -1,0 +1,85 @@
+name: game_plugin (103)
+sha1: 08b734c4168cec2d40f354f91898283bbce0732f
+options:
+  basename: game_plugin
+  target_path: tmp/baserom/103/game_plugin.prx
+  elf_path: tmp/build/103/game_plugin.elf
+  base_path: ../..
+  platform: psp
+  compiler: GCC
+
+  asm_path: tmp/asm/103/game_plugin
+  src_path: src/game_plugin
+  build_path: tmp/build/103
+  ld_script_path: tmp/build/103/game_plugin.ld
+  cache_path: tmp/build/103/.splat_cache.game_plugin
+  symbol_addrs_path:
+    - config/103/symbol_addrs.game_plugin.txt
+    - tmp/build/103/prx_syms.game_plugin.txt
+  reloc_addrs_path: [tmp/build/103/reloc_addrs.game_plugin.txt]
+  asset_path: tmp/assets/103/game_plugin
+  extensions_path: tools/splat_ext
+  undefined_funcs_auto_path: tmp/build/103/undefined_funcs_auto.game_plugin.txt
+  undefined_syms_auto_path: tmp/build/103/undefined_syms_auto.game_plugin.txt
+
+  find_file_boundaries: true
+  section_order: [".text", ".data", ".rodata", ".bss"]
+  migrate_rodata_to_functions: true
+  use_legacy_include_asm: false
+  asm_function_macro: glabel
+  asm_jtbl_label_macro: jlabel
+  asm_data_macro: dlabel
+  asm_end_label: endlabel
+  string_encoding: ASCII
+  data_string_encoding: ASCII
+  rodata_string_guesser_level: 2
+  data_string_guesser_level: 2
+  gp_value: 0x8170
+  add_set_gp_64: false
+  named_regs_for_c_funcs: false
+  ld_bss_is_noload: true
+  emit_subalign: false
+  ld_align_segment_vram_end: false
+  ld_align_section_vram_end: false
+  disasm_unknown: true
+  global_vram_start: 0x0
+  global_vram_end: 0x12214
+
+segments:
+  - [0x0, bin, elf_header]
+  - name: game_plugin
+    type: code
+    start: 0x80
+    vram: 0x0
+    subsegments:
+      - { start: 0x80, type: asm, name: init, linker_section: .init }
+      - [0xA4, asm, game_plugin]
+      - { start: 0x1072C, type: asm, name: fini, linker_section: .fini }
+      - { start: 0x10748, type: asm, name: sceStub, linker_section: .sceStub.text }
+      - { start: 0x10CA8, type: prxpad, order: .text }
+      - { start: 0x10CB0, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
+      - { start: 0x10CB4, type: rodata, name: lib_ent, linker_section: .lib.ent }
+      - { start: 0x10CC4, type: rodata, name: lib_ent_btm, linker_section: .lib.ent.btm }
+      - { start: 0x10CC8, type: rodata, name: lib_stub_top, linker_section: .lib.stub.top }
+      - { start: 0x10CCC, type: rodata, name: lib_stub, linker_section: .lib.stub }
+      - { start: 0x10D68, type: rodata, name: lib_stub_btm, linker_section: .lib.stub.btm }
+      - { start: 0x10D6C, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
+      - { start: 0x10DA0, type: rodata, name: resident, linker_section: .rodata.sceResident }
+      - { start: 0x10E40, type: rodata, name: nid, linker_section: .rodata.sceNid }
+      - { start: 0x110F0, type: rodata, name: rodata_sceVstub, linker_section: .rodata.sceVstub }
+      - { start: 0x111F8, type: rodata, name: ctors, linker_section: .ctors }
+      - { start: 0x11208, type: rodata, name: dtors, linker_section: .dtors }
+      - { start: 0x11218, type: rodata, name: jcr, linker_section: .jcr }
+      - { start: 0x1121C, type: rodata, name: eh_frame, linker_section: .eh_frame }
+      - [0x11220, rodata, game_plugin]
+      - { start: 0x11F68, type: prxpad, order: .rodata }
+  - name: game_plugin_seg1
+    type: code
+    start: 0x11F70
+    vram: 0x11EF0
+    bss_size: 0x19C
+    subsegments:
+      - [0x11F70, data, game_plugin_data]
+      - { start: 0x120E8, type: bss, vram: 0x12070 }
+  - [0x120E8, bin, elf_trailer]
+  - [0x19238]
