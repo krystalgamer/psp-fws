@@ -49,7 +49,6 @@ extern s32 D_00007800;
 extern s32 D_00007880;
 extern s32 D_00007AF4;
 
-M2C_UNK sceKernelReleaseIntrHandler(M2C_UNK);
 s32 func_000001E4(void *arg0);
 void func_00000930(s32 arg0);
 s32 func_00000C1C(struct Unk_func_00000C1C_0 *arg0);
@@ -89,14 +88,15 @@ s32 sceKernelClearEventFlag(u32, u32);
 s32 sceKernelDelayThread(u32);
 u32 sceKernelGetSystemTimeLow(void);
 s32 sceKernelGetThreadCurrentPriority(void);
-s32 sceMScmHCLastStatus(struct Unk_sceMScm_driver_0A054CDA_0 *arg0);
-s32 sceMScmSetPullDownReg(s32);
-s32 sceMScmResetHC(s32, s32);
+M2C_UNK sceKernelReleaseIntrHandler(M2C_UNK);
 s32 sceMScmClearALEvents(struct Unk_sceMScm_driver_B01C378C_0 *arg0);
+s32 sceMScmHCLastStatus(struct Unk_sceMScm_driver_0A054CDA_0 *arg0);
 void sceMScmIconResetIcon(s32 arg0);
-s32 sceMScm_driver_D6DB3199(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
+s32 sceMScmResetHC(s32, s32);
+s32 sceMScmSetPullDownReg(s32);
 s32 sceMScmSetPullDownRegByDesc(void *arg0);
 s32 sceMScmSetSlotPower(s32, s32);
+s32 sceMScm_driver_D6DB3199(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
 M2C_UNK sceSysregMsifIoDisable(s32);
 M2C_UNK sceSysregMsifIoEnable(s32);
 
