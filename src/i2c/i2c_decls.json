@@ -1,5 +1,6 @@
 {
  "funcs": {
+  "func_00001264": "s32 func_00001264();",
   "module_reboot_before": "s32 module_reboot_before(void);",
   "sceI2cEnd": "s32 sceI2cEnd(void);",
   "sceI2cReset": "s32 sceI2cReset(void);",
@@ -8,24 +9,30 @@
   "sceI2cSetDebugHandlers": "s32 sceI2cSetDebugHandlers(s32 arg0);",
   "sceI2cSetPollingMode": "s32 sceI2cSetPollingMode(s32 arg0);",
   "sceI2cSuspend": "s32 sceI2cSuspend(void);",
+  "sceKernelCreateEventFlag": "s32 sceKernelCreateEventFlag(const char *, u32, s32, void *);",
+  "sceKernelCreateSema": "s32 sceKernelCreateSema(const char *, u32, s32, s32, void *);",
   "sceKernelDelayThread": "s32 sceKernelDelayThread(u32);",
   "sceKernelDeleteEventFlag": "s32 sceKernelDeleteEventFlag(s32);",
   "sceKernelDeleteMutex": "s32 sceKernelDeleteMutex(s32);",
   "sceKernelDeleteSema": "s32 sceKernelDeleteSema(s32);",
+  "sceKernelRegisterIntrHandler": "s32 sceKernelRegisterIntrHandler(s32, s32, void *, void *, void *);",
+  "sceKernelRegisterSysEventHandler": "s32 sceKernelRegisterSysEventHandler(void *);",
   "sceKernelReleaseIntrHandler": "M2C_UNK sceKernelReleaseIntrHandler(M2C_UNK);",
   "sceKernelUnregisterSysEventHandler": "M2C_UNK sceKernelUnregisterSysEventHandler(M2C_UNK *);",
   "sceSysregIicClkDisable": "M2C_UNK sceSysregIicClkDisable();",
-  "sceSysregIicClkEnable": "M2C_UNK sceSysregIicClkEnable();",
+  "sceSysregIicClkEnable": "s32 sceSysregIicClkEnable(void);",
   "sceSysregIicIoDisable": "M2C_UNK sceSysregIicIoDisable();",
-  "sceSysregIicIoEnable": "M2C_UNK sceSysregIicIoEnable();"
+  "sceSysregIicIoEnable": "s32 sceSysregIicIoEnable(void);"
  },
  "types": {
-  "D_00001730_s": "struct D_00001730_s {\n    volatile s32 unk0;\n    volatile s32 unk4;\n    u8 pad8[0x8];\n    volatile s32 unk10;\n    volatile s32 unk14;\n};"
+  "D_00001730_s": "struct D_00001730_s {\n    volatile s32 unk0;\n    volatile s32 unk4;\n    u8 pad8[0x8];\n    volatile s32 unk10;\n    volatile s32 unk14;\n};",
+  "hand_sceI2cInit": "typedef struct {\n    s32 eventFlag;\n    s32 sema;\n    s32 unk8;\n#if FW_VERSION >= 150\n    s32 unkC_150;\n#endif\n    s32 unkC;\n    s32 unk10;\n    s32 unk14;\n} SceI2cState;"
  },
  "vars": {
   "D_00001570": "extern s32 D_00001570;",
-  "D_000015B0": "extern M2C_UNK D_000015B0;",
+  "D_000015B0": "extern SceI2cState D_000015B0;",
   "D_000015B8": "extern s32 D_000015B8;",
+  "D_000016E0": "extern char D_000016E0[];",
   "D_000016E0_v300": "extern s32 D_000016E0_v300;",
   "D_000016E0_v301": "extern s32 D_000016E0_v301;",
   "D_000016E0_v302": "extern s32 D_000016E0_v302;",

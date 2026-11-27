@@ -28,7 +28,30 @@ INCLUDE_ASM("nonmatchings/i2c", sceI2cMasterReceive);
 
 INCLUDE_ASM("nonmatchings/i2c", sceI2cMasterTransmitReceive);
 
+#if FW_VERSION < 201
+s32 module_start(void) {
+    D_000015B0.eventFlag = 0;
+    D_000015B0.sema = 0;
+    D_000015B0.unk8 = 0;
+#if FW_VERSION >= 150
+    D_000015B0.unkC_150 = 0;
+#endif
+    D_000015B0.unkC = 0;
+    D_000015B0.unk10 = 0;
+    D_000015B0.unk14 = 0;
+    sceSysregIicClkEnable();
+    sceSysregIicIoEnable();
+    D_000015B0.unkC = 9;
+    D_000015B0.unk10 = 9;
+    D_000015B0.sema = sceKernelCreateSema(D_000016E0, 1, 1, 1, NULL);
+    D_000015B0.eventFlag = sceKernelCreateEventFlag(D_000016E0, 1, 0, NULL);
+    sceKernelRegisterIntrHandler(12, 1, func_00001264, NULL, NULL);
+    sceKernelRegisterSysEventHandler(&D_00001570);
+    return 0;
+}
+#else
 INCLUDE_ASM("nonmatchings/i2c", module_start);
+#endif
 
 #if FW_VERSION < 282
 s32 module_reboot_before(void) {
@@ -38,9 +61,36 @@ s32 module_reboot_before(void) {
     sceKernelDeleteEventFlag(M2C_VFIELD(&D_000015B0, s32, 0));
     return 0;
 }
+#endif
 
+#if FW_VERSION < 201
+s32 sceI2cInit(void) {
+    D_000015B0.eventFlag = 0;
+    D_000015B0.sema = 0;
+    D_000015B0.unk8 = 0;
+#if FW_VERSION >= 150
+    D_000015B0.unkC_150 = 0;
+#endif
+    D_000015B0.unkC = 0;
+    D_000015B0.unk10 = 0;
+    D_000015B0.unk14 = 0;
+    sceSysregIicClkEnable();
+    sceSysregIicIoEnable();
+    D_000015B0.unkC = 9;
+    D_000015B0.unk10 = 9;
+    D_000015B0.sema = sceKernelCreateSema(D_000016E0, 1, 1, 1, NULL);
+    D_000015B0.eventFlag = sceKernelCreateEventFlag(D_000016E0, 1, 0, NULL);
+    sceKernelRegisterIntrHandler(12, 1, func_00001264, NULL, NULL);
+    sceKernelRegisterSysEventHandler(&D_00001570);
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/i2c", sceI2cInit);
+#endif
 
+#if FW_VERSION < 282
 s32 sceI2cEnd(void) {
     sceKernelUnregisterSysEventHandler(&D_00001570);
     sceKernelReleaseIntrHandler(0xC);
