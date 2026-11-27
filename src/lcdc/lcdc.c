@@ -77,15 +77,9 @@ s32 sceLcdcReadVPC(void) {
     return v;
 }
 
-#if FW_VERSION >= 102 && FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/lcdc", func_00000524);
-#endif
-
-#if FW_VERSION == 100 || (FW_VERSION >= 150 && FW_VERSION < 271)
+#if FW_VERSION < 271
 INCLUDE_ASM("nonmatchings/lcdc", module_start);
-#endif
-
-#if FW_VERSION >= 271
+#else
 s32 module_start(void) {
     sceLcdcInit();
     return 0;
@@ -99,11 +93,7 @@ s32 module_reboot_before(void) {
 }
 #endif
 
-#if FW_VERSION >= 102 && FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/lcdc", func_000006D0);
-#endif
-
-#if FW_VERSION == 100 || (FW_VERSION >= 150 && FW_VERSION < 271)
+#if FW_VERSION < 271
 INCLUDE_ASM("nonmatchings/lcdc", sceLcdcInit);
 #endif
 
