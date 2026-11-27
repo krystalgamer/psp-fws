@@ -4,6 +4,12 @@
 #include "common.h"
 #include "m2c_macros.h"
 
+#ifdef __cplusplus
+#include "paf.h"
+#include "vsh.h"
+extern "C" {
+#endif
+
 struct Unk_func_00002340_0 {
     u8 pad0[0x8];
     u8 unk8;
@@ -484,7 +490,12 @@ extern s32 D_00022A00;
 extern s32 D_00025320;
 extern s32 D_00025B94;
 
-M2C_UNK func_00000000();
+M2C_UNK _ZN3paf8PhWidget11UpdateStateEv(s32);
+M2C_UNK _ZN3paf8PhWidgetD2Ev(void);
+M2C_UNK _ZdaPv(s32);
+M2C_UNK _ZdlPv(void *);
+s32 _Znwj(M2C_UNK);
+M2C_UNK func_00000000(...);
 M2C_UNK func_00000164(M2C_UNK, M2C_UNK);
 s32 func_00000324(s32, s32);
 void func_00000494(s32 arg0, s32 arg1);
@@ -571,7 +582,7 @@ s32 func_00006A08(s32);
 u8 func_00006D08(void *arg0);
 void ***func_000079E4(void ***arg0, struct Unk_func_000079E4_1 *arg1, void **arg2);
 void func_00007E20(s32 arg0);
-void *func_00007F9C();
+void *func_00007F9C(...);
 M2C_UNK func_00008048(s32, void *);
 s32 func_00008548(void);
 s32 func_00008550(void);
@@ -618,8 +629,8 @@ void func_0000E840(void);
 void func_0000E85C(struct Unk_func_0000E85C_0 *arg0);
 void func_0000E8AC(struct Unk_func_0000E8AC_0 *arg0, s32 arg1);
 s32 func_0000EC98(s32, s32);
-M2C_UNK func_0000ED64();
-M2C_UNK func_0000EDBC();
+M2C_UNK func_0000ED64(...);
+M2C_UNK func_0000EDBC(...);
 s32 func_0000EDE8(s32, s32);
 void func_0000EEE8(struct Unk_func_0000EEE8_0 *arg0);
 void func_0000EFB4(struct Unk_func_0000EFB4_0 *arg0);
@@ -719,7 +730,7 @@ M2C_UNK func_00016F0C(s32);
 s32 *func_00017040(s32 *arg0, M2C_UNK arg1, M2C_UNK arg2);
 void func_00017140(s32 arg0, s32 arg1);
 void ***func_00017184(void ***arg0, struct Unk_func_00017184_1 *arg1, void **arg2);
-M2C_UNK func_00017314();
+M2C_UNK func_00017314(...);
 s32 func_00017398(M2C_UNK, M2C_UNK);
 M2C_UNK func_000175D4(s32, void *);
 s32 func_00018120(struct Unk_func_00018120_0 *arg0, struct Unk_func_00018120_1 *arg1);
@@ -783,12 +794,12 @@ s32 func_0001CA14(s32 *arg0);
 void func_0001CAD8(M2C_UNK **arg0);
 void func_0001CB50(M2C_UNK **arg0);
 void func_0001CC14(void);
-M2C_UNK func_0001CD88();
+M2C_UNK func_0001CD88(...);
 M2C_UNK func_0001D4BC(s32, s32);
 void func_0001D55C(void);
 void func_0001D7A0(M2C_UNK **arg0);
 void func_0001D7C0(M2C_UNK **arg0);
-M2C_UNK func_0001E098();
+M2C_UNK func_0001E098(...);
 void func_00021F94(s32 **arg0);
 void func_00021FBC(s32 **arg0);
 void func_00021FE4(s32 **arg0);
@@ -865,29 +876,28 @@ s32 music_common_E35947CF(s32 arg0);
 s32 music_common_E79F4C9B(void);
 s32 music_common_EE5C2594(s32 arg0);
 void music_common_F6EAB2FA(void);
-M2C_UNK sceIoClose();
+M2C_UNK sceIoClose(...);
 s32 sceKernelCreateEventFlag(void *, u32, u32, void *);
 s32 sceKernelCreateSema(void *, u32, s32, s32, void *);
-M2C_UNK sceKernelDelayThread();
+M2C_UNK sceKernelDelayThread(...);
 s32 sceKernelDeleteEventFlag(s32);
 s32 sceKernelDeleteSema(s32);
-M2C_UNK sceKernelGetThreadId();
+M2C_UNK sceKernelGetThreadId(...);
 s32 sceKernelSetEventFlag(s32);
-M2C_UNK sce_paf_private_wcscmp(s32, s32);
-M2C_UNK _ZN3paf8PhWidget11UpdateStateEv(s32);
-M2C_UNK _ZdlPv(void *);
 s32 scePaf_61A8E8EC(M2C_UNK);
 M2C_UNK scePaf_6261C0A5(s32 **);
-M2C_UNK sce_paf_private_strcmp(s32, s32);
-M2C_UNK _ZN3paf8PhWidgetD2Ev();
-M2C_UNK sce_paf_private_free2(void *, void *);
 M2C_UNK scePaf_8A902F65(s32);
-M2C_UNK _ZdaPv(s32);
-s32 _Znwj(M2C_UNK);
-M2C_UNK scePaf_CB4C96CE();
+M2C_UNK scePaf_CB4C96CE(...);
 M2C_UNK scePaf_CCFF20ED(s32);
-s32 sce_paf_private_strcasecmp(s32, s32);
 M2C_UNK scePaf_F5001144(void *, void *);
-s32 sce_paf_private_wcscasecmp();
+M2C_UNK sce_paf_private_free2(void *, void *);
+s32 sce_paf_private_strcasecmp(s32, s32);
+M2C_UNK sce_paf_private_strcmp(s32, s32);
+s32 sce_paf_private_wcscasecmp(...);
+M2C_UNK sce_paf_private_wcscmp(s32, s32);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

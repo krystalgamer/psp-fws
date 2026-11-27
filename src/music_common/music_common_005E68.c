@@ -1,3 +1,4 @@
+/* lang: c++ */
 #include "common.h"
 #include "music_common_decls.h"
 
@@ -177,9 +178,9 @@ void func_00006838(void *arg0) {
 
 #if FW_VERSION < 300
 void func_00006008(struct Unk_func_00006008_0 *arg0) {
-    func_00005CC4((u8 *)arg0 + 4);
+    func_00005CC4(( Unk_func_00005CC4_0*) ((u8 *)arg0 + 4));
     arg0->unk14 = 0;
-    func_00005CC4((u8 *)arg0 + 0x18);
+    func_00005CC4(( Unk_func_00005CC4_0*) ((u8 *)arg0 + 0x18));
 }
 #endif
 
@@ -450,12 +451,12 @@ void music_common_DD1980DD(struct Unk_music_common_DD1980DD_0 *arg0) {
 
 #if FW_VERSION < 300
 void music_common_DD1980DD(struct Unk_music_common_DD1980DD_0 *arg0) {
-    func_00005CC4(arg0);
-    func_00005CC4((u8 *)arg0 + 0x10);
-    func_00005CC4((u8 *)arg0 + 0x20);
-    func_00005CC4((u8 *)arg0 + 0x30);
-    func_00005CC4((u8 *)arg0 + 0x40);
-    func_00006008((u8 *)arg0 + 0x50);
+    func_00005CC4((Unk_func_00005CC4_0*) arg0);
+    func_00005CC4(( Unk_func_00005CC4_0*) ((u8 *)arg0 + 0x10));
+    func_00005CC4(( Unk_func_00005CC4_0*) ((u8 *)arg0 + 0x20));
+    func_00005CC4(( Unk_func_00005CC4_0*) ((u8 *)arg0 + 0x30));
+    func_00005CC4(( Unk_func_00005CC4_0*) ((u8 *)arg0 + 0x40));
+    func_00006008(( Unk_func_00006008_0*) ((u8 *)arg0 + 0x50));
     arg0->unk78 = 0;
 }
 #endif
@@ -2716,7 +2717,7 @@ void func_00010DB0(struct Unk_func_00010DB0_0 *arg0) {
     func_000115E8((s32) arg0);
     func_00011CE8((s32) arg0);
     arg0->unkB3 = 0;
-    func_000046F4((u8 *)arg0 + 0x90);
+    func_000046F4(( Unk_func_000046F4_0*) ((u8 *)arg0 + 0x90));
 }
 
 void func_00010E00(struct Unk_func_00010E00_0 *arg0) {
@@ -2725,7 +2726,7 @@ void func_00010E00(struct Unk_func_00010E00_0 *arg0) {
     func_000115E8((s32) arg0);
     func_00011CE8((s32) arg0);
     arg0->unkB3 = 0;
-    func_000046F4((u8 *)arg0 + 0x90);
+    func_000046F4(( Unk_func_000046F4_0*) ((u8 *)arg0 + 0x90));
 }
 #endif
 
@@ -2740,7 +2741,7 @@ void func_00010E50(struct Unk_func_00010E50_0 *arg0) {
     func_000115E8((s32) arg0);
     func_00011CE8((s32) arg0);
     arg0->unkB3 = 0;
-    func_000046F4((u8 *)arg0 + 0x90);
+    func_000046F4(( Unk_func_000046F4_0*) ((u8 *)arg0 + 0x90));
     _ZdlPv(arg0);
 }
 

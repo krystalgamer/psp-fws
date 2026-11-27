@@ -1,3 +1,4 @@
+/* lang: c++ */
 #include "common.h"
 #include "music_common_decls.h"
 
