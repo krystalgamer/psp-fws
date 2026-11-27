@@ -21,6 +21,10 @@ typedef struct SceWlanMsg {
     u32 state;                  /* 0x18 bit 0: queued */
 } SceWlanMsg;
 
+typedef struct {
+    u8 addr[6];
+} SceWlanEtherAddr;
+
 /* MLME request posted to the MAC management mailbox */
 typedef struct SceWlanMlmeMsg {
     struct SceWlanMlmeMsg *next;    /* 0x00 SceKernelMsgPacket */
@@ -28,8 +32,9 @@ typedef struct SceWlanMlmeMsg {
     u8 pad5[3];
     u32 cmd;                        /* 0x08 */
     s32 status;                     /* 0x0C */
-    u32 arg;                        /* 0x10 */
-    u8 data[0xC4 - 0x14];
+    u32 arg;                        /* 0x10 (or a 6-byte address, cmd 7) */
+    void *buf;                      /* 0x14 */
+    u8 data[0xC4 - 0x18];
 } SceWlanMlmeMsg;
 
 /* singly linked FIFO protected by suspendIntr (next pointer at +8) */
@@ -45,10 +50,6 @@ typedef struct {
     SceWlanQEnt *head;          /* 0x00 */
     SceWlanQEnt *tail;          /* 0x04 */
 } SceWlanQueue;
-
-typedef struct {
-    u8 addr[6];
-} SceWlanEtherAddr;
 
 /* sceWlanDrv_lib_81579D36 parameter block */
 typedef struct {
@@ -92,7 +93,17 @@ typedef struct {
 } SceWlanMlmeBuf;
 
 typedef struct {
-    u8 unk00[0x34];
+    u32 unk00;
+    u16 unk04;                  /* 0x04 */
+    u16 unk06;                  /* 0x06 */
+    u16 unk08;                  /* 0x08 */
+    u16 unk0A;                  /* 0x0A */
+    SceWlanEtherAddr bssid;     /* 0x0C */
+    u8 unk12[2];
+    u16 unk14;                  /* 0x14 */
+    u8 unk16[2];
+    u32 unk18;                  /* 0x18 */
+    u8 unk1C[0x34 - 0x1C];
     SceUID evf34;               /* 0x34 */
     SceUID evf38;               /* 0x38 */
     SceUID sema3C;              /* 0x3C */
@@ -492,6 +503,7 @@ extern SceWlanWakeUp D_0002A038;
 extern SceWlanMsg D_0002A060;
 extern SceWlanMsg D_0002A07C;
 extern SceWlanMsg D_0002A098;
+extern u16 D_0002A0C0;
 extern SceWlanMsg D_0002A83C;
 extern s32 D_0002D7A8;
 extern s32 D_0002D7AC;
