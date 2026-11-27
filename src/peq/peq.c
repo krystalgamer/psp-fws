@@ -3,6 +3,10 @@
 #include "k1.h"
 #include "peq_decls.h"
 
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/peq", func_00000000);
+#endif
+
 #if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/peq", scePeqProc);
 #endif
@@ -11,7 +15,7 @@ s32 scePeqEntry(void) {
     return 0;
 }
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 s32 scePeqInit(u32 *buf, u32 a, u32 b) {
     u32 oldK1 = shiftK1();
     s32 ret;
