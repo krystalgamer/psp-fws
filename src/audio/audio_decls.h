@@ -55,6 +55,18 @@ typedef struct {
     s8 unkCodecArg;
 } SceAudio;
 
+typedef struct SceSysEventHandler {
+    s32 size;
+    char *name;
+    s32 typeMask;
+    s32 (*handler)(s32 ev_id, char *ev_name, void *param, s32 *result);
+    s32 r28;
+    s32 busy;
+    struct SceSysEventHandler *next;
+    s32 reserved[9];
+} SceSysEventHandler;
+
+extern SceSysEventHandler D_00002DC0;
 extern SceAudio g_audio;
 
 void audioHwInit(void);
@@ -77,10 +89,14 @@ s32 sceAudioSetVolumeOffset(s32 arg0);
 M2C_UNK sceCodecSetVolumeOffset(s32);
 void sceKernelCpuResumeIntr(s32);
 s32 sceKernelCpuSuspendIntr(void);
+s32 sceKernelDeleteEventFlag(SceUID id);
 s32 sceKernelDmaOpDeQueue(void *op);
 s32 sceKernelDmaOpEnQueue(void *op);
+s32 sceKernelDmaOpFree(void *op);
 s32 sceKernelDmaOpQuit(void *op);
+s32 sceKernelRegisterSysEventHandler(SceSysEventHandler *handler);
 s32 sceKernelSetEventFlag(SceUID id, u32 bits);
+s32 sceKernelUnregisterSysEventHandler(SceSysEventHandler *handler);
 s32 sceKernelWaitEventFlag(SceUID id, u32 bits, u32 wait, u32 *outBits, void *timeout);
 void updateAudioBuf(s32 arg);
 
