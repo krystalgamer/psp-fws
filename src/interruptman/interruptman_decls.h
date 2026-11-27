@@ -115,7 +115,9 @@ s32 _sceKernelGetCpuClockCounterHigh(void);
 s32 _sceKernelGetCpuClockCounterLow(void);
 s32 func_00000000(s32 arg0);
 s32 func_00000274(void);
+Interrupt **func_000002B8(s32 num);
 void func_00000348(void *ptr);
+void *func_000015F8(void *dst, u8 c, s32 n);
 s32 func_00002FDC(s32 arg0);
 s32 func_00002FE4(void);
 s32 func_000030AC(s32 arg0);
@@ -128,10 +130,13 @@ s32 sceKernelCpuSuspendIntr(void);
 s32 sceKernelCreateHeap(s32 partitionId, s32 size, s32 attr, const char *name);
 void sceKernelDisableIntr(s32 arg0);
 s32 sceKernelFreeHeapMemory(s32 heapId, void *ptr);
+u64 sceKernelGetCpuClockCounterWide(void);
 s32 sceKernelGetInterruptExitCount(void);
 s32 sceKernelGetIntrSyscallFrame(void);
 s32 sceKernelIsIntrContext(void);
 s32 sceKernelRegisterUserSpaceIntrStack(s32 arg0, s32 arg1);
+s32 sceKernelReleaseIntrHandler(u32 intrNum);
+s32 sceKernelSetIntrLogging(u32 intrNum, s32 enable);
 s32 sceKernelSuspendIntr(s32, s32);
 
 #endif

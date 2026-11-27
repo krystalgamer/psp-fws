@@ -11,7 +11,9 @@
   "_sceKernelGetCpuClockCounterLow": "s32 _sceKernelGetCpuClockCounterLow(void);",
   "func_00000000": "s32 func_00000000(s32 arg0);",
   "func_00000274": "s32 func_00000274(void);",
+  "func_000002B8": "Interrupt **func_000002B8(s32 num);",
   "func_00000348": "void func_00000348(void *ptr);",
+  "func_000015F8": "void *func_000015F8(void *dst, u8 c, s32 n);",
   "func_00002FDC": "s32 func_00002FDC(s32 arg0);",
   "func_00002FE4": "s32 func_00002FE4(void);",
   "func_000030AC": "s32 func_000030AC(s32 arg0);",
@@ -24,10 +26,13 @@
   "sceKernelCreateHeap": "s32 sceKernelCreateHeap(s32 partitionId, s32 size, s32 attr, const char *name);",
   "sceKernelDisableIntr": "void sceKernelDisableIntr(s32 arg0);",
   "sceKernelFreeHeapMemory": "s32 sceKernelFreeHeapMemory(s32 heapId, void *ptr);",
+  "sceKernelGetCpuClockCounterWide": "u64 sceKernelGetCpuClockCounterWide(void);",
   "sceKernelGetInterruptExitCount": "s32 sceKernelGetInterruptExitCount(void);",
   "sceKernelGetIntrSyscallFrame": "s32 sceKernelGetIntrSyscallFrame(void);",
   "sceKernelIsIntrContext": "s32 sceKernelIsIntrContext(void);",
   "sceKernelRegisterUserSpaceIntrStack": "s32 sceKernelRegisterUserSpaceIntrStack(s32 arg0, s32 arg1);",
+  "sceKernelReleaseIntrHandler": "s32 sceKernelReleaseIntrHandler(u32 intrNum);",
+  "sceKernelSetIntrLogging": "s32 sceKernelSetIntrLogging(u32 intrNum, s32 enable);",
   "sceKernelSuspendIntr": "s32 sceKernelSuspendIntr(s32, s32);"
  },
  "types": {
