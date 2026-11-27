@@ -115,6 +115,20 @@ def main():
         return
     per = {v: CG.groups(v, mod) for v in vers}
     clusters = [c for c in CG.cluster(per, vers) if c["key"][0] == "dtor"]
+    # any dtor group (trivial or not) by (version, D2 name), and a class name per cluster: a base
+    # class whose own dtor stays asm/C still gets its mangled names, so derived dtors can call it
+    cname, group_of = {}, {}
+    for ci, c in enumerate(clusters):
+        nm = None
+        for g in c["by"].values():
+            m = MANGLED.match(g["funcs"][0][1])
+            if m:
+                nm = m[2]
+        g0 = next(iter(c["by"].values()))
+        cname[ci] = nm or ("Class_" + g0["vptr_label"].replace("D_", "") if g0["vptr_label"] else None)
+        for v, g in c["by"].items():
+            group_of[(v, g["funcs"][0][1])] = (ci, g)
+    asm_bases = {}  # class -> {version: group}
 
     def compiled(v):
         """[(file, index, entry)] of the functions version v compiles, in order (per file)."""
@@ -214,6 +228,10 @@ def main():
                 bases.add(d2_of[(v, b)]["cls"])
             elif b and b.startswith("_Z") and demangled_class(b):
                 bases.add(demangled_class(b))
+            elif b and (v, b) in group_of and cname[group_of[(v, b)][0]] and group_of[(v, b)][1]["vtable_zero"]:
+                ci, g = group_of[(v, b)]
+                bases.add(cname[ci])
+                asm_bases.setdefault(cname[ci], {})[v] = g
             else:
                 bases.add(None)
         if len(bases) != 1 or None in bases:
@@ -251,14 +269,40 @@ def main():
         pre.append("#pragma interface")
     paf_text = (ROOT / "include/paf.h").read_text() + (ROOT / "include/vsh.h").read_text()
     renames = {}  # version number -> {old: new}
+    used_bases = {p["base_cls"] for p in ok}
+    plan_cls = {p["cls"] for p in ok}
+    for bcls, byv in asm_bases.items():
+        if bcls not in used_bases or bcls in plan_cls:
+            continue
+        types.setdefault(bcls, f"#ifdef __cplusplus\n/* dtor still asm/m2c (not trivial) */\nclass {bcls} {{\npublic:\n"
+                               f"    virtual ~{bcls}();\n}};\n#endif")
+        new = dtor_names(bcls)
+        for v, g in byv.items():
+            if all(MANGLED.match(n) for _, n in g["funcs"]):
+                continue
+            n = fwnum(v)
+            renames.setdefault(n, {}).update(dict(zip([x for _, x in g["funcs"]], new)))
+            for q in (ROOT / f"config/{v}/symbol_addrs.{mod}.txt", ROOT / f"config/{v}/func_starts.{mod}.txt"):
+                if q.exists() and q not in keepcfg:
+                    keepcfg[q] = q.read_text()
+            sa, fs = ROOT / f"config/{v}/symbol_addrs.{mod}.txt", ROOT / f"config/{v}/func_starts.{mod}.txt"
+            st, ft = sa.read_text(), (fs.read_text() if fs.exists() else "")
+            for (addr, old), mn in zip(g["funcs"], new):
+                st = re.sub(rf"^{old}\s*=.*\n", "", st, flags=re.M)
+                ft = re.sub(rf"^{old}\s*=.*\n", "", ft, flags=re.M)
+                st = st.rstrip("\n") + f"\n{mn} = 0x{addr:08X}; // type:func\n"
+            sa.write_text(st)
+            if fs.exists():
+                fs.write_text(ft)
     for p in ok:
         cls, base = p["cls"], p["base_cls"]
         if base and "::" in base and not re.search(rf"\bclass {base.split('::')[-1]}\b", paf_text):
             ns, cn = base.rsplit("::", 1)
             types.setdefault(f"0_{base}", f"#ifdef __cplusplus\nnamespace {ns} {{\nclass {cn} {{\npublic:\n    virtual ~{cn}();\n}};\n}}\n#endif")
         inh = f" : public {base}" if base else ""
-        types[cls] = (f"#ifdef __cplusplus\n/* vtable {vtable_name(cls)} is data (vptr = label - 8 + 8) */\n"
-                      f"class {cls}{inh} {{\npublic:\n    virtual ~{cls}();\n}};\n#endif")
+        if cls not in types:  # a hand-written class (more members) is kept
+            types[cls] = (f"#ifdef __cplusplus\n/* vtable {vtable_name(cls)} is data (vptr = label - 8 + 8) */\n"
+                          f"class {cls}{inh} {{\npublic:\n    virtual ~{cls}();\n}};\n#endif")
         new = dtor_names(cls)
         for v, t in p["todo"].items():
             n = fwnum(v)
@@ -294,7 +338,7 @@ def main():
         out = []
         for e in es:
             hits = {n: m for n, m in renames.items() if n in e.vers and any(re.search(rf"\b{o}\b", e.text) for o in m)}
-            if not hits or e.kind in ("asm", "rodata"):
+            if not hits or e.kind == "rodata":
                 out.append(e)
                 continue
             groups = {}
@@ -307,13 +351,26 @@ def main():
                     txt = re.sub(rf"\b{o}\b", nn, txt)
                 out.append(FM.Entry(frozenset(vs), e.kind, e.name, txt))
         f.write_text(FM.emit(FM.dedupe(out), fv))
+    for m in renames.values():
+        for o, nn in m.items():
+            if o in store["funcs"] and nn not in store["funcs"]:
+                store["funcs"][nn] = re.sub(rf"\b{o}\b", nn, store["funcs"][o])
     allnew = {nn for m in renames.values() for nn in m.values()}
     for nn in allnew:
-        if nn.endswith("D2Ev") and any(re.search(rf"\b{nn}\(", f.read_text()) for f in files):
+        if nn.endswith("D2Ev") and nn not in store["funcs"] and any(re.search(rf"\b{nn}\(", f.read_text()) for f in files):
             store["funcs"][nn] = f"void {nn}(void *self);"
     structify.SRC[mod] = sd
     structify.write_decls(mod, store)
     print(f"converted {len(ok)} classes in {len({n for n in renames})} versions")
+    # m2c C calling the renamed functions may lack pass-through arguments etc.: to_cxx's fixers
+    r = subprocess.run([sys.executable, str(ROOT / "tools/to_cxx.py"), mod, "--ver", ver, "--keep", "--no-build"],
+                       cwd=ROOT, capture_output=True, text=True)
+    if r.returncode:
+        print("\n".join(r.stdout.splitlines()[-6:]))
+        for q, txt in list(keep.items()) + list(keepcfg.items()):
+            q.write_text(txt)
+        print("restored")
+        sys.exit(1)
     if a.no_build:
         return
     env = dict(os.environ, REGRESS_JOBS=os.environ.get("REGRESS_JOBS", "2"), MAKE_JOBS=os.environ.get("MAKE_JOBS", "2"))
