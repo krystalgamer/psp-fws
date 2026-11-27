@@ -136,6 +136,8 @@
   "func_00010528": "void func_00010528(struct mbuf *m);",
   "func_000106E0": "s32 func_000106E0(void);",
   "func_00010700": "s32 func_00010700(void);",
+  "func_00010874": "s32 func_00010874(struct socket *so, s32 cmd, void *data, struct ifnet *ifp);",
+  "func_00013114": "s32 func_00013114(void *v, struct mbuf *nam);",
   "func_00019A98": "s32 func_00019A98(void);",
   "func_00019C00": "void func_00019C00(struct rtentry *rt);",
   "func_0001A410": "s32 func_0001A410(void);",
