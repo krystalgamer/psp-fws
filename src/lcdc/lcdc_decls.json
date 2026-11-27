@@ -8,10 +8,10 @@
   "sceLcdcDisable": "s32 sceLcdcDisable(void);",
   "sceLcdcEnable": "s32 sceLcdcEnable(void);",
   "sceLcdcEnd": "s32 sceLcdcEnd(void);",
+  "sceLcdcGetCyclesPerPixel": "s32 sceLcdcGetCyclesPerPixel(void);",
   "sceLcdcInit": "s32 sceLcdcInit(void);",
   "sceLcdcResume": "s32 sceLcdcResume(void);",
   "sceLcdcSuspend": "s32 sceLcdcSuspend(void);",
-  "sceLcdcGetCyclesPerPixel": "s32 sceLcdcGetCyclesPerPixel(void);",
   "sceSysregLcdcClkDisable": "s32 sceSysregLcdcClkDisable(void);",
   "sceSysregLcdcIoDisable": "s32 sceSysregLcdcIoDisable(void);",
   "sceSysregLcdcIoEnable": "M2C_UNK sceSysregLcdcIoEnable();"

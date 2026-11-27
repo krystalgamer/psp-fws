@@ -1,3 +1,4 @@
+/* cflags[100-152]: -O2 -frename-registers -fno-merge-constants */
 /* cflags: -O2 -frename-registers */
 #include "common.h"
 #include "lcdc_decls.h"
@@ -184,7 +185,24 @@ s32 sceLcdcGetCyclesPerPixel(void) {
 }
 #endif
 
+#if FW_VERSION < 201
+float sceLcdcGetPixelClockFreq(void) {
+    u8 *p = (u8 *)&D_00000C70;
+    switch ((p[0x18] << 2) | p[0x19]) {
+    case 0:
+        return 9000000.0f;
+    case 1:
+        return 27000000.0f;
+    case 2:
+        return 13500000.0f;
+    case 5:
+        return 25175000.0f;
+    }
+    return 0.0f;
+}
+#else
 INCLUDE_ASM("nonmatchings/lcdc", sceLcdcGetPixelClockFreq);
+#endif
 
 INCLUDE_ASM("nonmatchings/lcdc", sceLcdcGetHsyncFreq);
 
