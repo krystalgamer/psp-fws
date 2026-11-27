@@ -9,6 +9,8 @@ extern "C" {
 #endif
 
 #ifdef __cplusplus
+/* vtables are still data (rodata asm): don't let cc1plus emit them (linkonce .gnu.linkonce.r) */
+#pragma interface
 namespace paf { class View; class PhWidget; }
 #endif
 
@@ -39,6 +41,22 @@ public:
 #endif
     virtual ~Class_00024F10();
     virtual void vfunc_last();
+};
+#endif
+
+#ifdef __cplusplus
+/* job slot: vtable _ZTV14Class_00025160 [D1, D0] (vptr D_00025160) */
+class Class_00025160 {
+public:
+    Class_00025160(s32 owner);
+    virtual ~Class_00025160();
+    void Reset();
+
+    s32 owner;  /* 0x04 */
+    u32 state;  /* 0x08 (flags: bit 0, bit 4, 0x18, 0x19 tested) */
+    s32 jobId;  /* 0x0C (Job_Cancel) */
+    s32 unk10;  /* 0x10 */
+    s32 unk14;  /* 0x14 */
 };
 #endif
 
@@ -701,6 +719,9 @@ extern s32 func_00012AC8;
 M2C_UNK Job_Cancel(M2C_UNK, s32);
 s32 Job_Start(M2C_UNK, M2C_UNK *, void *, M2C_UNK, M2C_UNK, M2C_UNK *);
 s32 Job_isCanceled(s32);
+void _ZN14Class_000251605ResetEv(void *self);
+void _ZN14Class_00025160C2Ei(void *self, s32 owner);
+void _ZN14Class_00025160D2Ev(void *self);
 void _ZN3paf12SurfaceRCPtrINS_7SurfaceEE6AddRefEv(void *self);
 void _ZN3paf12SurfaceRCPtrINS_7SurfaceEEC1EPS1_(void *self, void *p);
 M2C_UNK _ZN3paf4View12PageActivateEPKc(s32);
@@ -979,8 +1000,6 @@ void func_0000B818(void);
 void func_0000B834(void);
 void func_0000B850(void);
 void func_0000B86C(void);
-void func_0000B930(M2C_UNK **arg0);
-void func_0000B940(M2C_UNK **arg0);
 void func_0000B978(void *arg0, s32 arg1);
 s32 func_0000BA00(void *arg0);
 s32 func_0000BA10(void *arg0);
@@ -1132,11 +1151,6 @@ void func_000132F0(void);
 void func_0001330C(void);
 void func_00013328(void);
 void func_00013344(void);
-s32 func_00013360(s32, s32);
-void func_000133F8(s32 **arg0);
-void func_00013408(M2C_UNK **arg0);
-void func_00013418(M2C_UNK **arg0);
-M2C_UNK func_00013440(...);
 void func_00013450(struct Unk_func_00013450_0 *arg0, s32 arg1);
 s32 func_00013480(void);
 s32 func_0001354C(struct Unk_func_0001354C_0 *arg0);

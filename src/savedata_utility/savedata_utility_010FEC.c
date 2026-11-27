@@ -138,6 +138,7 @@ INCLUDE_RODATA("nonmatchings/savedata_utility_010FEC", D_00025138);
 INCLUDE_RODATA("nonmatchings/savedata_utility_010FEC", D_00025148);
 
 INCLUDE_RODATA("nonmatchings/savedata_utility_010FEC", D_00025160);
+__asm__(".globl _ZTV14Class_00025160\n_ZTV14Class_00025160 = D_00025160 - 8\n");
 
 INCLUDE_RODATA("nonmatchings/savedata_utility_010FEC", D_000251B0);
 #endif
@@ -152,6 +153,7 @@ INCLUDE_RODATA("nonmatchings/savedata_utility_010FEC", D_00025148);
 
 #if FW_VERSION == 260
 INCLUDE_RODATA("nonmatchings/savedata_utility_010FEC", D_00025160);
+__asm__(".globl _ZTV14Class_00025160\n_ZTV14Class_00025160 = D_00025160 - 8\n");
 #endif
 
 #if FW_VERSION < 282
@@ -714,51 +716,17 @@ void func_00013344(void) {
 }
 #endif
 
-INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_00013360);
-
-INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_000133AC);
-
-#if FW_VERSION >= 250 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_000133F8);
-#endif
-
-#if FW_VERSION < 250
-void func_000133F8(s32 **arg0) {
-    *arg0 = &D_00025160;
-}
-#endif
-
-#if FW_VERSION < 282
-void func_0000B930(M2C_UNK **arg0) {
-    *arg0 = &D_00025160;
+Class_00025160::Class_00025160(s32 owner) {
+    Reset();
+    this->owner = owner;
+    unk10 = -1;
+    unk14 = -1;
 }
 
-void func_0000B940(M2C_UNK **arg0) {
-    *arg0 = &D_00025160;
-    _ZdlPv(arg0);
-}
-#else
-void func_000133F8(M2C_UNK **arg0) {
-    *arg0 = &D_00025160;
+Class_00025160::~Class_00025160() {
 }
 
-void func_00013408(M2C_UNK **arg0) {
-    *arg0 = &D_00025160;
-}
-#endif
-
-#if FW_VERSION >= 350
-INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_00013418);
-#endif
-
-#if FW_VERSION >= 282 && FW_VERSION < 350
-void func_00013418(M2C_UNK **arg0) {
-    *arg0 = &D_00025160;
-    _ZdlPv(arg0);
-}
-#endif
-
-INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_00013440);
+INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", _ZN14Class_000251605ResetEv);
 
 #if FW_VERSION < 282
 void func_0000B978(void *arg0, s32 arg1) {
@@ -898,12 +866,12 @@ INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_00013644);
 #if FW_VERSION < 282
 void func_0000BB3C(s32 **arg0) {
     *arg0 = &D_00025148;
-    func_000133F8(arg0);
+    _ZN14Class_00025160D2Ev(arg0);
 }
 
 void func_0000BB64(s32 **arg0) {
     *arg0 = &D_00025148;
-    func_000133F8(arg0);
+    _ZN14Class_00025160D2Ev(arg0);
     _ZdlPv(arg0);
 }
 
@@ -911,7 +879,7 @@ INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_000136CC);
 #else
 void func_0001366C(s32 **arg0) {
     *arg0 = &D_00025148;
-    func_000133F8(arg0);
+    _ZN14Class_00025160D2Ev(arg0);
 }
 #endif
 
@@ -922,7 +890,7 @@ INCLUDE_ASM("nonmatchings/savedata_utility_010FEC", func_00013694);
 #if FW_VERSION >= 282 && FW_VERSION < 350
 void func_00013694(s32 **arg0) {
     *arg0 = &D_00025148;
-    func_000133F8(arg0);
+    _ZN14Class_00025160D2Ev(arg0);
     _ZdlPv(arg0);
 }
 #endif
@@ -1166,6 +1134,7 @@ INCLUDE_RODATA("nonmatchings/savedata_utility_010FEC", D_00025148);
 
 #if FW_VERSION < 260
 INCLUDE_RODATA("nonmatchings/savedata_utility_010FEC", D_00025160);
+__asm__(".globl _ZTV14Class_00025160\n_ZTV14Class_00025160 = D_00025160 - 8\n");
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 260
@@ -1383,6 +1352,7 @@ INCLUDE_RODATA("nonmatchings/savedata_utility_010FEC", D_00025138);
 INCLUDE_RODATA("nonmatchings/savedata_utility_010FEC", D_00025148);
 
 INCLUDE_RODATA("nonmatchings/savedata_utility_010FEC", D_00025160);
+__asm__(".globl _ZTV14Class_00025160\n_ZTV14Class_00025160 = D_00025160 - 8\n");
 
 INCLUDE_RODATA("nonmatchings/savedata_utility_010FEC", D_00025170);
 

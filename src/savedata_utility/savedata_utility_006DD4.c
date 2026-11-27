@@ -580,14 +580,14 @@ INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_0000B4F4);
 #if FW_VERSION == 271
 void func_0000BAD8(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x28) = 0;
-    func_00013440();
+    _ZN14Class_000251605ResetEv(arg0);
 }
 #endif
 
 #if FW_VERSION >= 250 && FW_VERSION < 271
 void func_0000BAD8(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x2C) = 0;
-    func_00013440();
+    _ZN14Class_000251605ResetEv(arg0);
 }
 #endif
 
@@ -598,7 +598,7 @@ INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_00006C9C);
 #if FW_VERSION >= 282
 void func_0000B560(struct Unk_func_0000B560_0 *arg0) {
     arg0->unk28 = 0;
-    func_00013440();
+    _ZN14Class_000251605ResetEv(arg0);
 }
 #endif
 
