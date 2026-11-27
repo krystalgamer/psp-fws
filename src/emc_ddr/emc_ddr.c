@@ -42,7 +42,7 @@ INCLUDE_ASM("nonmatchings/emc_ddr", sceDdrReadDllDelay);
 
 INCLUDE_ASM("nonmatchings/emc_ddr", sceDdrExecSeqCmd);
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/emc_ddr", func_00000164);
 #else
 INCLUDE_ASM("nonmatchings/emc_ddr", sceDdrSetup);
@@ -52,7 +52,7 @@ INCLUDE_ASM("nonmatchings/emc_ddr", sceDdr_driver_5B5831E5);
 
 INCLUDE_ASM("nonmatchings/emc_ddr", sceDdr_driver_F23B7983);
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/emc_ddr", func_000001FC);
 #else
 INCLUDE_ASM("nonmatchings/emc_ddr", sceDdrResetDevice);
