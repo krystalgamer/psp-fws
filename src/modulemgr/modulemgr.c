@@ -2453,7 +2453,43 @@ INCLUDE_ASM("nonmatchings/modulemgr", func_0000428C);
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/modulemgr", sceKernelRebootBeforeForKernel);
+s32 sceKernelRebootBeforeForKernel(void *arg) {
+    s32 count;
+    SceUID blk;
+    SceUID *list;
+    SceModule *mod;
+    s32 ret;
+    s32 i;
+
+    count = sceKernelModuleCount();
+    if (count < 0) {
+        Kprintf(D_00006100, "sceKernelRebootBeforeForKernel", count);
+        return count;
+    }
+    blk = sceKernelAllocPartitionMemory(1, D_0000602C, 1, count * sizeof(SceUID), 0);
+    if (blk < 0) {
+        Kprintf(D_00006E3C, "sceKernelRebootBeforeForKernel", blk);
+        return blk;
+    }
+    list = sceKernelGetBlockHeadAddr(blk);
+    ret = sceKernelGetModuleList(count, list);
+    if (ret < 0) {
+        Kprintf(D_000060C8, "sceKernelRebootBeforeForKernel", ret);
+        return ret;
+    }
+    for (i = count; i > 0; i--) {
+        mod = func_000002F8(list[i - 1]);
+        if (mod != NULL && (s32)mod->moduleRebootBefore != -1 && !(mod->status & 0x100)) {
+            mod->moduleRebootBefore(arg);
+        }
+    }
+    ret = sceKernelFreePartitionMemory(blk);
+    if (ret < 0) {
+        Kprintf(D_00006060, "sceKernelRebootBeforeForKernel", list, ret);
+        return ret;
+    }
+    return 0;
+}
 #endif
 
 #if FW_VERSION >= 282 && FW_VERSION < 350
