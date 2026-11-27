@@ -6,6 +6,11 @@
   "InputDevice_PspPad_Lock": "M2C_UNK InputDevice_PspPad_Lock();",
   "InputDevice_PspPad_Unlock": "M2C_UNK InputDevice_PspPad_Unlock();",
   "Job_Start": "M2C_UNK Job_Start(M2C_UNK, M2C_UNK *, s32, M2C_UNK, M2C_UNK, void (*)());",
+  "_ZN14Class_00022C20D0Ev": "void _ZN14Class_00022C20D0Ev(M2C_UNK **arg0);",
+  "_ZN14Class_00022C20D1Ev": "void _ZN14Class_00022C20D1Ev(M2C_UNK **arg0);",
+  "_ZN14Class_00022C20D2Ev": "s32 _ZN14Class_00022C20D2Ev(void);",
+  "_ZN14Class_00023FC0D1Ev": "void _ZN14Class_00023FC0D1Ev(s32 **arg0);",
+  "_ZN14Class_00023FC0D2Ev": "void _ZN14Class_00023FC0D2Ev(s32 **arg0);",
   "_ZN3paf4View4FindEPKc": "s32 _ZN3paf4View4FindEPKc(const char *);",
   "_ZN3paf6PhSpin11SetSelectedEi": "M2C_UNK _ZN3paf6PhSpin11SetSelectedEi(s32, s32);",
   "_ZN3paf8PhWidgetD2Ev": "M2C_UNK _ZN3paf8PhWidgetD2Ev();",
@@ -482,7 +487,9 @@
   "sce_paf_private_strlen": "s32 sce_paf_private_strlen(s32);"
  },
  "types": {
+  "Class_00022C20": "#ifdef __cplusplus\n/* dtor still asm/m2c (not trivial) */\nclass Class_00022C20 {\npublic:\n    virtual ~Class_00022C20();\n};\n#endif",
   "Class_00023B30": "#ifdef __cplusplus\n/* vtable _ZTV14Class_00023B30 is data (vptr = label - 8 + 8) */\nclass Class_00023B30 {\npublic:\n    virtual ~Class_00023B30();\n};\n#endif",
+  "Class_00023FC0": "#ifdef __cplusplus\n/* vtable _ZTV14Class_00023FC0 is data (vptr = label - 8 + 8) */\nclass Class_00023FC0 : public Class_00022C20 {\npublic:\n    virtual ~Class_00023FC0();\n};\n#endif",
   "Unk_D_00166C28": "struct Unk_D_00166C28 {\n    u8 pad0[0x4];\n    s32 unk4;\n};",
   "Unk_Unk_func_00001F08_0_330": "struct Unk_Unk_func_00001F08_0_330 {\n    u8 pad0[0x20];\n    s32 unk20;\n};",
   "Unk_Unk_func_00001F30_0_330": "struct Unk_Unk_func_00001F30_0_330 {\n    u8 pad0[0x44];\n    s8 unk44;\n};",

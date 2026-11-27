@@ -998,17 +998,8 @@ void func_00019A24(s32 **arg0) {
     M2C_FIELD(arg0, s8 *, 0x11) = 0;
 }
 
-void func_00019A5C(s32 **arg0) {
-    *arg0 = &D_00023FC0;
-    func_0001AEB0();
+Class_00023FC0::~Class_00023FC0() {
 }
-
-void func_00019A84(s32 **arg0) {
-    *arg0 = &D_00023FC0;
-    func_0001AEB0();
-}
-
-INCLUDE_ASM("nonmatchings/camera_plugin_00D554", func_00019AAC);
 
 INCLUDE_ASM("nonmatchings/camera_plugin_00D554", func_00019AE4);
 
@@ -1041,6 +1032,8 @@ s32 func_00019F3C(void *arg0) {
 
 #if FW_VERSION >= 330 && FW_VERSION < 352
 INCLUDE_RODATA("nonmatchings/camera_plugin_00D554", D_00023FC0);
+
+__asm__(".globl _ZTV14Class_00023FC0\n_ZTV14Class_00023FC0 = D_00023FC0 - 8\n");
 #endif
 
 #if FW_VERSION == 330
@@ -1252,17 +1245,8 @@ INCLUDE_ASM("nonmatchings/camera_plugin_00D554", func_00019888);
 
 INCLUDE_ASM("nonmatchings/camera_plugin_00D554", func_000198C0);
 
-void func_000198F8(M2C_UNK **arg0) {
-    *arg0 = &D_00024008;
-    func_0001AEB0();
+Class_00023FC0::~Class_00023FC0() {
 }
-
-void func_00019920(M2C_UNK **arg0) {
-    *arg0 = &D_00024008;
-    func_0001AEB0();
-}
-
-INCLUDE_ASM("nonmatchings/camera_plugin_00D554", func_00019948);
 
 INCLUDE_ASM("nonmatchings/camera_plugin_00D554", func_00019980);
 
@@ -1293,6 +1277,8 @@ s32 func_00019DD8(struct Unk_func_00019DD8_0 *arg0) {
 }
 
 INCLUDE_RODATA("nonmatchings/camera_plugin_00D554", D_00024008);
+
+__asm__(".globl _ZTV14Class_00023FC0\n_ZTV14Class_00023FC0 = D_00024008 - 8\n");
 
 INCLUDE_ASM("nonmatchings/camera_plugin_00D554", func_00019DE4);
 #endif
@@ -1547,18 +1533,28 @@ void func_0001AEA0(M2C_UNK **arg0) {
     *arg0 = &D_000241E0;
 }
 
-INCLUDE_ASM("nonmatchings/camera_plugin_00D554", func_0001AEB0);
-
-#if FW_VERSION < 352
-INCLUDE_ASM("nonmatchings/camera_plugin_00D554", func_0001AEC0);
+#if FW_VERSION >= 330
+INCLUDE_ASM("nonmatchings/camera_plugin_00D554", _ZN14Class_00022C20D2Ev);
 #else
-void func_0001AEC0(M2C_UNK **arg0) {
+INCLUDE_ASM("nonmatchings/camera_plugin_00D554", func_0001AEB0);
+#endif
+
+#if FW_VERSION >= 330 && FW_VERSION < 352
+INCLUDE_ASM("nonmatchings/camera_plugin_00D554", _ZN14Class_00022C20D1Ev);
+#endif
+
+#if FW_VERSION < 330
+INCLUDE_ASM("nonmatchings/camera_plugin_00D554", func_0001AEC0);
+#endif
+
+#if FW_VERSION == 352
+void _ZN14Class_00022C20D1Ev(M2C_UNK **arg0) {
     *arg0 = &D_000241E0;
 }
 #endif
 
 #if FW_VERSION >= 330
-INCLUDE_ASM("nonmatchings/camera_plugin_00D554", func_0001AED0);
+INCLUDE_ASM("nonmatchings/camera_plugin_00D554", _ZN14Class_00022C20D0Ev);
 #else
 void func_0001AED0(M2C_UNK **arg0) {
     *arg0 = &D_00022C20;
