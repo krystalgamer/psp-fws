@@ -9,7 +9,7 @@ options:
   compiler: GCC
 
   asm_path: tmp/asm/102/libupdown
-  src_path: src/libupdown
+  src_path: tmp/av_src/102/libupdown
   build_path: tmp/build/102
   ld_script_path: tmp/build/102/libupdown.ld
   cache_path: tmp/build/102/.splat_cache.libupdown
@@ -52,7 +52,7 @@ segments:
     start: 0x80
     vram: 0x0
     subsegments:
-      - [0x80, asm, libupdown]
+      - [0x80, c, libupdown]
       - { start: 0x301C, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x30FC, type: prxpad, order: .text }
       - { start: 0x3100, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
@@ -64,7 +64,7 @@ segments:
       - { start: 0x3180, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
       - { start: 0x31B4, type: rodata, name: resident, linker_section: .rodata.sceResident }
       - { start: 0x3274, type: rodata, name: nid, linker_section: .rodata.sceNid }
-      - [0x32E4, rodata, libupdown]
+      - [0x32E4, .rodata, libupdown]
   - name: libupdown_seg1
     type: code
     start: 0x3CA0
