@@ -4,10 +4,6 @@
 #include "common.h"
 #include "m2c_macros.h"
 
-/* small-data globals: these TUs were built with -G8 (gp-size 8) and assembled with -G0,
-   so gcc emits `sw $4,sym` macros that gas expands with $at */
-#define SDATA __attribute__((section(".sdata")))
-
 typedef int SceMode;
 typedef s64 SceOff;
 typedef s32 SceSSize;
@@ -291,20 +287,20 @@ struct Unk_func_0000D694_0 {
 };
 
 extern void *D_00014D00;
-extern s32 (*D_00014EE4)(s32, s32) SDATA;
+extern s32 (*D_00014EE4)(s32, s32);
 extern char D_00015D38[];
 extern const SceNandChipEntry D_00016C14[17];
-extern s32 D_00016DE4 SDATA;
-extern s32 D_00016DE8 SDATA;
-extern s32 D_00016DEC SDATA;
-extern s8 D_00016DF1[] SDATA;
-extern s32 D_00017124 SDATA;
-extern s32 D_00017134 SDATA;
-extern s32 D_00017138 SDATA;
-extern s32 (*D_0001713C)(void) SDATA;
-extern u32 D_00017140 SDATA;
-extern s32 D_00017144 SDATA;
-extern s32 D_00017148 SDATA;
+extern s32 D_00016DE4;
+extern s32 D_00016DE8;
+extern s32 D_00016DEC;
+extern s8 D_00016DF1[];
+extern void (*D_00017124)(s32);
+extern s32 D_00017134;
+extern s32 D_00017138;
+extern s32 (*D_0001713C)(void);
+extern u32 D_00017140;
+extern s32 D_00017144;
+extern s32 D_00017148;
 extern void *D_00017344;
 extern void **D_00017348;
 extern void *D_0001734C;
@@ -337,7 +333,7 @@ s32 df_remove(void *iob, char *name);
 s32 df_rename(void *iob, const char *oldname);
 s32 df_rmdir(void *iob, char *name);
 s32 func_00000000(s32);
-void func_000003BC(s32 arg0);
+void func_000003BC(void (*arg0)(s32));
 void func_00000768(s32 arg0);
 void *func_000012BC(const void *s, s32 c, s32 n);
 s32 func_000012F4(const char *s);

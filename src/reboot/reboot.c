@@ -1,5 +1,7 @@
 /* compiler[151]: 1.6.1 */
 /* compiler[150]: 1.6.1 */
+/* cflags[150,151]: -O2 -mno-split-addresses */
+/* cflags[100]: -O2 -mno-split-addresses */
 #include "common.h"
 #include "reboot_decls.h"
 
@@ -15,7 +17,7 @@ s32 module_bootstart(void) {
     return 0;
 }
 
-void func_000003BC(s32 arg0) {
+void func_000003BC(void (*arg0)(s32)) {
     D_00017124 = arg0;
 }
 

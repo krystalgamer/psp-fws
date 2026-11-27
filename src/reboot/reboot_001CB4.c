@@ -1,7 +1,7 @@
-/* cflags[150,151]: -O2 -frename-registers */
+/* cflags[150,151]: -O2 -frename-registers -mno-split-addresses */
 /* compiler[151]: 1.6.1 */
 /* compiler[150]: 1.6.1 */
-/* cflags[100]: -O2 */
+/* cflags[100]: -O2 -mno-split-addresses */
 /* cflags: -O1 */
 #include "common.h"
 #include "reboot_decls.h"
