@@ -91,9 +91,9 @@ typedef struct LFlashSegment LFlashSegment;
 struct LFlashSegment {
     u8 pad0[0x4];
     u16 firstLbn; /* 0x4 */
-    u8 pad6[0x2];
+    u16 firstPbn; /* 0x6 */
     u16 maxLbn; /* 0x8 */
-    u8 padA[0x2];
+    u16 maxPbn; /* 0xA */
     u16 *lpTable; /* 0xC */
     u8 pad10[0xC];
 };
