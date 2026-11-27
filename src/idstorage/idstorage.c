@@ -99,7 +99,27 @@ INCLUDE_ASM("nonmatchings/idstorage", sceIdStorageIsDirty);
 
 INCLUDE_ASM("nonmatchings/idstorage", sceIdStorageFormat);
 
+#if FW_VERSION < 201
+s32 sceIdStorageUnformat(void) {
+    s32 ret;
+    u32 i = 0;
+
+    ret = sceNandLock(1);
+    if (ret < 0) {
+        return ret;
+    }
+    sceKernelPowerLock(0);
+    for (; i < 512; i += D_00006630.pagesPerBlock) {
+        sceNandEraseBlock(0x600 + i);
+    }
+    sceKernelPowerUnlock(0);
+    sceNandUnlock();
+    D_00006630.formatted = 0;
+    return 0;
+}
+#else
 INCLUDE_ASM("nonmatchings/idstorage", sceIdStorageUnformat);
+#endif
 
 INCLUDE_ASM("nonmatchings/idstorage", sceIdStorageReadLeaf);
 
@@ -107,7 +127,28 @@ INCLUDE_ASM("nonmatchings/idstorage", sceIdStorageWriteLeaf);
 
 INCLUDE_ASM("nonmatchings/idstorage", sceIdStorageFlush);
 
+#if FW_VERSION < 201
+s32 sceIdStorageGetFreeLeaves(void) {
+    s32 intr;
+    s32 i;
+    s32 count;
+
+    if (!D_00006630.formatted) {
+        return 0x80000108;
+    }
+    intr = sceKernelCpuSuspendIntr();
+    count = 0;
+    for (i = 0; i < 512; i++) {
+        if (D_00006630.index[i] == 0xFFFF) {
+            count++;
+        }
+    }
+    sceKernelCpuResumeIntr(intr);
+    return count;
+}
+#else
 INCLUDE_ASM("nonmatchings/idstorage", sceIdStorageGetFreeLeaves);
+#endif
 
 INCLUDE_ASM("nonmatchings/idstorage", sceIdStorageEnumId);
 
@@ -177,10 +218,29 @@ INCLUDE_ASM("nonmatchings/idstorage", sceIdStorageIsReadOnly);
 u8 sceIdStorageIsReadOnly(void) {
     return D_00006645;
 }
+
+s32 _sceIdStorageLockMutex(void) {
+    s32 tid;
+    s32 ret;
+
+    tid = sceKernelGetThreadId();
+    if (tid < 0) {
+        return tid;
+    }
+    if (D_00006630.owner == tid) {
+        return 0;
+    }
+    ret = sceKernelWaitSema(D_00006630.sema, 1, NULL);
+    if (ret < 0) {
+        return ret;
+    }
+    D_00006630.owner = tid;
+    return 0;
+}
 #endif
 
-#if FW_VERSION < 300
-INCLUDE_ASM("nonmatchings/idstorage", func_00001C30);
+#if FW_VERSION >= 201 && FW_VERSION < 300
+INCLUDE_ASM("nonmatchings/idstorage", _sceIdStorageLockMutex);
 #endif
 
 INCLUDE_ASM("nonmatchings/idstorage", func_00001CA0);

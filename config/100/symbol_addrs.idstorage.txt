@@ -56,7 +56,7 @@ sceKernelRegisterSysEventHandler = 0x00001E78; // type:func
 sceKernelUnregisterSysEventHandler = 0x00001E80; // type:func
 // shared names (tools/add_version.py) begin
 _sceIdStorageSysEventHandler = 0x000002B0; // type:func
-func_00001C30 = 0x00001C3C; // type:func
+_sceIdStorageLockMutex = 0x00001C3C; // type:func
 func_00001CA0 = 0x00001CAC; // type:func
 _sceIdStorageFindKeyPos = 0x00001D2C; // type:func
 // shared names (tools/add_version.py) end

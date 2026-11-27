@@ -12,9 +12,11 @@ typedef struct {
 typedef struct {
     s32 fpl;
     s32 sema;
+    s32 owner;
     s32 pagesPerBlock;
-    s32 unkC;
-    u8 unk10[6];
+    u32 unk10;
+    u8 formatted;
+    u8 unk15;
     u8 dirty;
     u8 unk17;
     u32 unk18;
@@ -40,8 +42,17 @@ u8 sceIdStorageIsFormatted(void);
 u8 sceIdStorageIsReadOnly(void);
 s32 sceIdStorageResume(void);
 s32 sceIdStorageSuspend(void);
+void sceKernelCpuResumeIntr(s32);
+s32 sceKernelCpuSuspendIntr(void);
 s32 sceKernelDeleteFpl(s32);
 s32 sceKernelDeleteSema(s32);
+s32 sceKernelGetThreadId(void);
+s32 sceKernelPowerLock(s32);
+s32 sceKernelPowerUnlock(s32);
 s32 sceKernelUnregisterSysEventHandler(void *);
+s32 sceKernelWaitSema(s32, s32, u32 *);
+s32 sceNandEraseBlock(u32);
+s32 sceNandLock(s32);
+s32 sceNandUnlock(void);
 
 #endif

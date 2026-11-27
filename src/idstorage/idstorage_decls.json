@@ -11,12 +11,21 @@
   "sceIdStorageIsReadOnly": "u8 sceIdStorageIsReadOnly(void);",
   "sceIdStorageResume": "s32 sceIdStorageResume(void);",
   "sceIdStorageSuspend": "s32 sceIdStorageSuspend(void);",
+  "sceKernelCpuResumeIntr": "void sceKernelCpuResumeIntr(s32);",
+  "sceKernelCpuSuspendIntr": "s32 sceKernelCpuSuspendIntr(void);",
   "sceKernelDeleteFpl": "s32 sceKernelDeleteFpl(s32);",
   "sceKernelDeleteSema": "s32 sceKernelDeleteSema(s32);",
-  "sceKernelUnregisterSysEventHandler": "s32 sceKernelUnregisterSysEventHandler(void *);"
+  "sceKernelGetThreadId": "s32 sceKernelGetThreadId(void);",
+  "sceKernelPowerLock": "s32 sceKernelPowerLock(s32);",
+  "sceKernelPowerUnlock": "s32 sceKernelPowerUnlock(s32);",
+  "sceKernelUnregisterSysEventHandler": "s32 sceKernelUnregisterSysEventHandler(void *);",
+  "sceKernelWaitSema": "s32 sceKernelWaitSema(s32, s32, u32 *);",
+  "sceNandEraseBlock": "s32 sceNandEraseBlock(u32);",
+  "sceNandLock": "s32 sceNandLock(s32);",
+  "sceNandUnlock": "s32 sceNandUnlock(void);"
  },
  "types": {
-  "SceIdStorage": "typedef struct {\n    u16 keyId;\n    u8 state;\n    u8 unk3;\n} SceIdStorageItem;\ntypedef struct {\n    s32 fpl;\n    s32 sema;\n    s32 pagesPerBlock;\n    s32 unkC;\n    u8 unk10[6];\n    u8 dirty;\n    u8 unk17;\n    u32 unk18;\n    u32 unk1C;\n    u16 index[512];\n    SceIdStorageItem store[32];\n    void *pool;\n} SceIdStorage;"
+  "SceIdStorage": "typedef struct {\n    u16 keyId;\n    u8 state;\n    u8 unk3;\n} SceIdStorageItem;\ntypedef struct {\n    s32 fpl;\n    s32 sema;\n    s32 owner;\n    s32 pagesPerBlock;\n    u32 unk10;\n    u8 formatted;\n    u8 unk15;\n    u8 dirty;\n    u8 unk17;\n    u32 unk18;\n    u32 unk1C;\n    u16 index[512];\n    SceIdStorageItem store[32];\n    void *pool;\n} SceIdStorage;"
  },
  "vars": {
   "D_000021F0": "extern s32 D_000021F0;",
