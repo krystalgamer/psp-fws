@@ -6,23 +6,7 @@
 #include "k1.h"
 #include "me_wrapper_decls.h"
 
-#if FW_VERSION >= 102 && FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/me_wrapper", func_00000000);
-
-INCLUDE_ASM("nonmatchings/me_wrapper", func_00000124);
-
-INCLUDE_ASM("nonmatchings/me_wrapper", func_000001D8);
-
-INCLUDE_ASM("nonmatchings/me_wrapper", func_00000378);
-
-INCLUDE_ASM("nonmatchings/me_wrapper", func_000004A8);
-
-INCLUDE_ASM("nonmatchings/me_wrapper", func_00000548);
-
-INCLUDE_ASM("nonmatchings/me_wrapper", func_000006A8);
-#endif
-
-#if FW_VERSION >= 150
+#if FW_VERSION >= 102
 INCLUDE_ASM("nonmatchings/me_wrapper", sceMeVideo_driver_B655AD4E);
 
 INCLUDE_ASM("nonmatchings/me_wrapper", sceMeVideo_driver_06F0236A);
@@ -32,6 +16,14 @@ INCLUDE_ASM("nonmatchings/me_wrapper", sceMeVideo_driver_176BBE07);
 INCLUDE_ASM("nonmatchings/me_wrapper", sceMeVideo_driver_DE2E7E89);
 
 INCLUDE_ASM("nonmatchings/me_wrapper", sceMeVideo_driver_E67F4E0A);
+#endif
+
+#if FW_VERSION >= 102 && FW_VERSION < 280
+INCLUDE_ASM("nonmatchings/me_wrapper", sceMeVideo_driver_1C6A60E1);
+#endif
+
+#if FW_VERSION >= 102 && FW_VERSION < 250
+INCLUDE_ASM("nonmatchings/me_wrapper", sceMeAudio_driver_C00D873B);
 #endif
 
 #if FW_VERSION >= 350
@@ -108,14 +100,6 @@ INCLUDE_RODATA("nonmatchings/me_wrapper", D_00002994);
 INCLUDE_RODATA("nonmatchings/me_wrapper", D_000029C4);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 280
-INCLUDE_ASM("nonmatchings/me_wrapper", sceMeVideo_driver_1C6A60E1);
-#endif
-
-#if FW_VERSION >= 150 && FW_VERSION < 250
-INCLUDE_ASM("nonmatchings/me_wrapper", sceMeAudio_driver_C00D873B);
-#endif
-
 #if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/me_wrapper", sceMeWrapper_driver_B655AD4E);
 
@@ -134,14 +118,6 @@ INCLUDE_ASM("nonmatchings/me_wrapper", sceMeWrapper_driver_C00D873B);
 
 INCLUDE_RODATA("nonmatchings/me_wrapper", D_00001F8C);
 
-#if FW_VERSION >= 102 && FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/me_wrapper", func_000007D4);
-
-INCLUDE_ASM("nonmatchings/me_wrapper", func_000009D4);
-
-INCLUDE_ASM("nonmatchings/me_wrapper", func_00000B40);
-#endif
-
 #if FW_VERSION >= 280
 INCLUDE_ASM("nonmatchings/me_wrapper", sceMeVideo_driver_1C6A60E1);
 #endif
@@ -150,7 +126,7 @@ INCLUDE_ASM("nonmatchings/me_wrapper", sceMeVideo_driver_1C6A60E1);
 INCLUDE_ASM("nonmatchings/me_wrapper", sceMeAudio_driver_C00D873B);
 #endif
 
-#if FW_VERSION >= 150
+#if FW_VERSION >= 102
 INCLUDE_ASM("nonmatchings/me_wrapper", sceMeAudio_driver_FEE0A97D);
 #endif
 
@@ -158,11 +134,13 @@ INCLUDE_ASM("nonmatchings/me_wrapper", sceMeAudio_driver_FEE0A97D);
 INCLUDE_ASM("nonmatchings/me_wrapper", sceMeAudio_driver_3D6CC0D9);
 #endif
 
-#if FW_VERSION >= 150
+#if FW_VERSION >= 102
 INCLUDE_ASM("nonmatchings/me_wrapper", sceMeAudio_driver_BAC7C2BE);
 
 INCLUDE_ASM("nonmatchings/me_wrapper", sceMeAudio_driver_39F06790);
+#endif
 
+#if FW_VERSION >= 150
 void sceMeMemory_driver_A177798D(s32 arg0) {
     sceMeCore_driver_3D5F109C(0x180, arg0);
 }
@@ -213,17 +191,17 @@ INCLUDE_ASM("nonmatchings/me_wrapper", func_00000D10);
 
 INCLUDE_ASM("nonmatchings/me_wrapper", func_00000D38);
 
-INCLUDE_ASM("nonmatchings/me_wrapper", func_00000E08);
+INCLUDE_ASM("nonmatchings/me_wrapper", sceMeEnableFunctions);
 
-INCLUDE_ASM("nonmatchings/me_wrapper", func_00000E24);
+INCLUDE_ASM("nonmatchings/me_wrapper", sceMePowerControlAvcPower);
 
-INCLUDE_ASM("nonmatchings/me_wrapper", func_00000F08);
+INCLUDE_ASM("nonmatchings/me_wrapper", sceMePowerControlDmacplusClock);
 
-INCLUDE_ASM("nonmatchings/me_wrapper", func_00000F48);
+INCLUDE_ASM("nonmatchings/me_wrapper", sceMePowerSetCpuClockGear);
 
-INCLUDE_ASM("nonmatchings/me_wrapper", func_00000F80);
+INCLUDE_ASM("nonmatchings/me_wrapper", sceMePowerSetBusClockGear);
 
-INCLUDE_ASM("nonmatchings/me_wrapper", func_00000FB8);
+INCLUDE_ASM("nonmatchings/me_wrapper", sceMePowerSelectAvcClock);
 
 INCLUDE_ASM("nonmatchings/me_wrapper", func_00000FEC);
 #endif
@@ -364,19 +342,13 @@ INCLUDE_ASM("nonmatchings/me_wrapper", func_00001588);
 
 INCLUDE_ASM("nonmatchings/me_wrapper", func_00001624);
 
-#if FW_VERSION >= 102 && FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/me_wrapper", func_00001560);
-#endif
-
 #if FW_VERSION >= 280
 INCLUDE_RODATA("nonmatchings/me_wrapper", D_00002A64);
 #endif
 
-#if FW_VERSION >= 150
+#if FW_VERSION >= 102
 INCLUDE_ASM("nonmatchings/me_wrapper", sceMeWrapperInit);
-#endif
-
-#if FW_VERSION == 100
+#else
 s32 sceMeWrapperInit(void) {
     func_00001070();
     sceKernelRegisterSysEventHandler(&D_000019F0);
