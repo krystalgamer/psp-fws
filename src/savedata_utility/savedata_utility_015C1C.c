@@ -1,32 +1,23 @@
 /* lang: c++ */
-/* cflags: -Os */
+/* cflags[100,150,152,250,260]: -Os */
+/* cflags: -O2 */
 #include "common.h"
 #include "savedata_utility_decls.h"
 
 #if FW_VERSION >= 282
-void func_00015C1C(struct Unk_func_0000B3C4_0 *arg0, s32 arg1, s32 arg2) {
-    _ZN14Class_00025160C2Ei(arg0, arg1);
-    arg0->unk0 = &D_00025300;
-    _ZN3paf12SurfaceRCPtrINS_7SurfaceEEC1EPS1_((u8 *)arg0 + 0x20, 0);
-    arg0->unk24 = arg2;
-    arg0->unk1C = 0;
-    func_00015E9C(arg0);
+Class_0001FC80::Class_0001FC80(s32 owner, s32 arg2) : Class_00025160(owner), tex(0) {
+    unk28 = arg2;
+    unk1C = 0;
+    LoadTexture();
 }
 
-void func_00015C74(struct Unk_func_00015C74_0 *arg0, s32 arg1, s32 arg2) {
-    _ZN14Class_00025160C2Ei(arg0, arg1);
-    arg0->unk0 = &D_00025300;
-    _ZN3paf12SurfaceRCPtrINS_7SurfaceEEC1EPS1_((u8 *)arg0 + 0x20, 0);
-    arg0->unk24 = arg2;
-    arg0->unk1C = 0;
-    func_00015E9C(arg0);
+Class_0001FC80::~Class_0001FC80() {
+    if (unk1C != 0) {
+        delete unk1C;
+        unk1C = 0;
+    }
+    tex = 0;
 }
-
-INCLUDE_ASM("nonmatchings/savedata_utility_015C1C", func_00015CCC);
-
-INCLUDE_ASM("nonmatchings/savedata_utility_015C1C", func_00015D64);
-
-INCLUDE_ASM("nonmatchings/savedata_utility_015C1C", func_00015DFC);
 #endif
 
 #if FW_VERSION < 250 || FW_VERSION >= 282
@@ -59,26 +50,11 @@ void func_0000E818(void *arg0, s32 arg1) {
 INCLUDE_ASM("nonmatchings/savedata_utility_015C1C", func_0000E820);
 #endif
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/savedata_utility_015C1C", func_00015700);
-#endif
-
 #if FW_VERSION == 271
+INCLUDE_ASM("nonmatchings/savedata_utility_015C1C", func_00015700);
+
 INCLUDE_ASM("nonmatchings/savedata_utility_015C1C", func_0000E898);
-#endif
 
-#if FW_VERSION < 271
-void func_0000E898(s32 arg0, s32 arg1, s32 arg2) {
-    _ZN14Class_00025160C2Ei(arg0, arg1);
-    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_0001FC80;
-    _ZN3paf12SurfaceRCPtrINS_7SurfaceEEC1EPS1_(arg0 + 0x24, 0);
-    M2C_FIELD(arg0, s32 *, 0x28) = arg2;
-    M2C_FIELD(arg0, s32 *, 0x1C) = 0;
-    func_00015E9C(arg0);
-}
-#endif
-
-#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/savedata_utility_015C1C", func_0000E8F0);
 
 INCLUDE_ASM("nonmatchings/savedata_utility_015C1C", func_0000E97C);
@@ -86,11 +62,32 @@ INCLUDE_ASM("nonmatchings/savedata_utility_015C1C", func_0000E97C);
 INCLUDE_ASM("nonmatchings/savedata_utility_015C1C", func_0000EA08);
 #endif
 
+/* 1.00-2.60: the class is built -O2 but this splat TU is -Os (the real TU starts at the
+   C2 ctor), so the C++ below is used from 2.82 only */
+#if FW_VERSION < 271
+INCLUDE_ASM("nonmatchings/savedata_utility_015C1C", _ZN14Class_0001FC80C2Eii);
+
+void _ZN14Class_0001FC80C1Eii(void *arg0, s32 arg1, s32 arg2) {
+    _ZN14Class_00025160C2Ei(arg0, arg1);
+    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_0001FC80;
+    _ZN3paf12SurfaceRCPtrINS_7SurfaceEEC1EPS1_((u8 *)arg0 + 0x24, 0);
+    M2C_FIELD(arg0, s32 *, 0x28) = arg2;
+    M2C_FIELD(arg0, s32 *, 0x1C) = 0;
+    _ZN14Class_0001FC8011LoadTextureEv(arg0);
+}
+
+INCLUDE_ASM("nonmatchings/savedata_utility_015C1C", _ZN14Class_0001FC80D2Ev);
+
+INCLUDE_ASM("nonmatchings/savedata_utility_015C1C", _ZN14Class_0001FC80D1Ev);
+
+INCLUDE_ASM("nonmatchings/savedata_utility_015C1C", _ZN14Class_0001FC80D0Ev);
+#endif
+
 #if FW_VERSION != 271
 INCLUDE_RODATA("nonmatchings/savedata_utility_015C1C", D_000252B8);
 #endif
 
-INCLUDE_ASM("nonmatchings/savedata_utility_015C1C", func_00015E9C);
+INCLUDE_ASM("nonmatchings/savedata_utility_015C1C", _ZN14Class_0001FC8011LoadTextureEv);
 
 #if FW_VERSION < 282
 void func_0000EB30(void *arg0, s32 arg1) {
@@ -280,6 +277,7 @@ INCLUDE_RODATA("nonmatchings/savedata_utility_015C1C", D_00025340);
 INCLUDE_RODATA("nonmatchings/savedata_utility_015C1C", D_00025348);
 
 INCLUDE_RODATA("nonmatchings/savedata_utility_015C1C", D_0001FC80);
+__asm__(".globl _ZTV14Class_0001FC80\n_ZTV14Class_0001FC80 = D_0001FC80 - 8\n");
 
 INCLUDE_RODATA("nonmatchings/savedata_utility_015C1C", D_0001FC98);
 #endif

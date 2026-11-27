@@ -11,7 +11,9 @@ extern "C" {
 #ifdef __cplusplus
 /* vtables are still data (rodata asm): don't let cc1plus emit them (linkonce .gnu.linkonce.r) */
 #pragma interface
-namespace paf { class View; class PhWidget; }
+extern "C++" {
+#include "paf.h"
+}
 #endif
 
 #ifdef __cplusplus
@@ -57,6 +59,31 @@ public:
     s32 jobId;  /* 0x0C (Job_Cancel) */
     s32 unk10;  /* 0x10 */
     s32 unk14;  /* 0x14 */
+};
+#endif
+
+#ifdef __cplusplus
+/* object deleted through its virtual dtor (type unknown) */
+class UnkPolyObj {
+public:
+    virtual ~UnkPolyObj();
+};
+
+/* job slot with a texture: vtable _ZTV14Class_0001FC80 (vptr D_0001FC80 before 2.82,
+   D_00025300 after) [D1, D0, vfunc08, vfunc0C]; 2.82+ dropped the field at 0x20 */
+class Class_0001FC80 : public Class_00025160 {
+public:
+    Class_0001FC80(s32 owner, s32 arg2);
+    virtual ~Class_0001FC80();
+    void LoadTexture();
+
+    s32 unk18;                                  /* 0x18 */
+    UnkPolyObj *unk1C;                          /* 0x1C */
+#if FW_VERSION < 282
+    s32 unk20;                                  /* 0x20 */
+#endif
+    paf::SurfaceRCPtr<paf::Surface> tex;        /* 0x24 (2.82+: 0x20) */
+    s32 unk28;                                  /* 0x28 (2.82+: 0x24) */
 };
 #endif
 
@@ -520,14 +547,6 @@ struct Unk_func_00015C14_0 {
     s32 unk10;
 };
 
-struct Unk_func_00015C74_0 {
-    M2C_UNK *unk0;
-    u8 pad4[0x18];
-    s32 unk1C;
-    u8 pad20[0x4];
-    s32 unk24;
-};
-
 struct Unk_func_00015F1C_0 {
     u8 pad0[0x1C];
     s32 unk1C;
@@ -719,6 +738,9 @@ extern s32 func_00012AC8;
 M2C_UNK Job_Cancel(M2C_UNK, s32);
 s32 Job_Start(M2C_UNK, M2C_UNK *, void *, M2C_UNK, M2C_UNK, M2C_UNK *);
 s32 Job_isCanceled(s32);
+void _ZN14Class_0001FC8011LoadTextureEv(void *self);
+void _ZN14Class_0001FC80C1Eii(void *self, s32 owner, s32 arg2);
+void _ZN14Class_0001FC80C2Eii(void *self, s32 owner, s32 arg2);
 void _ZN14Class_000251605ResetEv(void *self);
 void _ZN14Class_00025160C2Ei(void *self, s32 owner);
 void _ZN14Class_00025160D2Ev(void *self);
@@ -1198,10 +1220,7 @@ void func_00015B44(void *arg0);
 s32 func_00015B7C(s32, s32);
 s32 func_00015BC8(s32, s32);
 void func_00015C14(struct Unk_func_00015C14_0 *arg0, s32 arg1);
-void func_00015C1C(struct Unk_func_0000B3C4_0 *arg0, s32 arg1, s32 arg2);
-void func_00015C74(struct Unk_func_00015C74_0 *arg0, s32 arg1, s32 arg2);
 s32 func_00015CEC(void);
-s32 func_00015E9C(s32);
 void func_00015F1C(struct Unk_func_00015F1C_0 *arg0, s32 arg1);
 void func_00015F80(void *arg0);
 void func_00015F90(void *arg0, s32 arg1);

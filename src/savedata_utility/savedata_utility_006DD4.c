@@ -559,13 +559,13 @@ INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_0000B29C);
 INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_0000B35C);
 
 void func_0000B3C4(struct Unk_func_0000B3C4_0 *arg0, s32 arg1, s32 arg2) {
-    func_00015C1C(arg0, arg1, arg2);
+    _ZN14Class_0001FC80C2Eii(arg0, arg1, arg2);
     arg0->unk0 = &D_00024FC8;
     arg0->unk28 = 0;
 }
 
 void func_0000B3F8(struct Unk_func_0000B3C4_0 *arg0, s32 arg1, s32 arg2) {
-    func_00015C1C(arg0, arg1, arg2);
+    _ZN14Class_0001FC80C2Eii(arg0, arg1, arg2);
     arg0->unk0 = &D_00024FC8;
     arg0->unk28 = 0;
 }
@@ -1023,7 +1023,7 @@ INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_0000D1C8);
 #endif
 
 #if FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_0000D040);
+INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", _ZN3paf12SurfaceRCPtrINS_7SurfaceEEaSEPS1_);
 
 INCLUDE_ASM("nonmatchings/savedata_utility_006DD4", func_0000D0B8);
 #endif

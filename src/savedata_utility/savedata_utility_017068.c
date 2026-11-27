@@ -292,6 +292,7 @@ INCLUDE_ASM("nonmatchings/savedata_utility_017068", func_000124E0);
 INCLUDE_RODATA("nonmatchings/savedata_utility_017068", D_000252E0);
 
 INCLUDE_RODATA("nonmatchings/savedata_utility_017068", D_00025300);
+__asm__(".globl _ZTV14Class_0001FC80\n_ZTV14Class_0001FC80 = D_00025300 - 8\n");
 
 INCLUDE_ASM("nonmatchings/savedata_utility_017068", func_00017430);
 
@@ -415,6 +416,7 @@ INCLUDE_RODATA("nonmatchings/savedata_utility_017068", D_00025348);
 
 #if FW_VERSION < 250
 INCLUDE_RODATA("nonmatchings/savedata_utility_017068", D_0001FC80);
+__asm__(".globl _ZTV14Class_0001FC80\n_ZTV14Class_0001FC80 = D_0001FC80 - 8\n");
 
 INCLUDE_RODATA("nonmatchings/savedata_utility_017068", D_0001FC98);
 

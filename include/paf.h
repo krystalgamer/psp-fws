@@ -21,8 +21,8 @@ public:
     s32 refCount;
 };
 
-/* intrusive smart pointer; the destructor releases inline, the constructor
-   and AddRef are out-of-line template instances in the module */
+/* intrusive smart pointer; the destructor releases inline, the constructor,
+   operator=(T *) and AddRef are out-of-line template instances in the module */
 template <class T> class SurfaceRCPtr {
 public:
     SurfaceRCPtr(T *p = 0);
@@ -31,6 +31,7 @@ public:
             delete ptr;
         }
     }
+    SurfaceRCPtr &operator=(T *p);
     void AddRef();
 
     T *ptr;
