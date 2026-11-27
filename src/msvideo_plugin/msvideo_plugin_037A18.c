@@ -109,9 +109,25 @@ s32 func_0003848C(void **arg0) {
 
 INCLUDE_ASM("nonmatchings/msvideo_plugin_037A18", func_000384CC);
 
-#if FW_VERSION < 201
+#if FW_VERSION == 100 || FW_VERSION == 152
 INCLUDE_ASM("nonmatchings/msvideo_plugin_037A18", func_0002B6C8);
-#else
+#endif
+
+#if FW_VERSION == 150
+s32 func_0002B6C8(void **arg0) {
+    s32 var_v0;
+    void *temp_v0;
+
+    var_v0 = 0x80610103;
+    if (arg0 != NULL) {
+        temp_v0 = *arg0;
+        var_v0 = (-(func_0002BA14(M2C_FIELD(temp_v0, s32 *, 0), M2C_FIELD(temp_v0, void **, 8)) == 0) & 0x7F9E7FFA) - 0x7F9E7FFA;
+    }
+    return var_v0;
+}
+#endif
+
+#if FW_VERSION == 201
 s32 func_00038514(void **arg0) {
     s32 var_v1;
     struct Unk_func_00038514_temp_v0 *temp_v0;
@@ -135,9 +151,25 @@ INCLUDE_ASM("nonmatchings/msvideo_plugin_037A18", func_0003877C);
 
 INCLUDE_ASM("nonmatchings/msvideo_plugin_037A18", func_00038820);
 
-#if FW_VERSION < 201
+#if FW_VERSION == 100 || FW_VERSION == 152
 INCLUDE_ASM("nonmatchings/msvideo_plugin_037A18", func_0002BA14);
-#else
+#endif
+
+#if FW_VERSION == 150
+s32 func_0002BA14(s32 arg0, void *arg1) {
+    s32 temp_v0;
+    s32 var_s1;
+
+    var_s1 = sceVideocodecDelete(arg0, M2C_FIELD(arg1, s32 *, 0x10));
+    temp_v0 = sceVideocodecReleaseEDRAM(arg0);
+    if (var_s1 != 0) {
+        var_s1 = temp_v0;
+    }
+    return var_s1;
+}
+#endif
+
+#if FW_VERSION == 201
 INCLUDE_ASM("nonmatchings/msvideo_plugin_037A18", func_0003884C);
 #endif
 

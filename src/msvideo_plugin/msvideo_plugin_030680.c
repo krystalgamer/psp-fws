@@ -74,8 +74,24 @@ void func_00030770(void *arg0) {
     func_000267C8(M2C_FIELD(arg0, s32 *, 0x38));
     func_000245A8((s32) arg0);
 }
-#else
+#endif
+
+#if FW_VERSION >= 152
 INCLUDE_ASM("nonmatchings/msvideo_plugin_030680", func_000307C0);
+#endif
+
+#if FW_VERSION == 150
+void func_000307C0(s32 **arg0) {
+    s32 temp_v1;
+
+    temp_v1 = M2C_FIELD(arg0, s32 *, 0x3C);
+    M2C_FIELD(arg0, s32 **, 0) = &D_00065060;
+    if (temp_v1 != 0) {
+        func_000267C8(temp_v1);
+    }
+    func_000245A8((s32) arg0);
+    _ZdlPv(arg0);
+}
 #endif
 
 #if FW_VERSION == 100
