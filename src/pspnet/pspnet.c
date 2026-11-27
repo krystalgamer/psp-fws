@@ -3817,8 +3817,8 @@ void sceNetEtherNtostr(const u8 *mac, char *buf) {
 INCLUDE_ASM("nonmatchings/pspnet", sceNetEtherStrton);
 
 #if FW_VERSION < 201
-void sceNetGetMallocStat(void) {
-    sceNetGetMallocStatInternal();
+s32 sceNetGetMallocStat(void *stat) {
+    return sceNetGetMallocStatInternal(stat);
 }
 #else
 INCLUDE_ASM("nonmatchings/pspnet", sceNetGetMallocStat);
