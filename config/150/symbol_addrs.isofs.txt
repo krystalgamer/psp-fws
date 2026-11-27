@@ -172,3 +172,5 @@ func_00007FF0 = 0x0000839C; // type:func rom:0x841C
 func_000003C8 = 0x000003EC; // type:func
 func_00004F74 = 0x00004FE0; // type:func
 func_00003AC8 = 0x00003B5C; // type:func
+isofsReadIsoDir = 0x00003308; // type:func
+sceIsofsReadDirent = 0x0000376C; // type:func

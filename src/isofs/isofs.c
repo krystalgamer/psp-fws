@@ -755,11 +755,11 @@ INCLUDE_ASM("nonmatchings/isofs", func_00002DDC);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/isofs", func_00003308);
+INCLUDE_ASM("nonmatchings/isofs", isofsReadIsoDir);
 #endif
 
 #if FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/isofs", func_000032D8);
+INCLUDE_ASM("nonmatchings/isofs", isofsReadIsoDir);
 #endif
 
 #if FW_VERSION < 201
@@ -767,7 +767,7 @@ INCLUDE_ASM("nonmatchings/isofs", sceIsofsCheckVFile);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/isofs", func_0000376C);
+INCLUDE_ASM("nonmatchings/isofs", sceIsofsReadDirent);
 #endif
 
 #if FW_VERSION < 150
@@ -1213,13 +1213,130 @@ s32 isofs_exit(void *entry) {
 }
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/isofs", isofs_exit);
+#if FW_VERSION >= 150 && FW_VERSION < 152
+s32 isofs_exit(void *entry) {
+    IsofsMgr *mgr;
+    s32 ret;
+
+    ISOFS_ASSERT(entry != NULL, D_00006224, D_00006200, "isofs_exit", 0x511);
+    if (entry == NULL) {
+        return 0x80010016;
+    }
+    ret = func_000001B8();
+    if (ret != 0) {
+        return ret;
+    }
+    ret = func_00000E6C();
+    if (ret != 0) {
+        return ret;
+    }
+    mgr = &g_isofsMgr;
+    if (mgr->driveType == 2) {
+        func_00004F08();
+        func_00004FC4();
+    }
+    sceKernelDeleteHeap(mgr->heapId);
+    sceKernelDeleteSema(mgr->semaId);
+    return 0;
+}
 #endif
 
-#if FW_VERSION < 201
+#if FW_VERSION == 152
+s32 isofs_exit(void *entry) {
+    IsofsMgr *mgr;
+    s32 ret;
+
+    ISOFS_ASSERT(entry != NULL, D_00006224, D_00006200, "isofs_exit", 0x50F);
+    if (entry == NULL) {
+        return 0x80010016;
+    }
+    ret = func_000001B8();
+    if (ret != 0) {
+        return ret;
+    }
+    ret = func_00000E6C();
+    if (ret != 0) {
+        return ret;
+    }
+    mgr = &g_isofsMgr;
+    if (mgr->driveType == 2) {
+        func_00004F08();
+        func_00004FC4();
+    }
+    sceKernelDeleteHeap(mgr->heapId);
+    sceKernelDeleteSema(mgr->semaId);
+    return 0;
+}
+#endif
+
+#if FW_VERSION == 100
+s32 isofs_getstat(SceIoIob *iob, char *path, SceIoStat *stat) {
+    s32 ret = 0;
+    IsofsUnit *unit = sceIsofsGetFileSystem(iob->i_unit);
+    IsoDirectory *dir;
+    char *name;
+
+    ISOFS_ASSERT(iob != NULL, D_00006224, D_00006200, "isofs_getstat", 0x4DF);
+    ISOFS_ASSERT(stat != NULL, D_00006224, D_00006200, "isofs_getstat", 0x4E0);
+    ISOFS_ASSERT(path != NULL, D_00006224, D_00006200, "isofs_getstat", 0x4E1);
+    ret = sceKernelWaitSema(unit->semaId, 1, NULL);
+    if (ret < 0) {
+        return ret;
+    }
+    if (iob == NULL || path == NULL || strlen(path) + 1 > 0x100 || iob->i_unit > g_isofsMgr.maxUnits) {
+        ret = 0x80010016;
+        goto end;
+    }
+    ret = func_00001B0C(path, 2);
+    if (ret != 0) {
+        goto end;
+    }
+    if (func_00001C5C(path) != 2) {
+        goto end;
+    }
+    name = strrchr(path, '/');
+    if (name == NULL) {
+        ret = 0x80010016;
+        goto end;
+    }
+    name++;
+    dir = isofsReadIsoDir(unit, path, name, 2, &ret);
+    if (dir == NULL) {
+        ret = 0x80010002;
+        goto end;
+    }
+    stat->st_private[0] = func_0000506C(((u8 *)dir)[2] | (((u8 *)dir)[3] << 8) | (((u8 *)dir)[4] << 16) | (((u8 *)dir)[5] << 24));
+    stat->st_private[1] = 0;
+    stat->st_private[2] = 0;
+    stat->st_private[3] = 0;
+    stat->st_private[4] = 0;
+    stat->st_private[5] = 0;
+    stat->st_size = (u32)(((u8 *)dir)[10] | (((u8 *)dir)[11] << 8) | (((u8 *)dir)[12] << 16) | (((u8 *)dir)[13] << 24));
+    stat->st_mode = 0x16D;
+    stat->st_ctime.year = stat->st_mtime.year = dir->dateTime.yearsSince1900 + 1900;
+    stat->st_ctime.month = stat->st_mtime.month = dir->dateTime.month;
+    stat->st_ctime.day = stat->st_mtime.day = dir->dateTime.day;
+    stat->st_ctime.hour = stat->st_mtime.hour = dir->dateTime.hour;
+    stat->st_ctime.minute = stat->st_mtime.minute = dir->dateTime.minute;
+    stat->st_ctime.second = stat->st_mtime.second = dir->dateTime.second;
+    stat->st_mtime.microsecond = 0;
+    stat->st_ctime.microsecond = 0;
+    if (dir->flags & 2) {
+        stat->st_mode |= 0x1000;
+    } else {
+        stat->st_mode |= 0x2000;
+    }
+end:
+    sceKernelSignalSema(unit->semaId, 1);
+    return ret;
+}
+#endif
+
+#if FW_VERSION >= 102 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/isofs", isofs_getstat);
-#else
+#endif
+
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/isofs", func_000037A4);
 
 INCLUDE_ASM("nonmatchings/isofs", func_00003ADC);
@@ -1328,17 +1445,441 @@ s32 func_0000664C(s32 arg0) {
 }
 #endif
 
-#if FW_VERSION < 201
+#if FW_VERSION < 150
+s32 isofs_open(SceIoIob *iob, char *path, s32 flags, SceMode mode) {
+    s32 ret = 0;
+    IsofsUnit *unit = sceIsofsGetFileSystem(iob->i_unit);
+    IsofsFile *file;
+
+    ISOFS_ASSERT(iob != NULL, D_00006224, D_00006200, "isofs_open", ISOFS_V4(0x5BC, 0x5BD, 0x619, 0x614));
+    ISOFS_ASSERT(path != NULL, D_00006224, D_00006200, "isofs_open", ISOFS_V4(0x5BD, 0x5BE, 0x61A, 0x615));
+    ret = sceKernelWaitSema(unit->semaId, 1, NULL);
+    if (ret < 0) {
+        return ret;
+    }
+    if (iob == NULL || path == NULL || strlen(path) + 1 > 0x100) {
+        ret = 0x80010016;
+        goto end;
+    }
+    if (iob->i_unit > g_isofsMgr.maxUnits) {
+        ret = 0x80010016;
+        goto end;
+    }
+    ret = func_0000664C(flags);
+    if (ret != 0) {
+        goto end;
+    }
+    ret = func_00001B0C(path, 2);
+    if (ret != 0) {
+        goto end;
+    }
+    switch (func_00001C5C(path)) {
+    case 2: {
+        char *name = strrchr(path, '/');
+        IsoDirectory *dir;
+
+        if (name == NULL) {
+            ret = 0x80010016;
+            goto end;
+        }
+        name++;
+        if (strlen(name) >= 0x20) {
+            ret = 0x80010024;
+        }
+        dir = isofsReadIsoDir(unit, path, name, 2, &ret);
+        if (dir == NULL || ret != 0) {
+            ret = 0x80010002;
+            goto end;
+        }
+        file = sceIsofsFileAllocNfile(unit, iob, dir, &ret);
+        break;
+    }
+    case 3: {
+        u32 lbn = 0;
+        u32 size = 0;
+
+        if (strlen(path) >= 0x100) {
+            ret = 0x80010024;
+        }
+        ret = sceIsofsCheckVFile(path, &lbn, &size);
+        if (ret != 0) {
+            goto end;
+        }
+        file = sceIsofsFileAllocVfile(unit, iob, lbn, size, &ret);
+        break;
+    }
+    default:
+        ret = 0x80010002;
+        goto end;
+    }
+    if (file != NULL) {
+        __builtin_memcpy(file->umdId, unit->umdId, 32);
+        iob->i_private = file;
+    }
+end:
+    sceKernelSignalSema(unit->semaId, 1);
+    return ret;
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/isofs", isofs_open);
+#endif
 
+
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/isofs", isofs_read);
+#endif
 
-INCLUDE_ASM("nonmatchings/isofs", isofs_lseek);
+#if FW_VERSION == 100
+SceOff isofs_lseek(SceIoIob *iob, SceOff ofs, s32 whence) {
+    IsofsUnit *unit = sceIsofsGetFileSystem(iob->i_unit);
+    IsofsFile *file;
+    s32 ret;
 
-INCLUDE_ASM("nonmatchings/isofs", isofs_ioctl);
+    ISOFS_ASSERT(iob != NULL, D_00006224, D_00006200, "isofs_lseek", 0x6CB);
+    ISOFS_ASSERT(unit != NULL, D_00006224, D_00006200, "isofs_lseek", 0x6CC);
+    ret = sceKernelWaitSema(unit->semaId, 1, NULL);
+    if (ret < 0) {
+        return ret;
+    }
+    file = iob->i_private;
+    ret = 0x80010016;
+    if (iob == NULL || file == NULL) {
+        goto end;
+    }
+    ret = 0x80010015;
+    if (iob->i_flgs & 8) {
+        goto end;
+    }
+    ret = isofs_set_lseek(file, ofs, whence);
+end:
+    sceKernelSignalSema(unit->semaId, 1);
+    return ret;
+}
+#endif
 
-INCLUDE_ASM("nonmatchings/isofs", isofs_devctl);
+#if FW_VERSION >= 102 && FW_VERSION < 150
+SceOff isofs_lseek(SceIoIob *iob, SceOff ofs, s32 whence) {
+    IsofsUnit *unit = sceIsofsGetFileSystem(iob->i_unit);
+    IsofsFile *file;
+    s32 ret;
 
+    ISOFS_ASSERT(iob != NULL, D_00006224, D_00006200, "isofs_lseek", 0x6D1);
+    ISOFS_ASSERT(unit != NULL, D_00006224, D_00006200, "isofs_lseek", 0x6D2);
+    ret = sceKernelWaitSema(unit->semaId, 1, NULL);
+    if (ret < 0) {
+        return ret;
+    }
+    file = iob->i_private;
+    ret = 0x80010016;
+    if (iob == NULL || file == NULL) {
+        goto end;
+    }
+    ret = 0x80010015;
+    if (iob->i_flgs & 8) {
+        goto end;
+    }
+    ret = isofs_set_lseek(file, ofs, whence);
+end:
+    sceKernelSignalSema(unit->semaId, 1);
+    return ret;
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 152
+SceOff isofs_lseek(SceIoIob *iob, SceOff ofs, s32 whence) {
+    IsofsUnit *unit = sceIsofsGetFileSystem(iob->i_unit);
+    IsofsFile *file;
+    s32 ret;
+
+    ISOFS_ASSERT(iob != NULL, D_00006224, D_00006200, "isofs_lseek", 0x732);
+    ISOFS_ASSERT(unit != NULL, D_00006224, D_00006200, "isofs_lseek", 0x733);
+    ret = sceKernelWaitSema(unit->semaId, 1, NULL);
+    if (ret < 0) {
+        return ret;
+    }
+    file = iob->i_private;
+    ret = 0x80010016;
+    if (iob == NULL || file == NULL) {
+        goto end;
+    }
+    ret = 0x80010015;
+    if (iob->i_flgs & 8) {
+        goto end;
+    }
+    ret = isofs_set_lseek(file, ofs, whence);
+end:
+    sceKernelSignalSema(unit->semaId, 1);
+    return ret;
+}
+#endif
+
+#if FW_VERSION == 152
+SceOff isofs_lseek(SceIoIob *iob, SceOff ofs, s32 whence) {
+    IsofsUnit *unit = sceIsofsGetFileSystem(iob->i_unit);
+    IsofsFile *file;
+    s32 ret;
+
+    ISOFS_ASSERT(iob != NULL, D_00006224, D_00006200, "isofs_lseek", 0x74F);
+    ISOFS_ASSERT(unit != NULL, D_00006224, D_00006200, "isofs_lseek", 0x750);
+    ret = sceKernelWaitSema(unit->semaId, 1, NULL);
+    if (ret < 0) {
+        return ret;
+    }
+    file = iob->i_private;
+    ret = 0x80010016;
+    if (iob == NULL || file == NULL) {
+        goto end;
+    }
+    ret = 0x80010015;
+    if (iob->i_flgs & 8) {
+        goto end;
+    }
+    ret = isofs_set_lseek(file, ofs, whence);
+end:
+    sceKernelSignalSema(unit->semaId, 1);
+    return ret;
+}
+#endif
+
+#if FW_VERSION == 100
+s32 isofs_ioctl(SceIoIob *iob, s32 cmd, void *indata, SceSize inlen, void *outdata, SceSize outlen) {
+    IsofsUnit *unit = sceIsofsGetFileSystem(iob->i_unit);
+    IsofsFile *file;
+    s32 ret;
+
+    ISOFS_ASSERT(cmd > 0, D_00006224, D_00006200, "isofs_ioctl", 0x779);
+    ISOFS_ASSERT(iob != NULL, D_00006224, D_00006200, "isofs_ioctl", 0x77A);
+    ret = sceKernelWaitSema(unit->semaId, 1, NULL);
+    if (ret < 0) {
+        return ret;
+    }
+    file = iob->i_private;
+    if (unit == NULL || iob == NULL || cmd <= 0 || file == NULL) {
+        ret = 0x80010016;
+        goto end;
+    }
+    ret = 0x80010009;
+    if (strncmp(file->umdId, unit->umdId, 32) != 0) {
+        goto end;
+    }
+    ret = isofs_exec_ioctl_cmd(iob, cmd, indata, inlen, outdata, outlen);
+end:
+    sceKernelSignalSema(unit->semaId, 1);
+    return ret;
+}
+#endif
+
+#if FW_VERSION >= 102 && FW_VERSION < 150
+s32 isofs_ioctl(SceIoIob *iob, s32 cmd, void *indata, SceSize inlen, void *outdata, SceSize outlen) {
+    IsofsUnit *unit = sceIsofsGetFileSystem(iob->i_unit);
+    IsofsFile *file;
+    s32 ret;
+
+    ISOFS_ASSERT(cmd > 0, D_00006224, D_00006200, "isofs_ioctl", 0x77F);
+    ISOFS_ASSERT(iob != NULL, D_00006224, D_00006200, "isofs_ioctl", 0x780);
+    ret = sceKernelWaitSema(unit->semaId, 1, NULL);
+    if (ret < 0) {
+        return ret;
+    }
+    file = iob->i_private;
+    if (unit == NULL || iob == NULL || cmd <= 0 || file == NULL) {
+        ret = 0x80010016;
+        goto end;
+    }
+    ret = 0x80010009;
+    if (strncmp(file->umdId, unit->umdId, 32) != 0) {
+        goto end;
+    }
+    ret = isofs_exec_ioctl_cmd(iob, cmd, indata, inlen, outdata, outlen);
+end:
+    sceKernelSignalSema(unit->semaId, 1);
+    return ret;
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 152
+s32 isofs_ioctl(SceIoIob *iob, s32 cmd, void *indata, SceSize inlen, void *outdata, SceSize outlen) {
+    IsofsUnit *unit = sceIsofsGetFileSystem(iob->i_unit);
+    IsofsFile *file;
+    s32 ret;
+
+    ISOFS_ASSERT(cmd > 0, D_00006224, D_00006200, "isofs_ioctl", 0x7DD);
+    ISOFS_ASSERT(iob != NULL, D_00006224, D_00006200, "isofs_ioctl", 0x7DE);
+    ret = sceKernelWaitSema(unit->semaId, 1, NULL);
+    if (ret < 0) {
+        return ret;
+    }
+    file = iob->i_private;
+    if (unit == NULL || iob == NULL || cmd <= 0 || file == NULL) {
+        ret = 0x80010016;
+        goto end;
+    }
+    ret = 0x80010009;
+    if (strncmp(file->umdId, unit->umdId, 32) != 0) {
+        goto end;
+    }
+    ret = isofs_exec_ioctl_cmd(iob, cmd, indata, inlen, outdata, outlen);
+end:
+    sceKernelSignalSema(unit->semaId, 1);
+    return ret;
+}
+#endif
+
+#if FW_VERSION == 152
+s32 isofs_ioctl(SceIoIob *iob, s32 cmd, void *indata, SceSize inlen, void *outdata, SceSize outlen) {
+    IsofsUnit *unit = sceIsofsGetFileSystem(iob->i_unit);
+    IsofsFile *file;
+    s32 ret;
+
+    ISOFS_ASSERT(cmd > 0, D_00006224, D_00006200, "isofs_ioctl", 0x7FA);
+    ISOFS_ASSERT(iob != NULL, D_00006224, D_00006200, "isofs_ioctl", 0x7FB);
+    ret = sceKernelWaitSema(unit->semaId, 1, NULL);
+    if (ret < 0) {
+        return ret;
+    }
+    file = iob->i_private;
+    if (unit == NULL || iob == NULL || cmd <= 0 || file == NULL) {
+        ret = 0x80010016;
+        goto end;
+    }
+    ret = 0x80010009;
+    if (strncmp(file->umdId, unit->umdId, 32) != 0) {
+        goto end;
+    }
+    ret = func_00007ED8(iob, cmd, indata, inlen, outdata, outlen);
+end:
+    sceKernelSignalSema(unit->semaId, 1);
+    return ret;
+}
+#endif
+
+#if FW_VERSION == 100
+s32 isofs_devctl(SceIoIob *iob, char *dev, s32 cmd, void *indata, SceSize inlen, void *outdata, SceSize outlen) {
+    IsofsUnit *unit = sceIsofsGetFileSystem(iob->i_unit);
+    s32 ret;
+
+    ISOFS_ASSERT(cmd > 0, D_00006224, D_00006200, "isofs_devctl", 0x7B1);
+    ISOFS_ASSERT(iob != NULL, D_00006224, D_00006200, "isofs_devctl", 0x7B2);
+    ISOFS_ASSERT(dev != NULL, D_00006224, D_00006200, "isofs_devctl", 0x7B3);
+    ret = sceKernelWaitSema(unit->semaId, 1, NULL);
+    if (ret < 0) {
+        return ret;
+    }
+    if (dev == NULL || cmd <= 0) {
+        ret = 0x80010016;
+        goto end;
+    }
+    if (strlen(dev) >= 0x20) {
+        ret = 0x80010016;
+        goto end;
+    }
+    ret = sceBLKInvalidateDeviceName(dev);
+    if (ret != 0) {
+        goto end;
+    }
+    ret = sceIoDevctl(dev, cmd, indata, inlen, outdata, outlen);
+end:
+    sceKernelSignalSema(unit->semaId, 1);
+    return ret;
+}
+#endif
+
+#if FW_VERSION >= 102 && FW_VERSION < 150
+s32 isofs_devctl(SceIoIob *iob, char *dev, s32 cmd, void *indata, SceSize inlen, void *outdata, SceSize outlen) {
+    IsofsUnit *unit = sceIsofsGetFileSystem(iob->i_unit);
+    s32 ret;
+
+    ISOFS_ASSERT(cmd > 0, D_00006224, D_00006200, "isofs_devctl", 0x7B7);
+    ISOFS_ASSERT(iob != NULL, D_00006224, D_00006200, "isofs_devctl", 0x7B8);
+    ISOFS_ASSERT(dev != NULL, D_00006224, D_00006200, "isofs_devctl", 0x7B9);
+    ret = sceKernelWaitSema(unit->semaId, 1, NULL);
+    if (ret < 0) {
+        return ret;
+    }
+    if (dev == NULL || cmd <= 0) {
+        ret = 0x80010016;
+        goto end;
+    }
+    if (strlen(dev) >= 0x20) {
+        ret = 0x80010016;
+        goto end;
+    }
+    ret = sceBLKInvalidateDeviceName(dev);
+    if (ret != 0) {
+        goto end;
+    }
+    ret = sceIoDevctl(dev, cmd, indata, inlen, outdata, outlen);
+end:
+    sceKernelSignalSema(unit->semaId, 1);
+    return ret;
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 152
+s32 isofs_devctl(SceIoIob *iob, char *dev, s32 cmd, void *indata, SceSize inlen, void *outdata, SceSize outlen) {
+    IsofsUnit *unit = sceIsofsGetFileSystem(iob->i_unit);
+    s32 ret;
+
+    ISOFS_ASSERT(cmd > 0, D_00006224, D_00006200, "isofs_devctl", 0x813);
+    ISOFS_ASSERT(iob != NULL, D_00006224, D_00006200, "isofs_devctl", 0x814);
+    ISOFS_ASSERT(dev != NULL, D_00006224, D_00006200, "isofs_devctl", 0x815);
+    ret = sceKernelWaitSema(unit->semaId, 1, NULL);
+    if (ret < 0) {
+        return ret;
+    }
+    if (dev == NULL || cmd <= 0) {
+        ret = 0x80010016;
+        goto end;
+    }
+    if (strlen(dev) >= 0x20) {
+        ret = 0x80010016;
+        goto end;
+    }
+    ret = sceBLKInvalidateDeviceName(dev);
+    if (ret != 0) {
+        goto end;
+    }
+    ret = sceIoDevctl(dev, cmd, indata, inlen, outdata, outlen);
+end:
+    sceKernelSignalSema(unit->semaId, 1);
+    return ret;
+}
+#endif
+
+#if FW_VERSION == 152
+s32 isofs_devctl(SceIoIob *iob, char *dev, s32 cmd, void *indata, SceSize inlen, void *outdata, SceSize outlen) {
+    IsofsUnit *unit = sceIsofsGetFileSystem(iob->i_unit);
+    s32 ret;
+
+    ISOFS_ASSERT(cmd > 0, D_00006224, D_00006200, "isofs_devctl", 0x830);
+    ISOFS_ASSERT(iob != NULL, D_00006224, D_00006200, "isofs_devctl", 0x831);
+    ISOFS_ASSERT(dev != NULL, D_00006224, D_00006200, "isofs_devctl", 0x832);
+    ret = sceKernelWaitSema(unit->semaId, 1, NULL);
+    if (ret < 0) {
+        return ret;
+    }
+    if (dev == NULL || cmd <= 0) {
+        ret = 0x80010016;
+        goto end;
+    }
+    if (strlen(dev) >= 0x20) {
+        ret = 0x80010016;
+        goto end;
+    }
+    ret = sceBLKInvalidateDeviceName(dev);
+    if (ret != 0) {
+        goto end;
+    }
+    ret = sceIoDevctl(dev, cmd, indata, inlen, outdata, outlen);
+end:
+    sceKernelSignalSema(unit->semaId, 1);
+    return ret;
+}
+#endif
+
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/isofs", isofs_get_pvd);
 
 INCLUDE_ASM("nonmatchings/isofs", isofs_get_umdpfi);
@@ -1430,9 +1971,7 @@ s32 func_00007748(void) {
 
 #if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/isofs", isofs_parse_argument);
-#endif
 
-#if FW_VERSION < 201
 s32 isofs_setup_manager(s32 arg0, s32 maxUnits, s32 maxFiles, s32 fdwCount) {
     SceUID heapId;
 
@@ -1455,7 +1994,6 @@ s32 isofs_setup_manager(s32 arg0, s32 maxUnits, s32 maxFiles, s32 fdwCount) {
 }
 #endif
 
-
 #if FW_VERSION == 152
 INCLUDE_ASM("nonmatchings/isofs", func_00007ED8);
 #endif
@@ -1464,8 +2002,136 @@ INCLUDE_ASM("nonmatchings/isofs", func_00007ED8);
 INCLUDE_ASM("nonmatchings/isofs", isofs_exec_ioctl_cmd);
 #endif
 
-#if FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/isofs", isofs_set_lseek);
+#if FW_VERSION == 100
+SceOff isofs_set_lseek(IsofsFile *file, SceOff ofs, s32 whence) {
+    SceOff base;
+    SceOff pos;
+
+    ISOFS_ASSERT(file != NULL, D_00006224, D_00006200, "isofs_set_lseek", 0x695);
+    if (file == NULL) {
+        return 0x80010016;
+    }
+    switch (whence) {
+    case 0:
+        base = 0;
+        pos = ofs;
+        break;
+    case 1:
+        base = file->fpos;
+        pos = base + ofs;
+        break;
+    case 2:
+        base = file->size;
+        pos = base + ofs;
+        break;
+    default:
+        return 0x80010016;
+    }
+    if (file->size < base + ofs || pos < 0) {
+        return 0x80010005;
+    }
+    file->fpos = pos;
+    return pos;
+}
+#endif
+
+#if FW_VERSION >= 102 && FW_VERSION < 150
+SceOff isofs_set_lseek(IsofsFile *file, SceOff ofs, s32 whence) {
+    SceOff base;
+    SceOff pos;
+
+    ISOFS_ASSERT(file != NULL, D_00006224, D_00006200, "isofs_set_lseek", 0x69B);
+    if (file == NULL) {
+        return 0x80010016;
+    }
+    switch (whence) {
+    case 0:
+        base = 0;
+        pos = ofs;
+        break;
+    case 1:
+        base = file->fpos;
+        pos = base + ofs;
+        break;
+    case 2:
+        base = file->size;
+        pos = base + ofs;
+        break;
+    default:
+        return 0x80010016;
+    }
+    if (file->size < base + ofs || pos < 0) {
+        return 0x80010005;
+    }
+    file->fpos = pos;
+    return pos;
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 152
+SceOff isofs_set_lseek(IsofsFile *file, SceOff ofs, s32 whence) {
+    SceOff base;
+    SceOff pos;
+
+    ISOFS_ASSERT(file != NULL, D_00006224, D_00006200, "isofs_set_lseek", 0x6FC);
+    if (file == NULL) {
+        return 0x80010016;
+    }
+    switch (whence) {
+    case 0:
+        base = 0;
+        pos = ofs;
+        break;
+    case 1:
+        base = file->fpos;
+        pos = base + ofs;
+        break;
+    case 2:
+        base = file->size;
+        pos = base + ofs;
+        break;
+    default:
+        return 0x80010016;
+    }
+    if (file->size < base + ofs || pos < 0) {
+        return 0x80010005;
+    }
+    file->fpos = pos;
+    return pos;
+}
+#endif
+
+#if FW_VERSION == 152
+SceOff isofs_set_lseek(IsofsFile *file, SceOff ofs, s32 whence) {
+    SceOff base;
+    SceOff pos;
+
+    ISOFS_ASSERT(file != NULL, D_00006224, D_00006200, "isofs_set_lseek", 0x719);
+    if (file == NULL) {
+        return 0x80010016;
+    }
+    switch (whence) {
+    case 0:
+        base = 0;
+        pos = ofs;
+        break;
+    case 1:
+        base = file->fpos;
+        pos = base + ofs;
+        break;
+    case 2:
+        base = file->size;
+        pos = base + ofs;
+        break;
+    default:
+        return 0x80010016;
+    }
+    if (file->size < base + ofs || pos < 0) {
+        return 0x80010005;
+    }
+    file->fpos = pos;
+    return pos;
+}
 #endif
 
 #if FW_VERSION >= 102 && FW_VERSION < 150

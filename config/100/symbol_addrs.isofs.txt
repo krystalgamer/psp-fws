@@ -117,3 +117,4 @@ isofs_parse_argument = 0x00007754; // type:func
 isofs_setup_manager = 0x000079AC; // type:func
 isofs_exec_ioctl_cmd = 0x00007B0C; // type:func
 isofs_set_lseek = 0x00007E48; // type:func
+isofsReadIsoDir = 0x000032D8; // type:func
