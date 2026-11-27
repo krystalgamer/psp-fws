@@ -1,4 +1,4 @@
-/* cflags[100]: -Os */
+/* cflags[100]: -O2 */
 #include "common.h"
 #include "k1.h"
 #include "registry_decls.h"
@@ -133,19 +133,20 @@ INCLUDE_ASM("nonmatchings/registry", sceRegRemoveRegistry);
 INCLUDE_ASM("nonmatchings/registry", sceRegFlushRegistry);
 #else
 s32 sceRegFlushRegistry(s32 arg0) {
-    s32 var_s0;
-    u32 temp_s1;
+    s32 ret;
+    u32 oldK1;
 
-    temp_s1 = shiftK1();
-    var_s0 = 0x80082733;
-    if (sceKernelWaitSema(D_0000671C, 1, NULL) == 0) {
-        var_s0 = func_000006CC(arg0);
-    }
+    oldK1 = shiftK1();
+    ret = 0x80082733;
+    if (sceKernelWaitSema(D_0000671C, 1, NULL) != 0)
+        goto end;
+    ret = func_000006CC(arg0);
+end:
     if (sceKernelSignalSema(D_0000671C, 1) != 0) {
-        var_s0 = 0x80082734;
+        ret = 0x80082734;
     }
-    setK1(temp_s1);
-    return var_s0;
+    setK1(oldK1);
+    return ret;
 }
 #endif
 
@@ -165,19 +166,20 @@ INCLUDE_ASM("nonmatchings/registry", func_0000086C);
 INCLUDE_ASM("nonmatchings/registry", sceRegFlushCategory);
 #else
 s32 sceRegFlushCategory(s32 arg0) {
-    s32 var_s0;
-    u32 temp_s1;
+    s32 ret;
+    u32 oldK1;
 
-    temp_s1 = shiftK1();
-    var_s0 = 0x80082733;
-    if (sceKernelWaitSema(D_0000671C, 1, NULL) == 0) {
-        var_s0 = func_000008E4(arg0);
-        if (sceKernelSignalSema(D_0000671C, 1) != 0) {
-            var_s0 = 0x80082734;
-        }
+    oldK1 = shiftK1();
+    ret = 0x80082733;
+    if (sceKernelWaitSema(D_0000671C, 1, NULL) != 0)
+        goto out;
+    ret = func_000008E4(arg0);
+    if (sceKernelSignalSema(D_0000671C, 1) != 0) {
+        ret = 0x80082734;
     }
-    setK1(temp_s1);
-    return var_s0;
+out:
+    setK1(oldK1);
+    return ret;
 }
 #endif
 
@@ -666,19 +668,20 @@ INCLUDE_ASM("nonmatchings/registry", sceRegSetKeyValue);
 INCLUDE_ASM("nonmatchings/registry", sceRegGetKeyInfo);
 #else
 s32 sceRegGetKeyInfo(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
-    s32 var_s0;
-    u32 temp_s5;
+    s32 ret;
+    u32 oldK1;
 
-    temp_s5 = shiftK1();
-    var_s0 = 0x80082733;
-    if (sceKernelWaitSema(D_0000671C, 1, NULL) == 0) {
-        var_s0 = func_00004A28(arg0, arg1, arg2, arg3, arg4);
-    }
+    oldK1 = shiftK1();
+    ret = 0x80082733;
+    if (sceKernelWaitSema(D_0000671C, 1, NULL) != 0)
+        goto end;
+    ret = func_00004A28(arg0, arg1, arg2, arg3, arg4);
+end:
     if (sceKernelSignalSema(D_0000671C, 1) != 0) {
-        var_s0 = 0x80082734;
+        ret = 0x80082734;
     }
-    setK1(temp_s5);
-    return var_s0;
+    setK1(oldK1);
+    return ret;
 }
 #endif
 
@@ -687,19 +690,20 @@ INCLUDE_ASM("nonmatchings/registry", sceRegGetKeyInfoByName);
 #else
 s32 sceRegGetKeyInfoByName(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     void *sp0;
-    s32 var_s0;
-    u32 temp_s4;
+    s32 ret;
+    u32 oldK1;
 
-    temp_s4 = shiftK1();
-    var_s0 = 0x80082733;
-    if (sceKernelWaitSema(D_0000671C, 1, NULL) == 0) {
-        var_s0 = func_00004A28(arg0, arg1, &sp0, arg2, arg3);
-    }
+    oldK1 = shiftK1();
+    ret = 0x80082733;
+    if (sceKernelWaitSema(D_0000671C, 1, NULL) != 0)
+        goto end;
+    ret = func_00004A28(arg0, arg1, &sp0, arg2, arg3);
+end:
     if (sceKernelSignalSema(D_0000671C, 1) != 0) {
-        var_s0 = 0x80082734;
+        ret = 0x80082734;
     }
-    setK1(temp_s4);
-    return var_s0;
+    setK1(oldK1);
+    return ret;
 }
 #endif
 
@@ -715,19 +719,20 @@ INCLUDE_ASM("nonmatchings/registry", func_00004D6C);
 INCLUDE_ASM("nonmatchings/registry", sceRegRemoveKey);
 #else
 s32 sceRegRemoveKey(s32 arg0, s32 arg1) {
-    s32 var_s0;
-    u32 temp_s2;
+    s32 ret;
+    u32 oldK1;
 
-    temp_s2 = shiftK1();
-    var_s0 = 0x80082733;
-    if (sceKernelWaitSema(D_0000671C, 1, NULL) == 0) {
-        var_s0 = func_000046A8(arg0, arg1);
-        if (sceKernelSignalSema(D_0000671C, 1) != 0) {
-            var_s0 = 0x80082734;
-        }
+    oldK1 = shiftK1();
+    ret = 0x80082733;
+    if (sceKernelWaitSema(D_0000671C, 1, NULL) != 0)
+        goto out;
+    ret = func_000046A8(arg0, arg1);
+    if (sceKernelSignalSema(D_0000671C, 1) != 0) {
+        ret = 0x80082734;
     }
-    setK1(temp_s2);
-    return var_s0;
+out:
+    setK1(oldK1);
+    return ret;
 }
 #endif
 
