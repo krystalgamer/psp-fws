@@ -4,6 +4,8 @@
 #include "common.h"
 #include "m2c_macros.h"
 
+struct socket;
+struct ifnet;
 /* NetBSD 1.5 sys/queue.h */
 #define TAILQ_HEAD(name, type) struct name { struct type *tqh_first; struct type **tqh_last; }
 #define TAILQ_ENTRY(type) struct { struct type *tqe_next; struct type **tqe_prev; }
@@ -26,6 +28,12 @@
         (head)->tqh_last = (elm)->field.tqe_prev; \
     *(elm)->field.tqe_prev = (elm)->field.tqe_next; \
 } while (0)
+
+struct sockaddr {
+    u8 sa_len;
+    u8 sa_family;
+    char sa_data[14];
+};
 
 /* SCE callout (NetBSD 1.5 kern_timeout.c API on top of sceKernelSetAlarm), 0x24 bytes */
 struct callout {
@@ -86,10 +94,94 @@ struct timeval {
 };
 
 
+/* struct if_data (NetBSD 1.5 if.h, u_quad_t counters, partial) */
+struct if_data {
+    u8 ifi_type;                        /* 0x00 */
+    u8 ifi_addrlen;                     /* 0x01 */
+    u8 ifi_hdrlen;                      /* 0x02 */
+    u64 ifi_mtu;                        /* 0x08 */
+    u64 ifi_metric;                     /* 0x10 */
+    u64 ifi_baudrate;                   /* 0x18 */
+};
+
+/* struct ifnet (NetBSD 1.5 if.h, partial; layout shared with pspnet_inet) */
+struct ifnet {
+    void *if_softc;                     /* 0x00 */
+    TAILQ_ENTRY(ifnet) if_list;         /* 0x04 */
+    TAILQ_HEAD(, ifaddr) if_addrlist;   /* 0x0C */
+    char if_xname[16];                  /* 0x14 */
+    s32 if_pcount;                      /* 0x24 */
+    void *if_bpf;                       /* 0x28 */
+    u16 if_index;                       /* 0x2C */
+    s16 if_timer;                       /* 0x2E */
+    s16 if_flags;                       /* 0x30 IFF_* */
+    u8 unk32[0x38 - 0x32];
+    struct if_data if_data;             /* 0x38 */
+    u8 unk58[0xB0 - 0x58];
+    s32 (*if_output)();                 /* 0xB0 */
+    void (*if_start)(struct ifnet *ifp); /* 0xB4 */
+    u8 unkB8[4];
+    s32 (*if_ioctl)(struct ifnet *ifp, u32 cmd, void *data); /* 0xBC */
+    u8 unkC0[0xE0 - 0xC0];
+    struct sockaddr_dl *if_sadl;        /* 0xE0 */
+};
+#define IFF_UP 0x1
+#define IFF_LOOPBACK 0x8
+#define IFF_MULTICAST 0x8000
+
+/* struct sockaddr_dl (if_dl.h) */
+struct sockaddr_dl {
+    u8 sdl_len;
+    u8 sdl_family;
+    u16 sdl_index;
+    u8 sdl_type;
+    u8 sdl_nlen;        /* 0x5 */
+    u8 sdl_alen;
+    u8 sdl_slen;
+    char sdl_data[12];  /* 0x8 */
+};
+#define LLADDR(s) ((char *)((s)->sdl_data + (s)->sdl_nlen))
+
+struct ether_addr {
+    char ether_addr_octet[6];
+};
+
+
 typedef struct {
     u32 low;
     u32 hi;
 } SceKernelSysClock;
+
+#define IFNAMSIZ 16
+
+/* struct ifreq (NetBSD 1.5 if.h), 0x20 bytes */
+struct ifreq {
+    char ifr_name[IFNAMSIZ];            /* 0x00 */
+    union {
+        struct sockaddr ifru_addr;
+        s16 ifru_flags;
+        s32 ifru_metric;
+        void *ifru_data;
+    } ifr_ifru;                         /* 0x10 */
+};
+#define ifr_addr ifr_ifru.ifru_addr
+#define ifr_flags ifr_ifru.ifru_flags
+#define ifr_data ifr_ifru.ifru_data
+#define SIOCSIFFLAGS 0x80206910
+#define SIOCGIFFLAGS 0xC0206911
+
+/* SCE 802.11 ioctl requests: interface name + N argument words (size encoded in the command) */
+struct SceNetIfreq1 { char ifr_name[IFNAMSIZ]; s32 args[1]; };
+struct SceNetIfreq2 { char ifr_name[IFNAMSIZ]; s32 args[2]; };
+struct SceNetIfreq3 { char ifr_name[IFNAMSIZ]; s32 args[3]; };
+struct SceNetIfreq4 { char ifr_name[IFNAMSIZ]; s32 args[4]; };
+
+/* sceNetConfig{Get,Set}IfEvent* data (ifr_data) */
+struct SceNetIfEvent {
+    s32 unk0;
+    s32 unk4;
+};
+
 
 struct Unk_func_00004974_var_s2 {
     struct Unk_func_00004974_var_s2 *unk0;
@@ -209,6 +301,8 @@ void _sce_pspnet_hashdone(void *hashtbl);
 void *_sce_pspnet_hashinit(s32 elements, u32 *hashmask);
 s32 _sce_pspnet_if_nulloutput(void);
 void _sce_pspnet_ifafree(void *ifa);
+s32 _sce_pspnet_ifioctl(struct socket *so, u32 cmd, void *data, s32 p);
+struct ifnet *_sce_pspnet_ifunit(const char *name);
 void _sce_pspnet_inet_sabort(s32 a);
 struct SceNetThreadInfo *_sce_pspnet_lock_threadinfo(SceUID thid);
 void _sce_pspnet_microtime(struct timeval *tv);
