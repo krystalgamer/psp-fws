@@ -4,6 +4,12 @@
 #include "common.h"
 #include "m2c_macros.h"
 
+#ifdef __cplusplus
+#include "paf.h"
+#include "vsh.h"
+extern "C" {
+#endif
+
 struct Unk_func_00001884_1 {
     u8 pad0[0xC];
     s32 unkC;
@@ -76,7 +82,12 @@ extern s32 D_00004890;
 extern s8 D_00004894;
 extern s32 D_000049C0;
 
-M2C_UNK func_0000015C();
+M2C_UNK _ZN3paf4View12PageActivateEPKc(s32);
+M2C_UNK _ZN3paf4View12PageCloseAllEv(s32);
+M2C_UNK _ZN3paf4View9PageCloseEPKc(s32);
+M2C_UNK _ZN3paf5SleepEi(M2C_UNK);
+M2C_UNK _ZNK3paf4View8PageRootEPKc(s32);
+M2C_UNK func_0000015C(...);
 s32 func_000001FC(void);
 void func_00000470(void);
 M2C_UNK func_000004A0(M2C_UNK, M2C_UNK);
@@ -92,7 +103,7 @@ void func_000014F8(void);
 void func_00001530(s32 arg0, s32 arg1);
 M2C_UNK func_0000161C(s32, s32, s32);
 s32 func_00001884(u32 arg0, struct Unk_func_00001884_1 *arg1);
-M2C_UNK func_00001CC8();
+M2C_UNK func_00001CC8(...);
 M2C_UNK func_00001D28(u32, s32);
 M2C_UNK func_00001DC4(u32, void *);
 M2C_UNK func_00001EF0(u32, void *);
@@ -115,31 +126,30 @@ void func_0000261C(struct Unk_func_0000261C_0 *arg0);
 s32 func_00002C9C(void);
 s32 func_00002CBC(void);
 void func_00002DE4(void);
-M2C_UNK func_000033BC();
-M2C_UNK func_00003450();
+M2C_UNK func_000033BC(...);
+M2C_UNK func_00003450(...);
 void func_00003470(struct Unk_func_00003470_0 *arg0);
 void func_000036C4(struct Unk_func_000036C4_0 *arg0);
 M2C_UNK func_00003708(void *);
 void func_00003898(s32 arg0, s32 arg1);
 M2C_UNK func_00003AA0(s32, s32, s32);
-M2C_UNK func_00003C08();
+M2C_UNK func_00003C08(...);
 s32 module_stop(void);
-M2C_UNK sceNetAdhocDownload_48F87AB1();
-M2C_UNK sceNetAdhocDistributeStopServer();
-M2C_UNK _ZN3paf4View12PageCloseAllEv(s32);
-M2C_UNK _ZN3paf4View9PageCloseEPKc(s32);
+M2C_UNK sceNetAdhocDistributeStopServer(...);
+M2C_UNK sceNetAdhocDownload_48F87AB1(...);
 M2C_UNK scePaf_39E62C88(s32, s32, M2C_UNK, M2C_UNK);
 s32 scePaf_5E4447F6(s32);
 M2C_UNK scePaf_82CF97B0(M2C_UNK);
 M2C_UNK scePaf_8B38372A(s32, s32);
 M2C_UNK scePaf_A013540A(s32, s32);
 s32 scePaf_C1B0AA0D(s32);
-M2C_UNK _ZN3paf5SleepEi(M2C_UNK);
-s32 sce_paf_private_strlen(s32);
-M2C_UNK _ZN3paf4View12PageActivateEPKc(s32);
 M2C_UNK scePaf_CD216C47(s32);
 M2C_UNK scePaf_D1447DB7(s32);
-M2C_UNK _ZNK3paf4View8PageRootEPKc(s32);
+s32 sce_paf_private_strlen(s32);
 s32 sce_paf_private_wcslen(s32);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

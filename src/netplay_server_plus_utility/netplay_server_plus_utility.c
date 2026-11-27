@@ -1,3 +1,4 @@
+/* lang: c++ */
 /* cflags: -Os */
 #include "common.h"
 #include "netplay_server_plus_utility_decls.h"
