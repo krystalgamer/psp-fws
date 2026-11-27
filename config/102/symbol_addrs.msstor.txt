@@ -197,3 +197,14 @@ sceKernelPowerLockForUser = 0x00007E30; // type:func rom:0x7EB0
 sceKernelPowerUnlockForUser = 0x00007E38; // type:func rom:0x7EB8
 func_00007D38_v102 = 0x00007D38; // type:func rom:0x7DB8
 // shared names (tools/add_version.py) end
+
+// NID-derived names
+sceIoAddDrv = 0x00007C80; // type:func
+sceKernelAssert = 0x00007C90; // type:func
+Kprintf = 0x00007C98; // type:func
+sceKernelDeleteSema = 0x00007CC8; // type:func
+sceKernelDeleteEventFlag = 0x00007CF0; // type:func
+sceKernelCreateFpl = 0x00007D08; // type:func
+sceKernelTryAllocateFpl = 0x00007D18; // type:func
+sceMScmSendTPC = 0x00007D70; // type:func
+sceMScmSendTPCDMA = 0x00007D78; // type:func
