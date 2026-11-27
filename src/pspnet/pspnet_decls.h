@@ -330,6 +330,24 @@ struct bpf_hdr {
         len = m->m_len; \
     } \
 }
+struct bpf_insn {
+    u16 code;
+    u8 jt;
+    u8 jf;
+    s32 k;
+};
+#define BPF_CLASS(code) ((code) & 0x07)
+#define BPF_LD 0x00
+#define BPF_ST 0x02
+#define BPF_ALU 0x04
+#define BPF_JMP 0x05
+#define BPF_RET 0x06
+#define BPF_MEM 0x60
+#define BPF_OP(code) ((code) & 0xf0)
+#define BPF_DIV 0x30
+#define BPF_JA 0x00
+#define BPF_K 0x00
+#define BPF_MEMWORDS 16
 
 
 /* struct iovec / struct uio (NetBSD uio.h; SCE: 32-bit offset, no segflg/proc) */
@@ -581,6 +599,7 @@ void func_000048F4(struct bpf_if **driverp, struct ifnet *ifp, u32 dlt, u32 hdrl
 u8 *func_00004974(u8 *arg0, void *arg1, u32 arg2);
 void func_000049F4(struct bpf_d *d, u8 *pkt, u32 pktlen, u32 snaplen, u8 *(*cpfn)());
 u32 func_00004B34(void *pc, u8 *p, u32 wirelen, u32 buflen);
+s32 func_00005010(struct bpf_insn *f, s32 len);
 s32 func_00005120(struct mbuf *m, s32 k, s32 *err);
 s32 func_00005234(struct mbuf *m, s32 k, s32 *err);
 void func_00005404(void *arg0);

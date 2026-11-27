@@ -2095,7 +2095,34 @@ INCLUDE_ASM("nonmatchings/pspnet", func_000049F4);
 
 INCLUDE_ASM("nonmatchings/pspnet", func_00004B34);
 
-INCLUDE_ASM("nonmatchings/pspnet", func_00005010);
+s32 func_00005010(struct bpf_insn *f, s32 len) {
+    s32 i;
+    struct bpf_insn *p;
+
+    for (i = 0; i < len; ++i) {
+        p = &f[i];
+        if (BPF_CLASS(p->code) == BPF_JMP) {
+            s32 from = i + 1;
+
+            if (BPF_OP(p->code) == BPF_JA) {
+                if ((p->k < 0) ||
+                    (from + p->k >= len) ||
+                    (from + p->k < 0))
+                    return 0;
+            }
+            else if (from + p->jt >= len || from + p->jf >= len)
+                return 0;
+        }
+        if ((BPF_CLASS(p->code) == BPF_ST ||
+             (BPF_CLASS(p->code) == BPF_LD &&
+              (p->code & 0xe0) == BPF_MEM)) &&
+            (p->k >= BPF_MEMWORDS || p->k < 0))
+            return 0;
+        if (p->code == (BPF_ALU | BPF_DIV | BPF_K) && p->k == 0)
+            return 0;
+    }
+    return BPF_CLASS(f[len - 1].code) == BPF_RET;
+}
 
 s32 func_00005120(struct mbuf *m, s32 k, s32 *err) {
     s32 len;
