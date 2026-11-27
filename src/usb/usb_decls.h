@@ -89,15 +89,15 @@ typedef struct UsbbdState {
     struct UsbbdDescRef *unk100; /* hi-speed configuration */
     void *unk104; /* full-speed device descriptor */
     struct UsbbdDescRef *unk108; /* full-speed configuration */
-    u32 unk10C;
+    u8 *unk10C; /* extra string descriptors (0x40 each) */
     void *unk110; /* GET_DESCRIPTOR buffers (FPL unk180) */
     void *unk114;
     void *unk118;
     void *unk11C;
-    u32 unk120;
-    u32 unk124;
-    u32 unk128;
-    u32 unk12C;
+    u8 *unk120; /* string descriptor 0 (languages) */
+    u8 *unk124;
+    u8 *unk128;
+    s32 unk12C; /* number of built-in strings */
     SceUsbdDeviceRequest setup; /* 0x130 */
     SceUsbdEndpoint ep0; /* 0x138 */
     SceUsbdDeviceReq ep0Req; /* 0x144 */
@@ -118,12 +118,24 @@ typedef struct UsbbdHwEp {
     u32 maxPacketSize;
     u32 flags;
     u32 unkC;
-    u32 *unk10;
-    u32 unk14;
-    u32 unk18;
+    u32 *unk10; /* DMA descriptors [2] */
+    u32 *unk14;
+    s32 unk18; /* current descriptor */
     u32 unk1C;
     u32 unk20;
 } UsbbdHwEp;
+
+/* UDC DMA descriptor */
+typedef struct UsbbdDmaDesc {
+    u32 length : 16;
+    u32 unk16 : 11;
+    u32 last : 1;
+    u32 rxsts : 2;
+    u32 bs : 2;
+    u32 unk4;
+    u32 buf;
+    u32 next;
+} UsbbdDmaDesc;
 
 typedef struct UsbbdHwUnk14 {
     u32 unk0;
