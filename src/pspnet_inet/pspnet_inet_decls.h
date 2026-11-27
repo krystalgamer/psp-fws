@@ -1498,7 +1498,6 @@ extern s32 D_0002C030;
 extern s32 D_0002C1D4;
 extern s32 D_0002C1D8;
 extern s32 D_0002C1DC;
-extern s32 D_0002C1E0;
 extern s32 D_0002C1E4;
 extern s32 D_0002C1E8; /* icmperrppslim */
 extern s32 D_0002C208; /* ip_maxfragpackets */
@@ -1513,7 +1512,6 @@ extern s32 D_0002C318;
 extern s32 D_0002C31C;
 extern s32 D_0002C320;
 extern s32 D_0002C358;
-extern s32 D_0002C360;
 extern s32 D_0002C364;
 extern s32 D_0002C368;
 extern s32 D_0002C39C;
@@ -1535,7 +1533,6 @@ extern s32 D_0002C590;
 extern s32 D_0002C594;
 extern s32 D_0002C5B4; /* icmpmaskrepl */
 extern struct { struct SceNetInetKeyNode *lh_first; } D_0002C5B8;
-extern s32 D_0002C5D8;
 extern u8 D_0002C5DC[];
 extern u8 D_0002CC50[]; /* pffasttimo_ch */
 extern u8 D_0002CC74[]; /* pfslowtimo_ch */
@@ -1625,20 +1622,24 @@ extern struct radix_node_head *rt_tables[32]; /* rt_tables */
 extern s32 rttrash; /* rttrash */
 extern struct soqhead so_list;
 extern s32 somaxconn; /* somaxconn */
+extern s32 syn_cache_last;
 extern struct inpcbtable tcbtable;
 extern s32 tcp_backoff[]; /* tcp_backoff */
 extern s32 tcp_compat_42; /* tcp_compat_42 */
 extern struct tcp_ctlvar tcp_ctlvars[]; /* tcp_ctlvars */
 extern struct tcpcb *tcp_delacks; /* tcp_delacks */
 extern u32 tcp_iss_seq; /* tcp_iss_seq */
+extern s32 tcp_keepcnt;
 extern s32 tcp_keepidle; /* tcp_keepidle */
 extern s32 tcp_keepintvl; /* tcp_keepintvl */
 extern s32 tcp_maxidle;
 extern s32 tcp_maxpersistidle; /* tcp_maxpersistidle */
 extern s32 tcp_mss_ifmtu;
+extern u32 tcp_now; /* tcp_now */
 extern u32 tcp_recvspace; /* tcp_recvspace */
 extern u32 tcp_sendspace; /* tcp_sendspace */
 extern struct tcpstat tcp_stat;
+extern s32 tcp_syn_cache_interval;
 extern s32 tcp_totbackoff; /* tcp_totbackoff */
 extern struct inpcbtable udbtable;
 extern struct in_addr zeroin_addr; /* zeroin_addr */
@@ -1944,6 +1945,7 @@ void sppp_lcp_up(struct sppp *sp);
 void sppp_pap_TO(void *arg);
 void sppp_to_event(const struct cp *cp, struct sppp *sp);
 void syn_cache_cleanup(struct tcpcb *tp);
+void syn_cache_timer(void);
 s32 sysctl_int(void *oldp, u32 *oldlenp, void *newp, u32 newlen, s32 *valp);
 s32 sysctl_rdint(void *oldp, u32 *oldlenp, void *newp, s32 val);
 s32 sysctl_rdstruct(void *oldp, u32 *oldlenp, void *newp, const void *sp, u32 len);

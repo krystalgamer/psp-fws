@@ -510,7 +510,57 @@ u32 tcp_new_iss(struct tcpcb *tp, u32 len, u32 addin) {
 }
 #endif
 
-INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", func_00023D98);
+void tcp_slowtimo(void) {
+    struct inpcb *inp, *ninp;
+    struct tcpcb *tp;
+    s32 s;
+    s32 i;
+    s32 skip, mask;
+
+    skip = mask = 0;
+
+    s = _sce_pspnet_spllock();
+    tcp_maxidle = tcp_keepcnt * tcp_keepintvl;
+    mask |= 1;
+    inp = tcbtable.inpt_queue.cqh_first;
+    if (inp == (struct inpcb *)0) {
+        skip |= 1;
+        goto dotcb6;
+    }
+    for (; inp != (struct inpcb *)&tcbtable.inpt_queue; inp = ninp) {
+        ninp = inp->inp_queue.cqe_next;
+        tp = (struct tcpcb *)inp->inp_ppcb;
+        if (tp == 0 || tp->t_state == 1)
+            continue;
+        for (i = 0; i < 4; i++) {
+            if (tp->t_timer[i] != 0 && !(pfslowtimo_now < (u32)tp->t_timer[i])) {
+                tp->t_timer[i] = 0;
+                (void)tcp_usrreq(tp->t_inpcb->inp_socket, 19, (struct mbuf *)0,
+                                 (struct mbuf *)i, (struct mbuf *)0);
+                if ((ninp == (void *)&tcbtable.inpt_queue &&
+                     tcbtable.inpt_queue.cqh_last != inp) ||
+                    ninp->inp_queue.cqe_prev != inp)
+                    goto tpgone;
+            }
+        }
+        tp->t_idle++;
+        if (tp->t_rtt)
+            tp->t_rtt++;
+tpgone:
+        ;
+    }
+dotcb6:
+    if (mask == skip)
+        goto done;
+    tcp_iss_seq += 0x1000000;
+    tcp_now++;
+    if (++syn_cache_last >= tcp_syn_cache_interval) {
+        syn_cache_timer();
+        syn_cache_last = 0;
+    }
+done:
+    _sce_pspnet_splunlock(s);
+}
 
 #if FW_VERSION < 250
 struct tcpcb *tcp_timers(struct tcpcb *tp, s32 timer) {
@@ -656,10 +706,10 @@ void func_00025E94(void) {
     tcp_keepidle = 0x3840;
     tcp_totbackoff = 0x1FF;
     tcp_keepintvl = 0x96;
-    D_0002C360 = 8;
+    tcp_keepcnt = 8;
     tcp_maxpersistidle = 0x3840;
     tcp_maxidle = 0;
-    D_0002C5D8 = 0;
+    syn_cache_last = 0;
 }
 #endif
 
@@ -668,10 +718,10 @@ void func_000244B0(void) {
     D_0002C358 = 0x3840;
     D_0002C39C = 0x1FF;
     tcp_keepintvl = 0x96;
-    D_0002C360 = 8;
+    tcp_keepcnt = 8;
     D_0002C364 = 0x3840;
     tcp_maxidle = 0;
-    D_0002C5D8 = 0;
+    syn_cache_last = 0;
 }
 #endif
 

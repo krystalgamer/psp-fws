@@ -3945,7 +3945,7 @@ void func_00014588(void) {
     D_0002E798 = 0x280F;
     D_0002E79C = 0x69;
     func_0002C94C(D_0002CFF8, 0, 0x928);
-    D_0002C1E0 = 1;
+    tcp_syn_cache_interval = 1;
     D_0002E7A4 = 100;
     D_0002C1E8 = 100;
 }
@@ -5050,7 +5050,7 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_0001F4CC);
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_0001F5A0);
 #endif
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_0001FA38);
+INCLUDE_ASM("nonmatchings/pspnet_inet", syn_cache_timer);
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", syn_cache_cleanup);
 
