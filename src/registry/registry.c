@@ -5,6 +5,14 @@
 
 #define IS_USER_ADDR(p) (((u32)(p) >> 31) ^ 1)
 
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/registry", func_00000000);
+
+INCLUDE_ASM("nonmatchings/registry", func_000000D8);
+
+INCLUDE_ASM("nonmatchings/registry", func_0000024C);
+#endif
+
 #if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/registry", D_00006D40);
 
@@ -39,7 +47,7 @@ INCLUDE_RODATA("nonmatchings/registry", D_00006FDC);
 INCLUDE_RODATA("nonmatchings/registry", D_00006FE0);
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION == 100 || (FW_VERSION >= 150 && FW_VERSION < 282)
 s32 sceRegInit(void) {
     s32 id;
     u32 oldK1;
@@ -127,7 +135,9 @@ s32 sceRegExit(void) {
 end:
     return ret;
 }
-#else
+#endif
+
+#if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/registry", sceRegExit);
 
 s32 module_reboot_before(void) {
@@ -162,7 +172,7 @@ s32 module_reboot_phase(s32 arg0) {
 }
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 s32 sceRegOpenRegistry(SceRegParam *param, s32 mode, s32 *handle) {
     const char *ireg;
     const char *dreg;
@@ -208,7 +218,13 @@ end:
     setK1(oldK1);
     return ret;
 }
-#else
+#endif
+
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/registry", func_000003C4);
+#endif
+
+#if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/registry", sceRegOpenRegistry);
 #endif
 
@@ -266,11 +282,11 @@ end:
     setK1(oldK1);
     return ret;
 }
-#else
-INCLUDE_ASM("nonmatchings/registry", sceRegCloseRegistry);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION >= 150
+INCLUDE_ASM("nonmatchings/registry", sceRegCloseRegistry);
+#else
 s32 sceRegRemoveRegistry(SceRegParam *param) {
     const char *ireg;
     const char *dreg;
@@ -296,7 +312,9 @@ end:
     setK1(oldK1);
     return ret;
 }
-#else
+#endif
+
+#if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/registry", sceRegRemoveRegistry);
 #endif
 
@@ -350,7 +368,7 @@ end:
 INCLUDE_ASM("nonmatchings/registry", sceRegFlushRegistry);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 s32 sceRegFlushRegistry(s32 arg0) {
     s32 ret;
     u32 oldK1;
@@ -373,7 +391,7 @@ end:
 INCLUDE_ASM("nonmatchings/registry", func_000008BC);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 s32 regFlushHive(s32 index) {
     SceRegHive *h;
     SceRegIregHeader *hdr;
@@ -455,7 +473,7 @@ out:
 INCLUDE_ASM("nonmatchings/registry", sceRegFlushCategory);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 s32 sceRegFlushCategory(s32 arg0) {
     s32 ret;
     u32 oldK1;
@@ -587,7 +605,7 @@ INCLUDE_ASM("nonmatchings/registry", regHiveAddRef);
 INCLUDE_ASM("nonmatchings/registry", func_00000DA8);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 s32 regLoadHive(SceRegParam *param, const char *ireg, const char *dreg, SceRegHive **hiveOut) {
     u32 size;
     s32 iregFd;
@@ -654,7 +672,7 @@ fail:
 INCLUDE_ASM("nonmatchings/registry", regLoadHive);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 s32 regCreateHive(SceRegParam *param, const char *ireg, const char *dreg) {
     SceRegIregHeader hdr;
     s32 ret;
@@ -688,7 +706,7 @@ INCLUDE_ASM("nonmatchings/registry", func_000010B8);
 INCLUDE_ASM("nonmatchings/registry", func_000014A8);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/registry", func_000012B0);
 #endif
 
@@ -700,7 +718,7 @@ INCLUDE_ASM("nonmatchings/registry", func_00001560);
 INCLUDE_ASM("nonmatchings/registry", func_00001A0C);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/registry", func_00001608);
 #endif
 
@@ -728,7 +746,7 @@ s32 regGetFileSize(const char *name, u32 *size) {
     return ret;
 }
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 s32 regOpenFileFd(const char *name, s32 *fd) {
     s32 ret;
     s32 res;
@@ -762,7 +780,13 @@ s32 regOpenFileFd(const char *arg0, s32 *arg1) {
 
 #if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/registry", regAddHive);
+#endif
 
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/registry", regGetFileNames);
+#endif
+
+#if FW_VERSION == 100 || (FW_VERSION >= 150 && FW_VERSION < 282)
 void regGetFileNames(s32 type, const char **ireg, const char **dreg) {
     if (type == 1) {
         *ireg = "/registry/system.ireg";
@@ -774,7 +798,7 @@ void regGetFileNames(s32 type, const char **ireg, const char **dreg) {
 }
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 void regClearOpenedCategories(SceRegIregHeader *hdr) {
     SceRegIndexEntry *e;
     u32 i;
@@ -1008,7 +1032,7 @@ INCLUDE_ASM("nonmatchings/registry", func_00002B18);
 INCLUDE_ASM("nonmatchings/registry", func_00003498);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/registry", func_00002C78);
 #endif
 
@@ -1202,7 +1226,7 @@ s32 regSetHiveDirty(s32 index) {
 INCLUDE_ASM("nonmatchings/registry", regSetCatDirty);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 s32 regSetCatDirty(SceRegIndexEntry *cat) {
     s32 ret;
     SceRegCatNode *n;
@@ -1299,7 +1323,7 @@ INCLUDE_ASM("nonmatchings/registry", func_000040E4);
 INCLUDE_ASM("nonmatchings/registry", func_00004270);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 s32 sceRegCreateKey(s32 hd, const char *name, s32 type, s32 size) {
     SceRegIndexEntry *cat = (SceRegIndexEntry *)hd;
     SceRegCatData *d;
@@ -1364,7 +1388,7 @@ end:
 INCLUDE_ASM("nonmatchings/registry", sceRegCreateKey);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 s32 sceRegSetKeyValue(s32 hd, const char *name, const void *buf, s32 size) {
     SceRegIndexEntry *cat = (SceRegIndexEntry *)hd;
     SceRegKeyEntry *k;
@@ -1445,7 +1469,7 @@ end:
 INCLUDE_ASM("nonmatchings/registry", sceRegGetKeyInfo);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 s32 sceRegGetKeyInfo(s32 hd, const char *name, s32 *keyId, s32 *type, u32 *size) {
     s32 ret;
     u32 oldK1;
@@ -1466,7 +1490,7 @@ end:
 INCLUDE_ASM("nonmatchings/registry", sceRegGetKeyInfoByName);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 s32 sceRegGetKeyInfoByName(s32 hd, const char *name, s32 *type, u32 *size) {
     s32 keyId;
     s32 ret;
@@ -1527,7 +1551,7 @@ fail:
 INCLUDE_ASM("nonmatchings/registry", regGetKeyInfo);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 s32 sceRegGetKeyValue(s32 hd, s32 keyId, void *buf, s32 size) {
     s32 ret;
     u32 oldK1;
@@ -1661,7 +1685,7 @@ end:
 INCLUDE_ASM("nonmatchings/registry", sceRegGetKeyValue);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 s32 sceRegGetKeyValueByName(s32 hd, const char *name, void *buf, s32 size) {
     s32 keyId;
     s32 type;
@@ -1846,7 +1870,7 @@ out:
 INCLUDE_ASM("nonmatchings/registry", sceRegRemoveKey);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 s32 sceRegRemoveKey(s32 arg0, const char *arg1) {
     s32 ret;
     u32 oldK1;
@@ -1966,6 +1990,40 @@ INCLUDE_ASM("nonmatchings/registry", func_00005F74);
 
 #if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/registry", func_000058D8);
-#else
+#endif
+
+#if FW_VERSION == 102
+INCLUDE_ASM("nonmatchings/registry", regCreateFile);
+
+INCLUDE_ASM("nonmatchings/registry", regOpenFile);
+
+INCLUDE_ASM("nonmatchings/registry", regCloseFile);
+
+INCLUDE_ASM("nonmatchings/registry", regRemoveFile);
+
+INCLUDE_ASM("nonmatchings/registry", regWriteFile);
+
+INCLUDE_ASM("nonmatchings/registry", regReadFile);
+
+INCLUDE_ASM("nonmatchings/registry", regSeekFile);
+
+INCLUDE_ASM("nonmatchings/registry", regStatFile);
+
+INCLUDE_ASM("nonmatchings/registry", func_00006350);
+
+INCLUDE_RODATA("nonmatchings/registry", D_00006888);
+
+INCLUDE_RODATA("nonmatchings/registry", D_00006890);
+
+INCLUDE_ASM("nonmatchings/registry", func_00006358);
+
+INCLUDE_ASM("nonmatchings/registry", func_000063C4);
+
+INCLUDE_ASM("nonmatchings/registry", regAlloc);
+
+INCLUDE_ASM("nonmatchings/registry", regFree);
+#endif
+
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/registry", func_00005FF0);
 #endif
