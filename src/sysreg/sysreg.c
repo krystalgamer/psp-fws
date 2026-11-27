@@ -1,3 +1,4 @@
+/* cflags[100]: -Os -frename-registers */
 /* cflags: -O2 -frename-registers */
 #include "common.h"
 #include "sysreg_decls.h"
