@@ -170,7 +170,7 @@ typedef struct {
 
 /* PrFILE volume / drive record (partial; D_000276E4 points at the current one). */
 typedef struct {
-    u32 flags; /* 0x0, bit 0 = mounted, 0x8000 = FAT16, 0x1000 = FAT32 (neither = FAT12) */
+    unsigned long flags; /* 0x0, bit 0 = mounted, 0x8000 = FAT16, 0x1000 = FAT32 (neither = FAT12) */
     u32 fatBufSector; /* 0x4, first sector in fatBuf (-1 = invalid) */
     u8 pad8[4];
     u8 *fatBuf; /* 0xC, FAT sector buffer */
@@ -596,7 +596,7 @@ u32 func_00007BD4(u32 sector);
 s32 func_00008274(s32, s32, s32, s32);
 s32 func_00008314(u32 cl, u32 *off, u32 *sector); /* locate the FAT entry and load its sector */
 s32 func_000085D4(u32 sector, u8 **buf);
-s32 func_000086E8(u32 cl, u32 *next); /* get FAT entry */
+s32 func_000086E8(u32 cl, u32 *next);
 s32 func_00008708(s32 arg0);
 s32 func_000088F8(s32 arg0);
 s8 func_00008900(s8 arg0);
