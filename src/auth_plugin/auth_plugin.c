@@ -263,7 +263,7 @@ INCLUDE_RODATA("nonmatchings/auth_plugin", D_00001D38);
 INCLUDE_RODATA("nonmatchings/auth_plugin", D_00001D54);
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_RODATA("nonmatchings/auth_plugin", D_00001D74);
 #endif
 
