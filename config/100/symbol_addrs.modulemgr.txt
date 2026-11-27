@@ -99,3 +99,5 @@ IsUserModulePartition = 0x0000066C; // type:func
 UnloadModule = 0x00002090; // type:func
 CheckMsHeader = 0x00001244; // type:func
 modMgrCB = 0x00006160;
+ReadFile = 0x000012E4; // type:func
+EpilogueModule = 0x00001108; // type:func

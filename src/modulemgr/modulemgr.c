@@ -484,8 +484,8 @@ void func_000003E8(void) {
     sceKernelLinkLibraryEntriesForUser();
 }
 
-void func_00000404(void) {
-    sceKernelUnLinkLibraryEntries();
+void func_00000404(void *libStubTable, SceSize size) {
+    sceKernelUnLinkLibraryEntries(libStubTable, size);
 }
 #endif
 
@@ -622,28 +622,24 @@ INCLUDE_RODATA("nonmatchings/modulemgr", D_00006DA0);
 #endif
 
 #if FW_VERSION == 100
-s32 func_00000420(void) {
-    s32 temp_v0;
+s32 func_00000420(void *libEntry) {
+    s32 ret;
 
-    temp_v0 = sceKernelCanReleaseLibrary();
-    if (temp_v0 >= 0) {
-
-    } else {
-        Kprintf(&D_00006DA0, "CanReleaseLibrary", temp_v0);
+    ret = sceKernelCanReleaseLibrary(libEntry);
+    if (ret < 0) {
+        Kprintf(&D_00006DA0, "CanReleaseLibrary", ret);
     }
-    return temp_v0;
+    return ret;
 }
 
-s32 func_00000474(void) {
-    s32 temp_v0;
+s32 func_00000474(void *libEntry) {
+    s32 ret;
 
-    temp_v0 = sceKernelReleaseLibrary();
-    if (temp_v0 >= 0) {
-
-    } else {
-        Kprintf(&D_00006DA0, "ReleaseLibrary", temp_v0);
+    ret = sceKernelReleaseLibrary(libEntry);
+    if (ret < 0) {
+        Kprintf(&D_00006DA0, "ReleaseLibrary", ret);
     }
-    return temp_v0;
+    return ret;
 }
 
 INCLUDE_ASM("nonmatchings/modulemgr", func_000004C8);
@@ -884,7 +880,37 @@ INCLUDE_ASM("nonmatchings/modulemgr", func_00002C74);
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/modulemgr", func_00001108);
+s32 EpilogueModule(SceModule *mod) {
+    SceResidentLibraryEntryTable *ent;
+    SceSize size;
+    s32 ret;
+
+    ret = 0;
+    if (mod->entSize != 0) {
+        ent = mod->entTop;
+        size = mod->entSize;
+        do {
+            if (ent->attribute >= 0) {
+                ret = func_00000420(ent);
+                if (ret != 0) {
+                    Kprintf("modulemgr.c:%s:CanReleaseLibrary failed 0x%x\n", "EpilogueModule", ret);
+                    goto end;
+                }
+            }
+            size -= sizeof(*ent);
+            ent++;
+        } while (size != 0);
+    }
+    if ((s32)mod->stubTop != -1) {
+        func_00000404(mod->stubTop, mod->stubSize);
+    }
+    func_00004FCC(mod);
+end:
+    if (ret < 0) {
+        Kprintf(D_0000515C, "EpilogueModule", ret);
+    }
+    return ret;
+}
 
 s32 func_000011E8(SceUID fd) {
     s32 size;
@@ -911,7 +937,41 @@ u32 CheckMsHeader(PBPHeader *header, SceSize *pSize) {
     return 0;
 }
 
-INCLUDE_ASM("nonmatchings/modulemgr", func_000012E4);
+s32 ReadFile(SceUID fd, void *buf, SceSize size) {
+    SceSize pbpSize;
+    u32 off;
+    SceSize chunk;
+    s32 total;
+    s32 n;
+    u8 *p;
+
+    chunk = 0xF000;
+    sceIoRead(fd, buf, 0x200);
+    off = CheckMsHeader(buf, &pbpSize);
+    sceIoLseek(fd, off, 0);
+    if (off != 0 && size < pbpSize) {
+        Kprintf("modulemgr.c:%s:filesize mismatch size 0x%08x <- max 0x%08x\n", "ReadFile", size, pbpSize);
+        size = pbpSize;
+    }
+    total = 0;
+    while (size != 0) {
+        p = (u8 *)buf + total;
+        if (size < chunk) {
+            chunk = size;
+        }
+        n = sceIoRead(fd, p, chunk);
+        if (n < 0) {
+            Kprintf("modulemgr.c:%s:sceIoread failed: 0x%08x\n", "ReadFile", n);
+            return total;
+        }
+        size -= n;
+        total += n;
+        if ((u32)n < chunk) {
+            break;
+        }
+    }
+    return total;
+}
 
 INCLUDE_ASM("nonmatchings/modulemgr", func_000013F4);
 
