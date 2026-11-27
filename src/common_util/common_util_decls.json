@@ -20,6 +20,7 @@
   "func_000012C0": "void func_000012C0(void);",
   "func_000012F8": "void func_000012F8(void);",
   "func_00001D08": "void func_00001D08(void);",
+  "func_00008378": "void func_00008378(void);",
   "func_000083D0": "M2C_UNK func_000083D0();",
   "func_00009F60": "M2C_UNK func_00009F60();",
   "module_start": "s32 module_start(void);",

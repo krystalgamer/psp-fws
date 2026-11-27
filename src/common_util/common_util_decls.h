@@ -52,6 +52,7 @@ s32 func_00001250(s32, s32, s32);
 void func_000012C0(void);
 void func_000012F8(void);
 void func_00001D08(void);
+void func_00008378(void);
 M2C_UNK func_000083D0();
 M2C_UNK func_00009F60();
 s32 module_start(void);
