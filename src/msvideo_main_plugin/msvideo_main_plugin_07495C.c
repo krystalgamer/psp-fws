@@ -138,6 +138,10 @@ INCLUDE_ASM("nonmatchings/msvideo_main_plugin_07495C", func_0007614C);
 
 INCLUDE_ASM("nonmatchings/msvideo_main_plugin_07495C", func_00076178);
 
+#if FW_VERSION < 350
+Class_000B4A08::~Class_000B4A08() {
+}
+#else
 void func_000761A4(M2C_UNK **arg0) {
     *arg0 = &D_000B4A08;
 }
@@ -145,10 +149,13 @@ void func_000761A4(M2C_UNK **arg0) {
 void func_000761B4(M2C_UNK **arg0) {
     *arg0 = &D_000B4A08;
 }
+#endif
 
-#if FW_VERSION < 352
+#if FW_VERSION >= 350 && FW_VERSION < 352
 INCLUDE_ASM("nonmatchings/msvideo_main_plugin_07495C", func_000761C4);
-#else
+#endif
+
+#if FW_VERSION == 352
 void func_000761C4(M2C_UNK **arg0) {
     *arg0 = &D_000B4A08;
     scePaf_6261C0A5((s32) arg0);

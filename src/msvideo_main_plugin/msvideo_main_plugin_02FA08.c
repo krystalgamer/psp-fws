@@ -1349,6 +1349,10 @@ void func_00037F48(struct Unk_func_00037F48_0 *arg0) {
 }
 #endif
 
+#if FW_VERSION < 350
+Class_000B27F8::~Class_000B27F8() {
+}
+#else
 void func_00037F68(M2C_UNK **arg0) {
     *arg0 = &D_000B27F8;
 }
@@ -1356,10 +1360,13 @@ void func_00037F68(M2C_UNK **arg0) {
 void func_00037F78(M2C_UNK **arg0) {
     *arg0 = &D_000B27F8;
 }
+#endif
 
-#if FW_VERSION < 352
+#if FW_VERSION >= 350 && FW_VERSION < 352
 INCLUDE_ASM("nonmatchings/msvideo_main_plugin_02FA08", func_00037F88);
-#else
+#endif
+
+#if FW_VERSION == 352
 void func_00037F88(M2C_UNK **arg0) {
     *arg0 = &D_000B27F8;
     scePaf_6261C0A5((s32) arg0);
@@ -1549,6 +1556,10 @@ INCLUDE_ASM("nonmatchings/msvideo_main_plugin_02FA08", func_00039C04);
 INCLUDE_RODATA("nonmatchings/msvideo_main_plugin_02FA08", D_000B2758);
 
 INCLUDE_RODATA("nonmatchings/msvideo_main_plugin_02FA08", D_000B27F8);
+
+#if FW_VERSION < 350
+__asm__(".globl _ZTV14Class_000B27F8\n_ZTV14Class_000B27F8 = D_000B27F8 - 8\n");
+#endif
 
 INCLUDE_RODATA("nonmatchings/msvideo_main_plugin_02FA08", D_000B2808);
 
@@ -2034,7 +2045,7 @@ void func_0003BA48(s32 **arg0) {
         _ZdaPv(temp_v0);
         M2C_FIELD(arg0, s32 *, 0x14) = 0;
     }
-    func_00037F68(arg0);
+    _ZN14Class_000B27F8D2Ev(arg0);
 }
 #endif
 
@@ -2100,7 +2111,7 @@ void func_0003D0F4(s32 **arg0) {
         _ZdaPv(temp_v0);
         M2C_FIELD(arg0, s32 *, 0x14) = 0;
     }
-    func_00037F68(arg0);
+    _ZN14Class_000B27F8D2Ev(arg0);
 }
 #endif
 
@@ -2125,7 +2136,7 @@ void func_0003D148(s32 **arg0) {
         _ZdaPv(temp_v0);
         M2C_FIELD(arg0, s32 *, 0x14) = 0;
     }
-    func_00037F68(arg0);
+    _ZN14Class_000B27F8D2Ev(arg0);
     _ZdlPv((s32) arg0);
 }
 #endif

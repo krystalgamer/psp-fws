@@ -7,7 +7,32 @@
 #ifdef __cplusplus
 #include "paf.h"
 #include "vsh.h"
+#pragma interface
 extern "C" {
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_000B27F8 is data (vptr = label - 8 + 8) */
+class Class_000B27F8 {
+public:
+    virtual ~Class_000B27F8();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_000B40A0 is data (vptr = label - 8 + 8) */
+class Class_000B40A0 {
+public:
+    virtual ~Class_000B40A0();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_000B4A08 is data (vptr = label - 8 + 8) */
+class Class_000B4A08 {
+public:
+    virtual ~Class_000B4A08();
+};
 #endif
 
 struct Unk_D_000B5FC0 {
@@ -3323,6 +3348,7 @@ M2C_UNK InputDevice_PspPad_Lock(...);
 M2C_UNK InputDevice_PspPad_Unlock(...);
 M2C_UNK Job_Cancel(M2C_UNK, s32);
 s32 Job_Start(M2C_UNK, M2C_UNK *, struct Unk_func_0002B144_0 *, M2C_UNK, M2C_UNK, M2C_UNK *);
+void _ZN14Class_000B27F8D2Ev(void *self);
 M2C_UNK _ZN3paf13PhApplication13StartDispListEv(void);
 M2C_UNK _ZN3paf13PhApplication14FinishDispListEv(void);
 M2C_UNK _ZN3paf4View12PageActivateEPv(s32, s32);

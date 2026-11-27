@@ -1,10 +1,14 @@
 {
+ "cxx_prelude": [
+  "#pragma interface"
+ ],
  "funcs": {
   "InputDevice_PspHprm_Lock": "M2C_UNK InputDevice_PspHprm_Lock();",
   "InputDevice_PspPad_Lock": "M2C_UNK InputDevice_PspPad_Lock();",
   "InputDevice_PspPad_Unlock": "M2C_UNK InputDevice_PspPad_Unlock();",
   "Job_Cancel": "M2C_UNK Job_Cancel(M2C_UNK, s32);",
   "Job_Start": "s32 Job_Start(M2C_UNK, M2C_UNK *, struct Unk_func_0002B144_0 *, M2C_UNK, M2C_UNK, M2C_UNK *);",
+  "_ZN14Class_000B27F8D2Ev": "void _ZN14Class_000B27F8D2Ev(void *self);",
   "_ZN3paf13PhApplication13StartDispListEv": "M2C_UNK _ZN3paf13PhApplication13StartDispListEv();",
   "_ZN3paf13PhApplication14FinishDispListEv": "M2C_UNK _ZN3paf13PhApplication14FinishDispListEv();",
   "_ZN3paf4View12PageActivateEPv": "M2C_UNK _ZN3paf4View12PageActivateEPv(s32, s32);",
@@ -2002,6 +2006,9 @@
   "vsh_60EA90BF": "M2C_UNK vsh_60EA90BF(s32, M2C_UNK *);"
  },
  "types": {
+  "Class_000B27F8": "#ifdef __cplusplus\n/* vtable _ZTV14Class_000B27F8 is data (vptr = label - 8 + 8) */\nclass Class_000B27F8 {\npublic:\n    virtual ~Class_000B27F8();\n};\n#endif",
+  "Class_000B40A0": "#ifdef __cplusplus\n/* vtable _ZTV14Class_000B40A0 is data (vptr = label - 8 + 8) */\nclass Class_000B40A0 {\npublic:\n    virtual ~Class_000B40A0();\n};\n#endif",
+  "Class_000B4A08": "#ifdef __cplusplus\n/* vtable _ZTV14Class_000B4A08 is data (vptr = label - 8 + 8) */\nclass Class_000B4A08 {\npublic:\n    virtual ~Class_000B4A08();\n};\n#endif",
   "Unk_D_000B5FC0": "struct Unk_D_000B5FC0 {\n    u8 pad0[0x10];\n    u8 unk10;\n};",
   "Unk_D_000B5FD4": "struct Unk_D_000B5FD4 {\n    u8 pad0[0x34];\n    s32 unk34;\n    s32 unk38;\n};",
   "Unk_D_000B6140": "struct Unk_D_000B6140 {\n    u8 pad0[0x20];\n    s32 unk20;\n};",

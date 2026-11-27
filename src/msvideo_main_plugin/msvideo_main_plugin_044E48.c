@@ -5533,11 +5533,8 @@ void func_0005F644(s32 arg0, s32 arg1) {
 #endif
 
 #if FW_VERSION < 350
-INCLUDE_ASM("nonmatchings/msvideo_main_plugin_044E48", func_000602E0);
-
-INCLUDE_ASM("nonmatchings/msvideo_main_plugin_044E48", func_0005F678);
-
-INCLUDE_ASM("nonmatchings/msvideo_main_plugin_044E48", func_0005F688);
+Class_000B40A0::~Class_000B40A0() {
+}
 
 INCLUDE_ASM("nonmatchings/msvideo_main_plugin_044E48", func_0005F6B0);
 
@@ -5593,6 +5590,8 @@ INCLUDE_RODATA("nonmatchings/msvideo_main_plugin_044E48", D_000B4080);
 INCLUDE_RODATA("nonmatchings/msvideo_main_plugin_044E48", D_000B40A0);
 
 #if FW_VERSION < 350
+__asm__(".globl _ZTV14Class_000B40A0\n_ZTV14Class_000B40A0 = D_000B40A0 - 8\n");
+
 INCLUDE_ASM("nonmatchings/msvideo_main_plugin_044E48", func_0005F8D4);
 
 INCLUDE_RODATA("nonmatchings/msvideo_main_plugin_044E48", D_000B42A8);
