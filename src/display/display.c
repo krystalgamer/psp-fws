@@ -259,7 +259,39 @@ INCLUDE_ASM("nonmatchings/display", func_00000890);
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/display", func_00000468);
+s32 func_00000468(s32 id, char *name, void *param, s32 *result)
+{
+    switch (id) {
+    case 0x400:
+        scePwmStop(1);
+        scePwmStop(0);
+        sceGpioPortClear(1);
+        g_display.suspendWait = 10;
+        break;
+    case 0x402:
+        if (g_display.suspendWait > 0) {
+            return -1;
+        }
+        break;
+    case 0x400A:
+        func_00001728();
+        break;
+    case 0x1000A:
+        func_00001748();
+        func_00002AC8();
+        sceGpioSetPortMode(0, 0);
+        if (g_display.enabled) {
+            sceGpioPortSet(1);
+        } else {
+            sceGpioPortClear(1);
+        }
+        scePwmStart(0, 0x18, 0x19, 1);
+        g_display.brightnessFade = 1;
+        g_display.curBrightness = 0;
+        break;
+    }
+    return 0;
+}
 
 INCLUDE_ASM("nonmatchings/display", func_00000578);
 #endif
@@ -510,7 +542,22 @@ INCLUDE_ASM("nonmatchings/display", func_000016C4);
 #endif
 
 #if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/display", func_00001254);
+s32 func_00001254(void *arg)
+{
+    s32 i;
+    s32 sub;
+
+    g_Vblank.vcount++;
+    for (i = 0; i < 32; i++) {
+        sub = D_00001FF8[i];
+        if (g_Vblank.subIntrMask & (1 << sub)) {
+            sceKernelCallSubIntrHandler(arg, sub, sub, 0);
+        }
+    }
+    sceKernelSetEventFlag(g_Vblank.evflg, 1);
+    sceKernelClearEventFlag(g_Vblank.evflg, ~1);
+    return -1;
+}
 #else
 INCLUDE_ASM("nonmatchings/display", sceDisplayInit);
 
@@ -676,7 +723,41 @@ INCLUDE_ASM("nonmatchings/display", func_00002258);
 INCLUDE_ASM("nonmatchings/display", func_000022A8);
 #endif
 
-INCLUDE_ASM("nonmatchings/display", func_000023B8);
+void func_000023B8(void)
+{
+    s32 intr = sceKernelCpuSuspendIntr();
+
+    sceSysregApbTimerClkDisable(1);
+    sceSysregApbTimerClkSelect(1, 4);
+    sceSysregApbTimerClkEnable(1);
+    while (((volatile SceDisplayHwCounter *)0xBE740000)->busy & 4)
+        ;
+    ((volatile SceDisplayHwCounter *)0xBE740000)->ctrl = 0;
+    while (((volatile SceDisplayHwCounter *)0xBE740000)->busy & 4)
+        ;
+    while (((volatile SceDisplayHwCounter *)0xBE740000)->busy & 2)
+        ;
+    ((volatile SceDisplayHwCounter *)0xBE740000)->unk4 = 0;
+    while (((volatile SceDisplayHwCounter *)0xBE740000)->busy & 8)
+        ;
+    ((volatile SceDisplayHwCounter *)0xBE740000)->unkC = -1;
+    while (((volatile SceDisplayHwCounter *)0xBE740000)->busy & 0x10)
+        ;
+    ((volatile SceDisplayHwCounter *)0xBE740000)->unk10 = 0;
+    while (((volatile SceDisplayHwCounter *)0xBE740000)->busy & 0x20)
+        ;
+    ((volatile SceDisplayHwCounter *)0xBE740000)->unk14 = 0;
+    while (((volatile SceDisplayHwCounter *)0xBE740000)->busy & 1)
+        ;
+    ((volatile SceDisplayHwCounter *)0xBE740000)->ctrl = 0x20201;
+    while (((volatile SceDisplayHwCounter *)0xBE740000)->busy & 4)
+        ;
+    sceSysregApbTimerClkDisable(1);
+    sceSysregApbTimerClkSelect(1, 7);
+    sceSysregApbTimerClkEnable(1);
+    ((volatile SceDisplayHwCounter *)0xBE740000)->unk24 = 1;
+    sceKernelCpuResumeIntrWithSync(intr);
+}
 
 #if FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/display", D_00001FF8);

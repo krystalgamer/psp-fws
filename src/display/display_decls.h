@@ -102,9 +102,24 @@ typedef struct {
     SceUID evflg;             /* g_Vblank.evflg */
 } SceDisplayVblank;
 
+typedef struct {
+    u32 ctrl;   /* 0x00 */
+    u32 unk4;   /* 0x04: accumulated hcount */
+    u32 unk8;   /* 0x08 */
+    u32 unkC;
+    u32 unk10;
+    u32 unk14;
+    u32 unk18;
+    u32 unk1C;
+    u32 busy;   /* 0x20: write-pending bits */
+    u32 unk24;
+} SceDisplayHwCounter;
+
+extern u8 D_00001FF8[];
 extern s32 D_00002018;
 extern s32 D_00002060;
 extern s32 D_000020D0;
+extern s32 D_0000213C;
 extern M2C_UNK D_00003D10;
 extern SceDisplayVblank g_Vblank;
 extern SceDisplay g_display;
@@ -114,14 +129,16 @@ s32 func_00000658(void);
 s32 func_00000868(s32 level);
 s32 func_0000092C(s32 mode, s32 width, s32 height, s32 bufferWidth, s32 pixelFormat);
 s32 func_000009F8(void);
+s32 func_00001254(void *arg);
 s32 func_000013B4(s32 *arg0);
 s32 func_000016F4(void);
 s32 func_00001728(void);
 s32 func_00001748(void);
 s32 func_000021C8(void);
-s32 func_000023B8(void);
+void func_000023B8(void);
 s32 func_00002A64(void);
 s32 func_00002AA0(void);
+s32 func_00002AC8(void);
 s32 func_00002B20(s32 arg0);
 s32 func_0000315C(void);
 s32 module_start(void);
@@ -159,13 +176,21 @@ M2C_UNK sceGeEdramSetSize(s32);
 s32 sceGpioPortClear(s32 mask);
 s32 sceGpioPortSet(s32 mask);
 s32 sceGpioSetPortMode(s32 port, s32 mode);
+s32 sceKernelCallSubIntrHandler(void *arg, s32 subIntr, s32 unk2, s32 unk3);
+s32 sceKernelClearEventFlag(SceUID evid, u32 bits);
+s32 sceKernelCpuResumeIntrWithSync(s32 intr);
+SceUID sceKernelCreateEventFlag(const char *name, s32 attr, s32 bits, void *opt);
 void sceKernelDcacheWritebackAll(void);
 s32 sceKernelDeleteEventFlag(s32);
 M2C_UNK sceKernelDisableIntr(M2C_UNK);
+s32 sceKernelEnableIntr(s32 intno);
 s32 sceKernelInitApitype();
 M2C_UNK sceKernelMemset32(void *, M2C_UNK, s32);
+s32 sceKernelRegisterIntrHandler(s32 intno, s32 unk1, void *handler, void *arg, void *cb);
 M2C_UNK sceKernelReleaseIntrHandler(M2C_UNK);
 M2C_UNK sceKernelReleaseSubIntrHandler(M2C_UNK, M2C_UNK);
+s32 sceKernelSetEventFlag(SceUID evid, u32 bits);
+s32 sceKernelSetUserModeIntrHanlerAcceptable(s32 intno, s32 subno, s32 accept);
 SceDisplaySm1Ops *sceKernelSm1ReferOperations(void);
 M2C_UNK sceKernelUnregisterSysEventHandler(M2C_UNK *);
 s32 sceKernelWaitEventFlag(s32, u32, s32, void *, void *);
@@ -180,6 +205,8 @@ s32 scePwmReferDuty(u32 id, u16 *duty, u16 *cycle);
 s32 scePwmStart(u32 id, u16 unk1, u16 unk2, u16 unk3);
 s32 scePwmStop(u32 id);
 M2C_UNK sceSysregApbTimerClkDisable(M2C_UNK);
+s32 sceSysregApbTimerClkEnable(s32 timer);
+s32 sceSysregApbTimerClkSelect(s32 timer, s32 clk);
 M2C_UNK sceSysregVblankIRQPolar(M2C_UNK);
 
 #endif
