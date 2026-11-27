@@ -1,0 +1,36 @@
+// shared names (tools/add_version.py) begin
+D_000016E0 = 0x00001564; // rom:0x15E4
+sceI2cMasterTransmit = 0x00000000; // type:func rom:0x80
+sceI2cMasterReceive = 0x00000288; // type:func rom:0x308
+sceI2cMasterTransmitReceive = 0x00000728; // type:func rom:0x7A8
+module_start = 0x00000DB8; // type:func rom:0xE38
+module_reboot_before = 0x00000E84; // type:func rom:0xF04
+sceI2cInit = 0x00000ED0; // type:func rom:0xF50
+sceI2cEnd = 0x00000F9C; // type:func rom:0x101C
+sceI2cSuspend = 0x00000FE8; // type:func rom:0x1068
+sceI2cResume = 0x00001010; // type:func rom:0x1090
+sceI2cSetDebugHandlers = 0x00001038; // type:func rom:0x10B8
+sceI2cReset = 0x00001048; // type:func rom:0x10C8
+sceI2cSetClock = 0x00001084; // type:func rom:0x1104
+func_00001264 = 0x000010FC; // type:func rom:0x117C
+func_000012BC = 0x00001154; // type:func rom:0x11D4
+sceKernelRegisterIntrHandler = 0x000012E4; // type:func rom:0x1364
+sceKernelReleaseIntrHandler = 0x000012EC; // type:func rom:0x136C
+sceKernelEnableIntr = 0x000012F4; // type:func rom:0x1374
+sceKernelDisableIntr = 0x000012FC; // type:func rom:0x137C
+sceKernelDelayThread = 0x00001304; // type:func rom:0x1384
+sceKernelCreateSema = 0x0000130C; // type:func rom:0x138C
+sceKernelDeleteSema = 0x00001314; // type:func rom:0x1394
+sceKernelSignalSema = 0x0000131C; // type:func rom:0x139C
+sceKernelWaitSema = 0x00001324; // type:func rom:0x13A4
+sceKernelCreateEventFlag = 0x0000132C; // type:func rom:0x13AC
+sceKernelDeleteEventFlag = 0x00001334; // type:func rom:0x13B4
+sceKernelSetEventFlag = 0x0000133C; // type:func rom:0x13BC
+sceKernelWaitEventFlag = 0x00001344; // type:func rom:0x13C4
+sceKernelRegisterSysEventHandler = 0x0000134C; // type:func rom:0x13CC
+sceKernelUnregisterSysEventHandler = 0x00001354; // type:func rom:0x13D4
+sceSysregIicClkEnable = 0x0000135C; // type:func rom:0x13DC
+sceSysregIicClkDisable = 0x00001364; // type:func rom:0x13E4
+sceSysregIicIoEnable = 0x0000136C; // type:func rom:0x13EC
+sceSysregIicIoDisable = 0x00001374; // type:func rom:0x13F4
+// shared names (tools/add_version.py) end

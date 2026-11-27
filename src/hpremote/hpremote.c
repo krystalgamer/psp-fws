@@ -300,7 +300,7 @@ s32 sceHprmGetIdleCancelKey(s32 *arg0) {
 }
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/hpremote", func_00001250);
 #endif
 
