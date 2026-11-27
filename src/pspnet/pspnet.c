@@ -1853,7 +1853,18 @@ INCLUDE_ASM("nonmatchings/pspnet", _sce_pspnet_if_attach);
 
 INCLUDE_ASM("nonmatchings/pspnet", _sce_pspnet_if_detach);
 
+#if FW_VERSION < 271
+void _sce_pspnet_if_down(struct ifnet *ifp) {
+    ifp->if_flags &= ~IFF_UP;
+    if (D_0000B3AC > 0)
+        D_0000B390(ifp);
+    func_00005404(&ifp->if_snd);
+    if (D_0000B3AC > 0)
+        D_0000B394(ifp);
+}
+#else
 INCLUDE_ASM("nonmatchings/pspnet", _sce_pspnet_if_down);
+#endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet", func_00005404);
@@ -2017,15 +2028,60 @@ void _sce_pspnet_ifafree(void *ifa) {
 }
 #endif
 
-INCLUDE_ASM("nonmatchings/pspnet", _sce_pspnet_link_rtrequest);
+void _sce_pspnet_link_rtrequest(s32 cmd, void *rt, void *info) {
+    if (D_0000B3AC > 0)
+        D_0000B374(cmd, rt, info);
+}
 
-INCLUDE_ASM("nonmatchings/pspnet", _sce_pspnet_if_up);
+void _sce_pspnet_if_up(struct ifnet *ifp) {
+    ifp->if_flags |= IFF_UP;
+    if (D_0000B3AC > 0)
+        D_0000B398(ifp);
+}
 
 INCLUDE_ASM("nonmatchings/pspnet", func_00005D64);
 
-INCLUDE_ASM("nonmatchings/pspnet", _sce_pspnet_ifunit);
+#if FW_VERSION < 201
+struct ifnet *_sce_pspnet_ifunit(const char *name) {
+    struct ifnet *ifp;
+    s32 s;
 
+    s = _sce_pspnet_spllock();
+    for (ifp = TAILQ_FIRST(&D_0000BE54); ifp != NULL; ifp = TAILQ_NEXT(ifp, if_list)) {
+        if (ifp->if_output == _sce_pspnet_if_nulloutput)
+            continue;
+        if (func_00007DAC(ifp->if_xname, name) == 0) {
+            _sce_pspnet_splunlock(s);
+            return ifp;
+        }
+    }
+    _sce_pspnet_splunlock(s);
+    return NULL;
+}
+#else
+INCLUDE_ASM("nonmatchings/pspnet", _sce_pspnet_ifunit);
+#endif
+
+#if FW_VERSION < 201
+s32 _sce_pspnet_if_exist(const char *name) {
+    struct ifnet *ifp;
+    s32 s;
+
+    s = _sce_pspnet_spllock();
+    for (ifp = TAILQ_FIRST(&D_0000BE54); ifp != NULL; ifp = TAILQ_NEXT(ifp, if_list)) {
+        if (ifp->if_output == _sce_pspnet_if_nulloutput)
+            continue;
+        if (func_00007DAC(ifp->if_xname, name) == 0) {
+            _sce_pspnet_splunlock(s);
+            return 1;
+        }
+    }
+    _sce_pspnet_splunlock(s);
+    return 0;
+}
+#else
 INCLUDE_ASM("nonmatchings/pspnet", _sce_pspnet_if_exist);
+#endif
 
 INCLUDE_ASM("nonmatchings/pspnet", _sce_pspnet_ifioctl_sync);
 

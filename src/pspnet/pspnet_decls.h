@@ -98,6 +98,16 @@ struct timeval {
 };
 
 
+struct mbuf;
+/* struct ifqueue (4.4BSD if.h) */
+struct ifqueue {
+    struct mbuf *ifq_head;      /* 0x00 */
+    struct mbuf *ifq_tail;      /* 0x04 */
+    s32 ifq_len;                /* 0x08 */
+    s32 ifq_maxlen;             /* 0x0C */
+    s32 ifq_drops;              /* 0x10 */
+};
+
 /* struct if_data (NetBSD 1.5 if.h, u_quad_t counters, partial) */
 struct if_data {
     u8 ifi_type;                        /* 0x00 */
@@ -126,7 +136,8 @@ struct ifnet {
     void (*if_start)(struct ifnet *ifp); /* 0xB4 */
     u8 unkB8[4];
     s32 (*if_ioctl)(struct ifnet *ifp, u32 cmd, void *data); /* 0xBC */
-    u8 unkC0[0xE0 - 0xC0];
+    u8 unkC0[0xCC - 0xC0];
+    struct ifqueue if_snd;              /* 0xCC */
     struct sockaddr_dl *if_sadl;        /* 0xE0 */
 };
 #define IFF_UP 0x1
@@ -149,6 +160,8 @@ struct sockaddr_dl {
 struct ether_addr {
     char ether_addr_octet[6];
 };
+
+TAILQ_HEAD(ifnethead, ifnet);
 
 
 typedef struct {
@@ -280,6 +293,20 @@ extern s32 D_0000B0F0;
 extern s32 D_0000B314;
 extern s32 D_0000B31C;
 extern s32 D_0000B370;
+extern void (*D_0000B374)();
+extern void (*D_0000B378)();
+extern void (*D_0000B37C)();
+extern void (*D_0000B380)();
+extern void (*D_0000B384)();
+extern void (*D_0000B388)();
+extern void (*D_0000B38C)();
+extern void (*D_0000B390)();
+extern void (*D_0000B394)();
+extern void (*D_0000B398)();
+extern void (*D_0000B39C)();
+extern void (*D_0000B3A0)();
+extern void (*D_0000B3A4)();
+extern s32 D_0000B3AC;
 extern s32 D_0000B3B4;
 extern s32 D_0000B3B8;
 extern s32 D_0000B3BC;
@@ -296,7 +323,7 @@ extern u32 D_0000B3E4[521];
 extern s32 D_0000B91C;
 extern s32 D_0000BC08;
 extern M2C_UNK D_0000BC0C;
-extern u8 D_0000BE54;
+extern struct ifnethead D_0000BE54;
 
 void _sce_pspnet_adhoc_sabort(s32 a, s32 b);
 void _sce_pspnet_callout_cleanup(struct callout *c);
@@ -309,11 +336,15 @@ s32 *_sce_pspnet_get_selwait_addr(void);
 struct SceNetThreadInfo *_sce_pspnet_get_threadinfo(SceUID thid);
 void _sce_pspnet_hashdone(void *hashtbl);
 void *_sce_pspnet_hashinit(s32 elements, u32 *hashmask);
+void _sce_pspnet_if_down(struct ifnet *ifp);
+s32 _sce_pspnet_if_exist(const char *name);
 s32 _sce_pspnet_if_nulloutput(void);
+void _sce_pspnet_if_up(struct ifnet *ifp);
 void _sce_pspnet_ifafree(void *ifa);
 s32 _sce_pspnet_ifioctl(struct socket *so, u32 cmd, void *data, s32 p);
 struct ifnet *_sce_pspnet_ifunit(const char *name);
 void _sce_pspnet_inet_sabort(s32 a);
+void _sce_pspnet_link_rtrequest(s32 cmd, void *rt, void *info);
 struct SceNetThreadInfo *_sce_pspnet_lock_threadinfo(SceUID thid);
 void _sce_pspnet_microtime(struct timeval *tv);
 void _sce_pspnet_schednetintr(s32 arg0);
