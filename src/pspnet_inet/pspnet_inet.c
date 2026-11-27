@@ -4343,7 +4343,29 @@ void func_00028290(struct sppp *sp) {
     }
 }
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_00028318);
+void func_00028318(struct sppp *sp) {
+    const struct cp *cp = &D_0002BB54;
+
+    switch (sp->state[cp->protoidx]) {
+    case STATE_CLOSED:
+    case STATE_CLOSING:
+        func_00025F18(cp, sp, STATE_INITIAL);
+        break;
+    case STATE_STOPPED:
+        (cp->tls)(sp);
+        /* fall through */
+    case STATE_STOPPING:
+    case STATE_REQ_SENT:
+    case STATE_ACK_RCVD:
+    case STATE_ACK_SENT:
+        func_00025F18(cp, sp, STATE_STARTING);
+        break;
+    case STATE_OPENED:
+        (cp->tld)(sp);
+        func_00025F18(cp, sp, STATE_STARTING);
+        break;
+    }
+}
 
 void func_000283B8(struct sppp *sp) {
     const struct cp *cp = &D_0002BB54;
@@ -4381,7 +4403,44 @@ void func_000283B8(struct sppp *sp) {
     }
 }
 
+#if FW_VERSION < 151
+void func_000284B4(struct sppp *sp) {
+    const struct cp *cp = &D_0002BB54;
+
+    switch (sp->state[cp->protoidx]) {
+    case STATE_INITIAL:
+    case STATE_CLOSED:
+    case STATE_CLOSING:
+        break;
+    case STATE_STARTING:
+        (cp->tlf)(sp);
+        func_00025F18(cp, sp, STATE_INITIAL);
+        break;
+    case STATE_STOPPED:
+        func_00025F18(cp, sp, STATE_CLOSED);
+        break;
+    case STATE_STOPPING:
+        func_00025F18(cp, sp, STATE_CLOSING);
+        break;
+    case STATE_OPENED:
+        (cp->tld)(sp);
+        /* fall through */
+    case STATE_REQ_SENT:
+    case STATE_ACK_RCVD:
+    case STATE_ACK_SENT:
+        sp->rst_counter[cp->protoidx] = sp->lcp_max_terminate;
+        func_00025638(sp, cp->proto, 5 /* TERM_REQ */, ++sp->pp_seq[cp->protoidx], 0, 0);
+        func_00025F18(cp, sp, STATE_CLOSING);
+        break;
+    }
+    if (sp->pp_saved_mtu) {
+        ((struct ifnet *)sp)->if_mtu = sp->pp_saved_mtu;
+        sp->pp_saved_mtu = 0;
+    }
+}
+#else
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_000284B4);
+#endif
 
 void func_00028608(void *arg0) {
     func_00028B84(&D_0002BB54, arg0);
