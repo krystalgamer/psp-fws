@@ -36,8 +36,42 @@ def c_body(mod, ver, name):
     for f in sd.glob("*.c"):
         for e in FM.parse(f.read_text(), fv):
             if e.kind == "cfunc" and e.name == name and fw(ver) in e.vers:
-                return e.text
+                return resolve_fw(e.text, fw(ver))
     return None
+
+
+def resolve_fw(text, v):
+    """Keep only the lines active for version v of FW_VERSION #if blocks inside a body (others untouched)."""
+    out, stack = [], []  # stack: (is_fw, active_now, taken)
+    for line in text.splitlines(keepends=True):
+        m = re.match(r"^\s*#\s*(if|ifdef|ifndef|elif|else|endif)\b(.*)$", line)
+        on = all(act for fwc, act, _ in stack if fwc)
+        if not m:
+            if on:
+                out.append(line)
+            continue
+        kw, cond = m[1], m[2].strip()
+        if kw in ("if", "ifdef", "ifndef"):
+            if kw == "if" and "FW_VERSION" in cond:
+                val = FM.evaluate(cond, v)
+                stack.append((True, val, val))
+                continue
+            stack.append((False, True, True))
+        elif kw == "elif" and stack and stack[-1][0]:
+            fwc, act, taken = stack.pop()
+            val = not taken and FM.evaluate(cond, v)
+            stack.append((True, val, taken or val))
+            continue
+        elif kw == "else" and stack and stack[-1][0]:
+            fwc, act, taken = stack.pop()
+            stack.append((True, not taken, True))
+            continue
+        elif kw == "endif" and stack:
+            if stack.pop()[0]:
+                continue
+        if on:
+            out.append(line)
+    return "".join(out)
 
 
 def hand_try(mod, ver, cfile, decls):
