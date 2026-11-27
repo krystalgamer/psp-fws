@@ -266,11 +266,31 @@ INCLUDE_ASM("nonmatchings/display", func_00000578);
 
 #if FW_VERSION < 271
 INCLUDE_ASM("nonmatchings/display", func_00000868);
+
+s32 func_0000092C(s32 mode, s32 width, s32 height, s32 bufferWidth, s32 pixelFormat)
+{
+    s32 format;
+
+    if ((u32)pixelFormat < 4) {
+        format = (0x39 >> (pixelFormat * 2)) & 3;
+    } else {
+        format = 0x80000108;
+    }
+    g_display.bufferWidth = bufferWidth;
+    g_display.pixelFormat = pixelFormat;
+    sceDmacplusLcdcDisable();
+    sceDmacplusLcdcSetFormat(width, bufferWidth, format);
+    sceLcdcSetMode(mode, width, height, format);
+    sceDmacplusLcdcEnable();
+    return 0;
+}
+#endif
+
+#if FW_VERSION == 271
+INCLUDE_ASM("nonmatchings/display", func_0000092C);
 #endif
 
 #if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/display", func_0000092C);
-
 INCLUDE_ASM("nonmatchings/display", sceDisplaySetMode);
 
 INCLUDE_ASM("nonmatchings/display", sceDisplayGetMode);
@@ -284,9 +304,31 @@ INCLUDE_ASM("nonmatchings/display", sceDisplay_driver_5B5AEFAD);
 INCLUDE_ASM("nonmatchings/display", sceDisplayGetBacklightSel);
 #endif
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/display", sceDisplaySetBrightness);
+#if FW_VERSION < 271
+s32 sceDisplaySetBrightness(s32 level, s32 unk1)
+{
+    if ((u32)level > 100) {
+        return 0x800001FF;
+    }
+    if (unk1 == 0) {
+        g_display.brightness = level;
+        g_display.brightnessFade = 0;
+        func_00000868(level);
+    } else if (unk1 == 1) {
+        g_display.brightness = level;
+        g_display.brightnessFade = unk1;
+    } else {
+        return 0x80000107;
+    }
+    return 0;
+}
+#endif
 
+#if FW_VERSION == 271
+INCLUDE_ASM("nonmatchings/display", sceDisplaySetBrightness);
+#endif
+
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/display", sceDisplayGetBrightness);
 #endif
 
@@ -301,13 +343,39 @@ s32 module_start(void) {
     sceDisplayInit();
     return 0;
 }
+#endif
 
-INCLUDE_ASM("nonmatchings/display", sceDisplayEnable);
+#if FW_VERSION < 271
+s32 sceDisplayEnable(void)
+{
+    s32 intr = sceKernelCpuSuspendIntr();
+    s32 old = g_display.enabled;
 
-INCLUDE_ASM("nonmatchings/display", sceDisplayDisable);
+    g_display.enabled = 1;
+    sceKernelCpuResumeIntr(intr);
+    return old;
+}
 #endif
 
 #if FW_VERSION == 271
+INCLUDE_ASM("nonmatchings/display", sceDisplayEnable);
+#endif
+
+#if FW_VERSION < 271
+s32 sceDisplayDisable(void)
+{
+    s32 intr = sceKernelCpuSuspendIntr();
+    s32 old = g_display.enabled;
+
+    g_display.enabled = 0;
+    sceKernelCpuResumeIntr(intr);
+    return old;
+}
+#endif
+
+#if FW_VERSION == 271
+INCLUDE_ASM("nonmatchings/display", sceDisplayDisable);
+
 s8 sceDisplay_driver_23CE8C51(void) {
     return g_display.unk55;
 }
@@ -315,11 +383,6 @@ s8 sceDisplay_driver_23CE8C51(void) {
 INCLUDE_ASM("nonmatchings/display", sceDisplay_driver_E4E4C018);
 
 INCLUDE_ASM("nonmatchings/display", sceDisplaySetHoldMode);
-
-s32 sceDisplaySetResumeMode(s32 arg0) {
-    g_display.resumeMode = arg0;
-    return 0;
-}
 #endif
 
 #if FW_VERSION < 271
@@ -329,7 +392,7 @@ s32 sceDisplaySetHoldMode(s32 arg0) {
 }
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 271
+#if FW_VERSION >= 150 && FW_VERSION < 282
 s32 sceDisplaySetResumeMode(s32 arg0) {
     g_display.resumeMode = arg0;
     return 0;
@@ -629,7 +692,20 @@ s32 func_00002AA0(void) {
 }
 #endif
 
+#if FW_VERSION == 100
+s32 func_00002AC8(void)
+{
+    s32 a, b, c;
+
+    sceLcdcInsertDisplay_default(&a, 0, &b, &c);
+    g_Vblank.unk8 = a;
+    g_Vblank.hcountPerFrame = c;
+    g_Vblank.vblankStart = b;
+    return 0;
+}
+#else
 INCLUDE_ASM("nonmatchings/display", func_00002AC8);
+#endif
 
 #if FW_VERSION >= 282
 s32 func_00002B20(s32 arg0) {
@@ -646,32 +722,16 @@ s32 sceDisplayGetVcount(void) {
 }
 #endif
 
-#if FW_VERSION < 282
 s32 sceDisplayIsVblank(void) {
     return sceDisplayGetCurrentHcount() < g_Vblank.vblankStart;
 }
-#endif
 
-#if FW_VERSION >= 201 && FW_VERSION < 282
 s32 sceDisplayGetVblankRest(void) {
     return __builtin_allegrex_max(g_Vblank.vblankStart - sceDisplayGetCurrentHcount(), -1);
 }
-#endif
-
-#if FW_VERSION >= 150 && FW_VERSION < 201
-s32 sceDisplayGetVblankRest(void) {
-    return __builtin_allegrex_max(g_Vblank.vblankStart - sceDisplayGetCurrentHcount(), -1);
-}
-#endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/display", sceDisplayIsVsync);
-#endif
-
-#if FW_VERSION == 100
-s32 sceDisplayGetVblankRest(void) {
-    return __builtin_allegrex_max(g_Vblank.vblankStart - sceDisplayGetCurrentHcount(), -1);
-}
 #endif
 
 #if FW_VERSION < 282
@@ -716,16 +776,6 @@ s32 sceDisplayWaitVblankStartCB(void) {
 }
 #endif
 
-#if FW_VERSION >= 282
-s32 sceDisplayIsVblank(void) {
-    return sceDisplayGetCurrentHcount() < g_Vblank.vblankStart;
-}
-
-s32 sceDisplayGetVblankRest(void) {
-    return __builtin_allegrex_max(g_Vblank.vblankStart - sceDisplayGetCurrentHcount(), -1);
-}
-#endif
-
 #if FW_VERSION >= 350
 s32 sceDisplay_driver_66961521(void) {
     return __builtin_allegrex_max(g_Vblank.unk14 - sceDisplayGetCurrentHcount(), -1);
@@ -760,13 +810,32 @@ s32 sceDisplayIsPseudoField(void) {
 }
 #endif
 
-INCLUDE_ASM("nonmatchings/display", func_00002C7C);
+s32 func_00002C7C(s32 intno, s32 subIntrNo)
+{
+    g_Vblank.subIntrMask |= 1 << subIntrNo;
+    return 0;
+}
 
-INCLUDE_ASM("nonmatchings/display", func_00002C9C);
+s32 func_00002C9C(s32 intno, s32 subIntrNo)
+{
+    g_Vblank.subIntrMask &= ~(1 << subIntrNo);
+    return 0;
+}
 
-INCLUDE_ASM("nonmatchings/display", func_00002CC0);
+s32 func_00002CC0(s32 intno, s32 subIntrNo, s32 *state)
+{
+    if (state != NULL) {
+        *state = (g_Vblank.subIntrMask >> subIntrNo) & 1;
+    }
+    g_Vblank.subIntrMask &= ~(1 << subIntrNo);
+    return 0;
+}
 
-INCLUDE_ASM("nonmatchings/display", func_00002CF8);
+s32 func_00002CF8(s32 intno, s32 subIntrNo, s32 state)
+{
+    g_Vblank.subIntrMask |= state << subIntrNo;
+    return 0;
+}
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/display", func_00001DE4);
