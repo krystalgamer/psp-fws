@@ -1,3 +1,4 @@
+/* lang: c++ */
 #include "common.h"
 #include "savedata_plugin_decls.h"
 
@@ -8,7 +9,7 @@ INCLUDE_ASM("nonmatchings/savedata_plugin_00CE3C", func_0000CE3C);
 #if FW_VERSION >= 282 && FW_VERSION < 350
 void func_0000CE3C(M2C_UNK **arg0) {
     *arg0 = &D_00022508;
-    _ZdlPv();
+    _ZdlPv(arg0);
 }
 #endif
 
@@ -219,7 +220,7 @@ void func_0000CCD0(M2C_UNK **arg0) {
 
 void func_0000CCE0(M2C_UNK **arg0) {
     *arg0 = &D_00023078;
-    _ZdlPv();
+    _ZdlPv(arg0);
 }
 
 INCLUDE_ASM("nonmatchings/savedata_plugin_00CE3C", func_0000CD08);
@@ -300,7 +301,7 @@ INCLUDE_ASM("nonmatchings/savedata_plugin_00CE3C", func_0000CE3C);
 #if FW_VERSION < 201
 void func_0000CE3C(s32 **arg0) {
     *arg0 = &D_00022508;
-    _ZdlPv();
+    _ZdlPv(arg0);
 }
 #endif
 
@@ -638,7 +639,7 @@ INCLUDE_ASM("nonmatchings/savedata_plugin_00CE3C", func_000114C0);
 #if FW_VERSION < 282
 void func_0000AD30(M2C_UNK **arg0) {
     *arg0 = &D_00022518;
-    _ZdlPv();
+    _ZdlPv(arg0);
 }
 #endif
 
@@ -669,7 +670,7 @@ INCLUDE_ASM("nonmatchings/savedata_plugin_00CE3C", func_0000D7C8);
 #if FW_VERSION >= 282 && FW_VERSION < 350
 void func_0000D7C8(M2C_UNK **arg0) {
     *arg0 = &D_00022518;
-    _ZdlPv();
+    _ZdlPv(arg0);
 }
 #endif
 
@@ -1284,7 +1285,7 @@ void func_0000C95C(M2C_UNK **arg0) {
 
 void func_0000C96C(M2C_UNK **arg0) {
     *arg0 = &D_00022578;
-    _ZdlPv();
+    _ZdlPv(arg0);
 }
 
 void func_0000F280(struct Unk_func_000040AC_0 *arg0) {
@@ -1320,7 +1321,7 @@ INCLUDE_ASM("nonmatchings/savedata_plugin_00CE3C", func_0000F258);
 #if FW_VERSION >= 282 && FW_VERSION < 350
 void func_0000F258(M2C_UNK **arg0) {
     *arg0 = &D_00022578;
-    _ZdlPv();
+    _ZdlPv(arg0);
 }
 #endif
 
@@ -1344,7 +1345,7 @@ s32 func_0000CA04(void *arg0, s32 arg1) {
     s32 var_v1;
 
     var_v1 = 1;
-    if (!(M2C_FIELD(arg0, s32 *, 8) & 0xD8) || (arg1 != M2C_FIELD(arg0, s32 *, 0x10))) {
+    if (((M2C_FIELD(arg0, s32 *, 8) & 0xD8) == 0) || (arg1 != M2C_FIELD(arg0, s32 *, 0x10))) {
         var_v1 = 0;
     }
     return var_v1;
@@ -1356,7 +1357,7 @@ s32 func_0000CA04(void *arg0, s32 arg1) {
     s32 var_v1;
 
     var_v1 = 1;
-    if (!(M2C_FIELD(arg0, s32 *, 8) & 0x18) || (arg1 != M2C_FIELD(arg0, s32 *, 0x10))) {
+    if (((M2C_FIELD(arg0, s32 *, 8) & 0x18) == 0) || (arg1 != M2C_FIELD(arg0, s32 *, 0x10))) {
         var_v1 = 0;
     }
     return var_v1;
@@ -1392,7 +1393,7 @@ s32 func_0000CA4C(void *arg0, s32 arg1) {
     s32 var_v1;
 
     var_v1 = 1;
-    if (!((M2C_FIELD(arg0, u8 *, 8) ^ 1) & 1) || (arg1 != M2C_FIELD(arg0, s32 *, 0x10))) {
+    if ((((M2C_FIELD(arg0, u8 *, 8) ^ 1) & 1) == 0) || (arg1 != M2C_FIELD(arg0, s32 *, 0x10))) {
         var_v1 = 0;
     }
     return var_v1;
@@ -1412,7 +1413,7 @@ s32 func_0000F364(struct Unk_func_0000F364_0 *arg0, s32 arg1) {
     s32 var_v1;
 
     var_v1 = 1;
-    if (!(arg0->unk8 & 0xD8) || (arg1 != arg0->unk10)) {
+    if (((arg0->unk8 & 0xD8) == 0) || (arg1 != arg0->unk10)) {
         var_v1 = 0;
     }
     return var_v1;
@@ -1430,7 +1431,7 @@ s32 func_0000F3A8(struct Unk_func_0000F3A8_0 *arg0, s32 arg1) {
     s32 var_v1;
 
     var_v1 = 1;
-    if (!((arg0->unk8 ^ 1) & 1) || (arg1 != arg0->unk10)) {
+    if ((((arg0->unk8 ^ 1) & 1) == 0) || (arg1 != arg0->unk10)) {
         var_v1 = 0;
     }
     return var_v1;
@@ -1581,7 +1582,7 @@ void func_0000D2C0(M2C_UNK **arg0) {
 
 void func_0000D2D0(M2C_UNK **arg0) {
     *arg0 = &D_000226A0;
-    _ZdlPv();
+    _ZdlPv(arg0);
 }
 #else
 void func_0000FBC0(M2C_UNK **arg0) {
@@ -1596,7 +1597,7 @@ INCLUDE_ASM("nonmatchings/savedata_plugin_00CE3C", func_0000FBD0);
 #if FW_VERSION >= 282 && FW_VERSION < 350
 void func_0000FBD0(M2C_UNK **arg0) {
     *arg0 = &D_000226A0;
-    _ZdlPv();
+    _ZdlPv(arg0);
 }
 #endif
 
@@ -1889,9 +1890,9 @@ void func_0000E6A0(s32 arg0, void **arg1, s32 arg2) {
     s32 temp_v0_3;
     s32 temp_v0_4;
 
-    func_000020A4(&sp0, 0);
+    func_000020A4((s32*) &sp0, 0);
     temp_s0 = arg2 << 0x10;
-    M2C_FIELD(*arg1, M2C_UNK (**)(void **, s32 *, s32), 0xAC)(arg1, &sp0, temp_s0 | 1);
+    M2C_FIELD(*arg1, M2C_UNK (**)(void **, s32 *, s32), 0xAC)(arg1, (s32*) &sp0, temp_s0 | 1);
     if (sp0 != NULL) {
         temp_v0 = M2C_FIELD(sp0, s32 *, 4) - 1;
         M2C_FIELD(sp0, s32 *, 4) = temp_v0;
@@ -1901,8 +1902,8 @@ void func_0000E6A0(s32 arg0, void **arg1, s32 arg2) {
             M2C_FIELD(M2C_FIELD(sp0, void **, 0), M2C_UNK (**)(void *), 4)(sp0);
         }
     }
-    _ZNK3paf4View10GetTextureEPKc(&sp0, arg0, "tex_broken_data");
-    M2C_FIELD(*arg1, M2C_UNK (**)(void **, s32 *, s32), 0xAC)(arg1, &sp0, temp_s0);
+    _ZNK3paf4View10GetTextureEPKc((s32*) &sp0, arg0, "tex_broken_data");
+    M2C_FIELD(*arg1, M2C_UNK (**)(void **, s32 *, s32), 0xAC)(arg1, (s32*) &sp0, temp_s0);
     if (sp0 != NULL) {
         temp_v0_2 = M2C_FIELD(sp0, s32 *, 4) - 1;
         M2C_FIELD(sp0, s32 *, 4) = temp_v0_2;
@@ -1912,8 +1913,8 @@ void func_0000E6A0(s32 arg0, void **arg1, s32 arg2) {
             M2C_FIELD(M2C_FIELD(sp0, void **, 0), M2C_UNK (**)(void *), 4)(sp0);
         }
     }
-    _ZNK3paf4View10GetTextureEPKc(&sp0, arg0, "tex_broken_data_f");
-    M2C_FIELD(*arg1, M2C_UNK (**)(void **, s32 *, s32), 0xAC)(arg1, &sp0, temp_s0 | 7);
+    _ZNK3paf4View10GetTextureEPKc((s32*) &sp0, arg0, "tex_broken_data_f");
+    M2C_FIELD(*arg1, M2C_UNK (**)(void **, s32 *, s32), 0xAC)(arg1, (s32*) &sp0, temp_s0 | 7);
     if (sp0 != NULL) {
         temp_v0_3 = M2C_FIELD(sp0, s32 *, 4) - 1;
         M2C_FIELD(sp0, s32 *, 4) = temp_v0_3;
@@ -1923,8 +1924,8 @@ void func_0000E6A0(s32 arg0, void **arg1, s32 arg2) {
             M2C_FIELD(M2C_FIELD(sp0, void **, 0), M2C_UNK (**)(void *), 4)(sp0);
         }
     }
-    _ZNK3paf4View10GetTextureEPKc(&sp0, arg0, "tex_broken_data_s");
-    M2C_FIELD(*arg1, M2C_UNK (**)(void **, s32 *, s32), 0xAC)(arg1, &sp0, temp_s0 | 0xE);
+    _ZNK3paf4View10GetTextureEPKc((s32*) &sp0, arg0, "tex_broken_data_s");
+    M2C_FIELD(*arg1, M2C_UNK (**)(void **, s32 *, s32), 0xAC)(arg1, (s32*) &sp0, temp_s0 | 0xE);
     if (sp0 != NULL) {
         temp_v0_4 = M2C_FIELD(sp0, s32 *, 4) - 1;
         M2C_FIELD(sp0, s32 *, 4) = temp_v0_4;
@@ -1948,17 +1949,17 @@ void func_0000E6A0(s32 arg0, void **arg1, s32 arg2) {
     s32 temp_v0_3;
     s32 temp_v0_4;
 
-    func_000020A4(&sp0, 0);
+    func_000020A4((s32*) &sp0, 0);
     temp_s2 = arg2 << 0x10;
-    M2C_FIELD(*arg1, M2C_UNK (**)(void **, s32 *, s32), 0xA8)(arg1, &sp0, temp_s2 | 1);
+    M2C_FIELD(*arg1, M2C_UNK (**)(void **, s32 *, s32), 0xA8)(arg1, (s32*) &sp0, temp_s2 | 1);
     if ((sp0 == NULL) || (temp_v0 = M2C_FIELD(sp0, s32 *, 4) - 1, M2C_FIELD(sp0, s32 *, 4) = temp_v0, (temp_v0 > 0))) {
 
     } else {
         M2C_FIELD(M2C_FIELD(sp0, void **, 0), M2C_UNK (**)(void *), 4)(sp0);
     }
     M2C_FIELD(*arg1, M2C_UNK (**)(void **, s32, M2C_UNK, M2C_UNK), 0x7C)(arg1, temp_s2, 0x19, 3);
-    _ZNK3paf4View10GetTextureEPKc(&sp0, arg0, &D_000210EC);
-    M2C_FIELD(*arg1, M2C_UNK (**)(void **, s32 *, s32), 0xA8)(arg1, &sp0, temp_s2);
+    _ZNK3paf4View10GetTextureEPKc((s32*) &sp0, arg0, D_000210EC);
+    M2C_FIELD(*arg1, M2C_UNK (**)(void **, s32 *, s32), 0xA8)(arg1, (s32*) &sp0, temp_s2);
     if ((sp0 == NULL) || (temp_v0_2 = M2C_FIELD(sp0, s32 *, 4) - 1, M2C_FIELD(sp0, s32 *, 4) = temp_v0_2, (temp_v0_2 > 0))) {
 
     } else {
@@ -1966,8 +1967,8 @@ void func_0000E6A0(s32 arg0, void **arg1, s32 arg2) {
     }
     temp_s0 = temp_s2 | 7;
     M2C_FIELD(*arg1, M2C_UNK (**)(void **, s32, M2C_UNK, M2C_UNK), 0x7C)(arg1, temp_s0, 0x19, 3);
-    _ZNK3paf4View10GetTextureEPKc(&sp0, arg0, &D_000210FC);
-    M2C_FIELD(*arg1, M2C_UNK (**)(void **, s32 *, s32), 0xA8)(arg1, &sp0, temp_s0);
+    _ZNK3paf4View10GetTextureEPKc((s32*) &sp0, arg0, D_000210FC);
+    M2C_FIELD(*arg1, M2C_UNK (**)(void **, s32 *, s32), 0xA8)(arg1, (s32*) &sp0, temp_s0);
     if ((sp0 == NULL) || (temp_v0_3 = M2C_FIELD(sp0, s32 *, 4) - 1, M2C_FIELD(sp0, s32 *, 4) = temp_v0_3, (temp_v0_3 > 0))) {
 
     } else {
@@ -1975,8 +1976,8 @@ void func_0000E6A0(s32 arg0, void **arg1, s32 arg2) {
     }
     temp_s0_2 = temp_s2 | 0xE;
     M2C_FIELD(*arg1, M2C_UNK (**)(void **, s32, M2C_UNK, M2C_UNK), 0x7C)(arg1, temp_s0_2, 0x19, 3);
-    _ZNK3paf4View10GetTextureEPKc(&sp0, arg0, &D_00021110);
-    M2C_FIELD(*arg1, M2C_UNK (**)(void **, s32 *, s32), 0xA8)(arg1, &sp0, temp_s0_2);
+    _ZNK3paf4View10GetTextureEPKc((s32*) &sp0, arg0, D_00021110);
+    M2C_FIELD(*arg1, M2C_UNK (**)(void **, s32 *, s32), 0xA8)(arg1, (s32*) &sp0, temp_s0_2);
     if (sp0 != NULL) {
         temp_v0_4 = M2C_FIELD(sp0, s32 *, 4) - 1;
         M2C_FIELD(sp0, s32 *, 4) = temp_v0_4;
@@ -2016,17 +2017,17 @@ void func_0000E8B8(s32 arg0, void **arg1, s32 arg2) {
     s32 temp_v0_3;
     s32 temp_v0_4;
 
-    func_000020A4(&sp0, 0);
+    func_000020A4((s32*) &sp0, 0);
     temp_s2 = arg2 << 0x10;
-    M2C_FIELD(*arg1, M2C_UNK (**)(void **, s32 *, s32), 0xA8)(arg1, &sp0, temp_s2 | 1);
+    M2C_FIELD(*arg1, M2C_UNK (**)(void **, s32 *, s32), 0xA8)(arg1, (s32*) &sp0, temp_s2 | 1);
     if ((sp0 == NULL) || (temp_v0 = M2C_FIELD(sp0, s32 *, 4) - 1, M2C_FIELD(sp0, s32 *, 4) = temp_v0, (temp_v0 > 0))) {
 
     } else {
         M2C_FIELD(M2C_FIELD(sp0, void **, 0), M2C_UNK (**)(void *), 4)(sp0);
     }
     M2C_FIELD(*arg1, M2C_UNK (**)(void **, s32, M2C_UNK, M2C_UNK), 0x7C)(arg1, temp_s2, 0x19, 3);
-    _ZNK3paf4View10GetTextureEPKc(&sp0, arg0, &D_00021124);
-    M2C_FIELD(*arg1, M2C_UNK (**)(void **, s32 *, s32), 0xA8)(arg1, &sp0, temp_s2);
+    _ZNK3paf4View10GetTextureEPKc((s32*) &sp0, arg0, D_00021124);
+    M2C_FIELD(*arg1, M2C_UNK (**)(void **, s32 *, s32), 0xA8)(arg1, (s32*) &sp0, temp_s2);
     if ((sp0 == NULL) || (temp_v0_2 = M2C_FIELD(sp0, s32 *, 4) - 1, M2C_FIELD(sp0, s32 *, 4) = temp_v0_2, (temp_v0_2 > 0))) {
 
     } else {
@@ -2034,8 +2035,8 @@ void func_0000E8B8(s32 arg0, void **arg1, s32 arg2) {
     }
     temp_s0 = temp_s2 | 7;
     M2C_FIELD(*arg1, M2C_UNK (**)(void **, s32, M2C_UNK, M2C_UNK), 0x7C)(arg1, temp_s0, 0x19, 3);
-    _ZNK3paf4View10GetTextureEPKc(&sp0, arg0, &D_00021138);
-    M2C_FIELD(*arg1, M2C_UNK (**)(void **, s32 *, s32), 0xA8)(arg1, &sp0, temp_s0);
+    _ZNK3paf4View10GetTextureEPKc((s32*) &sp0, arg0, D_00021138);
+    M2C_FIELD(*arg1, M2C_UNK (**)(void **, s32 *, s32), 0xA8)(arg1, (s32*) &sp0, temp_s0);
     if ((sp0 == NULL) || (temp_v0_3 = M2C_FIELD(sp0, s32 *, 4) - 1, M2C_FIELD(sp0, s32 *, 4) = temp_v0_3, (temp_v0_3 > 0))) {
 
     } else {
@@ -2043,8 +2044,8 @@ void func_0000E8B8(s32 arg0, void **arg1, s32 arg2) {
     }
     temp_s0_2 = temp_s2 | 0xE;
     M2C_FIELD(*arg1, M2C_UNK (**)(void **, s32, M2C_UNK, M2C_UNK), 0x7C)(arg1, temp_s0_2, 0x19, 3);
-    _ZNK3paf4View10GetTextureEPKc(&sp0, arg0, &D_0002114C);
-    M2C_FIELD(*arg1, M2C_UNK (**)(void **, s32 *, s32), 0xA8)(arg1, &sp0, temp_s0_2);
+    _ZNK3paf4View10GetTextureEPKc((s32*) &sp0, arg0, D_0002114C);
+    M2C_FIELD(*arg1, M2C_UNK (**)(void **, s32 *, s32), 0xA8)(arg1, (s32*) &sp0, temp_s0_2);
     if (sp0 != NULL) {
         temp_v0_4 = M2C_FIELD(sp0, s32 *, 4) - 1;
         M2C_FIELD(sp0, s32 *, 4) = temp_v0_4;
@@ -2090,9 +2091,9 @@ void func_00010664(s32 arg0, struct Unk_vt_func_00010664_arg1 **arg1, s32 arg2) 
     s32 temp_v0_3;
     s32 temp_v0_4;
 
-    func_000020A4(&sp0, 0);
+    func_000020A4((s32*) &sp0, 0);
     temp_s0 = arg2 << 0x10;
-    (*arg1)->unkAC((void **) arg1, &sp0, temp_s0 | 1);
+    (*arg1)->unkAC((void **) arg1, (s32*) &sp0, temp_s0 | 1);
     if (sp0 != NULL) {
         temp_v0 = M2C_FIELD(sp0, s32 *, 4) - 1;
         M2C_FIELD(sp0, s32 *, 4) = temp_v0;
@@ -2102,8 +2103,8 @@ void func_00010664(s32 arg0, struct Unk_vt_func_00010664_arg1 **arg1, s32 arg2) 
             M2C_FIELD(M2C_FIELD(sp0, void **, 0), M2C_UNK (**)(void *), 4)(sp0);
         }
     }
-    scePaf_3C5D1D0E(&sp0, arg0, "tex_broken_data");
-    (*arg1)->unkAC((void **) arg1, &sp0, temp_s0);
+    scePaf_3C5D1D0E((s32*) &sp0, arg0, "tex_broken_data");
+    (*arg1)->unkAC((void **) arg1, (s32*) &sp0, temp_s0);
     if (sp0 != NULL) {
         temp_v0_2 = M2C_FIELD(sp0, s32 *, 4) - 1;
         M2C_FIELD(sp0, s32 *, 4) = temp_v0_2;
@@ -2113,8 +2114,8 @@ void func_00010664(s32 arg0, struct Unk_vt_func_00010664_arg1 **arg1, s32 arg2) 
             M2C_FIELD(M2C_FIELD(sp0, void **, 0), M2C_UNK (**)(void *), 4)(sp0);
         }
     }
-    scePaf_3C5D1D0E(&sp0, arg0, "tex_broken_data_f");
-    (*arg1)->unkAC((void **) arg1, &sp0, temp_s0 | 7);
+    scePaf_3C5D1D0E((s32*) &sp0, arg0, "tex_broken_data_f");
+    (*arg1)->unkAC((void **) arg1, (s32*) &sp0, temp_s0 | 7);
     if (sp0 != NULL) {
         temp_v0_3 = M2C_FIELD(sp0, s32 *, 4) - 1;
         M2C_FIELD(sp0, s32 *, 4) = temp_v0_3;
@@ -2124,8 +2125,8 @@ void func_00010664(s32 arg0, struct Unk_vt_func_00010664_arg1 **arg1, s32 arg2) 
             M2C_FIELD(M2C_FIELD(sp0, void **, 0), M2C_UNK (**)(void *), 4)(sp0);
         }
     }
-    scePaf_3C5D1D0E(&sp0, arg0, "tex_broken_data_s");
-    (*arg1)->unkAC((void **) arg1, &sp0, temp_s0 | 0xE);
+    scePaf_3C5D1D0E((s32*) &sp0, arg0, "tex_broken_data_s");
+    (*arg1)->unkAC((void **) arg1, (s32*) &sp0, temp_s0 | 0xE);
     if (sp0 != NULL) {
         temp_v0_4 = M2C_FIELD(sp0, s32 *, 4) - 1;
         M2C_FIELD(sp0, s32 *, 4) = temp_v0_4;
@@ -2147,9 +2148,9 @@ void func_00010664(s32 arg0, struct Unk_vt_func_00010664_arg1 **arg1, s32 arg2) 
     s32 temp_v0_3;
     s32 temp_v0_4;
 
-    func_000020A4(&sp0, 0);
+    func_000020A4((s32*) &sp0, 0);
     temp_s0 = arg2 << 0x10;
-    (*arg1)->unkAC((void **) arg1, &sp0, temp_s0 | 1);
+    (*arg1)->unkAC((void **) arg1, (s32*) &sp0, temp_s0 | 1);
     if (sp0 != NULL) {
         temp_v0 = M2C_FIELD(sp0, s32 *, 4) - 1;
         M2C_FIELD(sp0, s32 *, 4) = temp_v0;
@@ -2159,8 +2160,8 @@ void func_00010664(s32 arg0, struct Unk_vt_func_00010664_arg1 **arg1, s32 arg2) 
             M2C_FIELD(M2C_FIELD(sp0, void **, 0), M2C_UNK (**)(void *), 4)(sp0);
         }
     }
-    _ZNK3paf4View10GetTextureEPKc(&sp0, arg0, "tex_broken_data");
-    (*arg1)->unkAC((void **) arg1, &sp0, temp_s0);
+    _ZNK3paf4View10GetTextureEPKc((s32*) &sp0, arg0, "tex_broken_data");
+    (*arg1)->unkAC((void **) arg1, (s32*) &sp0, temp_s0);
     if (sp0 != NULL) {
         temp_v0_2 = M2C_FIELD(sp0, s32 *, 4) - 1;
         M2C_FIELD(sp0, s32 *, 4) = temp_v0_2;
@@ -2170,8 +2171,8 @@ void func_00010664(s32 arg0, struct Unk_vt_func_00010664_arg1 **arg1, s32 arg2) 
             M2C_FIELD(M2C_FIELD(sp0, void **, 0), M2C_UNK (**)(void *), 4)(sp0);
         }
     }
-    _ZNK3paf4View10GetTextureEPKc(&sp0, arg0, "tex_broken_data_f");
-    (*arg1)->unkAC((void **) arg1, &sp0, temp_s0 | 7);
+    _ZNK3paf4View10GetTextureEPKc((s32*) &sp0, arg0, "tex_broken_data_f");
+    (*arg1)->unkAC((void **) arg1, (s32*) &sp0, temp_s0 | 7);
     if (sp0 != NULL) {
         temp_v0_3 = M2C_FIELD(sp0, s32 *, 4) - 1;
         M2C_FIELD(sp0, s32 *, 4) = temp_v0_3;
@@ -2181,8 +2182,8 @@ void func_00010664(s32 arg0, struct Unk_vt_func_00010664_arg1 **arg1, s32 arg2) 
             M2C_FIELD(M2C_FIELD(sp0, void **, 0), M2C_UNK (**)(void *), 4)(sp0);
         }
     }
-    _ZNK3paf4View10GetTextureEPKc(&sp0, arg0, "tex_broken_data_s");
-    (*arg1)->unkAC((void **) arg1, &sp0, temp_s0 | 0xE);
+    _ZNK3paf4View10GetTextureEPKc((s32*) &sp0, arg0, "tex_broken_data_s");
+    (*arg1)->unkAC((void **) arg1, (s32*) &sp0, temp_s0 | 0xE);
     if (sp0 != NULL) {
         temp_v0_4 = M2C_FIELD(sp0, s32 *, 4) - 1;
         M2C_FIELD(sp0, s32 *, 4) = temp_v0_4;
@@ -2204,9 +2205,9 @@ void func_00010664(s32 arg0, struct Unk_vt_func_00010664_arg1 **arg1, s32 arg2) 
     s32 temp_v0_3;
     s32 temp_v0_4;
 
-    func_000020A4(&sp0, 0);
+    func_000020A4((s32*) &sp0, 0);
     temp_s0 = arg2 << 0x10;
-    (*arg1)->unkAC(arg1, &sp0, temp_s0 | 1);
+    (*arg1)->unkAC(arg1, (s32*) &sp0, temp_s0 | 1);
     if (sp0 != NULL) {
         temp_v0 = sp0->unk4 - 1;
         sp0->unk4 = temp_v0;
@@ -2216,8 +2217,8 @@ void func_00010664(s32 arg0, struct Unk_vt_func_00010664_arg1 **arg1, s32 arg2) 
             sp0->unk0->unk4(sp0);
         }
     }
-    _ZNK3paf4View10GetTextureEPKc(&sp0, arg0, "tex_broken_data");
-    (*arg1)->unkAC(arg1, &sp0, temp_s0);
+    _ZNK3paf4View10GetTextureEPKc((s32*) &sp0, arg0, "tex_broken_data");
+    (*arg1)->unkAC(arg1, (s32*) &sp0, temp_s0);
     if (sp0 != NULL) {
         temp_v0_2 = sp0->unk4 - 1;
         sp0->unk4 = temp_v0_2;
@@ -2227,8 +2228,8 @@ void func_00010664(s32 arg0, struct Unk_vt_func_00010664_arg1 **arg1, s32 arg2) 
             sp0->unk0->unk4(sp0);
         }
     }
-    _ZNK3paf4View10GetTextureEPKc(&sp0, arg0, "tex_broken_data_f");
-    (*arg1)->unkAC(arg1, &sp0, temp_s0 | 7);
+    _ZNK3paf4View10GetTextureEPKc((s32*) &sp0, arg0, "tex_broken_data_f");
+    (*arg1)->unkAC(arg1, (s32*) &sp0, temp_s0 | 7);
     if (sp0 != NULL) {
         temp_v0_3 = sp0->unk4 - 1;
         sp0->unk4 = temp_v0_3;
@@ -2238,8 +2239,8 @@ void func_00010664(s32 arg0, struct Unk_vt_func_00010664_arg1 **arg1, s32 arg2) 
             sp0->unk0->unk4(sp0);
         }
     }
-    _ZNK3paf4View10GetTextureEPKc(&sp0, arg0, "tex_broken_data_s");
-    (*arg1)->unkAC(arg1, &sp0, temp_s0 | 0xE);
+    _ZNK3paf4View10GetTextureEPKc((s32*) &sp0, arg0, "tex_broken_data_s");
+    (*arg1)->unkAC(arg1, (s32*) &sp0, temp_s0 | 0xE);
     if (sp0 != NULL) {
         temp_v0_4 = sp0->unk4 - 1;
         sp0->unk4 = temp_v0_4;

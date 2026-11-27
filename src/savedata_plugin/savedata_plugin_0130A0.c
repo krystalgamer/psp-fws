@@ -1,3 +1,4 @@
+/* lang: c++ */
 #include "common.h"
 #include "savedata_plugin_decls.h"
 
@@ -174,7 +175,7 @@ INCLUDE_ASM("nonmatchings/savedata_plugin_0130A0", func_000134AC);
 void func_000134AC(struct Unk_func_000134AC_0 *arg0) {
     struct Unk_func_000134AC_temp_s1 *temp_s1;
 
-    temp_s1 = (u8 *)arg0 + 0x20;
+    temp_s1 = (Unk_func_000134AC_temp_s1*) ((u8 *)arg0 + 0x20);
     if (temp_s1->unk4 == 0) {
         arg0->unk1C = 0;
     } else {
@@ -1783,7 +1784,7 @@ M2C_UNK *func_00018A1C(s32 arg0) {
     M2C_UNK *var_v0;
 
     var_v0 = NULL;
-    if (!(arg0 & 0xFF)) {
+    if ((arg0 & 0xFF) == 0) {
         var_v0 = &D_00022B20_v271;
     }
     return var_v0;
@@ -1821,7 +1822,7 @@ M2C_UNK *func_00018A44(s32 arg0) {
     M2C_UNK *var_v0;
 
     var_v0 = NULL;
-    if (!(arg0 & 0xFF)) {
+    if ((arg0 & 0xFF) == 0) {
         var_v0 = &D_00022B18;
     }
     return var_v0;

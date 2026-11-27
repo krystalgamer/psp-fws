@@ -1,3 +1,4 @@
+/* lang: c++ */
 /* cflags: -Os */
 #include "common.h"
 #include "savedata_plugin_decls.h"
@@ -6,7 +7,7 @@
 void func_00011C54(struct Unk_func_00011C54_0 *arg0, s32 arg1, s32 arg2) {
     func_0000F1A0(arg0, arg1);
     arg0->unk0 = &D_00022718;
-    func_000020A4((u8 *)arg0 + 0x20, 0);
+    func_000020A4((s32*) ((u8 *)arg0 + 0x20), 0);
     arg0->unk24 = arg2;
     arg0->unk1C = 0;
     func_00011ED4(arg0);
@@ -15,7 +16,7 @@ void func_00011C54(struct Unk_func_00011C54_0 *arg0, s32 arg1, s32 arg2) {
 void func_00011CAC(struct Unk_func_00011CAC_0 *arg0, s32 arg1, s32 arg2) {
     func_0000F1A0(arg0, arg1);
     arg0->unk0 = &D_00022718;
-    func_000020A4((u8 *)arg0 + 0x20, 0);
+    func_000020A4((s32*) ((u8 *)arg0 + 0x20), 0);
     arg0->unk24 = arg2;
     arg0->unk1C = 0;
     func_00011ED4(arg0);

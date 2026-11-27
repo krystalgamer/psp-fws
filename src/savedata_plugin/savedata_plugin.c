@@ -1,3 +1,4 @@
+/* lang: c++ */
 #include "common.h"
 #include "savedata_plugin_decls.h"
 
@@ -1505,7 +1506,7 @@ INCLUDE_ASM("nonmatchings/savedata_plugin", func_00005BC4);
 #if FW_VERSION < 282
 void func_00003E68(M2C_UNK **arg0) {
     *arg0 = &D_00021DD0;
-    _ZdlPv();
+    _ZdlPv(arg0);
 }
 #endif
 
@@ -1582,7 +1583,7 @@ INCLUDE_ASM("nonmatchings/savedata_plugin", func_00005CBC);
 #if FW_VERSION >= 282 && FW_VERSION < 350
 void func_00005CBC(M2C_UNK **arg0) {
     *arg0 = &D_00021DD0;
-    _ZdlPv();
+    _ZdlPv(arg0);
 }
 #endif
 
@@ -3302,7 +3303,7 @@ INCLUDE_ASM("nonmatchings/savedata_plugin", func_0000C548);
 #if FW_VERSION >= 282 && FW_VERSION < 350
 void func_0000C548(M2C_UNK **arg0) {
     *arg0 = &D_000224C8;
-    _ZdlPv();
+    _ZdlPv(arg0);
 }
 #endif
 
