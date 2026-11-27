@@ -1,3 +1,4 @@
+/* lang: c++ */
 #include "common.h"
 #include "savedata_auto_dialog_decls.h"
 
@@ -2509,7 +2510,7 @@ s32 func_0000BE00(void *arg0, s32 arg1) {
     s32 var_v1;
 
     var_v1 = 1;
-    if (!((M2C_FIELD(arg0, u8 *, 8) ^ 1) & 1) || (arg1 != M2C_FIELD(arg0, s32 *, 0x10))) {
+    if ((((M2C_FIELD(arg0, u8 *, 8) ^ 1) & 1) == 0) || (arg1 != M2C_FIELD(arg0, s32 *, 0x10))) {
         var_v1 = 0;
     }
     return var_v1;
@@ -2807,17 +2808,17 @@ void func_0000DA54(s32 arg0, void **arg1, s32 arg2) {
     s32 temp_v0_3;
     s32 temp_v0_4;
 
-    func_00003B2C(&sp0, 0);
+    func_00003B2C((s32*) &sp0, 0);
     temp_s2 = arg2 << 0x10;
-    M2C_FIELD(*arg1, M2C_UNK (**)(void **, s32 *, s32), 0xA8)(arg1, &sp0, temp_s2 | 1);
+    M2C_FIELD(*arg1, M2C_UNK (**)(void **, s32 *, s32), 0xA8)(arg1, (s32*) &sp0, temp_s2 | 1);
     if ((sp0 == NULL) || (temp_v0 = M2C_FIELD(sp0, s32 *, 4) - 1, M2C_FIELD(sp0, s32 *, 4) = temp_v0, (temp_v0 > 0))) {
 
     } else {
         M2C_FIELD(M2C_FIELD(sp0, void **, 0), M2C_UNK (**)(void *), 4)(sp0);
     }
     M2C_FIELD(*arg1, M2C_UNK (**)(void **, s32, M2C_UNK, M2C_UNK), 0x7C)(arg1, temp_s2, 0x19, 3);
-    _ZNK3paf4View10GetTextureEPKc(&sp0, arg0, &D_0001FEE4);
-    M2C_FIELD(*arg1, M2C_UNK (**)(void **, s32 *, s32), 0xA8)(arg1, &sp0, temp_s2);
+    _ZNK3paf4View10GetTextureEPKc((s32*) &sp0, arg0, &D_0001FEE4);
+    M2C_FIELD(*arg1, M2C_UNK (**)(void **, s32 *, s32), 0xA8)(arg1, (s32*) &sp0, temp_s2);
     if ((sp0 == NULL) || (temp_v0_2 = M2C_FIELD(sp0, s32 *, 4) - 1, M2C_FIELD(sp0, s32 *, 4) = temp_v0_2, (temp_v0_2 > 0))) {
 
     } else {
@@ -2825,8 +2826,8 @@ void func_0000DA54(s32 arg0, void **arg1, s32 arg2) {
     }
     temp_s0 = temp_s2 | 7;
     M2C_FIELD(*arg1, M2C_UNK (**)(void **, s32, M2C_UNK, M2C_UNK), 0x7C)(arg1, temp_s0, 0x19, 3);
-    _ZNK3paf4View10GetTextureEPKc(&sp0, arg0, &D_0001FEF4);
-    M2C_FIELD(*arg1, M2C_UNK (**)(void **, s32 *, s32), 0xA8)(arg1, &sp0, temp_s0);
+    _ZNK3paf4View10GetTextureEPKc((s32*) &sp0, arg0, &D_0001FEF4);
+    M2C_FIELD(*arg1, M2C_UNK (**)(void **, s32 *, s32), 0xA8)(arg1, (s32*) &sp0, temp_s0);
     if ((sp0 == NULL) || (temp_v0_3 = M2C_FIELD(sp0, s32 *, 4) - 1, M2C_FIELD(sp0, s32 *, 4) = temp_v0_3, (temp_v0_3 > 0))) {
 
     } else {
@@ -2834,8 +2835,8 @@ void func_0000DA54(s32 arg0, void **arg1, s32 arg2) {
     }
     temp_s0_2 = temp_s2 | 0xE;
     M2C_FIELD(*arg1, M2C_UNK (**)(void **, s32, M2C_UNK, M2C_UNK), 0x7C)(arg1, temp_s0_2, 0x19, 3);
-    _ZNK3paf4View10GetTextureEPKc(&sp0, arg0, &D_0001FF08);
-    M2C_FIELD(*arg1, M2C_UNK (**)(void **, s32 *, s32), 0xA8)(arg1, &sp0, temp_s0_2);
+    _ZNK3paf4View10GetTextureEPKc((s32*) &sp0, arg0, &D_0001FF08);
+    M2C_FIELD(*arg1, M2C_UNK (**)(void **, s32 *, s32), 0xA8)(arg1, (s32*) &sp0, temp_s0_2);
     if (sp0 != NULL) {
         temp_v0_4 = M2C_FIELD(sp0, s32 *, 4) - 1;
         M2C_FIELD(sp0, s32 *, 4) = temp_v0_4;
@@ -2857,17 +2858,17 @@ void func_0000DC6C(s32 arg0, void **arg1, s32 arg2) {
     s32 temp_v0_3;
     s32 temp_v0_4;
 
-    func_00003B2C(&sp0, 0);
+    func_00003B2C((s32*) &sp0, 0);
     temp_s2 = arg2 << 0x10;
-    M2C_FIELD(*arg1, M2C_UNK (**)(void **, s32 *, s32), 0xA8)(arg1, &sp0, temp_s2 | 1);
+    M2C_FIELD(*arg1, M2C_UNK (**)(void **, s32 *, s32), 0xA8)(arg1, (s32*) &sp0, temp_s2 | 1);
     if ((sp0 == NULL) || (temp_v0 = M2C_FIELD(sp0, s32 *, 4) - 1, M2C_FIELD(sp0, s32 *, 4) = temp_v0, (temp_v0 > 0))) {
 
     } else {
         M2C_FIELD(M2C_FIELD(sp0, void **, 0), M2C_UNK (**)(void *), 4)(sp0);
     }
     M2C_FIELD(*arg1, M2C_UNK (**)(void **, s32, M2C_UNK, M2C_UNK), 0x7C)(arg1, temp_s2, 0x19, 3);
-    _ZNK3paf4View10GetTextureEPKc(&sp0, arg0, &D_0001FF1C);
-    M2C_FIELD(*arg1, M2C_UNK (**)(void **, s32 *, s32), 0xA8)(arg1, &sp0, temp_s2);
+    _ZNK3paf4View10GetTextureEPKc((s32*) &sp0, arg0, &D_0001FF1C);
+    M2C_FIELD(*arg1, M2C_UNK (**)(void **, s32 *, s32), 0xA8)(arg1, (s32*) &sp0, temp_s2);
     if ((sp0 == NULL) || (temp_v0_2 = M2C_FIELD(sp0, s32 *, 4) - 1, M2C_FIELD(sp0, s32 *, 4) = temp_v0_2, (temp_v0_2 > 0))) {
 
     } else {
@@ -2875,8 +2876,8 @@ void func_0000DC6C(s32 arg0, void **arg1, s32 arg2) {
     }
     temp_s0 = temp_s2 | 7;
     M2C_FIELD(*arg1, M2C_UNK (**)(void **, s32, M2C_UNK, M2C_UNK), 0x7C)(arg1, temp_s0, 0x19, 3);
-    _ZNK3paf4View10GetTextureEPKc(&sp0, arg0, &D_0001FF30);
-    M2C_FIELD(*arg1, M2C_UNK (**)(void **, s32 *, s32), 0xA8)(arg1, &sp0, temp_s0);
+    _ZNK3paf4View10GetTextureEPKc((s32*) &sp0, arg0, &D_0001FF30);
+    M2C_FIELD(*arg1, M2C_UNK (**)(void **, s32 *, s32), 0xA8)(arg1, (s32*) &sp0, temp_s0);
     if ((sp0 == NULL) || (temp_v0_3 = M2C_FIELD(sp0, s32 *, 4) - 1, M2C_FIELD(sp0, s32 *, 4) = temp_v0_3, (temp_v0_3 > 0))) {
 
     } else {
@@ -2884,8 +2885,8 @@ void func_0000DC6C(s32 arg0, void **arg1, s32 arg2) {
     }
     temp_s0_2 = temp_s2 | 0xE;
     M2C_FIELD(*arg1, M2C_UNK (**)(void **, s32, M2C_UNK, M2C_UNK), 0x7C)(arg1, temp_s0_2, 0x19, 3);
-    _ZNK3paf4View10GetTextureEPKc(&sp0, arg0, &D_0001FF44);
-    M2C_FIELD(*arg1, M2C_UNK (**)(void **, s32 *, s32), 0xA8)(arg1, &sp0, temp_s0_2);
+    _ZNK3paf4View10GetTextureEPKc((s32*) &sp0, arg0, &D_0001FF44);
+    M2C_FIELD(*arg1, M2C_UNK (**)(void **, s32 *, s32), 0xA8)(arg1, (s32*) &sp0, temp_s0_2);
     if (sp0 != NULL) {
         temp_v0_4 = M2C_FIELD(sp0, s32 *, 4) - 1;
         M2C_FIELD(sp0, s32 *, 4) = temp_v0_4;
@@ -4702,7 +4703,7 @@ M2C_UNK *func_0000CD48(s32 arg0) {
     M2C_UNK *var_v0;
 
     var_v0 = NULL;
-    if (!(arg0 & 0xFF)) {
+    if ((arg0 & 0xFF) == 0) {
         var_v0 = &D_0001B154;
     }
     return var_v0;
@@ -4980,7 +4981,7 @@ M2C_UNK *func_0000CD0C(s32 arg0) {
     M2C_UNK *var_v0;
 
     var_v0 = NULL;
-    if (!(arg0 & 0xFF)) {
+    if ((arg0 & 0xFF) == 0) {
         var_v0 = &D_0001B0CC;
     }
     return var_v0;
@@ -5207,7 +5208,7 @@ INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_000126B0);
 
 #if FW_VERSION >= 250 && FW_VERSION < 282
 void func_000126B0(s32 *arg0) {
-    if (!(*arg0 & 1)) {
+    if ((*arg0 & 1) == 0) {
 
     } else {
         scePowerCancelRequest();
@@ -5544,7 +5545,7 @@ s32 *func_00013F88(s32 **arg0, s32 arg1) {
     temp_s1 = func_00013F4C(arg0, arg1);
     var_a2 = arg0;
     if (arg1 != 0) {
-        var_a2 = func_00013F4C(arg0, arg1 - 1);
+        var_a2 = (s32**) func_00013F4C(arg0, arg1 - 1);
     }
     *var_a2 = (s32 *) *temp_s1;
     if (M2C_FIELD(arg0, s32 ***, 4) == temp_s1) {
@@ -8539,7 +8540,7 @@ INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0001411C);
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_00014160);
 
 void func_00014200(s32 *arg0) {
-    if (!(*arg0 & 1)) {
+    if ((*arg0 & 1) == 0) {
 
     } else {
         scePowerCancelRequest();
@@ -8596,7 +8597,7 @@ s32 func_0001445C(struct Unk_func_0001445C_0 *arg0) {
     return 0;
 }
 
-M2C_UNK *func_000144AC(void) {
+D_0001C24C_s *func_000144AC(void) {
     return &D_0001C24C;
 }
 
@@ -8686,7 +8687,7 @@ s32 *func_00014F18(s32 **arg0, s32 arg1) {
     temp_s1 = func_00014EDC(arg0, arg1);
     var_a2 = arg0;
     if (arg1 != 0) {
-        var_a2 = func_00014EDC(arg0, arg1 - 1);
+        var_a2 = (s32**) func_00014EDC(arg0, arg1 - 1);
     }
     *var_a2 = (s32 *) *temp_s1;
     if (M2C_FIELD(arg0, s32 ***, 4) == temp_s1) {
