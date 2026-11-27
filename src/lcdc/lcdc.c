@@ -42,9 +42,39 @@ INCLUDE_ASM("nonmatchings/lcdc", sceLcdcGetMode);
 
 INCLUDE_ASM("nonmatchings/lcdc", sceLcdcInsertDisplay_default);
 
-INCLUDE_ASM("nonmatchings/lcdc", sceLcdcReadHPC);
+s32 sceLcdcReadHPC(void) {
+    s32 intr = sceKernelCpuSuspendIntr();
+    s32 i = 0;
+    s32 v;
 
-INCLUDE_ASM("nonmatchings/lcdc", sceLcdcReadVPC);
+    do {
+        i++;
+        if (i > 100) {
+            v = -1;
+            break;
+        }
+        v = *(volatile s32 *)0xBE140030;
+    } while (*(volatile s32 *)0xBE140030 != v);
+    sceKernelCpuResumeIntr(intr);
+    return v;
+}
+
+s32 sceLcdcReadVPC(void) {
+    s32 intr = sceKernelCpuSuspendIntr();
+    s32 i = 0;
+    s32 v;
+
+    do {
+        i++;
+        if (i > 3) {
+            v = -1;
+            break;
+        }
+        v = *(volatile s32 *)0xBE140034;
+    } while (*(volatile s32 *)0xBE140034 != v);
+    sceKernelCpuResumeIntr(intr);
+    return v;
+}
 
 #if FW_VERSION < 271
 INCLUDE_ASM("nonmatchings/lcdc", module_start);
@@ -120,7 +150,19 @@ s32 sceLcdcDisable(void) {
 INCLUDE_ASM("nonmatchings/lcdc", sceLcdcSetHOffset);
 #endif
 
+#if FW_VERSION < 271
+s32 sceLcdcReset(void) {
+    s32 intr = sceKernelCpuSuspendIntr();
+    u32 v = *(volatile u32 *)0xBE140000;
+
+    *(volatile u32 *)0xBE140000 = v & ~1;
+    *(volatile u32 *)0xBE140000 = v;
+    sceKernelCpuResumeIntr(intr);
+    return 0;
+}
+#else
 INCLUDE_ASM("nonmatchings/lcdc", sceLcdcReset);
+#endif
 
 #if FW_VERSION == 271
 s32 sceLcdc_driver_825DB9C5(void) {
@@ -148,6 +190,24 @@ INCLUDE_ASM("nonmatchings/lcdc", sceLcdcGetHsyncFreq);
 
 INCLUDE_ASM("nonmatchings/lcdc", sceLcdcGetVsyncFreq);
 
-INCLUDE_ASM("nonmatchings/lcdc", sceLcdc_driver_E08B076B);
+s32 sceLcdc_driver_E08B076B(void) {
+    s32 v = *(volatile s32 *)0xBE140050;
 
-INCLUDE_ASM("nonmatchings/lcdc", func_00000B30);
+    if (v == 1) {
+        *(volatile s32 *)0xBE140050 = v;
+    }
+    return v;
+}
+
+s32 func_00000B30(s32 ev_id) {
+    switch (ev_id) {
+    case 0x4004:
+        sceSysregLcdcIoDisable();
+        sceSysregLcdcClkDisable();
+        break;
+    case 0x10004:
+        sceLcdcResume();
+        break;
+    }
+    return 0;
+}

@@ -2,15 +2,18 @@
  "funcs": {
   "module_reboot_before": "s32 module_reboot_before(void);",
   "module_start": "s32 module_start(void);",
+  "sceKernelCpuResumeIntr": "void sceKernelCpuResumeIntr(s32);",
+  "sceKernelCpuSuspendIntr": "s32 sceKernelCpuSuspendIntr(void);",
   "sceKernelUnregisterSysEventHandler": "M2C_UNK sceKernelUnregisterSysEventHandler(M2C_UNK *);",
   "sceLcdcDisable": "s32 sceLcdcDisable(void);",
   "sceLcdcEnable": "s32 sceLcdcEnable(void);",
   "sceLcdcEnd": "s32 sceLcdcEnd(void);",
   "sceLcdcInit": "s32 sceLcdcInit(void);",
+  "sceLcdcResume": "s32 sceLcdcResume(void);",
   "sceLcdcSuspend": "s32 sceLcdcSuspend(void);",
   "sceLcdc_driver_825DB9C5": "s32 sceLcdc_driver_825DB9C5(void);",
-  "sceSysregLcdcClkDisable": "M2C_UNK sceSysregLcdcClkDisable();",
-  "sceSysregLcdcIoDisable": "M2C_UNK sceSysregLcdcIoDisable();",
+  "sceSysregLcdcClkDisable": "s32 sceSysregLcdcClkDisable(void);",
+  "sceSysregLcdcIoDisable": "s32 sceSysregLcdcIoDisable(void);",
   "sceSysregLcdcIoEnable": "M2C_UNK sceSysregLcdcIoEnable();"
  },
  "vars": {
