@@ -1,4 +1,4 @@
-/* cflags[100,102]: -Os */
+/* cflags[100,102,103]: -Os */
 /* cflags[151]: -Os */
 #include "common.h"
 #include "usbstormgr_decls.h"
@@ -204,7 +204,7 @@ INCLUDE_ASM("nonmatchings/usbstormgr", func_00001440);
 INCLUDE_ASM("nonmatchings/usbstormgr", func_00001444);
 #endif
 
-#if FW_VERSION == 102
+#if FW_VERSION >= 102 && FW_VERSION < 151
 INCLUDE_ASM("nonmatchings/usbstormgr", func_00001840);
 #endif
 
