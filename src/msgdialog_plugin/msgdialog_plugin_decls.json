@@ -28,14 +28,6 @@
   "func_00000FBC": "void func_00000FBC(void);",
   "func_00001014": "M2C_UNK func_00001014();",
   "module_stop": "s32 module_stop(void);",
-  "scePaf_39E62C88": "M2C_UNK scePaf_39E62C88(s32, M2C_UNK *, M2C_UNK, M2C_UNK);",
-  "scePaf_5E4447F6": "s32 scePaf_5E4447F6(s32);",
-  "scePaf_A013540A": "M2C_UNK scePaf_A013540A(s32, M2C_UNK *);",
-  "scePaf_D1447DB7": "M2C_UNK scePaf_D1447DB7(s32);",
-  "sceVshCommonGui_11C48509": "M2C_UNK sceVshCommonGui_11C48509(void *, s32);",
-  "sceVshCommonGui_2EBB5C2B": "M2C_UNK sceVshCommonGui_2EBB5C2B(void *, s32);",
-  "sceVshCommonGui_30FA68C3": "s32 sceVshCommonGui_30FA68C3();",
-  "sceVshCommonGui_EC899EBE": "s32 sceVshCommonGui_EC899EBE();",
   "sce_paf_private_wcslen": "s32 sce_paf_private_wcslen(s32);"
  },
  "types": {

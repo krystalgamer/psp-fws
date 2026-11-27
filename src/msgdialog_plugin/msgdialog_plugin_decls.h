@@ -47,14 +47,6 @@ M2C_UNK func_00000F08(s32, s32, s32);
 void func_00000FBC(void);
 M2C_UNK func_00001014(...);
 s32 module_stop(void);
-M2C_UNK scePaf_39E62C88(s32, M2C_UNK *, M2C_UNK, M2C_UNK);
-s32 scePaf_5E4447F6(s32);
-M2C_UNK scePaf_A013540A(s32, M2C_UNK *);
-M2C_UNK scePaf_D1447DB7(s32);
-M2C_UNK sceVshCommonGui_11C48509(void *, s32);
-M2C_UNK sceVshCommonGui_2EBB5C2B(void *, s32);
-s32 sceVshCommonGui_30FA68C3(...);
-s32 sceVshCommonGui_EC899EBE(...);
 s32 sce_paf_private_wcslen(s32);
 
 #ifdef __cplusplus

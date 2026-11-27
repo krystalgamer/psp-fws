@@ -38,8 +38,8 @@ void func_0000015C(void) {
 
 #if FW_VERSION >= 350
 void func_0000015C(void) {
-    scePaf_39E62C88(D_00001A6C, &D_000012F0, 0, 0);
-    scePaf_A013540A(D_00001A6C, &D_000012F0);
+    _ZN3paf4View8PageOpenEPKcii(D_00001A6C, &D_000012F0, 0, 0);
+    _ZN3paf4View12PageActivateEPKc(D_00001A6C, &D_000012F0);
 }
 #endif
 
@@ -115,7 +115,7 @@ void func_00000384(void) {
 
 #if FW_VERSION >= 350
 void func_000003C8(void) {
-    scePaf_D1447DB7(D_00001A6C);
+    _ZN3paf4View12PageCloseAllEv(D_00001A6C);
     D_00001A68 = 0;
 }
 #endif
@@ -456,9 +456,9 @@ void func_00000998(void) {
 #if FW_VERSION >= 350
 void func_00000C0C(void) {
     void *sp0;
-    sceVshCommonGui_2EBB5C2B(&sp0, sceVshCommonGui_30FA68C3());
+    _ZN3vsh31SetButtonNavigationString_EnterEPKw(&sp0, _ZN3vsh15GetString_EnterEv());
     func_00000E88(&sp0);
-    sceVshCommonGui_11C48509(&sp0, sceVshCommonGui_EC899EBE());
+    _ZN3vsh30SetButtonNavigationString_BackEPKw(&sp0, _ZN3vsh14GetString_BackEv());
     func_00000E88(&sp0);
 }
 #endif
@@ -495,7 +495,7 @@ void func_00000EB8(s32 arg0, s32 arg1) {
 
     var_v0 = 0;
     if (arg1 != 0) {
-        var_v0 = scePaf_5E4447F6(arg1);
+        var_v0 = sce_paf_private_wcslen(arg1);
     }
     func_00000F08(arg0, arg1, var_v0);
 }
