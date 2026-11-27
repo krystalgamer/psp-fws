@@ -142,3 +142,4 @@ stub_pf_mkdir = 0x00002C20; // type:func
 stub_pf_rmdir = 0x00002C60; // type:func
 stub_pf_rename = 0x0000311C; // type:func
 stub_pf_fopen = 0x00002DE4; // type:func
+free_heap = 0x00000678; // type:func

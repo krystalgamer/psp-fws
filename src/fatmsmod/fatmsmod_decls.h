@@ -253,6 +253,7 @@ s32 df_ioctl(); /* 1.00 df_ioctl */
 s32 df_read(); /* 1.00 df_read(SceIoIob *, void *, SceSize) */
 s32 df_rename(); /* 1.00 df_rename */
 s32 df_write(); /* 1.00 df_write(SceIoIob *, const void *, SceSize) */
+s32 free_heap(SceUID heap, void *mem);
 s32 free_heap_all(void);
 M2C_UNK func_00000020();
 void func_00000048(void);
@@ -260,7 +261,6 @@ M2C_UNK func_00000134();
 void func_0000022C(void);
 M2C_UNK func_00000264();
 void func_000004B8(void);
-s32 func_00000678(SceUID heap, void *mem);
 M2C_UNK func_00000CE4();
 M2C_UNK func_00000E00();
 M2C_UNK func_00000EF8();

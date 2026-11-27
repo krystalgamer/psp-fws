@@ -68,3 +68,4 @@ stub_pf_fwrite = 0x0000501C; // type:func
 stub_pf_ferror = 0x00004E30; // type:func
 stub_pf_feof = 0x00004DF0; // type:func
 stub_pf_fclose = 0x00004D6C; // type:func
+free_heap = 0x00000444; // type:func

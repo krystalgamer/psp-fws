@@ -329,3 +329,7 @@ func_00013EE0 = 0x000154B4; // type:func rom:0x15534
 func_00014220 = 0x000157F4; // type:func rom:0x15874
 func_00000020_v150 = 0x00000020; // type:func rom:0xA0
 // shared names (tools/add_version.py) end
+free_heap = 0x00000910; // type:func
+prErr = 0x00000BDC; // type:func
+add_drive_name = 0x00000B1C; // type:func
+check_heap_alive = 0x00000A58; // type:func

@@ -240,12 +240,8 @@ void *get_heap(SceUID *heap, SceSize size) {
 INCLUDE_ASM("nonmatchings/fatmsmod", get_heap);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/fatmsmod", func_00000910);
-#endif
-
 #if FW_VERSION == 100
-s32 func_00000678(SceUID heap, void *mem) {
+s32 free_heap(SceUID heap, void *mem) {
     s32 ret;
     s32 intr;
     FatmsHeapEnt *p;
@@ -276,33 +272,35 @@ s32 func_00000678(SceUID heap, void *mem) {
 
 #if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00000320);
-
-INCLUDE_ASM("nonmatchings/fatmsmod", func_00000444);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION >= 150
+INCLUDE_ASM("nonmatchings/fatmsmod", free_heap);
+#else
 s32 free_heap_all(void) {
     FatmsHeapEnt *p;
 
     for (p = D_00019558; p < &D_00019558[128]; p++) {
         if (p->mem != NULL) {
-            if (func_00000678(p->heap, p->mem) < 0) {
+            if (free_heap(p->heap, p->mem) < 0) {
                 Kprintf("prfile_mod.c:%s:free heap error\n", "free_heap_all");
             }
         }
     }
     return 0;
 }
-#else
+#endif
+
+#if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/fatmsmod", free_heap_all);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/fatmsmod", func_00000A58);
+INCLUDE_ASM("nonmatchings/fatmsmod", check_heap_alive);
 
-INCLUDE_ASM("nonmatchings/fatmsmod", func_00000B1C);
+INCLUDE_ASM("nonmatchings/fatmsmod", add_drive_name);
 
-INCLUDE_ASM("nonmatchings/fatmsmod", func_00000BDC);
+INCLUDE_ASM("nonmatchings/fatmsmod", prErr);
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
@@ -426,7 +424,7 @@ s32 df_close(SceIoIob *iob) {
         if (ret == -0x3EA) {
             return 0;
         }
-        ret = func_00000678(priv->fileHeap, priv);
+        ret = free_heap(priv->fileHeap, priv);
         if (ret < 0) {
             Kprintf("prfile_mod.c:%s:cannot free heap\n", "df_close");
         }
@@ -439,7 +437,7 @@ s32 df_close(SceIoIob *iob) {
     if (stub_pf_fclose(priv->unk4) < 0) {
         return prErr(stub_pf_errnum());
     }
-    ret = func_00000678(priv->fileHeap, priv);
+    ret = free_heap(priv->fileHeap, priv);
     if (ret > 0) {
         ret = 0;
     }
@@ -449,7 +447,7 @@ s32 df_close(SceIoIob *iob) {
 INCLUDE_ASM("nonmatchings/fatmsmod", df_close);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 250
 s32 df_read(SceIoIob *iob, void *buf, SceSize size) {
     FatmsPrivate *priv;
     s32 fp;
@@ -488,11 +486,11 @@ s32 df_read(SceIoIob *iob, void *buf, SceSize size) {
 }
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/fatmsmod", df_read);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 250
 s32 df_write(SceIoIob *iob, const void *buf, SceSize size) {
     FatmsPrivate *priv;
     s32 fp;
@@ -529,7 +527,7 @@ s32 df_write(SceIoIob *iob, const void *buf, SceSize size) {
 }
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/fatmsmod", df_write);
 #endif
 
@@ -610,15 +608,15 @@ s32 df_remove(SceIoIob *iob, char *name) {
         return 0x8001000C;
     }
     if (add_drive_name(path, name, iob->i_unit) < 0) {
-        func_00000678(heap, path);
+        free_heap(heap, path);
         return 0x80010016;
     }
     if (stub_pf_remove(path) < 0) {
         err = stub_pf_errnum();
-        func_00000678(heap, path);
+        free_heap(heap, path);
         return prErr(err);
     }
-    func_00000678(heap, path);
+    free_heap(heap, path);
     return 0;
 }
 #else
@@ -640,15 +638,15 @@ s32 df_mkdir(SceIoIob *iob, char *name, SceMode mode) {
         return 0x8001000C;
     }
     if (add_drive_name(path, name, iob->i_unit) < 0) {
-        func_00000678(heap, path);
+        free_heap(heap, path);
         return 0x80010016;
     }
     if (stub_pf_mkdir(path) < 0) {
         err = stub_pf_errnum();
-        func_00000678(heap, path);
+        free_heap(heap, path);
         return prErr(err);
     }
-    func_00000678(heap, path);
+    free_heap(heap, path);
     return 0;
 }
 #else
@@ -670,15 +668,15 @@ s32 df_rmdir(SceIoIob *iob, char *name) {
         return 0x8001000C;
     }
     if (add_drive_name(path, name, iob->i_unit) < 0) {
-        func_00000678(heap, path);
+        free_heap(heap, path);
         return 0x80010016;
     }
     if (stub_pf_rmdir(path) < 0) {
         err = stub_pf_errnum();
-        func_00000678(heap, path);
+        free_heap(heap, path);
         return prErr(err);
     }
-    func_00000678(heap, path);
+    free_heap(heap, path);
     return 0;
 }
 #else
@@ -729,7 +727,7 @@ s32 df_dclose(SceIoIob *iob) {
         }
         fn = "df_dclose";
         Kprintf(D_00023B8C, fn);
-        ret = func_00000678(priv->dirHeap, priv);
+        ret = free_heap(priv->dirHeap, priv);
         if (ret < 0) {
             Kprintf("prfile_mod.c:%s:free heap retval:%d(0x%x)\n", fn, ret, ret);
         }
@@ -743,7 +741,7 @@ s32 df_dclose(SceIoIob *iob) {
             return prErr(stub_pf_errnum());
         }
     }
-    func_00000678(priv->dirHeap, priv);
+    free_heap(priv->dirHeap, priv);
     return 0;
 }
 #else
@@ -823,15 +821,15 @@ s32 df_rename(SceIoIob *iob, const char *name, const char *newName) {
         return 0x8001000C;
     }
     if (add_drive_name(path, name, iob->i_unit) < 0) {
-        func_00000678(heap, path);
+        free_heap(heap, path);
         return 0x80010016;
     }
     if (stub_pf_rename(path, newName) < 0) {
         err = stub_pf_errnum();
-        func_00000678(heap, path);
+        free_heap(heap, path);
         return prErr(err);
     }
-    func_00000678(heap, path);
+    free_heap(heap, path);
     return 0;
 }
 #else
