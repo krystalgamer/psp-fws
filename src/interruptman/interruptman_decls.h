@@ -39,8 +39,7 @@ typedef struct Interrupt {
 
 /* 1.00 interrupt manager state, 0x107C bytes (memset by module_bootstart) */
 typedef struct InterruptInfo {
-    u64 levelMasks[4];          /* 0x000: intrs enabled at each level */
-    u32 unk20[16];              /* 0x020 */
+    u64 levelMasks[12];         /* 0x000: intrs enabled at each level (4 used by SetIntrLevel) */
     Interrupt *intrPtrs[67];    /* 0x060 */
     s32 isIntrContext;          /* 0x16C */
     s32 unk170[4];              /* 0x170 */
@@ -119,7 +118,7 @@ void ReleaseContextHooks(void);
 void ReleaseSubIntrruptMonitor(void);
 s32 _sceKernelGetCpuClockCounterHigh(void);
 s32 _sceKernelGetCpuClockCounterLow(void);
-s32 func_00000000(s32 arg0);
+u32 func_00000000(s32 intrNum);
 s32 func_00000274(void);
 Interrupt **func_000002B8(s32 num);
 void func_00000348(void *ptr);
@@ -128,12 +127,15 @@ void func_00001628(s32 intrNum);
 void func_00001850(void);
 void func_00001DF8(s32 intrNum);
 s32 func_00001E9C(s32 intrNum);
+void func_00001F04(s32 intrNum);
 s32 func_00002FDC(s32 arg0);
 s32 func_00002FE4(void);
 s32 func_000030AC(s32 arg0);
 s32 func_000030B4(void);
 s32 func_000031AC(s32 arg0);
 s32 func_0000340C(s32 arg0);
+u64 func_00003970(void);
+void func_00003980(u64 mask);
 void *sceKernelAllocHeapMemory(s32 heapId, s32 size);
 void sceKernelCpuResumeIntr(s32);
 s32 sceKernelCpuSuspendIntr(void);
@@ -149,6 +151,6 @@ s32 sceKernelRegisterUserSpaceIntrStack(s32 arg0, s32 arg1);
 s32 sceKernelReleaseIntrHandler(u32 intrNum);
 s32 sceKernelSetIntrLevel(u32 intrNum, s32 level);
 s32 sceKernelSetIntrLogging(u32 intrNum, s32 enable);
-s32 sceKernelSuspendIntr(s32, s32);
+s32 sceKernelSuspendIntr(u32 intrNum, s32 *state);
 
 #endif

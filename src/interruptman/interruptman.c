@@ -22,17 +22,16 @@ static inline u32 getCop0Count(void) {
 }
 
 #if FW_VERSION == 100
-s32 func_00000000(s32 arg0) {
-    s32 var_v1;
+u32 func_00000000(s32 intrNum) {
+    u32 mask;
 
-    var_v1 = 0x100;
-    if (arg0 != 0x40) {
-        var_v1 = 0x200;
-        if (arg0 != 0x41) {
-            var_v1 = (arg0 == 0x42) << 0xF;
-        }
+    mask = 0x100;
+    if (intrNum != 64) {
+        mask = 0x200;
+        if (intrNum != 65)
+            mask = (intrNum == 66) << 15;
     }
-    return var_v1;
+    return mask;
 }
 #endif
 
@@ -396,8 +395,46 @@ INCLUDE_ASM("nonmatchings/interruptman", sceKernelIsInterruptOccurred);
 
 #if FW_VERSION == 100 || FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/interruptman", sceKernelEnableIntr);
+#endif
 
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/interruptman", sceKernelSuspendIntr);
+#endif
+
+#if FW_VERSION == 100
+s32 sceKernelSuspendIntr(u32 intrNum, s32 *state) {
+    s32 ret = 0;
+    s32 oldIntr;
+    u32 mask;
+    Interrupt *intr;
+    u32 bits;
+    u32 status;
+
+    if (intrNum >= 67)
+        return 0x80020065;
+    oldIntr = sceKernelCpuSuspendIntr();
+    mask = func_00000000(intrNum);
+    intr = &D_00003950.intr[intrNum];
+    if (intr->handler == 0) {
+        ret = 0x80020068;
+        if (state != NULL)
+            *state = 0;
+    } else if (state != NULL) {
+        if ((s32)intrNum >= 64) {
+            status = getCop0Status() & 0xFF00;
+            *state = status & mask;
+        } else
+            *state = func_00001E9C(intrNum);
+    }
+    if ((s32)intrNum < 64)
+        func_00001F04(intrNum);
+    else {
+        bits = mask & 0xFF00;
+        setCop0Status(getCop0Status() & ~bits);
+    }
+    sceKernelCpuResumeIntr(oldIntr);
+    return ret;
+}
 #endif
 
 #if FW_VERSION < 282
