@@ -1,9 +1,17 @@
 #include "common.h"
 #include "pafmini_decls.h"
 
-#if FW_VERSION < 282
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pafmini_000AC228", func_000AC228);
+#endif
 
+#if FW_VERSION == 100
+void func_000AC228(s32 arg0) {
+    func_000AC178(arg0);
+}
+#endif
+
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pafmini_000AC228", func_000AC244);
 #endif
 
