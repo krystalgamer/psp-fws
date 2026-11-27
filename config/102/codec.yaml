@@ -9,7 +9,7 @@ options:
   compiler: GCC
 
   asm_path: tmp/asm/102/codec
-  src_path: src/codec
+  src_path: tmp/av_src/102/codec
   build_path: tmp/build/102
   ld_script_path: tmp/build/102/codec.ld
   cache_path: tmp/build/102/.splat_cache.codec
@@ -52,7 +52,7 @@ segments:
     start: 0x80
     vram: 0x0
     subsegments:
-      - [0x80, asm, codec]
+      - [0x80, c, codec]
       - { start: 0x1038, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x1098, type: prxpad, order: .text }
       - { start: 0x10A0, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
@@ -64,7 +64,7 @@ segments:
       - { start: 0x1134, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
       - { start: 0x1168, type: rodata, name: resident, linker_section: .rodata.sceResident }
       - { start: 0x1260, type: rodata, name: nid, linker_section: .rodata.sceNid }
-      - [0x1290, rodata, codec]
+      - [0x1290, .rodata, codec]
       - { start: 0x12FC, type: prxpad, order: .rodata }
   - name: codec_seg1
     type: code
