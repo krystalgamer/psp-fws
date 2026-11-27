@@ -1172,6 +1172,7 @@ s32 *func_0002CE1C(s32 *arg0, M2C_UNK arg1, M2C_UNK arg2);
 M2C_UNK func_0002CE54();
 M2C_UNK func_0002CE60();
 s32 func_0002CEC0(M2C_UNK, M2C_UNK);
+void func_0002D1F0(void);
 M2C_UNK func_0002D248();
 s32 module_stop(void);
 s32 sceIoClose(u32);
