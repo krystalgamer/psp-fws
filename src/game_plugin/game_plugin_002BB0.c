@@ -1015,7 +1015,10 @@ INCLUDE_ASM("nonmatchings/game_plugin_002BB0", func_00005A78);
 
 INCLUDE_ASM("nonmatchings/game_plugin_002BB0", func_00005B04);
 
-INCLUDE_ASM("nonmatchings/game_plugin_002BB0", func_00005D88);
+void func_00005D88(void) {
+    sce_paf_private_snprintf(&D_000115D8, 0x80, "disc0:/PSP_GAME/SYSDIR/EBOOT.BIN");
+    func_00005E1C(0);
+}
 
 INCLUDE_ASM("nonmatchings/game_plugin_002BB0", func_00005DBC);
 
