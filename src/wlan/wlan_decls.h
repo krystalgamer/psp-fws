@@ -239,8 +239,13 @@ typedef struct {
     void *unk54;                /* 0x54 */
     u8 unk58[0x78 - 0x58];
     u32 unk78;                  /* 0x78 */
+#if FW_VERSION >= 150
+    u32 unk7C;                  /* 0x7C */
+#endif
 } SceWlanMlmeSync;
+#if FW_VERSION < 150
 typedef char chk_SceWlanMlmeSync[(sizeof(SceWlanMlmeSync) == 0x7C) ? 1 : -1];
+#endif
 
 /* MAC/chip state (D_000191B0->mac); offsets are 1.00's, 1.50 inserts 0x3C bytes before 0x7C */
 struct SceWlanMac {
