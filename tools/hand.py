@@ -154,12 +154,13 @@ def one(a, cfile, decls):
             fpm = re.match(r"^extern .*\(\s*\*\s*(\w+)\s*\)\s*\(.*\);$", st)  # extern T (*fp)(...);
             vm = re.match(r"^extern .*?\b(\w+)(\[[^\]]*\])*;$", st)
             fm = re.match(r"^(?!extern|typedef|struct|union|enum)[\w\s\*]+?\b(\w+)\(.*\);$", st)
-            if fpm:
-                store["vars"][fpm[1]] = st
-            elif vm:
-                store["vars"][vm[1]] = st
-            elif fm:
-                store["funcs"][fm[1]] = st
+            key = ("vars", fpm[1]) if fpm else ("vars", vm[1]) if vm else ("funcs", fm[1]) if fm else None
+            if key and "#if" in store[key[0]].get(key[1], ""):
+                # a per-version declaration (#if FW_VERSION inside): other versions need it as it is
+                if store[key[0]][key[1]].find(st) < 0:
+                    print(f"{key[1]}: per-version declaration in the decls kept (not replaced by `{st}`)")
+            elif key:
+                store[key[0]][key[1]] = st
             else:
                 kept.append(line)
         types = "\n".join(kept)
@@ -191,7 +192,7 @@ def one(a, cfile, decls):
     old_p = store["funcs"].get(name, "")
     given = bool(decls) and re.search(rf"\b{re.escape(name)}\s*\(", re.sub(r"/\*.*?\*/|//[^\n]*", "",
                                                                          Path(decls).read_text(), flags=re.S))
-    unproto = re.search(rf"\b{re.escape(name)}\s*\(\s*\)\s*;", old_p)
+    unproto = re.search(rf"\b{re.escape(name)}\s*\(\s*\)\s*;", old_p) or "#if" in old_p
     if sig and name in store["funcs"] and old_p != " ".join(sig[1].split()) + ";" and not unproto and not given:
         print(f"{name}: prototype `{old_p}` replaced by `{' '.join(sig[1].split())};` (from the definition)")
         store["funcs"][name] = " ".join(sig[1].split()) + ";"

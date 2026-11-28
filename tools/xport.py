@@ -369,6 +369,9 @@ def main():
         for k, t in used_types.items():
             store.setdefault("types", {})[f"x_{a.src_mod}_{k}"] = t
         for n, (kind, line) in new_decls.items():
+            if "#if" in store[kind].get(n, ""):  # per-version declaration: keep it for the other versions
+                print(f"{n}: per-version declaration in the decls kept")
+                continue
             other = "vars" if kind == "funcs" else "funcs"
             store[other].pop(n, None)
             store[kind][n] = line
@@ -393,7 +396,7 @@ def main():
                 hit[0].text = body
                 f.write_text(FM.emit(ents, fv))
                 sig = re.match(r"^(?!static)([^\n;#{]*?\b" + re.escape(dname) + r"\([^;{}]*\))\s*\{", body, re.M)
-                if sig:
+                if sig and "#if" not in store["funcs"].get(dname, ""):
                     store["funcs"][dname] = " ".join(sig[1].split()) + ";"
                 print(f"{dname}: C replaced")
                 break
