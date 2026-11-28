@@ -893,7 +893,11 @@ s32 sceNetAdhocPdpRecvWithRfInfo(s32 id, SceNetEtherAddr *addr, u16 *port, void 
 #endif
 
 #if FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/pspnet_adhoc", sceNetAdhocPdpRecvWithRfInfo);
+s32 sceNetAdhocPdpRecvWithRfInfo(s32 id, SceNetEtherAddr *addr, u16 *port, void *buf, s32 *len, u32 timeout, s32 nonblock, void *rfinfo) {
+    if (buf == NULL || len == NULL || (nonblock & ~1) || rfinfo == NULL)
+        return 0x80410711;
+    return func_000020A4(id, addr, port, buf, len, timeout, nonblock, rfinfo);
+}
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
@@ -2494,7 +2498,40 @@ end:
 #endif
 
 #if FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/pspnet_adhoc", sceNetAdhocPtpClose);
+s32 sceNetAdhocPtpClose(s32 id, s32 flag) {
+    s32 s;
+    s32 ret;
+    SceNetAdhocDesc *d;
+
+    ret = 0;
+    if (sceKernelCheckThreadStack() < 0x7E0)
+        return 0x80410005;
+    if (flag != 0)
+        return 0x80410711;
+    s = _sce_pspnet_spllock();
+    if (s < 0)
+        return s;
+    if (g_adhocInit == 0) {
+        ret = 0x80410712;
+        goto end;
+    }
+    d = func_00000E90(2, id);
+    if (d == NULL) {
+        ret = 0x80410701;
+        goto end;
+    }
+    func_00004E98(d->pcb);
+    func_00005708(d->pcb);
+    d->flags |= 1;
+    d->id = -1;
+    if (d->waiters == NULL) {
+        func_00004AE4(d);
+        func_00000FFC(d);
+    }
+end:
+    _sce_pspnet_splunlock(s);
+    return ret;
+}
 #endif
 
 #if FW_VERSION < 201
