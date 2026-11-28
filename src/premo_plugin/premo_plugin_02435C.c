@@ -17,14 +17,8 @@ INCLUDE_ASM("nonmatchings/premo_plugin_02435C", func_000243B8);
 #endif
 
 #if FW_VERSION == 352
-void func_000243A4(struct Unk_func_000243A4_0 *arg0) {
-    arg0->unk0 = &D_0002C150;
-    arg0->unkC = 0;
-}
-
-void func_000243B8(struct Unk_func_000243B8_0 *arg0) {
-    arg0->unk0 = &D_0002C150;
-    arg0->unkC = 0;
+Class_0002C150::Class_0002C150() {
+    this->unkC = 0;
 }
 #endif
 
