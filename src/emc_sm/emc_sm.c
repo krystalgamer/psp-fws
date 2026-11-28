@@ -81,17 +81,11 @@ s32 nandIsReady(void) {
 }
 #endif
 
-#if FW_VERSION < 271
-INCLUDE_ASM("nonmatchings/emc_sm", nandIntrHandler);
-#endif
-
 #if FW_VERSION >= 282
 INCLUDE_RODATA("nonmatchings/emc_sm", D_00002828);
 #endif
 
-#if FW_VERSION >= 271
-INCLUDE_ASM("nonmatchings/emc_sm", func_0000015C);
-#endif
+INCLUDE_ASM("nonmatchings/emc_sm", nandIntrHandler);
 
 #if FW_VERSION >= 102
 s32 sceNandSetWriteProtect(s32 protect) {
@@ -154,7 +148,21 @@ void sceNandUnlock(void) {
     }
     sceKernelSignalSema(g_nand.semaId, 1);
 }
-#else
+#endif
+
+#if FW_VERSION >= 300
+void sceNandUnlock(void) {
+    g_nand.scramble = 0;
+    sceNandSetWriteProtect(1);
+    if (g_nand.ops == NULL || g_nand.ops->isBusClockOn() == 0) {
+        g_nand.busClockOn = 0;
+        sceSysregEmcsmBusClockDisable();
+    }
+    sceKernelSignalSema(g_nand.semaId, 1);
+}
+#endif
+
+#if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/emc_sm", sceNandUnlock);
 #endif
 
@@ -377,7 +385,10 @@ s32 sceNandReadStatus(void) {
 }
 
 #if FW_VERSION >= 300
-INCLUDE_ASM("nonmatchings/emc_sm", sceNandSetScramble);
+s32 sceNandSetScramble(u32 scramble) {
+    g_nand.scramble = scramble;
+    return 0;
+}
 #endif
 
 s32 sceNandReadPages(u32 ppn, void *user, void *spare, u32 len) {

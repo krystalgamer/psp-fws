@@ -80,3 +80,4 @@ nandSysEventHandler = 0x00000F40; // type:func
 nandDmaReadPage = 0x00000FEC; // type:func
 g_bbmUser = 0x00002DC0;
 g_bbmSpare = 0x00002FC0;
+nandIntrHandler = 0x0000015C; // type:func

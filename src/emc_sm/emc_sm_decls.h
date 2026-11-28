@@ -75,6 +75,10 @@ typedef struct {
     s32 mode;        /* 0x28 */
     s32 wpReleased;  /* 0x2C: write protect was just released (sceNandEraseBlock waits 10 us) */
     u32 wpReleaseTime; /* 0x30 */
+#if FW_VERSION >= 300
+    s32 unk34;
+    u32 scramble;    /* 0x38: sceNandSetScramble, cleared by sceNandUnlock */
+#endif
 } SceNandState;
 #endif
 
@@ -186,6 +190,7 @@ s32 sceNandReadPagesRawExtra(u32 ppn, void *user, void *spare, u32 len);
 s32 sceNandReadStatus(void);
 s32 sceNandReset(u8 *status);
 s32 sceNandResume(void);
+s32 sceNandSetScramble(u32 scramble);
 s32 sceNandSetWriteProtect(s32 protect);
 s32 sceNandSuspend(void);
 s32 sceNandTestBlock(u32 ppn);

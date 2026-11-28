@@ -84,3 +84,4 @@ nandIsReady = 0x0000014C; // type:func
 nandWaitReady = 0x0000135C; // type:func
 nandDmaWritePage = 0x00001180; // type:func
 nandCorrectEcc = 0x0000214C; // type:func
+nandIntrHandler = 0x0000015C; // type:func
