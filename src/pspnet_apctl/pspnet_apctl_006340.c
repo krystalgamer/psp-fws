@@ -96,9 +96,19 @@ INCLUDE_ASM("nonmatchings/pspnet_apctl_006340", func_00006FC8);
 
 INCLUDE_ASM("nonmatchings/pspnet_apctl_006340", func_0000708C);
 
-#if FW_VERSION < 282
+#if FW_VERSION >= 102 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_apctl_006340", func_00005290);
-#else
+#endif
+
+#if FW_VERSION == 100
+void func_00005290(void *arg0) {
+    if (arg0 != NULL) {
+        func_00007504(arg0, 0, 0x404);
+    }
+}
+#endif
+
+#if FW_VERSION >= 282
 void func_000070C0(s32 *arg0) {
     if (arg0 != NULL) {
         sceNetMemset(arg0, 0, 0x404);

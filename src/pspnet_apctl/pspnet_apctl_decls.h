@@ -385,7 +385,10 @@ extern u32 D_00017820;
 
 s32 func_0000038C(SceNetApctlCtx *ctx, u32 *buflen, SceNetApctlBssId *buf);
 s32 func_0000050C(SceNetApctlCtx *ctx, s32 code, void *info);
+s32 func_00000788(SceNetApctlCtx *ctx);
 s32 func_00000A30(void *arg0, s32 arg1);
+s32 func_00000A74(SceNetApctlCtx *ctx);
+s32 func_00000B24(SceNetApctlCtx *ctx);
 s32 func_00000B54(s32, s32, s32);
 s32 func_00000B68(s32 stackSize, s32 prio);
 s32 func_00000C38(SceNetApctlCtx *ctx, s32 index, s32 code, union SceNetApctlBSSDescEntry *info);
@@ -415,6 +418,7 @@ s32 func_000038E4(void);
 void func_00003B30(s32 arg0);
 s32 func_00003C64(void);
 s32 func_00004424(s32 arg0);
+void func_00005290(void *arg0);
 s32 func_00006304(s32 arg0);
 void func_000070C0(s32 *arg0);
 s32 func_00007324(void);
