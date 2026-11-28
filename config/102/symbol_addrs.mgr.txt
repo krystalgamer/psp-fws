@@ -278,3 +278,6 @@ sceKernelCreateSema = 0x00008EF0; // type:func
 sceKernelCreateEventFlag = 0x00008F18; // type:func
 sceKernelSuspendDispatchThread = 0x00008F48; // type:func
 sceKernelResumeDispatchThread = 0x00008F50; // type:func
+sceMgrMSCheckICV = 0x000083CC; // type:func
+sceMgr_driver_016A843B = 0x000086A8; // type:func
+sceMgr_driver_3EE1140B = 0x00008788; // type:func

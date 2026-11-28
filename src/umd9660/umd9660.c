@@ -1,3 +1,7 @@
+/* compiler[271]: 1.9.2 */
+/* cflags[271]: -O2 -frename-registers -mext */
+/* compiler[282,300,301,302,303,310,311,330,340,350,351,352]: 1.9.2 */
+/* cflags[282,300,301,302,303,310,311,330,340,350,351,352]: -O2 -frename-registers -mext */
 /* cflags: -O2 -frename-registers */
 #include "common.h"
 #include "umd9660_decls.h"
@@ -622,7 +626,19 @@ s32 func_000013F4(SceUmd9660DevctlArgs *args) {
     }
     return ret;
 }
-#else
+#endif
+
+#if FW_VERSION >= 282
+s32 func_000013F4(SceUmd9660DevctlArgs *args) {
+    s32 ret = 0x80010016;
+    if (args != NULL) {
+        ret = func_00003CC8(func_000019DC(args->iob->i_unit), args->outdata, args->outlen, args->indata);
+    }
+    return ret;
+}
+#endif
+
+#if FW_VERSION == 271
 INCLUDE_ASM("nonmatchings/umd9660", func_000013F4);
 #endif
 

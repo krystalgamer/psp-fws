@@ -1,3 +1,5 @@
+/* compiler[282,302,303]: 1.9.2 */
+/* cflags[282,302,303]: -O2 -mext */
 #include "common.h"
 #include "meaudio_decls.h"
 

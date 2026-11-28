@@ -1,3 +1,7 @@
+/* compiler[311,352]: 1.9.2 */
+/* cflags[311,352]: -O2 -mext */
+/* compiler[271]: 1.9.2 */
+/* cflags[271]: -O2 -mext */
 #include "common.h"
 #include "iofilemgr_dnas_decls.h"
 
