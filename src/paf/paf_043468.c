@@ -107,17 +107,8 @@ void func_00044168(struct Unk_func_00044168_0 *arg0) {
     arg0->unk4 = 0;
 }
 
-INCLUDE_ASM("nonmatchings/paf_043468", _ZN14Class_00126EC8D2Ev);
-
-void _ZN14Class_00126EC8D1Ev(struct Unk_func_00044190_0 *arg0) {
-    arg0->unk0 = &D_00171380;
-    arg0->unk4 = 0;
-}
-
-void _ZN14Class_00126EC8D0Ev(struct Unk_func_000441A4_0 *arg0) {
-    arg0->unk0 = &D_00171380;
-    arg0->unk4 = 0;
-    _ZdlPv(arg0);
+Class_00126EC8::~Class_00126EC8() {
+    this->unk4 = 0;
 }
 
 s32 func_000441D0(struct Unk_func_000441D0_0 *arg0, void *arg1, s32 arg2, s32 arg3, s32 arg4) {
@@ -176,6 +167,8 @@ __asm__(".globl _ZTV14Class_00171640\n_ZTV14Class_00171640 = D_00171338 - 8\n");
 INCLUDE_RODATA("nonmatchings/paf_043468", D_0017135C);
 
 INCLUDE_RODATA("nonmatchings/paf_043468", D_00171380);
+
+__asm__(".globl _ZTV14Class_00126EC8\n_ZTV14Class_00126EC8 = D_00171380 - 8\n");
 
 INCLUDE_ASM("nonmatchings/paf_043468", func_00044974);
 

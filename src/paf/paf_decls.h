@@ -12,9 +12,10 @@ extern "C" {
 #endif
 
 #ifdef __cplusplus
-/* dtor still asm/m2c (not trivial) */
+/* vtable _ZTV14Class_00126EC8 is data (vptr = label - 8 + 8) */
 class Class_00126EC8 {
 public:
+    s32 unk4;
     virtual ~Class_00126EC8();
 };
 #endif
@@ -23,7 +24,7 @@ public:
 /* vtable _ZTV14Class_0016AAE0 is data (vptr = label - 8 + 8) */
 class Class_0016AAE0 : public Class_00126EC8 {
 public:
-    s32 unk4;
+
     virtual ~Class_0016AAE0();
 };
 #endif

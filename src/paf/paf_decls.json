@@ -2643,8 +2643,8 @@
   "zlibCompileFlags": "s32 zlibCompileFlags(void);"
  },
  "types": {
-  "Class_00126EC8": "#ifdef __cplusplus\n/* dtor still asm/m2c (not trivial) */\nclass Class_00126EC8 {\npublic:\n    virtual ~Class_00126EC8();\n};\n#endif",
-  "Class_0016AAE0": "#ifdef __cplusplus\n/* vtable _ZTV14Class_0016AAE0 is data (vptr = label - 8 + 8) */\nclass Class_0016AAE0 : public Class_00126EC8 {\npublic:\n    s32 unk4;\n    virtual ~Class_0016AAE0();\n};\n#endif",
+  "Class_00126EC8": "#ifdef __cplusplus\n/* vtable _ZTV14Class_00126EC8 is data (vptr = label - 8 + 8) */\nclass Class_00126EC8 {\npublic:\n    s32 unk4;\n    virtual ~Class_00126EC8();\n};\n#endif",
+  "Class_0016AAE0": "#ifdef __cplusplus\n/* vtable _ZTV14Class_0016AAE0 is data (vptr = label - 8 + 8) */\nclass Class_0016AAE0 : public Class_00126EC8 {\npublic:\n\n    virtual ~Class_0016AAE0();\n};\n#endif",
   "Class_00171640": "#ifdef __cplusplus\n/* vtable _ZTV14Class_00171640 is data (vptr = label - 8 + 8) */\nclass Class_00171640 : public Class_00126EC8 {\npublic:\n    virtual ~Class_00171640();\n};\n#endif",
   "Class_00171684": "#ifdef __cplusplus\n/* vtable _ZTV14Class_00171684 is data (vptr = label - 8 + 8) */\nclass Class_00171684 : public Class_00126EC8 {\npublic:\n    virtual ~Class_00171684();\n};\n#endif",
   "Class_001716C0": "#ifdef __cplusplus\n/* vtable _ZTV14Class_001716C0 is data (vptr = label - 8 + 8) */\nclass Class_001716C0 : public Class_00126EC8 {\npublic:\n    virtual ~Class_001716C0();\n};\n#endif",
