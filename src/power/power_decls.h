@@ -34,13 +34,13 @@ typedef struct {
     s32 lowBatteryCapacity; /* 0x10 */
     u32 isBatteryPollingSuspended; /* 0x14 */
     u32 batteryForbidChargingNetCounter; /* 0x18 */
-#if FW_VERSION == 100 || FW_VERSION == 102 || FW_VERSION == 103
-    /* 1.00: 0x50 bytes; 1.02 inserts unk20 (0x54), 1.03 also unk24 (0x58); offsets below are 1.00's */
+#if FW_VERSION < 282
+    /* 1.00: 0x50 bytes; 1.02 inserts unk20 (0x54), 1.03-2.71 also unk24 (0x58); offsets below are 1.00's */
     s32 workerThreadNextOp; /* 0x1C */
-#if FW_VERSION == 102 || FW_VERSION == 103
+#if FW_VERSION >= 102
     s32 unk20; /* -1 at init and on resume */
 #endif
-#if FW_VERSION == 103
+#if FW_VERSION >= 103
     s32 unk24; /* -1 at init */
 #endif
     u32 powerSupplyStatus; /* 0x20 */

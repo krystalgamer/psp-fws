@@ -1627,7 +1627,7 @@ s32 _scePowerBatteryInit(void) {
     memset(&g_Battery, 0, 0x58);
     temp_v0 = "ScePowerBattery";
     g_Battery.innerTempStatus = -1;
-    M2C_FIELD(&g_Battery, s32 *, 0x24) = -1;
+    g_Battery.unk24 = -1;
     g_Battery.batteryEventFlagId = sceKernelCreateEventFlag(temp_v0, 1U, 0U, NULL);
     temp_v0_2 = sceKernelCreateThread(temp_v0, (s32) &func_00003220, 0x40, 0x800U, 1U, NULL);
     g_Battery.workerThreadId = temp_v0_2;
@@ -1644,7 +1644,7 @@ s32 _scePowerBatteryInit(void) {
     memset(&g_Battery, 0, 0x58);
     temp_v0 = "ScePowerBattery";
     g_Battery.innerTempStatus = -1;
-    M2C_FIELD(&g_Battery, s32 *, 0x24) = -1;
+    g_Battery.unk24 = -1;
     g_Battery.batteryEventFlagId = sceKernelCreateEventFlag(temp_v0, 1U, 0U, NULL);
     temp_v0_2 = sceKernelCreateThread(temp_v0, (s32) &func_00003220, 0x40, 0x400U, 1U, NULL);
     g_Battery.workerThreadId = temp_v0_2;
