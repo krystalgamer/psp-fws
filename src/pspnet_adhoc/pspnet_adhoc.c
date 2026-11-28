@@ -2971,11 +2971,66 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc", ptpRecvData);
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_000049E4);
 #endif
 
-#if FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/pspnet_adhoc", ptpFlushWait);
+#if FW_VERSION < 150
+s32 ptpFlushWait(SceNetAdhocDesc *d, u32 timeout, s32 nonblock) {
+    SceNetAdhocPtpPcb *pcb;
+    u64 start;
+    u64 now;
+    u32 tmo;
+    s32 err;
+
+    pcb = d->pcb;
+    start = 0;
+    while (pcb->snd.cc != 0) {
+        if (d->flags & 0x8000)
+            return 0x8041070C;
+        if (d->flags & 0x200)
+            return 0x80410708;
+        if (nonblock & 1)
+            return 0x80410709;
+        tmo = 0;
+        if (timeout != 0) {
+            if (start == 0)
+                start = sceNetGetSystemClockUsec();
+            now = sceNetGetSystemClockUsec();
+            if (now - start >= timeout)
+                return 0x80410715;
+            tmo = timeout - ((u32)now - (u32)start);
+        }
+        pcb->snd.flags |= 1;
+        err = _sce_pspnet_tsleep_usec(&pcb->snd, tmo);
+        if (d->flags & 0x200)
+            err = 5;
+        if (d->flags & 1)
+            err = 0x20;
+        if (err != 0) {
+            switch (err) {
+            case 0xB:
+                err = 0x80410715;
+                break;
+            case 4:
+                err = 0x80410719;
+                break;
+            case 5:
+                err = 0x80410708;
+                break;
+            case 0x20:
+                err = 0x80410707;
+                break;
+            default:
+                err = 0x80410002;
+                break;
+            }
+            return err;
+        }
+    }
+    return 0;
+}
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 201
+INCLUDE_ASM("nonmatchings/pspnet_adhoc", ptpFlushWait);
+
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", sceNetAdhoc_lib_62B875A8);
 #endif
 

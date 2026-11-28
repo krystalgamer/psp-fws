@@ -349,6 +349,7 @@ void _sce_pspnet_stop_of_adhoc_module_in_netintr(void);
 void _sce_pspnet_stop_of_adhoc_module_in_sched(void);
 SceNetAdhocWaiter *_sce_pspnet_thread_enter(); /* 2.01+: (s32 *err) */
 void _sce_pspnet_thread_leave(SceNetAdhocWaiter *ti, s32 flag);
+s32 _sce_pspnet_tsleep_usec(void *chan, u32 usec);
 void _sce_pspnet_wakeup(void *chan);
 void adhocBcopy(const void *src, void *dst, s32 n);
 void adhocBzero(void *s, s32 n);
@@ -486,6 +487,7 @@ void sceNetAdhoc_lib_62B875A8(void);
 void sceNetAdhoc_lib_F9240FBA(void);
 void sceNetFreeInternal(void *p);
 s32 sceNetGetLocalEtherAddr(SceNetEtherAddr *addr);
+u64 sceNetGetSystemClockUsec(void);
 void sceNetMCopydata(struct mbuf *m, s32 off, s32 len, void *cp);
 void sceNetMFreem(struct mbuf *m);
 void *sceNetMallocInternal(u32 size);
