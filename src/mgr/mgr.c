@@ -1181,12 +1181,11 @@ INCLUDE_ASM("nonmatchings/mgr", func_00002788);
 #endif
 
 #if FW_VERSION < 340
-s32 func_00002498(void) {
+s32 func_00002498(s32 arg0, u8 *arg1) {
     return 0x80500001;
 }
 
-void func_000024A4(void) {
-
+void func_000024A4(s32 arg0, void *arg1) {
 }
 #else
 s32 func_000027E0(void) {
@@ -3125,7 +3124,31 @@ s32 sceMgrMSReadIBD(s32 arg0, u8 page, s32 arg2, s32 arg3) {
     return ret;
 }
 
-INCLUDE_ASM("nonmatchings/mgr", sceMgrMSWriteIBD);
+s32 sceMgrMSWriteIBD(s32 arg0, u8 page, s32 arg2, s32 arg3) {
+    MgrMsRegParam param;
+    s32 fd;
+    s32 ret;
+
+    param.unk0 = 0;
+    param.unk4 = 0;
+    param.unk5 = page;
+    ret = func_00006678(arg0, &fd, 4, 1);
+    if (ret < 0) {
+        return ret;
+    }
+    ret = func_000064EC(fd, (s32)&param);
+    if (ret >= 0) {
+        ret = func_00006528(fd, 0x46);
+        if (ret >= 0) {
+            ret = func_00006408(fd, arg2, arg3, 2, (s32)&D_0000B050);
+            if (ret >= 0) {
+                ret = 0;
+            }
+        }
+    }
+    func_000067CC(arg0, 1);
+    return ret;
+}
 
 s32 module_start(void) {
     return 0;
