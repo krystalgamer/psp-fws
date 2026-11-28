@@ -294,7 +294,38 @@ s32 sceNetApctl_lib_C519EDCD(s32 arg0) {
 }
 #endif
 
-#if FW_VERSION < 260 || FW_VERSION >= 282
+#if FW_VERSION < 150
+s32 func_00000964(SceNetApctlCtx *ctx, u32 *bits) {
+    s32 ret;
+    s32 i;
+
+    if (bits != NULL) {
+        *bits = 0;
+    }
+    for (i = 0; i < 5; i++) {
+        ret = sceWlanDevAttach();
+        if (ret == 0 || ret == 0x80410D0F) {
+            ret = 0;
+            break;
+        }
+        if (ret < 0 && ret != 0x80410D0E) {
+            goto end;
+        }
+        ret = sceKernelPollEventFlag(ctx->evf, 2, 0x11, bits);
+        if (ret == 0 && (*bits & 2)) {
+            goto end;
+        }
+        sceKernelDelayThread(1000000);
+    }
+    if (i == 5) {
+        ret = 0x80410A0B;
+    }
+end:
+    return ret;
+}
+#endif
+
+#if (FW_VERSION >= 150 && FW_VERSION < 260) || FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/pspnet_apctl", func_00000964);
 #endif
 

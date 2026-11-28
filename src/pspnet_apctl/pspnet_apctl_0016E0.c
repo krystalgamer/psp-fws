@@ -142,7 +142,34 @@ s32 func_000010EC(s32 *state) {
 
 INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_000023BC);
 
+#if FW_VERSION < 103
+s32 func_00002480(SceNetApctlCtx *ctx) {
+    u32 bits;
+    s32 type;
+    s32 arg;
+    s32 ret;
+
+wait:
+    ret = sceKernelWaitEventFlag(ctx->evf, 0x20, 0x11, &bits, NULL);
+    if (ret < 0) {
+        goto end;
+    }
+    do {
+        ret = sceNetConfigGetIfEvent(ctx, &type, &arg);
+        if (ret == 0x80410184) {
+            goto wait;
+        }
+        if (ret < 0) {
+            goto end;
+        }
+    } while (type != 8);
+    ctx->linkUp = 0;
+end:
+    return ret;
+}
+#else
 INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00002480);
+#endif
 
 #if FW_VERSION == 100
 s32 func_00001250(SceNetApctlCtx *ctx, u32 *bits) {
@@ -440,9 +467,92 @@ s32 func_00001858(SceNetApctlCtx *ctx, s32 prev, s32 *state, s32 *event) {
 INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00001858);
 #endif
 
-#if FW_VERSION < 260
-INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00001940);
+#if FW_VERSION < 150
+s32 func_00001940(SceNetApctlCtx *ctx) {
+    s32 ret;
 
+    ret = apctlResetDns();
+    if (ret < 0) {
+        goto fail;
+    }
+    {
+        SceNetApctlIpParam param;
+        u32 bits;
+
+        func_00007504(&param, 0, sizeof(param));
+        param.manualDns = ctx->conf.manualDns;
+        func_000077F8(param.primaryDns, ctx->conf.primaryDns);
+        func_000077F8(param.secondaryDns, ctx->conf.secondaryDns);
+        ret = func_000051A0(D_00010A8C, func_00003E70, 0x4000, ctx->priority, 0, &param);
+        if (ret < 0) {
+            goto fail;
+        }
+        bits = 0;
+        ret = func_000023BC(ctx, -1, &bits, 1);
+        if (bits & 0xA) {
+            if (bits & 2) {
+                ret = 0x80410A83;
+            } else if (bits & 8) {
+                ret = ctx->error;
+            }
+            func_00005634();
+            goto fail;
+        }
+    }
+    return 0;
+fail:
+    apctlResetDns();
+    return ret;
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 260
+INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00001940);
+#endif
+
+#if FW_VERSION < 150
+s32 func_00001A68(SceNetApctlCtx *ctx) {
+    s32 ret;
+
+    ret = apctlResetDns();
+    if (ret < 0) {
+        goto fail;
+    }
+    {
+        SceNetApctlIpParam param;
+        u32 bits;
+
+        func_00007504(&param, 0, sizeof(param));
+        param.manualDns = ctx->conf.manualDns;
+        func_000077F8(param.primaryDns, ctx->conf.primaryDns);
+        func_000077F8(param.secondaryDns, ctx->conf.secondaryDns);
+        func_000077F8(param.user, ctx->conf.addr.p.user);
+        func_000077F8(param.pass, ctx->conf.addr.p.pass);
+        ret = func_00006A14(D_00010A8C, func_00003EF0, 0x4000, ctx->priority, 0, &param);
+        if (ret < 0) {
+            goto fail;
+        }
+        bits = 0;
+        ret = func_000023BC(ctx, -1, &bits, 1);
+        if (bits & 0xA) {
+            if (bits & 2) {
+                ret = 0x80410A83;
+            } else if (bits & 8) {
+                ret = ctx->error;
+            }
+            func_00007324();
+            func_00008E34();
+            goto fail;
+        }
+    }
+    return 0;
+fail:
+    apctlResetDns();
+    return ret;
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 260
 INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00001A68);
 #endif
 
