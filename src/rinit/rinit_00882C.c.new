@@ -1,0 +1,5 @@
+/* newlib-1.12.0 libc/../libm/common/s_isinf.c (BSD-style licence, see the newlib COPYING.NEWLIB) */
+#include "common.h"
+#include "rinit_decls.h"
+#include "rinit_newlib.h"
+

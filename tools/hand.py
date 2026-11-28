@@ -5,8 +5,10 @@
 
 FILE.c holds one function definition (its name must be an INCLUDE_ASM entry
 compiled for VER). The C replaces that entry for every version compiling the
-same entry; each of those versions is rebuilt, and the C is kept only for the
-versions that still match (the others keep the asm). Optional --decls lines
+same entry, and for the versions of the function's other asm entries in the
+same file (separate `#if FW_VERSION` blocks); each of those versions is rebuilt,
+and the C is kept only for the versions that still match (the others keep the
+asm). Optional --decls lines
 (types, externs, prototypes) are added to the module's decls (json "types"
 under "hand", vars/funcs by name). Prints the versions that kept the C.
 """
@@ -51,11 +53,21 @@ def main():
         from concurrent.futures import ThreadPoolExecutor
         vs = sharing_versions(a.ver, a.module)
         with ThreadPoolExecutor(int(os.environ.get("HAND_JOBS", "4"))) as ex:
-            bad = [v for v, (ok, _) in zip(vs, ex.map(lambda v: build(v, a.module), vs)) if not ok]
+            res = dict(zip(vs, ex.map(lambda v: build(v, a.module), vs)))
+
+        def first_err(out):
+            return next((l.strip() for l in out.splitlines() if re.search(r"error|Error|MISMATCH|No rule", l)),
+                        out.strip().splitlines()[-1] if out.strip() else "?")
+        bad = [v for v in vs if not res[v][0]]
         if bad:  # a stale split/asm state (e.g. right after another tool) gives false failures: re-split those once
+            for v in bad:
+                print(f"pre-flight: {v} did not build ({first_err(res[v][1])[:200]}); re-splitting", flush=True)
             subprocess.run(["tools/regress.sh"] + [f"{v}:{a.module}" for v in bad], cwd=ROOT, capture_output=True)
-            bad = [v for v in bad if not build(v, a.module)[0]]
+            res.update({v: build(v, a.module) for v in bad})
+            bad = [v for v in bad if not res[v][0]]
         if bad:
+            for v in bad:
+                print(f"pre-flight: {v}: {first_err(res[v][1])[:300]}")
             sys.exit(f"pre-flight: {a.module} does not build in {bad} before any change — fix that first "
                      f"(HAND_PREFLIGHT=0 to skip)")
     done = []
@@ -82,10 +94,31 @@ def main():
         sys.exit(1)
 
 
+def propose_calls(a, name, cfile, vers_s):
+    """When the C calls other functions than VER's original: which VER function looks like each callee
+    (tools/match_funcs.py; a proposal only)."""
+    r = subprocess.run([sys.executable, str(ROOT / "tools/hand_try.py"), a.ver, a.module, str(cfile)]
+                       + (["--decls", a.decls] if a.decls else []), cwd=ROOT, capture_output=True, text=True,
+                       env={**os.environ, "HAND_TRY_NOLOCK": "1"})
+    pairs = re.findall(r"call target differs: target (\w+), mine (\w+)", r.stdout)
+    if not pairs:
+        return
+    import match_funcs
+    print(f"{name}: CALL TARGETS DIFFER in {a.ver}:")
+    for tgt, mine in dict.fromkeys(pairs):
+        src = next((v for v in [a.ver] + [x for x in vers_s if x != a.ver]
+                    if mine in match_funcs._module(v, a.module)[1]), None)
+        if src is None:
+            print(f"  {a.ver} calls {tgt} where the C calls {mine} ({mine} is no function of any sharing version)")
+            continue
+        print(f"  {a.ver} calls {tgt} where the C calls {mine}:")
+        match_funcs.propose(src, a.ver, a.module, [(tgt, mine)])
+
+
 def one(a, cfile, decls):
     """Insert one function; returns (name, keep, drop), or None (sources restored)."""
     body = Path(cfile).read_text().strip("\n") + "\n"
-    m = re.search(r"^(?!static)[^\n;#]*?\b(\w+)\([^;{}]*\)\s*\{", body, re.M)
+    m = re.search(r"^(?!static\b)(?!(?:if|while|for|switch|return|else|do)\b)(?=[A-Za-z_])[^\n;#]*?\b(\w+)\([^;{}]*\)\s*\{", body, re.M)
     if not m:
         print("no function definition in " + cfile)
         return None
@@ -103,8 +136,11 @@ def one(a, cfile, decls):
         return None
     orig = {p: p.read_text() for p in list(sd.glob("*.c")) + list(sd.glob("*_decls.*"))}
     ents = FM.parse(orig[f], fv)
-    k = next(i for i, e in enumerate(ents) if e.kind == "asm" and e.name == name and fw(a.ver) in e.vers)
-    cand = ents[k].vers
+    # every asm entry of the function in this file (other versions' separate entries too): the C is tried
+    # in all of them and kept wherever it matches
+    ks = [i for i, e in enumerate(ents) if e.kind == "asm" and e.name == name and e.vers]
+    k = next(i for i in ks if fw(a.ver) in ents[i].vers)
+    cand = frozenset().union(*(ents[i].vers for i in ks))
     if decls:
         store_p = sd / f"{a.module}_decls.json"
         store = json.loads(store_p.read_text())
@@ -118,12 +154,13 @@ def one(a, cfile, decls):
             fpm = re.match(r"^extern .*\(\s*\*\s*(\w+)\s*\)\s*\(.*\);$", st)  # extern T (*fp)(...);
             vm = re.match(r"^extern .*?\b(\w+)(\[[^\]]*\])*;$", st)
             fm = re.match(r"^(?!extern|typedef|struct|union|enum)[\w\s\*]+?\b(\w+)\(.*\);$", st)
-            if fpm:
-                store["vars"][fpm[1]] = st
-            elif vm:
-                store["vars"][vm[1]] = st
-            elif fm:
-                store["funcs"][fm[1]] = st
+            key = ("vars", fpm[1]) if fpm else ("vars", vm[1]) if vm else ("funcs", fm[1]) if fm else None
+            if key and "#if" in store[key[0]].get(key[1], ""):
+                # a per-version declaration (#if FW_VERSION inside): other versions need it as it is
+                if store[key[0]][key[1]].find(st) < 0:
+                    print(f"{key[1]}: per-version declaration in the decls kept (not replaced by `{st}`)")
+            elif key:
+                store[key[0]][key[1]] = st
             else:
                 kept.append(line)
         types = "\n".join(kept)
@@ -147,18 +184,25 @@ def one(a, cfile, decls):
         import structify
         structify.SRC[a.module] = sd
         structify.write_decls(a.module, store)
-    # the function's own prototype follows its definition (a stale m2c guess would conflict)
+    # the function's own prototype follows its definition (a stale m2c guess would conflict), except a
+    # deliberately unprototyped `T name();` and one given in --decls (both are the user's choice)
     store_p = sd / f"{a.module}_decls.json"
     store = json.loads(store_p.read_text())
     sig = re.match(r"^(?!static)([^\n;#{]*?\b" + re.escape(name) + r"\([^;{}]*\))\s*\{", body, re.M)
-    if sig and name in store["funcs"] and store["funcs"][name] != " ".join(sig[1].split()) + ";":
+    old_p = store["funcs"].get(name, "")
+    given = bool(decls) and re.search(rf"\b{re.escape(name)}\s*\(", re.sub(r"/\*.*?\*/|//[^\n]*", "",
+                                                                         Path(decls).read_text(), flags=re.S))
+    unproto = re.search(rf"\b{re.escape(name)}\s*\(\s*\)\s*;", old_p) or "#if" in old_p
+    if sig and name in store["funcs"] and old_p != " ".join(sig[1].split()) + ";" and not unproto and not given:
+        print(f"{name}: prototype `{old_p}` replaced by `{' '.join(sig[1].split())};` (from the definition)")
         store["funcs"][name] = " ".join(sig[1].split()) + ";"
         import structify
         structify.SRC[a.module] = sd
         structify.write_decls(a.module, store)
     # C for all candidate versions first
-    ents[k].vers = frozenset()
-    ents.insert(k, FM.Entry(cand, "cfunc", name, body))
+    for i in reversed(ks):
+        ents.insert(i, FM.Entry(ents[i].vers, "cfunc", name, body))
+        ents[i + 1].vers = frozenset()
     f.write_text(FM.emit(ents, fv))
     keep, drop, fails = [], [], {}
     # versions build into their own tmp/build/<v>: build them in parallel
@@ -180,13 +224,20 @@ def one(a, cfile, decls):
         errs = [l for l in out.splitlines() if re.search(r"error:|warning: implicit|differ|FAILED|mismatch", l)]
         print(f"{name}: no version matches; build output for {a.ver}:")
         print("\n".join((errs or out.splitlines())[-15:]))
+        propose_calls(a, name, cfile, vers_s)
         return None
     if drop:
         ents = FM.parse(orig[f], fv)
-        k = next(i for i, e in enumerate(ents) if e.kind == "asm" and e.name == name and fw(a.ver) in e.vers)
-        ents[k].vers = frozenset(drop)
-        ents.insert(k, FM.Entry(frozenset(keep), "cfunc", name, body))
+        ks = [i for i, e in enumerate(ents) if e.kind == "asm" and e.name == name and e.vers]
+        for i in reversed(ks):
+            kv = ents[i].vers & frozenset(keep)
+            ents[i].vers = ents[i].vers - kv
+            ents.insert(i, FM.Entry(kv, "cfunc", name, body))
         f.write_text(FM.emit(FM.dedupe(ents), fv))
+    elif len(ks) > 1:
+        f.write_text(FM.emit(FM.dedupe(FM.parse(f.read_text(), fv)), fv))
+    if len(ks) > 1:
+        print(f"{name}: {len(ks)} asm entries in {f.name} (tried in all of them)")
     return name, keep, drop
 
 

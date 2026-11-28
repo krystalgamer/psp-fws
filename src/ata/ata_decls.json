@@ -88,7 +88,7 @@
   "sceAtaAhbTerm": "s32 sceAtaAhbTerm(void);",
   "sceAtaBufferSelectSemaphore": "s32 sceAtaBufferSelectSemaphore(u32 *stat);",
   "sceAtaCheckDeviceReady": "s32 sceAtaCheckDeviceReady(SceAtaDrive *drive);",
-  "sceAtaClearDriveStat": "void sceAtaClearDriveStat(s32 arg0, s32 arg1);",
+  "sceAtaClearDriveStat": "void sceAtaClearDriveStat(s32 arg0, M2C_UNK arg1);",
   "sceAtaClearIntrStateFlag": "void sceAtaClearIntrStateFlag(s32 arg0);",
   "sceAtaDisableClkIo": "s32 sceAtaDisableClkIo(u32 flags);",
   "sceAtaDisplayReqSense": "void sceAtaDisplayReqSense(void);",

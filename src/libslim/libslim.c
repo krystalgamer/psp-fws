@@ -1,3 +1,7 @@
+/* compiler[303,311,340]: 1.9.2 */
+/* cflags[303,311,340]: -Os -mext */
+/* compiler[271]: 1.9.2 */
+/* cflags[271]: -Os -mext */
 /* cflags: -Os */
 #include "common.h"
 #include "libslim_decls.h"

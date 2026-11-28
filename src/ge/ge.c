@@ -1,3 +1,5 @@
+/* compiler[271]: 1.9.2 */
+/* cflags[271]: -O2 -frename-registers -mext */
 /* compiler[282,300,301,302,303,310,311,330,340,350,351,352]: 1.9.2 */
 /* cflags[282,300,301,302,303,310,311,330,340,350,351,352]: -O2 -frename-registers -mext */
 /* cflags: -O2 -frename-registers */
@@ -723,14 +725,14 @@ s32 _sceGeQueueEnd(void) {
 }
 #endif
 
-#if FW_VERSION == 150 || (FW_VERSION >= 201 && FW_VERSION < 282)
-INCLUDE_ASM("nonmatchings/ge", _sceGeQueueStatus);
-#endif
-
-#if FW_VERSION >= 151 && FW_VERSION < 201
+#if FW_VERSION >= 151 && FW_VERSION < 282
 s32 _sceGeQueueStatus(void) {
     return (D_00003ABC == 0) ? 0 : -1;
 }
+#endif
+
+#if FW_VERSION == 150
+INCLUDE_ASM("nonmatchings/ge", _sceGeQueueStatus);
 #endif
 
 #if FW_VERSION == 100
