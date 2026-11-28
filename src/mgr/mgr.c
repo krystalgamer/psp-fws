@@ -3,7 +3,7 @@
 #include "mgr_decls.h"
 
 s32 sceMgrLock(void) {
-    s32 ret = sceKernelWaitSema(D_0000B690.sema, 1, NULL);
+    s32 ret = sceKernelWaitSema(g_mgrCtrl.sema, 1, NULL);
     if (ret == 0x800201B5) {
         return 0x80500002;
     }
@@ -18,7 +18,7 @@ s32 sceMgrLock(void) {
 }
 
 s32 sceMgrPollLock(void) {
-    s32 ret = sceKernelPollSema(D_0000B690.sema, 1);
+    s32 ret = sceKernelPollSema(g_mgrCtrl.sema, 1);
     if (ret == 0x800201AD) {
         return 0x80502001;
     }
@@ -37,7 +37,7 @@ s32 sceMgrPollLock(void) {
 
 s32 sceMgrUnLock(void) {
     sceKernelPowerUnlock(0);
-    return sceKernelSignalSema(D_0000B690.sema, 1);
+    return sceKernelSignalSema(g_mgrCtrl.sema, 1);
 }
 
 void func_0000011C(void) {
@@ -45,14 +45,14 @@ void func_0000011C(void) {
 
     *(volatile u32 *)0xBE100000 = 0x8000;
     __asm__ volatile("sync");
-    ctrl = &D_0000B690;
+    ctrl = &g_mgrCtrl;
     if (ctrl->cb != NULL) {
         ctrl->cb(ctrl->cbArg);
     }
 }
 
 void func_0000015C(s32 (*intrCb)(void *), void *arg) {
-    MgrCtrl *ctrl = &D_0000B690;
+    MgrCtrl *ctrl = &g_mgrCtrl;
 
     ctrl->intrCb = intrCb;
     ctrl->cbArg = arg;
@@ -227,7 +227,7 @@ s32 func_0000064C(void) {
     if ((*(volatile u32 *)0xBE100018 & 1) == 0) {
         return 0;
     }
-    ret = sceKernelWaitEventFlag(D_0000B690.evf, 2, 0x11, &res, &timeout);
+    ret = sceKernelWaitEventFlag(g_mgrCtrl.evf, 2, 0x11, &res, &timeout);
     if (ret == 0x800201A8) {
         return 0x80502002;
     }
@@ -367,34 +367,34 @@ s32 sceMgrInit(void) {
     u8 seed[16];
 
     state = sceKernelSuspendDispatchThread();
-    if (D_0000B690.initCount > 0) {
-        D_0000B690.initCount++;
+    if (g_mgrCtrl.initCount > 0) {
+        g_mgrCtrl.initCount++;
         sceKernelResumeDispatchThread(state);
         return 0;
     }
     sceMgrReset();
     func_00001980();
-    if (D_0000B690.sema <= 0) {
+    if (g_mgrCtrl.sema <= 0) {
         ret = sceKernelCreateSema("SceMgrDrv", 0x100, 1, 1, NULL);
         if (ret < 0) {
             goto fail_resume;
         }
-        D_0000B690.sema = ret;
+        g_mgrCtrl.sema = ret;
     }
-    if (D_0000B690.evf <= 0) {
+    if (g_mgrCtrl.evf <= 0) {
         ret = sceKernelCreateEventFlag("SceMgrDev", 0, 0, NULL);
         if (ret < 0) {
             goto fail_resume;
         }
-        D_0000B690.evf = ret;
+        g_mgrCtrl.evf = ret;
     }
     ret = func_0000199C();
     if (ret < 0) {
         goto fail_resume;
     }
-    D_0000B690.initCount = 1;
+    g_mgrCtrl.initCount = 1;
     intr = sceKernelCpuSuspendIntr();
-    sceKernelRegisterIntrHandler(9, 1, func_00000170, &D_0000B690, NULL);
+    sceKernelRegisterIntrHandler(9, 1, func_00000170, &g_mgrCtrl, NULL);
     sceKernelEnableIntr(9);
     sceKernelCpuResumeIntr(intr);
     func_000023F4();
@@ -460,23 +460,23 @@ void func_00000AC4(void) {
     func_00001980();
     func_00001A44();
     sceMgrReset();
-    if (D_0000B690.sema > 0) {
-        sceKernelDeleteSema(D_0000B690.sema);
-        D_0000B690.sema = 0;
+    if (g_mgrCtrl.sema > 0) {
+        sceKernelDeleteSema(g_mgrCtrl.sema);
+        g_mgrCtrl.sema = 0;
     }
-    if (D_0000B690.evf > 0) {
-        sceKernelDeleteEventFlag(D_0000B690.evf);
-        D_0000B690.evf = 0;
+    if (g_mgrCtrl.evf > 0) {
+        sceKernelDeleteEventFlag(g_mgrCtrl.evf);
+        g_mgrCtrl.evf = 0;
     }
-    D_0000B690.initCount = 0;
+    g_mgrCtrl.initCount = 0;
 }
 
 void sceMgrEnd(void) {
     if (sceMgrLock() < 0) {
         return;
     }
-    if (D_0000B690.initCount >= 2) {
-        D_0000B690.initCount--;
+    if (g_mgrCtrl.initCount >= 2) {
+        g_mgrCtrl.initCount--;
         sceMgrUnLock();
     } else {
         sceKernelPowerUnlock(0);
@@ -751,25 +751,25 @@ INCLUDE_ASM("nonmatchings/mgr", func_0000199C);
 #if FW_VERSION < 340
 void func_00001A44(void) {
     func_0000015C(0, 0);
-    if (D_00009C68.sema != 0) {
-        sceKernelDeleteSema(D_00009C68.sema);
-        D_00009C68.sema = 0;
+    if (g_mgrIb2Ctrl.sema != 0) {
+        sceKernelDeleteSema(g_mgrIb2Ctrl.sema);
+        g_mgrIb2Ctrl.sema = 0;
     }
-    if (D_00009C68.evf != 0) {
-        sceKernelDeleteEventFlag(D_00009C68.evf);
-        D_00009C68.evf = 0;
+    if (g_mgrIb2Ctrl.evf != 0) {
+        sceKernelDeleteEventFlag(g_mgrIb2Ctrl.evf);
+        g_mgrIb2Ctrl.evf = 0;
     }
 }
 #else
 void func_00001A44(void) {
     func_0000015C(0, 0);
-    if (D_0000B708.sema != 0) {
-        sceKernelDeleteSema(D_0000B708.sema);
-        D_0000B708.sema = 0;
+    if (g_mgrIb2Ctrl.sema != 0) {
+        sceKernelDeleteSema(g_mgrIb2Ctrl.sema);
+        g_mgrIb2Ctrl.sema = 0;
     }
-    if (D_0000B708.evf != 0) {
-        sceKernelDeleteEventFlag(D_0000B708.evf);
-        D_0000B708.evf = 0;
+    if (g_mgrIb2Ctrl.evf != 0) {
+        sceKernelDeleteEventFlag(g_mgrIb2Ctrl.evf);
+        g_mgrIb2Ctrl.evf = 0;
     }
 }
 #endif
@@ -809,7 +809,7 @@ void func_00001BD8(u32 arg0, u32 arg1) {
     *(volatile u32 *)0xBE100080 = 3;
     *(volatile u32 *)0xBE100090 = 0x100;
     *(volatile u32 *)0xBE100094 = arg1;
-    sceKernelClearEventFlag(D_00009C68.evf, 0);
+    sceKernelClearEventFlag(g_mgrIb2Ctrl.evf, 0);
     *(volatile u32 *)0xBE100088 = arg0;
     __asm__ volatile("sync");
 }
@@ -1018,27 +1018,27 @@ void func_000023F4(void) {
 
     n = 0;
     for (i = 0; i < 4; i++) {
-        D_00009C8C[n].offset = i << 6;
-        D_00009C8C[n].type = 0;
+        g_mgrKeyRegs[n].offset = i << 6;
+        g_mgrKeyRegs[n].type = 0;
         D_00009C7C[i] = n;
-        D_00009C8C[n].flags = 0;
-        D_00009C8C[n].slot = &D_00009C7C[i];
+        g_mgrKeyRegs[n].flags = 0;
+        g_mgrKeyRegs[n].slot = &D_00009C7C[i];
         n++;
     }
     for (i = 0; i < 8; i++) {
-        D_00009C8C[n].type = 1;
-        D_00009C8C[n].offset = i << 10;
+        g_mgrKeyRegs[n].type = 1;
+        g_mgrKeyRegs[n].offset = i << 10;
         D_00009C80[i] = n;
-        D_00009C8C[n].flags = 0;
-        D_00009C8C[n].slot = &D_00009C80[i];
+        g_mgrKeyRegs[n].flags = 0;
+        g_mgrKeyRegs[n].slot = &D_00009C80[i];
         n++;
     }
     for (i = 0; i < 2; i++) {
-        D_00009C8C[n].type = 2;
-        D_00009C8C[n].offset = i << 4;
+        g_mgrKeyRegs[n].type = 2;
+        g_mgrKeyRegs[n].offset = i << 4;
         D_00009C88[i] = n;
-        D_00009C8C[n].flags = 0;
-        D_00009C8C[n].slot = &D_00009C88[i];
+        g_mgrKeyRegs[n].flags = 0;
+        g_mgrKeyRegs[n].slot = &D_00009C88[i];
         n++;
     }
     D_00009550 = sceMgrAllocKeyReg(0);
@@ -1054,7 +1054,7 @@ void func_00002588(void) {
     s32 i;
 
     for (i = 0; i < 14; i++) {
-        if (D_00009C8C[i].flags & 1) {
+        if (g_mgrKeyRegs[i].flags & 1) {
             sceMgrFreeKeyReg(i);
         }
     }
@@ -1093,8 +1093,8 @@ s32 sceMgrAllocKeyReg(s32 type) {
     intr = sceKernelCpuSuspendIntr();
     for (i = 0; i < count; i++) {
         id = pool[i];
-        if (!(D_00009C8C[id].flags & 1)) {
-            D_00009C8C[id].flags |= 1;
+        if (!(g_mgrKeyRegs[id].flags & 1)) {
+            g_mgrKeyRegs[id].flags |= 1;
             sceKernelCpuResumeIntr(intr);
             return id;
         }
@@ -1111,10 +1111,10 @@ s32 sceMgrFreeKeyReg(s32 id) {
     if (id >= 14) {
         return 0x80501006;
     }
-    if (!(D_00009C8C[id].flags & 1)) {
+    if (!(g_mgrKeyRegs[id].flags & 1)) {
         return 0x80501006;
     }
-    D_00009C8C[id].flags &= ~1;
+    g_mgrKeyRegs[id].flags &= ~1;
     return 0;
 }
 #else
@@ -1126,10 +1126,10 @@ s32 func_00002748(s32 id) {
     if (id >= 14) {
         return 0x80501006;
     }
-    if (!(D_00009C8C[id].flags & 1)) {
+    if (!(g_mgrKeyRegs[id].flags & 1)) {
         return 0x80501006;
     }
-    return D_00009C8C[id].offset;
+    return g_mgrKeyRegs[id].offset;
 }
 #else
 INCLUDE_ASM("nonmatchings/mgr", func_00002748);
@@ -1946,9 +1946,9 @@ s32 func_000059BC(s32 err) {
 INCLUDE_ASM("nonmatchings/mgr", func_00004180);
 
 s32 func_00005B88(void) {
-    if (D_0000AFF8.fd >= 0) {
-        sceIoClose(D_0000AFF8.fd);
-        D_0000AFF8.fd = -1;
+    if (g_mgrMsCtrl.fd >= 0) {
+        sceIoClose(g_mgrMsCtrl.fd);
+        g_mgrMsCtrl.fd = -1;
     }
     return 0;
 }
@@ -2197,9 +2197,9 @@ s32 func_000059BC(s32 err) {
 INCLUDE_ASM("nonmatchings/mgr", func_000059F8);
 
 s32 func_00005B88(void) {
-    if (D_0000AFF8.fd >= 0) {
-        sceIoClose(D_0000AFF8.fd);
-        D_0000AFF8.fd = -1;
+    if (g_mgrMsCtrl.fd >= 0) {
+        sceIoClose(g_mgrMsCtrl.fd);
+        g_mgrMsCtrl.fd = -1;
     }
     return 0;
 }
@@ -2220,21 +2220,21 @@ s32 sceMgrMSInit(void) {
     s32 state = sceKernelSuspendDispatchThread();
     s32 ret;
 
-    if (D_0000AFF8.initCount > 0) {
-        D_0000AFF8.initCount++;
+    if (g_mgrMsCtrl.initCount > 0) {
+        g_mgrMsCtrl.initCount++;
         sceKernelResumeDispatchThread(state);
         return 0;
     }
-    if (D_0000AFF8.sema <= 0) {
+    if (g_mgrMsCtrl.sema <= 0) {
         ret = sceKernelCreateSema("SceMgrMsDrv", 0x100, 1, 1, NULL);
         if (ret < 0) {
             sceKernelResumeDispatchThread(state);
             return ret;
         }
-        D_0000AFF8.sema = ret;
+        g_mgrMsCtrl.sema = ret;
     }
-    D_0000AFF8.initCount = 1;
-    D_0000AFF8.unkC = 0;
+    g_mgrMsCtrl.initCount = 1;
+    g_mgrMsCtrl.unkC = 0;
     sceKernelResumeDispatchThread(state);
     return 0;
 }
@@ -2254,21 +2254,21 @@ s32 sceMgrMSReset(void) {
 #if FW_VERSION < 152
 void func_00005F7C(void) {
     func_00005B88();
-    if (D_0000AFF8.sema > 0) {
-        sceKernelDeleteSema(D_0000AFF8.sema);
-        D_0000AFF8.sema = -1;
+    if (g_mgrMsCtrl.sema > 0) {
+        sceKernelDeleteSema(g_mgrMsCtrl.sema);
+        g_mgrMsCtrl.sema = -1;
     }
-    D_0000AFF8.initCount = 0;
+    g_mgrMsCtrl.initCount = 0;
 }
 #else
 void func_00005F7C(void) {
-    func_00007644(D_0000AFF8.fd);
+    func_00007644(g_mgrMsCtrl.fd);
     func_00005B88();
-    if (D_0000AFF8.sema > 0) {
-        sceKernelDeleteSema(D_0000AFF8.sema);
-        D_0000AFF8.sema = -1;
+    if (g_mgrMsCtrl.sema > 0) {
+        sceKernelDeleteSema(g_mgrMsCtrl.sema);
+        g_mgrMsCtrl.sema = -1;
     }
-    D_0000AFF8.initCount = 0;
+    g_mgrMsCtrl.initCount = 0;
 }
 #endif
 
@@ -2278,8 +2278,8 @@ s32 sceMgrMSEnd(void) {
     if (ret < 0) {
         return ret;
     }
-    if (D_0000AFF8.initCount >= 2) {
-        D_0000AFF8.initCount--;
+    if (g_mgrMsCtrl.initCount >= 2) {
+        g_mgrMsCtrl.initCount--;
         func_0000608C();
         return 0;
     }
@@ -2289,7 +2289,7 @@ s32 sceMgrMSEnd(void) {
 
 #if FW_VERSION < 152
 s32 func_00006030(void) {
-    s32 ret = sceKernelWaitSema(D_0000AFF8.sema, 1, NULL);
+    s32 ret = sceKernelWaitSema(g_mgrMsCtrl.sema, 1, NULL);
 
     if (ret == 0x80020199) {
         return 0x80501001;
@@ -2531,7 +2531,7 @@ s32 sceMgrMSDeauth(s32 arg0) {
         var_s1 = func_00007644(arg0);
         if (var_s1 >= 0) {
             var_s1 = 0;
-            D_0000AFF8.unkC &= ~0x208;
+            g_mgrMsCtrl.unkC &= ~0x208;
         }
         func_0000608C();
     }
@@ -2550,7 +2550,7 @@ s32 sceMgrMSDeauth(s32 arg0) {
         var_s1 = func_00007644(arg0);
         if (var_s1 >= 0) {
             var_s1 = 0;
-            D_0000AFF8.unkC &= ~8;
+            g_mgrMsCtrl.unkC &= ~8;
         }
         func_0000608C();
     }
@@ -2569,7 +2569,7 @@ s32 sceMgrMSDeauth(s32 arg0) {
         var_s1 = func_00007644(arg0);
         if (var_s1 >= 0) {
             var_s1 = 0;
-            D_0000AFF8.unkC = (s32) (D_0000AFF8.unkC & ~0x208);
+            g_mgrMsCtrl.unkC = (s32) (g_mgrMsCtrl.unkC & ~0x208);
         }
         func_0000608C();
     }
