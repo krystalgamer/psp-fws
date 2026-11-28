@@ -555,7 +555,60 @@ end:
 }
 #endif
 
-#if FW_VERSION >= 260
+#if FW_VERSION == 260
+s32 sceNetAdhocPdpSend(s32 id, const SceNetEtherAddr *daddr, u16 dport, const void *data, s32 len, u32 timeout, s32 nonblock) {
+    SceNetAdhocWaiter *ti;
+    SceNetAdhocWaiter *w;
+    SceNetAdhocDesc *d;
+    s32 s;
+    s32 ret;
+
+    if (sceKernelCheckThreadStack() < 0x7C0)
+        return 0x80410005;
+    if (daddr == NULL || (nonblock & ~1))
+        return 0x80410711;
+    ti = _sce_pspnet_thread_enter(&ret);
+    if (ti == NULL)
+        return ret;
+    s = _sce_pspnet_spllock();
+    if (s < 0) {
+        ret = s;
+        goto end;
+    }
+    if (g_adhocInit == 0) {
+        ret = 0x80410712;
+        goto end;
+    }
+    d = func_00000E90(1, id);
+    if (d == NULL) {
+        ret = 0x80410701;
+        goto end;
+    }
+    ti->next = d->waiters;
+    d->waiters = ti;
+    ret = func_000016B4(d, daddr, dport, data, len, timeout, nonblock);
+    if (d->waiters == ti) {
+        d->waiters = ti->next;
+    } else {
+        for (w = d->waiters; w->next != ti; w = w->next)
+            ;
+        w->next = w->next->next;
+    }
+    if (d->flags & 1) {
+        if (d->waiters == NULL) {
+            func_00002CD4(d);
+            func_00000FFC(d);
+        }
+        ret = 0x80410707;
+    }
+end:
+    _sce_pspnet_splunlock(s);
+    _sce_pspnet_thread_leave(ti, 0);
+    return ret;
+}
+#endif
+
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", sceNetAdhocPdpSend);
 #endif
 
@@ -742,7 +795,52 @@ end:
 #endif
 
 #if FW_VERSION >= 260 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_0000215C);
+s32 func_0000215C(s32 id, SceNetEtherAddr *addr, u16 *port, void *buf, s32 *len, u32 timeout, s32 nonblock, void *rfinfo) {
+    SceNetAdhocWaiter *ti;
+    SceNetAdhocWaiter *w;
+    SceNetAdhocDesc *d;
+    s32 s;
+    s32 ret;
+
+    ti = _sce_pspnet_thread_enter(&ret);
+    if (ti == NULL)
+        return ret;
+    s = _sce_pspnet_spllock();
+    if (s < 0) {
+        ret = s;
+        goto end;
+    }
+    if (g_adhocInit == 0) {
+        ret = 0x80410712;
+        goto end;
+    }
+    d = func_00000E90(1, id);
+    if (d == NULL) {
+        ret = 0x80410701;
+        goto end;
+    }
+    ti->next = d->waiters;
+    d->waiters = ti;
+    ret = func_00001B90(d, addr, port, buf, len, timeout, nonblock, rfinfo);
+    if (d->waiters == ti) {
+        d->waiters = ti->next;
+    } else {
+        for (w = d->waiters; w->next != ti; w = w->next)
+            ;
+        w->next = w->next->next;
+    }
+    if (d->flags & 1) {
+        if (d->waiters == NULL) {
+            func_00002CD4(d);
+            func_00000FFC(d);
+        }
+        ret = 0x80410707;
+    }
+end:
+    _sce_pspnet_splunlock(s);
+    _sce_pspnet_thread_leave(ti, 0);
+    return ret;
+}
 #endif
 
 #if FW_VERSION < 201
@@ -1157,7 +1255,60 @@ end:
 }
 #endif
 
-#if FW_VERSION >= 260
+#if FW_VERSION == 260
+s32 sceNetAdhocPtpConnect(s32 id, u32 timeout, s32 nonblock) {
+    SceNetAdhocWaiter *ti;
+    SceNetAdhocWaiter *w;
+    SceNetAdhocDesc *d;
+    s32 s;
+    s32 ret;
+
+    if (sceKernelCheckThreadStack() < 0x7D0)
+        return 0x80410005;
+    if (nonblock & ~1)
+        return 0x80410711;
+    ti = _sce_pspnet_thread_enter(&ret);
+    if (ti == NULL)
+        return ret;
+    s = _sce_pspnet_spllock();
+    if (s < 0) {
+        ret = s;
+        goto end;
+    }
+    if (g_adhocInit == 0) {
+        ret = 0x80410712;
+        goto end;
+    }
+    d = func_00000E90(2, id);
+    if (d == NULL) {
+        ret = 0x80410701;
+        goto end;
+    }
+    ti->next = d->waiters;
+    d->waiters = ti;
+    ret = func_00003A34(d, timeout, nonblock);
+    if (d->waiters == ti) {
+        d->waiters = ti->next;
+    } else {
+        for (w = d->waiters; w->next != ti; w = w->next)
+            ;
+        w->next = w->next->next;
+    }
+    if (d->flags & 1) {
+        if (d->waiters == NULL) {
+            func_00004AE4(d);
+            func_00000FFC(d);
+        }
+        ret = 0x80410707;
+    }
+end:
+    _sce_pspnet_splunlock(s);
+    _sce_pspnet_thread_leave(ti, 0);
+    return ret;
+}
+#endif
+
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", sceNetAdhocPtpConnect);
 #endif
 
@@ -1314,7 +1465,60 @@ end:
 }
 #endif
 
-#if FW_VERSION >= 260
+#if FW_VERSION == 260
+s32 sceNetAdhocPtpAccept(s32 id, SceNetEtherAddr *addr, u16 *port, u32 timeout, s32 nonblock) {
+    SceNetAdhocWaiter *ti;
+    SceNetAdhocWaiter *w;
+    SceNetAdhocDesc *d;
+    s32 s;
+    s32 ret;
+
+    if (sceKernelCheckThreadStack() < 0x7D0)
+        return 0x80410005;
+    if (nonblock & ~1)
+        return 0x80410711;
+    ti = _sce_pspnet_thread_enter(&ret);
+    if (ti == NULL)
+        return ret;
+    s = _sce_pspnet_spllock();
+    if (s < 0) {
+        ret = s;
+        goto end;
+    }
+    if (g_adhocInit == 0) {
+        ret = 0x80410712;
+        goto end;
+    }
+    d = func_00000E90(2, id);
+    if (d == NULL) {
+        ret = 0x80410701;
+        goto end;
+    }
+    ti->next = d->waiters;
+    d->waiters = ti;
+    ret = func_00003C00(d, addr, port, timeout, nonblock);
+    if (d->waiters == ti) {
+        d->waiters = ti->next;
+    } else {
+        for (w = d->waiters; w->next != ti; w = w->next)
+            ;
+        w->next = w->next->next;
+    }
+    if (d->flags & 1) {
+        if (d->waiters == NULL) {
+            func_00004AE4(d);
+            func_00000FFC(d);
+        }
+        ret = 0x80410707;
+    }
+end:
+    _sce_pspnet_splunlock(s);
+    _sce_pspnet_thread_leave(ti, 0);
+    return ret;
+}
+#endif
+
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", sceNetAdhocPtpAccept);
 #endif
 
@@ -1451,7 +1655,64 @@ end:
 }
 #endif
 
-#if FW_VERSION >= 260
+#if FW_VERSION == 260
+s32 sceNetAdhocPtpSend(s32 id, const void *data, s32 *len, u32 timeout, s32 nonblock) {
+    SceNetAdhocWaiter *ti;
+    SceNetAdhocWaiter *w;
+    SceNetAdhocDesc *d;
+    s32 s;
+    s32 ret;
+
+    if (sceKernelCheckThreadStack() < 0x7D0)
+        return 0x80410005;
+    if (len == NULL || (nonblock & ~1))
+        return 0x80410711;
+    ti = _sce_pspnet_thread_enter(&ret);
+    if (ti == NULL)
+        return ret;
+    s = _sce_pspnet_spllock();
+    if (s < 0) {
+        ret = s;
+        goto end;
+    }
+    if (g_adhocInit == 0) {
+        ret = 0x80410712;
+        goto end;
+    }
+    d = func_00000E90(2, id);
+    if (d == NULL) {
+        ret = 0x80410701;
+        goto end;
+    }
+    if ((d->flags & 0xC000) == 0) {
+        ret = 0x8041070B;
+        goto end;
+    }
+    ti->next = d->waiters;
+    d->waiters = ti;
+    ret = func_00004058(d, data, len, timeout, nonblock);
+    if (d->waiters == ti) {
+        d->waiters = ti->next;
+    } else {
+        for (w = d->waiters; w->next != ti; w = w->next)
+            ;
+        w->next = w->next->next;
+    }
+    if (d->flags & 1) {
+        if (d->waiters == NULL) {
+            func_00004AE4(d);
+            func_00000FFC(d);
+        }
+        ret = 0x80410707;
+    }
+end:
+    _sce_pspnet_splunlock(s);
+    _sce_pspnet_thread_leave(ti, 0);
+    return ret;
+}
+#endif
+
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", sceNetAdhocPtpSend);
 #endif
 
@@ -1588,7 +1849,64 @@ end:
 }
 #endif
 
-#if FW_VERSION >= 260
+#if FW_VERSION == 260
+s32 sceNetAdhocPtpRecv(s32 id, void *buf, s32 *len, u32 timeout, s32 nonblock) {
+    SceNetAdhocWaiter *ti;
+    SceNetAdhocWaiter *w;
+    SceNetAdhocDesc *d;
+    s32 s;
+    s32 ret;
+
+    if (sceKernelCheckThreadStack() < 0x7D0)
+        return 0x80410005;
+    if (buf == NULL || len == NULL || (nonblock & ~1))
+        return 0x80410711;
+    ti = _sce_pspnet_thread_enter(&ret);
+    if (ti == NULL)
+        return ret;
+    s = _sce_pspnet_spllock();
+    if (s < 0) {
+        ret = s;
+        goto end;
+    }
+    if (g_adhocInit == 0) {
+        ret = 0x80410712;
+        goto end;
+    }
+    d = func_00000E90(2, id);
+    if (d == NULL) {
+        ret = 0x80410701;
+        goto end;
+    }
+    if ((d->flags & 0xC000) == 0) {
+        ret = 0x8041070B;
+        goto end;
+    }
+    ti->next = d->waiters;
+    d->waiters = ti;
+    ret = func_00004408(d, buf, len, timeout, nonblock);
+    if (d->waiters == ti) {
+        d->waiters = ti->next;
+    } else {
+        for (w = d->waiters; w->next != ti; w = w->next)
+            ;
+        w->next = w->next->next;
+    }
+    if (d->flags & 1) {
+        if (d->waiters == NULL) {
+            func_00004AE4(d);
+            func_00000FFC(d);
+        }
+        ret = 0x80410707;
+    }
+end:
+    _sce_pspnet_splunlock(s);
+    _sce_pspnet_thread_leave(ti, 0);
+    return ret;
+}
+#endif
+
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", sceNetAdhocPtpRecv);
 #endif
 
@@ -1723,7 +2041,64 @@ end:
 }
 #endif
 
-#if FW_VERSION >= 260
+#if FW_VERSION == 260
+s32 sceNetAdhocPtpFlush(s32 id, u32 timeout, s32 nonblock) {
+    SceNetAdhocWaiter *ti;
+    SceNetAdhocWaiter *w;
+    SceNetAdhocDesc *d;
+    s32 s;
+    s32 ret;
+
+    if (sceKernelCheckThreadStack() < 0x7D0)
+        return 0x80410005;
+    if (nonblock & ~1)
+        return 0x80410711;
+    ti = _sce_pspnet_thread_enter(&ret);
+    if (ti == NULL)
+        return ret;
+    s = _sce_pspnet_spllock();
+    if (s < 0) {
+        ret = s;
+        goto end;
+    }
+    if (g_adhocInit == 0) {
+        ret = 0x80410712;
+        goto end;
+    }
+    d = func_00000E90(2, id);
+    if (d == NULL) {
+        ret = 0x80410701;
+        goto end;
+    }
+    if ((d->flags & 0xC000) == 0) {
+        ret = 0x8041070B;
+        goto end;
+    }
+    ti->next = d->waiters;
+    d->waiters = ti;
+    ret = func_000049E4(d, timeout, nonblock);
+    if (d->waiters == ti) {
+        d->waiters = ti->next;
+    } else {
+        for (w = d->waiters; w->next != ti; w = w->next)
+            ;
+        w->next = w->next->next;
+    }
+    if (d->flags & 1) {
+        if (d->waiters == NULL) {
+            func_00004AE4(d);
+            func_00000FFC(d);
+        }
+        ret = 0x80410707;
+    }
+end:
+    _sce_pspnet_splunlock(s);
+    _sce_pspnet_thread_leave(ti, 0);
+    return ret;
+}
+#endif
+
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", sceNetAdhocPtpFlush);
 #endif
 
