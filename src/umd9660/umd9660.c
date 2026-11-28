@@ -2038,11 +2038,11 @@ INCLUDE_ASM("nonmatchings/umd9660", func_000042A0);
 INCLUDE_ASM("nonmatchings/umd9660", func_00003D24);
 #endif
 
-#if FW_VERSION < 103
+#if FW_VERSION < 201
 s32 umd9660_release_devfd(SceIoIob *iob) {
     s32 ret = 0;
     s32 i;
-    UMD9660_ASSERT(iob != NULL, "Assertion failed at %s:%s:%04d\n", "umdif.c", "umd9660_release_devfd", 0x2E3);
+    UMD9660_ASSERT(iob != NULL, "Assertion failed at %s:%s:%04d\n", "umdif.c", "umd9660_release_devfd", UMD9660_V(0x2E3, 0x2E3, 0x2F0, 0x30F, 0x30E));
     sceKernelWaitSema(D_00005D90.semaId, 1, NULL);
     if (iob == NULL) {
         sceKernelSignalSema(D_00005D90.semaId, 1);
@@ -2063,10 +2063,6 @@ s32 umd9660_release_devfd(SceIoIob *iob) {
     sceKernelSignalSema(D_00005D90.semaId, 1);
     return ret;
 }
-#endif
-
-#if FW_VERSION >= 103 && FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/umd9660", umd9660_release_devfd);
 #endif
 
 #if FW_VERSION >= 282
