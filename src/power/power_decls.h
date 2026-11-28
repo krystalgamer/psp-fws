@@ -288,6 +288,7 @@ void _scePowerPowerSwCallback(s32 enable);
 s32 _scePowerUnlock(s32 lockType, s32 isUserLock);
 s32 _scePowerVblankInterrupt(s32 subIntr, void *arg);
 s32 func_000012B4(s32, s32);
+s32 func_000017B0(s32 lockType, s32 isUserLock);
 s32 func_00001EF4(s32, s32);
 s32 func_00001FEC(s32, s32);
 s32 func_0000250C(void);

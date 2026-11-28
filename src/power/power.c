@@ -541,7 +541,9 @@ INCLUDE_ASM("nonmatchings/power", scePower_driver_D6D016EF);
 
 INCLUDE_ASM("nonmatchings/power", scePower_CA3D34C1);
 
-INCLUDE_ASM("nonmatchings/power", scePower_driver_CA3D34C1);
+void scePower_driver_CA3D34C1(s32 arg0) {
+    func_000017B0(arg0, 0);
+}
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
@@ -725,17 +727,11 @@ s32 scePowerRequestSuspendTouchAndGo(void) {
 INCLUDE_ASM("nonmatchings/power", scePowerRequestColdReset);
 #endif
 
-#if FW_VERSION >= 102 && FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/power", scePowerGetResumeCount);
-#endif
-
-#if FW_VERSION == 100 || (FW_VERSION >= 150 && FW_VERSION < 282)
+#if FW_VERSION < 282
 s32 scePowerGetResumeCount(void) {
     return g_PowerSwitchV.resumeCount;
 }
-#endif
 
-#if FW_VERSION < 282
 s32 scePowerSetWakeupCondition(s32 arg0) {
     g_PowerSwitch.wakeupCondition = arg0;
     return 0;
@@ -1069,9 +1065,7 @@ INCLUDE_ASM("nonmatchings/power", _scePowerFreqInit);
 INCLUDE_ASM("nonmatchings/power", func_00002FA0);
 #endif
 
-#if FW_VERSION >= 102
-INCLUDE_ASM("nonmatchings/power", scePowerSetCpuClockFrequency);
-#else
+#if FW_VERSION < 150
 s32 scePowerSetCpuClockFrequency(s32 freq) {
     s32 intr;
     u32 oldK1;
@@ -1092,6 +1086,8 @@ s32 scePowerSetCpuClockFrequency(s32 freq) {
     setK1(oldK1);
     return 0;
 }
+#else
+INCLUDE_ASM("nonmatchings/power", scePowerSetCpuClockFrequency);
 #endif
 
 #if FW_VERSION >= 102
@@ -1308,34 +1304,34 @@ s32 scePowerGetDdrStrength(s32 *arg0, s32 *arg1) {
 INCLUDE_ASM("nonmatchings/power", scePowerSetDdrStrength);
 #endif
 
-#if FW_VERSION >= 102
-INCLUDE_ASM("nonmatchings/power", scePowerLimitScCpuClock);
-#else
+#if FW_VERSION < 150
 s32 scePowerLimitScCpuClock(s32 lower, s32 upper) {
     g_PowerFreq.scCpuClockLowerLimit = lower;
     g_PowerFreq.scCpuClockUpperLimit = upper;
     return 0;
 }
+#else
+INCLUDE_ASM("nonmatchings/power", scePowerLimitScCpuClock);
 #endif
 
-#if FW_VERSION >= 102
-INCLUDE_ASM("nonmatchings/power", scePowerLimitScBusClock);
-#else
+#if FW_VERSION < 150
 s32 scePowerLimitScBusClock(s32 lower, s32 upper) {
     g_PowerFreq.scBusClockLowerLimit = lower;
     g_PowerFreq.scBusClockUpperLimit = upper;
     return 0;
 }
+#else
+INCLUDE_ASM("nonmatchings/power", scePowerLimitScBusClock);
 #endif
 
-#if FW_VERSION >= 102
-INCLUDE_ASM("nonmatchings/power", scePowerLimitPllClock);
-#else
+#if FW_VERSION < 150
 s32 scePowerLimitPllClock(s32 lower, s32 upper) {
     g_PowerFreq.pllClockLowerLimit = lower;
     g_PowerFreq.pllClockUpperLimit = upper;
     return 0;
 }
+#else
+INCLUDE_ASM("nonmatchings/power", scePowerLimitPllClock);
 #endif
 
 #if FW_VERSION >= 102 && FW_VERSION < 150
@@ -1560,11 +1556,7 @@ s32 scePowerGetBatteryElec(s32 *elec) {
 }
 #endif
 
-#if FW_VERSION >= 102 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/power", scePowerGetInnerTemp);
-#endif
-
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 s32 scePowerGetInnerTemp(float *temp) {
     s32 ret;
     u32 oldK1 = shiftK1();
@@ -1580,6 +1572,10 @@ s32 scePowerGetInnerTemp(float *temp) {
     setK1(oldK1);
     return ret;
 }
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 282
+INCLUDE_ASM("nonmatchings/power", scePowerGetInnerTemp);
 #endif
 
 #if FW_VERSION >= 102 && FW_VERSION < 150
