@@ -703,11 +703,7 @@ void *sceKernelQueryLoadCoreCB(void) {
 }
 #endif
 
-#if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/loadcore", sceKernelQueryLoadCoreCB);
-#endif
-
-#if FW_VERSION >= 150 && FW_VERSION < 201
+#if FW_VERSION >= 150 && FW_VERSION < 282
 void *sceKernelQueryLoadCoreCB(void) {
     return &D_00008C40;
 }
