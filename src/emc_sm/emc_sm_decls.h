@@ -55,9 +55,9 @@ typedef struct {
 
 /* NAND chip geometry (D_00002FD0); filled by sceNandDetectChip */
 typedef struct {
-    u32 pageSize;      /* 0x0 */
-    u32 pagesPerBlock; /* 0x4 */
-    u32 totalBlocks;   /* 0x8 */
+    s32 pageSize;      /* 0x0 */
+    s32 pagesPerBlock; /* 0x4 */
+    s32 totalBlocks;   /* 0x8 */
     u8 makerId;        /* 0xC */
     u8 deviceId;       /* 0xD */
     u8 padE[2];
@@ -73,15 +73,32 @@ typedef struct {
 } SceNandChipEntry;
 typedef char chk_SceNandChipEntry[(sizeof(SceNandChipEntry) == 0xC) ? 1 : -1];
 
+/* spare area without the user ECC (sceNandReadPages/WritePages "spare" buffers) */
+typedef struct {
+    u8 blockFmt;    /* 0x0 */
+    u8 blockStat;   /* 0x1: 0xFF = good block */
+    u16 lbn;        /* 0x2 */
+    u32 id;         /* 0x4 */
+    u8 spareEcc[2]; /* 0x8 */
+    u8 reserved[2]; /* 0xA */
+} SceNandSpareExtra;
+/* raw spare area (sceNandReadPagesRawAll) */
+typedef struct {
+    u8 userEcc[3];  /* 0x0 */
+    u8 reserved0;   /* 0x3 */
+    SceNandSpareExtra extra; /* 0x4 */
+} SceNandSpare;
+typedef char chk_SceNandSpare[(sizeof(SceNandSpare) == 0x10) ? 1 : -1];
+
 extern const SceNandChipEntry D_00002860[17];
 extern SceSysEventHandler D_00002930;
 extern SceNandState D_00002970;
 extern u8 D_000029A8[0x200];
-extern u8 D_00002BA8[0xC];
+extern SceNandSpareExtra D_00002BA8;
 extern u8 D_00002BB4[0x200];
 extern u8 D_00002C90[0x200];
-extern u8 D_00002DB4[0xC];
-extern u8 D_00002E90[0x10];
+extern SceNandSpareExtra D_00002DB4;
+extern SceNandSpare D_00002E90;
 extern SceNandInfo D_00002FD0;
 
 s32 Kprintf(const char *fmt, ...);

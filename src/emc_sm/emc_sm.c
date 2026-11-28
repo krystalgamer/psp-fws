@@ -378,7 +378,34 @@ s32 sceNandReadBlockWithRetry(u32 ppn, void *user, void *spare) {
 INCLUDE_ASM("nonmatchings/emc_sm", sceNandReadBlockWithRetry);
 #endif
 
+#if FW_VERSION < 201
+s32 sceNandVerifyBlockWithRetry(u32 ppn, void *user, void *spare) {
+    s32 i;
+    s32 retry;
+    s32 ret;
+
+    for (i = 0; i < D_00002FD0.pagesPerBlock; i++) {
+        retry = 0;
+        do {
+            ret = sceNandReadPages(ppn + i, D_000029A8, &D_00002BA8, 1);
+            if (ret < 0) {
+                if (++retry >= 4) {
+                    return ret;
+                }
+            }
+            if (user != NULL && memcmp(D_000029A8, (u8 *)user + D_00002FD0.pageSize * i, D_00002FD0.pageSize) != 0) {
+                return 0x80230006;
+            }
+            if (spare != NULL && memcmp(&D_00002BA8, (u8 *)spare + i * 12, 8) != 0) {
+                return 0x80230006;
+            }
+        } while (ret < 0);
+    }
+    return 0;
+}
+#else
 INCLUDE_ASM("nonmatchings/emc_sm", sceNandVerifyBlockWithRetry);
+#endif
 
 #if FW_VERSION == 100
 s32 sceNandEraseBlockWithRetry(u32 ppn) {
@@ -402,15 +429,98 @@ INCLUDE_ASM("nonmatchings/emc_sm", sceNandEraseBlockWithRetry);
 
 INCLUDE_ASM("nonmatchings/emc_sm", sceNandIsBadBlock);
 
+#if FW_VERSION < 201
+s32 sceNandDoMarkAsBadBlock(u32 ppn) {
+    s32 i;
+    s32 retry;
+
+    if (ppn % D_00002FD0.pagesPerBlock != 0) {
+        return 0x80230008;
+    }
+    memset(D_00002BB4, 0, 0x200);
+    memset(&D_00002DB4, 0xFF, sizeof(D_00002DB4));
+    D_00002DB4.blockStat = 0xF0;
+    retry = 0;
+    for (i = 0; i < D_00002FD0.pagesPerBlock; i++) {
+        do {
+            if (sceNandWritePages(ppn + i, D_00002BB4, &D_00002DB4, 1) >= 0) {
+                break;
+            }
+            retry++;
+        } while (retry < 4);
+    }
+    return 0;
+}
+#else
 INCLUDE_ASM("nonmatchings/emc_sm", sceNandDoMarkAsBadBlock);
+#endif
 
 INCLUDE_ASM("nonmatchings/emc_sm", sceNandDumpWearBBMSize);
 
+#if FW_VERSION < 201
+s32 sceNandCountChipMakersBBM(void) {
+    s32 i;
+    s32 count = 0;
+    s32 ret;
+
+    for (i = 0; i < D_00002FD0.totalBlocks; i++) {
+        ret = sceNandDetectChipMakersBBM(i * D_00002FD0.pagesPerBlock);
+        if (ret == 1) {
+            count++;
+        }
+        if (ret < 0) {
+            return ret;
+        }
+    }
+    return count;
+}
+#else
 INCLUDE_ASM("nonmatchings/emc_sm", sceNandCountChipMakersBBM);
+#endif
 
+#if FW_VERSION < 152
+s32 sceNandDetectChipMakersBBM(u32 ppn) {
+    s32 i;
+    s32 ret;
+    s32 bad = 0;
+    SceNandSpare *sp = &D_00002E90;
+
+    for (i = 0; i < 4; i++) {
+        ret = sceNandReadPagesRawAll(ppn, D_00002C90, &D_00002E90, 1);
+        if (ret >= 0) {
+            if (sp->extra.blockStat != 0xFF) {
+                bad = 1;
+            }
+            return bad != 0;
+        }
+    }
+    return ret;
+}
+#else
 INCLUDE_ASM("nonmatchings/emc_sm", sceNandDetectChipMakersBBM);
+#endif
 
+#if FW_VERSION < 201
+s32 sceNandEraseAllBlock(void) {
+    s32 i;
+    s32 count = 0;
+    s32 ret;
+
+    for (i = 0; i < D_00002FD0.totalBlocks; i++) {
+        ret = sceNandEraseBlockWithRetry(i * D_00002FD0.pagesPerBlock);
+        if (ret < 0) {
+            count++;
+        }
+        if (ret == 0x80230007) {
+            count = 0x80230007;
+            break;
+        }
+    }
+    return count;
+}
+#else
 INCLUDE_ASM("nonmatchings/emc_sm", sceNandEraseAllBlock);
+#endif
 
 INCLUDE_ASM("nonmatchings/emc_sm", sceNandTestBlock);
 
