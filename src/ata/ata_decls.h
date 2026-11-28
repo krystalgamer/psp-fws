@@ -20,13 +20,39 @@ typedef struct {
     s32 ahb2;
 } SceAtaAhbBlock;
 
-/* per-command completion state (caller's stack) */
+/* per-command completion state (caller's stack), drive->unk20 */
 typedef struct {
     u32 unk0;
-    u32 driveStat;
+    u32 driveStat;  /* 0x4 */
     u32 unk8;
-    u32 unkC;
+    void *buf;      /* 0xC: PIO data pointer (func_00000E8C mode 2) */
 } SceAtaCmdState;
+
+/* drive descriptor: g_ataDrive[2] (0x24 each) in 1.00-1.03, one 0x20-byte drive in 1.50 */
+typedef struct {
+    s8 driveId;               /* 0x00: -1 = not present */
+    s8 state;                 /* 0x01: 2 = ready (sceAtaCheckDeviceReady) */
+    u8 pad2[2];
+    u32 driveStat;            /* 0x04: sceAta{Set,Clear,Get}DriveStat */
+    u32 unk8;                 /* 0x08: 0xB0 / 0xC0 (func_000039AC) */
+    u32 protocol;             /* 0x0C: sceAtaExecCmd data phase: 1 none, 2 PIO in, 4 PIO out, 0x10, 0x20, 0x80 packet */
+#if FW_VERSION < 150
+    SceUID semaId;            /* 0x10 */
+    SceUID evfId;             /* 0x14 */
+#else
+    s32 unk10;                /* 0x10 (1.50: -1 at init; sema or event flag) */
+#endif
+    u32 byteLimit;            /* 0x18 (1.50: 0x14) */
+    /* the two command pointers are void * like SceAtaCmd.buf: storing buf must
+       reload them (alias set; func_00000E8C) */
+    void *cmd;                /* 0x1C (1.50: 0x18): SceAtaCmd *, caller's stack */
+    void *unk20;              /* 0x20 (1.50: 0x1C): SceAtaCmdState * */
+} SceAtaDrive;
+#if FW_VERSION < 150
+typedef char chk_SceAtaDrive[(sizeof(SceAtaDrive) == 0x24) ? 1 : -1];
+#elif FW_VERSION < 201
+typedef char chk_SceAtaDrive[(sizeof(SceAtaDrive) == 0x20) ? 1 : -1];
+#endif
 
 typedef s32 (*SceAtaIntrFunc)();
 typedef struct {
@@ -100,30 +126,6 @@ typedef struct {
 typedef char chk_SceAtaCmd[(sizeof(SceAtaCmd) == 0x20) ? 1 : -1];
 #endif
 
-/* drive descriptor: g_ataDrive[2] (0x24 each) in 1.00-1.03, one 0x20-byte drive in 1.50 */
-typedef struct {
-    s8 driveId;               /* 0x00: -1 = not present */
-    u8 unk1;
-    u8 pad2[2];
-    u32 driveStat;            /* 0x04: sceAta{Set,Clear,Get}DriveStat */
-    u32 unk8;
-    u32 protocol;             /* 0x0C: sceAtaExecCmd data phase: 1 none, 2 PIO in, 4 PIO out, 0x10, 0x20, 0x80 packet */
-#if FW_VERSION < 150
-    SceUID semaId;            /* 0x10 */
-    SceUID evfId;             /* 0x14 */
-#else
-    s32 unk10;                /* 0x10 (1.50: -1 at init; sema or event flag) */
-#endif
-    u32 byteLimit;            /* 0x18 (1.50: 0x14) */
-    SceAtaCmd *cmd;           /* 0x1C (1.50: 0x18): current command (caller's stack) */
-    void *unk20;              /* 0x20 (1.50: 0x1C) */
-} SceAtaDrive;
-#if FW_VERSION < 150
-typedef char chk_SceAtaDrive[(sizeof(SceAtaDrive) == 0x24) ? 1 : -1];
-#elif FW_VERSION < 201
-typedef char chk_SceAtaDrive[(sizeof(SceAtaDrive) == 0x20) ? 1 : -1];
-#endif
-
 struct Unk_func_0000277C_0 {
     u8 pad0[0x1C];
     void * unk1C;
@@ -168,16 +170,19 @@ extern M2C_UNK func_00003D3C;
 
 M2C_UNK Kprintf(M2C_UNK *, M2C_UNK *, M2C_UNK *);
 s32 func_00000000(s32);
+s32 func_00000280(void);
+s32 func_00000E8C(SceAtaDrive *drive, s32 mode, s32 size);
 s32 func_00001134(u32 id);
 void func_00001274(u32 arg0);
 s32 func_000012C8(void);
 void func_000012D4(s32 arg0);
+s32 func_0000171C(SceAtaDrive *drive);
 void func_00001810(void);
 s32 func_000018B8(s32 *flag);
 void func_00001ED8(s32 mode);
 void func_00001F14(s32 mode);
 void func_00001F5C(s32 mode);
-s32 func_00002074(SceAtaDrive *drive, u8 features, s8 a2, s8 a3, u32 a4, SceAtaCmd *cmd, s32 a6);
+s32 func_00002074(SceAtaDrive *drive, u8 features, s8 dev, s32 a3, u32 a4, SceAtaCmd *cmd, s32 a6);
 s32 func_000020F8(SceAtaDrive *drive, SceAtaCmd *cmd, void *buf);
 s32 func_00002120(void);
 s32 func_0000212C(void);
@@ -190,6 +195,7 @@ void func_00002500(s32 mode);
 void func_00002570(s32 mode);
 void func_000025E4(s32 mode);
 s32 func_0000277C(struct Unk_func_0000277C_0 *arg0, struct Unk_func_0000277C_1 *arg1, s32 arg2);
+void func_000029DC(u8 a0, u16 count, u8 a2, s8 dev, u8 a4, s32 mode, SceAtaCmd *cmd);
 s32 func_00003264(void);
 s32 func_000032C8(void);
 s32 func_000033D4(void);
@@ -198,11 +204,13 @@ s32 func_00003440(u32 no, SceAtaIntrFunc func, void *arg);
 s32 func_000034CC(void);
 s32 func_0000356C(s32 a0, s32 a1, s32 a2);
 s32 func_0000358C(s32 a0, s32 a1);
+s32 func_00003680(SceAtaDrive *drive, u8 type, s8 dev, s32 a3, SceAtaCmd *cmd, s32 a5);
 s32 func_000036FC(void);
 s32 func_00003704(void);
 s32 func_0000370C(void);
 s32 func_00003714(void);
 s32 func_0000371C(void);
+s32 func_000039AC(SceAtaDrive *drive, s32 a1, u8 *out);
 void func_00003C58(void);
 void func_00003CA0(u32 arg0);
 s32 func_00003CBC(u32 cmd, SceAtaTaskFile *tf);
@@ -222,7 +230,7 @@ u32 sceAtaAhbGetDDRSize(void);
 s32 sceAtaAhbGetDevStat(u32 *stat);
 s32 sceAtaAhbGetEventFlag(void);
 u32 sceAtaAhbGetIntrMask(void);
-void sceAtaAhbInit(void);
+s32 sceAtaAhbInit(void);
 u32 sceAtaAhbReadIntr(void);
 s32 sceAtaAhbSetAHBCtl(s32 a0, s32 a1, s32 a2);
 void sceAtaAhbSetAtaBlock(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5);
@@ -232,12 +240,14 @@ s32 sceAtaAhbSetMDMATiming(s32 mode, s32 arg);
 s32 sceAtaAhbSetPioCtl(s32 n, s32 a, s32 b);
 s32 sceAtaAhbSetPioTiming(s32 mode, s32 arg);
 s32 sceAtaAhbSetUDMATiming();
-void sceAtaAhbTerm(void);
+s32 sceAtaAhbTerm(void);
 s32 sceAtaBufferSelectSemaphore(u32 *stat);
+s32 sceAtaCheckDeviceReady(SceAtaDrive *drive);
 void sceAtaClearDriveStat(s32 arg0, s32 arg1);
 void sceAtaClearIntrStateFlag(s32 arg0);
 s32 sceAtaDisableClkIo(u32 flags);
 void sceAtaDisplayReqSense(void);
+s32 sceAtaDoSoftResetBit(void);
 s32 sceAtaEnableClkIo(u32 flags);
 s32 sceAtaExecCmd(SceAtaDrive *drive, u32 cmd, s32 protocol, u32 *args);
 s32 sceAtaExecDeviceResetCmd(SceAtaDrive *drive);
@@ -251,19 +261,25 @@ SceAtaDrive *sceAtaGetAtaDrive(u32 id);
 s32 sceAtaGetDriveStat(s32 arg0);
 s32 sceAtaGetIntrFlag(void);
 s32 sceAtaGetIntrStateFlag(void);
+s32 sceAtaInit(s32 clk);
 s32 sceAtaIsDvdDrive(void);
 s32 sceAtaIsNormalDriveStat(void);
 s32 sceAtaIsReadableDriveStat(void);
 s32 sceAtaIsUmdDrive(void);
+s32 sceAtaScanDevice(SceAtaDrive *drive);
+s32 sceAtaSelectDevice(s8 dev);
 s32 sceAtaSetBusErrorIntr(SceAtaIntrFunc func, void *arg);
 s32 sceAtaSetDescriptorTableIntr(SceAtaIntrFunc func, void *arg);
 s32 sceAtaSetDeviceIntr(SceAtaIntrFunc func, void *arg);
 void sceAtaSetDriveStat(s32 arg0, s32 arg1);
 void sceAtaSetIntrFlag(s32 arg0);
 void sceAtaSetIntrStateFlag(s32 arg0);
+s32 sceAtaSetupAtaBlock(void);
 SceAtaDrive *sceAtaStart(u32 id);
 s32 sceAtaStop(u32 flags);
 s32 sceAtaTerm(void);
+s32 sceAtaWaitBusBusy1(void);
+s32 sceAtaWaitBusBusy2(void);
 void sceAta_driver_4222D6F3(void);
 void sceAta_driver_4D225674(void);
 void sceAta_driver_638EEA14(SceAtaIntrFunc func);
@@ -277,6 +293,7 @@ s32 sceKernelCancelAlarm(s32);
 void sceKernelCpuResumeIntr(s32);
 s32 sceKernelCpuSuspendIntr(void);
 SceUID sceKernelCreateEventFlag(const char *name, s32 attr, s32 bits, void *opt);
+s32 sceKernelDelayThread(u32 usec);
 s32 sceKernelDeleteEventFlag(SceUID id);
 s32 sceKernelDeleteSema(SceUID id);
 s32 sceKernelDipsw(M2C_UNK);
