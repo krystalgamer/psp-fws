@@ -4767,7 +4767,77 @@ s32 sceKernelCancelAlarm(SceUID alarmid) {
     setK1(oldK1);
     return ret;
 }
-#else
+#endif
+
+#if FW_VERSION >= 270 && FW_VERSION < 282
+s32 sceKernelCancelAlarm(SceUID alarmid) {
+    SceSysmemUidCB *cb;
+    SceSysmemUidCB *uid;
+    u32 attr;
+    SceTimer *timer;
+    s32 ret;
+    s32 ok;
+    s32 intr;
+    void *ra = getRa();
+    u32 oldK1 = shiftK1Noreorder();
+
+    if (g_threadmanInfo.unk440 == alarmid) {
+        setK1(oldK1);
+        return 0x8002019F;
+    }
+    intr = sceKernelCpuSuspendIntr();
+    if (sceKernelGetUIDcontrolBlockWithType(alarmid, g_threadmanInfo.uidAlarmType, &uid) != 0) {
+        sceKernelCpuResumeIntr(intr);
+        setK1(oldK1);
+        return 0x8002019F;
+    }
+    cb = uid;
+    attr = cb->attr & 0x10;
+    if (!k1IsUserMode()) {
+        attr = 0x10;
+    }
+    if (attr == 0) {
+        sceKernelCpuResumeIntr(intr);
+        setK1(oldK1);
+        return 0x800200D1;
+    }
+    if (g_threadmanInfo.logHandler != NULL) {
+        g_threadmanInfo.logHandler(0x7A, ra, 1, alarmid);
+    }
+    cb = uid;
+    timer = UID_CB_TO_DATA(cb, g_threadmanInfo.uidTimerType, SceTimer);
+    if (timer->unk10 != 0) {
+        sceKernelCpuResumeIntr(intr);
+        setK1(oldK1);
+        return 0x8002019F;
+    }
+#if FW_VERSION >= 152
+    if (timer == g_threadmanInfo.timerCursor) {
+        g_threadmanInfo.timerCursor = timer->next;
+    }
+#endif
+    timer->next->prev = timer->prev;
+    timer->prev->next = timer->next;
+    timer->prev = timer;
+    timer->next = timer;
+    if (sceKernelIsIntrContext()) {
+        timer->unk10 = 1;
+        ret = deleteUIDDeferred(alarmid);
+    } else {
+        ret = sceKernelDeleteUID(alarmid);
+        ok = ret == 0;
+        THREADMAN_ASSERT(ok, D_00014F74, D_00014F2C, "sceKernelCancelAlarm", FW_VERSION < 150 ? 0x366 : FW_VERSION < 152 ? 0x372 : 0x380);
+    }
+    if (ret == 0) {
+        timerUpdate();
+    }
+    sceKernelCpuResumeIntr(intr);
+    setK1(oldK1);
+    return ret;
+}
+#endif
+
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/threadman", sceKernelCancelAlarm);
 #endif
 
@@ -4919,7 +4989,117 @@ s32 sceKernelDeleteVTimer(SceUID id) {
     setK1(oldK1);
     return 0;
 }
-#else
+#endif
+
+#if FW_VERSION >= 152 && FW_VERSION < 270
+s32 sceKernelDeleteVTimer(SceUID vtid) {
+    SceSysmemUidCB *cb;
+    SceSysmemUidCB *uid;
+    SceTimer *timer;
+    SceVTimer *vt;
+    s32 intr;
+    s32 ok;
+    void *ra = getRa();
+    u32 oldK1 = shiftK1Noreorder();
+
+    if (sceKernelIsIntrContext()) {
+        setK1(oldK1);
+        return 0x80020064;
+    }
+    intr = sceKernelCpuSuspendIntr();
+    if (sceKernelGetUIDcontrolBlockWithType(vtid, g_threadmanInfo.uidVTimerType, &uid) != 0) {
+        sceKernelCpuResumeIntr(intr);
+        setK1(oldK1);
+        return 0x800201BE;
+    }
+    cb = uid;
+    ok = k1IsUserMode() && !(cb->attr & 0x10);
+    if (ok) {
+        sceKernelCpuResumeIntr(intr);
+        setK1(oldK1);
+        return 0x800200D1;
+    }
+    if (g_threadmanInfo.logHandler != NULL) {
+        g_threadmanInfo.logHandler(0x75, ra, 1, vtid);
+    }
+    cb = uid;
+    vt = UID_CB_TO_DATA(cb, g_threadmanInfo.uidVTimerType, SceVTimer);
+    timer = UID_CB_TO_DATA(cb, g_threadmanInfo.uidTimerType, SceTimer);
+    if (vt->active != 0 && vt->handler != NULL) {
+        if (timer == g_threadmanInfo.timerCursor) {
+            g_threadmanInfo.timerCursor = timer->next;
+        }
+        timer->next->prev = timer->prev;
+        timer->prev->next = timer->next;
+        timer->prev = timer;
+        timer->next = timer;
+        timerUpdate();
+    }
+    ok = sceKernelDeleteUID(vtid) == 0;
+    THREADMAN_ASSERT(ok, D_00014F74, D_00014F2C, "sceKernelDeleteVTimer", FW_VERSION < 150 ? 0x46E : FW_VERSION < 152 ? 0x47A : 0x492);
+    sceKernelCpuResumeIntr(intr);
+    setK1(oldK1);
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 270 && FW_VERSION < 282
+s32 sceKernelDeleteVTimer(SceUID vtid) {
+    SceSysmemUidCB *cb;
+    SceSysmemUidCB *uid;
+    u32 attr;
+    SceTimer *timer;
+    SceVTimer *vt;
+    s32 intr;
+    s32 ok;
+    void *ra = getRa();
+    u32 oldK1 = shiftK1Noreorder();
+
+    if (sceKernelIsIntrContext()) {
+        setK1(oldK1);
+        return 0x80020064;
+    }
+    intr = sceKernelCpuSuspendIntr();
+    if (sceKernelGetUIDcontrolBlockWithType(vtid, g_threadmanInfo.uidVTimerType, &uid) != 0) {
+        sceKernelCpuResumeIntr(intr);
+        setK1(oldK1);
+        return 0x800201BE;
+    }
+    cb = uid;
+    attr = cb->attr & 0x10;
+    if (!k1IsUserMode()) {
+        attr = 0x10;
+    }
+    if (attr == 0) {
+        sceKernelCpuResumeIntr(intr);
+        setK1(oldK1);
+        return 0x800200D1;
+    }
+    if (g_threadmanInfo.logHandler != NULL) {
+        g_threadmanInfo.logHandler(0x7D, ra, 1, vtid);
+    }
+    cb = uid;
+    vt = UID_CB_TO_DATA(cb, g_threadmanInfo.uidVTimerType, SceVTimer);
+    timer = UID_CB_TO_DATA(cb, g_threadmanInfo.uidTimerType, SceTimer);
+    if (vt->active != 0 && vt->handler != NULL) {
+        if (timer == g_threadmanInfo.timerCursor) {
+            g_threadmanInfo.timerCursor = timer->next;
+        }
+        timer->next->prev = timer->prev;
+        timer->prev->next = timer->next;
+        timer->prev = timer;
+        timer->next = timer;
+        timerUpdate();
+    }
+    ok = sceKernelDeleteUID(vtid) == 0;
+    THREADMAN_ASSERT(ok, D_00014F74, D_00014F2C, "sceKernelDeleteVTimer", FW_VERSION < 150 ? 0x46E : FW_VERSION < 152 ? 0x47A : 0x492);
+    sceKernelCpuResumeIntr(intr);
+    setK1(oldK1);
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/threadman", sceKernelDeleteVTimer);
 #endif
 
