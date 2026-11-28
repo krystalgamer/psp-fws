@@ -229,6 +229,7 @@ extern s32 D_00008F90;
 extern s32 D_00008FD4;
 extern s32 D_00008FD8;
 extern s32 D_00008FDC;
+extern s32 D_00009450;
 extern s32 D_0000A1CC;
 extern s32 D_0000A1D0;
 extern u16 D_0000A1F8;

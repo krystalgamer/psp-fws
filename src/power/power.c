@@ -535,9 +535,17 @@ s32 scePowerGetPowerSwMode(void) {
 #if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/power", scePowerRebootStart);
 
-INCLUDE_ASM("nonmatchings/power", scePower_D6D016EF);
+void scePower_D6D016EF(s32 arg0) {
+    u32 temp_s0;
 
-INCLUDE_ASM("nonmatchings/power", scePower_driver_D6D016EF);
+    temp_s0 = shiftK1();
+    _scePowerLock(arg0, 1);
+    setK1(temp_s0);
+}
+
+void scePower_driver_D6D016EF(s32 arg0) {
+    _scePowerLock(arg0, 0);
+}
 
 INCLUDE_ASM("nonmatchings/power", scePower_CA3D34C1);
 
@@ -1345,11 +1353,15 @@ INCLUDE_ASM("nonmatchings/power", scePowerLimitPllClock);
 #endif
 
 #if FW_VERSION >= 102 && FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/power", scePowerGetCpuClockFrequencyInt);
+s32 scePowerGetCpuClockFrequencyInt(void) {
+    return D_00009450;
+}
 
 INCLUDE_ASM("nonmatchings/power", scePowerGetCpuClockFrequencyFloat);
 
-INCLUDE_ASM("nonmatchings/power", scePowerGetBusClockFrequencyInt);
+s32 scePowerGetBusClockFrequencyInt(void) {
+    return D_0000B35C;
+}
 
 INCLUDE_ASM("nonmatchings/power", scePowerGetBusClockFrequencyFloat);
 
@@ -1889,17 +1901,11 @@ s32 scePowerIsPowerOnline(void) {
     return ret;
 }
 
-#if FW_VERSION >= 150
+#if FW_VERSION >= 102
 s32 scePowerIsBatteryExist(void) {
     return D_0000B3DC != 0;
 }
-#endif
-
-#if FW_VERSION >= 102 && FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/power", scePowerIsBatteryExist);
-#endif
-
-#if FW_VERSION == 100
+#else
 s32 scePowerIsBatteryExist(void) {
     return D_0000B3DC == 2;
 }
