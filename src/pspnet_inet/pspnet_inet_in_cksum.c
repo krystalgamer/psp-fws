@@ -969,178 +969,7 @@ INCLUDE_ASM("nonmatchings/pspnet_inet_in_cksum", ip_optcopy);
 INCLUDE_ASM("nonmatchings/pspnet_inet_in_cksum", func_0001788C);
 #endif
 
-#if FW_VERSION < 151
-s32 ip_ctloutput(s32 op, struct socket *so, s32 level, s32 optname, struct mbuf **mp) {
-    struct inpcb *inp = (struct inpcb *)so->so_pcb;
-    struct mbuf *m = *mp;
-    s32 optval = 0;
-    s32 error = 0;
-
-    if (level != 0) {
-        error = 0x16;
-        if (op == 1 && *mp)
-            (void)sceNetMFree(*mp);
-    } else switch (op) {
-    case 1:
-        switch (optname) {
-        case 1:
-            return (ip_pcbopts(&inp->inp_options, m));
-        case 3:
-        case 4:
-        case 5:
-        case 6:
-        case 7:
-        case 20:
-            if (m == NULL || m->m_len != sizeof(s32))
-                error = 0x16;
-            else {
-                optval = *mtod(m, s32 *);
-                switch (optname) {
-                case 3:
-                    inp->inp_ip.ip_tos = optval;
-                    break;
-                case 4:
-                    inp->inp_ip.ip_ttl = optval;
-                    break;
-#define OPTSET(bit) \
-    if (optval) \
-        inp->inp_flags |= bit; \
-    else \
-        inp->inp_flags &= ~bit;
-                case 5:
-                    OPTSET(0x1);
-                    break;
-                case 6:
-                    OPTSET(0x2);
-                    break;
-                case 7:
-                    OPTSET(0x4);
-                    break;
-                case 20:
-                    OPTSET(0x80);
-                    break;
-                }
-            }
-            break;
-#undef OPTSET
-        case 9:
-        case 10:
-        case 11:
-        case 12:
-        case 13:
-            error = ip_setmoptions(optname, &inp->inp_moptions, m);
-            break;
-        case 19:
-            if (m == 0 || m->m_len != sizeof(s32))
-                error = 0x16;
-            else {
-                optval = *mtod(m, s32 *);
-                switch (optval) {
-                case 0:
-                case 1:
-                    inp->inp_flags &= ~(0x20);
-                    break;
-                case 2:
-                    inp->inp_flags |= 0x20;
-                    break;
-                default:
-                    error = 0x16;
-                    break;
-                }
-            }
-            break;
-        default:
-            error = 0x6D;
-            break;
-        }
-        if (m)
-            (void)sceNetMFree(m);
-        break;
-    case 0:
-        switch (optname) {
-        case 1:
-        case 8:
-            *mp = m = sceNetMGet(0, 4);
-            if (m == NULL) {
-                error = 0x69;
-                break;
-            }
-            if (inp->inp_options) {
-                m->m_len = inp->inp_options->m_len;
-                func_0002C9B8(mtod(inp->inp_options, char *), mtod(m, char *), (u32)m->m_len);
-            } else
-                m->m_len = 0;
-            break;
-        case 3:
-        case 4:
-        case 5:
-        case 6:
-        case 7:
-        case 20:
-        case 21:
-            *mp = m = sceNetMGet(0, 4);
-            if (m == NULL) {
-                error = 0x69;
-                break;
-            }
-            m->m_len = sizeof(s32);
-            switch (optname) {
-            case 3:
-                optval = inp->inp_ip.ip_tos;
-                break;
-            case 4:
-                optval = inp->inp_ip.ip_ttl;
-                break;
-            case 21:
-                optval = inp->inp_errormtu;
-                break;
-#define OPTBIT(bit) (inp->inp_flags & bit ? 1 : 0)
-            case 5:
-                optval = OPTBIT(0x1);
-                break;
-            case 6:
-                optval = OPTBIT(0x2);
-                break;
-            case 7:
-                optval = OPTBIT(0x4);
-                break;
-            case 20:
-                optval = OPTBIT(0x80);
-                break;
-            }
-            *mtod(m, s32 *) = optval;
-            break;
-        case 9:
-        case 10:
-        case 11:
-        case 12:
-        case 13:
-            error = ip_getmoptions(optname, inp->inp_moptions, mp);
-            break;
-        case 19:
-            *mp = m = sceNetMGet(0, 4);
-            if (m == NULL) {
-                error = 0x69;
-                break;
-            }
-            m->m_len = sizeof(s32);
-            if (inp->inp_flags & 0x20)
-                optval = 2;
-            else
-                optval = 0;
-            *mtod(m, s32 *) = optval;
-            break;
-        default:
-            error = 0x6D;
-            break;
-        }
-        break;
-    }
-    return (error);
-}
-#endif
-
-#if FW_VERSION >= 151 && FW_VERSION < 201
+#if FW_VERSION < 201
 s32 ip_ctloutput(s32 op, struct socket *so, s32 level, s32 optname, struct mbuf **mp) {
     struct inpcb *inp = (struct inpcb *)so->so_pcb;
     struct mbuf *m = *mp;
@@ -1740,7 +1569,26 @@ s32 ip_getmoptions(s32 optname, struct ip_moptions *imo, struct mbuf **mp) {
 INCLUDE_ASM("nonmatchings/pspnet_inet_in_cksum", ip_getmoptions);
 #endif
 
-INCLUDE_ASM("nonmatchings/pspnet_inet_in_cksum", func_00018478);
+#if FW_VERSION < 250
+void ip_mloopback(struct ifnet *ifp, struct mbuf *m, struct sockaddr_in *dst) {
+    struct ip *ip;
+    struct mbuf *copym;
+
+    copym = sceNetMCopym(m, 0, 1000000000, 1);
+    if (copym != NULL && (copym->m_flags & M_EXT || copym->m_len < sizeof(struct ip)))
+        copym = sceNetMPullup(copym, sizeof(struct ip));
+    if (copym != NULL) {
+        ip = mtod(copym, struct ip *);
+        ip->ip_len = (u16)__builtin_allegrex_wsbh(ip->ip_len);
+        ip->ip_off = (u16)__builtin_allegrex_wsbh(ip->ip_off);
+        ip->ip_sum = 0;
+        ip->ip_sum = in_cksum(copym, (ip->ip_hl_v & 0xF) << 2);
+        (void)looutput(ifp, copym, (struct sockaddr *)dst, NULL);
+    }
+}
+#else
+INCLUDE_ASM("nonmatchings/pspnet_inet_in_cksum", ip_mloopback);
+#endif
 
 #if FW_VERSION < 250
 s32 ip_optlen(void *arg0) {

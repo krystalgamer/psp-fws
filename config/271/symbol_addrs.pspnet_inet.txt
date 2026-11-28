@@ -587,3 +587,5 @@ sbinsertoob = 0x00004A68; // type:func
 sbcompress = 0x00004E28; // type:func
 ip_pcbopts = 0x00017BF0; // type:func
 ip_getmoptions = 0x00018328; // type:func
+ip_mloopback = 0x00018478; // type:func
+looutput = 0x0000F2D4; // type:func

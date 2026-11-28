@@ -379,7 +379,7 @@ void func_0000F2A8(struct Unk_func_0000F2A8_0 *arg0, struct Unk_func_0000F2A8_1 
 }
 #endif
 
-INCLUDE_ASM("nonmatchings/pspnet_inet_rtsub", func_0000F2D4);
+INCLUDE_ASM("nonmatchings/pspnet_inet_rtsub", looutput);
 
 s32 loioctl(struct ifnet *ifp, u32 cmd, void *data) {
     s32 error = 0;
@@ -420,7 +420,7 @@ void loopattach(void) {
     ifp->if_mtu = 0x81BC; //P
     ifp->if_flags = IFF_LOOPBACK | IFF_MULTICAST; //P
     ifp->if_ioctl = loioctl; //P
-    ifp->if_output = func_0000F2D4; //P
+    ifp->if_output = looutput; //P
     ifp->if_type = IFT_LOOP; //P
     ifp->if_hdrlen = 0; //P
     ifp->if_addrlen = 0; //P
