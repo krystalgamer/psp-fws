@@ -3542,21 +3542,13 @@ s32 func_000079A4(void) {
 }
 #endif
 
-#if FW_VERSION != 201
 s32 *sceUmdManSPKGetMKI(void) {
     return &D_00012D00;
 }
-#else
-INCLUDE_ASM("nonmatchings/umdman", sceUmdManSPKGetMKI);
-#endif
 
-#if FW_VERSION < 201
 M2C_UNK *func_000079B8(void) {
     return &D_0001AD8C;
 }
-#else
-INCLUDE_ASM("nonmatchings/umdman", func_000079B8);
-#endif
 
 void func_000079C4(u32 v) {
     __asm__ volatile("sync");
@@ -3656,7 +3648,6 @@ INCLUDE_ASM("nonmatchings/umdman", sceUmdManSPKStartStep1);
 INCLUDE_ASM("nonmatchings/umdman", func_00007B5C);
 #endif
 
-#if FW_VERSION != 201
 s32 func_00007B94(void) {
     s32 temp_s0;
 
@@ -3664,9 +3655,6 @@ s32 func_00007B94(void) {
     sceKernelDeleteSema(D_00012C10);
     return temp_s0;
 }
-#else
-INCLUDE_ASM("nonmatchings/umdman", func_00007B94);
-#endif
 
 #if FW_VERSION < 201
 void func_00007BC8(u32 *src, u32 size) {
@@ -3689,21 +3677,13 @@ void func_00007C08(s32 arg0, s32 arg1) {
 }
 #endif
 
-#if FW_VERSION < 201
 M2C_UNK *func_00007C24(void) {
     return &D_00012C20;
 }
-#else
-INCLUDE_ASM("nonmatchings/umdman", func_00007C24);
-#endif
 
-#if FW_VERSION < 201
 M2C_UNK *func_00007C30(void) {
     return &D_00012C00;
 }
-#else
-INCLUDE_ASM("nonmatchings/umdman", func_00007C30);
-#endif
 
 void func_00007C3C(u32 v) {
     __asm__ volatile("sync");
@@ -3835,89 +3815,57 @@ s32 func_00008274(s32 arg0) {
 }
 #endif
 
-#if (FW_VERSION >= 102 && FW_VERSION < 150) || FW_VERSION >= 201
-INCLUDE_ASM("nonmatchings/umdman", func_00008284);
-#endif
-
-#if FW_VERSION >= 150 && FW_VERSION < 201
+#if FW_VERSION >= 102
 s32 func_00008284(void) {
     sceKernelSetEventFlag(D_00012C00, 0x10U);
     return 0;
 }
 #endif
 
-#if FW_VERSION >= 201
-INCLUDE_ASM("nonmatchings/umdman", func_000082AC);
-#else
 s32 func_000082AC(void) {
     sceKernelSetEventFlag(D_00012C00, 0x20U);
     return 0;
 }
-#endif
 
-#if (FW_VERSION >= 102 && FW_VERSION < 150) || FW_VERSION >= 201
-INCLUDE_ASM("nonmatchings/umdman", func_000082D4);
-#endif
-
-#if FW_VERSION >= 150 && FW_VERSION < 201
+#if FW_VERSION >= 102
 s32 func_000082D4(void) {
     sceKernelSetEventFlag(D_00012C00, 0x40U);
     return 0;
 }
-#endif
-
-#if FW_VERSION == 100
+#else
 s32 func_000082D4(void) {
     return __builtin_allegrex_min(sceKernelSetEventFlag(D_00012C00, 0x40U), 0);
 }
 #endif
 
-#if (FW_VERSION >= 102 && FW_VERSION < 150) || FW_VERSION >= 201
-INCLUDE_ASM("nonmatchings/umdman", func_000082FC);
-#endif
-
-#if FW_VERSION >= 150 && FW_VERSION < 201
+#if FW_VERSION >= 102
 s32 func_000082FC(void) {
     sceKernelSetEventFlag(D_00012C00, 0x80U);
     return 0;
 }
-#endif
-
-#if FW_VERSION == 100
+#else
 s32 func_000082FC(void) {
     return __builtin_allegrex_min(sceKernelSetEventFlag(D_00012C00, 0x80U), 0);
 }
 #endif
 
-#if (FW_VERSION >= 102 && FW_VERSION < 150) || FW_VERSION >= 201
-INCLUDE_ASM("nonmatchings/umdman", func_00008324);
-#endif
-
-#if FW_VERSION >= 150 && FW_VERSION < 201
+#if FW_VERSION >= 102
 s32 func_00008324(void) {
     sceKernelSetEventFlag(D_00012C00, 0x100U);
     return 0;
 }
-#endif
-
-#if FW_VERSION == 100
+#else
 s32 func_00008324(void) {
     return __builtin_allegrex_min(sceKernelSetEventFlag(D_00012C00, 0x100U), 0);
 }
 #endif
 
-#if (FW_VERSION >= 102 && FW_VERSION < 150) || FW_VERSION >= 201
-INCLUDE_ASM("nonmatchings/umdman", func_0000834C);
-#endif
-
-#if FW_VERSION >= 150 && FW_VERSION < 201
+#if FW_VERSION >= 102
 s32 func_0000834C(void) {
     sceKernelSetEventFlag(D_00012C00, 0x200U);
     return 0;
 }
-#endif
-
-#if FW_VERSION == 100
+#else
 s32 func_0000834C(void) {
     return __builtin_allegrex_min(sceKernelSetEventFlag(D_00012C00, 0x200U), 0);
 }
