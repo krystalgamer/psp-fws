@@ -339,7 +339,7 @@ struct SceWlanSoftc {
     u8 unk254[0x260 - 0x254];
     SceUID thread;              /* 0x260 SceWlanMac */
 #if FW_VERSION >= 150
-    u32 unk_v150;
+    SceUID thread264;           /* 1.50+: second thread, terminated by func_0000368C */
 #endif
     SceUID lock264;             /* 0x264 */
     SceUID lock268;             /* 0x268 */
@@ -654,6 +654,7 @@ extern SceWlanMsg D_0002A098;
 extern s32 D_0002A0B4;
 extern s32 D_0002A0B8;
 extern u16 D_0002A0C0;
+extern SceWlanMsg D_0002A820;
 extern SceWlanMsg D_0002A83C;
 extern s32 D_0002D7A8;
 extern s32 D_0002D7AC;

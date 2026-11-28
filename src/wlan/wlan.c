@@ -1613,7 +1613,27 @@ s32 func_0000368C(SceWlanSoftc *sc) {
 }
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION >= 150 && FW_VERSION < 201
+s32 func_0000368C(SceWlanSoftc *sc) {
+    s32 intr;
+    SceWlanMsg *msg;
+
+    sc->unk2BC = 0;
+    intr = sceKernelCpuSuspendIntr();
+    msg = &D_0002A820;
+    msg->cmd = 0x80000007;
+    if ((msg->state & 1) == 0) {
+        msg->state = 3;
+        sceKernelSendMbx(sc->mbx, msg);
+    }
+    sceKernelCpuResumeIntr(intr);
+    if (sc->thread264 > 0)
+        sceKernelTerminateThread(sc->thread264);
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/wlan", func_0000368C);
 #endif
 
