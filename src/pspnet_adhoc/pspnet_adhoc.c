@@ -3825,7 +3825,11 @@ s32 sceNetAdhocGameModeUpdateReplica(s32 id, SceNetAdhocGameModeOptData *opt) {
 #endif
 
 #if FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/pspnet_adhoc", sceNetAdhocGameModeUpdateReplica);
+s32 sceNetAdhocGameModeUpdateReplica(s32 id, SceNetAdhocGameModeOptData *opt) {
+    if (sceKernelCheckThreadStack() < 0x7F0)
+        return 0x80410005;
+    return func_00007298(id, opt, 0);
+}
 #endif
 
 #if FW_VERSION < 201
