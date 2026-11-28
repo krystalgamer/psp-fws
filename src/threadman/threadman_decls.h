@@ -68,9 +68,60 @@ typedef struct SceSema {
 
 /* "EventFlag" uid type data (partial) */
 typedef struct SceEventFlag {
-    u32 initPattern; /* 0x00 */
+    u32 unk0; /* 0x00 */
     u32 currentPattern; /* 0x04 */
+    u32 initPattern; /* 0x08 */
 } SceEventFlag;
+
+typedef struct {
+    SceSize size;
+    char name[32];
+    u32 attr;
+    s32 blockSize;
+    s32 numBlocks;
+    s32 freeBlocks;
+    s32 numWaitThreads;
+} SceKernelFplInfo;
+
+typedef struct {
+    SceSize size;
+    char name[32];
+    u32 attr;
+    s32 poolSize;
+    s32 freeSize;
+    s32 numWaitThreads;
+} SceKernelVplInfo;
+
+typedef struct {
+    SceSize size;
+    char name[32];
+    u32 attr;
+    s32 numWaitThreads;
+    s32 numMessages;
+    void *firstMessage;
+} SceKernelMbxInfo;
+
+/* "Fpl" uid type data (partial) */
+typedef struct SceFpl {
+    u8 unk0[0x10];
+    s32 freeBlocks; /* 0x10 */
+    s32 blockSize; /* 0x14 */
+    s32 numBlocks; /* 0x18 */
+} SceFpl;
+
+/* "Vpl" uid type data (partial) */
+typedef struct SceVpl {
+    u32 unk0;
+    SceUID heapId; /* 0x04 */
+    s32 poolSize; /* 0x08 */
+} SceVpl;
+
+/* "Mbx" uid type data (partial) */
+typedef struct SceMbx {
+    u32 unk0;
+    s32 numMessages; /* 0x04 */
+    void **lastMessage; /* 0x08: messages form a ring; lastMessage[0] is the first */
+} SceMbx;
 
 /* "MsgPipe" uid type data (partial) */
 typedef struct SceMsgPipe {
@@ -439,6 +490,9 @@ typedef struct SceThreadmanInfo {
         u32 size;
         SceKernelSemaInfo sema;
         SceKernelEventFlagInfo eventFlag;
+        SceKernelFplInfo fpl;
+        SceKernelVplInfo vpl;
+        SceKernelMbxInfo mbx;
         u8 buf[0x84];
     } tmpInfo; /* 0x660: refer-status scratch buffer */
     u8 unk6E4[0x6E8 - 0x6E4];
@@ -478,12 +532,22 @@ typedef struct SceThreadmanInfo {
     SceSysmemUidCB *uidDelayType;
     SceSysmemUidCB *uidAlarmType;
     SceSysmemUidCB *uidVTimerType;
+    u8 unkUidEnd[0x2C];
+    union {
+        u32 size;
+        SceKernelSemaInfo sema;
+        SceKernelEventFlagInfo eventFlag;
+        SceKernelFplInfo fpl;
+        SceKernelVplInfo vpl;
+        SceKernelMbxInfo mbx;
+        u8 buf[0x84];
+    } tmpInfo; /* refer-status scratch buffer (0x660 in 1.00) */
 #if FW_VERSION < 282
-    u8 unkUidEnd[THREADMAN_TIMERINTR_OFF - THREADMAN_UID_OFF - THREADMAN_NUM_UID * 4];
+    u8 unkTmpEnd[THREADMAN_TIMERINTR_OFF - THREADMAN_UID_OFF - THREADMAN_NUM_UID * 4 - 0x2C - 0x84];
     s32 unk6E8; /* system timer interrupt number (0x6E8 in 1.00) */
     u8 unkTimerEnd[THREADMAN_LOG_OFF - THREADMAN_TIMERINTR_OFF - 4];
 #else
-    u8 unkUidEnd[THREADMAN_LOG_OFF - THREADMAN_UID_OFF - THREADMAN_NUM_UID * 4];
+    u8 unkTmpEnd[THREADMAN_LOG_OFF - THREADMAN_UID_OFF - THREADMAN_NUM_UID * 4 - 0x2C - 0x84];
 #endif
 #else
     u8 unk41C[THREADMAN_LOG_OFF - 0x41C];
@@ -690,6 +754,7 @@ s32 sceKernelFreePartitionMemory(); /* (SceUID blockId); one 2.x draft passes tw
 void sceKernelGetKTLS(s32 arg0);
 s32 sceKernelGetSystemStatusFlag(void);
 s32 sceKernelGetThreadKTLS(s32, s32, s32);
+s32 sceKernelHeapTotalFreeSize(SceUID id);
 s32 sceKernelIsIntrContext(void);
 void * sceKernelMemset(void *, s32, u32);
 s32 sceKernelQueryMemoryInfo(u32 address, s32 *partitionId, SceUID *memoryBlockId);
