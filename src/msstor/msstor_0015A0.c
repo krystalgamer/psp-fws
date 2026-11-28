@@ -154,7 +154,24 @@ INCLUDE_ASM("nonmatchings/msstor_0015A0", func_00001BF0);
 
 INCLUDE_ASM("nonmatchings/msstor_0015A0", func_00001F78);
 
+#if FW_VERSION < 201
+s32 func_0000263C(SceMSstorDev *dev, u32 block) {
+    s32 n;
+    s32 i;
+    u8 *tbl;
+
+    n = (dev->boot[0x174] << 24) | (dev->boot[0x175] << 16) | (dev->boot[0x176] << 8) | dev->boot[0x177];
+    tbl = dev->unk4460;
+    for (i = 0; i < n; i += 2) {
+        if (((tbl[i] << 8) | tbl[i + 1]) == block) {
+            return -1;
+        }
+    }
+    return 0;
+}
+#else
 INCLUDE_ASM("nonmatchings/msstor_0015A0", func_0000263C);
+#endif
 
 s32 func_000026A8(SceMSstorDev *dev) {
     return func_000008B8(dev, 0xC3, 1);
@@ -188,7 +205,29 @@ INCLUDE_RODATA("nonmatchings/msstor_0015A0", D_00009214);
 
 INCLUDE_ASM("nonmatchings/msstor_0015A0", func_00002A54);
 
+#if FW_VERSION < 201
+s32 func_000031EC(SceMSstorDev *dev, s32 *blk, s32 seg) {
+    u16 *list;
+    s32 n;
+    s32 last;
+
+    n = dev->freeCount[seg];
+    last = (seg == (dev->boot[0x1A4] >> 1) - 1);
+    list = dev->freeBlk[seg];
+    if (last < n) {
+        *blk = list[0];
+        n--;
+        func_0000432C((u8 *)list, (u8 *)&list[1], n * 2);
+        list[n] = 0xFFFF;
+        dev->freeCount[seg] = n;
+        return 0;
+    }
+    dev->writable = 0;
+    return -13;
+}
+#else
 INCLUDE_ASM("nonmatchings/msstor_0015A0", func_000031EC);
+#endif
 
 INCLUDE_ASM("nonmatchings/msstor_0015A0", func_000032A4);
 
@@ -247,7 +286,29 @@ INCLUDE_ASM("nonmatchings/msstor_0015A0", func_0000351C);
 
 INCLUDE_ASM("nonmatchings/msstor_0015A0", func_00003588);
 
+#if FW_VERSION < 201
+s32 func_0000366C(SceMSstorDev *dev, s32 block, s32 page, u8 *extra) {
+    s32 ret;
+
+    if (dev->writable == 0) {
+        return -13;
+    }
+    if (dev->wpSwitch != 0) {
+        return -12;
+    }
+    ret = func_000008F0(dev, block, page, 0x80, extra, 1);
+    if (ret != 0) {
+        return ret;
+    }
+    ret = func_000008B8(dev, 0x55, 10);
+    if (ret != 0 && ret != -6) {
+        return ret;
+    }
+    return 0;
+}
+#else
 INCLUDE_ASM("nonmatchings/msstor_0015A0", func_0000366C);
+#endif
 
 INCLUDE_ASM("nonmatchings/msstor_0015A0", func_000036F8);
 
@@ -257,7 +318,23 @@ INCLUDE_ASM("nonmatchings/msstor_0015A0", func_00003BD4);
 
 INCLUDE_ASM("nonmatchings/msstor_0015A0", func_00003CA4);
 
+#if FW_VERSION < 201
+s32 func_00003E20(SceMSstorDev *dev) {
+    s32 ret;
+
+    ret = func_000008B8(dev, 0x3C, 10);
+    if (ret != 0) {
+        return ret;
+    }
+    if (dev->parallel != 1) {
+        return 0;
+    }
+    func_000016E4(dev, 0);
+    return func_00000654(dev, 1);
+}
+#else
 INCLUDE_ASM("nonmatchings/msstor_0015A0", func_00003E20);
+#endif
 
 #if FW_VERSION < 201
 s32 func_00003C2C(SceMSstorDev *dev) {
@@ -283,9 +360,25 @@ INCLUDE_ASM("nonmatchings/msstor_0015A0", func_0000413C);
 
 INCLUDE_ASM("nonmatchings/msstor_0015A0", func_00004204);
 
+#if FW_VERSION < 201
+void func_00004300(u8 *p, u8 c, s32 n) {
+    while (n-- != 0) {
+        *p++ = c;
+    }
+}
+#else
 INCLUDE_ASM("nonmatchings/msstor_0015A0", func_00004300);
+#endif
 
+#if FW_VERSION < 201
+void func_0000432C(u8 *dst, const u8 *src, s32 n) {
+    while (n-- != 0) {
+        *dst++ = *src++;
+    }
+}
+#else
 INCLUDE_ASM("nonmatchings/msstor_0015A0", func_0000432C);
+#endif
 
 INCLUDE_ASM("nonmatchings/msstor_0015A0", func_00004360);
 
@@ -1272,13 +1365,88 @@ INCLUDE_ASM("nonmatchings/msstor_0015A0", func_00006758);
 
 INCLUDE_ASM("nonmatchings/msstor_0015A0", func_00006A68);
 
+#if FW_VERSION < 201
+s32 func_00006AC8(SceIoIob *iob, s32 cmd, void *in, SceSize inlen, void *out, SceSize outlen) {
+    SceMSstorDev *dev;
+
+    if (in == NULL || inlen != 4) {
+        return 0x80220183;
+    }
+    if (out == NULL || outlen < 0x200) {
+        return 0x80220183;
+    }
+    if (*(s32 *)in != 1) {
+        return 0x80220183;
+    }
+    dev = ((SceMSstorIoCtx *)iob->i_private)->dev;
+    if (dev->mediaType2 & 0x40) {
+        return 0x80220183;
+    }
+    if (dev->unk8 < 0 && dev->unkC < 0) {
+        return 0x80220183;
+    }
+    __builtin_memcpy(out, dev->unk4460, 0x200);
+    return 0;
+}
+#else
 INCLUDE_ASM("nonmatchings/msstor_0015A0", func_00006AC8);
+#endif
 
 INCLUDE_ASM("nonmatchings/msstor_0015A0", func_00006BE8);
 
-INCLUDE_ASM("nonmatchings/msstor_0015A0", func_00006C70);
+s32 func_00006C70(SceIoIob *iob, s32 cmd, void *in, SceSize inlen, void *out, SceSize outlen, s32 flag) {
+    s32 v;
 
+    if (in == NULL || inlen != 4) {
+        return 0x80220183;
+    }
+    v = *(s32 *)in;
+    if (v < 0) {
+        return 0x80220183;
+    }
+    return func_00007850(func_00006CD8(((SceMSstorIoCtx *)iob->i_private)->dev, v, flag));
+}
+
+#if FW_VERSION < 201
+s32 func_00006CD8(SceMSstorDev *dev, s32 delay, s32 flag) {
+    s32 ret;
+    s32 parallel;
+
+    ret = 0;
+    if (delay < 0) {
+        return 0x80220183;
+    }
+    if (flag != 0 && (dev->mediaType2 & 0x40)) {
+        return 0x80220183;
+    }
+    parallel = dev->parallel;
+    if (flag == 0) {
+        sceMScmSetSlotPower(dev->hc, 1);
+        sceKernelDelayThread(delay);
+        sceMScmSetSlotPower(dev->hc, 2);
+        if (dev->mediaType2 & 0x40) {
+            sceKernelDelayThread(0x5014);
+        } else {
+            sceKernelDelayThread(0x9C4);
+        }
+    } else {
+        if (dev->mediaType2 & 0x10) {
+            ret = func_000008B8(dev, 0x3C, delay);
+        }
+        sceKernelDelayThread(delay);
+    }
+    if (parallel == 1) {
+        func_000016E4(dev, 0);
+        func_00000654(dev, 1);
+    }
+    if (dev->mediaType2 & 0x40) {
+        ret = func_0000149C(dev);
+    }
+    return ret;
+}
+#else
 INCLUDE_ASM("nonmatchings/msstor_0015A0", func_00006CD8);
+#endif
 
 #if FW_VERSION < 201
 s32 func_00006DFC(SceIoIob *iob, s32 cmd, void *in, SceSize inlen, void *out, SceSize outlen) {
@@ -1334,11 +1502,132 @@ s32 func_00006EBC(SceIoIob *iob, s32 cmd, void *in, SceSize inlen, void *out, Sc
 INCLUDE_ASM("nonmatchings/msstor_0015A0", func_00006EBC);
 #endif
 
+#if FW_VERSION < 201
+s32 func_00006F10(SceIoIob *iob, s32 cmd, void *in, SceSize inlen, void *out, SceSize outlen) {
+    SceMSstorDev *dev;
+    SceMSstorRawParam *p;
+    s32 seg;
+    s32 r;
+    s32 ret;
+    s32 writable;
+    s32 blk;
+
+    dev = ((SceMSstorIoCtx *)iob->i_private)->dev;
+    p = out;
+    r = 0;
+    if (dev->mediaType2 & 0x40) {
+        return 0x80220183;
+    }
+    if (out == NULL || outlen < 0x20) {
+        return 0x80220183;
+    }
+    seg = ((u32)((dev->boot[0x1A4] << 8) | dev->boot[0x1A5]) >> 9) - 1;
+    writable = dev->writable;
+    for (; seg > 0; seg--) {
+        blk = 0;
+        r = func_000031EC(dev, &blk, seg);
+        if (r == 0) {
+            break;
+        }
+        if (r == -13) {
+            dev->writable = writable;
+        }
+    }
+    if (blk == 0) {
+        p->result = 0x80220187;
+        return 0x80220187;
+    }
+    ret = func_00007850(r);
+    p->result = ret;
+    p->unk0 = blk;
+    return ret;
+}
+#else
 INCLUDE_ASM("nonmatchings/msstor_0015A0", func_00006F10);
+#endif
 
+#if FW_VERSION < 201
+s32 func_0000700C(s32 mode, SceIoIob *iob, s32 cmd, void *in, SceSize inlen, void *out, SceSize outlen) {
+    SceMSstorDev *dev;
+    SceMSstorRawParam *p;
+    s32 r;
+    s32 ret;
+
+    r = 0x80220183;
+    dev = ((SceMSstorIoCtx *)iob->i_private)->dev;
+    p = in;
+    if (dev->mediaType2 & 0x40) {
+        return r;
+    }
+    if (in == NULL || inlen < 0x20) {
+        return r;
+    }
+    if (p->unk14 < 0x200 || p->unk18 < 4) {
+        return 0x80220183;
+    }
+    if (p->unk8 != 1) {
+        return 0x80220183;
+    }
+    switch (mode) {
+    case 1:
+        r = func_000086F4(dev, p->unk0, p->unk4, p->unk4, p->unkC, p->unk10);
+        break;
+    case 2:
+        r = func_00008A54(dev, p->unk0, p->unk4, p->unk4, p->unkC, p->unk10);
+        break;
+    }
+    ret = func_00007850(r);
+    p->result = ret;
+    return ret;
+}
+#else
 INCLUDE_ASM("nonmatchings/msstor_0015A0", func_0000700C);
+#endif
 
+#if FW_VERSION < 201
+s32 func_00007108(s32 mode, SceIoIob *iob, s32 cmd, void *in, SceSize inlen, void *out, SceSize outlen) {
+    SceMSstorDev *dev;
+    SceMSstorRawParam *p;
+    s32 r;
+    s32 ret;
+
+    dev = ((SceMSstorIoCtx *)iob->i_private)->dev;
+    p = in;
+    if (dev->mediaType2 & 0x40) {
+        return 0x80220183;
+    }
+    if (in == NULL || inlen < 0x20) {
+        return 0x80220183;
+    }
+    if (mode == 3) {
+        if (p->unk18 <= 0) {
+            return 0x80220183;
+        }
+    } else if (p->unk18 < 4) {
+        return 0x80220183;
+    }
+    if (p->unk8 != 1) {
+        return 0x80220183;
+    }
+    r = 0;
+    switch (mode) {
+    case 1:
+        r = func_00003BD4(dev, p->unk0, p->unk4, p->unk10);
+        break;
+    case 2:
+        r = func_0000413C(dev, p->unk0, p->unk4, p->unk10);
+        break;
+    case 3:
+        r = func_0000366C(dev, p->unk0, p->unk4, p->unk10);
+        break;
+    }
+    ret = func_00007850(r);
+    p->result = ret;
+    return ret;
+}
+#else
 INCLUDE_ASM("nonmatchings/msstor_0015A0", func_00007108);
+#endif
 
 #if FW_VERSION < 201
 s32 func_00007234(SceIoIob *iob, s32 cmd, void *in, SceSize inlen, void *out, SceSize outlen) {
