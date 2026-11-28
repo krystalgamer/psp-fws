@@ -251,7 +251,8 @@ typedef struct SceTimer {
 typedef struct SceVTimer {
     s32 active; /* 0x00 */
     SceKernelSysClock base; /* 0x04: system time when started */
-    u8 unkC[0x18 - 0xC];
+    SceKernelSysClock schedule; /* 0x0C: handler time, relative to base */
+    u32 unk14;
     void *handler; /* 0x18 */
 } SceVTimer;
 
