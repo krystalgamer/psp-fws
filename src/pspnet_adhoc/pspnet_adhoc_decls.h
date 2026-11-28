@@ -9,16 +9,6 @@ typedef struct {
     u32 flag;
 } SceNetAdhocGameModeOptData;
 
-/* queued PDP send entry (callout-driven) */
-typedef struct SceNetAdhocPdpQent {
-    struct SceNetAdhocPdpQent *next;    /* 0x00 */
-    struct SceNetAdhocPdpQent **prev;   /* 0x04 */
-    s32 unk8;
-    struct mbuf *m;                     /* 0x0C */
-    u8 callout[0x34 - 0x10];            /* 0x10 */
-    struct SceNetAdhocPdpPcb *pcb;      /* 0x34 */
-} SceNetAdhocPdpQent;
-
 typedef struct {
     s32 id;
     s32 events;
@@ -38,6 +28,63 @@ typedef struct {
 typedef struct {
     u32 stat[12];
 } SceNetAdhocStat100;
+
+typedef struct {
+    u8 data[6];
+} SceNetEtherAddr;
+
+/* game-mode master/replica entry (0x1C) */
+typedef struct SceNetAdhocGameMode {
+    struct SceNetAdhocGameMode *next;   /* 0x00 TAILQ */
+    struct SceNetAdhocGameMode **prev;  /* 0x04 */
+    s32 id;                             /* 0x08 */
+    SceNetEtherAddr addr;               /* 0x0C */
+    void *ptr;                          /* 0x14 */
+    s32 size;                           /* 0x18 */
+} SceNetAdhocGameMode;
+
+typedef struct {
+    SceNetAdhocGameMode *first;
+    SceNetAdhocGameMode **last;
+} SceNetAdhocGameModeList;
+
+typedef struct SceNetAdhocPdpStat {
+    struct SceNetAdhocPdpStat *next;    /* 0x00 */
+    s32 id;                             /* 0x04 */
+    SceNetEtherAddr laddr;              /* 0x08 */
+    u16 lport;                          /* 0x0E */
+    u32 rcv_sb_cc;                      /* 0x10 */
+} SceNetAdhocPdpStat;
+
+typedef struct SceNetAdhocPtpStat {
+    struct SceNetAdhocPtpStat *next;    /* 0x00 */
+    s32 id;                             /* 0x04 */
+    SceNetEtherAddr laddr;              /* 0x08 */
+    SceNetEtherAddr paddr;              /* 0x0E */
+    u16 lport;                          /* 0x14 */
+    u16 pport;                          /* 0x16 */
+    u32 snd_sb_cc;                      /* 0x18 */
+    u32 rcv_sb_cc;                      /* 0x1C */
+    s32 state;                          /* 0x20 */
+} SceNetAdhocPtpStat;
+
+/* pspnet callout (0x24, partial) */
+struct callout {
+    u8 unk0[0x1C];
+    u32 c_flags;                        /* 0x1C CALLOUT_* */
+    u8 unk20[4];
+};
+#define CALLOUT_PENDING 0x1
+
+/* queued PDP send entry (callout-driven) */
+typedef struct SceNetAdhocPdpQent {
+    struct SceNetAdhocPdpQent *next;    /* 0x00 */
+    struct SceNetAdhocPdpQent **prev;   /* 0x04 */
+    s32 unk8;
+    struct mbuf *m;                     /* 0x0C */
+    u8 callout[0x34 - 0x10];            /* 0x10 */
+    struct SceNetAdhocPdpPcb *pcb;      /* 0x34 */
+} SceNetAdhocPdpQent;
 
 /* pspnet SceNetThreadInfo as seen by pspnet_adhoc (1.00: 0x64, 1.50: 0x60 (no sleepcnt), 2.60+: 0x5C (no descs chain)) */
 typedef struct SceNetAdhocWaiter {
@@ -83,30 +130,6 @@ typedef struct {
     SceNetAdhocDesc **last;
 } SceNetAdhocDescList;
 
-typedef struct {
-    SceNetAdhocDesc *d;
-    SceNetAdhocPollSd *sd;
-} SceNetAdhocPollEnt;
-
-typedef struct {
-    u8 data[6];
-} SceNetEtherAddr;
-
-/* game-mode master/replica entry (0x1C) */
-typedef struct SceNetAdhocGameMode {
-    struct SceNetAdhocGameMode *next;   /* 0x00 TAILQ */
-    struct SceNetAdhocGameMode **prev;  /* 0x04 */
-    s32 id;                             /* 0x08 */
-    SceNetEtherAddr addr;               /* 0x0C */
-    void *ptr;                          /* 0x14 */
-    s32 size;                           /* 0x18 */
-} SceNetAdhocGameMode;
-
-typedef struct {
-    SceNetAdhocGameMode *first;
-    SceNetAdhocGameMode **last;
-} SceNetAdhocGameModeList;
-
 /* PDP control block (1.00: 0x38, 1.50+: 0x34; offsets in comments are 1.00) */
 typedef struct SceNetAdhocPdpPcb {
     struct SceNetAdhocPdpPcb *next;     /* 0x00 TAILQ on the PDP list */
@@ -133,13 +156,10 @@ typedef struct {
     SceNetAdhocPdpPcb **last;
 } SceNetAdhocPdpList;
 
-typedef struct SceNetAdhocPdpStat {
-    struct SceNetAdhocPdpStat *next;    /* 0x00 */
-    s32 id;                             /* 0x04 */
-    SceNetEtherAddr laddr;              /* 0x08 */
-    u16 lport;                          /* 0x0E */
-    u32 rcv_sb_cc;                      /* 0x10 */
-} SceNetAdhocPdpStat;
+typedef struct {
+    SceNetAdhocDesc *d;
+    SceNetAdhocPollSd *sd;
+} SceNetAdhocPollEnt;
 
 /* PTP control block (offsets are 1.00; 1.50+: no ifp (-4), 0x24 more bytes after the callout) */
 typedef struct SceNetAdhocPtpPcb {
@@ -169,7 +189,7 @@ typedef struct SceNetAdhocPtpPcb {
     u32 rcv_nxt;                        /* 0x7C */
     s32 snd_wnd;                        /* 0x80 */
     s32 snd_inflight;                   /* 0x84 */
-    u8 callout[0xAC - 0x88];            /* 0x88 */
+    struct callout callout;             /* 0x88 */
 #if FW_VERSION >= 150
     u8 unk150[0x24];
 #endif
@@ -187,18 +207,6 @@ typedef struct {
     SceNetAdhocPtpPcb *first;
     SceNetAdhocPtpPcb **last;
 } SceNetAdhocPtpList;
-
-typedef struct SceNetAdhocPtpStat {
-    struct SceNetAdhocPtpStat *next;    /* 0x00 */
-    s32 id;                             /* 0x04 */
-    SceNetEtherAddr laddr;              /* 0x08 */
-    SceNetEtherAddr paddr;              /* 0x0E */
-    u16 lport;                          /* 0x14 */
-    u16 pport;                          /* 0x16 */
-    u32 snd_sb_cc;                      /* 0x18 */
-    u32 rcv_sb_cc;                      /* 0x1C */
-    s32 state;                          /* 0x20 */
-} SceNetAdhocPtpStat;
 
 struct ifqueue {
     struct mbuf *ifq_head;      /* 0x00 */
