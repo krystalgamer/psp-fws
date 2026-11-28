@@ -1063,20 +1063,14 @@ s32 func_0000434C(void *arg0) {
 }
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 201
-s32 func_0000434C(void *arg0) {
-    return M2C_FIELD(M2C_FIELD(arg0, void **, 0x864), s32 *, 0xC);
-}
-#endif
-
-#if FW_VERSION >= 102 && FW_VERSION < 150
+#if FW_VERSION == 103
 INCLUDE_ASM("nonmatchings/umd9660", func_0000434C);
-#endif
-
-#if FW_VERSION == 100
-s32 func_0000434C(void *arg0) {
-    return M2C_FIELD(M2C_FIELD(arg0, void **, 0x860), s32 *, 0xC);
+#else
+#if FW_VERSION < 201
+s32 func_0000434C(SceUmd9660Drive *arg0) {
+    return arg0->umdDrive->unkC;
 }
+#endif
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
@@ -1091,32 +1085,20 @@ s32 func_00004358(void *arg0) {
 }
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 201
-s32 func_00004358(void *arg0) {
-    s32 var_v0;
-
-    var_v0 = 0x80010016;
-    if (arg0 != NULL) {
-        var_v0 = sceUmdManSetReadAheadSize(M2C_FIELD(arg0, s32 *, 0x864));
-    }
-    return var_v0;
-}
-#endif
-
-#if FW_VERSION >= 102 && FW_VERSION < 150
+#if FW_VERSION == 103
 INCLUDE_ASM("nonmatchings/umd9660", func_00004358);
-#endif
-
-#if FW_VERSION == 100
-s32 func_00004358(void *arg0) {
+#else
+#if FW_VERSION < 201
+s32 func_00004358(SceUmd9660Drive *arg0) {
     s32 var_v0;
 
     var_v0 = 0x80010016;
     if (arg0 != NULL) {
-        var_v0 = sceUmdManSetReadAheadSize(M2C_FIELD(arg0, s32 *, 0x860));
+        var_v0 = sceUmdManSetReadAheadSize(arg0->umdDrive);
     }
     return var_v0;
 }
+#endif
 #endif
 
 #if FW_VERSION >= 282 && FW_VERSION < 350
@@ -1252,18 +1234,21 @@ s32 func_00003FFC(struct Unk_func_00003FFC_0 *arg0) {
 }
 #endif
 
-#if (FW_VERSION >= 102 && FW_VERSION < 150) || (FW_VERSION >= 201 && FW_VERSION < 350)
+#if FW_VERSION >= 201 && FW_VERSION < 350
 INCLUDE_ASM("nonmatchings/umd9660", func_00004024);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 201
-s32 func_00004024(void *arg0) {
+#if FW_VERSION == 103
+INCLUDE_ASM("nonmatchings/umd9660", func_00004024);
+#else
+#if FW_VERSION < 201
+s32 func_00004024(SceUmd9660Drive *arg0) {
     s32 temp_a1;
     s32 var_v1;
 
     var_v1 = 0x80010016;
     if (arg0 != NULL) {
-        temp_a1 = M2C_FIELD(arg0, s32 *, 0x864);
+        temp_a1 = (s32)arg0->umdDrive;
         if (temp_a1 != 0) {
             var_v1 = sceUmdManSetEnableReadAhead(temp_a1);
         }
@@ -1271,35 +1256,23 @@ s32 func_00004024(void *arg0) {
     return var_v1;
 }
 #endif
-
-#if FW_VERSION == 100
-s32 func_00004024(void *arg0) {
-    s32 temp_a1;
-    s32 var_v1;
-
-    var_v1 = 0x80010016;
-    if (arg0 != NULL) {
-        temp_a1 = M2C_FIELD(arg0, s32 *, 0x860);
-        if (temp_a1 != 0) {
-            var_v1 = sceUmdManSetEnableReadAhead(temp_a1);
-        }
-    }
-    return var_v1;
-}
 #endif
 
-#if (FW_VERSION >= 102 && FW_VERSION < 150) || (FW_VERSION >= 201 && FW_VERSION < 350)
+#if FW_VERSION >= 201 && FW_VERSION < 350
 INCLUDE_ASM("nonmatchings/umd9660", func_00004064);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 201
-s32 func_00004064(void *arg0) {
+#if FW_VERSION == 103
+INCLUDE_ASM("nonmatchings/umd9660", func_00004064);
+#else
+#if FW_VERSION < 201
+s32 func_00004064(SceUmd9660Drive *arg0) {
     s32 temp_a1;
     s32 var_v1;
 
     var_v1 = 0x80010016;
     if (arg0 != NULL) {
-        temp_a1 = M2C_FIELD(arg0, s32 *, 0x864);
+        temp_a1 = (s32)arg0->umdDrive;
         if (temp_a1 != 0) {
             var_v1 = sceUmdManSetDisableReadAhead(temp_a1);
         }
@@ -1307,35 +1280,23 @@ s32 func_00004064(void *arg0) {
     return var_v1;
 }
 #endif
-
-#if FW_VERSION == 100
-s32 func_00004064(void *arg0) {
-    s32 temp_a1;
-    s32 var_v1;
-
-    var_v1 = 0x80010016;
-    if (arg0 != NULL) {
-        temp_a1 = M2C_FIELD(arg0, s32 *, 0x860);
-        if (temp_a1 != 0) {
-            var_v1 = sceUmdManSetDisableReadAhead(temp_a1);
-        }
-    }
-    return var_v1;
-}
 #endif
 
-#if (FW_VERSION >= 102 && FW_VERSION < 150) || (FW_VERSION >= 201 && FW_VERSION < 350)
+#if FW_VERSION >= 201 && FW_VERSION < 350
 INCLUDE_ASM("nonmatchings/umd9660", func_000040A4);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 201
-s32 func_000040A4(void *arg0) {
+#if FW_VERSION == 103
+INCLUDE_ASM("nonmatchings/umd9660", func_000040A4);
+#else
+#if FW_VERSION < 201
+s32 func_000040A4(SceUmd9660Drive *arg0) {
     s32 temp_a1;
     s32 var_v1;
 
     var_v1 = 0x80010016;
     if (arg0 != NULL) {
-        temp_a1 = M2C_FIELD(arg0, s32 *, 0x864);
+        temp_a1 = (s32)arg0->umdDrive;
         if (temp_a1 != 0) {
             var_v1 = sceUmdManSetCachedRead(temp_a1);
         }
@@ -1343,35 +1304,23 @@ s32 func_000040A4(void *arg0) {
     return var_v1;
 }
 #endif
-
-#if FW_VERSION == 100
-s32 func_000040A4(void *arg0) {
-    s32 temp_a1;
-    s32 var_v1;
-
-    var_v1 = 0x80010016;
-    if (arg0 != NULL) {
-        temp_a1 = M2C_FIELD(arg0, s32 *, 0x860);
-        if (temp_a1 != 0) {
-            var_v1 = sceUmdManSetCachedRead(temp_a1);
-        }
-    }
-    return var_v1;
-}
 #endif
 
-#if (FW_VERSION >= 102 && FW_VERSION < 150) || (FW_VERSION >= 201 && FW_VERSION < 350)
+#if FW_VERSION >= 201 && FW_VERSION < 350
 INCLUDE_ASM("nonmatchings/umd9660", func_000040E4);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 201
-s32 func_000040E4(void *arg0) {
+#if FW_VERSION == 103
+INCLUDE_ASM("nonmatchings/umd9660", func_000040E4);
+#else
+#if FW_VERSION < 201
+s32 func_000040E4(SceUmd9660Drive *arg0) {
     s32 temp_a1;
     s32 var_v1;
 
     var_v1 = 0x80010016;
     if (arg0 != NULL) {
-        temp_a1 = M2C_FIELD(arg0, s32 *, 0x864);
+        temp_a1 = (s32)arg0->umdDrive;
         if (temp_a1 != 0) {
             var_v1 = sceUmdManSetUnCachedRead(temp_a1);
         }
@@ -1379,35 +1328,23 @@ s32 func_000040E4(void *arg0) {
     return var_v1;
 }
 #endif
-
-#if FW_VERSION == 100
-s32 func_000040E4(void *arg0) {
-    s32 temp_a1;
-    s32 var_v1;
-
-    var_v1 = 0x80010016;
-    if (arg0 != NULL) {
-        temp_a1 = M2C_FIELD(arg0, s32 *, 0x860);
-        if (temp_a1 != 0) {
-            var_v1 = sceUmdManSetUnCachedRead(temp_a1);
-        }
-    }
-    return var_v1;
-}
 #endif
 
-#if (FW_VERSION >= 102 && FW_VERSION < 150) || (FW_VERSION >= 201 && FW_VERSION < 350)
+#if FW_VERSION >= 201 && FW_VERSION < 350
 INCLUDE_ASM("nonmatchings/umd9660", func_00004124);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 201
-s32 func_00004124(void *arg0, s32 arg1) {
+#if FW_VERSION == 103
+INCLUDE_ASM("nonmatchings/umd9660", func_00004124);
+#else
+#if FW_VERSION < 201
+s32 func_00004124(SceUmd9660Drive *arg0, s32 arg1) {
     s32 temp_a2;
     s32 var_v1;
 
     var_v1 = 0x80010016;
     if (arg0 != NULL) {
-        temp_a2 = M2C_FIELD(arg0, s32 *, 0x864);
+        temp_a2 = (s32)arg0->umdDrive;
         if (temp_a2 != 0) {
             var_v1 = sceUmdManValidateUMD(temp_a2, arg1);
         }
@@ -1415,21 +1352,6 @@ s32 func_00004124(void *arg0, s32 arg1) {
     return var_v1;
 }
 #endif
-
-#if FW_VERSION == 100
-s32 func_00004124(void *arg0, s32 arg1) {
-    s32 temp_a2;
-    s32 var_v1;
-
-    var_v1 = 0x80010016;
-    if (arg0 != NULL) {
-        temp_a2 = M2C_FIELD(arg0, s32 *, 0x860);
-        if (temp_a2 != 0) {
-            var_v1 = sceUmdManValidateUMD(temp_a2, arg1);
-        }
-    }
-    return var_v1;
-}
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
@@ -1444,36 +1366,24 @@ s32 func_000044C0(void *arg0) {
 }
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 201
-s32 func_000044C0(void *arg0) {
+#if FW_VERSION == 103
+INCLUDE_ASM("nonmatchings/umd9660", func_000044C0);
+#else
+#if FW_VERSION < 201
+s32 func_000044C0(SceUmd9660Drive *arg0) {
     s32 var_v1;
 
     var_v1 = 0;
-    if ((arg0 == NULL) || (M2C_FIELD(arg0, s32 *, 0x864) == 0)) {
+    if ((arg0 == NULL) || (arg0->umdDrive == 0)) {
         var_v1 = 0x80010016;
     }
     return var_v1;
 }
 #endif
-
-#if FW_VERSION >= 102 && FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/umd9660", func_000044C0);
 #endif
 
 #if FW_VERSION == 103
 INCLUDE_ASM("nonmatchings/umd9660", func_00004A60);
-#endif
-
-#if FW_VERSION == 100
-s32 func_000044C0(void *arg0) {
-    s32 var_v1;
-
-    var_v1 = 0;
-    if ((arg0 == NULL) || (M2C_FIELD(arg0, s32 *, 0x860) == 0)) {
-        var_v1 = 0x80010016;
-    }
-    return var_v1;
-}
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282

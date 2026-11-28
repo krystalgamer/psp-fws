@@ -56,8 +56,10 @@ typedef char chk_SceUmd9660DiscInfo[(sizeof(SceUmd9660DiscInfo) == 0x28) ? 1 : -
 typedef struct {
     u8 sectorBuf[0x800]; /* 0x000 */
     char name[0x20]; /* 0x800: "umd%01x:" (sceBLKRegister name) */
-    SceUID semaId; /* 0x820 */
-    s32 unk824[3]; /* 0x824 */
+    union {
+        SceUID semaId; /* 0x820 */
+        s32 unk820[4]; /* 0x820: [1] = -1, [2] = 1 at init (an array: Init/BLK close index it) */
+    };
     s32 unk830[3]; /* 0x830: [2] = BLK open count */
     SceUmd9660DiscInfo disc; /* 0x83C */
     struct SceUmdDrive *umdDrive; /* 0x860 (1.02+: 0x864) */
@@ -112,7 +114,8 @@ typedef struct {
 typedef struct SceUmdDrive {
     struct { s8 driveId; u8 pad1[0x7]; u32 unk8; } *ataDrive; /* 0x00 */
     s32 unk4; /* 0x04 */
-    u8 pad8[0x8];
+    u32 unk8; /* 0x08 */
+    s32 unkC; /* 0x0C */
     s32 unk10; /* 0x10: 0x10 = UMD, 0x20 = not */
     u8 pad14[0x14];
     s32 unk28; /* 0x28 */
@@ -196,6 +199,10 @@ extern char D_00005A70[];
 extern char D_00005AD0[];
 extern char D_00005AF0[];
 extern char D_00005AFC[];
+extern char D_00005B30[];
+extern char D_00005B34[];
+extern char D_00005B4C[];
+extern char D_00005B60[];
 extern M2C_UNK D_00005C80;
 extern M2C_UNK D_00005C88;
 extern M2C_UNK D_00005CA0;
@@ -254,12 +261,16 @@ s32 func_00001E00(void);
 s32 func_00001E0C(void);
 s32 func_00001E18(void);
 s32 func_00001E24(void);
+SceOff func_00001E30(SceUmd9660File *file, SceOff ofs, s32 whence);
 void func_000022E8(void);
+s32 func_000023E4(void *arg0, void *arg1, s32 *unit);
+s32 func_00002694(void);
 SceUmd9660Mgr *func_000026E4(void);
 SceUmd9660File *func_00002910(SceIoIob *iob);
 s32 func_00002974(SceUmd9660Drive *drive, void *buf, SceSize size, SceUmdLbnParam *param);
 s32 func_000029FC(SceUmd9660Drive *drive, void *buf, SceSize size, s32 arg3, SceUmdLbnParam *param);
 s32 func_000036D0(s32 arg0);
+s32 func_000037AC(SceUmd9660Drive *drive);
 s32 func_00003A58(void);
 s32 func_00003BFC(void);
 M2C_UNK *func_00003C04(void);
@@ -267,17 +278,18 @@ s32 func_00003C80(s32 arg0);
 s32 func_00003C8C(SceUmd9660Drive *drive, void *buf);
 s32 func_00003D24(s32);
 s32 func_00003D28(SceIoIob *iob);
+s32 func_00003ED0(void *arg0, void *arg1, s32 *unit);
 s32 func_00003F70(void);
 s32 func_00003F7C(const char *name);
 void func_00003FAC(void);
 void func_00003FD4(void);
 s32 func_00003FF0(struct Unk_func_00003FF0_0 *arg0);
 s32 func_00003FFC(struct Unk_func_00003FFC_0 *arg0);
-s32 func_00004024(void *arg0);
-s32 func_00004064(void *arg0);
-s32 func_000040A4(void *arg0);
-s32 func_000040E4(void *arg0);
-s32 func_00004124(void *arg0, s32 arg1);
+s32 func_00004024(); /* 1.x: (SceUmd9660Drive *), 2.x: other layout */
+s32 func_00004064(); /* 1.x: (SceUmd9660Drive *), 2.x: other layout */
+s32 func_000040A4(); /* 1.x: (SceUmd9660Drive *), 2.x: other layout */
+s32 func_000040E4(); /* 1.x: (SceUmd9660Drive *), 2.x: other layout */
+s32 func_00004124(); /* 1.x: (SceUmd9660Drive *), 2.x: other layout */
 s32 func_00004148(s32 *arg0);
 s32 func_00004164(struct Unk_func_00004164_0 *arg0);
 s32 func_0000420C(void);
@@ -286,12 +298,13 @@ s32 func_00004264(s32 *arg0);
 s32 func_00004300(s32);
 s32 func_00004308(void);
 void func_00004330(void);
-s32 func_0000434C(void *arg0);
-s32 func_00004358(void *arg0);
+s32 func_0000434C(); /* 1.x: (SceUmd9660Drive *), 2.x: other layout */
+s32 func_00004358(); /* 1.x: (SceUmd9660Drive *), 2.x: other layout */
+s32 func_0000438C(SceUmdDrive *umd);
 s32 func_000043DC(void);
 s32 func_000043FC(void);
 M2C_UNK *func_00004404(void);
-s32 func_000044C0(void *arg0);
+s32 func_000044C0(); /* 1.x: (SceUmd9660Drive *), 2.x: other layout */
 s32 func_00004544(SceIoIob *iob);
 s32 func_00004568(void);
 void func_000046C4(void);
@@ -321,17 +334,27 @@ void func_00005B2C(s32 arg0);
 void *memcpy(void *dst, const void *src, SceSize n);
 void *memset(void *dst, s32 c, SceSize n);
 s32 module_start(void);
+s32 sceAtaExecSetFeaturesCmd(void *ata, s32 feature, s32 count, s32 driveId, s32 arg4);
 s32 sceAtaIsDvdDrive(void);
+s32 sceBLKRegister(const char *name, s32 type, s32 unit, void *data, SceUmd9660BlkOps *ops);
+s32 sceBLKUnRegister(const char *name, s32 unit);
 M2C_UNK sceIoAddDrv(M2C_UNK *);
 void sceKernelAssert(s32 ok, s32 lvl);
 void sceKernelCpuResumeIntr(s32);
 s32 sceKernelCpuSuspendIntr(void);
+SceUID sceKernelCreateHeap(SceUID part, SceSize size, s32 attr, const char *name);
+SceUID sceKernelCreateSema(const char *name, u32 attr, s32 init, s32 max, void *opt);
 s32 sceKernelDeleteHeap(SceUID heap);
+s32 sceKernelDeleteSema(SceUID id);
 s32 sceKernelDipsw(M2C_UNK);
 u32 sceKernelDipswAll(void);
 s32 sceKernelFreeHeapMemory(SceUID heap, void *p);
+s32 sceKernelSignalSema(SceUID id, s32 n);
+s32 sceKernelWaitSema(SceUID id, s32 n, u32 *timeout);
 SceUmd9660Drive *sceUmd9660GetDrive(s32 unit);
 s32 sceUmd9660Init(void);
+s32 sceUmd9660ReadPvd4DVD(const char *name, void *buf);
+s32 sceUmd9660ReadRootDir4DVD(const char *name, void *buf);
 s32 sceUmd9660Term(void);
 s32 sceUmd9660_driver_2C6C3F4C(void);
 s32 sceUmd9660_driver_3C150E0D(void);
@@ -341,6 +364,7 @@ s32 sceUmd9660_driver_C7CD9CE8(void);
 s32 sceUmd9660_driver_CAAFFE8D(void);
 s32 sceUmd9660_driver_F42C0AEE(void);
 s32 sceUmdIsUMD(void);
+s32 sceUmdManDVDDriveStart(void);
 s32 sceUmdManGetDiscInfo(SceUmdDiscInfo *info);
 s32 sceUmdManGetDiscInfo4VSH(SceUmdDiscInfo *info);
 s32 sceUmdManGetInquiry(SceUmdDrive *umd, s32 size, void *buf);
@@ -348,12 +372,15 @@ s32 sceUmdManGetIntrStateFlag();
 s32 sceUmdManGetPowerStat(s32 driveId);
 SceUmdDrive *sceUmdManGetUmdDrive(s32 driveId);
 s32 sceUmdManIsDvdDrive();
-s32 sceUmdManSetCachedRead(s32);
-s32 sceUmdManSetDisableReadAhead(s32);
-s32 sceUmdManSetEnableReadAhead(s32);
-s32 sceUmdManSetReadAheadSize(s32);
-s32 sceUmdManSetUnCachedRead(s32);
+s32 sceUmdManSetCachedRead();
+s32 sceUmdManSetDisableReadAhead();
+s32 sceUmdManSetEnableReadAhead();
+s32 sceUmdManSetReadAheadSize();
+s32 sceUmdManSetUnCachedRead();
 M2C_UNK sceUmdManSignalSema();
+s32 sceUmdManSyncState(void);
+s32 sceUmdManUMDDrivePreStart(void);
+s32 sceUmdManUMDDriveStart(void);
 s32 sceUmdManValidateUMD(s32, s32);
 M2C_UNK sceUmdManWaitSema();
 s32 sceUmdMan_driver_85AEA6C5();
