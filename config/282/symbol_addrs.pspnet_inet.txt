@@ -360,3 +360,7 @@ tcp_init_win = 0x0002C350; // rom:0x2C3F0
 tcp_sendspace = 0x0002C3A0; // rom:0x2C440
 tcp_recvspace = 0x0002C3A4; // rom:0x2C444
 ip_nhops = 0x0002C580;
+route_dst = 0x0002BEF4; // rom:0x2BF94
+route_src = 0x0002BF04; // rom:0x2BFA4
+route_proto = 0x0002BF14; // rom:0x2BFB4
+route_cb = 0x0002CD68;

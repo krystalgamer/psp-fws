@@ -680,3 +680,7 @@ func_00026930 = 0x00025034; // type:func (split from func_00024EC4)
 syn_hash2 = 0x0002DD50;
 syn_hash1 = 0x0002DD58;
 loif = 0x0002CDD8;
+route_dst = 0x0002BF44; // rom:0x2BFC4
+route_src = 0x0002BF54; // rom:0x2BFD4
+route_proto = 0x0002BF64; // rom:0x2BFE4
+route_cb = 0x0002CDB8;
