@@ -1032,9 +1032,158 @@ __inline struct syn_cache *syn_cache_lookup(struct sockaddr *src, struct sockadd
 	_sce_pspnet_splunlock(s);
 	return (NULL);
 }
+#endif
 
+#if FW_VERSION < 151
+struct socket *syn_cache_get(struct sockaddr *src, struct sockaddr *dst, struct tcphdr *th, u32 hlen, u32 tlen, struct socket *so, struct mbuf *m)
+{
+	struct syn_cache *sc;
+	struct syn_cache_head *scp;
+	struct inpcb *inp = NULL;
+	struct tcpcb *tp = 0;
+	struct mbuf *am;
+	int s;
+	struct socket *oso;
+
+	s = _sce_pspnet_spllock();
+	if ((sc = syn_cache_lookup(src, dst, &scp)) == NULL) {
+		_sce_pspnet_splunlock(s);
+		return (NULL);
+	}
+
+	if ((th->th_ack != sc->sc_iss + 1) ||
+	    SEQ_LEQ(th->th_seq, sc->sc_irs) ||
+	    SEQ_GT(th->th_seq, sc->sc_irs + 1 + sc->sc_win)) {
+		(void) syn_cache_respond(sc, m);
+		_sce_pspnet_splunlock(s);
+		return ((struct socket *)(-1));
+	}
+
+	SYN_CACHE_RM(sc);
+	_sce_pspnet_splunlock(s);
+
+    {
+	struct inpcb *parentinpcb;
+
+	parentinpcb = (struct inpcb *)so->so_pcb;
+
+	oso = so;
+	so = sonewconn1(so, SS_ISCONNECTED);
+	if (so == NULL)
+		goto resetandabort;
+
+	switch (so->so_proto->pr_domain->dom_family) {
+	case AF_INET:
+		inp = (struct inpcb *)so->so_pcb;
+		break;
+	}
+    }
+	switch (src->sa_family) {
+	case AF_INET:
+		if (inp) {
+			inp->inp_laddr = ((struct sockaddr_in *)dst)->sin_addr;
+			inp->inp_lport = ((struct sockaddr_in *)dst)->sin_port;
+			inp->inp_options = ip_srcroute();
+			in_pcbstate(inp, INP_BOUND);
+			if (inp->inp_options == NULL) {
+				inp->inp_options = sc->sc_ipopts;
+				sc->sc_ipopts = NULL;
+			}
+		}
+		break;
+	}
+
+	if (inp)
+		inp->inp_route = sc->sc_route4;
+	sc->sc_route4.ro_rt = NULL;
+
+	am = sceNetMGet(M_DONTWAIT, MT_SONAME);
+	if (am == NULL)
+		goto resetandabort;
+	am->m_len = src->sa_len;
+	func_0002C9B8(src, mtod(am, char *), src->sa_len);
+	if (inp) {
+		if (in_pcbconnect(inp, am)) {
+			(void) sceNetMFree(am);
+			goto resetandabort;
+		}
+	}
+	else {
+		(void) sceNetMFree(am);
+		goto resetandabort;
+	}
+	(void) sceNetMFree(am);
+
+	if (inp)
+		tp = (struct tcpcb *)inp->inp_ppcb;
+	else
+		tp = NULL;
+	if (sc->sc_request_r_scale != 15) {
+		tp->requested_s_scale = sc->sc_requested_s_scale;
+		tp->request_r_scale = sc->sc_request_r_scale;
+		tp->snd_scale = sc->sc_requested_s_scale;
+		tp->rcv_scale = sc->sc_request_r_scale;
+		tp->t_flags |= TF_RCVD_SCALE;
+	}
+	if (sc->sc_flags & SCF_TIMESTAMP)
+		tp->t_flags |= TF_RCVD_TSTMP;
+
+	tp->t_template = tcp_template(tp);
+	if (tp->t_template == 0) {
+		tp = tcp_drop(tp, ENOBUFS);
+		so = NULL;
+		sceNetMFreem(m);
+		goto abort;
+	}
+
+	tp->iss = sc->sc_iss;
+	tp->irs = sc->sc_irs;
+	tcp_sendseqinit(tp);
+	tcp_rcvseqinit(tp);
+	tp->t_state = TCPS_SYN_RECEIVED;
+	TCP_TIMER_ARM(tp, TCPT_KEEP, TCPTV_KEEP_INIT);
+	tcp_stat.tcps_accepts++;
+
+	tp->t_ourmss = sc->sc_ourmaxseg;
+	tcp_mss_from_peer(tp, sc->sc_peermaxseg);
+
+	if (sc->sc_rxtshift)
+		tp->snd_cwnd = tp->t_peermss;
+	else
+		tp->snd_cwnd = TCP_INITIAL_WINDOW(tcp_init_win, tp->t_peermss);
+
+	tcp_rmx_rtt(tp);
+	tp->snd_wl1 = sc->sc_irs;
+	tp->rcv_up = sc->sc_irs + 1;
+
+	tp->snd_up = tp->snd_una;
+	tp->snd_max = tp->snd_nxt = tp->iss+1;
+	TCP_TIMER_ARM(tp, TCPT_REXMT, tp->t_rxtcur);
+	if (sc->sc_win > 0 && SEQ_GT(tp->rcv_nxt + sc->sc_win, tp->rcv_adv))
+		tp->rcv_adv = tp->rcv_nxt + sc->sc_win;
+	tp->last_ack_sent = tp->rcv_nxt;
+
+	tcp_stat.tcps_sc_completed++;
+	SYN_CACHE_PUT(sc);
+	return (so);
+
+resetandabort:
+	(void) tcp_respond(NULL, m, m, th,
+			   th->th_seq + tlen, (tcp_seq)0, TH_RST|TH_ACK);
+abort:
+	if (so != NULL)
+		(void) soabort(so);
+	SYN_CACHE_PUT(sc);
+	tcp_stat.tcps_sc_aborted++;
+	return ((struct socket *)(-1));
+}
+#endif
+
+#if FW_VERSION >= 151 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_inet_udp", syn_cache_get);
+#endif
 
+#if FW_VERSION < 282
 void syn_cache_reset(struct sockaddr *src, struct sockaddr *dst, struct tcphdr *th)
 {
 	struct syn_cache *sc;

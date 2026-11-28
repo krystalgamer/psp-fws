@@ -1062,7 +1062,7 @@ struct syn_cache {
     struct { struct syn_cache *le_next; struct syn_cache **le_prev; } sc_bucketq; /* 0x00 */
     TAILQ_ENTRY(syn_cache) sc_timeq;    /* 0x08 */
     struct route sc_route4;             /* 0x10 */
-    s32 sc_win;                         /* 0x24 */
+    long sc_win;                        /* 0x24 */
     s32 sc_bucketidx;                   /* 0x28 */
     u32 sc_hash;                        /* 0x2C */
     u32 sc_timestamp;                   /* 0x30 */
@@ -1089,6 +1089,8 @@ struct syn_cache_head {
     u16 sch_length;                     /* 0x4 */
 };
 TAILQ_HEAD(syn_cache_timeq_head, syn_cache);
+#define tcp_rcvseqinit(tp) (tp)->rcv_adv = (tp)->rcv_nxt = (tp)->irs + 1
+#define tcp_sendseqinit(tp) (tp)->snd_una = (tp)->snd_nxt = (tp)->snd_max = (tp)->snd_up = (tp)->snd_recover = (tp)->iss
 #define SCF_UNREACH 0x0001
 #define SCF_TIMESTAMP 0x0002
 #define SYN_HASH(sa, sp, dp) \
@@ -2402,6 +2404,7 @@ void sppp_pap_scr(struct sppp *sp);
 void sppp_pap_tld(struct sppp *sp);
 void sppp_to_event(const struct cp *cp, struct sppp *sp);
 void syn_cache_cleanup(struct tcpcb *tp);
+struct socket *syn_cache_get(struct sockaddr *src, struct sockaddr *dst, struct tcphdr *th, u32 hlen, u32 tlen, struct socket *so, struct mbuf *m);
 void syn_cache_init(void);
 void syn_cache_insert(struct syn_cache *sc, struct tcpcb *tp);
 struct syn_cache *syn_cache_lookup(struct sockaddr *src, struct sockaddr *dst, struct syn_cache_head **headp);
