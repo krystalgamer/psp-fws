@@ -246,21 +246,42 @@ s32 sceKernelHeapTotalFreeSize(SceUID id) {
 }
 #endif
 
-#if FW_VERSION >= 201
-INCLUDE_ASM("nonmatchings/sysmem", sceKernelHeapTotalFreeSize);
-#endif
-
-#if FW_VERSION >= 201 && FW_VERSION < 280
-INCLUDE_ASM("nonmatchings/sysmem", sceKernelGetHeapTypeCB);
-#endif
-
-#if FW_VERSION < 201
-SceSysmemUidCB *sceKernelGetHeapTypeCB(void) {
-    return g_HeapType;
+#if FW_VERSION >= 201 && FW_VERSION < 330
+s32 sceKernelHeapTotalFreeSize(SceUID id) {
+    SceSysmemUidCB *uid;
+    SceSysmemHeap *heap;
+    SceSysmemHeapBlock *cur;
+    s32 total;
+    s32 oldIntr = suspendIntr();
+    s32 ret = sceKernelGetUIDcontrolBlockWithType(id, g_HeapType, &uid);
+    if (ret != 0) {
+        resumeIntr(oldIntr);
+        return ret;
+    }
+    heap = UID_CB_TO_DATA(uid, g_HeapType, SceSysmemHeap);
+    total = 0;
+    cur = heap->firstBlock->next;
+    while (1) {
+        total += func_00004A60(cur + 1);
+        if (cur == heap->firstBlock) {
+            break;
+        }
+        cur = cur->next;
+    }
+    resumeIntr(oldIntr);
+    return total;
 }
 #endif
 
+#if FW_VERSION >= 330
+INCLUDE_ASM("nonmatchings/sysmem", sceKernelHeapTotalFreeSize);
+#endif
+
 #if FW_VERSION < 280
+SceSysmemUidCB *sceKernelGetHeapTypeCB(void) {
+    return g_HeapType;
+}
+
 s32 sceKernelGetUidManHeapID(void) {
     return HeapCBUid;
 }
@@ -631,7 +652,28 @@ u32 SysMemForKernel_E6581468(s32 mpid) {
 }
 #endif
 
-#if FW_VERSION >= 201
+#if FW_VERSION >= 201 && FW_VERSION < 270
+u32 SysMemForKernel_E6581468(s32 mpid) {
+    s32 oldIntr = suspendIntr();
+    SceSysmemMemoryPartition *part = func_00000E08(mpid);
+    SceSysmemSeg *seg = part->firstCtlBlk->segs;
+    u32 max = 0;
+    u32 ret;
+    while (seg != NULL) {
+        if (!seg->used) {
+            if (max < seg->size) {
+                max = seg->size;
+            }
+        }
+        seg = seg->next;
+    }
+    ret = max << 8;
+    resumeIntr(oldIntr);
+    return ret;
+}
+#endif
+
+#if FW_VERSION >= 270
 INCLUDE_ASM("nonmatchings/sysmem", SysMemForKernel_E6581468);
 #endif
 
@@ -732,7 +774,26 @@ u32 SysMemForKernel_9697CD32(s32 mpid) {
 }
 #endif
 
-#if FW_VERSION >= 201
+#if FW_VERSION >= 201 && FW_VERSION < 270
+u32 SysMemForKernel_9697CD32(s32 mpid) {
+    s32 oldIntr = suspendIntr();
+    SceSysmemMemoryPartition *part = func_00000E08(mpid);
+    SceSysmemSeg *seg = part->firstCtlBlk->segs;
+    s32 total = 0;
+    u32 ret;
+    while (seg != NULL) {
+        if (!seg->used) {
+            total += seg->size;
+        }
+        seg = seg->next;
+    }
+    ret = total << 8;
+    resumeIntr(oldIntr);
+    return ret;
+}
+#endif
+
+#if FW_VERSION >= 270
 INCLUDE_ASM("nonmatchings/sysmem", SysMemForKernel_9697CD32);
 #endif
 
@@ -1428,7 +1489,14 @@ void func_00005430(u8 *arg0, u8 *arg1) {
     *var_a0 = 0;
 }
 
-INCLUDE_ASM("nonmatchings/sysmem", wmemclear);
+void wmemclear(void *dst, u32 size) {
+    s32 *p = dst;
+    u32 n = size >> 2;
+    while (n != 0) {
+        n--;
+        *p++ = 0;
+    }
+}
 
 INCLUDE_ASM("nonmatchings/sysmem", func_0000547C);
 
@@ -1834,7 +1902,27 @@ char *AllocSceUIDnamestr(const char *str1, const char *str2) {
     }
     return buf;
 }
-#else
+#endif
+
+#if FW_VERSION == 201
+char *AllocSceUIDnamestr(const char *str1, const char *str2) {
+    u32 len1 = func_000054FC(str1, 31);
+    u32 len2 = func_000054FC(str2, 31);
+    char *buf;
+    if (len1 + len2 >= 32) {
+        return NULL;
+    }
+    buf = _AllocHeapMemory(&EHeap4UID, len1 + len2 + 1, 0);
+    if (buf != NULL) {
+        func_0000547C(buf, str1, len1);
+        func_0000547C(buf + len1, str2, len2);
+        buf[len1 + len2] = '\0';
+    }
+    return buf;
+}
+#endif
+
+#if FW_VERSION >= 250
 INCLUDE_ASM("nonmatchings/sysmem", AllocSceUIDnamestr);
 #endif
 
@@ -1955,7 +2043,27 @@ s32 sceKernelCallUIDObjFunction(SceSysmemUidCB *uid, s32 funcId, ...) {
 }
 
 #if FW_VERSION >= 201
-INCLUDE_ASM("nonmatchings/sysmem", sceKernelLookupUIDFunction);
+s32 sceKernelLookupUIDFunction(SceSysmemUidCB *uid, s32 id, SceSysmemUidFunc *func, SceSysmemUidCB **parentUidWithFunc) {
+    s32 oldIntr = suspendIntr();
+    *func = NULL;
+    while (uid != NULL) {
+        if (uid->funcTable != NULL) {
+            SceSysmemUidLookupFunc *cur = uid->funcTable;
+            while (cur->func != NULL) {
+                if (cur->id == id) {
+                    *parentUidWithFunc = uid;
+                    *func = cur->func;
+                    resumeIntr(oldIntr);
+                    return 0;
+                }
+                cur++;
+            }
+        }
+        uid = uid->PARENT1;
+    }
+    resumeIntr(oldIntr);
+    return 0x800200CE;
+}
 #endif
 
 #if FW_VERSION < 150 || FW_VERSION >= 201
@@ -3496,7 +3604,10 @@ s32 sceKernelDebugEcho(void) {
     return D_0000F8B8;
 }
 
-INCLUDE_ASM("nonmatchings/sysmem", sceKernelDebugEchoSet);
+s32 sceKernelDebugEchoSet(s32 arg0) {
+    D_0000F8B8 = arg0;
+    return arg0;
+}
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 201

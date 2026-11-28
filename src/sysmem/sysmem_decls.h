@@ -108,40 +108,6 @@ typedef struct {
     u32 attr; /* 0xC */
 } SceSysmemPartitionInfo;
 
-struct SceSysmemUidLookupFunc;
-typedef struct SceSysmemUidCB {
-    struct SceSysmemUidCB *PARENT0; /* 0x00 */
-    struct SceSysmemUidCB *nextChild; /* 0x04 */
-    struct SceSysmemUidCB *meta; /* 0x08: the type */
-    SceUID uid; /* 0x0C */
-    char *name; /* 0x10 */
-    u8 childSize; /* 0x14: in words */
-    u8 size; /* 0x15: in words */
-    u16 attr; /* 0x16 */
-    union {
-        struct SceSysmemUidCB *next;
-        s32 numChild;
-    } next; /* 0x18 */
-    struct SceSysmemUidCB *PARENT1; /* 0x1C */
-    struct SceSysmemUidLookupFunc *funcTable; /* 0x20 */
-} SceSysmemUidCB; /* size 0x24 */
-
-typedef struct {
-    SceSysmemUidCB *root; /* 0x0 */
-    SceSysmemUidCB *metaRoot; /* 0x4 */
-    SceSysmemUidCB *basic; /* 0x8 */
-    s32 count; /* 0xC */
-} SceSysmemUidList;
-
-typedef s32 (*SceSysmemUidFunc)(SceSysmemUidCB *uid, SceSysmemUidCB *uidWithFunc, s32 funcId, __builtin_va_list ap);
-typedef struct SceSysmemUidLookupFunc {
-    s32 id;
-    SceSysmemUidFunc func;
-} SceSysmemUidLookupFunc;
-
-#define UIDCB(id) ((SceSysmemUidCB *)(0x88000000 | (((u32)(id) >> 7) << 2)))
-#define UID_CB_TO_DATA(uid, typeStruct, type) ((type *)((u8 *)(uid) + (typeStruct)->size * 4))
-
 struct Unk_func_00001318_0 {
     u8 pad0[0x10];
     s32 unk10;
@@ -179,6 +145,40 @@ struct Unk_func_00004A60_0 {
     s32 unk4;
     s32 unk8;
 };
+
+struct SceSysmemUidLookupFunc;
+typedef struct SceSysmemUidCB {
+    struct SceSysmemUidCB *PARENT0; /* 0x00 */
+    struct SceSysmemUidCB *nextChild; /* 0x04 */
+    struct SceSysmemUidCB *meta; /* 0x08: the type */
+    SceUID uid; /* 0x0C */
+    char *name; /* 0x10 */
+    u8 childSize; /* 0x14: in words */
+    u8 size; /* 0x15: in words */
+    u16 attr; /* 0x16 */
+    union {
+        struct SceSysmemUidCB *next;
+        s32 numChild;
+    } next; /* 0x18 */
+    struct SceSysmemUidCB *PARENT1; /* 0x1C */
+    struct SceSysmemUidLookupFunc *funcTable; /* 0x20 */
+} SceSysmemUidCB; /* size 0x24 */
+
+typedef struct {
+    SceSysmemUidCB *root; /* 0x0 */
+    SceSysmemUidCB *metaRoot; /* 0x4 */
+    SceSysmemUidCB *basic; /* 0x8 */
+    s32 count; /* 0xC */
+} SceSysmemUidList;
+
+typedef s32 (*SceSysmemUidFunc)(SceSysmemUidCB *uid, SceSysmemUidCB *uidWithFunc, s32 funcId, __builtin_va_list ap);
+typedef struct SceSysmemUidLookupFunc {
+    s32 id;
+    SceSysmemUidFunc func;
+} SceSysmemUidLookupFunc;
+
+#define UIDCB(id) ((SceSysmemUidCB *)(0x88000000 | (((u32)(id) >> 7) << 2)))
+#define UID_CB_TO_DATA(uid, typeStruct, type) ((type *)((u8 *)(uid) + (typeStruct)->size * 4))
 
 extern M2C_UNK D_0000A6E4;
 extern M2C_UNK D_0000A734;
@@ -338,7 +338,9 @@ s32 func_0000435C(void *lowheap);
 s32 func_000048E0(void *arg0);
 s32 func_00004A60(struct Unk_func_00004A60_0 *arg0);
 void func_00005430(u8 *arg0, u8 *arg1);
+void func_0000547C(u8 *arg0, u8 *arg1, u32 arg2);
 void func_000054E4(u8 *arg0, u8 *arg1);
+s32 func_000054FC(const char *s, s32 max);
 void func_00005850(void);
 s32 func_00005DBC(const char *s1, const char *s2);
 void func_00006080(u8 *arg0, u8 *arg1);
