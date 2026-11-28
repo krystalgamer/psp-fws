@@ -1552,6 +1552,11 @@ struct ipoption {
 typedef u32 tcp_seq;
 #define m_copydata sceNetMCopydata
 
+/* 2.x link bcmp from sceNet instead of a local copy */
+#if FW_VERSION >= 201
+#define func_0002C978 sceNetBcmp
+#endif
+
 struct SceTailqHead {
     void *tqh_first;
     void **tqh_last;
@@ -2284,6 +2289,7 @@ void sbinsertoob(struct sockbuf *sb, struct mbuf *m0);
 s32 sbreserve(struct sockbuf *sb, u32 cc);
 s32 sceKernelGetThreadId(void);
 s32 sceKernelSignalSema(u32, s32);
+s32 sceNetBcmp(const void *b1, const void *b2, u32 len);
 M2C_UNK sceNetBcopy(u8 *, s32, u8);
 s32 sceNetConfigAddArp(s32, s32);
 s32 sceNetConfigDelArp(s32, s32);

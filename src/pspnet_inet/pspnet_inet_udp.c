@@ -878,7 +878,7 @@ void syn_cache_cleanup(struct tcpcb *tp)
 	_sce_pspnet_splunlock(s);
 }
 
-#if FW_VERSION < 201
+#if FW_VERSION < 282
 __inline struct syn_cache *syn_cache_lookup(struct sockaddr *src, struct sockaddr *dst, struct syn_cache_head **headp)
 {
 	struct syn_cache *sc;
@@ -992,6 +992,6 @@ void syn_cache_init(void) {
     }
 }
 
-#if FW_VERSION >= 201
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/pspnet_inet_udp", syn_cache_lookup);
 #endif
