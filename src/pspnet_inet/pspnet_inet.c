@@ -79,7 +79,6 @@ s32 sceNetConfigDelDefaultRoute(void) {
 INCLUDE_ASM("nonmatchings/pspnet_inet", sceNetConfigDelDefaultRoute);
 #endif
 
-#if FW_VERSION < 271
 s32 sceNetConfigGetDefaultRoute(struct in_addr *gw) {
     SceNetConfigRouteInfo info;
     s32 len;
@@ -98,9 +97,6 @@ s32 sceNetConfigGetDefaultRoute(struct in_addr *gw) {
 end:
     return ret;
 }
-#else
-INCLUDE_ASM("nonmatchings/pspnet_inet", sceNetConfigGetDefaultRoute);
-#endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00001584);
@@ -568,7 +564,6 @@ s32 solisten(struct socket *so, s32 backlog) {
     return 0;
 }
 
-#if FW_VERSION < 271
 s32 soaccept(struct socket *so, struct mbuf *nam) {
     s32 s = _sce_pspnet_spllock();
     s32 error;
@@ -582,9 +577,6 @@ s32 soaccept(struct socket *so, struct mbuf *nam) {
     _sce_pspnet_splunlock(s);
     return error;
 }
-#else
-INCLUDE_ASM("nonmatchings/pspnet_inet", soaccept);
-#endif
 
 s32 soconnect(struct socket *so, struct mbuf *nam) {
     s32 s;
@@ -714,9 +706,7 @@ struct socket *sonewconn1(struct socket *head, s32 connstatus) {
     so_list.tqh_last = &so->so_list.tqe_next;
     return so;
 }
-#endif
-
-#if FW_VERSION >= 201 && FW_VERSION < 271
+#else
 struct socket *sonewconn1(struct socket *head, s32 connstatus) {
     struct socket *so;
     s32 soqueue = connstatus ? 1 : 0;
@@ -756,10 +746,6 @@ struct socket *sonewconn1(struct socket *head, s32 connstatus) {
     so_list.tqh_last = &so->so_list.tqe_next;
     return so;
 }
-#endif
-
-#if FW_VERSION >= 271
-INCLUDE_ASM("nonmatchings/pspnet_inet", sonewconn1);
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
@@ -807,7 +793,6 @@ s32 soqremque(struct socket *so, s32 q) {
     return 1;
 }
 
-#if FW_VERSION < 271
 void sowakeup(struct socket *so, struct sockbuf *sb) {
     _sce_pspnet_selwakeup(&sb->sb_sel);
     sb->sb_flags &= ~SB_SEL;
@@ -819,9 +804,6 @@ void sowakeup(struct socket *so, struct sockbuf *sb) {
         so->so_upcall(so, so->so_upcallarg, 1);
     }
 }
-#else
-INCLUDE_ASM("nonmatchings/pspnet_inet", sowakeup);
-#endif
 
 s32 soreserve(struct socket *so, u32 sndcc, u32 rcvcc) {
     if (sbreserve(&so->so_snd, sndcc) == 0) {
@@ -863,7 +845,6 @@ void func_00004A3C(struct sockbuf *sb) {
     sb->sb_hiwat = sb->sb_mbmax = 0;
 }
 
-#if FW_VERSION < 271
 void sbinsertoob(struct sockbuf *sb, struct mbuf *m0) {
     struct mbuf *m, **mp;
 
@@ -893,9 +874,6 @@ void sbinsertoob(struct sockbuf *sb, struct mbuf *m0) {
     }
     sbcompress(sb, m, m0);
 }
-#else
-INCLUDE_ASM("nonmatchings/pspnet_inet", sbinsertoob);
-#endif
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", sbappendaddr);
 
@@ -1049,7 +1027,6 @@ void func_00005778(struct socket *so) {
 }
 #endif
 
-#if FW_VERSION < 271
 void soisdisconnecting(struct socket *so) {
     so->so_state &= ~SS_ISCONNECTING;
     so->so_state |= (SS_ISDISCONNECTING | SS_CANTRCVMORE | SS_CANTSENDMORE);
@@ -1061,11 +1038,7 @@ void soisdisconnecting(struct socket *so) {
         sowakeup(so, &so->so_rcv);
     }
 }
-#else
-INCLUDE_ASM("nonmatchings/pspnet_inet", soisdisconnecting);
-#endif
 
-#if FW_VERSION < 271
 void soisdisconnected(struct socket *so) {
     so->so_state &= ~(SS_ISCONNECTING | SS_ISCONNECTED | SS_ISDISCONNECTING);
     so->so_state |= (SS_CANTRCVMORE | SS_CANTSENDMORE | SS_ISDISCONNECTED);
@@ -1077,9 +1050,6 @@ void soisdisconnected(struct socket *so) {
         sowakeup(so, &so->so_rcv);
     }
 }
-#else
-INCLUDE_ASM("nonmatchings/pspnet_inet", soisdisconnected);
-#endif
 
 #if FW_VERSION < 282
 void socantsendmore(struct socket *so) {

@@ -200,7 +200,42 @@ void tcp_init(void) {
 }
 #endif
 
-#if FW_VERSION >= 250
+#if FW_VERSION >= 282
+void tcp_init(void) {
+    s32 max_linkhdr;
+    s32 max_protohdr;
+
+    D_0002C324 = 3;
+    D_0002C334 = 4;
+    D_0002C338 = 0x200;
+    D_0002C33C = 3;
+    D_0002DC94 = 0;
+    D_0002C5C0 = 0;
+    D_0002C340 = 1;
+    D_0002C344 = 1;
+    D_0002C348 = 1;
+    D_0002C34C = 1;
+    tcp_init_win = 1;
+    D_0002C5C4 = 0;
+    D_0002C5C8 = 0;
+    D_0002C5CC = 0;
+    D_0002C5D0 = 0;
+    tcp_iss_seq = 0;
+    tcp_now = 0;
+    sceNetMemset(&tcp_stat, 0, sizeof(tcp_stat));
+    func_000244B0();
+    in_pcbinit(&tcbtable, D_0002C354, D_0002C354);
+    D_0002DF54 = NULL;
+    sceNetIfhandle_lib_5FB31C72(&max_linkhdr, &max_protohdr, NULL, NULL);
+    if (max_protohdr < (s32)(sizeof(struct ip) + sizeof(struct tcphdr)))
+        max_protohdr = sizeof(struct ip) + sizeof(struct tcphdr);
+    sceNetIfhandle_lib_62B20015(max_linkhdr, max_protohdr, 0, 0);
+    icmp_mtudisc_callback_register((void *)func_00023AD4);
+    syn_cache_init();
+}
+#endif
+
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", tcp_init);
 #endif
 
@@ -1600,7 +1635,7 @@ s32 tcp_ctloutput(s32 op, struct socket *so, s32 level, s32 optname, struct mbuf
 INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", func_000249FC);
 #endif
 
-#if FW_VERSION < 271
+#if FW_VERSION != 271
 s32 tcp_attach(struct socket *so) {
     struct tcpcb *tp;
     struct inpcb *inp;
@@ -1980,7 +2015,6 @@ void sppp_lcp_up(struct sppp *sp) {
     }
 }
 
-#if FW_VERSION < 271
 void sppp_lcp_down(struct sppp *sp) {
     const struct cp *cp = &lcp;
 
@@ -2011,11 +2045,7 @@ void sppp_lcp_down(struct sppp *sp) {
     }
     ((struct ifnet *)sp)->if_flags &= ~0x40; /* IFF_RUNNING */
 }
-#else
-INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", sppp_lcp_down);
-#endif
 
-#if FW_VERSION < 271
 void sppp_lcp_open(struct sppp *sp) {
     const struct cp *cp = &lcp;
 
@@ -2044,9 +2074,6 @@ void sppp_lcp_open(struct sppp *sp) {
         break;
     }
 }
-#else
-INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", sppp_lcp_open);
-#endif
 
 void sppp_lcp_close(struct sppp *sp) {
     const struct cp *cp = &lcp;
@@ -2083,7 +2110,6 @@ void sppp_lcp_TO(void *arg0) {
     sppp_to_event(&lcp, arg0);
 }
 
-#if FW_VERSION < 271
 void sppp_lcp_RCN_rej(struct sppp *sp, u8 *h, s32 len) {
     u8 *buf, *p;
 
@@ -2106,9 +2132,6 @@ void sppp_lcp_RCN_rej(struct sppp *sp, u8 *h, s32 len) {
     }
     sceNetFreeInternal(buf);
 }
-#else
-INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", sppp_lcp_RCN_rej);
-#endif
 
 void sppp_lcp_tld(struct sppp *sp) {
     s32 i;
@@ -2281,7 +2304,6 @@ void sppp_ipcp_TO(void *arg0) {
     sppp_to_event(&ipcp, arg0);
 }
 
-#if FW_VERSION < 271
 void sppp_ipcp_RCN_rej(struct sppp *sp, u8 *h, s32 len) {
     u8 *p;
 
@@ -2301,9 +2323,6 @@ void sppp_ipcp_RCN_rej(struct sppp *sp, u8 *h, s32 len) {
         }
     }
 }
-#else
-INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", sppp_ipcp_RCN_rej);
-#endif
 
 void sppp_ipcp_tlu(struct sppp *sp) {
     struct ifnet *ifp = (struct ifnet *)sp;
@@ -2423,15 +2442,11 @@ void func_000288E4(void) {
 }
 #endif
 
-#if FW_VERSION < 271
 void sppp_pap_tld(struct sppp *sp) {
     _sce_pspnet_callout_stop(sp->ch[IDX_PAP]);
     sp->lcp_protos &= ~(1 << IDX_PAP);
     D_0002BB24(sp);
 }
-#else
-INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", sppp_pap_tld);
-#endif
 
 void sppp_pap_scr(struct sppp *sp) {
     u8 idlen, pwdlen;

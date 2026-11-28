@@ -1925,6 +1925,7 @@ extern s32 D_0002C1D8;
 extern s32 D_0002C1DC;
 extern s32 D_0002C1E4;
 extern s32 D_0002C1E8; /* icmperrppslim */
+extern s32 D_0002C1F0;
 extern s32 D_0002C208; /* ip_maxfragpackets */
 extern s32 D_0002C228;
 extern s32 D_0002C22C;
@@ -1932,6 +1933,15 @@ extern s32 D_0002C234;
 extern s32 D_0002C240;
 extern s32 D_0002C270; /* icmpreturndatabytes */
 extern s32 D_0002C318;
+extern s32 D_0002C324;
+extern s32 D_0002C334;
+extern s32 D_0002C338;
+extern s32 D_0002C33C;
+extern s32 D_0002C340;
+extern s32 D_0002C344;
+extern s32 D_0002C348;
+extern s32 D_0002C34C;
+extern s32 D_0002C354;
 extern s32 D_0002C358;
 extern s32 D_0002C364;
 extern s32 D_0002C368;
@@ -1961,6 +1971,11 @@ extern s32 D_0002C590;
 extern s32 D_0002C594;
 extern s32 D_0002C5B4; /* icmpmaskrepl */
 extern struct { struct SceNetInetKeyNode *lh_first; } D_0002C5B8;
+extern s32 D_0002C5C0;
+extern s32 D_0002C5C4;
+extern s32 D_0002C5C8;
+extern s32 D_0002C5CC;
+extern s32 D_0002C5D0;
 extern u8 D_0002C5DC[];
 extern s32 D_0002C610;
 extern s32 D_0002C614_v201;
@@ -1982,7 +1997,9 @@ extern struct { struct ipq *lh_first; } D_0002DA48; /* ipq */
 extern u8 D_0002DA50[0x170]; /* icmpstat */
 extern M2C_UNK D_0002DBC8;
 extern struct inpcbtable D_0002DC78;
+extern s32 D_0002DC94;
 extern s32 D_0002DCE4;
+extern struct tcpcb *D_0002DF54;
 extern struct route D_0002E19C;
 extern s32 D_0002E5EC;
 extern s32 D_0002E5F0;
@@ -2253,9 +2270,14 @@ void func_00010528(struct mbuf *m);
 s32 func_000106E0(void);
 s32 func_00010700(void);
 s32 func_00010874(struct socket *so, s32 cmd, void *data, struct ifnet *ifp);
+s32 func_00010C08(struct socket *so, s32 cmd, void *data, struct ifnet *ifp);
 s32 func_00010D50(struct socket *so, s32 cmd, void *data, struct ifnet *ifp);
 s32 func_000123FC(struct in_addr in);
 s32 func_00013114(void *v, struct mbuf *nam);
+s32 func_00013338(void *v, struct mbuf *nam);
+s32 func_0001358C(void *v, struct mbuf *nam);
+void func_000141EC(struct inpcb *inp, struct mbuf *nam);
+void func_00014258(struct inpcb *inp, struct mbuf *nam);
 void func_00014260(struct inpcb *inp, struct mbuf *nam);
 void func_000142CC(struct inpcb *inp, struct mbuf *nam);
 s32 func_00019A98(void);
@@ -2270,6 +2292,7 @@ void func_0001F088(struct tcpcb *tp, u8 *cp, s32 cnt, struct tcphdr *th, struct 
 s32 func_000232C0(struct Unk_func_000232C0_0 *arg0);
 s32 func_00023828(struct Unk_func_00023828_0 *arg0);
 void func_00023AB8(struct Unk_func_00023AB8_0 *arg0);
+void func_00023AD4(struct in_addr addr);
 void func_000244B0(void);
 void func_00025638(struct sppp *sp, u16 proto, u8 type, u8 ident, u16 len, void *data);
 void func_00026FF4(const struct cp *cp, struct sppp *sp, u32 type, u32 id, ...);
