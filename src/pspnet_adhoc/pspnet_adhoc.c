@@ -1239,13 +1239,71 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00006B1C);
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00006AA0);
 #endif
 
+#if FW_VERSION < 150
+s32 sceNetAdhocGameModeCreateMaster(void *ptr, s32 size) {
+    s32 s;
+    s32 ret;
+    SceNetEtherAddr addr;
+
+    if (ptr == NULL)
+        return 0x80410711;
+    ret = 0x80410712;
+    s = _sce_pspnet_spllock();
+    if (D_00007400 == 0)
+        goto end;
+    ret = 0x8041071B;
+    if (sceWlanDevIsGameMode() == 0)
+        goto end;
+    ret = sceNetGetLocalEtherAddr(&addr);
+    if (ret < 0)
+        goto end;
+    ret = func_00006AB8(&addr, ptr, size);
+    if (ret < 0)
+        goto end;
+    D_000073F0 = ret;
+    ret = 0;
+end:
+    _sce_pspnet_splunlock(s);
+    return ret;
+}
+#else
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", sceNetAdhocGameModeCreateMaster);
 
-#if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", sceNetAdhocGameModeCreateReplica);
 #endif
 
+#if FW_VERSION < 150
+s32 sceNetAdhocGameModeUpdateMaster(void) {
+    s32 s;
+    s32 ret;
+    SceNetAdhocGameMode *gm;
+
+    s = _sce_pspnet_spllock();
+    ret = 0x80410712;
+    if (D_00007400 == 0)
+        goto end;
+    ret = 0x8041071B;
+    if (sceWlanDevIsGameMode() == 0)
+        goto end;
+    ret = 0x8041071C;
+    if (D_000073F0 < 0)
+        goto end;
+    for (gm = D_000079C0.first; gm != NULL; gm = gm->next) {
+        if (gm->id == D_000073F0)
+            break;
+    }
+    if (gm == NULL) {
+        ret = 0x8041071C;
+        goto end;
+    }
+    ret = sceWlanGPSend(0x10, gm->ptr, gm->size);
+end:
+    _sce_pspnet_splunlock(s);
+    return ret;
+}
+#else
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", sceNetAdhocGameModeUpdateMaster);
+#endif
 
 #if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", sceNetAdhocGameModeDeleteMaster);

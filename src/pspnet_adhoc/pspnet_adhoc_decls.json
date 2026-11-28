@@ -84,9 +84,11 @@
   "module_start": "s32 module_start(void);",
   "module_stop": "s32 module_stop(void);",
   "sceKernelSignalSema": "s32 sceKernelSignalSema(s32 sema, s32 n);",
+  "sceNetAdhocGameModeCreateMaster": "s32 sceNetAdhocGameModeCreateMaster(void *ptr, s32 size);",
   "sceNetAdhocGameModeCreateReplica": "s32 sceNetAdhocGameModeCreateReplica(const SceNetEtherAddr *addr, void *ptr, s32 size);",
   "sceNetAdhocGameModeDeleteMaster": "s32 sceNetAdhocGameModeDeleteMaster(void);",
   "sceNetAdhocGameModeDeleteReplica": "s32 sceNetAdhocGameModeDeleteReplica(s32 id);",
+  "sceNetAdhocGameModeUpdateMaster": "s32 sceNetAdhocGameModeUpdateMaster(void);",
   "sceNetAdhocGameModeUpdateReplica": "void sceNetAdhocGameModeUpdateReplica(s32 id, SceNetAdhocGameModeOptData *opt);",
   "sceNetAdhocGameModeUpdateReplicaInternal": "void sceNetAdhocGameModeUpdateReplicaInternal(s32 id, SceNetAdhocGameModeOptData *opt);",
   "sceNetAdhocGetPdpStat": "s32 sceNetAdhocGetPdpStat(s32 *buflen, SceNetAdhocPdpStat *buf);",
@@ -98,6 +100,7 @@
   "sceNetAdhoc_lib_62B875A8": "void sceNetAdhoc_lib_62B875A8(void);",
   "sceNetAdhoc_lib_F9240FBA": "void sceNetAdhoc_lib_F9240FBA(void);",
   "sceNetFreeInternal": "void sceNetFreeInternal(void *p);",
+  "sceNetGetLocalEtherAddr": "s32 sceNetGetLocalEtherAddr(SceNetEtherAddr *addr);",
   "sceNetMCopydata": "void sceNetMCopydata(struct mbuf *m, s32 off, s32 len, void *cp);",
   "sceNetMFreem": "void sceNetMFreem(struct mbuf *m);",
   "sceNetMallocInternal": "void *sceNetMallocInternal(u32 size);",
@@ -105,7 +108,8 @@
   "sceNetRand": "u32 sceNetRand(void);",
   "sceWlanDevIsGameMode": "s32 sceWlanDevIsGameMode(void);",
   "sceWlanGPPrevEstablishActive": "s32 sceWlanGPPrevEstablishActive(const SceNetEtherAddr *addr);",
-  "sceWlanGPRecv": "s32 sceWlanGPRecv(s32 id, void *ptr, s32 size, SceNetAdhocGameModeOptData *opt);"
+  "sceWlanGPRecv": "s32 sceWlanGPRecv(s32 id, void *ptr, s32 size, SceNetAdhocGameModeOptData *opt);",
+  "sceWlanGPSend": "s32 sceWlanGPSend(s32 id, void *ptr, s32 size);"
  },
  "types": {
   "SceNetAdhocDesc": "/* socket descriptor (0x2C), one per PDP/PTP id */\ntypedef struct SceNetAdhocDesc {\n    struct SceNetAdhocDesc *next;   /* 0x00 TAILQ entry */\n    struct SceNetAdhocDesc **prev;  /* 0x04 */\n    s32 id;                         /* 0x08 */\n    s32 unkC;\n    u8 type;                        /* 0x10 SCE_NET_ADHOC_DESC_* */\n    u8 pad11[3];\n    void *pcb;                      /* 0x14 */\n    s32 unk18;                      /* 0x18 read-waiter tid */\n    s32 unk1C;                      /* 0x1C write-waiter tid */\n    s32 unk20;                      /* 0x20 except-waiter tid */\n    SceNetAdhocWaiter *waiters;     /* 0x24 */\n    s32 unk28;\n} SceNetAdhocDesc;\ntypedef char chk_SceNetAdhocDesc[(sizeof(SceNetAdhocDesc) == 0x2C) ? 1 : -1];",

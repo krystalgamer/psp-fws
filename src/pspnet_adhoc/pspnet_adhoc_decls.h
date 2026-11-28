@@ -359,9 +359,11 @@ s32 func_00007298(s32 id, SceNetAdhocGameModeOptData *opt, s32 internal);
 s32 module_start(void);
 s32 module_stop(void);
 s32 sceKernelSignalSema(s32 sema, s32 n);
+s32 sceNetAdhocGameModeCreateMaster(void *ptr, s32 size);
 s32 sceNetAdhocGameModeCreateReplica(const SceNetEtherAddr *addr, void *ptr, s32 size);
 s32 sceNetAdhocGameModeDeleteMaster(void);
 s32 sceNetAdhocGameModeDeleteReplica(s32 id);
+s32 sceNetAdhocGameModeUpdateMaster(void);
 void sceNetAdhocGameModeUpdateReplica(s32 id, SceNetAdhocGameModeOptData *opt);
 void sceNetAdhocGameModeUpdateReplicaInternal(s32 id, SceNetAdhocGameModeOptData *opt);
 s32 sceNetAdhocGetPdpStat(s32 *buflen, SceNetAdhocPdpStat *buf);
@@ -373,6 +375,7 @@ s32 sceNetAdhocTerm(void);
 void sceNetAdhoc_lib_62B875A8(void);
 void sceNetAdhoc_lib_F9240FBA(void);
 void sceNetFreeInternal(void *p);
+s32 sceNetGetLocalEtherAddr(SceNetEtherAddr *addr);
 void sceNetMCopydata(struct mbuf *m, s32 off, s32 len, void *cp);
 void sceNetMFreem(struct mbuf *m);
 void *sceNetMallocInternal(u32 size);
@@ -381,5 +384,6 @@ u32 sceNetRand(void);
 s32 sceWlanDevIsGameMode(void);
 s32 sceWlanGPPrevEstablishActive(const SceNetEtherAddr *addr);
 s32 sceWlanGPRecv(s32 id, void *ptr, s32 size, SceNetAdhocGameModeOptData *opt);
+s32 sceWlanGPSend(s32 id, void *ptr, s32 size);
 
 #endif
