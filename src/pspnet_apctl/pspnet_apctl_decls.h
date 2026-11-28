@@ -725,7 +725,7 @@ u32 func_00004270(SceNetInAddrPacked *addr);
 s32 func_000042D0(SceNetDhcpCtx *dc);
 s32 func_00004424(const char *ifname);
 s32 func_000045B8(SceNetDhcpCtx *dc, void *addr);
-s32 func_00004704(s32 sock, u32 *dst, void *buf);
+s32 func_00004704(s32 sock, SceNetInAddrPacked *dst, void *buf);
 s32 func_000047D8(SceNetDhcpCtx *dc);
 s32 func_0000487C(SceNetDhcpCtx *dc, void *spa, void *tpa);
 s32 func_00004AEC(void *bp, s32 len, SceNetDhcpLease *l);

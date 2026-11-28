@@ -25,7 +25,30 @@ INCLUDE_ASM("nonmatchings/pspnet_apctl_006340", func_00006168);
 #if FW_VERSION < 250
 INCLUDE_ASM("nonmatchings/pspnet_apctl_006340", func_000045B8);
 
-INCLUDE_ASM("nonmatchings/pspnet_apctl_006340", func_00004704);
+s32 func_00004704(s32 sock, SceNetInAddrPacked *dst, void *buf) {
+    SceNetSockaddrIn sin;
+    SceNetMsghdr msg;
+    SceNetIovec iov;
+
+    __builtin_memset(&sin, 0, sizeof(sin));
+    sin.sin_family = 2;
+    sin.sin_addr = dst->s_addr;
+    sin.sin_port = __builtin_allegrex_wsbh(67);
+    iov.iov_base = buf;
+    iov.iov_len = 0x224;
+    msg.msg_namelen = sizeof(sin);
+    msg.msg_iov = &iov;
+    msg.msg_iovlen = 1;
+    msg.msg_control = NULL;
+    msg.msg_controllen = 0;
+    msg.msg_flags = 0;
+    msg.msg_name = &sin;
+    if (sceNetInetSendmsg(sock, &msg, 0) < 0) {
+        sceNetInetClose(sock);
+        return 0x80410583;
+    }
+    return 0;
+}
 
 s32 func_000047D8(SceNetDhcpCtx *dc) {
     s32 now;

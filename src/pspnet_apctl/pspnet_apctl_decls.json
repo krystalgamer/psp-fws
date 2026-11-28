@@ -90,7 +90,7 @@
   "func_000042D0": "s32 func_000042D0(SceNetDhcpCtx *dc);",
   "func_00004424": "s32 func_00004424(const char *ifname);",
   "func_000045B8": "s32 func_000045B8(SceNetDhcpCtx *dc, void *addr);",
-  "func_00004704": "s32 func_00004704(s32 sock, u32 *dst, void *buf);",
+  "func_00004704": "s32 func_00004704(s32 sock, SceNetInAddrPacked *dst, void *buf);",
   "func_000047D8": "s32 func_000047D8(SceNetDhcpCtx *dc);",
   "func_0000487C": "s32 func_0000487C(SceNetDhcpCtx *dc, void *spa, void *tpa);",
   "func_00004AEC": "s32 func_00004AEC(void *bp, s32 len, SceNetDhcpLease *l);",
