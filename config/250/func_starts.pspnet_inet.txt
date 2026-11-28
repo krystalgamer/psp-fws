@@ -1,7 +1,7 @@
 // function starts pinned by tools/split_tu.py
-sbappendrecord = 0x00005BD4; // type:func
-rn_search = 0x0000B654; // type:func
-rtable_init = 0x0000D104; // type:func
 func_00018B28 = 0x00018B28; // type:func
 func_00023CD0 = 0x00023CD0; // type:func
 func_00024B04 = 0x00024B04; // type:func
+rtable_init = 0x0000D104; // type:func
+rn_search = 0x0000B654; // type:func
+sbappendrecord = 0x00005BD4; // type:func
