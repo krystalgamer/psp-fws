@@ -57,6 +57,7 @@
   "func_0000263C": "s32 func_0000263C(SceMSstorDev *dev, u32 block);",
   "func_000026A8": "s32 func_000026A8(SceMSstorDev *dev);",
   "func_0000299C": "s32 func_0000299C(SceMSstorDev *dev, s32 arg1, void *arg2);",
+  "func_000031EC": "s32 func_000031EC(SceMSstorDev *dev, s32 *blk, s32 seg);",
   "func_00003298": "u32 func_00003298(SceMSstorDev *dev);",
   "func_000034CC": "s32 func_000034CC(void *arg0, s32 arg1, s32 *arg2);",
   "func_0000366C": "s32 func_0000366C(SceMSstorDev *dev, s32 a1, s32 a2, s32 a3);",

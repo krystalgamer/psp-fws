@@ -440,6 +440,7 @@ void func_00001BBC(s32 *arg0, M2C_UNK arg1, M2C_UNK arg2);
 s32 func_0000263C(SceMSstorDev *dev, u32 block);
 s32 func_000026A8(SceMSstorDev *dev);
 s32 func_0000299C(SceMSstorDev *dev, s32 arg1, void *arg2);
+s32 func_000031EC(SceMSstorDev *dev, s32 *blk, s32 seg);
 u32 func_00003298(SceMSstorDev *dev);
 s32 func_000034CC(void *arg0, s32 arg1, s32 *arg2);
 s32 func_0000366C(SceMSstorDev *dev, s32 a1, s32 a2, s32 a3);

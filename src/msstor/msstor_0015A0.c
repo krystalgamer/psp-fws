@@ -1433,7 +1433,49 @@ s32 func_00006EBC(SceIoIob *iob, s32 cmd, void *in, SceSize inlen, void *out, Sc
 INCLUDE_ASM("nonmatchings/msstor_0015A0", func_00006EBC);
 #endif
 
+#if FW_VERSION < 201
+s32 func_00006F10(SceIoIob *iob, s32 cmd, void *in, SceSize inlen, void *out, SceSize outlen) {
+    SceMSstorDev *dev;
+    SceMSstorRawParam *p;
+    s32 seg;
+    s32 r;
+    s32 ret;
+    s32 writable;
+    s32 blk;
+
+    dev = ((SceMSstorIoCtx *)iob->i_private)->dev;
+    p = out;
+    r = 0;
+    if (dev->mediaType2 & 0x40) {
+        return 0x80220183;
+    }
+    if (out == NULL || outlen < 0x20) {
+        return 0x80220183;
+    }
+    seg = ((u32)((dev->boot[0x1A4] << 8) | dev->boot[0x1A5]) >> 9) - 1;
+    writable = dev->writable;
+    for (; seg > 0; seg--) {
+        blk = 0;
+        r = func_000031EC(dev, &blk, seg);
+        if (r == 0) {
+            break;
+        }
+        if (r == -13) {
+            dev->writable = writable;
+        }
+    }
+    if (blk == 0) {
+        p->result = 0x80220187;
+        return 0x80220187;
+    }
+    ret = func_00007850(r);
+    p->result = ret;
+    p->unk0 = blk;
+    return ret;
+}
+#else
 INCLUDE_ASM("nonmatchings/msstor_0015A0", func_00006F10);
+#endif
 
 #if FW_VERSION < 201
 s32 func_0000700C(s32 mode, SceIoIob *iob, s32 cmd, void *in, SceSize inlen, void *out, SceSize outlen) {
