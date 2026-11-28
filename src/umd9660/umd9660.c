@@ -1063,14 +1063,10 @@ s32 func_0000434C(void *arg0) {
 }
 #endif
 
-#if FW_VERSION == 103
-INCLUDE_ASM("nonmatchings/umd9660", func_0000434C);
-#else
 #if FW_VERSION < 201
 s32 func_0000434C(SceUmd9660Drive *arg0) {
     return arg0->umdDrive->unkC;
 }
-#endif
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
@@ -1085,9 +1081,6 @@ s32 func_00004358(void *arg0) {
 }
 #endif
 
-#if FW_VERSION == 103
-INCLUDE_ASM("nonmatchings/umd9660", func_00004358);
-#else
 #if FW_VERSION < 201
 s32 func_00004358(SceUmd9660Drive *arg0) {
     s32 var_v0;
@@ -1098,7 +1091,6 @@ s32 func_00004358(SceUmd9660Drive *arg0) {
     }
     return var_v0;
 }
-#endif
 #endif
 
 #if FW_VERSION >= 282 && FW_VERSION < 350
@@ -1238,9 +1230,6 @@ s32 func_00003FFC(struct Unk_func_00003FFC_0 *arg0) {
 INCLUDE_ASM("nonmatchings/umd9660", func_00004024);
 #endif
 
-#if FW_VERSION == 103
-INCLUDE_ASM("nonmatchings/umd9660", func_00004024);
-#else
 #if FW_VERSION < 201
 s32 func_00004024(SceUmd9660Drive *arg0) {
     s32 temp_a1;
@@ -1256,15 +1245,11 @@ s32 func_00004024(SceUmd9660Drive *arg0) {
     return var_v1;
 }
 #endif
-#endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 350
 INCLUDE_ASM("nonmatchings/umd9660", func_00004064);
 #endif
 
-#if FW_VERSION == 103
-INCLUDE_ASM("nonmatchings/umd9660", func_00004064);
-#else
 #if FW_VERSION < 201
 s32 func_00004064(SceUmd9660Drive *arg0) {
     s32 temp_a1;
@@ -1280,15 +1265,11 @@ s32 func_00004064(SceUmd9660Drive *arg0) {
     return var_v1;
 }
 #endif
-#endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 350
 INCLUDE_ASM("nonmatchings/umd9660", func_000040A4);
 #endif
 
-#if FW_VERSION == 103
-INCLUDE_ASM("nonmatchings/umd9660", func_000040A4);
-#else
 #if FW_VERSION < 201
 s32 func_000040A4(SceUmd9660Drive *arg0) {
     s32 temp_a1;
@@ -1304,15 +1285,11 @@ s32 func_000040A4(SceUmd9660Drive *arg0) {
     return var_v1;
 }
 #endif
-#endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 350
 INCLUDE_ASM("nonmatchings/umd9660", func_000040E4);
 #endif
 
-#if FW_VERSION == 103
-INCLUDE_ASM("nonmatchings/umd9660", func_000040E4);
-#else
 #if FW_VERSION < 201
 s32 func_000040E4(SceUmd9660Drive *arg0) {
     s32 temp_a1;
@@ -1328,15 +1305,11 @@ s32 func_000040E4(SceUmd9660Drive *arg0) {
     return var_v1;
 }
 #endif
-#endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 350
 INCLUDE_ASM("nonmatchings/umd9660", func_00004124);
 #endif
 
-#if FW_VERSION == 103
-INCLUDE_ASM("nonmatchings/umd9660", func_00004124);
-#else
 #if FW_VERSION < 201
 s32 func_00004124(SceUmd9660Drive *arg0, s32 arg1) {
     s32 temp_a2;
@@ -1352,7 +1325,6 @@ s32 func_00004124(SceUmd9660Drive *arg0, s32 arg1) {
     return var_v1;
 }
 #endif
-#endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
 s32 func_000044C0(void *arg0) {
@@ -1366,9 +1338,6 @@ s32 func_000044C0(void *arg0) {
 }
 #endif
 
-#if FW_VERSION == 103
-INCLUDE_ASM("nonmatchings/umd9660", func_000044C0);
-#else
 #if FW_VERSION < 201
 s32 func_000044C0(SceUmd9660Drive *arg0) {
     s32 var_v1;
@@ -1379,7 +1348,6 @@ s32 func_000044C0(SceUmd9660Drive *arg0) {
     }
     return var_v1;
 }
-#endif
 #endif
 
 #if FW_VERSION == 103
