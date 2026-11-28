@@ -21,7 +21,9 @@ INCLUDE_ASM("nonmatchings/pafmini_06A490", func_0006A528);
 
 INCLUDE_ASM("nonmatchings/pafmini_06A490", _ZN3paf6PhText9EraseTextEjj);
 
-s32 _ZN3paf6PhText9EraseTextEi(struct Unk_scePaf_B9BE69FD_0 *arg0, s32 arg1) {
+s32 paf::PhText::EraseText(int cxxp1) {
+    struct Unk_scePaf_B9BE69FD_0 *arg0 = (struct Unk_scePaf_B9BE69FD_0 *) this;
+    s32 arg1 = (s32) cxxp1;
     s32 var_a2;
     void *temp_v0;
 
@@ -86,7 +88,8 @@ INCLUDE_ASM("nonmatchings/pafmini_06A490", _ZN3paf6PhText14RemoveAllAttrsEv);
 
 INCLUDE_ASM("nonmatchings/pafmini_06A490", _ZNK3paf6PhText12GetTextWidthEv);
 
-void _ZN3paf6PhText14ReleaseSurfaceEv(struct Unk_scePaf_A574DB92_0 *arg0) {
+void paf::PhText::ReleaseSurface() {
+    struct Unk_scePaf_A574DB92_0 *arg0 = (struct Unk_scePaf_A574DB92_0 *) this;
     s32 temp_v0;
 
     temp_v0 = arg0->unk1E8;
@@ -156,7 +159,7 @@ s32 func_0006AAE8(void) {
     return D_000E1288;
 }
 
-s32 _ZN3paf8PhXmItem10WidgetTypeEv(void) {
+s32 paf::PhXmItem::WidgetType() {
     return D_000E1288;
 }
 
@@ -396,7 +399,7 @@ s32 func_0006BEFC(void) {
     return D_000E128C;
 }
 
-s32 _ZN3paf8PhXmList10WidgetTypeEv(void) {
+s32 paf::PhXmList::WidgetType() {
     return D_000E128C;
 }
 
@@ -496,7 +499,9 @@ INCLUDE_ASM("nonmatchings/pafmini_06A490", func_000839C4);
 INCLUDE_ASM("nonmatchings/pafmini_06A490", func_0006C79C);
 #endif
 
-s32 _ZN3paf8PhXmList10SetItemNumEi(struct Unk_scePaf_4FC2470C_0 *arg0, s32 arg1) {
+s32 paf::PhXmList::SetItemNum(int cxxp1) {
+    struct Unk_scePaf_4FC2470C_0 *arg0 = (struct Unk_scePaf_4FC2470C_0 *) this;
+    s32 arg1 = (s32) cxxp1;
     s32 var_v0;
 
     var_v0 = -1;
@@ -689,7 +694,9 @@ INCLUDE_ASM("nonmatchings/pafmini_06A490", _ZN3paf8PhXmList12AnimIconStopEi);
 #if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/pafmini_06A490", _ZN3paf8PhXmList12AnimIconMoveEiRK4vec4ff);
 
-s32 _ZN3paf8PhXmList10SetKeyMaskEi(struct Unk_scePaf_C933B3C5_0 *arg0, s32 arg1) {
+s32 paf::PhXmList::SetKeyMask(int cxxp1) {
+    struct Unk_scePaf_C933B3C5_0 *arg0 = (struct Unk_scePaf_C933B3C5_0 *) this;
+    s32 arg1 = (s32) cxxp1;
     s32 temp_v0;
 
     temp_v0 = arg0->unk35C;
@@ -1255,10 +1262,10 @@ void func_00074B34(struct Unk_func_00074B34_0 *arg0) {
 }
 #endif
 
-void _ZN3paf12MiconPointee6AddRefEv(void) {
+void paf::MiconPointee::AddRef() {
 }
 
-void _ZN3paf12MiconPointee7ReleaseEv(void) {
+void paf::MiconPointee::Release() {
 }
 
 INCLUDE_ASM("nonmatchings/pafmini_06A490", func_00074B60);

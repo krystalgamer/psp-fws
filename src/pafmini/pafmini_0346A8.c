@@ -778,7 +778,7 @@ INCLUDE_ASM("nonmatchings/pafmini_0346A8", func_0003CA60);
 INCLUDE_ASM("nonmatchings/pafmini_0346A8", func_0003CB0C);
 #endif
 
-M2C_UNK *_ZN3paf8PhAppear12ShadowRenderEv(void) {
+M2C_UNK * paf::PhAppear::ShadowRender() {
     return &D_000E1750;
 }
 
@@ -802,25 +802,25 @@ s32 _ZN3paf9PhSRender8SetStyleEib(void) {
     return -1;
 }
 
-s32 _ZN3paf9PhSRender8SetStyleEif(void) {
+s32 paf::PhSRender::SetStyle(int cxxp1, float cxxp2) {
     return -1;
 }
 
-s32 _ZN3paf9PhSRender8SetStyleEiRK4vec4(void) {
+s32 paf::PhSRender::SetStyle(int cxxp1, vec4 const& cxxp2) {
     return -1;
 }
 
 INCLUDE_ASM("nonmatchings/pafmini_0346A8", _ZNK3paf9PhSRender8GetStyleEiRi);
 
-s32 _ZNK3paf9PhSRender8GetStyleEiRb(void) {
+s32 paf::PhSRender::GetStyle(int cxxp1, bool& cxxp2) const {
     return -1;
 }
 
-s32 _ZNK3paf9PhSRender8GetStyleEiRf(void) {
+s32 paf::PhSRender::GetStyle(int cxxp1, float& cxxp2) const {
     return -1;
 }
 
-s32 _ZNK3paf9PhSRender8GetStyleEiR4vec4(void) {
+s32 paf::PhSRender::GetStyle(int cxxp1, vec4& cxxp2) const {
     return -1;
 }
 
@@ -1030,7 +1030,7 @@ INCLUDE_ASM("nonmatchings/pafmini_0346A8", func_0003EB54);
 #if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pafmini_0346A8", _ZN3paf13PhApplication13StartDispListEv);
 #else
-void _ZN3paf13PhApplication13StartDispListEv(void) {
+void paf::PhApplication::StartDispList() {
     sceGuStart(0, D_000E17A8, D_000E17AC);
 }
 #endif
@@ -1038,7 +1038,7 @@ void _ZN3paf13PhApplication13StartDispListEv(void) {
 #if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pafmini_0346A8", _ZN3paf13PhApplication14FinishDispListEv);
 #else
-void _ZN3paf13PhApplication14FinishDispListEv(void) {
+void paf::PhApplication::FinishDispList() {
     sceGuFinish();
     sceGuSync(0, 0);
 }
@@ -1073,7 +1073,7 @@ void func_00056FB4(s32 arg0) {
 #endif
 
 #if FW_VERSION == 282
-M2C_UNK *_ZN3paf13PhApplication14GetRootSurfaceEv(void) {
+M2C_UNK * paf::PhApplication::GetRootSurface() {
     return &D_000E17B4;
 }
 
@@ -1869,7 +1869,9 @@ INCLUDE_ASM("nonmatchings/pafmini_0346A8", _ZN3paf9PhHandler17HandleAnalogEventE
 #if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/pafmini_0346A8", _ZN3paf9PhHandler16HandlePointEventEPNS_7PhEventE);
 #else
-s32 _ZN3paf9PhHandler16HandlePointEventEPNS_7PhEventE(s32 arg0, s32 arg1) {
+s32 paf::PhHandler::HandlePointEvent(paf::PhEvent* cxxp1) {
+    s32 arg0 = (s32) this;
+    s32 arg1 = (s32) cxxp1;
     u32 temp_a0;
 
     _ZN3paf9PhHandler10DoCallBackEiPNS_7PhEventE(arg0, 0x1000B, arg1);
@@ -1886,7 +1888,9 @@ INCLUDE_ASM("nonmatchings/pafmini_0346A8", _ZN3paf9PhHandler16HandleStateEventEP
 #if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/pafmini_0346A8", _ZN3paf9PhHandler18HandleCommandEventEPNS_7PhEventE);
 #else
-s32 _ZN3paf9PhHandler18HandleCommandEventEPNS_7PhEventE(s32 arg0, s32 arg1) {
+s32 paf::PhHandler::HandleCommandEvent(paf::PhEvent* cxxp1) {
+    s32 arg0 = (s32) this;
+    s32 arg1 = (s32) cxxp1;
     u32 temp_a0;
 
     _ZN3paf9PhHandler10DoCallBackEiPNS_7PhEventE(arg0, 0x2000E, arg1);
@@ -1937,7 +1941,8 @@ INCLUDE_RODATA("nonmatchings/pafmini_0346A8", D_000D7678);
 #if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pafmini_0346A8", func_0005D034);
 
-s32 _ZN3paf9PhHandler13PauseTimerAllEv(struct Unk_scePaf_01CF521E_0 *arg0) {
+s32 paf::PhHandler::PauseTimerAll() {
+    struct Unk_scePaf_01CF521E_0 *arg0 = (struct Unk_scePaf_01CF521E_0 *) this;
     s32 temp_v0;
     s32 var_a1;
 
@@ -1950,7 +1955,8 @@ s32 _ZN3paf9PhHandler13PauseTimerAllEv(struct Unk_scePaf_01CF521E_0 *arg0) {
     return var_a1;
 }
 
-s32 _ZN3paf9PhHandler13StartTimerAllEv(void *arg0) {
+s32 paf::PhHandler::StartTimerAll() {
+    void *arg0 = (void *) this;
     s32 var_a1;
     u32 temp_v0;
 
@@ -2011,7 +2017,8 @@ s32 func_0005BDC8(void *arg0) {
 #if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/pafmini_0346A8", func_00044194);
 
-s32 _ZN3paf9PhHandler13PauseTimerAllEv(struct Unk_scePaf_01CF521E_0 *arg0) {
+s32 paf::PhHandler::PauseTimerAll() {
+    struct Unk_scePaf_01CF521E_0 *arg0 = (struct Unk_scePaf_01CF521E_0 *) this;
     s32 temp_v0;
     s32 var_a1;
 
@@ -3590,7 +3597,9 @@ void func_00051C30(M2C_UNK **arg0) {
 void func_00051C58(void) {
 }
 
-s32 _ZNK3paf8PhWidget9IsInheritEPKc(s32 arg0, s32 arg1) {
+s32 paf::PhWidget::IsInherit(char const* cxxp1) const {
+    s32 arg0 = (s32) this;
+    s32 arg1 = (s32) cxxp1;
     s32 var_v0;
 
     var_v0 = 1;
@@ -3604,7 +3613,7 @@ s32 func_00051C8C(void) {
     return D_000E1220;
 }
 
-s32 _ZN3paf8PhWidget10WidgetTypeEv(void) {
+s32 paf::PhWidget::WidgetType() {
     return D_000E1220;
 }
 
@@ -3706,7 +3715,9 @@ INCLUDE_ASM("nonmatchings/pafmini_0346A8", _ZN3paf8PhWidget14SetPos_ontimerERK4v
 
 INCLUDE_ASM("nonmatchings/pafmini_0346A8", _ZN3paf8PhWidget6GetPosEPS0_RK4vec4);
 
-void _ZN3paf8PhWidget16SetScale_ontimerERK4vec4(struct Unk_scePaf_58BFC2AC_0 *arg0, struct Unk_scePaf_58BFC2AC_1 *arg1) {
+void paf::PhWidget::SetScale_ontimer(vec4 const& cxxp1) {
+    struct Unk_scePaf_58BFC2AC_0 *arg0 = (struct Unk_scePaf_58BFC2AC_0 *) this;
+    struct Unk_scePaf_58BFC2AC_1 *arg1 = (struct Unk_scePaf_58BFC2AC_1 *) &cxxp1;
     arg0->unk230 = (s32) arg1->unk0;
     arg0->unk234 = (s32) arg1->unk4;
     arg0->unk238 = (s32) arg1->unk8;
@@ -3732,7 +3743,9 @@ INCLUDE_ASM("nonmatchings/pafmini_0346A8", func_00054270);
 
 INCLUDE_ASM("nonmatchings/pafmini_0346A8", func_00054334);
 
-s32 _ZN3paf8PhWidget22HandleFocusSwitchEventEPNS_7PhEventE(struct Unk_func_0005D398_0 *arg0, struct Unk_func_0005D398_1 *arg1) {
+s32 paf::PhWidget::HandleFocusSwitchEvent(paf::PhEvent* cxxp1) {
+    struct Unk_func_0005D398_0 *arg0 = (struct Unk_func_0005D398_0 *) this;
+    struct Unk_func_0005D398_1 *arg1 = (struct Unk_func_0005D398_1 *) cxxp1;
     u8 temp_a2;
 
     func_00043008();
@@ -3845,7 +3858,8 @@ s32 scePaf_C2E4423A(Class_000D8898 *arg0) {
     return var_v0;
 }
 
-void _ZN3paf8PhWidget13UpdateCamerasEv(struct Unk_scePaf_86B41BA3_0 *arg0) {
+void paf::PhWidget::UpdateCameras() {
+    struct Unk_scePaf_86B41BA3_0 *arg0 = (struct Unk_scePaf_86B41BA3_0 *) this;
     s32 temp_v0;
 
     temp_v0 = arg0->unk1D0;
@@ -3982,7 +3996,9 @@ s32 func_00055F88(void) {
 void func_00055F90(void) {
 }
 
-s32 _ZNK3paf8PhButton9IsInheritEPKc(s32 arg0, s32 arg1) {
+s32 paf::PhButton::IsInherit(char const* cxxp1) const {
+    s32 arg0 = (s32) this;
+    s32 arg1 = (s32) cxxp1;
     s32 var_v0;
 
     var_v0 = 1;
@@ -3996,7 +4012,7 @@ s32 func_00055FC4(void) {
     return D_000E1224;
 }
 
-s32 _ZN3paf8PhButton10WidgetTypeEv(void) {
+s32 paf::PhButton::WidgetType() {
     return D_000E1224;
 }
 
@@ -4144,7 +4160,7 @@ INCLUDE_ASM("nonmatchings/pafmini_0346A8", func_0006E92C);
 
 INCLUDE_ASM("nonmatchings/pafmini_0346A8", func_0006E9D4);
 #else
-s32 _ZN3paf10PhInfoList10WidgetTypeEv(void) {
+s32 paf::PhInfoList::WidgetType() {
     return D_000E122C;
 }
 #endif
@@ -4411,7 +4427,7 @@ s32 func_00070C5C(void) {
     return D_0010EF10;
 }
 
-s32 _ZN3paf10PhInfoList10WidgetTypeEv(void) {
+s32 paf::PhInfoList::WidgetType() {
     return D_0010EF10;
 }
 #endif
@@ -4661,7 +4677,7 @@ s32 func_0005AF98(void) {
     return D_000E1230;
 }
 
-s32 _ZN3paf8PhIPAddr10WidgetTypeEv(void) {
+s32 paf::PhIPAddr::WidgetType() {
     return D_000E1230;
 }
 
@@ -5041,7 +5057,8 @@ void func_0005C7F4(struct Unk_func_0005C7F4_0 *arg0) {
     func_0004A6D8(arg0->unk1E8->unk20);
 }
 
-void _ZN3paf11PhLabelText14ReleaseSurfaceEv(struct Unk_scePaf_6E1B5B50_0 *arg0) {
+void paf::PhLabelText::ReleaseSurface() {
+    struct Unk_scePaf_6E1B5B50_0 *arg0 = (struct Unk_scePaf_6E1B5B50_0 *) this;
     func_0004BF08(arg0->unk1E8->unk20);
 }
 
@@ -5061,7 +5078,9 @@ void func_0005C894(struct Unk_func_0005C894_0 *arg0) {
     func_0004C754(arg0->unk1E8->unk20);
 }
 
-void _ZN3paf11PhLabelText21SetPrivateSurfacePoolEPNS_11SurfacePoolE(struct Unk_scePaf_7116224C_0 *arg0, s32 arg1) {
+void paf::PhLabelText::SetPrivateSurfacePool(paf::SurfacePool* cxxp1) {
+    struct Unk_scePaf_7116224C_0 *arg0 = (struct Unk_scePaf_7116224C_0 *) this;
+    s32 arg1 = (s32) cxxp1;
     arg0->unk1E8->unk20->unk194 = arg1;
 }
 
@@ -5122,7 +5141,8 @@ void func_000767EC(void *arg0) {
     func_0004A6D8(M2C_FIELD(M2C_FIELD(arg0, void **, 0x1E8), s32 *, 0x1C));
 }
 
-void _ZN3paf11PhLabelText14ReleaseSurfaceEv(struct Unk_scePaf_6E1B5B50_0 *arg0) {
+void paf::PhLabelText::ReleaseSurface() {
+    struct Unk_scePaf_6E1B5B50_0 *arg0 = (struct Unk_scePaf_6E1B5B50_0 *) this;
     func_0004BF08(M2C_FIELD(arg0->unk1E8, s32 *, 0x1C));
 }
 #endif
@@ -5146,7 +5166,9 @@ void func_00078940(void *arg0, s32 arg1) {
     func_00065238(M2C_FIELD(M2C_FIELD(arg0, void **, 0x1E8), s32 *, 0x1C), arg1);
 }
 
-void _ZN3paf11PhLabelText21SetPrivateSurfacePoolEPNS_11SurfacePoolE(struct Unk_scePaf_7116224C_0 *arg0, s32 arg1) {
+void paf::PhLabelText::SetPrivateSurfacePool(paf::SurfacePool* cxxp1) {
+    struct Unk_scePaf_7116224C_0 *arg0 = (struct Unk_scePaf_7116224C_0 *) this;
+    s32 arg1 = (s32) cxxp1;
     M2C_FIELD(M2C_FIELD(arg0->unk1E8, void **, 0x1C), s32 *, 0x194) = arg1;
 }
 #endif
@@ -5458,7 +5480,8 @@ INCLUDE_ASM("nonmatchings/pafmini_0346A8", _ZN3paf6PhList6RedrawEv);
 #endif
 
 #if FW_VERSION == 100
-void _ZN3paf6PhList6RedrawEv(struct Unk_scePaf_44EB8C62_0 *arg0) {
+void paf::PhList::Redraw() {
+    struct Unk_scePaf_44EB8C62_0 *arg0 = (struct Unk_scePaf_44EB8C62_0 *) this;
     s32 temp_a1;
     s32 var_s0;
 
@@ -5476,7 +5499,8 @@ void _ZN3paf6PhList6RedrawEv(struct Unk_scePaf_44EB8C62_0 *arg0) {
 #endif
 
 #if FW_VERSION == 282
-void _ZN3paf6PhList6RedrawEv(struct Unk_scePaf_44EB8C62_0 *arg0) {
+void paf::PhList::Redraw() {
+    struct Unk_scePaf_44EB8C62_0 *arg0 = (struct Unk_scePaf_44EB8C62_0 *) this;
     s32 temp_a1;
     s32 var_s0;
 
@@ -5494,7 +5518,8 @@ void _ZN3paf6PhList6RedrawEv(struct Unk_scePaf_44EB8C62_0 *arg0) {
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 201
-void _ZN3paf6PhList6RedrawEv(struct Unk_scePaf_44EB8C62_0 *arg0) {
+void paf::PhList::Redraw() {
+    struct Unk_scePaf_44EB8C62_0 *arg0 = (struct Unk_scePaf_44EB8C62_0 *) this;
     s32 temp_a1;
     s32 var_s0;
 
@@ -5725,7 +5750,8 @@ void _ZNK3paf7PhMicon8GetMusicERNS_10MiconRCPtrINS_13MusicResourceEEE(struct Unk
 
 INCLUDE_ASM("nonmatchings/pafmini_0346A8", _ZN3paf7PhMicon10SetBGColorERK4vec4);
 
-void _ZNK3paf7PhMicon10GetBGColorEv(struct Unk_scePaf_86A5AE7D_0 *arg0) {
+void paf::PhMicon::GetBGColor() const {
+    struct Unk_scePaf_86A5AE7D_0 *arg0 = (struct Unk_scePaf_86A5AE7D_0 *) this;
     func_00074EA4(arg0->unk1E8);
 }
 
@@ -5739,25 +5765,29 @@ INCLUDE_ASM("nonmatchings/pafmini_0346A8", _ZN3paf7PhMicon4StopEv);
 
 INCLUDE_ASM("nonmatchings/pafmini_0346A8", _ZN3paf7PhMicon11SetChannelsEi);
 
-void _ZNK3paf7PhMicon11GetChannelsEv(struct Unk_scePaf_05073826_0 *arg0) {
+void paf::PhMicon::GetChannels() const {
+    struct Unk_scePaf_05073826_0 *arg0 = (struct Unk_scePaf_05073826_0 *) this;
     func_00074EF8(arg0->unk1E8);
 }
 
 INCLUDE_ASM("nonmatchings/pafmini_0346A8", _ZN3paf7PhMicon9SetRepeatEi);
 
-void _ZNK3paf7PhMicon9GetRepeatEv(struct Unk_scePaf_224C33F0_0 *arg0) {
+void paf::PhMicon::GetRepeat() const {
+    struct Unk_scePaf_224C33F0_0 *arg0 = (struct Unk_scePaf_224C33F0_0 *) this;
     func_00074F08(arg0->unk1E8);
 }
 
 INCLUDE_ASM("nonmatchings/pafmini_0346A8", _ZN3paf7PhMicon9SetVolumeEf);
 
-void _ZNK3paf7PhMicon9GetVolumeEv(struct Unk_scePaf_FA78AF39_0 *arg0) {
+void paf::PhMicon::GetVolume() const {
+    struct Unk_scePaf_FA78AF39_0 *arg0 = (struct Unk_scePaf_FA78AF39_0 *) this;
     func_00074F18(arg0->unk1E8);
 }
 
 INCLUDE_ASM("nonmatchings/pafmini_0346A8", _ZN3paf7PhMicon7SetLoopEff);
 
-void _ZNK3paf7PhMicon7GetLoopEv(struct Unk_scePaf_DE75C2BA_0 *arg0) {
+void paf::PhMicon::GetLoop() const {
+    struct Unk_scePaf_DE75C2BA_0 *arg0 = (struct Unk_scePaf_DE75C2BA_0 *) this;
     func_00074F2C(arg0->unk1E8);
 }
 
@@ -5767,15 +5797,18 @@ void _ZNK3paf7PhMicon9IsEnabledEi(struct Unk_scePaf_8A51BA1E_0 *arg0) {
     func_00074F3C(arg0->unk1E8);
 }
 
-void _ZNK3paf7PhMicon8GetWidthEv(struct Unk_scePaf_0FFA3ECE_0 *arg0) {
+void paf::PhMicon::GetWidth() const {
+    struct Unk_scePaf_0FFA3ECE_0 *arg0 = (struct Unk_scePaf_0FFA3ECE_0 *) this;
     func_00074F44(arg0->unk1E8);
 }
 
-void _ZNK3paf7PhMicon9GetHeightEv(struct Unk_scePaf_89582FD0_0 *arg0) {
+void paf::PhMicon::GetHeight() const {
+    struct Unk_scePaf_89582FD0_0 *arg0 = (struct Unk_scePaf_89582FD0_0 *) this;
     func_00074F4C(arg0->unk1E8);
 }
 
-void _ZNK3paf7PhMicon7GetTimeEv(struct Unk_scePaf_84913A3A_0 *arg0) {
+void paf::PhMicon::GetTime() const {
+    struct Unk_scePaf_84913A3A_0 *arg0 = (struct Unk_scePaf_84913A3A_0 *) this;
     func_00074F54(arg0->unk1E8);
 }
 
@@ -5828,7 +5861,7 @@ s32 func_00061AEC(void) {
 }
 #endif
 
-s32 _ZN3paf10PhMenuList10WidgetTypeEv(void) {
+s32 paf::PhMenuList::WidgetType() {
     return D_000E1240;
 }
 
@@ -6197,7 +6230,9 @@ INCLUDE_ASM("nonmatchings/pafmini_0346A8", func_00062BD8);
 
 INCLUDE_ASM("nonmatchings/pafmini_0346A8", func_00062C8C);
 
-s32 _ZN3paf10PhMenuList10SetItemNumEi(s32 arg0, s32 arg1) {
+s32 paf::PhMenuList::SetItemNum(int cxxp1) {
+    s32 arg0 = (s32) this;
+    s32 arg1 = (s32) cxxp1;
     s32 temp_v0;
 
     temp_v0 = _ZN3paf6PhList10SetItemNumEi(arg0, arg1);
@@ -6302,7 +6337,7 @@ s32 func_0006402C(void) {
     return D_000E126C;
 }
 
-s32 _ZN3paf9PhNumSpin10WidgetTypeEv(void) {
+s32 paf::PhNumSpin::WidgetType() {
     return D_000E126C;
 }
 

@@ -3468,11 +3468,11 @@ INCLUDE_ASM("nonmatchings/pafmini_00DD54", func_00032E00);
 #if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/pafmini_00DD54", func_0000E850);
 
-void _ZN8PSJSHeap14private_mallocEj(void) {
+void PSJSHeap::private_malloc(unsigned int cxxp1) {
     sce_paf_private_malloc();
 }
 
-void _ZN8PSJSHeap12private_freeEPv(void) {
+void PSJSHeap::private_free(void* cxxp1) {
     sce_paf_private_free();
 }
 #endif
@@ -3897,7 +3897,8 @@ INCLUDE_ASM("nonmatchings/pafmini_00DD54", func_00012618);
 
 INCLUDE_ASM("nonmatchings/pafmini_00DD54", func_00012684);
 
-s32 _ZN3paf5Image9Convert32Ev(s32 arg0) {
+s32 paf::Image::Convert32() {
+    s32 arg0 = (s32) this;
     s32 **temp_v0;
     s32 var_v0;
 
@@ -3952,7 +3953,8 @@ INCLUDE_ASM("nonmatchings/pafmini_00DD54", _ZN3paf5Image7SetClipERKNS_9ImageRect
 
 INCLUDE_ASM("nonmatchings/pafmini_00DD54", _ZN3paf5Image10SetSubRectERKNS_9ImageRectE);
 
-s32 _ZN3paf5Image4CopyEv(s32 arg0) {
+s32 paf::Image::Copy() {
+    s32 arg0 = (s32) this;
     s32 **temp_v0;
     s32 var_v0;
 
@@ -3988,7 +3990,7 @@ s32 func_00012E6C(s32 arg0) {
 }
 #endif
 
-s32 _ZN3paf5Image12GetErrorTypeEv(void) {
+s32 paf::Image::GetErrorType() {
     return D_000E067C;
 }
 
@@ -4011,7 +4013,8 @@ INCLUDE_ASM("nonmatchings/pafmini_00DD54", func_00012654);
 #endif
 
 #if FW_VERSION == 282
-s32 _ZN3paf5Image12CopyWithEdgeEv(s32 arg0) {
+s32 paf::Image::CopyWithEdge() {
+    s32 arg0 = (s32) this;
     s32 **temp_v0;
     s32 var_v0;
 
@@ -4024,7 +4027,8 @@ s32 _ZN3paf5Image12CopyWithEdgeEv(s32 arg0) {
     return var_v0;
 }
 
-s32 _ZN3paf5Image6MirrorEv(s32 arg0) {
+s32 paf::Image::Mirror() {
+    s32 arg0 = (s32) this;
     s32 **temp_v0;
     s32 var_v0;
 

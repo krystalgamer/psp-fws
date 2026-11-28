@@ -1479,7 +1479,8 @@ INCLUDE_ASM("nonmatchings/pafmini_078748", _ZN3paf4Cond4WaitEv);
 #endif
 
 #if FW_VERSION == 282
-s32 _ZN3paf4Cond4WaitEv(struct Unk_scePaf_0B0959FC_0 *arg0) {
+s32 paf::Cond::Wait() {
+    struct Unk_scePaf_0B0959FC_0 *arg0 = (struct Unk_scePaf_0B0959FC_0 *) this;
     void *sp0;
     sceKernelSignalSema(*arg0->unk0, 1);
     sceKernelWaitEventFlag(arg0->unk4, 1U, 0x10, &sp0, NULL);
@@ -1493,7 +1494,8 @@ INCLUDE_ASM("nonmatchings/pafmini_078748", _ZN3paf4Cond6NotifyEv);
 #endif
 
 #if FW_VERSION == 282
-void _ZN3paf4Cond6NotifyEv(struct Unk_scePaf_CA5EF446_0 *arg0) {
+void paf::Cond::Notify() {
+    struct Unk_scePaf_CA5EF446_0 *arg0 = (struct Unk_scePaf_CA5EF446_0 *) this;
     sceKernelSetEventFlag(arg0->unk4, 1);
 }
 #endif
@@ -1542,7 +1544,8 @@ void _ZN3paf15CriticalSectionD1Ev(s32 *arg0) {
     sceKernelDeleteEventFlag(*arg0);
 }
 
-void _ZN3paf15CriticalSection5EnterEv(struct Unk_scePaf_C1F72218_0 *arg0) {
+void paf::CriticalSection::Enter() {
+    struct Unk_scePaf_C1F72218_0 *arg0 = (struct Unk_scePaf_C1F72218_0 *) this;
     u32 temp_v0;
 
     sceKernelWaitEventFlag(arg0->unk0, 1U, 0x20, NULL, NULL);
@@ -1556,7 +1559,8 @@ void _ZN3paf15CriticalSection5EnterEv(struct Unk_scePaf_C1F72218_0 *arg0) {
     sceKernelSetEventFlag((s32) arg0->unk0, 1);
 }
 
-void _ZN3paf15CriticalSection5LeaveEv(struct Unk_scePaf_539F2583_0 *arg0) {
+void paf::CriticalSection::Leave() {
+    struct Unk_scePaf_539F2583_0 *arg0 = (struct Unk_scePaf_539F2583_0 *) this;
     s32 temp_v1;
 
     sceKernelWaitEventFlag(arg0->unk0, 1U, 0x20, NULL, NULL);
@@ -1613,7 +1617,8 @@ void _ZN3paf15CriticalSectionD1Ev(s32 *arg0) {
     sceKernelDeleteEventFlag(*arg0);
 }
 
-void _ZN3paf15CriticalSection5EnterEv(struct Unk_scePaf_C1F72218_0 *arg0) {
+void paf::CriticalSection::Enter() {
+    struct Unk_scePaf_C1F72218_0 *arg0 = (struct Unk_scePaf_C1F72218_0 *) this;
     u32 temp_v0;
 
     sceKernelWaitEventFlag(arg0->unk0, 1U, 0x20, NULL, NULL);
@@ -1627,7 +1632,8 @@ void _ZN3paf15CriticalSection5EnterEv(struct Unk_scePaf_C1F72218_0 *arg0) {
     sceKernelSetEventFlag((s32) arg0->unk0, 1);
 }
 
-void _ZN3paf15CriticalSection5LeaveEv(struct Unk_scePaf_539F2583_0 *arg0) {
+void paf::CriticalSection::Leave() {
+    struct Unk_scePaf_539F2583_0 *arg0 = (struct Unk_scePaf_539F2583_0 *) this;
     s32 temp_v1;
 
     sceKernelWaitEventFlag(arg0->unk0, 1U, 0x20, NULL, NULL);
@@ -1813,7 +1819,8 @@ INCLUDE_ASM("nonmatchings/pafmini_078748", _ZN3paf6Thread4JoinEv);
 #endif
 
 #if FW_VERSION == 282
-void _ZN3paf6Thread4JoinEv(struct Unk_scePaf_5775283A_0 *arg0) {
+void paf::Thread::Join() {
+    struct Unk_scePaf_5775283A_0 *arg0 = (struct Unk_scePaf_5775283A_0 *) this;
     sceKernelWaitThreadEnd(arg0->unk4, 0);
 }
 #endif
@@ -2152,7 +2159,9 @@ INCLUDE_ASM("nonmatchings/pafmini_078748", func_0008DEA8);
 
 INCLUDE_ASM("nonmatchings/pafmini_078748", func_0008DF10);
 
-s32 _ZNK3paf11SurfaceBase13PixelsToBytesEi(struct Unk_scePaf_08DD2D50_0 *arg0, s32 arg1) {
+s32 paf::SurfaceBase::PixelsToBytes(int cxxp1) const {
+    struct Unk_scePaf_08DD2D50_0 *arg0 = (struct Unk_scePaf_08DD2D50_0 *) this;
+    s32 arg1 = (s32) cxxp1;
     return (s32) ((arg1 << arg0->unkC) + 7) >> 3;
 }
 #endif
@@ -2576,7 +2585,9 @@ INCLUDE_ASM("nonmatchings/pafmini_078748", func_000AB580);
 
 INCLUDE_ASM("nonmatchings/pafmini_078748", func_000AB680);
 
-s32 _ZNK3paf11SurfaceBase13PixelsToBytesEi(struct Unk_scePaf_08DD2D50_0 *arg0, s32 arg1) {
+s32 paf::SurfaceBase::PixelsToBytes(int cxxp1) const {
+    struct Unk_scePaf_08DD2D50_0 *arg0 = (struct Unk_scePaf_08DD2D50_0 *) this;
+    s32 arg1 = (s32) cxxp1;
     return (s32) ((arg1 << arg0->unkC) + 7) >> 3;
 }
 

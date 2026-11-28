@@ -12,6 +12,366 @@ extern "C" {
 #endif
 
 #ifdef __cplusplus
+class vec4;
+class psjsvector;
+class psjsstring_impl;
+class psjsstring;
+class psjsname;
+namespace paf { class SurfacePool; }
+namespace paf { class PhSRender; }
+namespace paf { class PhEvent; }
+class PSJSValueImpl;
+class PSJSValue;
+class PSJSObject;
+class PSJSFile;
+class PSJSContext;
+class PSJSAPIEntry;
+class PSJSContext {
+public:
+    void SetUserData(void*);
+    void RegistGlobal(char const*, PSJSValueImpl*);
+    void GetUserData() const;
+    void Load(PSJSFile const*);
+    void RegistStandard();
+    void RegistMethodToObj(PSJSValue&, PSJSAPIEntry const*);
+    void RegistExtensionVector();
+    void FindGlobal(char const*) const;
+    void SetException(PSJSValue const&);
+    void RegistGlobal(char const*, int);
+};
+class PSJSError {
+public:
+    void IsSubClass(unsigned short const*) const;
+};
+class PSJSExec {
+public:
+    void FinalizeExecSync();
+};
+class PSJSHeap {
+public:
+    void private_malloc(unsigned int);
+    void private_free(void*);
+};
+class PSJSObject {
+public:
+    void DelAttr(psjsname const&);
+    void DelAttr(int);
+    void SetAttr(psjsname const&, PSJSValue const&);
+    void SetAttr(int, PSJSValue const&);
+    void IsSubClass(unsigned short const*) const;
+    void GetAttr(psjsname const&, PSJSValue*) const;
+    void GetAttr(int, PSJSValue*) const;
+};
+class PSJSPage {
+public:
+    void IsOpen() const;
+};
+class PSJSPageTable {
+public:
+    void PageCloseAll(paf::View*);
+};
+class PSJSValue {
+public:
+    void SetAttr(psjsname const&, PSJSValue const&);
+    void ToBool() const;
+    void GetAttr(PSJSContext const&, psjsname const&, PSJSValue*) const;
+    void IsClass(unsigned short const*) const;
+    void ToFloat() const;
+    void ToInt32() const;
+    void ToUint32() const;
+    void Assign(PSJSContext const&, PSJSValueImpl*);
+    void ToString() const;
+    void SetPrototype(PSJSValue const&);
+    void IsSubClass(unsigned short const*) const;
+    void ToNumber(PSJSContext const&) const;
+};
+class PSJSValueImpl {
+public:
+    void NewFromPool(PSJSContext const&);
+    void NewFromPool(PSJSContext const&, PSJSObject*);
+    void NewFromPool(PSJSContext const&, psjsstring const&);
+    void NewFromPool(PSJSContext const&, float);
+    void NewFromPool(PSJSContext const&, int);
+    void DecRef();
+    void NewFromPool(PSJSContext const&, psjsvector const&);
+};
+extern "C++" {
+namespace paf {
+    void Sleep(int);
+}
+}
+namespace paf {
+class Cond {
+public:
+    s32 Wait();
+    void Notify();
+};
+}
+namespace paf {
+class CriticalSection {
+public:
+    void Enter();
+    void Leave();
+};
+}
+namespace paf {
+class Framework {
+public:
+    s32 Instance();
+};
+}
+namespace paf {
+class Image {
+public:
+    s32 Convert32();
+    s32 Copy();
+    s32 GetErrorType();
+    s32 CopyWithEdge();
+    s32 Mirror();
+};
+}
+namespace paf {
+class MiconPointee {
+public:
+    void AddRef();
+    void Release();
+};
+}
+namespace paf {
+class PhAppear {
+public:
+    M2C_UNK * ShadowRender();
+};
+}
+namespace paf {
+class PhApplication {
+public:
+    void StartDispList();
+    void FinishDispList();
+    M2C_UNK * GetRootSurface();
+};
+}
+namespace paf {
+class PhButton {
+public:
+    s32 IsInherit(char const*) const;
+    s32 WidgetType();
+};
+}
+namespace paf {
+class PhClock {
+public:
+    void WidgetType();
+    void SetFormat(int, int);
+    void SetShadowRender(paf::PhSRender*);
+};
+}
+namespace paf {
+class PhHandler {
+public:
+    s32 HandlePointEvent(paf::PhEvent*);
+    s32 HandleCommandEvent(paf::PhEvent*);
+    s32 PauseTimerAll();
+    s32 StartTimerAll();
+};
+}
+namespace paf {
+class PhIPAddr {
+public:
+    s32 WidgetType();
+};
+}
+namespace paf {
+class PhInfoList {
+public:
+    s32 WidgetType();
+};
+}
+namespace paf {
+class PhItemSpin {
+public:
+    void WidgetType();
+};
+}
+namespace paf {
+class PhLabelText {
+public:
+    void ReleaseSurface();
+    void SetPrivateSurfacePool(paf::SurfacePool*);
+};
+}
+namespace paf {
+class PhList {
+public:
+    void Redraw();
+};
+}
+namespace paf {
+class PhMenuList {
+public:
+    s32 WidgetType();
+    s32 SetItemNum(int);
+};
+}
+namespace paf {
+class PhMicon {
+public:
+    void GetBGColor() const;
+    void GetChannels() const;
+    void GetRepeat() const;
+    void GetVolume() const;
+    void GetLoop() const;
+    void GetWidth() const;
+    void GetHeight() const;
+    void GetTime() const;
+};
+}
+namespace paf {
+class PhModel {
+public:
+    void WidgetType();
+    void SetPatchDivide(int);
+    void SetModel(void*, int);
+    void SetCurrentMotion(int, float);
+    void GetMotionCount() const;
+    void GetFrame() const;
+    void SetFrameLoop(float, float);
+    void SetFrameRepeat(int);
+    void SetFrame(float);
+    void SetFrameRate(float);
+    void GetCurrentMotion() const;
+};
+}
+namespace paf {
+class PhNumSpin {
+public:
+    s32 WidgetType();
+};
+}
+namespace paf {
+class PhPlane {
+public:
+    s32 WidgetType();
+};
+}
+namespace paf {
+class PhProgress {
+public:
+    s32 WidgetType();
+    void SetShadowRender(paf::PhSRender*);
+};
+}
+namespace paf {
+class PhSRender {
+public:
+    s32 SetStyle(int, float);
+    s32 SetStyle(int, vec4 const&);
+    s32 GetStyle(int, bool&) const;
+    s32 GetStyle(int, float&) const;
+    s32 GetStyle(int, vec4&) const;
+};
+}
+namespace paf {
+class PhScene {
+public:
+    s32 WidgetType();
+};
+}
+namespace paf {
+class PhScroll {
+public:
+    s32 WidgetType();
+};
+}
+namespace paf {
+class PhSpin {
+public:
+    s32 WidgetType();
+};
+}
+namespace paf {
+class PhText {
+public:
+    s32 WidgetType();
+    void GetFirstLine() const;
+    s32 GetTextLength() const;
+    s32 GetLineCount() const;
+    s32 GetCurrentPos() const;
+    s32 EraseText(int);
+    void ReleaseSurface();
+};
+}
+namespace paf {
+class PhXmBar {
+public:
+    void SetListNum(int);
+    void SetFocusIndex(int, int);
+    void Redraw(int, int);
+    void DeleteItem(int, int, float);
+    void InsertItem(int, int);
+    void UpdateItems(int);
+    void AnimIconPlay(int, int, float);
+    void AnimIconStop(int, int);
+    void GetFocusedItemIndex(int);
+    void CloseOff(int, int, float, float);
+    void SelectOut(float);
+    void ScrollDown(float, paf::PhEvent*);
+    void ScrollLeft(float, paf::PhEvent*);
+    void ScrollRight(float, paf::PhEvent*);
+    void ScrollUp(float, paf::PhEvent*);
+    void WidgetType();
+    void SelectIn(float, float, float);
+    void SetOtherItemAlpha(float, float, float);
+    void SetTopAlpha(float, float, float);
+    void SetTopLabelAlpha(float, float, float);
+    void SetOtherTopAlpha(float, float, float);
+    void HideFade(float, float);
+    void SetFade(float, float, float);
+    void SetAlpha(float, float, float);
+    void ShowFade(float, float);
+    void HideLabel(int, float, float);
+    void ShowLabel(int, float, float);
+    void IconSize(int, int, vec4 const&, float, float);
+};
+}
+namespace paf {
+class PhXmItem {
+public:
+    s32 WidgetType();
+};
+}
+namespace paf {
+class PhXmList {
+public:
+    s32 WidgetType();
+    s32 SetItemNum(int);
+    s32 SetKeyMask(int);
+};
+}
+namespace paf {
+class SurfaceBase {
+public:
+    s32 PixelsToBytes(int) const;
+};
+}
+namespace paf {
+class Thread {
+public:
+    void Join();
+};
+}
+class psjsname_impl {
+public:
+    void DecRef();
+};
+class psjsstring_impl {
+public:
+    void DecRef();
+    void compare(psjsstring_impl const*) const;
+};
+#endif
+
+#ifdef __cplusplus
 /* vtable _ZTV14Class_000D1ED8 is data (vptr = label - 8 + 8) */
 class Class_000D1ED8 {
 public:

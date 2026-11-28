@@ -73,6 +73,7 @@ public:
     void PageActivate(char const*);
     void PageInactivate(char const*);
     void PlaySound(char const*);
+    s32 GetModel(char const*) const;
 };
 
 } // namespace paf
