@@ -134,7 +134,9 @@ s32 regSeekFile(s32 fd, s32 offset, s32 whence) {
     return ((s32)sceIoLseek(fd, offset, func_000061B4(whence)) < 0) ? -9 : 0;
 }
 #else
-INCLUDE_ASM("nonmatchings/regio", regSeekFile);
+s32 regSeekFile(s32 fd, s32 offset, s32 whence) {
+    return ((s32)sceIoLseek(fd, offset, func_00006998(whence)) < 0) ? -9 : 0;
+}
 #endif
 
 #if FW_VERSION < 201
