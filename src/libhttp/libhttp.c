@@ -1212,7 +1212,7 @@ INCLUDE_ASM("nonmatchings/libhttp", func_000032B0);
 #if FW_VERSION < 103
 int func_00003614(SceHttpReq *req) {
     if (req->tmpl.cookie != 0) {
-        func_000092D4(req->res_header_buf, req->res_header_size, req->connection->hostname, req->unk68);
+        func_000092D4(req->res_header_buf, req->res_header_size, req->connection->hostname, req->path);
         func_00006658(req);
     }
     return 0;
@@ -2028,14 +2028,14 @@ int func_00006658(SceHttpReq *req) {
     if (ret < 0) {
         return ret;
     }
-    ret = func_0000907C(NULL, list, req->unk68, &size, 0);
+    ret = func_0000907C(NULL, list, req->path, &size, 0);
     if (ret < 0) {
         return ret;
     }
     ret = 0x80431022;
     buf = _sceHttpMallocInternal(size);
     if (buf != NULL) {
-        ret = func_0000907C(buf, list, req->unk68, NULL, size);
+        ret = func_0000907C(buf, list, req->path, NULL, size);
         if (ret >= 0) {
             ret = sceHttpAddExtraHeader(req->id, (const SceUChar8 *)"Cookie", (const SceUChar8 *)buf, 0);
         }
