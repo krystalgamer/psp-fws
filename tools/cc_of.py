@@ -42,7 +42,9 @@ KNOWN = {"1.3.1": "1.3.1", "1.5.1": "1.5.1", "1.5.1.internal": "1.5.1",
          # psp-gcc 1.8.x generates 1.7.1's code (psp-compiler-ground FINDINGS; 1.8.4 checked
          # against every 1.51/1.52 C file built with 1.7.1: identical)
          "1.7.1": "1.7.1", "1.8.0": "1.7.1", "1.8.0.internal": "1.7.1", "1.8.3": "1.7.1",
-         "1.8.3.internal": "1.7.1", "1.8.4": "1.7.1", "1.8.4.internal": "1.7.1"}
+         "1.8.3.internal": "1.7.1", "1.8.4": "1.7.1", "1.8.4.internal": "1.7.1",
+         # psp-gcc 1.9.2 = gcc 3.3.6 (built from psp-compiler-ground gcc1.9.2_src)
+         "1.9.2": "1.9.2", "1.9.2.internal": "1.9.2"}
 
 
 def from_comment(mod, ver):

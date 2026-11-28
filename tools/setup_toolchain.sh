@@ -71,6 +71,14 @@ if [ ! -x "$CGH/tmp/toolchains/bin/cc1plus-1.5.1-head.bin" ] || [ ! -x "$CGH/tmp
     "$CGH/tools/build_gcc.sh" 1.5.1-head "$CGH/gcc1.5.1_src" --cxx >/dev/null
     "$CGH/tools/build_gcc.sh" 1.6.1-head "$CGH/gcc1.6.1_src" --cxx >/dev/null
 fi
+# psp-gcc 1.9.2 (gcc 3.3.6: 2.70/2.71 and some later modules), C and C++, from the same tree
+if [ ! -x "$CGH/tmp/toolchains/bin/cc1-1.9.2.bin" ] || [ ! -x "$CGH/tmp/toolchains/bin/cc1plus-1.9.2.bin" ]; then
+    "$CGH/tools/build_gcc.sh" 1.9.2 "$CGH/gcc1.9.2_src" >/dev/null
+    "$CGH/tools/build_gcc.sh" 1.9.2 "$CGH/gcc1.9.2_src" --cxx >/dev/null
+fi
+printf '#!/bin/sh\nexec "%s/tmp/toolchains/bin/cc1-1.9.2" "$@"\n' "$PCG" > "$T/bin/cc1-1.9.2"
+printf '#!/bin/sh\nexec "%s/tmp/toolchains/bin/cc1plus-1.9.2" "$@"\n' "$PCG" > "$T/bin/cc1plus-1.9.2"
+chmod +x "$T/bin/cc1-1.9.2" "$T/bin/cc1plus-1.9.2"
 printf '#!/bin/sh\nexec "%s/tmp/toolchains/bin/cc1plus-1.5.1-head" -mno-ulsw "$@"\n' "$PCG" > "$T/bin/cc1plus-1.5.1"
 printf '#!/bin/sh\nexec "%s/tmp/toolchains/bin/cc1plus-1.6.1-head" "$@"\n' "$PCG" > "$T/bin/cc1plus-1.6.1"
 chmod +x "$T/bin/cc1plus-1.5.1" "$T/bin/cc1plus-1.6.1"
