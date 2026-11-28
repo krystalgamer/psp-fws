@@ -80,3 +80,4 @@ g_ptpLastPort = 0x000079B8;
 g_ptpIss = 0x000079BC;
 g_gameModeList = 0x000079C0;
 g_adhocIntrq = 0x00007984;
+g_adhocSelChan = 0x000079C8;
