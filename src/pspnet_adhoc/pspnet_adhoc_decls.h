@@ -54,11 +54,13 @@ typedef struct {
     u8 data[6];
 } SceNetEtherAddr;
 
-/* PDP control block (1.00: 0x38) */
+/* PDP control block (1.00: 0x38, 1.50+: 0x34; offsets in comments are 1.00) */
 typedef struct SceNetAdhocPdpPcb {
     struct SceNetAdhocPdpPcb *next;     /* 0x00 TAILQ on the PDP list */
     struct SceNetAdhocPdpPcb **prev;    /* 0x04 */
-    struct ifnet *ifp;                  /* 0x08 */
+#if FW_VERSION < 150
+    struct ifnet *ifp;                  /* 0x08 (1.50+: looked up from laddr) */
+#endif
     SceNetEtherAddr laddr;              /* 0x0C */
     u16 lport;                          /* 0x12 */
     struct mbuf *rcvq_first;            /* 0x14 */
@@ -71,7 +73,7 @@ typedef struct SceNetAdhocPdpPcb {
     SceNetAdhocPdpQent *qfirst;         /* 0x30 */
     SceNetAdhocPdpQent **qlast;         /* 0x34 */
 } SceNetAdhocPdpPcb;
-typedef char chk_SceNetAdhocPdpPcb[(sizeof(SceNetAdhocPdpPcb) == 0x38) ? 1 : -1];
+typedef char chk_SceNetAdhocPdpPcb[(sizeof(SceNetAdhocPdpPcb) == ((FW_VERSION < 150) ? 0x38 : 0x34)) ? 1 : -1];
 
 typedef struct {
     SceNetAdhocPdpPcb *first;
