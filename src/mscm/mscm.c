@@ -1882,10 +1882,68 @@ INCLUDE_RODATA("nonmatchings/mscm", D_00007300);
 
 #if FW_VERSION < 201
 INCLUDE_RODATA("nonmatchings/mscm", D_00006950);
+#endif
 
-INCLUDE_ASM("nonmatchings/mscm", func_000052FC);
+#if FW_VERSION < 150
+s32 func_000052FC(void *arg) {
+    s32 ok = (arg != NULL);
+    const char *file = D_00006950, *fn = "_sceMScmIomanExit";
 
-INCLUDE_ASM("nonmatchings/mscm", func_00005358);
+    if (!ok) {
+        Kprintf(D_00007300, file, fn, 0x6C);
+        sceKernelAssert(ok, 0);
+    }
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 201
+s32 func_000052FC(void *arg) {
+    s32 ok = (arg != NULL);
+    const char *file = D_00006950, *fn = "_sceMScmIomanExit";
+
+    if (!ok) {
+        Kprintf(D_00007300, file, fn, 0x6D);
+        sceKernelAssert(ok, 0);
+    }
+    return 0;
+}
+#endif
+
+#if FW_VERSION < 150
+s32 func_00005358(SceIoIob *iob) {
+    s32 ok = (iob != NULL);
+    const char *file = D_00006950, *fn = "_sceMScmIomanOpen";
+    s32 ret;
+
+    if (!ok) {
+        Kprintf(D_00007300, file, fn, 0x79);
+        sceKernelAssert(ok, 0);
+    }
+    ret = 0x80220081;
+    if (iob->i_unit == 0) {
+        ret = (D_00006F20 != 0) ? 0 : 0x80220083;
+    }
+    return ret;
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 201
+s32 func_00005358(SceIoIob *iob) {
+    s32 ok = (iob != NULL);
+    const char *file = D_00006950, *fn = "_sceMScmIomanOpen";
+    s32 ret;
+
+    if (!ok) {
+        Kprintf(D_00007300, file, fn, 0x7A);
+        sceKernelAssert(ok, 0);
+    }
+    ret = 0x80220081;
+    if (iob->i_unit == 0) {
+        ret = (D_00006F20 != 0) ? 0 : 0x80220083;
+    }
+    return ret;
+}
 #endif
 
 #if FW_VERSION < 282

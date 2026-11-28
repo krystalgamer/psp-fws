@@ -4,6 +4,15 @@
 #include "common.h"
 #include "m2c_macros.h"
 
+/* iofilemgr file descriptor block (leading fields only; see src/iofilemgr) */
+typedef struct SceIoIob {
+    s32 i_flgs;     /* 0x0 */
+    s32 i_unit;     /* 0x4 */
+    void *i_de;     /* 0x8 */
+    s32 d_type;     /* 0xC */
+    void *i_private; /* 0x10 */
+} SceIoIob;
+
 typedef struct {
     u32 low;
     u32 hi;
@@ -121,6 +130,7 @@ static inline void hcAnd16(volatile u16 *p, u16 v) {
     sceKernelCpuResumeIntr(intr);
 }
 
+extern char D_00006950[]; /* "mscm_ioman.c" */
 extern SceMScmBitMap D_000069F8[13];
 extern u8 D_00006B10[];
 extern u8 D_00006B24[];
@@ -129,8 +139,10 @@ extern SceUID D_00006B4C[1];
 extern SceMScmSlotCB D_00006ED8[1];
 extern s32 D_00006F0C;
 extern SceMScmHC D_00006F14[1];
+extern s32 D_00006F20;
 extern SceKernelSysClock D_00007190; /* sysclock ticks per usec */
 extern s32 D_00007218;
+extern char D_00007300[]; /* "Assertion failed at %s:%s:%04d\n" (mscm_ioman.c) */
 extern s32 D_00007800;
 extern s32 D_00007880;
 extern s32 D_00007AF4;

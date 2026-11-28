@@ -99,6 +99,7 @@
   "sceSysregMsifIoEnable": "M2C_UNK sceSysregMsifIoEnable(s32);"
  },
  "types": {
+  "SceIoIob": "/* iofilemgr file descriptor block (leading fields only; see src/iofilemgr) */\ntypedef struct SceIoIob {\n    s32 i_flgs;     /* 0x0 */\n    s32 i_unit;     /* 0x4 */\n    void *i_de;     /* 0x8 */\n    s32 d_type;     /* 0xC */\n    void *i_private; /* 0x10 */\n} SceIoIob;",
   "SceKernelSysClock": "typedef struct {\n    u32 low;\n    u32 hi;\n} SceKernelSysClock;",
   "SceMScmBitMap": "typedef struct {\n    u32 from;\n    u32 to;\n} SceMScmBitMap;",
   "SceMScmHC": "/* host controller state; drivers get a pointer to it as their HC descriptor */\ntypedef struct SceMScmHC {\n    SceMScmHCReg *reg;      /* 0x00 */\n    s32 index;              /* 0x04: slot / HC number */\n    struct SceMScmHC *hc;   /* 0x08: points to itself */\n    s32 inService;          /* 0x0C */\n#if FW_VERSION < 250\n    s32 unk10;\n    volatile u32 intrStatus; /* 0x14 */\n    volatile s32 lastStatus; /* 0x18: status register at the last interrupt */\n    volatile s32 intrCause; /* 0x1C: reg->unk8 at the last interrupt */\n    s32 readAddr;           /* 0x20: cached MS register window (-1 = unknown) */\n    s32 readSize;           /* 0x24 */\n    s32 writeAddr;          /* 0x28 */\n    s32 writeSize;          /* 0x2C */\n    SceUID evf;             /* 0x30: \"SceMScmAl\" */\n    u8 unk34[0x27C - 0x34];\n#if FW_VERSION >= 150\n    s32 unk27C;\n    s32 unk280;\n#endif\n#else\n    s32 unk10;\n    s32 lastStatus;         /* 0x14 */\n    s32 unk18;\n    s32 readAddr;\n    s32 readSize;\n    s32 writeAddr;\n    s32 writeSize;\n    SceUID evf;             /* 0x2C */\n#endif\n} SceMScmHC;\n#if FW_VERSION < 150\ntypedef char chk_SceMScmHC[(sizeof(SceMScmHC) == 0x27C) ? 1 : -1];\n#elif FW_VERSION < 250\ntypedef char chk_SceMScmHC[(sizeof(SceMScmHC) == 0x284) ? 1 : -1];\n#endif",
@@ -107,6 +108,7 @@
   "zz_hc_regs": "/* HC register accessors: each access runs with interrupts disabled (inlined everywhere) */\ns32 sceKernelCpuSuspendIntr(void);\nvoid sceKernelCpuResumeIntr(s32 intr);\n\nstatic inline u16 hcRead16(volatile u16 *p) {\n    s32 intr = sceKernelCpuSuspendIntr();\n    u16 v = *p;\n    sceKernelCpuResumeIntr(intr);\n    return v;\n}\n\nstatic inline void hcWrite16(volatile u16 *p, u16 v) {\n    s32 intr = sceKernelCpuSuspendIntr();\n    *p = v;\n    asm volatile(\"sync\");\n    sceKernelCpuResumeIntr(intr);\n}\n\nstatic inline void hcOr16(volatile u16 *p, u16 v) {\n    s32 intr = sceKernelCpuSuspendIntr();\n    *p |= v;\n    asm volatile(\"sync\");\n    sceKernelCpuResumeIntr(intr);\n}\n\n\nstatic inline void hcAnd16(volatile u16 *p, u16 v) {\n    s32 intr = sceKernelCpuSuspendIntr();\n    *p &= v;\n    asm volatile(\"sync\");\n    sceKernelCpuResumeIntr(intr);\n}"
  },
  "vars": {
+  "D_00006950": "extern char D_00006950[]; /* \"mscm_ioman.c\" */",
   "D_000069F8": "extern SceMScmBitMap D_000069F8[13];",
   "D_00006B10": "extern u8 D_00006B10[];",
   "D_00006B24": "extern u8 D_00006B24[];",
@@ -115,8 +117,10 @@
   "D_00006ED8": "extern SceMScmSlotCB D_00006ED8[1];",
   "D_00006F0C": "extern s32 D_00006F0C;",
   "D_00006F14": "extern SceMScmHC D_00006F14[1];",
+  "D_00006F20": "extern s32 D_00006F20;",
   "D_00007190": "extern SceKernelSysClock D_00007190; /* sysclock ticks per usec */",
   "D_00007218": "extern s32 D_00007218;",
+  "D_00007300": "extern char D_00007300[]; /* \"Assertion failed at %s:%s:%04d\\n\" (mscm_ioman.c) */",
   "D_00007800": "extern s32 D_00007800;",
   "D_00007880": "extern s32 D_00007880;",
   "D_00007AF4": "extern s32 D_00007AF4;",
