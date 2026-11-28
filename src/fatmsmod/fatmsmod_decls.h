@@ -639,9 +639,11 @@ s32 func_0000A7C0(const u8 *s);
 s32 func_0000A8F8(s32);
 s32 func_0000ABF8(PfFile *fp);
 s32 func_0000ACF8(void);
-s32 func_0000AE30(void);
+s32 func_0000AD4C(void);
+s32 func_0000AE30(); /* 1.00: (const char *path) select the drive/dir of a path */
 s32 func_0000B1D8(s32, s32);
 void func_0000B418(u8 *p, u32 v);
+s32 func_0000B440(const char *path, s8 mode);
 s32 func_0000B440_v201(s32, s32, s32);
 s32 func_0000B50C(s8 drive, u8 *index);
 void func_0000B574(s32 arg0, s32 arg1, s32 arg2);

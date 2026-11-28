@@ -3768,9 +3768,36 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_00012C50);
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00012D24);
 #endif
 
-#if FW_VERSION < 271
-INCLUDE_ASM("nonmatchings/fatmsmod", func_0000B440);
+#if FW_VERSION < 201
+s32 func_0000B440(const char *path, s8 mode) {
+    u8 m;
 
+    func_0000A128();
+    if (func_0000AE30(path) == -1) {
+        return -1;
+    }
+    m = mode;
+    func_0000B57C();
+    if (m & 1) {
+        if (func_0000AAC4() == -1 || func_0000AD4C() == -1) {
+            func_0000B650();
+            return -1;
+        }
+    }
+    if ((m & 2) && (D_000276E4->flags & 0x800)) {
+        func_0000B650();
+        D_00019E08 = 0xD;
+        return -1;
+    }
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 271
+INCLUDE_ASM("nonmatchings/fatmsmod", func_0000B440);
+#endif
+
+#if FW_VERSION < 271
 s32 func_0000B50C(s8 drive, u8 *index) {
     drive = func_00004BBC(drive);
     *index = drive - 'A';
