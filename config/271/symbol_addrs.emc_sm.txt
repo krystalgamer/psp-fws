@@ -68,8 +68,8 @@ sceSysregEmcsmBusClockEnable = 0x000024B0; // type:func
 // shared names (tools/add_version.py) begin
 D_000026F0 = 0x00002820; // rom:0x28C0
 D_00002860 = 0x00002858; // rom:0x28F8
-D_00002D9C = 0x00002DC0;
-D_00002F9C = 0x00002FC0;
+g_bbmUser = 0x00002DC0;
+g_bbmSpare = 0x00002FC0;
 nandSysEventHandler = 0x00000F40; // type:func rom:0xFE0
 nandDmaReadPage = 0x00000FEC; // type:func rom:0x108C
 // shared names (tools/add_version.py) end

@@ -86,3 +86,5 @@ nandWaitReady = 0x0000146C; // type:func rom:0x150C
 nandCorrectEcc = 0x000022F0; // type:func rom:0x2390
 // shared names (tools/add_version.py) end
 nandDmaReadPage = 0x00000FE0; // type:func
+g_bbmUser = 0x00002F94;
+g_bbmSpare = 0x00003194;
