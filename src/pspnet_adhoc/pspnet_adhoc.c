@@ -1,3 +1,5 @@
+/* compiler[282-352]: 1.9.2 */
+/* cflags[271-352]: -O2 -frename-registers -mext */
 /* cflags: -O2 -frename-registers */
 #include "common.h"
 #include "pspnet_adhoc_decls.h"
