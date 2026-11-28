@@ -791,7 +791,7 @@ void ip_freef(struct Unk_func_00015654_0 *arg0) {
 #if FW_VERSION >= 151 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_inet_in_cksum2", func_00015278);
 
-INCLUDE_ASM("nonmatchings/pspnet_inet_in_cksum2", func_00015764);
+INCLUDE_ASM("nonmatchings/pspnet_inet_in_cksum2", ip_rtaddr);
 #endif
 
 #if FW_VERSION < 151

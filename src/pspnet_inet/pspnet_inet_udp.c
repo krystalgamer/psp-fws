@@ -744,7 +744,7 @@ INCLUDE_ASM("nonmatchings/pspnet_inet_udp", func_0001F674);
 #endif
 
 #if FW_VERSION >= 151 && FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/pspnet_inet_udp", func_0001F178);
+INCLUDE_ASM("nonmatchings/pspnet_inet_udp", syn_cache_insert);
 #endif
 
 #if FW_VERSION < 151
@@ -881,11 +881,11 @@ void syn_cache_cleanup(struct tcpcb *tp)
 }
 
 #if FW_VERSION >= 151 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet_udp", func_0001FBBC);
+INCLUDE_ASM("nonmatchings/pspnet_inet_udp", syn_cache_get);
 
-INCLUDE_ASM("nonmatchings/pspnet_inet_udp", func_00020260);
+INCLUDE_ASM("nonmatchings/pspnet_inet_udp", syn_cache_reset);
 
-INCLUDE_ASM("nonmatchings/pspnet_inet_udp", func_000204E4);
+INCLUDE_ASM("nonmatchings/pspnet_inet_udp", syn_cache_unreach);
 
 INCLUDE_ASM("nonmatchings/pspnet_inet_udp", func_00020788);
 #endif
