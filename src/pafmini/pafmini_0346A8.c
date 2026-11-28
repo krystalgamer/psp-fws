@@ -3819,7 +3819,7 @@ INCLUDE_ASM("nonmatchings/pafmini_0346A8", _ZN3paf8PhWidget8GetStyleEiiR4vec4);
 
 INCLUDE_ASM("nonmatchings/pafmini_0346A8", _ZN3paf8PhWidget10SetTextureERKNS_12SurfaceRCPtrINS_7SurfaceEEEi);
 
-s32 _ZNK3paf8PhWidget10GetTextureERNS_12SurfaceRCPtrINS_7SurfaceEEEi(struct Unk_scePaf_4EA868E6_0 *arg0) {
+s32 _ZNK3paf8PhWidget10GetTextureERNS_12SurfaceRCPtrINS_7SurfaceEEEi(Class_000D8898 *arg0) {
     s32 var_v0;
     struct Unk_vt_scePaf_4EA868E6_temp_v1 **temp_v1;
 
@@ -3833,7 +3833,7 @@ s32 _ZNK3paf8PhWidget10GetTextureERNS_12SurfaceRCPtrINS_7SurfaceEEEi(struct Unk_
 
 INCLUDE_ASM("nonmatchings/pafmini_0346A8", scePaf_DB230BE1);
 
-s32 scePaf_C2E4423A(struct Unk_scePaf_C2E4423A_0 *arg0) {
+s32 scePaf_C2E4423A(Class_000D8898 *arg0) {
     s32 var_v0;
     struct Unk_vt_scePaf_C2E4423A_temp_v1 **temp_v1;
 
@@ -3858,13 +3858,13 @@ void _ZN3paf8PhWidget13UpdateCamerasEv(struct Unk_scePaf_86B41BA3_0 *arg0) {
 
 INCLUDE_ASM("nonmatchings/pafmini_0346A8", func_0005597C);
 
-s32 func_00055A8C(struct Unk_func_00055A8C_0 *arg0) {
+s32 func_00055A8C(Class_000D8898 *arg0) {
     return arg0->unk1D4;
 }
 
 INCLUDE_ASM("nonmatchings/pafmini_0346A8", func_00055A94);
 
-s32 func_00055AE8(struct Unk_func_00055AE8_0 *arg0, s32 arg1) {
+s32 func_00055AE8(Class_000D8898 *arg0, s32 arg1) {
     arg0->unk1EC = arg1;
     return 0;
 }
@@ -5264,9 +5264,9 @@ INCLUDE_ASM("nonmatchings/pafmini_0346A8", func_0005D2AC);
 #if FW_VERSION == 250
 INCLUDE_ASM("nonmatchings/pafmini_0346A8", _ZN3paf6PhList22HandleFocusSwitchEventEPNS_7PhEventE);
 #else
-s32 func_0005D398(struct Unk_func_0005D398_0 *arg0, struct Unk_func_0005D398_1 *arg1) {
+s32 func_0005D398(Class_000D8898 *arg0, struct Unk_func_0005D398_1 *arg1) {
     if (((u32) (arg1->unk8 - 1) >= 2U) || (arg0->unk331 != 0)) {
-        _ZN3paf8PhWidget22HandleFocusSwitchEventEPNS_7PhEventE(arg0, arg1);
+        _ZN3paf8PhWidget22HandleFocusSwitchEventEPNS_7PhEventE((Unk_func_0005D398_0*) arg0, arg1);
     }
     arg0->unk331 = 0U;
     return 0;
@@ -5975,7 +5975,7 @@ INCLUDE_ASM("nonmatchings/pafmini_0346A8", func_0007AF10);
 #if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/pafmini_0346A8", func_00062488);
 
-s32 func_00062764(struct Unk_func_00062764_0 *arg0, s32 arg1, s32 arg2) {
+s32 func_00062764(Class_000D8BF8 *arg0, s32 arg1, s32 arg2) {
     s32 temp_a4;
     s32 var_v0;
 

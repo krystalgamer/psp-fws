@@ -39,6 +39,13 @@ public:
 /* dtor still asm/m2c (not trivial) */
 class Class_000D8898 {
 public:
+    u8 pad4[0x1D0];
+    s32 unk1D4;
+    u8 pad1D8[0x10];
+    void ** unk1E8;
+    s32 unk1EC;
+    u8 pad1F0[0x141];
+    u8 unk331;
     virtual ~Class_000D8898();
 };
 #endif
@@ -47,6 +54,10 @@ public:
 /* vtable _ZTV14Class_000D8BF8 is data (vptr = label - 8 + 8) */
 class Class_000D8BF8 : public Class_000D8898 {
 public:
+    u8 pad332[0x396];
+    s8 unk6C8;
+    u8 pad6C9[0x37];
+    void **unk700;
     virtual ~Class_000D8BF8();
 };
 #endif
@@ -71,6 +82,7 @@ public:
 /* vtable _ZTV14Class_000D0798 is data (vptr = label - 8 + 8) */
 class Class_000D0798 : public Class_000FF5D8 {
 public:
+    s32 unk4;
     virtual ~Class_000D0798();
 };
 #endif
@@ -3276,7 +3288,7 @@ M2C_UNK _ZNK3paf7PhSPrim8GetStyleEiRf(void *self, s32, float *);
 M2C_UNK _ZNK3paf7PhSPrim8GetStyleEiRi(s32);
 s16 _ZNK3paf7Surface13GetActivePageENS0_8PageModeE(struct Unk_scePaf_0598FFD6_0 *arg0, s32 arg1);
 s32 _ZNK3paf8PhButton9IsInheritEPKc(s32 arg0, s32 arg1);
-s32 _ZNK3paf8PhWidget10GetTextureERNS_12SurfaceRCPtrINS_7SurfaceEEEi(struct Unk_scePaf_4EA868E6_0 *arg0);
+s32 _ZNK3paf8PhWidget10GetTextureERNS_12SurfaceRCPtrINS_7SurfaceEEEi(Class_000D8898 *arg0);
 s32 _ZNK3paf8PhWidget9IsInheritEPKc(s32 arg0, s32 arg1);
 s32 _ZNK3paf9PhSRender8GetStyleEiR4vec4(void);
 s32 _ZNK3paf9PhSRender8GetStyleEiRb(void);
@@ -3488,7 +3500,7 @@ void func_00013BA4(struct Unk_func_00013BA4_0 *arg0);
 void func_00013BB8(struct Unk_func_00013BB8_0 *arg0);
 s32 func_00013BE4(struct Unk_func_00013BE4_0 *arg0, void *arg1, s32 arg2, s32 arg3, s32 arg4);
 M2C_UNK *func_00013C2C(void);
-void func_00013DA8(struct Unk_func_00013DA8_0 *arg0);
+void func_00013DA8(Class_000D0798 *arg0);
 void func_0001408C(void);
 void func_00014094(M2C_UNK **arg0);
 void func_000140A4(M2C_UNK **arg0);
@@ -4000,8 +4012,8 @@ s32 func_000550F4(s32, s32);
 s32 func_000551B8(s32, s32, s32);
 s32 func_00055438(s32, s32);
 s32 func_00055480(s32, s32);
-s32 func_00055A8C(struct Unk_func_00055A8C_0 *arg0);
-s32 func_00055AE8(struct Unk_func_00055AE8_0 *arg0, s32 arg1);
+s32 func_00055A8C(Class_000D8898 *arg0);
+s32 func_00055AE8(Class_000D8898 *arg0, s32 arg1);
 void func_00055AF4(struct Unk_func_00055AF4_0 *arg0);
 void func_00055B10(struct Unk_func_00055B10_0 *arg0);
 void func_00055B44(struct Unk_func_00055B44_0 *arg0, s32 arg1);
@@ -4076,7 +4088,7 @@ void func_0005D2D8(void *arg0, s32 arg1);
 void func_0005D2EC(void);
 void func_0005D30C(void);
 void func_0005D368(void *arg0, s32 arg1, s32 arg2);
-s32 func_0005D398(struct Unk_func_0005D398_0 *arg0, struct Unk_func_0005D398_1 *arg1);
+s32 func_0005D398(Class_000D8898 *arg0, struct Unk_func_0005D398_1 *arg1);
 s32 func_0005D8B4(s32, s32, s32);
 void ***func_0005D9A4(void ***arg0, void *arg1, void **arg2);
 M2C_UNK func_0005D9E4(...);
@@ -4102,7 +4114,7 @@ s32 func_00061AEC(void);
 void func_00061EF4(M2C_UNK **arg0);
 void func_00061F1C(M2C_UNK **arg0);
 void func_00061F44(M2C_UNK **arg0);
-s32 func_00062764(struct Unk_func_00062764_0 *arg0, s32 arg1, s32 arg2);
+s32 func_00062764(Class_000D8BF8 *arg0, s32 arg1, s32 arg2);
 s32 func_000627A0(s32 arg0, s32 arg1, s32 arg2);
 void func_00062968(struct Unk_func_00062968_0 *arg0, s32 arg1, s32 arg2, s32 arg3);
 void func_000629B4(struct Unk_func_000629B4_0 *arg0, s32 arg1, s32 arg2);
@@ -5110,7 +5122,7 @@ void scePaf_86C87E62(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5)
 void scePaf_8D3EAEA3(s32 arg0);
 s32 scePaf_8D7FC7DB(struct Unk_scePaf_8D7FC7DB_0 *arg0, s32 arg1, s32 arg2, s32 arg3);
 void scePaf_C2911954(s32 arg0);
-s32 scePaf_C2E4423A(struct Unk_scePaf_C2E4423A_0 *arg0);
+s32 scePaf_C2E4423A(Class_000D8898 *arg0);
 void scePaf_C8E7B03F(s32 arg0);
 s32 scePaf_D1EE972C(struct Unk_scePaf_D1EE972C_0 *arg0, s32 arg1, s32 arg2, s32 arg3);
 M2C_UNK scePaf_DB230BE1(...);

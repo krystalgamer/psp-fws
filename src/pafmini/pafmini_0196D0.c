@@ -259,7 +259,7 @@ s32 func_00013BE4(struct Unk_func_00013BE4_0 *arg0, void *arg1, s32 arg2, s32 ar
 #if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pafmini_0196D0", func_00013C80);
 
-void func_00013DA8(struct Unk_func_00013DA8_0 *arg0) {
+void func_00013DA8(Class_000D0798 *arg0) {
     s32 temp_v0;
 
     temp_v0 = arg0->unk4;
