@@ -190,3 +190,4 @@ _scePowerBatteryInit = 0x00003070; // type:func
 _scePowerBatteryThread = 0x0000289C; // type:func
 _scePowerLock = 0x000016A0; // type:func
 _scePowerUnlock = 0x000017B0; // type:func
+g_PowerHandler = 0x00003FBC; // rom:0x403C

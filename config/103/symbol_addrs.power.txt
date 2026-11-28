@@ -151,7 +151,7 @@ sceClkcSetBusFrequency = 0x00003B38; // type:func
 sceClkcGetBusFrequency = 0x00003B40; // type:func
 // shared names (tools/add_version.py) begin
 D_00005D60 = 0x00004338; // rom:0x43B8
-D_00003FBC = 0x00004344; // rom:0x43C4
+g_PowerHandler = 0x00004344; // rom:0x43C4
 D_00004048 = 0x000043D0; // rom:0x4450
 D_00004054 = 0x000043DC; // rom:0x445C
 D_000040A0 = 0x00004428; // rom:0x44A8

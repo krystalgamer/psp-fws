@@ -399,7 +399,7 @@ INCLUDE_ASM("nonmatchings/power", func_00000D20);
 INCLUDE_RODATA("nonmatchings/power", D_00005D60);
 
 #if FW_VERSION >= 102 && FW_VERSION < 150
-INCLUDE_RODATA("nonmatchings/power", D_00003FBC);
+INCLUDE_RODATA("nonmatchings/power", g_PowerHandler);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
@@ -1399,7 +1399,7 @@ INCLUDE_RODATA("nonmatchings/power", D_00004E0C);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/power", func_00003220);
+INCLUDE_ASM("nonmatchings/power", _scePowerBatteryThread);
 
 INCLUDE_ASM("nonmatchings/power", func_00003814);
 #endif
@@ -1629,7 +1629,7 @@ s32 _scePowerBatteryInit(void) {
     g_Battery.innerTempStatus = -1;
     g_Battery.unk24 = -1;
     g_Battery.batteryEventFlagId = sceKernelCreateEventFlag(temp_v0, 1U, 0U, NULL);
-    temp_v0_2 = sceKernelCreateThread(temp_v0, (s32) &func_00003220, 0x40, 0x800U, 1U, NULL);
+    temp_v0_2 = sceKernelCreateThread(temp_v0, (s32) &_scePowerBatteryThread, 0x40, 0x800U, 1U, NULL);
     g_Battery.workerThreadId = temp_v0_2;
     sceKernelStartThread(temp_v0_2, 0U, NULL);
     return 0;
@@ -1646,7 +1646,7 @@ s32 _scePowerBatteryInit(void) {
     g_Battery.innerTempStatus = -1;
     g_Battery.unk24 = -1;
     g_Battery.batteryEventFlagId = sceKernelCreateEventFlag(temp_v0, 1U, 0U, NULL);
-    temp_v0_2 = sceKernelCreateThread(temp_v0, (s32) &func_00003220, 0x40, 0x400U, 1U, NULL);
+    temp_v0_2 = sceKernelCreateThread(temp_v0, (s32) &_scePowerBatteryThread, 0x40, 0x400U, 1U, NULL);
     g_Battery.workerThreadId = temp_v0_2;
     sceKernelStartThread(temp_v0_2, 0U, NULL);
     return 0;

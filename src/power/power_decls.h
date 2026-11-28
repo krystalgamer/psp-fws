@@ -118,7 +118,7 @@ typedef struct {
 #endif
 } ScePowerFrequency;
 
-/* sceKernelRegisterPowerHandlers table (1.00: 6 words). */
+/* sceKernelRegisterPowerHandlers table (1.00: 6 words, 1.02: 7, 1.50: 10). */
 typedef struct {
     s32 size;
     s32 (*tick)(s32);
@@ -126,6 +126,14 @@ typedef struct {
     s32 (*unlock)(s32);
     s32 (*lockForUser)(s32);
     s32 (*unlockForUser)(s32);
+#if FW_VERSION >= 102
+    s32 (*rebootStart)(void);
+#endif
+#if FW_VERSION >= 150
+    s32 (*memLock)(s32, void **, SceSize *);
+    s32 (*memTryLock)(s32, void **, SceSize *);
+    s32 (*memUnlock)(s32);
+#endif
 } ScePowerHandlers;
 
 /* Idle timer slot (1.00: 0x20 bytes). */
