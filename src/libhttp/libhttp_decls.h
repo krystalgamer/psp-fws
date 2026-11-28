@@ -341,6 +341,15 @@ struct _SceHttpConnection {
     struct _SceHttpConnection *pre;
 } /* size 0x130 */;
 
+typedef struct {
+    u32 h[4];
+    u32 pad;
+    u16 usRemains;
+    u16 usComputed;
+    u64 ullTotalLen;
+    u8 buf[64];
+} SceKernelUtilsMd5Context;
+
 /* 1.00-1.03 template (sceHttpCreateTemplate); offsets from the 1.00 asm.
  * Embedded in SceHttpConn (+0xA4) and SceHttpReq (+0x84/+0x88). */
 typedef struct SceHttpTmpl {
@@ -636,6 +645,7 @@ s32 func_00007C58(void);
 void func_00008360(void *arg0);
 s32 func_00008510(void);
 void func_00008AB8(void *arg0, void *arg1, u32 arg2, s32 arg3);
+void func_00008EBC(const u8 *digest, char *out);
 void func_00008F68(void *arg0, void *arg1, u32 arg2, s32 arg3);
 int func_000092D4(unsigned char *buf, u32 size, unsigned char *hostname, unsigned char *path);
 s32 func_00009300(s32);
@@ -729,9 +739,9 @@ M2C_UNK sceKernelCpuSuspendIntr();
 s32 sceKernelDeleteVpl(s32);
 s32 sceKernelResumeDispatchThread(s32);
 s32 sceKernelSuspendDispatchThread(void);
-M2C_UNK sceKernelUtilsMd5BlockInit();
-M2C_UNK sceKernelUtilsMd5BlockResult();
-M2C_UNK sceKernelUtilsMd5BlockUpdate();
+int sceKernelUtilsMd5BlockInit(); /* unprototyped: 1.50 C calls it without the pass-through args */
+int sceKernelUtilsMd5BlockResult(); /* unprototyped: 1.50 C calls it without the pass-through args */
+int sceKernelUtilsMd5BlockUpdate(); /* unprototyped: 1.50 C calls it without the pass-through args */
 M2C_UNK sceKernelUtilsMd5Digest();
 M2C_UNK sceNetInetInetPton();
 s32 sceNetInetRecv(s32, void *, u32, s32);

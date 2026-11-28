@@ -1907,9 +1907,25 @@ INCLUDE_ASM("nonmatchings/libhttp", func_000083B0);
 INCLUDE_ASM("nonmatchings/libhttp", func_000088E8);
 
 INCLUDE_ASM("nonmatchings/libhttp", func_00008A80);
+#endif
 
+#if FW_VERSION < 150
+void func_00008CB0(int val, char *out) {
+    SceKernelUtilsMd5Context ctx;
+    u8 digest[16];
+
+    sceKernelUtilsMd5BlockInit(&ctx);
+    sceKernelUtilsMd5BlockUpdate(&ctx, (u8 *)&val, 4);
+    sceKernelUtilsMd5BlockResult(&ctx, digest);
+    func_00008EBC(digest, out);
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/libhttp", func_00008CB0);
+#endif
 
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/libhttp", func_00008D10);
 #endif
 
@@ -1997,11 +2013,32 @@ INCLUDE_RODATA("nonmatchings/libhttp", D_0001746C);
 INCLUDE_ASM("nonmatchings/libhttp", func_00008DA4);
 #endif
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/libhttp", func_00008EBC);
+#if FW_VERSION < 201
+void func_00008EBC(const u8 *digest, char *out) {
+    u16 i;
+    u8 c;
+
+    for (i = 0; i < 16; i++) {
+        c = digest[i] >> 4;
+        if (c < 10) {
+            out[i * 2] = c + '0';
+        } else {
+            out[i * 2] = c + 0x57;
+        }
+        c = digest[i] & 0xF;
+        if (c < 10) {
+            out[i * 2 + 1] = c + '0';
+        } else {
+            out[i * 2 + 1] = c + 0x57;
+        }
+    }
+    out[32] = '\0';
+}
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
+INCLUDE_ASM("nonmatchings/libhttp", func_00008EBC);
+
 INCLUDE_ASM("nonmatchings/libhttp", func_00004198);
 
 INCLUDE_ASM("nonmatchings/libhttp", func_00004280);
