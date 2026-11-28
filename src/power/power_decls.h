@@ -67,7 +67,7 @@ typedef struct {
 /* clockFrequency.c state (1.00 layout, 0x44 bytes). */
 typedef struct {
     SceUID semaId; /* 0x0 */
-#if FW_VERSION < 103
+#if FW_VERSION < 150
     s32 pllOutSelect; /* 0x4 */
     s32 pllClockFrequencyInt; /* 0x8 */
     s32 cpuClockFrequencyInt; /* 0xC */
