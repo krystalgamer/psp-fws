@@ -656,50 +656,92 @@ INCLUDE_ASM("nonmatchings/libhttp", sceHttpSendRequest);
 INCLUDE_ASM("nonmatchings/libhttp", sceHttpAbortRequest);
 #endif
 
-#if FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/libhttp", sceHttpGetContentLength);
-#endif
-
-#if FW_VERSION >= 102 && FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/libhttp", sceHttpGetStatusCode);
-#endif
-
 #if FW_VERSION == 100
-s32 sceHttpGetStatusCode(s32 arg0, s32 *arg1) {
-    void *sp0;
-    s32 temp_a1;
-    s32 temp_v0;
-    s32 var_a0;
+int sceHttpGetContentLength(int request_id, SceULong64 *content_length) {
+    SceHttpReq *req;
+    int ret;
 
     if (D_0000DCCC.inited != 1) {
-        var_a0 = 0x80431001;
+        ret = 0x80431001;
     } else {
-        temp_v0 = GetHttpReq(arg0, &sp0);
-        var_a0 = temp_v0;
-        if (temp_v0 >= 0) {
-            var_a0 = 0x80431065;
-            temp_a1 = M2C_FIELD(sp0, s32 *, 0x2C);
-            if (temp_a1 != 0) {
-                var_a0 = 0x80431063;
-                if (temp_a1 != 6) {
-                    var_a0 = 0x8043106C;
-                    if (temp_a1 != 7) {
-                        var_a0 = 0;
-                        *arg1 = M2C_FIELD(sp0, s32 *, 0x124);
+        ret = GetHttpReq(request_id, &req);
+        if (ret >= 0) {
+            ret = 0x80431065;
+            if (req->status != 0) {
+                ret = 0x80431063;
+                if (req->status != 6) {
+                    ret = 0x8043106C;
+                    if (req->status != 7) {
+                        ret = 0x80431071;
+                        if (req->has_content_length != 0) {
+                            *content_length = req->content_length;
+                            ret = 0;
+                        }
                     }
                 }
             }
         }
     }
-    if (sp0 != NULL) {
-        M2C_FIELD(sp0, s32 *, 0x18) = (s32) (M2C_FIELD(sp0, s32 *, 0x18) - 1);
+    if (req != NULL) {
+        req->reference_counter--;
     }
-    return var_a0;
+    return ret;
+}
+#endif
+
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/libhttp", sceHttpGetContentLength);
+
+INCLUDE_ASM("nonmatchings/libhttp", sceHttpGetStatusCode);
+#endif
+
+#if FW_VERSION == 100
+int sceHttpGetStatusCode(int request_id, int *status_code) {
+    SceHttpReq *req;
+    int ret;
+
+    if (D_0000DCCC.inited != 1) {
+        ret = 0x80431001;
+    } else {
+        ret = GetHttpReq(request_id, &req);
+        if (ret >= 0) {
+            ret = 0x80431065;
+            if (req->status != 0) {
+                ret = 0x80431063;
+                if (req->status != 6) {
+                    ret = 0x8043106C;
+                    if (req->status != 7) {
+                        ret = 0;
+                        *status_code = req->response_code;
+                    }
+                }
+            }
+        }
+    }
+    if (req != NULL) {
+        req->reference_counter--;
+    }
+    return ret;
 }
 #endif
 
 #if FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/libhttp", sceHttpGetNetworkErrno);
+int sceHttpGetNetworkErrno(int request_id, int *err_num) {
+    SceHttpReq *req = NULL;
+    int ret = 0x80431001;
+
+    if (D_0000DCCC.inited == 1) {
+        ret = GetHttpReq(request_id, &req);
+        if (ret >= 0) {
+            ret = 0;
+            *err_num = req->network_errno;
+        }
+    }
+    if (req != NULL) {
+        req->reference_counter--;
+    }
+    return ret;
+}
 
 INCLUDE_ASM("nonmatchings/libhttp", sceHttpGetAllHeader);
 #endif
@@ -1127,7 +1169,27 @@ INCLUDE_ASM("nonmatchings/libhttp", CopyHttpTmpl);
 
 INCLUDE_ASM("nonmatchings/libhttp", CopyHttpHeaderList);
 
-INCLUDE_ASM("nonmatchings/libhttp", HttpWhichId);
+int HttpWhichId(int id) {
+    int tmp;
+    int ret;
+
+    tmp = id & 0x0F000000;
+    switch (tmp) {
+    case 0:
+        ret = 0;
+        break;
+    case 0x1000000:
+        ret = 0x1000000;
+        break;
+    case 0x2000000:
+        ret = 0x2000000;
+        break;
+    default:
+        ret = 0x80431100;
+        break;
+    }
+    return ret;
+}
 
 INCLUDE_ASM("nonmatchings/libhttp", ConnectNonblock);
 

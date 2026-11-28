@@ -409,11 +409,15 @@ typedef struct SceHttpReq {
     s32 id;                 /* 0x10 */
     u8 unk14[0x18 - 0x14];
     s32 reference_counter;  /* 0x18 */
-    u8 unk1C[0x2C - 0x1C];
+    s32 network_errno;      /* 0x1C */
+    u8 unk20[0x2C - 0x20];
     s32 status;             /* 0x2C */
     u8 unk30[HTTP_REQ_V(0x84, 0x88, 0x8C) - 0x30];
     SceHttpTmpl tmpl;       /* 0x84 (1.02: 0x88, 1.03: 0x8C) */
-    u8 unk108[HTTP_REQ_V(0x124, 0x130, 0x134) - HTTP_REQ_V(0x108, 0x10C, 0x110)];
+    u8 unk108[HTTP_REQ_V(0x110, 0x118, 0x118) - HTTP_REQ_V(0x108, 0x10C, 0x110)];
+    SceULong64 content_length; /* 0x110 (1.02/1.03: 0x118) */
+    s32 has_content_length; /* 0x118 (1.02/1.03: 0x120) */
+    u8 unk11C[HTTP_REQ_V(0x124, 0x130, 0x134) - HTTP_REQ_V(0x11C, 0x124, 0x124)];
     s32 response_code;      /* 0x124 (1.02: 0x130, 1.03: 0x134) */
     u8 unk128[HTTP_REQ_V(0x178, 0x190, 0x190) - HTTP_REQ_V(0x128, 0x134, 0x138)];
     struct SceHttpReq *next; /* 0x178 (1.02: 0x190) */
@@ -504,8 +508,13 @@ extern s32 D_0001B0E0;
 int CopyHttpHeaderList(_SceHttpReqHeaderList **out, const _SceHttpReqHeaderList *src);
 s32 CreateConnectionWithUrl(s32, s32, s32, s32, s32);
 int DeleteHttpHeader(_SceHttpReqHeaderList **header_list, const SceUChar8 *name);
-s32 GetHttpReq(s32, s32);
+int GetHttpConnection(int target_id, SceHttpConn **dst);
+int GetHttpReq(int target_id, SceHttpReq **dst);
+int GetHttpTmpl(int target_id, SceHttpTmpl **dst);
 int HttpWhichId(int id);
+int InsertNewHttpConnection(SceHttpConn *new_connection);
+int InsertNewHttpReq(SceHttpReq *new_request);
+int InsertNewHttpTmpl(SceHttpTmpl *new_template);
 M2C_UNK SSL_CTX_free(s32);
 M2C_UNK SSL_clear(s32);
 M2C_UNK SSL_free(s32);
@@ -630,7 +639,7 @@ s32 sceHttpDeleteConnection(s32 arg0);
 s32 sceHttpDeleteRequest(s32 arg0);
 s32 sceHttpDeleteTemplate(s32 arg0);
 s32 sceHttpEnd(void);
-s32 sceHttpGetStatusCode(s32 arg0, s32 *arg1);
+int sceHttpGetStatusCode(int request_id, int *status_code);
 s32 sceHttpInit(u32 arg0);
 s32 sceHttpInitCache(u32 arg0);
 int sceHttpSetMallocFunction(SceHttpMallocFunction malloc_func, SceHttpFreeFunction free_func, SceHttpReallocFunction reallc_func);
