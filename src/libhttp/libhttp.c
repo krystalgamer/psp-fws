@@ -162,7 +162,106 @@ INCLUDE_ASM("nonmatchings/libhttp", sceHttpSendRequest);
 #endif
 
 #if FW_VERSION < 150 || FW_VERSION >= 282
+#if FW_VERSION < 150
+int sceHttpCreateTemplate(const unsigned char *user_agent, int http_ver, int netcnf) {
+    _SceHttpReqHeaderList *h = NULL;
+    _SceHttpReqHeaderList *last = NULL;
+    SceHttpTmpl *tmpl;
+    int ret = 0x80431001;
+
+    if (D_0000DCCC.inited != 1) {
+        goto out;
+    }
+    ret = 0x80431022;
+    tmpl = _sceHttpMallocInternal(sizeof(SceHttpTmpl));
+    if (tmpl == NULL) {
+        goto fail;
+    }
+    func_0000BBCC(tmpl, 0, sizeof(SceHttpTmpl));
+    if (user_agent != NULL) {
+        ret = CreateHttpExtraHeader(&h, (const SceUChar8 *)"User-Agent", user_agent);
+        if (ret < 0) {
+            goto fail;
+        }
+        if (tmpl->header_list == NULL) {
+            tmpl->header_list = h;
+            last = h;
+        } else {
+            last->next = h;
+            last = h;
+        }
+    }
+    ret = CreateHttpExtraHeader(&h, (const SceUChar8 *)"Accept", (const SceUChar8 *)"*/*;q=0.01");
+    if (ret < 0) {
+        goto fail;
+    }
+    if (tmpl->header_list == NULL) {
+        tmpl->header_list = h;
+        last = h;
+    } else {
+        last->next = h;
+        last = h;
+    }
+    ret = CreateHttpExtraHeader(&h, (const SceUChar8 *)"Accept-Encoding", (const SceUChar8 *)"");
+    if (ret < 0) {
+        goto fail;
+    }
+    if (tmpl->header_list == NULL) {
+        tmpl->header_list = h;
+        last = h;
+    } else {
+        last->next = h;
+        last = h;
+    }
+    ret = CreateHttpExtraHeader(&h, (const SceUChar8 *)"Accept-Charset", (const SceUChar8 *)"iso-8859-1;q=0.01");
+    if (ret < 0) {
+        goto fail;
+    }
+    if (tmpl->header_list == NULL) {
+        tmpl->header_list = h;
+        last = h;
+    } else {
+        last->next = h;
+        last = h;
+    }
+    for (last = tmpl->header_list; last != NULL; last = last->next) {
+    }
+    ret = 0x8043106A;
+    if ((u32)http_ver >= 2) {
+        goto fail;
+    }
+    tmpl->http_ver = http_ver;
+    tmpl->use_netcnf = netcnf;
+#if FW_VERSION < 102
+    tmpl->resolver_timeo = 1000000;
+#else
+    tmpl->resolver_timeo = 3000000;
+#endif
+    tmpl->resolver_retry = 10;
+    tmpl->unk24 = 1500;
+    tmpl->unk28 = 6;
+    tmpl->unk2C = 6;
+    tmpl->redirect = 1;
+#if FW_VERSION < 102
+    tmpl->cache = 1;
+#else
+    tmpl->cache = 0;
+#endif
+    tmpl->cookie = 1;
+    tmpl->auth = 1;
+    return InsertNewHttpTmpl(tmpl);
+
+fail:
+    if (tmpl != NULL) {
+        FreeHttpHederList(tmpl->header_list);
+        _sceHttpFreeInternal(tmpl);
+    }
+out:
+    return ret;
+}
+#else
 INCLUDE_ASM("nonmatchings/libhttp", sceHttpCreateTemplate);
+#endif
 #endif
 
 #if FW_VERSION < 150
@@ -271,7 +370,7 @@ int sceHttpSetProxy(int id, int activate_flag, int mode, const unsigned char *ne
         goto end;
     }
     if (activate_flag == 0) {
-        tmpl->proxy_mode = 0;
+        tmpl->use_netcnf = 0;
         tmpl->proxy_status = 0;
     } else if (mode == 0) {
         ret = GetProxyInfoFromSystem(tmpl);
@@ -299,7 +398,7 @@ int sceHttpSetProxy(int id, int activate_flag, int mode, const unsigned char *ne
         tmpl->proxy_host = copy;
         tmpl->proxy_port = new_proxy_port;
         tmpl->proxy_status = mode;
-        tmpl->proxy_mode = 0;
+        tmpl->use_netcnf = 0;
     }
     if (con != NULL) {
         con->reference_counter--;
@@ -1298,7 +1397,7 @@ INCLUDE_ASM("nonmatchings/libhttp", sceHttpCreateTemplate);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 201
-s32 sceHttpCreateTemplate(void *arg0, s32 arg1, s32 arg2) {
+int sceHttpCreateTemplate(const unsigned char *arg0, int arg1, int arg2) {
     return func_0000A774((s32) arg0, arg1, arg2);
 }
 #endif
@@ -1315,10 +1414,6 @@ s32 sceHttpDeleteTemplate(s32 arg0) {
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/libhttp", sceHttpCreateConnection);
-#endif
-
-#if FW_VERSION < 150
-INCLUDE_RODATA("nonmatchings/libhttp", D_0000D6F8);
 #endif
 
 #if FW_VERSION >= 282
@@ -1345,7 +1440,7 @@ INCLUDE_ASM("nonmatchings/libhttp", func_00001C10);
 INCLUDE_ASM("nonmatchings/libhttp", func_00001FC8);
 #endif
 
-#if FW_VERSION < 150 || FW_VERSION >= 282
+#if FW_VERSION >= 282
 INCLUDE_RODATA("nonmatchings/libhttp", D_000173A4);
 
 INCLUDE_RODATA("nonmatchings/libhttp", D_000173A8);

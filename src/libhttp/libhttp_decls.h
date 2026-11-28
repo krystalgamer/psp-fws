@@ -370,15 +370,15 @@ typedef struct SceHttpTmpl {
     s32 id;                 /* 0x00 template_id (ids 0x00xxxxxx) */
     s32 http_ver;           /* 0x04 */
     s32 reference_counter;  /* 0x08 */
-    s32 use_netcnf;         /* 0x0C */
+    s32 resolver_retry;     /* 0x0C (10) */
     s32 proxy_status;       /* 0x10 */
     u32 resolver_timeo;     /* 0x14 */
     u32 connect_timeo;      /* 0x18 */
     u32 receive_timeo;      /* 0x1C */
     u32 send_timeo;         /* 0x20 */
-    u32 unk24;              /* 0x24 */
-    u32 unk28;              /* 0x28 */
-    u32 unk2C;              /* 0x2C */
+    u32 unk24;              /* 0x24 (1500) */
+    u32 unk28;              /* 0x28 (6) */
+    u32 unk2C;              /* 0x2C (6) */
     char *proxy_host;       /* 0x30 */
     char *str34;            /* 0x34 */
     char *str38;            /* 0x38 */
@@ -388,7 +388,7 @@ typedef struct SceHttpTmpl {
     s32 cookie;             /* 0x48 */
     s32 auth;               /* 0x4C */
     s32 header_lock;        /* 0x50 header list busy */
-    s32 proxy_mode;         /* 0x54 */
+    s32 use_netcnf;         /* 0x54 sceHttpCreateTemplate netcnf; 1 = SCE_HTTP_PROXY_AUTO */
     void *unk58;            /* 0x58 */
     void *unk5C;            /* 0x5C */
     void *password_cb;      /* 0x60 sceHttpSetAuthInfoCB */
@@ -779,7 +779,7 @@ int sceHttpAddExtraHeader(int id, const SceUChar8 *name, const SceUChar8 *value,
 int sceHttpCreateConnection(int template_id, const unsigned char *server_name, unsigned char *scheme, unsigned short port, int keepalive);
 s32 sceHttpCreateConnectionWithURL(s32 arg0, void *arg1, s32 arg2);
 int sceHttpCreateRequest(int connection_id, int method, const unsigned char *path, SceULong64 content_length);
-s32 sceHttpCreateTemplate(void *arg0, s32 arg1, s32 arg2);
+int sceHttpCreateTemplate(const unsigned char *user_agent, int http_ver, int netcnf);
 int sceHttpDeleteConnection(int connection_id);
 int sceHttpDeleteHeader(int id, const SceUChar8 *name);
 s32 sceHttpDeleteRequest(s32 arg0);
