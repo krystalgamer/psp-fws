@@ -93,7 +93,7 @@ INCLUDE_RODATA("nonmatchings/emc_sm", D_00002828);
 INCLUDE_ASM("nonmatchings/emc_sm", func_0000015C);
 #endif
 
-#if FW_VERSION >= 102 && FW_VERSION < 271
+#if FW_VERSION >= 102
 s32 sceNandSetWriteProtect(s32 protect) {
     u32 v = NAND_STATUS;
     s32 old = __builtin_allegrex_ext(v ^ 0x80, 7, 1);
@@ -108,13 +108,7 @@ s32 sceNandSetWriteProtect(s32 protect) {
     }
     return old;
 }
-#endif
-
-#if FW_VERSION >= 271
-INCLUDE_ASM("nonmatchings/emc_sm", sceNandSetWriteProtect);
-#endif
-
-#if FW_VERSION == 100
+#else
 s32 sceNandLock(s32 writeMode) {
     s32 ret = sceKernelWaitSema(g_nand.semaId, 1, NULL);
     if (ret < 0) {
@@ -130,7 +124,9 @@ s32 sceNandLock(s32 writeMode) {
     }
     return 0;
 }
-#else
+#endif
+
+#if FW_VERSION >= 102
 s32 sceNandLock(s32 writeMode) {
     s32 ret = sceKernelWaitSema(g_nand.semaId, 1, NULL);
     if (ret < 0) {
@@ -162,7 +158,6 @@ void sceNandUnlock(void) {
 INCLUDE_ASM("nonmatchings/emc_sm", sceNandUnlock);
 #endif
 
-#if FW_VERSION < 271
 s32 sceNandReset(u8 *status) {
     s32 ret;
     u32 v;
@@ -184,9 +179,6 @@ s32 sceNandReset(u8 *status) {
     }
     return ret;
 }
-#else
-INCLUDE_ASM("nonmatchings/emc_sm", sceNandReset);
-#endif
 
 s32 sceNandReadId(u8 *buf, s32 len) {
     s32 i;
@@ -236,9 +228,7 @@ s32 sceNandEraseBlock(u32 ppn) {
     }
     return ret;
 }
-#endif
-
-#if FW_VERSION >= 102 && FW_VERSION < 271
+#else
 s32 sceNandEraseBlock(u32 ppn) {
     s32 ret;
     u8 st;
@@ -272,10 +262,6 @@ s32 sceNandEraseBlock(u32 ppn) {
     }
     return ret;
 }
-#endif
-
-#if FW_VERSION >= 271
-INCLUDE_ASM("nonmatchings/emc_sm", sceNandEraseBlock);
 #endif
 
 s32 sceNandReadExtraOnly(u32 ppn, void *spare, s32 len) {
