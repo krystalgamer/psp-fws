@@ -294,7 +294,7 @@ s32 sceNetApctl_lib_C519EDCD(s32 arg0) {
 }
 #endif
 
-#if FW_VERSION < 150
+#if FW_VERSION < 250
 s32 func_00000964(SceNetApctlCtx *ctx, u32 *bits) {
     s32 ret;
     s32 i;
@@ -325,7 +325,7 @@ end:
 }
 #endif
 
-#if (FW_VERSION >= 150 && FW_VERSION < 260) || FW_VERSION >= 282
+#if FW_VERSION == 250 || FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/pspnet_apctl", func_00000964);
 #endif
 
@@ -412,9 +412,7 @@ INCLUDE_ASM("nonmatchings/pspnet_apctl", func_00001550);
 
 #if FW_VERSION < 250
 INCLUDE_ASM("nonmatchings/pspnet_apctl", func_0000050C);
-#endif
 
-#if FW_VERSION < 150
 s32 func_00000788(SceNetApctlCtx *ctx) {
     SceNetApctlNetParam p;
     s32 ret;
@@ -520,10 +518,6 @@ end:
 }
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 250
-INCLUDE_ASM("nonmatchings/pspnet_apctl", func_00000788);
-#endif
-
 #if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_apctl", func_00000A30);
 #endif
@@ -544,7 +538,7 @@ s32 func_00000A30(void *arg0, s32 arg1) {
 INCLUDE_ASM("nonmatchings/pspnet_apctl", func_000002BC);
 #endif
 
-#if FW_VERSION < 150
+#if FW_VERSION < 250
 s32 func_00000A74(SceNetApctlCtx *ctx) {
     s32 keyLen = 0;
     void *key = NULL;
@@ -566,13 +560,7 @@ s32 func_00000A74(SceNetApctlCtx *ctx) {
     }
     return ret;
 }
-#endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 250
-INCLUDE_ASM("nonmatchings/pspnet_apctl", func_00000A74);
-#endif
-
-#if FW_VERSION < 250
 s32 func_00000B24(SceNetApctlCtx *ctx) {
     s32 buf[4];
     s32 ret;

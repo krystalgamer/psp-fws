@@ -43,7 +43,7 @@
   "func_0000235C": "void func_0000235C(s32 arg0, s32 arg1);",
   "func_00002388": "s32 func_00002388(s32 index, s32 code, void *info);",
   "func_000023BC": "s32 func_000023BC(SceNetApctlCtx *ctx, u32 mask, u32 *bits, s32 wait);",
-  "func_00002480": "s32 func_00002480();",
+  "func_00002480": "s32 func_00002480(SceNetApctlCtx *ctx);",
   "func_00002514": "s32 func_00002514(s32 arg0);",
   "func_000038E4": "s32 func_000038E4(void);",
   "func_00003B30": "void func_00003B30(s32 arg0);",

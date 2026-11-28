@@ -64,7 +64,28 @@ end:
 }
 #endif
 
-#if (FW_VERSION >= 150 && FW_VERSION < 250) || FW_VERSION >= 282
+#if FW_VERSION >= 150 && FW_VERSION < 250
+s32 func_00002204(s32 connIndex) {
+    SceNetApctlCtx *ctx = &D_00011DD4;
+    s32 ret;
+
+    if (ctx->idle == 0) {
+        return 0x80410A80;
+    }
+    ctx->idle = 0;
+    ret = sceUtilityCheckNetParam(connIndex);
+    if (ret < 0) {
+        ctx->idle = 1;
+        goto end;
+    }
+    ctx->connIndex = connIndex;
+    sceKernelSetEventFlag(ctx->evf, 1);
+end:
+    return ret;
+}
+#endif
+
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00002204);
 #endif
 
@@ -142,7 +163,7 @@ s32 func_000010EC(s32 *state) {
 
 INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_000023BC);
 
-#if FW_VERSION < 103
+#if FW_VERSION < 103 || (FW_VERSION >= 150 && FW_VERSION < 250)
 s32 func_00002480(SceNetApctlCtx *ctx) {
     u32 bits;
     s32 type;
