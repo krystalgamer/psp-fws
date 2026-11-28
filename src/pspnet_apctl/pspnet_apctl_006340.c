@@ -60,9 +60,61 @@ INCLUDE_ASM("nonmatchings/pspnet_apctl_006340", func_00006708);
 
 INCLUDE_ASM("nonmatchings/pspnet_apctl_006340", func_00006870);
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_apctl_006340", func_00004AEC);
+#if FW_VERSION < 250
+s32 func_00004AEC(void *pkt, s32 len, SceNetDhcpLease *l) {
+    SceNetBootp *bp = pkt;
+    u32 overload;
+    s32 ret;
 
+    __builtin_memset(l, 0, 9);
+    overload = 0;
+    ret = func_00007358(bp, len, l, 0, &overload);
+    if (ret < 0) {
+        return ret;
+    }
+    func_00007504(l->file, 0, sizeof(l->file));
+    if (overload & 1) {
+        ret = func_00007358(bp, len, l, 1, NULL);
+        if (ret < 0) {
+            return ret;
+        }
+    } else {
+        func_0000774C(l->file, bp->file, func_00007830(bp->file) + 1);
+    }
+    func_00007504(l->sname, 0, sizeof(l->sname));
+    if (overload & 2) {
+        ret = func_00007358(bp, len, l, 2, NULL);
+        if (ret < 0) {
+            return ret;
+        }
+    } else {
+        func_0000774C(l->sname, bp->sname, func_00007830(bp->sname) + 1);
+    }
+    l->ciaddr.s_addr = bp->ciaddr;
+    l->yiaddr.s_addr = bp->yiaddr;
+    l->siaddr.s_addr = bp->siaddr;
+    l->giaddr.s_addr = bp->giaddr;
+    if (!(l->flags & 0x20)) {
+        l->flags |= 0x20;
+        l->unk3E0 = l->unk3DC / 2;
+    }
+    l->unk3E0 = (l->unk3E0 * 3 + 9) / 4 + (u32)sceNetRand() % (u32)((l->unk3E0 + 3) / 4);
+    if (!(l->flags & 0x10)) {
+        l->flags |= 0x10;
+        l->unk3E4 = l->unk3DC / 8 * 7;
+    }
+    if (l->unk3E0 > l->unk3E4) {
+        l->unk3E0 = l->unk3E4 * 3 / 4;
+    }
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 250 && FW_VERSION < 282
+INCLUDE_ASM("nonmatchings/pspnet_apctl_006340", func_00004AEC);
+#endif
+
+#if FW_VERSION < 282
 s32 func_00006BD8(s8 tag, u8 len) {
     switch (tag) {
     case 53:

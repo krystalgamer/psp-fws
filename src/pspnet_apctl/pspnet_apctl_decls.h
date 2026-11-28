@@ -711,7 +711,7 @@ s32 func_000045B8(SceNetDhcpCtx *dc, void *addr);
 s32 func_00004704(s32 sock, u32 *dst, void *buf);
 s32 func_000047D8(SceNetDhcpCtx *dc);
 s32 func_0000487C(SceNetDhcpCtx *dc, void *spa, void *tpa);
-s32 func_00004AEC(void *bp, s32 len, SceNetDhcpLease *l);
+s32 func_00004AEC(void *pkt, s32 len, SceNetDhcpLease *l);
 s32 func_00004CDC(s8 *opt, SceNetDhcpLease *l);
 s32 func_00004DE0(s8 *opt, SceNetDhcpLease *l);
 s32 func_00004E50(s8 *opt, SceNetDhcpLease *l);
