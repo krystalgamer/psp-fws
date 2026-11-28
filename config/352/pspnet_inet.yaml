@@ -58,7 +58,7 @@ segments:
       - [0xBA9C, c, pspnet_inet_route]
       - [0xD288, c, pspnet_inet_rtsub]
       - [0x12D68, c, pspnet_inet_in_init]
-      - [0x12D98, c, pspnet_inet_in_cksum]
+      - [0x12D98, c, pspnet_inet_in_cksum2]
       - [0x1B7EC, c, pspnet_inet_udp]
       - [0x22464, c, pspnet_inet_tcp_subr]
       - { start: 0x2B220, type: asm, name: sceStub, linker_section: .sceStub.text }
@@ -71,7 +71,7 @@ segments:
       - { start: 0x2B554, type: rodata, name: lib_stub_btm, linker_section: .lib.stub.btm }
       - { start: 0x2B558, type: rodata, name: module_info, linker_section: .rodata.sceModuleInfo }
       - [0x2B58C, .rodata, pspnet_inet_rtsub]
-      - [0x2B9F4, .rodata, pspnet_inet_in_cksum]
+      - [0x2B9F4, .rodata, pspnet_inet_in_cksum2]
       - [0x2BC9C, .rodata, pspnet_inet_udp]
       - [0x2BD34, .rodata, pspnet_inet_tcp_subr]
       - { start: 0x2C14C, type: prxpad, order: .rodata }

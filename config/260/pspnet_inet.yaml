@@ -58,7 +58,7 @@ segments:
       - [0xBAB0, c, pspnet_inet_route]
       - [0xD2A4, c, pspnet_inet_rtsub]
       - [0x12DB8, c, pspnet_inet_in_init]
-      - [0x131AC, c, pspnet_inet_in_cksum]
+      - [0x131AC, c, pspnet_inet_in_cksum2]
       - [0x1BBBC, c, pspnet_inet_udp]
       - [0x225FC, c, pspnet_inet_tcp_subr]
       - { start: 0x2B180, type: asm, name: sceStub, linker_section: .sceStub.text }
@@ -73,7 +73,7 @@ segments:
       - { start: 0x2B4EC, type: rodata, name: resident, linker_section: .rodata.sceResident }
       - { start: 0x2B75C, type: rodata, name: nid, linker_section: .rodata.sceNid }
       - [0x2B8A8, .rodata, pspnet_inet_rtsub]
-      - [0x2B934, .rodata, pspnet_inet_in_cksum]
+      - [0x2B934, .rodata, pspnet_inet_in_cksum2]
       - [0x2BBDC, .rodata, pspnet_inet_udp]
       - [0x2BC74, .rodata, pspnet_inet_tcp_subr]
       - { start: 0x2C08C, type: prxpad, order: .rodata }

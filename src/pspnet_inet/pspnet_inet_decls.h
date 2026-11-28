@@ -21,6 +21,9 @@ static __inline s32 imin(s32 a, s32 b) {
 static __inline s32 imax(s32 a, s32 b) {
     return (a > b) ? a : b;
 }
+static __inline u16 htons(u16 x) {
+    return (u16)__builtin_allegrex_wsbh(x);
+}
 
 #define TAILQ_HEAD(name, type) struct name { struct type *tqh_first; struct type **tqh_last; }
 #define TAILQ_ENTRY(type) struct { struct type *tqe_next; struct type **tqe_prev; }
