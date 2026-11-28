@@ -2,6 +2,39 @@
 #include "common.h"
 #include "pspnet_inet_decls.h"
 
+
+#if FW_VERSION < 201
+__inline void rtalloc(struct route *ro) {
+    if (ro->ro_rt != NULL && ro->ro_rt->rt_ifp != NULL && (ro->ro_rt->rt_flags & RTF_UP)) {
+        return;
+    }
+    ro->ro_rt = rtalloc1(&ro->ro_dst, 1);
+}
+
+__inline void rtfree(struct rtentry *rt) {
+    struct ifaddr *ifa;
+
+    rt->rt_refcnt--;
+    if (rt->rt_refcnt <= 0 && (rt->rt_flags & RTF_UP) == 0) {
+        rttrash--;
+        if (rt->rt_refcnt < 0) {
+            return;
+        }
+        rt_timer_remove_all(rt);
+        ifa = rt->rt_ifa;
+        if (--ifa->ifa_refcnt == 0) {
+            _sce_pspnet_ifafree(ifa);
+        }
+        sceNetFreeInternal(rt->rt_nodes[0].rn_key);
+        sceNetFreeInternal(rt);
+    }
+}
+
+__inline s32 func_0000D128(u32 cmd, void *data) {
+    return 0x5F;
+}
+#endif
+
 #if FW_VERSION < 201
 struct rtentry *rtalloc1(struct sockaddr *dst, s32 report) {
     struct radix_node_head *rnh = rt_tables[dst->sa_family];
@@ -152,6 +185,9 @@ INCLUDE_ASM("nonmatchings/pspnet_inet_route", func_0000CF68);
 INCLUDE_ASM("nonmatchings/pspnet_inet_route", func_0000D048);
 #endif
 
+
+
+#if FW_VERSION >= 201
 void rtalloc(struct route *ro) {
     if (ro->ro_rt != NULL && ro->ro_rt->rt_ifp != NULL && (ro->ro_rt->rt_flags & RTF_UP)) {
         return;
@@ -177,16 +213,12 @@ void rtfree(struct rtentry *rt) {
         sceNetFreeInternal(rt);
     }
 }
+#endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_inet_route", func_0000D128);
 #endif
 
-#if FW_VERSION < 201
-s32 func_0000D128(u32 cmd, void *data) {
-    return 0x5F;
-}
-#endif
 
 #if FW_VERSION >= 282
 s32 func_0000D1F4(void) {
