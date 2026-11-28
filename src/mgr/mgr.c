@@ -2343,7 +2343,7 @@ void func_000060B4(s32 arg0, s32 *arg1) {
 #endif
 
 #if FW_VERSION < 152
-s32 func_00006104(void) {
+s32 func_00006104(s32 fd) {
     return (-((sceMScmHCLastStatus() & 0x300) == 0) & 0x7FAFE000) - 0x7FAFE000;
 }
 #endif
@@ -2378,12 +2378,65 @@ void func_000060B4(s32 arg0, s32 *arg1) {
 #endif
 
 #if FW_VERSION >= 152
-s32 func_00006104(void) {
+s32 func_00006104(s32 fd) {
     return !(sceMScmHCLastStatus() & 0x300) ? 0 : 0x80502000;
 }
 #endif
 
-INCLUDE_ASM("nonmatchings/mgr", func_00006134);
+s32 func_00006134(s32 fd, s32 tpc, u8 *buf, s32 size) {
+    s32 (*xfer)(s32, u8 *, s32, s32) = sceMScmWriteDataPIO;
+    u8 st;
+    s32 slot;
+    s32 mask;
+    s32 i;
+    s32 ret;
+
+    if (!(tpc & 8)) {
+        xfer = sceMScmReadDataPIO;
+    }
+    i = 0;
+    do {
+        if (sceMScmGetSlotState(fd, &slot) >= 0 && slot == 2) {
+            ret = 0x80505001;
+            goto end;
+        }
+        ret = sceMScmSendTPC(fd, tpc & 0xFF, size, -1);
+        if (ret < 0) {
+            goto fail;
+        }
+        ret = xfer(fd, buf, size, -1);
+        if (ret < 0) {
+            goto check;
+        }
+        if (size >= 0x20) {
+            st = 0;
+            ret = sceMScmTPCGetInt(fd, &st, 0, -1);
+            if (ret >= 0) {
+                goto end;
+            }
+check:
+            i++;
+            if (ret != 0x80220089) {
+fail:
+                ret = func_000057CC(ret);
+                goto end;
+            }
+        } else {
+            mask = 2;
+            ret = sceMScmWaitHCIntr(fd, &mask, -1);
+            if (ret < 0) {
+                goto fail;
+            }
+            ret = func_00006104(fd);
+            if (ret >= 0) {
+                goto end;
+            }
+            i++;
+        }
+    } while (i < 8);
+end:
+    return ret;
+}
 
 INCLUDE_ASM("nonmatchings/mgr", func_00006288);
 
