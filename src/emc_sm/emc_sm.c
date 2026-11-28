@@ -459,9 +459,13 @@ s32 sceNandReadPagesRawExtra(u32 ppn, void *user, void *spare, u32 len) {
     return sceNandReadAccess(ppn, user, spare, len, 0x20);
 }
 
-#if FW_VERSION < 152
+#if FW_VERSION < 201
 s32 sceNandWritePagesRawExtra(u32 ppn, void *user, void *spare, u32 len) {
-    return sceNandWriteAccess(ppn, user, spare, len, (user == NULL) ? 0x30 : 0x20);
+    s32 mode = 0x20;
+    if (user == NULL) {
+        mode = 0x30;
+    }
+    return sceNandWriteAccess(ppn, user, spare, len, mode);
 }
 #else
 INCLUDE_ASM("nonmatchings/emc_sm", sceNandWritePagesRawExtra);
@@ -661,7 +665,7 @@ s32 sceNandCountChipMakersBBM(void) {
 INCLUDE_ASM("nonmatchings/emc_sm", sceNandCountChipMakersBBM);
 #endif
 
-#if FW_VERSION < 152
+#if FW_VERSION < 201
 s32 sceNandDetectChipMakersBBM(u32 ppn) {
     s32 i;
     s32 ret;
