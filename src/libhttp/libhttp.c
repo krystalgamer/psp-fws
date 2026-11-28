@@ -185,11 +185,59 @@ INCLUDE_ASM("nonmatchings/libhttp", CreateConnection);
 INCLUDE_ASM("nonmatchings/libhttp", sceHttpCreateConnectionWithURL);
 #endif
 
-#if FW_VERSION < 150 || FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/libhttp", sceHttpDeleteConnection);
+#if FW_VERSION < 150
+int sceHttpDeleteConnection(int connection_id) {
+    SceHttpConn *con;
+    SceHttpConn *p;
+    int ret = 0x80431001;
+    int intr;
+
+    if (D_0000DCCC.inited == 1) {
+        ret = 0x80431100;
+        if (connection_id != 0x1000000) {
+            intr = sceKernelSuspendDispatchThread();
+            ret = GetHttpConnection(connection_id, &con);
+            if (con != NULL) {
+                p = con;
+                if (p->reference_counter != 1) {
+                    con->reference_counter--;
+                    ret = 0x80431067;
+                } else {
+                    if (con->pre != NULL) {
+                        con->pre->next = con->next;
+                    }
+                    if (con->next != NULL) {
+                        con->next->pre = con->pre;
+                    }
+                }
+            } else {
+                ret = 0x80431100;
+            }
+            sceKernelResumeDispatchThread(intr);
+            if (ret >= 0) {
+                p = con;
+                while (p != NULL) {
+                    con = p;
+                    if (con->hostname != NULL) {
+                        _sceHttpFreeInternal(con->hostname);
+                        con->hostname = NULL;
+                    }
+                    func_00005798(&con->tmpl);
+                    func_00006380(con);
+                    _sceHttpFreeInternal(con->unk138);
+                    p = con->redirect_list;
+                    _sceHttpFreeInternal(con);
+                }
+            }
+        }
+    }
+    return ret;
+}
 #endif
 
 #if FW_VERSION >= 282
+INCLUDE_ASM("nonmatchings/libhttp", sceHttpDeleteConnection);
+
 INCLUDE_ASM("nonmatchings/libhttp", sceHttpCreateRequest);
 #endif
 
@@ -608,7 +656,7 @@ int sceHttpEndCache(void) {
         D_0000DCCC.cache_inited = 0;
         D_0000DCCC.cache_list = NULL;
         D_0000DCCC.cache_size = 0;
-        D_0000DCCC.unk14 = 0;
+        D_0000DCCC.cache_used = 0;
     }
     return ret;
 }
@@ -1084,7 +1132,25 @@ INCLUDE_ASM("nonmatchings/libhttp", func_00003830);
 
 INCLUDE_ASM("nonmatchings/libhttp", func_000038CC);
 
-INCLUDE_ASM("nonmatchings/libhttp", func_00003A24);
+int func_00003A24(SceHttpCacheEntry *entry) {
+    int ret = 0;
+    int size;
+
+    if (entry != NULL) {
+        if (entry->prev != NULL) {
+            entry->prev->next = entry->next;
+        }
+        if (entry->next != NULL) {
+            entry->next->prev = entry->prev;
+        }
+        size = func_00003830(entry);
+        _sceHttpFreeInternal(entry);
+        size += 0x40;
+        D_0000DCCC.cache_used -= size;
+        ret = size;
+    }
+    return ret;
+}
 #endif
 
 #if FW_VERSION == 103
@@ -1379,24 +1445,19 @@ void func_00005798(SceHttpTmpl *tmpl) {
 
 INCLUDE_ASM("nonmatchings/libhttp", BuildHttpHeader);
 
-u32 func_00005DE0(u32 arg0) {
-    u32 var_s1;
-    void *temp_s0;
-    void *var_a1;
+u32 func_00005DE0(u32 size) {
+    u32 freed = 0;
+    SceHttpCacheEntry *next;
+    SceHttpCacheEntry *p;
 
-    var_a1 = D_0000DCE4;
-    var_s1 = 0;
-    if ((var_a1 != NULL) & (arg0 != 0)) {
-        do {
-            temp_s0 = M2C_FIELD(var_a1, void **, 0x2C);
-            if ((M2C_FIELD(var_a1, s32 *, 0x24) == 0) && (M2C_FIELD(var_a1, s32 *, 0x28) != 1)) {
-                M2C_FIELD(var_a1, s32 *, 0x28) = 1;
-                var_s1 += func_00003A24((s32) var_a1);
-            }
-            var_a1 = temp_s0;
-        } while ((temp_s0 != NULL) & (var_s1 < arg0));
+    for (p = D_0000DCCC.cache_list; p != NULL && freed < size; p = next) {
+        next = p->next;
+        if (p->reference_counter == 0 && p->status != 1) {
+            p->status = 1;
+            freed += func_00003A24(p);
+        }
     }
-    return var_s1;
+    return freed;
 }
 
 void *_sceHttpMallocInternal(SceSize size) {

@@ -395,7 +395,10 @@ typedef struct SceHttpConn {
     unsigned char *hostname; /* 0x30 (1.03: 0x2C) */
     u8 unk34[(FW_VERSION == 103) ? 0xA4 - 0x30 : 0xA4 - 0x34];
     SceHttpTmpl tmpl;       /* 0xA4 */
-    u8 unk128[0x150 - 0x128];
+    u8 unk128[0x138 - 0x128];
+    void *unk138;           /* 0x138 */
+    u8 unk13C[0x14C - 0x13C];
+    struct SceHttpConn *redirect_list; /* 0x14C */
     struct SceHttpConn *next; /* 0x150 */
     struct SceHttpConn *pre;  /* 0x154 */
     u8 unk158[0x164 - 0x158];
@@ -465,6 +468,7 @@ typedef struct SceHttpCacheEntry {
     s32 reference_counter;  /* 0x24 */
     s32 status;             /* 0x28 */
     struct SceHttpCacheEntry *next; /* 0x2C */
+    struct SceHttpCacheEntry *prev; /* 0x30 */
 } SceHttpCacheEntry;
 /* library state (0xDCCC in 1.00) */
 typedef struct {
@@ -473,7 +477,7 @@ typedef struct {
     s32 cache_inited;       /* 0x08 sceHttpInitCache */
     s32 unk0C;
     u32 cache_size;         /* 0x10 */
-    s32 unk14;
+    s32 cache_used;         /* 0x14 */
     struct SceHttpCacheEntry *cache_list; /* 0x18 */
     u8 unk1C[0x5C - 0x1C];
 } SceHttpGlobals;
@@ -509,7 +513,6 @@ extern char D_0000DC34[];
 extern u8 D_0000DC35[];
 extern SceHttpMallocFuncs D_0000DCC0;
 extern SceHttpGlobals D_0000DCCC;
-extern void *D_0000DCE4;
 extern s32 D_0000DD28;
 extern SceHttpTmpl D_0000DD2C;
 extern SceHttpConn D_0000DDB0;
@@ -572,7 +575,7 @@ s32 func_000032B0(SceHttpReq *req);
 int func_00003614(SceHttpReq *req);
 s32 func_00003668(SceHttpReq *req);
 int func_00003830(SceHttpCacheEntry *entry);
-s32 func_00003A24(s32);
+int func_00003A24(SceHttpCacheEntry *entry);
 void func_00003C04(void *arg0);
 s32 func_00003C90(void *arg0);
 void func_00003CEC(void *arg0);
@@ -592,8 +595,9 @@ s32 func_0000584C(s32);
 s32 func_00005CAC(s32);
 void func_00005CD0(void *arg0, void *arg1);
 s32 func_00005D20(s32);
-u32 func_00005DE0(u32 arg0);
+u32 func_00005DE0(u32 size);
 s32 func_00005EF4(s32);
+void func_00006380(SceHttpConn *con);
 s32 func_00006388(s32);
 void func_0000646C(void *arg0, void *arg1, u32 arg2, s32 arg3);
 s32 func_0000649C(s32);
@@ -679,7 +683,7 @@ int sceHttpCreateConnection(int template_id, const unsigned char *server_name, u
 s32 sceHttpCreateConnectionWithURL(s32 arg0, void *arg1, s32 arg2);
 int sceHttpCreateRequest(int connection_id, int method, const unsigned char *path, SceULong64 content_length);
 s32 sceHttpCreateTemplate(void *arg0, s32 arg1, s32 arg2);
-s32 sceHttpDeleteConnection(s32 arg0);
+int sceHttpDeleteConnection(int connection_id);
 s32 sceHttpDeleteRequest(s32 arg0);
 int sceHttpDeleteTemplate(int tmpl_id);
 s32 sceHttpEnd(void);
