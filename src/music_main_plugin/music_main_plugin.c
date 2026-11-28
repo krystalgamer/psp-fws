@@ -2123,7 +2123,14 @@ void func_00006810(void) {
 }
 #endif
 
-#if FW_VERSION == 282 || FW_VERSION >= 350
+#if FW_VERSION >= 350
+void func_00006810(void) {
+    sceVshCommonUtil_0587F20C(&D_000BD7A4, 0x10000000, 0);
+    _ZN3vsh12BusyIcon_DecEv();
+}
+#endif
+
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/music_main_plugin", func_00006810);
 #endif
 
@@ -2134,7 +2141,9 @@ void func_00007DD0(void) {
 #endif
 
 #if FW_VERSION >= 350
-INCLUDE_ASM("nonmatchings/music_main_plugin", func_00007DD0);
+void func_00007DD0(void) {
+    sceVshCommonUtil_0587F20C(&D_000BD7A4, 0x20000000, 0);
+}
 #endif
 
 #if FW_VERSION >= 300
