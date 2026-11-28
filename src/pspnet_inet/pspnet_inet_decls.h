@@ -467,7 +467,9 @@ struct radix_node_head {
     struct radix_node *(*rnh_lookup)();     /* 0x20 */
     struct radix_node *(*rnh_matchpkt)();   /* 0x24 */
     s32 (*rnh_walktree)(struct radix_node_head *head, s32 (*f)(), void *w); /* 0x28 */
+    struct radix_node rnh_nodes[3];  /* 0x2C */
 };
+typedef char chk_radix_node_head[(sizeof(struct radix_node_head) == 0x74) ? 1 : -1];
 #define RTF_UP 0x1
 #define RTF_GATEWAY 0x2
 #define RTF_HOST 0x4
@@ -1859,8 +1861,10 @@ s32 func_00009B0C(void);
 void func_00009B24(void);
 void func_00009B5C(void);
 s32 func_00009B84();
-struct radix_node *func_0000A144(void *v_arg, struct radix_node_head *head);
+struct radix_node *func_0000A144();
 struct radix_node *func_0000A61C(void *n_arg, s32 search, s32 skip);
+struct radix_node *func_0000A804();
+struct radix_node *func_0000AE9C();
 s32 func_0000D1F4(void);
 void func_0000D25C(s32 *arg0, s32 arg1);
 s32 func_0000D264(void *arg0, s32 arg1);
@@ -2028,7 +2032,7 @@ void rip_input(struct mbuf *m, ...);
 s32 rip_output(struct mbuf *m, ...);
 s32 rip_usrreq(struct socket *so, s32 req, struct mbuf *m, struct mbuf *nam, struct mbuf *control);
 s32 rn_inithead(void **head, s32 off);
-struct radix_node *rn_lookup(void *v_arg, void *m_arg, struct radix_node_head *head);
+struct radix_node *rn_lookup();
 struct radix_node *rn_newpair(void *v, s32 b, struct radix_node nodes[2]);
 struct radix_node *rn_search(void *v_arg, struct radix_node *head);
 struct radix_node *rn_search_m(void *v_arg, struct radix_node *head, void *m_arg);

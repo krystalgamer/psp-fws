@@ -30,3 +30,4 @@ func_0002AAC8 = 0x0002AAC8; // type:func
 func_0002ACFC = 0x0002ACFC; // type:func
 rtable_init = 0x0000CBD4; // type:func
 rn_search = 0x0000B0F0; // type:func
+sbappendrecord = 0x00005A0C; // type:func

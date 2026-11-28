@@ -995,6 +995,10 @@ s32 sb_lock(struct sockbuf *sb) {
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", sbappend);
 
+#if FW_VERSION < 271
+INCLUDE_ASM("nonmatchings/pspnet_inet", sbappendrecord);
+#endif
+
 #if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_inet", sce_alignbytes);
 #endif
