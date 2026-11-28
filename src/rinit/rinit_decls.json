@@ -1,5 +1,6 @@
 {
  "funcs": {
+  "_Jv_RegisterClasses": "extern void _Jv_RegisterClasses(void *) __attribute__((weak));",
   "__malloc_lock": "void __malloc_lock(struct _reent *ptr);",
   "__malloc_unlock": "void __malloc_unlock(struct _reent *ptr);",
   "__sclose": "int __sclose(void *cookie);",
@@ -147,10 +148,15 @@
  },
  "vars": {
   "D_0000B28C": "extern func_ptr D_0000B28C[];",
+  "D_0000B298": "extern void *D_0000B298[]; /* __JCR_LIST__ */",
+  "D_0000B29C": "extern char D_0000B29C[]; /* __EH_FRAME_BEGIN__ */",
   "D_0000BAF0": "extern char D_0000BAF0[];",
   "D_0000BEBC": "extern struct lconv D_0000BEBC;",
+  "D_0000C164": "extern func_ptr *D_0000C164; /* crtstuff p = __DTOR_LIST__ + 1 */",
   "D_0000C168": "extern const char *D_0000C168[];",
   "D_0000C1F8": "extern struct RegKeyInit D_0000C1F8[][20];",
+  "D_0000F570": "extern _Bool D_0000F570; /* crtstuff completed */",
+  "D_0000F574": "extern char D_0000F574[]; /* crtstuff frame_dummy object */",
   "D_0000F58C": "extern char *D_0000F58C;",
   "D_0000F590": "extern char *D_0000F590;",
   "D_0000F594": "extern char *D_0000F594;",

@@ -268,10 +268,15 @@ struct _reent {
 };
 
 extern func_ptr D_0000B28C[];
+extern void *D_0000B298[]; /* __JCR_LIST__ */
+extern char D_0000B29C[]; /* __EH_FRAME_BEGIN__ */
 extern char D_0000BAF0[];
 extern struct lconv D_0000BEBC;
+extern func_ptr *D_0000C164; /* crtstuff p = __DTOR_LIST__ + 1 */
 extern const char *D_0000C168[];
 extern struct RegKeyInit D_0000C1F8[][20];
+extern _Bool D_0000F570; /* crtstuff completed */
+extern char D_0000F574[]; /* crtstuff frame_dummy object */
 extern char *D_0000F58C;
 extern char *D_0000F590;
 extern char *D_0000F594;
@@ -282,6 +287,7 @@ extern char __lc_ctype[12];
 extern struct _reent *_impure_ptr;
 extern int errno;
 
+extern void _Jv_RegisterClasses(void *) __attribute__((weak));
 void __malloc_lock(struct _reent *ptr);
 void __malloc_unlock(struct _reent *ptr);
 int __sclose(void *cookie);
