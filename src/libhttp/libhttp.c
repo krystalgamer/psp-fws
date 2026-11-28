@@ -995,7 +995,17 @@ int func_0000325C(SceHttpReq *req) {
 #endif
 
 #if FW_VERSION >= 102 && FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/libhttp", func_0000325C);
+int func_0000325C(SceHttpReq *req) {
+    int ret = 0;
+
+    if (req->status == 2) {
+        return 0;
+    }
+    if (req->response_code >= 100 && req->response_code < 103) {
+        ret = func_00004A6C(req);
+    }
+    return ret;
+}
 #endif
 
 #if FW_VERSION < 150
@@ -3610,11 +3620,31 @@ s32 module_stop(void) {
     return 0;
 }
 
-INCLUDE_ASM("nonmatchings/libhttp", func_0000BAA8);
+int func_0000BAA8(int c) {
+    int t;
 
-INCLUDE_ASM("nonmatchings/libhttp", func_0000BAD4);
+    c = (char)c;
+    t = D_0000DC34[c + 1];
+    if (t & 2) {
+        c = (char)(c - 0x20);
+    }
+    return c;
+}
 
-INCLUDE_ASM("nonmatchings/libhttp", func_0000BB00);
+int func_0000BAD4(int c) {
+    int t;
+
+    c = (char)c;
+    t = D_0000DC34[c + 1];
+    if (t & 1) {
+        c = (char)(c + 0x20);
+    }
+    return c;
+}
+
+int func_0000BB00(int c) {
+    return D_0000DC34[c + 1];
+}
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 201
@@ -3632,7 +3662,19 @@ M2C_UNK *func_0000BB14(void) {
 #if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/libhttp", func_0000BB20);
 
-INCLUDE_ASM("nonmatchings/libhttp", func_0000BB58);
+int func_0000BB58(const void *s1, const void *s2, int n) {
+    const unsigned char *a = s1;
+    const unsigned char *b = s2;
+
+    for (; n > 0; n--) {
+        if (*a != *b) {
+            return (*a < *b) ? -1 : 1;
+        }
+        a++;
+        b++;
+    }
+    return 0;
+}
 
 u8 *func_0000BB98(u8 *arg0, u8 *arg1, s32 arg2) {
     s32 var_a2;
@@ -3660,7 +3702,20 @@ u8 *func_0000BB98(u8 *arg0, u8 *arg1, s32 arg2) {
     return var_v0;
 }
 
-INCLUDE_ASM("nonmatchings/libhttp", func_0000BBCC);
+void *func_0000BBCC(void *s, int c, int n) {
+    unsigned char *p;
+    unsigned char ch;
+
+    if (s != NULL) {
+        ch = c;
+        p = s;
+        while (n > 0) {
+            n--;
+            *p++ = ch;
+        }
+    }
+    return s;
+}
 
 INCLUDE_ASM("nonmatchings/libhttp", func_0000BBF8);
 
@@ -3670,7 +3725,17 @@ INCLUDE_ASM("nonmatchings/libhttp", func_0000BD18);
 
 INCLUDE_ASM("nonmatchings/libhttp", func_0000BDF0);
 
-INCLUDE_ASM("nonmatchings/libhttp", func_0000BE38);
+int func_0000BE38(const char *s) {
+    int len = 0;
+
+    if (s == NULL) {
+        return 0;
+    }
+    while (*s++ != '\0') {
+        len++;
+    }
+    return len;
+}
 
 INCLUDE_ASM("nonmatchings/libhttp", func_0000BE6C);
 #endif
@@ -3688,7 +3753,18 @@ INCLUDE_ASM("nonmatchings/libhttp", func_0000BF6C);
 
 INCLUDE_ASM("nonmatchings/libhttp", func_0000C030);
 
-INCLUDE_ASM("nonmatchings/libhttp", func_0000C0AC);
+char *func_0000C0AC(const char *s, int c) {
+    c = (char)c;
+    if (s == NULL) {
+        return NULL;
+    }
+    do {
+        if (*s == c) {
+            return (char *)s;
+        }
+    } while (*s++ != '\0');
+    return NULL;
+}
 #endif
 
 #if FW_VERSION == 152
