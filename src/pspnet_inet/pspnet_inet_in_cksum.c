@@ -927,7 +927,52 @@ INCLUDE_ASM("nonmatchings/pspnet_inet_in_cksum", ip_stripoptions);
 
 INCLUDE_ASM("nonmatchings/pspnet_inet_in_cksum", ip_output);
 
-INCLUDE_ASM("nonmatchings/pspnet_inet_in_cksum", func_000175DC);
+#if FW_VERSION < 201
+struct mbuf *ip_insertoptions(struct mbuf *m, struct mbuf *opt, s32 *phlen) {
+    struct ipoption *p = mtod(opt, struct ipoption *);
+    struct mbuf *n;
+    struct ip *ip = mtod(m, struct ip *);
+    u32 optlen;
+    s32 max_linkhdr;
+
+    optlen = opt->m_len - sizeof(p->ipopt_dst);
+    if (optlen + (u16)ip->ip_len > 0xFFFF)
+        return (m);
+    if (p->ipopt_dst.s_addr != __builtin_allegrex_wsbw(0))
+        ip->ip_dst = p->ipopt_dst;
+    if (m->m_flags & M_EXT || m->m_data - optlen < (u8 *)&m->m_ext) {
+        n = sceNetMallocInternal(MSIZE);
+        if (n == 0)
+            return (m);
+        n->m_type = MT_HEADER;
+        n->m_flags = M_PKTHDR;
+        n->m_data = (u8 *)&n->m_ext;
+        n->m_nextpkt = NULL;
+        n->m_pkthdr.aux = NULL;
+        n->m_pkthdr.len = m->m_pkthdr.len + optlen;
+        m->m_len -= sizeof(struct ip);
+        m->m_data += sizeof(struct ip);
+        n->m_next = m;
+        m = n;
+        m->m_len = optlen + sizeof(struct ip);
+        sceNetIfhandle_lib_5FB31C72(&max_linkhdr, NULL, NULL, NULL);
+        m->m_data += max_linkhdr;
+        func_0002C9B8((char *)ip, mtod(m, char *), sizeof(struct ip));
+    } else {
+        m->m_data -= optlen;
+        m->m_len += optlen;
+        m->m_pkthdr.len += optlen;
+        func_0002C864(mtod(m, char *), ip, sizeof(struct ip));
+    }
+    ip = mtod(m, struct ip *);
+    func_0002C9B8((char *)p->ipopt_list, (char *)(ip + 1), (u32)optlen);
+    *phlen = sizeof(struct ip) + optlen;
+    ip->ip_len += optlen;
+    return (m);
+}
+#else
+INCLUDE_ASM("nonmatchings/pspnet_inet_in_cksum", ip_insertoptions);
+#endif
 
 #if FW_VERSION < 201
 s32 ip_optcopy(struct ip *ip, struct ip *jp) {

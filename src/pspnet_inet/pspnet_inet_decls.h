@@ -1378,6 +1378,11 @@ struct ip_mreq {
     (ifp) = (ia == NULL) ? NULL : ia->ia_ifp; \
 }
 
+struct ipoption {
+    struct in_addr ipopt_dst;           /* 0x00 */
+    s8 ipopt_list[40];                  /* 0x04 */
+};
+
 struct SceTailqHead {
     void *tqh_first;
     void **tqh_last;
