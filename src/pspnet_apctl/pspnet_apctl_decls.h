@@ -643,6 +643,7 @@ s32 func_000038E4(void);
 s32 func_000038EC(SceNetApctlCtx *ctx, SceNetInAddrPacked *ip, SceNetInAddrPacked *bcast, SceNetInAddrPacked *mask, SceNetInAddrPacked *route, SceNetInAddrPacked *dns1, SceNetInAddrPacked *dns2);
 s32 func_00003908(u32 *out);
 s32 func_00003978(void);
+s32 func_00003A18(SceNetDhcpCtx *dc);
 s32 func_00003AA8(SceNetDhcpCtx *dc);
 void func_00003B30(s32 arg0);
 void func_00003B50(s32 arg0);

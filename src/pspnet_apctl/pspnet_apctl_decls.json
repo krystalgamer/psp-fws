@@ -60,6 +60,7 @@
   "func_000038EC": "s32 func_000038EC(SceNetApctlCtx *ctx, SceNetInAddrPacked *ip, SceNetInAddrPacked *bcast, SceNetInAddrPacked *mask, SceNetInAddrPacked *route, SceNetInAddrPacked *dns1, SceNetInAddrPacked *dns2);",
   "func_00003908": "s32 func_00003908(u32 *out);",
   "func_00003978": "s32 func_00003978(void);",
+  "func_00003A18": "s32 func_00003A18(SceNetDhcpCtx *dc);",
   "func_00003AA8": "s32 func_00003AA8(SceNetDhcpCtx *dc);",
   "func_00003B30": "void func_00003B30(s32 arg0);",
   "func_00003B50": "void func_00003B50(s32 arg0);",
