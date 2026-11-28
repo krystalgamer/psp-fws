@@ -287,6 +287,7 @@ s32 func_00007844(s32 fd, u64 *a, u64 *b, u64 *c, s32 flag);
 s32 func_000078F8(s32 fd, u64 *a, u64 *b);
 void func_0000798C(s32 arg0);
 s32 func_00007AD8(s32 fd);
+s32 func_00007BAC(s32 fd, s32 *blks, u8 *buf);
 s32 func_00008274(s32 fd, s32 reg);
 s32 func_00008300(s32 fd, s32 reg);
 s32 func_00008374(s32 arg0, s32 arg1, s32 pos, s32 step);

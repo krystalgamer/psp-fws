@@ -2960,7 +2960,43 @@ s32 func_00007AD8(s32 fd) {
 INCLUDE_ASM("nonmatchings/mgr", func_00007AD8);
 #endif
 
+#if FW_VERSION < 152
+s32 func_00007BAC(s32 fd, s32 *blks, u8 *buf) {
+    s32 max = g_mgrMsCtrl.info.unk4;
+    s32 ret;
+    s32 i;
+    u8 *p;
+    s32 *out;
+
+    ret = func_000053B0(fd, buf, 1);
+    if (ret < 0) {
+        return ret;
+    }
+    out = blks;
+    i = 0;
+    p = buf;
+    for (; i < 2; i++) {
+        *out = (p[2] << 8) | p[3];
+        if (*out < 3) {
+            goto bad;
+        }
+        if (max < *out) {
+bad:
+            *out = -1;
+            return 0x80505004;
+        }
+        p += 2;
+        out++;
+    }
+    ret = (buf[0] << 8) | buf[1];
+    if (ret < 2 || max < ret) {
+        return 0x80504003;
+    }
+    return ret;
+}
+#else
 INCLUDE_ASM("nonmatchings/mgr", func_00007BAC);
+#endif
 
 INCLUDE_ASM("nonmatchings/mgr", func_00007C84);
 
