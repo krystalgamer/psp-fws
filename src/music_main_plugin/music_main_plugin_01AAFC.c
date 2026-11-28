@@ -250,7 +250,11 @@ INCLUDE_ASM("nonmatchings/music_main_plugin_01AAFC", _ZN14Class_0009BCC8D0Ev);
 #if FW_VERSION >= 330
 INCLUDE_ASM("nonmatchings/music_main_plugin_01AAFC", func_00065F68);
 #else
-INCLUDE_ASM("nonmatchings/music_main_plugin_01AAFC", func_0001B810);
+M2C_UNK func_0001B810(void *cxxthis) {
+    Class_0009BCC8 *arg0 = (Class_0009BCC8 *) cxxthis;
+    arg0->unk50 = 0;
+    return M2C_FIELD(M2C_FIELD(arg0, void **, 0), s32 (**)(), 0x2C)();
+}
 #endif
 
 INCLUDE_ASM("nonmatchings/music_main_plugin_01AAFC", func_0001B838);

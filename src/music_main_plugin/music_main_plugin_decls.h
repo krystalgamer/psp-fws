@@ -42,6 +42,22 @@ public:
 class Class_00094538 {
 public:
     u32 unk4;
+    s32 unk8;
+    s32 unkC;
+    s32 unk10;
+    s32 unk14;
+    s32 unk18;
+    s32 unk1C;
+    s32 unk20;
+    s32 unk24;
+    s32 unk28;
+    s32 unk2C;
+    s32 unk30;
+    s32 unk34;
+    s32 unk38;
+    s32 unk3C;
+    s32 unk40;
+    s32 unk44;
     virtual ~Class_00094538();
 };
 #endif
@@ -50,6 +66,12 @@ public:
 /* dtor still asm/m2c (not trivial) */
 class Class_00094D20 {
 public:
+    s32 unk4;
+    u8 pad8[0x4];
+    s32 unkC;
+    u8 pad10[0x18];
+    s32 unk28;
+    s32 unk2C;
     virtual ~Class_00094D20();
 };
 #endif
@@ -92,6 +114,9 @@ class Class_00097B88 {
 public:
     s32 unk4;
     s32 unk8;
+    s32 unkC;
+    u8 pad10[0x18];
+    s32 unk28;
     Class_00097B88(s32 arg1, s32 arg2);
     virtual ~Class_00097B88();
 };
@@ -198,6 +223,8 @@ public:
 /* dtor still asm/m2c (not trivial) */
 class Class_00097DC8_v271 {
 public:
+    s32 unk4;
+    s32 unk8;
     virtual ~Class_00097DC8_v271();
 };
 #endif
@@ -415,12 +442,22 @@ public:
 /* dtor still asm/m2c (not trivial) */
 class Class_0009BCC8 {
 public:
-    u8 pad4[0x8];
+    s32 unk4;
+    u8 pad8[0x4];
     s32 unkC;
-    u8 pad10[0x20];
+    u8 pad10[0x18];
+    s32 unk28;
+    s32 unk2C;
     s32 unk30;
-    u8 pad34[0xC];
+    s32 unk34;
+    u8 pad38[0x4];
+    s32 unk3C;
     s32 unk40;
+    s32 unk44;
+    u8 pad48[0x4];
+    s32 unk4C;
+    s32 unk50;
+    s32 unk54;
     virtual ~Class_0009BCC8();
 };
 #endif
@@ -429,6 +466,7 @@ public:
 /* vtable _ZTV14Class_00097AA8 is data (vptr = label - 8 + 8) */
 class Class_00097AA8 : public Class_0009BCC8 {
 public:
+    s32 unk58;
     virtual ~Class_00097AA8();
 };
 #endif
@@ -437,7 +475,20 @@ public:
 /* vtable _ZTV14Class_0009B818 is data (vptr = label - 8 + 8) */
 class Class_0009B818 : public Class_0009BCC8 {
 public:
-    u8 pad44[0x4C];
+    s32 unk58;
+    s32 unk5C;
+    s32 unk60;
+    s32 unk64;
+    s32 unk68;
+    s32 unk6C;
+    s32 unk70;
+    s32 unk74;
+    s32 unk78;
+    s32 unk7C;
+    s32 unk80;
+    s32 unk84;
+    s32 unk88;
+    s32 unk8C;
     u32 unk90;
     virtual ~Class_0009B818();
 };
@@ -450,6 +501,9 @@ public:
     u8 unk4;
     u8 pad5[0x3];
     s32 unk8;
+    s32 unkC;
+    s32 unk10;
+    s32 unk14;
     virtual ~Class_0009C078();
 };
 #endif
@@ -458,6 +512,9 @@ public:
 /* vtable _ZTV14Class_0009C098 is data (vptr = label - 8 + 8) */
 class Class_0009C098 : public Class_0009C078 {
 public:
+    u8 pad18[0x4];
+    s32 unk1C;
+    s32 unk20;
     virtual ~Class_0009C098();
 };
 #endif
@@ -533,6 +590,8 @@ public:
 /* dtor still asm/m2c (not trivial) */
 class Class_0009E218 {
 public:
+    s32 unk4;
+    s32 unk8;
     Class_0009E218();
     virtual ~Class_0009E218();
 };
@@ -542,6 +601,8 @@ public:
 /* vtable _ZTV14Class_0009BC50 is data (vptr = label - 8 + 8) */
 class Class_0009BC50 : public Class_0009E218 {
 public:
+    u8 padC[0x404];
+    s32 unk410;
     virtual ~Class_0009BC50();
 };
 #endif
@@ -550,7 +611,7 @@ public:
 /* vtable _ZTV14Class_0009E470 is data (vptr = label - 8 + 8) */
 class Class_0009E470 : public Class_0009E218 {
 public:
-    s32 unk4;
+
     Class_0009E470();
     virtual ~Class_0009E470();
 };
@@ -654,6 +715,17 @@ public:
 /* vtable _ZTV14Class_000A0220 is data (vptr = label - 8 + 8) */
 class Class_000A0220 : public Class_00094D20 {
 public:
+    s32 unk30;
+    s32 unk34;
+    s32 unk38;
+    s32 unk3C;
+    s32 unk40;
+    s32 unk44;
+    u8 pad48[0xC];
+    s32 unk54;
+    s32 unk58;
+    s32 unk5C;
+    s32 unk60;
     virtual ~Class_000A0220();
 };
 #endif
@@ -662,6 +734,18 @@ public:
 /* vtable _ZTV14Class_000A0460 is data (vptr = label - 8 + 8) */
 class Class_000A0460 : public Class_00094D20 {
 public:
+    s32 unk30;
+    s32 unk34;
+    s32 unk38;
+    s32 unk3C;
+    s32 unk40;
+    s32 unk44;
+    s32 unk48;
+    s32 unk4C;
+    s32 unk50;
+    s32 unk54;
+    s32 unk58;
+    s32 unk5C;
     virtual ~Class_000A0460();
 };
 #endif
@@ -670,6 +754,16 @@ public:
 /* vtable _ZTV14Class_000A04C8 is data (vptr = label - 8 + 8) */
 class Class_000A04C8 : public Class_00094D20 {
 public:
+    s32 unk30;
+    s32 unk34;
+    s32 unk38;
+    s32 unk3C;
+    s32 unk40;
+    s32 unk44;
+    s32 unk48;
+    s32 unk4C;
+    s32 unk50;
+    s32 unk54;
     virtual ~Class_000A04C8();
 };
 #endif
@@ -787,6 +881,23 @@ public:
 /* vtable _ZTV14Class_000A1E50 is data (vptr = label - 8 + 8) */
 class Class_000A1E50 : public Class_00094D20 {
 public:
+    s32 unk30;
+    s32 unk34;
+    s32 unk38;
+    s32 unk3C;
+    s32 unk40;
+    s32 unk44;
+    s32 unk48;
+    s32 unk4C;
+    s32 unk50;
+    s32 unk54;
+    s32 unk58;
+    s32 unk5C;
+    s32 unk60;
+    s32 unk64;
+    s32 unk68;
+    s32 unk6C;
+    s32 unk70;
     virtual ~Class_000A1E50();
 };
 #endif
@@ -795,6 +906,12 @@ public:
 /* vtable _ZTV14Class_000A1EF8 is data (vptr = label - 8 + 8) */
 class Class_000A1EF8 {
 public:
+    s32 unk4;
+    s32 unk8;
+    s32 unkC;
+    s32 unk10;
+    u8 pad14[0x30];
+    s32 unk44;
     virtual ~Class_000A1EF8();
 };
 #endif
@@ -814,7 +931,9 @@ public:
 /* vtable _ZTV14Class_000A1F18 is data (vptr = label - 8 + 8) */
 class Class_000A1F18 {
 public:
-    u8 pad4[0xC];
+    s32 unk4;
+    s32 unk8;
+    u8 padC[0x4];
     s32 unk10;
     s32 unk14;
     s32 unk18;
@@ -872,6 +991,12 @@ public:
 /* dtor still asm/m2c (not trivial) */
 class Class_000A20E0 {
 public:
+    s8 unk4;
+    u8 pad5[0x3];
+    s32 unk8;
+    s32 unkC;
+    s32 unk10;
+    s32 unk14;
     virtual ~Class_000A20E0();
 };
 #endif
@@ -929,7 +1054,7 @@ public:
 /* vtable _ZTV14Class_000A21B8 is data (vptr = label - 8 + 8) */
 class Class_000A21B8 : public Class_000A20E0 {
 public:
-    u8 pad4[0x1C];
+    u8 pad18[0x8];
     s32 unk20;
     virtual ~Class_000A21B8();
 };
@@ -1211,6 +1336,10 @@ public:
 /* vtable _ZTV14Class_000B2FE0 is data (vptr = label - 8 + 8) */
 class Class_000B2FE0 : public Class_00097DC8_v271 {
 public:
+    s32 unkC;
+    s32 unk10;
+    s8 unk14;
+    s8 unk15;
     virtual ~Class_000B2FE0();
 };
 #endif
@@ -1219,6 +1348,9 @@ public:
 /* vtable _ZTV14Class_000B4C30 is data (vptr = label - 8 + 8) */
 class Class_000B4C30 {
 public:
+    s32 unk4;
+    s32 unk8;
+    s32 unkC;
     virtual ~Class_000B4C30();
 };
 #endif
@@ -3595,9 +3727,31 @@ typedef struct Class_00094528 {
 typedef struct Class_00094538 {
     void *vptr;
     u32 unk4;
+    s32 unk8;
+    s32 unkC;
+    s32 unk10;
+    s32 unk14;
+    s32 unk18;
+    s32 unk1C;
+    s32 unk20;
+    s32 unk24;
+    s32 unk28;
+    s32 unk2C;
+    s32 unk30;
+    s32 unk34;
+    s32 unk38;
+    s32 unk3C;
+    s32 unk40;
+    s32 unk44;
 } Class_00094538;
 typedef struct Class_00094D20 {
     void *vptr;
+    s32 unk4;
+    u8 pad8[0x4];
+    s32 unkC;
+    u8 pad10[0x18];
+    s32 unk28;
+    s32 unk2C;
 } Class_00094D20;
 typedef struct Class_00094DD0 {
     void *vptr;
@@ -3610,12 +3764,23 @@ typedef struct Class_00094E50 {
 } Class_00094E50;
 typedef struct Class_00097AA8 {
     void *vptr;
-    u8 pad4[0x8];
+    s32 unk4;
+    u8 pad8[0x4];
     s32 unkC;
-    u8 pad10[0x20];
+    u8 pad10[0x18];
+    s32 unk28;
+    s32 unk2C;
     s32 unk30;
-    u8 pad34[0xC];
+    s32 unk34;
+    u8 pad38[0x4];
+    s32 unk3C;
     s32 unk40;
+    s32 unk44;
+    u8 pad48[0x4];
+    s32 unk4C;
+    s32 unk50;
+    s32 unk54;
+    s32 unk58;
 } Class_00097AA8;
 typedef struct Class_00097B40 {
     void *vptr;
@@ -3624,6 +3789,9 @@ typedef struct Class_00097B88 {
     void *vptr;
     s32 unk4;
     s32 unk8;
+    s32 unkC;
+    u8 pad10[0x18];
+    s32 unk28;
 } Class_00097B88;
 typedef struct Class_00097B98 {
     void *vptr;
@@ -3669,6 +3837,8 @@ typedef struct Class_00097DC8 {
 } Class_00097DC8;
 typedef struct Class_00097DC8_v271 {
     void *vptr;
+    s32 unk4;
+    s32 unk8;
 } Class_00097DC8_v271;
 typedef struct Class_00097DD8 {
     void *vptr;
@@ -3744,38 +3914,84 @@ typedef struct Class_0009B2A8 {
 } Class_0009B2A8;
 typedef struct Class_0009B818 {
     void *vptr;
-    u8 pad4[0x8];
+    s32 unk4;
+    u8 pad8[0x4];
     s32 unkC;
-    u8 pad10[0x20];
+    u8 pad10[0x18];
+    s32 unk28;
+    s32 unk2C;
     s32 unk30;
-    u8 pad34[0xC];
+    s32 unk34;
+    u8 pad38[0x4];
+    s32 unk3C;
     s32 unk40;
-    u8 pad44[0x4C];
+    s32 unk44;
+    u8 pad48[0x4];
+    s32 unk4C;
+    s32 unk50;
+    s32 unk54;
+    s32 unk58;
+    s32 unk5C;
+    s32 unk60;
+    s32 unk64;
+    s32 unk68;
+    s32 unk6C;
+    s32 unk70;
+    s32 unk74;
+    s32 unk78;
+    s32 unk7C;
+    s32 unk80;
+    s32 unk84;
+    s32 unk88;
+    s32 unk8C;
     u32 unk90;
 } Class_0009B818;
 typedef struct Class_0009BC50 {
     void *vptr;
+    s32 unk4;
+    s32 unk8;
+    u8 padC[0x404];
+    s32 unk410;
 } Class_0009BC50;
 typedef struct Class_0009BCC8 {
     void *vptr;
-    u8 pad4[0x8];
+    s32 unk4;
+    u8 pad8[0x4];
     s32 unkC;
-    u8 pad10[0x20];
+    u8 pad10[0x18];
+    s32 unk28;
+    s32 unk2C;
     s32 unk30;
-    u8 pad34[0xC];
+    s32 unk34;
+    u8 pad38[0x4];
+    s32 unk3C;
     s32 unk40;
+    s32 unk44;
+    u8 pad48[0x4];
+    s32 unk4C;
+    s32 unk50;
+    s32 unk54;
 } Class_0009BCC8;
 typedef struct Class_0009C078 {
     void *vptr;
     u8 unk4;
     u8 pad5[0x3];
     s32 unk8;
+    s32 unkC;
+    s32 unk10;
+    s32 unk14;
 } Class_0009C078;
 typedef struct Class_0009C098 {
     void *vptr;
     u8 unk4;
     u8 pad5[0x3];
     s32 unk8;
+    s32 unkC;
+    s32 unk10;
+    s32 unk14;
+    u8 pad18[0x4];
+    s32 unk1C;
+    s32 unk20;
 } Class_0009C098;
 typedef struct Class_0009C140 {
     void *vptr;
@@ -3804,10 +4020,13 @@ typedef struct Class_0009E098 {
 } Class_0009E098;
 typedef struct Class_0009E218 {
     void *vptr;
+    s32 unk4;
+    s32 unk8;
 } Class_0009E218;
 typedef struct Class_0009E470 {
     void *vptr;
     s32 unk4;
+    s32 unk8;
 } Class_0009E470;
 typedef struct Class_0009E528 {
     void *vptr;
@@ -3844,12 +4063,63 @@ typedef struct Class_0009F580 {
 } Class_0009F580;
 typedef struct Class_000A0220 {
     void *vptr;
+    s32 unk4;
+    u8 pad8[0x4];
+    s32 unkC;
+    u8 pad10[0x18];
+    s32 unk28;
+    s32 unk2C;
+    s32 unk30;
+    s32 unk34;
+    s32 unk38;
+    s32 unk3C;
+    s32 unk40;
+    s32 unk44;
+    u8 pad48[0xC];
+    s32 unk54;
+    s32 unk58;
+    s32 unk5C;
+    s32 unk60;
 } Class_000A0220;
 typedef struct Class_000A0460 {
     void *vptr;
+    s32 unk4;
+    u8 pad8[0x4];
+    s32 unkC;
+    u8 pad10[0x18];
+    s32 unk28;
+    s32 unk2C;
+    s32 unk30;
+    s32 unk34;
+    s32 unk38;
+    s32 unk3C;
+    s32 unk40;
+    s32 unk44;
+    s32 unk48;
+    s32 unk4C;
+    s32 unk50;
+    s32 unk54;
+    s32 unk58;
+    s32 unk5C;
 } Class_000A0460;
 typedef struct Class_000A04C8 {
     void *vptr;
+    s32 unk4;
+    u8 pad8[0x4];
+    s32 unkC;
+    u8 pad10[0x18];
+    s32 unk28;
+    s32 unk2C;
+    s32 unk30;
+    s32 unk34;
+    s32 unk38;
+    s32 unk3C;
+    s32 unk40;
+    s32 unk44;
+    s32 unk48;
+    s32 unk4C;
+    s32 unk50;
+    s32 unk54;
 } Class_000A04C8;
 typedef struct Class_000A04F0 {
     void *vptr;
@@ -3890,9 +4160,38 @@ typedef struct Class_000A1B58 {
 } Class_000A1B58;
 typedef struct Class_000A1E50 {
     void *vptr;
+    s32 unk4;
+    u8 pad8[0x4];
+    s32 unkC;
+    u8 pad10[0x18];
+    s32 unk28;
+    s32 unk2C;
+    s32 unk30;
+    s32 unk34;
+    s32 unk38;
+    s32 unk3C;
+    s32 unk40;
+    s32 unk44;
+    s32 unk48;
+    s32 unk4C;
+    s32 unk50;
+    s32 unk54;
+    s32 unk58;
+    s32 unk5C;
+    s32 unk60;
+    s32 unk64;
+    s32 unk68;
+    s32 unk6C;
+    s32 unk70;
 } Class_000A1E50;
 typedef struct Class_000A1EF8 {
     void *vptr;
+    s32 unk4;
+    s32 unk8;
+    s32 unkC;
+    s32 unk10;
+    u8 pad14[0x30];
+    s32 unk44;
 } Class_000A1EF8;
 typedef struct Class_000A1F08 {
     void *vptr;
@@ -3901,7 +4200,9 @@ typedef struct Class_000A1F08 {
 } Class_000A1F08;
 typedef struct Class_000A1F18 {
     void *vptr;
-    u8 pad4[0xC];
+    s32 unk4;
+    s32 unk8;
+    u8 padC[0x4];
     s32 unk10;
     s32 unk14;
     s32 unk18;
@@ -3949,6 +4250,12 @@ typedef struct Class_000A20D0 {
 } Class_000A20D0;
 typedef struct Class_000A20E0 {
     void *vptr;
+    s8 unk4;
+    u8 pad5[0x3];
+    s32 unk8;
+    s32 unkC;
+    s32 unk10;
+    s32 unk14;
 } Class_000A20E0;
 typedef struct Class_000A20F8 {
     void *vptr;
@@ -3962,6 +4269,12 @@ typedef struct Class_000A2120 {
 } Class_000A2120;
 typedef struct Class_000A2130 {
     void *vptr;
+    s8 unk4;
+    u8 pad5[0x3];
+    s32 unk8;
+    s32 unkC;
+    s32 unk10;
+    s32 unk14;
 } Class_000A2130;
 typedef struct Class_000A2160 {
     void *vptr;
@@ -3978,7 +4291,13 @@ typedef struct Class_000A21A8 {
 } Class_000A21A8;
 typedef struct Class_000A21B8 {
     void *vptr;
-    u8 pad4[0x1C];
+    s8 unk4;
+    u8 pad5[0x3];
+    s32 unk8;
+    s32 unkC;
+    s32 unk10;
+    s32 unk14;
+    u8 pad18[0x8];
     s32 unk20;
 } Class_000A21B8;
 typedef struct Class_000A21F8 {
@@ -4141,9 +4460,18 @@ typedef struct Class_000B2B20 {
 } Class_000B2B20;
 typedef struct Class_000B2FE0 {
     void *vptr;
+    s32 unk4;
+    s32 unk8;
+    s32 unkC;
+    s32 unk10;
+    s8 unk14;
+    s8 unk15;
 } Class_000B2FE0;
 typedef struct Class_000B4C30 {
     void *vptr;
+    s32 unk4;
+    s32 unk8;
+    s32 unkC;
 } Class_000B4C30;
 typedef struct Class_000B6100 {
     void *vptr;
@@ -4997,7 +5325,7 @@ void func_0001B3FC(struct Unk_func_0001B3FC_0 *arg0);
 s32 func_0001B56C(struct Unk_func_0001B56C_0 *arg0, struct Unk_func_0001B56C_1 *arg1);
 s32 func_0001B678(void);
 s32 func_0001B730(s32);
-M2C_UNK func_0001B810(void *);
+M2C_UNK func_0001B810(void *cxxthis);
 s32 func_0001B870(Class_0009BCC8 *arg0);
 s32 func_0001B8B0(Class_0009BCC8 *arg0);
 s32 func_0001B914(Class_0009BCC8 *arg0);
@@ -6030,7 +6358,7 @@ u16 func_000870B0(struct Unk_func_000870B0_0 *arg0);
 void func_00087118(M2C_UNK **arg0);
 void func_00087140(M2C_UNK **arg0);
 void func_00087168(M2C_UNK **arg0);
-s32 func_00087374(s32, s32);
+s32 func_00087374(s32 cxxthis, s32 arg1);
 void func_00087394(struct Unk_func_00087394_0 *arg0, s8 arg1);
 void func_000873B4(M2C_UNK **arg0);
 void func_000873C4(M2C_UNK **arg0);
