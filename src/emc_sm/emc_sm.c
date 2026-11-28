@@ -42,7 +42,25 @@ INCLUDE_ASM("nonmatchings/emc_sm", sceNandUnlock);
 
 INCLUDE_ASM("nonmatchings/emc_sm", sceNandReset);
 
+#if FW_VERSION < 201
+s32 sceNandReadId(u8 *buf, s32 len) {
+    s32 i;
+    u8 v;
+
+    *(volatile u32 *)0xBD101008 = 0x90;
+    *(volatile u32 *)0xBD10100C = 0;
+    for (i = 0; i < len; i++) {
+        v = *(volatile u32 *)0xBD101300;
+        if (buf != NULL) {
+            buf[i] = v;
+        }
+    }
+    *(volatile u32 *)0xBD101014 = 1;
+    return 0;
+}
+#else
 INCLUDE_ASM("nonmatchings/emc_sm", sceNandReadId);
+#endif
 
 INCLUDE_ASM("nonmatchings/emc_sm", sceNandReadAccess);
 
@@ -90,16 +108,46 @@ s32 sceNandSuspend(void) {
 INCLUDE_ASM("nonmatchings/emc_sm", sceNandResume);
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/emc_sm", sceNandSetWriteProtect);
+s32 sceNandSetWriteProtect(s32 protect) {
+    u32 v = *(volatile u32 *)0xBD101004;
+    s32 old = __builtin_allegrex_ext(v ^ 0x80, 7, 1);
+    if (protect) {
+        v &= ~0x80;
+    } else {
+        v |= 0x80;
+    }
+    *(volatile u32 *)0xBD101004 = v;
+    return old;
+}
 #endif
 
+#if FW_VERSION < 201
+s32 sceNandReadStatus(void) {
+    u32 v;
+    *(volatile u32 *)0xBD101008 = 0x70;
+    v = *(volatile u32 *)0xBD101300;
+    *(volatile u32 *)0xBD101014 = 1;
+    return v & 0xFF;
+}
+#else
 INCLUDE_ASM("nonmatchings/emc_sm", sceNandReadStatus);
+#endif
 
 #if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/emc_sm", sceNandSetScramble);
 #endif
 
+#if FW_VERSION < 201
+s32 sceNandReadPages(u32 ppn, void *user, void *spare, u32 len) {
+    s32 ret = sceNandReadAccess(ppn, user, spare, len, 0);
+    if (spare == NULL && ret == 0x80230009) {
+        ret = 0;
+    }
+    return ret;
+}
+#else
 INCLUDE_ASM("nonmatchings/emc_sm", sceNandReadPages);
+#endif
 
 #if FW_VERSION >= 102
 INCLUDE_ASM("nonmatchings/emc_sm", sceNandWritePages);
@@ -119,7 +167,13 @@ s32 sceNandReadPagesRawExtra(u32 ppn, void *user, void *spare, u32 len) {
     return sceNandReadAccess(ppn, user, spare, len, 0x20);
 }
 
+#if FW_VERSION < 152
+s32 sceNandWritePagesRawExtra(u32 ppn, void *user, void *spare, u32 len) {
+    return sceNandWriteAccess(ppn, user, spare, len, (user == NULL) ? 0x30 : 0x20);
+}
+#else
 INCLUDE_ASM("nonmatchings/emc_sm", sceNandWritePagesRawExtra);
+#endif
 
 s32 sceNandReadPagesRawAll(u32 ppn, void *user, void *spare, u32 len) {
     return sceNandReadAccess(ppn, user, spare, len, 0x31);
@@ -174,11 +228,47 @@ INCLUDE_ASM("nonmatchings/emc_sm", sceNandDetectChip);
 
 INCLUDE_ASM("nonmatchings/emc_sm", sceNandWriteBlockWithVerify);
 
+#if FW_VERSION < 201
+s32 sceNandReadBlockWithRetry(u32 ppn, void *user, void *spare) {
+    s32 i;
+    s32 ret;
+
+    for (i = 0; i < 4; i++) {
+        ret = sceNandReadPages(ppn, user, spare, D_00002FD0.pagesPerBlock);
+        if (ret >= 0) {
+            break;
+        }
+    }
+    if (ret < 0) {
+        return ret;
+    }
+    return 0;
+}
+#else
 INCLUDE_ASM("nonmatchings/emc_sm", sceNandReadBlockWithRetry);
+#endif
 
 INCLUDE_ASM("nonmatchings/emc_sm", sceNandVerifyBlockWithRetry);
 
+#if FW_VERSION == 100
+s32 sceNandEraseBlockWithRetry(u32 ppn) {
+    s32 i;
+    s32 ret;
+
+    if (ppn % D_00002FD0.pagesPerBlock != 0) {
+        return 0x80230008;
+    }
+    for (i = 0; i < 4; i++) {
+        ret = sceNandEraseBlock(ppn);
+        if (ret >= 0) {
+            return 0;
+        }
+    }
+    return ret;
+}
+#else
 INCLUDE_ASM("nonmatchings/emc_sm", sceNandEraseBlockWithRetry);
+#endif
 
 INCLUDE_ASM("nonmatchings/emc_sm", sceNandIsBadBlock);
 
@@ -236,9 +326,13 @@ s32 sceNandWriteBlock(u32 ppn, void *user, void *spare) {
 
 INCLUDE_ASM("nonmatchings/emc_sm", sceNandCalcEcc);
 
-INCLUDE_ASM("nonmatchings/emc_sm", sceNandVerifyEcc);
+s32 sceNandVerifyEcc(u8 *buf, u32 ecc) {
+    return func_0000214C(buf, ecc, 0);
+}
 
-INCLUDE_ASM("nonmatchings/emc_sm", sceNandCollectEcc);
+s32 sceNandCollectEcc(u8 *buf, u32 ecc) {
+    return func_0000214C(buf, ecc, 1);
+}
 
 INCLUDE_ASM("nonmatchings/emc_sm", func_0000214C);
 
