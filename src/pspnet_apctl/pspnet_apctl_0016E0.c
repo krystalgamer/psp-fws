@@ -925,16 +925,16 @@ s32 func_000021B8(SceNetDhcpCtx *dc, s32 prev) {
             u32 hl = *(u16 *)(p + 0x10);
 
             q = p;
-            dc->rxEther = p + hl;
-            dc->rxIp = dc->rxEther + 14;
-            dc->rxUdp = (SceNetDhcpUdpHdr *)(p + (hl + (dc->rxEther[14] & 0xF) * 4) + 14);
-            dc->rxBootp = p + (hl + (dc->rxEther[14] & 0xF) * 4) + 22;
+            dc->rx.ether = p + hl;
+            dc->rx.ip = dc->rx.ether + 14;
+            dc->rx.udp = (SceNetDhcpUdpHdr *)(p + (hl + (dc->rx.ether[14] & 0xF) * 4) + 14);
+            dc->rx.bootp = p + (hl + (dc->rx.ether[14] & 0xF) * 4) + 22;
             if (func_00003AA8(dc) == 0) {
                 SceNetDhcpLease *l = &dc->offer;
 
                 func_00007504(l, 0, sizeof(*l));
-                if (func_00006870(dc->rxBootp, (u16)__builtin_allegrex_wsbh(dc->rxUdp->len) - 8) == 0) {
-                    ret = func_00004AEC(dc->rxBootp, (u16)__builtin_allegrex_wsbh(dc->rxUdp->len) - 8, l);
+                if (func_00006870(dc->rx.bootp, (u16)__builtin_allegrex_wsbh(dc->rx.udp->len) - 8) == 0) {
+                    ret = func_00004AEC(dc->rx.bootp, (u16)__builtin_allegrex_wsbh(dc->rx.udp->len) - 8, l);
                     if (ret < 0) {
                         return ret;
                     }
@@ -1003,16 +1003,16 @@ s32 func_000024D4(SceNetDhcpCtx *dc, s32 prev) {
             u32 hl = *(u16 *)(p + 0x10);
 
             q = p;
-            dc->rxEther = p + hl;
-            dc->rxIp = dc->rxEther + 14;
-            dc->rxUdp = (SceNetDhcpUdpHdr *)(p + (hl + (dc->rxEther[14] & 0xF) * 4) + 14);
-            dc->rxBootp = p + (hl + (dc->rxEther[14] & 0xF) * 4) + 22;
+            dc->rx.ether = p + hl;
+            dc->rx.ip = dc->rx.ether + 14;
+            dc->rx.udp = (SceNetDhcpUdpHdr *)(p + (hl + (dc->rx.ether[14] & 0xF) * 4) + 14);
+            dc->rx.bootp = p + (hl + (dc->rx.ether[14] & 0xF) * 4) + 22;
             if (func_00003CD0(dc) == 0) {
-                opt = func_00006FC8(dc->rxBootp, (u16)__builtin_allegrex_wsbh(dc->rxUdp->len) - 8, 53);
+                opt = func_00006FC8(dc->rx.bootp, (u16)__builtin_allegrex_wsbh(dc->rx.udp->len) - 8, 53);
                 if (opt != NULL) {
                     if (opt[2] == 6) {
                         func_00007504(msg, 0, sizeof(msg));
-                        opt = func_00006FC8(dc->rxBootp, (u16)__builtin_allegrex_wsbh(dc->rxUdp->len) - 8, 56);
+                        opt = func_00006FC8(dc->rx.bootp, (u16)__builtin_allegrex_wsbh(dc->rx.udp->len) - 8, 56);
                         if (opt != NULL) {
                             func_0000708C((u8 *)opt + 2, msg, opt[1]);
                         }
@@ -1021,8 +1021,8 @@ s32 func_000024D4(SceNetDhcpCtx *dc, s32 prev) {
                         return 0;
                     }
                     if (opt[2] == 5) {
-                        if (func_00006870(dc->rxBootp, (u16)__builtin_allegrex_wsbh(dc->rxUdp->len) - 8) == 0) {
-                            ret = func_00004AEC(dc->rxBootp, (u16)__builtin_allegrex_wsbh(dc->rxUdp->len) - 8, dc->lease);
+                        if (func_00006870(dc->rx.bootp, (u16)__builtin_allegrex_wsbh(dc->rx.udp->len) - 8) == 0) {
+                            ret = func_00004AEC(dc->rx.bootp, (u16)__builtin_allegrex_wsbh(dc->rx.udp->len) - 8, dc->lease);
                             if (ret < 0) {
                                 return ret;
                             }
@@ -1112,16 +1112,16 @@ s32 func_000021A4(SceNetDhcpCtx *dc, s32 prev) {
             u32 hl = *(u16 *)(p + 0x10);
 
             q = p;
-            dc->rxEther = p + hl;
-            dc->rxIp = dc->rxEther + 14;
-            dc->rxUdp = (SceNetDhcpUdpHdr *)(p + (hl + (dc->rxEther[14] & 0xF) * 4) + 14);
-            dc->rxBootp = p + (hl + (dc->rxEther[14] & 0xF) * 4) + 22;
+            dc->rx.ether = p + hl;
+            dc->rx.ip = dc->rx.ether + 14;
+            dc->rx.udp = (SceNetDhcpUdpHdr *)(p + (hl + (dc->rx.ether[14] & 0xF) * 4) + 14);
+            dc->rx.bootp = p + (hl + (dc->rx.ether[14] & 0xF) * 4) + 22;
             if (func_00003AA8(dc) == 0) {
                 SceNetDhcpLease *l = &dc->offer;
 
                 func_00007504(l, 0, sizeof(*l));
-                if (func_00006870(dc->rxBootp, (u16)__builtin_allegrex_wsbh(dc->rxUdp->len) - 8) == 0) {
-                    ret = func_00004AEC(dc->rxBootp, (u16)__builtin_allegrex_wsbh(dc->rxUdp->len) - 8, l);
+                if (func_00006870(dc->rx.bootp, (u16)__builtin_allegrex_wsbh(dc->rx.udp->len) - 8) == 0) {
+                    ret = func_00004AEC(dc->rx.bootp, (u16)__builtin_allegrex_wsbh(dc->rx.udp->len) - 8, l);
                     if (ret < 0) {
                         return ret;
                     }
@@ -1194,16 +1194,16 @@ s32 func_000021A4(SceNetDhcpCtx *dc, s32 prev) {
             u32 hl = *(u16 *)(p + 0x10);
 
             q = p;
-            dc->rxEther = p + hl;
-            dc->rxIp = dc->rxEther + 14;
-            dc->rxUdp = (SceNetDhcpUdpHdr *)(p + (hl + (dc->rxEther[14] & 0xF) * 4) + 14);
-            dc->rxBootp = p + (hl + (dc->rxEther[14] & 0xF) * 4) + 22;
+            dc->rx.ether = p + hl;
+            dc->rx.ip = dc->rx.ether + 14;
+            dc->rx.udp = (SceNetDhcpUdpHdr *)(p + (hl + (dc->rx.ether[14] & 0xF) * 4) + 14);
+            dc->rx.bootp = p + (hl + (dc->rx.ether[14] & 0xF) * 4) + 22;
             if (func_00003A18(dc) == 0) {
                 SceNetDhcpLease *l = &dc->offer;
 
                 func_00007504(l, 0, sizeof(*l));
-                if (func_00006870(dc->rxBootp, (u16)__builtin_allegrex_wsbh(dc->rxUdp->len) - 8) == 0) {
-                    ret = func_00004AEC(dc->rxBootp, (u16)__builtin_allegrex_wsbh(dc->rxUdp->len) - 8, l);
+                if (func_00006870(dc->rx.bootp, (u16)__builtin_allegrex_wsbh(dc->rx.udp->len) - 8) == 0) {
+                    ret = func_00004AEC(dc->rx.bootp, (u16)__builtin_allegrex_wsbh(dc->rx.udp->len) - 8, l);
                     if (ret < 0) {
                         return ret;
                     }
@@ -1278,16 +1278,16 @@ s32 func_000024C0(SceNetDhcpCtx *dc, s32 prev) {
             u32 hl = *(u16 *)(p + 0x10);
 
             q = p;
-            dc->rxEther = p + hl;
-            dc->rxIp = dc->rxEther + 14;
-            dc->rxUdp = (SceNetDhcpUdpHdr *)(p + (hl + (dc->rxEther[14] & 0xF) * 4) + 14);
-            dc->rxBootp = p + (hl + (dc->rxEther[14] & 0xF) * 4) + 22;
+            dc->rx.ether = p + hl;
+            dc->rx.ip = dc->rx.ether + 14;
+            dc->rx.udp = (SceNetDhcpUdpHdr *)(p + (hl + (dc->rx.ether[14] & 0xF) * 4) + 14);
+            dc->rx.bootp = p + (hl + (dc->rx.ether[14] & 0xF) * 4) + 22;
             if (func_00003CD0(dc) == 0) {
-                opt = func_00006FC8(dc->rxBootp, (u16)__builtin_allegrex_wsbh(dc->rxUdp->len) - 8, 53);
+                opt = func_00006FC8(dc->rx.bootp, (u16)__builtin_allegrex_wsbh(dc->rx.udp->len) - 8, 53);
                 if (opt != NULL) {
                     if (opt[2] == 6) {
                         func_00007504(msg, 0, sizeof(msg));
-                        opt = func_00006FC8(dc->rxBootp, (u16)__builtin_allegrex_wsbh(dc->rxUdp->len) - 8, 56);
+                        opt = func_00006FC8(dc->rx.bootp, (u16)__builtin_allegrex_wsbh(dc->rx.udp->len) - 8, 56);
                         if (opt != NULL) {
                             func_0000708C((u8 *)opt + 2, msg, opt[1]);
                         }
@@ -1296,8 +1296,8 @@ s32 func_000024C0(SceNetDhcpCtx *dc, s32 prev) {
                         return 0;
                     }
                     if (opt[2] == 5) {
-                        if (func_00006870(dc->rxBootp, (u16)__builtin_allegrex_wsbh(dc->rxUdp->len) - 8) == 0) {
-                            ret = func_00004AEC(dc->rxBootp, (u16)__builtin_allegrex_wsbh(dc->rxUdp->len) - 8, dc->lease);
+                        if (func_00006870(dc->rx.bootp, (u16)__builtin_allegrex_wsbh(dc->rx.udp->len) - 8) == 0) {
+                            ret = func_00004AEC(dc->rx.bootp, (u16)__builtin_allegrex_wsbh(dc->rx.udp->len) - 8, dc->lease);
                             if (ret < 0) {
                                 return ret;
                             }
@@ -1390,16 +1390,16 @@ s32 func_000020D4(SceNetDhcpCtx *dc, s32 prev) {
             u32 hl = *(u16 *)(p + 0x10);
 
             q = p;
-            dc->rxEther = p + hl;
-            dc->rxIp = dc->rxEther + 14;
-            dc->rxUdp = (SceNetDhcpUdpHdr *)(p + (hl + (dc->rxEther[14] & 0xF) * 4) + 14);
-            dc->rxBootp = p + (hl + (dc->rxEther[14] & 0xF) * 4) + 22;
+            dc->rx.ether = p + hl;
+            dc->rx.ip = dc->rx.ether + 14;
+            dc->rx.udp = (SceNetDhcpUdpHdr *)(p + (hl + (dc->rx.ether[14] & 0xF) * 4) + 14);
+            dc->rx.bootp = p + (hl + (dc->rx.ether[14] & 0xF) * 4) + 22;
             if (func_00003AA8(dc) == 0) {
                 SceNetDhcpLease *l = &dc->offer;
 
                 func_00007504(l, 0, sizeof(*l));
-                if (func_00006870(dc->rxBootp, (u16)__builtin_allegrex_wsbh(dc->rxUdp->len) - 8) == 0) {
-                    ret = func_00004AEC(dc->rxBootp, (u16)__builtin_allegrex_wsbh(dc->rxUdp->len) - 8, l);
+                if (func_00006870(dc->rx.bootp, (u16)__builtin_allegrex_wsbh(dc->rx.udp->len) - 8) == 0) {
+                    ret = func_00004AEC(dc->rx.bootp, (u16)__builtin_allegrex_wsbh(dc->rx.udp->len) - 8, l);
                     if (ret < 0) {
                         return ret;
                     }
@@ -1474,16 +1474,16 @@ s32 func_00002408(SceNetDhcpCtx *dc, s32 prev) {
             u32 hl = *(u16 *)(p + 0x10);
 
             q = p;
-            dc->rxEther = p + hl;
-            dc->rxIp = dc->rxEther + 14;
-            dc->rxUdp = (SceNetDhcpUdpHdr *)(p + (hl + (dc->rxEther[14] & 0xF) * 4) + 14);
-            dc->rxBootp = p + (hl + (dc->rxEther[14] & 0xF) * 4) + 22;
+            dc->rx.ether = p + hl;
+            dc->rx.ip = dc->rx.ether + 14;
+            dc->rx.udp = (SceNetDhcpUdpHdr *)(p + (hl + (dc->rx.ether[14] & 0xF) * 4) + 14);
+            dc->rx.bootp = p + (hl + (dc->rx.ether[14] & 0xF) * 4) + 22;
             if (func_00003CD0(dc) == 0) {
-                opt = func_00006FC8(dc->rxBootp, (u16)__builtin_allegrex_wsbh(dc->rxUdp->len) - 8, 53);
+                opt = func_00006FC8(dc->rx.bootp, (u16)__builtin_allegrex_wsbh(dc->rx.udp->len) - 8, 53);
                 if (opt != NULL) {
                     if (opt[2] == 6) {
                         func_00007504(msg, 0, sizeof(msg));
-                        opt = func_00006FC8(dc->rxBootp, (u16)__builtin_allegrex_wsbh(dc->rxUdp->len) - 8, 56);
+                        opt = func_00006FC8(dc->rx.bootp, (u16)__builtin_allegrex_wsbh(dc->rx.udp->len) - 8, 56);
                         if (opt != NULL) {
                             func_0000708C((u8 *)opt + 2, msg, opt[1]);
                         }
@@ -1492,8 +1492,8 @@ s32 func_00002408(SceNetDhcpCtx *dc, s32 prev) {
                         return 0;
                     }
                     if (opt[2] == 5) {
-                        if (func_00006870(dc->rxBootp, (u16)__builtin_allegrex_wsbh(dc->rxUdp->len) - 8) == 0) {
-                            ret = func_00004AEC(dc->rxBootp, (u16)__builtin_allegrex_wsbh(dc->rxUdp->len) - 8, dc->lease);
+                        if (func_00006870(dc->rx.bootp, (u16)__builtin_allegrex_wsbh(dc->rx.udp->len) - 8) == 0) {
+                            ret = func_00004AEC(dc->rx.bootp, (u16)__builtin_allegrex_wsbh(dc->rx.udp->len) - 8, dc->lease);
                             if (ret < 0) {
                                 return ret;
                             }
@@ -1588,16 +1588,16 @@ s32 func_00002FC0(SceNetDhcpCtx *dc, s32 prev) {
             u32 hl = *(u16 *)(p + 0x10);
 
             q = p;
-            dc->rxEther = p + hl;
-            dc->rxIp = dc->rxEther + 14;
-            dc->rxUdp = (SceNetDhcpUdpHdr *)(p + (hl + (dc->rxEther[14] & 0xF) * 4) + 14);
-            dc->rxBootp = p + (hl + (dc->rxEther[14] & 0xF) * 4) + 22;
+            dc->rx.ether = p + hl;
+            dc->rx.ip = dc->rx.ether + 14;
+            dc->rx.udp = (SceNetDhcpUdpHdr *)(p + (hl + (dc->rx.ether[14] & 0xF) * 4) + 14);
+            dc->rx.bootp = p + (hl + (dc->rx.ether[14] & 0xF) * 4) + 22;
             if (func_00003CD0(dc) == 0) {
-                opt = func_00006FC8(dc->rxBootp, (u16)__builtin_allegrex_wsbh(dc->rxUdp->len) - 8, 53);
+                opt = func_00006FC8(dc->rx.bootp, (u16)__builtin_allegrex_wsbh(dc->rx.udp->len) - 8, 53);
                 if (opt != NULL) {
                     if (opt[2] == 6) {
                         func_00007504(msg, 0, sizeof(msg));
-                        opt = func_00006FC8(dc->rxBootp, (u16)__builtin_allegrex_wsbh(dc->rxUdp->len) - 8, 56);
+                        opt = func_00006FC8(dc->rx.bootp, (u16)__builtin_allegrex_wsbh(dc->rx.udp->len) - 8, 56);
                         if (opt != NULL) {
                             func_0000708C((u8 *)opt + 2, msg, opt[1]);
                         }
@@ -1606,8 +1606,8 @@ s32 func_00002FC0(SceNetDhcpCtx *dc, s32 prev) {
                         return 0x80410505;
                     }
                     if (opt[2] == 5) {
-                        if (func_00006870(dc->rxBootp, (u16)__builtin_allegrex_wsbh(dc->rxUdp->len) - 8) == 0) {
-                            ret = func_00004AEC(dc->rxBootp, (u16)__builtin_allegrex_wsbh(dc->rxUdp->len) - 8, dc->lease);
+                        if (func_00006870(dc->rx.bootp, (u16)__builtin_allegrex_wsbh(dc->rx.udp->len) - 8) == 0) {
+                            ret = func_00004AEC(dc->rx.bootp, (u16)__builtin_allegrex_wsbh(dc->rx.udp->len) - 8, dc->lease);
                             if (ret < 0) {
                                 return ret;
                             }
@@ -1678,16 +1678,16 @@ s32 func_00002FAC(SceNetDhcpCtx *dc, s32 prev) {
             u32 hl = *(u16 *)(p + 0x10);
 
             q = p;
-            dc->rxEther = p + hl;
-            dc->rxIp = dc->rxEther + 14;
-            dc->rxUdp = (SceNetDhcpUdpHdr *)(p + (hl + (dc->rxEther[14] & 0xF) * 4) + 14);
-            dc->rxBootp = p + (hl + (dc->rxEther[14] & 0xF) * 4) + 22;
+            dc->rx.ether = p + hl;
+            dc->rx.ip = dc->rx.ether + 14;
+            dc->rx.udp = (SceNetDhcpUdpHdr *)(p + (hl + (dc->rx.ether[14] & 0xF) * 4) + 14);
+            dc->rx.bootp = p + (hl + (dc->rx.ether[14] & 0xF) * 4) + 22;
             if (func_00003CD0(dc) == 0) {
-                opt = func_00006FC8(dc->rxBootp, (u16)__builtin_allegrex_wsbh(dc->rxUdp->len) - 8, 53);
+                opt = func_00006FC8(dc->rx.bootp, (u16)__builtin_allegrex_wsbh(dc->rx.udp->len) - 8, 53);
                 if (opt != NULL) {
                     if (opt[2] == 6) {
                         func_00007504(msg, 0, sizeof(msg));
-                        opt = func_00006FC8(dc->rxBootp, (u16)__builtin_allegrex_wsbh(dc->rxUdp->len) - 8, 56);
+                        opt = func_00006FC8(dc->rx.bootp, (u16)__builtin_allegrex_wsbh(dc->rx.udp->len) - 8, 56);
                         if (opt != NULL) {
                             func_0000708C((u8 *)opt + 2, msg, opt[1]);
                         }
@@ -1696,8 +1696,8 @@ s32 func_00002FAC(SceNetDhcpCtx *dc, s32 prev) {
                         return 0x80410505;
                     }
                     if (opt[2] == 5) {
-                        if (func_00006870(dc->rxBootp, (u16)__builtin_allegrex_wsbh(dc->rxUdp->len) - 8) == 0) {
-                            ret = func_00004AEC(dc->rxBootp, (u16)__builtin_allegrex_wsbh(dc->rxUdp->len) - 8, dc->lease);
+                        if (func_00006870(dc->rx.bootp, (u16)__builtin_allegrex_wsbh(dc->rx.udp->len) - 8) == 0) {
+                            ret = func_00004AEC(dc->rx.bootp, (u16)__builtin_allegrex_wsbh(dc->rx.udp->len) - 8, dc->lease);
                             if (ret < 0) {
                                 return ret;
                             }
@@ -1771,16 +1771,16 @@ s32 func_00002F50(SceNetDhcpCtx *dc, s32 prev) {
             u32 hl = *(u16 *)(p + 0x10);
 
             q = p;
-            dc->rxEther = p + hl;
-            dc->rxIp = dc->rxEther + 14;
-            dc->rxUdp = (SceNetDhcpUdpHdr *)(p + (hl + (dc->rxEther[14] & 0xF) * 4) + 14);
-            dc->rxBootp = p + (hl + (dc->rxEther[14] & 0xF) * 4) + 22;
+            dc->rx.ether = p + hl;
+            dc->rx.ip = dc->rx.ether + 14;
+            dc->rx.udp = (SceNetDhcpUdpHdr *)(p + (hl + (dc->rx.ether[14] & 0xF) * 4) + 14);
+            dc->rx.bootp = p + (hl + (dc->rx.ether[14] & 0xF) * 4) + 22;
             if (func_00003CD0(dc) == 0) {
-                opt = func_00006FC8(dc->rxBootp, (u16)__builtin_allegrex_wsbh(dc->rxUdp->len) - 8, 53);
+                opt = func_00006FC8(dc->rx.bootp, (u16)__builtin_allegrex_wsbh(dc->rx.udp->len) - 8, 53);
                 if (opt != NULL) {
                     if (opt[2] == 6) {
                         func_00007504(msg, 0, sizeof(msg));
-                        opt = func_00006FC8(dc->rxBootp, (u16)__builtin_allegrex_wsbh(dc->rxUdp->len) - 8, 56);
+                        opt = func_00006FC8(dc->rx.bootp, (u16)__builtin_allegrex_wsbh(dc->rx.udp->len) - 8, 56);
                         if (opt != NULL) {
                             func_0000708C((u8 *)opt + 2, msg, opt[1]);
                         }
@@ -1789,8 +1789,8 @@ s32 func_00002F50(SceNetDhcpCtx *dc, s32 prev) {
                         return 0x80410505;
                     }
                     if (opt[2] == 5) {
-                        if (func_00006870(dc->rxBootp, (u16)__builtin_allegrex_wsbh(dc->rxUdp->len) - 8) == 0) {
-                            ret = func_00004AEC(dc->rxBootp, (u16)__builtin_allegrex_wsbh(dc->rxUdp->len) - 8, dc->lease);
+                        if (func_00006870(dc->rx.bootp, (u16)__builtin_allegrex_wsbh(dc->rx.udp->len) - 8) == 0) {
+                            ret = func_00004AEC(dc->rx.bootp, (u16)__builtin_allegrex_wsbh(dc->rx.udp->len) - 8, dc->lease);
                             if (ret < 0) {
                                 return ret;
                             }
@@ -2106,7 +2106,7 @@ void func_00005D14(SceNetDhcpCtx *dc, s32 state, s32 err) {
         if (sock < 0) {
             break;
         }
-        func_00004704(sock, &dc->lease->unk3E8, dc->unkE54);
+        func_00004704(sock, &dc->lease->unk3E8, dc->tx.bootp);
         sceKernelDelayThread(100000);
         if (dc->sock >= 0) {
             sceNetInetClose(dc->sock);
@@ -2149,7 +2149,7 @@ void func_00005D14(SceNetDhcpCtx *dc, s32 state, s32 err) {
         if (sock < 0) {
             break;
         }
-        func_00006088(sock, &dc->lease->unk3E8, dc->unkE54);
+        func_00006088(sock, &dc->lease->unk3E8, dc->tx.bootp);
         sceKernelDelayThread(100000);
         if (dc->sock >= 0) {
             sceNetInetClose(dc->sock);

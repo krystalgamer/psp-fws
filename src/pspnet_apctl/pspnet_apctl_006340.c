@@ -32,9 +32,9 @@ s32 func_000047D8(SceNetDhcpCtx *dc) {
     if (now == -1) {
         return 0x80410586;
     }
-    *(u16 *)(dc->unkE54 + 8) = __builtin_allegrex_wsbh((u16)(now - dc->startTime));
-    dc->udp->sum = 0;
-    dc->udp->sum = func_00005E00(&dc->pseudo, dc->udp, (u16)__builtin_allegrex_wsbh(dc->pseudo.len));
+    *(u16 *)(dc->tx.bootp + 8) = __builtin_allegrex_wsbh((u16)(now - dc->startTime));
+    dc->tx.udp->sum = 0;
+    dc->tx.udp->sum = func_00005E00(&dc->pseudo, dc->tx.udp, (u16)__builtin_allegrex_wsbh(dc->pseudo.len));
     sceNetBpfWrite(dc->bpf, dc->pkt, dc->pktLen);
     return 0;
 }

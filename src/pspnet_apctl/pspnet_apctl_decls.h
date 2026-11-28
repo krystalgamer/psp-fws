@@ -238,11 +238,32 @@ typedef struct {
 } __attribute__((packed)) SceNetArpHdr;
 
 typedef struct {
+    u8 vhl;
+    u8 tos;
+    u16 len;
+    u16 id;
+    u16 off;
+    u8 ttl;
+    u8 p;
+    u16 sum;
+    u32 src;
+    u32 dst;
+} __attribute__((packed)) SceNetDhcpIpHdr;
+
+typedef struct {
     u16 sport;
     u16 dport;
     u16 len;
     u16 sum;
 } __attribute__((packed)) SceNetDhcpUdpHdr;
+
+/* header pointers into a DHCP frame */
+typedef struct {
+    u8 *ether;
+    u8 *ip;
+    SceNetDhcpUdpHdr *udp;
+    u8 *bootp;
+} SceNetDhcpFrame;
 
 typedef struct {
     u8 dst[6];
@@ -291,13 +312,9 @@ typedef struct {
     u8 unkBD8[2];
     u8 pkt[0x24E];              /* 0xBDA outgoing frame */
     s32 pktLen;                 /* 0xE28 */
-    u8 *rxEther;                /* 0xE2C */
-    u8 *rxIp;                   /* 0xE30 */
-    SceNetDhcpUdpHdr *rxUdp;    /* 0xE34 */
-    u8 *rxBootp;                /* 0xE38 */
-    u8 unkE3C[0x14];
-    SceNetDhcpUdpHdr *udp;      /* 0xE50 */
-    u8 *unkE54;                 /* 0xE54 */
+    SceNetDhcpFrame rx;         /* 0xE2C received frame */
+    u8 unkE3C[0xC];
+    SceNetDhcpFrame tx;         /* 0xE48 frame being sent (in pkt) */
     struct {
         u32 src;
         u32 dst;
@@ -555,6 +572,7 @@ extern SceNetDhcpCtx D_00008B38;
 extern SceNetApctlHandlerEntry D_00008B80[2];
 extern SceNetApctlHandlerEntry D_00008B98[1]; /* 1.50+ internal handler */
 extern char D_00010A8C[]; /* "wlan" */
+extern u8 D_00010ADC[4]; /* DHCP magic cookie 63 82 53 63 */
 extern s32 D_00011710;
 extern s32 D_00011870;
 extern s32 D_00011D64;
