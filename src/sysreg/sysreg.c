@@ -1,4 +1,4 @@
-/* cflags[100-152]: -O2 -frename-registers -fno-merge-constants */
+/* cflags[100-260]: -O2 -frename-registers -fno-merge-constants */
 /* cflags: -O2 -frename-registers */
 #include "common.h"
 #include "sysreg_decls.h"
@@ -318,15 +318,11 @@ INCLUDE_ASM("nonmatchings/sysreg", sysregSetResetBit);
 
 INCLUDE_RODATA("nonmatchings/sysreg", D_00002520);
 
-#if FW_VERSION == 271
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregPllGetBaseFrequency);
-#endif
-
-#if FW_VERSION < 271
+#else
 INCLUDE_RODATA("nonmatchings/sysreg", D_00002B04);
-#endif
 
-#if FW_VERSION < 201
 float sceSysregPllUpdateFrequency(void) {
     u32 sel = *(volatile u32 *)0xBC100068 & 0xF;
     u32 mul = __builtin_allegrex_ext(*(volatile u32 *)0xBC1000FC, 8, 8);
@@ -334,11 +330,9 @@ float sceSysregPllUpdateFrequency(void) {
 }
 #endif
 
-#if FW_VERSION >= 201 && FW_VERSION < 282
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregPllUpdateFrequency);
-#endif
-
-#if FW_VERSION < 271
+#else
 s32 sceSysregPllSetOutSelect(s32 sel) {
     s32 intr;
     u32 v;
@@ -355,20 +349,10 @@ s32 sceSysregPllSetOutSelect(s32 sel) {
     sceKernelCpuResumeIntr(intr);
     return ret;
 }
-#endif
 
-#if FW_VERSION < 201
 float sceSysregPllGetBaseFrequency(void) {
     return 37.0f;
 }
-#endif
-
-#if (FW_VERSION >= 201 && FW_VERSION < 271) || FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregPllGetBaseFrequency);
-#endif
-
-#if FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregPllUpdateFrequency);
 #endif
 
 float sceSysregPllGetFrequency(void) {
@@ -1690,7 +1674,7 @@ s32 sceClkcGetBusGear(s32 *num, s32 *den) {
     return 0;
 }
 
-#if FW_VERSION < 201
+#if FW_VERSION < 271
 s32 sceClkcSetCpuFrequency(float freq) {
     float pll = sceSysregPllGetFrequency();
     s32 n = (s32)(freq * 511.0f / pll);
