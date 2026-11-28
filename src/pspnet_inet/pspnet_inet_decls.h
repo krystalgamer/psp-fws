@@ -764,6 +764,15 @@ struct rt_addrinfo {
     struct sockaddr *rti_info[RTAX_MAX]; /* 0x04 */
 };
 /* struct rt_msghdr (route.h), route_cb (rtsock.c) */
+struct if_announcemsghdr {
+    u16 ifan_msglen;
+    u8 ifan_version;
+    u8 ifan_type;
+    u16 ifan_index;
+    char ifan_name[16];
+    u16 ifan_what;
+};
+#define RTM_IFANNOUNCE 0x10
 struct if_msghdr {
     u16 ifm_msglen;
     u8 ifm_version;
@@ -2166,7 +2175,7 @@ s32 func_0000D378(s32);
 void func_0000DD34(s32 arg0, void *arg1, void *arg2);
 void func_0000DDCC(s32 arg0, struct Unk_func_0000DDCC_1 *arg1, struct Unk_func_0000DDCC_2 *arg2);
 void func_0000E3F0(struct ifnet *ifp);
-s32 func_0000E448(s32, s32);
+void func_0000E448(struct ifnet *ifp, s32 what);
 s32 func_0000E4E4(s32, s32);
 struct mbuf *func_0000E5A4(s32 type, struct rt_addrinfo *rtinfo, char *data, s32 datalen);
 void func_0000ED48(void *arg0);
