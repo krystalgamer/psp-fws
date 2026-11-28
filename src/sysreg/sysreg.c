@@ -1425,7 +1425,18 @@ s32 sceClkcGetCpuGear(s32 *num, s32 *den) {
     return 0;
 }
 
+#if FW_VERSION < 271
+s32 sceClkcSetBusGear(s32 num, s32 den) {
+    if (num >= 0x200 || den >= 0x200 || den < num) {
+        return 0x800001FE;
+    }
+    *(volatile u32 *)0xBC200004 = ((num & 0x1FF) << 16) | (den & 0x1FF);
+    asm volatile("sync");
+    return 0;
+}
+#else
 INCLUDE_ASM("nonmatchings/sysreg", sceClkcSetBusGear);
+#endif
 
 s32 sceClkcGetBusGear(s32 *num, s32 *den) {
     if (num != NULL) {
@@ -1437,10 +1448,50 @@ s32 sceClkcGetBusGear(s32 *num, s32 *den) {
     return 0;
 }
 
+#if FW_VERSION < 201
+s32 sceClkcSetCpuFrequency(float freq) {
+    float pll = sceSysregPllGetFrequency();
+    s32 n = (s32)(freq * 511.0f / pll);
+    if (n < 0) {
+        n = 1;
+    }
+    if (n >= 0x200) {
+        n = 0x1FF;
+    }
+    *(volatile u32 *)0xBC200000 = ((n & 0x1FF) << 16) | 0x1FF;
+    asm volatile("sync");
+    return 0;
+}
+#else
 INCLUDE_ASM("nonmatchings/sysreg", sceClkcSetCpuFrequency);
+#endif
 
-INCLUDE_ASM("nonmatchings/sysreg", sceClkcGetCpuFrequency);
+float sceClkcGetCpuFrequency(void) {
+    float pll = sceSysregPllGetFrequency();
+    u32 v = *(volatile u32 *)0xBC200000;
+    return pll * (s32)__builtin_allegrex_ext(v, 16, 9) / (s32)(v & 0x1FF);
+}
 
+#if FW_VERSION < 271
+s32 sceClkcSetBusFrequency(float freq) {
+    float pll = sceSysregPllGetFrequency();
+    s32 n = (s32)(freq * 1022.0f / pll);
+    if (n < 0) {
+        n = 1;
+    }
+    if (n >= 0x200) {
+        n = 0x1FF;
+    }
+    *(volatile u32 *)0xBC200004 = ((n & 0x1FF) << 16) | 0x1FF;
+    asm volatile("sync");
+    return 0;
+}
+#else
 INCLUDE_ASM("nonmatchings/sysreg", sceClkcSetBusFrequency);
+#endif
 
-INCLUDE_ASM("nonmatchings/sysreg", sceClkcGetBusFrequency);
+float sceClkcGetBusFrequency(void) {
+    float pll = sceSysregPllGetFrequency();
+    u32 v = *(volatile u32 *)0xBC200004;
+    return pll * (s32)__builtin_allegrex_ext(v, 16, 9) / (s32)((v & 0x1FF) * 2);
+}
