@@ -626,39 +626,16 @@ INCLUDE_ASM("nonmatchings/music_main_plugin_011C7C", func_00017280);
 #endif
 
 #if FW_VERSION >= 282 && FW_VERSION < 310
-void func_00017280(struct Unk_func_00017280_0 *arg0) {
-    arg0->unk0 = &D_0009B818;
+Class_0009B818::~Class_0009B818() {
     func_00018594();
-    sceKernelDeleteSema(arg0->unk90);
-    _ZN14Class_0009BCC8D2Ev((s32) arg0);
+    sceKernelDeleteSema(this->unk90);
 }
 #endif
 
 #if FW_VERSION >= 310 && FW_VERSION < 330
 INCLUDE_ASM("nonmatchings/music_main_plugin_011C7C", func_000172C0);
-#endif
 
-#if FW_VERSION >= 282 && FW_VERSION < 310
-void func_000172C0(struct Unk_func_000172C0_0 *arg0) {
-    arg0->unk0 = &D_0009B818;
-    func_00018594();
-    sceKernelDeleteSema(arg0->unk90);
-    _ZN14Class_0009BCC8D2Ev((s32) arg0);
-}
-#endif
-
-#if FW_VERSION >= 310 && FW_VERSION < 330
 INCLUDE_ASM("nonmatchings/music_main_plugin_011C7C", func_00017300);
-#endif
-
-#if FW_VERSION >= 282 && FW_VERSION < 310
-void func_00017300(struct Unk_func_00017300_0 *arg0) {
-    arg0->unk0 = &D_0009B818;
-    func_00018594();
-    sceKernelDeleteSema(arg0->unk90);
-    _ZN14Class_0009BCC8D2Ev((s32) arg0);
-    _ZdlPv(arg0);
-}
 #endif
 
 #if FW_VERSION >= 282 && FW_VERSION < 330

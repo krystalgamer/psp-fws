@@ -206,11 +206,11 @@ INCLUDE_ASM("nonmatchings/music_main_plugin_01AAFC", func_00023198);
 
 INCLUDE_ASM("nonmatchings/music_main_plugin_01AAFC", func_000231D4);
 
-INCLUDE_ASM("nonmatchings/music_main_plugin_01AAFC", func_0004A310);
+INCLUDE_ASM("nonmatchings/music_main_plugin_01AAFC", _ZN14Class_00094D20D2Ev);
 
-INCLUDE_ASM("nonmatchings/music_main_plugin_01AAFC", func_00023238);
+INCLUDE_ASM("nonmatchings/music_main_plugin_01AAFC", _ZN14Class_00094D20D1Ev);
 
-INCLUDE_ASM("nonmatchings/music_main_plugin_01AAFC", func_00023260);
+INCLUDE_ASM("nonmatchings/music_main_plugin_01AAFC", _ZN14Class_00094D20D0Ev);
 
 INCLUDE_ASM("nonmatchings/music_main_plugin_01AAFC", func_00023298);
 #else
