@@ -129,6 +129,7 @@ def main():
     ap.add_argument("--no-build", action="store_true")
     ap.add_argument("--exclude", default="")
     ap.add_argument("-v", action="store_true")
+    ap.add_argument("--keep", action="store_true", help="keep the changes on failure")
     a = ap.parse_args()
     mod = a.module
     have = sorted((p.parent.name for p in ROOT.glob(f"config/*/{mod}.yaml")), key=lambda v: (CC.fwnum(v), v))
@@ -140,10 +141,10 @@ def main():
     ents = {f: FM.parse(f.read_text(), fv) for f in files}
     sp = sd / f"{mod}_decls.json"
     store = json.loads(sp.read_text())
-    types = store["types"]
+    types = store.setdefault("types", {})
     statics = structify.static_members(mod, store)
     shared_text = {p: p.read_text() for p in SHARED}
-    namespaces = {"paf"}
+    namespaces = {"paf"} | {m[1] for t in shared_text.values() for m in re.finditer(r"^namespace (\w+) \{", t, re.M)}
     exclude = set(a.exclude.split(",")) - {""}
 
     plans, why = [], {}
@@ -160,6 +161,9 @@ def main():
                 why["demangled form"] = why.get("demangled form", 0) + 1
                 continue
             qual, name, params, const = pd
+            if qual.count("::") > 1 or ("::" in qual and qual.split("::")[0] not in namespaces):
+                why["nested class"] = why.get("nested class", 0) + 1
+                continue
             fwd = []
             for t in params:
                 r = param_ok(t, namespaces)
@@ -173,7 +177,13 @@ def main():
                 continue
             cps = [] if hm["params"].strip() in ("", "void") else [x.strip() for x in hm["params"].split(",")]
             static = hm["name"] in statics
-            if cps and len(cps) == len(params) + 1 and not static:
+            nsfunc = qual in namespaces  # vsh::BusyIcon_Inc(): a function in a namespace
+            if nsfunc:
+                if len(cps) > len(params):
+                    why["parameter count"] = why.get("parameter count", 0) + 1
+                    continue
+                this, rest = None, cps
+            elif cps and len(cps) == len(params) + 1 and not static:
                 this, rest = cps[0], cps[1:]
             elif not cps:
                 this, rest = None, []
@@ -183,7 +193,7 @@ def main():
                 why["parameter count"] = why.get("parameter count", 0) + 1
                 continue
             ret = hm["ret"].strip()
-            in_shared = next((p for p, t in shared_text.items() if class_block(t, qual)), None)
+            in_shared = None if nsfunc else next((p for p, t in shared_text.items() if class_block(t, qual)), None)
             if in_shared and not re.match(r"^(?:void|s8|u8|s16|u16|s32|u32|f32|int|M2C_UNK)$", ret):
                 why["return type"] = why.get("return type", 0) + 1
                 continue
@@ -211,7 +221,7 @@ def main():
             head = f"{ret} {qual}::{name}({decl_params}){cq} {{\n"
             body = e.text[hm.end():]
             new = head + "".join(p + "\n" for p in pro) + body
-            member = f"    {'static ' if static and not this else ''}{ret} {name}({', '.join(params)}){cq};"
+            member = f"    {'static ' if static and not this and not nsfunc else ''}{ret} {name}({', '.join(params)}){cq};"
             if sigs.setdefault(hm["name"], member) != member:
                 why["differs between versions"] = why.get("differs between versions", 0) + 1
                 continue
@@ -252,17 +262,23 @@ def main():
             t = t.replace("#ifdef __cplusplus\n", "#ifdef __cplusplus\n\n/* forward declarations (tools/cxx_methods.py) */\n"
                           + fl, 1)
             sh.write_text(t)
+    def missing(text, se, ms):
+        have = {l.strip() for l in text[se[0]:se[1]].split("\n")}
+        return "".join(m + "\n" for m in ms if m.strip() not in have)
     for qual, ms in sorted(members.items()):
-        sh = next((p for p, t in shared_text.items() if class_block(t, qual)), None)
         block = "".join(m + "\n" for m in ms)
+        if qual in namespaces:
+            gen.append(f"namespace {qual} {{\n{block}}}\n")
+            continue
+        sh = next((p for p, t in shared_text.items() if class_block(t, qual)), None)
         if sh:
             t = sh.read_text()
             s0, e0 = class_block(t, qual)
-            sh.write_text(t[:e0] + block + t[e0:])
+            sh.write_text(t[:e0] + missing(t, (s0, e0), ms) + t[e0:])
         elif "::" not in qual and qual in declared:
             kk = declared[qual]
             s0, e0 = class_block(types[kk], qual)
-            types[kk] = types[kk][:e0] + block + types[kk][e0:]
+            types[kk] = types[kk][:e0] + missing(types[kk], (s0, e0), ms) + types[kk][e0:]
         else:
             ns, _, cn = qual.rpartition("::")
             if ns and ns not in namespaces:
@@ -285,6 +301,8 @@ def main():
     print(f"defined {len(plans)} member functions ({len(members)} classes)")
 
     def restore():
+        if a.keep:
+            sys.exit(1)
         for q, txt in keep.items():
             q.write_text(txt)
         print("restored")
