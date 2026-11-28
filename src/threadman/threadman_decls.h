@@ -816,6 +816,7 @@ s32 sceKernelRegisterDeadThreadHandler(s32 arg0);
 M2C_UNK sceKernelReleaseExceptionHandler(M2C_UNK, M2C_UNK *);
 M2C_UNK sceKernelReleaseIntrHandler(s32);
 s64 sceKernelUSec2SysClockWide(u32 arg0);
+SceUID setAlarm(u64 clock, void *handler, void *common);
 void wakeFirstWaitThread(SceSysmemUidCB *cb, s32 waitRet, s32 isIntr, s32 intr);
 
 #endif

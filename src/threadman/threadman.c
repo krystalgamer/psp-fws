@@ -4445,7 +4445,22 @@ void func_0000B258(SceTimer *timer) {
 INCLUDE_ASM("nonmatchings/threadman", func_0000B304);
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION < 270
+s32 sceKernelUSec2SysClock(u32 usec, SceKernelSysClock *clock) {
+    u32 oldK1 = shiftK1();
+
+    if (k1IsUserMode() && (s32)((u32)clock | ((u32)clock + sizeof(SceKernelSysClock))) < 0) {
+        setK1(oldK1);
+        return 0x800200D3;
+    }
+    clock->low = usec;
+    clock->hi = 0;
+    setK1(oldK1);
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 270 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/threadman", sceKernelUSec2SysClock);
 #endif
 
@@ -4517,11 +4532,42 @@ INCLUDE_RODATA("nonmatchings/threadman", D_00014F74);
 #endif
 
 #if FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/threadman", func_0000B8BC);
+INCLUDE_ASM("nonmatchings/threadman", setAlarm);
 
-INCLUDE_ASM("nonmatchings/threadman", sceKernelSetAlarm);
+SceUID sceKernelSetAlarm(u32 clock, void *handler, void *common) {
+    SceUID ret;
+    void *ra = getRa();
+    u32 oldK1 = shiftK1Noreorder();
 
-INCLUDE_ASM("nonmatchings/threadman", sceKernelSetSysClockAlarm);
+    if (handler == NULL || (k1IsUserMode() && (s32)handler < 0)) {
+        setK1(oldK1);
+        return 0x800200D3;
+    }
+    ret = setAlarm(clock, handler, common);
+    if (g_threadmanInfo.logHandler != NULL) {
+        g_threadmanInfo.logHandler(0x70, ra, 4, clock, handler, common, ret);
+    }
+    setK1(oldK1);
+    return ret;
+}
+
+SceUID sceKernelSetSysClockAlarm(SceKernelSysClock *clock, void *handler, void *common) {
+    SceUID ret;
+    void *ra = getRa();
+    u32 oldK1 = shiftK1Noreorder();
+
+    if (handler == NULL || (k1IsUserMode() && IS_USER_ADDR((u32)clock | ((u32)clock + sizeof(SceKernelSysClock))) == 0)
+        || (k1IsUserMode() && (s32)handler < 0)) {
+        setK1(oldK1);
+        return 0x800200D3;
+    }
+    ret = setAlarm(sysClockToU64(clock), handler, common);
+    if (g_threadmanInfo.logHandler != NULL) {
+        g_threadmanInfo.logHandler(0x71, ra, 5, clock->hi, clock->low, handler, common, ret);
+    }
+    setK1(oldK1);
+    return ret;
+}
 #endif
 
 #if FW_VERSION >= 282
@@ -4702,11 +4748,54 @@ void func_0000B84C(SceKernelSysClock *out, SceKernelSysClock *in) {
 INCLUDE_ASM("nonmatchings/threadman", func_0000B84C);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION >= 150 && FW_VERSION < 270
+SceUID sceKernelSetAlarm(u32 clock, void *handler, void *common) {
+    SceUID ret;
+    void *ra = getRa();
+    u32 oldK1 = shiftK1Noreorder();
+
+    if (handler == NULL || (k1IsUserMode() && (s32)handler < 0)) {
+        setK1(oldK1);
+        return 0x800200D3;
+    }
+    ret = setAlarm(clock, handler, common);
+    if (g_threadmanInfo.logHandler != NULL) {
+        g_threadmanInfo.logHandler(0x70, ra, 4, clock, handler, common, ret);
+    }
+    setK1(oldK1);
+    return ret;
+}
+#endif
+
+#if FW_VERSION >= 270 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/threadman", sceKernelSetAlarm);
+#endif
 
+#if FW_VERSION >= 150 && FW_VERSION < 201
+SceUID sceKernelSetSysClockAlarm(SceKernelSysClock *clock, void *handler, void *common) {
+    SceUID ret;
+    void *ra = getRa();
+    u32 oldK1 = shiftK1Noreorder();
+
+    if (handler == NULL || (k1IsUserMode() && IS_USER_ADDR((u32)clock | ((u32)clock + sizeof(SceKernelSysClock))) == 0)
+        || (k1IsUserMode() && (s32)handler < 0)) {
+        setK1(oldK1);
+        return 0x800200D3;
+    }
+    ret = setAlarm(sysClockToU64(clock), handler, common);
+    if (g_threadmanInfo.logHandler != NULL) {
+        g_threadmanInfo.logHandler(0x71, ra, 5, clock->hi, clock->low, handler, common, ret);
+    }
+    setK1(oldK1);
+    return ret;
+}
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/threadman", sceKernelSetSysClockAlarm);
+#endif
 
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/threadman", func_0000D994);
 
 INCLUDE_ASM("nonmatchings/threadman", func_0000BEBC);
@@ -4741,7 +4830,7 @@ INCLUDE_ASM("nonmatchings/threadman", func_0000DEC0);
 
 INCLUDE_ASM("nonmatchings/threadman", func_0000DF4C);
 
-INCLUDE_ASM("nonmatchings/threadman", func_0000E094);
+INCLUDE_ASM("nonmatchings/threadman", setAlarm);
 #endif
 
 #if FW_VERSION < 282
@@ -4876,7 +4965,7 @@ INCLUDE_ASM("nonmatchings/threadman", func_0000ED7C);
 
 INCLUDE_ASM("nonmatchings/threadman", func_0000EE74);
 
-INCLUDE_ASM("nonmatchings/threadman", func_0000EFF4);
+INCLUDE_ASM("nonmatchings/threadman", setAlarm);
 
 s32 func_0000F140(struct Unk_func_0000F140_0 *arg0) {
     sceKernelCallUIDObjCommonFunction();
@@ -5551,7 +5640,11 @@ s32 func_000136C0(void) {
 
 INCLUDE_ASM("nonmatchings/threadman", func_000136E0);
 
-INCLUDE_ASM("nonmatchings/threadman", func_000136F4);
+void threadReturnStub(void) {
+    register s32 status asm("$2"); /* the thread entry's return value */
+
+    sceKernelExitThread(status);
+}
 
 INCLUDE_ASM("nonmatchings/threadman", func_00013710);
 #endif
@@ -5976,7 +6069,11 @@ INCLUDE_ASM("nonmatchings/threadman", func_0001446C);
 #endif
 
 #if FW_VERSION < 150 || FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/threadman", func_00014480);
+void threadReturnStub(void) {
+    register s32 status asm("$2"); /* the thread entry's return value */
+
+    sceKernelExitThread(status);
+}
 #endif
 
 #if FW_VERSION < 150

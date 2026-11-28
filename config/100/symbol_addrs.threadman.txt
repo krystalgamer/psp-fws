@@ -204,8 +204,9 @@ func_00004B68 = 0x00004800; // type:func rom:0x4880
 func_0000BBD0 = 0x0000A858; // type:func rom:0xA8D8
 func_0000E674 = 0x0000DEB4; // type:func rom:0xDF34
 func_00010CFC = 0x00010254; // type:func rom:0x102D4
-func_00014480 = 0x00010840; // type:func rom:0x108C0
+threadReturnStub = 0x00010840; // type:func rom:0x108C0
 func_000153A8 = 0x00013288; // type:func rom:0x13308
 // shared names (tools/add_version.py) end
 wakeFirstWaitThread = 0x00000308; // type:func
 mbxAddMessage = 0x00005D40; // type:func
+setAlarm = 0x0000B8BC; // type:func
