@@ -432,7 +432,31 @@ end:
 INCLUDE_ASM("nonmatchings/mscm", sceMScmRegisterCLD);
 #endif
 
+#if FW_VERSION < 201
+s32 sceMScmUnRegisterCLD(s32 slot, SceMScmCLD *cld) {
+    SceMScmSlotCB *cb;
+
+    if (cld == NULL) {
+        return 0x80220081;
+    }
+    if (slot != 0) {
+        return 0x80220081;
+    }
+    cb = &D_00006ED8[slot];
+    if (strncmp(D_00006ED8[slot].drv.name, cld->name, 0xFF) != 0) {
+        return 0x80220081;
+    }
+    {
+        SceUID vpl = D_00006B50;
+        cb->attached = 0;
+        sceKernelFreeVpl(vpl, D_00006ED8[slot].drv.name);
+    }
+    memset(cb, 0, 0x20);
+    return 0;
+}
+#else
 INCLUDE_ASM("nonmatchings/mscm", sceMScmUnRegisterCLD);
+#endif
 
 #if FW_VERSION < 150
 s32 sceMScmDetachCLD(s32 slot, SceMScmCLD *cld) {
