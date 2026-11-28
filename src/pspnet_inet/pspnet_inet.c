@@ -1593,7 +1593,45 @@ struct ifaddr *ifa_ifwithnet(struct sockaddr *addr) {
     return (ifa_maybe);
 }
 
+#if FW_VERSION < 201
+struct ifaddr *ifaof_ifpforaddr(struct sockaddr *addr, struct ifnet *ifp) {
+    struct ifaddr *ifa;
+    char *cp, *cp2, *cp3;
+    char *cplim;
+    struct ifaddr *ifa_maybe = 0;
+    u32 af = addr->sa_family;
+
+    if (ifp->if_output == _sce_pspnet_if_nulloutput)
+        return (NULL);
+
+    if (af >= 31)
+        return (NULL);
+
+    for (ifa = ifp->if_addrlist.tqh_first; ifa != 0; ifa = ifa->ifa_list.tqe_next) {
+        if (ifa->ifa_addr->sa_family != af)
+            continue;
+        ifa_maybe = ifa;
+        if (ifa->ifa_netmask == 0) {
+            if (func_0002C978(addr, ifa->ifa_addr, addr->sa_len) == 0 ||
+                (ifa->ifa_dstaddr && func_0002C978(addr, ifa->ifa_dstaddr, addr->sa_len) == 0))
+                return (ifa);
+            continue;
+        }
+        cp = addr->sa_data;
+        cp2 = ifa->ifa_addr->sa_data;
+        cp3 = ifa->ifa_netmask->sa_data;
+        cplim = ifa->ifa_netmask->sa_len + (char *)ifa->ifa_netmask;
+        for (; cp3 < cplim; cp3++)
+            if ((*cp++ ^ *cp2++) & *cp3)
+                break;
+        if (cp3 == cplim)
+            return (ifa);
+    }
+    return (ifa_maybe);
+}
+#else
 INCLUDE_ASM("nonmatchings/pspnet_inet", ifaof_ifpforaddr);
+#endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_inet", if_rtdel);
