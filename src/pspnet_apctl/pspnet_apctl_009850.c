@@ -176,15 +176,15 @@ INCLUDE_ASM("nonmatchings/pspnet_apctl_009850", func_0000774C);
 
 INCLUDE_ASM("nonmatchings/pspnet_apctl_009850", func_000077C8);
 
-u8 *func_000077F8(u8 *arg0, u8 *arg1) {
-    u8 *var_a1;
+char *func_000077F8(char *arg0, const char *arg1) {
+    const u8 *var_a1;
     u8 *var_a2;
-    u8 *var_v0;
+    char *var_v0;
     u8 temp_a3;
 
-    var_a1 = arg1;
+    var_a1 = (const u8 *)arg1;
     var_v0 = NULL;
-    var_a2 = arg0;
+    var_a2 = (u8 *)arg0;
     if (((arg0 == NULL) | (var_a1 == NULL)) == 0) {
         do {
             temp_a3 = *var_a1;

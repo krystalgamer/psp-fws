@@ -94,6 +94,27 @@ union SceNetApctlInfo {
     SceUShort16 http_proxy_port;
 } /* size 0x80 */;
 
+/* sceNetConfig80211GetBssDesc / scan result descriptor */
+typedef struct {
+    u8 bssid[6];                /* 0x00 */
+    u8 channel;                 /* 0x06 */
+    u8 ssidLen;                 /* 0x07 */
+    char ssid[0x20];            /* 0x08 */
+    s32 bssType;                /* 0x28 1 = infrastructure */
+    u8 unk2C[0x12];
+    u16 capability;             /* 0x3E 0x10 = privacy */
+    u8 unk40[8];
+    u8 rssi;                    /* 0x48 */
+    u8 unk49[7];
+} SceNetApctlBssDesc;
+typedef char chk_SceNetApctlBssDesc[(sizeof(SceNetApctlBssDesc) == 0x50) ? 1 : -1];
+
+/* sceNetApctlGetBSSDescIDList output entry */
+typedef struct SceNetApctlBssId {
+    struct SceNetApctlBssId *next;
+    s32 id;
+} SceNetApctlBssId;
+
 typedef struct {
     s32 id;
     void (*func)(s32 oldState, s32 newState, s32 event, s32 error, void *arg);
@@ -149,6 +170,30 @@ typedef struct {
     SceNetApctlNetConf conf;    /* 0x6CC */
 } SceNetApctlCtx;
 typedef char chk_SceNetApctlCtx[(sizeof(SceNetApctlCtx) == 0x8F8) ? 1 : -1];
+
+/* sceUtilityGetNetParam output buffer */
+typedef union {
+    u32 asUint;
+    char asString[128];
+} SceNetApctlNetParam;
+
+typedef struct SceNetApctlScanEntry {
+    struct SceNetApctlScanEntry *next;
+    SceNetApctlBssDesc desc;
+} SceNetApctlScanEntry;
+
+/* sceNetConfig80211ScanRequest parameters */
+typedef struct {
+    s32 unk0;                   /* 0x00 = 1 */
+    u8 unk4[6];
+    u8 channels[14];            /* 0x0A 1..14 */
+    u8 unk18[0x24];
+    s32 unk3C;                  /* 0x3C = 1 */
+    s32 unk40;                  /* 0x40 = 0 */
+    s32 unk44;                  /* 0x44 = 6 */
+    s32 unk48;                  /* 0x48 = 500 */
+} SceNetApctlScanParam;
+typedef char chk_SceNetApctlScanParam[(sizeof(SceNetApctlScanParam) == 0x4C) ? 1 : -1];
 
 struct Unk_D_00013F20 {
     u8 pad0[0x4];
@@ -338,12 +383,12 @@ extern s32 D_000170A8;
 extern M2C_UNK D_000177A0;
 extern u32 D_00017820;
 
-s32 func_0000038C(SceNetApctlCtx *ctx, u32 *buflen, void *buf);
+s32 func_0000038C(SceNetApctlCtx *ctx, u32 *buflen, SceNetApctlBssId *buf);
 s32 func_0000050C(SceNetApctlCtx *ctx, s32 code, void *info);
 s32 func_00000A30(void *arg0, s32 arg1);
 s32 func_00000B54(s32, s32, s32);
 s32 func_00000B68(s32 stackSize, s32 prio);
-s32 func_00000C38(SceNetApctlCtx *ctx, s32 index, s32 code, void *info);
+s32 func_00000C38(SceNetApctlCtx *ctx, s32 index, s32 code, union SceNetApctlBSSDescEntry *info);
 s32 func_00000CB0(void);
 s32 func_00000D54(void *func, void *arg, s32 *id);
 s32 func_00000D60(s32, s32, s32, s32);
@@ -377,7 +422,7 @@ s32 func_0000741C(s32, s32);
 u8 *func_000074D0(u8 *arg0, u8 *arg1, s32 arg2);
 void *func_00007504(void *dst, s32 c, s32 n);
 char *func_0000774C(char *dst, const char *src, s32 n);
-u8 *func_000077F8(u8 *arg0, u8 *arg1);
+char *func_000077F8(char *dst, const char *src);
 s32 func_00007830(const char *s);
 s32 func_00008BB0(s32, s32, s32, s32, s32, s32, s32, s32);
 s32 func_00008E00(void);
@@ -471,7 +516,7 @@ s32 sceNetApctlGetBSSDescIDList(u32 *buflen, void *buf);
 s32 sceNetApctlGetBSSDescIDListUser(u32 *buflen, void *buf);
 s32 sceNetApctlGetInfo(s32 code, void *info);
 s32 sceNetApctlGetState(s32 *state);
-s32 sceNetApctlInit(s32 stackSize, s32 initPriority);
+s32 sceNetApctlInit(s32 stackSize, s32 prio);
 s32 sceNetApctlScan(void);
 s32 sceNetApctlScanUser(void);
 s32 sceNetApctlTerm(void);

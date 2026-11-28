@@ -304,7 +304,60 @@ INCLUDE_ASM("nonmatchings/pspnet_apctl", func_000002BC);
 
 #if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_apctl", func_0000038C);
+#endif
 
+#if FW_VERSION < 250
+s32 func_00000C38(SceNetApctlCtx *ctx, s32 index, s32 code, union SceNetApctlBSSDescEntry *info) {
+    SceNetApctlScanEntry *e;
+    SceNetApctlBssDesc *d;
+    s32 i;
+    s32 ret;
+
+    ret = 0x80410A82;
+    if ((u32)index >= 20) {
+        goto end;
+    }
+    e = (SceNetApctlScanEntry *)ctx->scanBuf;
+    for (i = 1; i < index; i++) {
+        e = e->next;
+    }
+    d = &e->desc;
+    ret = 0x80410A02;
+    switch (code) {
+    case 0:
+        __builtin_memcpy(info, d, 6);
+        break;
+    case 1: {
+        u32 *src = (u32 *)d->ssid;
+        __builtin_memcpy(info, src, 33);
+        break;
+    }
+    case 2:
+        info->ssidlen = d->ssidLen;
+        break;
+    case 3:
+        info->channel = d->channel;
+        break;
+    case 4:
+        info->rssi = d->rssi;
+        break;
+    case 5:
+        if (d->capability & 0x10) {
+            info->auth_proto = 1;
+        } else {
+            info->auth_proto = 0;
+        }
+        break;
+    default:
+        goto end;
+    }
+    ret = 0;
+end:
+    return ret;
+}
+#endif
+
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_apctl", func_00000C38);
 #endif
 
@@ -328,7 +381,115 @@ INCLUDE_ASM("nonmatchings/pspnet_apctl", func_00001550);
 
 #if FW_VERSION < 250
 INCLUDE_ASM("nonmatchings/pspnet_apctl", func_0000050C);
+#endif
 
+#if FW_VERSION < 150
+s32 func_00000788(SceNetApctlCtx *ctx) {
+    SceNetApctlNetParam p;
+    s32 ret;
+
+    ret = sceUtilityGetNetParam(ctx->connIndex, 0, &p);
+    if (ret < 0) {
+        goto end;
+    }
+    func_000077F8(ctx->conf.name, p.asString);
+    ret = sceUtilityGetNetParam(ctx->connIndex, 1, &p);
+    if (ret < 0) {
+        goto end;
+    }
+    func_000077F8(ctx->conf.ssid, p.asString);
+    ret = sceUtilityGetNetParam(ctx->connIndex, 2, &p);
+    if (ret < 0) {
+        goto end;
+    }
+    ctx->conf.secure = p.asUint;
+    if (p.asUint == 1 || p.asUint == 2) {
+        ret = sceUtilityGetNetParam(ctx->connIndex, 3, &p);
+        if (ret < 0) {
+            goto end;
+        }
+        __builtin_memcpy(&ctx->conf.wepKey, &p, 13);
+    }
+    ret = sceUtilityGetSystemParamInt(3, &ctx->conf.powerSave);
+    if (ret < 0) {
+        goto end;
+    }
+    ret = sceUtilityGetNetParam(ctx->connIndex, 4, &p);
+    if (ret < 0) {
+        goto end;
+    }
+    ctx->conf.ipType = p.asUint;
+    switch (p.asUint) {
+    case 0:
+        break;
+    case 1:
+        ret = sceUtilityGetNetParam(ctx->connIndex, 5, &p);
+        if (ret < 0) {
+            goto end;
+        }
+        func_000077F8(ctx->conf.addr.s.ip, p.asString);
+        ret = sceUtilityGetNetParam(ctx->connIndex, 6, &p);
+        if (ret < 0) {
+            goto end;
+        }
+        func_000077F8(ctx->conf.addr.s.netmask, p.asString);
+        ret = sceUtilityGetNetParam(ctx->connIndex, 7, &p);
+        if (ret < 0) {
+            goto end;
+        }
+        func_000077F8(ctx->conf.addr.s.route, p.asString);
+        break;
+    case 2:
+        ret = sceUtilityGetNetParam(ctx->connIndex, 11, &p);
+        if (ret < 0) {
+            goto end;
+        }
+        func_000077F8(ctx->conf.addr.p.user, p.asString);
+        ret = sceUtilityGetNetParam(ctx->connIndex, 12, &p);
+        if (ret < 0) {
+            goto end;
+        }
+        func_000077F8(ctx->conf.addr.p.pass, p.asString);
+        break;
+    }
+    ret = sceUtilityGetNetParam(ctx->connIndex, 8, &p);
+    if (ret < 0) {
+        goto end;
+    }
+    ctx->conf.manualDns = p.asUint;
+    ret = sceUtilityGetNetParam(ctx->connIndex, 9, &p);
+    if (ret < 0) {
+        goto end;
+    }
+    func_000077F8(ctx->conf.primaryDns, p.asString);
+    ret = sceUtilityGetNetParam(ctx->connIndex, 10, &p);
+    if (ret < 0) {
+        goto end;
+    }
+    func_000077F8(ctx->conf.secondaryDns, p.asString);
+    ret = sceUtilityGetNetParam(ctx->connIndex, 13, &p);
+    if (ret < 0) {
+        goto end;
+    }
+    ctx->conf.useProxy = p.asUint;
+    if (p.asUint == 1) {
+        ret = sceUtilityGetNetParam(ctx->connIndex, 14, &p);
+        if (ret < 0) {
+            goto end;
+        }
+        func_000077F8(ctx->conf.proxyServer, p.asString);
+        ret = sceUtilityGetNetParam(ctx->connIndex, 15, &p);
+        if (ret < 0) {
+            goto end;
+        }
+        ctx->conf.proxyPort = p.asUint;
+    }
+end:
+    return ret;
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 250
 INCLUDE_ASM("nonmatchings/pspnet_apctl", func_00000788);
 #endif
 
@@ -352,9 +513,35 @@ s32 func_00000A30(void *arg0, s32 arg1) {
 INCLUDE_ASM("nonmatchings/pspnet_apctl", func_000002BC);
 #endif
 
-#if FW_VERSION < 250
-INCLUDE_ASM("nonmatchings/pspnet_apctl", func_00000A74);
+#if FW_VERSION < 150
+s32 func_00000A74(SceNetApctlCtx *ctx) {
+    s32 keyLen = 0;
+    void *key = NULL;
+    s32 ret;
 
+    ret = sceNetConfigUpInterface(ctx);
+    if (ret >= 0) {
+        if (ctx->conf.secure == 1) {
+            keyLen = 5;
+            key = &ctx->conf.wepKey;
+        } else if (ctx->conf.secure == 2) {
+            keyLen = 13;
+            key = &ctx->conf.wepKey;
+        }
+        {
+            s32 ps = ctx->conf.powerSave == 1;
+            ret = sceNetConfig80211ScanJoinRequest(ctx, ctx->conf.ssid, func_00007830(ctx->conf.ssid), key, keyLen, ps, 1);
+        }
+    }
+    return ret;
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 250
+INCLUDE_ASM("nonmatchings/pspnet_apctl", func_00000A74);
+#endif
+
+#if FW_VERSION < 250
 s32 func_00000B24(SceNetApctlCtx *ctx) {
     s32 buf[4];
     s32 ret;
