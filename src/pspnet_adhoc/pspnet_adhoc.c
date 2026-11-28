@@ -557,7 +557,7 @@ end:
 }
 #endif
 
-#if FW_VERSION == 260
+#if FW_VERSION >= 260 && FW_VERSION < 282
 s32 sceNetAdhocPdpSend(s32 id, const SceNetEtherAddr *daddr, u16 dport, const void *data, s32 len, u32 timeout, s32 nonblock) {
     SceNetAdhocWaiter *ti;
     SceNetAdhocWaiter *w;
@@ -610,7 +610,7 @@ end:
 }
 #endif
 
-#if FW_VERSION >= 271
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", sceNetAdhocPdpSend);
 #endif
 
@@ -688,7 +688,7 @@ s32 sceNetAdhocPdpRecv(s32 id, SceNetEtherAddr *addr, u16 *port, void *buf, s32 
 }
 #endif
 
-#if FW_VERSION >= 201 && FW_VERSION < 271
+#if FW_VERSION >= 201 && FW_VERSION < 282
 s32 sceNetAdhocPdpRecv(s32 id, SceNetEtherAddr *addr, u16 *port, void *buf, s32 *len, u32 timeout, s32 nonblock) {
     if (sceKernelCheckThreadStack() < 0x7E0)
         return 0x80410005;
@@ -698,7 +698,7 @@ s32 sceNetAdhocPdpRecv(s32 id, SceNetEtherAddr *addr, u16 *port, void *buf, s32 
 }
 #endif
 
-#if FW_VERSION >= 271
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", sceNetAdhocPdpRecv);
 #endif
 
@@ -1257,7 +1257,7 @@ end:
 }
 #endif
 
-#if FW_VERSION == 260
+#if FW_VERSION >= 260 && FW_VERSION < 282
 s32 sceNetAdhocPtpConnect(s32 id, u32 timeout, s32 nonblock) {
     SceNetAdhocWaiter *ti;
     SceNetAdhocWaiter *w;
@@ -1310,7 +1310,7 @@ end:
 }
 #endif
 
-#if FW_VERSION >= 271
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", sceNetAdhocPtpConnect);
 #endif
 
@@ -1467,7 +1467,7 @@ end:
 }
 #endif
 
-#if FW_VERSION == 260
+#if FW_VERSION >= 260 && FW_VERSION < 282
 s32 sceNetAdhocPtpAccept(s32 id, SceNetEtherAddr *addr, u16 *port, u32 timeout, s32 nonblock) {
     SceNetAdhocWaiter *ti;
     SceNetAdhocWaiter *w;
@@ -1520,7 +1520,7 @@ end:
 }
 #endif
 
-#if FW_VERSION >= 271
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", sceNetAdhocPtpAccept);
 #endif
 
@@ -1657,7 +1657,7 @@ end:
 }
 #endif
 
-#if FW_VERSION == 260
+#if FW_VERSION >= 260
 s32 sceNetAdhocPtpSend(s32 id, const void *data, s32 *len, u32 timeout, s32 nonblock) {
     SceNetAdhocWaiter *ti;
     SceNetAdhocWaiter *w;
@@ -1712,10 +1712,6 @@ end:
     _sce_pspnet_thread_leave(ti, 0);
     return ret;
 }
-#endif
-
-#if FW_VERSION >= 271
-INCLUDE_ASM("nonmatchings/pspnet_adhoc", sceNetAdhocPtpSend);
 #endif
 
 #if FW_VERSION < 201
@@ -1851,7 +1847,7 @@ end:
 }
 #endif
 
-#if FW_VERSION == 260
+#if FW_VERSION >= 260
 s32 sceNetAdhocPtpRecv(s32 id, void *buf, s32 *len, u32 timeout, s32 nonblock) {
     SceNetAdhocWaiter *ti;
     SceNetAdhocWaiter *w;
@@ -1906,10 +1902,6 @@ end:
     _sce_pspnet_thread_leave(ti, 0);
     return ret;
 }
-#endif
-
-#if FW_VERSION >= 271
-INCLUDE_ASM("nonmatchings/pspnet_adhoc", sceNetAdhocPtpRecv);
 #endif
 
 #if FW_VERSION < 201
@@ -2043,7 +2035,7 @@ end:
 }
 #endif
 
-#if FW_VERSION == 260
+#if FW_VERSION >= 260 && FW_VERSION < 282
 s32 sceNetAdhocPtpFlush(s32 id, u32 timeout, s32 nonblock) {
     SceNetAdhocWaiter *ti;
     SceNetAdhocWaiter *w;
@@ -2100,7 +2092,7 @@ end:
 }
 #endif
 
-#if FW_VERSION >= 271
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", sceNetAdhocPtpFlush);
 #endif
 
