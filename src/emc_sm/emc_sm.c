@@ -63,8 +63,8 @@ INCLUDE_ASM("nonmatchings/emc_sm", module_reboot_before);
 s32 module_reboot_before(void) {
     sceNandLock(0);
     sceKernelUnregisterSysEventHandler(&D_00002930);
-    sceKernelDeleteSema(M2C_FIELD(&D_00002970, s32 *, 0));
-    sceKernelDeleteEventFlag(M2C_FIELD(&D_00002970, s32 *, 4));
+    sceKernelDeleteSema(D_00002970.semaId);
+    sceKernelDeleteEventFlag(D_00002970.evFlagId);
     sceKernelReleaseIntrHandler(0x14);
     return 0;
 }
@@ -76,8 +76,8 @@ INCLUDE_ASM("nonmatchings/emc_sm", sceNandEnd);
 s32 sceNandEnd(void) {
     sceNandLock(0);
     sceKernelUnregisterSysEventHandler(&D_00002930);
-    sceKernelDeleteSema(M2C_FIELD(&D_00002970, s32 *, 0));
-    sceKernelDeleteEventFlag(M2C_FIELD(&D_00002970, s32 *, 4));
+    sceKernelDeleteSema(D_00002970.semaId);
+    sceKernelDeleteEventFlag(D_00002970.evFlagId);
     sceKernelReleaseIntrHandler(0x14);
     return 0;
 }
@@ -104,29 +104,29 @@ INCLUDE_ASM("nonmatchings/emc_sm", sceNandReadPages);
 #if FW_VERSION >= 102
 INCLUDE_ASM("nonmatchings/emc_sm", sceNandWritePages);
 #else
-s32 sceNandWritePages(u32 arg0, void *arg1, void *arg2, u32 arg3) {
-    s32 var_a4;
+s32 sceNandWritePages(u32 ppn, void *user, void *spare, u32 len) {
+    s32 mode;
 
-    var_a4 = (arg1 == NULL) * 0x10;
-    if (arg2 == NULL) {
-        var_a4 |= 0x20;
+    mode = (user == NULL) * 0x10;
+    if (spare == NULL) {
+        mode |= 0x20;
     }
-    return sceNandWriteAccess((s32) arg0, (s32) arg1, (s32) arg2, (s32) arg3, var_a4);
+    return sceNandWriteAccess(ppn, user, spare, len, mode);
 }
 #endif
 
-void sceNandReadPagesRawExtra(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
-    sceNandReadAccess(arg0, arg1, arg2, arg3, 0x20);
+s32 sceNandReadPagesRawExtra(u32 ppn, void *user, void *spare, u32 len) {
+    return sceNandReadAccess(ppn, user, spare, len, 0x20);
 }
 
 INCLUDE_ASM("nonmatchings/emc_sm", sceNandWritePagesRawExtra);
 
-void sceNandReadPagesRawAll(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
-    sceNandReadAccess(arg0, arg1, arg2, arg3, 0x31);
+s32 sceNandReadPagesRawAll(u32 ppn, void *user, void *spare, u32 len) {
+    return sceNandReadAccess(ppn, user, spare, len, 0x31);
 }
 
-void sceNandWritePagesRawAll(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
-    sceNandWriteAccess(arg0, arg1, arg2, arg3, 0x31);
+s32 sceNandWritePagesRawAll(u32 ppn, void *user, void *spare, u32 len) {
+    return sceNandWriteAccess(ppn, user, spare, len, 0x31);
 }
 
 #if FW_VERSION >= 102 && FW_VERSION < 282
@@ -198,7 +198,7 @@ INCLUDE_ASM("nonmatchings/emc_sm", sceNandTestBlock);
 INCLUDE_ASM("nonmatchings/emc_sm", sceNandGetPageSize);
 #else
 s32 sceNandGetPageSize(void) {
-    return D_00002FD0;
+    return D_00002FD0.pageSize;
 }
 #endif
 
@@ -206,7 +206,7 @@ s32 sceNandGetPageSize(void) {
 INCLUDE_ASM("nonmatchings/emc_sm", sceNandGetPagesPerBlock);
 #else
 s32 sceNandGetPagesPerBlock(void) {
-    return D_00002FD4;
+    return D_00002FD0.pagesPerBlock;
 }
 #endif
 
@@ -214,21 +214,23 @@ s32 sceNandGetPagesPerBlock(void) {
 INCLUDE_ASM("nonmatchings/emc_sm", sceNandGetTotalBlocks);
 #else
 s32 sceNandGetTotalBlocks(void) {
-    return D_00002FD8;
+    return D_00002FD0.totalBlocks;
 }
 #endif
 
 #if FW_VERSION >= 102
 INCLUDE_ASM("nonmatchings/emc_sm", sceNandWriteBlock);
 #else
-s32 sceNandWriteBlock(u32 arg0, void *arg1, void *arg2) {
-    s32 var_v0;
-
-    var_v0 = sceNandEraseBlockWithRetry(arg0);
-    if (var_v0 >= 0) {
-        var_v0 = __builtin_allegrex_min(sceNandWritePages(arg0, arg1, arg2, (u32) D_00002FD4), 0);
+s32 sceNandWriteBlock(u32 ppn, void *user, void *spare) {
+    s32 ret = sceNandEraseBlockWithRetry(ppn);
+    if (ret < 0) {
+        return ret;
     }
-    return var_v0;
+    ret = sceNandWritePages(ppn, user, spare, D_00002FD0.pagesPerBlock);
+    if (ret >= 0) {
+        return 0;
+    }
+    return ret;
 }
 #endif
 
