@@ -33,11 +33,11 @@ struct selinfo {
 
 /* struct sockbuf (0x28) */
 struct sockbuf {
-    u32 sb_cc;              /* 0x00 actual chars in buffer */
-    u32 sb_hiwat;           /* 0x04 max actual char count */
-    u32 sb_mbcnt;           /* 0x08 chars of mbufs used */
-    u32 sb_mbmax;           /* 0x0C max chars of mbufs to use */
-    s32 sb_lowat;           /* 0x10 low water mark */
+    unsigned long sb_cc;             /* 0x00 actual chars in buffer */
+    unsigned long sb_hiwat;          /* 0x04 max actual char count */
+    unsigned long sb_mbcnt;          /* 0x08 chars of mbufs used */
+    unsigned long sb_mbmax;          /* 0x0C max chars of mbufs to use */
+    long sb_lowat;          /* 0x10 low water mark */
     struct mbuf *sb_mb;     /* 0x14 the mbuf chain */
     struct selinfo sb_sel;  /* 0x18 process selecting read/write */
     s16 sb_flags;           /* 0x20 SB_* */
@@ -311,6 +311,9 @@ struct domain {
     struct protosw *dom_protosw;        /* 0x14 */
     struct protosw *dom_protoswNPROTOSW; /* 0x18 */
     struct domain *dom_next;            /* 0x1C */
+    s32 (*dom_rtattach)(void **head, s32 off); /* 0x20 */
+    s32 dom_rtoffset;                   /* 0x24 */
+    s32 dom_maxrtkey;                   /* 0x28 */
 };
 
 struct sockaddr {
@@ -440,6 +443,7 @@ struct rtentry {
 struct rttimer_queue {
     s32 rtq_timeout;                /* 0x0 */
     TAILQ_HEAD(, rttimer) rtq_head; /* 0x4 */
+    struct { struct rttimer_queue *le_next; struct rttimer_queue **le_prev; } rtq_link; /* 0xC */
 };
 struct rttimer {
     TAILQ_ENTRY(rttimer) rtt_next;  /* 0x00 */
@@ -463,7 +467,9 @@ struct radix_node_head {
     struct radix_node *(*rnh_lookup)();     /* 0x20 */
     struct radix_node *(*rnh_matchpkt)();   /* 0x24 */
     s32 (*rnh_walktree)(struct radix_node_head *head, s32 (*f)(), void *w); /* 0x28 */
+    struct radix_node rnh_nodes[3];  /* 0x2C */
 };
+typedef char chk_radix_node_head[(sizeof(struct radix_node_head) == 0x74) ? 1 : -1];
 #define RTF_UP 0x1
 #define RTF_GATEWAY 0x2
 #define RTF_HOST 0x4
@@ -1078,9 +1084,12 @@ static __inline s32 tcp_reass_lock_try(struct tcpcb *tp) {
 
 /* struct icmp (partial) */
 struct icmp {
-    u8 icmp_type;
-    u8 icmp_code;
-    u16 icmp_cksum;
+    u8 icmp_type;                       /* 0x0 */
+    u8 icmp_code;                       /* 0x1 */
+    u16 icmp_cksum;                     /* 0x2 */
+    u16 icmp_pmvoid;                    /* 0x4 icmp_hun.ih_pmtu.ipm_void */
+    u16 icmp_nextmtu;                   /* 0x6 icmp_hun.ih_pmtu.ipm_nextmtu */
+    struct ip icmp_ip;                  /* 0x8 icmp_dun.id_ip.idi_ip */
 };
 
 /* struct ipq (NetBSD 1.5 ip_var.h, partial) */
@@ -1325,6 +1334,58 @@ struct udpstat {
         (m)->m_pkthdr.len += (plen); \
 } while (0)
 
+/* struct rtstat (4.4BSD route.h) */
+struct rtstat {
+    u16 rts_badredirect;                /* 0x0 */
+    u16 rts_dynamic;                    /* 0x2 */
+    u16 rts_newgateway;                 /* 0x4 */
+    u16 rts_unreach;                    /* 0x6 */
+    u16 rts_wildcard;                   /* 0x8 */
+};
+#define ROUNDUP(a) ((a) > 0 ? (1 + (((a) - 1) | (sizeof(long) - 1))) : sizeof(long))
+
+/* SCE sceNetInetGetUdpcbstat / GetTcpcbstat records */
+struct SceNetInetUdpcbstat {
+    struct SceNetInetUdpcbstat *next;   /* 0x00 */
+    u32 ts_so_snd_sb_cc;                /* 0x04 */
+    u32 ts_so_rcv_sb_cc;                /* 0x08 */
+    struct in_addr laddr;           /* 0x0C */
+    struct in_addr faddr;           /* 0x10 */
+    u16 lport;                      /* 0x14 */
+    u16 fport;                      /* 0x16 */
+};
+struct SceNetInetTcpcbstat {
+    struct SceNetInetTcpcbstat *next;   /* 0x00 */
+    u32 ts_so_snd_sb_cc;                /* 0x04 */
+    u32 ts_so_rcv_sb_cc;                /* 0x08 */
+    struct in_addr laddr;           /* 0x0C */
+    struct in_addr faddr;           /* 0x10 */
+    u16 lport;                      /* 0x14 */
+    u16 fport;                      /* 0x16 */
+    s32 t_state;                        /* 0x18 */
+};
+
+struct ip_mreq {
+    struct in_addr imr_multiaddr;       /* 0x0 */
+    struct in_addr imr_interface;       /* 0x4 */
+};
+/* SCE INADDR_TO_IA: in_ifaddrhashtbl[addr % 509], skipping interfaces that are down */
+#define INADDR_TO_IA(addr, ia) { \
+    for (ia = in_ifaddrhashtbl[(u32)(addr).s_addr % 509]; ia != NULL; ia = ia->ia_hash.le_next) \
+        if (ia->ia_addr.sin_addr.s_addr == (addr).s_addr && (ia->ia_ifp->if_flags & IFF_UP)) \
+            break; \
+}
+#define INADDR_TO_IFP(addr, ifp) { \
+    struct in_ifaddr *ia; \
+    INADDR_TO_IA(addr, ia); \
+    (ifp) = (ia == NULL) ? NULL : ia->ia_ifp; \
+}
+
+struct ipoption {
+    struct in_addr ipopt_dst;           /* 0x00 */
+    s8 ipopt_list[40];                  /* 0x04 */
+};
+
 struct SceTailqHead {
     void *tqh_first;
     void **tqh_last;
@@ -1564,6 +1625,8 @@ struct inpcb *in_pcblookup_port(struct inpcbtable *table, struct in_addr laddr, 
 
 struct inpcb *in_pcblookup_port(struct inpcbtable *table, struct in_addr laddr, u32 lport_arg, s32 lookup_wildcard);
 
+struct in_multi *func_00012108(struct in_addr *ap, struct ifnet *ifp);
+
 extern void (*const D_0002BB24)(struct sppp *sp); /* lcp.Close (split rodata label) */
 extern void (*const D_0002BBCC)(struct sppp *sp); /* pap.scr (split rodata label) */
 extern s32 D_0002BEC0;
@@ -1608,7 +1671,7 @@ extern struct { struct SceNetInetKeyNode *lh_first; } D_0002C5B8;
 extern u8 D_0002C5DC[];
 extern u8 D_0002CC50[]; /* pffasttimo_ch */
 extern u8 D_0002CC74[]; /* pfslowtimo_ch */
-extern s32 D_0002CCB4;
+extern struct { struct rttimer_queue *lh_first; } D_0002CCB4; /* rttimer_queue_head */
 extern u8 D_0002CD38[];
 extern char D_0002CDB0[16]; /* 1.5x inet_ntoa buf */
 extern s32 D_0002CEB0;
@@ -1638,6 +1701,7 @@ extern s32 D_0002E7B0; /* ip_defttl */
 extern struct sockaddr_in D_0002E834 __attribute__((aligned(4)));
 extern struct sockaddr_in D_0002E844 __attribute__((aligned(4)));
 extern struct sockaddr_in D_0002E854 __attribute__((aligned(4)));
+extern u32 D_0002E864[]; /* mtu_table (icmp_mtudisc) */
 extern s32 D_0002E8D8;
 extern s32 D_0002E8E4;
 extern s32 D_0002E8F4;
@@ -1653,6 +1717,7 @@ extern s32 D_0002EAB1;
 extern s32 D_0002EB40;
 extern s32 D_0002EB44;
 extern s32 D_0002EB54;
+extern s32 D_0002EB74;
 extern s32 D_0002EB88;
 extern s32 D_0002EB8C;
 extern s32 D_0002EB90;
@@ -1662,11 +1727,14 @@ extern s32 D_0002EC10;
 extern s32 D_0002EC14;
 extern s32 D_0002EC18;
 extern char D_0002F288[18] __attribute__((aligned(4)));
+extern s32 D_0002F2F8;
+extern struct { s32 w[6]; } D_0002F3B8;
 extern s32 D_0002F500;
 extern s32 D_0002F50C;
 extern s32 D_0002F510;
 extern struct route D_0002FF98; /* ipforward_rt */
 extern s32 D_000302E4;
+extern char *addmask_key; /* addmask_key */
 extern s32 arp_locked; /* arp_locked */
 extern const struct cp chap; /* chap */
 extern const struct cp *cps[IDX_COUNT]; /* cps */
@@ -1677,6 +1745,7 @@ extern u8 ether_ipmulticast_max[6]; /* ether_ipmulticast_max */
 extern u8 ether_ipmulticast_min[6]; /* ether_ipmulticast_min */
 extern struct igmpstat igmp_stat; /* igmpstat */
 extern s32 igmp_timers_are_running; /* igmp_timers_are_running */
+extern struct in_ifaddr **in_ifaddrhashtbl; /* in_ifaddrhashtbl */
 extern TAILQ_HEAD(, in_ifaddr) in_ifaddrhead; /* in_ifaddr */
 extern u32 in_maxmtu;
 extern TAILQ_HEAD(, in_ifaddr) in_mk; /* in_mk */
@@ -1684,6 +1753,7 @@ extern s32 inetctlerrmap[]; /* inetctlerrmap */
 extern struct protosw inetsw[]; /* inetsw */
 extern u16 ip_id_seq; /* ip_id */
 extern s32 ip_mtudisc; /* ip_mtudisc */
+extern struct rttimer_queue *ip_mtudisc_timeout_q;
 extern s32 ip_nhops; /* ip_nhops */
 extern u8 ip_protox[]; /* ip_protox */
 extern struct ip_srcrt_s ip_srcrt; /* ip_srcrt */
@@ -1692,6 +1762,9 @@ extern struct ifqueue ipintrq; /* ipintrq, exported by sceNetInet_lib_D7928A6D *
 extern const struct cp lcp; /* lcp */
 extern struct { struct llinfo_arp *lh_first; } llinfo_arp_head; /* llinfo_arp */
 extern struct ifnet loif; /* loif */
+extern struct radix_node_head *mask_rnhead; /* mask_rnhead */
+extern s32 max_keylen; /* max_keylen */
+extern s32 mtu_table[]; /* mtu_table */
 extern const struct cp pap; /* pap */
 extern s32 pffasttimo_now; /* pffasttimo_now */
 extern s32 pfslowtimo_now; /* pfslowtimo_now (SCE tcp timers are absolute slowtimo ticks) */
@@ -1701,6 +1774,9 @@ extern struct { struct rawcb *lh_first; } rawcb; /* rawcb */
 extern struct inpcbtable rawcbtable;
 extern s32 rip_recvspace;
 extern s32 rip_sendspace;
+extern char *rn_ones; /* rn_ones */
+extern char *rn_zeros; /* rn_zeros */
+extern struct rtstat rt_stat; /* rtstat */
 extern struct radix_node_head *rt_tables[32]; /* rt_tables */
 extern s32 rttrash; /* rttrash */
 extern struct soqhead so_list;
@@ -1763,6 +1839,9 @@ struct SceNetInetWaiter *_sce_pspnet_thread_enter(void);
 s32 _sce_pspnet_thread_leave(struct SceNetInetWaiter *w, s32 error);
 s32 _sce_pspnet_tsleep(void *chan, s32 timo);
 void _sce_pspnet_wakeup(void *chan);
+void arp_drain(void);
+void arp_ifinit(struct ifnet *ifp, struct ifaddr *ifa);
+void arpintr(struct mbuf *m);
 s32 ether_multiaddr(struct sockaddr *sa, u8 *addrlo, u8 *addrhi);
 s32 falloc(void);
 void func_00001320(void);
@@ -1785,8 +1864,6 @@ void func_000044AC(struct socket *so);
 void func_000046A8(struct socket *so);
 void func_000047DC(struct socket *head, struct socket *so, s32 q);
 void func_00004A3C(struct sockbuf *sb);
-void func_00004A68(struct sockbuf *sb, struct mbuf *m0);
-void func_00004E28(struct sockbuf *sb, struct mbuf *m, struct mbuf *n);
 void func_00005778(struct socket *so);
 void func_0000588C(struct socket *so);
 void func_000058CC(struct socket *so);
@@ -1833,13 +1910,10 @@ s32 func_00009B0C(void);
 void func_00009B24(void);
 void func_00009B5C(void);
 s32 func_00009B84();
-struct radix_node *func_0000A144(void *v_arg, struct radix_node_head *head);
+struct radix_node *func_0000A144();
 struct radix_node *func_0000A61C(void *n_arg, s32 search, s32 skip);
-struct rtentry *func_0000BA10(struct sockaddr *dst, s32 report);
-s32 func_0000BEE0(s32 req, void *dst, void *gateway, void *netmask, s32 flags, struct rtentry **ret_nrt);
-s32 func_0000C998(s32, s32, s32);
-void func_0000CE98(void *arg);
-s32 func_0000D128(u32 cmd, void *data);
+struct radix_node *func_0000A804();
+struct radix_node *func_0000AE9C();
 s32 func_0000D1F4(void);
 void func_0000D25C(s32 *arg0, s32 arg1);
 s32 func_0000D264(void *arg0, s32 arg1);
@@ -1848,7 +1922,6 @@ s32 func_0000D338(struct Unk_func_0000D338_0 *arg0, s32 arg1);
 s32 func_0000D378(s32);
 void func_0000DD34(s32 arg0, void *arg1, void *arg2);
 void func_0000DDCC(s32 arg0, struct Unk_func_0000DDCC_1 *arg1, struct Unk_func_0000DDCC_2 *arg2);
-void func_0000E318(s32 type, struct rt_addrinfo *rtinfo, s32 flags, s32 error);
 s32 func_0000E3F0(s32);
 s32 func_0000E448(s32, s32);
 s32 func_0000E4E4(s32, s32);
@@ -1862,7 +1935,6 @@ void func_0000F268(void);
 s32 func_0000F274(void);
 void func_0000F27C(struct Unk_func_0000F27C_0 *arg0, struct Unk_func_0000F27C_1 *arg1);
 void func_0000F2A8(struct Unk_func_0000F2A8_0 *arg0, struct Unk_func_0000F2A8_1 *arg1);
-s32 func_0000F2D4();
 void func_0000F730(s32 req, struct rtentry *rt);
 void func_0000FA70(struct ifnet *ifp, struct in_addr *sip, struct in_addr *tip, u8 *enaddr);
 void func_00010528(struct mbuf *m);
@@ -1874,7 +1946,6 @@ s32 func_00019A98(void);
 void func_00019C00(struct rtentry *rt);
 s32 func_0001A410(void);
 void func_0001A49C(void);
-void func_0001A548(struct rtentry *rt);
 void func_0001A8AC(void);
 void func_0001AA20(struct Unk_func_0001AA20_0 *arg0);
 void func_0001C208(void);
@@ -1923,16 +1994,26 @@ s32 func_0002CCF8(void *putc, void *arg, const char *fmt, __builtin_va_list ap);
 void func_0002D420();
 struct socket *getsock(s32 s);
 void icmp_mtudisc_callback_register(void *key);
+void icmp_mtudisc_timeout(struct rtentry *rt);
 void icmp_send(struct mbuf *m, struct mbuf *opts);
 s32 icmp_sysctl(s32 *name, u32 namelen, void *oldp, u32 *oldlenp, void *newp, u32 newlen);
 s32 if_rtdel(struct rtentry *rt, void *arg);
 struct ifaddr *ifa_ifwithaddr(struct sockaddr *addr);
+struct ifaddr *ifa_ifwithdstaddr(struct sockaddr *addr);
 struct ifaddr *ifa_ifwithladdr(struct sockaddr *addr);
+struct ifaddr *ifa_ifwithnet(struct sockaddr *addr);
+void igmp_fasttimo(void);
+void igmp_joingroup(struct in_multi *inm);
 void igmp_leavegroup(void *arg0);
 void igmp_sendpkt(struct in_multi *inm, s32 type);
+void igmp_slowtimo(void);
+struct in_multi *in_addmulti(struct in_addr *ap, struct ifnet *ifp);
+s32 in_broadcast(struct in_addr in, struct ifnet *ifp);
+s32 in_canforward(struct in_addr in);
 s32 in_cksum(struct mbuf *m, s32 len);
 s32 in_control(struct socket *so, s32 cmd, void *data, struct ifnet *ifp);
 void in_delmulti(struct in_multi *inm);
+s32 in_localaddr(struct in_addr in);
 void in_losing(struct inpcb *inp);
 s32 in_pcballoc(struct socket *so, void *v);
 s32 in_pcbbind(void *v, struct mbuf *nam);
@@ -1946,57 +2027,124 @@ struct inpcb *in_pcblookup_port(struct inpcbtable *table, struct in_addr laddr, 
 s32 in_pcbnotify(struct inpcbtable *table, struct in_addr faddr, u32 fport_arg, struct in_addr laddr, u32 lport_arg, s32 errno, void (*notify)(struct inpcb *, s32));
 void in_pcbnotifyall(struct inpcbtable *table, struct in_addr faddr, s32 errno, void (*notify)(struct inpcb *, s32));
 void in_pcbpurgeif(struct inpcbtable *table, struct ifnet *ifp);
+struct rtentry *in_pcbrtentry(struct inpcb *inp);
 void in_pcbstate(struct inpcb *inp, s32 state);
 void in_purgeif(struct ifnet *ifp);
+void in_purgemkludge(struct ifnet *ifp);
 void in_rtchange(struct inpcb *inp, s32 errno);
 struct sockaddr_in *in_selectsrc(struct sockaddr_in *sin, struct route *ro, s32 soopts, struct ip_moptions *mopts, s32 *errorp);
-s32 ip_ctloutput(s32 op, struct socket *so, s32 level, s32 optname, struct mbuf **m);
+void in_setmaxmtu(void);
+void in_setpeeraddr(struct inpcb *inp, struct mbuf *nam);
+void in_setsockaddr(struct inpcb *inp, struct mbuf *nam);
+void in_socktrim(struct sockaddr_in *ap);
+char *inet_ntoa(struct in_addr ina);
+char *intoa(u32 addr);
+s32 ip_ctloutput(s32 op, struct socket *so, s32 level, s32 optname, struct mbuf **mp);
 void ip_drain(void);
 void ip_freef();
+void ip_freemoptions(struct ip_moptions *imo);
+s32 ip_getmoptions(s32 optname, struct ip_moptions *imo, struct mbuf **mp);
 void ip_input(struct mbuf *m);
 s32 ip_optcopy(struct ip *ip, struct ip *jp);
 s32 ip_optlen(void *inp);
 s32 ip_output(struct mbuf *m0, ...);
+s32 ip_pcbopts(struct mbuf **pcbopt, struct mbuf *m);
 struct in_ifaddr *ip_rtaddr(struct in_addr dst);
 void ip_savecontrol(struct inpcb *inp, struct mbuf **mp, struct ip *ip, struct mbuf *m);
+s32 ip_setmoptions(s32 optname, struct ip_moptions **imop, struct mbuf *m);
 void ip_slowtimo(void);
+struct mbuf *ip_srcroute(void);
 void ip_stripoptions(struct mbuf *m, struct mbuf *mopt);
+void ipintr(void);
+u32 iptime(void);
 void link_rtrequest(s32 cmd, struct rtentry *rt, struct sockaddr *sa);
+s32 loioctl(struct ifnet *ifp, u32 cmd, void *data);
+void loopattach(void);
+s32 looutput();
 void lortrequest(s32 cmd, struct rtentry *rt);
 s32 module_start(void);
 s32 module_stop(void);
+s32 net_sysctl(s32 *name, u32 namelen, void *oldp, u32 *oldlenp, void *newp, u32 newlen);
 void pfctlinput(s32 cmd, struct sockaddr *sa);
 void pffasttimo(void *arg);
+struct domain *pffinddomain(s32 family);
+struct protosw *pffindproto(s32 family, s32 protocol, s32 type);
+struct protosw *pffindtype(s32 family, s32 type);
 void pfslowtimo(void *arg);
+s32 pollscan(void *p, struct pollfd *fds, s32 nfd, s32 *retval);
 s32 raw_attach(struct socket *so, s32 proto);
+void raw_setpeeraddr(struct rawcb *rp, struct mbuf *nam);
+void raw_setsockaddr(struct rawcb *rp, struct mbuf *nam);
+s32 rip_bind(struct inpcb *inp, struct mbuf *nam);
+s32 rip_connect(struct inpcb *inp, struct mbuf *nam);
+s32 rip_ctloutput(s32 op, struct socket *so, s32 level, s32 optname, struct mbuf **m);
 void rip_disconnect(struct inpcb *inp);
-struct radix_node *rn_lookup(void *v_arg, void *m_arg, struct radix_node_head *head);
+void rip_init(void);
+void rip_input(struct mbuf *m, ...);
+s32 rip_output(struct mbuf *m, ...);
+s32 rip_usrreq(struct socket *so, s32 req, struct mbuf *m, struct mbuf *nam, struct mbuf *control);
+s32 rn_inithead(void **head, s32 off);
+struct radix_node *rn_lookup();
+struct radix_node *rn_newpair(void *v, s32 b, struct radix_node nodes[2]);
+struct radix_node *rn_search(void *v_arg, struct radix_node *head);
+struct radix_node *rn_search_m(void *v_arg, struct radix_node *head, void *m_arg);
+s32 rn_walktree(struct radix_node_head *h, s32 (*f)(struct radix_node *, void *), void *w);
 void rt_maskedcopy(struct sockaddr *src, struct sockaddr *dst, struct sockaddr *netmask);
+void rt_missmsg(s32 type, struct rt_addrinfo *rtinfo, s32 flags, s32 error);
+s32 rt_timer_add(struct rtentry *rt, void (*func)(), struct rttimer_queue *queue);
 void rt_timer_remove_all(struct rtentry *rt);
+void rt_timer_timer(void *arg);
+void rt_xaddrs(u8 *cp, u8 *cplim, struct rt_addrinfo *rtinfo);
+void rtalloc(struct route *ro);
+struct rtentry *rtalloc1(struct sockaddr *dst, s32 report);
 void rtfree(struct rtentry *rt);
+s32 rtinit(s32, s32, s32);
+s32 rtioctl(u32 cmd, void *data);
+s32 rtrequest(s32 req, struct sockaddr *dst, struct sockaddr *gateway, struct sockaddr *netmask, s32 flags, struct rtentry **ret_nrt);
 void save_rte(u8 *option, struct in_addr dst);
 s32 sb_lock(struct sockbuf *sb);
 void sbappend(struct sockbuf *sb, struct mbuf *m);
 s32 sbappendaddr(struct sockbuf *sb, struct sockaddr *asa, struct mbuf *m0, struct mbuf *control);
+void sbcompress(struct sockbuf *sb, struct mbuf *m, struct mbuf *n);
 struct mbuf *sbcreatecontrol(void *p, s32 size, s32 type, s32 level);
 void sbdrop(struct sockbuf *sb, s32 len);
 void sbdroprecord(struct sockbuf *sb);
 void sbflush(struct sockbuf *sb);
+void sbinsertoob(struct sockbuf *sb, struct mbuf *m0);
 s32 sbreserve(struct sockbuf *sb, u32 cc);
+s32 sceKernelGetThreadId(void);
 s32 sceKernelSignalSema(u32, s32);
 M2C_UNK sceNetBcopy(u8 *, s32, u8);
 s32 sceNetConfigAddArp(s32, s32);
 s32 sceNetConfigDelArp(s32, s32);
+s32 sceNetConfigDelDefaultRoute(void);
 s32 sceNetConfigGetArpInfo(s32, s32);
+s32 sceNetConfigGetDNS(SceNetBytes4 *primary, SceNetBytes4 *secondary);
+s32 sceNetConfigGetDefaultRoute(struct in_addr *gw);
 s32 sceNetConfigGetRouteInfo(s32 *len, void *buf);
+s32 sceNetConfigSetDNS(SceNetBytes4 *primary, SceNetBytes4 *secondary);
 void sceNetFreeInternal(void *p);
+s32 sceNetGetSystemClockSec(void);
 s32 sceNetIfhandle_lib_5FB31C72(s32 *max_linkhdr, s32 *a1, s32 *a2, s32 *a3);
 s32 sceNetIfhandle_lib_62B20015(s32 max_linkhdr, s32 max_protohdr, s32 a2, s32 a3);
+s32 sceNetInetBind(s32 s, const struct sockaddr *name, s32 namelen);
+s32 sceNetInetClose(s32 s);
+s32 sceNetInetCloseWithRST(s32 s);
+s32 sceNetInetGetErrno(void);
+s32 sceNetInetGetpeername(s32 s, struct sockaddr *asa, u32 *alen);
 s32 sceNetInetInetAddr(s32 arg0);
 void sceNetInetInetAton(s32 arg0, s32 arg1);
 const char *sceNetInetInetNtop(s32 af, const void *src, char *dst, s32 size);
 s32 sceNetInetListen(s32 s, s32 backlog);
+s32 sceNetInetRecv(s32 s, void *buf, u32 len, s32 flags);
+s32 sceNetInetRecvfrom(s32 s, void *buf, u32 len, s32 flags, struct sockaddr *from, u32 *fromlenaddr);
+s32 sceNetInetSend(s32 s, const void *buf, u32 len, s32 flags);
+s32 sceNetInetSendto(s32 s, const void *buf, u32 len, s32 flags, const struct sockaddr *to, u32 tolen);
+s32 sceNetInetSetsockopt(s32 s, s32 level, s32 name, const void *val, u32 valsize);
 s32 sceNetInetShutdown(s32 s, s32 how);
+s32 sceNetInetSocketAbort(s32 s);
+s32 sceNetInetTerm(void);
+char *sceNetInet_lib_2595064C(struct in_addr in);
 struct ifqueue *sceNetInet_lib_D7928A6D(void);
 void sceNetMAdj(struct mbuf *mp, s32 req_len);
 struct mbuf *sceNetMCopym(struct mbuf *m, s32 off, s32 len, s32 wait);
@@ -2005,6 +2153,7 @@ void sceNetMFreem(struct mbuf *m);
 struct mbuf *sceNetMGet(s32 how, s32 type);
 struct mbuf *sceNetMGetclr(s32 how, s32 type);
 struct mbuf *sceNetMPrepend(struct mbuf *m, s32 plen, s32 how);
+struct mbuf *sceNetMPullup(struct mbuf *n, s32 len);
 void *sceNetMallocInternal(u32 size);
 M2C_UNK sceNetMemset(M2C_UNK *, M2C_UNK, M2C_UNK);
 u32 sceNetRand(void);
@@ -2020,19 +2169,44 @@ s32 sodisconnect(struct socket *so);
 void sofree(struct socket *so);
 void soisconnected(struct socket *so);
 void soisconnecting(struct socket *so);
+void soisdisconnected(struct socket *so);
+void soisdisconnecting(struct socket *so);
 s32 solisten(struct socket *so, s32 backlog);
 struct socket *sonewconn1(struct socket *head, s32 connstatus);
 s32 soo_poll(struct socket *so, s32 events, void *p);
 s32 soqremque(struct socket *so, s32 q);
+s32 soreceive();
 s32 soreserve(struct socket *so, u32 sndcc, u32 rcvcc);
 void sorflush(struct socket *so);
+s32 sosend();
 s32 soshutdown(struct socket *so, s32 how);
 void sowakeup(struct socket *so, struct sockbuf *sb);
 void sppp_cp_change_state(const struct cp *cp, struct sppp *sp, s32 newstate);
+struct mbuf *sppp_dequeue(struct sppp *sp);
+void sppp_flush(struct sppp *sp);
+void sppp_ipcp_RCN_rej(struct sppp *sp, u8 *h, s32 len);
+void sppp_ipcp_TO(void *arg0);
+void sppp_ipcp_close(struct sppp *sp);
+void sppp_ipcp_down(struct sppp *sp);
+void sppp_ipcp_open(struct sppp *sp);
+void sppp_ipcp_tlu(struct sppp *sp);
+void sppp_ipcp_up(struct sppp *sp);
+void sppp_lcp_RCN_rej(struct sppp *sp, u8 *h, s32 len);
+void sppp_lcp_TO(void *arg0);
 void sppp_lcp_check_and_close(struct sppp *sp);
+void sppp_lcp_close(struct sppp *sp);
+void sppp_lcp_down(struct sppp *sp);
+void sppp_lcp_open(struct sppp *sp);
+void sppp_lcp_scr(struct sppp *sp);
 void sppp_lcp_tld(struct sppp *sp);
+void sppp_lcp_tlf(struct sppp *sp);
+void sppp_lcp_tls(struct sppp *sp);
 void sppp_lcp_up(struct sppp *sp);
+s32 sppp_ncp_check(struct sppp *sp);
 void sppp_pap_TO(void *arg);
+void sppp_pap_open(struct sppp *sp);
+void sppp_pap_scr(struct sppp *sp);
+void sppp_pap_tld(struct sppp *sp);
 void sppp_to_event(const struct cp *cp, struct sppp *sp);
 void syn_cache_cleanup(struct tcpcb *tp);
 void syn_cache_init(void);
@@ -2040,24 +2214,44 @@ void syn_cache_timer(void);
 s32 sysctl_int(void *oldp, u32 *oldlenp, void *newp, u32 newlen, s32 *valp);
 s32 sysctl_rdint(void *oldp, u32 *oldlenp, void *newp, s32 val);
 s32 sysctl_rdstruct(void *oldp, u32 *oldlenp, void *newp, const void *sp, u32 len);
+s32 tcp_attach(struct socket *so);
+void tcp_canceltimers(u8 *arg0);
 struct tcpcb *tcp_close(struct tcpcb *tp);
+s32 tcp_ctloutput(s32 op, struct socket *so, s32 level, s32 optname, struct mbuf **mp);
+struct tcpcb *tcp_disconnect(struct tcpcb *tp);
 struct tcpcb *tcp_drop(struct tcpcb *tp, s32 errno);
 void tcp_established(struct tcpcb *tp);
+void tcp_fasttimo(void);
 s32 tcp_freeq(struct tcpcb *tp);
+void tcp_init(void);
 void tcp_mss_from_peer(struct tcpcb *tp, s32 offer);
+u32 tcp_mss_to_advertise(struct ifnet *ifp, s32 af);
 void tcp_mtudisc(struct inpcb *inp, s32 errno);
 void tcp_mtudisc_callback(struct in_addr addr);
+u32 tcp_new_iss(struct tcpcb *tp, u32 len, u32 addin);
 struct tcpcb *tcp_newtcpcb(s32 family, void *aux);
 void tcp_notify(struct inpcb *inp, s32 error);
 s32 tcp_optlen(void *tp);
 s32 tcp_output(struct tcpcb *tp);
+void tcp_pulloutofband(struct socket *so, struct tcphdr *th, struct mbuf *m, s32 off);
 s32 tcp_respond(struct tcpcb *tp, struct mbuf *template, struct mbuf *m, struct tcphdr *th0, u32 ack, u32 seq, s32 flags);
 void tcp_rmx_rtt(struct tcpcb *tp);
+void tcp_setpersist(struct tcpcb *tp);
+void tcp_slowtimo(void);
+s32 tcp_sysctl(s32 *name, u32 namelen, void *oldp, u32 *oldlenp, void *newp, u32 newlen);
 struct mbuf *tcp_template(struct tcpcb *tp);
 void tcp_timer_init(void);
 struct tcpcb *tcp_timers(struct tcpcb *tp, s32 timer);
+struct tcpcb *tcp_usrclosed(struct tcpcb *tp);
+s32 tcp_usrreq(struct socket *so, s32 req, struct mbuf *m, struct mbuf *nam, struct mbuf *control);
+s32 udp4_realinput(struct sockaddr_in *src, struct sockaddr_in *dst, struct mbuf *m, s32 off);
+void udp4_sendup(struct mbuf *m, s32 off, struct sockaddr *src, struct socket *so);
 void *udp_ctlinput(s32 cmd, struct sockaddr *sa, void *v);
+void udp_init(void);
+void udp_input(struct mbuf *m, ...);
 void udp_notify(void *arg0, s16 arg1);
+s32 udp_output(struct mbuf *m, ...);
 s32 udp_sysctl(s32 *name, u32 namelen, void *oldp, u32 *oldlenp, void *newp, u32 newlen);
+s32 udp_usrreq(struct socket *so, s32 req, struct mbuf *m, struct mbuf *nam, struct mbuf *control);
 
 #endif

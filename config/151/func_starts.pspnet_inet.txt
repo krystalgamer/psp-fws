@@ -1,4 +1,7 @@
 // function starts pinned by tools/split_tu.py
+sbappendrecord = 0x00005A0C; // type:func
+rn_search = 0x0000B0F0; // type:func
+rtable_init = 0x0000CBD4; // type:func
 func_00010874 = 0x00010874; // type:func
 func_000119FC = 0x000119FC; // type:func
 func_00012108 = 0x00012108; // type:func
@@ -11,7 +14,7 @@ in_pcblookup_port = 0x00013478; // type:func
 func_00015278 = 0x00015278; // type:func
 func_00015764 = 0x00015764; // type:func
 func_00015888 = 0x00015888; // type:func
-func_0001794C = 0x0001794C; // type:func
+ip_setmoptions = 0x0001794C; // type:func
 func_00018640 = 0x00018640; // type:func
 func_00018BE8 = 0x00018BE8; // type:func
 func_000197EC = 0x000197EC; // type:func

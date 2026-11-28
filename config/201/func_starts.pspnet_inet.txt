@@ -1,6 +1,9 @@
 // function starts pinned by tools/split_tu.py
+sbappendrecord = 0x00005BDC; // type:func
 func_00005C9C = 0x00005C9C; // type:func
 func_000085D0 = 0x000085D0; // type:func
+rn_search = 0x0000B65C; // type:func
+rtable_init = 0x0000D10C; // type:func
 func_0000D170 = 0x0000D170; // type:func
 func_0000D37C = 0x0000D37C; // type:func
 func_0000DF80 = 0x0000DF80; // type:func
