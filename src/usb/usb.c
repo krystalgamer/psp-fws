@@ -1281,7 +1281,14 @@ void func_00005B1C(void) {
     sceKernelEnableIntr(0x39);
 }
 #else
-INCLUDE_ASM("nonmatchings/usb", func_00005B1C);
+void func_00005B1C(void) {
+    sceSysregUsbResetDisable();
+    if (sceSysregUsbQueryIntr() & 4) {
+        sceSysregUsbAcquireIntr(4);
+    }
+    __asm__ __volatile__("sync");
+    sceKernelEnableIntr(0x39);
+}
 #endif
 
 #if FW_VERSION == 100
