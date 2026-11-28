@@ -52,7 +52,7 @@ def compiled_reloc_syms(c_text, comp, opt):
         elf = ELFFile(open(o, "rb"))
         symtab = elf.get_section_by_name(".symtab")
         text = elf.get_section_by_name(".text").data()
-        out, strs, hi, calls, addend = [], {}, {}, [], {}
+        out, strs, hi, calls, addend, consts = [], {}, {}, [], {}, {}
         for sec in elf.iter_sections():
             if isinstance(sec, RelocationSection) and sec.name == ".rel.text":
                 for rel in sorted(sec.iter_relocations(), key=lambda r: r["r_offset"]):
@@ -77,10 +77,15 @@ def compiled_reloc_syms(c_text, comp, opt):
                             off = (hi.get(rel["r_info_sym"], 0) << 16) + (imm - 0x10000 if imm & 0x8000 else imm)
                             d = target.data()
                             strs[rel["r_offset"]] = d[off:d.find(b"\0", off)] if 0 <= off < len(d) else None
+                            # raw constant words too (float/double literals: .rodata.cst4/cst8 or plain .rodata)
+                            width = 8 if target.name.endswith("cst8") else 4
+                            consts[rel["r_offset"]] = (d[off:off + width] if 0 <= off <= len(d) - width else None,
+                                                       target.name.startswith(".rodata.cst"))
         names = [n for _, n in sorted(out)]
         compiled_reloc_syms.strings = [strs.get(o2) for o2, _ in sorted(out)]
         compiled_reloc_syms.calls = calls
         compiled_reloc_syms.addends = [addend.get(o2) for o2, _ in sorted(out)]
+        compiled_reloc_syms.consts = [consts.get(o2) for o2, _ in sorted(out)]
         return names
 
 
@@ -462,8 +467,26 @@ def main():
                     continue
                 if ts != ms:
                     bad_str.append((w, ts, ms))
+            # constant-pool literals (floats/doubles): compare the raw words at the original's address
+            for i, cv in enumerate(getattr(compiled_reloc_syms, "consts", [])):
+                ta = taddrs[i] if i < len(taddrs) else None
+                if not cv or cv[0] is None or ta is None:
+                    continue
+                mine_b, is_pool = cv
+                ms = compiled_reloc_syms.strings[i] if i < len(compiled_reloc_syms.strings) else None
+                if not is_pool and ms and all(32 <= c < 127 or c in (9, 10, 13) for c in ms):
+                    continue  # a string, handled above
+                at = mod.text_off + ta
+                tb = mod.base[at:at + len(mine_b)]
+                text = lambda b: b and all(32 <= c < 127 or c in (9, 10, 13, 0) for c in b)  # noqa: E731
+                # plain .rodata (-fno-merge-constants): compare when neither side looks like text; a jump table
+                # (words pointing into .text) is not a literal either: skip words that look like code addresses
+                looks_addr = lambda b: len(b) == 4 and struct.unpack("<I", b)[0] < 0x200000  # noqa: E731
+                if tb != mine_b and (is_pool or (not text(mine_b) and not text(tb)
+                                                  and not looks_addr(mine_b) and not looks_addr(tb))):
+                    bad_str.append((want[i], tb, mine_b))
             for w, ts, ms in dict.fromkeys(bad_str):
-                print(f"  string literal for {w} differs: target {ts!r}, mine {ms!r}")
+                print(f"  literal for {w} differs: target {ts!r}, mine {ms!r}")
             # call targets: the original's jal names (from its asm) must be the functions the C calls
             bad_call = []
             asm_path = mod.funcs[name][2]
@@ -492,7 +515,7 @@ def main():
                 print(f"  WARNING: your C emits the literal for {w}, which the source still has as INCLUDE_RODATA "
                       f"(it would be in .rodata twice): use `extern char {w}[];` or drop that entry for this version")
             if bad_str:
-                print("RESULT: words match, STRING LITERALS DIFFER (not a match)")
+                print("RESULT: words match, LITERALS DIFFER (not a match)")
             elif bad_call:
                 print("RESULT: words match, CALL TARGETS DIFFER (not a match)")
             else:
