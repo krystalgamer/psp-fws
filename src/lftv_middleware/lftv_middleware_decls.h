@@ -105,6 +105,7 @@ public:
 /* dtor still asm/m2c (not trivial) */
 class Class_00056230 {
 public:
+    Class_00056230();
     virtual ~Class_00056230();
 };
 #endif
@@ -114,8 +115,12 @@ public:
 class Class_000561B8 : public Class_00056230 {
 public:
     s32 unk4;
-    u8 pad8[0x1C];
+    u8 pad8[0x10];
+    s32 unk18;
+    s32 unk1C;
+    s32 unk20;
     s32 unk24;
+    Class_000561B8(s32 arg1);
     virtual ~Class_000561B8();
 };
 #endif
@@ -1413,12 +1418,16 @@ void _ZN14Class_00055780D1Ev(M2C_UNK **arg0);
 void _ZN14Class_00055780D2Ev(M2C_UNK **arg0);
 void _ZN14Class_00056170D1Ev(M2C_UNK **arg0);
 void _ZN14Class_00056170D2Ev(M2C_UNK **arg0);
+void _ZN14Class_000561B8C1Ei(struct Unk_func_000314B4_0 *arg0, s32 arg1);
+void _ZN14Class_000561B8C2Ei(struct Unk_func_000314B4_0 *arg0, s32 arg1);
 void _ZN14Class_000561B8D1Ev(struct Unk_func_00031D1C_0 *arg0);
 void _ZN14Class_000561B8D2Ev(struct Unk_func_00031CDC_0 *arg0);
 void _ZN14Class_000561E0D1Ev(struct Unk_func_00031A18_0 *arg0);
 void _ZN14Class_000561E0D2Ev(struct Unk_func_000319DC_0 *arg0);
 void _ZN14Class_00056208D1Ev(struct Unk_func_00031708_0 *arg0);
 void _ZN14Class_00056208D2Ev(struct Unk_func_000316CC_0 *arg0);
+void _ZN14Class_00056230C1Ev(struct Unk_func_000314E4_0 *arg0);
+void _ZN14Class_00056230C2Ev(struct Unk_func_000314B4_0 *arg0);
 s32 _ZN14Class_00056230D2Ev(s32);
 void _ZN14Class_000562E0D1Ev(M2C_UNK **arg0);
 void _ZN14Class_000562E0D2Ev(M2C_UNK **arg0);

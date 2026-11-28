@@ -3,25 +3,43 @@
 #include "common.h"
 #include "lftv_middleware_decls.h"
 
+#if FW_VERSION == 352
 void func_000315DC(struct Unk_func_000314B4_0 *arg0, s32 arg1, s32 arg2) {
     func_000314B4(arg0);
     arg0->unk18 = arg1;
     arg0->unk0 = &D_00056208;
     arg0->unk4 = sceKernelCreateSema(&D_00056198, (arg1 & 1) << 8, arg2 == 1, 1, NULL);
 }
+#else
+void func_000315DC(struct Unk_func_000314B4_0 *arg0, s32 arg1, s32 arg2) {
+    _ZN14Class_00056230C2Ev(arg0);
+    arg0->unk18 = arg1;
+    arg0->unk0 = &D_00056208;
+    arg0->unk4 = sceKernelCreateSema(&D_00056198, (arg1 & 1) << 8, arg2 == 1, 1, NULL);
+}
+#endif
 
+#if FW_VERSION == 352
 void func_00031654(struct Unk_func_000314B4_0 *arg0, s32 arg1, s32 arg2) {
     func_000314B4(arg0);
     arg0->unk18 = arg1;
     arg0->unk0 = &D_00056208;
     arg0->unk4 = sceKernelCreateSema(&D_00056198, (arg1 & 1) << 8, arg2 == 1, 1, NULL);
 }
+#else
+void func_00031654(struct Unk_func_000314B4_0 *arg0, s32 arg1, s32 arg2) {
+    _ZN14Class_00056230C2Ev(arg0);
+    arg0->unk18 = arg1;
+    arg0->unk0 = &D_00056208;
+    arg0->unk4 = sceKernelCreateSema(&D_00056198, (arg1 & 1) << 8, arg2 == 1, 1, NULL);
+}
 
-#if FW_VERSION < 352
 Class_00056208::~Class_00056208() {
     sceKernelDeleteSema(this->unk4);
 }
-#else
+#endif
+
+#if FW_VERSION == 352
 void func_000316CC(struct Unk_func_000316CC_0 *arg0) {
     arg0->unk0 = &D_00056208;
     sceKernelDeleteSema(arg0->unk4);
@@ -49,25 +67,43 @@ s32 func_000318F4(void) {
     return 0;
 }
 
+#if FW_VERSION == 352
 void func_000318FC(struct Unk_func_000314B4_0 *arg0, s32 arg1, s32 arg2) {
     func_000314B4(arg0);
     arg0->unk18 = arg1;
     arg0->unk0 = &D_000561E0;
     arg0->unk4 = sceKernelCreateSema(&D_00056198, (arg1 & 1) << 8, arg2, arg2, NULL);
 }
+#else
+void func_000318FC(struct Unk_func_000314B4_0 *arg0, s32 arg1, s32 arg2) {
+    _ZN14Class_00056230C2Ev(arg0);
+    arg0->unk18 = arg1;
+    arg0->unk0 = &D_000561E0;
+    arg0->unk4 = sceKernelCreateSema(&D_00056198, (arg1 & 1) << 8, arg2, arg2, NULL);
+}
+#endif
 
+#if FW_VERSION == 352
 void func_0003196C(struct Unk_func_000314B4_0 *arg0, s32 arg1, s32 arg2) {
     func_000314B4(arg0);
     arg0->unk18 = arg1;
     arg0->unk0 = &D_000561E0;
     arg0->unk4 = sceKernelCreateSema(&D_00056198, (arg1 & 1) << 8, arg2, arg2, NULL);
 }
+#else
+void func_0003196C(struct Unk_func_000314B4_0 *arg0, s32 arg1, s32 arg2) {
+    _ZN14Class_00056230C2Ev(arg0);
+    arg0->unk18 = arg1;
+    arg0->unk0 = &D_000561E0;
+    arg0->unk4 = sceKernelCreateSema(&D_00056198, (arg1 & 1) << 8, arg2, arg2, NULL);
+}
 
-#if FW_VERSION < 352
 Class_000561E0::~Class_000561E0() {
     sceKernelDeleteSema(this->unk4);
 }
-#else
+#endif
+
+#if FW_VERSION == 352
 void func_000319DC(struct Unk_func_000319DC_0 *arg0) {
     arg0->unk0 = &D_000561E0;
     sceKernelDeleteSema(arg0->unk4);
@@ -95,6 +131,15 @@ s32 func_00031BFC(void) {
     return 0;
 }
 
+#if FW_VERSION < 352
+Class_000561B8::Class_000561B8(s32 arg1) {
+    this->unk18 = arg1;
+    this->unk4 = 1;
+    this->unk1C = 0;
+    this->unk20 = 0;
+    this->unk24 = sceKernelCreateEventFlag(&D_000561A4, 0x200U, 3U, NULL);
+}
+#else
 void func_00031C04(struct Unk_func_000314B4_0 *arg0, s32 arg1) {
     func_000314B4(arg0);
     arg0->unk0 = &D_000561B8;
@@ -114,6 +159,7 @@ void func_00031C70(struct Unk_func_000314B4_0 *arg0, s32 arg1) {
     arg0->unk20 = 0;
     arg0->unk24 = sceKernelCreateEventFlag(&D_000561A4, 0x200U, 3U, NULL);
 }
+#endif
 
 #if FW_VERSION < 352
 Class_000561B8::~Class_000561B8() {
