@@ -950,7 +950,22 @@ s32 func_0000271C(s32 unit) {
 #endif
 
 #if FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/umd9660", func_00002778);
+s32 func_00002778(void) {
+    s32 list[8];
+    s32 count;
+    s32 i;
+    if (func_0000281C(list, &count) == 0) {
+        return 0;
+    }
+    sceKernelWaitSema(D_00005D90.semaId, 1, NULL);
+    for (i = 0; i < count; i++) {
+        D_00007000[list[i]].iob = NULL;
+        D_00007000[list[i]].drive = NULL;
+        D_00007000[list[i]].state = 1;
+    }
+    sceKernelSignalSema(D_00005D90.semaId, 1);
+    return 0;
+}
 
 INCLUDE_ASM("nonmatchings/umd9660", func_0000281C);
 
@@ -2023,7 +2038,34 @@ INCLUDE_ASM("nonmatchings/umd9660", func_000042A0);
 INCLUDE_ASM("nonmatchings/umd9660", func_00003D24);
 #endif
 
-#if FW_VERSION < 201
+#if FW_VERSION < 103
+s32 umd9660_release_devfd(SceIoIob *iob) {
+    s32 ret = 0;
+    s32 i;
+    UMD9660_ASSERT(iob != NULL, "Assertion failed at %s:%s:%04d\n", "umdif.c", "umd9660_release_devfd", 0x2E3);
+    sceKernelWaitSema(D_00005D90.semaId, 1, NULL);
+    if (iob == NULL) {
+        sceKernelSignalSema(D_00005D90.semaId, 1);
+        return 0x80010016;
+    }
+    for (i = 0; i < D_00005D90.maxFiles; i++) {
+        ret = 0x80010002;
+        if (D_00007000[i].iob == iob && D_00007000[i].state == 0x80) {
+            D_00007000[i].state = 1;
+            D_00007000[i].numSectors = 0;
+            D_00007000[i].size = 0;
+            D_00007000[i].drive = NULL;
+            D_00007000[i].iob = NULL;
+            sceKernelSignalSema(D_00005D90.semaId, 1);
+            return 0;
+        }
+    }
+    sceKernelSignalSema(D_00005D90.semaId, 1);
+    return ret;
+}
+#endif
+
+#if FW_VERSION >= 103 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/umd9660", umd9660_release_devfd);
 #endif
 

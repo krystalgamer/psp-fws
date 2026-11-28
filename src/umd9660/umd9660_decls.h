@@ -319,6 +319,8 @@ void func_000022E8(void);
 s32 func_000023E4(s32 *arg0, void *arg1, s32 *unit, s32 arg3);
 s32 func_00002694(void);
 SceUmd9660Mgr *func_000026E4(void);
+s32 func_00002778(void);
+s32 func_0000281C(s32 *list, s32 *count);
 SceUmd9660File *func_00002910(SceIoIob *iob);
 s32 func_00002974(SceUmd9660Drive *drive, void *buf, SceSize size, SceUmdLbnParam *param);
 s32 func_000029FC(SceUmd9660Drive *drive, void *buf, SceSize size, s32 arg3, SceUmdLbnParam *param);
