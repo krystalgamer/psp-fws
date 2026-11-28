@@ -1522,7 +1522,7 @@ INCLUDE_ASM("nonmatchings/power", scePowerGetBatteryChargingStatus);
 
 INCLUDE_ASM("nonmatchings/power", scePowerIsSuspendRequired);
 
-#if FW_VERSION >= 102 && FW_VERSION < 150
+#if FW_VERSION >= 102 && FW_VERSION < 282
 s32 scePowerGetBatteryRemainCapacity(void) {
     if (g_Battery.batteryAvailabilityStatus == 0) {
         return 0x802B0100;
@@ -1534,7 +1534,7 @@ s32 scePowerGetBatteryRemainCapacity(void) {
 }
 #endif
 
-#if FW_VERSION >= 150
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/power", scePowerGetBatteryRemainCapacity);
 #endif
 
@@ -1551,7 +1551,7 @@ s32 scePowerGetBatteryRemainCapacity(void) {
 }
 #endif
 
-#if FW_VERSION >= 102 && FW_VERSION < 150
+#if FW_VERSION >= 102 && FW_VERSION < 271
 s32 scePowerGetBatteryElec(s32 *elec) {
     s32 ret;
     u32 oldK1 = shiftK1();
@@ -1571,7 +1571,7 @@ s32 scePowerGetBatteryElec(s32 *elec) {
 }
 #endif
 
-#if FW_VERSION >= 150
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/power", scePowerGetBatteryElec);
 #endif
 
@@ -1593,7 +1593,7 @@ s32 scePowerGetBatteryElec(s32 *elec) {
 }
 #endif
 
-#if FW_VERSION < 150
+#if FW_VERSION < 271
 s32 scePowerGetInnerTemp(float *temp) {
     s32 ret;
     u32 oldK1 = shiftK1();
@@ -1611,7 +1611,7 @@ s32 scePowerGetInnerTemp(float *temp) {
 }
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION == 271
 INCLUDE_ASM("nonmatchings/power", scePowerGetInnerTemp);
 #endif
 
@@ -1961,7 +1961,7 @@ s32 scePowerIsLowBattery(void) {
 INCLUDE_ASM("nonmatchings/power", scePowerIsLowBattery);
 #endif
 
-#if FW_VERSION >= 102 && FW_VERSION < 150
+#if FW_VERSION >= 102 && FW_VERSION < 282
 s32 scePowerGetBatteryFullCapacity(void) {
     if (g_Battery.batteryAvailabilityStatus == 0) {
         return 0x802B0100;
@@ -1973,7 +1973,7 @@ s32 scePowerGetBatteryFullCapacity(void) {
 }
 #endif
 
-#if FW_VERSION >= 150
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/power", scePowerGetBatteryFullCapacity);
 #endif
 
@@ -1986,7 +1986,7 @@ s32 scePowerGetBatteryFullCapacity(void) {
 }
 #endif
 
-#if FW_VERSION >= 102 && FW_VERSION < 150
+#if FW_VERSION >= 102 && FW_VERSION < 282
 s32 scePowerGetBatteryLifePercent(void) {
     if (g_Battery.batteryAvailabilityStatus == 0) {
         return 0x802B0100;
@@ -1998,7 +1998,7 @@ s32 scePowerGetBatteryLifePercent(void) {
 }
 #endif
 
-#if FW_VERSION >= 150
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/power", scePowerGetBatteryLifePercent);
 #endif
 
@@ -2035,7 +2035,7 @@ s32 scePowerGetBatteryLifeTime(void) {
 }
 #endif
 
-#if FW_VERSION >= 102 && FW_VERSION < 150
+#if FW_VERSION >= 102 && FW_VERSION < 282
 s32 scePowerGetBatteryTemp(void) {
     if (g_Battery.batteryAvailabilityStatus == 0) {
         return 0x802B0100;
@@ -2047,7 +2047,7 @@ s32 scePowerGetBatteryTemp(void) {
 }
 #endif
 
-#if FW_VERSION >= 150
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/power", scePowerGetBatteryTemp);
 #endif
 
@@ -2060,7 +2060,7 @@ s32 scePowerGetBatteryTemp(void) {
 }
 #endif
 
-#if FW_VERSION >= 102 && FW_VERSION < 150
+#if FW_VERSION >= 102 && FW_VERSION < 282
 s32 scePowerGetBatteryVolt(void) {
     if (g_Battery.batteryAvailabilityStatus == 0) {
         return 0x802B0100;
@@ -2072,7 +2072,7 @@ s32 scePowerGetBatteryVolt(void) {
 }
 #endif
 
-#if FW_VERSION >= 150
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/power", scePowerGetBatteryVolt);
 #endif
 
