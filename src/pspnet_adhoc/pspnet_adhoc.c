@@ -1329,7 +1329,7 @@ s32 pdpBind(SceNetAdhocPdpPcb *pcb, const SceNetEtherAddr *addr, u16 port) {
 #if FW_VERSION < 150
     pcb->ifp = ifp;
 #endif
-    __builtin_memcpy(&pcb->laddr, addr, sizeof(pcb->laddr));
+    ADHOC_COPY(&pcb->laddr, addr, sizeof(pcb->laddr));
     pcb->lport = lport;
     d = pcb->desc;
     d->sndchan = &ifp->if_snd;
@@ -1514,7 +1514,7 @@ s32 pdpBind(SceNetAdhocPdpPcb *pcb, const SceNetEtherAddr *addr, u16 port) {
 #if FW_VERSION < 150
     pcb->ifp = ifp;
 #endif
-    __builtin_memcpy(&pcb->laddr, addr, sizeof(pcb->laddr));
+    ADHOC_COPY(&pcb->laddr, addr, sizeof(pcb->laddr));
     pcb->lport = lport;
     d = pcb->desc;
     d->sndchan = &ifp->if_snd;
@@ -1525,7 +1525,61 @@ s32 pdpBind(SceNetAdhocPdpPcb *pcb, const SceNetEtherAddr *addr, u16 port) {
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_adhoc", pdpBind);
+static __inline SceNetAdhocPdpPcb *pdp_lookup(const SceNetEtherAddr *addr, u16 port) {
+    SceNetAdhocPdpPcb *p;
+
+    for (p = g_pdpList.first; p != NULL; p = p->next) {
+        if (ADHOC_MEMCMP(&p->laddr, addr, 6) == 0 && p->lport == port)
+            break;
+    }
+    return p;
+}
+
+static __inline u16 pdp_alloc_port(const SceNetEtherAddr *addr) {
+    u16 port;
+    SceNetAdhocPdpPcb *p;
+
+    port = (g_pdpLastPort == 0x7FFF) ? 0x4000 : g_pdpLastPort + 1;
+    for (; port != g_pdpLastPort; port = (port == 0x7FFF) ? 0x4000 : port + 1) {
+        p = pdp_lookup(addr, port);
+        if (p == NULL) {
+            g_pdpLastPort = port;
+            return port;
+        }
+    }
+    return 0;
+}
+
+s32 pdpBind(SceNetAdhocPdpPcb *pcb, const SceNetEtherAddr *addr, u16 port) {
+    struct ifnet *ifp;
+    SceNetAdhocDesc *d;
+    u16 lport;
+
+    ifp = _sce_pspnet_ifplookup_lladdr(addr);
+    if (ifp == NULL)
+        return 0x80410702;
+    if (port == 0) {
+        lport = pdp_alloc_port(addr);
+        if (lport == 0)
+            return 0x80410710;
+    } else {
+        if (port == 0xFFFF)
+            return 0x80410703;
+        if (pdp_lookup(addr, port) != NULL)
+            return 0x8041070A;
+        lport = port;
+    }
+#if FW_VERSION < 150
+    pcb->ifp = ifp;
+#endif
+    ADHOC_COPY(&pcb->laddr, addr, sizeof(pcb->laddr));
+    pcb->lport = lport;
+    d = pcb->desc;
+    d->sndchan = &ifp->if_snd;
+    d->rcvchan = &pcb->rcvq_first;
+    d->selchan = &g_adhocSelChan;
+    return 0;
+}
 #endif
 
 #if FW_VERSION >= 282

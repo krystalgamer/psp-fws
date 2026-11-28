@@ -347,6 +347,13 @@ struct sockaddr_dl {
 #define ADHOC_CLOCK() sceKernelGetSystemTimeWide()
 #endif
 
+/* inline copy before 2.01, the pspnet import from 2.01 */
+#if FW_VERSION < 201
+#define ADHOC_COPY(d, s, n) __builtin_memcpy(d, s, n)
+#else
+#define ADHOC_COPY(d, s, n) sceNetMemcpy(d, s, n)
+#endif
+
 /* NetBSD 1.5 if.h queue macros */
 #define IF_QFULL(ifq) ((ifq)->ifq_len >= (ifq)->ifq_maxlen)
 #define IF_DROP(ifq) ((ifq)->ifq_drops++)
