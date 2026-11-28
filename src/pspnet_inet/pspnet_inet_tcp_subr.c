@@ -2,9 +2,68 @@
 #include "common.h"
 #include "pspnet_inet_decls.h"
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", func_00023C74);
-#else
+#if FW_VERSION < 151
+void tcp_segsize(struct tcpcb *tp, int *txsegsizep, int *rxsegsizep)
+{
+	struct inpcb *inp = tp->t_inpcb;
+	struct rtentry *rt;
+	struct ifnet *ifp;
+	int size;
+	int iphlen;
+
+	switch (tp->t_family) {
+	case AF_INET:
+		iphlen = sizeof(struct ip);
+		break;
+	default:
+		size = tcp_mssdflt;
+		goto out;
+	}
+
+	if (inp)
+		rt = in_pcbrtentry(inp);
+	else
+		rt = NULL;
+	if (rt == NULL) {
+		size = tcp_mssdflt;
+		goto out;
+	}
+
+	ifp = rt->rt_ifp;
+
+	size = tcp_mssdflt;
+	if (tp->t_mtudisc && rt->rt_rmx.rmx_mtu != 0)
+		size = rt->rt_rmx.rmx_mtu - iphlen - sizeof(struct tcphdr);
+	else if (tp->t_mtudisc || ifp->if_flags & IFF_LOOPBACK)
+		size = ifp->if_mtu - iphlen - sizeof(struct tcphdr);
+	else if (inp && in_localaddr(inp->inp_faddr))
+		size = ifp->if_mtu - iphlen - sizeof(struct tcphdr);
+	size -= tcp_optlen(tp);
+	if (inp) {
+		size -= ip_optlen(inp);
+	}
+
+ out:
+	*txsegsizep = min(tp->t_peermss, size);
+	*rxsegsizep = min(tp->t_ourmss, size);
+
+	if (*txsegsizep != tp->t_segsz) {
+		if (*txsegsizep < tp->t_segsz) {
+			tp->snd_cwnd = max((tp->snd_cwnd / tp->t_segsz)
+					   * *txsegsizep, *txsegsizep);
+			tp->snd_ssthresh = max((tp->snd_ssthresh / tp->t_segsz)
+						* *txsegsizep, *txsegsizep);
+		}
+		tp->t_segsz = *txsegsizep;
+	}
+}
+#endif
+
+#if FW_VERSION >= 151 && FW_VERSION < 282
+INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", tcp_segsize);
+#endif
+
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", func_000223CC);
 
 INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", func_00022450);
@@ -16,18 +75,18 @@ void tcp_init(void) {
     s32 max_protohdr;
 
     D_0002E8E4 = 3;
-    D_0002E8F4 = 4;
-    D_0002E8F8 = 0x200;
+    tcp_cwm_burstsize = 4;
+    tcp_mssdflt = 0x200;
     D_0002E8FC = 3;
     D_000302E4 = 0;
-    D_0002EC10 = 0;
+    tcp_cwm = 0;
     D_0002E900 = 1;
     D_0002E904 = 1;
     D_0002E908 = 1;
     D_0002E90C = 1;
-    D_0002E910 = 1;
-    D_0002EC14 = 0;
-    D_0002EC18 = 0;
+    tcp_init_win = 1;
+    tcp_do_newreno = 0;
+    tcp_ack_on_push = 0;
     tcp_mss_ifmtu = 0;
     tcp_compat_42 = 0;
     tcp_iss_seq = 0;
@@ -73,10 +132,10 @@ struct tcpcb *tcp_newtcpcb(s32 family, void *aux) {
     tp->segq = NULL;
     tp->timeq = NULL;
     tp->t_family = family;
-    tp->t_peermss = D_0002E8F8;
-    tp->t_ourmss = D_0002E8F8;
-    tp->t_segsz = D_0002E8F8;
-    tp->t_sc = NULL;
+    tp->t_peermss = tcp_mssdflt;
+    tp->t_ourmss = tcp_mssdflt;
+    tp->t_segsz = tcp_mssdflt;
+    LIST_INIT(&tp->t_sc);
     tp->t_flags = 0;
     if (D_0002E900 && D_0002E908) {
         tp->t_flags |= 0x20; /* TF_REQ_SCALE */
@@ -245,7 +304,7 @@ void tcp_mss_from_peer(struct tcpcb *tp, s32 offer) {
         so = tp->t_inpcb->inp_socket;
         rt = in_pcbrtentry(tp->t_inpcb);
     }
-    mss = D_0002E8F8;
+    mss = tcp_mssdflt;
     if (offer) {
         mss = offer;
     }
@@ -403,17 +462,16 @@ void tcp_notify(struct inpcb *inp, s32 error) {
 }
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", func_0002544C);
+INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", tcp_quench);
 #endif
 
 #if FW_VERSION < 201
-void func_0002544C(void *arg0) {
-    void *temp_v1;
+void tcp_quench(struct inpcb *inp, s32 errno)
+{
+	struct tcpcb *tp = (struct tcpcb *)inp->inp_ppcb;
 
-    temp_v1 = M2C_FIELD(arg0, void **, 0x10);
-    if (temp_v1 != NULL) {
-        M2C_FIELD(temp_v1, s32 *, 0x78) = (s32) M2C_FIELD(temp_v1, u16 *, 0x24);
-    }
+	if (tp)
+		tp->snd_cwnd = tp->t_segsz;
 }
 #endif
 
@@ -435,7 +493,7 @@ void tcp_mtudisc(struct inpcb *inp, s32 errno) {
                 }
             }
             if (rt->rt_rmx.rmx_mtu != 0) {
-                tp->snd_cwnd = TCP_INITIAL_WINDOW(D_0002E910, rt->rt_rmx.rmx_mtu);
+                tp->snd_cwnd = TCP_INITIAL_WINDOW(tcp_init_win, rt->rt_rmx.rmx_mtu);
             }
         }
         tp->snd_nxt = tp->snd_una;
@@ -468,7 +526,7 @@ u32 tcp_mss_to_advertise(struct ifnet *ifp, s32 af) {
     hdrsiz += sizeof(struct tcphdr);
     if (mss > hdrsiz)
         mss -= hdrsiz;
-    mss = max((u32)D_0002E8F8, mss);
+    mss = max((u32)tcp_mssdflt, mss);
     return (mss);
 }
 #endif

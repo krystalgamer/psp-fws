@@ -21,6 +21,9 @@ static __inline s32 imin(s32 a, s32 b) {
 static __inline s32 imax(s32 a, s32 b) {
     return (a > b) ? a : b;
 }
+static __inline u16 htons(u16 x) {
+    return (u16)__builtin_allegrex_wsbh(x);
+}
 
 #define TAILQ_HEAD(name, type) struct name { struct type *tqh_first; struct type **tqh_last; }
 #define TAILQ_ENTRY(type) struct { struct type *tqe_next; struct type **tqe_prev; }
@@ -852,7 +855,7 @@ struct tcpcb {
     u32 last_ack_sent;          /* 0xA4 */
     void *timeq;                /* 0xA8 LIST_HEAD */
     s32 t_mtudisc;              /* 0xAC */
-    void *t_sc;                 /* 0xB0 LIST_HEAD */
+    struct { struct syn_cache *lh_first; } t_sc; /* 0xB0 */
 };
 typedef char chk_tcpcb[(sizeof(struct tcpcb) == 0xB4) ? 1 : -1];
 #define TCPS_CLOSED 0
@@ -1030,6 +1033,99 @@ struct inpcbtable {
     if ((elm)->field.le_next != NULL) \
         (elm)->field.le_next->field.le_prev = (elm)->field.le_prev; \
     *(elm)->field.le_prev = (elm)->field.le_next; \
+} while (0)
+#define LIST_INIT(head) do { (head)->lh_first = NULL; } while (0)
+#define LIST_FIRST(head) ((head)->lh_first)
+#define LIST_NEXT(elm, field) ((elm)->field.le_next)
+#define TAILQ_INIT(head) do { \
+    (head)->tqh_first = NULL; \
+    (head)->tqh_last = &(head)->tqh_first; \
+} while (0)
+#define TAILQ_FIRST(head) ((head)->tqh_first)
+#define TAILQ_NEXT(elm, field) ((elm)->field.tqe_next)
+#define TAILQ_INSERT_TAIL(head, elm, field) do { \
+    (elm)->field.tqe_next = NULL; \
+    (elm)->field.tqe_prev = (head)->tqh_last; \
+    *(head)->tqh_last = (elm); \
+    (head)->tqh_last = &(elm)->field.tqe_next; \
+} while (0)
+#define TAILQ_REMOVE(head, elm, field) do { \
+    if (((elm)->field.tqe_next) != NULL) \
+        (elm)->field.tqe_next->field.tqe_prev = (elm)->field.tqe_prev; \
+    else \
+        (head)->tqh_last = (elm)->field.tqe_prev; \
+    *(elm)->field.tqe_prev = (elm)->field.tqe_next; \
+} while (0)
+
+/* struct syn_cache (NetBSD-current tcp_var.h, late 2000; no INET6) */
+struct syn_cache {
+    struct { struct syn_cache *le_next; struct syn_cache **le_prev; } sc_bucketq; /* 0x00 */
+    TAILQ_ENTRY(syn_cache) sc_timeq;    /* 0x08 */
+    struct route sc_route4;             /* 0x10 */
+    s32 sc_win;                         /* 0x24 */
+    s32 sc_bucketidx;                   /* 0x28 */
+    u32 sc_hash;                        /* 0x2C */
+    u32 sc_timestamp;                   /* 0x30 */
+    struct sockaddr_in sc_src;          /* 0x34 */
+    struct sockaddr_in sc_dst;          /* 0x44 */
+    u32 sc_irs;                         /* 0x54 */
+    u32 sc_iss;                         /* 0x58 */
+    u32 sc_rexmt;                       /* 0x5C */
+    u32 sc_rxtcur;                      /* 0x60 */
+    u32 sc_rxttot;                      /* 0x64 */
+    u16 sc_rxtshift;                    /* 0x68 */
+    u16 sc_flags;                       /* 0x6A */
+    struct mbuf *sc_ipopts;             /* 0x6C */
+    u16 sc_peermaxseg;                  /* 0x70 */
+    u16 sc_ourmaxseg;                   /* 0x72 */
+    u8 sc_request_r_scale : 4,          /* 0x74 */
+        sc_requested_s_scale : 4;
+    struct tcpcb *sc_tp;                /* 0x78 */
+    struct { struct syn_cache *le_next; struct syn_cache **le_prev; } sc_tpq; /* 0x7C */
+};
+typedef char chk_syn_cache[(sizeof(struct syn_cache) == 0x84) ? 1 : -1];
+struct syn_cache_head {
+    struct { struct syn_cache *lh_first; } sch_bucket; /* 0x0 */
+    u16 sch_length;                     /* 0x4 */
+};
+TAILQ_HEAD(syn_cache_timeq_head, syn_cache);
+#define SCF_UNREACH 0x0001
+#define SCF_TIMESTAMP 0x0002
+#define SYN_HASH(sa, sp, dp) \
+    ((((sa)->s_addr^syn_hash1)*(((((u32)(dp))<<16) + \
+                     ((u32)(sp)))^syn_hash2)))
+#define SYN_HASHALL(hash, src, dst) \
+do { \
+    hash = SYN_HASH(&((struct sockaddr_in *)(src))->sin_addr, \
+        ((struct sockaddr_in *)(src))->sin_port, \
+        ((struct sockaddr_in *)(dst))->sin_port); \
+} while (0)
+#define TCPTV_SRTTDFLT 6
+#define TCPTV_MIN 2
+#define TCPTV_REXMTMAX 128
+#define TCPTV_KEEP_INIT 150
+#define PRT_SLOW_ARM(t, nticks) ((t) = pfslowtimo_now + (nticks))
+#define PRT_SLOW_ISEXPIRED(t) ((t) != 0 && pfslowtimo_now >= (t))
+#define SYN_CACHE_TIMER_ARM(sc) do { \
+    TCPT_RANGESET((sc)->sc_rxtcur, \
+        TCPTV_SRTTDFLT * tcp_backoff[(sc)->sc_rxtshift], TCPTV_MIN, \
+        TCPTV_REXMTMAX); \
+    PRT_SLOW_ARM((sc)->sc_rexmt, (sc)->sc_rxtcur); \
+} while (0)
+#define SYN_CACHE_RM(sc) do { \
+    LIST_REMOVE((sc), sc_bucketq); \
+    (sc)->sc_tp = NULL; \
+    LIST_REMOVE((sc), sc_tpq); \
+    tcp_syn_cache[(sc)->sc_bucketidx].sch_length--; \
+    TAILQ_REMOVE(&tcp_syn_cache_timeq[(sc)->sc_rxtshift], (sc), sc_timeq); \
+    syn_cache_count--; \
+} while (0)
+#define SYN_CACHE_PUT(sc) do { \
+    if ((sc)->sc_ipopts) \
+        (void)sceNetMFree((sc)->sc_ipopts); \
+    if ((sc)->sc_route4.ro_rt != NULL) \
+        RTFREE((sc)->sc_route4.ro_rt); \
+    sceNetFreeInternal(sc); \
 } while (0)
 #define IN_MULTICAST(a) (((u32)(a) & __builtin_allegrex_wsbw(0xF0000000)) == __builtin_allegrex_wsbw(0xE0000000))
 #define RTFREE(rt) do { \
@@ -1386,6 +1482,76 @@ struct ipoption {
     s8 ipopt_list[40];                  /* 0x04 */
 };
 
+/* tcp/ip constants and SCE mbuf/timer macros (NetBSD-current, late 2000) */
+#define TH_FIN 0x01
+#define TH_SYN 0x02
+#define TH_RST 0x04
+#define TH_PUSH 0x08
+#define TH_ACK 0x10
+#define TH_URG 0x20
+#define TF_ACKNOW 0x0001
+#define TF_DELACK 0x0002
+#define TF_NODELAY 0x0004
+#define TF_NOOPT 0x0008
+#define TF_REQ_SCALE 0x0020
+#define TF_RCVD_SCALE 0x0040
+#define TF_REQ_TSTMP 0x0080
+#define TF_RCVD_TSTMP 0x0100
+#define TCPOPT_NOP 1
+#define TCPOPT_MAXSEG 2
+#define TCPOPT_WINDOW 3
+#define TCPOLEN_WINDOW 3
+#define TCPOPT_TIMESTAMP 8
+#define TCPOLEN_TIMESTAMP 10
+#define TCPOLEN_TSTAMP_APPA (TCPOLEN_TIMESTAMP + 2)
+#define TCPOPT_TSTAMP_HDR (TCPOPT_NOP << 24 | TCPOPT_NOP << 16 | TCPOPT_TIMESTAMP << 8 | TCPOLEN_TIMESTAMP)
+#define MAX_TCPOPTLEN 32
+#define TCP_MAXBURST 4
+#define TCP_MAXWIN 65535
+#define IP_MAXPACKET 65535
+#define IP_MTUDISC 0x0400
+#define SO_DEBUG 0x0001
+#define SO_DONTROUTE 0x0010
+#define ENETDOWN 0x73
+#define SEQ_LT(a, b) ((int)((a) - (b)) < 0)
+#define SEQ_LEQ(a, b) ((int)((a) - (b)) <= 0)
+#define SEQ_GT(a, b) ((int)((a) - (b)) > 0)
+#define SEQ_GEQ(a, b) ((int)((a) - (b)) >= 0)
+#define TCP_TIMER_ARM(tp, timer, nticks) ((tp)->t_timer[(timer)] = pfslowtimo_now + (nticks))
+#define TCP_TIMER_DISARM(tp, timer) ((tp)->t_timer[(timer)] = 0)
+#define TCP_TIMER_ISARMED(tp, timer) ((tp)->t_timer[(timer)])
+#define TCP_CLEAR_DELACK(tp) do { \
+    if ((tp)->t_flags & TF_DELACK) { \
+        (tp)->t_flags &= ~TF_DELACK; \
+        LIST_REMOVE(tp, t_delack); \
+    } \
+} while (0)
+#define MHLEN (MSIZE - 0x30)
+#define MGETHDR(m, how, type) do { \
+    (m) = sceNetMallocInternal(MSIZE); \
+    if (m) { \
+        (m)->m_type = (type); \
+        (m)->m_data = (u8 *)&(m)->m_ext; \
+        (m)->m_flags = M_PKTHDR; \
+        (m)->m_next = NULL; \
+        (m)->m_nextpkt = NULL; \
+        (m)->m_pkthdr.aux = NULL; \
+    } \
+} while (0)
+#define M_TRAILINGSPACE(m) \
+    ((m)->m_flags & M_EXT ? (m)->m_ext.ext_buf + (m)->m_ext.ext_size - \
+        ((m)->m_data + (m)->m_len) : \
+        &((u8 *)(m) + 0x14)[MLEN] - ((m)->m_data + (m)->m_len))
+#define m_copy(m, o, l) sceNetMCopym((m), (o), (l), M_DONTWAIT)
+#define htonl(x) __builtin_allegrex_wsbw(x)
+#define ntohl(x) __builtin_allegrex_wsbw(x)
+#define EINVAL 0x16
+#define ENOBUFS 0x69
+#define EAFNOSUPPORT 0x6A
+#define EHOSTUNREACH 0x76
+typedef u32 tcp_seq;
+#define m_copydata sceNetMCopydata
+
 struct SceTailqHead {
     void *tqh_first;
     void **tqh_last;
@@ -1635,7 +1801,6 @@ extern s32 D_0002C01C;
 extern s32 D_0002C020;
 extern s32 D_0002C02C;
 extern s32 D_0002C030;
-extern s32 D_0002C1D4;
 extern s32 D_0002C1D8;
 extern s32 D_0002C1DC;
 extern s32 D_0002C1E4;
@@ -1680,22 +1845,17 @@ extern s32 D_0002CEC0;
 extern s32 D_0002CF00;
 extern s32 D_0002CF0C;
 extern s32 D_0002CF10;
-extern struct SceTailqHead D_0002CFF8[];
 extern s32 D_0002D944; /* ipq_locked */
 extern struct ipstat D_0002D960; /* ipstat */
 extern struct { struct ipq *lh_first; } D_0002DA48; /* ipq */
 extern u8 D_0002DA50[0x170]; /* icmpstat */
 extern M2C_UNK D_0002DBC8;
 extern struct inpcbtable D_0002DC78;
-extern struct SceTailqHead D_0002DC98[13];
-extern s32 D_0002DD04;
 extern struct route D_0002E19C;
 extern s32 D_0002E5EC;
 extern s32 D_0002E5F0;
 extern s32 D_0002E5F4; /* lowportmin */
 extern s32 D_0002E5F8; /* lowportmax */
-extern s32 D_0002E798;
-extern s32 D_0002E79C;
 extern s32 D_0002E7A4;
 extern s32 D_0002E7B0; /* ip_defttl */
 extern struct sockaddr_in D_0002E834 __attribute__((aligned(4)));
@@ -1704,14 +1864,11 @@ extern struct sockaddr_in D_0002E854 __attribute__((aligned(4)));
 extern u32 D_0002E864[]; /* mtu_table (icmp_mtudisc) */
 extern s32 D_0002E8D8;
 extern s32 D_0002E8E4;
-extern s32 D_0002E8F4;
-extern s32 D_0002E8F8; /* tcp_mssdflt */
 extern s32 D_0002E8FC; /* tcp_rttdflt */
 extern s32 D_0002E900; /* tcp_do_rfc1323 */
 extern s32 D_0002E904; /* tcp_do_sack */
 extern s32 D_0002E908; /* tcp_do_win_scale */
 extern s32 D_0002E90C; /* tcp_do_timestamps */
-extern s32 D_0002E910; /* tcp_init_win */
 extern s8 D_0002EAB0[];
 extern s32 D_0002EAB1;
 extern s32 D_0002EB40;
@@ -1723,9 +1880,6 @@ extern s32 D_0002EB8C;
 extern s32 D_0002EB90;
 extern s32 D_0002EB94;
 extern char D_0002EBB0[16]; /* inet_ntoa buf */
-extern s32 D_0002EC10;
-extern s32 D_0002EC14;
-extern s32 D_0002EC18;
 extern char D_0002F288[18] __attribute__((aligned(4)));
 extern s32 D_0002F2F8;
 extern struct { s32 w[6]; } D_0002F3B8;
@@ -1781,13 +1935,21 @@ extern struct radix_node_head *rt_tables[32]; /* rt_tables */
 extern s32 rttrash; /* rttrash */
 extern struct soqhead so_list;
 extern s32 somaxconn; /* somaxconn */
+extern s32 syn_cache_count;
 extern s32 syn_cache_last;
+extern u32 syn_hash1;
+extern u32 syn_hash2;
 extern s32 tcbhashsize; /* tcbhashsize */
 extern struct inpcbtable tcbtable;
+extern s32 tcp_ack_on_push;
 extern s32 tcp_backoff[]; /* tcp_backoff */
 extern s32 tcp_compat_42; /* tcp_compat_42 */
 extern struct tcp_ctlvar tcp_ctlvars[]; /* tcp_ctlvars */
+extern s32 tcp_cwm;
+extern s32 tcp_cwm_burstsize;
 extern struct tcpcb *tcp_delacks; /* tcp_delacks */
+extern s32 tcp_do_newreno;
+extern s32 tcp_init_win; /* tcp_init_win */
 extern u32 tcp_iss_seq; /* tcp_iss_seq */
 extern s32 tcp_keepcnt;
 extern s32 tcp_keepidle; /* tcp_keepidle */
@@ -1795,11 +1957,18 @@ extern s32 tcp_keepintvl; /* tcp_keepintvl */
 extern s32 tcp_maxidle;
 extern s32 tcp_maxpersistidle; /* tcp_maxpersistidle */
 extern s32 tcp_mss_ifmtu;
+extern s32 tcp_mssdflt; /* tcp_mssdflt */
 extern u32 tcp_now; /* tcp_now */
+extern u8 tcp_outflags[];
 extern u32 tcp_recvspace; /* tcp_recvspace */
 extern u32 tcp_sendspace; /* tcp_sendspace */
 extern struct tcpstat tcp_stat;
+extern s32 tcp_syn_bucket_limit;
+extern struct syn_cache_head tcp_syn_cache[];
 extern s32 tcp_syn_cache_interval;
+extern u32 tcp_syn_cache_limit;
+extern s32 tcp_syn_cache_size;
+extern struct syn_cache_timeq_head tcp_syn_cache_timeq[13];
 extern s32 tcp_totbackoff; /* tcp_totbackoff */
 extern struct inpcbtable udbtable;
 extern s32 udp_recvspace;
@@ -1954,7 +2123,6 @@ s32 func_000232C0(struct Unk_func_000232C0_0 *arg0);
 s32 func_00023828(struct Unk_func_00023828_0 *arg0);
 void func_00023AB8(struct Unk_func_00023AB8_0 *arg0);
 void func_000244B0(void);
-void func_0002544C(void *arg0);
 void func_00025638(struct sppp *sp, u16 proto, u8 type, u8 ident, u16 len, void *data);
 void func_00026FF4(const struct cp *cp, struct sppp *sp, u32 type, u32 id, ...);
 s32 func_00027830(struct Unk_func_00027830_0 *arg0);
@@ -1988,6 +2156,7 @@ s32 *func_0002C820(void);
 void *func_0002C864(void *dst, const void *src, s32 n);
 u8 *func_0002C918(u8 *dst, const u8 *src, s32 n);
 void *func_0002C94C(void *p, s32 c, s32 n);
+s32 func_0002C978(const void *b1, const void *b2, u32 len);
 void func_0002C9B8(const void *src, void *dst, s32 len);
 u8 *func_0002CC40(u8 *arg0, u8 *arg1);
 s32 func_0002CCF8(void *putc, void *arg, const char *fmt, __builtin_va_list ap);
@@ -2147,6 +2316,7 @@ s32 sceNetInetTerm(void);
 char *sceNetInet_lib_2595064C(struct in_addr in);
 struct ifqueue *sceNetInet_lib_D7928A6D(void);
 void sceNetMAdj(struct mbuf *mp, s32 req_len);
+s32 sceNetMCopydata(struct mbuf *m, s32 off, s32 len, void *cp);
 struct mbuf *sceNetMCopym(struct mbuf *m, s32 off, s32 len, s32 wait);
 struct mbuf *sceNetMFree(struct mbuf *m);
 void sceNetMFreem(struct mbuf *m);
@@ -2210,7 +2380,12 @@ void sppp_pap_tld(struct sppp *sp);
 void sppp_to_event(const struct cp *cp, struct sppp *sp);
 void syn_cache_cleanup(struct tcpcb *tp);
 void syn_cache_init(void);
+void syn_cache_insert(struct syn_cache *sc, struct tcpcb *tp);
+struct syn_cache *syn_cache_lookup(struct sockaddr *src, struct sockaddr *dst, struct syn_cache_head **headp);
+void syn_cache_reset(struct sockaddr *src, struct sockaddr *dst, struct tcphdr *th);
+s32 syn_cache_respond(struct syn_cache *sc, struct mbuf *m);
 void syn_cache_timer(void);
+void syn_cache_unreach(struct sockaddr *src, struct sockaddr *dst, struct tcphdr *th);
 s32 sysctl_int(void *oldp, u32 *oldlenp, void *newp, u32 newlen, s32 *valp);
 s32 sysctl_rdint(void *oldp, u32 *oldlenp, void *newp, s32 val);
 s32 sysctl_rdstruct(void *oldp, u32 *oldlenp, void *newp, const void *sp, u32 len);
@@ -2234,6 +2409,7 @@ void tcp_notify(struct inpcb *inp, s32 error);
 s32 tcp_optlen(void *tp);
 s32 tcp_output(struct tcpcb *tp);
 void tcp_pulloutofband(struct socket *so, struct tcphdr *th, struct mbuf *m, s32 off);
+void tcp_quench(struct inpcb *inp, s32 errno);
 s32 tcp_respond(struct tcpcb *tp, struct mbuf *template, struct mbuf *m, struct tcphdr *th0, u32 ack, u32 seq, s32 flags);
 void tcp_rmx_rtt(struct tcpcb *tp);
 void tcp_setpersist(struct tcpcb *tp);

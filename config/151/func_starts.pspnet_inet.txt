@@ -14,7 +14,6 @@ in_pcblookup_port = 0x00013478; // type:func
 func_00015278 = 0x00015278; // type:func
 func_00015764 = 0x00015764; // type:func
 func_00015888 = 0x00015888; // type:func
-ip_setmoptions = 0x0001794C; // type:func
 func_00018640 = 0x00018640; // type:func
 func_00018BE8 = 0x00018BE8; // type:func
 func_000197EC = 0x000197EC; // type:func
