@@ -538,7 +538,47 @@ s32 func_000232C0(struct Unk_func_000232C0_0 *arg0) {
 
 INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", func_00023344);
 
-INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", tcp_mss_from_peer);
+void tcp_mss_from_peer(struct tcpcb *tp, s32 offer) {
+    struct socket *so;
+    struct rtentry *rt;
+    u32 bufsize;
+    s32 mss;
+
+    so = NULL;
+    rt = NULL;
+    if (tp->t_inpcb) {
+        so = tp->t_inpcb->inp_socket;
+        rt = in_pcbrtentry(tp->t_inpcb);
+    }
+    mss = tcp_mssdflt;
+    if (offer) {
+        mss = offer;
+    }
+    mss = max(mss, 32);
+    tp->t_peermss = mss;
+    mss -= func_00023828(tp);
+    if (tp->t_inpcb) {
+        mss -= ip_optlen(tp->t_inpcb);
+    }
+    if (rt != NULL && rt->rt_rmx.rmx_sendpipe != 0) {
+        bufsize = rt->rt_rmx.rmx_sendpipe;
+    } else {
+        bufsize = so->so_snd.sb_hiwat;
+    }
+    if (bufsize < mss) {
+        mss = bufsize;
+    } else {
+        bufsize = roundup(bufsize, mss);
+        if (bufsize > 0x40000) {
+            bufsize = 0x40000;
+        }
+        (void)sbreserve(&so->so_snd, bufsize);
+    }
+    tp->t_segsz = mss;
+    if (rt != NULL && rt->rt_rmx.rmx_ssthresh) {
+        tp->snd_ssthresh = max(2 * mss, rt->rt_rmx.rmx_ssthresh);
+    }
+}
 #endif
 
 void tcp_rmx_rtt(struct tcpcb *tp) {
@@ -936,10 +976,109 @@ struct tcpcb *tcp_timers(struct tcpcb *tp, s32 timer) {
     return (tp);
 }
 #else
-INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", tcp_timers);
+struct tcpcb *tcp_timers(struct tcpcb *tp, s32 timer) {
+    s16 rto;
+
+    switch (timer) {
+    case 3:
+        if (tp->t_state != 10 &&
+            ((tcp_maxidle == 0) || (tp->t_idle <= tcp_maxidle)))
+            tp->t_timer[3] = pfslowtimo_now + tcp_keepintvl;
+        else
+            tp = tcp_close(tp);
+        break;
+
+    case 0:
+        if (++tp->t_rxtshift > 12) {
+            tp->t_rxtshift = 12;
+            tcp_stat.tcps_timeoutdrop++;
+            tp = tcp_drop(tp, tp->t_softerror ? tp->t_softerror : 0x74);
+            break;
+        }
+        tcp_stat.tcps_rexmttimeo++;
+        rto = ((tp->t_srtt >> 3) + tp->t_rttvar) >> 2;
+        if (rto < tp->t_rttmin)
+            rto = tp->t_rttmin;
+        TCPT_RANGESET(tp->t_rxtcur, rto * tcp_backoff[tp->t_rxtshift], tp->t_rttmin, 128);
+        tp->t_timer[0] = pfslowtimo_now + tp->t_rxtcur;
+        if (ip_mtudisc && tp->t_rxtshift > 12 / 6) {
+            tcp_stat.tcps_pmtublackhole++;
+            if (tp->t_inpcb)
+                tp->t_mtudisc = 0;
+        }
+        if (tp->t_rxtshift > 12 / 4) {
+            if (tp->t_inpcb)
+                func_00014480(tp->t_inpcb);
+            tp->t_rttvar += (tp->t_srtt >> 3);
+            tp->t_srtt = 0;
+        }
+        tp->snd_nxt = tp->snd_una;
+        tp->t_rtt = 0;
+        if (tp->t_state == 2)
+            tp->t_flags |= 0x400;
+        {
+            u32 win = min(tp->snd_wnd, tp->snd_cwnd) / 2 / tp->t_segsz;
+            if (win < 2)
+                win = 2;
+            tp->snd_cwnd = tp->t_segsz;
+            tp->snd_ssthresh = win * tp->t_segsz;
+            tp->t_dupacks = 0;
+        }
+        (void)tcp_output(tp);
+        break;
+
+    case 1:
+        rto = ((tp->t_srtt >> 3) + tp->t_rttvar) >> 2;
+        if (rto < tp->t_rttmin)
+            rto = tp->t_rttmin;
+        if (tp->t_rxtshift == 12 &&
+            (tp->t_idle >= tcp_maxpersistidle ||
+             tp->t_idle >= rto * tcp_totbackoff)) {
+            tcp_stat.tcps_persistdrops++;
+            tp = tcp_drop(tp, 0x74);
+            break;
+        }
+        tcp_stat.tcps_persisttimeo++;
+        tcp_setpersist(tp);
+        tp->t_force = 1;
+        (void)tcp_output(tp);
+        tp->t_force = 0;
+        break;
+
+    case 2: {
+        struct socket *so = NULL;
+
+        tcp_stat.tcps_keeptimeo++;
+        if (TCPS_HAVEESTABLISHED(tp->t_state) == 0)
+            goto dropit;
+        if (tp->t_inpcb)
+            so = tp->t_inpcb->inp_socket;
+        if (so->so_options & 0x8 && tp->t_state <= 5) {
+            if ((tcp_maxidle > 0) &&
+                (tp->t_idle >= tcp_keepidle + tcp_maxidle))
+                goto dropit;
+            tcp_stat.tcps_keepprobe++;
+            if (tcp_compat_42) {
+                (void)tcp_respond(tp, tp->t_template, (struct mbuf *)NULL, NULL,
+                                    tp->rcv_nxt - 1, tp->snd_una - 1, 0);
+            } else {
+                (void)tcp_respond(tp, tp->t_template, (struct mbuf *)NULL, NULL,
+                                    tp->rcv_nxt, tp->snd_una - 1, 0);
+            }
+            tp->t_timer[2] = pfslowtimo_now + tcp_keepintvl;
+        } else
+            tp->t_timer[2] = pfslowtimo_now + tcp_keepidle;
+        break;
+    }
+    dropit:
+        tcp_stat.tcps_keepdrops++;
+        tp = tcp_drop(tp, 0x74);
+        break;
+    }
+    return (tp);
+}
 #endif
 
-#if FW_VERSION < 282
 void tcp_fasttimo(void) {
     s32 s = _sce_pspnet_spllock();
     struct tcpcb *tp, *next;
@@ -950,9 +1089,6 @@ void tcp_fasttimo(void) {
     }
     _sce_pspnet_splunlock(s);
 }
-#else
-INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", tcp_fasttimo);
-#endif
 
 void tcp_canceltimers(u8 *arg0) {
     s32 i;
@@ -1566,7 +1702,201 @@ release:
 }
 #endif
 
-#if FW_VERSION >= 271
+#if FW_VERSION >= 282
+s32 tcp_usrreq(struct socket *so, s32 req, struct mbuf *m, struct mbuf *nam, struct mbuf *control) {
+    struct inpcb *inp;
+    struct tcpcb *tp = NULL;
+    s32 s;
+    s32 error = 0;
+    s32 family;
+
+    family = so->so_proto->pr_domain->dom_family;
+    if (req == 11) {
+        switch (family) {
+        case AF_INET:
+            return (func_00010C08(so, (s32)m, (void *)nam, (struct ifnet *)control));
+        default:
+            return 0x6A;
+        }
+    }
+    if (req == 22) {
+        switch (family) {
+        case AF_INET:
+            in_purgeif((struct ifnet *)control);
+            in_pcbpurgeif(&tcbtable, (struct ifnet *)control);
+            break;
+        default:
+            return (0x6A);
+        }
+        return (0);
+    }
+    s = _sce_pspnet_spllock();
+    switch (family) {
+    case AF_INET:
+        inp = (struct inpcb *)so->so_pcb;
+        break;
+    default:
+        _sce_pspnet_splunlock(s);
+        return 0x6A;
+    }
+    if (inp == 0 && req != 0) {
+        error = 0x16;
+        goto release;
+    }
+    if (inp)
+        tp = (struct tcpcb *)inp->inp_ppcb;
+
+    switch (req) {
+    case 0:
+        if (inp != 0) {
+            error = 0x7F;
+            break;
+        }
+        error = tcp_attach(so);
+        if (error)
+            break;
+        if ((so->so_options & 0x80) && so->so_linger == 0)
+            so->so_linger = 120;
+        break;
+    case 1:
+        tp = tcp_disconnect(tp);
+        break;
+    case 2:
+        switch (family) {
+        case AF_INET:
+            error = in_pcbbind(inp, nam);
+            break;
+        }
+        break;
+    case 3:
+        if (inp && inp->inp_lport == 0) {
+            error = in_pcbbind(inp, (struct mbuf *)0);
+            if (error)
+                break;
+        }
+        tp->t_state = 1;
+        break;
+    case 4:
+        if (inp) {
+            if (inp->inp_lport == 0) {
+                error = in_pcbbind(inp, (struct mbuf *)0);
+                if (error)
+                    break;
+            }
+            error = func_0001358C(inp, nam);
+        }
+        if (error)
+            break;
+        tp->t_template = func_00022714(tp);
+        if (tp->t_template == 0) {
+            if (inp)
+                in_pcbdisconnect(inp);
+            error = 0x69;
+            break;
+        }
+        while (tp->request_r_scale < 14 &&
+               (0xFFFF << tp->request_r_scale) < so->so_rcv.sb_hiwat)
+            tp->request_r_scale++;
+        func_00005778(so);
+        tcp_stat.tcps_connattempt++;
+        tp->t_state = 2;
+        tp->t_timer[2] = pfslowtimo_now + 150;
+        tp->iss = func_00023D1C(tp, sizeof(struct tcpcb), 0);
+        tp->snd_una = tp->snd_nxt = tp->snd_max = tp->snd_up = tp->snd_recover = tp->iss;
+        error = tcp_output(tp);
+        break;
+    case 17:
+        error = 0x5F;
+        break;
+    case 6:
+        tp = tcp_disconnect(tp);
+        break;
+    case 5:
+        if (inp)
+            func_00014258(inp, nam);
+        break;
+    case 7:
+        func_0000588C(so);
+        tp = tcp_usrclosed(tp);
+        if (tp)
+            error = tcp_output(tp);
+        break;
+    case 8:
+        (void)tcp_output(tp);
+        break;
+    case 9:
+        if (control && control->m_len) {
+            sceNetMFreem(control);
+            sceNetMFreem(m);
+            error = 0x16;
+            break;
+        }
+        sbappend(&so->so_snd, m);
+        error = tcp_output(tp);
+        break;
+    case 10:
+        tp = tcp_drop(tp, 0x71);
+        break;
+    case 12:
+        _sce_pspnet_splunlock(s);
+        return (0);
+    case 13:
+        if (control && control->m_len) {
+            sceNetMFreem(control);
+            sceNetMFreem(m);
+            error = 0x16;
+            break;
+        }
+        if ((so->so_oobmark == 0 &&
+             (so->so_state & SS_RCVATMARK) == 0) ||
+            so->so_options & 0x100 ||
+            tp->t_oobflags & 0x2) {
+            error = 0x16;
+            break;
+        }
+        if ((tp->t_oobflags & 0x1) == 0) {
+            error = 0xB;
+            break;
+        }
+        m->m_len = 1;
+        *mtod(m, char *) = tp->t_iobc;
+        if (((s32)nam & 0x2) == 0)
+            tp->t_oobflags ^= (0x1 | 0x2);
+        break;
+    case 14:
+        if (sbspace(&so->so_snd) < -512) {
+            sceNetMFreem(m);
+            error = 0x69;
+            break;
+        }
+        sbappend(&so->so_snd, m);
+        tp->snd_up = tp->snd_una + so->so_snd.sb_cc;
+        tp->t_force = 1;
+        error = tcp_output(tp);
+        tp->t_force = 0;
+        break;
+    case 15:
+        if (inp)
+            func_000141EC(inp, nam);
+        break;
+    case 16:
+        if (inp)
+            func_00014258(inp, nam);
+        break;
+    case 19:
+        tp = tcp_timers(tp, (s32)nam);
+        break;
+    default:
+        break;
+    }
+
+release:
+    _sce_pspnet_splunlock(s);
+    return (error);
+}
+#endif
+
+#if FW_VERSION == 271
 INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", tcp_usrreq);
 #endif
 

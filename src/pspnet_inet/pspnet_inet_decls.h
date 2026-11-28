@@ -1929,6 +1929,14 @@ struct inpcb *in_pcblookup_port(struct inpcbtable *table, struct in_addr laddr, 
 
 struct in_multi *func_00012108(struct in_addr *ap, struct ifnet *ifp);
 
+struct mbuf *func_00022714(struct tcpcb *tp);
+
+struct mbuf *func_00022714(struct tcpcb *tp);
+
+struct mbuf *func_00022714(struct tcpcb *tp);
+
+struct mbuf *func_00022714(struct tcpcb *tp);
+
 extern void (*const D_0002BB24)(struct sppp *sp); /* lcp.Close (split rodata label) */
 extern void (*const D_0002BBCC)(struct sppp *sp); /* pap.scr (split rodata label) */
 extern s32 D_0002BEC0;
@@ -2311,6 +2319,7 @@ void func_000141EC(struct inpcb *inp, struct mbuf *nam);
 void func_00014258(struct inpcb *inp, struct mbuf *nam);
 void func_00014260(struct inpcb *inp, struct mbuf *nam);
 void func_000142CC(struct inpcb *inp, struct mbuf *nam);
+void func_00014480(struct inpcb *inp);
 s32 func_00019A98(void);
 void func_00019C00(struct rtentry *rt);
 s32 func_0001A410(void);
@@ -2324,6 +2333,7 @@ s32 func_000232C0(struct Unk_func_000232C0_0 *arg0);
 s32 func_00023828(struct Unk_func_00023828_0 *arg0);
 void func_00023AB8(struct Unk_func_00023AB8_0 *arg0);
 void func_00023AD4(struct in_addr addr);
+u32 func_00023D1C(void *m, u32 len, u32 addin);
 void func_000244B0(void);
 void func_00025638(struct sppp *sp, u16 proto, u8 type, u8 ident, u16 len, void *data);
 void func_00026FF4(const struct cp *cp, struct sppp *sp, u32 type, u32 id, ...);
