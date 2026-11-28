@@ -11,3 +11,4 @@ func_00001C80 = 0x00001C80; // type:func
 func_00001DF4 = 0x00001DF4; // type:func
 sodisconnect = 0x000025FC; // type:func
 func_00002684 = 0x00002684; // type:func
+rtable_init = 0x0000CFE0; // type:func

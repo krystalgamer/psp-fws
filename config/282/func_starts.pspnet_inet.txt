@@ -253,3 +253,4 @@ func_0002A290 = 0x0002A290; // type:func
 func_0002A570 = 0x0002A570; // type:func
 func_0002AA4C = 0x0002AA4C; // type:func
 func_0002AF14 = 0x0002AF14; // type:func
+rtable_init = 0x0000CFE4; // type:func

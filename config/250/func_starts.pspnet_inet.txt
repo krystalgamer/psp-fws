@@ -2,3 +2,4 @@
 func_00018B28 = 0x00018B28; // type:func
 func_00023CD0 = 0x00023CD0; // type:func
 func_00024B04 = 0x00024B04; // type:func
+rtable_init = 0x0000D104; // type:func

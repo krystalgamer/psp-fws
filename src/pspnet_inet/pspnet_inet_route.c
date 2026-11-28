@@ -337,6 +337,7 @@ INCLUDE_ASM("nonmatchings/pspnet_inet_route", func_0000CD64);
 #endif
 
 INCLUDE_ASM("nonmatchings/pspnet_inet_route", rt_timer_timer);
+INCLUDE_ASM("nonmatchings/pspnet_inet_route", rtable_init);
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_inet_route", func_0000D170);

@@ -102,3 +102,4 @@ func_0002CC78 = 0x0002CC78; // type:func
 func_0002CCAC = 0x0002CCAC; // type:func
 func_0002CCF8 = 0x0002CCF8; // type:func
 func_0002D420 = 0x0002D420; // type:func
+rtable_init = 0x0000CF04; // type:func

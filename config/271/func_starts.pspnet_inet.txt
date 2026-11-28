@@ -121,3 +121,4 @@ func_00029460 = 0x00029460; // type:func
 func_000299E4 = 0x000299E4; // type:func
 func_00029C28 = 0x00029C28; // type:func
 func_0002A570 = 0x0002A570; // type:func
+rtable_init = 0x0000CFE4; // type:func
