@@ -1101,7 +1101,22 @@ s32 func_0000585C(SceNetDhcpCtx *dc) {
     ret = sceNetBpfWrite(dc->bpf, dc->pkt, dc->pktLen);
     return (ret < dc->pktLen) ? 0x80410582 : 3;
 }
-#else
+#endif
+
+#if FW_VERSION >= 151 && FW_VERSION < 282
+s32 func_0000585C(SceNetDhcpCtx *dc) {
+    s32 ret;
+
+    ret = func_00005434(dc, 3);
+    if (ret < 0) {
+        return ret;
+    }
+    ret = sceNetBpfWrite(dc->bpf, dc->pkt, dc->pktLen);
+    return (ret < dc->pktLen) ? 0x80410582 : 3;
+}
+#endif
+
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_0000585C);
 #endif
 

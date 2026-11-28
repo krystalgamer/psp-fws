@@ -133,9 +133,43 @@ s32 func_00006C50(s8 *opt, SceNetDhcpLease *l) {
 }
 #endif
 
-#if FW_VERSION >= 151 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_apctl_006340", func_00006C50);
+#if FW_VERSION >= 151 && FW_VERSION < 250
+s32 func_00006C50(s8 *opt, SceNetDhcpLease *l) {
+    s32 ret = 0;
 
+    switch (opt[0]) {
+    case 53:
+        l->msgType = opt[2];
+        break;
+    case 1:
+    case 28:
+    case 54:
+        ret = func_00004DE0(opt, l);
+        break;
+    case 3:
+    case 6:
+        ret = func_00004E50(opt, l);
+        break;
+    case 12:
+    case 15:
+    case 56:
+        ret = func_00004CDC(opt, l);
+        break;
+    case 51:
+    case 58:
+    case 59:
+        ret = func_00006F34(opt, l);
+        break;
+    }
+    return ret;
+}
+#endif
+
+#if FW_VERSION >= 250 && FW_VERSION < 282
+INCLUDE_ASM("nonmatchings/pspnet_apctl_006340", func_00006C50);
+#endif
+
+#if FW_VERSION >= 151 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_apctl_006340", func_00004CDC);
 #endif
 
