@@ -5,8 +5,10 @@
 
 FILE.c holds one function definition (its name must be an INCLUDE_ASM entry
 compiled for VER). The C replaces that entry for every version compiling the
-same entry; each of those versions is rebuilt, and the C is kept only for the
-versions that still match (the others keep the asm). Optional --decls lines
+same entry, and for the versions of the function's other asm entries in the
+same file (separate `#if FW_VERSION` blocks); each of those versions is rebuilt,
+and the C is kept only for the versions that still match (the others keep the
+asm). Optional --decls lines
 (types, externs, prototypes) are added to the module's decls (json "types"
 under "hand", vars/funcs by name). Prints the versions that kept the C.
 """
@@ -103,8 +105,11 @@ def one(a, cfile, decls):
         return None
     orig = {p: p.read_text() for p in list(sd.glob("*.c")) + list(sd.glob("*_decls.*"))}
     ents = FM.parse(orig[f], fv)
-    k = next(i for i, e in enumerate(ents) if e.kind == "asm" and e.name == name and fw(a.ver) in e.vers)
-    cand = ents[k].vers
+    # every asm entry of the function in this file (other versions' separate entries too): the C is tried
+    # in all of them and kept wherever it matches
+    ks = [i for i, e in enumerate(ents) if e.kind == "asm" and e.name == name and e.vers]
+    k = next(i for i in ks if fw(a.ver) in ents[i].vers)
+    cand = frozenset().union(*(ents[i].vers for i in ks))
     if decls:
         store_p = sd / f"{a.module}_decls.json"
         store = json.loads(store_p.read_text())
@@ -163,8 +168,9 @@ def one(a, cfile, decls):
         structify.SRC[a.module] = sd
         structify.write_decls(a.module, store)
     # C for all candidate versions first
-    ents[k].vers = frozenset()
-    ents.insert(k, FM.Entry(cand, "cfunc", name, body))
+    for i in reversed(ks):
+        ents.insert(i, FM.Entry(ents[i].vers, "cfunc", name, body))
+        ents[i + 1].vers = frozenset()
     f.write_text(FM.emit(ents, fv))
     keep, drop, fails = [], [], {}
     # versions build into their own tmp/build/<v>: build them in parallel
@@ -189,10 +195,16 @@ def one(a, cfile, decls):
         return None
     if drop:
         ents = FM.parse(orig[f], fv)
-        k = next(i for i, e in enumerate(ents) if e.kind == "asm" and e.name == name and fw(a.ver) in e.vers)
-        ents[k].vers = frozenset(drop)
-        ents.insert(k, FM.Entry(frozenset(keep), "cfunc", name, body))
+        ks = [i for i, e in enumerate(ents) if e.kind == "asm" and e.name == name and e.vers]
+        for i in reversed(ks):
+            kv = ents[i].vers & frozenset(keep)
+            ents[i].vers = ents[i].vers - kv
+            ents.insert(i, FM.Entry(kv, "cfunc", name, body))
         f.write_text(FM.emit(FM.dedupe(ents), fv))
+    elif len(ks) > 1:
+        f.write_text(FM.emit(FM.dedupe(FM.parse(f.read_text(), fv)), fv))
+    if len(ks) > 1:
+        print(f"{name}: {len(ks)} asm entries in {f.name} (tried in all of them)")
     return name, keep, drop
 
 
