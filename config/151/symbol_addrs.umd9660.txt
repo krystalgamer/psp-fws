@@ -207,3 +207,4 @@ umd9660_close = 0x00000134; // type:func
 umd9660_read = 0x000001BC; // type:func
 umd9660_devctl = 0x00000860; // type:func
 umd9660_lseek = 0x00000000; // type:func
+func_00004114 = 0x000045D8; // type:func

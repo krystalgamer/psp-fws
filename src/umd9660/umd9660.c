@@ -1273,6 +1273,8 @@ INCLUDE_ASM("nonmatchings/umd9660", func_00002974);
 
 #if FW_VERSION < 103
 INCLUDE_ASM("nonmatchings/umd9660", func_00003E54);
+
+INCLUDE_ASM("nonmatchings/umd9660", func_00003ED4);
 #endif
 
 #if FW_VERSION < 201
@@ -1387,6 +1389,8 @@ INCLUDE_ASM("nonmatchings/umd9660", func_000048B0);
 
 #if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/umd9660", func_000040C8);
+
+INCLUDE_ASM("nonmatchings/umd9660", func_00004114);
 #endif
 
 #if FW_VERSION >= 282 && FW_VERSION < 350

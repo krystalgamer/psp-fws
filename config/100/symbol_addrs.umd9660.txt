@@ -127,3 +127,5 @@ umd9660_release_devfd = 0x00004544; // type:func
 umd9660_lseek = 0x00000000; // type:func
 g_umd9660DvdSectorBuf = 0x00008400;
 g_umd9660DvdDirBuf = 0x00008440;
+func_00004114 = 0x00004114; // type:func
+func_00003ED4 = 0x00003ED4; // type:func
