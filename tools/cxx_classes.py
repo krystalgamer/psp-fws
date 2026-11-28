@@ -222,6 +222,9 @@ def main():
             names = [n for _, n in g["funcs"]]
             if all(MANGLED.match(n) for n in names):
                 continue  # done
+            if any(n.startswith("_Z") and not MANGLED.match(n) for n in names):
+                why["real (exported) names"] += 1
+                continue
             if tuple(g["sizes"]) != sizes or not g["vptr"] or not g["vtable_zero"] or not g["vptr_label"]:
                 why["vtable"] += 1
                 continue
