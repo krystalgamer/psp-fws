@@ -22,6 +22,11 @@ typedef struct {
 typedef char chk_MgrCtrl[(sizeof(MgrCtrl) == 0x18) ? 1 : -1];
 
 typedef struct {
+    u32 w[4];
+    u8 data[0x3F0];
+} MgrEkbBuf;
+
+typedef struct {
     SceUID sema;
     SceUID evf;
 } MgrIb2Ctrl;
@@ -47,11 +52,31 @@ typedef struct {
 } MgrMsAuthInfo;
 
 typedef struct {
+    s32 poolValid;
+    s32 seqBlk[2];
+    s32 poolBlk[2];
+    s32 seqPos[2];
+    s32 unk1C;
+    s32 poolPos[2];
+} MgrMsMap;
+
+typedef struct {
+    volatile s32 status;
+    s32 unk4;
+    s32 segBlocks;
+    MgrMsMap map;
+    u32 unk34[2];
+    u32 mediaId[4];
+} MgrMsInfo;
+
+typedef struct {
     SceUID fd;
     SceUID sema;
     s32 initCount;
-    volatile s32 unkC;
+    MgrMsInfo info;
+    u8 page[0x200];
 } MgrMsCtrl;
+typedef char chk_MgrMsCtrl[(sizeof(MgrMsCtrl) == 0x258) ? 1 : -1];
 
 typedef union {
     u8 b[0x20];
@@ -65,9 +90,9 @@ typedef struct {
     u8 unk5;
 } MgrMsRegParam;
 
-typedef struct {
-    u32 w0;
-    u32 w1;
+typedef union {
+    u64 v;
+    u32 w[2];
 } MgrSeed;
 
 struct Unk_func_000018F4_4 {
@@ -99,6 +124,7 @@ extern s32 D_00009C78;
 extern s8 D_00009C7C[4];
 extern s8 D_00009C80[8];
 extern s8 D_00009C88[2];
+extern MgrEkbBuf D_00009D00;
 extern const u64 D_0000AE68;
 extern s32 D_0000AEE0;
 extern const u16 D_0000AEF0[2];
@@ -108,6 +134,7 @@ extern const u16 D_0000AEFC[2];
 extern const u16 D_0000AF00[2];
 extern const u16 D_0000AF04[2];
 extern M2C_UNK D_0000AFA0;
+extern u32 D_0000AFB8;
 extern const u8 D_0000AFBC[4];
 extern const u8 D_0000AFC0[4];
 extern M2C_UNK D_0000AFCC;
@@ -212,6 +239,8 @@ s32 func_0000341C(u64 *dst, u64 *src, u32 *iv, u32 size, s32 keyReg, u32 *key, s
 s32 func_000038D0(u32 *arg0, u32 *arg1);
 s32 func_00003BFC(s32 arg0, MgrId16 *id, u8 *ekb, MgrId16 *key, u8 *data);
 void func_00003E08(s32 arg0);
+s32 func_00004180(MgrMsInfo *info, s32 *out);
+s32 func_00004358(MgrMsInfo *info);
 s32 func_0000439C(u32 *a, u32 *b);
 void func_00004410(s32 arg0);
 s32 func_00004460(u32 *p, s32 count);
@@ -221,8 +250,9 @@ s32 func_00004664(M2C_UNK, M2C_UNK);
 s32 func_00004724(s32, s32);
 s32 func_00004CBC(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
 s32 func_00005194(s32 arg0, s32 arg1);
+s32 func_00005324(s32 fd, u8 *buf, s32 mode);
 s32 func_000053B0(s32 fd, u8 *buf, s32 mode);
-s32 func_00005768(s32 fd, s32 arg1, s32 arg2, u8 arg3);
+s32 func_00005768(s32 fd, s32 arg1, s32 arg2, s32 arg3);
 s32 func_000057CC(s32 err);
 s32 func_00005834(s32 ret);
 s32 func_000059BC(s32 err);
@@ -231,10 +261,10 @@ s32 func_00005E30(void);
 void func_00005F7C(void);
 s32 func_00006030(void);
 s32 func_0000608C(void);
-void func_000060B4(s32 arg0, s32 *arg1);
-void func_00006100(s32 arg0);
-s32 func_00006104(void);
-s32 func_00006134(s32 arg0, s32 arg1, u8 *buf, s32 size);
+s32 func_000060B4(s32 fd, s32 *out);
+s32 func_00006100(s32 fd);
+s32 func_00006104(s32 fd);
+s32 func_00006134(s32 fd, s32 tpc, u8 *buf, s32 size);
 void func_00006288(MgrMsAuthInfo *out, u64 *a, u64 *b, u64 *c);
 s32 func_00006300(s32 arg0);
 s32 func_00006340(s32 fd, u8 *buf, s32 size, s32 count, u8 *tmp);
@@ -242,28 +272,37 @@ s32 func_00006408(s32 fd, u8 *buf, s32 size, s32 count, u8 *tmp);
 s32 func_000064EC(s32 arg0, s32 arg1);
 s32 func_00006528(s32 fd, s32 reg);
 s32 func_000065FC(s32 arg0, u8 *buf, s32 count);
-s32 func_00006678(s32 arg0, s32 *fd, s32 arg2, s32 arg3);
+s32 func_00006678(s32 fd, s32 *out, s32 mode, s32 lock);
 s32 func_000067CC(s32 fd, s32 unlock);
 s32 func_0000684C(s32 fd);
 s32 func_00006884(s32 arg0, s32 arg1);
 s32 func_000069E0(s32 arg0, s32 arg1);
 s32 func_00006A20(s32 fd, s32 blk, u8 *cmd);
 s32 func_00006B3C(s32 fd);
+s32 func_00006BF0(s32 fd, u8 *buf, s32 mode);
 s32 func_00006C40(s32 fd, s32 arg1, s32 arg2, s32 arg3, u8 *buf);
 s32 func_00006D2C(s32 arg0, s32 arg1, s32 arg2, s32 *arg3);
 s32 func_00006D70(s32 fd, s32 arg1, s32 arg2, u8 *buf);
+s32 func_00006EAC(s32 fd, s32 arg1, s32 arg2, s32 arg3, u8 *buf);
+s32 func_00007364(s32 arg0, u64 *id, s32 arg2);
 s32 func_00007644(s32 arg0);
 s32 func_000077A0(s32 fd, u64 *a, u64 *b);
 s32 func_00007844(s32 fd, u64 *a, u64 *b, u64 *c, s32 flag);
 s32 func_000078F8(s32 fd, u64 *a, u64 *b);
-void func_0000798C(s32 arg0);
+s32 func_0000798C(s32 fd);
+s32 func_000079B0(s32 fd);
+s32 func_00007AD8(s32 fd);
+s32 func_00007BAC(s32 fd, s32 *blks, u8 *buf);
+s32 func_00007F24(s32 fd, s32 *blks, s32 pos, s32 valid, u8 *buf);
+s32 func_00008204(s32 fd, s32 blk);
 s32 func_00008274(s32 fd, s32 reg);
 s32 func_00008300(s32 fd, s32 reg);
-s32 func_00008374(s32 arg0, s32 arg1, s32 pos, s32 step);
+s32 func_00008374(s32 fd, s32 blk, s32 page, s32 count);
 void func_00008388(s32 arg0);
 s32 func_00008460(s32 arg0, s32 arg1, s32 start, s32 step);
 s32 func_00008504(s32 arg0, s32 arg1, s32 arg2, u32 *out);
 s32 func_00008584(s32 arg0, s32 arg1, s32 arg2, s32 *arg3);
+s32 func_00008754(s32 fd, s32 *blks, s32 *pos0, s32 *pos1, s32 *pos2);
 s32 func_00008EB0(s32 *out, s32 pos);
 s32 func_00009B34(s32 fd, s32 reg);
 void func_00009BAC(s32 arg0);
@@ -282,6 +321,7 @@ s32 sceIoIoctl(s32, u32, void *, u32, void *, u32);
 s32 sceKernelClearEventFlag(s32, u32);
 s32 sceKernelCreateEventFlag(const char *, u32, s32, void *);
 s32 sceKernelCreateSema(const char *, u32, s32, s32, void *);
+s32 sceKernelDelayThread(u32);
 s32 sceKernelDeleteEventFlag(s32);
 s32 sceKernelDeleteSema(s32);
 s32 sceKernelExtendKernelStack(s32, s32 (*)(s32 *), void *);
@@ -296,9 +336,14 @@ s32 sceKernelSignalSema(s32, s32);
 s32 sceKernelSuspendDispatchThread(void);
 s32 sceKernelWaitEventFlag(s32, u32, u32, u32 *, u32 *);
 s32 sceKernelWaitSema(s32, s32, void *);
-s32 sceMScmGetSlotState(s32, s32 *, s32);
+s32 sceMScmGetSlotState();
 s32 sceMScmHCLastStatus();
+s32 sceMScmReadDataPIO(s32, u8 *, s32, s32);
+s32 sceMScmSendTPC(s32, u32, s32, s32);
+s32 sceMScmTPCGetInt(s32, u8 *, s32, s32);
 s32 sceMScmTPCSetCmd(s32, u32, u8 *, s32);
+s32 sceMScmWaitHCIntr(s32, s32 *, s32);
+s32 sceMScmWriteDataPIO(s32, u8 *, s32, s32);
 s32 sceMScmWriteMSReg(s32, s32, s32, s32, s32, s32);
 s32 sceMgrAESDecrypt(u32 *dst, u32 *src, u32 size, u32 *key, u32 *iv);
 s32 sceMgrAESEncrypt(u32 *dst, u32 *src, u32 size, u32 *key, u32 *iv);
@@ -310,6 +355,7 @@ s32 sceMgrDESDecrypt(u32 *dst, u32 *src, u32 size, u32 *key, u32 *iv);
 s32 sceMgrDESDecryptBlock(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
 s32 sceMgrDESEncrypt(u32 *dst, u32 *src, u32 size, u32 *key, u32 *iv);
 s32 sceMgrDESEncryptBlock(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
+s32 sceMgrDecryptEKB(s32 arg0, u8 *ekb, s32 size);
 s32 sceMgrDecryptKc(s32 arg0, s32 arg1, s32 arg2);
 s32 sceMgrDecryptKcWithKse(s32 arg0, s32 arg1);
 s32 sceMgrDecryptKicv(s32 arg0, s32 arg1, s32 arg2);
@@ -325,6 +371,7 @@ s32 sceMgrFreeKeyReg(s32 id);
 s32 sceMgrGenerateICV(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
 s32 sceMgrGenerateKb(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
 s32 sceMgrGenerateKse(s32 arg0, s32 arg1, s32 arg2);
+s32 sceMgrGenerateMAC1d(u64 *a, u64 *b, s32 c, u64 *d, u64 *e);
 s32 sceMgrGenerateMACWithKbCBC(s32 arg0, s32 arg1, s32 *arg2, s32 arg3, s32 arg4);
 void sceMgrGenerateMACWithKseCBC(s32 arg0, s32 arg1, s32 *arg2, s32 arg3);
 s32 sceMgrGetDefaultEKB(void *buf, u32 size);
@@ -332,6 +379,7 @@ u32 sceMgrGetInitialEKB(s32 arg0, u32 arg1);
 s32 sceMgrGetLeafID(u64 *out);
 s32 sceMgrInitSeed(MgrSeed *seed);
 s32 sceMgrLock(void);
+s32 sceMgrMSCheckICV(s32 arg0, u64 *icv);
 s32 sceMgrMSCompareICV(s32 arg0);
 s32 sceMgrMSDeauth(s32 arg0);
 s32 sceMgrMSEnd(void);
@@ -339,7 +387,11 @@ s32 sceMgrMSGetLocalEKB(s32 arg0, s32 buf, s32 size);
 s32 sceMgrMSGetMediaID(s32 arg0, u64 *id);
 s32 sceMgrMSGetMediaType(s32 arg0);
 s32 sceMgrMSInit(void);
+s32 sceMgrMSInvalidateICV(s32 arg0);
+s32 sceMgrMSMount(void);
 s32 sceMgrMSReadIBD(s32 arg0, u8 page, s32 arg2, s32 arg3);
+s32 sceMgrMSReadPoolPage(s32 arg0, u8 *buf, s32 pool);
+s32 sceMgrMSReadSeqPage(s32 arg0, u8 *buf, s32 which);
 s32 sceMgrMSReset(void);
 s32 sceMgrMSSetLeafID(s32 arg0, u64 *id);
 s32 sceMgrMSSetMAC2d(s32 arg0, u64 *mac);
