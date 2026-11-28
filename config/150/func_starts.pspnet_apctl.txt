@@ -10,3 +10,4 @@ func_000021A4 = 0x000021A4; // type:func
 func_000024C0 = 0x000024C0; // type:func
 func_00002B90 = 0x00002B90; // type:func
 func_00002FAC = 0x00002FAC; // type:func
+func_0000762C = 0x00007620; // type:func

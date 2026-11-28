@@ -173,7 +173,13 @@ void func_00007594(void *dst, s32 n) {
 }
 
 INCLUDE_ASM("nonmatchings/pspnet_apctl_009850", func_000075BC);
+#endif
 
+#if FW_VERSION < 151
+INCLUDE_ASM("nonmatchings/pspnet_apctl_009850", func_0000762C);
+#endif
+
+#if FW_VERSION < 250
 char *func_0000766C(const char *s, s32 c) {
     const char *p = s;
     char ch = c;
