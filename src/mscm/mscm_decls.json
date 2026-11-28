@@ -63,6 +63,7 @@
   "sceKernelClearEventFlag": "s32 sceKernelClearEventFlag(u32, u32);",
   "sceKernelDelayThread": "s32 sceKernelDelayThread(u32);",
   "sceKernelGetSystemTimeLow": "u32 sceKernelGetSystemTimeLow(void);",
+  "sceKernelGetSystemTimeWide": "u64 sceKernelGetSystemTimeWide(void);",
   "sceKernelGetThreadCurrentPriority": "s32 sceKernelGetThreadCurrentPriority(void);",
   "sceKernelReleaseIntrHandler": "M2C_UNK sceKernelReleaseIntrHandler(M2C_UNK);",
   "sceMScmClearALEvents": "s32 sceMScmClearALEvents(SceMScmHC *hc);",
@@ -145,6 +146,8 @@
   "D_00007800": "extern s32 D_00007800;",
   "D_00007880": "extern s32 D_00007880;",
   "D_00007AF4": "extern s32 D_00007AF4;",
+  "g_ejectTime": "extern u64 g_ejectTime[1]; /* 1.50+: time of the last ejection */",
+  "g_insertTime": "extern u64 g_insertTime[1]; /* 1.50+: time of the last insertion */",
   "g_irqMissCount": "extern s32 g_irqMissCount[1];"
  }
 }

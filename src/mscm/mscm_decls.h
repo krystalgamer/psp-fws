@@ -182,6 +182,8 @@ extern char D_00007300[]; /* "Assertion failed at %s:%s:%04d\n" (mscm_ioman.c) *
 extern s32 D_00007800;
 extern s32 D_00007880;
 extern s32 D_00007AF4;
+extern u64 g_ejectTime[1]; /* 1.50+: time of the last ejection */
+extern u64 g_insertTime[1]; /* 1.50+: time of the last insertion */
 extern s32 g_irqMissCount[1];
 
 s32 _sceMScmReinitializeHC(s32 slot);
@@ -247,6 +249,7 @@ s32 sceKernelChangeThreadPriority(u32, s32);
 s32 sceKernelClearEventFlag(u32, u32);
 s32 sceKernelDelayThread(u32);
 u32 sceKernelGetSystemTimeLow(void);
+u64 sceKernelGetSystemTimeWide(void);
 s32 sceKernelGetThreadCurrentPriority(void);
 M2C_UNK sceKernelReleaseIntrHandler(M2C_UNK);
 s32 sceMScmClearALEvents(SceMScmHC *hc);

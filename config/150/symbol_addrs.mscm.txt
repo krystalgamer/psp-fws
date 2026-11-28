@@ -201,3 +201,5 @@ func_00005EB0 = 0x00006350; // type:func rom:0x63D0
 D_00006B50_v150 = 0x00006B50; // rom:0x6BD0
 // shared names (tools/add_version.py) end
 g_irqMissCount = 0x00006E44; // rom:0x6EC4
+g_insertTime = 0x00007320;
+g_ejectTime = 0x00007328;
