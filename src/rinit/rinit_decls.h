@@ -366,6 +366,7 @@ int isatty(int fd);
 int isinf(double x);
 int isnan(double x);
 struct lconv *localeconv(void);
+void *malloc(size_t nbytes);
 void *memchr(const void *src_void, int c, size_t length);
 void *memcpy(void *dst0, const void *src0, size_t len0);
 void *memmove(void *dst_void, const void *src_void, size_t length);

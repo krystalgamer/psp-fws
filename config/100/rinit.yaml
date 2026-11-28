@@ -77,7 +77,7 @@ segments:
       - [0x6240, c, rinit_0061C0]
       - [0x6348, c, rinit_0062C8]
       - [0x6440, c, rinit_0063C0]
-      - [0x65BC, c, rinit_00653C]
+      - [0x6598, c, rinit_00653C]
       - [0x65E4, c, rinit_006564]
       - [0x6D8C, c, rinit_006D0C]
       - [0x6E74, c, rinit_006DF4]

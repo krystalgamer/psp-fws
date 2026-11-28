@@ -35,3 +35,4 @@ func_00000DFC = 0x00000DFC; // type:func
 func_00000F00 = 0x00000F00; // type:func
 func_00001004 = 0x00001004; // type:func
 func_000010BC = 0x000010BC; // type:func
+malloc = 0x00006518; // type:func

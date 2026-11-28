@@ -79,6 +79,7 @@
   "isinf": "int isinf(double x);",
   "isnan": "int isnan(double x);",
   "localeconv": "struct lconv *localeconv(void);",
+  "malloc": "void *malloc(size_t nbytes);",
   "memchr": "void *memchr(const void *src_void, int c, size_t length);",
   "memcpy": "void *memcpy(void *dst0, const void *src0, size_t len0);",
   "memmove": "void *memmove(void *dst_void, const void *src_void, size_t length);",
