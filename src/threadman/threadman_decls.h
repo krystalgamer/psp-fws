@@ -250,6 +250,15 @@ typedef struct SceWaitQ {
     SceThreadQueue waitQueue; /* 0x0C */
 } SceWaitQ;
 
+/* data of the ThreadEventHandler and Callback uid types (partial) */
+typedef struct SceThreadCbObj {
+    struct SceThreadCbObj *next; /* 0x00 */
+    struct SceThreadCbObj *prev; /* 0x04 */
+    s32 unk8; /* 0x08 */
+    s32 unkC; /* 0x0C: use count */
+    s32 unk10; /* 0x10: deleted, release when unused */
+} SceThreadCbObj;
+
 enum SceThreadStatus {
     THREAD_RUNNING = 1,
     THREAD_READY = 2,
@@ -284,11 +293,12 @@ typedef struct SceThread {
     s32 unk38; /* 0x38 */
     s32 *unk3C; /* 0x3C: where the remaining timeout is written back */
     s32 waitRet; /* 0x40 */
-    u8 unk44[0x4C - 0x44];
+    s32 unk44; /* 0x44 */
+    SceSysmemUidCB *unk48; /* 0x48: thread event handler being run */
     SceThreadQueue callbacks; /* 0x4C: callbacks owned by the thread */
-    u8 unk54[0x58 - 0x54];
+    s32 unk54; /* 0x54 */
     s32 unk58; /* 0x58 */
-    u8 unk5C[0x60 - 0x5C];
+    SceSysmemUidCB *unk5C; /* 0x5C: callback being run */
     s32 initPriority; /* 0x60 */
     u8 unk64[0x6C - 0x64];
     void *entry; /* 0x6C */

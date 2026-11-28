@@ -192,7 +192,20 @@ INCLUDE_ASM("nonmatchings/threadman", func_00000698);
 #endif
 
 #if FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/threadman", func_00000474);
+void func_00000474(SceThread *thread) {
+    s32 ok;
+
+    thread->unk54 = 0;
+    if (thread->unk38 != 0) {
+        ok = func_0000BEBC(thread->unk38, thread->unk3C) == 0;
+        THREADMAN_ASSERT(ok, D_00014928, D_00014948, "releaseWaitState", 0xCD);
+        thread->unk38 = 0;
+        thread->unk3C = NULL;
+    }
+    if (thread->waitObj != NULL) {
+        sceKernelCallUIDObjFunction(thread->waitObj, 0x5BD49380);
+    }
+}
 
 s32 func_00000524(SceSysmemUidCB *cb) {
     return sceKernelCallUIDObjFunction(cb, 0x85FE2B4C);
@@ -679,7 +692,27 @@ INCLUDE_ASM("nonmatchings/threadman", func_00001260);
 #if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/threadman", func_00001220);
 
-INCLUDE_ASM("nonmatchings/threadman", func_00001430);
+void func_00001430(SceThread *thread) {
+    SceSysmemUidCB *cb = thread->unk48;
+    SceThreadCbObj *obj;
+
+    if (cb == NULL) {
+        return;
+    }
+    obj = UID_CB_TO_DATA(cb, g_threadmanInfo.uidThreadEventHandlerType, SceThreadCbObj);
+    obj->unkC--;
+    if (obj->unk10 != 0 && obj->unkC == 0) {
+        SceThreadCbObj *next = obj->next;
+
+        next->prev = obj->prev;
+        obj->prev->next = next;
+        obj->prev = obj;
+        obj->next = obj;
+        func_000003F0(cb, 0);
+    }
+    thread->unk44 = 0;
+    thread->unk48 = NULL;
+}
 
 INCLUDE_ASM("nonmatchings/threadman", func_000014BC);
 #endif
@@ -752,7 +785,30 @@ INCLUDE_ASM("nonmatchings/threadman", sceKernelCheckCallback);
 INCLUDE_ASM("nonmatchings/threadman", func_00001FC4);
 #endif
 
+#if FW_VERSION < 282
+void func_0000233C(SceThread *thread) {
+    SceSysmemUidCB *cb = thread->unk5C;
+    SceThreadCbObj *obj;
+
+    if (cb == NULL) {
+        return;
+    }
+    obj = UID_CB_TO_DATA(cb, g_threadmanInfo.uidCallbackType, SceThreadCbObj);
+    obj->unkC--;
+    if (obj->unk10 != 0 && obj->unkC == 0) {
+        SceThreadCbObj *next = obj->next;
+
+        next->prev = obj->prev;
+        obj->prev->next = next;
+        obj->prev = obj;
+        obj->next = obj;
+        func_000003F0(cb, 0);
+    }
+    thread->unk5C = NULL;
+}
+#else
 INCLUDE_ASM("nonmatchings/threadman", func_0000233C);
+#endif
 
 #if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/threadman", sceKernelReferCallbackStatus);
@@ -1280,7 +1336,32 @@ s32 func_00004B48(void) {
 }
 #endif
 
+#if FW_VERSION < 150
+s32 func_00004B68(SceSysmemUidCB *cb) {
+    SceWaitQ *wq = UID_CB_TO_DATA(cb, g_threadmanInfo.uidWaitQType, SceWaitQ);
+    SceSema *sema = UID_CB_TO_DATA(cb, g_threadmanInfo.uidSemaType, SceSema);
+    SceThread *thread;
+    SceThread *next;
+    s32 n = 0;
+
+    if (wq->numWaitThreads <= 0) {
+        return 0;
+    }
+    next = wq->waitQueue.next;
+    while (next != (SceThread *)&wq->waitQueue) {
+        thread = next;
+        next = thread->next;
+        if (sema->currentCount < thread->waitArg0) {
+            break;
+        }
+        sema->currentCount -= thread->waitArg0;
+        n += func_00000268(thread) > 0;
+    }
+    return n;
+}
+#else
 INCLUDE_ASM("nonmatchings/threadman", func_00004B68);
+#endif
 
 #if FW_VERSION == 100
 /* "WaitQ" again: one literal per original object (thsema.c, ...), merged within this file */
@@ -2999,7 +3080,14 @@ INCLUDE_ASM("nonmatchings/threadman", func_0000F5B4);
 #endif
 
 #if FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/threadman", func_0000ED74);
+void func_0000ED74(s32 id, s32 nargs, s32 a0, s32 a1, s32 a2, s32 a3) {
+    s32 intr = sceKernelCpuSuspendIntr();
+
+    if (g_threadmanInfo.logHandler != NULL) {
+        g_threadmanInfo.logHandler(0, NULL, nargs + 1, id, a0, a1, a2, a3);
+    }
+    sceKernelCpuResumeIntr(intr);
+}
 
 INCLUDE_ASM("nonmatchings/threadman", func_0000EE28);
 #endif
@@ -3409,7 +3497,26 @@ void func_0000F0E4(SceThread *thread, u32 prio) {
     thread->prev->next = next;
 }
 
-INCLUDE_ASM("nonmatchings/threadman", func_0000F13C);
+void func_0000F13C(SceThread *thread, s32 intr) {
+    SceThread *cur = g_threadmanInfo.currentThread;
+
+    if (thread->currentPriority < cur->currentPriority && g_threadmanInfo.dispatchDisabled == 0) {
+        if (intr != 0) {
+            cur->status = THREAD_READY;
+            func_0000F08C(cur);
+            thread->status = THREAD_RUNNING;
+            g_threadmanInfo.nextThread = thread;
+        } else {
+            thread->status = THREAD_READY;
+            func_0000F034(thread);
+            g_threadmanInfo.nextThread = NULL;
+        }
+        func_000007F4(0, intr);
+    } else {
+        thread->status = THREAD_READY;
+        func_0000F034(thread);
+    }
+}
 
 INCLUDE_ASM("nonmatchings/threadman", func_0000F1EC);
 #endif
