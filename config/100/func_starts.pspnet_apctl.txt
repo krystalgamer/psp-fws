@@ -77,3 +77,4 @@ func_0000774C = 0x0000774C; // type:func
 func_000077C8 = 0x000077C8; // type:func
 func_000077F8 = 0x000077F8; // type:func
 func_00007830 = 0x00007830; // type:func
+func_0000763C = 0x0000763C; // type:func

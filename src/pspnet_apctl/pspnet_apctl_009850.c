@@ -171,9 +171,46 @@ void func_00007594(void *dst, s32 n) {
         *p++ = 0;
     }
 }
+#endif
 
+#if FW_VERSION < 151
+s32 func_000075BC(const char *a, const char *b) {
+    if (a == NULL || b == NULL) {
+        if (a == b) {
+            return 0;
+        }
+        return (a == NULL) ? -1 : 1;
+    }
+    while (*a == *b++) {
+        if (*a++ == '\0') {
+            return 0;
+        }
+    }
+    return *a - b[-1];
+}
+#endif
+
+#if FW_VERSION >= 151 && FW_VERSION < 250
 INCLUDE_ASM("nonmatchings/pspnet_apctl_009850", func_000075BC);
+#endif
 
+#if FW_VERSION < 151
+char *func_0000763C(const char *s, s32 c) {
+    char ch = c;
+
+    if (s == NULL) {
+        return NULL;
+    }
+    do {
+        if (*s == ch) {
+            return (char *)s;
+        }
+    } while (*s++ != '\0');
+    return NULL;
+}
+#endif
+
+#if FW_VERSION < 250
 char *func_0000766C(const char *s, s32 c) {
     const char *p = s;
     char ch = c;
@@ -258,7 +295,7 @@ char *func_000077F8(char *arg0, const char *arg1) {
     return var_v0;
 }
 
-s32 func_00007830(const char *s) {
+u32 func_00007830(const char *s) {
     s32 n = 0;
 
     if (s == NULL) {

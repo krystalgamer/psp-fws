@@ -95,7 +95,7 @@ INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00002204);
 
 #if FW_VERSION == 100 || (FW_VERSION >= 150 && FW_VERSION < 282)
 s32 func_00000FD0(void) {
-    sceKernelSetEventFlag(D_00008240, 2U);
+    sceKernelSetEventFlag(D_00011DD4.evf, 2);
     return 0;
 }
 #endif
@@ -160,7 +160,7 @@ s32 func_00001098(s32 code, void *info) {
 
 #if FW_VERSION == 100 || (FW_VERSION >= 150 && FW_VERSION < 260)
 s32 func_000010EC(s32 *state) {
-    *state = D_00008234;
+    *state = D_00011DD4.state;
     return 0;
 }
 #endif
@@ -248,7 +248,10 @@ INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00001250);
 #endif
 
 #if FW_VERSION >= 260 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_0000251C);
+s32 func_0000251C(s32 arg0) {
+    D_0001253C = arg0;
+    return 0;
+}
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
@@ -644,7 +647,9 @@ INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_000035C4);
 #endif
 
 #if FW_VERSION == 271
-INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00003B50);
+void func_00003B50(s32 arg0) {
+    func_0000BC30(arg0);
+}
 #endif
 
 #if FW_VERSION >= 250 && FW_VERSION < 282
@@ -658,7 +663,18 @@ INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_000036FC);
 #endif
 
 #if FW_VERSION >= 250 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_000037CC);
+s32 func_000037CC(void) {
+    if (D_00012430 > 0) {
+        func_0000901C();
+        D_00012430 = 0;
+    }
+    if (D_00012434 > 0) {
+        func_0000B740();
+        D_00012438 = 0;
+        D_00012434 = 0;
+    }
+    return 0;
+}
 
 INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00003830);
 #endif
@@ -706,8 +722,28 @@ s32 func_000038EC(SceNetApctlCtx *ctx, SceNetInAddrPacked *ip, SceNetInAddrPacke
 }
 #endif
 
-#if FW_VERSION >= 282
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_000038EC);
+#endif
+
+#if FW_VERSION == 282
+s32 func_000038EC(SceNetApctlCtx *ctx, SceNetInAddrPacked *ip, SceNetInAddrPacked *bcast, SceNetInAddrPacked *mask, SceNetInAddrPacked *route, SceNetInAddrPacked *dns1, SceNetInAddrPacked *dns2) {
+    s32 temp_v0;
+    s32 temp_v0_2;
+    s32 var_s1;
+
+    temp_v0 = sceNetConfigSetIfaddr();
+    var_s1 = temp_v0;
+    if (temp_v0 >= 0) {
+        sceNetConfigSetDefaultRoute(route);
+        temp_v0_2 = sceNetConfigSetDNS(dns1, dns2);
+        var_s1 = temp_v0_2;
+        if (temp_v0_2 >= 0) {
+            sceNetConfigAddMRoute(ip);
+        }
+    }
+    return var_s1;
+}
 #endif
 
 #if FW_VERSION == 100
@@ -870,9 +906,184 @@ INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00003EF0);
 #endif
 
 #if FW_VERSION >= 102 && FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_000021B8);
+s32 func_000021B8(SceNetDhcpCtx *dc, s32 prev) {
+    u32 now;
+    u32 wait;
+    s32 n;
+    s32 ret;
+    u8 *p;
+    u8 *q;
 
-INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_000024D4);
+    if (prev == 0) {
+        if (dc->lease != NULL) {
+            func_00005290(dc->lease);
+            dc->lease = NULL;
+        }
+        dc->interval = dc->initInterval;
+    } else {
+        dc->interval += (u32)sceNetRand() % (u32)(dc->interval * 2);
+        if (dc->maxInterval < dc->interval) {
+            dc->interval = dc->maxInterval / 2 + (u32)sceNetRand() % (u32)dc->maxInterval;
+        }
+    }
+    now = sceNetGetSystemClockSec();
+    if (dc->timeout == 0 || now + dc->interval < dc->startTime + dc->timeout) {
+        wait = dc->interval;
+    } else {
+        if (now >= dc->startTime + dc->timeout) {
+            goto timeout;
+        }
+        wait = dc->startTime + dc->timeout - now;
+    }
+    for (; wait > 0; wait--) {
+        n = sceNetBpfRead(dc->bpf, dc->rxBuf, dc->rxLen);
+        if (n < 0) {
+            return 0x80410582;
+        }
+        if (sceKernelPollSema(dc->sema, 1) == 0) {
+            func_00005D14(dc, 1, 0);
+        }
+        for (p = dc->rxBuf; n > 0; n -= p - q) {
+            u32 hl = *(u16 *)(p + 0x10);
+
+            q = p;
+            dc->rx.ether = p + hl;
+            dc->rx.ip = dc->rx.ether + 14;
+            dc->rx.udp = (SceNetDhcpUdpHdr *)(p + (hl + (dc->rx.ether[14] & 0xF) * 4) + 14);
+            dc->rx.bootp = p + (hl + (dc->rx.ether[14] & 0xF) * 4) + 22;
+            if (func_00003AA8(dc) == 0) {
+                SceNetDhcpLease *l = &dc->offer;
+
+                func_00007504(l, 0, sizeof(*l));
+                if (func_00006870(dc->rx.bootp, (u16)__builtin_allegrex_wsbh(dc->rx.udp->len) - 8) == 0) {
+                    ret = func_00004AEC(dc->rx.bootp, (u16)__builtin_allegrex_wsbh(dc->rx.udp->len) - 8, l);
+                    if (ret < 0) {
+                        return ret;
+                    }
+                    if (l->unk3E8 != 0 && l->unk3DC != 0) {
+                        if (func_00006414(dc, &l->yiaddr) == 0) {
+                            dc->lease = l;
+                            return 2;
+                        }
+                    }
+                    func_00005290(l);
+                }
+            }
+            p += (*(u16 *)(p + 0x10) + *(u32 *)(p + 8) + 3) & ~3;
+        }
+    }
+    now = sceNetGetSystemClockSec();
+    if (dc->timeout != 0 && now >= dc->startTime + dc->timeout) {
+        goto timeout;
+    }
+    ret = func_000047D8(dc);
+    if (ret < 0) {
+        return ret;
+    }
+    return 1;
+timeout:
+    func_00005D14(dc, 1, 0x80410502);
+    return 0x80410502;
+}
+
+s32 func_000024D4(SceNetDhcpCtx *dc, s32 prev) {
+    u8 msg[0x100];
+    u32 now;
+    u32 wait;
+    s32 n;
+    s32 ret;
+    u8 *p;
+    u8 *q;
+    s8 *opt;
+
+    if (prev == 2) {
+        dc->interval = dc->initInterval;
+    } else {
+        dc->interval += (u32)sceNetRand() % (u32)(dc->interval * 2);
+        if (dc->maxInterval < dc->interval) {
+            dc->interval = dc->maxInterval / 2 + (u32)sceNetRand() % (u32)dc->maxInterval;
+        }
+    }
+    now = sceNetGetSystemClockSec();
+    if (dc->timeout == 0 || now + dc->interval < dc->startTime + dc->timeout) {
+        wait = dc->interval;
+    } else {
+        if (now >= dc->startTime + dc->timeout) {
+            goto timeout;
+        }
+        wait = dc->startTime + dc->timeout - now;
+    }
+    for (; wait > 0; wait--) {
+        n = sceNetBpfRead(dc->bpf, dc->rxBuf, dc->rxLen);
+        if (n < 0) {
+            return 0x80410582;
+        }
+        if (sceKernelPollSema(dc->sema, 1) == 0) {
+            func_00005D14(dc, 3, 0);
+        }
+        for (p = dc->rxBuf; n > 0; n -= p - q) {
+            u32 hl = *(u16 *)(p + 0x10);
+
+            q = p;
+            dc->rx.ether = p + hl;
+            dc->rx.ip = dc->rx.ether + 14;
+            dc->rx.udp = (SceNetDhcpUdpHdr *)(p + (hl + (dc->rx.ether[14] & 0xF) * 4) + 14);
+            dc->rx.bootp = p + (hl + (dc->rx.ether[14] & 0xF) * 4) + 22;
+            if (func_00003CD0(dc) == 0) {
+                opt = func_00006FC8(dc->rx.bootp, (u16)__builtin_allegrex_wsbh(dc->rx.udp->len) - 8, 53);
+                if (opt != NULL) {
+                    if (opt[2] == 6) {
+                        func_00007504(msg, 0, sizeof(msg));
+                        opt = func_00006FC8(dc->rx.bootp, (u16)__builtin_allegrex_wsbh(dc->rx.udp->len) - 8, 56);
+                        if (opt != NULL) {
+                            func_0000708C((u8 *)opt + 2, msg, opt[1]);
+                        }
+                        func_00005290(dc->lease);
+                        dc->lease = NULL;
+                        return 0;
+                    }
+                    if (opt[2] == 5) {
+                        if (func_00006870(dc->rx.bootp, (u16)__builtin_allegrex_wsbh(dc->rx.udp->len) - 8) == 0) {
+                            ret = func_00004AEC(dc->rx.bootp, (u16)__builtin_allegrex_wsbh(dc->rx.udp->len) - 8, dc->lease);
+                            if (ret < 0) {
+                                return ret;
+                            }
+                            ret = func_00006414(dc, &dc->lease->yiaddr);
+                            if (ret == 0) {
+                                dc->unkF98 = sceNetGetSystemClockSec();
+                                func_000045B8(dc, &dc->lease->yiaddr);
+                                return 4;
+                            }
+                            ret = func_00005B2C(dc, ret);
+                            if (ret < 0) {
+                                return ret;
+                            }
+                            if (sceNetBpfWrite(dc->bpf, dc->pkt, dc->pktLen) < dc->pktLen) {
+                                return 0x80410582;
+                            }
+                            func_00005290(dc->lease);
+                            dc->lease = NULL;
+                            return 0x80410503;
+                        }
+                    }
+                }
+            }
+            p += (*(u16 *)(p + 0x10) + *(u32 *)(p + 8) + 3) & ~3;
+        }
+    }
+    now = sceNetGetSystemClockSec();
+    if (dc->timeout != 0 && now >= dc->startTime + dc->timeout) {
+        goto timeout;
+    }
+    ret = func_000047D8(dc);
+    if (ret < 0) {
+        return ret;
+    }
+    return 3;
+timeout:
+    func_00005D14(dc, 3, 0x80410502);
+    return 0x80410502;
+}
 #endif
 
 #if FW_VERSION >= 250 && FW_VERSION < 282
@@ -881,20 +1092,393 @@ INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00003A2C);
 INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00003A98);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_000021A4);
+#if FW_VERSION >= 150 && FW_VERSION < 250
+s32 func_000021A4(SceNetDhcpCtx *dc, s32 prev) {
+    u32 now;
+    u32 wait;
+    s32 n;
+    s32 ret;
+    u8 *p;
+    u8 *q;
 
-INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_000024C0);
+    if (prev == 0) {
+        if (dc->lease != NULL) {
+            func_00005290(dc->lease);
+            dc->lease = NULL;
+        }
+        dc->interval = dc->initInterval;
+    } else {
+        dc->interval += (u32)sceNetRand() % (u32)(dc->interval * 2);
+        if (dc->maxInterval < dc->interval) {
+            dc->interval = dc->maxInterval / 2 + (u32)sceNetRand() % (u32)dc->maxInterval;
+        }
+    }
+    now = sceNetGetSystemClockSec();
+    if (dc->timeout == 0 || now + dc->interval < dc->startTime + dc->timeout) {
+        wait = dc->interval;
+    } else {
+        if (now >= dc->startTime + dc->timeout) {
+            goto timeout;
+        }
+        wait = dc->startTime + dc->timeout - now;
+    }
+    for (; wait > 0; wait--) {
+        n = sceNetBpfRead(dc->bpf, dc->rxBuf, dc->rxLen);
+        if (n < 0) {
+            return 0x80410582;
+        }
+        if (sceKernelPollSema(dc->sema, 1) == 0) {
+            func_00005D14(dc, 1, 0);
+        }
+        for (p = dc->rxBuf; n > 0; n -= p - q) {
+            u32 hl = *(u16 *)(p + 0x10);
+
+            q = p;
+            dc->rx.ether = p + hl;
+            dc->rx.ip = dc->rx.ether + 14;
+            dc->rx.udp = (SceNetDhcpUdpHdr *)(p + (hl + (dc->rx.ether[14] & 0xF) * 4) + 14);
+            dc->rx.bootp = p + (hl + (dc->rx.ether[14] & 0xF) * 4) + 22;
+            if (func_00003AA8(dc) == 0) {
+                SceNetDhcpLease *l = &dc->offer;
+
+                func_00007504(l, 0, sizeof(*l));
+                if (func_00006870(dc->rx.bootp, (u16)__builtin_allegrex_wsbh(dc->rx.udp->len) - 8) == 0) {
+                    ret = func_00004AEC(dc->rx.bootp, (u16)__builtin_allegrex_wsbh(dc->rx.udp->len) - 8, l);
+                    if (ret < 0) {
+                        return ret;
+                    }
+                    if (l->unk3E8 != 0 && l->unk3DC != 0) {
+                        if (func_00006414(dc, &l->yiaddr) == 0) {
+                            dc->lease = l;
+                            return 2;
+                        }
+                    }
+                    func_00005290(l);
+                }
+            }
+            p += (*(u16 *)(p + 0x10) + *(u32 *)(p + 8) + 3) & ~3;
+        }
+    }
+    now = sceNetGetSystemClockSec();
+    if (dc->timeout != 0 && now >= dc->startTime + dc->timeout) {
+        goto timeout;
+    }
+    ret = func_000047D8(dc);
+    if (ret < 0) {
+        return ret;
+    }
+    return 1;
+timeout:
+    func_00005D14(dc, 1, 0x80410502);
+    return 0x80410502;
+}
+#endif
+
+#if FW_VERSION >= 250 && FW_VERSION < 282
+INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_000021A4);
+#endif
+
+#if FW_VERSION == 150
+s32 func_000024C0(SceNetDhcpCtx *dc, s32 prev) {
+    u8 msg[0x100];
+    u32 now;
+    u32 wait;
+    s32 n;
+    s32 ret;
+    u8 *p;
+    u8 *q;
+    s8 *opt;
+
+    if (prev == 2) {
+        dc->interval = dc->initInterval;
+    } else {
+        dc->interval += (u32)sceNetRand() % (u32)(dc->interval * 2);
+        if (dc->maxInterval < dc->interval) {
+            dc->interval = dc->maxInterval / 2 + (u32)sceNetRand() % (u32)dc->maxInterval;
+        }
+    }
+    now = sceNetGetSystemClockSec();
+    if (dc->timeout == 0 || now + dc->interval < dc->startTime + dc->timeout) {
+        wait = dc->interval;
+    } else {
+        if (now >= dc->startTime + dc->timeout) {
+            goto timeout;
+        }
+        wait = dc->startTime + dc->timeout - now;
+    }
+    for (; wait > 0; wait--) {
+        n = sceNetBpfRead(dc->bpf, dc->rxBuf, dc->rxLen);
+        if (n < 0) {
+            return 0x80410582;
+        }
+        if (sceKernelPollSema(dc->sema, 1) == 0) {
+            func_00005D14(dc, 3, 0);
+        }
+        for (p = dc->rxBuf; n > 0; n -= p - q) {
+            u32 hl = *(u16 *)(p + 0x10);
+
+            q = p;
+            dc->rx.ether = p + hl;
+            dc->rx.ip = dc->rx.ether + 14;
+            dc->rx.udp = (SceNetDhcpUdpHdr *)(p + (hl + (dc->rx.ether[14] & 0xF) * 4) + 14);
+            dc->rx.bootp = p + (hl + (dc->rx.ether[14] & 0xF) * 4) + 22;
+            if (func_00003CD0(dc) == 0) {
+                opt = func_00006FC8(dc->rx.bootp, (u16)__builtin_allegrex_wsbh(dc->rx.udp->len) - 8, 53);
+                if (opt != NULL) {
+                    if (opt[2] == 6) {
+                        func_00007504(msg, 0, sizeof(msg));
+                        opt = func_00006FC8(dc->rx.bootp, (u16)__builtin_allegrex_wsbh(dc->rx.udp->len) - 8, 56);
+                        if (opt != NULL) {
+                            func_0000708C((u8 *)opt + 2, msg, opt[1]);
+                        }
+                        func_00005290(dc->lease);
+                        dc->lease = NULL;
+                        return 0;
+                    }
+                    if (opt[2] == 5) {
+                        if (func_00006870(dc->rx.bootp, (u16)__builtin_allegrex_wsbh(dc->rx.udp->len) - 8) == 0) {
+                            ret = func_00004AEC(dc->rx.bootp, (u16)__builtin_allegrex_wsbh(dc->rx.udp->len) - 8, dc->lease);
+                            if (ret < 0) {
+                                return ret;
+                            }
+                            ret = func_00006414(dc, &dc->lease->yiaddr);
+                            if (ret == 0) {
+                                dc->unkF98 = sceNetGetSystemClockSec();
+                                func_000045B8(dc, &dc->lease->yiaddr);
+                                return 4;
+                            }
+                            ret = func_00005B2C(dc, ret);
+                            if (ret < 0) {
+                                return ret;
+                            }
+                            if (sceNetBpfWrite(dc->bpf, dc->pkt, dc->pktLen) < dc->pktLen) {
+                                return 0x80410582;
+                            }
+                            func_00005290(dc->lease);
+                            dc->lease = NULL;
+                            return 0x80410503;
+                        }
+                    }
+                }
+            }
+            p += (*(u16 *)(p + 0x10) + *(u32 *)(p + 8) + 3) & ~3;
+        }
+    }
+    now = sceNetGetSystemClockSec();
+    if (dc->timeout != 0 && now >= dc->startTime + dc->timeout) {
+        goto timeout;
+    }
+    ret = func_000047D8(dc);
+    if (ret < 0) {
+        return ret;
+    }
+    return 3;
+timeout:
+    func_00005D14(dc, 3, 0x80410502);
+    return 0x80410502;
+}
 #endif
 
 #if FW_VERSION >= 151 && FW_VERSION < 282
+INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_000024C0);
+
 INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00002898);
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_000020D4);
+s32 func_000020D4(SceNetDhcpCtx *dc, s32 prev) {
+    s32 now;
+    s32 wait;
+    s32 n;
+    s32 ret;
+    u8 *p;
+    u8 *q;
 
-INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00002408);
+    if (prev == 0) {
+        if (dc->lease != NULL) {
+            func_00005290(dc->lease);
+            dc->lease = NULL;
+        }
+        dc->interval = dc->initInterval;
+    } else {
+        dc->interval += (u32)sceNetRand() % (u32)(dc->interval * 2);
+        if (dc->maxInterval < dc->interval) {
+            dc->interval = dc->maxInterval / 2 + (u32)sceNetRand() % (u32)dc->maxInterval;
+        }
+    }
+    now = sceNetGetSystemClockSec();
+    if (now < 0) {
+        return 0x80410586;
+    }
+    if (dc->timeout == 0 || now + dc->interval < dc->startTime + dc->timeout) {
+        wait = dc->interval;
+    } else {
+        if (now >= dc->startTime + dc->timeout) {
+            goto timeout;
+        }
+        wait = dc->startTime + dc->timeout - now;
+    }
+    for (; wait > 0; wait--) {
+        n = sceNetBpfRead(dc->bpf, dc->rxBuf, dc->rxLen);
+        if (n < 0) {
+            return 0x80410582;
+        }
+        if (sceKernelPollSema(dc->sema, 1) == 0) {
+            func_00005D14(dc, 1, 0);
+        }
+        for (p = dc->rxBuf; n > 0; n -= p - q) {
+            u32 hl = *(u16 *)(p + 0x10);
+
+            q = p;
+            dc->rx.ether = p + hl;
+            dc->rx.ip = dc->rx.ether + 14;
+            dc->rx.udp = (SceNetDhcpUdpHdr *)(p + (hl + (dc->rx.ether[14] & 0xF) * 4) + 14);
+            dc->rx.bootp = p + (hl + (dc->rx.ether[14] & 0xF) * 4) + 22;
+            if (func_00003AA8(dc) == 0) {
+                SceNetDhcpLease *l = &dc->offer;
+
+                func_00007504(l, 0, sizeof(*l));
+                if (func_00006870(dc->rx.bootp, (u16)__builtin_allegrex_wsbh(dc->rx.udp->len) - 8) == 0) {
+                    ret = func_00004AEC(dc->rx.bootp, (u16)__builtin_allegrex_wsbh(dc->rx.udp->len) - 8, l);
+                    if (ret < 0) {
+                        return ret;
+                    }
+                    if (l->unk3E8 != 0 && l->unk3DC != 0) {
+                        if (func_00006414(dc, &l->yiaddr) == 0) {
+                            dc->lease = l;
+                            return 2;
+                        }
+                    }
+                    func_00005290(l);
+                }
+            }
+            p += (*(u16 *)(p + 0x10) + *(u32 *)(p + 8) + 3) & ~3;
+        }
+    }
+    now = sceNetGetSystemClockSec();
+    if (now < 0) {
+        return 0x80410586;
+    }
+    if (dc->timeout != 0 && now >= dc->startTime + dc->timeout) {
+        goto timeout;
+    }
+    ret = func_000047D8(dc);
+    if (ret < 0) {
+        return ret;
+    }
+    return 1;
+timeout:
+    func_00005D14(dc, 1, 0x80410502);
+    return 0x80410502;
+}
+
+s32 func_00002408(SceNetDhcpCtx *dc, s32 prev) {
+    u8 msg[0x100];
+    s32 now;
+    s32 wait;
+    s32 n;
+    s32 ret;
+    u8 *p;
+    u8 *q;
+    s8 *opt;
+
+    if (prev == 2) {
+        dc->interval = dc->initInterval;
+    } else {
+        dc->interval += (u32)sceNetRand() % (u32)(dc->interval * 2);
+        if (dc->maxInterval < dc->interval) {
+            dc->interval = dc->maxInterval / 2 + (u32)sceNetRand() % (u32)dc->maxInterval;
+        }
+    }
+    now = sceNetGetSystemClockSec();
+    if (now < 0) {
+        return 0x80410586;
+    }
+    if (dc->timeout == 0 || now + dc->interval < dc->startTime + dc->timeout) {
+        wait = dc->interval;
+    } else {
+        if (now >= dc->startTime + dc->timeout) {
+            goto timeout;
+        }
+        wait = dc->startTime + dc->timeout - now;
+    }
+    for (; wait > 0; wait--) {
+        n = sceNetBpfRead(dc->bpf, dc->rxBuf, dc->rxLen);
+        if (n < 0) {
+            return 0x80410582;
+        }
+        if (sceKernelPollSema(dc->sema, 1) == 0) {
+            func_00005D14(dc, 3, 0);
+        }
+        for (p = dc->rxBuf; n > 0; n -= p - q) {
+            u32 hl = *(u16 *)(p + 0x10);
+
+            q = p;
+            dc->rx.ether = p + hl;
+            dc->rx.ip = dc->rx.ether + 14;
+            dc->rx.udp = (SceNetDhcpUdpHdr *)(p + (hl + (dc->rx.ether[14] & 0xF) * 4) + 14);
+            dc->rx.bootp = p + (hl + (dc->rx.ether[14] & 0xF) * 4) + 22;
+            if (func_00003CD0(dc) == 0) {
+                opt = func_00006FC8(dc->rx.bootp, (u16)__builtin_allegrex_wsbh(dc->rx.udp->len) - 8, 53);
+                if (opt != NULL) {
+                    if (opt[2] == 6) {
+                        func_00007504(msg, 0, sizeof(msg));
+                        opt = func_00006FC8(dc->rx.bootp, (u16)__builtin_allegrex_wsbh(dc->rx.udp->len) - 8, 56);
+                        if (opt != NULL) {
+                            func_0000708C((u8 *)opt + 2, msg, opt[1]);
+                        }
+                        func_00005290(dc->lease);
+                        dc->lease = NULL;
+                        return 0;
+                    }
+                    if (opt[2] == 5) {
+                        if (func_00006870(dc->rx.bootp, (u16)__builtin_allegrex_wsbh(dc->rx.udp->len) - 8) == 0) {
+                            ret = func_00004AEC(dc->rx.bootp, (u16)__builtin_allegrex_wsbh(dc->rx.udp->len) - 8, dc->lease);
+                            if (ret < 0) {
+                                return ret;
+                            }
+                            ret = func_00006414(dc, &dc->lease->yiaddr);
+                            if (ret == 0) {
+                                dc->unkF98 = sceNetGetSystemClockSec();
+                                if (dc->unkF98 < 0) {
+                                    return 0x80410586;
+                                }
+                                func_000045B8(dc, &dc->lease->yiaddr);
+                                return 4;
+                            }
+                            ret = func_00005B2C(dc, ret);
+                            if (ret < 0) {
+                                return ret;
+                            }
+                            if (sceNetBpfWrite(dc->bpf, dc->pkt, dc->pktLen) < dc->pktLen) {
+                                return 0x80410582;
+                            }
+                            func_00005290(dc->lease);
+                            dc->lease = NULL;
+                            return 0x80410503;
+                        }
+                    }
+                }
+            }
+            p += (*(u16 *)(p + 0x10) + *(u32 *)(p + 8) + 3) & ~3;
+        }
+    }
+    now = sceNetGetSystemClockSec();
+    if (now < 0) {
+        return 0x80410586;
+    }
+    if (dc->timeout != 0 && now >= dc->startTime + dc->timeout) {
+        goto timeout;
+    }
+    ret = func_000047D8(dc);
+    if (ret < 0) {
+        return ret;
+    }
+    return 3;
+timeout:
+    func_00005D14(dc, 3, 0x80410502);
+    return 0x80410502;
+}
 #endif
 
 #if FW_VERSION < 151
@@ -904,19 +1488,360 @@ INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00002818);
 #if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00002BA4);
 
-INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00002FC0);
+s32 func_00002FC0(SceNetDhcpCtx *dc, s32 prev) {
+    u8 msg[0x100];
+    u32 now;
+    u32 wait;
+    s32 n;
+    s32 ret;
+    u8 *p;
+    u8 *q;
+    s8 *opt;
+
+    if (dc->callback != NULL) {
+        dc->callback(3, 0);
+    }
+    if (prev != 6) {
+        dc->interval = dc->initInterval;
+    }
+    now = sceNetGetSystemClockSec();
+    if (now >= dc->unkF98 + dc->lease->unk3DC) {
+        return 0x80410504;
+    }
+    dc->interval += (u32)sceNetRand() % (u32)(dc->interval * 2);
+    if (dc->maxInterval < dc->interval) {
+        dc->interval = dc->maxInterval / 2 + (u32)sceNetRand() % (u32)dc->maxInterval;
+    }
+    wait = dc->unkF98 + dc->lease->unk3DC - now;
+    if (dc->interval < wait) {
+        wait = dc->interval;
+    }
+    for (; wait > 0; wait--) {
+        n = sceNetBpfRead(dc->bpf, dc->rxBuf, dc->rxLen);
+        if (n < 0) {
+            return 0x80410582;
+        }
+        if (sceKernelPollSema(dc->sema, 1) == 0) {
+            func_00005D14(dc, 6, 0);
+        }
+        for (p = dc->rxBuf; n > 0; n -= p - q) {
+            u32 hl = *(u16 *)(p + 0x10);
+
+            q = p;
+            dc->rx.ether = p + hl;
+            dc->rx.ip = dc->rx.ether + 14;
+            dc->rx.udp = (SceNetDhcpUdpHdr *)(p + (hl + (dc->rx.ether[14] & 0xF) * 4) + 14);
+            dc->rx.bootp = p + (hl + (dc->rx.ether[14] & 0xF) * 4) + 22;
+            if (func_00003CD0(dc) == 0) {
+                opt = func_00006FC8(dc->rx.bootp, (u16)__builtin_allegrex_wsbh(dc->rx.udp->len) - 8, 53);
+                if (opt != NULL) {
+                    if (opt[2] == 6) {
+                        func_00007504(msg, 0, sizeof(msg));
+                        opt = func_00006FC8(dc->rx.bootp, (u16)__builtin_allegrex_wsbh(dc->rx.udp->len) - 8, 56);
+                        if (opt != NULL) {
+                            func_0000708C((u8 *)opt + 2, msg, opt[1]);
+                        }
+                        func_00005290(dc->lease);
+                        dc->lease = NULL;
+                        return 0x80410505;
+                    }
+                    if (opt[2] == 5) {
+                        if (func_00006870(dc->rx.bootp, (u16)__builtin_allegrex_wsbh(dc->rx.udp->len) - 8) == 0) {
+                            ret = func_00004AEC(dc->rx.bootp, (u16)__builtin_allegrex_wsbh(dc->rx.udp->len) - 8, dc->lease);
+                            if (ret < 0) {
+                                return ret;
+                            }
+                            dc->unkF98 = sceNetGetSystemClockSec();
+                            func_000045B8(dc, &dc->lease->yiaddr);
+                            return 4;
+                        }
+                    }
+                }
+            }
+            p += (*(u16 *)(p + 0x10) + *(u32 *)(p + 8) + 3) & ~3;
+        }
+    }
+    now = sceNetGetSystemClockSec();
+    if (now >= dc->unkF98 + dc->lease->unk3DC) {
+        return 0x80410504;
+    }
+    ret = func_000047D8(dc);
+    if (ret < 0) {
+        return ret;
+    }
+    return 6;
+}
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00002B90);
+#endif
 
-INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00002FAC);
+#if FW_VERSION >= 150 && FW_VERSION < 250
+s32 func_00002FAC(SceNetDhcpCtx *dc, s32 prev) {
+    u8 msg[0x100];
+    u32 now;
+    u32 wait;
+    s32 n;
+    s32 ret;
+    u8 *p;
+    u8 *q;
+    s8 *opt;
+
+    if (dc->callback != NULL) {
+        dc->callback(3, 0);
+    }
+    if (prev != 6) {
+        dc->interval = dc->initInterval;
+    }
+    now = sceNetGetSystemClockSec();
+    if (now >= dc->unkF98 + dc->lease->unk3DC) {
+        return 0x80410504;
+    }
+    dc->interval += (u32)sceNetRand() % (u32)(dc->interval * 2);
+    if (dc->maxInterval < dc->interval) {
+        dc->interval = dc->maxInterval / 2 + (u32)sceNetRand() % (u32)dc->maxInterval;
+    }
+    wait = dc->unkF98 + dc->lease->unk3DC - now;
+    if (dc->interval < wait) {
+        wait = dc->interval;
+    }
+    for (; wait > 0; wait--) {
+        n = sceNetBpfRead(dc->bpf, dc->rxBuf, dc->rxLen);
+        if (n < 0) {
+            return 0x80410582;
+        }
+        if (sceKernelPollSema(dc->sema, 1) == 0) {
+            func_00005D14(dc, 6, 0);
+        }
+        for (p = dc->rxBuf; n > 0; n -= p - q) {
+            u32 hl = *(u16 *)(p + 0x10);
+
+            q = p;
+            dc->rx.ether = p + hl;
+            dc->rx.ip = dc->rx.ether + 14;
+            dc->rx.udp = (SceNetDhcpUdpHdr *)(p + (hl + (dc->rx.ether[14] & 0xF) * 4) + 14);
+            dc->rx.bootp = p + (hl + (dc->rx.ether[14] & 0xF) * 4) + 22;
+            if (func_00003CD0(dc) == 0) {
+                opt = func_00006FC8(dc->rx.bootp, (u16)__builtin_allegrex_wsbh(dc->rx.udp->len) - 8, 53);
+                if (opt != NULL) {
+                    if (opt[2] == 6) {
+                        func_00007504(msg, 0, sizeof(msg));
+                        opt = func_00006FC8(dc->rx.bootp, (u16)__builtin_allegrex_wsbh(dc->rx.udp->len) - 8, 56);
+                        if (opt != NULL) {
+                            func_0000708C((u8 *)opt + 2, msg, opt[1]);
+                        }
+                        func_00005290(dc->lease);
+                        dc->lease = NULL;
+                        return 0x80410505;
+                    }
+                    if (opt[2] == 5) {
+                        if (func_00006870(dc->rx.bootp, (u16)__builtin_allegrex_wsbh(dc->rx.udp->len) - 8) == 0) {
+                            ret = func_00004AEC(dc->rx.bootp, (u16)__builtin_allegrex_wsbh(dc->rx.udp->len) - 8, dc->lease);
+                            if (ret < 0) {
+                                return ret;
+                            }
+                            dc->unkF98 = sceNetGetSystemClockSec();
+                            func_000045B8(dc, &dc->lease->yiaddr);
+                            return 4;
+                        }
+                    }
+                }
+            }
+            p += (*(u16 *)(p + 0x10) + *(u32 *)(p + 8) + 3) & ~3;
+        }
+    }
+    now = sceNetGetSystemClockSec();
+    if (now >= dc->unkF98 + dc->lease->unk3DC) {
+        return 0x80410504;
+    }
+    ret = func_000047D8(dc);
+    if (ret < 0) {
+        return ret;
+    }
+    return 6;
+}
+#endif
+
+#if FW_VERSION >= 250 && FW_VERSION < 282
+s32 func_00002FAC(SceNetDhcpCtx *dc, s32 prev) {
+    u8 msg[0x100];
+    u32 now;
+    u32 wait;
+    s32 n;
+    s32 ret;
+    u8 *p;
+    u8 *q;
+    s8 *opt;
+
+    if (dc->callback != NULL) {
+        dc->callback(3, 0);
+    }
+    if (prev != 6) {
+        dc->interval = dc->initInterval;
+    }
+    now = sceNetGetSystemClockSec();
+    if (now >= dc->unkF98 + dc->lease->unk3DC) {
+        return 0x80410504;
+    }
+    dc->interval += (u32)sceNetRand() % (u32)(dc->interval * 2);
+    if (dc->maxInterval < dc->interval) {
+        dc->interval = dc->maxInterval / 2 + (u32)sceNetRand() % (u32)dc->maxInterval;
+    }
+    wait = dc->unkF98 + dc->lease->unk3DC - now;
+    if (dc->interval < wait) {
+        wait = dc->interval;
+    }
+    for (; wait > 0; wait--) {
+        n = sceNetBpfRead(dc->bpf, dc->rxBuf, dc->rxLen);
+        if (n < 0) {
+            return 0x80410582;
+        }
+        if (sceKernelPollSema(dc->sema, 1) == 0) {
+            func_00005D14(dc, 6, 0);
+        }
+        for (p = dc->rxBuf; n > 0; n -= p - q) {
+            u32 hl = *(u16 *)(p + 0x10);
+
+            q = p;
+            dc->rx.ether = p + hl;
+            dc->rx.ip = dc->rx.ether + 14;
+            dc->rx.udp = (SceNetDhcpUdpHdr *)(p + (hl + (dc->rx.ether[14] & 0xF) * 4) + 14);
+            dc->rx.bootp = p + (hl + (dc->rx.ether[14] & 0xF) * 4) + 22;
+            if (func_00003CD0(dc) == 0) {
+                opt = func_00006FC8(dc->rx.bootp, (u16)__builtin_allegrex_wsbh(dc->rx.udp->len) - 8, 53);
+                if (opt != NULL) {
+                    if (opt[2] == 6) {
+                        sceNetMemset(msg, 0, sizeof(msg));
+                        opt = func_00006FC8(dc->rx.bootp, (u16)__builtin_allegrex_wsbh(dc->rx.udp->len) - 8, 56);
+                        if (opt != NULL) {
+                            func_0000708C((u8 *)opt + 2, msg, opt[1]);
+                        }
+                        func_00005290(dc->lease);
+                        dc->lease = NULL;
+                        return 0x80410505;
+                    }
+                    if (opt[2] == 5) {
+                        if (func_00006870(dc->rx.bootp, (u16)__builtin_allegrex_wsbh(dc->rx.udp->len) - 8) == 0) {
+                            ret = func_00004AEC(dc->rx.bootp, (u16)__builtin_allegrex_wsbh(dc->rx.udp->len) - 8, dc->lease);
+                            if (ret < 0) {
+                                return ret;
+                            }
+                            dc->unkF98 = sceNetGetSystemClockSec();
+                            func_000045B8(dc, &dc->lease->yiaddr);
+                            return 4;
+                        }
+                    }
+                }
+            }
+            p += (*(u16 *)(p + 0x10) + *(u32 *)(p + 8) + 3) & ~3;
+        }
+    }
+    now = sceNetGetSystemClockSec();
+    if (now >= dc->unkF98 + dc->lease->unk3DC) {
+        return 0x80410504;
+    }
+    ret = func_000047D8(dc);
+    if (ret < 0) {
+        return ret;
+    }
+    return 6;
+}
 #endif
 
 #if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00002B04);
 
-INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00002F50);
+s32 func_00002F50(SceNetDhcpCtx *dc, s32 prev) {
+    u8 msg[0x100];
+    s32 now;
+    s32 wait;
+    s32 n;
+    s32 ret;
+    u8 *p;
+    u8 *q;
+    s8 *opt;
+
+    if (dc->callback != NULL) {
+        dc->callback(3, 0);
+    }
+    if (prev != 6) {
+        dc->interval = dc->initInterval;
+    }
+    now = sceNetGetSystemClockSec();
+    if (now < 0) {
+        return 0x80410586;
+    }
+    if (now >= dc->unkF98 + dc->lease->unk3DC) {
+        return 0x80410504;
+    }
+    dc->interval += (u32)sceNetRand() % (u32)(dc->interval * 2);
+    if (dc->maxInterval < dc->interval) {
+        dc->interval = dc->maxInterval / 2 + (u32)sceNetRand() % (u32)dc->maxInterval;
+    }
+    wait = dc->unkF98 + dc->lease->unk3DC - now;
+    wait = __builtin_allegrex_min(wait, dc->interval);
+    for (; wait > 0; wait--) {
+        n = sceNetBpfRead(dc->bpf, dc->rxBuf, dc->rxLen);
+        if (n < 0) {
+            return 0x80410582;
+        }
+        if (sceKernelPollSema(dc->sema, 1) == 0) {
+            func_00005D14(dc, 6, 0);
+        }
+        for (p = dc->rxBuf; n > 0; n -= p - q) {
+            u32 hl = *(u16 *)(p + 0x10);
+
+            q = p;
+            dc->rx.ether = p + hl;
+            dc->rx.ip = dc->rx.ether + 14;
+            dc->rx.udp = (SceNetDhcpUdpHdr *)(p + (hl + (dc->rx.ether[14] & 0xF) * 4) + 14);
+            dc->rx.bootp = p + (hl + (dc->rx.ether[14] & 0xF) * 4) + 22;
+            if (func_00003CD0(dc) == 0) {
+                opt = func_00006FC8(dc->rx.bootp, (u16)__builtin_allegrex_wsbh(dc->rx.udp->len) - 8, 53);
+                if (opt != NULL) {
+                    if (opt[2] == 6) {
+                        func_00007504(msg, 0, sizeof(msg));
+                        opt = func_00006FC8(dc->rx.bootp, (u16)__builtin_allegrex_wsbh(dc->rx.udp->len) - 8, 56);
+                        if (opt != NULL) {
+                            func_0000708C((u8 *)opt + 2, msg, opt[1]);
+                        }
+                        func_00005290(dc->lease);
+                        dc->lease = NULL;
+                        return 0x80410505;
+                    }
+                    if (opt[2] == 5) {
+                        if (func_00006870(dc->rx.bootp, (u16)__builtin_allegrex_wsbh(dc->rx.udp->len) - 8) == 0) {
+                            ret = func_00004AEC(dc->rx.bootp, (u16)__builtin_allegrex_wsbh(dc->rx.udp->len) - 8, dc->lease);
+                            if (ret < 0) {
+                                return ret;
+                            }
+                            dc->unkF98 = sceNetGetSystemClockSec();
+                            if (dc->unkF98 < 0) {
+                                return 0x80410586;
+                            }
+                            func_000045B8(dc, &dc->lease->yiaddr);
+                            return 4;
+                        }
+                    }
+                }
+            }
+            p += (*(u16 *)(p + 0x10) + *(u32 *)(p + 8) + 3) & ~3;
+        }
+    }
+    now = sceNetGetSystemClockSec();
+    if (now < 0) {
+        return 0x80410586;
+    }
+    if (now >= dc->unkF98 + dc->lease->unk3DC) {
+        return 0x80410504;
+    }
+    ret = func_000047D8(dc);
+    if (ret < 0) {
+        return ret;
+    }
+    return 6;
+}
 #endif
 
 #if FW_VERSION >= 282
@@ -1045,7 +1970,40 @@ void func_00005634(void) {
     func_00007504(dc, 0, sizeof(SceNetDhcpCtx));
     D_00008134 = -1;
 }
-#else
+#endif
+
+#if FW_VERSION == 250
+void func_00005634(void) {
+    SceNetDhcpCtx *dc = &D_0001243C;
+
+    if (D_00011710 < 0) {
+        return;
+    }
+    sceKernelSignalSema(dc->sema, 1);
+    if (dc->thid >= 0) {
+        sceKernelWaitThreadEnd(dc->thid, NULL);
+        sceKernelDeleteThread(dc->thid);
+        sceNetFreeThreadinfo(dc->thid);
+    }
+    if (dc->sema >= 0) {
+        sceKernelDeleteSema(dc->sema);
+    }
+    if (dc->bpf >= 0) {
+        sceNetBpfClose(dc->bpf);
+    }
+    if (dc->arpBpf >= 0) {
+        sceNetBpfClose(dc->arpBpf);
+    }
+    if (dc->sock >= 0) {
+        sceNetInetClose(dc->sock);
+        dc->sock = -1;
+    }
+    sceNetMemset(dc, 0, sizeof(SceNetDhcpCtx));
+    D_00011710 = -1;
+}
+#endif
+
+#if FW_VERSION >= 260
 INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00005634);
 #endif
 
@@ -1129,15 +2087,119 @@ INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00005394);
 #endif
 
 #if FW_VERSION >= 151 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00003A18);
-
-INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00003C00);
-#endif
-
-#if FW_VERSION < 151
 INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00003AA8);
 
 INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00003CD0);
+#endif
+
+#if FW_VERSION < 151
+s32 func_00003AA8(SceNetDhcpCtx *dc) {
+    struct {
+        u32 src;
+        u32 dst;
+        u8 zero;
+        u8 proto;
+        u16 len;
+    } ph;
+    SceNetDhcpFrame *rx = &dc->rx;
+    SceNetDhcpFrame *tx = &dc->tx;
+    u16 ipsum;
+    u16 udpsum;
+    s8 *opt;
+
+    ipsum = ((SceNetDhcpIpHdr *)rx->ip)->sum;
+    ((SceNetDhcpIpHdr *)rx->ip)->sum = 0;
+    udpsum = rx->udp->sum;
+    rx->udp->sum = 0;
+    ph.zero = 0;
+    ph.proto = 17;
+    ph.src = ((SceNetDhcpIpHdr *)rx->ip)->src;
+    ph.dst = ((SceNetDhcpIpHdr *)rx->ip)->dst;
+    ph.len = rx->udp->len;
+    if ((u16)__builtin_allegrex_wsbh(((SceNetDhcpIpHdr *)rx->ip)->len) < 0x10C) {
+        goto fail;
+    }
+    if ((u16)__builtin_allegrex_wsbh(rx->udp->len) < 0xF8) {
+        goto fail;
+    }
+    if (ipsum != func_00005E90((u16 *)rx->ip, (rx->ip[0] & 0xF) * 2)) {
+        goto fail;
+    }
+    if (rx->udp->sum != 0) {
+        if (udpsum != func_00005E00(&ph, rx->udp, (u16)__builtin_allegrex_wsbh(ph.len))) {
+            goto fail;
+        }
+    }
+    if (rx->bootp[0] != 2) {
+        goto fail;
+    }
+    if (*(u32 *)(rx->bootp + 4) != *(u32 *)(tx->bootp + 4)) {
+        goto fail;
+    }
+    if (func_00007490(rx->bootp + 0xEC, D_00010ADC, 4) != 0) {
+        goto fail;
+    }
+    opt = func_00006FC8(rx->bootp, (u16)__builtin_allegrex_wsbh(rx->udp->len) - 8, 53);
+    if (opt == NULL) {
+        goto fail;
+    }
+    if (opt[2] != 2) {
+        goto fail;
+    }
+    return 0;
+fail:
+    return 0x80410501;
+}
+
+s32 func_00003CD0(SceNetDhcpCtx *dc) {
+    struct {
+        u32 src;
+        u32 dst;
+        u8 zero;
+        u8 proto;
+        u16 len;
+    } ph;
+    SceNetDhcpFrame *rx = &dc->rx;
+    SceNetDhcpFrame *tx = &dc->tx;
+    u16 ipsum;
+    u16 udpsum;
+
+    ipsum = ((SceNetDhcpIpHdr *)rx->ip)->sum;
+    ((SceNetDhcpIpHdr *)rx->ip)->sum = 0;
+    udpsum = rx->udp->sum;
+    rx->udp->sum = 0;
+    ph.zero = 0;
+    ph.proto = 17;
+    ph.src = ((SceNetDhcpIpHdr *)rx->ip)->src;
+    ph.dst = ((SceNetDhcpIpHdr *)rx->ip)->dst;
+    ph.len = rx->udp->len;
+    if ((u16)__builtin_allegrex_wsbh(((SceNetDhcpIpHdr *)rx->ip)->len) < 0x10C) {
+        goto fail;
+    }
+    if ((u16)__builtin_allegrex_wsbh(rx->udp->len) < 0xF8) {
+        goto fail;
+    }
+    if (ipsum != func_00005E90((u16 *)rx->ip, (rx->ip[0] & 0xF) * 2)) {
+        goto fail;
+    }
+    if (rx->udp->sum != 0) {
+        if (udpsum != func_00005E00(&ph, rx->udp, (u16)__builtin_allegrex_wsbh(ph.len))) {
+            goto fail;
+        }
+    }
+    if (rx->bootp[0] != 2) {
+        goto fail;
+    }
+    if (*(u32 *)(rx->bootp + 4) != *(u32 *)(tx->bootp + 4)) {
+        goto fail;
+    }
+    if (func_00007490(rx->bootp + 0xEC, D_00010ADC, 4) != 0) {
+        goto fail;
+    }
+    return 0;
+fail:
+    return 0x80410501;
+}
 #endif
 
 #if FW_VERSION >= 282
@@ -1170,7 +2232,7 @@ void func_00005D14(SceNetDhcpCtx *dc, s32 state, s32 err) {
         if (sock < 0) {
             break;
         }
-        func_00004704(sock, &dc->lease->unk3E8, dc->unkE54);
+        func_00004704(sock, &dc->lease->unk3E8, dc->tx.bootp);
         sceKernelDelayThread(100000);
         if (dc->sock >= 0) {
             sceNetInetClose(dc->sock);
@@ -1189,7 +2251,52 @@ void func_00005D14(SceNetDhcpCtx *dc, s32 state, s32 err) {
     }
     sceKernelExitThread(0);
 }
-#else
+#endif
+
+#if FW_VERSION == 250
+void func_00005D14(SceNetDhcpCtx *dc, s32 state, s32 err) {
+    s32 sock;
+
+    switch (state) {
+    case 0:
+    case 1:
+    case 2:
+    case 3:
+    case 7:
+        break;
+    case 4:
+    case 5:
+    case 6:
+        if (func_000077D8(dc) < 0) {
+            break;
+        }
+        sock = func_00006050(dc->sock);
+        dc->sock = sock;
+        if (sock < 0) {
+            break;
+        }
+        func_00006088(sock, &dc->lease->unk3E8, dc->tx.bootp);
+        sceKernelDelayThread(100000);
+        if (dc->sock >= 0) {
+            sceNetInetClose(dc->sock);
+            dc->sock = -1;
+        }
+        break;
+    }
+    sceNetConfigDelArp(dc->arpAddr, dc->arpHw);
+    func_00004424(dc->ifname);
+    if (dc->callback != NULL) {
+        if (err == 0) {
+            dc->callback(1, 0);
+        } else {
+            dc->callback(4, err);
+        }
+    }
+    sceKernelExitThread(0);
+}
+#endif
+
+#if FW_VERSION >= 260
 INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00005D14);
 #endif
 
