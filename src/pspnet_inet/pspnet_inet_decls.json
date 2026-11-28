@@ -525,7 +525,7 @@
   "D_0002C5DC": "extern u8 D_0002C5DC[];",
   "D_0002CC50": "extern u8 D_0002CC50[]; /* pffasttimo_ch */",
   "D_0002CC74": "extern u8 D_0002CC74[]; /* pfslowtimo_ch */",
-  "D_0002CCB4": "extern s32 D_0002CCB4;",
+  "D_0002CCB4": "extern struct { struct rttimer_queue *lh_first; } D_0002CCB4; /* rttimer_queue_head */",
   "D_0002CD38": "extern u8 D_0002CD38[];",
   "D_0002CDB0": "extern char D_0002CDB0[16]; /* 1.5x inet_ntoa buf */",
   "D_0002CEB0": "extern s32 D_0002CEB0;",

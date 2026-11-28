@@ -3,7 +3,7 @@
 #include "pspnet_inet_decls.h"
 
 void func_0000D1FC(void) {
-    D_0002CCB4 = 0;
+    D_0002CCB4.lh_first = 0;
     _sce_pspnet_callout_init(&D_0002CD38);
     _sce_pspnet_callout_reset(&D_0002CD38, 100, rt_timer_timer, NULL);
     D_0002C534 = 1;

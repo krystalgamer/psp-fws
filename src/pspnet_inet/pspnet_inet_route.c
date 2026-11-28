@@ -336,8 +336,44 @@ INCLUDE_ASM("nonmatchings/pspnet_inet_route", rt_timer_add);
 INCLUDE_ASM("nonmatchings/pspnet_inet_route", func_0000CD64);
 #endif
 
-INCLUDE_ASM("nonmatchings/pspnet_inet_route", rt_timer_timer);
-INCLUDE_ASM("nonmatchings/pspnet_inet_route", rtable_init);
+void rt_timer_timer(void *arg) {
+    struct rttimer_queue *rtq;
+    struct rttimer *r;
+    s32 current_time;
+    s32 s;
+
+    current_time = sceNetGetSystemClockSec();
+    s = _sce_pspnet_spllock();
+    for (rtq = D_0002CCB4.lh_first; rtq != NULL; rtq = rtq->rtq_link.le_next) {
+        while ((r = rtq->rtq_head.tqh_first) != NULL &&
+               (r->rtt_time + rtq->rtq_timeout) < current_time) {
+            if (r->rtt_link.le_next != NULL)
+                r->rtt_link.le_next->rtt_link.le_prev = r->rtt_link.le_prev;
+            *r->rtt_link.le_prev = r->rtt_link.le_next;
+            if (r->rtt_next.tqe_next != NULL)
+                r->rtt_next.tqe_next->rtt_next.tqe_prev = r->rtt_next.tqe_prev;
+            else
+                rtq->rtq_head.tqh_last = r->rtt_next.tqe_prev;
+            *r->rtt_next.tqe_prev = r->rtt_next.tqe_next;
+            if (r->rtt_func != NULL) {
+                (*r->rtt_func)(r->rtt_rt, r);
+            } else {
+                rtrequest(2, (struct sockaddr *)rt_key(r->rtt_rt), 0, 0, 0, 0);
+            }
+            sceNetFreeInternal(r);
+        }
+    }
+    _sce_pspnet_splunlock(s);
+    _sce_pspnet_callout_reset(&D_0002CD38, 100, rt_timer_timer, NULL);
+}
+
+void rtable_init(void **table) {
+    struct domain *dom;
+
+    for (dom = domains; dom; dom = dom->dom_next)
+        if (dom->dom_rtattach)
+            dom->dom_rtattach(&table[dom->dom_family], dom->dom_rtoffset);
+}
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_inet_route", func_0000D170);
