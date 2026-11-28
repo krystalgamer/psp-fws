@@ -14,7 +14,29 @@ INCLUDE_ASM("nonmatchings/pspnet_inet_rtsub", func_0000D37C);
 #endif
 
 #if FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/pspnet_inet_rtsub", func_0000D188);
+struct rttimer_queue *func_0000D188(u32 timeout)
+{
+	struct rttimer_queue *rtq;
+
+	/* rt_timer_init() (func_0000D1FC), expanded inline */
+	if (D_0002C534 == 0) {
+		D_0002CCB4.lh_first = 0;
+		_sce_pspnet_callout_init(&D_0002CD38);
+		_sce_pspnet_callout_reset(&D_0002CD38, 100, rt_timer_timer, NULL);
+		D_0002C534 = 1;
+	}
+
+	rtq = sceNetMallocInternal(sizeof *rtq);
+	if (rtq == NULL)
+		return (NULL);
+	__builtin_memset(rtq, 0, sizeof *rtq);
+
+	rtq->rtq_timeout = timeout;
+	TAILQ_INIT(&rtq->rtq_head);
+	LIST_INSERT_HEAD(&D_0002CCB4, rtq, rtq_link);
+
+	return (rtq);
+}
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282

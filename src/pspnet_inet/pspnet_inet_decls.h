@@ -2200,6 +2200,7 @@ struct radix_node *func_0000A144();
 struct radix_node *func_0000A61C(void *n_arg, s32 search, s32 skip);
 struct radix_node *func_0000A804();
 struct radix_node *func_0000AE9C();
+struct rttimer_queue *func_0000D188(u32 timeout);
 s32 func_0000D1F4(void);
 void func_0000D25C(s32 *arg0, s32 arg1);
 s32 func_0000D264(void *arg0, s32 arg1);
