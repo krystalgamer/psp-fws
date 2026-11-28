@@ -2264,7 +2264,28 @@ s32 func_00005E30(void) {
 
 INCLUDE_RODATA("nonmatchings/mgr", D_0000AFA0);
 
-INCLUDE_ASM("nonmatchings/mgr", sceMgrMSInit);
+s32 sceMgrMSInit(void) {
+    s32 state = sceKernelSuspendDispatchThread();
+    s32 ret;
+
+    if (D_0000AFF8.initCount > 0) {
+        D_0000AFF8.initCount++;
+        sceKernelResumeDispatchThread(state);
+        return 0;
+    }
+    if (D_0000AFF8.sema <= 0) {
+        ret = sceKernelCreateSema("SceMgrMsDrv", 0x100, 1, 1, NULL);
+        if (ret < 0) {
+            sceKernelResumeDispatchThread(state);
+            return ret;
+        }
+        D_0000AFF8.sema = ret;
+    }
+    D_0000AFF8.initCount = 1;
+    D_0000AFF8.unkC = 0;
+    sceKernelResumeDispatchThread(state);
+    return 0;
+}
 
 s32 sceMgrMSReset(void) {
     s32 ret = func_00006030();
@@ -2619,7 +2640,28 @@ s32 func_00007644(s32 arg0) {
 INCLUDE_ASM("nonmatchings/mgr", func_00007644);
 #endif
 
+#if FW_VERSION < 250
+s32 sceMgrMSGetMediaID(s32 arg0, u64 *id) {
+    s32 ret = func_00006030();
+
+    if (ret < 0) {
+        return ret;
+    }
+    ret = func_00006884(arg0, 1);
+    if (ret >= 0) {
+        if (!(D_0000B004 & 8)) {
+            ret = 0x80505005;
+        } else {
+            id[0] = D_000095A0;
+            id[1] = D_000095A8;
+        }
+    }
+    func_0000608C();
+    return ret;
+}
+#else
 INCLUDE_ASM("nonmatchings/mgr", sceMgrMSGetMediaID);
+#endif
 
 s32 func_000077A0(s32 fd, u64 *a, u64 *b) {
     u64 buf[3];
@@ -2638,7 +2680,36 @@ s32 func_000077A0(s32 fd, u64 *a, u64 *b) {
     return ret;
 }
 
-INCLUDE_ASM("nonmatchings/mgr", func_00007844);
+s32 func_00007844(s32 fd, u64 *a, u64 *b, u64 *c, s32 flag) {
+    MgrMsAuthInfo info;
+    s32 ret;
+
+    func_00006288(&info, a, b, c);
+    info.unk19 = flag;
+    ret = func_00006134(fd, 0xC, (u8 *)&info, 0x1A);
+    if (ret < 0) {
+        return ret;
+    }
+    ret = func_000065FC(fd, (u8 *)D_0000AFC0, 4);
+    if (ret < 0) {
+        return ret;
+    }
+    ret = func_00006528(fd, 0x68);
+    if (ret >= 0) {
+        return ret;
+    }
+    if (ret != 0x80504000) {
+        return ret;
+    }
+    ret = func_00006300(fd);
+    if (ret < 0) {
+        return ret;
+    }
+    if (ret & 2) {
+        return 0x80503002;
+    }
+    return 0x80505003;
+}
 
 #if FW_VERSION >= 201
 INCLUDE_RODATA("nonmatchings/mgr", D_0000AFB8);
@@ -2979,11 +3050,80 @@ s32 sceMgrMSSetRd(s32 arg0, u64 *rd) {
     return ret;
 }
 
-INCLUDE_ASM("nonmatchings/mgr", sceMgr_driver_D1023CC2);
+s32 sceMgr_driver_D1023CC2(s32 arg0, u64 *a, u64 *b) {
+    u64 buf[4];
+    s32 fd;
+    s32 ret;
 
+    ret = func_00006678(arg0, &fd, 5, 1);
+    if (ret < 0) {
+        return ret;
+    }
+    ret = func_00006528(fd, 0x44);
+    if (ret >= 0) {
+        ret = func_00006134(fd, 3, (u8 *)buf, 0x20);
+        if (ret >= 0) {
+            *a = buf[0];
+            *b = buf[1];
+        }
+    }
+    func_000067CC(arg0, 1);
+    return ret;
+}
+
+#if FW_VERSION < 250
+s32 sceMgrMSSetMAC2d(s32 arg0, u64 *mac) {
+    MgrMsRegBuf buf;
+    s32 fd;
+    s32 ret;
+
+    buf.id[0] = *mac;
+    buf.w[2] = 0;
+    buf.w[3] = 0;
+    buf.w[4] = 0;
+    buf.w[5] = 0;
+    buf.w[6] = 0;
+    buf.w[7] = 0;
+    ret = func_00006678(arg0, &fd, 5, 1);
+    if (ret < 0) {
+        return ret;
+    }
+    ret = func_00006528(fd, 0x45);
+    if (ret >= 0) {
+        ret = func_00006134(fd, 0xC, buf.b, 0x20);
+    }
+    func_000067CC(arg0, 1);
+    return ret;
+}
+#else
 INCLUDE_ASM("nonmatchings/mgr", sceMgrMSSetMAC2d);
+#endif
 
-INCLUDE_ASM("nonmatchings/mgr", sceMgrMSReadIBD);
+s32 sceMgrMSReadIBD(s32 arg0, u8 page, s32 arg2, s32 arg3) {
+    MgrMsRegParam param;
+    s32 fd;
+    s32 ret;
+
+    param.unk0 = 0;
+    param.unk4 = 0;
+    param.unk5 = page;
+    ret = func_00006678(arg0, &fd, 5, 1);
+    if (ret < 0) {
+        return ret;
+    }
+    ret = func_000064EC(fd, (s32)&param);
+    if (ret >= 0) {
+        ret = func_00006528(fd, 0x47);
+        if (ret >= 0) {
+            ret = func_00006340(fd, arg2, arg3, 2, (s32)&D_0000B050);
+            if (ret >= 0) {
+                ret = 0;
+            }
+        }
+    }
+    func_000067CC(arg0, 1);
+    return ret;
+}
 
 INCLUDE_ASM("nonmatchings/mgr", sceMgrMSWriteIBD);
 
