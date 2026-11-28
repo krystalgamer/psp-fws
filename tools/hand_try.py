@@ -133,6 +133,13 @@ def build_map_addrs(mod):
     return out
 
 
+def field_aliases(mod):
+    """Old auto labels of fields inside sized symbols: label -> (symbol, offset) (prx_relocs PROVIDEs)."""
+    ab = ROOT / "tmp/build" / mod.ver / f"abs_syms.{mod.mod}.txt"
+    return {m[1]: (m[2], int(m[3], 16)) for m in re.finditer(
+        r"^PROVIDE\((\w+) = (\w+) \+ (0x[0-9a-fA-F]+)\);", ab.read_text() if ab.exists() else "", re.M)}
+
+
 def target_calls_from_words(mod, name):
     """j/jal targets of an already-C function, read from the original's words and named via the build map
     (the function is C in this version, so splat wrote no asm for it). Jumps inside the function are None."""
@@ -157,10 +164,14 @@ def target_calls_from_words(mod, name):
 def target_reloc_syms(mod, name):
     rom, end, _ = mod.funcs[name]
     out = []
+    tadd = {}
     for line in (ROOT / "tmp/build" / mod.ver / f"reloc_addrs.{mod.mod}.txt").read_text().splitlines():
-        m = re.match(r"rom:(0[xX][0-9A-Fa-f]+) reloc:MIPS_\w+ symbol:(\w+)", line)
+        m = re.match(r"rom:(0[xX][0-9A-Fa-f]+) reloc:MIPS_\w+ symbol:(\w+)(?: addend:(0x[0-9A-Fa-f]+))?", line)
         if m and rom <= int(m[1], 16) < end:
             out.append((int(m[1], 16), m[2]))
+            if m[3] and m[2] != "PRX_ZERO":  # a field of a sized symbol: sym+addend
+                tadd[int(m[1], 16)] = int(m[3], 16)
+    target_reloc_syms.tadds = [tadd.get(r) for r, _ in sorted(out)]
     # the address each reloc resolves to, from the original's own HI/LO immediates
     # (splat's label name may carry another version's address)
     addrs, hi = [], {}
@@ -503,15 +514,33 @@ def main():
                 return False
             return (symaddr[m] + ad) & 0xFFFFFFFF == ta & 0xFFFFFFFF
         bad = [(i, w, m) for i, w, m in bad if not same_addr(i, m)]
-        if len(mine) != len(want) or any(not interior(m, w) for _, w, m in bad):
+        # the original references a field of a sized symbol (sym+addend): same symbol, same offset
+        tadds = getattr(target_reloc_syms, "tadds", [])
+
+        def tname(i, w):
+            ta = tadds[i] if i < len(tadds) else None
+            return f"{w}+0x{ta:X}" if ta else w
+        off_bad = [(i, w, m) for i, (w, m) in enumerate(zip(want, mine))
+                   if m == w and i < len(tadds) and tadds[i] is not None and i < len(adds)
+                   and adds[i] is not None and adds[i] != tadds[i]]
+        # a %lo of a sized symbol's field must resolve to the same address (no interior-label leniency)
+        alias = field_aliases(mod)
+        field_bad = [i for i, w, m in bad if i < len(tadds) and tadds[i] is not None and i < len(adds)
+                     and adds[i] is not None and alias.get(m, (None, 0))[0] != w
+                     or (m in alias and alias[m][0] == w and adds[i] is not None and alias[m][1] + adds[i] != tadds[i])]
+        if len(mine) != len(want) or any(not interior(m, w) for _, w, m in bad) or off_bad or field_bad:
             print("relocation symbols differ:")
             for i, w, m in bad:
-                print(f"  reloc {i}: target {w}, mine {m}")
+                print(f"  reloc {i}: target {tname(i, w)}, mine {m}")
+            for i, w, m in off_bad:
+                print(f"  reloc {i}: target {tname(i, w)}, mine {m}+0x{adds[i]:X} (another field)")
             print("RESULT: words match, RELOCATION SYMBOLS DIFFER (not a match)")
         else:
             print("relocation symbols match")
             adds = getattr(compiled_reloc_syms, "addends", [])
             for i, w, m in bad:
+                if alias.get(m, (None,))[0] == w:  # an old field label of w: checked above
+                    continue
                 off = adds[i] if i < len(adds) and adds[i] is not None else None
                 print(f"  (reloc {i}: target label {w} assumed inside {m}; check the offset)"
                       + (f" [{m}+0x{off:X}]" if off is not None else ""))

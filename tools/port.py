@@ -142,9 +142,16 @@ def main():
             for t, m, o in raw:
                 if int(o or "0", 16) == 0 and t != m:
                     pairs.append((t, m))
+            for tb, toff, mine in dict.fromkeys(re.findall(r"reloc \d+: target (\w+)\+0x([0-9A-F]+), mine (\w+)", out)):
+                print(f"  {name}: {mine} is {tb}+0x{toff} in {a.dst_ver} (a field of a sized symbol): "
+                      f"write it as a member of {tb}, not substituted")
             if ("RESULT: MATCH" in result and not raw) or not pairs:
                 break
             for tgt, mine in dict.fromkeys(pairs):
+                if re.fullmatch(r"D_[0-9A-F]{8}", tgt) and mine in store["vars"]:
+                    print(f"  {name}: adopting the address label {tgt} for {mine}; if it is a struct member, give the "
+                          f"containing global a `// size:` in config/{a.dst_ver}/symbol_addrs.{a.module}.txt and "
+                          f"re-split (references become sym+offset)")
                 body = re.sub(rf"\b{mine}\b", tgt, body)
                 proto = store["funcs"].get(mine) or store["vars"].get(mine)
                 if proto and tgt not in store["funcs"] and tgt not in store["vars"]:
