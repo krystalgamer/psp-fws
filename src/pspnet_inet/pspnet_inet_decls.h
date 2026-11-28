@@ -2455,7 +2455,7 @@ s32 sbreserve(struct sockbuf *sb, u32 cc);
 s32 sceKernelGetThreadId(void);
 s32 sceKernelSignalSema(u32, s32);
 s32 sceNetBcmp(const void *b1, const void *b2, u32 len);
-M2C_UNK sceNetBcopy(u8 *, s32, u8);
+void sceNetBcopy(const void *src, void *dst, s32 len);
 s32 sceNetConfigAddArp(s32, s32);
 s32 sceNetConfigDelArp(s32, s32);
 s32 sceNetConfigDelDefaultRoute(void);
