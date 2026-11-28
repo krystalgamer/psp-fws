@@ -2241,7 +2241,7 @@ s32 sceMgrMSInit(void) {
         g_mgrMsCtrl.sema = ret;
     }
     g_mgrMsCtrl.initCount = 1;
-    g_mgrMsCtrl.unkC = 0;
+    g_mgrMsCtrl.info.status = 0;
     sceKernelResumeDispatchThread(state);
     return 0;
 }
@@ -2538,7 +2538,7 @@ s32 sceMgrMSDeauth(s32 arg0) {
         var_s1 = func_00007644(arg0);
         if (var_s1 >= 0) {
             var_s1 = 0;
-            g_mgrMsCtrl.unkC &= ~0x208;
+            g_mgrMsCtrl.info.status &= ~0x208;
         }
         func_0000608C();
     }
@@ -2557,7 +2557,7 @@ s32 sceMgrMSDeauth(s32 arg0) {
         var_s1 = func_00007644(arg0);
         if (var_s1 >= 0) {
             var_s1 = 0;
-            g_mgrMsCtrl.unkC &= ~8;
+            g_mgrMsCtrl.info.status &= ~8;
         }
         func_0000608C();
     }
@@ -2576,7 +2576,7 @@ s32 sceMgrMSDeauth(s32 arg0) {
         var_s1 = func_00007644(arg0);
         if (var_s1 >= 0) {
             var_s1 = 0;
-            g_mgrMsCtrl.unkC = (s32) (g_mgrMsCtrl.unkC & ~0x208);
+            g_mgrMsCtrl.info.status = (s32) (g_mgrMsCtrl.info.status & ~0x208);
         }
         func_0000608C();
     }
@@ -2811,7 +2811,7 @@ s32 func_00008EB0(s32 *out, s32 pos) {
 s32 sceMgrMSReadSeqPage(s32 arg0, u8 *buf, s32 which) {
     u8 extra[16];
     s32 seg;
-    s32 *blks = g_mgrMsCtrl.map.seqBlk;
+    s32 *blks = g_mgrMsCtrl.info.map.seqBlk;
     s32 ret;
     s32 page;
     s32 blk;
@@ -2824,7 +2824,7 @@ s32 sceMgrMSReadSeqPage(s32 arg0, u8 *buf, s32 which) {
     }
     ret = func_00005194(arg0, 3);
     if (ret >= 0) {
-        page = func_00008EB0(&seg, which ? g_mgrMsCtrl.map.seqPos[1] : g_mgrMsCtrl.map.seqPos[0]);
+        page = func_00008EB0(&seg, which ? g_mgrMsCtrl.info.map.seqPos[1] : g_mgrMsCtrl.info.map.seqPos[0]);
         ret = 0x80504003;
         if (page >= 0) {
             blk = blks[seg];
@@ -2868,7 +2868,7 @@ INCLUDE_ASM("nonmatchings/mgr", sceMgrMSReadSeqPage);
 s32 sceMgrMSReadPoolPage(s32 arg0, u8 *buf, s32 pool) {
     u8 extra[16];
     s32 seg;
-    MgrMsMap *map = &g_mgrMsCtrl.map;
+    MgrMsMap *map = &g_mgrMsCtrl.info.map;
     s32 *blks = map->poolBlk;
     s32 ret;
     s32 page;
@@ -2882,7 +2882,7 @@ s32 sceMgrMSReadPoolPage(s32 arg0, u8 *buf, s32 pool) {
     if (ret >= 0) {
         ret = 0x80505003;
         if (map->poolValid >= 0) {
-            page = func_00008EB0(&seg, pool ? g_mgrMsCtrl.map.poolPos[1] : g_mgrMsCtrl.map.poolPos[0]);
+            page = func_00008EB0(&seg, pool ? g_mgrMsCtrl.info.map.poolPos[1] : g_mgrMsCtrl.info.map.poolPos[0]);
             ret = 0x80504003;
             if (page >= 0) {
                 blk = blks[seg];

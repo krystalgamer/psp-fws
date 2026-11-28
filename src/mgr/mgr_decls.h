@@ -61,15 +61,19 @@ typedef struct {
 } MgrMsMap;
 
 typedef struct {
+    volatile s32 status;
+    s32 unk4;
+    s32 segBlocks;
+    MgrMsMap map;
+    u32 unk34[2];
+    u32 mediaId[4];
+} MgrMsInfo;
+
+typedef struct {
     SceUID fd;
     SceUID sema;
     s32 initCount;
-    volatile s32 unkC;
-    s32 unk10;
-    s32 segBlocks;
-    MgrMsMap map;
-    u32 unk40[2];
-    u64 mediaId[2];
+    MgrMsInfo info;
 } MgrMsCtrl;
 typedef char chk_MgrMsCtrl[(sizeof(MgrMsCtrl) == 0x58) ? 1 : -1];
 
@@ -233,6 +237,7 @@ s32 func_0000341C(u64 *dst, u64 *src, u32 *iv, u32 size, s32 keyReg, u32 *key, s
 s32 func_000038D0(u32 *arg0, u32 *arg1);
 s32 func_00003BFC(s32 arg0, MgrId16 *id, u8 *ekb, MgrId16 *key, u8 *data);
 void func_00003E08(s32 arg0);
+s32 func_00004358(MgrMsInfo *info);
 s32 func_0000439C(u32 *a, u32 *b);
 void func_00004410(s32 arg0);
 s32 func_00004460(u32 *p, s32 count);
@@ -361,6 +366,7 @@ s32 sceMgrMSGetLocalEKB(s32 arg0, s32 buf, s32 size);
 s32 sceMgrMSGetMediaID(s32 arg0, u64 *id);
 s32 sceMgrMSGetMediaType(s32 arg0);
 s32 sceMgrMSInit(void);
+s32 sceMgrMSMount(void);
 s32 sceMgrMSReadIBD(s32 arg0, u8 page, s32 arg2, s32 arg3);
 s32 sceMgrMSReadPoolPage(s32 arg0, u8 *buf, s32 pool);
 s32 sceMgrMSReadSeqPage(s32 arg0, u8 *buf, s32 which);
