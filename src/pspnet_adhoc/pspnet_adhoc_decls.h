@@ -25,6 +25,15 @@ typedef struct SceNetAdhocPdpQent {
     struct SceNetAdhocPdpPcb *pcb;      /* 0x34 */
 } SceNetAdhocPdpQent;
 
+typedef struct {
+    struct mbuf *first;                 /* 0x00 m_nextpkt chain */
+    struct mbuf *last;                  /* 0x04 */
+    s32 cc;                             /* 0x08 */
+    s32 hiwat;                          /* 0x0C */
+    s32 lowat;                          /* 0x10 */
+    s32 unk14;
+} SceNetAdhocPtpSockbuf;
+
 typedef struct SceNetAdhocWaiter {
     u8 pad0[0x20];
     s32 tid;                        /* 0x20 */
@@ -94,6 +103,45 @@ typedef struct SceNetAdhocPdpStat {
     u32 rcv_sb_cc;                      /* 0x10 */
 } SceNetAdhocPdpStat;
 
+/* PTP control block (offsets are 1.00; 1.50+: no ifp (-4), 0x24 more bytes after the callout) */
+typedef struct SceNetAdhocPtpPcb {
+    struct SceNetAdhocPtpPcb *next;     /* 0x00 TAILQ on the PTP list */
+    struct SceNetAdhocPtpPcb **prev;    /* 0x04 */
+    struct SceNetAdhocPtpPcb *cnext;    /* 0x08 TAILQ on the listener's children */
+    struct SceNetAdhocPtpPcb **cprev;   /* 0x0C */
+    struct SceNetAdhocPtpPcb *cfirst;   /* 0x10 children (accept queue) */
+    struct SceNetAdhocPtpPcb **clast;   /* 0x14 */
+#if FW_VERSION < 150
+    struct ifnet *ifp;                  /* 0x18 */
+#endif
+    SceNetEtherAddr laddr;              /* 0x1C */
+    SceNetEtherAddr paddr;              /* 0x22 */
+    u16 lport;                          /* 0x28 */
+    u16 pport;                          /* 0x2A */
+    SceNetAdhocPtpSockbuf snd;          /* 0x2C */
+    SceNetAdhocPtpSockbuf rcv;          /* 0x44 */
+    SceNetAdhocDesc *desc;              /* 0x5C */
+    s32 unk60;
+    s32 unk64;
+    s32 mss;                            /* 0x68 */
+    u8 unk6C[0x88 - 0x6C];
+    u8 callout[0xAC - 0x88];            /* 0x88 */
+#if FW_VERSION >= 150
+    u8 unk150[0x24];
+#endif
+    s32 unkAC;
+    s32 unkB0;
+    s32 unkB4;
+    s32 nchildren;                      /* 0xB8 */
+    s32 unkBC;
+} SceNetAdhocPtpPcb;
+typedef char chk_SceNetAdhocPtpPcb_desc[((u32)&((SceNetAdhocPtpPcb *)0)->desc == ((FW_VERSION < 150) ? 0x5C : 0x58)) ? 1 : -1];
+
+typedef struct {
+    SceNetAdhocPtpPcb *first;
+    SceNetAdhocPtpPcb **last;
+} SceNetAdhocPtpList;
+
 struct Unk_func_00000974_temp_a1 {
     u8 pad0[0x10];
     u8 unk10;
@@ -114,67 +162,6 @@ struct Unk_func_00000974_temp_s0_2 {
 struct Unk_func_00000974_temp_v0 {
     u8 pad0[0x8];
     s32 unk8;
-};
-
-struct Unk_func_00002D20_0 {
-    u8 pad0[0x1C];
-    s32 unk1C;
-};
-
-struct Unk_func_00003BB0_0 {
-    u8 pad0[0x14];
-    s32 unk14;
-};
-
-struct Unk_func_00005594_0 {
-    u8 pad0[0x34];
-    s32 unk34;
-    s32 unk38;
-    u8 pad3C[0x10];
-    s32 unk4C;
-    s32 unk50;
-};
-
-struct Unk_func_000055B0_0 {
-    u8 pad0[0xCC];
-    s32 unkCC;
-    s32 unkD0;
-};
-
-struct Unk_func_000056E4_0 {
-    u8 pad0[0x58];
-    struct Unk_func_000056E4_temp_a2 *unk58;
-    s32 unk5C;
-    u8 pad60[0x7C];
-    s32 unkDC;
-};
-
-struct Unk_func_000056E4_temp_a2 {
-    u8 pad0[0xC];
-    s32 unkC;
-};
-
-struct Unk_func_00005708_0 {
-    u8 pad0[0x10];
-    void *unk10;
-    void **unk14;
-    u8 pad18[0xC];
-    s16 unk24;
-    u8 pad26[0xB2];
-    s32 unkD8;
-};
-
-struct Unk_func_00005708_temp_a1 {
-    u8 pad0[0xC];
-    void **unkC;
-};
-
-struct Unk_func_00005708_var_s0 {
-    u8 pad0[0x8];
-    struct Unk_func_00005708_temp_a1 *unk8;
-    void **unkC;
-    u8 pad10[0x48];
-    s32 unk58;
 };
 
 struct ifqueue {
@@ -255,6 +242,9 @@ extern SceNetAdhocDescList D_00007998;
 extern s32 D_000079A0;
 extern SceNetAdhocPdpList D_000079A4;
 extern u16 D_000079AC;
+extern SceNetAdhocPtpList D_000079B0;
+extern u16 D_000079B8;
+extern u32 D_000079BC;
 extern SceNetAdhocGameModeList D_000079C0;
 extern M2C_UNK D_000079CC;
 extern u16 D_000079E4;
@@ -296,32 +286,33 @@ void func_000023C4(struct mbuf *m);
 s32 func_0000297C(void);
 void func_000029E8(void);
 s32 func_00002A9C(SceNetAdhocDesc *d);
-s32 func_00002B84(void *arg0, s32 arg1);
+s32 func_00002B84(SceNetAdhocPdpPcb *pcb, s32 size);
 void func_00002B90(struct ifnet *ifp);
 s32 func_00002C00(SceNetAdhocDesc *d, s32 events);
 void func_00002CD4(SceNetAdhocDesc *d);
-s32 func_00002D20(struct Unk_func_00002D20_0 *arg0, s32 arg1);
+s32 func_00002D20(SceNetAdhocPdpPcb *pcb, s32 size);
 s32 func_00002D2C(s32);
 s32 func_00002D94(s32, s32);
 void func_00002E48(SceNetAdhocPdpQent *e);
-void func_000039FC(void *arg0);
-void func_00003BB0(struct Unk_func_00003BB0_0 *arg0);
+void func_000039FC(SceNetAdhocDesc *d);
+void func_00003BB0(SceNetAdhocDesc *d);
 void func_00004964(void);
-s32 func_00004AE4(s32);
-s32 func_00004B30(s32);
-s32 func_00004E98(s32);
-s32 func_00004F50(s32);
+void func_00004AE4(SceNetAdhocDesc *d);
+void func_00004B30(SceNetAdhocPtpPcb *pcb);
+s32 func_00004E98(SceNetAdhocPtpPcb *pcb);
+s32 func_00004F50(SceNetAdhocPtpPcb *pcb);
 s32 func_00005024(s32, s32);
 s32 func_000050F8(s32, s32);
 s32 func_000052D4(void);
-s32 func_00005544(void *arg0, s32 arg1, s32 arg2);
-void func_00005560(void *arg0, s32 arg1, s32 arg2);
-s32 func_00005594(struct Unk_func_00005594_0 *arg0, s32 arg1, s32 arg2);
-void func_000055B0(struct Unk_func_000055B0_0 *arg0, s32 arg1, s32 arg2);
-s32 func_000056B0(void *arg0, s32 arg1);
-void func_000056D4(void *arg0);
-s32 func_000056E4(struct Unk_func_000056E4_0 *arg0, s32 arg1);
-void func_00005708(struct Unk_func_00005708_0 *arg0);
+SceNetAdhocPtpPcb *func_0000532C(const SceNetEtherAddr *laddr, u16 lport, const SceNetEtherAddr *paddr, u16 pport);
+s32 func_00005544(SceNetAdhocPtpPcb *pcb, s32 sndsize, s32 rcvsize);
+void func_00005560(SceNetAdhocPtpPcb *pcb, s32 a1, s32 a2);
+s32 func_00005594(SceNetAdhocPtpPcb *pcb, s32 sndsize, s32 rcvsize);
+void func_000055B0(SceNetAdhocPtpPcb *pcb, s32 a1, s32 a2);
+s32 func_000056B0(SceNetAdhocPtpPcb *pcb, s32 a1);
+void func_000056D4(SceNetAdhocPtpPcb *pcb);
+s32 func_000056E4(SceNetAdhocPtpPcb *pcb, s32 a1);
+void func_00005708(SceNetAdhocPtpPcb *pcb);
 void func_0000578C(struct mbuf *m);
 s32 func_00006880(void);
 s32 func_00006C3C(s32, s32, s32);
@@ -353,7 +344,7 @@ void sceNetFreeInternal(void *p);
 void sceNetMCopydata(struct mbuf *m, s32 off, s32 len, void *cp);
 void sceNetMFreem(struct mbuf *m);
 void *sceNetMallocInternal(u32 size);
-M2C_UNK sceNetMemset(void *, M2C_UNK, M2C_UNK);
+void *sceNetMemset(void *s, s32 c, s32 n);
 u32 sceNetRand(void);
 
 #endif

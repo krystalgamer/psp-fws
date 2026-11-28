@@ -592,16 +592,9 @@ void func_00002CD4(SceNetAdhocDesc *d) {
     sceNetFreeInternal(pcb);
 }
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
-s32 func_00002B84(void *arg0, s32 arg1) {
-    M2C_FIELD(arg0, s32 *, 0x1C) = arg1;
-    return 0;
-}
-#endif
-
-#if FW_VERSION < 150
-s32 func_00002B84(void *arg0, s32 arg1) {
-    M2C_FIELD(arg0, s32 *, 0x20) = arg1;
+#if FW_VERSION < 282
+s32 func_00002B84(SceNetAdhocPdpPcb *pcb, s32 size) {
+    pcb->rcvbufsize = size;
     return 0;
 }
 #endif
@@ -649,8 +642,8 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00002C00);
 #endif
 
 #if FW_VERSION >= 282
-s32 func_00002D20(struct Unk_func_00002D20_0 *arg0, s32 arg1) {
-    arg0->unk1C = arg1;
+s32 func_00002D20(SceNetAdhocPdpPcb *pcb, s32 size) {
+    pcb->rcvbufsize = size;
     return 0;
 }
 
@@ -693,20 +686,20 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc", sceNetAdhocPtpClose);
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00003A68);
 
 #if FW_VERSION < 282
-void func_000039FC(void *arg0) {
-    func_00004B30(M2C_FIELD(arg0, s32 *, 0x14));
-    func_00004AE4((s32) arg0);
-    func_00000FFC(arg0);
+void func_000039FC(SceNetAdhocDesc *d) {
+    func_00004B30(d->pcb);
+    func_00004AE4(d);
+    func_00000FFC(d);
 }
 
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00003A34);
 
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00003C00);
 #else
-void func_00003BB0(struct Unk_func_00003BB0_0 *arg0) {
-    func_00004B30(arg0->unk14);
-    func_00004AE4((s32) arg0);
-    func_00000FFC(arg0);
+void func_00003BB0(SceNetAdhocDesc *d) {
+    func_00004B30(d->pcb);
+    func_00004AE4(d);
+    func_00000FFC(d);
 }
 
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00003BE8);
@@ -839,30 +832,20 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_0000548C);
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00005528);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
-s32 func_00005544(void *arg0, s32 arg1, s32 arg2) {
-    M2C_FIELD(arg0, s32 *, 0x34) = arg1;
-    M2C_FIELD(arg0, s32 *, 0x4C) = arg2;
-    M2C_FIELD(arg0, s32 *, 0x38) = 1;
-    M2C_FIELD(arg0, s32 *, 0x50) = 1;
+#if FW_VERSION < 282
+s32 func_00005544(SceNetAdhocPtpPcb *pcb, s32 sndsize, s32 rcvsize) {
+    pcb->snd.hiwat = sndsize;
+    pcb->rcv.hiwat = rcvsize;
+    pcb->snd.lowat = 1;
+    pcb->rcv.lowat = 1;
     return 0;
 }
 #endif
 
-#if FW_VERSION < 150
-s32 func_00005544(void *arg0, s32 arg1, s32 arg2) {
-    M2C_FIELD(arg0, s32 *, 0x38) = arg1;
-    M2C_FIELD(arg0, s32 *, 0x50) = arg2;
-    M2C_FIELD(arg0, s32 *, 0x3C) = 1;
-    M2C_FIELD(arg0, s32 *, 0x54) = 1;
-    return 0;
-}
-#endif
-
-#if FW_VERSION >= 150 && FW_VERSION < 282
-void func_00005560(void *arg0, s32 arg1, s32 arg2) {
-    M2C_FIELD(arg0, s32 *, 0xCC) = arg1;
-    M2C_FIELD(arg0, s32 *, 0xD0) = arg2;
+#if FW_VERSION < 282
+void func_00005560(SceNetAdhocPtpPcb *pcb, s32 a1, s32 a2) {
+    pcb->unkAC = a1;
+    pcb->unkB0 = a2;
 }
 #endif
 
@@ -870,43 +853,21 @@ void func_00005560(void *arg0, s32 arg1, s32 arg2) {
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_0000589C);
 #endif
 
-#if FW_VERSION < 150
-void func_00005560(void *arg0, s32 arg1, s32 arg2) {
-    M2C_FIELD(arg0, s32 *, 0xAC) = arg1;
-    M2C_FIELD(arg0, s32 *, 0xB0) = arg2;
-}
-#endif
-
 #if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_0000556C);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
-s32 func_000056B0(void *arg0, s32 arg1) {
-    void *temp_a2;
-
-    M2C_FIELD(arg0, s32 *, 0x5C) = 1;
-    M2C_FIELD(arg0, s32 *, 0xDC) = arg1;
-    temp_a2 = M2C_FIELD(arg0, void **, 0x58);
-    M2C_FIELD(temp_a2, s32 *, 0xC) = (s32) (M2C_FIELD(temp_a2, s32 *, 0xC) | 0x1000);
-    return 0;
-}
-#endif
-
-#if FW_VERSION < 150
-s32 func_000056B0(void *arg0, s32 arg1) {
-    void *temp_a2;
-
-    M2C_FIELD(arg0, s32 *, 0x60) = 1;
-    M2C_FIELD(arg0, s32 *, 0xBC) = arg1;
-    temp_a2 = M2C_FIELD(arg0, void **, 0x5C);
-    M2C_FIELD(temp_a2, s32 *, 0xC) = (s32) (M2C_FIELD(temp_a2, s32 *, 0xC) | 0x1000);
+#if FW_VERSION < 282
+s32 func_000056B0(SceNetAdhocPtpPcb *pcb, s32 a1) {
+    pcb->unk60 = 1;
+    pcb->unkBC = a1;
+    pcb->desc->unkC |= 0x1000;
     return 0;
 }
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
-void func_000056D4(void *arg0) {
+void func_000056D4(SceNetAdhocPtpPcb *arg0) {
     s32 temp_s2;
     void *temp_a1;
     void *var_s0;
@@ -923,22 +884,22 @@ void func_000056D4(void *arg0) {
             }
             *M2C_FIELD(var_s0, void ***, 0xC) = temp_a1;
             M2C_FIELD(arg0, s32 *, 0xD8) = (s32) (M2C_FIELD(arg0, s32 *, 0xD8) - 1);
-            func_00004F50((s32) var_s0);
+            func_00004F50(var_s0);
             func_000056D4(var_s0);
             func_00004AE4(temp_s2);
             func_00000FFC((SceNetAdhocDesc *) temp_s2);
             var_s0 = M2C_FIELD(arg0, void **, 0x10);
         } while (var_s0 != NULL);
     }
-    sceNetMemset(arg0 + 0x18, 0, 6);
-    sceNetMemset(arg0 + 0x1E, 0, 6);
+    sceNetMemset((u8 *)arg0 + 0x18, 0, 6);
+    sceNetMemset((u8 *)arg0 + 0x1E, 0, 6);
     M2C_FIELD(arg0, s16 *, 0x24) = 0;
-    func_00004B30((s32) arg0);
+    func_00004B30(arg0);
 }
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 201
-void func_000056D4(void *arg0) {
+void func_000056D4(SceNetAdhocPtpPcb *arg0) {
     s32 temp_s2;
     void *temp_a1;
     void *var_s0;
@@ -955,7 +916,7 @@ void func_000056D4(void *arg0) {
             }
             *M2C_FIELD(var_s0, void ***, 0xC) = temp_a1;
             M2C_FIELD(arg0, s32 *, 0xD8) = (s32) (M2C_FIELD(arg0, s32 *, 0xD8) - 1);
-            func_00004F50((s32) var_s0);
+            func_00004F50(var_s0);
             func_000056D4(var_s0);
             func_00004AE4(temp_s2);
             func_00000FFC((SceNetAdhocDesc *) temp_s2);
@@ -968,7 +929,7 @@ void func_000056D4(void *arg0) {
     M2C_FIELD(arg0, s16 *, 0x20) = 0;
     M2C_FIELD(arg0, s16 *, 0x22) = 0;
     M2C_FIELD(arg0, s16 *, 0x24) = 0;
-    func_00004B30((s32) arg0);
+    func_00004B30(arg0);
 }
 #endif
 
@@ -977,7 +938,7 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00005AAC);
 #endif
 
 #if FW_VERSION < 150
-void func_000056D4(void *arg0) {
+void func_000056D4(SceNetAdhocPtpPcb *arg0) {
     s32 temp_s2;
     void *temp_a1;
     void *var_s0;
@@ -994,7 +955,7 @@ void func_000056D4(void *arg0) {
             }
             *M2C_FIELD(var_s0, void ***, 0xC) = temp_a1;
             M2C_FIELD(arg0, s32 *, 0xB8) = (s32) (M2C_FIELD(arg0, s32 *, 0xB8) - 1);
-            func_00004F50((s32) var_s0);
+            func_00004F50(var_s0);
             func_000056D4(var_s0);
             func_00004AE4(temp_s2);
             func_00000FFC((SceNetAdhocDesc *) temp_s2);
@@ -1007,7 +968,7 @@ void func_000056D4(void *arg0) {
     M2C_FIELD(arg0, s16 *, 0x24) = 0;
     M2C_FIELD(arg0, s16 *, 0x26) = 0;
     M2C_FIELD(arg0, s16 *, 0x28) = 0;
-    func_00004B30((s32) arg0);
+    func_00004B30(arg0);
 }
 #endif
 
@@ -1020,28 +981,25 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00004AE4);
 #endif
 
 #if FW_VERSION >= 282
-s32 func_00005594(struct Unk_func_00005594_0 *arg0, s32 arg1, s32 arg2) {
-    arg0->unk34 = arg1;
-    arg0->unk4C = arg2;
-    arg0->unk38 = 1;
-    arg0->unk50 = 1;
+s32 func_00005594(SceNetAdhocPtpPcb *pcb, s32 sndsize, s32 rcvsize) {
+    pcb->snd.hiwat = sndsize;
+    pcb->rcv.hiwat = rcvsize;
+    pcb->snd.lowat = 1;
+    pcb->rcv.lowat = 1;
     return 0;
 }
 
-void func_000055B0(struct Unk_func_000055B0_0 *arg0, s32 arg1, s32 arg2) {
-    arg0->unkCC = arg1;
-    arg0->unkD0 = arg2;
+void func_000055B0(SceNetAdhocPtpPcb *pcb, s32 a1, s32 a2) {
+    pcb->unkAC = a1;
+    pcb->unkB0 = a2;
 }
 
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_000055BC);
 
-s32 func_000056E4(struct Unk_func_000056E4_0 *arg0, s32 arg1) {
-    struct Unk_func_000056E4_temp_a2 *temp_a2;
-
-    arg0->unk5C = 1;
-    arg0->unkDC = arg1;
-    temp_a2 = arg0->unk58;
-    temp_a2->unkC = (s32) (temp_a2->unkC | 0x1000);
+s32 func_000056E4(SceNetAdhocPtpPcb *pcb, s32 a1) {
+    pcb->unk60 = 1;
+    pcb->unkBC = a1;
+    pcb->desc->unkC |= 0x1000;
     return 0;
 }
 #endif
@@ -1051,34 +1009,34 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00005708);
 #endif
 
 #if FW_VERSION == 282
-void func_00005708(struct Unk_func_00005708_0 *arg0) {
+void func_00005708(SceNetAdhocPtpPcb *arg0) {
     s32 temp_s2;
-    struct Unk_func_00005708_temp_a1 *temp_a1;
-    struct Unk_func_00005708_var_s0 *var_s0;
+    void *temp_a1;
+    void *var_s0;
 
-    var_s0 = arg0->unk10;
+    var_s0 = M2C_FIELD(arg0, void **, 0x10);
     if (var_s0 != NULL) {
         do {
-            temp_a1 = var_s0->unk8;
-            temp_s2 = var_s0->unk58;
+            temp_a1 = M2C_FIELD(var_s0, void **, 8);
+            temp_s2 = M2C_FIELD(var_s0, s32 *, 0x58);
             if (temp_a1 != NULL) {
-                temp_a1->unkC = (void **) var_s0->unkC;
+                M2C_FIELD(temp_a1, void ***, 0xC) = (void **) M2C_FIELD(var_s0, void ***, 0xC);
             } else {
-                arg0->unk14 = (void **) var_s0->unkC;
+                M2C_FIELD(arg0, void ***, 0x14) = (void **) M2C_FIELD(var_s0, void ***, 0xC);
             }
-            *var_s0->unkC = temp_a1;
-            arg0->unkD8 = (s32) (arg0->unkD8 - 1);
-            func_00004E98((s32) var_s0);
+            *M2C_FIELD(var_s0, void ***, 0xC) = temp_a1;
+            M2C_FIELD(arg0, s32 *, 0xD8) = (s32) (M2C_FIELD(arg0, s32 *, 0xD8) - 1);
+            func_00004E98(var_s0);
             func_00005708(var_s0);
             func_00004AE4(temp_s2);
             func_00000FFC((SceNetAdhocDesc *) temp_s2);
-            var_s0 = arg0->unk10;
+            var_s0 = M2C_FIELD(arg0, void **, 0x10);
         } while (var_s0 != NULL);
     }
     sceNetMemset((u8 *)arg0 + 0x18, 0, 6);
     sceNetMemset((u8 *)arg0 + 0x1E, 0, 6);
-    arg0->unk24 = 0;
-    func_00004B30((s32) arg0);
+    M2C_FIELD(arg0, s16 *, 0x24) = 0;
+    func_00004B30(arg0);
 }
 #endif
 
