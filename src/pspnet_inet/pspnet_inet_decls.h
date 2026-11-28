@@ -1341,6 +1341,27 @@ struct rtstat {
 };
 #define ROUNDUP(a) ((a) > 0 ? (1 + (((a) - 1) | (sizeof(long) - 1))) : sizeof(long))
 
+/* SCE sceNetInetGetUdpcbstat / GetTcpcbstat records */
+struct SceNetInetUdpcbstat {
+    struct SceNetInetUdpcbstat *next;   /* 0x00 */
+    u32 ts_so_snd_sb_cc;                /* 0x04 */
+    u32 ts_so_rcv_sb_cc;                /* 0x08 */
+    struct in_addr laddr;           /* 0x0C */
+    struct in_addr faddr;           /* 0x10 */
+    u16 lport;                      /* 0x14 */
+    u16 fport;                      /* 0x16 */
+};
+struct SceNetInetTcpcbstat {
+    struct SceNetInetTcpcbstat *next;   /* 0x00 */
+    u32 ts_so_snd_sb_cc;                /* 0x04 */
+    u32 ts_so_rcv_sb_cc;                /* 0x08 */
+    struct in_addr laddr;           /* 0x0C */
+    struct in_addr faddr;           /* 0x10 */
+    u16 lport;                      /* 0x14 */
+    u16 fport;                      /* 0x16 */
+    s32 t_state;                        /* 0x18 */
+};
+
 struct SceTailqHead {
     void *tqh_first;
     void **tqh_last;
@@ -1989,16 +2010,19 @@ void in_setsockaddr(struct inpcb *inp, struct mbuf *nam);
 void in_socktrim(struct sockaddr_in *ap);
 char *inet_ntoa(struct in_addr ina);
 char *intoa(u32 addr);
-s32 ip_ctloutput(s32 op, struct socket *so, s32 level, s32 optname, struct mbuf **m);
+s32 ip_ctloutput(s32 op, struct socket *so, s32 level, s32 optname, struct mbuf **mp);
 void ip_drain(void);
 void ip_freef();
 void ip_freemoptions(struct ip_moptions *imo);
+s32 ip_getmoptions(s32 optname, struct ip_moptions *imo, struct mbuf **mp);
 void ip_input(struct mbuf *m);
 s32 ip_optcopy(struct ip *ip, struct ip *jp);
 s32 ip_optlen(void *inp);
 s32 ip_output(struct mbuf *m0, ...);
+s32 ip_pcbopts(struct mbuf **pcbopt, struct mbuf *m);
 struct in_ifaddr *ip_rtaddr(struct in_addr dst);
 void ip_savecontrol(struct inpcb *inp, struct mbuf **mp, struct ip *ip, struct mbuf *m);
+s32 ip_setmoptions(s32 optname, struct ip_moptions **imop, struct mbuf *m);
 void ip_slowtimo(void);
 struct mbuf *ip_srcroute(void);
 void ip_stripoptions(struct mbuf *m, struct mbuf *mopt);
