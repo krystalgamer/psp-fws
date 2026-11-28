@@ -4919,28 +4919,14 @@ void func_00060D70(struct Unk_func_00060D70_0 *arg0) {
 
 INCLUDE_ASM("nonmatchings/msvideo_main_plugin_044E48", func_00060DBC);
 
-void func_00060E18(struct Unk_func_00060E18_0 *arg0) {
-    arg0->unk0 = &D_000B40E0;
-    func_00061220((s32) (&arg0->unk4));
-    func_000612DC(arg0->unk4, 0);
+Class_000B40E0::Class_000B40E0() {
+    func_00061220((s32) (&this->unk4));
+    func_000612DC(this->unk4, 0);
 }
 
-void func_00060E58(struct Unk_func_00060E58_0 *arg0) {
-    arg0->unk0 = &D_000B40E0;
-    func_00061220((s32) (&arg0->unk4));
-    func_000612DC(arg0->unk4, 0);
-}
-
-void func_00060E98(struct Unk_func_00060E98_0 *arg0, s32 arg1) {
-    arg0->unk0 = &D_000B40E0;
-    func_0006126C(&arg0->unk4, arg1);
-    func_000612DC(arg0->unk4, 0);
-}
-
-void func_00060ED8(struct Unk_func_00060ED8_0 *arg0, s32 arg1) {
-    arg0->unk0 = &D_000B40E0;
-    func_0006126C(&arg0->unk4, arg1);
-    func_000612DC(arg0->unk4, 0);
+Class_000B40E0::Class_000B40E0(s32 arg1) {
+    func_0006126C(&this->unk4, arg1);
+    func_000612DC(this->unk4, 0);
 }
 
 Class_000B40E0::~Class_000B40E0() {
