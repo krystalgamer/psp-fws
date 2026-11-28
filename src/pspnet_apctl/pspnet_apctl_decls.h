@@ -628,6 +628,7 @@ s32 func_000038EC(SceNetApctlCtx *ctx, SceNetInAddrPacked *ip, SceNetInAddrPacke
 s32 func_00003908(u32 *out);
 s32 func_00003978(void);
 void func_00003B30(s32 arg0);
+void func_00003B50(s32 arg0);
 s32 func_00003C64(void);
 void func_00003E70();
 void func_00003EF0();

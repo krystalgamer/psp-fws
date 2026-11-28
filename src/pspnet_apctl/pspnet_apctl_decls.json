@@ -61,6 +61,7 @@
   "func_00003908": "s32 func_00003908(u32 *out);",
   "func_00003978": "s32 func_00003978(void);",
   "func_00003B30": "void func_00003B30(s32 arg0);",
+  "func_00003B50": "void func_00003B50(s32 arg0);",
   "func_00003C64": "s32 func_00003C64(void);",
   "func_00003E70": "void func_00003E70();",
   "func_00003EF0": "void func_00003EF0();",
