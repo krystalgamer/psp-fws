@@ -86,13 +86,41 @@ void func_0008A19C(M2C_UNK **arg0) {
 }
 #endif
 
-#if FW_VERSION >= 282
+#if FW_VERSION == 282 || FW_VERSION >= 301
 INCLUDE_ASM("nonmatchings/music_main_plugin_089BF0", func_0008A1D4);
+#endif
 
+#if FW_VERSION == 300
+void func_0008A1D4(s32 **arg0) {
+    *arg0 = &D_000A2370;
+    _ZN14Class_000A2088D2Ev(arg0);
+}
+#endif
+
+#if FW_VERSION == 282 || FW_VERSION >= 301
 INCLUDE_ASM("nonmatchings/music_main_plugin_089BF0", func_0008A1FC);
+#endif
 
+#if FW_VERSION == 300
+void func_0008A1FC(s32 **arg0) {
+    *arg0 = &D_000A2370;
+    _ZN14Class_000A2088D2Ev(arg0);
+}
+#endif
+
+#if FW_VERSION == 282 || FW_VERSION >= 301
 INCLUDE_ASM("nonmatchings/music_main_plugin_089BF0", func_0008A224);
+#endif
 
+#if FW_VERSION == 300
+void func_0008A224(s32 **arg0) {
+    *arg0 = &D_000A2370;
+    _ZN14Class_000A2088D2Ev(arg0);
+    _ZdlPv(arg0);
+}
+#endif
+
+#if FW_VERSION >= 282
 s32 func_0008A25C(struct Unk_func_0008A25C_0 *arg0) {
     return arg0->unk10;
 }
@@ -910,8 +938,14 @@ s32 func_0008DFC0(struct Unk_func_0008DFC0_0 *arg0) {
 INCLUDE_ASM("nonmatchings/music_main_plugin_089BF0", func_0008DFFC);
 #endif
 
-#if FW_VERSION >= 300
+#if FW_VERSION >= 301
 INCLUDE_ASM("nonmatchings/music_main_plugin_089BF0", func_000A3A44);
+#endif
+
+#if FW_VERSION == 300
+u32 func_000A3A44(void *arg0) {
+    return (u32) ~M2C_FIELD(arg0, s32 *, 0xC) >> 0x1F;
+}
 #endif
 
 #if FW_VERSION != 271

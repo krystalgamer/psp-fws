@@ -217,6 +217,50 @@ def ordered_types(types):
     return out
 
 
+_FIELD = re.compile(r"^\s*(.+?)\s*\bunk([0-9A-F]+)(\[(?:0x[0-9A-Fa-f]+|\d+)\])?;", re.M)
+_SCALAR = {"s8": 1, "u8": 1, "s16": 2, "u16": 2, "s32": 4, "u32": 4, "f32": 4}
+
+
+def c_mirrors(types):
+    """C views of the module's classes (for C units and m2c's context): `struct Class_X` with the vptr
+    word and the `unkN` fields of the class and its bases at their offsets, typedef'd to the class
+    name, so prototypes taking `Class_X *` parse as C and m2c sees the layout."""
+    declared = {}
+    for t in types.values():
+        for m in re.finditer(r"^class (\w+)(?: : public ([\w:]+))? \{", t, re.M):
+            declared[m[1]] = (t, m[2])
+    if not declared:
+        return []
+    out = ["#ifndef __cplusplus"]
+    for c in sorted(declared):
+        fields, b, depth = {}, c, 0
+        while b in declared and depth < 30:
+            t, base = declared[b]
+            body = t[t.index(f"class {b}"):]
+            for m in _FIELD.finditer(body.split("\n};", 1)[0]):
+                ty = m[1].strip()
+                if ty.startswith(("virtual", "static", "u8 pad")) or "(" in ty:
+                    continue
+                n = int(m[3][1:-1], 0) if m[3] else 1
+                size = 4 if ty.endswith("*") else _SCALAR.get(ty)
+                if size is not None:
+                    fields.setdefault(int(m[2], 16), (size * n, m[0].strip()))
+            b, depth = base, depth + 1
+        pos, lines = 4, ["    void *vptr;"]
+        for o in sorted(fields):
+            if o < pos:
+                break
+            if o > pos:
+                lines.append(f"    u8 pad{pos:X}[0x{o - pos:X}];")
+            lines.append(f"    {fields[o][1]}")
+            pos = o + fields[o][0]
+        else:
+            out += [f"typedef struct {c} {{", *lines, f"}} {c};"]
+            continue
+        out.append(f"typedef struct {c} {c};")
+    return out + ["#endif", ""]
+
+
 def decls_body(mod, store, cxx):
     """Header text after the includes: C++ prelude, then types (dependency order), globals and prototypes,
     inside extern "C" for C++ units."""
@@ -226,6 +270,8 @@ def decls_body(mod, store, cxx):
         lines += ["#ifdef __cplusplus"] + prelude + ['extern "C" {', "#endif", ""]
     types = store.get("types", {})
     lines += [types[k] + "\n" for k in ordered_types(types)]
+    if cxx:
+        lines += c_mirrors(types)
     lines += [store["vars"][k] for k in sorted(store["vars"])]
     lines.append("")
     statics = static_members(mod, store) if cxx else set()

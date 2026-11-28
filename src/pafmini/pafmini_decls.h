@@ -3010,6 +3010,195 @@ struct Unk_vt_scePaf_C2E4423A_temp_v1 {
 
 typedef void (*func_ptr)(void);
 
+#ifndef __cplusplus
+typedef struct Class_000D0798 {
+    void *vptr;
+    s32 unk4;
+} Class_000D0798;
+typedef struct Class_000D1E30 {
+    void *vptr;
+    s32 unk4;
+} Class_000D1E30;
+typedef struct Class_000D1E74 {
+    void *vptr;
+    s32 unk4;
+} Class_000D1E74;
+typedef struct Class_000D1EB0 {
+    void *vptr;
+    s32 unk4;
+} Class_000D1EB0;
+typedef struct Class_000D1ED8 {
+    void *vptr;
+} Class_000D1ED8;
+typedef struct Class_000D75B0 {
+    void *vptr;
+} Class_000D75B0;
+typedef struct Class_000D8188 {
+    void *vptr;
+} Class_000D8188;
+typedef struct Class_000D8898 {
+    void *vptr;
+    u8 pad4[0x1D0];
+    s32 unk1D4;
+    u8 pad1D8[0x10];
+    void ** unk1E8;
+    s32 unk1EC;
+    u8 pad1F0[0x141];
+    u8 unk331;
+} Class_000D8898;
+typedef struct Class_000D8BF8 {
+    void *vptr;
+    u8 pad4[0x1D0];
+    s32 unk1D4;
+    u8 pad1D8[0x10];
+    void ** unk1E8;
+    s32 unk1EC;
+    u8 pad1F0[0x141];
+    u8 unk331;
+    u8 pad332[0x396];
+    s8 unk6C8;
+    u8 pad6C9[0x37];
+    void **unk700;
+} Class_000D8BF8;
+typedef struct Class_000DAFE8 {
+    void *vptr;
+    u32 unk4;
+} Class_000DAFE8;
+typedef struct Class_000DB140 {
+    void *vptr;
+} Class_000DB140;
+typedef struct Class_000FF5D8 {
+    void *vptr;
+    s32 unk4;
+} Class_000FF5D8;
+typedef struct Cond {
+    void *vptr;
+} Cond;
+typedef struct CriticalSection {
+    void *vptr;
+} CriticalSection;
+typedef struct Framework {
+    void *vptr;
+} Framework;
+typedef struct Image {
+    void *vptr;
+} Image;
+typedef struct MiconPointee {
+    void *vptr;
+} MiconPointee;
+typedef struct PSJSContext {
+    void *vptr;
+} PSJSContext;
+typedef struct PSJSError {
+    void *vptr;
+} PSJSError;
+typedef struct PSJSExec {
+    void *vptr;
+} PSJSExec;
+typedef struct PSJSHeap {
+    void *vptr;
+} PSJSHeap;
+typedef struct PSJSObject {
+    void *vptr;
+} PSJSObject;
+typedef struct PSJSPage {
+    void *vptr;
+} PSJSPage;
+typedef struct PSJSPageTable {
+    void *vptr;
+} PSJSPageTable;
+typedef struct PSJSValue {
+    void *vptr;
+} PSJSValue;
+typedef struct PSJSValueImpl {
+    void *vptr;
+} PSJSValueImpl;
+typedef struct PhAppear {
+    void *vptr;
+} PhAppear;
+typedef struct PhApplication {
+    void *vptr;
+} PhApplication;
+typedef struct PhButton {
+    void *vptr;
+} PhButton;
+typedef struct PhClock {
+    void *vptr;
+} PhClock;
+typedef struct PhHandler {
+    void *vptr;
+} PhHandler;
+typedef struct PhIPAddr {
+    void *vptr;
+} PhIPAddr;
+typedef struct PhInfoList {
+    void *vptr;
+} PhInfoList;
+typedef struct PhItemSpin {
+    void *vptr;
+} PhItemSpin;
+typedef struct PhLabelText {
+    void *vptr;
+} PhLabelText;
+typedef struct PhList {
+    void *vptr;
+} PhList;
+typedef struct PhMenuList {
+    void *vptr;
+} PhMenuList;
+typedef struct PhMicon {
+    void *vptr;
+} PhMicon;
+typedef struct PhModel {
+    void *vptr;
+} PhModel;
+typedef struct PhNumSpin {
+    void *vptr;
+} PhNumSpin;
+typedef struct PhPlane {
+    void *vptr;
+} PhPlane;
+typedef struct PhProgress {
+    void *vptr;
+} PhProgress;
+typedef struct PhSRender {
+    void *vptr;
+} PhSRender;
+typedef struct PhScene {
+    void *vptr;
+} PhScene;
+typedef struct PhScroll {
+    void *vptr;
+} PhScroll;
+typedef struct PhSpin {
+    void *vptr;
+} PhSpin;
+typedef struct PhText {
+    void *vptr;
+} PhText;
+typedef struct PhXmBar {
+    void *vptr;
+} PhXmBar;
+typedef struct PhXmItem {
+    void *vptr;
+} PhXmItem;
+typedef struct PhXmList {
+    void *vptr;
+} PhXmList;
+typedef struct SurfaceBase {
+    void *vptr;
+} SurfaceBase;
+typedef struct Thread {
+    void *vptr;
+} Thread;
+typedef struct psjsname_impl {
+    void *vptr;
+} psjsname_impl;
+typedef struct psjsstring_impl {
+    void *vptr;
+} psjsstring_impl;
+#endif
+
 extern M2C_UNK D_000CE964;
 extern M2C_UNK D_000D04F0;
 extern M2C_UNK D_000D0798;
@@ -3568,10 +3757,21 @@ void _ZN3paf8PhWidget13UpdateCamerasEv(struct Unk_scePaf_86B41BA3_0 *arg0);
 void _ZN3paf8PhWidget16SetScale_ontimerERK4vec4(struct Unk_scePaf_58BFC2AC_0 *arg0, struct Unk_scePaf_58BFC2AC_1 *arg1);
 s32 _ZN3paf8PhWidget22HandleFocusSwitchEventEPNS_7PhEventE(struct Unk_func_0005D398_0 *arg0, struct Unk_func_0005D398_1 *arg1);
 s32 _ZN3paf8PhWidget7SetAnimEiffiRK4vec4(void *self, s32, float, float, s32, void *);
-s32 _ZN3paf8PhWidget8SetStyleEiRK4vec4(s32);
+M2C_UNK _ZN3paf8PhWidget8GetStyleEiR4vec4(void *self, s32, void *);
+M2C_UNK _ZN3paf8PhWidget8GetStyleEiRb(void *self, s32, bool *);
+M2C_UNK _ZN3paf8PhWidget8GetStyleEiRf(void *self, s32, float *);
+M2C_UNK _ZN3paf8PhWidget8GetStyleEiRi(void *self, s32, s32 *);
+M2C_UNK _ZN3paf8PhWidget8GetStyleEiiR4vec4(void *self, s32, s32, void *);
+M2C_UNK _ZN3paf8PhWidget8GetStyleEiiRb(void *self, s32, s32, bool *);
+M2C_UNK _ZN3paf8PhWidget8GetStyleEiiRf(void *self, s32, s32, float *);
+M2C_UNK _ZN3paf8PhWidget8GetStyleEiiRi(void *self, s32, s32, s32 *);
+s32 _ZN3paf8PhWidget8SetStyleEiRK4vec4(s32 self);
 s32 _ZN3paf8PhWidget8SetStyleEib(s32, s32, s32);
-s32 _ZN3paf8PhWidget8SetStyleEif(s32);
-M2C_UNK _ZN3paf8PhWidget8SetStyleEii(void *self, s32, s32);
+s32 _ZN3paf8PhWidget8SetStyleEif(s32 self);
+M2C_UNK _ZN3paf8PhWidget8SetStyleEii(void * self, s32 a1, s32 a2);
+M2C_UNK _ZN3paf8PhWidget8SetStyleEiiRK4vec4(void *self, s32, s32, void *);
+M2C_UNK _ZN3paf8PhWidget8SetStyleEiif(void *self, s32, s32, float);
+M2C_UNK _ZN3paf8PhWidget8SetStyleEiii(void * self, s32 a1, s32 a2, s32 a3);
 s32 _ZN3paf8PhWidgetC1EPS0_PNS_8PhAppearE(s32, s32, s32);
 s32 _ZN3paf8PhWidgetC2EPS0_PNS_8PhAppearE(s32, s32, s32);
 s32 _ZN3paf8PhWidgetD2Ev(s32);

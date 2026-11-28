@@ -3800,35 +3800,147 @@ INCLUDE_ASM("nonmatchings/pafmini_0346A8", _ZN3paf8PhWidget10SetTimeoutEifPFvPS0
 
 INCLUDE_ASM("nonmatchings/pafmini_0346A8", _ZN3paf8PhWidget8SetStyleEib);
 
-INCLUDE_ASM("nonmatchings/pafmini_0346A8", _ZN3paf8PhWidget8SetStyleEii);
+M2C_UNK _ZN3paf8PhWidget8SetStyleEii(void * self, s32 a1, s32 a2) {
+    s32 r = 0;
+    s32 p = M2C_FIELD(self, s32 *, 0x1E8);
 
-INCLUDE_ASM("nonmatchings/pafmini_0346A8", _ZN3paf8PhWidget8SetStyleEif);
+    if (p != 0) {
+        r = M2C_FIELD(*(void **) p, s32 (**)(s32, s32, s32), 0x30)(p, a1, a2);
+    }
+    return r;
+}
 
-INCLUDE_ASM("nonmatchings/pafmini_0346A8", _ZN3paf8PhWidget8SetStyleEiRK4vec4);
+s32 _ZN3paf8PhWidget8SetStyleEif(s32 self) {
+    s32 r = 0;
+    s32 p = M2C_FIELD(self, s32 *, 0x1E8);
+
+    if (p != 0) {
+        r = M2C_FIELD(*(void **) p, s32 (**)(s32), 0x34)(p);
+    }
+    return r;
+}
+
+s32 _ZN3paf8PhWidget8SetStyleEiRK4vec4(s32 self) {
+    s32 r = 0;
+    s32 p = M2C_FIELD(self, s32 *, 0x1E8);
+
+    if (p != 0) {
+        r = M2C_FIELD(*(void **) p, s32 (**)(s32), 0x38)(p);
+    }
+    return r;
+}
 
 INCLUDE_ASM("nonmatchings/pafmini_0346A8", _ZN3paf8PhWidget8SetStyleEiib);
 
-INCLUDE_ASM("nonmatchings/pafmini_0346A8", _ZN3paf8PhWidget8SetStyleEiii);
+M2C_UNK _ZN3paf8PhWidget8SetStyleEiii(void * self, s32 a1, s32 a2, s32 a3) {
+    s32 r = 0;
+    s32 p = M2C_FIELD(self, s32 *, 0x1E8);
 
-INCLUDE_ASM("nonmatchings/pafmini_0346A8", _ZN3paf8PhWidget8SetStyleEiif);
+    if (p != 0) {
+        r = M2C_FIELD(*(void **) p, s32 (**)(s32, s32, s32, s32), 0x40)(p, a1, a2, a3);
+    }
+    return r;
+}
 
-INCLUDE_ASM("nonmatchings/pafmini_0346A8", _ZN3paf8PhWidget8SetStyleEiiRK4vec4);
+M2C_UNK _ZN3paf8PhWidget8SetStyleEiif(void * self, s32 a1, s32 a2, float a3) {
+    s32 r = 0;
+    s32 p = M2C_FIELD(self, s32 *, 0x1E8);
 
-INCLUDE_ASM("nonmatchings/pafmini_0346A8", _ZN3paf8PhWidget8GetStyleEiRb);
+    if (p != 0) {
+        r = M2C_FIELD(*(void **) p, s32 (**)(s32, s32, s32, float), 0x44)(p, a1, a2, a3);
+    }
+    return r;
+}
 
-INCLUDE_ASM("nonmatchings/pafmini_0346A8", _ZN3paf8PhWidget8GetStyleEiRi);
+M2C_UNK _ZN3paf8PhWidget8SetStyleEiiRK4vec4(void * self, s32 a1, s32 a2, void * a3) {
+    s32 r = 0;
+    s32 p = M2C_FIELD(self, s32 *, 0x1E8);
 
-INCLUDE_ASM("nonmatchings/pafmini_0346A8", _ZN3paf8PhWidget8GetStyleEiRf);
+    if (p != 0) {
+        r = M2C_FIELD(*(void **) p, s32 (**)(s32, s32, s32, void *), 0x48)(p, a1, a2, a3);
+    }
+    return r;
+}
 
-INCLUDE_ASM("nonmatchings/pafmini_0346A8", _ZN3paf8PhWidget8GetStyleEiR4vec4);
+M2C_UNK _ZN3paf8PhWidget8GetStyleEiRb(void * self, s32 a1, bool * a2) {
+    s32 r = 0;
+    s32 p = M2C_FIELD(self, s32 *, 0x1E8);
 
-INCLUDE_ASM("nonmatchings/pafmini_0346A8", _ZN3paf8PhWidget8GetStyleEiiRb);
+    if (p != 0) {
+        r = M2C_FIELD(*(void **) p, s32 (**)(s32, s32, bool *), 0x4C)(p, a1, a2);
+    }
+    return r;
+}
 
-INCLUDE_ASM("nonmatchings/pafmini_0346A8", _ZN3paf8PhWidget8GetStyleEiiRi);
+M2C_UNK _ZN3paf8PhWidget8GetStyleEiRi(void * self, s32 a1, s32 * a2) {
+    s32 r = 0;
+    s32 p = M2C_FIELD(self, s32 *, 0x1E8);
 
-INCLUDE_ASM("nonmatchings/pafmini_0346A8", _ZN3paf8PhWidget8GetStyleEiiRf);
+    if (p != 0) {
+        r = M2C_FIELD(*(void **) p, s32 (**)(s32, s32, s32 *), 0x50)(p, a1, a2);
+    }
+    return r;
+}
 
-INCLUDE_ASM("nonmatchings/pafmini_0346A8", _ZN3paf8PhWidget8GetStyleEiiR4vec4);
+M2C_UNK _ZN3paf8PhWidget8GetStyleEiRf(void * self, s32 a1, float * a2) {
+    s32 r = 0;
+    s32 p = M2C_FIELD(self, s32 *, 0x1E8);
+
+    if (p != 0) {
+        r = M2C_FIELD(*(void **) p, s32 (**)(s32, s32, float *), 0x54)(p, a1, a2);
+    }
+    return r;
+}
+
+M2C_UNK _ZN3paf8PhWidget8GetStyleEiR4vec4(void * self, s32 a1, void * a2) {
+    s32 r = 0;
+    s32 p = M2C_FIELD(self, s32 *, 0x1E8);
+
+    if (p != 0) {
+        r = M2C_FIELD(*(void **) p, s32 (**)(s32, s32, void *), 0x58)(p, a1, a2);
+    }
+    return r;
+}
+
+M2C_UNK _ZN3paf8PhWidget8GetStyleEiiRb(void * self, s32 a1, s32 a2, bool * a3) {
+    s32 r = 0;
+    s32 p = M2C_FIELD(self, s32 *, 0x1E8);
+
+    if (p != 0) {
+        r = M2C_FIELD(*(void **) p, s32 (**)(s32, s32, s32, bool *), 0x5C)(p, a1, a2, a3);
+    }
+    return r;
+}
+
+M2C_UNK _ZN3paf8PhWidget8GetStyleEiiRi(void * self, s32 a1, s32 a2, s32 * a3) {
+    s32 r = 0;
+    s32 p = M2C_FIELD(self, s32 *, 0x1E8);
+
+    if (p != 0) {
+        r = M2C_FIELD(*(void **) p, s32 (**)(s32, s32, s32, s32 *), 0x60)(p, a1, a2, a3);
+    }
+    return r;
+}
+
+M2C_UNK _ZN3paf8PhWidget8GetStyleEiiRf(void * self, s32 a1, s32 a2, float * a3) {
+    s32 r = 0;
+    s32 p = M2C_FIELD(self, s32 *, 0x1E8);
+
+    if (p != 0) {
+        r = M2C_FIELD(*(void **) p, s32 (**)(s32, s32, s32, float *), 0x64)(p, a1, a2, a3);
+    }
+    return r;
+}
+
+M2C_UNK _ZN3paf8PhWidget8GetStyleEiiR4vec4(void * self, s32 a1, s32 a2, void * a3) {
+    s32 r = 0;
+    s32 p = M2C_FIELD(self, s32 *, 0x1E8);
+
+    if (p != 0) {
+        r = M2C_FIELD(*(void **) p, s32 (**)(s32, s32, s32, void *), 0x68)(p, a1, a2, a3);
+    }
+    return r;
+}
 
 INCLUDE_ASM("nonmatchings/pafmini_0346A8", _ZN3paf8PhWidget10SetTextureERKNS_12SurfaceRCPtrINS_7SurfaceEEEi);
 

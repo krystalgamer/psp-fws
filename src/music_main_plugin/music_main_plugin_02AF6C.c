@@ -224,7 +224,14 @@ s32 func_0002D18C(s32 arg0) {
     return 0;
 }
 
+#if FW_VERSION != 300
 INCLUDE_ASM("nonmatchings/music_main_plugin_02AF6C", func_0002D1B0);
+#else
+s32 func_0002D1B0(void) {
+    D_000A4558.unk0 = 0;
+    return 0;
+}
+#endif
 
 INCLUDE_ASM("nonmatchings/music_main_plugin_02AF6C", func_0002D1C0);
 
