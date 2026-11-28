@@ -1,3 +1,5 @@
+/* compiler[270,271]: 1.9.2 */
+/* cflags[270,271]: -Os -frename-registers -mext */
 /* compiler[282,300,301,302,303,310,311,330,340,350,351,352]: 1.9.2 */
 /* cflags[282,300,301,302,303,310,311,330,340,350,351,352]: -Os -frename-registers -mext */
 /* cflags[100-103]: -O2 */
@@ -701,11 +703,7 @@ void *sceKernelQueryLoadCoreCB(void) {
 }
 #endif
 
-#if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/loadcore", sceKernelQueryLoadCoreCB);
-#endif
-
-#if FW_VERSION >= 150 && FW_VERSION < 201
+#if FW_VERSION >= 150 && FW_VERSION < 282
 void *sceKernelQueryLoadCoreCB(void) {
     return &D_00008C40;
 }

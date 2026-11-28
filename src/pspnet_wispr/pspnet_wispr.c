@@ -1,3 +1,5 @@
+/* compiler[330,340]: 1.9.2 */
+/* cflags[330,340]: -O2 -mext */
 #include "common.h"
 
 INCLUDE_ASM("nonmatchings/pspnet_wispr", sceNetWisprInit);

@@ -1,3 +1,5 @@
+/* compiler[271]: 1.9.2 */
+/* cflags[271]: -O2 -fno-thread-jumps -mext */
 /* compiler[282,300,301,302,303,310,311,330,340,350,351,352]: 1.9.2 */
 /* cflags[282,300,301,302,303]: -O2 -fno-thread-jumps -mext */
 /* cflags[310,311,330,340,350,351,352]: -O2 -mext */
@@ -618,7 +620,9 @@ INCLUDE_ASM("nonmatchings/registry", regLoadHive);
 #endif
 
 #if FW_VERSION == 271
-INCLUDE_ASM("nonmatchings/registry", regHiveAddRef);
+void regHiveAddRef(SceRegHive *h) {
+    h->openCount++;
+}
 #endif
 
 #if FW_VERSION >= 201

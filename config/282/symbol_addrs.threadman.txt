@@ -200,3 +200,5 @@ strcpy = 0x000157B4; // type:func
 sceKernelRegisterSuspendHandler = 0x000157BC; // type:func
 sceKernelRegisterResumeHandler = 0x000157C4; // type:func
 g_threadmanInfo = 0x00016C74;
+func_00000268 = 0x0000022C; // type:func
+func_000000B0 = 0x00000000; // type:func

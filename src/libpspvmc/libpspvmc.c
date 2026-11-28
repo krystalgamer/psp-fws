@@ -1,3 +1,5 @@
+/* compiler[340,352]: 1.9.2 */
+/* cflags[340,352]: -O2 -mext */
 #include "common.h"
 #include "libpspvmc_decls.h"
 
