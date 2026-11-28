@@ -198,8 +198,9 @@ def variants(text, body, target, comp, opt, jobs):
     print(f"variants: {len(combos)} combinations, {len(ok)} compiled")
     for sc, c in ok[:5]:
         print(f"  {sc}: {c}")
-    if ok and ok[0][0] == 0:
-        print("best variant source:\n" + src_of(ok[0][1]))
+    if ok:
+        print(("best variant source (MATCH):" if ok[0][0] == 0 else f"best variant source ({ok[0][0]} off):")
+              + "\n" + src_of(ok[0][1]))
     return src_of(ok[0][1]) if ok else None
 
 

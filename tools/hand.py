@@ -52,6 +52,9 @@ def main():
         vs = sharing_versions(a.ver, a.module)
         with ThreadPoolExecutor(int(os.environ.get("HAND_JOBS", "4"))) as ex:
             bad = [v for v, (ok, _) in zip(vs, ex.map(lambda v: build(v, a.module), vs)) if not ok]
+        if bad:  # a stale split/asm state (e.g. right after another tool) gives false failures: re-split those once
+            subprocess.run(["tools/regress.sh"] + [f"{v}:{a.module}" for v in bad], cwd=ROOT, capture_output=True)
+            bad = [v for v in bad if not build(v, a.module)[0]]
         if bad:
             sys.exit(f"pre-flight: {a.module} does not build in {bad} before any change — fix that first "
                      f"(HAND_PREFLIGHT=0 to skip)")
