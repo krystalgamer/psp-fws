@@ -541,6 +541,7 @@ void ptpTimer(SceNetAdhocPtpPcb *pcb);
 s32 sceKernelCheckThreadStack(void);
 u64 sceKernelGetSystemTimeWide(void);
 s32 sceKernelSignalSema(s32 sema, s32 n);
+s32 sceNetAdhocAuth_lib_015A8A64(void *buf, s32 len);
 s32 sceNetAdhocAuth_lib_AAB06250(void *buf, s32 len);
 s32 sceNetAdhocGameModeCreateMaster(void *ptr, s32 size);
 s32 sceNetAdhocGameModeCreateReplica(const SceNetEtherAddr *addr, void *ptr, s32 size);

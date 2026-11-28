@@ -117,6 +117,7 @@
   "sceKernelCheckThreadStack": "s32 sceKernelCheckThreadStack(void);",
   "sceKernelGetSystemTimeWide": "u64 sceKernelGetSystemTimeWide(void);",
   "sceKernelSignalSema": "s32 sceKernelSignalSema(s32 sema, s32 n);",
+  "sceNetAdhocAuth_lib_015A8A64": "s32 sceNetAdhocAuth_lib_015A8A64(void *buf, s32 len);",
   "sceNetAdhocAuth_lib_AAB06250": "s32 sceNetAdhocAuth_lib_AAB06250(void *buf, s32 len);",
   "sceNetAdhocGameModeCreateMaster": "s32 sceNetAdhocGameModeCreateMaster(void *ptr, s32 size);",
   "sceNetAdhocGameModeCreateReplica": "s32 sceNetAdhocGameModeCreateReplica(const SceNetEtherAddr *addr, void *ptr, s32 size);",

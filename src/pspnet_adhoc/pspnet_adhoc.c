@@ -4323,15 +4323,17 @@ s32 gameModeDelete(s32 id) {
 }
 #endif
 
-#if FW_VERSION < 150
+#if FW_VERSION < 201
 s32 gameModeUpdateReplica(s32 id, SceNetAdhocGameModeOptData *opt, s32 internal) {
     s32 s;
     s32 ret;
     SceNetAdhocGameMode *gm;
     SceNetAdhocGameModeOptData tmp;
+#if FW_VERSION < 150
     SceNetAdhocGameModeOptData *info;
 
     info = NULL;
+#endif
     s = _sce_pspnet_spllock();
     ret = 0x80410712;
     if (g_adhocInit == 0)
@@ -4347,6 +4349,22 @@ s32 gameModeUpdateReplica(s32 id, SceNetAdhocGameModeOptData *opt, s32 internal)
         ret = 0x8041071C;
         goto end;
     }
+#if FW_VERSION >= 150
+    tmp.size = sizeof(tmp);
+    ret = sceWlanGPRecv(id, gm->buf, gm->buflen, &tmp);
+    if (ret < 0)
+        goto end;
+    if (tmp.flag & 1) {
+        ret = sceNetAdhocAuth_lib_015A8A64(gm->buf, gm->buflen);
+        if (ret < 0)
+            goto end;
+        ADHOC_MEMCPY(gm->ptr, gm->buf, gm->size);
+    }
+    if (opt == NULL)
+        goto end;
+    if (opt->size >= sizeof(tmp))
+        opt->flag = tmp.flag;
+#else
     if (opt != NULL) {
         tmp.size = sizeof(tmp);
         info = &tmp;
@@ -4356,6 +4374,7 @@ s32 gameModeUpdateReplica(s32 id, SceNetAdhocGameModeOptData *opt, s32 internal)
         goto end;
     if (opt->size >= sizeof(tmp))
         opt->flag = info->flag;
+#endif
     if (internal == 0)
         opt->flag = (u16)opt->flag;
 end:
@@ -4364,7 +4383,7 @@ end:
 }
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", gameModeUpdateReplica);
 #endif
 
