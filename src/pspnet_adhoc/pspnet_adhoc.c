@@ -1446,7 +1446,26 @@ s32 func_00002C00(SceNetAdhocDesc *d, s32 events) {
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00002C00);
+s32 func_00002C00(SceNetAdhocDesc *d, s32 events) {
+    SceNetAdhocPdpPcb *pcb;
+    struct ifnet *ifp;
+    s32 ret;
+
+    ret = 0;
+    pcb = d->pcb;
+    ifp = _sce_pspnet_ifplookup_lladdr(&pcb->laddr);
+    if ((events & 2) && pcb->rcvq_first != NULL)
+        ret = 2;
+    if ((events & 1) && (ifp == NULL || ifp->if_snd.ifq_len < ifp->if_snd.ifq_maxlen))
+        ret |= 1;
+    if (ret == 0) {
+        if (events & 2)
+            pcb->flags |= 2;
+        if ((events & 1) && ifp != NULL)
+            ifp->if_adhocflags |= 2;
+    }
+    return ret;
+}
 #endif
 
 #if FW_VERSION >= 282
