@@ -1,6 +1,7 @@
 /* cflags[100,102,103,150,152]: -Os */
 #include "common.h"
 #include "msstor_decls.h"
+#include "k1.h"
 
 #if FW_VERSION == 201
 INCLUDE_ASM("nonmatchings/msstor_0015A0", func_000015A0);
@@ -661,11 +662,59 @@ INCLUDE_ASM("nonmatchings/msstor_0015A0", func_00006C70);
 
 INCLUDE_ASM("nonmatchings/msstor_0015A0", func_00006CD8);
 
+#if FW_VERSION < 201
+s32 func_00006DFC(SceIoIob *iob, s32 cmd, void *in, SceSize inlen, void *out, SceSize outlen) {
+    SceMSstorDev *dev;
+
+    if (out == NULL || outlen < 4 || (k1IsUserMode() && (s32)((u32)out | ((u32)out + 4)) < 0)) {
+        return 0x80220183;
+    }
+    dev = ((SceMSstorIoCtx *)iob->i_private)->dev;
+    if (dev->writable == 0 || dev->wpSwitch == 1) {
+        *(s32 *)out = 0;
+    } else {
+        *(s32 *)out = 1;
+    }
+    return 0;
+}
+#else
 INCLUDE_ASM("nonmatchings/msstor_0015A0", func_00006DFC);
+#endif
 
+#if FW_VERSION < 201
+s32 func_00006E60(SceIoIob *iob, s32 cmd, void *in, SceSize inlen, void *out, SceSize outlen) {
+    SceMSstorDev *dev;
+
+    if (out == NULL || outlen < 4 || (k1IsUserMode() && (s32)((u32)out | ((u32)out + 4)) < 0)) {
+        return 0x80220183;
+    }
+    dev = ((SceMSstorIoCtx *)iob->i_private)->dev;
+    if (dev->wpSwitch == 1) {
+        *(s32 *)out = 1;
+    } else {
+        *(s32 *)out = 0;
+    }
+    return 0;
+}
+#else
 INCLUDE_ASM("nonmatchings/msstor_0015A0", func_00006E60);
+#endif
 
+#if FW_VERSION < 201
+s32 func_00006EBC(SceIoIob *iob, s32 cmd, void *in, SceSize inlen, void *out, SceSize outlen) {
+    s32 ret;
+
+    if (out == NULL || outlen < 4 || (k1IsUserMode() && (s32)((u32)out | ((u32)out + 0xC)) < 0)) {
+        ret = 0x80220183;
+    } else {
+        ret = 0;
+        *(SceMScmHC **)out = ((SceMSstorIoCtx *)iob->i_private)->dev->hc;
+    }
+    return ret;
+}
+#else
 INCLUDE_ASM("nonmatchings/msstor_0015A0", func_00006EBC);
+#endif
 
 INCLUDE_ASM("nonmatchings/msstor_0015A0", func_00006F10);
 
@@ -673,9 +722,54 @@ INCLUDE_ASM("nonmatchings/msstor_0015A0", func_0000700C);
 
 INCLUDE_ASM("nonmatchings/msstor_0015A0", func_00007108);
 
-INCLUDE_ASM("nonmatchings/msstor_0015A0", func_00007234);
+#if FW_VERSION < 201
+s32 func_00007234(SceIoIob *iob, s32 cmd, void *in, SceSize inlen, void *out, SceSize outlen) {
+    SceMSstorDev *dev;
+    u8 *o;
+    s32 ret;
 
+    dev = ((SceMSstorIoCtx *)iob->i_private)->dev;
+    if (out == NULL || outlen < 5 || (k1IsUserMode() && (s32)((u32)out | ((u32)out + 5)) < 0)) {
+        ret = 0x80220183;
+    } else {
+        o = out;
+        ret = 0;
+        o[0] = dev->mediaType.type;
+        o[1] = dev->mediaType.category;
+        o[2] = dev->mediaType.cls;
+        o[3] = dev->mediaType.parallel;
+        o[4] = dev->mediaType.deviceId;
+    }
+    return ret;
+}
+#else
+INCLUDE_ASM("nonmatchings/msstor_0015A0", func_00007234);
+#endif
+
+#if FW_VERSION < 201
+s32 func_000072A4(SceIoIob *iob, s32 cmd, void *in, SceSize inlen, void *out, SceSize outlen) {
+    SceMSstorDev *dev;
+
+    dev = ((SceMSstorIoCtx *)iob->i_private)->dev;
+    if (out == NULL || outlen < 4 || (k1IsUserMode() && (s32)((u32)out | ((u32)out + 4)) < 0)) {
+        return 0x80220183;
+    }
+    switch (dev->mediaType2) {
+    case 0x10:
+    case 0x11:
+    case 0x40:
+    case 0x41:
+        *(s32 *)out = dev->mediaType2;
+        break;
+    default:
+        *(s32 *)out = 0;
+        break;
+    }
+    return 0;
+}
+#else
 INCLUDE_ASM("nonmatchings/msstor_0015A0", func_000072A4);
+#endif
 
 #if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/msstor_0015A0", func_00006858);
