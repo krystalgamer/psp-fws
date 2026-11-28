@@ -2187,7 +2187,60 @@ fail:
 INCLUDE_ASM("nonmatchings/threadman", sceKernelPollSema);
 #endif
 
+#if FW_VERSION < 270
+s32 sceKernelCancelSema(SceUID semaid, s32 setCount, s32 *numWaitThreads) {
+    SceSysmemUidCB *cb;
+    SceSysmemUidCB *uid;
+    SceSema *sema;
+    s32 ret;
+    void *ra = getRa();
+    u32 oldK1 = shiftK1Noreorder();
+    s32 intr = sceKernelCpuSuspendIntr();
+
+    sceKernelIsIntrContext();
+    ret = k1IsUserMode() && (s32)((u32)numWaitThreads | ((u32)numWaitThreads + 4)) < 0;
+    if (ret) {
+        sceKernelCpuResumeIntr(intr);
+        setK1(oldK1);
+        return 0x800200D3;
+    }
+    if (sceKernelGetUIDcontrolBlockWithType(semaid, g_threadmanInfo.uidSemaType, &uid) != 0) {
+        sceKernelCpuResumeIntr(intr);
+        setK1(oldK1);
+        return 0x80020199;
+    }
+    cb = uid;
+    ret = 0x800200D1;
+    if (k1IsUserMode() && !(cb->attr & 8)) {
+        sceKernelCpuResumeIntr(intr);
+        setK1(oldK1);
+        return ret;
+    }
+    sema = UID_CB_TO_DATA(cb, g_threadmanInfo.uidSemaType, SceSema);
+    if (sema->maxCount < setCount) {
+        sceKernelCpuResumeIntr(intr);
+        setK1(oldK1);
+        return 0x800201BD;
+    }
+    if (g_threadmanInfo.logHandler != NULL) {
+        g_threadmanInfo.logHandler(0x3C, ra, 3, semaid, setCount, numWaitThreads);
+    }
+    ret = sceKernelCallUIDObjFunction(uid, 0x86D94883);
+    if (setCount < 0) {
+        sema->currentCount = sema->initCount;
+    } else {
+        sema->currentCount = setCount;
+    }
+    if (numWaitThreads != NULL) {
+        *numWaitThreads = ret;
+    }
+    sceKernelCpuResumeIntr(intr);
+    setK1(oldK1);
+    return 0;
+}
+#else
 INCLUDE_ASM("nonmatchings/threadman", sceKernelCancelSema);
+#endif
 
 INCLUDE_ASM("nonmatchings/threadman", sceKernelReferSemaStatus);
 
@@ -2444,7 +2497,50 @@ INCLUDE_ASM("nonmatchings/threadman", sceKernelWaitEventFlagCB);
 
 INCLUDE_ASM("nonmatchings/threadman", sceKernelPollEventFlag);
 
+#if FW_VERSION < 270
+s32 sceKernelCancelEventFlag(SceUID evid, u32 setPattern, s32 *numWaitThreads) {
+    SceSysmemUidCB *cb;
+    SceSysmemUidCB *uid;
+    SceEventFlag *ev;
+    s32 ret;
+    void *ra = getRa();
+    u32 oldK1 = shiftK1Noreorder();
+    s32 intr = sceKernelCpuSuspendIntr();
+
+    sceKernelIsIntrContext();
+    ret = k1IsUserMode() && (s32)((u32)numWaitThreads | ((u32)numWaitThreads + 4)) < 0;
+    if (ret) {
+        sceKernelCpuResumeIntr(intr);
+        setK1(oldK1);
+        return 0x800200D3;
+    }
+    if (sceKernelGetUIDcontrolBlockWithType(evid, g_threadmanInfo.uidEventFlagType, &uid) != 0) {
+        sceKernelCpuResumeIntr(intr);
+        setK1(oldK1);
+        return 0x8002019A;
+    }
+    cb = uid;
+    if (k1IsUserMode() && !(cb->attr & 8)) {
+        sceKernelCpuResumeIntr(intr);
+        setK1(oldK1);
+        return 0x800200D1;
+    }
+    ev = UID_CB_TO_DATA(cb, g_threadmanInfo.uidEventFlagType, SceEventFlag);
+    if (g_threadmanInfo.logHandler != NULL) {
+        g_threadmanInfo.logHandler(0x45, ra, 3, evid, setPattern, numWaitThreads);
+    }
+    ret = sceKernelCallUIDObjFunction(uid, 0x86D94883);
+    ev->currentPattern = setPattern;
+    if (numWaitThreads != NULL) {
+        *numWaitThreads = ret;
+    }
+    sceKernelCpuResumeIntr(intr);
+    setK1(oldK1);
+    return 0;
+}
+#else
 INCLUDE_ASM("nonmatchings/threadman", sceKernelCancelEventFlag);
+#endif
 
 INCLUDE_ASM("nonmatchings/threadman", sceKernelReferEventFlagStatus);
 
@@ -2629,9 +2725,53 @@ INCLUDE_ASM("nonmatchings/threadman", sceKernelReceiveMbx);
 INCLUDE_ASM("nonmatchings/threadman", sceKernelReceiveMbxCB);
 
 INCLUDE_ASM("nonmatchings/threadman", sceKernelPollMbx);
+#endif
 
+#if FW_VERSION < 270
+s32 sceKernelCancelReceiveMbx(SceUID mbxid, s32 *numWaitThreads) {
+    SceSysmemUidCB *cb;
+    SceSysmemUidCB *uid;
+    s32 ret;
+    void *ra = getRa();
+    u32 oldK1 = shiftK1Noreorder();
+    s32 intr = sceKernelCpuSuspendIntr();
+
+    sceKernelIsIntrContext();
+    ret = k1IsUserMode() && (s32)((u32)numWaitThreads | ((u32)numWaitThreads + 4)) < 0;
+    if (ret) {
+        sceKernelCpuResumeIntr(intr);
+        setK1(oldK1);
+        return 0x800200D3;
+    }
+    if (sceKernelGetUIDcontrolBlockWithType(mbxid, g_threadmanInfo.uidMbxType, &uid) != 0) {
+        sceKernelCpuResumeIntr(intr);
+        setK1(oldK1);
+        return 0x8002019B;
+    }
+    cb = uid;
+    if (k1IsUserMode() && !(cb->attr & 8)) {
+        sceKernelCpuResumeIntr(intr);
+        setK1(oldK1);
+        return 0x800200D1;
+    }
+    if (g_threadmanInfo.logHandler != NULL) {
+        g_threadmanInfo.logHandler(0x4D, ra, 2, mbxid, numWaitThreads);
+    }
+    ret = sceKernelCallUIDObjFunction(uid, 0x86D94883);
+    if (numWaitThreads != NULL) {
+        *numWaitThreads = ret;
+    }
+    sceKernelCpuResumeIntr(intr);
+    setK1(oldK1);
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 270 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/threadman", sceKernelCancelReceiveMbx);
+#endif
 
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/threadman", sceKernelReferMbxStatus);
 #endif
 
@@ -2971,9 +3111,53 @@ INCLUDE_ASM("nonmatchings/threadman", sceKernelAllocateVplCB);
 INCLUDE_ASM("nonmatchings/threadman", sceKernelTryAllocateVpl);
 
 INCLUDE_ASM("nonmatchings/threadman", sceKernelFreeVpl);
+#endif
 
+#if FW_VERSION < 270
+s32 sceKernelCancelVpl(SceUID vplid, s32 *numWaitThreads) {
+    SceSysmemUidCB *cb;
+    SceSysmemUidCB *uid;
+    s32 ret;
+    void *ra = getRa();
+    u32 oldK1 = shiftK1Noreorder();
+    s32 intr = sceKernelCpuSuspendIntr();
+
+    sceKernelIsIntrContext();
+    ret = k1IsUserMode() && (s32)((u32)numWaitThreads | ((u32)numWaitThreads + 4)) < 0;
+    if (ret) {
+        sceKernelCpuResumeIntr(intr);
+        setK1(oldK1);
+        return 0x800200D3;
+    }
+    if (sceKernelGetUIDcontrolBlockWithType(vplid, g_threadmanInfo.uidVplType, &uid) != 0) {
+        sceKernelCpuResumeIntr(intr);
+        setK1(oldK1);
+        return 0x8002019C;
+    }
+    cb = uid;
+    if (k1IsUserMode() && !(cb->attr & 8)) {
+        sceKernelCpuResumeIntr(intr);
+        setK1(oldK1);
+        return 0x800200D1;
+    }
+    if (g_threadmanInfo.logHandler != NULL) {
+        g_threadmanInfo.logHandler(0x5F, ra, 2, vplid, numWaitThreads);
+    }
+    ret = sceKernelCallUIDObjFunction(uid, 0x86D94883);
+    if (numWaitThreads != NULL) {
+        *numWaitThreads = ret;
+    }
+    sceKernelCpuResumeIntr(intr);
+    setK1(oldK1);
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 270 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/threadman", sceKernelCancelVpl);
+#endif
 
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/threadman", sceKernelReferVplStatus);
 #endif
 
@@ -3336,7 +3520,47 @@ INCLUDE_ASM("nonmatchings/threadman", sceKernelTryAllocateFpl);
 
 INCLUDE_ASM("nonmatchings/threadman", sceKernelFreeFpl);
 
+#if FW_VERSION < 270
+s32 sceKernelCancelFpl(SceUID fplid, s32 *numWaitThreads) {
+    SceSysmemUidCB *cb;
+    SceSysmemUidCB *uid;
+    s32 ret;
+    void *ra = getRa();
+    u32 oldK1 = shiftK1Noreorder();
+    s32 intr = sceKernelCpuSuspendIntr();
+
+    sceKernelIsIntrContext();
+    ret = k1IsUserMode() && (s32)((u32)numWaitThreads | ((u32)numWaitThreads + 4)) < 0;
+    if (ret) {
+        sceKernelCpuResumeIntr(intr);
+        setK1(oldK1);
+        return 0x800200D3;
+    }
+    if (sceKernelGetUIDcontrolBlockWithType(fplid, g_threadmanInfo.uidFplType, &uid) != 0) {
+        sceKernelCpuResumeIntr(intr);
+        setK1(oldK1);
+        return 0x8002019D;
+    }
+    cb = uid;
+    if (k1IsUserMode() && !(cb->attr & 8)) {
+        sceKernelCpuResumeIntr(intr);
+        setK1(oldK1);
+        return 0x800200D1;
+    }
+    if (g_threadmanInfo.logHandler != NULL) {
+        g_threadmanInfo.logHandler(0x67, ra, 2, fplid, numWaitThreads);
+    }
+    ret = sceKernelCallUIDObjFunction(uid, 0x86D94883);
+    if (numWaitThreads != NULL) {
+        *numWaitThreads = ret;
+    }
+    sceKernelCpuResumeIntr(intr);
+    setK1(oldK1);
+    return 0;
+}
+#else
 INCLUDE_ASM("nonmatchings/threadman", sceKernelCancelFpl);
+#endif
 
 INCLUDE_ASM("nonmatchings/threadman", sceKernelReferFplStatus);
 
