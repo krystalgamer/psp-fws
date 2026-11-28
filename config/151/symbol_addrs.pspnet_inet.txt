@@ -712,3 +712,4 @@ rip_disconnect = 0x0001B2E4; // type:func
 tcp_setpersist = 0x00021FF0; // type:func
 tcp_mss_from_peer = 0x000231F8; // type:func
 tcp_mss_to_advertise = 0x0002380C; // type:func
+ip_setmoptions = 0x0001794C; // type:func

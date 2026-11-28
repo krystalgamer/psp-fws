@@ -135,7 +135,6 @@
   "func_00010700": "s32 func_00010700(void);",
   "func_00010874": "s32 func_00010874(struct socket *so, s32 cmd, void *data, struct ifnet *ifp);",
   "func_00013114": "s32 func_00013114(void *v, struct mbuf *nam);",
-  "func_0001794C": "s32 func_0001794C(s32 optname, struct ip_moptions **imop, struct mbuf *m);",
   "func_00019A98": "s32 func_00019A98(void);",
   "func_00019C00": "void func_00019C00(struct rtentry *rt);",
   "func_0001A410": "s32 func_0001A410(void);",

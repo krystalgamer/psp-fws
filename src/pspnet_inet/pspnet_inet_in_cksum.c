@@ -1199,7 +1199,7 @@ s32 ip_ctloutput(s32 op, struct socket *so, s32 level, s32 optname, struct mbuf 
         case 11:
         case 12:
         case 13:
-            error = func_0001794C(optname, &inp->inp_moptions, m);
+            error = ip_setmoptions(optname, &inp->inp_moptions, m);
             break;
         case 19:
             if (m == 0 || m->m_len != sizeof(s32))
@@ -1383,7 +1383,7 @@ INCLUDE_ASM("nonmatchings/pspnet_inet_in_cksum", ip_pcbopts);
 #endif
 
 #if FW_VERSION >= 151 && FW_VERSION < 201
-s32 func_0001794C(s32 optname, struct ip_moptions **imop, struct mbuf *m) {
+s32 ip_setmoptions(s32 optname, struct ip_moptions **imop, struct mbuf *m) {
     s32 error = 0;
     u8 loop;
     s32 i;
@@ -1538,7 +1538,7 @@ s32 func_0001794C(s32 optname, struct ip_moptions **imop, struct mbuf *m) {
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet_in_cksum", func_0001794C);
+INCLUDE_ASM("nonmatchings/pspnet_inet_in_cksum", ip_setmoptions);
 #endif
 
 #if FW_VERSION < 151
