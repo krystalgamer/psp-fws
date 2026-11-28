@@ -247,9 +247,11 @@ typedef struct {
     u32 unk3DC;                 /* 0x3DC option 51 lease time */
     u32 unk3E0;                 /* 0x3E0 option 58 T1 */
     u32 unk3E4;                 /* 0x3E4 option 59 T2 */
-    u32 unk3E8;
-    u32 netmask;                /* 0x3EC */
-    u32 broadcast;              /* 0x3F0 */
+    u32 unk3E8;                 /* 0x3E8 option 54 server id */
+    u32 netmask;                /* 0x3EC option 1 */
+    u32 broadcast;              /* 0x3F0 option 28 */
+    u32 router;                 /* 0x3F4 option 3 */
+    u32 dns[2];                 /* 0x3F8 option 6 */
 } SceNetDhcpLease;
 
 /* DHCP client state (1.00: D_00008B38) */
@@ -582,6 +584,7 @@ s32 func_00006304(s32 arg0);
 s32 func_0000643C(SceNetDhcpCtx *dc);
 s32 func_00006A14(const char *ifname, void *func, s32 a2, s32 prio, s32 a4, SceNetApctlIpParam *param);
 void func_000070C0(s32 *arg0);
+s32 func_00007244(void *pkt, void *arg, s8 tag, s32 area, u32 *overload);
 s32 func_00007324(void);
 s32 func_0000741C(s32, s32);
 u8 *func_000074D0(u8 *dst, u8 *src, s32 n);

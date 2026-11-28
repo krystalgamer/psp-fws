@@ -84,9 +84,40 @@ INCLUDE_ASM("nonmatchings/pspnet_apctl_006340", func_00004E50);
 #if FW_VERSION < 151
 INCLUDE_ASM("nonmatchings/pspnet_apctl_006340", func_00004EBC);
 
-INCLUDE_ASM("nonmatchings/pspnet_apctl_006340", func_00004FC4);
+s32 func_00004FC4(s8 *opt, SceNetDhcpLease *l) {
+    switch (opt[0]) {
+    case 1:
+        __builtin_memcpy(&l->netmask, opt + 2, 4);
+        break;
+    case 28:
+        __builtin_memcpy(&l->broadcast, opt + 2, 4);
+        break;
+    case 54:
+        __builtin_memcpy(&l->unk3E8, opt + 2, 4);
+        break;
+    }
+    return 0;
+}
 
-INCLUDE_ASM("nonmatchings/pspnet_apctl_006340", func_00005064);
+s32 func_00005064(s8 *opt, SceNetDhcpLease *l) {
+    s32 n = (u32)opt[1] >> 2;
+
+    switch (opt[0]) {
+    case 3:
+        l->router = 0;
+        __builtin_memcpy(&l->router, opt + 2, 4);
+        break;
+    case 6:
+        l->dns[0] = 0;
+        l->dns[1] = 0;
+        __builtin_memcpy(&l->dns[0], opt + 2, 4);
+        if (n >= 2) {
+            __builtin_memcpy(&l->dns[1], opt + 6, 4);
+        }
+        break;
+    }
+    return 0;
+}
 #endif
 
 #if FW_VERSION >= 282
