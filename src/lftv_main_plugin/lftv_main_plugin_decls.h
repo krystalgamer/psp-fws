@@ -271,6 +271,7 @@ public:
 /* vtable _ZTV14Class_0005D8A0 is data (vptr = label - 8 + 8) */
 class Class_0005D8A0 {
 public:
+    Class_0005D8A0();
     virtual ~Class_0005D8A0();
 };
 #endif
@@ -1966,6 +1967,8 @@ s32 _ZN14Class_0005B860D2Ev(s32);
 void _ZN14Class_0005B8C0D0Ev(M2C_UNK **arg0);
 void _ZN14Class_0005B8C0D1Ev(M2C_UNK **arg0);
 void _ZN14Class_0005B8C0D2Ev(M2C_UNK **arg0);
+void _ZN14Class_0005D8A0C1Ev(M2C_UNK **arg0);
+void _ZN14Class_0005D8A0C2Ev(M2C_UNK **arg0);
 void _ZN14Class_0005D948D2Ev(void *self);
 M2C_UNK _ZN3paf10PhMenuListD2Ev(void);
 M2C_UNK _ZN3paf13PhApplication13StartDispListEv(void);

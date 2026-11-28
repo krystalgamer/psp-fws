@@ -3167,12 +3167,7 @@ s32 func_0004F7CC(void *arg0, u32 arg1) {
     return var_v0;
 }
 
-void func_0004F7FC(M2C_UNK **arg0) {
-    *arg0 = &D_0005D8A0;
-}
-
-void func_0004F80C(M2C_UNK **arg0) {
-    *arg0 = &D_0005D8A0;
+Class_0005D8A0::Class_0005D8A0() {
 }
 
 Class_0005D8A0::~Class_0005D8A0() {
