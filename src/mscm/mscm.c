@@ -226,7 +226,115 @@ INCLUDE_ASM("nonmatchings/mscm", func_00000244);
 
 INCLUDE_ASM("nonmatchings/mscm", sceMScmStartModule);
 
+#if FW_VERSION < 150
+s32 sceMScmStopModule(SceSize args, void *argp) {
+    SceMScmCLDM *p;
+    SceMScmCLDM *list;
+    s32 i;
+    s32 j;
+
+    p = NULL;
+    sceKernelUnregisterSysEventHandler(D_000069A0);
+    func_00005270(0, 0x11);
+    sceMScmSetPullDownReg(0, 0);
+    func_00005A44(0, 0x11, 0);
+    func_00005804(0);
+    sceKernelTerminateDeleteThread(D_00006F10);
+    sceKernelTerminateDeleteThread(D_00006ED0);
+    func_000000AC(0);
+    func_00005A44_v100(0);
+    func_00005A44_v100(1);
+    for (i = 0; i < 1; i++) {
+        for (j = 0; j < 3; j++) {
+            list = &D_00006B54[i][j];
+            /* the original reads p->next before p is set (p == NULL on the first list) */
+            while (list != p->next) {
+                if (p->info.args != 0) {
+                    sceKernelFreeVpl(D_00006B50, (void *)p->info.args);
+                }
+                if (p->info.path != NULL) {
+                    sceKernelFreeVpl(D_00006B50, p->info.path);
+                }
+                p->next->prev = p->prev;
+                p->prev->next = p->next;
+                sceKernelFreeVpl(D_00006B50, p);
+                p = list->next;
+            }
+        }
+    }
+    for (i = 0; i < 1; i++) {
+        sceKernelDeleteSema(D_00006ECC[i]);
+        D_00006ECC[i] = 0;
+        for (j = 0; j < 3; j++) {
+            D_00006B54[i][j].unk124 = 0;
+            D_00006F00[i * 3 + j] = 0;
+        }
+    }
+    D_00006EFC = NULL;
+    sceKernelDeleteEventFlag(g_mainEvf[0]);
+    sceKernelDeleteEventFlag(g_mediaEvf[0]);
+    sceKernelDeleteEventFlag(D_00006F44);
+    sceKernelDeleteVpl(D_00006B50);
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 201
+s32 sceMScmStopModule(SceSize args, void *argp) {
+    SceMScmCLDM *p;
+    SceMScmCLDM *list;
+    s32 i;
+    s32 j;
+
+    p = NULL;
+    sceKernelUnregisterSysEventHandler(D_00006DF0);
+    func_00005270(0, 0x11);
+    sceMScmSetPullDownReg(0, 0);
+    func_00005A44(0, 0x11, 0);
+    func_00005804(0);
+    sceKernelTerminateDeleteThread(D_00007370);
+    sceKernelTerminateDeleteThread(D_00007330);
+    func_000000AC(0);
+    func_00005EE4(0);
+    func_00005EE4(1);
+    for (i = 0; i < 1; i++) {
+        for (j = 0; j < 3; j++) {
+            list = &D_00006B54[i][j];
+            /* the original reads p->next before p is set (p == NULL on the first list) */
+            while (list != p->next) {
+                if (p->info.args != 0) {
+                    sceKernelFreeVpl(D_00006B50, (void *)p->info.args);
+                }
+                if (p->info.path != NULL) {
+                    sceKernelFreeVpl(D_00006B50, p->info.path);
+                }
+                p->next->prev = p->prev;
+                p->prev->next = p->next;
+                sceKernelFreeVpl(D_00006B50, p);
+                p = list->next;
+            }
+        }
+    }
+    for (i = 0; i < 1; i++) {
+        sceKernelDeleteSema(D_00006ECC[i]);
+        D_00006ECC[i] = 0;
+        for (j = 0; j < 3; j++) {
+            D_00006B54[i][j].unk124 = 0;
+            D_00006F00[i * 3 + j] = 0;
+        }
+    }
+    D_0000735C = NULL;
+    sceKernelDeleteEventFlag(g_mainEvf[0]);
+    sceKernelDeleteEventFlag(g_mediaEvf[0]);
+    sceKernelDeleteEventFlag(D_000073A4);
+    sceKernelDeleteVpl(D_00006B50);
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/mscm", sceMScmStopModule);
+#endif
 
 #if FW_VERSION >= 310
 INCLUDE_ASM("nonmatchings/mscm", module_reboot_before);
@@ -276,11 +384,135 @@ void func_00000930(s32 arg0) {
 }
 #endif
 
+#if FW_VERSION < 201
+/* cld.c is its own object (its assert format is not merged with init.c's) */
+static const char cldRegisterName[] = "sceMScmRegisterCLD";
+static const char cldFile[] = "cld.c";
+static const char cldAssertFmt[] = "Assertion failed at %s:%s:%04d\n";
+
+s32 sceMScmRegisterCLD(s32 slot, SceMScmCLD *cld) {
+    s32 ret;
+    s32 ok;
+    void *buf;
+    char *name;
+    u32 len;
+
+    if (cld == NULL) {
+        ret = 0x80220081;
+        goto end;
+    }
+    if (slot != 0) {
+        ret = 0x80220081;
+        goto end;
+    }
+    ok = (D_00006ED8[slot].attached == 0);
+    {
+        const char *fn = cldRegisterName, *file = cldFile;
+        if (!ok) {
+            Kprintf(cldAssertFmt, file, fn, 0x2B);
+            sceKernelAssert(ok, 0);
+        }
+    }
+    len = strlen(cld->name);
+    if (sceKernelTryAllocateVpl(D_00006B50, (len < 0x100) ? len + 1 : 0x100, &buf) < 0) {
+        ret = 0x80220082;
+        goto end;
+    }
+    name = buf;
+    memset(name, 0, len + 1);
+    strncpy(name, cld->name, len);
+    memcpy(&D_00006ED8[slot].drv, cld, sizeof(SceMScmCLD));
+    D_00006ED8[slot].drv.name = name;
+    D_00006ED8[slot].attached = 1;
+    ret = 0;
+end:
+    return ret;
+}
+#else
 INCLUDE_ASM("nonmatchings/mscm", sceMScmRegisterCLD);
+#endif
 
+#if FW_VERSION < 201
+s32 sceMScmUnRegisterCLD(s32 slot, SceMScmCLD *cld) {
+    SceMScmSlotCB *cb;
+
+    if (cld == NULL) {
+        return 0x80220081;
+    }
+    if (slot != 0) {
+        return 0x80220081;
+    }
+    cb = &D_00006ED8[slot];
+    if (strncmp(D_00006ED8[slot].drv.name, cld->name, 0xFF) != 0) {
+        return 0x80220081;
+    }
+    {
+        SceUID vpl = D_00006B50;
+        cb->attached = 0;
+        sceKernelFreeVpl(vpl, D_00006ED8[slot].drv.name);
+    }
+    memset(cb, 0, 0x20);
+    return 0;
+}
+#else
 INCLUDE_ASM("nonmatchings/mscm", sceMScmUnRegisterCLD);
+#endif
 
+#if FW_VERSION < 150
+s32 sceMScmDetachCLD(s32 slot, SceMScmCLD *cld) {
+    SceMScmSlotCB *cb;
+    s32 buf[4];
+    s32 (*stop)(s32, s32, s32);
+
+    cb = &D_00006ED8[slot];
+    if (cb->attached == 0) {
+        return 0xC0220000;
+    }
+    if (strncmp(cb->drv.name, cld->name, 0xFF) != 0) {
+        return 0x80220081;
+    }
+    func_00002194(cb->drv.cmd, (s32)&D_00006F14[slot], 4, (s32)buf, 0, cb->drv.cmdArg);
+    stop = (s32 (*)(s32, s32, s32))cb->cldm->unload;
+    if (stop != NULL) {
+        stop(0, 0, 0);
+    }
+    memset(cb, 0, sizeof(SceMScmSlotCB));
+    D_00006B40[slot] = 0;
+    D_00006ED4[slot] = 1;
+    sceKernelSetEventFlag(g_mainEvf[slot], 0x40000000);
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 201
+s32 sceMScmDetachCLD(s32 slot, SceMScmCLD *cld) {
+    SceMScmSlotCB *cb;
+    s32 buf[4];
+    s32 (*stop)(s32, s32, s32);
+
+    cb = &D_00006ED8[slot];
+    if (cb->attached == 0) {
+        return 0xC0220000;
+    }
+    if (strncmp(cb->drv.name, cld->name, 0xFF) != 0) {
+        return 0x80220081;
+    }
+    func_00002194(cb->drv.cmd, (s32)&D_00006F14[slot], 4, (s32)buf, 0, cb->drv.cmdArg);
+    stop = (s32 (*)(s32, s32, s32))cb->cldm->unload;
+    if (stop != NULL) {
+        stop(0, 0, 0);
+    }
+    memset(cb, 0, sizeof(SceMScmSlotCB));
+    D_00006F90[slot] = 0;
+    D_00007334[slot] = 1;
+    sceKernelSetEventFlag(g_mainEvf[slot], 0x40000000);
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/mscm", sceMScmDetachCLD);
+#endif
 
 INCLUDE_ASM("nonmatchings/mscm", sceMScmRegisterCLDM);
 
@@ -292,7 +524,25 @@ INCLUDE_ASM("nonmatchings/mscm", func_000015C8);
 INCLUDE_ASM("nonmatchings/mscm", func_0000123C);
 #endif
 
+#if FW_VERSION < 201
+s32 sceMScmGetRegisteredCLDMCount(s32 slot) {
+    s32 count;
+    s32 i;
+
+    count = 0;
+    if (slot != 0) {
+        return 0x80220081;
+    }
+    sceKernelWaitSema(D_00006ECC[slot], 1, 0);
+    for (i = 0; i < 3; i++) {
+        count += D_00006F00[slot * 3 + i];
+    }
+    sceKernelSignalSema(D_00006ECC[slot], 1);
+    return count;
+}
+#else
 INCLUDE_ASM("nonmatchings/mscm", sceMScmGetRegisteredCLDMCount);
+#endif
 
 #if FW_VERSION >= 250
 INCLUDE_ASM("nonmatchings/mscm", func_00001804);
@@ -302,8 +552,62 @@ INCLUDE_ASM("nonmatchings/mscm", func_00001804);
 INCLUDE_RODATA("nonmatchings/mscm", D_000070F8);
 #endif
 
-#if FW_VERSION < 250
-INCLUDE_ASM("nonmatchings/mscm", func_00001478);
+#if FW_VERSION < 201
+static const char cldmFile[] = "cldm.c";
+static const char cldmAssertFmt[] = "Assertion failed at %s:%s:%04d\n";
+
+s32 _sceMScmGetCLDMHelper(s32 slot, s32 n, SceMScmCLDMInfo **out) {
+    s32 ret;
+    s32 sum;
+    s32 i;
+    s32 j;
+    s32 k;
+    s32 ok;
+    SceMScmCLDM *p;
+
+    ret = 0;
+    if (out == NULL || slot != 0) {
+        return 0x80220081;
+    }
+    sceKernelWaitSema(D_00006ECC[slot], 1, 0);
+    for (i = 0, sum = 0; i < 3; i++) {
+        if (n < sum + D_00006F00[slot * 3 + i]) {
+            break;
+        }
+        sum += D_00006F00[slot * 3 + i];
+    }
+    if (i >= 3) {
+        ret = 0x80220084;
+        goto end;
+    }
+    j = i;
+    k = n - sum;
+    p = D_00006B54[slot][j].next;
+    for (i = 0; i < k; i++) {
+        p = p->next;
+        if (p == NULL) {
+            ret = 0xC0220000;
+            goto end;
+        }
+        if (&D_00006B54[slot][j] == p) {
+            ret = 0x80220084;
+            goto end;
+        }
+    }
+    ok = (p != NULL);
+    if (!ok) {
+        Kprintf(cldmAssertFmt, cldmFile, "_sceMScmGetCLDMHelper", 0x14E);
+        sceKernelAssert(ok, 0);
+    }
+    *out = &p->info;
+end:
+    sceKernelSignalSema(D_00006ECC[slot], 1);
+    return ret;
+}
+#endif
+
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/mscm", _sceMScmGetCLDMHelper);
 #endif
 
 #if FW_VERSION >= 282
@@ -312,11 +616,66 @@ INCLUDE_RODATA("nonmatchings/mscm", D_0000716C);
 INCLUDE_ASM("nonmatchings/mscm", sceMScmQueryMSCMStatus);
 #endif
 
-#if FW_VERSION < 250 || FW_VERSION >= 282
+#if FW_VERSION < 201
+s32 sceMScmGetCLDM(s32 slot, s32 n, SceMScmCLDMInfo *out) {
+    SceMScmCLDMInfo *info;
+    s32 ret;
+
+    ret = _sceMScmGetCLDMHelper(slot, n, &info);
+    if (ret >= 0) {
+        if (out != NULL) {
+            *out = *info;
+        }
+    }
+    return ret;
+}
+#endif
+
+#if FW_VERSION == 201 || FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/mscm", sceMScmGetCLDM);
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION == 100
+s32 sceMScmQueryMSCMStatus(s32 slot, s32 *out) {
+    s32 st;
+    s32 ret;
+
+    ret = 0x80220083;
+    if (D_00006F14[slot].inService != 0) {
+        switch (D_00006ED4[slot]) {
+        case 0:
+            ret = 0;
+            *out = 0;
+            break;
+        case 4:
+            ret = 0;
+            *out = 3;
+            break;
+        case 5:
+            ret = 0;
+            *out = 4;
+            break;
+        case 1:
+        case 2:
+        case 3:
+            func_00005C8C(slot, &st);
+            if (st != 0) {
+                *out = 2;
+            } else {
+                *out = 1;
+            }
+            ret = 0;
+            break;
+        default:
+            ret = 0xC0220000;
+            break;
+        }
+    }
+    return ret;
+}
+#endif
+
+#if FW_VERSION >= 102 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/mscm", sceMScmQueryMSCMStatus);
 #endif
 
@@ -338,17 +697,135 @@ INCLUDE_ASM("nonmatchings/mscm", func_00001BF8);
 INCLUDE_ASM("nonmatchings/mscm", func_00001F10);
 
 INCLUDE_ASM("nonmatchings/mscm", func_00002114);
-#else
-INCLUDE_ASM("nonmatchings/mscm", func_0000179C);
+#endif
+
+#if FW_VERSION < 201
+s32 func_0000179C(SceSize args, void *argp) {
+    s32 index = ((SceMScmHC *)argp)->index;
+    SceUID evf = D_00006F14[index].evf;
+    u32 bits;
+    s32 st;
+
+    for (;;) {
+        bits = 0;
+        sceKernelWaitEventFlag(g_mainEvf[index], 0xC0007FF1, 0x21, &bits, NULL);
+        if (bits & 1) {
+            func_00005C8C(index, &st);
+            if (st != 0) {
+                bits |= 0x40000000;
+            }
+        }
+        if (bits & 0x7FF0) {
+            sceKernelSetEventFlag(evf, bits & 0x7FF0);
+        }
+        if ((s32)bits < 0) {
+            sceKernelSetEventFlag(g_mediaEvf[index], 0x80000000);
+        }
+        if (bits & 0x40000000) {
+#if FW_VERSION == 100
+            D_00006ED4[index] = 2;
+#endif
+            sceKernelSetEventFlag(g_mediaEvf[index], 0x40000000);
+        }
+    }
+}
 #endif
 
 #if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/mscm", func_0000179C);
+
 INCLUDE_ASM("nonmatchings/mscm", func_00001B88);
 #endif
 
-#if FW_VERSION < 250
-INCLUDE_ASM("nonmatchings/mscm", func_000018B8);
 
+#if FW_VERSION < 150
+s32 func_000018B8(s32 slot) {
+    s32 st;
+    s32 buf[1];
+    s32 ret;
+    s32 i;
+    s32 intr;
+    SceMScmSlotCB *cb;
+    u32 entry;
+    s32 (*cmd)(s32, s32, s32, s32, s32);
+
+    st = 0;
+    sceLedSetMode(0, 0, 0);
+#if FW_VERSION == 100
+    ret = func_00005C8C(slot, &st);
+    if (st != 0) {
+        return 0;
+    }
+    sceKernelPowerLock(0);
+    sceMScmSetSlotPower(&D_00006F14[slot], 1);
+    sceKernelDelayThread(100000);
+#else
+    func_00005C8C(slot, &st);
+    if (st != 0) {
+        return 0;
+    }
+    sceKernelPowerLock(0);
+    sceMScmSetSlotPower(&D_00006F14[slot], 1);
+    sceKernelDelayThread(100000);
+    ret = func_00005C8C(slot, &st);
+    if (st != 0) {
+        sceKernelPowerUnlock(0);
+        return 0;
+    }
+#endif
+    intr = sceKernelSuspendDispatchThread();
+    for (i = 0; i < 32; i++) {
+        if (g_notifyEvf[slot][i] != 0) {
+            sceKernelSetEventFlag(g_notifyEvf[slot][i], 8);
+        }
+        if (g_notifyCb[slot][i] != 0) {
+            if (sceKernelNotifyCallback(g_notifyCb[slot][i], 8) == 0x800201A1) {
+                g_notifyCb[slot][i] = 0;
+            }
+        }
+    }
+    sceKernelResumeDispatchThread(intr);
+    cb = &D_00006ED8[slot];
+    if (cb->attached == 0) {
+        D_00006ED4[slot] = 1;
+        sceKernelPowerUnlock(0);
+        return 0;
+    }
+    cmd = cb->drv.cmd;
+    func_00002194(cmd, (s32)&D_00006F14[slot], 3, (s32)buf, 0, cb->drv.cmdArg);
+    cb->attached = 0;
+    func_00002194(cmd, (s32)&D_00006F14[slot], 4, (s32)buf, 0, cb->drv.cmdArg);
+    entry = (u32)cb->cldm->unload;
+    if (entry != 0) {
+        ((s32 (*)(s32, s32, s32))entry)(0, 0, 0);
+    }
+    sceMScmUnRegisterCLD(slot, &cb->drv);
+    intr = sceKernelSuspendDispatchThread();
+    for (i = 0; i < 32; i++) {
+        if (g_notifyEvf[slot][i] != 0) {
+            sceKernelSetEventFlag(g_notifyEvf[slot][i], 2);
+        }
+        if (g_notifyCb[slot][i] != 0) {
+            if (sceKernelNotifyCallback(g_notifyCb[slot][i], 2) == 0x800201A1) {
+                g_notifyCb[slot][i] = 0;
+            }
+        }
+    }
+    sceKernelResumeDispatchThread(intr);
+    memset(&D_00006ED8[slot], 0, 0x20);
+    D_00006B40[slot] = 0;
+    D_00006ED4[slot] = 1;
+    _sceMScmReinitializeHC(slot);
+    sceKernelPowerUnlock(0);
+    return ret;
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 250
+INCLUDE_ASM("nonmatchings/mscm", func_000018B8);
+#endif
+
+#if FW_VERSION < 250
 INCLUDE_ASM("nonmatchings/mscm", func_00001BA0);
 
 INCLUDE_ASM("nonmatchings/mscm", func_00001D18);
@@ -388,8 +865,49 @@ s32 func_00002194(s32 (*arg0)(s32, s32, s32, s32, s32), s32 arg1, s32 arg2, s32 
 INCLUDE_ASM("nonmatchings/mscm", func_0000244C);
 #endif
 
-#if FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/mscm", func_00002238);
+#if FW_VERSION == 100
+s32 func_00002238(SceSize args, void *argp) {
+    s32 index = ((SceMScmHC *)argp)->index;
+    SceUID evf = D_00006F14[index].evf;
+    u32 bits;
+
+    for (;;) {
+        bits = 0;
+        sceKernelWaitEventFlag(g_mediaEvf[index], 0xC0000000, 0x11, &bits, NULL);
+        if ((s32)bits < 0) {
+            sceKernelSetEventFlag(evf, 0x80000000);
+            func_000018B8(index);
+        }
+        if (bits & 0x40000000) {
+            D_00006ED4[index] = 2;
+            sceKernelSetEventFlag(evf, 0x40000000);
+            func_00001BA0(index);
+        }
+    }
+}
+#endif
+
+#if FW_VERSION >= 102 && FW_VERSION < 150
+s32 func_00002238(SceSize args, void *argp) {
+    s32 index = ((SceMScmHC *)argp)->index;
+    SceUID evf = D_00006F14[index].evf;
+    u32 bits;
+
+    for (;;) {
+        bits = 0;
+        sceKernelWaitEventFlag(g_mediaEvf[index], 0xC0000000, 0x11, &bits, NULL);
+        sceKernelPowerLock(0);
+        if ((s32)bits < 0) {
+            sceKernelSetEventFlag(evf, 0x80000000);
+            func_000018B8(index);
+        } else if (bits & 0x40000000) {
+            D_00006ED4[index] = 2;
+            sceKernelSetEventFlag(evf, 0x40000000);
+            func_00001BA0(index);
+        }
+        sceKernelPowerUnlock(0);
+    }
+}
 #endif
 
 #if FW_VERSION >= 282
@@ -415,13 +933,116 @@ INCLUDE_ASM("nonmatchings/mscm", func_000028E0);
 INCLUDE_ASM("nonmatchings/mscm", func_000025F0);
 #endif
 
+#if FW_VERSION < 201 || (FW_VERSION >= 250 && FW_VERSION < 282)
+s32 sceMScmReadMSReg(SceMScmHC *hc, s32 addr, s32 size, u8 *buf, s32 force, s32 timeout) {
+    SceMScmHC *h;
+    u8 adr[4];
+    s32 ret;
+
+    timeout = func_000029F8(hc, timeout);
+    h = hc->hc;
+    if (force == 1 || h->readAddr != addr || h->readSize != size) {
+        h->readAddr = addr;
+        adr[0] = addr;
+        h->readSize = size;
+        adr[1] = size;
+        adr[2] = h->writeAddr;
+        adr[3] = h->writeSize;
+        ret = sceMScmTPCSetRWRegAdrs(hc, adr, timeout);
+        if (ret < 0) {
+            return ret;
+        }
+    }
+    return sceMScmReadMSRegHelper(hc, buf, size, timeout);
+}
+#else
 INCLUDE_ASM("nonmatchings/mscm", sceMScmReadMSReg);
+#endif
 
 INCLUDE_ASM("nonmatchings/mscm", sceMScmReadMSRegHelper);
 
-INCLUDE_ASM("nonmatchings/mscm", sceMScmWriteMSReg);
+#if FW_VERSION < 201 || (FW_VERSION >= 250 && FW_VERSION < 282)
+s32 sceMScmWriteMSReg(SceMScmHC *hc, s32 addr, s32 size, u8 *buf, s32 force, s32 timeout) {
+    SceMScmHC *h;
+    u8 adr[4];
+    u8 st[4];
+    u16 saved;
+    s32 busy;
+    s32 ret;
 
+    saved = 0;
+    timeout = func_000029F8(hc, timeout);
+    h = hc->hc;
+    if (force == 1 || h->writeAddr != addr || h->writeSize != size) {
+        adr[0] = h->readAddr;
+        adr[1] = h->readSize;
+        h->writeAddr = addr;
+        adr[2] = addr;
+        h->writeSize = size;
+        adr[3] = size;
+        ret = sceMScmTPCSetRWRegAdrs(hc, adr, timeout);
+        if (ret < 0) {
+            return ret;
+        }
+    }
+    ret = sceMScmReadMSReg(hc, 2, 3, st, 1, -1);
+    if (ret < 0) {
+        return ret;
+    }
+    busy = 0;
+    if ((st[0] & 2) && st[2] != 1) {
+        saved = sceMScmHCSetBusyCount(hc, 0);
+        busy = 1;
+    }
+    ret = sceMScmWriteMSRegHelper(hc, buf, size, timeout);
+    if (ret < 0) {
+        return ret;
+    }
+    if (busy) {
+        sceMScmHCSetBusyCount(hc, saved);
+    }
+    return 0;
+}
+#else
+INCLUDE_ASM("nonmatchings/mscm", sceMScmWriteMSReg);
+#endif
+
+#if FW_VERSION < 201
+s32 sceMScmWriteMSRegHelper(SceMScmHC *hc, u8 *buf, s32 size, s32 timeout) {
+    s32 retry;
+    s32 ret;
+
+    retry = 5;
+    do {
+        ret = sceMScmSendTPC(hc, 0xB, size, timeout);
+        if (ret < 0) {
+            break;
+        }
+        ret = sceMScmWriteDataPIO(hc, buf, size, timeout);
+        if (ret < 0) {
+            if (ret == 0x80220087) {
+                continue;
+            }
+            break;
+        }
+        ret = func_000047C0(hc, timeout);
+        if (ret < 0) {
+            break;
+        }
+        if (sceMScmHCLastStatus(hc) & 0x100) {
+            ret = 0x80220089;
+            continue;
+        }
+        if (sceMScmHCLastStatus(hc) & 0x200) {
+            ret = 0x80220088;
+        }
+        break;
+    } while (retry-- != 0);
+    return ret;
+}
+#else
 INCLUDE_ASM("nonmatchings/mscm", sceMScmWriteMSRegHelper);
+#endif
 
 #if FW_VERSION < 201
 s32 sceMScmSendTPCDMA(SceMScmHC *hc, u8 dmaCh, s32 a2, s32 a3) {
@@ -572,15 +1193,164 @@ INCLUDE_ASM("nonmatchings/mscm", func_000029F8);
 INCLUDE_ASM("nonmatchings/mscm", func_00002FE0);
 #endif
 
+#if FW_VERSION < 201
+s32 sceMScmTPCSetRWRegAdrs(SceMScmHC *hc, u8 *adr, s32 timeout) {
+    SceMScmHC *h;
+    s32 retry;
+    s32 ret;
+
+    h = hc->hc;
+    h->readAddr = adr[0];
+    h->readSize = adr[1];
+    h->writeAddr = adr[2];
+    h->writeSize = adr[3];
+    retry = 5;
+    do {
+        ret = sceMScmSendTPC(hc, 8, 4, timeout);
+        if (ret < 0) {
+            break;
+        }
+        ret = sceMScmWriteDataPIO(hc, adr, 4, timeout);
+        if (ret < 0) {
+            if (ret == 0x80220087) {
+                continue;
+            }
+            break;
+        }
+        ret = func_000047C0(hc, timeout);
+        if (ret < 0) {
+            break;
+        }
+        if (sceMScmHCLastStatus(hc) & 0x100) {
+            ret = 0x80220089;
+            continue;
+        }
+        if (sceMScmHCLastStatus(hc) & 0x200) {
+            ret = 0x80220088;
+        }
+        break;
+    } while (retry-- != 0);
+    return ret;
+}
+#else
 INCLUDE_ASM("nonmatchings/mscm", sceMScmTPCSetRWRegAdrs);
+#endif
 
+#if FW_VERSION < 201
+s32 sceMScmTPCReadShortData(SceMScmHC *hc, u8 *buf, s32 size, s32 timeout) {
+    s32 retry;
+    s32 ret;
+
+    retry = 5;
+    switch (size) {
+    case 0x20:
+    case 0x40:
+    case 0x80:
+    case 0x100:
+        break;
+    default:
+        return 0x80220081;
+    }
+    do {
+        ret = sceMScmSendTPC(hc, 3, size, timeout);
+        if (ret < 0) {
+            break;
+        }
+        ret = sceMScmReadDataPIO(hc, buf, size, timeout);
+        if (ret < 0) {
+            if (ret == 0x80220089) {
+                continue;
+            }
+            break;
+        }
+        ret = func_000047C0(hc, timeout);
+        break;
+    } while (retry-- != 0);
+    return ret;
+}
+#else
 INCLUDE_ASM("nonmatchings/mscm", sceMScmTPCReadShortData);
+#endif
 
+#if FW_VERSION < 201
+s32 sceMScmTPCWriteShortData(SceMScmHC *hc, u8 *buf, s32 size, s32 timeout) {
+    s32 retry;
+    s32 ret;
+
+    retry = 5;
+    switch (size) {
+    case 0x20:
+    case 0x40:
+    case 0x80:
+    case 0x100:
+        break;
+    default:
+        return 0x80220081;
+    }
+    do {
+        ret = sceMScmSendTPC(hc, 0xC, size, timeout);
+        if (ret < 0) {
+            break;
+        }
+        ret = sceMScmWriteDataPIO(hc, buf, size, timeout);
+        if (ret < 0) {
+            if (ret == 0x80220087) {
+                continue;
+            }
+            break;
+        }
+        ret = func_000047C0(hc, timeout);
+        if (ret < 0) {
+            break;
+        }
+        if (sceMScmHCLastStatus(hc) & 0x100) {
+            ret = 0x80220089;
+            continue;
+        }
+        break;
+    } while (retry-- != 0);
+    return ret;
+}
+#else
 INCLUDE_ASM("nonmatchings/mscm", sceMScmTPCWriteShortData);
+#endif
 
 INCLUDE_ASM("nonmatchings/mscm", sceMScmReadDataPIO);
 
+#if FW_VERSION < 201 || (FW_VERSION >= 250 && FW_VERSION < 282)
+s32 sceMScmWriteDataPIO(SceMScmHC *hc, u8 *buf, s32 size, s32 timeout) {
+    u32 w[2];
+    u32 start;
+    s32 i;
+    s32 j;
+
+    timeout = func_000029F8(hc, timeout);
+    start = func_00004870();
+    while (size > 0) {
+        w[1] = 0;
+        w[0] = 0;
+        for (i = 0; i < 2; i++) {
+            for (j = 0; j < 4 && size != 0; j++) {
+                w[i] |= *buf++ << (j * 8);
+                size--;
+            }
+        }
+        while (!(hc->reg->status & 0x4000)) {
+            if (func_0000488C(start, timeout)) {
+                if (!(hc->reg->status & 0x4000)) {
+                    return 0x80220087;
+                }
+                break;
+            }
+        }
+        hc->reg->data = w[0];
+        hc->reg->data = w[1];
+    }
+    return 0;
+}
+#else
 INCLUDE_ASM("nonmatchings/mscm", sceMScmWriteDataPIO);
+#endif
 
 #if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/mscm", func_00003628);
@@ -607,7 +1377,58 @@ INCLUDE_ASM("nonmatchings/mscm", func_00003624);
 
 INCLUDE_ASM("nonmatchings/mscm", sceMScmStartReadDataDMA);
 
+#if FW_VERSION < 201
+s32 sceMScmWaitAndEndDMA(SceMScmHC *hc, u32 mode, s32 nowait) {
+    SceMScmHC *h;
+    s32 ret;
+    u32 bits;
+    u32 tmo;
+    s32 i;
+
+    h = hc->hc;
+    ret = 0;
+again:
+    if (nowait == 0) {
+        if (h->dmaTimeout != 0) {
+            tmo = h->dmaTimeout;
+            ret = sceKernelWaitEventFlag(h->dmaEvf, h->dmaWaitBits, 0x10, &bits, &tmo);
+        } else {
+            ret = sceKernelWaitEventFlag(h->dmaEvf, h->dmaWaitBits, 0x10, &bits, NULL);
+        }
+    }
+    for (i = 0; i < 2; i++) {
+        if (h->dmaOp[i] != 0) {
+            ret = sceKernelDmaOpSync(h->dmaOp[i], 0, 0);
+            if (ret < 0) {
+                if (((mode >> 1) & 1) && nowait == 0 && (hc->reg->unk0 & 1)) {
+                    if (--h->dmaRetry != -1) {
+                        goto again;
+                    }
+                }
+                ret = 0x8022008A;
+                sceKernelDmaOpQuit(h->dmaOp[i]);
+                sceKernelDmaOpDeQueue(h->dmaOp[i]);
+            }
+        }
+    }
+    if (!(hc->reg->unk0 & 1) && (hc->reg->status & 0x100)) {
+        ret = 0x80220089;
+    }
+    for (i = 0; i < 2; i++) {
+        if (h->dmaOp[i] != 0) {
+            sceKernelDmaOpFreeLink(h->dmaOp[i]);
+            sceKernelDmaOpFree(h->dmaOp[i]);
+        }
+    }
+    sceKernelDeleteEventFlag(h->dmaEvf);
+    h->dmaEvf = 0;
+    hc->reg->unk40 = 0;
+    asm volatile("sync");
+    return ret;
+}
+#else
 INCLUDE_ASM("nonmatchings/mscm", sceMScmWaitAndEndDMA);
+#endif
 
 INCLUDE_ASM("nonmatchings/mscm", sceMScmStartWriteDataDMA);
 
@@ -763,7 +1584,54 @@ INCLUDE_ASM("nonmatchings/mscm", func_00003F48);
 INCLUDE_ASM("nonmatchings/mscm", func_000044D8);
 #endif
 
+#if FW_VERSION < 201 || (FW_VERSION >= 250 && FW_VERSION < 282)
+s32 sceMScmResetHC(SceMScmHC *hc, u32 mode) {
+    s32 ret;
+    u32 start;
+
+    ret = 0;
+    switch (mode) {
+    case 0:
+        break;
+    case 1:
+        ret = func_00005EB0(hc->index);
+        break;
+    case 2:
+        hcOr16(&hc->reg->sys, 0x8000);
+        start = func_00004870();
+        while ((s16)hcRead16(&hc->reg->sys) < 0) {
+            if (func_0000488C(start, 1000)) {
+                if ((s16)hc->reg->sys < 0) {
+                    return 0x80220087;
+                }
+                break;
+            }
+        }
+        sceMScmHCSetBusyCount(hc, 7);
+        hcOr16(&hc->reg->sys, 0x2000);
+        break;
+    case 4:
+        hcOr16(&hc->reg->unk4, 1);
+        start = func_00004870();
+        while (hcRead16(&hc->reg->unk4) & 1) {
+            if (func_0000488C(start, 1000)) {
+                if (hc->reg->unk4 & 1) {
+                    return 0x80220087;
+                }
+                break;
+            }
+        }
+        hcOr16(&hc->reg->unk4, 0x25C);
+        break;
+    default:
+        ret = 0xC0220000;
+        break;
+    }
+    return ret;
+}
+#else
 INCLUDE_ASM("nonmatchings/mscm", sceMScmResetHC);
+#endif
 
 INCLUDE_ASM("nonmatchings/mscm", sceMScmTPCSetCmd);
 
@@ -806,13 +1674,111 @@ s32 sceMScmTPCSetCmdHelper(SceMScmHC *hc, u8 cmd, s32 timeout) {
 INCLUDE_ASM("nonmatchings/mscm", sceMScmTPCSetCmdHelper);
 #endif
 
-INCLUDE_ASM("nonmatchings/mscm", sceMScmTPCExSetCmd);
+#if FW_VERSION != 201
+s32 sceMScmTPCExSetCmd(SceMScmHC *hc, u8 cmd, s8 *arg, u8 *intr, s32 timeout) {
+    u8 st[4];
+    s32 busy;
+    s32 ret;
 
+    ret = sceMScmReadMSReg(hc, 2, 1, st, 1, -1);
+    if (ret < 0) {
+        return ret;
+    }
+    busy = st[0] & 2;
+    ret = sceMScmTPCExSetCmdHelper(hc, cmd, arg, timeout);
+    if (ret < 0) {
+        return ret;
+    }
+    if (cmd == 0x3C) {
+        return ret;
+    }
+    if (busy) {
+        timeout += 500000;
+    }
+    return sceMScmTPCGetInt(hc, intr, 0, timeout);
+}
+#else
+INCLUDE_ASM("nonmatchings/mscm", sceMScmTPCExSetCmd);
+#endif
+
+#if FW_VERSION < 201
+s32 sceMScmTPCExSetCmdHelper(SceMScmHC *hc, u8 cmd, s8 *arg, s32 timeout) {
+    s8 buf[8];
+    s32 retry;
+    s32 ret;
+
+    buf[0] = cmd;
+    memcpy(&buf[1], arg, 6);
+    retry = 5;
+    do {
+        ret = sceMScmSendTPC(hc, 9, 7, timeout);
+        if (ret < 0) {
+            break;
+        }
+        ret = sceMScmWriteDataPIO(hc, buf, 7, timeout);
+        if (ret < 0) {
+            if (ret == 0x80220087) {
+                continue;
+            }
+            break;
+        }
+        ret = func_000047C0(hc, timeout);
+        if (ret < 0) {
+            break;
+        }
+        if (sceMScmHCLastStatus(hc) & 0x100) {
+            ret = 0x80220089;
+            continue;
+        }
+        if (sceMScmHCLastStatus(hc) & 0x200) {
+            ret = 0x80220088;
+        }
+        break;
+    } while (retry-- != 0);
+    return ret;
+}
+#else
 INCLUDE_ASM("nonmatchings/mscm", sceMScmTPCExSetCmdHelper);
+#endif
 
 INCLUDE_ASM("nonmatchings/mscm", sceMScmTPCGetInt);
 
+#if FW_VERSION < 201
+s32 sceMScmTPCGetIntHelper(SceMScmHC *hc, u8 *intr, s32 timeout) {
+    s32 retry;
+    s32 ret;
+
+    retry = 5;
+    do {
+        ret = sceMScmSendTPC(hc, 7, 1, timeout);
+        if (ret < 0) {
+            break;
+        }
+        ret = sceMScmReadDataPIO(hc, intr, 1, timeout);
+        if (ret < 0) {
+            if (ret == 0x80220087) {
+                continue;
+            }
+            break;
+        }
+        ret = func_000047C0(hc, timeout);
+        if (ret < 0) {
+            break;
+        }
+        if (sceMScmHCLastStatus(hc) & 0x200) {
+            ret = 0x80220088;
+            continue;
+        }
+        if (sceMScmHCLastStatus(hc) & 0x100) {
+            ret = 0x80220089;
+        }
+        break;
+    } while (retry-- != 0);
+    return ret;
+}
+#else
 INCLUDE_ASM("nonmatchings/mscm", sceMScmTPCGetIntHelper);
+#endif
 
 #if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/mscm", func_00004DAC);
@@ -1002,9 +1968,145 @@ INCLUDE_ASM("nonmatchings/mscm", func_00005734);
 INCLUDE_RODATA("nonmatchings/mscm", D_000068A4);
 #endif
 
-#if FW_VERSION < 250
-INCLUDE_ASM("nonmatchings/mscm", func_00004B70);
+#if FW_VERSION == 100
+/* intr.c is its own object: its assert format is not merged with init.c's */
+static const char intrAssertFmt[] = "Assertion failed at %s:%s:%04d\n";
+#endif
 
+#if FW_VERSION >= 102 && FW_VERSION < 152
+/* intr.c is its own object: its assert format is not merged with init.c's */
+static const char intrAssertFmt[] = "Assertion failed at %s:%s:%04d\n";
+#endif
+
+#if FW_VERSION < 152
+s32 sceMScmHCIrqPrimaryHandler(s32 intno, SceMScmHC *hc) {
+    s32 index = hc->index;
+    s32 slot;
+    s32 ret;
+    SceMScmHC *h;
+    SceMScmSlotCB *cb;
+
+    switch (intno) {
+    case 7:
+        slot = 0;
+        break;
+    case 8:
+        slot = 1;
+        break;
+    default:
+        Kprintf(intrAssertFmt, "intr.c", "sceMScmHCIrqPrimaryHandler", 0x39);
+        sceKernelAssert(0, 0);
+        return -2;
+    }
+    if (index != slot) {
+        if (--g_irqMissCount[index] != -1) {
+            return -1;
+        }
+        g_irqMissCount[index] = 100;
+        return -2;
+    }
+    h = &D_00006F14[index];
+    h->lastStatus = hc->reg->status;
+    h->intrCause = hc->reg->unk8;
+    h->intrStatus = func_00004E94(index);
+    ret = 1;
+    cb = &D_00006ED8[index];
+    if (cb->attached != 0 && (D_00006F14[index].intrStatus & 0x11) && cb->drv.intrCb != NULL) {
+        ret = cb->drv.intrCb(hc, cb->drv.intrArg);
+    }
+    h = &D_00006F14[index];
+    func_00005270(index, h->intrStatus);
+    if (ret > 0) {
+        sceKernelSetEventFlag(g_mainEvf[index], func_00004E50(h->intrStatus));
+    }
+    return -1;
+}
+#endif
+
+#if FW_VERSION == 152
+/* intr.c is its own object: its assert format is not merged with init.c's */
+static const char intrAssertFmt[] = "Assertion failed at %s:%s:%04d\n";
+
+s32 sceMScmHCIrqPrimaryHandler(s32 intno, SceMScmHC *hc) {
+    s32 index = hc->index;
+    s32 slot;
+    s32 ret;
+    SceMScmHC *h;
+    SceMScmSlotCB *cb;
+
+    switch (intno) {
+    case 7:
+        slot = 0;
+        break;
+    case 8:
+        slot = 1;
+        break;
+    default:
+        Kprintf(intrAssertFmt, "intr.c", "sceMScmHCIrqPrimaryHandler", 0x39);
+        sceKernelAssert(0, 0);
+        return -2;
+    }
+    if (index != slot) {
+        if (--g_irqMissCount[index] != -1) {
+            return -1;
+        }
+        g_irqMissCount[index] = 100;
+        return -2;
+    }
+    h = &D_00006F14[index];
+    h->lastStatus = hc->reg->status;
+    h->intrCause = hc->reg->unk8;
+    h->intrStatus = func_0000514C(index);
+    ret = 1;
+    cb = &D_00006ED8[index];
+    if (cb->attached != 0 && (D_00006F14[index].intrStatus & 0x11) && cb->drv.intrCb != NULL) {
+        ret = cb->drv.intrCb(hc, cb->drv.intrArg);
+    }
+    h = &D_00006F14[index];
+    func_00005270(index, h->intrStatus);
+    if (ret > 0) {
+        sceKernelSetEventFlag(g_mainEvf[index], func_00004E50(h->intrStatus));
+    }
+    return -1;
+}
+#endif
+
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/mscm", sceMScmHCIrqPrimaryHandler);
+#endif
+
+#if FW_VERSION < 150
+s32 func_00004D30(s32 intno, SceMScmHC *hc) {
+    s32 ret;
+    s32 index;
+    SceMScmSlotCB *cb;
+
+    ret = 1;
+    sceKernelPowerTick(0);
+    index = hc->index;
+    if (intno == 0x3C) {
+        D_00006F14[index].intrStatus |= 0x1000;
+    } else {
+        D_00006F14[index].intrStatus |= 0x2000;
+    }
+    cb = &D_00006ED8[index];
+    if (cb->drv.insertCb != NULL) {
+        ret = cb->drv.insertCb(hc, cb->drv.insertArg);
+    }
+    func_00005C58(index);
+    if (ret > 0) {
+        if (intno == 0x3C) {
+            sceKernelSetEventFlag(g_mainEvf[index], 0x40000000);
+        } else {
+            sceSysregMsifIoDisable(index);
+            sceKernelSetEventFlag(g_mainEvf[index], 0x80000000);
+        }
+    }
+    return -1;
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 250
 INCLUDE_ASM("nonmatchings/mscm", func_00004D30);
 #endif
 
@@ -1155,7 +2257,46 @@ INCLUDE_ASM("nonmatchings/mscm", func_00005938);
 INCLUDE_ASM("nonmatchings/mscm", func_000059F8);
 #endif
 
-#if FW_VERSION < 250
+#if FW_VERSION < 201
+s32 func_00005094(s32 slot, u32 mask, s32 enable) {
+    s32 no;
+    s32 gpio[2];
+
+    switch (slot) {
+    case 0:
+        no = 7;
+        gpio[0] = 0x3C;
+        gpio[1] = 0x3D;
+        break;
+    case 1:
+        no = 8;
+        gpio[0] = 0x3E;
+        gpio[1] = 0x3F;
+        break;
+    default:
+        return 0xC0220000;
+    }
+    if (mask & 1) {
+        if (enable) {
+            sceKernelEnableIntr(no);
+        } else {
+            sceKernelDisableIntr(no);
+        }
+    }
+    if (mask & 2) {
+        if (enable) {
+            sceKernelEnableIntr(gpio[0]);
+            sceKernelEnableIntr(gpio[1]);
+        } else {
+            sceKernelDisableIntr(gpio[0]);
+            sceKernelDisableIntr(gpio[1]);
+        }
+    }
+    return 0;
+}
+#endif
+
+#if FW_VERSION == 201
 INCLUDE_ASM("nonmatchings/mscm", func_00005094);
 #endif
 
@@ -1349,10 +2490,68 @@ INCLUDE_RODATA("nonmatchings/mscm", D_00007300);
 
 #if FW_VERSION < 201
 INCLUDE_RODATA("nonmatchings/mscm", D_00006950);
+#endif
 
-INCLUDE_ASM("nonmatchings/mscm", func_000052FC);
+#if FW_VERSION < 150
+s32 _sceMScmIomanExit(void *arg) {
+    s32 ok = (arg != NULL);
+    const char *file = D_00006950, *fn = "_sceMScmIomanExit";
 
-INCLUDE_ASM("nonmatchings/mscm", func_00005358);
+    if (!ok) {
+        Kprintf(D_00007300, file, fn, 0x6C);
+        sceKernelAssert(ok, 0);
+    }
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 201
+s32 _sceMScmIomanExit(void *arg) {
+    s32 ok = (arg != NULL);
+    const char *file = D_00006950, *fn = "_sceMScmIomanExit";
+
+    if (!ok) {
+        Kprintf(D_00007300, file, fn, 0x6D);
+        sceKernelAssert(ok, 0);
+    }
+    return 0;
+}
+#endif
+
+#if FW_VERSION < 150
+s32 _sceMScmIomanOpen(SceIoIob *iob) {
+    s32 ok = (iob != NULL);
+    const char *file = D_00006950, *fn = "_sceMScmIomanOpen";
+    s32 ret;
+
+    if (!ok) {
+        Kprintf(D_00007300, file, fn, 0x79);
+        sceKernelAssert(ok, 0);
+    }
+    ret = 0x80220081;
+    if (iob->i_unit == 0) {
+        ret = (D_00006F20 != 0) ? 0 : 0x80220083;
+    }
+    return ret;
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 201
+s32 _sceMScmIomanOpen(SceIoIob *iob) {
+    s32 ok = (iob != NULL);
+    const char *file = D_00006950, *fn = "_sceMScmIomanOpen";
+    s32 ret;
+
+    if (!ok) {
+        Kprintf(D_00007300, file, fn, 0x7A);
+        sceKernelAssert(ok, 0);
+    }
+    ret = 0x80220081;
+    if (iob->i_unit == 0) {
+        ret = (D_00006F20 != 0) ? 0 : 0x80220083;
+    }
+    return ret;
+}
 #endif
 
 #if FW_VERSION < 282
@@ -1400,7 +2599,7 @@ INCLUDE_ASM("nonmatchings/mscm", func_000057F8);
 #endif
 
 #if FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/mscm", func_000053F4);
+INCLUDE_ASM("nonmatchings/mscm", _sceMScmIomanDevctl);
 #endif
 
 #if FW_VERSION == 201
@@ -1475,11 +2674,38 @@ s32 func_00005AA8(SceMScmHC *hc, s32 mode) {
 }
 #endif
 
-#if FW_VERSION < 250
-INCLUDE_ASM("nonmatchings/mscm", func_00005AD0);
+#if FW_VERSION < 201
+s32 func_00005AD0(s32 slot, u32 mode) {
+    s32 ret;
+    s32 clk;
+
+    ret = 0x80220081;
+    if (slot == 0) {
+        switch (mode) {
+        case 0:
+            return 0;
+        case 1:
+            clk = 2;
+            break;
+        case 2:
+            clk = 0;
+            break;
+        case 3:
+            clk = 1;
+            break;
+        default:
+            return 0x80220081;
+        }
+        sceSysregMsifClkSelect(slot, clk);
+        ret = 0;
+    }
+    return ret;
+}
 #endif
 
 #if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/mscm", func_00005AD0);
+
 INCLUDE_ASM("nonmatchings/mscm", func_00005B3C);
 #endif
 
@@ -1527,7 +2753,24 @@ s32 sceMScmSetPullDownRegByDesc(SceMScmHC *hc, s32 on) {
 }
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION < 201 || (FW_VERSION >= 250 && FW_VERSION < 282)
+s32 sceMScmSetPullDownReg(s32 slot, s32 on) {
+    s32 ret;
+
+    ret = 0x80220081;
+    if (slot == 0) {
+        if (on != 0) {
+            sceSysreg_driver_55B18B84(slot);
+        } else {
+            sceSysreg_driver_2112E686(slot);
+        }
+        ret = 0;
+    }
+    return ret;
+}
+#endif
+
+#if FW_VERSION == 201
 INCLUDE_ASM("nonmatchings/mscm", sceMScmSetPullDownReg);
 #endif
 
@@ -1545,9 +2788,44 @@ s32 func_00005C58(s32 slot) {
 INCLUDE_ASM("nonmatchings/mscm", func_00005C58);
 #endif
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/mscm", func_00005C8C);
+#if FW_VERSION < 201
+s32 func_00005C8C(s32 slot, s32 *out) {
+    s32 ret;
 
+    ret = 0x80220081;
+    if (slot == 0) {
+        if (D_00006F0C != 0) {
+            *out = 0;
+        } else {
+            *out = sceSysregMsifGetConnectStatus(slot);
+        }
+        ret = 0;
+    }
+    return ret;
+}
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 282
+INCLUDE_ASM("nonmatchings/mscm", func_00005C8C);
+#endif
+
+#if FW_VERSION < 201
+s32 func_00005CE4(s32 slot, s32 *a, s32 *b) {
+    s32 ret;
+    u32 v;
+
+    ret = 0x80220081;
+    if (slot == 0) {
+        v = sceSysregMsifQueryConnectIntr(slot);
+        *a = v & 1;
+        ret = 0;
+        *b = (v >> 1) & 1;
+    }
+    return ret;
+}
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/mscm", func_00005CE4);
 #endif
 
@@ -1619,7 +2897,26 @@ s32 sceMScmGetSlotState(SceMScmHC *hc, s32 *out) {
 INCLUDE_ASM("nonmatchings/mscm", sceMScmGetSlotState);
 #endif
 
-#if FW_VERSION < 250
+#if FW_VERSION < 201
+s32 func_00005E58(s32 slot, s32 on) {
+    s32 ret;
+
+    ret = 0x80220081;
+    if (slot == 0) {
+        if (on != 0) {
+            sceSysregMsifClkEnable(slot);
+            sceSysregMsifBusClockEnable(0);
+        } else {
+            sceSysregMsifClkDisable(slot);
+            sceSysregMsifBusClockDisable(0);
+        }
+        ret = 0;
+    }
+    return ret;
+}
+#endif
+
+#if FW_VERSION == 201
 INCLUDE_ASM("nonmatchings/mscm", func_00005E58);
 #endif
 

@@ -210,3 +210,4 @@ func_00005988 = 0x000050D8; // type:func rom:0x5158
 D_00005624_v260 = 0x00005624; // rom:0x56A4
 D_000058A4_v260 = 0x000058A4; // rom:0x5924
 // shared names (tools/add_version.py) end
+func_00004114 = 0x00003A90; // type:func

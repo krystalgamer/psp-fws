@@ -139,3 +139,13 @@ func_00005A44 = 0x00005224; // type:func
 func_00005A44_v100 = 0x00005A44; // type:func
 // shared names (tools/add_version.py) end
 _sceMScmReinitializeHC = 0x00000124; // type:func
+g_irqMissCount = 0x000069F4; // rom:0x6A74
+_sceMScmGetCLDMHelper = 0x00001478; // type:func
+sceMScmHCIrqPrimaryHandler = 0x00004B70; // type:func
+_sceMScmIomanExit = 0x000052FC; // type:func
+_sceMScmIomanOpen = 0x00005358; // type:func
+_sceMScmIomanDevctl = 0x000053F4; // type:func
+g_mediaEvf = 0x00006B4C;
+g_mainEvf = 0x00006B48;
+g_notifyEvf = 0x00007198;
+g_notifyCb = 0x0000721C;

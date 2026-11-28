@@ -28,6 +28,14 @@ typedef struct {
     void *gp; /* 0x84 */
 } SceUmd9660BlkOps;
 
+/* devctl 0x1E180D3 input (0x18 bytes checked) */
+typedef struct {
+    u32 unk0[3];
+    u32 mode; /* 0x0C: < 4 */
+    u32 unk10; /* 0x10 */
+    u32 unk14; /* 0x14 */
+} SceUmd9660ClearCacheArg;
+
 /* copy of the umdman disc info (sceUmdMan_driver_E192C10A() + 0x64); 1.00: 0x24 bytes, 1.02+: 0x28 */
 typedef struct {
     u8 unk0; /* 0x0 */
@@ -56,8 +64,10 @@ typedef char chk_SceUmd9660DiscInfo[(sizeof(SceUmd9660DiscInfo) == 0x28) ? 1 : -
 typedef struct {
     u8 sectorBuf[0x800]; /* 0x000 */
     char name[0x20]; /* 0x800: "umd%01x:" (sceBLKRegister name) */
-    SceUID semaId; /* 0x820 */
-    s32 unk824[3]; /* 0x824 */
+    union {
+        SceUID semaId; /* 0x820 */
+        s32 unk820[4]; /* 0x820: [1] = -1, [2] = 1 at init (an array: Init/BLK close index it) */
+    };
     s32 unk830[3]; /* 0x830: [2] = BLK open count */
     SceUmd9660DiscInfo disc; /* 0x83C */
     struct SceUmdDrive *umdDrive; /* 0x860 (1.02+: 0x864) */
@@ -101,6 +111,31 @@ typedef struct {
     SceUID heapId; /* 0x18 */
 } SceUmd9660Mgr;
 
+/* devctl 0x1E180C1 input (0x1C bytes checked) */
+typedef struct {
+    u8 unk0; /* 0x0: nonzero -> flag 4 */
+    u8 unk1; /* 0x1: nonzero -> flag 1 */
+    u8 pad2[2];
+    u32 lbn; /* 0x4 */
+    u16 count; /* 0x8 */
+} SceUmd9660PrefetchArg;
+
+/* sceUmdExecSetCDSpeedCmd parameter */
+typedef struct {
+    u8 unk0; /* 0x0 */
+    u8 unk1; /* 0x1 */
+    u16 readSpeed; /* 0x2 */
+    u16 writeSpeed; /* 0x4 */
+} SceUmdCdSpeedCmd;
+
+/* sceUmdExecClearCacheInfoCmd parameter */
+typedef struct {
+    u16 unk0; /* 0x0 */
+    u16 unk2; /* 0x2 */
+    u16 unk4; /* 0x4 */
+    u8 mode; /* 0x6 */
+} SceUmdClearCacheCmd;
+
 /* sceUmdGetDiscInfo result */
 typedef struct {
     u32 size; /* 0x0 */
@@ -112,18 +147,24 @@ typedef struct {
 typedef struct SceUmdDrive {
     struct { s8 driveId; u8 pad1[0x7]; u32 unk8; } *ataDrive; /* 0x00 */
     s32 unk4; /* 0x04 */
-    u8 pad8[0x8];
+    u32 unk8; /* 0x08 */
+    s32 unkC; /* 0x0C */
     s32 unk10; /* 0x10: 0x10 = UMD, 0x20 = not */
     u8 pad14[0x14];
-    s32 unk28; /* 0x28 */
-    s32 unk2C; /* 0x2C */
-    s32 unk30; /* 0x30 */
-    s32 unk34; /* 0x34 */
-    s32 unk38; /* 0x38 */
-    s32 unk3C; /* 0x3C */
+    union {
+        u8 sense[0x18]; /* 0x28: request sense data (0x12 used) */
+        struct {
+            s32 unk28; /* 0x28 */
+            s32 unk2C; /* 0x2C */
+            s32 unk30; /* 0x30 */
+            s32 unk34; /* 0x34 */
+            s32 unk38; /* 0x38 */
+            s32 unk3C; /* 0x3C */
+        };
+    };
 } SceUmdDrive;
 
-/* umdman read request (1.00: uOFW LbnParams without unk20) */
+/* umdman read request (uOFW LbnParams; unk20 from 1.50 on) */
 typedef struct {
     u32 unk0;
     u32 cmd;
@@ -133,7 +174,26 @@ typedef struct {
     u32 byteSizeMiddle;
     u32 byteSizeFirst;
     u32 byteSizeLast;
+#if FW_VERSION >= 150
+    u32 unk20;
+#endif
 } SceUmdLbnParam;
+
+/* sceUmdExecPrefetch10Cmd parameter */
+typedef struct {
+    u64 lbn; /* 0x0 */
+    u16 count; /* 0x8 */
+    u8 flags; /* 0xA */
+    u8 unkB; /* 0xB */
+} SceUmdPrefetchCmd;
+
+/* sceUmdExecReportCacheCmd parameter */
+typedef struct {
+    u16 unk0; /* 0x0 */
+    u16 unk2; /* 0x2 */
+    u16 len; /* 0x4 */
+    u8 unk6; /* 0x6 */
+} SceUmdReportCacheCmd;
 
 /* SCE assert: Kprintf(fmt, __FILE__, __FUNCTION__, __LINE__) */
 #define UMD9660_ASSERT(cond, fmt, file, func, line) \
@@ -196,6 +256,13 @@ extern char D_00005A70[];
 extern char D_00005AD0[];
 extern char D_00005AF0[];
 extern char D_00005AFC[];
+extern char D_00005B30[];
+extern char D_00005B34[];
+extern char D_00005B4C[];
+extern char D_00005B60[];
+extern char D_00005BF0[];
+extern char D_00005C14[];
+extern char D_00005C34[];
 extern M2C_UNK D_00005C80;
 extern M2C_UNK D_00005C88;
 extern M2C_UNK D_00005CA0;
@@ -230,13 +297,14 @@ extern s32 D_000083AC;
 extern s32 D_000083B0;
 extern s32 D_000083C0;
 extern s32 D_000083D0;
-extern void *D_00008400;
-extern void *D_00008440;
 extern s32 D_00008CA0;
 extern s32 D_00008CB0;
 extern M2C_UNK func_000036D8;
+extern u8 *g_umd9660DvdDirBuf;
+extern u8 *g_umd9660DvdSectorBuf;
 
 s32 Kprintf(const char *fmt, ...);
+s32 dvd_get_controlimg_lbn(const char *name);
 s32 func_00000964(s32 arg0);
 s32 func_00000984(s32 arg0);
 s32 func_000009BC(s32 arg0);
@@ -254,44 +322,69 @@ s32 func_00001E00(void);
 s32 func_00001E0C(void);
 s32 func_00001E18(void);
 s32 func_00001E24(void);
+SceOff func_00001E30(SceUmd9660File *file, SceOff ofs, s32 whence);
 void func_000022E8(void);
+s32 func_000023E4(s32 *arg0, void *arg1, s32 *unit, s32 arg3);
+s32 func_00002694(void);
 SceUmd9660Mgr *func_000026E4(void);
+s32 func_00002778(void);
+s32 func_0000281C(s32 *list, s32 *count);
 SceUmd9660File *func_00002910(SceIoIob *iob);
 s32 func_00002974(SceUmd9660Drive *drive, void *buf, SceSize size, SceUmdLbnParam *param);
 s32 func_000029FC(SceUmd9660Drive *drive, void *buf, SceSize size, s32 arg3, SceUmdLbnParam *param);
+s32 func_00002AB0(SceUmd9660Drive *drive, void *buf, SceSize size, SceUmdLbnParam *param);
+s32 func_00002BA4(void *a, void *b, void *c, s32 d, u32 e);
+s32 func_00002C08();
+s32 func_00002CE4();
+s32 func_00002F24(void *buf, SceUmdLbnParam *param);
+s32 func_00002FCC(SceUmdLbnParam *param, void *buf);
+s32 func_00003120(SceUmdLbnParam *param, void *buf);
+s32 func_000036C4();
 s32 func_000036D0(s32 arg0);
+s32 func_000037AC(SceUmd9660Drive *drive);
+s32 func_00003818();
+s32 func_000038F0();
+s32 func_0000397C();
 s32 func_00003A58(void);
+s32 func_00003A74();
+s32 func_00003AF8();
 s32 func_00003BFC(void);
 M2C_UNK *func_00003C04(void);
 s32 func_00003C80(s32 arg0);
 s32 func_00003C8C(SceUmd9660Drive *drive, void *buf);
 s32 func_00003D24(s32);
 s32 func_00003D28(SceIoIob *iob);
+s32 func_00003E54();
+s32 func_00003ED0(void *arg0, void *arg1, s32 *unit);
 s32 func_00003F70(void);
 s32 func_00003F7C(const char *name);
 void func_00003FAC(void);
 void func_00003FD4(void);
 s32 func_00003FF0(struct Unk_func_00003FF0_0 *arg0);
 s32 func_00003FFC(struct Unk_func_00003FFC_0 *arg0);
-s32 func_00004024(void *arg0);
-s32 func_00004064(void *arg0);
-s32 func_000040A4(void *arg0);
-s32 func_000040E4(void *arg0);
-s32 func_00004124(void *arg0, s32 arg1);
+s32 func_00004004();
+s32 func_00004024(); /* 1.x: (SceUmd9660Drive *), 2.x: other layout */
+s32 func_00004064(); /* 1.x: (SceUmd9660Drive *), 2.x: other layout */
+s32 func_000040A4(); /* 1.x: (SceUmd9660Drive *), 2.x: other layout */
+s32 func_000040C8();
+s32 func_000040E4(); /* 1.x: (SceUmd9660Drive *), 2.x: other layout */
+s32 func_00004124(); /* 1.x: (SceUmd9660Drive *), 2.x: other layout */
 s32 func_00004148(s32 *arg0);
 s32 func_00004164(struct Unk_func_00004164_0 *arg0);
 s32 func_0000420C(void);
 s32 func_00004250(SceUmdDiscInfo *info);
 s32 func_00004264(s32 *arg0);
+SceUmd9660File *func_000042A0(s32 count, s32 *err);
 s32 func_00004300(s32);
 s32 func_00004308(void);
 void func_00004330(void);
-s32 func_0000434C(void *arg0);
-s32 func_00004358(void *arg0);
+s32 func_0000434C(); /* 1.x: (SceUmd9660Drive *), 2.x: other layout */
+s32 func_00004358(); /* 1.x: (SceUmd9660Drive *), 2.x: other layout */
+s32 func_0000438C(SceUmdDrive *umd);
 s32 func_000043DC(void);
 s32 func_000043FC(void);
 M2C_UNK *func_00004404(void);
-s32 func_000044C0(void *arg0);
+s32 func_000044C0(); /* 1.x: (SceUmd9660Drive *), 2.x: other layout */
 s32 func_00004544(SceIoIob *iob);
 s32 func_00004568(void);
 void func_000046C4(void);
@@ -300,6 +393,8 @@ s32 func_00004B30(void *arg0);
 s32 func_00004B84(void *arg0);
 s32 func_00004BD8(void *arg0);
 s32 func_00004C2C(void *arg0, s32 arg1);
+s32 func_00004C88(void);
+s32 func_00004DDC(void);
 void func_00004E14(void);
 void func_00004E20(void);
 s32 func_00004EE8(SceUmdDrive *umd, void *buf, void *buf2);
@@ -318,20 +413,39 @@ u8 func_000053F0(void);
 u32 func_00005420(s32 arg0);
 void func_00005B20(s32 arg0);
 void func_00005B2C(s32 arg0);
+s32 look_ctype_table(s32 c);
 void *memcpy(void *dst, const void *src, SceSize n);
 void *memset(void *dst, s32 c, SceSize n);
 s32 module_start(void);
+void sceAtaDisplayReqSense(void *sense);
+s32 sceAtaDoSoftResetBit(void);
+s32 sceAtaExecSetFeaturesCmd(void *ata, s32 feature, s32 count, s32 driveId, s32 arg4);
 s32 sceAtaIsDvdDrive(void);
+s32 sceAta_driver_BE07B3A7(void *sense);
+s32 sceBLKRegister(const char *name, s32 type, s32 unit, void *data, SceUmd9660BlkOps *ops);
+s32 sceBLKUnRegister(const char *name, s32 unit);
 M2C_UNK sceIoAddDrv(M2C_UNK *);
+s32 sceIoDevctl(const char *name, s32 cmd, void *indata, SceSize inlen, void *outdata, SceSize outlen);
+void *sceKernelAllocHeapMemory(SceUID heap, SceSize size);
 void sceKernelAssert(s32 ok, s32 lvl);
 void sceKernelCpuResumeIntr(s32);
 s32 sceKernelCpuSuspendIntr(void);
+SceUID sceKernelCreateHeap(SceUID part, SceSize size, s32 attr, const char *name);
+SceUID sceKernelCreateSema(const char *name, u32 attr, s32 init, s32 max, void *opt);
 s32 sceKernelDeleteHeap(SceUID heap);
+s32 sceKernelDeleteSema(SceUID id);
 s32 sceKernelDipsw(M2C_UNK);
 u32 sceKernelDipswAll(void);
+s32 sceKernelExtendKernelStack(s32 size, s32 (*func)(SceUmd9660DevctlArgs *), void *arg);
 s32 sceKernelFreeHeapMemory(SceUID heap, void *p);
+s32 sceKernelSignalSema(SceUID id, s32 n);
+s32 sceKernelWaitSema(SceUID id, s32 n, u32 *timeout);
 SceUmd9660Drive *sceUmd9660GetDrive(s32 unit);
+s32 sceUmd9660GetUnitNum(const char *name);
 s32 sceUmd9660Init(void);
+s32 sceUmd9660InvalidateDeviceName(const char *name);
+s32 sceUmd9660ReadPvd4DVD(const char *name, SceUmdLbnParam *param);
+s32 sceUmd9660ReadRootDir4DVD(const char *name, SceUmdLbnParam *param);
 s32 sceUmd9660Term(void);
 s32 sceUmd9660_driver_2C6C3F4C(void);
 s32 sceUmd9660_driver_3C150E0D(void);
@@ -340,7 +454,20 @@ s32 sceUmd9660_driver_B23266CA(void);
 s32 sceUmd9660_driver_C7CD9CE8(void);
 s32 sceUmd9660_driver_CAAFFE8D(void);
 s32 sceUmd9660_driver_F42C0AEE(void);
+s32 sceUmdExecClearCacheInfoCmd(SceUmdDrive *umd, SceUmdClearCacheCmd *cmd);
+s32 sceUmdExecMechaStatCmd(SceUmdDrive *umd, SceSize size, void *buf);
+s32 sceUmdExecPrefetch10Cmd(SceUmdDrive *umd, SceUmdPrefetchCmd *cmd);
+s32 sceUmdExecReportCacheCmd(SceUmdDrive *umd, SceUmdReportCacheCmd *cmd, void *buf);
+s32 sceUmdExecReqSenseCmd(SceUmdDrive *umd, void *buf, SceSize size);
+s32 sceUmdExecSeekCmd(SceUmdDrive *umd, u32 lbn, s32 arg2);
+s32 sceUmdExecSetCDSpeedCmd(SceUmdDrive *umd, SceUmdCdSpeedCmd *cmd);
+s32 sceUmdExecSetLockLengthCmd(SceUmdDrive *umd, u32 len);
 s32 sceUmdIsUMD(void);
+s32 sceUmdManCancelAlarm(SceUID id);
+s32 sceUmdManChangePowerMode(SceUmdDrive *umd, s32 mode);
+s32 sceUmdManCheckDeviceReady(SceUmdDrive *umd);
+s32 sceUmdManDVDDriveStart(void);
+s32 sceUmdManGetCommandTimerFlag(void);
 s32 sceUmdManGetDiscInfo(SceUmdDiscInfo *info);
 s32 sceUmdManGetDiscInfo4VSH(SceUmdDiscInfo *info);
 s32 sceUmdManGetInquiry(SceUmdDrive *umd, s32 size, void *buf);
@@ -348,20 +475,30 @@ s32 sceUmdManGetIntrStateFlag();
 s32 sceUmdManGetPowerStat(s32 driveId);
 SceUmdDrive *sceUmdManGetUmdDrive(s32 driveId);
 s32 sceUmdManIsDvdDrive();
-s32 sceUmdManSetCachedRead(s32);
-s32 sceUmdManSetDisableReadAhead(s32);
-s32 sceUmdManSetEnableReadAhead(s32);
-s32 sceUmdManSetReadAheadSize(s32);
-s32 sceUmdManSetUnCachedRead(s32);
+SceUID sceUmdManSetAlarm(u32 usec);
+s32 sceUmdManSetCachedRead();
+s32 sceUmdManSetDisableReadAhead();
+s32 sceUmdManSetEnableReadAhead();
+s32 sceUmdManSetReadAheadSize();
+s32 sceUmdManSetUnCachedRead();
 M2C_UNK sceUmdManSignalSema();
+s32 sceUmdManSyncState(void);
+s32 sceUmdManUMDDrivePreStart(void);
+s32 sceUmdManUMDDriveStart(void);
 s32 sceUmdManValidateUMD(s32, s32);
 M2C_UNK sceUmdManWaitSema();
 s32 sceUmdMan_driver_85AEA6C5();
 struct Unk_ret_sceUmdMan_driver_E192C10A *sceUmdMan_driver_E192C10A();
+s32 sceUmdMan_driver_F4AFF62D(SceUmdDrive *umd, u32 a, u32 b, u32 c, u32 d, u32 e);
 M2C_UNK sceUmdRegisterGetUMDInfoCallBack(M2C_UNK *, M2C_UNK *);
 M2C_UNK sceUmdUnRegisterGetUMDInfoCallBack();
 s32 sprintf(char *buf, const char *fmt, ...);
-SceSize strlen(const char *s);
+char *strchr(const char *s, s32 c);
+s32 strcmp(const char *a, const char *b);
+s32 strlen(const char *s);
+s32 strncmp(const char *a, const char *b, SceSize n);
+s32 strtol(const char *s, char **end, s32 base);
+s32 umd9660_exec_devctl(SceIoIob *iob, const char *name, s32 cmd, void *indata, SceSize inlen, void *outdata, SceSize outlen);
 s32 umd9660_release_devfd(SceIoIob *iob);
 SceOff umd9660_set_lseek(SceUmd9660File *file, SceOff ofs, s32 whence);
 

@@ -188,3 +188,6 @@ umd9660_devctl = 0x00000860; // type:func
 umd9660_exec_devctl = 0x00000AD0; // type:func
 dvd_get_controlimg_lbn = 0x00005038; // type:func
 umd9660_lseek = 0x00000000; // type:func
+g_umd9660DvdSectorBuf = 0x000089C0;
+g_umd9660DvdDirBuf = 0x00008A00;
+func_00004114 = 0x00004644; // type:func

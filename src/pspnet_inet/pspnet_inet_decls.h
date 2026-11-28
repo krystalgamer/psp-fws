@@ -817,23 +817,23 @@ struct tcpcb {
     u32 snd_wl1;                /* 0x4C */
     u32 snd_wl2;                /* 0x50 */
     u32 iss;                    /* 0x54 */
-    u32 snd_wnd;                /* 0x58 */
+    unsigned long snd_wnd;                /* 0x58 */
     u32 snd_recover;            /* 0x5C */
-    u32 rcv_wnd;                /* 0x60 */
+    unsigned long rcv_wnd;                /* 0x60 */
     u32 rcv_nxt;                /* 0x64 */
     u32 rcv_up;                 /* 0x68 */
     u32 irs;                    /* 0x6C */
     u32 rcv_adv;                /* 0x70 */
     u32 snd_max;                /* 0x74 */
-    u32 snd_cwnd;               /* 0x78 */
-    u32 snd_ssthresh;           /* 0x7C */
+    unsigned long snd_cwnd;               /* 0x78 */
+    unsigned long snd_ssthresh;           /* 0x7C */
     s16 t_idle;                 /* 0x80 */
     s16 t_rtt;                  /* 0x82 */
     u32 t_rtseq;                /* 0x84 */
     s16 t_srtt;                 /* 0x88 */
     s16 t_rttvar;               /* 0x8A */
     s16 t_rttmin;               /* 0x8C */
-    u32 max_sndwnd;             /* 0x90 */
+    unsigned long max_sndwnd;             /* 0x90 */
     s8 t_oobflags;              /* 0x94 */
     s8 t_iobc;                  /* 0x95 */
     s16 t_softerror;            /* 0x96 */
@@ -855,17 +855,78 @@ typedef char chk_tcpcb[(sizeof(struct tcpcb) == 0xB4) ? 1 : -1];
 #define TCPS_HAVERCVDSYN(s) ((s) >= TCPS_SYN_RECEIVED)
 #define TCPS_HAVEESTABLISHED(s) ((s) >= TCPS_ESTABLISHED)
 
-/* struct tcpstat (NetBSD 1.5, u_quad_t counters; partial) */
+/* struct tcpstat (NetBSD 1.5 + tcps_pmtublackhole, u_quad_t counters) */
 struct tcpstat {
-    u64 tcps_connattempt;       /* 0x00 */
-    u64 tcps_accepts;           /* 0x08 */
-    u64 tcps_connects;          /* 0x10 */
-    u64 tcps_drops;             /* 0x18 */
-    u64 tcps_conndrops;         /* 0x20 */
-    u64 tcps_closed;            /* 0x28 */
-    u8 unk30[0x80 - 0x30];
-    u64 tcps_connsdrained;      /* 0x80 */
+    u64 tcps_connattempt;           /* 0x0 */
+    u64 tcps_accepts;               /* 0x8 */
+    u64 tcps_connects;              /* 0x10 */
+    u64 tcps_drops;                 /* 0x18 */
+    u64 tcps_conndrops;             /* 0x20 */
+    u64 tcps_closed;                /* 0x28 */
+    u64 tcps_segstimed;             /* 0x30 */
+    u64 tcps_rttupdated;            /* 0x38 */
+    u64 tcps_delack;                /* 0x40 */
+    u64 tcps_timeoutdrop;           /* 0x48 */
+    u64 tcps_rexmttimeo;            /* 0x50 */
+    u64 tcps_persisttimeo;          /* 0x58 */
+    u64 tcps_keeptimeo;             /* 0x60 */
+    u64 tcps_keepprobe;             /* 0x68 */
+    u64 tcps_keepdrops;             /* 0x70 */
+    u64 tcps_persistdrops;          /* 0x78 */
+    u64 tcps_connsdrained;          /* 0x80 */
+    u64 tcps_pmtublackhole;         /* 0x88 */
+    u64 tcps_sndtotal;              /* 0x90 */
+    u64 tcps_sndpack;               /* 0x98 */
+    u64 tcps_sndbyte;               /* 0xA0 */
+    u64 tcps_sndrexmitpack;         /* 0xA8 */
+    u64 tcps_sndrexmitbyte;         /* 0xB0 */
+    u64 tcps_sndacks;               /* 0xB8 */
+    u64 tcps_sndprobe;              /* 0xC0 */
+    u64 tcps_sndurg;                /* 0xC8 */
+    u64 tcps_sndwinup;              /* 0xD0 */
+    u64 tcps_sndctrl;               /* 0xD8 */
+    u64 tcps_rcvtotal;              /* 0xE0 */
+    u64 tcps_rcvpack;               /* 0xE8 */
+    u64 tcps_rcvbyte;               /* 0xF0 */
+    u64 tcps_rcvbadsum;             /* 0xF8 */
+    u64 tcps_rcvbadoff;             /* 0x100 */
+    u64 tcps_rcvmemdrop;            /* 0x108 */
+    u64 tcps_rcvshort;              /* 0x110 */
+    u64 tcps_rcvduppack;            /* 0x118 */
+    u64 tcps_rcvdupbyte;            /* 0x120 */
+    u64 tcps_rcvpartduppack;        /* 0x128 */
+    u64 tcps_rcvpartdupbyte;        /* 0x130 */
+    u64 tcps_rcvoopack;             /* 0x138 */
+    u64 tcps_rcvoobyte;             /* 0x140 */
+    u64 tcps_rcvpackafterwin;       /* 0x148 */
+    u64 tcps_rcvbyteafterwin;       /* 0x150 */
+    u64 tcps_rcvafterclose;         /* 0x158 */
+    u64 tcps_rcvwinprobe;           /* 0x160 */
+    u64 tcps_rcvdupack;             /* 0x168 */
+    u64 tcps_rcvacktoomuch;         /* 0x170 */
+    u64 tcps_rcvackpack;            /* 0x178 */
+    u64 tcps_rcvackbyte;            /* 0x180 */
+    u64 tcps_rcvwinupd;             /* 0x188 */
+    u64 tcps_pawsdrop;              /* 0x190 */
+    u64 tcps_predack;               /* 0x198 */
+    u64 tcps_preddat;               /* 0x1A0 */
+    u64 tcps_pcbhashmiss;           /* 0x1A8 */
+    u64 tcps_noport;                /* 0x1B0 */
+    u64 tcps_badsyn;                /* 0x1B8 */
+    u64 tcps_sc_added;              /* 0x1C0 */
+    u64 tcps_sc_completed;          /* 0x1C8 */
+    u64 tcps_sc_timed_out;          /* 0x1D0 */
+    u64 tcps_sc_overflowed;         /* 0x1D8 */
+    u64 tcps_sc_reset;              /* 0x1E0 */
+    u64 tcps_sc_unreach;            /* 0x1E8 */
+    u64 tcps_sc_bucketoverflow;     /* 0x1F0 */
+    u64 tcps_sc_aborted;            /* 0x1F8 */
+    u64 tcps_sc_dupesyn;            /* 0x200 */
+    u64 tcps_sc_dropped;            /* 0x208 */
+    u64 tcps_sc_collisions;         /* 0x210 */
+    u64 tcps_sc_retransmitted;      /* 0x218 */
 };
+typedef char chk_tcpstat[(sizeof(struct tcpstat) == 0x220) ? 1 : -1];
 #define TCP_INITIAL_WINDOW(iw, segsz) \
     (((iw) == 0) ? (min(4 * (segsz), max(2 * (segsz), 4380))) : ((segsz) * (iw)))
 #define TCPTV_PERSMIN 10
@@ -1030,9 +1091,35 @@ struct ipq {
 
 /* struct ipstat (u_quad_t counters, partial) */
 struct ipstat {
-    u8 unk0[0x38];
-    u64 ips_fragdropped;            /* 0x38 */
-    u64 ips_fragtimeout;            /* 0x40 */
+    u64 ips_total;                 /* 0x0 */
+    u64 ips_badsum;                /* 0x8 */
+    u64 ips_tooshort;              /* 0x10 */
+    u64 ips_toosmall;              /* 0x18 */
+    u64 ips_badhlen;               /* 0x20 */
+    u64 ips_badlen;                /* 0x28 */
+    u64 ips_fragments;             /* 0x30 */
+    u64 ips_fragdropped;           /* 0x38 */
+    u64 ips_fragtimeout;           /* 0x40 */
+    u64 ips_forward;               /* 0x48 */
+    u64 ips_fastforward;           /* 0x50 */
+    u64 ips_cantforward;           /* 0x58 */
+    u64 ips_redirectsent;          /* 0x60 */
+    u64 ips_noproto;               /* 0x68 */
+    u64 ips_delivered;             /* 0x70 */
+    u64 ips_localout;              /* 0x78 */
+    u64 ips_odropped;              /* 0x80 */
+    u64 ips_reassembled;           /* 0x88 */
+    u64 ips_fragmented;            /* 0x90 */
+    u64 ips_ofragments;            /* 0x98 */
+    u64 ips_cantfrag;              /* 0xA0 */
+    u64 ips_badoptions;            /* 0xA8 */
+    u64 ips_noroute;               /* 0xB0 */
+    u64 ips_badvers;               /* 0xB8 */
+    u64 ips_rawout;                /* 0xC0 */
+    u64 ips_badfrags;              /* 0xC8 */
+    u64 ips_rcvmemdrop;            /* 0xD0 */
+    u64 ips_toolong;               /* 0xD8 */
+    u64 ips_nogif;                 /* 0xE0 */
 };
 extern s32 D_0002D944; /* ipq_locked */
 s32 _sce_pspnet_spllock(void);
@@ -1177,6 +1264,66 @@ struct in_multistep {
     (step).i_inm = NULL; \
     IN_NEXT_MULTI((step), (inm)); \
 }
+
+/* struct tcp_ctlvar (NetBSD 1.5 tcp_usrreq.c sysctl table) */
+struct tcp_ctlvar {
+    u32 valid : 1;
+    u32 rdonly : 1;
+    s32 *var;
+    s32 num;
+};
+
+/* struct ipovly (NetBSD 1.5 ip_var.h, packed) */
+struct ipovly {
+    u8 ih_x1[9];                        /* 0x00 */
+    u8 ih_pr;                           /* 0x09 */
+    u16 ih_len;                         /* 0x0A */
+    struct in_addr ih_src;              /* 0x0C */
+    struct in_addr ih_dst;              /* 0x10 */
+} __attribute__((packed));
+
+/* struct udpiphdr (NetBSD 1.5 udp_var.h, packed) */
+struct udpiphdr {
+    struct ipovly ui_i;                 /* 0x00 */
+    struct udphdr ui_u;                 /* 0x14 */
+} __attribute__((packed));
+#define ui_x1 ui_i.ih_x1
+#define ui_pr ui_i.ih_pr
+#define ui_len ui_i.ih_len
+#define ui_src ui_i.ih_src
+#define ui_dst ui_i.ih_dst
+#define ui_sport ui_u.uh_sport
+#define ui_dport ui_u.uh_dport
+#define ui_ulen ui_u.uh_ulen
+#define ui_sum ui_u.uh_sum
+
+/* struct udpstat (NetBSD 1.5, u_quad_t counters) */
+struct udpstat {
+    u64 udps_ipackets;                  /* 0x00 */
+    u64 udps_hdrops;                    /* 0x08 */
+    u64 udps_badsum;                    /* 0x10 */
+    u64 udps_badlen;                    /* 0x18 */
+    u64 udps_noport;                    /* 0x20 */
+    u64 udps_noportbcast;               /* 0x28 */
+    u64 udps_fullsock;                  /* 0x30 */
+    u64 udps_pcbhashmiss;               /* 0x38 */
+    u64 udps_opackets;                  /* 0x40 */
+};
+
+/* M_LEADINGSPACE / M_PREPEND (NetBSD 1.5 mbuf.h; SCE: no writable-cluster check) */
+#define M_LEADINGSPACE(m) \
+    ((m)->m_flags & M_EXT ? 0 : \
+     (m)->m_flags & M_PKTHDR ? (m)->m_data - (u8 *)&(m)->m_ext : \
+     (m)->m_data - (u8 *)&(m)->m_pkthdr)
+#define M_PREPEND(m, plen, how) do { \
+    if (M_LEADINGSPACE(m) >= (plen)) { \
+        (m)->m_data -= (plen); \
+        (m)->m_len += (plen); \
+    } else \
+        (m) = sceNetMPrepend((m), (plen), (how)); \
+    if ((m) && (m)->m_flags & M_PKTHDR) \
+        (m)->m_pkthdr.len += (plen); \
+} while (0)
 
 struct SceTailqHead {
     void *tqh_first;
@@ -1413,9 +1560,9 @@ struct Unk_func_0002A244_0 {
     s32 unk4BC;
 };
 
-struct inpcb *func_00013478(struct inpcbtable *table, struct in_addr laddr, u32 lport_arg, s32 lookup_wildcard);
+struct inpcb *in_pcblookup_port(struct inpcbtable *table, struct in_addr laddr, u32 lport_arg, s32 lookup_wildcard);
 
-struct inpcb *func_00013478(struct inpcbtable *table, struct in_addr laddr, u32 lport_arg, s32 lookup_wildcard);
+struct inpcb *in_pcblookup_port(struct inpcbtable *table, struct in_addr laddr, u32 lport_arg, s32 lookup_wildcard);
 
 extern void (*const D_0002BB24)(struct sppp *sp); /* lcp.Close (split rodata label) */
 extern void (*const D_0002BBCC)(struct sppp *sp); /* pap.scr (split rodata label) */
@@ -1423,13 +1570,11 @@ extern s32 D_0002BEC0;
 extern struct ifqueue D_0002BF8C;
 extern s32 D_0002C01C;
 extern s32 D_0002C020;
-extern struct SceTailqHead D_0002C024;
 extern s32 D_0002C02C;
 extern s32 D_0002C030;
 extern s32 D_0002C1D4;
 extern s32 D_0002C1D8;
 extern s32 D_0002C1DC;
-extern s32 D_0002C1E0;
 extern s32 D_0002C1E4;
 extern s32 D_0002C1E8; /* icmperrppslim */
 extern s32 D_0002C208; /* ip_maxfragpackets */
@@ -1437,15 +1582,8 @@ extern s32 D_0002C228;
 extern s32 D_0002C22C;
 extern s32 D_0002C234;
 extern s32 D_0002C270; /* icmpreturndatabytes */
-extern s32 D_0002C30C;
-extern s32 D_0002C310;
-extern s32 D_0002C314;
 extern s32 D_0002C318;
-extern s32 D_0002C31C;
-extern s32 D_0002C320;
 extern s32 D_0002C358;
-extern s32 D_0002C35C;
-extern s32 D_0002C360;
 extern s32 D_0002C364;
 extern s32 D_0002C368;
 extern s32 D_0002C39C;
@@ -1467,7 +1605,6 @@ extern s32 D_0002C590;
 extern s32 D_0002C594;
 extern s32 D_0002C5B4; /* icmpmaskrepl */
 extern struct { struct SceNetInetKeyNode *lh_first; } D_0002C5B8;
-extern s32 D_0002C5D8;
 extern u8 D_0002C5DC[];
 extern u8 D_0002CC50[]; /* pffasttimo_ch */
 extern u8 D_0002CC74[]; /* pfslowtimo_ch */
@@ -1486,11 +1623,10 @@ extern struct ipstat D_0002D960; /* ipstat */
 extern struct { struct ipq *lh_first; } D_0002DA48; /* ipq */
 extern u8 D_0002DA50[0x170]; /* icmpstat */
 extern M2C_UNK D_0002DBC8;
-extern s32 D_0002DC30;
 extern struct inpcbtable D_0002DC78;
 extern struct SceTailqHead D_0002DC98[13];
 extern s32 D_0002DD04;
-extern s32 D_0002DF50;
+extern struct route D_0002E19C;
 extern s32 D_0002E5EC;
 extern s32 D_0002E5F0;
 extern s32 D_0002E5F4; /* lowportmin */
@@ -1499,11 +1635,12 @@ extern s32 D_0002E798;
 extern s32 D_0002E79C;
 extern s32 D_0002E7A4;
 extern s32 D_0002E7B0; /* ip_defttl */
-extern s32 D_0002E7BC; /* ip_mtudisc */
 extern struct sockaddr_in D_0002E834 __attribute__((aligned(4)));
 extern struct sockaddr_in D_0002E844 __attribute__((aligned(4)));
 extern struct sockaddr_in D_0002E854 __attribute__((aligned(4)));
 extern s32 D_0002E8D8;
+extern s32 D_0002E8E4;
+extern s32 D_0002E8F4;
 extern s32 D_0002E8F8; /* tcp_mssdflt */
 extern s32 D_0002E8FC; /* tcp_rttdflt */
 extern s32 D_0002E900; /* tcp_do_rfc1323 */
@@ -1511,9 +1648,6 @@ extern s32 D_0002E904; /* tcp_do_sack */
 extern s32 D_0002E908; /* tcp_do_win_scale */
 extern s32 D_0002E90C; /* tcp_do_timestamps */
 extern s32 D_0002E910; /* tcp_init_win */
-extern s32 D_0002E918; /* tcp_keepidle */
-extern s32 D_0002E924;
-extern s32 D_0002E95C;
 extern s8 D_0002EAB0[];
 extern s32 D_0002EAB1;
 extern s32 D_0002EB40;
@@ -1524,12 +1658,15 @@ extern s32 D_0002EB8C;
 extern s32 D_0002EB90;
 extern s32 D_0002EB94;
 extern char D_0002EBB0[16]; /* inet_ntoa buf */
-extern s32 D_0002EC1C;
+extern s32 D_0002EC10;
+extern s32 D_0002EC14;
+extern s32 D_0002EC18;
 extern char D_0002F288[18] __attribute__((aligned(4)));
 extern s32 D_0002F500;
 extern s32 D_0002F50C;
 extern s32 D_0002F510;
 extern struct route D_0002FF98; /* ipforward_rt */
+extern s32 D_000302E4;
 extern s32 arp_locked; /* arp_locked */
 extern const struct cp chap; /* chap */
 extern const struct cp *cps[IDX_COUNT]; /* cps */
@@ -1542,8 +1679,13 @@ extern struct igmpstat igmp_stat; /* igmpstat */
 extern s32 igmp_timers_are_running; /* igmp_timers_are_running */
 extern TAILQ_HEAD(, in_ifaddr) in_ifaddrhead; /* in_ifaddr */
 extern u32 in_maxmtu;
+extern TAILQ_HEAD(, in_ifaddr) in_mk; /* in_mk */
 extern s32 inetctlerrmap[]; /* inetctlerrmap */
+extern struct protosw inetsw[]; /* inetsw */
+extern u16 ip_id_seq; /* ip_id */
+extern s32 ip_mtudisc; /* ip_mtudisc */
 extern s32 ip_nhops; /* ip_nhops */
+extern u8 ip_protox[]; /* ip_protox */
 extern struct ip_srcrt_s ip_srcrt; /* ip_srcrt */
 extern const struct cp ipcp; /* ipcp */
 extern struct ifqueue ipintrq; /* ipintrq, exported by sceNetInet_lib_D7928A6D */
@@ -1557,17 +1699,37 @@ extern u32 raw_recvspace; /* raw_recvspace */
 extern u32 raw_sendspace; /* raw_sendspace */
 extern struct { struct rawcb *lh_first; } rawcb; /* rawcb */
 extern struct inpcbtable rawcbtable;
+extern s32 rip_recvspace;
+extern s32 rip_sendspace;
 extern struct radix_node_head *rt_tables[32]; /* rt_tables */
 extern s32 rttrash; /* rttrash */
 extern struct soqhead so_list;
 extern s32 somaxconn; /* somaxconn */
+extern s32 syn_cache_last;
+extern s32 tcbhashsize; /* tcbhashsize */
 extern struct inpcbtable tcbtable;
 extern s32 tcp_backoff[]; /* tcp_backoff */
 extern s32 tcp_compat_42; /* tcp_compat_42 */
+extern struct tcp_ctlvar tcp_ctlvars[]; /* tcp_ctlvars */
 extern struct tcpcb *tcp_delacks; /* tcp_delacks */
 extern u32 tcp_iss_seq; /* tcp_iss_seq */
+extern s32 tcp_keepcnt;
+extern s32 tcp_keepidle; /* tcp_keepidle */
+extern s32 tcp_keepintvl; /* tcp_keepintvl */
+extern s32 tcp_maxidle;
+extern s32 tcp_maxpersistidle; /* tcp_maxpersistidle */
+extern s32 tcp_mss_ifmtu;
+extern u32 tcp_now; /* tcp_now */
+extern u32 tcp_recvspace; /* tcp_recvspace */
+extern u32 tcp_sendspace; /* tcp_sendspace */
 extern struct tcpstat tcp_stat;
+extern s32 tcp_syn_cache_interval;
+extern s32 tcp_totbackoff; /* tcp_totbackoff */
 extern struct inpcbtable udbtable;
+extern s32 udp_recvspace;
+extern s32 udp_sendspace;
+extern struct udpstat udp_stat; /* udpstat */
+extern s32 udpcksum; /* udpcksum */
 extern struct in_addr zeroin_addr; /* zeroin_addr */
 
 void _sce_pspnet_callout_init(void *c);
@@ -1628,8 +1790,6 @@ void func_00004E28(struct sockbuf *sb, struct mbuf *m, struct mbuf *n);
 void func_00005778(struct socket *so);
 void func_0000588C(struct socket *so);
 void func_000058CC(struct socket *so);
-void func_00005964(struct socket *so);
-void func_00005A78(struct socket *so);
 void func_00005AB8(struct socket *so);
 s32 func_00005B8C(void);
 s32 func_00006568(struct SceNetInetWaiter *w, s32 s, struct msghdr *mp, s32 flags, s32 *retsize);
@@ -1708,6 +1868,8 @@ void func_0000FA70(struct ifnet *ifp, struct in_addr *sip, struct in_addr *tip, 
 void func_00010528(struct mbuf *m);
 s32 func_000106E0(void);
 s32 func_00010700(void);
+s32 func_00010874(struct socket *so, s32 cmd, void *data, struct ifnet *ifp);
+s32 func_00013114(void *v, struct mbuf *nam);
 s32 func_00019A98(void);
 void func_00019C00(struct rtentry *rt);
 s32 func_0001A410(void);
@@ -1718,13 +1880,11 @@ void func_0001AA20(struct Unk_func_0001AA20_0 *arg0);
 void func_0001C208(void);
 void func_0001C57C(struct Unk_func_0001C57C_0 *arg0, s16 arg1);
 s32 func_000232C0(struct Unk_func_000232C0_0 *arg0);
-void func_0002373C(struct inpcb *inp, s32 errno);
 s32 func_00023828(struct Unk_func_00023828_0 *arg0);
 void func_00023AB8(struct Unk_func_00023AB8_0 *arg0);
 void func_000244B0(void);
 void func_0002544C(void *arg0);
 void func_00025638(struct sppp *sp, u16 proto, u8 type, u8 ident, u16 len, void *data);
-void func_00025E94(void);
 void func_00026FF4(const struct cp *cp, struct sppp *sp, u32 type, u32 id, ...);
 s32 func_00027830(struct Unk_func_00027830_0 *arg0);
 void func_00027C20(void);
@@ -1762,6 +1922,7 @@ u8 *func_0002CC40(u8 *arg0, u8 *arg1);
 s32 func_0002CCF8(void *putc, void *arg, const char *fmt, __builtin_va_list ap);
 void func_0002D420();
 struct socket *getsock(s32 s);
+void icmp_mtudisc_callback_register(void *key);
 void icmp_send(struct mbuf *m, struct mbuf *opts);
 s32 icmp_sysctl(s32 *name, u32 namelen, void *oldp, u32 *oldlenp, void *newp, u32 newlen);
 s32 if_rtdel(struct rtentry *rt, void *arg);
@@ -1770,6 +1931,7 @@ struct ifaddr *ifa_ifwithladdr(struct sockaddr *addr);
 void igmp_leavegroup(void *arg0);
 void igmp_sendpkt(struct in_multi *inm, s32 type);
 s32 in_cksum(struct mbuf *m, s32 len);
+s32 in_control(struct socket *so, s32 cmd, void *data, struct ifnet *ifp);
 void in_delmulti(struct in_multi *inm);
 void in_losing(struct inpcb *inp);
 s32 in_pcballoc(struct socket *so, void *v);
@@ -1783,7 +1945,9 @@ struct inpcb *in_pcblookup_connect(struct inpcbtable *table, struct in_addr fadd
 struct inpcb *in_pcblookup_port(struct inpcbtable *table, struct in_addr laddr, u32 lport_arg, s32 lookup_wildcard);
 s32 in_pcbnotify(struct inpcbtable *table, struct in_addr faddr, u32 fport_arg, struct in_addr laddr, u32 lport_arg, s32 errno, void (*notify)(struct inpcb *, s32));
 void in_pcbnotifyall(struct inpcbtable *table, struct in_addr faddr, s32 errno, void (*notify)(struct inpcb *, s32));
+void in_pcbpurgeif(struct inpcbtable *table, struct ifnet *ifp);
 void in_pcbstate(struct inpcb *inp, s32 state);
+void in_purgeif(struct ifnet *ifp);
 void in_rtchange(struct inpcb *inp, s32 errno);
 struct sockaddr_in *in_selectsrc(struct sockaddr_in *sin, struct route *ro, s32 soopts, struct ip_moptions *mopts, s32 *errorp);
 s32 ip_ctloutput(s32 op, struct socket *so, s32 level, s32 optname, struct mbuf **m);
@@ -1792,7 +1956,7 @@ void ip_freef();
 void ip_input(struct mbuf *m);
 s32 ip_optcopy(struct ip *ip, struct ip *jp);
 s32 ip_optlen(void *inp);
-s32 ip_output(struct mbuf *m0, struct mbuf *opt, struct route *ro, s32 flags, struct ip_moptions *imo);
+s32 ip_output(struct mbuf *m0, ...);
 struct in_ifaddr *ip_rtaddr(struct in_addr dst);
 void ip_savecontrol(struct inpcb *inp, struct mbuf **mp, struct ip *ip, struct mbuf *m);
 void ip_slowtimo(void);
@@ -1812,6 +1976,7 @@ void rt_timer_remove_all(struct rtentry *rt);
 void rtfree(struct rtentry *rt);
 void save_rte(u8 *option, struct in_addr dst);
 s32 sb_lock(struct sockbuf *sb);
+void sbappend(struct sockbuf *sb, struct mbuf *m);
 s32 sbappendaddr(struct sockbuf *sb, struct sockaddr *asa, struct mbuf *m0, struct mbuf *control);
 struct mbuf *sbcreatecontrol(void *p, s32 size, s32 type, s32 level);
 void sbdrop(struct sockbuf *sb, s32 len);
@@ -1826,6 +1991,7 @@ s32 sceNetConfigGetArpInfo(s32, s32);
 s32 sceNetConfigGetRouteInfo(s32 *len, void *buf);
 void sceNetFreeInternal(void *p);
 s32 sceNetIfhandle_lib_5FB31C72(s32 *max_linkhdr, s32 *a1, s32 *a2, s32 *a3);
+s32 sceNetIfhandle_lib_62B20015(s32 max_linkhdr, s32 max_protohdr, s32 a2, s32 a3);
 s32 sceNetInetInetAddr(s32 arg0);
 void sceNetInetInetAton(s32 arg0, s32 arg1);
 const char *sceNetInetInetNtop(s32 af, const void *src, char *dst, s32 size);
@@ -1838,12 +2004,14 @@ struct mbuf *sceNetMFree(struct mbuf *m);
 void sceNetMFreem(struct mbuf *m);
 struct mbuf *sceNetMGet(s32 how, s32 type);
 struct mbuf *sceNetMGetclr(s32 how, s32 type);
+struct mbuf *sceNetMPrepend(struct mbuf *m, s32 plen, s32 how);
 void *sceNetMallocInternal(u32 size);
 M2C_UNK sceNetMemset(M2C_UNK *, M2C_UNK, M2C_UNK);
 u32 sceNetRand(void);
 s32 sce_alignbytes(void);
 s32 soabort(struct socket *so);
 s32 soaccept(struct socket *so, struct mbuf *nam);
+void socantsendmore(struct socket *so);
 s32 sockargs(struct mbuf **mp, const void *buf, u32 buflen, s32 type);
 s32 soclose(struct socket *so);
 s32 soconnect(struct socket *so, struct mbuf *nam);
@@ -1851,6 +2019,7 @@ s32 soconnect2(struct socket *so1, struct socket *so2);
 s32 sodisconnect(struct socket *so);
 void sofree(struct socket *so);
 void soisconnected(struct socket *so);
+void soisconnecting(struct socket *so);
 s32 solisten(struct socket *so, s32 backlog);
 struct socket *sonewconn1(struct socket *head, s32 connstatus);
 s32 soo_poll(struct socket *so, s32 events, void *p);
@@ -1866,7 +2035,10 @@ void sppp_lcp_up(struct sppp *sp);
 void sppp_pap_TO(void *arg);
 void sppp_to_event(const struct cp *cp, struct sppp *sp);
 void syn_cache_cleanup(struct tcpcb *tp);
+void syn_cache_init(void);
+void syn_cache_timer(void);
 s32 sysctl_int(void *oldp, u32 *oldlenp, void *newp, u32 newlen, s32 *valp);
+s32 sysctl_rdint(void *oldp, u32 *oldlenp, void *newp, s32 val);
 s32 sysctl_rdstruct(void *oldp, u32 *oldlenp, void *newp, const void *sp, u32 len);
 struct tcpcb *tcp_close(struct tcpcb *tp);
 struct tcpcb *tcp_drop(struct tcpcb *tp, s32 errno);
@@ -1879,7 +2051,11 @@ struct tcpcb *tcp_newtcpcb(s32 family, void *aux);
 void tcp_notify(struct inpcb *inp, s32 error);
 s32 tcp_optlen(void *tp);
 s32 tcp_output(struct tcpcb *tp);
+s32 tcp_respond(struct tcpcb *tp, struct mbuf *template, struct mbuf *m, struct tcphdr *th0, u32 ack, u32 seq, s32 flags);
 void tcp_rmx_rtt(struct tcpcb *tp);
+struct mbuf *tcp_template(struct tcpcb *tp);
+void tcp_timer_init(void);
+struct tcpcb *tcp_timers(struct tcpcb *tp, s32 timer);
 void *udp_ctlinput(s32 cmd, struct sockaddr *sa, void *v);
 void udp_notify(void *arg0, s16 arg1);
 s32 udp_sysctl(s32 *name, u32 namelen, void *oldp, u32 *oldlenp, void *newp, u32 newlen);

@@ -34,9 +34,23 @@ def c_body(mod, ver, name):
     sd = src_dir(ver, mod)
     fv = sorted({fw(v) for v in sharing_versions(ver, mod)})
     for f in sd.glob("*.c"):
-        for e in FM.parse(f.read_text(), fv):
+        ents = FM.parse(f.read_text(), fv)
+        for k, e in enumerate(ents):
             if e.kind == "cfunc" and e.name == name and fw(ver) in e.vers:
-                return resolve_fw(e.text, fw(ver))
+                body = resolve_fw(e.text, fw(ver))
+                # file-scope data right before the function that it uses (e.g. per-file assert strings)
+                pre = ""
+                j = k - 1
+                while j >= 0 and ents[j].name == name:  # other versions' entries of the same function
+                    j -= 1
+                if j >= 0 and ents[j].kind == "other" and fw(ver) in ents[j].vers:
+                    prev = ents[j].text
+                    keep = [d for d in re.findall(r"^[^\n#]*\b(\w+)\s*(?:\[[^\]]*\])*\s*=[^;]*;\s*$", prev, re.M)
+                            if re.search(rf"\b{d}\b", body)]
+                    if keep:
+                        pre = "".join(l + "\n" for l in prev.splitlines()
+                                      if any(re.search(rf"\b{d}\b\s*(?:\[[^\]]*\])*\s*=", l) for d in keep))
+                return pre + body
     return None
 
 
