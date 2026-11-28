@@ -673,7 +673,7 @@ void func_00001DB8(SceNetApctlCtx *ctx) {
     u32 dns1[4];
     u32 dns2[4];
 
-    func_00005634(ctx);
+    func_00005634();
     dns2[0] = 0;
     dns1[0] = 0;
     sceNetConfigSetDNS(dns1, dns2);
@@ -900,7 +900,38 @@ end:
 INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00003754);
 #endif
 
+#if FW_VERSION < 250
+void func_00005634(void) {
+    SceNetDhcpCtx *dc = &D_00008B38;
+
+    if (D_00008134 < 0) {
+        return;
+    }
+    sceKernelSignalSema(dc->sema, 1);
+    if (dc->thid >= 0) {
+        sceKernelWaitThreadEnd(dc->thid, NULL);
+        sceKernelDeleteThread(dc->thid);
+        sceNetFreeThreadinfo(dc->thid);
+    }
+    if (dc->sema >= 0) {
+        sceKernelDeleteSema(dc->sema);
+    }
+    if (dc->bpf >= 0) {
+        sceNetBpfClose(dc->bpf);
+    }
+    if (dc->arpBpf >= 0) {
+        sceNetBpfClose(dc->arpBpf);
+    }
+    if (dc->sock >= 0) {
+        sceNetInetClose(dc->sock);
+        dc->sock = -1;
+    }
+    func_00007504(dc, 0, sizeof(SceNetDhcpCtx));
+    D_00008134 = -1;
+}
+#else
 INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00005634);
+#endif
 
 #if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_000051E8);

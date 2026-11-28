@@ -504,7 +504,7 @@ void func_00003EF0();
 s32 func_00004424(const char *ifname);
 s32 func_000051A0(const char *ifname, void *func, s32 a2, s32 prio, s32 a4, SceNetApctlIpParam *param);
 void func_00005290(void *arg0);
-s32 func_00005634();
+void func_00005634(void);
 s32 func_00005678(SceNetDhcpCtx *dc, s32 type);
 s32 func_00005D14(SceNetDhcpCtx *dc, s32 state, s32 arg);
 u16 func_00005E00(void *pseudo, void *data, s32 len);
