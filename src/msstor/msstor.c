@@ -15,39 +15,39 @@ INCLUDE_ASM("nonmatchings/msstor", func_00000134);
 INCLUDE_ASM("nonmatchings/msstor", func_0000017C);
 
 #if FW_VERSION < 201
-s32 func_000001BC(s32 arg0, s32 arg1, s32 arg2) {
-    s32 var_v1;
+s32 func_000001BC(s32 lba, s32 count, void *buf) {
+    s32 ret;
 
-    var_v1 = -0xD;
-    if (D_00009B50->unk18 != 0) {
-        var_v1 = -0xC;
-        if (D_00009B50->unk1C == 0) {
-            var_v1 = D_00009888->unk4(D_00009B50, arg0 + D_00009B50->unk4, arg1, arg2);
+    ret = -0xD;
+    if (D_00009B50->writable != 0) {
+        ret = -0xC;
+        if (D_00009B50->wpSwitch == 0) {
+            ret = D_00009888->write(D_00009B50, lba + D_00009B50->partStart, count, buf);
         }
     }
-    return var_v1;
+    return ret;
 }
 
-s32 func_00000220(s32 arg0, s32 arg1, s32 arg2) {
-    s32 var_a4;
+s32 func_00000220(s32 lba, s32 count, void *buf) {
+    s32 ret;
 
-    var_a4 = -0xD;
-    if (D_00009B50->unk18 != 0) {
-        var_a4 = -0xC;
-        if (D_00009B50->unk1C == 0) {
-            var_a4 = D_00009888->unk4(D_00009B50, arg0, arg1, arg2);
+    ret = -0xD;
+    if (D_00009B50->writable != 0) {
+        ret = -0xC;
+        if (D_00009B50->wpSwitch == 0) {
+            ret = D_00009888->write(D_00009B50, lba, count, buf);
         }
     }
-    return var_a4;
+    return ret;
 }
 
-void func_00000288(void) {
-    D_00009888->unk10(D_00009B50);
+s32 func_00000288(void) {
+    return D_00009888->unk10(D_00009B50);
 }
 
-void func_00000518(s32 *arg0) {
-    M2C_FIELD(arg0, s32 *, 0x18) = 1;
-    M2C_FIELD(arg0, s32 *, 0x10) = 0;
-    func_00001568();
+s32 func_00000518(SceMSstorDev *dev, s32 arg1) {
+    dev->writable = 1;
+    dev->parallel = 0;
+    return func_00001568(dev);
 }
 #endif

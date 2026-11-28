@@ -15,12 +15,12 @@ INCLUDE_ASM("nonmatchings/msstor_0015A0", func_0000172C);
 INCLUDE_ASM("nonmatchings/msstor_0015A0", func_00001794);
 
 #if FW_VERSION < 201
-void func_000013E0(s32 *arg0, s32 arg1) {
-    func_000077C4(sceMScmReadDataPIO(*arg0, arg1, 8, -1));
+s32 func_000013E0(SceMSstorDev *dev, u8 *buf) {
+    return func_000077C4(sceMScmReadDataPIO(dev->hc, buf, 8, -1));
 }
 
-void func_0000140C(s32 *arg0, s32 arg1, s32 arg2) {
-    func_000077C4(sceMScmReadDataPIO(*arg0, arg2, arg1, -1));
+s32 func_0000140C(SceMSstorDev *dev, s32 size, u8 *buf) {
+    return func_000077C4(sceMScmReadDataPIO(dev->hc, buf, size, -1));
 }
 #endif
 
@@ -29,18 +29,18 @@ INCLUDE_ASM("nonmatchings/msstor_0015A0", func_000047C8);
 #endif
 
 #if FW_VERSION < 201
-void func_0000181C(s32 *arg0, s32 arg1, s32 arg2) {
-    func_000077C4(sceMScmReadMSRegHelper(*arg0, arg2, arg1, -1));
+s32 func_0000181C(SceMSstorDev *dev, s32 size, u8 *buf) {
+    return func_000077C4(sceMScmReadMSRegHelper(dev->hc, buf, size, -1));
 }
 
-void func_00001534(s32 *arg0, s32 arg1, s32 arg2) {
-    func_000077C4(sceMScmTPCReadShortData(*arg0, arg2, arg1, -1));
+s32 func_00001534(SceMSstorDev *dev, s32 size, u8 *buf) {
+    return func_000077C4(sceMScmTPCReadShortData(dev->hc, buf, size, -1));
 }
 
 INCLUDE_ASM("nonmatchings/msstor_0015A0", func_00001568);
 
-void func_00001590(s32 *arg0, s32 arg1) {
-    func_000077C4(sceMScmTPCSetCmdHelper(*arg0, arg1 & 0xFF, -1));
+s32 func_00001590(SceMSstorDev *dev, s32 cmd) {
+    return func_000077C4(sceMScmTPCSetCmdHelper(dev->hc, cmd & 0xFF, -1));
 }
 #else
 void func_000017BC(s32 *arg0, s32 arg1) {
@@ -85,12 +85,12 @@ INCLUDE_ASM("nonmatchings/msstor_0015A0", func_0000192C);
 INCLUDE_ASM("nonmatchings/msstor_0015A0", func_000019C8);
 
 #if FW_VERSION < 201
-void func_00001808(s32 *arg0, s32 arg1) {
-    func_000077C4(sceMScmWriteDataPIO(*arg0, arg1, 8, -1));
+s32 func_00001808(SceMSstorDev *dev, u8 *buf) {
+    return func_000077C4(sceMScmWriteDataPIO(dev->hc, buf, 8, -1));
 }
 
-void func_00001834(s32 *arg0, s32 arg1, s32 arg2) {
-    func_000077C4(sceMScmWriteDataPIO(*arg0, arg2, arg1, -1));
+s32 func_00001834(SceMSstorDev *dev, s32 size, u8 *buf) {
+    return func_000077C4(sceMScmWriteDataPIO(dev->hc, buf, size, -1));
 }
 #endif
 
@@ -99,12 +99,12 @@ INCLUDE_ASM("nonmatchings/msstor_0015A0", func_000048D4);
 #endif
 
 #if FW_VERSION < 201
-void func_00001B88(s32 *arg0, s32 arg1, s32 arg2) {
-    func_000077C4(sceMScmWriteMSRegHelper(*arg0, arg2, arg1, -1));
+s32 func_00001B88(SceMSstorDev *dev, s32 size, u8 *buf) {
+    return func_000077C4(sceMScmWriteMSRegHelper(dev->hc, buf, size, -1));
 }
 
-void func_00001958(s32 *arg0, s32 arg1, s32 arg2) {
-    func_000077C4(sceMScmTPCWriteShortData(*arg0, arg2, arg1, -1));
+s32 func_00001958(SceMSstorDev *dev, s32 size, u8 *buf) {
+    return func_000077C4(sceMScmTPCWriteShortData(dev->hc, buf, size, -1));
 }
 #else
 void func_00001B28(s32 *arg0, s32 arg1) {
@@ -307,10 +307,10 @@ INCLUDE_RODATA("nonmatchings/msstor_0015A0", D_00009270);
 INCLUDE_ASM("nonmatchings/msstor_0015A0", func_00004588);
 
 s32 module_reboot_before(void) {
-    sceKernelWaitSema(D_00008934, 1, NULL);
+    sceKernelWaitSema(D_00008934.sema, 1, NULL);
     sceIoDelDrv(&D_00009264);
     sceIoDelDrv(&D_00009248);
-    sceKernelSignalSema(D_00008934, 1);
+    sceKernelSignalSema(D_00008934.sema, 1);
     return 0;
 }
 #endif
@@ -338,41 +338,41 @@ INCLUDE_RODATA("nonmatchings/msstor_0015A0", D_0000823C);
 #endif
 
 #if FW_VERSION < 201
-s32 func_000048A8(void *arg0) {
-    s32 temp_v0;
+s32 func_000048A8(SceIoDeviceEntry *de) {
+    SceUID thid;
 
-    M2C_VFIELD(&D_00008934, s32, 4) = (s32) D_00008AA4;
-    M2C_FIELD(&D_00008934, s32 **, 8) = &D_00008AA4;
-    M2C_VFIELD(&D_00008934, s32, 0) = sceKernelCreateSema(&D_00009284, 1U, 1, 1, NULL);
-    M2C_VFIELD(&D_00008934, s32, 0x14) = 0;
-    M2C_VFIELD(&D_00008934, s32, 0xC) = 0;
-    M2C_VFIELD(&D_00008934, s32, 0x10) = 0;
-    M2C_VFIELD(&D_00008934, s32, 0x1C) = sceKernelCreateEventFlag("SceMSstorSleeper", 0x201U, 0U, NULL);
-    temp_v0 = sceKernelCreateThread("SceMSstorSleep", (s32) &func_00006858, 0x6F, 0x800U, 0U, NULL);
-    M2C_VFIELD(&D_00008934, s32, 0x18) = temp_v0;
-    sceKernelStartThread(temp_v0, 0x20U, &D_00008934);
-    M2C_FIELD(arg0, M2C_UNK **, 4) = &D_00008934;
+    D_00008934.hc = D_00008AA4.hc;
+    D_00008934.dev = &D_00008AA4;
+    D_00008934.sema = sceKernelCreateSema(D_00009284, 1, 1, 1, NULL);
+    D_00008934.unk14 = 0;
+    D_00008934.unkC = 0;
+    D_00008934.openCount = 0;
+    D_00008934.evf = sceKernelCreateEventFlag("SceMSstorSleeper", 0x201, 0, NULL);
+    thid = sceKernelCreateThread("SceMSstorSleep", func_00006858, 0x6F, 0x800, 0, NULL);
+    D_00008934.thread = thid;
+    sceKernelStartThread(thid, 0x20, &D_00008934);
+    de->d_private = &D_00008934;
     return 0;
 }
 
-s32 func_0000497C(void *arg0) {
-    M2C_FIELD(arg0, M2C_UNK **, 4) = &D_00008934;
+s32 func_0000497C(SceIoDeviceEntry *de) {
+    de->d_private = &D_00008934;
     return 0;
 }
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 201
 s32 func_00004990(void) {
-    if (M2C_FIELD(&D_00008934, s32 *, 0) > 0) {
-        sceKernelDeleteSema(M2C_FIELD(&D_00008934, s32 *, 0));
+    if (D_00008934.sema > 0) {
+        sceKernelDeleteSema(D_00008934.sema);
     }
-    if (M2C_FIELD(&D_00008934, s32 *, 0x18) > 0) {
-        sceKernelTerminateDeleteThread(M2C_FIELD(&D_00008934, s32 *, 0x18));
+    if (D_00008934.thread > 0) {
+        sceKernelTerminateDeleteThread(D_00008934.thread);
     }
-    if (M2C_FIELD(&D_00008934, s32 *, 0x1C) > 0) {
-        sceKernelDeleteEventFlag(M2C_FIELD(&D_00008934, s32 *, 0x1C));
+    if (D_00008934.evf > 0) {
+        sceKernelDeleteEventFlag(D_00008934.evf);
     }
-    M2C_FIELD(&D_00008934, s32 *, 0) = -1;
+    D_00008934.sema = -1;
     return 0;
 }
 #endif
@@ -383,16 +383,16 @@ INCLUDE_ASM("nonmatchings/msstor_0015A0", func_00004990);
 
 #if FW_VERSION == 100
 s32 func_00004990(void) {
-    if (M2C_FIELD(&D_00008934, s32 *, 0) > 0) {
-        sceKernelDeleteSema(M2C_FIELD(&D_00008934, s32 *, 0));
+    if (D_00008934.sema > 0) {
+        sceKernelDeleteSema(D_00008934.sema);
     }
-    if (M2C_FIELD(&D_00008934, s32 *, 0x18) > 0) {
-        sceKernelTerminateDeleteThread(M2C_FIELD(&D_00008934, s32 *, 0x18));
+    if (D_00008934.thread > 0) {
+        sceKernelTerminateDeleteThread(D_00008934.thread);
     }
-    if (M2C_FIELD(&D_00008934, s32 *, 0x1C) > 0) {
-        sceKernelDeleteEventFlag(M2C_FIELD(&D_00008934, s32 *, 0));
+    if (D_00008934.evf > 0) {
+        sceKernelDeleteEventFlag(D_00008934.sema);
     }
-    M2C_FIELD(&D_00008934, s32 *, 0) = -1;
+    D_00008934.sema = -1;
     return 0;
 }
 #endif
@@ -410,40 +410,40 @@ INCLUDE_ASM("nonmatchings/msstor_0015A0", func_00004B30);
 
 INCLUDE_ASM("nonmatchings/msstor_0015A0", func_00004C00);
 
-s32 func_00004C88(void *arg0) {
-    s32 var_a1;
-    void *temp_v1;
+s32 func_00004C88(SceIoIob *iob) {
+    s32 ret;
+    SceMSstorIoCtx *ctx;
 
-    var_a1 = 0x80020328;
-    if (arg0 != NULL) {
-        temp_v1 = M2C_FIELD(arg0, void **, 0x10);
-        var_a1 = 0;
-        M2C_FIELD(temp_v1, s32 *, 0x10) = (s32) (M2C_FIELD(temp_v1, s32 *, 0x10) - 1);
+    ret = 0x80020328;
+    if (iob != NULL) {
+        ctx = iob->i_private;
+        ret = 0;
+        ctx->openCount--;
     }
-    return var_a1;
+    return ret;
 }
 #endif
 
 #if FW_VERSION < 150
-s32 func_00004A0C(void *arg0, s32 arg1, s32 arg2) {
-    s32 var_v1;
+s32 func_00004A0C(SceIoIob *iob, char *name, s32 flags, SceMode mode) {
+    s32 ret;
 
-    var_v1 = 0x80220183;
-    if (M2C_FIELD(arg0, s32 *, 4) == 0) {
-        var_v1 = func_00004A98((s32) arg0, arg1, arg2);
+    ret = 0x80220183;
+    if (iob->i_unit == 0) {
+        ret = func_00004A98(iob, name, flags);
     }
-    return var_v1;
+    return ret;
 }
 
 INCLUDE_ASM("nonmatchings/msstor_0015A0", func_00004A40);
 
 INCLUDE_ASM("nonmatchings/msstor_0015A0", func_00004A98);
 
-s32 func_00004B14(void *arg0) {
-    void *temp_a0;
+s32 func_00004B14(SceIoIob *iob) {
+    SceMSstorIoCtx *ctx;
 
-    temp_a0 = M2C_FIELD(arg0, void **, 0x10);
-    M2C_FIELD(temp_a0, s32 *, 0x10) = (s32) (M2C_FIELD(temp_a0, s32 *, 0x10) - 1);
+    ctx = iob->i_private;
+    ctx->openCount--;
     return 0;
 }
 #endif
