@@ -1259,7 +1259,24 @@ s32 func_00003A34(s32 unit, s32 stat) {
     return 0;
 }
 
-INCLUDE_ASM("nonmatchings/fatmsmod", func_00003A50);
+s32 func_00003A50(s32 unit, s32 arg) {
+    s32 state;
+    s32 i;
+
+    if (unit != 0) {
+        return -1;
+    }
+    state = sceKernelSuspendDispatchThread();
+    for (i = 0; i < 32; i++) {
+        if (D_0002BA10[0][i] != 0) {
+            if (sceKernelNotifyCallback(D_0002BA10[0][i], arg) == 0x800201A1) {
+                D_0002BA10[0][i] = 0;
+            }
+        }
+    }
+    sceKernelResumeDispatchThread(state);
+    return 0;
+}
 
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00003AF4);
 
@@ -2185,7 +2202,25 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_000037AC);
 INCLUDE_ASM("nonmatchings/fatmsmod", func_000059A8);
 #endif
 
-INCLUDE_ASM("nonmatchings/fatmsmod", func_00005D18);
+s32 func_00005D18(s32 *flag) {
+    s32 v;
+    s32 ret;
+
+    if (*flag != 0) {
+        v = 1;
+    } else {
+        v = 0;
+    }
+    ret = sceIoDevctl(D_000241C8, 0x0211D814, &v, 4, NULL, 0);
+    if (ret < 0) {
+        return ret;
+    }
+    ret = sceIoDevctl(D_000241C8, 0x0210D816, NULL, 0, NULL, 0);
+    if (ret >= 0) {
+        return 0;
+    }
+    return ret;
+}
 
 INCLUDE_RODATA("nonmatchings/fatmsmod", D_000241C8);
 
@@ -2389,7 +2424,29 @@ s32 FcpSendMsg(SceMsStubMsg *msg) {
 
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00006A54);
 
-INCLUDE_ASM("nonmatchings/fatmsmod", func_00006B10);
+void func_00006B10(PfDate *d, PfTime *t) {
+    ScePspDateTime now;
+
+    if (sceRtcGetCurrentClockLocalTime(&now) != 0) {
+        d->year = 1985;
+        d->month = 1;
+        d->day = 1;
+        t->hour = 0;
+        t->minute = 0;
+        t->second = 0;
+        return;
+    }
+    if ((u16)(now.year - 1980) >= 128) {
+        d->year = 1980;
+    } else {
+        d->year = now.year;
+    }
+    d->month = now.month;
+    d->day = now.day;
+    t->hour = now.hour;
+    t->minute = now.minute;
+    t->second = now.second;
+}
 
 #if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00006B44);

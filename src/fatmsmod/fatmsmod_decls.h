@@ -438,6 +438,7 @@ extern s8 D_00019E1C;
 extern PfDrives D_00019E28;
 extern PfSavedEnt D_00019E2C;
 extern s32 D_0001A040;
+extern u32 *D_0001A07C; /* card status word */
 extern s32 D_0001B0C8;
 extern s32 D_0001B248;
 extern FatmsHeapEnt D_0001B298[128];
@@ -449,6 +450,7 @@ extern PfCwd D_0001BCE8;
 extern PfFile D_0001BEFC[10];
 extern char D_00023B8C[]; /* "prfile_mod.c:%s:driver deleted\n" */
 extern M2C_UNK D_0002411C;
+extern const char D_000241C8[]; /* "msstor0:" */
 extern char D_000243D8[]; /* 2.50-2.71 "prfile_mod.c:%s:driver deleted\n" */
 extern const char D_00024BF0[]; /* characters not allowed in names */
 extern PfVolume *D_000276E4; /* current volume */
@@ -541,6 +543,7 @@ void func_0000381C(SceIoIob *iob);
 void func_00003940(s32 arg0);
 s32 func_000039E8(void);
 s32 func_00003A34(s32 unit, s32 stat);
+s32 func_00003A50(s32 unit, s32 arg);
 s32 func_00003CD8(void);
 s32 func_00004544(void);
 s8 *func_000045F4(void);
@@ -570,6 +573,7 @@ s32 func_000052D0(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
 void func_000053FC(void);
 s32 func_0000565C(void);
 void func_000057CC(s32 arg0);
+s32 func_00005D18(s32 *flag);
 s32 func_00006148(s32, s32, s32);
 s32 func_0000635C(void);
 s32 func_00006724(void);
@@ -578,7 +582,7 @@ s32 func_000067E0(void);
 s32 func_000067EC(void);
 s32 func_00006918(void);
 s32 func_00006960(void);
-void func_00006B10(PfDate *date, PfTime *time);
+void func_00006B10(PfDate *d, PfTime *t);
 s32 func_000075CC(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
 s32 func_0000764C(void);
 s32 func_000076F4(s32, s32);
@@ -740,9 +744,11 @@ void memset(void *s, s32 c, SceSize n);
 s32 module_start(void);
 s32 prErr(s32 err);
 s32 sceFatMS_driver_BCB9DEDB(void);
-s32 sceIoClose(s32);
+s32 sceIoClose(SceUID fd);
 M2C_UNK sceIoDelDrv(s32);
-s32 sceIoDevctl(void *, s32, void *, u32, void *, u32);
+s32 sceIoDevctl(const char *dev, u32 cmd, void *indata, s32 inlen, void *outdata, s32 outlen);
+s32 sceIoIoctl(SceUID fd, u32 cmd, void *indata, s32 inlen, void *outdata, s32 outlen);
+SceUID sceIoOpen(const char *file, s32 flags, SceMode mode);
 void *sceKernelAllocHeapMemory(SceUID heapid, SceSize size);
 void sceKernelCpuResumeIntr(s32 intr);
 s32 sceKernelCpuSuspendIntr(void);
@@ -755,10 +761,14 @@ s32 sceKernelDeleteHeap(SceUID heapid);
 s32 sceKernelDeleteMbx(SceUID mbx);
 s32 sceKernelFreeHeapMemory(SceUID heapid, void *block);
 s32 sceKernelGetThreadCurrentPriority(void);
+s32 sceKernelNotifyCallback(SceUID cb, s32 arg);
 s32 sceKernelReceiveMbx(SceUID mbx, void **msg, u32 *timeout);
+s32 sceKernelResumeDispatchThread(s32 state);
 s32 sceKernelSendMbx(SceUID mbx, void *msg);
 s32 sceKernelSetEventFlag(SceUID evf, u32 bits);
+s32 sceKernelSuspendDispatchThread(void);
 s32 sceKernelWaitEventFlag(SceUID evf, u32 bits, u32 wait, u32 *outBits, u32 *timeout);
+s32 sceRtcGetCurrentClockLocalTime(ScePspDateTime *time);
 s32 sceRtcSetDosTime(ScePspDateTime *date, u32 dosTime);
 char *strcat(char *d, const char *s);
 u32 strlen(const char *s);
