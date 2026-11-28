@@ -153,9 +153,9 @@ INCLUDE_ASM("nonmatchings/libhttp", sceHttpSetProxy);
 #if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/libhttp", sceHttpGetProxy);
 
-INCLUDE_ASM("nonmatchings/libhttp", func_00000990);
+INCLUDE_ASM("nonmatchings/libhttp", GetProxyInfoFromSystem);
 
-INCLUDE_ASM("nonmatchings/libhttp", func_00000A74);
+INCLUDE_ASM("nonmatchings/libhttp", CreateConnection);
 #endif
 
 #if FW_VERSION == 103
@@ -268,7 +268,7 @@ s32 sceHttpGetStatusCode(s32 arg0, s32 *arg1) {
     if (D_0000DCCC != 1) {
         var_a0 = 0x80431001;
     } else {
-        temp_v0 = func_00004AFC(arg0, &sp0);
+        temp_v0 = GetHttpReq(arg0, &sp0);
         var_a0 = temp_v0;
         if (temp_v0 >= 0) {
             var_a0 = 0x80431065;
@@ -401,11 +401,11 @@ INCLUDE_ASM("nonmatchings/libhttp", func_000031D4);
 #endif
 
 #if FW_VERSION < 103
-INCLUDE_ASM("nonmatchings/libhttp", func_00003094);
+INCLUDE_ASM("nonmatchings/libhttp", SchemeToProtocol);
 #endif
 
 #if FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/libhttp", func_0000316C);
+INCLUDE_ASM("nonmatchings/libhttp", CloneHeader);
 #endif
 
 #if FW_VERSION == 100
@@ -564,37 +564,37 @@ INCLUDE_ASM("nonmatchings/libhttp", func_00004A6C);
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/libhttp", func_00004790);
+INCLUDE_ASM("nonmatchings/libhttp", RecvResponseHeader);
 #endif
 
 #if FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/libhttp", func_00004AFC);
+INCLUDE_ASM("nonmatchings/libhttp", GetHttpReq);
 
-INCLUDE_ASM("nonmatchings/libhttp", func_00004BC4);
+INCLUDE_ASM("nonmatchings/libhttp", GetHttpConnection);
 
-INCLUDE_ASM("nonmatchings/libhttp", func_00004C8C);
+INCLUDE_ASM("nonmatchings/libhttp", GetHttpTmpl);
 
-INCLUDE_ASM("nonmatchings/libhttp", func_00004D54);
+INCLUDE_ASM("nonmatchings/libhttp", InsertNewHttpTmpl);
 
-INCLUDE_ASM("nonmatchings/libhttp", func_00004E18);
+INCLUDE_ASM("nonmatchings/libhttp", InsertNewHttpConnection);
 
-INCLUDE_ASM("nonmatchings/libhttp", func_00004EDC);
+INCLUDE_ASM("nonmatchings/libhttp", InsertNewHttpReq);
 
-INCLUDE_ASM("nonmatchings/libhttp", func_00004FA0);
+INCLUDE_ASM("nonmatchings/libhttp", CopyHttpTmpl);
 
 INCLUDE_ASM("nonmatchings/libhttp", CopyHttpHeaderList);
 
 INCLUDE_ASM("nonmatchings/libhttp", HttpWhichId);
 
-INCLUDE_ASM("nonmatchings/libhttp", func_000053D0);
+INCLUDE_ASM("nonmatchings/libhttp", ConnectNonblock);
 
-INCLUDE_ASM("nonmatchings/libhttp", func_000055B4);
+INCLUDE_ASM("nonmatchings/libhttp", CreateHttpExtraHeader);
 
-INCLUDE_ASM("nonmatchings/libhttp", func_0000571C);
+INCLUDE_ASM("nonmatchings/libhttp", FreeHttpHederList);
 
 INCLUDE_ASM("nonmatchings/libhttp", func_00005798);
 
-INCLUDE_ASM("nonmatchings/libhttp", func_00005828);
+INCLUDE_ASM("nonmatchings/libhttp", BuildHttpHeader);
 
 u32 func_00005DE0(u32 arg0) {
     u32 var_s1;
@@ -663,7 +663,7 @@ INCLUDE_ASM("nonmatchings/libhttp", sceHttpCreateConnectionWithURL);
 
 #if FW_VERSION < 201
 s32 sceHttpCreateConnectionWithURL(s32 arg0, void *arg1, s32 arg2) {
-    return func_00006B7C(arg0, (s32) arg1, arg2, 0, 0);
+    return CreateConnectionWithUrl(arg0, (s32) arg1, arg2, 0, 0);
 }
 #endif
 
@@ -746,7 +746,7 @@ INCLUDE_ASM("nonmatchings/libhttp", func_00006658);
 
 INCLUDE_ASM("nonmatchings/libhttp", func_0000673C);
 
-INCLUDE_ASM("nonmatchings/libhttp", func_00006B7C);
+INCLUDE_ASM("nonmatchings/libhttp", CreateConnectionWithUrl);
 
 INCLUDE_ASM("nonmatchings/libhttp", DeleteHttpHeader);
 
@@ -778,13 +778,13 @@ INCLUDE_ASM("nonmatchings/libhttp", func_00007B1C);
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/libhttp", func_000074AC);
+INCLUDE_ASM("nonmatchings/libhttp", _try_connect);
 #endif
 
 #if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/libhttp", _try_build_header);
 
-INCLUDE_ASM("nonmatchings/libhttp", func_00007704);
+INCLUDE_ASM("nonmatchings/libhttp", _try_resolve_hostname);
 #endif
 
 #if FW_VERSION < 282
@@ -2283,7 +2283,7 @@ INCLUDE_ASM("nonmatchings/libhttp", func_000101F8);
 #if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/libhttp", func_00009E08);
 
-INCLUDE_ASM("nonmatchings/libhttp", func_00006B7C);
+INCLUDE_ASM("nonmatchings/libhttp", CreateConnectionWithUrl);
 
 INCLUDE_ASM("nonmatchings/libhttp", func_0000A0A0);
 #endif
