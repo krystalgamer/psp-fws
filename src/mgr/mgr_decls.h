@@ -4,12 +4,6 @@
 #include "common.h"
 #include "m2c_macros.h"
 
-struct D_0000AFF8_s {
-    s32 unk0;
-    u8 pad4[0x8];
-    volatile s32 unkC;
-};
-
 struct D_0000B050_s {
     u8 unk0;
     u8 unk1;
@@ -43,6 +37,13 @@ typedef struct {
     u16 offset;
 } MgrKeyReg;
 typedef char chk_MgrKeyReg[(sizeof(MgrKeyReg) == 0x8) ? 1 : -1];
+
+typedef struct {
+    SceUID fd;
+    SceUID sema;
+    s32 initCount;
+    volatile s32 unkC;
+} MgrMsCtrl;
 
 typedef struct {
     u32 w0;
@@ -83,9 +84,10 @@ extern s32 D_0000AEE0;
 extern M2C_UNK D_0000AFA0;
 extern M2C_UNK D_0000AFCC;
 extern M2C_UNK D_0000AFD0;
-extern struct D_0000AFF8_s D_0000AFF8;
+extern MgrMsCtrl D_0000AFF8;
 extern s32 D_0000AFFC;
 extern s32 D_0000B004;
+extern s32 D_0000B00C;
 extern struct D_0000B050_s D_0000B050;
 extern MgrCtrl D_0000B690;
 extern s32 D_0000B6A8;
@@ -125,7 +127,7 @@ s32 func_000006CC(u32 cmd);
 s32 func_00000708(u32 *arg0, u32 cmd);
 s32 func_00000754(u32 cmd0, u32 cmd1, u32 cmd2);
 s32 func_000007DC(u32 cmd, s32 count);
-void func_00000840(s32 arg0, s32 arg1, s32 arg2);
+s32 func_00000840(u32 *arg0, u32 cmd, s32 count);
 s32 func_00000898();
 s32 func_000008A4(void);
 void func_00000AC4(void);
@@ -176,7 +178,7 @@ s32 func_00002F84(s32, s32, s32, s32, s32);
 s32 func_0000310C(u64 *dst, u64 *src, s32 count, u32 cmd);
 s32 func_000031C8(u32 *dst, u64 *src, s32 count, u32 cmd);
 s32 func_0000341C(s32, s32, s32, s32, s32, s32, s32);
-s32 func_000038D0(s32, s32);
+s32 func_000038D0(u32 *arg0, u32 *arg1);
 void func_00003E08(s32 arg0);
 void func_00004410(s32 arg0);
 s32 func_000045DC(void);
@@ -184,19 +186,26 @@ s32 func_00004664(M2C_UNK, M2C_UNK);
 s32 func_00004724(s32, s32);
 s32 func_00004CBC(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
 s32 func_00005194(s32 arg0, s32 arg1);
-s32 func_00005834(s32);
+s32 func_000053B0(s32 fd, u8 *buf, s32 mode);
+s32 func_000057CC(s32 err);
+s32 func_00005834(s32 ret);
+s32 func_000059BC(s32 err);
 s32 func_00005B88(void);
 s32 func_00005E30(void);
-M2C_UNK func_00005F7C();
+void func_00005F7C(void);
 s32 func_00006030(void);
 s32 func_0000608C(void);
 void func_000060B4(s32 arg0, s32 *arg1);
 void func_00006100(s32 arg0);
 s32 func_00006104(void);
+s32 func_00006134(s32 arg0, s32 arg1, u8 *buf, s32 size);
+s32 func_00006300(s32 arg0);
 s32 func_00006340(s32, s32, s32, s32, s32);
+s32 func_000064EC(s32 arg0, s32 arg1);
 s32 func_00006528(s32, s32);
 s32 func_000065FC(s32, s32, s32);
-s32 func_00006884(s32, s32);
+s32 func_0000684C(s32 fd);
+s32 func_00006884(s32 arg0, s32 arg1);
 s32 func_000069E0(s32 arg0, s32 arg1);
 s32 func_00006C40(s32, s32, s32, s32, s32);
 s32 func_00006D2C(s32 arg0, s32 arg1, s32 arg2, s32 *arg3);
@@ -204,6 +213,7 @@ s32 func_00007644(s32);
 void func_0000798C(s32 arg0);
 void func_00008388(s32 arg0);
 s32 func_00008584(s32 arg0, s32 arg1, s32 arg2, s32 *arg3);
+s32 func_00008EB0(s32 *out, s32 pos);
 void func_00009BAC(s32 arg0);
 s32 func_0000A1C8(s32 arg0, s32 arg1, s32 arg2);
 s32 memcmp(const void *, const void *, u32);
@@ -213,7 +223,7 @@ s32 sceIdStorageGetLeafSize(void);
 s32 sceIdStorageLookup(u16 key, u32 offset, void *buf, u32 len);
 s32 sceIoClose(s32);
 s32 sceIoDevctl(void *, s32, void *, u32, void *, u32);
-s32 sceIoIoctl(s32, s32, void *, u32, void *, u32);
+s32 sceIoIoctl(s32, u32, void *, u32, void *, u32);
 s32 sceKernelClearEventFlag(s32, u32);
 s32 sceKernelCreateEventFlag(const char *, u32, s32, void *);
 s32 sceKernelCreateSema(const char *, u32, s32, s32, void *);
@@ -230,6 +240,7 @@ s32 sceKernelSignalSema(s32, s32);
 s32 sceKernelWaitEventFlag(s32, u32, u32, u32 *, u32 *);
 s32 sceKernelWaitSema(s32, s32, void *);
 s32 sceMScmHCLastStatus();
+s32 sceMScmWriteMSReg(s32, s32, s32, s32, s32, s32);
 s32 sceMgrAESDecrypt(u32 *dst, u32 *src, u32 size, u32 *key, u32 *iv);
 s32 sceMgrAESEncrypt(u32 *dst, u32 *src, u32 size, u32 *key, u32 *iv);
 void sceMgrAesEnd(void);
@@ -262,6 +273,8 @@ s32 sceMgrGetLeafID(u64 *out);
 s32 sceMgrInitSeed(MgrSeed *seed);
 s32 sceMgrLock(void);
 s32 sceMgrMSDeauth(s32 arg0);
+s32 sceMgrMSEnd(void);
+s32 sceMgrMSReset(void);
 void sceMgrNetDecryptKc(s32 arg0, s32 arg1, s32 arg2);
 s32 sceMgrPollLock(void);
 s32 sceMgrRandom(s32 arg0, s32 arg1);

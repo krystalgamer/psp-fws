@@ -296,9 +296,9 @@ s32 func_000007DC(u32 cmd, s32 count) {
     return func_000001C8();
 }
 
-void func_00000840(s32 arg0, s32 arg1, s32 arg2) {
+s32 func_00000840(u32 *arg0, u32 cmd, s32 count) {
     func_000002EC(arg0);
-    func_000007DC(arg1, arg2);
+    return func_000007DC(cmd, count);
 }
 
 void sceMgrReset(void) {
@@ -1755,7 +1755,14 @@ s32 sceMgrStartSession(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     return var_s2;
 }
 
-INCLUDE_ASM("nonmatchings/mgr", func_000038D0);
+s32 func_000038D0(u32 *arg0, u32 *arg1) {
+    s32 ret = func_00000708(arg0, 0x2200);
+
+    if (ret < 0) {
+        return ret;
+    }
+    return func_00000840(arg1, 0x2201, 3);
+}
 
 #if FW_VERSION >= 250 && FW_VERSION < 340
 INCLUDE_ASM("nonmatchings/mgr", func_00003934);
@@ -1923,18 +1930,41 @@ INCLUDE_ASM("nonmatchings/mgr", sceMgrAesEcbEncrypt);
 #endif
 
 #if FW_VERSION < 340
-INCLUDE_ASM("nonmatchings/mgr", func_000057CC);
+s32 func_000057CC(s32 err) {
+    switch (err) {
+    case 0x80220086:
+    case 0x80220087:
+    case 0x80220088:
+    case 0x80220089:
+    case 0x8022008A:
+        return 0x80504002;
+    case 0x8022008B:
+        return 0x80504001;
+    case 0x8022008C:
+        return 0x80504000;
+    }
+    return (err < 0) ? err : 0;
+}
 
 INCLUDE_ASM("nonmatchings/mgr", func_00005834);
 
-INCLUDE_ASM("nonmatchings/mgr", func_000059BC);
+s32 func_000059BC(s32 err) {
+    switch (err) {
+    case 0x80220086:
+    case 0x80220088:
+    case 0x80220089:
+    case 0x8022008A:
+        return 1;
+    }
+    return 0;
+}
 
 INCLUDE_ASM("nonmatchings/mgr", func_00004180);
 
 s32 func_00005B88(void) {
-    if (D_0000AFF8.unk0 >= 0) {
-        sceIoClose(D_0000AFF8.unk0);
-        D_0000AFF8.unk0 = -1;
+    if (D_0000AFF8.fd >= 0) {
+        sceIoClose(D_0000AFF8.fd);
+        D_0000AFF8.fd = -1;
     }
     return 0;
 }
@@ -2142,9 +2172,9 @@ INCLUDE_ASM("nonmatchings/mgr", func_000059BC);
 INCLUDE_ASM("nonmatchings/mgr", func_000059F8);
 
 s32 func_00005B88(void) {
-    if (D_0000AFF8.unk0 >= 0) {
-        sceIoClose(D_0000AFF8.unk0);
-        D_0000AFF8.unk0 = -1;
+    if (D_0000AFF8.fd >= 0) {
+        sceIoClose(D_0000AFF8.fd);
+        D_0000AFF8.fd = -1;
     }
     return 0;
 }
@@ -2163,14 +2193,61 @@ INCLUDE_RODATA("nonmatchings/mgr", D_0000AFA0);
 
 INCLUDE_ASM("nonmatchings/mgr", sceMgrMSInit);
 
-INCLUDE_ASM("nonmatchings/mgr", sceMgrMSReset);
+s32 sceMgrMSReset(void) {
+    s32 ret = func_00006030();
 
-INCLUDE_ASM("nonmatchings/mgr", func_00005F7C);
-
-INCLUDE_ASM("nonmatchings/mgr", sceMgrMSEnd);
+    if (ret < 0) {
+        return ret;
+    }
+    D_0000B004 = 0;
+    func_00005B88();
+    func_0000608C();
+    return 0;
+}
 
 #if FW_VERSION < 152
-INCLUDE_ASM("nonmatchings/mgr", func_00006030);
+void func_00005F7C(void) {
+    func_00005B88();
+    if (D_0000AFF8.sema > 0) {
+        sceKernelDeleteSema(D_0000AFF8.sema);
+        D_0000AFF8.sema = -1;
+    }
+    D_0000AFF8.initCount = 0;
+}
+#else
+INCLUDE_ASM("nonmatchings/mgr", func_00005F7C);
+#endif
+
+s32 sceMgrMSEnd(void) {
+    s32 ret = func_00006030();
+
+    if (ret < 0) {
+        return ret;
+    }
+    if (D_0000AFF8.initCount >= 2) {
+        D_0000AFF8.initCount--;
+        func_0000608C();
+        return 0;
+    }
+    func_00005F7C();
+    return 0;
+}
+
+#if FW_VERSION < 152
+s32 func_00006030(void) {
+    s32 ret = sceKernelWaitSema(D_0000AFF8.sema, 1, NULL);
+
+    if (ret == 0x80020199) {
+        return 0x80501001;
+    }
+    if (ret == 0x800201B5) {
+        return 0x80500002;
+    }
+    if (ret != 0) {
+        return ret;
+    }
+    return 0;
+}
 #endif
 
 #if FW_VERSION >= 152 && FW_VERSION < 340
@@ -2249,13 +2326,28 @@ INCLUDE_ASM("nonmatchings/mgr", func_00006134);
 
 INCLUDE_ASM("nonmatchings/mgr", func_00006288);
 
-INCLUDE_ASM("nonmatchings/mgr", func_00006300);
+s32 func_00006300(s32 arg0) {
+    u8 buf[2];
+    s32 ret = func_00006134(arg0, 1, buf, 2);
+
+    if (ret < 0) {
+        return ret;
+    }
+    return (buf[0] << 8) | buf[1];
+}
 
 INCLUDE_ASM("nonmatchings/mgr", func_00006340);
 
 INCLUDE_ASM("nonmatchings/mgr", func_00006408);
 
-INCLUDE_ASM("nonmatchings/mgr", func_000064EC);
+s32 func_000064EC(s32 arg0, s32 arg1) {
+    s32 ret = sceMScmWriteMSReg(arg0, 0x11, 6, arg1, 1, -1);
+
+    if (ret < 0) {
+        ret = func_000057CC(ret);
+    }
+    return ret;
+}
 
 INCLUDE_ASM("nonmatchings/mgr", func_00006528);
 
@@ -2265,7 +2357,11 @@ INCLUDE_ASM("nonmatchings/mgr", func_00006678);
 
 INCLUDE_ASM("nonmatchings/mgr", func_000067CC);
 
-INCLUDE_ASM("nonmatchings/mgr", func_0000684C);
+s32 func_0000684C(s32 fd) {
+    s32 arg = 10;
+
+    return sceIoIoctl(fd, 0x0211D019, &arg, 4, NULL, 0);
+}
 
 INCLUDE_ASM("nonmatchings/mgr", func_00006884);
 
@@ -2484,7 +2580,18 @@ INCLUDE_ASM("nonmatchings/mgr", func_00008754);
 
 INCLUDE_ASM("nonmatchings/mgr", func_00008B04);
 
-INCLUDE_ASM("nonmatchings/mgr", func_00008EB0);
+s32 func_00008EB0(s32 *out, s32 pos) {
+    s32 n = D_0000B00C;
+    s32 r;
+
+    if (pos < 0) {
+        *out = 0;
+        return -1;
+    }
+    r = pos % (n * 2);
+    *out = r / n;
+    return r % n;
+}
 
 INCLUDE_ASM("nonmatchings/mgr", sceMgrMSReadSeqPage);
 
