@@ -112,3 +112,4 @@ g_adhocSelChan = 0x00007448;
 g_adhocStat = 0x00007450;
 ptpSendCtl = 0x00006340; // type:func
 gameModeCreate = 0x00006AB8; // type:func
+ptpOutput = 0x0000648C; // type:func

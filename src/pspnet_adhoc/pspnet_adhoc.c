@@ -2948,12 +2948,6 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_000045E4);
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", sceNetAdhoc_lib_62B875A8);
 #endif
 
-#if FW_VERSION >= 201 && FW_VERSION < 282
-void sceNetAdhoc_lib_62B875A8(void) {
-    sceNetMemset(&g_adhocStat, 0, sizeof(g_adhocStat));
-}
-#endif
-
 #if FW_VERSION < 150
 void sceNetAdhoc_lib_62B875A8(void) {
     __builtin_memset(&g_adhocStat, 0, sizeof(g_adhocStat));
@@ -2962,7 +2956,9 @@ void sceNetAdhoc_lib_62B875A8(void) {
 
 #if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_0000473C);
+#endif
 
+#if FW_VERSION >= 201
 void sceNetAdhoc_lib_62B875A8(void) {
     sceNetMemset(&g_adhocStat, 0, sizeof(g_adhocStat));
 }
@@ -3511,7 +3507,7 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00006AF8);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00006878);
+INCLUDE_ASM("nonmatchings/pspnet_adhoc", ptpOutput);
 #endif
 
 #if FW_VERSION < 150
@@ -3519,7 +3515,7 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00005FF8);
 
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", ptpSendCtl);
 
-void func_0000648C(SceNetAdhocPtpPcb *pcb, s32 rexmt) {
+void ptpOutput(SceNetAdhocPtpPcb *pcb, s32 rexmt) {
     struct mbuf *m;
     u32 seq;
     s32 n;
@@ -3574,12 +3570,14 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_0000660C);
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_000067F8);
 #endif
 
-#if FW_VERSION < 150
+#if FW_VERSION < 201
 void func_000069D4(SceNetAdhocPtpPcb *pcb) {
     if ((u32)pcb->state < 2)
         return;
     if (pcb->rexmt_left-- <= 0) {
+#if FW_VERSION < 150
         _sce_pspnet_callout_stop(&pcb->callout);
+#endif
         func_00004F50(pcb);
         return;
     }
@@ -3593,7 +3591,7 @@ void func_000069D4(SceNetAdhocPtpPcb *pcb) {
     case 4:
         pcb->snd_inflight = 0;
         pcb->snd_nxt = pcb->snd_una;
-        func_0000648C(pcb, 1);
+        ptpOutput(pcb, 1);
         g_adhocStat.stat[ADHOC_STAT_PTP_REXMT]++;
         break;
     }
