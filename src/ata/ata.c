@@ -10,15 +10,90 @@ INCLUDE_RODATA("nonmatchings/ata", D_00003F1C);
 INCLUDE_ASM("nonmatchings/ata", func_00000000);
 #else
 INCLUDE_ASM("nonmatchings/ata", sceAtaInit);
+
+SceAtaDrive *sceAtaStart(u32 id) {
+    SceAtaDrive *drive;
+    if (D_00004180 >= 2) {
+        return NULL;
+    }
+    D_00004180++;
+    if (sceAtaEnableClkIo(0x80) != 0) {
+        return NULL;
+    }
+    drive = sceAtaGetAtaDrive(id);
+    if (drive == NULL) {
+        return NULL;
+    }
+    return drive;
+}
 #endif
 
+#if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/ata", sceAtaStart);
+#else
+s32 sceAtaStop(u32 flags) {
+    s32 n;
+    s32 ret;
+    sceAtaAhbSetIntrMask(0x1130000);
+    n = D_00004180 - 1;
+    if (n < 0) {
+        return 0x8021101C;
+    }
+    D_00004180 = n;
+    if (n == 0) {
+        ret = sceAtaDisableClkIo(flags);
+        if (ret != 0) {
+            return ret;
+        }
+    }
+    return 0;
+}
+#endif
 
+#if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/ata", sceAtaStop);
+#endif
 
-INCLUDE_ASM("nonmatchings/ata", sceAtaDisableClkIo);
+s32 sceAtaDisableClkIo(u32 flags) {
+    if (flags == 0x80) {
+        sceSysregAtaIoDisable();
+        sceSysregAtaClkDisable();
+        sceSysregAtaBusClockDisable();
+    } else {
+        if (!(flags & 0x40)) {
+            return 0x8021101D;
+        }
+        sceSysregAtaIoDisable();
+        if (flags & 0x20) {
+            sceSysregAtaClkDisable();
+            if (flags & 0x10) {
+                sceSysregAtaBusClockDisable();
+            }
+        }
+    }
+    return 0;
+}
 
-INCLUDE_ASM("nonmatchings/ata", sceAtaEnableClkIo);
+s32 sceAtaEnableClkIo(u32 flags) {
+    sceSysregAtaResetDisable();
+    if (flags == 0x80) {
+        sceSysregAtaBusClockEnable();
+        sceSysregAtaClkEnable();
+        sceSysregAtaIoEnable();
+    } else {
+        if (!(flags & 0x10)) {
+            return 0x8021101D;
+        }
+        sceSysregAtaBusClockEnable();
+        if (flags & 0x20) {
+            sceSysregAtaClkEnable();
+            if (flags & 0x40) {
+                sceSysregAtaIoEnable();
+            }
+        }
+    }
+    return 0;
+}
 
 #if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/ata", func_0000025C);
@@ -26,9 +101,16 @@ INCLUDE_ASM("nonmatchings/ata", func_0000025C);
 
 #if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/ata", func_00000280);
-#endif
 
+SceAtaDrive *sceAtaGetAtaDrive(u32 id) {
+    if (id < 2) {
+        return &D_00004200[id];
+    }
+    return NULL;
+}
+#else
 INCLUDE_ASM("nonmatchings/ata", sceAtaGetAtaDrive);
+#endif
 
 #if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/ata", D_000041DC);
@@ -103,12 +185,12 @@ INCLUDE_ASM("nonmatchings/ata", func_00000E3C);
 #if FW_VERSION >= 150
 void sceAtaSetDriveStat(s32 arg0, s32 arg1) {
     s32 temp_s1;
-    s32 temp_v0;
+    SceAtaDrive *temp_v0;
 
     temp_s1 = sceKernelCpuSuspendIntr();
     temp_v0 = sceAtaGetAtaDrive(arg0);
-    if (temp_v0 != 0) {
-        M2C_FIELD(temp_v0, s32 *, 4) = (s32) (M2C_FIELD(temp_v0, s32 *, 4) | arg1);
+    if (temp_v0 != NULL) {
+        temp_v0->driveStat |= arg1;
     }
     sceKernelCpuResumeIntr(temp_s1);
 }
@@ -121,12 +203,12 @@ INCLUDE_ASM("nonmatchings/ata", func_0000104C);
 #if FW_VERSION < 150
 void sceAtaSetDriveStat(s32 arg0, s32 arg1) {
     s32 temp_s0;
-    s32 temp_v0;
+    SceAtaDrive *temp_v0;
 
     temp_s0 = sceKernelCpuSuspendIntr();
     temp_v0 = sceAtaGetAtaDrive(0);
-    if (temp_v0 != 0) {
-        M2C_FIELD(temp_v0, s32 *, 4) = (s32) (M2C_FIELD(temp_v0, s32 *, 4) | arg1);
+    if (temp_v0 != NULL) {
+        temp_v0->driveStat |= arg1;
     }
     sceKernelCpuResumeIntr(temp_s0);
 }
@@ -173,16 +255,23 @@ void sceAtaClearIntrStateFlag(s32 arg0) {
 #endif
 
 #if FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/ata", func_00001134);
+s32 func_00001134(u32 id) {
+    SceAtaDrive *drive = sceAtaGetAtaDrive(id);
+    SceAtaCmdState *st = drive->unk20;
+    if (st != NULL && st->driveStat == 1) {
+        return 1;
+    }
+    return 0;
+}
 
 s32 sceAtaIsNormalDriveStat(void) {
-    s32 temp_v0;
+    SceAtaDrive *temp_v0;
     s32 var_v0;
 
     temp_v0 = sceAtaGetAtaDrive(0);
     var_v0 = 0x80211009;
-    if (temp_v0 != 0) {
-        var_v0 = M2C_FIELD(temp_v0, s32 *, 4);
+    if (temp_v0 != NULL) {
+        var_v0 = temp_v0->driveStat;
     }
     s32 cmp_tmp = var_v0 & 0x10;
     return cmp_tmp != 0;
@@ -235,11 +324,16 @@ void sceAtaClearIntrStateFlag(s32 arg0) {
 }
 #endif
 
-INCLUDE_ASM("nonmatchings/ata", sceAta_driver_638EEA14);
+void sceAta_driver_638EEA14(SceAtaIntrFunc func) {
+    s32 intr = sceKernelCpuSuspendIntr();
+    D_000046A8.func = func;
+    D_000046A8.gp = pspGetGp();
+    sceKernelCpuResumeIntr(intr);
+}
 
 void sceAta_driver_B5982381(void) {
-    D_000046A8.unk0 = 0;
-    D_000046A8.unk4 = 0;
+    D_000046A8.func = NULL;
+    D_000046A8.gp = 0;
 }
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
@@ -271,7 +365,20 @@ void func_000012D4(s32 arg0) {
     sceKernelCancelAlarm(arg0);
 }
 
-INCLUDE_ASM("nonmatchings/ata", sceAtaTerm);
+s32 sceAtaTerm(void) {
+    SceAtaDrive *drive = D_00004200;
+    s32 i;
+    for (i = 1; i >= 0; i--) {
+        sceKernelDeleteSema(drive->semaId);
+        sceKernelDeleteEventFlag(drive->evfId);
+        drive++;
+    }
+    func_000034CC();
+    sceAtaStop(0x80);
+    sceAtaAhbTerm();
+    sceSysregAtaResetEnable();
+    return 0;
+}
 #endif
 
 #if FW_VERSION >= 282
@@ -284,53 +391,79 @@ INCLUDE_ASM("nonmatchings/ata", sceAtaDoSoftResetBit);
 
 INCLUDE_ASM("nonmatchings/ata", sceAtaCheckDeviceReady);
 
-INCLUDE_ASM("nonmatchings/ata", sceAtaSetDeviceIntr);
+s32 sceAtaSetDeviceIntr(SceAtaIntrFunc func, void *arg) {
+    s32 intr = sceKernelCpuSuspendIntr();
+    D_000046A8.device.func = func;
+    D_000046A8.device.arg = arg;
+    D_000046A8.device.gp = pspGetGp();
+    sceKernelCpuResumeIntr(intr);
+    return 0;
+}
 
-INCLUDE_ASM("nonmatchings/ata", sceAtaSetDescriptorTableIntr);
+s32 sceAtaSetDescriptorTableIntr(SceAtaIntrFunc func, void *arg) {
+    s32 intr = sceKernelCpuSuspendIntr();
+    D_000046A8.descTable.func = func;
+    D_000046A8.descTable.arg = arg;
+    D_000046A8.descTable.gp = pspGetGp();
+    sceKernelCpuResumeIntr(intr);
+    return 0;
+}
 
-INCLUDE_ASM("nonmatchings/ata", sceAtaSetBusErrorIntr);
+s32 sceAtaSetBusErrorIntr(SceAtaIntrFunc func, void *arg) {
+    s32 intr = sceKernelCpuSuspendIntr();
+    D_000046A8.busError.func = func;
+    D_000046A8.busError.arg = arg;
+    D_000046A8.busError.gp = pspGetGp();
+    sceKernelCpuResumeIntr(intr);
+    return 0;
+}
 
-INCLUDE_ASM("nonmatchings/ata", sceAta_driver_689FCB7D);
+s32 sceAta_driver_689FCB7D(SceAtaIntrFunc func, void *arg) {
+    s32 intr = sceKernelCpuSuspendIntr();
+    D_000046A8.unk20.func = func;
+    D_000046A8.unk20.arg = arg;
+    D_000046A8.unk20.gp = pspGetGp();
+    sceKernelCpuResumeIntr(intr);
+    return 0;
+}
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/ata", sceAtaGetAtaCallBack);
-#endif
-
-#if FW_VERSION < 201
-s32 *sceAtaGetAtaCallBack(void) {
-    return &D_000046A8.unk0;
-}
-#endif
-
-#if FW_VERSION >= 282
-M2C_UNK *sceAtaGetAtaCallBack(void) {
+#else
+SceAtaCallBack *sceAtaGetAtaCallBack(void) {
     return &D_000046A8;
 }
 #endif
 
-INCLUDE_ASM("nonmatchings/ata", sceAta_driver_C144826E);
+s32 sceAta_driver_C144826E(SceAtaIntrFunc func) {
+    s32 intr = sceKernelCpuSuspendIntr();
+    D_000046A8.execPacketCmd = func;
+    D_000046A8.execPacketCmdGp = pspGetGp();
+    sceKernelCpuResumeIntr(intr);
+    return 0;
+}
 
 #if FW_VERSION >= 150
 s32 sceAtaGetDriveStat(s32 arg0) {
-    s32 temp_v0;
+    SceAtaDrive *temp_v0;
     s32 var_v0;
 
     temp_v0 = sceAtaGetAtaDrive(arg0);
     var_v0 = 0x80211009;
-    if (temp_v0 != 0) {
-        var_v0 = M2C_FIELD(temp_v0, s32 *, 4);
+    if (temp_v0 != NULL) {
+        var_v0 = temp_v0->driveStat;
     }
     return var_v0;
 }
 #else
 s32 sceAtaGetDriveStat(s32 arg0) {
-    s32 temp_v0;
+    SceAtaDrive *temp_v0;
     s32 var_v0;
 
     temp_v0 = sceAtaGetAtaDrive(0);
     var_v0 = 0x80211009;
-    if (temp_v0 != 0) {
-        var_v0 = M2C_FIELD(temp_v0, s32 *, 4);
+    if (temp_v0 != NULL) {
+        var_v0 = temp_v0->driveStat;
     }
     return var_v0;
 }
@@ -340,13 +473,13 @@ s32 sceAtaGetDriveStat(s32 arg0) {
 INCLUDE_ASM("nonmatchings/ata", sceAtaIsReadableDriveStat);
 #else
 s32 sceAtaIsReadableDriveStat(void) {
-    s32 temp_v0;
+    SceAtaDrive *temp_v0;
     s32 var_v0;
 
     temp_v0 = sceAtaGetAtaDrive(0);
     var_v0 = 0x80211009;
-    if (temp_v0 != 0) {
-        var_v0 = M2C_FIELD(temp_v0, s32 *, 4);
+    if (temp_v0 != NULL) {
+        var_v0 = temp_v0->driveStat;
     }
     s32 cmp_tmp = var_v0 & 0x80;
     return cmp_tmp != 0;
@@ -374,12 +507,12 @@ INCLUDE_ASM("nonmatchings/ata", sceAtaClearDriveStat);
 #if FW_VERSION < 201
 void sceAtaClearDriveStat(s32 arg0, s32 arg1) {
     s32 temp_s1;
-    s32 temp_v0;
+    SceAtaDrive *temp_v0;
 
     temp_s1 = sceKernelCpuSuspendIntr();
     temp_v0 = sceAtaGetAtaDrive(arg0);
-    if (temp_v0 != 0) {
-        M2C_FIELD(temp_v0, s32 *, 4) = (s32) (M2C_FIELD(temp_v0, s32 *, 4) & ~arg1);
+    if (temp_v0 != NULL) {
+        temp_v0->driveStat &= ~arg1;
     }
     sceKernelCpuResumeIntr(temp_s1);
 }
@@ -396,18 +529,24 @@ s32 sceAtaGetIntrFlag(void) {
 
 void sceAtaClearDriveStat(s32 arg0, M2C_UNK arg1) {
     s32 temp_s1;
-    s32 temp_v0;
+    SceAtaDrive *temp_v0;
 
     temp_s1 = sceKernelCpuSuspendIntr();
     temp_v0 = sceAtaGetAtaDrive(arg0);
-    if (temp_v0 != 0) {
-        M2C_FIELD(temp_v0, s32 *, 4) = (s32) (M2C_FIELD(temp_v0, s32 *, 4) & ~arg1);
+    if (temp_v0 != NULL) {
+        temp_v0->driveStat &= ~arg1;
     }
     sceKernelCpuResumeIntr(temp_s1);
 }
 #endif
 
-#if FW_VERSION < 150 || (FW_VERSION >= 250 && FW_VERSION < 271) || FW_VERSION == 282
+#if FW_VERSION < 150
+s32 module_start(void) {
+    return sceAtaInit(1) != 0;
+}
+#endif
+
+#if (FW_VERSION >= 250 && FW_VERSION < 271) || FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/ata", module_start);
 #endif
 
@@ -460,13 +599,60 @@ INCLUDE_ASM("nonmatchings/ata", func_00001FFC);
 #endif
 
 #if FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/ata", func_000018B8);
+s32 func_000018B8(s32 *flag) {
+    *flag = 1;
+    return 0;
+}
 
-INCLUDE_ASM("nonmatchings/ata", sceAtaAhbSetPioCtl);
+s32 sceAtaAhbSetPioCtl(s32 n, s32 a, s32 b) {
+    u32 v;
+    s32 cnt;
+    asm volatile("sync");
+    v = ATA_AHB_REG(0x34);
+    if (((a != 0) & (b != 0)) == 0) {
+        ATA_AHB_REG(0x34) = v & ~0x300;
+    } else {
+        v |= 0x300;
+        cnt = 1;
+        if (n > 0) {
+            cnt = 0x50;
+            if (n < 0x50) {
+                cnt = n + 1;
+            }
+        }
+        ATA_AHB_REG(0x34) = v | (cnt << 24);
+        asm volatile("sync");
+    }
+    return 0;
+}
 
-INCLUDE_ASM("nonmatchings/ata", sceAtaAhbSetPioTiming);
+s32 sceAtaAhbSetPioTiming(s32 mode, s32 arg) {
+    asm volatile("sync");
+    if (mode == 1) {
+        func_00002570(arg);
+    } else if (mode == 0) {
+        func_000025E4(arg);
+    } else if (mode == 2) {
+        func_00002500(arg);
+    } else {
+        func_00002570(arg);
+    }
+    return 0;
+}
 
-INCLUDE_ASM("nonmatchings/ata", sceAtaAhbSetMDMATiming);
+s32 sceAtaAhbSetMDMATiming(s32 mode, s32 arg) {
+    asm volatile("sync");
+    if (mode == 1) {
+        func_00001F14(arg);
+    } else if (mode == 0) {
+        func_00001F5C(arg);
+    } else if (mode == 2) {
+        func_00001ED8(arg);
+    } else {
+        func_00001F14(arg);
+    }
+    return 0;
+}
 
 INCLUDE_ASM("nonmatchings/ata", sceAtaAhbSetAHBCtl);
 #endif
@@ -485,7 +671,31 @@ INCLUDE_ASM("nonmatchings/ata", func_000020F4);
 INCLUDE_ASM("nonmatchings/ata", func_000021D0);
 #endif
 
+#if FW_VERSION < 150
+s32 sceAta_driver_E3E1EED7(s32 on) {
+    u32 v;
+    asm volatile("sync");
+    v = ATA_AHB_REG(0x40);
+    if (on) {
+        if (!(v & 2)) {
+            ATA_AHB_REG(0x40) |= 1;
+        }
+    } else {
+        if (v & 2) {
+            ATA_AHB_REG(0x40) &= ~1;
+            asm volatile("sync");
+            if (ATA_AHB_REG(0x40) & 2) {
+                ATA_AHB_REG(0x40) &= ~1;
+                asm volatile("sync");
+            }
+        }
+    }
+    asm volatile("sync");
+    return 0;
+}
+#else
 INCLUDE_ASM("nonmatchings/ata", sceAta_driver_E3E1EED7);
+#endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
 s32 func_00002120(void) {
@@ -502,7 +712,11 @@ void func_00002134(void) {
 #endif
 
 #if FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/ata", sceAta_driver_4222D6F3);
+void sceAta_driver_4222D6F3(void) {
+    asm volatile("sync");
+    ATA_AHB_REG(0x10) = 1;
+    asm volatile("sync");
+}
 
 void sceAtaAhbInit(void) {
     func_000033D4();
@@ -564,11 +778,27 @@ M2C_UNK *sceAtaAhbGetAtaBlock(void) {
 
 #if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/ata", sceAta_driver_4222D6F3);
+#else
+void sceAta_driver_4D225674(void) {
+    asm volatile("sync");
+    ATA_AHB_REG(0x10) = 0;
+    asm volatile("sync");
+}
 #endif
 
+#if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/ata", sceAta_driver_4D225674);
+#else
+void sceAtaAhbEnableIntr(u32 mask) {
+    asm volatile("sync");
+    ATA_AHB_REG(0x44) = ~mask & 0xFFFF0000;
+    asm volatile("sync");
+}
+#endif
 
+#if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/ata", sceAtaAhbEnableIntr);
+#endif
 
 #if FW_VERSION == 271
 INCLUDE_ASM("nonmatchings/ata", func_00002374);
@@ -591,15 +821,37 @@ INCLUDE_ASM("nonmatchings/ata", func_00002254);
 #endif
 
 #if FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/ata", sceAtaAhbSetIntrMask);
+void sceAtaAhbSetIntrMask(u32 mask) {
+    asm volatile("sync");
+    ATA_AHB_REG(0x44) |= mask & 0xFFFF0000;
+    asm volatile("sync");
+}
 
-INCLUDE_ASM("nonmatchings/ata", sceAtaAhbGetIntrMask);
+u32 sceAtaAhbGetIntrMask(void) {
+    asm volatile("sync");
+    return ATA_AHB_REG(0x44) & 0xFFFF0000;
+}
 
-INCLUDE_ASM("nonmatchings/ata", sceAtaAhbReadIntr);
+u32 sceAtaAhbReadIntr(void) {
+    asm volatile("sync");
+    return ATA_AHB_REG(0x44) & 0xFFFF;
+}
 
-INCLUDE_ASM("nonmatchings/ata", sceAtaAhbClearIntr);
+void sceAtaAhbClearIntr(u32 mask) {
+    asm volatile("sync");
+    *(volatile u32 *)0xBD600044 |= ~mask & 0xFFFF;
+    asm volatile("sync");
+}
 
-INCLUDE_ASM("nonmatchings/ata", sceAtaAhbGetDevStat);
+s32 sceAtaAhbGetDevStat(u32 *stat) {
+    if (stat == NULL) {
+        return 0x800001FF;
+    }
+    asm volatile("sync");
+    *stat = ATA_AHB_REG(0x4C);
+    asm volatile("sync");
+    return 0;
+}
 #endif
 
 #if FW_VERSION >= 282
@@ -614,14 +866,34 @@ INCLUDE_ASM("nonmatchings/ata", func_000023DC);
 INCLUDE_ASM("nonmatchings/ata", func_00002408);
 #endif
 
+#if FW_VERSION < 150
+s32 sceAta_driver_76C0923D(u32 *stat) {
+    if (stat == NULL) {
+        return 0x800001FF;
+    }
+    asm volatile("sync");
+    *stat = ATA_AHB_REG(0x40);
+    asm volatile("sync");
+    return 0;
+}
+#else
 INCLUDE_ASM("nonmatchings/ata", sceAta_driver_76C0923D);
+#endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/ata", func_0000229C);
 #endif
 
 #if FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/ata", sceAtaBufferSelectSemaphore);
+s32 sceAtaBufferSelectSemaphore(u32 *stat) {
+    if (stat == NULL) {
+        return 0x800001FF;
+    }
+    asm volatile("sync");
+    *stat = ATA_AHB_REG(0x00);
+    asm volatile("sync");
+    return 0;
+}
 
 s32 sceAtaAhbSetUDMATiming(void) {
     return 0x80211004;
@@ -632,7 +904,15 @@ s32 sceAtaAhbSetUDMATiming(void) {
 INCLUDE_ASM("nonmatchings/ata", func_00002450);
 #endif
 
+#if FW_VERSION < 150
+void sceAta_driver_F61EAFC0(void) {
+    asm volatile("sync");
+    ATA_AHB_REG(0x38) = 0x10100;
+    asm volatile("sync");
+}
+#else
 INCLUDE_ASM("nonmatchings/ata", sceAta_driver_F61EAFC0);
+#endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/ata", func_000022E0);
@@ -641,9 +921,20 @@ INCLUDE_ASM("nonmatchings/ata", func_0000233C);
 #endif
 
 #if FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/ata", sceAtaAhbSetDDRSize);
+s32 sceAtaAhbSetDDRSize(u32 size) {
+    asm volatile("sync");
+    size &= 3;
+    if (size >= 4) {
+        return 0x8021101D;
+    }
+    *(volatile u32 *)0xBC100040 |= size;
+    return 0;
+}
 
-INCLUDE_ASM("nonmatchings/ata", sceAtaAhbGetDDRSize);
+u32 sceAtaAhbGetDDRSize(void) {
+    asm volatile("sync");
+    return *(volatile u32 *)0xBC100040 & 3;
+}
 #endif
 
 #if FW_VERSION >= 282
@@ -652,18 +943,143 @@ INCLUDE_ASM("nonmatchings/ata", func_00002494);
 INCLUDE_ASM("nonmatchings/ata", func_000024EC);
 #endif
 
-INCLUDE_ASM("nonmatchings/ata", func_00002500);
+void func_00002500(s32 mode) {
+    u32 v;
+    switch (mode) {
+    case 1:
+        v = 0x20900;
+        break;
+    case 2:
+        v = 0x10900;
+        break;
+    case 3:
+        v = 0x10201;
+        break;
+    case 4:
+        v = 0x10200;
+        break;
+    default:
+    case 0:
+        v = 0x1030906;
+        break;
+    }
+    ATA_AHB_REG(0x14) = v;
+    asm volatile("sync");
+}
 
-INCLUDE_ASM("nonmatchings/ata", func_00002570);
+void func_00002570(s32 mode) {
+    u32 v;
+    switch (mode) {
+    case 0:
+        v = 0x1050B0A;
+        break;
+    case 2:
+        v = 0x10D01;
+        break;
+    case 3:
+        v = 0x10302;
+        break;
+    case 4:
+        v = 0x10301;
+        break;
+    default:
+    case 1:
+        v = 0x1050A01;
+        break;
+    }
+    ATA_AHB_REG(0x14) = v;
+    asm volatile("sync");
+}
 
+#if FW_VERSION >= 150
+void func_000025E4(s32 mode) {
+    u32 v;
+    switch (mode) {
+    case 0:
+        v = 0x1080F0E;
+        break;
+    case 2:
+        v = 0x1011301;
+        break;
+    case 3:
+        v = 0x1010503;
+        break;
+    case 4:
+        v = 0x1010401;
+        break;
+    default:
+    case 1:
+        v = 0x1080E01;
+        break;
+    }
+    ATA_AHB_REG(0x14) = v;
+    asm volatile("sync");
+}
+#else
 INCLUDE_ASM("nonmatchings/ata", func_000025E4);
 
-#if FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/ata", func_00001ED8);
+void func_00001ED8(s32 mode) {
+    switch (mode) {
+    case 0:
+        ATA_AHB_REG(0x1C) = 0x10707;
+        break;
+    case 1:
+        ATA_AHB_REG(0x1C) = 0x201;
+        break;
+    case 2:
+        ATA_AHB_REG(0x1C) = 0x200;
+        break;
+    case 3:
+        ATA_AHB_REG(0x1C) = 0x10707;
+        break;
+    default:
+        ATA_AHB_REG(0x1C) = 0x10707;
+        break;
+    }
+    asm volatile("sync");
+}
 
-INCLUDE_ASM("nonmatchings/ata", func_00001F14);
+void func_00001F14(s32 mode) {
+    switch (mode) {
+    case 0:
+        ATA_AHB_REG(0x1C) = 0x20A0C;
+        break;
+    case 1:
+        ATA_AHB_REG(0x1C) = 0x1010303;
+        break;
+    case 2:
+        ATA_AHB_REG(0x1C) = 0x1010301;
+        break;
+    case 3:
+        ATA_AHB_REG(0x1C) = 0x20A0C;
+        break;
+    default:
+        ATA_AHB_REG(0x1C) = 0x20A0C;
+        break;
+    }
+    asm volatile("sync");
+}
 
-INCLUDE_ASM("nonmatchings/ata", func_00001F5C);
+void func_00001F5C(s32 mode) {
+    switch (mode) {
+    case 0:
+        ATA_AHB_REG(0x1C) = 0x1080E10;
+        break;
+    case 1:
+        ATA_AHB_REG(0x1C) = 0x1010503;
+        break;
+    case 2:
+        ATA_AHB_REG(0x1C) = 0x1010402;
+        break;
+    case 3:
+        ATA_AHB_REG(0x1C) = 0x1080E10;
+        break;
+    default:
+        ATA_AHB_REG(0x1C) = 0x1080E10;
+        break;
+    }
+    asm volatile("sync");
+}
 #endif
 
 INCLUDE_ASM("nonmatchings/ata", sceAtaGetByteLimitCount);
@@ -939,7 +1355,10 @@ s32 func_000034CC(void) {
     return 0;
 }
 
-INCLUDE_ASM("nonmatchings/ata", func_0000356C);
+s32 func_0000356C(s32 a0, s32 a1, s32 a2) {
+    func_0000358C(a0, a2);
+    return -1;
+}
 
 INCLUDE_ASM("nonmatchings/ata", func_0000358C);
 
