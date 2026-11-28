@@ -38,12 +38,15 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_00007AEC);
 #endif
 
 #if FW_VERSION == 100 || FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/fatmsmod", func_00000020);
+s32 func_00000020(void) {
+    func_00007AEC();
+    return sceIoAddDrv(&D_0002B568);
+}
 #endif
 
 #if FW_VERSION == 100
 void func_0000022C(void) {
-    sceIoDelDrv(D_0002B568);
+    sceIoDelDrv(D_0002B568.dt_string);
 }
 #endif
 
@@ -65,14 +68,14 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_000004B8);
 
 #if FW_VERSION >= 150 && FW_VERSION < 201
 void func_000004B8(void) {
-    sceIoDelDrv(D_0001B790);
-    sceIoDelDrv(D_0001B6A4);
+    sceIoDelDrv((const char *)D_0001B790);
+    sceIoDelDrv((const char *)D_0001B6A4);
 }
 #endif
 
 #if FW_VERSION >= 260 && FW_VERSION < 282
 void func_000004B8(void) {
-    sceIoDelDrv(D_0002BD1C);
+    sceIoDelDrv((const char *)D_0002BD1C);
 }
 
 INCLUDE_RODATA("nonmatchings/fatmsmod", D_00022F3C);
@@ -96,7 +99,7 @@ INCLUDE_RODATA("nonmatchings/fatmsmod", D_00015D54);
 
 #if FW_VERSION >= 282
 void func_00000048(void) {
-    sceIoDelDrv(D_0002B568);
+    sceIoDelDrv(D_0002B568.dt_string);
 }
 #endif
 

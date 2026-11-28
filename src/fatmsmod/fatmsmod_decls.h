@@ -480,7 +480,7 @@ extern u32 D_00027CC4[1]; /* per drive: first freed cluster hint */
 extern PfDrive *D_00027CC8[1]; /* per drive (index drive - A; one drive in 1.00) */
 extern s8 D_00027DD0[1]; /* per drive: 1 = flush after each operation */
 extern s32 D_00027DD4;
-extern s32 D_0002B568;
+extern SceIoDeviceTable D_0002B568; /* the fatms driver */
 extern s32 D_0002B5CC;
 extern s32 D_0002B8C8;
 extern s32 D_0002BA10[1][32];
@@ -518,7 +518,7 @@ s32 df_rmdir(); /* 1.50+ take one more trailing argument */
 s32 df_write(); /* 1.00 df_write(SceIoIob *, const void *, SceSize) */
 s32 free_heap(SceUID heap, void *mem);
 s32 free_heap_all(void);
-M2C_UNK func_00000020();
+s32 func_00000020(void);
 void func_00000048(void);
 M2C_UNK func_00000134();
 void func_0000022C(void);
@@ -609,6 +609,7 @@ char *func_000079F8(const char *s, s32 c);
 char *func_00007A20(char *dst, const char *src);
 s32 func_00007A5C(const char *s1, const char *s2);
 char *func_00007AB4(char *dst, const char *src, u32 n);
+void func_00007AEC(void);
 s32 func_00007BB0(s32 arg0);
 u32 func_00007BD4(u32 sector);
 s32 func_00007C30(s32 write, u32 off, u32 size, void *data, u32 sector, void *buf); /* read/write bytes of a directory sector */
@@ -768,8 +769,9 @@ void memset(void *s, s32 c, SceSize n);
 s32 module_start(void);
 s32 prErr(s32 err);
 s32 sceFatMS_driver_BCB9DEDB(void);
+s32 sceIoAddDrv(SceIoDeviceTable *drv);
 s32 sceIoClose(SceUID fd);
-M2C_UNK sceIoDelDrv(s32);
+s32 sceIoDelDrv(const char *name);
 s32 sceIoDevctl(const char *dev, u32 cmd, void *indata, s32 inlen, void *outdata, s32 outlen);
 s32 sceIoIoctl(SceUID fd, u32 cmd, void *indata, s32 inlen, void *outdata, s32 outlen);
 SceUID sceIoOpen(const char *file, s32 flags, SceMode mode);
