@@ -100,8 +100,16 @@ INCLUDE_RODATA("nonmatchings/music_main_plugin_011BE4", D_0009B510);
 INCLUDE_ASM("nonmatchings/music_main_plugin_011BE4", func_00015C58);
 
 INCLUDE_ASM("nonmatchings/music_main_plugin_011BE4", func_00015D80);
+#endif
 
+#if FW_VERSION >= 301
 INCLUDE_ASM("nonmatchings/music_main_plugin_011BE4", func_00015DCC);
+#endif
+
+#if FW_VERSION == 300
+s32 func_00015DCC(void) {
+    return 0x203;
+}
 #endif
 
 #if FW_VERSION >= 350

@@ -3576,6 +3576,598 @@ struct Unk_vt_func_0008D064_temp_v1 {
     s32 (*unk18)(void **);
 };
 
+#ifndef __cplusplus
+typedef struct Class_00092948 {
+    void *vptr;
+} Class_00092948;
+typedef struct Class_000935E8 {
+    void *vptr;
+} Class_000935E8;
+typedef struct Class_00093600 {
+    void *vptr;
+    s32 unk4;
+    s32 unk8;
+} Class_00093600;
+typedef struct Class_00094528 {
+    void *vptr;
+    u32 unk4;
+} Class_00094528;
+typedef struct Class_00094538 {
+    void *vptr;
+    u32 unk4;
+} Class_00094538;
+typedef struct Class_00094D20 {
+    void *vptr;
+} Class_00094D20;
+typedef struct Class_00094DD0 {
+    void *vptr;
+} Class_00094DD0;
+typedef struct Class_00094E20 {
+    void *vptr;
+} Class_00094E20;
+typedef struct Class_00094E50 {
+    void *vptr;
+} Class_00094E50;
+typedef struct Class_00097AA8 {
+    void *vptr;
+    u8 pad4[0x8];
+    s32 unkC;
+    u8 pad10[0x20];
+    s32 unk30;
+    u8 pad34[0xC];
+    s32 unk40;
+} Class_00097AA8;
+typedef struct Class_00097B40 {
+    void *vptr;
+} Class_00097B40;
+typedef struct Class_00097B88 {
+    void *vptr;
+    s32 unk4;
+    s32 unk8;
+} Class_00097B88;
+typedef struct Class_00097B98 {
+    void *vptr;
+} Class_00097B98;
+typedef struct Class_00097BD0 {
+    void *vptr;
+} Class_00097BD0;
+typedef struct Class_00097C60 {
+    void *vptr;
+} Class_00097C60;
+typedef struct Class_00097CA8 {
+    void *vptr;
+} Class_00097CA8;
+typedef struct Class_00097CF0 {
+    void *vptr;
+} Class_00097CF0;
+typedef struct Class_00097D00 {
+    void *vptr;
+} Class_00097D00;
+typedef struct Class_00097D20 {
+    void *vptr;
+} Class_00097D20;
+typedef struct Class_00097D30 {
+    void *vptr;
+} Class_00097D30;
+typedef struct Class_00097D48 {
+    void *vptr;
+} Class_00097D48;
+typedef struct Class_00097D58 {
+    void *vptr;
+} Class_00097D58;
+typedef struct Class_00097D70 {
+    void *vptr;
+} Class_00097D70;
+typedef struct Class_00097D98 {
+    void *vptr;
+} Class_00097D98;
+typedef struct Class_00097DA8 {
+    void *vptr;
+} Class_00097DA8;
+typedef struct Class_00097DC8 {
+    void *vptr;
+} Class_00097DC8;
+typedef struct Class_00097DC8_v271 {
+    void *vptr;
+} Class_00097DC8_v271;
+typedef struct Class_00097DD8 {
+    void *vptr;
+} Class_00097DD8;
+typedef struct Class_00097DF8 {
+    void *vptr;
+} Class_00097DF8;
+typedef struct Class_00097E08 {
+    void *vptr;
+} Class_00097E08;
+typedef struct Class_00097E20 {
+    void *vptr;
+} Class_00097E20;
+typedef struct Class_00097E30 {
+    void *vptr;
+} Class_00097E30;
+typedef struct Class_00097E48 {
+    void *vptr;
+} Class_00097E48;
+typedef struct Class_00097E58 {
+    void *vptr;
+} Class_00097E58;
+typedef struct Class_00097E80 {
+    void *vptr;
+} Class_00097E80;
+typedef struct Class_00097E90 {
+    void *vptr;
+} Class_00097E90;
+typedef struct Class_00097EB0 {
+    void *vptr;
+} Class_00097EB0;
+typedef struct Class_00097EE0 {
+    void *vptr;
+} Class_00097EE0;
+typedef struct Class_00097EF0 {
+    void *vptr;
+} Class_00097EF0;
+typedef struct Class_00097F10 {
+    void *vptr;
+} Class_00097F10;
+typedef struct Class_00097F20 {
+    void *vptr;
+} Class_00097F20;
+typedef struct Class_00097F48 {
+    void *vptr;
+} Class_00097F48;
+typedef struct Class_00097F58 {
+    void *vptr;
+} Class_00097F58;
+typedef struct Class_00097F78 {
+    void *vptr;
+} Class_00097F78;
+typedef struct Class_00097F88 {
+    void *vptr;
+} Class_00097F88;
+typedef struct Class_00098078 {
+    void *vptr;
+} Class_00098078;
+typedef struct Class_00098158 {
+    void *vptr;
+} Class_00098158;
+typedef struct Class_00098168 {
+    void *vptr;
+} Class_00098168;
+typedef struct Class_00098188 {
+    void *vptr;
+} Class_00098188;
+typedef struct Class_00098198 {
+    void *vptr;
+} Class_00098198;
+typedef struct Class_0009B2A8 {
+    void *vptr;
+} Class_0009B2A8;
+typedef struct Class_0009B818 {
+    void *vptr;
+    u8 pad4[0x8];
+    s32 unkC;
+    u8 pad10[0x20];
+    s32 unk30;
+    u8 pad34[0xC];
+    s32 unk40;
+    u8 pad44[0x4C];
+    u32 unk90;
+} Class_0009B818;
+typedef struct Class_0009BC50 {
+    void *vptr;
+} Class_0009BC50;
+typedef struct Class_0009BCC8 {
+    void *vptr;
+    u8 pad4[0x8];
+    s32 unkC;
+    u8 pad10[0x20];
+    s32 unk30;
+    u8 pad34[0xC];
+    s32 unk40;
+} Class_0009BCC8;
+typedef struct Class_0009C078 {
+    void *vptr;
+    u8 unk4;
+    u8 pad5[0x3];
+    s32 unk8;
+} Class_0009C078;
+typedef struct Class_0009C098 {
+    void *vptr;
+    u8 unk4;
+    u8 pad5[0x3];
+    s32 unk8;
+} Class_0009C098;
+typedef struct Class_0009C140 {
+    void *vptr;
+} Class_0009C140;
+typedef struct Class_0009C278 {
+    void *vptr;
+    s32 unk4;
+} Class_0009C278;
+typedef struct Class_0009D0E0 {
+    void *vptr;
+} Class_0009D0E0;
+typedef struct Class_0009D760 {
+    void *vptr;
+} Class_0009D760;
+typedef struct Class_0009D9E8 {
+    void *vptr;
+} Class_0009D9E8;
+typedef struct Class_0009DB80 {
+    void *vptr;
+} Class_0009DB80;
+typedef struct Class_0009E040 {
+    void *vptr;
+} Class_0009E040;
+typedef struct Class_0009E098 {
+    void *vptr;
+} Class_0009E098;
+typedef struct Class_0009E218 {
+    void *vptr;
+} Class_0009E218;
+typedef struct Class_0009E470 {
+    void *vptr;
+    s32 unk4;
+} Class_0009E470;
+typedef struct Class_0009E528 {
+    void *vptr;
+} Class_0009E528;
+typedef struct Class_0009EAD0 {
+    void *vptr;
+} Class_0009EAD0;
+typedef struct Class_0009EC98 {
+    void *vptr;
+} Class_0009EC98;
+typedef struct Class_0009EDA0 {
+    void *vptr;
+} Class_0009EDA0;
+typedef struct Class_0009EDE0 {
+    void *vptr;
+} Class_0009EDE0;
+typedef struct Class_0009EDF8 {
+    void *vptr;
+} Class_0009EDF8;
+typedef struct Class_0009EE10 {
+    void *vptr;
+} Class_0009EE10;
+typedef struct Class_0009F0F8 {
+    void *vptr;
+} Class_0009F0F8;
+typedef struct Class_0009F108 {
+    void *vptr;
+} Class_0009F108;
+typedef struct Class_0009F560 {
+    void *vptr;
+} Class_0009F560;
+typedef struct Class_0009F580 {
+    void *vptr;
+} Class_0009F580;
+typedef struct Class_000A0220 {
+    void *vptr;
+} Class_000A0220;
+typedef struct Class_000A0460 {
+    void *vptr;
+} Class_000A0460;
+typedef struct Class_000A04C8 {
+    void *vptr;
+} Class_000A04C8;
+typedef struct Class_000A04F0 {
+    void *vptr;
+    s32 unk4;
+    s32 unk8;
+} Class_000A04F0;
+typedef struct Class_000A0870 {
+    void *vptr;
+} Class_000A0870;
+typedef struct Class_000A0880 {
+    void *vptr;
+} Class_000A0880;
+typedef struct Class_000A08F0 {
+    void *vptr;
+} Class_000A08F0;
+typedef struct Class_000A0910 {
+    void *vptr;
+    s32 unk4;
+} Class_000A0910;
+typedef struct Class_000A1370 {
+    void *vptr;
+} Class_000A1370;
+typedef struct Class_000A1490 {
+    void *vptr;
+} Class_000A1490;
+typedef struct Class_000A1668 {
+    void *vptr;
+} Class_000A1668;
+typedef struct Class_000A1800 {
+    void *vptr;
+} Class_000A1800;
+typedef struct Class_000A1998 {
+    void *vptr;
+} Class_000A1998;
+typedef struct Class_000A1B58 {
+    void *vptr;
+    s32 unk4;
+} Class_000A1B58;
+typedef struct Class_000A1E50 {
+    void *vptr;
+} Class_000A1E50;
+typedef struct Class_000A1EF8 {
+    void *vptr;
+} Class_000A1EF8;
+typedef struct Class_000A1F08 {
+    void *vptr;
+    s32 unk4;
+    s32 unk8;
+} Class_000A1F08;
+typedef struct Class_000A1F18 {
+    void *vptr;
+    u8 pad4[0xC];
+    s32 unk10;
+    s32 unk14;
+    s32 unk18;
+} Class_000A1F18;
+typedef struct Class_000A1F90 {
+    void *vptr;
+} Class_000A1F90;
+typedef struct Class_000A2030 {
+    void *vptr;
+    s32 unk4;
+    s32 unk8;
+} Class_000A2030;
+typedef struct Class_000A2078 {
+    void *vptr;
+    s32 unk4;
+    s32 unk8;
+} Class_000A2078;
+typedef struct Class_000A2088 {
+    void *vptr;
+    s32 unk4;
+    u8 pad8[0x4];
+    s32 unkC;
+    s32 unk10;
+    s32 unk14;
+} Class_000A2088;
+typedef struct Class_000A20A8 {
+    void *vptr;
+    s32 unk4;
+    s32 unk8;
+} Class_000A20A8;
+typedef struct Class_000A20B8 {
+    void *vptr;
+    s32 unk4;
+    u8 pad8[0x4];
+    s32 unkC;
+    s32 unk10;
+    s32 unk14;
+    u8 pad18[0x4];
+    s32 unk1C;
+} Class_000A20B8;
+typedef struct Class_000A20D0 {
+    void *vptr;
+    s32 unk4;
+    s32 unk8;
+} Class_000A20D0;
+typedef struct Class_000A20E0 {
+    void *vptr;
+} Class_000A20E0;
+typedef struct Class_000A20F8 {
+    void *vptr;
+    s32 unk4;
+    s32 unk8;
+} Class_000A20F8;
+typedef struct Class_000A2120 {
+    void *vptr;
+    s32 unk4;
+    s32 unk8;
+} Class_000A2120;
+typedef struct Class_000A2130 {
+    void *vptr;
+} Class_000A2130;
+typedef struct Class_000A2160 {
+    void *vptr;
+    s32 unk4;
+    u8 pad8[0x4];
+    s32 unkC;
+    s32 unk10;
+    s32 unk14;
+} Class_000A2160;
+typedef struct Class_000A21A8 {
+    void *vptr;
+    s32 unk4;
+    s32 unk8;
+} Class_000A21A8;
+typedef struct Class_000A21B8 {
+    void *vptr;
+    u8 pad4[0x1C];
+    s32 unk20;
+} Class_000A21B8;
+typedef struct Class_000A21F8 {
+    void *vptr;
+    s32 unk4;
+    s32 unk8;
+} Class_000A21F8;
+typedef struct Class_000A2208 {
+    void *vptr;
+    s32 unk4;
+    u8 pad8[0x4];
+    s32 unkC;
+    s32 unk10;
+    s32 unk14;
+} Class_000A2208;
+typedef struct Class_000A2260 {
+    void *vptr;
+    s32 unk4;
+    s32 unk8;
+} Class_000A2260;
+typedef struct Class_000A2270 {
+    void *vptr;
+    s32 unk4;
+    u8 pad8[0x4];
+    s32 unkC;
+    s32 unk10;
+    s32 unk14;
+} Class_000A2270;
+typedef struct Class_000A2290 {
+    void *vptr;
+    s32 unk4;
+    s32 unk8;
+} Class_000A2290;
+typedef struct Class_000A22A0 {
+    void *vptr;
+    s32 unk4;
+    u8 pad8[0x4];
+    s32 unkC;
+    s32 unk10;
+    s32 unk14;
+} Class_000A22A0;
+typedef struct Class_000A22C0 {
+    void *vptr;
+    s32 unk4;
+    s32 unk8;
+} Class_000A22C0;
+typedef struct Class_000A22D0 {
+    void *vptr;
+    s32 unk4;
+    u8 pad8[0x4];
+    s32 unkC;
+    s32 unk10;
+    s32 unk14;
+} Class_000A22D0;
+typedef struct Class_000A2328 {
+    void *vptr;
+    s32 unk4;
+    s32 unk8;
+} Class_000A2328;
+typedef struct Class_000A2338 {
+    void *vptr;
+    s32 unk4;
+    u8 pad8[0x4];
+    s32 unkC;
+    s32 unk10;
+    s32 unk14;
+} Class_000A2338;
+typedef struct Class_000A2480 {
+    void *vptr;
+    s32 unk4;
+    s32 unk8;
+} Class_000A2480;
+typedef struct Class_000A2490 {
+    void *vptr;
+    s32 unk4;
+    u8 pad8[0x4];
+    s32 unkC;
+    s32 unk10;
+    s32 unk14;
+} Class_000A2490;
+typedef struct Class_000A24B0 {
+    void *vptr;
+    s32 unk4;
+    s32 unk8;
+} Class_000A24B0;
+typedef struct Class_000A24C0 {
+    void *vptr;
+    s32 unk4;
+    u8 pad8[0x4];
+    s32 unkC;
+    s32 unk10;
+    s32 unk14;
+} Class_000A24C0;
+typedef struct Class_000A24E0 {
+    void *vptr;
+    s32 unk4;
+    s32 unk8;
+} Class_000A24E0;
+typedef struct Class_000A24F0 {
+    void *vptr;
+    s32 unk4;
+    u8 pad8[0x4];
+    s32 unkC;
+    s32 unk10;
+    s32 unk14;
+} Class_000A24F0;
+typedef struct Class_000A2948 {
+    void *vptr;
+    s32 unk4;
+    s32 unk8;
+} Class_000A2948;
+typedef struct Class_000A2968 {
+    void *vptr;
+    s32 unk4;
+    s32 unk8;
+    s32 unkC;
+} Class_000A2968;
+typedef struct Class_000A2988 {
+    void *vptr;
+} Class_000A2988;
+typedef struct Class_000A2998 {
+    void *vptr;
+    s32 unk4;
+} Class_000A2998;
+typedef struct Class_000A29A8 {
+    void *vptr;
+} Class_000A29A8;
+typedef struct Class_000A29C8 {
+    void *vptr;
+    s32 unk4;
+} Class_000A29C8;
+typedef struct Class_000A29D8 {
+    void *vptr;
+} Class_000A29D8;
+typedef struct Class_000A29F8 {
+    void *vptr;
+} Class_000A29F8;
+typedef struct Class_000A2A08 {
+    void *vptr;
+} Class_000A2A08;
+typedef struct Class_000A2A30 {
+    void *vptr;
+} Class_000A2A30;
+typedef struct Class_000A2A40 {
+    void *vptr;
+    u8 pad4[0x20];
+    s32 unk24;
+} Class_000A2A40;
+typedef struct Class_000A2A68 {
+    void *vptr;
+} Class_000A2A68;
+typedef struct Class_000A2A78 {
+    void *vptr;
+} Class_000A2A78;
+typedef struct Class_000B2AF8_v330 {
+    void *vptr;
+} Class_000B2AF8_v330;
+typedef struct Class_000B2B20 {
+    void *vptr;
+} Class_000B2B20;
+typedef struct Class_000B2FE0 {
+    void *vptr;
+} Class_000B2FE0;
+typedef struct Class_000B4C30 {
+    void *vptr;
+} Class_000B4C30;
+typedef struct Class_000B6100 {
+    void *vptr;
+} Class_000B6100;
+typedef struct Class_000B63D8 {
+    void *vptr;
+} Class_000B63D8;
+typedef struct Class_000B8A88 {
+    void *vptr;
+} Class_000B8A88;
+typedef struct Class_000B8B20 {
+    void *vptr;
+} Class_000B8B20;
+typedef struct Class_000B9700 {
+    void *vptr;
+} Class_000B9700;
+typedef struct Class_000B9740 {
+    void *vptr;
+} Class_000B9740;
+typedef struct Class_000BB2F8 {
+    void *vptr;
+} Class_000BB2F8;
+#endif
+
 extern M2C_UNK D_000936E8;
 extern M2C_UNK D_00096E38;
 extern M2C_UNK D_00097AA8;
@@ -4358,6 +4950,7 @@ M2C_UNK func_00015A38(...);
 M2C_UNK func_00015A90(...);
 s32 func_00015C9C(M2C_UNK, M2C_UNK);
 M2C_UNK func_00015CF4(s32, void *);
+s32 func_00015DCC(void);
 void func_00016520(M2C_UNK **arg0);
 void func_00016580(struct Unk_func_00016580_0 *arg0);
 void func_000165CC(struct Unk_func_000165CC_0 *arg0);
@@ -4673,6 +5266,10 @@ s32 func_00035F50(void);
 void func_00037528(s32 arg0, s32 arg1);
 s32 func_00038320(void);
 void func_00038328(s32 arg0);
+void func_00039B84(void *arg0);
+void func_00039BA0(void *arg0);
+void func_00039C04(void *arg0, s32 arg1);
+void func_00039C18(void *arg0, s32 arg1);
 s32 func_0003E9EC(s32, s32);
 void func_00040BC8(s32 *arg0);
 M2C_UNK func_00041384(M2C_UNK, M2C_UNK);
