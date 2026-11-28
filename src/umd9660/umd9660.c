@@ -1117,11 +1117,58 @@ INCLUDE_ASM("nonmatchings/umd9660", func_00003D78);
 INCLUDE_ASM("nonmatchings/umd9660", func_00003690);
 
 INCLUDE_ASM("nonmatchings/umd9660", func_00003818);
+#endif
 
+#if FW_VERSION == 100
+s32 func_000038F0(SceUmd9660Drive *drive, u32 len) {
+    SceUmdDrive *umd;
+    s32 ret = 0x80010016;
+    if (drive == NULL || len == 0) {
+        goto end;
+    }
+    umd = drive->umdDrive;
+    if (sceKernelDipswAll() & 0x10000) {
+        ret = 0;
+    } else {
+        while ((ret = sceUmdExecSetLockLengthCmd(umd, len)) != 0) {
+            sceUmdExecReqSenseCmd(umd, umd->sense, 0x12);
+        }
+    }
+end:
+    return ret;
+}
+#endif
+
+#if FW_VERSION == 102
 INCLUDE_ASM("nonmatchings/umd9660", func_000038F0);
+#endif
 
+#if FW_VERSION < 103
 INCLUDE_ASM("nonmatchings/umd9660", func_0000397C);
+#endif
 
+#if FW_VERSION == 100
+s32 func_00003A74(SceUmd9660Drive *drive, u32 lbn) {
+    SceUmdDrive *umd;
+    s32 ret = 0x80010016;
+    if (drive == NULL) {
+        goto end;
+    }
+    umd = drive->umdDrive;
+    for (;;) {
+        if (sceUmdExecSeekCmd(umd, lbn, 0) == 0) {
+            ret = 0;
+            break;
+        }
+        sceUmdExecReqSenseCmd(umd, umd->sense, 0x12);
+        sceAtaDisplayReqSense(umd->sense);
+    }
+end:
+    return ret;
+}
+#endif
+
+#if FW_VERSION == 102
 INCLUDE_ASM("nonmatchings/umd9660", func_00003A74);
 #endif
 
@@ -1229,7 +1276,17 @@ INCLUDE_ASM("nonmatchings/umd9660", func_00003E54);
 #endif
 
 #if FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/umd9660", func_00003EE0);
+SceUmd9660File *func_00003EE0(s32 count, s32 *err) {
+    SceUmd9660File *files;
+    sceKernelWaitSema(D_00005D90.semaId, 1, NULL);
+    files = func_000042A0(count, err);
+    if (files == NULL) {
+        sceKernelSignalSema(D_00005D90.semaId, 1);
+        return NULL;
+    }
+    sceKernelSignalSema(D_00005D90.semaId, 1);
+    return files;
+}
 #endif
 
 #if FW_VERSION >= 282
@@ -1314,7 +1371,12 @@ s32 func_00003FC0(SceUmd9660Drive *drive, void *buf, SceUmdLbnParam *param) {
     return func_00002974(drive, buf, param->size, param);
 }
 
-INCLUDE_ASM("nonmatchings/umd9660", func_00004004);
+s32 func_00004004(SceUmd9660Drive *drive, void *buf, SceSize size, SceUmdLbnParam *param) {
+    if (drive == NULL || buf == NULL || param == NULL) {
+        return 0x80010016;
+    }
+    return func_00002974(drive, buf, size, param);
+}
 #endif
 
 INCLUDE_ASM("nonmatchings/umd9660", func_00003DEC);

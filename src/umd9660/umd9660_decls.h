@@ -118,12 +118,17 @@ typedef struct SceUmdDrive {
     s32 unkC; /* 0x0C */
     s32 unk10; /* 0x10: 0x10 = UMD, 0x20 = not */
     u8 pad14[0x14];
-    s32 unk28; /* 0x28 */
-    s32 unk2C; /* 0x2C */
-    s32 unk30; /* 0x30 */
-    s32 unk34; /* 0x34 */
-    s32 unk38; /* 0x38 */
-    s32 unk3C; /* 0x3C */
+    union {
+        u8 sense[0x18]; /* 0x28: request sense data (0x12 used) */
+        struct {
+            s32 unk28; /* 0x28 */
+            s32 unk2C; /* 0x2C */
+            s32 unk30; /* 0x30 */
+            s32 unk34; /* 0x34 */
+            s32 unk38; /* 0x38 */
+            s32 unk3C; /* 0x3C */
+        };
+    };
 } SceUmdDrive;
 
 /* umdman read request (uOFW LbnParams; unk20 from 1.50 on) */
@@ -281,10 +286,10 @@ s32 func_000036C4();
 s32 func_000036D0(s32 arg0);
 s32 func_000037AC(SceUmd9660Drive *drive);
 s32 func_00003818();
-s32 func_000038F0();
+s32 func_000038F0(SceUmd9660Drive *drive, u32 len);
 s32 func_0000397C();
 s32 func_00003A58(void);
-s32 func_00003A74();
+s32 func_00003A74(SceUmd9660Drive *drive, u32 lbn);
 s32 func_00003AF8();
 s32 func_00003BFC(void);
 M2C_UNK *func_00003C04(void);
@@ -300,7 +305,7 @@ void func_00003FAC(void);
 void func_00003FD4(void);
 s32 func_00003FF0(struct Unk_func_00003FF0_0 *arg0);
 s32 func_00003FFC(struct Unk_func_00003FFC_0 *arg0);
-s32 func_00004004();
+s32 func_00004004(SceUmd9660Drive *drive, void *buf, SceSize size, SceUmdLbnParam *param);
 s32 func_00004024(); /* 1.x: (SceUmd9660Drive *), 2.x: other layout */
 s32 func_00004064(); /* 1.x: (SceUmd9660Drive *), 2.x: other layout */
 s32 func_000040A4(); /* 1.x: (SceUmd9660Drive *), 2.x: other layout */
@@ -312,6 +317,7 @@ s32 func_00004164(struct Unk_func_00004164_0 *arg0);
 s32 func_0000420C(void);
 s32 func_00004250(SceUmdDiscInfo *info);
 s32 func_00004264(s32 *arg0);
+SceUmd9660File *func_000042A0(s32 count, s32 *err);
 s32 func_00004300(s32);
 s32 func_00004308(void);
 void func_00004330(void);
@@ -353,6 +359,7 @@ void func_00005B2C(s32 arg0);
 void *memcpy(void *dst, const void *src, SceSize n);
 void *memset(void *dst, s32 c, SceSize n);
 s32 module_start(void);
+void sceAtaDisplayReqSense(void *sense);
 s32 sceAtaExecSetFeaturesCmd(void *ata, s32 feature, s32 count, s32 driveId, s32 arg4);
 s32 sceAtaIsDvdDrive(void);
 s32 sceBLKRegister(const char *name, s32 type, s32 unit, void *data, SceUmd9660BlkOps *ops);
@@ -384,6 +391,9 @@ s32 sceUmd9660_driver_B23266CA(void);
 s32 sceUmd9660_driver_C7CD9CE8(void);
 s32 sceUmd9660_driver_CAAFFE8D(void);
 s32 sceUmd9660_driver_F42C0AEE(void);
+s32 sceUmdExecReqSenseCmd(SceUmdDrive *umd, void *buf, SceSize size);
+s32 sceUmdExecSeekCmd(SceUmdDrive *umd, u32 lbn, s32 arg2);
+s32 sceUmdExecSetLockLengthCmd(SceUmdDrive *umd, u32 len);
 s32 sceUmdIsUMD(void);
 s32 sceUmdManDVDDriveStart(void);
 s32 sceUmdManGetDiscInfo(SceUmdDiscInfo *info);
