@@ -1005,11 +1005,11 @@ INCLUDE_ASM("nonmatchings/msvideo_main_plugin", func_00004C84);
 
 INCLUDE_ASM("nonmatchings/msvideo_main_plugin", func_00004D20);
 
-INCLUDE_ASM("nonmatchings/msvideo_main_plugin", func_00004DBC);
+INCLUDE_ASM("nonmatchings/msvideo_main_plugin", _ZN14Class_000AF080D2Ev);
 
-INCLUDE_ASM("nonmatchings/msvideo_main_plugin", func_00004DF8);
+INCLUDE_ASM("nonmatchings/msvideo_main_plugin", _ZN14Class_000AF080D1Ev);
 
-INCLUDE_ASM("nonmatchings/msvideo_main_plugin", func_00004E34);
+INCLUDE_ASM("nonmatchings/msvideo_main_plugin", _ZN14Class_000AF080D0Ev);
 
 s32 func_00004E78(struct Unk_func_00004E78_0 *arg0) {
     return arg0->unk2C;
