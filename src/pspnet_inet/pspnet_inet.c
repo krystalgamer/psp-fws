@@ -4490,9 +4490,58 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_0001B5E8);
 
 #if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_0001AAFC);
+#else
+s32 func_0001AE68(struct mbuf *m, ...) {
+    struct inpcb *inp;
+    struct ip *ip;
+    struct mbuf *opts;
+    s32 flags;
+    __builtin_va_list ap;
+
+    __builtin_va_start(ap, m);
+    inp = __builtin_va_arg(ap, struct inpcb *);
+    __builtin_va_end(ap);
+
+    flags = (inp->inp_socket->so_options & 0x10) | 0x20 | 0x4;
+
+    if ((inp->inp_flags & 0x8) == 0) {
+        if ((m->m_pkthdr.len + sizeof(struct ip)) > 0xFFFF) {
+            sceNetMFreem(m);
+            return (0x7A);
+        }
+        M_PREPEND(m, sizeof(struct ip), 0);
+        ip = mtod(m, struct ip *);
+        ip->ip_tos = 0;
+        ip->ip_off = 0;
+        ip->ip_p = inp->inp_ip.ip_p;
+        ip->ip_len = m->m_pkthdr.len;
+        ip->ip_src = inp->inp_laddr;
+        ip->ip_dst = inp->inp_faddr;
+        ip->ip_ttl = 255;
+        opts = inp->inp_options;
+    } else {
+        if (m->m_pkthdr.len > 0xFFFF) {
+            sceNetMFreem(m);
+            return (0x7A);
+        }
+        ip = mtod(m, struct ip *);
+        if (m->m_pkthdr.len != ip->ip_len) {
+            sceNetMFreem(m);
+            return (0x16);
+        }
+        if (ip->ip_id == 0)
+            ip->ip_id = (u16)__builtin_allegrex_wsbh(D_0002FF70++);
+        opts = NULL;
+        flags |= 0x2;
+        D_0002D960.ips_rawout++;
+    }
+    return (ip_output(m, opts, &inp->inp_route, flags, inp->inp_moptions, &inp->inp_errormtu));
+}
 #endif
 
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_0001AE68);
+#endif
 
 #if FW_VERSION < 250
 s32 rip_ctloutput(s32 op, struct socket *so, s32 level, s32 optname, struct mbuf **m) {

@@ -1100,9 +1100,35 @@ struct ipq {
 
 /* struct ipstat (u_quad_t counters, partial) */
 struct ipstat {
-    u8 unk0[0x38];
-    u64 ips_fragdropped;            /* 0x38 */
-    u64 ips_fragtimeout;            /* 0x40 */
+    u64 ips_total;                 /* 0x0 */
+    u64 ips_badsum;                /* 0x8 */
+    u64 ips_tooshort;              /* 0x10 */
+    u64 ips_toosmall;              /* 0x18 */
+    u64 ips_badhlen;               /* 0x20 */
+    u64 ips_badlen;                /* 0x28 */
+    u64 ips_fragments;             /* 0x30 */
+    u64 ips_fragdropped;           /* 0x38 */
+    u64 ips_fragtimeout;           /* 0x40 */
+    u64 ips_forward;               /* 0x48 */
+    u64 ips_fastforward;           /* 0x50 */
+    u64 ips_cantforward;           /* 0x58 */
+    u64 ips_redirectsent;          /* 0x60 */
+    u64 ips_noproto;               /* 0x68 */
+    u64 ips_delivered;             /* 0x70 */
+    u64 ips_localout;              /* 0x78 */
+    u64 ips_odropped;              /* 0x80 */
+    u64 ips_reassembled;           /* 0x88 */
+    u64 ips_fragmented;            /* 0x90 */
+    u64 ips_ofragments;            /* 0x98 */
+    u64 ips_cantfrag;              /* 0xA0 */
+    u64 ips_badoptions;            /* 0xA8 */
+    u64 ips_noroute;               /* 0xB0 */
+    u64 ips_badvers;               /* 0xB8 */
+    u64 ips_rawout;                /* 0xC0 */
+    u64 ips_badfrags;              /* 0xC8 */
+    u64 ips_rcvmemdrop;            /* 0xD0 */
+    u64 ips_toolong;               /* 0xD8 */
+    u64 ips_nogif;                 /* 0xE0 */
 };
 extern s32 D_0002D944; /* ipq_locked */
 s32 _sce_pspnet_spllock(void);
@@ -1644,6 +1670,7 @@ extern char D_0002F288[18] __attribute__((aligned(4)));
 extern s32 D_0002F500;
 extern s32 D_0002F50C;
 extern s32 D_0002F510;
+extern u16 D_0002FF70; /* ip_id */
 extern struct route D_0002FF98; /* ipforward_rt */
 extern s32 D_000302E4;
 extern s32 arp_locked; /* arp_locked */
@@ -1927,7 +1954,7 @@ void ip_freef();
 void ip_input(struct mbuf *m);
 s32 ip_optcopy(struct ip *ip, struct ip *jp);
 s32 ip_optlen(void *inp);
-s32 ip_output(struct mbuf *m0, struct mbuf *opt, struct route *ro, s32 flags, struct ip_moptions *imo);
+s32 ip_output(struct mbuf *m0, ...);
 struct in_ifaddr *ip_rtaddr(struct in_addr dst);
 void ip_savecontrol(struct inpcb *inp, struct mbuf **mp, struct ip *ip, struct mbuf *m);
 void ip_slowtimo(void);
