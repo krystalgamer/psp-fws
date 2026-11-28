@@ -63,6 +63,7 @@
   "func_00005708": "void func_00005708(SceNetAdhocPtpPcb *pcb);",
   "func_000058B8": "void func_000058B8(struct mbuf *m);",
   "func_00006F68": "s32 func_00006F68(void);",
+  "func_000070E8": "s32 func_000070E8(const SceNetEtherAddr *addr, void *ptr, s32 size);",
   "func_00007298": "s32 func_00007298(s32 id, SceNetAdhocGameModeOptData *opt, s32 internal);",
   "gameModeCreate": "s32 gameModeCreate(const SceNetEtherAddr *addr, void *ptr, s32 size);",
   "gameModeDelete": "s32 gameModeDelete(s32 id);",

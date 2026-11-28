@@ -3853,7 +3853,47 @@ end:
     return ret;
 }
 #else
-INCLUDE_ASM("nonmatchings/pspnet_adhoc", sceNetAdhocGameModeCreateMaster);
+s32 sceNetAdhocGameModeCreateMaster(void *ptr, s32 size) {
+    s32 s;
+    s32 ret;
+    SceNetEtherAddr addr;
+
+#if FW_VERSION >= 201
+    if (sceKernelCheckThreadStack() < 0x7D0)
+        return 0x80410005;
+#endif
+    if (ptr == NULL)
+        return 0x80410711;
+#if FW_VERSION >= 150
+    if ((u32)(size - 1) >= 0x400)
+        return 0x80410705;
+#endif
+#if FW_VERSION >= 201
+    s = _sce_pspnet_spllock();
+    if (s < 0)
+        return s;
+    ret = 0x80410712;
+#else
+    ret = 0x80410712;
+    s = _sce_pspnet_spllock();
+#endif
+    if (g_adhocInit == 0)
+        goto end;
+    ret = 0x8041071B;
+    if (sceWlanDevIsGameMode() == 0)
+        goto end;
+    ret = sceNetGetLocalEtherAddr(&addr);
+    if (ret < 0)
+        goto end;
+    ret = func_000070E8(&addr, ptr, size);
+    if (ret < 0)
+        goto end;
+    g_gameModeMasterId = ret;
+    ret = 0;
+end:
+    _sce_pspnet_splunlock(s);
+    return ret;
+}
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
@@ -3893,7 +3933,39 @@ end:
 #endif
 
 #if FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/pspnet_adhoc", sceNetAdhocGameModeCreateReplica);
+s32 sceNetAdhocGameModeCreateReplica(const SceNetEtherAddr *addr, void *ptr, s32 size) {
+    s32 s;
+    s32 ret;
+
+#if FW_VERSION >= 201
+    if (sceKernelCheckThreadStack() < 0x7E0)
+        return 0x80410005;
+#endif
+    if (addr == NULL || ptr == NULL)
+        return 0x80410711;
+#if FW_VERSION >= 150
+    if ((u32)(size - 1) >= 0x400)
+        return 0x80410705;
+#endif
+#if FW_VERSION >= 201
+    s = _sce_pspnet_spllock();
+    if (s < 0)
+        return s;
+    ret = 0x80410712;
+#else
+    ret = 0x80410712;
+    s = _sce_pspnet_spllock();
+#endif
+    if (g_adhocInit == 0)
+        goto end;
+    ret = 0x8041071B;
+    if (sceWlanDevIsGameMode() == 0)
+        goto end;
+    ret = func_000070E8(addr, ptr, size);
+end:
+    _sce_pspnet_splunlock(s);
+    return ret;
+}
 #endif
 
 #if FW_VERSION < 201
