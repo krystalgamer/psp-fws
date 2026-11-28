@@ -177,7 +177,7 @@ s32 sceKernelSetIntrLevel(u32 intrNum, s32 level) {
 INCLUDE_ASM("nonmatchings/interruptman", sceKernelSetIntrLevel);
 #endif
 
-#if (FW_VERSION >= 150 && FW_VERSION < 271) || FW_VERSION >= 282
+#if FW_VERSION >= 150
 s32 sceKernelSetIntrLogging(u32 intrNum, s32 enable) {
     s32 oldIntr;
     Interrupt *intr;
@@ -193,10 +193,6 @@ s32 sceKernelSetIntrLogging(u32 intrNum, s32 enable) {
     sceKernelCpuResumeIntr(oldIntr);
     return 0;
 }
-#endif
-
-#if FW_VERSION == 271
-INCLUDE_ASM("nonmatchings/interruptman", sceKernelSetIntrLogging);
 #endif
 
 #if FW_VERSION >= 151
@@ -350,13 +346,7 @@ INCLUDE_ASM("nonmatchings/interruptman", sceKernelSetPrimarySyscallHandler);
 
 #if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/interruptman", sceKernelCpuEnableIntr);
-#endif
 
-#if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/interruptman", QueryInterruptManCB);
-#endif
-
-#if FW_VERSION < 201
 void *QueryInterruptManCB(void) {
     return &g_intrInfo;
 }
