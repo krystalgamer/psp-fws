@@ -377,6 +377,7 @@ s32 func_000020A4(s32 id, SceNetEtherAddr *addr, u16 *port, void *buf, s32 *len,
 s32 func_00002108(SceNetAdhocPdpPcb *pcb, const SceNetEtherAddr *addr, u16 port);
 s32 func_0000215C(s32 id, SceNetEtherAddr *addr, u16 *port, void *buf, s32 *len, u32 timeout, s32 nonblock, void *rfinfo);
 void func_0000223C(SceNetAdhocPdpPcb *pcb);
+void func_000022FC(struct mbuf *m);
 s32 func_0000297C(void);
 void func_000029E8(void);
 s32 func_00002A9C(SceNetAdhocDesc *d);
@@ -425,6 +426,7 @@ s32 func_000056CC(SceNetAdhocPtpPcb *pcb, const SceNetEtherAddr *saddr, u16 spor
 void func_000056D4(SceNetAdhocPtpPcb *pcb);
 s32 func_000056E4(SceNetAdhocPtpPcb *pcb, s32 a1);
 void func_00005708(SceNetAdhocPtpPcb *pcb);
+void func_000058B8(struct mbuf *m);
 void func_00005FF8(struct ifnet *ifp, const SceNetEtherAddr *laddr, u16 lport, const SceNetEtherAddr *paddr, u16 pport, u8 type, u32 seq, struct mbuf *m);
 void func_0000660C(SceNetAdhocPtpPcb *pcb, u8 type);
 void func_000067F8(SceNetAdhocPtpPcb *pcb, s32 rexmt);

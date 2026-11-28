@@ -194,7 +194,35 @@ void func_00000270(void) {
     }
 }
 #else
-INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00000270);
+void func_00000270(void) {
+    struct mbuf *m;
+    u8 type;
+
+    for (;;) {
+        IF_DEQUEUE(&g_adhocIntrq, m);
+        if (m == NULL)
+            break;
+        if (m->m_pkthdr.len <= 0x30) {
+            sceNetMFreem(m);
+            continue;
+        }
+        if (m->m_len <= 0x30)
+            sceNetMCopydata(m, 0x30, 1, &type);
+        else
+            type = m->m_data[0x30];
+        switch (type) {
+        case 1:
+            func_000022FC(m);
+            break;
+        case 2:
+            func_000058B8(m);
+            break;
+        default:
+            sceNetMFreem(m);
+            break;
+        }
+    }
+}
 #endif
 
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_0000036C);
