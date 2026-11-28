@@ -1078,7 +1078,8 @@ struct syn_cache {
     struct mbuf *sc_ipopts;             /* 0x6C */
     u16 sc_peermaxseg;                  /* 0x70 */
     u16 sc_ourmaxseg;                   /* 0x72 */
-    u8 sc_request_r_scale_s;            /* 0x74 sc_request_r_scale:4, sc_requested_s_scale:4 */
+    u8 sc_request_r_scale : 4,          /* 0x74 */
+        sc_requested_s_scale : 4;
     struct tcpcb *sc_tp;                /* 0x78 */
     struct { struct syn_cache *le_next; struct syn_cache **le_prev; } sc_tpq; /* 0x7C */
 };
