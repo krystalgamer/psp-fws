@@ -362,7 +362,9 @@ INCLUDE_ASM("nonmatchings/paf_0E9AB8", _ZN3paf10PhMenuList10SetItemNumEi);
 #endif
 
 #if FW_VERSION == 282
-s32 _ZN3paf10PhMenuList10SetItemNumEi(s32 arg0, s32 arg1) {
+s32 paf::PhMenuList::SetItemNum(int cxxp1) {
+    s32 arg0 = (s32) this;
+    s32 arg1 = (s32) cxxp1;
     s32 temp_v0;
 
     temp_v0 = _ZN3paf6PhList10SetItemNumEi(arg0, arg1);
@@ -477,7 +479,7 @@ s32 func_000EBBA0(void) {
     return D_001A47DC;
 }
 
-s32 _ZN3paf7PhModel10WidgetTypeEv(void) {
+s32 paf::PhModel::WidgetType() {
     return D_001A47DC;
 }
 

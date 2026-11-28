@@ -118,6 +118,8 @@ def groups(ver, mod):
                 "sizes": [y - x for x, y in g],
                 "shape": shape(ws),
                 "shapes": [shape(words(x, y)) for x, y in g],
+                "calls": [calls(words(x, y)) for x, y in g],
+                "delete": sorted(dele),
                 "vptr": vp,
                 "vptr_label": names.get(vp) if vp is not None else None,
                 "vtable_zero": vp is not None and word(raw, segs, vp - 8) == 0 and word(raw, segs, vp - 4) == 0,

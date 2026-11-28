@@ -43,7 +43,7 @@ s32 func_000E9660(void) {
 }
 #endif
 
-s32 _ZN3paf10PhMenuList10WidgetTypeEv(void) {
+s32 paf::PhMenuList::WidgetType() {
     return D_001A47D8;
 }
 

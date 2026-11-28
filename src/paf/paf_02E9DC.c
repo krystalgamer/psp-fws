@@ -268,7 +268,8 @@ INCLUDE_ASM("nonmatchings/paf_02E9DC", func_00034F34);
 #endif
 
 #if FW_VERSION == 282
-void _ZN15psjsstring_impl6DecRefEv(s32 *arg0) {
+void psjsstring_impl::DecRef() {
+    s32 *arg0 = (s32 *) this;
     s32 temp_v0;
 
     temp_v0 = *arg0 - 1;

@@ -473,7 +473,9 @@ INCLUDE_ASM("nonmatchings/paf_0274C4", _ZNK9PSJSError10IsSubClassEPKt);
 #endif
 
 #if FW_VERSION == 282
-s32 _ZNK9PSJSError10IsSubClassEPKt(s32 arg0, s32 arg1) {
+s32 PSJSError::IsSubClass(unsigned short const* cxxp1) const {
+    s32 arg0 = (s32) this;
+    s32 arg1 = (s32) cxxp1;
     s32 var_a2;
 
     var_a2 = 1;

@@ -23,6 +23,8 @@ public:
 /* vtable _ZTV14Class_0002C150 is data (vptr = label - 8 + 8) */
 class Class_0002C150 {
 public:
+    u8 pad4[0x8];
+    s8 unkC;
     Class_0002C150();
     virtual ~Class_0002C150();
 };

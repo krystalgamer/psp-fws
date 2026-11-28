@@ -2,7 +2,7 @@
 #include "common.h"
 #include "paf_decls.h"
 
-s32 _ZN3paf5Image12GetErrorTypeEv(void) {
+s32 paf::Image::GetErrorType() {
     return D_001A34E4;
 }
 
@@ -25,7 +25,8 @@ INCLUDE_ASM("nonmatchings/paf_043468", func_00040864);
 #endif
 
 #if FW_VERSION == 282
-s32 _ZN3paf5Image12CopyWithEdgeEv(s32 arg0) {
+s32 paf::Image::CopyWithEdge() {
+    s32 arg0 = (s32) this;
     s32 **temp_v0;
     s32 var_v0;
 
@@ -38,7 +39,8 @@ s32 _ZN3paf5Image12CopyWithEdgeEv(s32 arg0) {
     return var_v0;
 }
 
-s32 _ZN3paf5Image6MirrorEv(s32 arg0) {
+s32 paf::Image::Mirror() {
+    s32 arg0 = (s32) this;
     s32 **temp_v0;
     s32 var_v0;
 
@@ -107,17 +109,8 @@ void func_00044168(struct Unk_func_00044168_0 *arg0) {
     arg0->unk4 = 0;
 }
 
-INCLUDE_ASM("nonmatchings/paf_043468", _ZN14Class_00126EC8D2Ev);
-
-void _ZN14Class_00126EC8D1Ev(struct Unk_func_00044190_0 *arg0) {
-    arg0->unk0 = &D_00171380;
-    arg0->unk4 = 0;
-}
-
-void _ZN14Class_00126EC8D0Ev(struct Unk_func_000441A4_0 *arg0) {
-    arg0->unk0 = &D_00171380;
-    arg0->unk4 = 0;
-    _ZdlPv(arg0);
+Class_00126EC8::~Class_00126EC8() {
+    this->unk4 = 0;
 }
 
 s32 func_000441D0(struct Unk_func_000441D0_0 *arg0, void *arg1, s32 arg2, s32 arg3, s32 arg4) {
@@ -133,7 +126,7 @@ s32 func_000441D0(struct Unk_func_000441D0_0 *arg0, void *arg1, s32 arg2, s32 ar
 
 INCLUDE_ASM("nonmatchings/paf_043468", func_0004426C);
 
-void func_00044394(struct Unk_func_00044394_0 *arg0) {
+void func_00044394(Class_0016AAE0 *arg0) {
     s32 temp_v0;
 
     temp_v0 = arg0->unk4;
@@ -176,6 +169,8 @@ __asm__(".globl _ZTV14Class_00171640\n_ZTV14Class_00171640 = D_00171338 - 8\n");
 INCLUDE_RODATA("nonmatchings/paf_043468", D_0017135C);
 
 INCLUDE_RODATA("nonmatchings/paf_043468", D_00171380);
+
+__asm__(".globl _ZTV14Class_00126EC8\n_ZTV14Class_00126EC8 = D_00171380 - 8\n");
 
 INCLUDE_ASM("nonmatchings/paf_043468", func_00044974);
 

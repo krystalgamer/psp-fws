@@ -22,7 +22,7 @@ s32 func_000EE164(void) {
     return D_001A4810;
 }
 
-s32 _ZN3paf10PhProgress10WidgetTypeEv(void) {
+s32 paf::PhProgress::WidgetType() {
     return D_001A4810;
 }
 

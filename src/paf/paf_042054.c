@@ -90,7 +90,8 @@ INCLUDE_ASM("nonmatchings/paf_042054", func_00042C04);
 
 INCLUDE_ASM("nonmatchings/paf_042054", func_00042C70);
 
-s32 _ZN3paf5Image9Convert32Ev(s32 arg0) {
+s32 paf::Image::Convert32() {
+    s32 arg0 = (s32) this;
     s32 **temp_v0;
     s32 var_v0;
 
@@ -145,7 +146,8 @@ INCLUDE_ASM("nonmatchings/paf_042054", _ZN3paf5Image7SetClipERKNS_9ImageRectE);
 
 INCLUDE_ASM("nonmatchings/paf_042054", _ZN3paf5Image10SetSubRectERKNS_9ImageRectE);
 
-s32 _ZN3paf5Image4CopyEv(s32 arg0) {
+s32 paf::Image::Copy() {
+    s32 arg0 = (s32) this;
     s32 **temp_v0;
     s32 var_v0;
 

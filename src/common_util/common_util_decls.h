@@ -10,6 +10,17 @@
 extern "C" {
 #endif
 
+#ifdef __cplusplus
+namespace vsh {
+class RebootLock {
+public:
+    void Init();
+    void Exit();
+    void Reboot();
+};
+}
+#endif
+
 struct Unk_sceVshCommonUtil_98E57F6D_0 {
     u8 unk0;
     u8 pad1[0x3];

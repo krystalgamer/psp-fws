@@ -453,14 +453,8 @@ void func_0007D83C(void) {
     func_0007D768(0, 0xFFFF);
 }
 
-void func_0007D85C(struct Unk_func_0007D85C_0 *arg0) {
-    arg0->unk0 = &D_000A1B58;
-    arg0->unk4 = 0;
-}
-
-void func_0007D870(struct Unk_func_0007D870_0 *arg0) {
-    arg0->unk0 = &D_000A1B58;
-    arg0->unk4 = 0;
+Class_000A1B58::Class_000A1B58() {
+    this->unk4 = 0;
 }
 
 Class_000A1B58::~Class_000A1B58() {
@@ -717,28 +711,9 @@ INCLUDE_ASM("nonmatchings/music_main_plugin_0772FC", func_000681B8);
 
 #if FW_VERSION < 301
 INCLUDE_ASM("nonmatchings/music_main_plugin_0772FC", func_00080400);
-#endif
 
-#if FW_VERSION >= 271 && FW_VERSION < 301
-INCLUDE_ASM("nonmatchings/music_main_plugin_0772FC", func_00080478);
-#endif
-
-#if FW_VERSION == 260
-INCLUDE_ASM("nonmatchings/music_main_plugin_0772FC", func_000682A0);
-#endif
-
-#if FW_VERSION < 301
-void func_000804B0(M2C_UNK **arg0) {
-    *arg0 = &D_000A1E50;
-    func_000810C4((s32) arg0);
-    func_0004A310((s32) arg0);
-}
-
-void func_000804E8(M2C_UNK **arg0) {
-    *arg0 = &D_000A1E50;
-    func_000810C4((s32) arg0);
-    func_0004A310((s32) arg0);
-    _ZdlPv(arg0);
+Class_000A1E50::~Class_000A1E50() {
+    func_000810C4((s32) this);
 }
 #endif
 
@@ -850,6 +825,8 @@ INCLUDE_ASM("nonmatchings/music_main_plugin_0772FC", func_00069818);
 INCLUDE_ASM("nonmatchings/music_main_plugin_0772FC", func_00069900);
 
 INCLUDE_RODATA("nonmatchings/music_main_plugin_0772FC", D_000A1E50);
+
+__asm__(".globl _ZTV14Class_000A1E50\n_ZTV14Class_000A1E50 = D_000A1E50 - 8\n");
 
 INCLUDE_ASM("nonmatchings/music_main_plugin_0772FC", func_000699EC);
 
@@ -1032,6 +1009,8 @@ INCLUDE_ASM("nonmatchings/music_main_plugin_0772FC", func_00080CD4);
 INCLUDE_ASM("nonmatchings/music_main_plugin_0772FC", func_0007FD94);
 
 INCLUDE_RODATA("nonmatchings/music_main_plugin_0772FC", D_000A1E50);
+
+__asm__(".globl _ZTV14Class_000A1E50\n_ZTV14Class_000A1E50 = D_000A1E50 - 8\n");
 #endif
 
 #if FW_VERSION == 260
@@ -1550,16 +1529,9 @@ void func_0008209C(struct Unk_func_0008209C_0 *arg0) {
     arg0->unk8 = 0;
 }
 
-void func_000820B4(struct Unk_func_000820B4_0 *arg0, s32 arg1, s32 arg2) {
-    arg0->unk0 = &D_000A1F08;
-    arg0->unk4 = arg1;
-    arg0->unk8 = arg2;
-}
-
-void func_000820CC(struct Unk_func_000820CC_0 *arg0, s32 arg1, s32 arg2) {
-    arg0->unk0 = &D_000A1F08;
-    arg0->unk4 = arg1;
-    arg0->unk8 = arg2;
+Class_000A1F08::Class_000A1F08(s32 arg1, s32 arg2) {
+    this->unk4 = arg1;
+    this->unk8 = arg2;
 }
 
 Class_000A1F08::~Class_000A1F08() {
@@ -1576,18 +1548,10 @@ void func_0008249C(struct Unk_func_0008249C_0 *arg0) {
     arg0->unk18 = 0;
 }
 
-void func_000824BC(struct Unk_func_000824BC_0 *arg0, s32 arg1, s32 arg2) {
-    arg0->unk0 = &D_000A1F18;
-    arg0->unk10 = -1;
-    arg0->unk14 = arg1;
-    arg0->unk18 = arg2;
-}
-
-void func_000824DC(struct Unk_func_000824DC_0 *arg0, s32 arg1, s32 arg2) {
-    arg0->unk0 = &D_000A1F18;
-    arg0->unk10 = -1;
-    arg0->unk14 = arg1;
-    arg0->unk18 = arg2;
+Class_000A1F18::Class_000A1F18(s32 arg1, s32 arg2) {
+    this->unk10 = -1;
+    this->unk14 = arg1;
+    this->unk18 = arg2;
 }
 
 Class_000A1F18::~Class_000A1F18() {
@@ -1696,7 +1660,13 @@ void func_00083134(M2C_UNK **arg0) {
 
 #if FW_VERSION >= 282
 INCLUDE_RODATA("nonmatchings/music_main_plugin_0772FC", D_000A1E50);
+#endif
 
+#if FW_VERSION >= 282 && FW_VERSION < 301
+__asm__(".globl _ZTV14Class_000A1E50\n_ZTV14Class_000A1E50 = D_000A1E50 - 8\n");
+#endif
+
+#if FW_VERSION >= 282
 INCLUDE_RODATA("nonmatchings/music_main_plugin_0772FC", D_000A1E78);
 
 INCLUDE_RODATA("nonmatchings/music_main_plugin_0772FC", D_000A1E88);

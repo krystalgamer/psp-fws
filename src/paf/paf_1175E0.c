@@ -372,7 +372,8 @@ void func_000BF280(void *arg0) {
 #endif
 
 #if FW_VERSION == 282
-s32 _ZN3paf4Cond4WaitEv(struct Unk_scePaf_0B0959FC_0 *arg0) {
+s32 paf::Cond::Wait() {
+    struct Unk_scePaf_0B0959FC_0 *arg0 = (struct Unk_scePaf_0B0959FC_0 *) this;
     void *sp0;
     sceKernelSignalSema(*arg0->unk0, 1);
     sceKernelWaitEventFlag(arg0->unk4, 1U, 0x10, &sp0, NULL);
@@ -386,7 +387,8 @@ INCLUDE_ASM("nonmatchings/paf_1175E0", _ZN3paf4Cond6NotifyEv);
 #endif
 
 #if FW_VERSION == 282
-void _ZN3paf4Cond6NotifyEv(struct Unk_scePaf_CA5EF446_0 *arg0) {
+void paf::Cond::Notify() {
+    struct Unk_scePaf_CA5EF446_0 *arg0 = (struct Unk_scePaf_CA5EF446_0 *) this;
     sceKernelSetEventFlag(arg0->unk4, 1);
 }
 #endif
@@ -445,7 +447,8 @@ INCLUDE_ASM("nonmatchings/paf_1175E0", _ZN3paf15CriticalSection5EnterEv);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 200
-void _ZN3paf15CriticalSection5EnterEv(struct Unk_scePaf_C1F72218_0 *arg0) {
+void paf::CriticalSection::Enter() {
+    struct Unk_scePaf_C1F72218_0 *arg0 = (struct Unk_scePaf_C1F72218_0 *) this;
     u32 temp_v0;
 
     sceKernelWaitEventFlag(arg0->unk0, 1U, 0x20, NULL, NULL);
@@ -465,7 +468,8 @@ INCLUDE_ASM("nonmatchings/paf_1175E0", _ZN3paf15CriticalSection5LeaveEv);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 200
-void _ZN3paf15CriticalSection5LeaveEv(struct Unk_scePaf_539F2583_0 *arg0) {
+void paf::CriticalSection::Leave() {
+    struct Unk_scePaf_539F2583_0 *arg0 = (struct Unk_scePaf_539F2583_0 *) this;
     s32 temp_v1;
 
     sceKernelWaitEventFlag(arg0->unk0, 1U, 0x20, NULL, NULL);

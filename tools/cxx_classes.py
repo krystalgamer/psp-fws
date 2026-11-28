@@ -86,6 +86,133 @@ def unit_flags(f, v):
     return _flags[(f, v)]
 
 
+SCALAR = {"s8": 1, "u8": 1, "s16": 2, "u16": 2, "s32": 4, "u32": 4, "f32": 4}
+
+
+def struct_fields(text):
+    """{offset: (size, decl)} of the `unkN` fields of an m2c struct or a generated class body."""
+    out = {}
+    for m in re.finditer(r"^\s*(.+?)\s*\bunk([0-9A-F]+)(?:\[(0x[0-9A-Fa-f]+|\d+)\])?;", text, re.M):
+        ty, off, n = m[1].strip(), int(m[2], 16), int(m[3], 0) if m[3] else 1
+        size = 4 if ty.endswith("*") else SCALAR.get(ty)
+        out[off] = (None if size is None else size * n, m[0].strip())
+    return out
+
+
+GENERATED = ("is data (vptr = label", "dtor still asm/m2c")
+
+
+def relayout(types):
+    """Fields of generated class declarations are `unkN` at absolute offset N: redo the padding of
+    every generated class after its base's fields (a base that got fields moves the derived
+    class's start). Returns the classes whose fields now overlap their base's (to be undone)."""
+    declared = {}
+    for k, t in types.items():
+        for m in re.finditer(r"^class (\w+)(?: : public ([\w:]+))? \{", t, re.M):
+            declared[m[1]] = (k, m[2])
+    end, bad = {}, []
+
+    def class_end(c, depth=0):
+        if c in end:
+            return end[c]
+        k, base = declared.get(c, (None, None))
+        e = class_end(base, depth + 1) if base and base in declared and depth < 30 else 4
+        if k is not None:
+            for o, (sz, d) in struct_fields(types[k]).items():
+                e = max(e, o + (sz or 4))
+        end[c] = e
+        return e
+    for c, (k, base) in declared.items():
+        t = types[k]
+        if not any(g in t for g in GENERATED):
+            continue
+        fs = struct_fields(t)
+        if not fs:
+            continue
+        pos = class_end(base) if base and base in declared else 4
+        inherited, b = {}, base
+        while b in declared and len(inherited) < 10000:
+            inherited.update({o: f for o, f in struct_fields(types[declared[b][0]]).items() if o not in inherited})
+            b = declared[b][1]
+        fs = {o: f for o, f in fs.items() if inherited.get(o) != f}  # the base declares it already
+        if fs and min(fs) < pos:
+            bad.append(c)
+            continue
+        body = []
+        for o in sorted(fs):
+            sz, d = fs[o]
+            if o > pos:
+                body.append(f"    u8 pad{pos:X}[0x{o - pos:X}];")
+            body.append(f"    {d}")
+            pos = o + sz
+        t = re.sub(r"\n    (?:u8 pad\w+\[[^\]]*\];|[^\n]*\bunk[0-9A-F]+(?:\[[^\]]*\])?;)(?=\n)", "", t)
+        types[k] = re.sub(rf"(class {c}\b[^{{]*\{{\npublic:\n)", lambda m: m[1] + "\n".join(body) + "\n", t, count=1)
+    return bad
+
+
+def first_mismatch(v, mod):
+    """Name of the first symbol (from the link map) whose bytes differ from the baserom."""
+    from elftools.elf.elffile import ELFFile
+    a = (ROOT / f"tmp/build/{v}/{mod}.prx").read_bytes()
+    b = (ROOT / f"tmp/baserom/{v}/{mod}.prx").read_bytes()
+    with open(ROOT / f"tmp/baserom/{v}/{mod}.prx", "rb") as fh:
+        seg = next(s for s in ELFFile(fh).iter_segments() if s["p_type"] == "PT_LOAD")
+        off, size = seg["p_offset"], seg["p_filesz"]
+    syms = []
+    for l in (ROOT / f"tmp/build/{v}/{mod}.map").read_text().splitlines():
+        m = re.match(r"\s+0x([0-9a-f]+)\s+(\S.*?)\s*$", l)
+        if m and not m[2].startswith("0x") and not m[2].endswith("NON_MATCHING"):
+            syms.append((int(m[1], 16), m[2]))
+    syms.sort()
+    for i in range(off, off + size, 4):
+        if a[i:i + 4] != b[i:i + 4]:
+            va = i - off
+            best = None
+            for x, n in syms:
+                if x <= va:
+                    best = n
+                else:
+                    break
+            return best
+    return None
+
+
+def dtor_body(text, label, structs):
+    """m2c C of a non-trivial D2/D1 -> (body of `X::~X()`, base D2 name or None, {offset: field}) or
+    None: the vptr store of `label` goes (the compiler emits it), a final `B(arg0);` is the base
+    destructor, `arg0` becomes `this` (fields from m2c's struct of arg0)."""
+    m = re.match(r"^void \w+\((?:struct (\w+) \*|M2C_UNK \*\*)arg0\) \{\n(.*)\n\}\n*$", text, re.S)
+    if not m:
+        return None
+    lines = m[2].split("\n")
+    vp = [i for i, l in enumerate(lines) if re.match(rf"^    (?:arg0->unk0|\*arg0) = (?:\([^)]*\) )?&{label};$", l)]
+    if len(vp) != 1:
+        return None
+    del lines[vp[0]]
+    while lines and not lines[-1].strip():
+        lines.pop()
+    base = None
+    bm = re.match(r"^    (\w+)\((?:\([^()]*\) )?arg0\);$", lines[-1]) if lines else None
+    if bm:
+        base = bm[1]
+        lines.pop()
+    body = "\n".join(lines)
+    if re.search(r"\barg0->unk0\b|\*arg0\b|_ZdlPv|\breturn\b", body) or not body.strip():
+        return None
+    fields = {}
+    if m[1]:
+        st = structs.get(m[1], {})
+        for o, f in st.items():
+            if re.search(rf"\barg0->unk{o:X}\b", body):
+                if f[0] is None:
+                    return None
+                fields[o] = f
+    if re.search(r"\barg0->unk", body) and not fields:
+        return None
+    body = re.sub(r"\barg0\b", "this", body)
+    return body, base, fields
+
+
 def fwnum(v):
     return int(re.match(r"\d+", v)[0])
 
@@ -140,6 +267,8 @@ def main():
     ap.add_argument("--no-build", action="store_true")
     ap.add_argument("-v", action="store_true")
     ap.add_argument("--migrate", action="store_true", help="only move old version-listed vtable aliases")
+    ap.add_argument("--nontrivial", action="store_true", help="also dtors with a body (from the C of D2/D1)")
+    ap.add_argument("--exclude", default="", help="classes to leave alone (comma-separated)")
     a = ap.parse_args()
     mod = a.module
     have = sorted((p.parent.name for p in ROOT.glob(f"config/*/{mod}.yaml")), key=lambda v: (fwnum(v), v))
@@ -205,10 +334,16 @@ def main():
 
     # per cluster and version: qualification
     reasons, plans = Counter(), []
+    store0 = json.loads((sd / f"{mod}_decls.json").read_text())
+    structs = {}
+    for t in store0.get("types", {}).values():
+        for m in re.finditer(r"struct (\w+) \{\n(.*?)\n\};", t, re.S):
+            structs[m[1]] = struct_fields(m[2])
     for c in clusters:
         g0 = next(iter(c["by"].values()))
         sizes = tuple(g0["sizes"])
-        if sizes not in TRIVIAL:
+        nt = sizes not in TRIVIAL
+        if nt and not a.nontrivial:
             reasons["not trivial"] += 1
             continue
         cls = None
@@ -220,8 +355,10 @@ def main():
         todo, why = {}, Counter()
         for v, g in c["by"].items():
             names = [n for _, n in g["funcs"]]
-            if all(MANGLED.match(n) for n in names):
-                continue  # done
+            if all(MANGLED.match(n) for n in names) and (not nt or any(
+                    e.kind == "cfunc" and re.search(r"(\w+)::~\1\(\)", e.text) and e.name == MANGLED.match(names[0])[2]
+                    for lst in comp[v].values() for _, e in lst)):
+                continue  # done (a non-trivial base with mangled names may still be asm)
             if any(n.startswith("_Z") and not MANGLED.match(n) for n in names):
                 why["real (exported) names"] += 1
                 continue
@@ -239,22 +376,55 @@ def main():
                 why["entries not consecutive" if where == "split" else "entries not found"] += 1
                 continue
             flags = unit_flags(where[0], v)
-            if not flags.startswith("cc1plus") or template_shapes(flags, sizes[0]) != [list(x) for x in g["shapes"]]:
+            body = None
+            if nt:
+                # D0 = D1 inlined + operator delete: a third function that only calls delete
+                # somewhere (a list-freeing dtor next to it) is no D0
+                cl = g.get("calls") or []
+                nbr = [sum(1 for w in sh if (w >> 26) in (1, 4, 5, 6, 7, 20, 21, 22, 23)) for sh in g["shapes"]]
+                if len(cl) != 3 or not cl[2] or cl[2][:-1] != cl[0] or cl[2][-1] not in g["delete"] \
+                        or nbr[2] != nbr[0] or g["sizes"][2] - g["sizes"][0] > 0x30:
+                    why["not a D2/D1/D0 triple"] += 1
+                    continue
+                es = ents[where[0]]
+                cs = [es[k] for k in where[1][:2] if es[k].kind == "cfunc"]
+                body = next((b for b in (dtor_body(e.text, g["vptr_label"], structs) for e in cs) if b), None)
+                if not flags.startswith("cc1plus") or body is None:
+                    why["dtor body not in C (or not convertible)"] += 1
+                    continue
+            elif not flags.startswith("cc1plus") or template_shapes(flags, sizes[0]) != [list(x) for x in g["shapes"]]:
                 why["code differs from the unit's compiler"] += 1
                 continue
             lu = label_unit(v, g["vptr_label"])
             if lu is None:
                 why["vtable label not found"] += 1
                 continue
-            todo[v] = {"names": names, "where": where, "label": g["vptr_label"], "label_unit": lu, "base": g["base"],
-                       "funcs": g["funcs"]}
+            todo[v] = {"names": names, "where": where, "label": g["vptr_label"], "label_unit": lu,
+                       "base": body[1] if nt else g["base"], "funcs": g["funcs"],
+                       "body": body[0] if nt else "", "fields": body[2] if nt else {}}
         if not todo:
             if why:
                 reasons[max(why, key=why.get)] += 1
             continue
         if why:
             reasons["some versions skipped"] += 1
-        plans.append({"cls": cls, "sizes": sizes, "todo": todo, "done": [v for v in c["by"] if v not in todo]})
+        fields = {}
+        for t in todo.values():
+            for o, f in t["fields"].items():
+                if fields.setdefault(o, f) != f:
+                    fields = None
+                    break
+            if fields is None:
+                break
+        if fields is None:
+            reasons["field types differ between versions"] += 1
+            continue
+        have = struct_fields(store0.get("types", {}).get(cls, ""))
+        if any(o in have and have[o] != f for o, f in fields.items()):
+            reasons["field differs from the class's"] += 1
+            continue
+        plans.append({"cls": cls, "sizes": sizes, "todo": todo, "done": [v for v in c["by"] if v not in todo],
+                      "nt": nt, "fields": fields})
     # unique class names; bases
     dup = Counter(p["cls"] for p in plans)
     for p in [p for p in plans if dup[p["cls"]] > 1 or p["cls"] in ambiguous]:
@@ -270,13 +440,16 @@ def main():
         if id(p) in state:
             return state[id(p)]
         state[id(p)] = None
-        if p["sizes"][0] == 0x10:
+        if p["sizes"][0] == 0x10 and not p["nt"]:
             p["base_cls"] = None
             state[id(p)] = True
             return True
         bases = set()
         for v, t in p["todo"].items():
             b = t["base"]
+            if p["nt"] and b is None:
+                bases.add("")
+                continue
             if b and (v, b) in d2_of and depth < 20 and resolve(d2_of[(v, b)], depth + 1):
                 bases.add(d2_of[(v, b)]["cls"])
             elif b and b.startswith("_Z") and demangled_class(b):
@@ -291,7 +464,7 @@ def main():
         if len(bases) != 1 or None in bases:
             state[id(p)] = False
             return False
-        p["base_cls"] = bases.pop()
+        p["base_cls"] = bases.pop() or None
         state[id(p)] = True
         return True
     # a class declared already (by an earlier run, for other versions) must keep its base
@@ -307,10 +480,14 @@ def main():
         else:
             ok.append(p)
     ok.sort(key=lambda p: (p["base_cls"] or "") in {q["cls"] for q in ok})  # bases first in the decls
+    if a.exclude:
+        ex = set(a.exclude.split(","))
+        ok = [p for p in ok if p["cls"] not in ex and p["base_cls"] not in ex]
     if a.limit:
         ok = ok[:a.limit]
     total = len(clusters)
-    trivial = total - reasons["not trivial"]
+    trivial = total - reasons["not trivial"] if not a.nontrivial else sum(
+        1 for c in clusters if tuple(next(iter(c["by"].values()))["sizes"]) in TRIVIAL)
     already = sum(1 for c in clusters if all(all(MANGLED.match(n) for _, n in g["funcs"]) for g in c["by"].values()))
     print(f"{mod}: {total} dtor groups, {trivial} trivial, {already} done, {len(ok)} to convert; skipped: "
           + ", ".join(f"{k} {n}" for k, n in sorted(reasons.items())))
@@ -361,9 +538,27 @@ def main():
             ns, cn = base.rsplit("::", 1)
             types.setdefault(f"0_{base}", f"#ifdef __cplusplus\nnamespace {ns} {{\nclass {cn} {{\npublic:\n    virtual ~{cn}();\n}};\n}}\n#endif")
         inh = f" : public {base}" if base else ""
-        if cls not in types:  # a hand-written class (more members) is kept
+        have = struct_fields(types.get(cls, ""))  # fields given earlier (tools/cxx_layout.py)
+        if cls not in types or "dtor still asm/m2c" in types[cls]:  # a hand-written class (more members) is kept
+            old_t = types.get(cls, "")
             types[cls] = (f"#ifdef __cplusplus\n/* vtable {vtable_name(cls)} is data (vptr = label - 8 + 8) */\n"
                           f"class {cls}{inh} {{\npublic:\n    virtual ~{cls}();\n}};\n#endif")
+            ctor = re.search(rf"^    {cls}\(\);$", old_t, re.M)
+            if ctor:
+                types[cls] = types[cls].replace("public:\n", f"public:\n    {cls}();\n", 1)
+        if p["fields"] or have:
+            allf = dict(have)
+            for o, f in p["fields"].items():
+                allf.setdefault(o, f)  # same type (checked when planning) or relayout reports it
+            body, pos = [], 4
+            for o in sorted(allf):
+                sz, d = allf[o]
+                if o > pos:
+                    body.append(f"    u8 pad{pos:X}[0x{o - pos:X}];")
+                body.append(f"    {d}")
+                pos = o + sz
+            t = re.sub(r"\n    (?:u8 pad\w+\[[^\]]*\];|[^\n]*\bunk[0-9A-F]+(?:\[[^\]]*\])?;)(?=\n)", "", types[cls])
+            types[cls] = t.replace("public:\n", "public:\n" + "\n".join(body) + "\n", 1)
         new = dtor_names(cls)
         for v, t in p["todo"].items():
             n = fwnum(v)
@@ -374,7 +569,8 @@ def main():
             assert [es[k].name for k in idxs] == t["names"], (cls, v)
             for k in idxs:
                 es[k].vers = es[k].vers - {n}
-            es.insert(idxs[0], FM.Entry(frozenset([n]), "cfunc", cls, f"{cls}::~{cls}() {{\n}}\n"))
+            body = (t["body"] + "\n") if t["body"] else ""
+            es.insert(idxs[0], FM.Entry(frozenset([n]), "cfunc", cls, f"{cls}::~{cls}() {{\n{body}}}\n"))
             lf = t["label_unit"]
             les = ents[lf]
             pos = next((k + 1 for k, e in enumerate(les) if e.kind == "rodata" and e.name == t["label"] and n in e.vers), len(les))
@@ -420,6 +616,11 @@ def main():
     for nn in allnew:
         if nn.endswith("D2Ev") and nn not in store["funcs"] and any(re.search(rf"\b{nn}\(", f.read_text()) for f in files):
             store["funcs"][nn] = f"void {nn}(void *self);"
+    bad = relayout(types)
+    if bad:
+        for q, txt in list(keep.items()) + list(keepcfg.items()):
+            q.write_text(txt)
+        raise SystemExit(f"fields overlap the base's in {', '.join(bad)}; restored")
     structify.SRC[mod] = sd
     structify.write_decls(mod, store)
     print(f"converted {len(ok)} classes in {len({n for n in renames})} versions")
@@ -439,6 +640,16 @@ def main():
     bad = [l for l in r.stdout.splitlines() if l.strip() and not l.endswith(": OK")]
     if bad:
         print("\n".join(sorted(bad)[:12]))
+        culprits = set()
+        for l in bad:
+            m = re.match(r"^(\w+):\S+: FAIL .*MISMATCH", l)
+            if m:
+                n = first_mismatch(m[1], mod)
+                cm = re.match(r"^(\w+)::~\1\(\)", n or "")
+                if cm:
+                    culprits.add(cm[1])
+        if culprits:
+            print("mismatching classes: " + " ".join(sorted(culprits)))
         for q, txt in list(keep.items()) + list(keepcfg.items()):
             q.write_text(txt)
         print("restored")

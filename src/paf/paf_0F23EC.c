@@ -21,7 +21,9 @@ INCLUDE_ASM("nonmatchings/paf_0F23EC", func_000F2484);
 
 INCLUDE_ASM("nonmatchings/paf_0F23EC", _ZN3paf6PhText9EraseTextEjj);
 
-s32 _ZN3paf6PhText9EraseTextEi(struct Unk_scePaf_B9BE69FD_0 *arg0, s32 arg1) {
+s32 paf::PhText::EraseText(int cxxp1) {
+    struct Unk_scePaf_B9BE69FD_0 *arg0 = (struct Unk_scePaf_B9BE69FD_0 *) this;
+    s32 arg1 = (s32) cxxp1;
     s32 var_a2;
     void *temp_v0;
 
@@ -86,7 +88,8 @@ INCLUDE_ASM("nonmatchings/paf_0F23EC", _ZN3paf6PhText14RemoveAllAttrsEv);
 
 INCLUDE_ASM("nonmatchings/paf_0F23EC", _ZNK3paf6PhText12GetTextWidthEv);
 
-void _ZN3paf6PhText14ReleaseSurfaceEv(struct Unk_scePaf_A574DB92_0 *arg0) {
+void paf::PhText::ReleaseSurface() {
+    struct Unk_scePaf_A574DB92_0 *arg0 = (struct Unk_scePaf_A574DB92_0 *) this;
     s32 temp_v0;
 
     temp_v0 = arg0->unk1E8;

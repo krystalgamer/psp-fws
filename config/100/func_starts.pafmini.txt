@@ -1123,7 +1123,6 @@ func_000A4750 = 0x000A4750; // type:func
 func_000A476C = 0x000A476C; // type:func
 func_000A47CC = 0x000A47CC; // type:func
 func_000A4810 = 0x000A4810; // type:func
-func_000A4940 = 0x000A4940; // type:func
 func_000A49CC = 0x000A49CC; // type:func
 func_000A4A14 = 0x000A4A14; // type:func
 func_000A4B28 = 0x000A4B28; // type:func

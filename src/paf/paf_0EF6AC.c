@@ -46,7 +46,7 @@ s32 func_000EFBD4(void) {
     return D_001A481C;
 }
 
-s32 _ZN3paf6PhSpin10WidgetTypeEv(void) {
+s32 paf::PhSpin::WidgetType() {
     return D_001A481C;
 }
 
@@ -342,7 +342,7 @@ s32 func_000F1CA0(void) {
     return D_001A4820;
 }
 
-s32 _ZN3paf6PhText10WidgetTypeEv(void) {
+s32 paf::PhText::WidgetType() {
     return D_001A4820;
 }
 
@@ -409,7 +409,8 @@ s32 scePaf_D1EE972C(struct Unk_scePaf_D1EE972C_0 *arg0, s32 arg1, s32 arg2, s32 
 
 INCLUDE_ASM("nonmatchings/paf_0EF6AC", _ZN3paf6PhText12SetFirstLineEf);
 
-void _ZNK3paf6PhText12GetFirstLineEv(struct Unk_scePaf_FA758B05_0 *arg0) {
+void paf::PhText::GetFirstLine() const {
+    struct Unk_scePaf_FA758B05_0 *arg0 = (struct Unk_scePaf_FA758B05_0 *) this;
     func_00106ABC(arg0->unk1E8);
 }
 
@@ -419,7 +420,8 @@ INCLUDE_ASM("nonmatchings/paf_0EF6AC", _ZN3paf6PhText15SetColumnOffsetEf);
 INCLUDE_ASM("nonmatchings/paf_0EF6AC", func_00095D40);
 #endif
 
-s32 _ZNK3paf6PhText13GetTextLengthEv(struct Unk_scePaf_DC8B0309_0 *arg0) {
+s32 paf::PhText::GetTextLength() const {
+    struct Unk_scePaf_DC8B0309_0 *arg0 = (struct Unk_scePaf_DC8B0309_0 *) this;
     s32 temp_v0;
     s32 var_v1;
 
@@ -431,7 +433,8 @@ s32 _ZNK3paf6PhText13GetTextLengthEv(struct Unk_scePaf_DC8B0309_0 *arg0) {
     return var_v1;
 }
 
-s32 _ZNK3paf6PhText12GetLineCountEv(struct Unk_scePaf_FA87D725_0 *arg0) {
+s32 paf::PhText::GetLineCount() const {
+    struct Unk_scePaf_FA87D725_0 *arg0 = (struct Unk_scePaf_FA87D725_0 *) this;
     s32 temp_v0;
     s32 var_v1;
 
@@ -443,7 +446,8 @@ s32 _ZNK3paf6PhText12GetLineCountEv(struct Unk_scePaf_FA87D725_0 *arg0) {
     return var_v1;
 }
 
-s32 _ZNK3paf6PhText13GetCurrentPosEv(struct Unk_scePaf_409E25A3_0 *arg0) {
+s32 paf::PhText::GetCurrentPos() const {
+    struct Unk_scePaf_409E25A3_0 *arg0 = (struct Unk_scePaf_409E25A3_0 *) this;
     s32 temp_v0;
     s32 var_v1;
 

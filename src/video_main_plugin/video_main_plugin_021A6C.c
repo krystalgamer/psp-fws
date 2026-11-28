@@ -162,17 +162,10 @@ INCLUDE_ASM("nonmatchings/video_main_plugin_021A6C", func_000226C4);
 
 INCLUDE_ASM("nonmatchings/video_main_plugin_021A6C", func_0002272C);
 
-#if FW_VERSION >= 350
 s32 func_00022794(s32 arg0, s32 *arg1) {
     *arg1 = sce_paf_private_atoi(arg0 + 0x4C);
     return 0;
 }
-#else
-s32 func_00022794(s32 arg0, s32 *arg1) {
-    *arg1 = sce_paf_private_atoi(arg0 + 0x4C);
-    return 0;
-}
-#endif
 
 INCLUDE_ASM("nonmatchings/video_main_plugin_021A6C", func_000227C4);
 
@@ -1097,25 +1090,13 @@ s32 func_00026A64(s32 *arg0) {
 
 INCLUDE_ASM("nonmatchings/video_main_plugin_021A6C", func_00026AB0);
 
-#if FW_VERSION >= 350
 void func_00026ACC(s32 *arg0) {
     sce_paf_private_fseek(*arg0);
 }
-#else
-void func_00026ACC(s32 *arg0) {
-    sce_paf_private_fseek(*arg0);
-}
-#endif
 
-#if FW_VERSION >= 350
 void func_00026AE8(s32 *arg0) {
     sce_paf_private_ftell(*arg0);
 }
-#else
-void func_00026AE8(s32 *arg0) {
-    sce_paf_private_ftell(*arg0);
-}
-#endif
 
 INCLUDE_ASM("nonmatchings/video_main_plugin_021A6C", func_00026B04);
 

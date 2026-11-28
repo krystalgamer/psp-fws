@@ -10,6 +10,24 @@
 extern "C" {
 #endif
 
+#ifdef __cplusplus
+class PageManager {
+public:
+    void Clear();
+};
+extern "C++" {
+namespace vsh {
+    void RaiseFatalError(unsigned int);
+}
+}
+namespace vsh {
+class FixedAlloc {
+public:
+    void * Instance();
+};
+}
+#endif
+
 struct D_00030398_s {
     volatile s32 unk0;
     volatile s32 unk4;

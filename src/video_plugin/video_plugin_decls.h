@@ -12,6 +12,38 @@ extern "C" {
 #endif
 
 #ifdef __cplusplus
+/* vtable _ZTV14Class_00041F30 is data (vptr = label - 8 + 8) */
+class Class_00041F30 {
+public:
+    virtual ~Class_00041F30();
+};
+#endif
+
+#ifdef __cplusplus
+/* dtor still asm/m2c (not trivial) */
+class Class_00042AE0 {
+public:
+    virtual ~Class_00042AE0();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_00040E98 is data (vptr = label - 8 + 8) */
+class Class_00040E98 : public Class_00042AE0 {
+public:
+    virtual ~Class_00040E98();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_00042AC0 is data (vptr = label - 8 + 8) */
+class Class_00042AC0 : public Class_00042AE0 {
+public:
+    virtual ~Class_00042AC0();
+};
+#endif
+
+#ifdef __cplusplus
 /* vtable _ZTV14Class_00043FF0 is data (vptr = label - 8 + 8) */
 class Class_00043FF0 {
 public:
@@ -166,6 +198,15 @@ M2C_UNK InputDevice_PspPad_Lock(...);
 M2C_UNK Job_Start(M2C_UNK, M2C_UNK *, M2C_UNK, M2C_UNK, M2C_UNK, void (*)());
 M2C_UNK _Z11PSJS_Mallocj(u32);
 M2C_UNK _Z9PSJS_FreePv(void *);
+void _ZN14Class_00040E98D0Ev(s32 **arg0);
+void _ZN14Class_00040E98D1Ev(s32 **arg0);
+void _ZN14Class_00040E98D2Ev(s32 **arg0);
+void _ZN14Class_00041F30D1Ev(s32 **arg0);
+void _ZN14Class_00041F30D2Ev(s32 **arg0);
+void _ZN14Class_00042AC0D0Ev(s32 **arg0);
+void _ZN14Class_00042AC0D1Ev(s32 **arg0);
+void _ZN14Class_00042AC0D2Ev(s32 **arg0);
+s32 _ZN14Class_00042AE0D2Ev(s32);
 M2C_UNK _ZN3paf13PhApplication13StartDispListEv(void);
 M2C_UNK _ZN3paf13PhApplication14FinishDispListEv(void);
 M2C_UNK _ZN3paf4View11ForEachPageEPFbPS0_PvS2_ES2_(s32, M2C_UNK *, void *);

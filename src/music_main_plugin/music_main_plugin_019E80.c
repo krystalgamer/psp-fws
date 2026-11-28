@@ -23,7 +23,13 @@ INCLUDE_RODATA("nonmatchings/music_main_plugin_019E80", D_0009B7F8);
 INCLUDE_RODATA("nonmatchings/music_main_plugin_019E80", D_0009B808);
 
 INCLUDE_RODATA("nonmatchings/music_main_plugin_019E80", D_0009B818);
+#endif
 
+#if FW_VERSION >= 282 && FW_VERSION < 310
+__asm__(".globl _ZTV14Class_0009B818\n_ZTV14Class_0009B818 = D_0009B818 - 8\n");
+#endif
+
+#if FW_VERSION >= 282 && FW_VERSION < 330
 INCLUDE_RODATA("nonmatchings/music_main_plugin_019E80", D_0009B878);
 
 INCLUDE_RODATA("nonmatchings/music_main_plugin_019E80", D_0009B888);
@@ -224,7 +230,7 @@ INCLUDE_ASM("nonmatchings/music_main_plugin_019E80", func_0001C50C);
 
 INCLUDE_ASM("nonmatchings/music_main_plugin_019E80", func_0001C52C);
 
-s32 func_00019788(struct Unk_func_00019788_0 *arg0) {
+s32 func_00019788(Class_0009BCC8 *arg0) {
     return arg0->unkC;
 }
 

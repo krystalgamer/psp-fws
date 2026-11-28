@@ -77,14 +77,26 @@ INCLUDE_ASM("nonmatchings/music_main_plugin_01AAFC", func_00022968);
 
 INCLUDE_ASM("nonmatchings/music_main_plugin_01AAFC", func_00022970);
 
-INCLUDE_ASM("nonmatchings/music_main_plugin_01AAFC", func_00022978);
+Class_0009E470::Class_0009E470() {
+    this->unk4 = 1;
+}
 #endif
 
+#if FW_VERSION == 260
+void func_0001AF98(struct Unk_func_0001AF98_0 *arg0) {
+    _ZN14Class_0009E218C2Ev(arg0);
+    arg0->unk0 = &D_0009BC50;
+    arg0->unk4 = 1;
+}
+#endif
+
+#if FW_VERSION >= 271 && FW_VERSION < 330
 void func_0001AF98(struct Unk_func_0001AF98_0 *arg0) {
     func_00049EE0(arg0);
     arg0->unk0 = &D_0009BC50;
     arg0->unk4 = 1;
 }
+#endif
 
 #if FW_VERSION == 260
 Class_0009BC50::~Class_0009BC50() {
@@ -206,11 +218,11 @@ INCLUDE_ASM("nonmatchings/music_main_plugin_01AAFC", func_00023198);
 
 INCLUDE_ASM("nonmatchings/music_main_plugin_01AAFC", func_000231D4);
 
-INCLUDE_ASM("nonmatchings/music_main_plugin_01AAFC", func_0004A310);
+INCLUDE_ASM("nonmatchings/music_main_plugin_01AAFC", _ZN14Class_00094D20D2Ev);
 
-INCLUDE_ASM("nonmatchings/music_main_plugin_01AAFC", func_00023238);
+INCLUDE_ASM("nonmatchings/music_main_plugin_01AAFC", _ZN14Class_00094D20D1Ev);
 
-INCLUDE_ASM("nonmatchings/music_main_plugin_01AAFC", func_00023260);
+INCLUDE_ASM("nonmatchings/music_main_plugin_01AAFC", _ZN14Class_00094D20D0Ev);
 
 INCLUDE_ASM("nonmatchings/music_main_plugin_01AAFC", func_00023298);
 #else
@@ -246,7 +258,7 @@ INCLUDE_ASM("nonmatchings/music_main_plugin_01AAFC", func_0001B838);
 #if FW_VERSION >= 330
 INCLUDE_ASM("nonmatchings/music_main_plugin_01AAFC", func_0001B870);
 #else
-s32 func_0001B870(struct Unk_func_0001B870_0 *arg0) {
+s32 func_0001B870(Class_0009BCC8 *arg0) {
     return arg0->unk30;
 }
 #endif
@@ -256,7 +268,7 @@ INCLUDE_ASM("nonmatchings/music_main_plugin_01AAFC", func_0001B878);
 #if FW_VERSION >= 330
 INCLUDE_ASM("nonmatchings/music_main_plugin_01AAFC", func_0001B8B0);
 #else
-s32 func_0001B8B0(struct Unk_func_0001B8B0_0 *arg0) {
+s32 func_0001B8B0(Class_0009BCC8 *arg0) {
     return arg0->unk40;
 }
 #endif
@@ -266,7 +278,7 @@ INCLUDE_ASM("nonmatchings/music_main_plugin_01AAFC", func_0001B8B8);
 #if FW_VERSION >= 330
 INCLUDE_ASM("nonmatchings/music_main_plugin_01AAFC", func_0001B914);
 #else
-s32 func_0001B914(struct Unk_func_0001B914_0 *arg0) {
+s32 func_0001B914(Class_0009BCC8 *arg0) {
     return arg0->unk30 + arg0->unk40;
 }
 #endif
@@ -324,7 +336,7 @@ INCLUDE_ASM("nonmatchings/music_main_plugin_01AAFC", func_0001BC50);
 #endif
 
 #if FW_VERSION >= 282 && FW_VERSION < 330
-s32 func_0001BEB4(struct Unk_func_0001BEB4_0 *arg0) {
+s32 func_0001BEB4(Class_0009BCC8 *arg0) {
     func_0001BEF4((s32) arg0, 0, arg0->unk30);
     func_0001BF5C((s32) arg0, 0, arg0->unk40);
     return 0;

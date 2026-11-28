@@ -7,6 +7,11 @@ s32 func_0001C52C(void) {
     return D_0005BD44;
 }
 
+#if FW_VERSION < 352
+Class_00054D80::~Class_00054D80() {
+    D_0005BD44 = 0;
+}
+#else
 void func_0001C538(M2C_UNK **arg0) {
     *arg0 = &D_00054D80;
     D_0005BD44 = 0;
@@ -19,9 +24,10 @@ void func_0001C550(M2C_UNK **arg0) {
 
 INCLUDE_ASM("nonmatchings/lftv_middleware_01C52C", func_0001C568);
 
-#if FW_VERSION == 352
 INCLUDE_ASM("nonmatchings/lftv_middleware_01C52C", func_0001C594);
-#else
+#endif
+
+#if FW_VERSION < 352
 void func_0001C594(struct Unk_func_0001C594_0 *arg0, s32 arg1) {
     arg0->unk40 = arg1;
     arg0->unk0 = &D_00054DD0;
@@ -126,6 +132,10 @@ INCLUDE_RODATA("nonmatchings/lftv_middleware_01C52C", D_00054B40);
 INCLUDE_RODATA("nonmatchings/lftv_middleware_01C52C", D_00054C60);
 
 INCLUDE_RODATA("nonmatchings/lftv_middleware_01C52C", D_00054D80);
+
+#if FW_VERSION < 352
+__asm__(".globl _ZTV14Class_00054D80\n_ZTV14Class_00054D80 = D_00054D80 - 8\n");
+#endif
 
 INCLUDE_RODATA("nonmatchings/lftv_middleware_01C52C", D_00054DD0);
 

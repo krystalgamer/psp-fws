@@ -28,6 +28,33 @@ public:
 #endif
 
 #ifdef __cplusplus
+/* vtable _ZTV14Class_00094528 is data (vptr = label - 8 + 8) */
+class Class_00094528 {
+public:
+    u32 unk4;
+    Class_00094528(void *arg1);
+    virtual ~Class_00094528();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_00094538 is data (vptr = label - 8 + 8) */
+class Class_00094538 {
+public:
+    u32 unk4;
+    virtual ~Class_00094538();
+};
+#endif
+
+#ifdef __cplusplus
+/* dtor still asm/m2c (not trivial) */
+class Class_00094D20 {
+public:
+    virtual ~Class_00094D20();
+};
+#endif
+
+#ifdef __cplusplus
 /* dtor still asm/m2c (not trivial) */
 class Class_00094DD0 {
 public:
@@ -63,6 +90,9 @@ public:
 /* vtable _ZTV14Class_00097B88 is data (vptr = label - 8 + 8) */
 class Class_00097B88 {
 public:
+    s32 unk4;
+    s32 unk8;
+    Class_00097B88(s32 arg1, s32 arg2);
     virtual ~Class_00097B88();
 };
 #endif
@@ -385,6 +415,12 @@ public:
 /* dtor still asm/m2c (not trivial) */
 class Class_0009BCC8 {
 public:
+    u8 pad4[0x8];
+    s32 unkC;
+    u8 pad10[0x20];
+    s32 unk30;
+    u8 pad34[0xC];
+    s32 unk40;
     virtual ~Class_0009BCC8();
 };
 #endif
@@ -398,9 +434,22 @@ public:
 #endif
 
 #ifdef __cplusplus
+/* vtable _ZTV14Class_0009B818 is data (vptr = label - 8 + 8) */
+class Class_0009B818 : public Class_0009BCC8 {
+public:
+    u8 pad44[0x4C];
+    u32 unk90;
+    virtual ~Class_0009B818();
+};
+#endif
+
+#ifdef __cplusplus
 /* dtor still asm/m2c (not trivial) */
 class Class_0009C078 {
 public:
+    u8 unk4;
+    u8 pad5[0x3];
+    s32 unk8;
     virtual ~Class_0009C078();
 };
 #endif
@@ -425,6 +474,8 @@ public:
 /* vtable _ZTV14Class_0009C278 is data (vptr = label - 8 + 8) */
 class Class_0009C278 {
 public:
+    s32 unk4;
+    Class_0009C278();
     virtual ~Class_0009C278();
 };
 #endif
@@ -482,6 +533,7 @@ public:
 /* dtor still asm/m2c (not trivial) */
 class Class_0009E218 {
 public:
+    Class_0009E218();
     virtual ~Class_0009E218();
 };
 #endif
@@ -498,6 +550,8 @@ public:
 /* vtable _ZTV14Class_0009E470 is data (vptr = label - 8 + 8) */
 class Class_0009E470 : public Class_0009E218 {
 public:
+    s32 unk4;
+    Class_0009E470();
     virtual ~Class_0009E470();
 };
 #endif
@@ -597,9 +651,36 @@ public:
 #endif
 
 #ifdef __cplusplus
+/* vtable _ZTV14Class_000A0220 is data (vptr = label - 8 + 8) */
+class Class_000A0220 : public Class_00094D20 {
+public:
+    virtual ~Class_000A0220();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_000A0460 is data (vptr = label - 8 + 8) */
+class Class_000A0460 : public Class_00094D20 {
+public:
+    virtual ~Class_000A0460();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_000A04C8 is data (vptr = label - 8 + 8) */
+class Class_000A04C8 : public Class_00094D20 {
+public:
+    virtual ~Class_000A04C8();
+};
+#endif
+
+#ifdef __cplusplus
 /* vtable _ZTV14Class_000A04F0 is data (vptr = label - 8 + 8) */
 class Class_000A04F0 {
 public:
+    s32 unk4;
+    s32 unk8;
+    Class_000A04F0();
     virtual ~Class_000A04F0();
 };
 #endif
@@ -641,6 +722,7 @@ public:
 /* vtable _ZTV14Class_000A0910 is data (vptr = label - 8 + 8) */
 class Class_000A0910 {
 public:
+    s32 unk4;
     Class_000A0910();
     virtual ~Class_000A0910();
 };
@@ -695,7 +777,17 @@ public:
 /* vtable _ZTV14Class_000A1B58 is data (vptr = label - 8 + 8) */
 class Class_000A1B58 {
 public:
+    s32 unk4;
+    Class_000A1B58();
     virtual ~Class_000A1B58();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_000A1E50 is data (vptr = label - 8 + 8) */
+class Class_000A1E50 : public Class_00094D20 {
+public:
+    virtual ~Class_000A1E50();
 };
 #endif
 
@@ -711,6 +803,9 @@ public:
 /* vtable _ZTV14Class_000A1F08 is data (vptr = label - 8 + 8) */
 class Class_000A1F08 {
 public:
+    s32 unk4;
+    s32 unk8;
+    Class_000A1F08(s32 arg1, s32 arg2);
     virtual ~Class_000A1F08();
 };
 #endif
@@ -719,6 +814,11 @@ public:
 /* vtable _ZTV14Class_000A1F18 is data (vptr = label - 8 + 8) */
 class Class_000A1F18 {
 public:
+    u8 pad4[0xC];
+    s32 unk10;
+    s32 unk14;
+    s32 unk18;
+    Class_000A1F18(s32 arg1, s32 arg2);
     virtual ~Class_000A1F18();
 };
 #endif
@@ -736,6 +836,9 @@ public:
 /* vtable _ZTV14Class_000A2078 is data (vptr = label - 8 + 8) */
 class Class_000A2078 {
 public:
+    s32 unk4;
+    s32 unk8;
+    Class_000A2078(s32 arg1, s32 arg2);
     virtual ~Class_000A2078();
 };
 #endif
@@ -744,6 +847,12 @@ public:
 /* vtable _ZTV14Class_000A2088 is data (vptr = label - 8 + 8) */
 class Class_000A2088 {
 public:
+    s32 unk4;
+    u8 pad8[0x4];
+    s32 unkC;
+    s32 unk10;
+    s32 unk14;
+    Class_000A2088(s32 arg1);
     virtual ~Class_000A2088();
 };
 #endif
@@ -752,6 +861,9 @@ public:
 /* vtable _ZTV14Class_000A20D0 is data (vptr = label - 8 + 8) */
 class Class_000A20D0 {
 public:
+    s32 unk4;
+    s32 unk8;
+    Class_000A20D0(s32 arg1, s32 arg2);
     virtual ~Class_000A20D0();
 };
 #endif
@@ -800,6 +912,7 @@ public:
 /* vtable _ZTV14Class_000A2160 is data (vptr = label - 8 + 8) */
 class Class_000A2160 : public Class_000A2088 {
 public:
+
     virtual ~Class_000A2160();
 };
 #endif
@@ -816,6 +929,8 @@ public:
 /* vtable _ZTV14Class_000A21B8 is data (vptr = label - 8 + 8) */
 class Class_000A21B8 : public Class_000A20E0 {
 public:
+    u8 pad4[0x1C];
+    s32 unk20;
     virtual ~Class_000A21B8();
 };
 #endif
@@ -832,6 +947,7 @@ public:
 /* vtable _ZTV14Class_000A2270 is data (vptr = label - 8 + 8) */
 class Class_000A2270 : public Class_000A2088 {
 public:
+
     virtual ~Class_000A2270();
 };
 #endif
@@ -848,6 +964,7 @@ public:
 /* vtable _ZTV14Class_000A22A0 is data (vptr = label - 8 + 8) */
 class Class_000A22A0 : public Class_000A2088 {
 public:
+
     virtual ~Class_000A22A0();
 };
 #endif
@@ -864,6 +981,7 @@ public:
 /* vtable _ZTV14Class_000A22D0 is data (vptr = label - 8 + 8) */
 class Class_000A22D0 : public Class_000A2088 {
 public:
+
     virtual ~Class_000A22D0();
 };
 #endif
@@ -896,6 +1014,8 @@ public:
 /* vtable _ZTV14Class_000A20B8 is data (vptr = label - 8 + 8) */
 class Class_000A20B8 : public Class_000A2338 {
 public:
+    u8 pad18[0x4];
+    s32 unk1C;
     virtual ~Class_000A20B8();
 };
 #endif
@@ -912,6 +1032,7 @@ public:
 /* vtable _ZTV14Class_000A2490 is data (vptr = label - 8 + 8) */
 class Class_000A2490 : public Class_000A2088 {
 public:
+
     virtual ~Class_000A2490();
 };
 #endif
@@ -928,6 +1049,7 @@ public:
 /* vtable _ZTV14Class_000A24C0 is data (vptr = label - 8 + 8) */
 class Class_000A24C0 : public Class_000A2088 {
 public:
+
     virtual ~Class_000A24C0();
 };
 #endif
@@ -952,6 +1074,7 @@ public:
 /* vtable _ZTV14Class_000A24F0 is data (vptr = label - 8 + 8) */
 class Class_000A24F0 : public Class_000A2088 {
 public:
+
     virtual ~Class_000A24F0();
 };
 #endif
@@ -968,6 +1091,9 @@ public:
 /* vtable _ZTV14Class_000A2948 (vptr D_000A2948) */
 class Class_000A2948 {
 public:
+    Class_000A2948(s32 arg1, s32 arg2);
+    s32 unk4;
+    s32 unk8;
     virtual ~Class_000A2948();
 };
 #endif
@@ -976,6 +1102,10 @@ public:
 /* vtable _ZTV14Class_000A2968 is data (vptr = label - 8 + 8) */
 class Class_000A2968 {
 public:
+    s32 unk4;
+    s32 unk8;
+    s32 unkC;
+    Class_000A2968(s32 arg1, s32 arg2, s32 arg3);
     virtual ~Class_000A2968();
 };
 #endif
@@ -992,6 +1122,9 @@ public:
 /* vtable _ZTV14Class_000A2998 is data (vptr = label - 8 + 8) */
 class Class_000A2998 {
 public:
+    s32 unk4;
+    Class_000A2998(s32 arg1);
+    Class_000A2998();
     virtual ~Class_000A2998();
 };
 #endif
@@ -1009,6 +1142,9 @@ public:
 /* vtable _ZTV14Class_000A29C8 is data (vptr = label - 8 + 8) */
 class Class_000A29C8 {
 public:
+    s32 unk4;
+    Class_000A29C8(s32 arg1);
+    Class_000A29C8();
     virtual ~Class_000A29C8();
 };
 #endif
@@ -1049,6 +1185,8 @@ public:
 /* vtable _ZTV14Class_000A2A40 is data (vptr = label - 8 + 8) */
 class Class_000A2A40 : public Class_00097E58 {
 public:
+    u8 pad4[0x20];
+    s32 unk24;
     virtual ~Class_000A2A40();
 };
 #endif
@@ -3746,9 +3884,22 @@ s32 Job_isCanceled(...);
 void _ZN14Class_00093600D0Ev(M2C_UNK **arg0);
 void _ZN14Class_00093600D1Ev(M2C_UNK **arg0);
 void _ZN14Class_00093600D2Ev(M2C_UNK **arg0);
+void _ZN14Class_00094528C1EPv(struct Unk_func_000529BC_0 *arg0, void *arg1);
+void _ZN14Class_00094528C2EPv(struct Unk_func_00052978_0 *arg0, void *arg1);
+void _ZN14Class_00094528D0Ev(struct Unk_func_00052A50_0 *arg0);
+void _ZN14Class_00094528D1Ev(struct Unk_func_00052A28_0 *arg0);
+void _ZN14Class_00094528D2Ev(struct Unk_func_00052A00_0 *arg0);
+void _ZN14Class_00094538D0Ev(struct Unk_func_00053598_0 *arg0);
+void _ZN14Class_00094538D1Ev(struct Unk_func_00053570_0 *arg0);
+void _ZN14Class_00094538D2Ev(struct Unk_func_00053548_0 *arg0);
+void _ZN14Class_00094D20D0Ev(M2C_UNK **arg0);
+void _ZN14Class_00094D20D1Ev(M2C_UNK **arg0);
+s32 _ZN14Class_00094D20D2Ev(s32);
 void _ZN14Class_00097AA8D0Ev(M2C_UNK **arg0);
 void _ZN14Class_00097AA8D1Ev(M2C_UNK **arg0);
 void _ZN14Class_00097AA8D2Ev(M2C_UNK **arg0);
+void _ZN14Class_00097B88C1Eii(struct Unk_func_000918F8_0 *arg0, s32 arg1, s32 arg2);
+void _ZN14Class_00097B88C2Eii(struct Unk_func_000918E0_0 *arg0, s32 arg1, s32 arg2);
 void _ZN14Class_00097B88D0Ev(M2C_UNK **arg0);
 void _ZN14Class_00097B88D1Ev(M2C_UNK **arg0);
 void _ZN14Class_00097B88D2Ev(M2C_UNK **arg0);
@@ -3787,6 +3938,9 @@ void _ZN14Class_00098158D2Ev(M2C_UNK **arg0);
 void _ZN14Class_00098168D0Ev(s32 **arg0, s32 arg1, s32 arg2);
 void _ZN14Class_00098168D1Ev(M2C_UNK **arg0);
 void _ZN14Class_00098168D2Ev(M2C_UNK **arg0);
+void _ZN14Class_0009B818D0Ev(struct Unk_func_00017300_0 *arg0);
+void _ZN14Class_0009B818D1Ev(struct Unk_func_000172C0_0 *arg0);
+void _ZN14Class_0009B818D2Ev(struct Unk_func_00017280_0 *arg0);
 void _ZN14Class_0009BC50D0Ev(M2C_UNK **arg0);
 void _ZN14Class_0009BC50D1Ev(M2C_UNK **arg0);
 void _ZN14Class_0009BC50D2Ev(M2C_UNK **arg0);
@@ -3800,6 +3954,8 @@ void _ZN14Class_0009C098D2Ev(s32 **arg0);
 void _ZN14Class_0009C140D0Ev(M2C_UNK **arg0);
 void _ZN14Class_0009C140D1Ev(M2C_UNK **arg0);
 void _ZN14Class_0009C140D2Ev(M2C_UNK **arg0);
+void _ZN14Class_0009C278C1Ev(struct Unk_func_00025284_0 *arg0);
+void _ZN14Class_0009C278C2Ev(struct Unk_func_00025270_0 *arg0);
 void _ZN14Class_0009C278D0Ev(M2C_UNK **arg0);
 void _ZN14Class_0009C278D1Ev(M2C_UNK **arg0);
 void _ZN14Class_0009C278D2Ev(M2C_UNK **arg0);
@@ -3815,9 +3971,13 @@ void _ZN14Class_0009E040C2Ev(M2C_UNK **arg0);
 void _ZN14Class_0009E040D0Ev(M2C_UNK **arg0);
 void _ZN14Class_0009E040D1Ev(M2C_UNK **arg0);
 void _ZN14Class_0009E040D2Ev(M2C_UNK **arg0);
+void _ZN14Class_0009E218C1Ev(struct Unk_func_00049EF8_0 *arg0);
+s32 _ZN14Class_0009E218C2Ev(s32);
 void _ZN14Class_0009E218D0Ev(M2C_UNK **arg0);
 void _ZN14Class_0009E218D1Ev(M2C_UNK **arg0);
 s32 _ZN14Class_0009E218D2Ev(s32);
+void _ZN14Class_0009E470C1Ev(struct Unk_func_0004A07C_0 *arg0);
+void _ZN14Class_0009E470C2Ev(struct Unk_func_0004A044_0 *arg0);
 void _ZN14Class_0009E470D0Ev(M2C_UNK **arg0);
 void _ZN14Class_0009E470D1Ev(M2C_UNK **arg0);
 void _ZN14Class_0009E470D2Ev(M2C_UNK **arg0);
@@ -3854,6 +4014,17 @@ void _ZN14Class_0009EE10C2Ev(M2C_UNK **arg0);
 void _ZN14Class_0009EE10D0Ev(M2C_UNK **arg0);
 void _ZN14Class_0009EE10D1Ev(M2C_UNK **arg0);
 void _ZN14Class_0009EE10D2Ev(M2C_UNK **arg0);
+void _ZN14Class_000A0220D0Ev(M2C_UNK **arg0);
+void _ZN14Class_000A0220D1Ev(M2C_UNK **arg0);
+void _ZN14Class_000A0220D2Ev(M2C_UNK **arg0);
+void _ZN14Class_000A0460D0Ev(M2C_UNK **arg0);
+void _ZN14Class_000A0460D1Ev(M2C_UNK **arg0);
+void _ZN14Class_000A0460D2Ev(M2C_UNK **arg0);
+void _ZN14Class_000A04C8D0Ev(M2C_UNK **arg0);
+void _ZN14Class_000A04C8D1Ev(M2C_UNK **arg0);
+void _ZN14Class_000A04C8D2Ev(M2C_UNK **arg0);
+void _ZN14Class_000A04F0C1Ev(struct Unk_func_000655F0_0 *arg0);
+void _ZN14Class_000A04F0C2Ev(struct Unk_func_000655D8_0 *arg0);
 void _ZN14Class_000A04F0D0Ev(M2C_UNK **arg0);
 void _ZN14Class_000A04F0D1Ev(M2C_UNK **arg0);
 s32 _ZN14Class_000A04F0D2Ev(void);
@@ -3892,15 +4063,24 @@ void _ZN14Class_000A1998C2Ev(M2C_UNK **arg0);
 void _ZN14Class_000A1998D0Ev(M2C_UNK **arg0);
 void _ZN14Class_000A1998D1Ev(M2C_UNK **arg0);
 void _ZN14Class_000A1998D2Ev(M2C_UNK **arg0);
+void _ZN14Class_000A1B58C1Ev(struct Unk_func_0007D870_0 *arg0);
+void _ZN14Class_000A1B58C2Ev(struct Unk_func_0007D85C_0 *arg0);
 void _ZN14Class_000A1B58D0Ev(M2C_UNK **arg0);
 void _ZN14Class_000A1B58D1Ev(M2C_UNK **arg0);
 void _ZN14Class_000A1B58D2Ev(M2C_UNK **arg0);
+void _ZN14Class_000A1E50D0Ev(M2C_UNK **arg0);
+void _ZN14Class_000A1E50D1Ev(M2C_UNK **arg0);
+s32 _ZN14Class_000A1E50D2Ev(s32);
 void _ZN14Class_000A1EF8D0Ev(M2C_UNK **arg0);
 void _ZN14Class_000A1EF8D1Ev(M2C_UNK **arg0);
 void _ZN14Class_000A1EF8D2Ev(M2C_UNK **arg0);
+void _ZN14Class_000A1F08C1Eii(struct Unk_func_000820CC_0 *arg0, s32 arg1, s32 arg2);
+void _ZN14Class_000A1F08C2Eii(struct Unk_func_000820B4_0 *arg0, s32 arg1, s32 arg2);
 void _ZN14Class_000A1F08D0Ev(M2C_UNK **arg0);
 void _ZN14Class_000A1F08D1Ev(M2C_UNK **arg0);
 void _ZN14Class_000A1F08D2Ev(M2C_UNK **arg0);
+void _ZN14Class_000A1F18C1Eii(struct Unk_func_000824DC_0 *arg0, s32 arg1, s32 arg2);
+void _ZN14Class_000A1F18C2Eii(struct Unk_func_000824BC_0 *arg0, s32 arg1, s32 arg2);
 void _ZN14Class_000A1F18D0Ev(M2C_UNK **arg0);
 void _ZN14Class_000A1F18D1Ev(M2C_UNK **arg0);
 void _ZN14Class_000A1F18D2Ev(M2C_UNK **arg0);
@@ -3912,9 +4092,13 @@ void _ZN14Class_000A1F90D2Ev(M2C_UNK **arg0);
 void _ZN14Class_000A2030D0Ev(M2C_UNK **arg0);
 void _ZN14Class_000A2030D1Ev(M2C_UNK **arg0);
 void _ZN14Class_000A2030D2Ev(M2C_UNK **arg0);
+void _ZN14Class_000A2078C1Eii(struct Unk_func_00086B64_0 *arg0, s32 arg1, s32 arg2);
+void _ZN14Class_000A2078C2Eii(struct Unk_func_00086B4C_0 *arg0, s32 arg1, s32 arg2);
 void _ZN14Class_000A2078D0Ev(M2C_UNK **arg0);
 void _ZN14Class_000A2078D1Ev(M2C_UNK **arg0);
 void _ZN14Class_000A2078D2Ev(M2C_UNK **arg0);
+void _ZN14Class_000A2088C1Ei(struct Unk_func_00086A98_0 *arg0, s32 arg1);
+void _ZN14Class_000A2088C2Ei(struct Unk_func_00086A54_0 *arg0, s32 arg1);
 void _ZN14Class_000A2088D0Ev(M2C_UNK **arg0);
 void _ZN14Class_000A2088D1Ev(M2C_UNK **arg0);
 void _ZN14Class_000A2088D2Ev(M2C_UNK **arg0);
@@ -3924,6 +4108,8 @@ void _ZN14Class_000A20A8D2Ev(M2C_UNK **arg0);
 void _ZN14Class_000A20B8D0Ev(M2C_UNK **arg0);
 void _ZN14Class_000A20B8D1Ev(M2C_UNK **arg0);
 void _ZN14Class_000A20B8D2Ev(M2C_UNK **arg0);
+void _ZN14Class_000A20D0C1Eii(struct Unk_func_0008743C_0 *arg0, s32 arg1, s32 arg2);
+void _ZN14Class_000A20D0C2Eii(struct Unk_func_00087424_0 *arg0, s32 arg1, s32 arg2);
 void _ZN14Class_000A20D0D0Ev(M2C_UNK **arg0);
 void _ZN14Class_000A20D0D1Ev(M2C_UNK **arg0);
 void _ZN14Class_000A20D0D2Ev(M2C_UNK **arg0);
@@ -3976,11 +4162,18 @@ void _ZN14Class_000A24E0D0Ev(s32 **arg0);
 void _ZN14Class_000A24E0D1Ev(s32 **arg0);
 s32 _ZN14Class_000A24E0D2Ev(s32);
 s32 _ZN14Class_000A24F0D2Ev(s32);
+void _ZN14Class_000A2948C2Eii(struct Unk_func_000918E0_0 *arg0, s32 arg1, s32 arg2);
+void _ZN14Class_000A2968C1Eiii(struct Unk_func_00091B90_0 *arg0, s32 arg1, s32 arg2, s32 arg3);
+void _ZN14Class_000A2968C2Eiii(struct Unk_func_00091B74_0 *arg0, s32 arg1, s32 arg2, s32 arg3);
 void _ZN14Class_000A2968D0Ev(M2C_UNK **arg0);
 void _ZN14Class_000A2968D1Ev(M2C_UNK **arg0);
 void _ZN14Class_000A2968D2Ev(M2C_UNK **arg0);
 void _ZN14Class_000A2988D0Ev(M2C_UNK **arg0);
 void _ZN14Class_000A2988D1Ev(M2C_UNK **arg0);
+void _ZN14Class_000A2998C1Ei(struct Unk_func_000924DC_0 *arg0, s32 arg1);
+void _ZN14Class_000A2998C1Ev(struct Unk_func_000924B4_0 *arg0);
+void _ZN14Class_000A2998C2Ei(struct Unk_func_000924C8_0 *arg0, s32 arg1);
+void _ZN14Class_000A2998C2Ev(struct Unk_func_000924A0_0 *arg0);
 void _ZN14Class_000A2998D0Ev(M2C_UNK **arg0);
 void _ZN14Class_000A2998D1Ev(M2C_UNK **arg0);
 void _ZN14Class_000A2998D2Ev(M2C_UNK **arg0);
@@ -3989,6 +4182,10 @@ void _ZN14Class_000A29A8C2Ev(M2C_UNK **arg0);
 void _ZN14Class_000A29A8D0Ev(M2C_UNK **arg0);
 void _ZN14Class_000A29A8D1Ev(M2C_UNK **arg0);
 void _ZN14Class_000A29A8D2Ev(M2C_UNK **arg0);
+void _ZN14Class_000A29C8C1Ei(struct Unk_func_000926C8_0 *arg0, s32 arg1);
+void _ZN14Class_000A29C8C1Ev(struct Unk_func_000926A0_0 *arg0);
+void _ZN14Class_000A29C8C2Ei(struct Unk_func_000926B4_0 *arg0, s32 arg1);
+void _ZN14Class_000A29C8C2Ev(struct Unk_func_0009268C_0 *arg0);
 void _ZN14Class_000A29C8D0Ev(M2C_UNK **arg0);
 void _ZN14Class_000A29C8D1Ev(M2C_UNK **arg0);
 void _ZN14Class_000A29C8D2Ev(M2C_UNK **arg0);
@@ -4182,7 +4379,7 @@ M2C_UNK func_00019610(...);
 M2C_UNK func_00019668(...);
 void func_00019750(M2C_UNK **arg0);
 void func_00019760(M2C_UNK **arg0);
-s32 func_00019788(struct Unk_func_00019788_0 *arg0);
+s32 func_00019788(Class_0009BCC8 *arg0);
 void func_00019790(M2C_UNK **arg0);
 void func_000197A0(M2C_UNK **arg0);
 s32 func_000197C8(void);
@@ -4208,16 +4405,16 @@ s32 func_0001B56C(struct Unk_func_0001B56C_0 *arg0, struct Unk_func_0001B56C_1 *
 s32 func_0001B678(void);
 s32 func_0001B730(s32);
 M2C_UNK func_0001B810(void *);
-s32 func_0001B870(struct Unk_func_0001B870_0 *arg0);
-s32 func_0001B8B0(struct Unk_func_0001B8B0_0 *arg0);
-s32 func_0001B914(struct Unk_func_0001B914_0 *arg0);
+s32 func_0001B870(Class_0009BCC8 *arg0);
+s32 func_0001B8B0(Class_0009BCC8 *arg0);
+s32 func_0001B914(Class_0009BCC8 *arg0);
 s32 func_0001B924(struct Unk_vt_func_0001B924_arg0 **arg0);
 void func_0001BBE0(struct Unk_vt_func_0001BBE0_arg0 **arg0);
 s32 func_0001BBE8(s32, s32, s32);
 void func_0001BC04(s32 arg0, s32 arg1, M2C_UNK arg2);
 s32 func_0001BC50(s32, s32, s32);
 M2C_UNK func_0001BC54(s32, s32);
-s32 func_0001BEB4(struct Unk_func_0001BEB4_0 *arg0);
+s32 func_0001BEB4(Class_0009BCC8 *arg0);
 s32 func_0001BEF4(s32, s32, s32);
 s32 func_0001BF5C(s32, s32, s32);
 s32 func_0001C038(s32, s32);
@@ -4275,7 +4472,7 @@ s32 func_00021874(struct Unk_func_00021874_0 *arg0);
 void func_00021F8C(M2C_UNK **arg0);
 void func_00021FC4(M2C_UNK **arg0);
 void func_00021FFC(M2C_UNK **arg0);
-s32 func_0002203C(struct Unk_func_0002203C_0 *arg0, s32 arg1);
+s32 func_0002203C(Class_0009C078 *arg0, s32 arg1);
 s32 func_00022120(s32);
 s32 func_0002216C(s32, s32);
 s32 func_00022280(s32, s32, s32);
@@ -5231,7 +5428,7 @@ void func_00086FDC(struct Unk_func_00086A54_0 *arg0);
 void func_0008701C(M2C_UNK **arg0);
 void func_00087044(M2C_UNK **arg0);
 void func_0008706C(M2C_UNK **arg0);
-s32 func_000870A4(struct Unk_func_000870A4_0 *arg0);
+s32 func_000870A4(Class_000A20B8 *arg0);
 u16 func_000870B0(struct Unk_func_000870B0_0 *arg0);
 void func_00087118(M2C_UNK **arg0);
 void func_00087140(M2C_UNK **arg0);
@@ -5273,7 +5470,7 @@ void func_00087B98(s32 **arg0);
 void func_00087BC0(s32 **arg0);
 void func_00087C44(M2C_UNK **arg0);
 void func_00087C7C(M2C_UNK **arg0);
-s32 func_00087D3C(struct Unk_func_00087D3C_0 *arg0);
+s32 func_00087D3C(Class_000A2160 *arg0);
 void func_00087D44(s32 **arg0, s32 arg1, s32 arg2);
 void func_00087D74(s32 **arg0, s32 arg1, s32 arg2);
 void func_00087DA4(s32 **arg0);
@@ -5292,7 +5489,7 @@ void func_00088094(M2C_UNK **arg0);
 void func_00088220(s32 **arg0);
 void func_00088248(s32 **arg0);
 void func_00088270(s32 **arg0);
-s32 func_000882A8(struct Unk_func_000882A8_0 *arg0);
+s32 func_000882A8(Class_000A21B8 *arg0);
 u8 func_000882B0(struct Unk_func_000882B0_0 *arg0);
 u8 func_000882B8(struct Unk_func_000882B8_0 *arg0);
 u8 func_000882C0(struct Unk_func_000882C0_0 *arg0);
@@ -5334,21 +5531,21 @@ void func_00088E80(M2C_UNK **arg0);
 void func_00088EA8(M2C_UNK **arg0);
 void func_00088ED0(M2C_UNK **arg0);
 void func_00089088(M2C_UNK **arg0);
-s32 func_00089148(struct Unk_func_00089148_0 *arg0);
+s32 func_00089148(Class_000A2270 *arg0);
 void func_00089150(s32 **arg0, s32 arg1, s32 arg2);
 void func_00089180(s32 **arg0, s32 arg1, s32 arg2);
 void func_000891B0(s32 **arg0);
 void func_000891D8(s32 **arg0);
 void func_00089200(s32 **arg0);
 void func_00089310(M2C_UNK **arg0);
-s32 func_000893D0(struct Unk_func_000893D0_0 *arg0);
+s32 func_000893D0(Class_000A22A0 *arg0);
 void func_000893D8(s32 **arg0, s32 arg1, s32 arg2);
 void func_00089408(s32 **arg0, s32 arg1, s32 arg2);
 void func_00089438(s32 **arg0);
 void func_00089460(s32 **arg0);
 void func_00089488(s32 **arg0);
 void func_00089598(M2C_UNK **arg0);
-s32 func_00089658(struct Unk_func_00089658_0 *arg0);
+s32 func_00089658(Class_000A22D0 *arg0);
 void func_00089660(s32 **arg0, s32 arg1, s32 arg2);
 void func_00089690(s32 **arg0, s32 arg1, s32 arg2);
 void func_000896C0(s32 **arg0);
@@ -5397,7 +5594,7 @@ void func_0008A5D8(M2C_UNK **arg0);
 void func_0008A9E4(M2C_UNK **arg0);
 void func_0008AA0C(M2C_UNK **arg0);
 void func_0008AA34(M2C_UNK **arg0);
-s32 func_0008AA6C(struct Unk_func_0008AA6C_0 *arg0);
+s32 func_0008AA6C(Class_000A2A40 *arg0);
 s32 func_0008AA74(struct Unk_func_0008AA74_0 *arg0);
 void func_0008AE8C(M2C_UNK **arg0);
 void func_0008AEB4(M2C_UNK **arg0);
@@ -5411,7 +5608,7 @@ void func_0008AFFC(M2C_UNK **arg0);
 void func_0008B024(M2C_UNK **arg0);
 void func_0008B04C(M2C_UNK **arg0);
 void func_0008B390(struct Unk_func_0008B390_0 *arg0);
-s32 func_0008B454(struct Unk_func_0008B454_0 *arg0);
+s32 func_0008B454(Class_000A2490 *arg0);
 void func_0008B45C(s32 **arg0, s32 arg1, s32 arg2);
 void func_0008B48C(s32 **arg0, s32 arg1, s32 arg2);
 void func_0008B4BC(s32 **arg0);
@@ -5423,11 +5620,11 @@ void func_0008B7A8(s32 **arg0, s32 arg1, s32 arg2);
 void func_0008B7D8(s32 **arg0);
 void func_0008B800(s32 **arg0);
 void func_0008B828(s32 **arg0);
-s32 func_0008B860(struct Unk_func_0008B860_0 *arg0);
+s32 func_0008B860(Class_000A24C0 *arg0);
 void func_0008B908(struct Unk_func_0008B908_0 *arg0);
 void func_0008B944(struct Unk_func_0008B944_0 *arg0);
 s32 func_0008B980(s32);
-s32 func_0008BA08(struct Unk_func_0008BA08_0 *arg0);
+s32 func_0008BA08(Class_000A24F0 *arg0);
 s32 func_0008BA14(void);
 void func_0008BA44(s32 **arg0, s32 arg1, s32 arg2);
 s32 func_0008BA74(s32);

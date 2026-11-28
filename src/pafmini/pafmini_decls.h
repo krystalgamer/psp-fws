@@ -12,6 +12,366 @@ extern "C" {
 #endif
 
 #ifdef __cplusplus
+class vec4;
+class psjsvector;
+class psjsstring_impl;
+class psjsstring;
+class psjsname;
+namespace paf { class SurfacePool; }
+namespace paf { class PhSRender; }
+namespace paf { class PhEvent; }
+class PSJSValueImpl;
+class PSJSValue;
+class PSJSObject;
+class PSJSFile;
+class PSJSContext;
+class PSJSAPIEntry;
+class PSJSContext {
+public:
+    void SetUserData(void*);
+    void RegistGlobal(char const*, PSJSValueImpl*);
+    void GetUserData() const;
+    void Load(PSJSFile const*);
+    void RegistStandard();
+    void RegistMethodToObj(PSJSValue&, PSJSAPIEntry const*);
+    void RegistExtensionVector();
+    void FindGlobal(char const*) const;
+    void SetException(PSJSValue const&);
+    void RegistGlobal(char const*, int);
+};
+class PSJSError {
+public:
+    void IsSubClass(unsigned short const*) const;
+};
+class PSJSExec {
+public:
+    void FinalizeExecSync();
+};
+class PSJSHeap {
+public:
+    void private_malloc(unsigned int);
+    void private_free(void*);
+};
+class PSJSObject {
+public:
+    void DelAttr(psjsname const&);
+    void DelAttr(int);
+    void SetAttr(psjsname const&, PSJSValue const&);
+    void SetAttr(int, PSJSValue const&);
+    void IsSubClass(unsigned short const*) const;
+    void GetAttr(psjsname const&, PSJSValue*) const;
+    void GetAttr(int, PSJSValue*) const;
+};
+class PSJSPage {
+public:
+    void IsOpen() const;
+};
+class PSJSPageTable {
+public:
+    void PageCloseAll(paf::View*);
+};
+class PSJSValue {
+public:
+    void SetAttr(psjsname const&, PSJSValue const&);
+    void ToBool() const;
+    void GetAttr(PSJSContext const&, psjsname const&, PSJSValue*) const;
+    void IsClass(unsigned short const*) const;
+    void ToFloat() const;
+    void ToInt32() const;
+    void ToUint32() const;
+    void Assign(PSJSContext const&, PSJSValueImpl*);
+    void ToString() const;
+    void SetPrototype(PSJSValue const&);
+    void IsSubClass(unsigned short const*) const;
+    void ToNumber(PSJSContext const&) const;
+};
+class PSJSValueImpl {
+public:
+    void NewFromPool(PSJSContext const&);
+    void NewFromPool(PSJSContext const&, PSJSObject*);
+    void NewFromPool(PSJSContext const&, psjsstring const&);
+    void NewFromPool(PSJSContext const&, float);
+    void NewFromPool(PSJSContext const&, int);
+    void DecRef();
+    void NewFromPool(PSJSContext const&, psjsvector const&);
+};
+extern "C++" {
+namespace paf {
+    void Sleep(int);
+}
+}
+namespace paf {
+class Cond {
+public:
+    s32 Wait();
+    void Notify();
+};
+}
+namespace paf {
+class CriticalSection {
+public:
+    void Enter();
+    void Leave();
+};
+}
+namespace paf {
+class Framework {
+public:
+    s32 Instance();
+};
+}
+namespace paf {
+class Image {
+public:
+    s32 Convert32();
+    s32 Copy();
+    s32 GetErrorType();
+    s32 CopyWithEdge();
+    s32 Mirror();
+};
+}
+namespace paf {
+class MiconPointee {
+public:
+    void AddRef();
+    void Release();
+};
+}
+namespace paf {
+class PhAppear {
+public:
+    M2C_UNK * ShadowRender();
+};
+}
+namespace paf {
+class PhApplication {
+public:
+    void StartDispList();
+    void FinishDispList();
+    M2C_UNK * GetRootSurface();
+};
+}
+namespace paf {
+class PhButton {
+public:
+    s32 IsInherit(char const*) const;
+    s32 WidgetType();
+};
+}
+namespace paf {
+class PhClock {
+public:
+    void WidgetType();
+    void SetFormat(int, int);
+    void SetShadowRender(paf::PhSRender*);
+};
+}
+namespace paf {
+class PhHandler {
+public:
+    s32 HandlePointEvent(paf::PhEvent*);
+    s32 HandleCommandEvent(paf::PhEvent*);
+    s32 PauseTimerAll();
+    s32 StartTimerAll();
+};
+}
+namespace paf {
+class PhIPAddr {
+public:
+    s32 WidgetType();
+};
+}
+namespace paf {
+class PhInfoList {
+public:
+    s32 WidgetType();
+};
+}
+namespace paf {
+class PhItemSpin {
+public:
+    void WidgetType();
+};
+}
+namespace paf {
+class PhLabelText {
+public:
+    void ReleaseSurface();
+    void SetPrivateSurfacePool(paf::SurfacePool*);
+};
+}
+namespace paf {
+class PhList {
+public:
+    void Redraw();
+};
+}
+namespace paf {
+class PhMenuList {
+public:
+    s32 WidgetType();
+    s32 SetItemNum(int);
+};
+}
+namespace paf {
+class PhMicon {
+public:
+    void GetBGColor() const;
+    void GetChannels() const;
+    void GetRepeat() const;
+    void GetVolume() const;
+    void GetLoop() const;
+    void GetWidth() const;
+    void GetHeight() const;
+    void GetTime() const;
+};
+}
+namespace paf {
+class PhModel {
+public:
+    void WidgetType();
+    void SetPatchDivide(int);
+    void SetModel(void*, int);
+    void SetCurrentMotion(int, float);
+    void GetMotionCount() const;
+    void GetFrame() const;
+    void SetFrameLoop(float, float);
+    void SetFrameRepeat(int);
+    void SetFrame(float);
+    void SetFrameRate(float);
+    void GetCurrentMotion() const;
+};
+}
+namespace paf {
+class PhNumSpin {
+public:
+    s32 WidgetType();
+};
+}
+namespace paf {
+class PhPlane {
+public:
+    s32 WidgetType();
+};
+}
+namespace paf {
+class PhProgress {
+public:
+    s32 WidgetType();
+    void SetShadowRender(paf::PhSRender*);
+};
+}
+namespace paf {
+class PhSRender {
+public:
+    s32 SetStyle(int, float);
+    s32 SetStyle(int, vec4 const&);
+    s32 GetStyle(int, bool&) const;
+    s32 GetStyle(int, float&) const;
+    s32 GetStyle(int, vec4&) const;
+};
+}
+namespace paf {
+class PhScene {
+public:
+    s32 WidgetType();
+};
+}
+namespace paf {
+class PhScroll {
+public:
+    s32 WidgetType();
+};
+}
+namespace paf {
+class PhSpin {
+public:
+    s32 WidgetType();
+};
+}
+namespace paf {
+class PhText {
+public:
+    s32 WidgetType();
+    void GetFirstLine() const;
+    s32 GetTextLength() const;
+    s32 GetLineCount() const;
+    s32 GetCurrentPos() const;
+    s32 EraseText(int);
+    void ReleaseSurface();
+};
+}
+namespace paf {
+class PhXmBar {
+public:
+    void SetListNum(int);
+    void SetFocusIndex(int, int);
+    void Redraw(int, int);
+    void DeleteItem(int, int, float);
+    void InsertItem(int, int);
+    void UpdateItems(int);
+    void AnimIconPlay(int, int, float);
+    void AnimIconStop(int, int);
+    void GetFocusedItemIndex(int);
+    void CloseOff(int, int, float, float);
+    void SelectOut(float);
+    void ScrollDown(float, paf::PhEvent*);
+    void ScrollLeft(float, paf::PhEvent*);
+    void ScrollRight(float, paf::PhEvent*);
+    void ScrollUp(float, paf::PhEvent*);
+    void WidgetType();
+    void SelectIn(float, float, float);
+    void SetOtherItemAlpha(float, float, float);
+    void SetTopAlpha(float, float, float);
+    void SetTopLabelAlpha(float, float, float);
+    void SetOtherTopAlpha(float, float, float);
+    void HideFade(float, float);
+    void SetFade(float, float, float);
+    void SetAlpha(float, float, float);
+    void ShowFade(float, float);
+    void HideLabel(int, float, float);
+    void ShowLabel(int, float, float);
+    void IconSize(int, int, vec4 const&, float, float);
+};
+}
+namespace paf {
+class PhXmItem {
+public:
+    s32 WidgetType();
+};
+}
+namespace paf {
+class PhXmList {
+public:
+    s32 WidgetType();
+    s32 SetItemNum(int);
+    s32 SetKeyMask(int);
+};
+}
+namespace paf {
+class SurfaceBase {
+public:
+    s32 PixelsToBytes(int) const;
+};
+}
+namespace paf {
+class Thread {
+public:
+    void Join();
+};
+}
+class psjsname_impl {
+public:
+    void DecRef();
+};
+class psjsstring_impl {
+public:
+    void DecRef();
+    void compare(psjsstring_impl const*) const;
+};
+#endif
+
+#ifdef __cplusplus
 /* vtable _ZTV14Class_000D1ED8 is data (vptr = label - 8 + 8) */
 class Class_000D1ED8 {
 public:
@@ -39,6 +399,13 @@ public:
 /* dtor still asm/m2c (not trivial) */
 class Class_000D8898 {
 public:
+    u8 pad4[0x1D0];
+    s32 unk1D4;
+    u8 pad1D8[0x10];
+    void ** unk1E8;
+    s32 unk1EC;
+    u8 pad1F0[0x141];
+    u8 unk331;
     virtual ~Class_000D8898();
 };
 #endif
@@ -47,7 +414,20 @@ public:
 /* vtable _ZTV14Class_000D8BF8 is data (vptr = label - 8 + 8) */
 class Class_000D8BF8 : public Class_000D8898 {
 public:
+    u8 pad332[0x396];
+    s8 unk6C8;
+    u8 pad6C9[0x37];
+    void **unk700;
     virtual ~Class_000D8BF8();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_000DAFE8 is data (vptr = label - 8 + 8) */
+class Class_000DAFE8 {
+public:
+    u32 unk4;
+    virtual ~Class_000DAFE8();
 };
 #endif
 
@@ -60,9 +440,10 @@ public:
 #endif
 
 #ifdef __cplusplus
-/* dtor still asm/m2c (not trivial) */
+/* vtable _ZTV14Class_000FF5D8 is data (vptr = label - 8 + 8) */
 class Class_000FF5D8 {
 public:
+    s32 unk4;
     virtual ~Class_000FF5D8();
 };
 #endif
@@ -71,6 +452,7 @@ public:
 /* vtable _ZTV14Class_000D0798 is data (vptr = label - 8 + 8) */
 class Class_000D0798 : public Class_000FF5D8 {
 public:
+
     virtual ~Class_000D0798();
 };
 #endif
@@ -3026,6 +3408,9 @@ s32 _ZN14Class_000D8898D2Ev(s32);
 void _ZN14Class_000D8BF8D0Ev(M2C_UNK **arg0);
 void _ZN14Class_000D8BF8D1Ev(M2C_UNK **arg0);
 void _ZN14Class_000D8BF8D2Ev(M2C_UNK **arg0);
+void _ZN14Class_000DAFE8D0Ev(struct Unk_func_0008A244_0 *arg0);
+void _ZN14Class_000DAFE8D1Ev(struct Unk_func_0008A21C_0 *arg0);
+void _ZN14Class_000DAFE8D2Ev(void *arg0);
 void _ZN14Class_000FF5D8D0Ev(struct Unk_func_00013BB8_0 *arg0);
 void _ZN14Class_000FF5D8D1Ev(struct Unk_func_00013BA4_0 *arg0);
 s32 _ZN14Class_000FF5D8D2Ev(s32);
@@ -3276,7 +3661,7 @@ M2C_UNK _ZNK3paf7PhSPrim8GetStyleEiRf(void *self, s32, float *);
 M2C_UNK _ZNK3paf7PhSPrim8GetStyleEiRi(s32);
 s16 _ZNK3paf7Surface13GetActivePageENS0_8PageModeE(struct Unk_scePaf_0598FFD6_0 *arg0, s32 arg1);
 s32 _ZNK3paf8PhButton9IsInheritEPKc(s32 arg0, s32 arg1);
-s32 _ZNK3paf8PhWidget10GetTextureERNS_12SurfaceRCPtrINS_7SurfaceEEEi(struct Unk_scePaf_4EA868E6_0 *arg0);
+s32 _ZNK3paf8PhWidget10GetTextureERNS_12SurfaceRCPtrINS_7SurfaceEEEi(Class_000D8898 *arg0);
 s32 _ZNK3paf8PhWidget9IsInheritEPKc(s32 arg0, s32 arg1);
 s32 _ZNK3paf9PhSRender8GetStyleEiR4vec4(void);
 s32 _ZNK3paf9PhSRender8GetStyleEiRb(void);
@@ -3488,7 +3873,7 @@ void func_00013BA4(struct Unk_func_00013BA4_0 *arg0);
 void func_00013BB8(struct Unk_func_00013BB8_0 *arg0);
 s32 func_00013BE4(struct Unk_func_00013BE4_0 *arg0, void *arg1, s32 arg2, s32 arg3, s32 arg4);
 M2C_UNK *func_00013C2C(void);
-void func_00013DA8(struct Unk_func_00013DA8_0 *arg0);
+void func_00013DA8(Class_000D0798 *arg0);
 void func_0001408C(void);
 void func_00014094(M2C_UNK **arg0);
 void func_000140A4(M2C_UNK **arg0);
@@ -4000,8 +4385,8 @@ s32 func_000550F4(s32, s32);
 s32 func_000551B8(s32, s32, s32);
 s32 func_00055438(s32, s32);
 s32 func_00055480(s32, s32);
-s32 func_00055A8C(struct Unk_func_00055A8C_0 *arg0);
-s32 func_00055AE8(struct Unk_func_00055AE8_0 *arg0, s32 arg1);
+s32 func_00055A8C(Class_000D8898 *arg0);
+s32 func_00055AE8(Class_000D8898 *arg0, s32 arg1);
 void func_00055AF4(struct Unk_func_00055AF4_0 *arg0);
 void func_00055B10(struct Unk_func_00055B10_0 *arg0);
 void func_00055B44(struct Unk_func_00055B44_0 *arg0, s32 arg1);
@@ -4076,7 +4461,7 @@ void func_0005D2D8(void *arg0, s32 arg1);
 void func_0005D2EC(void);
 void func_0005D30C(void);
 void func_0005D368(void *arg0, s32 arg1, s32 arg2);
-s32 func_0005D398(struct Unk_func_0005D398_0 *arg0, struct Unk_func_0005D398_1 *arg1);
+s32 func_0005D398(Class_000D8898 *arg0, struct Unk_func_0005D398_1 *arg1);
 s32 func_0005D8B4(s32, s32, s32);
 void ***func_0005D9A4(void ***arg0, void *arg1, void **arg2);
 M2C_UNK func_0005D9E4(...);
@@ -4102,7 +4487,7 @@ s32 func_00061AEC(void);
 void func_00061EF4(M2C_UNK **arg0);
 void func_00061F1C(M2C_UNK **arg0);
 void func_00061F44(M2C_UNK **arg0);
-s32 func_00062764(struct Unk_func_00062764_0 *arg0, s32 arg1, s32 arg2);
+s32 func_00062764(Class_000D8BF8 *arg0, s32 arg1, s32 arg2);
 s32 func_000627A0(s32 arg0, s32 arg1, s32 arg2);
 void func_00062968(struct Unk_func_00062968_0 *arg0, s32 arg1, s32 arg2, s32 arg3);
 void func_000629B4(struct Unk_func_000629B4_0 *arg0, s32 arg1, s32 arg2);
@@ -5110,7 +5495,7 @@ void scePaf_86C87E62(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5)
 void scePaf_8D3EAEA3(s32 arg0);
 s32 scePaf_8D7FC7DB(struct Unk_scePaf_8D7FC7DB_0 *arg0, s32 arg1, s32 arg2, s32 arg3);
 void scePaf_C2911954(s32 arg0);
-s32 scePaf_C2E4423A(struct Unk_scePaf_C2E4423A_0 *arg0);
+s32 scePaf_C2E4423A(Class_000D8898 *arg0);
 void scePaf_C8E7B03F(s32 arg0);
 s32 scePaf_D1EE972C(struct Unk_scePaf_D1EE972C_0 *arg0, s32 arg1, s32 arg2, s32 arg3);
 M2C_UNK scePaf_DB230BE1(...);

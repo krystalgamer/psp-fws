@@ -694,7 +694,7 @@ s32 func_00041D28(struct Unk_func_00041D28_0 *arg0) {
 
 INCLUDE_ASM("nonmatchings/lftv_middleware_03D910", func_00041D34);
 
-s32 func_00041DB0(struct Unk_func_00041DB0_0 *arg0) {
+s32 func_00041DB0(Class_00056AD0 *arg0) {
     s32 temp_s0;
     s32 temp_s1;
 

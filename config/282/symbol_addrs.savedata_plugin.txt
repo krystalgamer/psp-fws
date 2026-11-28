@@ -186,3 +186,5 @@ _ZN14Class_000226A0D0Ev = 0x0000FBD0; // type:func
 _ZN14Class_000224C8D2Ev = 0x0000C528; // type:func
 _ZN14Class_000224C8D1Ev = 0x0000C538; // type:func
 _ZN14Class_000224C8D0Ev = 0x0000C548; // type:func
+_ZN14Class_000226A0C2Ei = 0x0000FB58; // type:func
+_ZN14Class_000226A0C1Ei = 0x0000FB84; // type:func

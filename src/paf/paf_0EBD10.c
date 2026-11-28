@@ -32,7 +32,8 @@ void func_000EBDD4(struct Unk_func_000EBDD4_0 *arg0) {
     func_0010308C(arg0->unk1E8);
 }
 
-void _ZNK3paf7PhModel14GetMotionCountEv(struct Unk_scePaf_4C5F6657_0 *arg0) {
+void paf::PhModel::GetMotionCount() const {
+    struct Unk_scePaf_4C5F6657_0 *arg0 = (struct Unk_scePaf_4C5F6657_0 *) this;
     func_00103094(arg0->unk1E8);
 }
 
@@ -40,7 +41,8 @@ void _ZN3paf7PhModel16SetCurrentMotionEif(struct Unk_scePaf_6A772BF7_0 *arg0) {
     func_001030B0(arg0->unk1E8);
 }
 
-void _ZNK3paf7PhModel16GetCurrentMotionEv(struct Unk_scePaf_8CDEDC6F_0 *arg0) {
+void paf::PhModel::GetCurrentMotion() const {
+    struct Unk_scePaf_8CDEDC6F_0 *arg0 = (struct Unk_scePaf_8CDEDC6F_0 *) this;
     func_00103104(arg0->unk1E8);
 }
 
@@ -48,7 +50,8 @@ void _ZN3paf7PhModel8SetFrameEf(struct Unk_scePaf_CFAF88AB_0 *arg0) {
     func_00103120(arg0->unk1E8);
 }
 
-void _ZNK3paf7PhModel8GetFrameEv(struct Unk_scePaf_DFB912CB_0 *arg0) {
+void paf::PhModel::GetFrame() const {
+    struct Unk_scePaf_DFB912CB_0 *arg0 = (struct Unk_scePaf_DFB912CB_0 *) this;
     func_0010313C(arg0->unk1E8);
 }
 
@@ -98,7 +101,7 @@ s32 func_000EBF88(void) {
     return D_001A4808;
 }
 
-s32 _ZN3paf9PhNumSpin10WidgetTypeEv(void) {
+s32 paf::PhNumSpin::WidgetType() {
     return D_001A4808;
 }
 

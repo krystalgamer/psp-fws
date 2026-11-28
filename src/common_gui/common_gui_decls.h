@@ -10,6 +10,28 @@
 extern "C" {
 #endif
 
+#ifdef __cplusplus
+extern "C++" {
+namespace vsh {
+    void BusyIcon_Inc();
+    void BusyIcon_Dec();
+    void GetString_Enter();
+    void GetString_Back();
+    void GetString_Option();
+    void GetString_Cancel();
+    void GetString_OK();
+    void Infobar_Close();
+}
+}
+namespace vsh {
+class MessageDialog {
+public:
+    void HideDelete();
+    s32 GetBasePlane();
+};
+}
+#endif
+
 struct Unk_func_000008A8_temp_a0 {
     u8 pad0[0x4];
     s32 unk4;

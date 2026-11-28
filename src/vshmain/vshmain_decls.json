@@ -567,6 +567,7 @@
   "vsh_FDEE4109": "s32 vsh_FDEE4109(void);"
  },
  "types": {
+  "0_cxx_methods": "#ifdef __cplusplus\nclass PageManager {\npublic:\n    void Clear();\n};\nextern \"C++\" {\nnamespace vsh {\n    void RaiseFatalError(unsigned int);\n}\n}\nnamespace vsh {\nclass FixedAlloc {\npublic:\n    void * Instance();\n};\n}\n#endif",
   "D_00030398_s": "struct D_00030398_s {\n    volatile s32 unk0;\n    volatile s32 unk4;\n    volatile s32 unk8;\n    M2C_UNK * unkC;\n    volatile s32 unk10;\n    volatile s32 unk14;\n    volatile s32 unk18;\n    volatile s32 unk1C;\n    volatile s32 unk20;\n};",
   "Unk_D_0003089C": "struct Unk_D_0003089C {\n    u8 pad0[0x84];\n    s32 unk84;\n    u8 pad88[0x18];\n    s32 unkA0;\n    s32 unkA4;\n    u8 padA8[0x8];\n    s32 unkB0;\n    u8 padB4[0x18];\n    u8 unkCC;\n    u8 padCD[0x4B];\n    struct Unk_func_0001AE48_temp_v1 *unk118;\n    u8 pad11C[0x390];\n    void *unk4AC;\n    u8 pad4B0[0x70];\n    s32 unk520;\n};",
   "Unk_func_00002760_temp_v0": "struct Unk_func_00002760_temp_v0 {\n    u8 pad0[0xC];\n    M2C_UNK (*unkC)(M2C_UNK);\n};",

@@ -58,25 +58,9 @@ void func_000284C8(struct Unk_func_000284C8_0 *arg0, s32 arg1, s32 arg2) {
     arg0->unk4 = 0;
 }
 
-void func_000284E4(M2C_UNK **arg0) {
-    *arg0 = &D_000B10E0;
+Class_000B10E0::~Class_000B10E0() {
     D_000B61F4 = 0;
 }
-
-void func_000284FC(M2C_UNK **arg0) {
-    *arg0 = &D_000B10E0;
-    D_000B61F4 = 0;
-}
-
-#if FW_VERSION < 352
-INCLUDE_ASM("nonmatchings/msvideo_main_plugin_027C8C", func_00028514);
-#else
-void func_00028514(M2C_UNK **arg0) {
-    *arg0 = &D_000B10E0;
-    D_000B61F4 = 0;
-    _ZdlPv((s32) arg0);
-}
-#endif
 
 #if FW_VERSION == 300
 INCLUDE_ASM("nonmatchings/msvideo_main_plugin_027C8C", func_00028540);
@@ -201,6 +185,8 @@ void func_00028D18(struct Unk_func_00028D18_0 *arg0) {
 }
 
 INCLUDE_RODATA("nonmatchings/msvideo_main_plugin_027C8C", D_000B10E0);
+
+__asm__(".globl _ZTV14Class_000B10E0\n_ZTV14Class_000B10E0 = D_000B10E0 - 8\n");
 
 INCLUDE_RODATA("nonmatchings/msvideo_main_plugin_027C8C", D_000B110C);
 
@@ -536,28 +522,9 @@ void func_0002A4E0(struct Unk_func_0002A4E0_0 *arg0, s32 arg1) {
     arg0->unk28 = 0;
 }
 
-void func_0002A530(M2C_UNK **arg0) {
-    *arg0 = &D_000B15A8;
+Class_000B15A8::~Class_000B15A8() {
     D_000B6204 = 0;
-    _ZN14Class_000AE948D2Ev((s32) arg0);
 }
-
-void func_0002A55C(M2C_UNK **arg0) {
-    *arg0 = &D_000B15A8;
-    D_000B6204 = 0;
-    _ZN14Class_000AE948D2Ev((s32) arg0);
-}
-
-#if FW_VERSION < 352
-INCLUDE_ASM("nonmatchings/msvideo_main_plugin_027C8C", func_0002A588);
-#else
-void func_0002A588(M2C_UNK **arg0) {
-    *arg0 = &D_000B15A8;
-    D_000B6204 = 0;
-    _ZN14Class_000AE948D2Ev((s32) arg0);
-    _ZdlPv((s32) arg0);
-}
-#endif
 
 INCLUDE_RODATA("nonmatchings/msvideo_main_plugin_027C8C", D_000B1520);
 
@@ -569,6 +536,8 @@ INCLUDE_ASM("nonmatchings/msvideo_main_plugin_027C8C", func_0002A5C8);
 INCLUDE_RODATA("nonmatchings/msvideo_main_plugin_027C8C", D_000B1594);
 
 INCLUDE_RODATA("nonmatchings/msvideo_main_plugin_027C8C", D_000B15A8);
+
+__asm__(".globl _ZTV14Class_000B15A8\n_ZTV14Class_000B15A8 = D_000B15A8 - 8\n");
 
 INCLUDE_RODATA("nonmatchings/msvideo_main_plugin_027C8C", D_000B15E0);
 #endif
@@ -591,6 +560,8 @@ INCLUDE_RODATA("nonmatchings/msvideo_main_plugin_027C8C", D_000B0F34);
 
 #if FW_VERSION < 350
 INCLUDE_RODATA("nonmatchings/msvideo_main_plugin_027C8C", D_000B15A8);
+
+__asm__(".globl _ZTV14Class_000B15A8\n_ZTV14Class_000B15A8 = D_000B15A8 - 8\n");
 
 INCLUDE_RODATA("nonmatchings/msvideo_main_plugin_027C8C", D_000B0F80);
 #endif
@@ -662,6 +633,8 @@ INCLUDE_ASM("nonmatchings/msvideo_main_plugin_027C8C", func_0002AD58);
 INCLUDE_RODATA("nonmatchings/msvideo_main_plugin_027C8C", D_000B1594);
 
 INCLUDE_RODATA("nonmatchings/msvideo_main_plugin_027C8C", D_000B15A8);
+
+__asm__(".globl _ZTV14Class_000B15A8\n_ZTV14Class_000B15A8 = D_000B15A8 - 8\n");
 
 INCLUDE_RODATA("nonmatchings/msvideo_main_plugin_027C8C", D_000B15E0);
 #endif

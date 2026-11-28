@@ -375,23 +375,8 @@ INCLUDE_ASM("nonmatchings/video_main_plugin", func_000010A0);
 
 INCLUDE_ASM("nonmatchings/video_main_plugin", func_00001100);
 
-void func_00001160(M2C_UNK **arg0) {
-    *arg0 = &D_00051DD8;
+Class_00051DD8::~Class_00051DD8() {
     D_0005721C = 0;
-    func_00036CC0((s32) arg0);
-}
-
-void func_0000118C(M2C_UNK **arg0) {
-    *arg0 = &D_00051DD8;
-    D_0005721C = 0;
-    func_00036CC0((s32) arg0);
-}
-
-void func_000011B8(M2C_UNK **arg0) {
-    *arg0 = &D_00051DD8;
-    D_0005721C = 0;
-    func_00036CC0((s32) arg0);
-    _ZdlPv((s32) arg0);
 }
 #endif
 

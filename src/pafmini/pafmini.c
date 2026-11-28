@@ -360,40 +360,40 @@ INCLUDE_ASM("nonmatchings/pafmini", _ZN3paf7PhXmBar8IconSizeEiiRK4vec4ff);
 #endif
 
 #if FW_VERSION == 282
-void _ZN3paf7PhModel10WidgetTypeEv(void) {
+void paf::PhModel::WidgetType() {
 }
 
-void _ZN3paf7PhModel14SetPatchDivideEi(void) {
+void paf::PhModel::SetPatchDivide(int cxxp1) {
 }
 
-void _ZN3paf7PhModel8SetModelEPvi(void) {
+void paf::PhModel::SetModel(void* cxxp1, int cxxp2) {
 }
 
-void _ZN3paf7PhModel16SetCurrentMotionEif(void) {
+void paf::PhModel::SetCurrentMotion(int cxxp1, float cxxp2) {
 }
 
 void _ZN3paf7PhModelC1EPNS_8PhWidgetEPNS_8PhAppearE(void) {
 }
 
-void _ZNK3paf7PhModel14GetMotionCountEv(void) {
+void paf::PhModel::GetMotionCount() const {
 }
 
-void _ZNK3paf7PhModel8GetFrameEv(void) {
+void paf::PhModel::GetFrame() const {
 }
 
-void _ZN3paf7PhModel12SetFrameLoopEff(void) {
+void paf::PhModel::SetFrameLoop(float cxxp1, float cxxp2) {
 }
 
-void _ZN3paf7PhModel14SetFrameRepeatEi(void) {
+void paf::PhModel::SetFrameRepeat(int cxxp1) {
 }
 
-void _ZN3paf7PhModel8SetFrameEf(void) {
+void paf::PhModel::SetFrame(float cxxp1) {
 }
 
-void _ZN3paf7PhModel12SetFrameRateEf(void) {
+void paf::PhModel::SetFrameRate(float cxxp1) {
 }
 
-void _ZNK3paf7PhModel16GetCurrentMotionEv(void) {
+void paf::PhModel::GetCurrentMotion() const {
 }
 
 void _ZN3paf7PhModel15SetTextureImageERKNS_12SurfaceRCPtrINS_7SurfaceEEEi(void) {
@@ -408,109 +408,109 @@ void _ZNK3paf7PhModel15GetTextureImageERNS_12SurfaceRCPtrINS_7SurfaceEEEi(void) 
 void _ZNK3paf7PhModel17GetTexturePaletteERNS_12SurfaceRCPtrINS_7SurfaceEEEi(void) {
 }
 
-void _ZN3paf7PhXmBar10SetListNumEi(void) {
+void paf::PhXmBar::SetListNum(int cxxp1) {
 }
 
-void _ZN3paf7PhXmBar13SetFocusIndexEii(void) {
+void paf::PhXmBar::SetFocusIndex(int cxxp1, int cxxp2) {
 }
 
-void _ZN3paf7PhXmBar6RedrawEii(void) {
+void paf::PhXmBar::Redraw(int cxxp1, int cxxp2) {
 }
 
-void _ZN3paf7PhXmBar10DeleteItemEiif(void) {
+void paf::PhXmBar::DeleteItem(int cxxp1, int cxxp2, float cxxp3) {
 }
 
-void _ZN3paf7PhXmBar10InsertItemEii(void) {
+void paf::PhXmBar::InsertItem(int cxxp1, int cxxp2) {
 }
 
 void scePaf_04EF78CD(void) {
 }
 
-void _ZN3paf7PhXmBar11UpdateItemsEi(void) {
+void paf::PhXmBar::UpdateItems(int cxxp1) {
 }
 
-void _ZN3paf7PhXmBar12AnimIconPlayEiif(void) {
+void paf::PhXmBar::AnimIconPlay(int cxxp1, int cxxp2, float cxxp3) {
 }
 
-void _ZN3paf7PhXmBar12AnimIconStopEii(void) {
+void paf::PhXmBar::AnimIconStop(int cxxp1, int cxxp2) {
 }
 
-void _ZN3paf7PhXmBar19GetFocusedItemIndexEi(void) {
+void paf::PhXmBar::GetFocusedItemIndex(int cxxp1) {
 }
 
 void _ZN3paf7PhXmBar7CloseUpEiibbff(void) {
 }
 
-void _ZN3paf7PhXmBar8CloseOffEiiff(void) {
+void paf::PhXmBar::CloseOff(int cxxp1, int cxxp2, float cxxp3, float cxxp4) {
 }
 
-void _ZN3paf7PhXmBar9SelectOutEf(void) {
+void paf::PhXmBar::SelectOut(float cxxp1) {
 }
 
-void _ZN3paf7PhXmBar10ScrollDownEfPNS_7PhEventE(void) {
+void paf::PhXmBar::ScrollDown(float cxxp1, paf::PhEvent* cxxp2) {
 }
 
-void _ZN3paf7PhXmBar10ScrollLeftEfPNS_7PhEventE(void) {
+void paf::PhXmBar::ScrollLeft(float cxxp1, paf::PhEvent* cxxp2) {
 }
 
-void _ZN3paf7PhXmBar11ScrollRightEfPNS_7PhEventE(void) {
+void paf::PhXmBar::ScrollRight(float cxxp1, paf::PhEvent* cxxp2) {
 }
 
-void _ZN3paf7PhXmBar8ScrollUpEfPNS_7PhEventE(void) {
+void paf::PhXmBar::ScrollUp(float cxxp1, paf::PhEvent* cxxp2) {
 }
 
-void _ZN3paf7PhXmBar10WidgetTypeEv(void) {
+void paf::PhXmBar::WidgetType() {
 }
 
-void _ZN3paf7PhXmBar8SelectInEfff(void) {
+void paf::PhXmBar::SelectIn(float cxxp1, float cxxp2, float cxxp3) {
 }
 
-void _ZN3paf7PhXmBar17SetOtherItemAlphaEfff(void) {
+void paf::PhXmBar::SetOtherItemAlpha(float cxxp1, float cxxp2, float cxxp3) {
 }
 
-void _ZN3paf7PhXmBar11SetTopAlphaEfff(void) {
+void paf::PhXmBar::SetTopAlpha(float cxxp1, float cxxp2, float cxxp3) {
 }
 
-void _ZN3paf7PhXmBar16SetTopLabelAlphaEfff(void) {
+void paf::PhXmBar::SetTopLabelAlpha(float cxxp1, float cxxp2, float cxxp3) {
 }
 
-void _ZN3paf7PhXmBar16SetOtherTopAlphaEfff(void) {
+void paf::PhXmBar::SetOtherTopAlpha(float cxxp1, float cxxp2, float cxxp3) {
 }
 
-void _ZN3paf7PhXmBar8HideFadeEff(void) {
+void paf::PhXmBar::HideFade(float cxxp1, float cxxp2) {
 }
 
-void _ZN3paf7PhXmBar7SetFadeEfff(void) {
+void paf::PhXmBar::SetFade(float cxxp1, float cxxp2, float cxxp3) {
 }
 
-void _ZN3paf7PhXmBar8SetAlphaEfff(void) {
+void paf::PhXmBar::SetAlpha(float cxxp1, float cxxp2, float cxxp3) {
 }
 
-void _ZN3paf7PhXmBar8ShowFadeEff(void) {
+void paf::PhXmBar::ShowFade(float cxxp1, float cxxp2) {
 }
 
-void _ZN3paf7PhXmBar9HideLabelEiff(void) {
+void paf::PhXmBar::HideLabel(int cxxp1, float cxxp2, float cxxp3) {
 }
 
-void _ZN3paf7PhXmBar9ShowLabelEiff(void) {
+void paf::PhXmBar::ShowLabel(int cxxp1, float cxxp2, float cxxp3) {
 }
 
 void _ZN3paf7PhXmBar8IconMoveERK4vec4ffb(void) {
 }
 
-void _ZN3paf7PhXmBar8IconSizeEiiRK4vec4ff(void) {
+void paf::PhXmBar::IconSize(int cxxp1, int cxxp2, vec4 const& cxxp3, float cxxp4, float cxxp5) {
 }
 
-void _ZN3paf10PhItemSpin10WidgetTypeEv(void) {
+void paf::PhItemSpin::WidgetType() {
 }
 
 void scePaf_16033F84(void) {
 }
 
-void _ZN3paf7PhClock10WidgetTypeEv(void) {
+void paf::PhClock::WidgetType() {
 }
 
-void _ZN3paf7PhClock9SetFormatEii(void) {
+void paf::PhClock::SetFormat(int cxxp1, int cxxp2) {
 }
 
 void _ZN3paf7PhClock7GetTimeERNS0_10datetime_tE(void) {
@@ -522,7 +522,7 @@ void _ZN3paf7PhClock7SetTimeERKNS0_10datetime_tE(void) {
 void _ZN3paf7PhClockC1EPNS_8PhWidgetE(void) {
 }
 
-void _ZN3paf7PhClock15SetShadowRenderEPNS_9PhSRenderE(void) {
+void paf::PhClock::SetShadowRender(paf::PhSRender* cxxp1) {
 }
 
 void scePaf_6DFFCAAE(void) {
@@ -582,49 +582,49 @@ void _Z31PSJS_BuildValue_TemporaryObjectRK11PSJSContext(void) {
 void _Z33PSJS_RecycleValue_TemporaryObjectRK11PSJSContextR9PSJSValue(void) {
 }
 
-void _ZN10PSJSObject7DelAttrERK8psjsname(void) {
+void PSJSObject::DelAttr(psjsname const& cxxp1) {
 }
 
-void _ZN10PSJSObject7DelAttrEi(void) {
+void PSJSObject::DelAttr(int cxxp1) {
 }
 
-void _ZN10PSJSObject7SetAttrERK8psjsnameRK9PSJSValue(void) {
+void PSJSObject::SetAttr(psjsname const& cxxp1, PSJSValue const& cxxp2) {
 }
 
-void _ZN10PSJSObject7SetAttrEiRK9PSJSValue(void) {
+void PSJSObject::SetAttr(int cxxp1, PSJSValue const& cxxp2) {
 }
 
 void _ZN10PSJSObjectC2ERK11PSJSContext(void) {
 }
 
-void _ZN11PSJSContext11SetUserDataEPv(void) {
+void PSJSContext::SetUserData(void* cxxp1) {
 }
 
-void _ZN11PSJSContext12RegistGlobalEPKcP13PSJSValueImpl(void) {
+void PSJSContext::RegistGlobal(char const* cxxp1, PSJSValueImpl* cxxp2) {
 }
 
-void _ZN13PSJSPageTable12PageCloseAllEPN3paf4ViewE(void) {
+void PSJSPageTable::PageCloseAll(paf::View* cxxp1) {
 }
 
-void _ZN13PSJSValueImpl11NewFromPoolERK11PSJSContext(void) {
+void PSJSValueImpl::NewFromPool(PSJSContext const& cxxp1) {
 }
 
-void _ZN13PSJSValueImpl11NewFromPoolERK11PSJSContextP10PSJSObject(void) {
+void PSJSValueImpl::NewFromPool(PSJSContext const& cxxp1, PSJSObject* cxxp2) {
 }
 
-void _ZN13PSJSValueImpl11NewFromPoolERK11PSJSContextRK10psjsstring(void) {
+void PSJSValueImpl::NewFromPool(PSJSContext const& cxxp1, psjsstring const& cxxp2) {
 }
 
 void _ZN13PSJSValueImpl11NewFromPoolERK11PSJSContextb(void) {
 }
 
-void _ZN13PSJSValueImpl11NewFromPoolERK11PSJSContextf(void) {
+void PSJSValueImpl::NewFromPool(PSJSContext const& cxxp1, float cxxp2) {
 }
 
-void _ZN13PSJSValueImpl11NewFromPoolERK11PSJSContexti(void) {
+void PSJSValueImpl::NewFromPool(PSJSContext const& cxxp1, int cxxp2) {
 }
 
-void _ZN13PSJSValueImpl6DecRefEv(void) {
+void PSJSValueImpl::DecRef() {
 }
 
 void _ZN8PSJSExec28RegistFinalExecWithClearSyncEPFvPvS0_S0_bES0_S0_S0_(void) {
@@ -633,7 +633,7 @@ void _ZN8PSJSExec28RegistFinalExecWithClearSyncEPFvPvS0_S0_bES0_S0_S0_(void) {
 void _ZN8psjsnameC1ERK11PSJSContextPKti(void) {
 }
 
-void _ZN9PSJSValue7SetAttrERK8psjsnameRKS_(void) {
+void PSJSValue::SetAttr(psjsname const& cxxp1, PSJSValue const& cxxp2) {
 }
 
 void _ZN9PSJSValueaSEP13PSJSValueImpl(void) {
@@ -642,49 +642,49 @@ void _ZN9PSJSValueaSEP13PSJSValueImpl(void) {
 void _ZN9PSJSValueaSERKS_(void) {
 }
 
-void _ZNK10PSJSObject10IsSubClassEPKt(void) {
+void PSJSObject::IsSubClass(unsigned short const* cxxp1) const {
 }
 
 void _ZNK10PSJSObject11ToPrimitiveE15ToPrimitiveHint(void) {
 }
 
-void _ZNK10PSJSObject7GetAttrERK8psjsnameP9PSJSValue(void) {
+void PSJSObject::GetAttr(psjsname const& cxxp1, PSJSValue* cxxp2) const {
 }
 
-void _ZNK10PSJSObject7GetAttrEiP9PSJSValue(void) {
+void PSJSObject::GetAttr(int cxxp1, PSJSValue* cxxp2) const {
 }
 
-void _ZNK11PSJSContext11GetUserDataEv(void) {
+void PSJSContext::GetUserData() const {
 }
 
-void _ZNK9PSJSValue6ToBoolEv(void) {
+void PSJSValue::ToBool() const {
 }
 
-void _ZNK9PSJSValue7GetAttrERK11PSJSContextRK8psjsnamePS_(void) {
+void PSJSValue::GetAttr(PSJSContext const& cxxp1, psjsname const& cxxp2, PSJSValue* cxxp3) const {
 }
 
-void _ZNK9PSJSValue7IsClassEPKt(void) {
+void PSJSValue::IsClass(unsigned short const* cxxp1) const {
 }
 
-void _ZNK9PSJSValue7ToFloatEv(void) {
+void PSJSValue::ToFloat() const {
 }
 
-void _ZNK9PSJSValue7ToInt32Ev(void) {
+void PSJSValue::ToInt32() const {
 }
 
-void _ZNK9PSJSValue8ToUint32Ev(void) {
+void PSJSValue::ToUint32() const {
 }
 
 void _ZN10psjsstringC1EPKt(void) {
 }
 
-void _ZN13psjsname_impl6DecRefEv(void) {
+void psjsname_impl::DecRef() {
 }
 
-void _ZN15psjsstring_impl6DecRefEv(void) {
+void psjsstring_impl::DecRef() {
 }
 
-void _ZNK15psjsstring_impl7compareEPKS_(void) {
+void psjsstring_impl::compare(psjsstring_impl const* cxxp1) const {
 }
 
 void _ZN10PSJSObjectdlEPv(void) {
@@ -696,7 +696,7 @@ void _ZN11PSJSContext22SetHeapIsEmptyCallbackEPFvPvES0_(void) {
 void _ZN8PSJSExec10RegistExecEPFvPvS0_S0_bES0_S0_S0_b(void) {
 }
 
-void _ZN8PSJSExec16FinalizeExecSyncEv(void) {
+void PSJSExec::FinalizeExecSync() {
 }
 
 void _ZN8PSJSExec21RegistExecTopPriorityEPFvPvS0_S0_bES0_S0_S0_b(void) {
@@ -708,16 +708,16 @@ void _ZN8PSJSExec6ResumeEPFvPvS0_S0_bES0_S0_S0_(void) {
 void _ZN8PSJSExec7SuspendEPFvPvS0_S0_bES0_S0_S0_(void) {
 }
 
-void _ZN9PSJSValue6AssignERK11PSJSContextP13PSJSValueImpl(void) {
+void PSJSValue::Assign(PSJSContext const& cxxp1, PSJSValueImpl* cxxp2) {
 }
 
 void _ZN9PSJSValuedaEPv(void) {
 }
 
-void _ZNK8PSJSPage6IsOpenEv(void) {
+void PSJSPage::IsOpen() const {
 }
 
-void _ZNK9PSJSValue8ToStringEv(void) {
+void PSJSValue::ToString() const {
 }
 
 void _ZN8PSJSHeapC1Ev(void) {
@@ -729,10 +729,10 @@ void _ZN8PSJSHeapC1EPvj(void) {
 void _ZN8PSJSHeapD1Ev(void) {
 }
 
-void _ZN11PSJSContext4LoadEPK8PSJSFile(void) {
+void PSJSContext::Load(PSJSFile const* cxxp1) {
 }
 
-void _ZN11PSJSContext14RegistStandardEv(void) {
+void PSJSContext::RegistStandard() {
 }
 
 void _Z9PSJS_ExecRK11PSJSContext(void) {
@@ -759,19 +759,19 @@ void _ZN11PSJSContext17SetStdOutCallbackEPFvPKtiPvES2_(void) {
 void _ZN11PSJSContext17SetStdErrCallbackEPFvPKtiPvES2_(void) {
 }
 
-void _ZN11PSJSContext17RegistMethodToObjER9PSJSValuePK12PSJSAPIEntry(void) {
+void PSJSContext::RegistMethodToObj(PSJSValue& cxxp1, PSJSAPIEntry const* cxxp2) {
 }
 
-void _ZN11PSJSContext21RegistExtensionVectorEv(void) {
+void PSJSContext::RegistExtensionVector() {
 }
 
 void _ZN11PSJSContextC1ERKS_(void) {
 }
 
-void _ZN9PSJSValue12SetPrototypeERKS_(void) {
+void PSJSValue::SetPrototype(PSJSValue const& cxxp1) {
 }
 
-void _ZNK9PSJSValue10IsSubClassEPKt(void) {
+void PSJSValue::IsSubClass(unsigned short const* cxxp1) const {
 }
 
 void _ZN9PSJSValue16TypeToPsjsstringE13PSJSValueType(void) {
@@ -780,7 +780,7 @@ void _ZN9PSJSValue16TypeToPsjsstringE13PSJSValueType(void) {
 void _ZN10psjsvectorC1EjPf(void) {
 }
 
-void _ZN13PSJSValueImpl11NewFromPoolERK11PSJSContextRK10psjsvector(void) {
+void PSJSValueImpl::NewFromPool(PSJSContext const& cxxp1, psjsvector const& cxxp2) {
 }
 
 void _ZN9PSJSErrorC2ERK11PSJSContext(void) {
@@ -789,10 +789,10 @@ void _ZN9PSJSErrorC2ERK11PSJSContext(void) {
 void _ZTV9PSJSError(void) {
 }
 
-void _ZNK9PSJSError10IsSubClassEPKt(void) {
+void PSJSError::IsSubClass(unsigned short const* cxxp1) const {
 }
 
-void _ZNK11PSJSContext10FindGlobalEPKc(void) {
+void PSJSContext::FindGlobal(char const* cxxp1) const {
 }
 
 void _ZN10psjsvectorC1EjPfPNS_12ELEMENT_TYPEE(void) {
@@ -804,19 +804,19 @@ void _ZN13PSJSValueImpl11NewFromPoolERK11PSJSContext13PSJSValueType(void) {
 void _ZN8psjsname18null_psjs_char_strE(void) {
 }
 
-void _ZN11PSJSContext12SetExceptionERK9PSJSValue(void) {
+void PSJSContext::SetException(PSJSValue const& cxxp1) {
 }
 
 void _ZN11PSJSContext22SetExecMonitorCallbackEjPFbbPvES0_(void) {
 }
 
-void _ZN11PSJSContext12RegistGlobalEPKci(void) {
+void PSJSContext::RegistGlobal(char const* cxxp1, int cxxp2) {
 }
 
 void _ZN10psjsvector13element_shiftE(void) {
 }
 
-void _ZNK9PSJSValue8ToNumberERK11PSJSContext(void) {
+void PSJSValue::ToNumber(PSJSContext const& cxxp1) const {
 }
 #endif
 
@@ -1060,7 +1060,7 @@ INCLUDE_ASM("nonmatchings/pafmini", func_00001EC0);
 
 INCLUDE_ASM("nonmatchings/pafmini", func_00002128);
 
-s32 _ZN3paf9Framework8InstanceEv(void) {
+s32 paf::Framework::Instance() {
     return D_000E15A8;
 }
 
@@ -1299,7 +1299,11 @@ INCLUDE_ASM("nonmatchings/pafmini", _ZN3paf4View8PageOpenEPKcii);
 #endif
 
 #if FW_VERSION == 100
-void _ZN3paf4View8PageOpenEPKcii(struct Unk_scePaf_F609FA81_0 *arg0, s32 arg1, s32 arg2, s32 arg3) {
+void paf::View::PageOpen(char const* cxxp1, int cxxp2, int cxxp3) {
+    struct Unk_scePaf_F609FA81_0 *arg0 = (struct Unk_scePaf_F609FA81_0 *) this;
+    s32 arg1 = (s32) cxxp1;
+    s32 arg2 = (s32) cxxp2;
+    s32 arg3 = (s32) cxxp3;
     void *sp0;
     s32 temp_v0;
 
@@ -1313,7 +1317,11 @@ void _ZN3paf4View8PageOpenEPKcii(struct Unk_scePaf_F609FA81_0 *arg0, s32 arg1, s
 #endif
 
 #if FW_VERSION == 282
-void _ZN3paf4View8PageOpenEPKcii(struct Unk_scePaf_F609FA81_0 *arg0, s32 arg1, s32 arg2, s32 arg3) {
+void paf::View::PageOpen(char const* cxxp1, int cxxp2, int cxxp3) {
+    struct Unk_scePaf_F609FA81_0 *arg0 = (struct Unk_scePaf_F609FA81_0 *) this;
+    s32 arg1 = (s32) cxxp1;
+    s32 arg2 = (s32) cxxp2;
+    s32 arg3 = (s32) cxxp3;
     void *sp0;
     s32 temp_v0;
 
@@ -1327,7 +1335,11 @@ void _ZN3paf4View8PageOpenEPKcii(struct Unk_scePaf_F609FA81_0 *arg0, s32 arg1, s
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 201
-void _ZN3paf4View8PageOpenEPKcii(struct Unk_scePaf_F609FA81_0 *arg0, s32 arg1, s32 arg2, s32 arg3) {
+void paf::View::PageOpen(char const* cxxp1, int cxxp2, int cxxp3) {
+    struct Unk_scePaf_F609FA81_0 *arg0 = (struct Unk_scePaf_F609FA81_0 *) this;
+    s32 arg1 = (s32) cxxp1;
+    s32 arg2 = (s32) cxxp2;
+    s32 arg3 = (s32) cxxp3;
     void *sp0;
     s32 temp_v0;
 
@@ -1355,7 +1367,9 @@ INCLUDE_ASM("nonmatchings/pafmini", _ZN3paf4View9PageCloseEPKc);
 #endif
 
 #if FW_VERSION == 100
-void _ZN3paf4View9PageCloseEPKc(struct Unk_scePaf_3481F595_0 *arg0, s32 arg1) {
+void paf::View::PageClose(char const* cxxp1) {
+    struct Unk_scePaf_3481F595_0 *arg0 = (struct Unk_scePaf_3481F595_0 *) this;
+    s32 arg1 = (s32) cxxp1;
     void *sp0;
     s32 temp_v0;
 
@@ -1369,7 +1383,9 @@ void _ZN3paf4View9PageCloseEPKc(struct Unk_scePaf_3481F595_0 *arg0, s32 arg1) {
 #endif
 
 #if FW_VERSION == 282
-void _ZN3paf4View9PageCloseEPKc(struct Unk_scePaf_3481F595_0 *arg0, s32 arg1) {
+void paf::View::PageClose(char const* cxxp1) {
+    struct Unk_scePaf_3481F595_0 *arg0 = (struct Unk_scePaf_3481F595_0 *) this;
+    s32 arg1 = (s32) cxxp1;
     void *sp0;
     s32 temp_v0;
 
@@ -1383,7 +1399,9 @@ void _ZN3paf4View9PageCloseEPKc(struct Unk_scePaf_3481F595_0 *arg0, s32 arg1) {
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 201
-void _ZN3paf4View9PageCloseEPKc(struct Unk_scePaf_3481F595_0 *arg0, s32 arg1) {
+void paf::View::PageClose(char const* cxxp1) {
+    struct Unk_scePaf_3481F595_0 *arg0 = (struct Unk_scePaf_3481F595_0 *) this;
+    s32 arg1 = (s32) cxxp1;
     void *sp0;
     s32 temp_v0;
 
@@ -1405,7 +1423,9 @@ INCLUDE_ASM("nonmatchings/pafmini", _ZN3paf4View12PageActivateEPKc);
 #endif
 
 #if FW_VERSION == 100
-void _ZN3paf4View12PageActivateEPKc(struct Unk_scePaf_CAF05F1D_0 *arg0, s32 arg1) {
+void paf::View::PageActivate(char const* cxxp1) {
+    struct Unk_scePaf_CAF05F1D_0 *arg0 = (struct Unk_scePaf_CAF05F1D_0 *) this;
+    s32 arg1 = (s32) cxxp1;
     void *sp0;
     s32 temp_v0;
 
@@ -1419,7 +1439,9 @@ void _ZN3paf4View12PageActivateEPKc(struct Unk_scePaf_CAF05F1D_0 *arg0, s32 arg1
 #endif
 
 #if FW_VERSION == 282
-void _ZN3paf4View12PageActivateEPKc(struct Unk_scePaf_CAF05F1D_0 *arg0, s32 arg1) {
+void paf::View::PageActivate(char const* cxxp1) {
+    struct Unk_scePaf_CAF05F1D_0 *arg0 = (struct Unk_scePaf_CAF05F1D_0 *) this;
+    s32 arg1 = (s32) cxxp1;
     void *sp0;
     s32 temp_v0;
 
@@ -1433,7 +1455,9 @@ void _ZN3paf4View12PageActivateEPKc(struct Unk_scePaf_CAF05F1D_0 *arg0, s32 arg1
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 201
-void _ZN3paf4View12PageActivateEPKc(struct Unk_scePaf_CAF05F1D_0 *arg0, s32 arg1) {
+void paf::View::PageActivate(char const* cxxp1) {
+    struct Unk_scePaf_CAF05F1D_0 *arg0 = (struct Unk_scePaf_CAF05F1D_0 *) this;
+    s32 arg1 = (s32) cxxp1;
     void *sp0;
     s32 temp_v0;
 
@@ -1457,7 +1481,9 @@ INCLUDE_ASM("nonmatchings/pafmini", _ZN3paf4View14PageInactivateEPKc);
 #endif
 
 #if FW_VERSION == 100
-void _ZN3paf4View14PageInactivateEPKc(struct Unk_scePaf_5470B915_0 *arg0, s32 arg1) {
+void paf::View::PageInactivate(char const* cxxp1) {
+    struct Unk_scePaf_5470B915_0 *arg0 = (struct Unk_scePaf_5470B915_0 *) this;
+    s32 arg1 = (s32) cxxp1;
     void *sp0;
     s32 temp_v0;
 
@@ -1471,7 +1497,9 @@ void _ZN3paf4View14PageInactivateEPKc(struct Unk_scePaf_5470B915_0 *arg0, s32 ar
 #endif
 
 #if FW_VERSION == 282
-void _ZN3paf4View14PageInactivateEPKc(struct Unk_scePaf_5470B915_0 *arg0, s32 arg1) {
+void paf::View::PageInactivate(char const* cxxp1) {
+    struct Unk_scePaf_5470B915_0 *arg0 = (struct Unk_scePaf_5470B915_0 *) this;
+    s32 arg1 = (s32) cxxp1;
     void *sp0;
     s32 temp_v0;
 
@@ -1485,7 +1513,9 @@ void _ZN3paf4View14PageInactivateEPKc(struct Unk_scePaf_5470B915_0 *arg0, s32 ar
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 201
-void _ZN3paf4View14PageInactivateEPKc(struct Unk_scePaf_5470B915_0 *arg0, s32 arg1) {
+void paf::View::PageInactivate(char const* cxxp1) {
+    struct Unk_scePaf_5470B915_0 *arg0 = (struct Unk_scePaf_5470B915_0 *) this;
+    s32 arg1 = (s32) cxxp1;
     void *sp0;
     s32 temp_v0;
 
@@ -1793,7 +1823,7 @@ INCLUDE_ASM("nonmatchings/pafmini", func_0000A614);
 
 INCLUDE_ASM("nonmatchings/pafmini", _ZNK3paf4View10GetTextureEPKc);
 
-s32 _ZNK3paf4View8GetModelEPKc(void) {
+s32 paf::View::GetModel(char const* cxxp1) const {
     return 0;
 }
 
@@ -1806,7 +1836,9 @@ INCLUDE_ASM("nonmatchings/pafmini", _ZN3paf4View9PlaySoundEPKc);
 #endif
 
 #if FW_VERSION == 100
-void _ZN3paf4View9PlaySoundEPKc(struct Unk_scePaf_49CE42F7_0 *arg0, char* arg1) {
+void paf::View::PlaySound(char const* cxxp1) {
+    struct Unk_scePaf_49CE42F7_0 *arg0 = (struct Unk_scePaf_49CE42F7_0 *) this;
+    char* arg1 = (char*) cxxp1;
     s32 temp_v0;
 
     if (M2C_FIELD(arg0, u8 *, 0x1D0) == 0) {
@@ -1821,7 +1853,9 @@ void _ZN3paf4View9PlaySoundEPKc(struct Unk_scePaf_49CE42F7_0 *arg0, char* arg1) 
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 201
-void _ZN3paf4View9PlaySoundEPKc(struct Unk_scePaf_49CE42F7_0 *arg0, char* arg1) {
+void paf::View::PlaySound(char const* cxxp1) {
+    struct Unk_scePaf_49CE42F7_0 *arg0 = (struct Unk_scePaf_49CE42F7_0 *) this;
+    char* arg1 = (char*) cxxp1;
     s32 temp_v0;
 
     if (M2C_FIELD(arg0, u8 *, 0x1D4) == 0) {
@@ -1836,7 +1870,9 @@ void _ZN3paf4View9PlaySoundEPKc(struct Unk_scePaf_49CE42F7_0 *arg0, char* arg1) 
 #endif
 
 #if FW_VERSION == 282
-void _ZN3paf4View9PlaySoundEPKc(struct Unk_scePaf_49CE42F7_0 *arg0, char* arg1) {
+void paf::View::PlaySound(char const* cxxp1) {
+    struct Unk_scePaf_49CE42F7_0 *arg0 = (struct Unk_scePaf_49CE42F7_0 *) this;
+    char* arg1 = (char*) cxxp1;
     s32 temp_v0;
 
     if (arg0->unk1C0 == 0) {

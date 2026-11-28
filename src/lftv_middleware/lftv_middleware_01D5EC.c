@@ -277,6 +277,12 @@ INCLUDE_ASM("nonmatchings/lftv_middleware_01D5EC", func_0001FA94);
 
 INCLUDE_ASM("nonmatchings/lftv_middleware_01D5EC", func_0001FBC4);
 
+#if FW_VERSION < 352
+Class_000551E8::~Class_000551E8() {
+    func_0001FFAC((s32) this);
+    func_0001FCD0((s32) this);
+}
+#else
 void func_0001FC08(M2C_UNK **arg0) {
     *arg0 = &D_000551E8;
     func_0001FFAC((s32) arg0);
@@ -292,6 +298,7 @@ void func_0001FC48(M2C_UNK **arg0) {
 }
 
 INCLUDE_ASM("nonmatchings/lftv_middleware_01D5EC", func_0001FC88);
+#endif
 
 INCLUDE_ASM("nonmatchings/lftv_middleware_01D5EC", func_0001FCD0);
 

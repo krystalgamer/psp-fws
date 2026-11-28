@@ -10,7 +10,9 @@ void func_000D6370(M2C_UNK **arg0) {
 void func_000D6398(void) {
 }
 
-s32 _ZNK3paf8PhWidget9IsInheritEPKc(s32 arg0, s32 arg1) {
+s32 paf::PhWidget::IsInherit(char const* cxxp1) const {
+    s32 arg0 = (s32) this;
+    s32 arg1 = (s32) cxxp1;
     s32 var_v0;
 
     var_v0 = 1;
@@ -24,7 +26,7 @@ s32 func_000D63CC(void) {
     return D_001A47B0;
 }
 
-s32 _ZN3paf8PhWidget10WidgetTypeEv(void) {
+s32 paf::PhWidget::WidgetType() {
     return D_001A47B0;
 }
 
@@ -146,7 +148,9 @@ INCLUDE_ASM("nonmatchings/paf_0D6370", _ZN3paf8PhWidget14SetPos_ontimerERK4vec4P
 
 INCLUDE_ASM("nonmatchings/paf_0D6370", _ZN3paf8PhWidget6GetPosEPS0_RK4vec4);
 
-void _ZN3paf8PhWidget16SetScale_ontimerERK4vec4(struct Unk_scePaf_58BFC2AC_0 *arg0, struct Unk_scePaf_58BFC2AC_1 *arg1) {
+void paf::PhWidget::SetScale_ontimer(vec4 const& cxxp1) {
+    struct Unk_scePaf_58BFC2AC_0 *arg0 = (struct Unk_scePaf_58BFC2AC_0 *) this;
+    struct Unk_scePaf_58BFC2AC_1 *arg1 = (struct Unk_scePaf_58BFC2AC_1 *) &cxxp1;
     arg0->unk230 = (s32) arg1->unk0;
     arg0->unk234 = (s32) arg1->unk4;
     arg0->unk238 = (s32) arg1->unk8;
@@ -172,7 +176,9 @@ INCLUDE_ASM("nonmatchings/paf_0D6370", func_000D89B0);
 
 INCLUDE_ASM("nonmatchings/paf_0D6370", func_000D8A74);
 
-s32 _ZN3paf8PhWidget22HandleFocusSwitchEventEPNS_7PhEventE(struct Unk_func_000E4F0C_0 *arg0, struct Unk_func_000E4F0C_1 *arg1) {
+s32 paf::PhWidget::HandleFocusSwitchEvent(paf::PhEvent* cxxp1) {
+    struct Unk_func_000E4F0C_0 *arg0 = (struct Unk_func_000E4F0C_0 *) this;
+    struct Unk_func_000E4F0C_1 *arg1 = (struct Unk_func_000E4F0C_1 *) cxxp1;
     u8 temp_a2;
 
     func_000C7708();
@@ -285,7 +291,8 @@ s32 scePaf_C2E4423A(struct Unk_scePaf_C2E4423A_0 *arg0) {
     return var_v0;
 }
 
-void _ZN3paf8PhWidget13UpdateCamerasEv(struct Unk_scePaf_86B41BA3_0 *arg0) {
+void paf::PhWidget::UpdateCameras() {
+    struct Unk_scePaf_86B41BA3_0 *arg0 = (struct Unk_scePaf_86B41BA3_0 *) this;
     s32 temp_v0;
 
     temp_v0 = arg0->unk1D0;
@@ -422,7 +429,9 @@ s32 func_000DA6C8(void) {
 void func_000DA6D0(void) {
 }
 
-s32 _ZNK3paf8PhButton9IsInheritEPKc(s32 arg0, s32 arg1) {
+s32 paf::PhButton::IsInherit(char const* cxxp1) const {
+    s32 arg0 = (s32) this;
+    s32 arg1 = (s32) cxxp1;
     s32 var_v0;
 
     var_v0 = 1;
@@ -436,7 +445,7 @@ s32 func_000DA704(void) {
     return D_001A47B4;
 }
 
-s32 _ZN3paf8PhButton10WidgetTypeEv(void) {
+s32 paf::PhButton::WidgetType() {
     return D_001A47B4;
 }
 

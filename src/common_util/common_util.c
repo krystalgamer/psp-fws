@@ -661,12 +661,12 @@ void _ZN3vsh9PowerLock10SetHandlerEPFiiES2_(s32 arg0, s32 arg1) {
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
-void _ZN3vsh10RebootLock4InitEv(void) {
+void vsh::RebootLock::Init() {
     D_0000E7A4 = 0;
     D_0000E7A8 = sceKernelCreateEventFlag("SceVshRebootLock", 0x200U, 3U, NULL);
 }
 
-void _ZN3vsh10RebootLock4ExitEv(void) {
+void vsh::RebootLock::Exit() {
     sceKernelDeleteEventFlag(D_0000E7A8);
 }
 
@@ -686,7 +686,7 @@ void _ZN3vsh10RebootLockD1Ev(void) {
     RebootLock_Unlock();
 }
 
-void _ZN3vsh10RebootLock6RebootEv(void) {
+void vsh::RebootLock::Reboot() {
     sceKernelClearEventFlag(D_0000E7A8, -3U);
     sceKernelWaitEventFlag(D_0000E7A8, 1U, 0, NULL, NULL);
 }
@@ -740,12 +740,12 @@ void sceVshCommonUtil_9480072F(void) {
 #endif
 
 #if FW_VERSION >= 282 && FW_VERSION < 350
-void _ZN3vsh10RebootLock4InitEv(void) {
+void vsh::RebootLock::Init() {
     D_00008BF8 = 0;
     D_00008BFC = sceKernelCreateEventFlag("SceVshRebootLock", 0x200U, 3U, NULL);
 }
 
-void _ZN3vsh10RebootLock4ExitEv(void) {
+void vsh::RebootLock::Exit() {
     sceKernelDeleteEventFlag(D_00008BFC);
 }
 
@@ -786,7 +786,7 @@ void _ZN3vsh10RebootLockD1Ev(void) {
     RebootLock_Unlock();
 }
 
-void _ZN3vsh10RebootLock6RebootEv(void) {
+void vsh::RebootLock::Reboot() {
     sceKernelClearEventFlag(D_00008BFC, -3U);
     sceKernelWaitEventFlag(D_00008BFC, 1U, 0, NULL, NULL);
 }

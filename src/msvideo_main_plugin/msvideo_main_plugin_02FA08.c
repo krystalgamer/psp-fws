@@ -276,9 +276,15 @@ INCLUDE_ASM("nonmatchings/msvideo_main_plugin_02FA08", func_00031384);
 
 INCLUDE_ASM("nonmatchings/msvideo_main_plugin_02FA08", func_00031648);
 
-#if FW_VERSION < 352
+#if FW_VERSION < 350
+INCLUDE_ASM("nonmatchings/msvideo_main_plugin_02FA08", _ZN14Class_000B2390C2Ev);
+#endif
+
+#if FW_VERSION >= 350 && FW_VERSION < 352
 INCLUDE_ASM("nonmatchings/msvideo_main_plugin_02FA08", func_00031804);
-#else
+#endif
+
+#if FW_VERSION == 352
 void func_00031804(struct Unk_func_00031804_0 *arg0) {
     arg0->unk0 = &D_000B2390;
     func_0007484C((u8 *)arg0 + 8);
@@ -294,9 +300,15 @@ void func_00031804(struct Unk_func_00031804_0 *arg0) {
 }
 #endif
 
-#if FW_VERSION < 352
+#if FW_VERSION < 350
+INCLUDE_ASM("nonmatchings/msvideo_main_plugin_02FA08", _ZN14Class_000B2390C1Ev);
+#endif
+
+#if FW_VERSION >= 350 && FW_VERSION < 352
 INCLUDE_ASM("nonmatchings/msvideo_main_plugin_02FA08", func_0003186C);
-#else
+#endif
+
+#if FW_VERSION == 352
 void func_0003186C(struct Unk_func_0003186C_0 *arg0) {
     arg0->unk0 = &D_000B2390;
     func_0007484C((u8 *)arg0 + 8);
@@ -586,7 +598,7 @@ s32 func_000353BC(void) {
 #if FW_VERSION < 310
 INCLUDE_ASM("nonmatchings/msvideo_main_plugin_02FA08", func_000353C4);
 #else
-s32 func_000353C4(struct Unk_func_000353C4_0 *arg0) {
+s32 func_000353C4(Class_000B2390 *arg0) {
     return arg0->unk55C;
 }
 #endif
@@ -595,7 +607,7 @@ s32 func_000353C4(struct Unk_func_000353C4_0 *arg0) {
 INCLUDE_ASM("nonmatchings/msvideo_main_plugin_02FA08", func_000368C4);
 #endif
 
-s32 func_000353CC(struct Unk_func_000353CC_0 *arg0) {
+s32 func_000353CC(Class_000B2390 *arg0) {
     return arg0->unk560;
 }
 
@@ -767,6 +779,10 @@ s32 func_000358F0(void) {
 }
 #endif
 
+#if FW_VERSION < 350
+Class_000B24E0::Class_000B24E0() {
+}
+#else
 void func_000358F8(M2C_UNK **arg0) {
     func_00031804((Unk_func_00031804_0*) arg0);
     *arg0 = &D_000B24E0;
@@ -776,6 +792,7 @@ void func_00035928(M2C_UNK **arg0) {
     func_00031804((Unk_func_00031804_0*) arg0);
     *arg0 = &D_000B24E0;
 }
+#endif
 
 #if FW_VERSION < 350
 Class_000B24E0::~Class_000B24E0() {
@@ -1337,21 +1354,14 @@ INCLUDE_ASM("nonmatchings/msvideo_main_plugin_02FA08", func_00037DC4);
 #if FW_VERSION < 352
 INCLUDE_ASM("nonmatchings/msvideo_main_plugin_02FA08", func_00037F28);
 #else
-void func_00037F28(struct Unk_func_00037F28_0 *arg0) {
-    arg0->unk0 = &D_000B27F8;
-    arg0->unk4 = -1;
-    arg0->unk8 = 0xB;
+Class_000B27F8::Class_000B27F8() {
+    this->unk4 = -1;
+    this->unk8 = 0xB;
 }
 #endif
 
 #if FW_VERSION < 352
 INCLUDE_ASM("nonmatchings/msvideo_main_plugin_02FA08", func_00037F48);
-#else
-void func_00037F48(struct Unk_func_00037F48_0 *arg0) {
-    arg0->unk0 = &D_000B27F8;
-    arg0->unk4 = -1;
-    arg0->unk8 = 0xB;
-}
 #endif
 
 Class_000B27F8::~Class_000B27F8() {
@@ -1413,15 +1423,29 @@ s32 func_000386B0(struct Unk_func_000386B0_0 *arg0) {
 }
 #endif
 
+#if FW_VERSION >= 350
 void func_0003870C(M2C_UNK **arg0) {
     func_00031804((Unk_func_00031804_0*) arg0);
     *arg0 = &D_000B2758;
 }
+#else
+void func_0003870C(M2C_UNK **arg0) {
+    _ZN14Class_000B2390C2Ev((Unk_func_00031804_0*) arg0);
+    *arg0 = &D_000B2758;
+}
+#endif
 
+#if FW_VERSION >= 350
 void func_0003873C(M2C_UNK **arg0) {
     func_00031804((Unk_func_00031804_0*) arg0);
     *arg0 = &D_000B2758;
 }
+#else
+void func_0003873C(M2C_UNK **arg0) {
+    _ZN14Class_000B2390C2Ev((Unk_func_00031804_0*) arg0);
+    *arg0 = &D_000B2758;
+}
+#endif
 
 INCLUDE_ASM("nonmatchings/msvideo_main_plugin_02FA08", func_0003876C);
 
@@ -1792,6 +1816,10 @@ void func_0003A278(void) {
     func_0003A1DC(0, 0xFFFF);
 }
 
+#if FW_VERSION < 350
+Class_000B2960::Class_000B2960() {
+}
+#else
 void func_0003A298(M2C_UNK **arg0) {
     func_00031804((Unk_func_00031804_0*) arg0);
     *arg0 = &D_000B2960;
@@ -1801,6 +1829,7 @@ void func_0003A2C8(M2C_UNK **arg0) {
     func_00031804((Unk_func_00031804_0*) arg0);
     *arg0 = &D_000B2960;
 }
+#endif
 
 #if FW_VERSION < 350
 Class_000B2960::~Class_000B2960() {
@@ -2547,6 +2576,10 @@ s32 func_0003E1E8(void) {
     return 0;
 }
 
+#if FW_VERSION < 350
+Class_000B2D20::Class_000B2D20() {
+}
+#else
 void func_0003E1F0(M2C_UNK **arg0) {
     func_00031804((Unk_func_00031804_0*) arg0);
     *arg0 = &D_000B2D20;
@@ -2556,6 +2589,7 @@ void func_0003E220(M2C_UNK **arg0) {
     func_00031804((Unk_func_00031804_0*) arg0);
     *arg0 = &D_000B2D20;
 }
+#endif
 
 #if FW_VERSION < 350
 Class_000B2D20::~Class_000B2D20() {

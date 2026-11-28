@@ -8,6 +8,10 @@
 
 #ifdef __cplusplus
 
+/* forward declarations (tools/cxx_methods.py) */
+namespace paf { class PhEvent; }
+class vec4;
+
 /* placeholder virtual slot: keeps later virtuals at their vtable offset */
 #define PAF_VSLOT(n) virtual void vslot_##n()
 
@@ -54,11 +58,22 @@ public:
     PAF_VSLOT(29b);
 #endif
     virtual int SetTexture(const SurfaceRCPtr<Surface> &tex, int id); /* +0xA8 (1.00), +0xAC (2.50+) */
+    s32 IsInherit(char const*) const;
+    s32 WidgetType();
+    void SetScale_ontimer(vec4 const&);
+    s32 HandleFocusSwitchEvent(paf::PhEvent*);
+    void UpdateCameras();
 };
 
 class View {
 public:
     SurfaceRCPtr<Surface> GetTexture(const char *name) const;
+    void PageOpen(char const*, int, int);
+    void PageClose(char const*);
+    void PageActivate(char const*);
+    void PageInactivate(char const*);
+    void PlaySound(char const*);
+    s32 GetModel(char const*) const;
 };
 
 } // namespace paf

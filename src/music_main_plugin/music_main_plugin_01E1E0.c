@@ -266,7 +266,7 @@ void _ZN14Class_0009C078D0Ev(M2C_UNK **arg0) {
 #if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/music_main_plugin_01E1E0", func_0002203C);
 #else
-s32 func_0002203C(struct Unk_func_0002203C_0 *arg0, s32 arg1) {
+s32 func_0002203C(Class_0009C078 *arg0, s32 arg1) {
     s32 temp_v0;
     s32 var_v1;
 
@@ -717,27 +717,20 @@ void func_00025250(void) {
     func_0002517C(0, 0xFFFF);
 }
 
-#if FW_VERSION == 271
-INCLUDE_ASM("nonmatchings/music_main_plugin_01E1E0", func_00024D04);
-#endif
-
-#if FW_VERSION == 260
+#if FW_VERSION >= 271
+Class_0009C278::Class_0009C278() {
+    this->unk4 = 0;
+}
+#else
 INCLUDE_ASM("nonmatchings/music_main_plugin_01E1E0", func_00008B64);
 
 INCLUDE_ASM("nonmatchings/music_main_plugin_01E1E0", func_000130C4);
-#endif
-
-#if FW_VERSION >= 282
-void func_00025270(struct Unk_func_00025270_0 *arg0) {
-    arg0->unk0 = &D_0009C278;
-    arg0->unk4 = 0;
-}
-#endif
 
 void func_00025284(struct Unk_func_00025284_0 *arg0) {
     arg0->unk0 = &D_0009C278;
     arg0->unk4 = 0;
 }
+#endif
 
 Class_0009C278::~Class_0009C278() {
 }

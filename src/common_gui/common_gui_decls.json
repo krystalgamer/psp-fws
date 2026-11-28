@@ -93,6 +93,7 @@
   "sce_paf_private_wcslen": "s32 sce_paf_private_wcslen(s32);"
  },
  "types": {
+  "0_cxx_methods": "#ifdef __cplusplus\nextern \"C++\" {\nnamespace vsh {\n    void BusyIcon_Inc();\n    void BusyIcon_Dec();\n    void GetString_Enter();\n    void GetString_Back();\n    void GetString_Option();\n    void GetString_Cancel();\n    void GetString_OK();\n    void Infobar_Close();\n}\n}\nnamespace vsh {\nclass MessageDialog {\npublic:\n    void HideDelete();\n    s32 GetBasePlane();\n};\n}\n#endif",
   "Unk_func_000008A8_temp_a0": "struct Unk_func_000008A8_temp_a0 {\n    u8 pad0[0x4];\n    s32 unk4;\n};",
   "Unk_func_000008C8_0": "struct Unk_func_000008C8_0 {\n    u8 pad0[0x4];\n    s32 unk4;\n    s32 unk8;\n    s32 unkC;\n    s32 unk10;\n    s32 unk14;\n    s32 unk18;\n    s32 unk1C;\n    s32 unk20;\n    s32 unk24;\n};",
   "Unk_func_000008F0_0": "struct Unk_func_000008F0_0 {\n    u8 pad0[0x4];\n    s32 unk4;\n    s32 unk8;\n    s32 unkC;\n    s32 unk10;\n    s32 unk14;\n    s32 unk18;\n    s32 unk1C;\n    s32 unk20;\n    s32 unk24;\n};",

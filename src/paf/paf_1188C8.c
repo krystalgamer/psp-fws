@@ -23,7 +23,8 @@ INCLUDE_ASM("nonmatchings/paf_1188C8", _ZN3paf6Thread4JoinEv);
 #endif
 
 #if FW_VERSION == 282
-void _ZN3paf6Thread4JoinEv(struct Unk_scePaf_5775283A_0 *arg0) {
+void paf::Thread::Join() {
+    struct Unk_scePaf_5775283A_0 *arg0 = (struct Unk_scePaf_5775283A_0 *) this;
     sceKernelWaitThreadEnd(arg0->unk4, 0);
 }
 #endif

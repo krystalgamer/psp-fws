@@ -12,10 +12,66 @@ extern "C" {
 #endif
 
 #ifdef __cplusplus
+/* vtable _ZTV14Class_00051158 is data (vptr = label - 8 + 8) */
+class Class_00051158 {
+public:
+    virtual ~Class_00051158();
+};
+#endif
+
+#ifdef __cplusplus
+/* dtor still asm/m2c (not trivial) */
+class Class_00051D68 {
+public:
+    virtual ~Class_00051D68();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV19Class_00051D30_v271 is data (vptr = label - 8 + 8) */
+class Class_00051D30_v271 : public Class_00051D68 {
+public:
+    virtual ~Class_00051D30_v271();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_00051DD8 is data (vptr = label - 8 + 8) */
+class Class_00051DD8 : public Class_00051D68 {
+public:
+    virtual ~Class_00051DD8();
+};
+#endif
+
+#ifdef __cplusplus
 /* vtable _ZTV14Class_000535A0 is data (vptr = label - 8 + 8) */
 class Class_000535A0 {
 public:
     virtual ~Class_000535A0();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_00054620 is data (vptr = label - 8 + 8) */
+class Class_00054620 {
+public:
+    virtual ~Class_00054620();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_00056640 is data (vptr = label - 8 + 8) */
+class Class_00056640 : public Class_00051D68 {
+public:
+    virtual ~Class_00056640();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_00056760 is data (vptr = label - 8 + 8) */
+class Class_00056760 : public Class_00051D68 {
+public:
+    virtual ~Class_00056760();
 };
 #endif
 
@@ -1795,6 +1851,25 @@ extern M2C_UNK func_000324B8;
 
 M2C_UNK _Z11PSJS_Mallocj(u32);
 M2C_UNK _Z9PSJS_FreePv(void *);
+void _ZN14Class_00051158D0Ev(M2C_UNK **arg0);
+void _ZN14Class_00051158D1Ev(M2C_UNK **arg0);
+void _ZN14Class_00051158D2Ev(M2C_UNK **arg0);
+s32 _ZN14Class_00051D68D2Ev(s32);
+void _ZN14Class_00051DD8D0Ev(M2C_UNK **arg0);
+void _ZN14Class_00051DD8D1Ev(M2C_UNK **arg0);
+void _ZN14Class_00051DD8D2Ev(M2C_UNK **arg0);
+void _ZN14Class_00054620D0Ev(M2C_UNK **arg0);
+void _ZN14Class_00054620D1Ev(M2C_UNK **arg0);
+void _ZN14Class_00054620D2Ev(M2C_UNK **arg0);
+void _ZN14Class_00056640D0Ev(M2C_UNK **arg0);
+void _ZN14Class_00056640D1Ev(M2C_UNK **arg0);
+void _ZN14Class_00056640D2Ev(M2C_UNK **arg0);
+void _ZN14Class_00056760D0Ev(M2C_UNK **arg0);
+void _ZN14Class_00056760D1Ev(M2C_UNK **arg0);
+void _ZN14Class_00056760D2Ev(M2C_UNK **arg0);
+void _ZN19Class_00051D30_v271D0Ev(M2C_UNK **arg0);
+void _ZN19Class_00051D30_v271D1Ev(M2C_UNK **arg0);
+void _ZN19Class_00051D30_v271D2Ev(M2C_UNK **arg0);
 M2C_UNK _ZN3paf13PhApplication13StartDispListEv(void);
 M2C_UNK _ZN3paf13PhApplication14FinishDispListEv(void);
 M2C_UNK _ZN3paf4View11ForEachPageEPFbPS0_PvS2_ES2_(s32, M2C_UNK *, void *);

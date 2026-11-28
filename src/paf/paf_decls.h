@@ -12,9 +12,259 @@ extern "C" {
 #endif
 
 #ifdef __cplusplus
-/* dtor still asm/m2c (not trivial) */
+class vec4;
+namespace paf { class SurfacePool; }
+namespace paf { class PhSRender; }
+namespace paf { class PhEvent; }
+class PSJSContext {
+public:
+    s32 GetUserData() const;
+    s32 SetUserData(void*);
+};
+class PSJSError {
+public:
+    s32 IsSubClass(unsigned short const*) const;
+};
+class PSJSPage {
+public:
+    s32 IsOpen() const;
+};
+namespace paf {
+class Cond {
+public:
+    s32 Wait();
+    void Notify();
+};
+}
+namespace paf {
+class CriticalSection {
+public:
+    void Enter();
+    void Leave();
+};
+}
+namespace paf {
+class Framework {
+public:
+    s32 Instance();
+};
+}
+namespace paf {
+class Image {
+public:
+    s32 Convert32();
+    s32 Copy();
+    s32 GetErrorType();
+    s32 CopyWithEdge();
+    s32 Mirror();
+};
+}
+namespace paf {
+class MiconPointee {
+public:
+    void AddRef();
+};
+}
+namespace paf {
+class PhAppear {
+public:
+    M2C_UNK * ShadowRender();
+};
+}
+namespace paf {
+class PhApplication {
+public:
+    void StartDispList();
+    void FinishDispList();
+    M2C_UNK * GetRootSurface();
+};
+}
+namespace paf {
+class PhButton {
+public:
+    s32 IsInherit(char const*) const;
+    s32 WidgetType();
+};
+}
+namespace paf {
+class PhClock {
+public:
+    s32 WidgetType();
+};
+}
+namespace paf {
+class PhHandler {
+public:
+    s32 HandlePointEvent(paf::PhEvent*);
+    s32 HandleCommandEvent(paf::PhEvent*);
+    s32 PauseTimerAll();
+    s32 StartTimerAll();
+};
+}
+namespace paf {
+class PhIPAddr {
+public:
+    s32 WidgetType();
+};
+}
+namespace paf {
+class PhInfoList {
+public:
+    s32 WidgetType();
+};
+}
+namespace paf {
+class PhItemSpin {
+public:
+    s32 WidgetType();
+};
+}
+namespace paf {
+class PhLabelText {
+public:
+    void ReleaseSurface();
+    void SetPrivateSurfacePool(paf::SurfacePool*);
+};
+}
+namespace paf {
+class PhList {
+public:
+    void Redraw();
+};
+}
+namespace paf {
+class PhMenuList {
+public:
+    s32 WidgetType();
+    s32 SetItemNum(int);
+};
+}
+namespace paf {
+class PhMicon {
+public:
+    void GetBGColor() const;
+    void Play();
+    void Stop();
+    void GetChannels() const;
+    void GetRepeat() const;
+    void GetVolume() const;
+    void GetLoop() const;
+    void GetWidth() const;
+    void GetHeight() const;
+    void GetTime() const;
+};
+}
+namespace paf {
+class PhModel {
+public:
+    s32 WidgetType();
+    void GetMotionCount() const;
+    void GetCurrentMotion() const;
+    void GetFrame() const;
+};
+}
+namespace paf {
+class PhNumSpin {
+public:
+    s32 WidgetType();
+};
+}
+namespace paf {
+class PhPlane {
+public:
+    s32 WidgetType();
+};
+}
+namespace paf {
+class PhProgress {
+public:
+    s32 WidgetType();
+    void SetShadowRender(paf::PhSRender*);
+};
+}
+namespace paf {
+class PhSRender {
+public:
+    s32 SetStyle(int, float);
+    s32 SetStyle(int, vec4 const&);
+    s32 GetStyle(int, bool&) const;
+    s32 GetStyle(int, float&) const;
+    s32 GetStyle(int, vec4&) const;
+};
+}
+namespace paf {
+class PhScene {
+public:
+    s32 WidgetType();
+};
+}
+namespace paf {
+class PhScroll {
+public:
+    s32 WidgetType();
+};
+}
+namespace paf {
+class PhSpin {
+public:
+    s32 WidgetType();
+};
+}
+namespace paf {
+class PhText {
+public:
+    s32 WidgetType();
+    void GetFirstLine() const;
+    s32 GetTextLength() const;
+    s32 GetLineCount() const;
+    s32 GetCurrentPos() const;
+    s32 EraseText(int);
+    void ReleaseSurface();
+};
+}
+namespace paf {
+class PhXmBar {
+public:
+    s32 WidgetType();
+};
+}
+namespace paf {
+class PhXmItem {
+public:
+    s32 WidgetType();
+};
+}
+namespace paf {
+class PhXmList {
+public:
+    s32 WidgetType();
+    s32 SetItemNum(int);
+    s32 SetKeyMask(int);
+};
+}
+namespace paf {
+class SurfaceBase {
+public:
+    s32 PixelsToBytes(int) const;
+};
+}
+namespace paf {
+class Thread {
+public:
+    void Join();
+};
+}
+class psjsstring_impl {
+public:
+    void DecRef();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_00126EC8 is data (vptr = label - 8 + 8) */
 class Class_00126EC8 {
 public:
+    s32 unk4;
     virtual ~Class_00126EC8();
 };
 #endif
@@ -23,6 +273,7 @@ public:
 /* vtable _ZTV14Class_0016AAE0 is data (vptr = label - 8 + 8) */
 class Class_0016AAE0 : public Class_00126EC8 {
 public:
+
     virtual ~Class_0016AAE0();
 };
 #endif
@@ -5327,7 +5578,7 @@ s32 func_0004417C(s32);
 void func_00044190(struct Unk_func_00044190_0 *arg0);
 void func_000441A4(struct Unk_func_000441A4_0 *arg0);
 s32 func_000441D0(struct Unk_func_000441D0_0 *arg0, void *arg1, s32 arg2, s32 arg3, s32 arg4);
-void func_00044394(struct Unk_func_00044394_0 *arg0);
+void func_00044394(Class_0016AAE0 *arg0);
 void func_00044678(void);
 void func_00044680(M2C_UNK **arg0);
 void func_00044690(M2C_UNK **arg0);

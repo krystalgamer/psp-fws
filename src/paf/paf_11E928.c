@@ -246,7 +246,9 @@ INCLUDE_ASM("nonmatchings/paf_11E928", func_000C6034);
 #if FW_VERSION < 270
 INCLUDE_ASM("nonmatchings/paf_11E928", func_000C6134);
 
-s32 _ZNK3paf11SurfaceBase13PixelsToBytesEi(struct Unk_scePaf_08DD2D50_0 *arg0, s32 arg1) {
+s32 paf::SurfaceBase::PixelsToBytes(int cxxp1) const {
+    struct Unk_scePaf_08DD2D50_0 *arg0 = (struct Unk_scePaf_08DD2D50_0 *) this;
+    s32 arg1 = (s32) cxxp1;
     return (s32) ((arg1 << arg0->unkC) + 7) >> 3;
 }
 #endif

@@ -601,7 +601,9 @@ INCLUDE_ASM("nonmatchings/paf_0C52B8", _ZN3paf9PhHandler17HandleAnalogEventEPNS_
 #if FW_VERSION >= 200
 INCLUDE_ASM("nonmatchings/paf_0C52B8", _ZN3paf9PhHandler16HandlePointEventEPNS_7PhEventE);
 #else
-s32 _ZN3paf9PhHandler16HandlePointEventEPNS_7PhEventE(s32 arg0, s32 arg1) {
+s32 paf::PhHandler::HandlePointEvent(paf::PhEvent* cxxp1) {
+    s32 arg0 = (s32) this;
+    s32 arg1 = (s32) cxxp1;
     u32 temp_a0;
 
     _ZN3paf9PhHandler10DoCallBackEiPNS_7PhEventE(arg0, 0x1000B, arg1);
@@ -618,7 +620,9 @@ INCLUDE_ASM("nonmatchings/paf_0C52B8", _ZN3paf9PhHandler16HandleStateEventEPNS_7
 #if FW_VERSION >= 200
 INCLUDE_ASM("nonmatchings/paf_0C52B8", _ZN3paf9PhHandler18HandleCommandEventEPNS_7PhEventE);
 #else
-s32 _ZN3paf9PhHandler18HandleCommandEventEPNS_7PhEventE(s32 arg0, s32 arg1) {
+s32 paf::PhHandler::HandleCommandEvent(paf::PhEvent* cxxp1) {
+    s32 arg0 = (s32) this;
+    s32 arg1 = (s32) cxxp1;
     u32 temp_a0;
 
     _ZN3paf9PhHandler10DoCallBackEiPNS_7PhEventE(arg0, 0x2000E, arg1);
@@ -675,7 +679,8 @@ INCLUDE_ASM("nonmatchings/paf_0C52B8", _ZN3paf9PhHandler13PauseTimerAllEv);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 200
-s32 _ZN3paf9PhHandler13PauseTimerAllEv(struct Unk_scePaf_01CF521E_0 *arg0) {
+s32 paf::PhHandler::PauseTimerAll() {
+    struct Unk_scePaf_01CF521E_0 *arg0 = (struct Unk_scePaf_01CF521E_0 *) this;
     s32 temp_v0;
     s32 var_a1;
 
@@ -694,7 +699,8 @@ INCLUDE_ASM("nonmatchings/paf_0C52B8", _ZN3paf9PhHandler13StartTimerAllEv);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 200
-s32 _ZN3paf9PhHandler13StartTimerAllEv(void *arg0) {
+s32 paf::PhHandler::StartTimerAll() {
+    void *arg0 = (void *) this;
     s32 var_a1;
     u32 temp_v0;
 
@@ -771,7 +777,8 @@ s32 func_0006FE44(void *arg0) {
 #if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/paf_0C52B8", func_000C8894);
 
-s32 _ZN3paf9PhHandler13PauseTimerAllEv(struct Unk_scePaf_01CF521E_0 *arg0) {
+s32 paf::PhHandler::PauseTimerAll() {
+    struct Unk_scePaf_01CF521E_0 *arg0 = (struct Unk_scePaf_01CF521E_0 *) this;
     s32 temp_v0;
     s32 var_a1;
 

@@ -425,7 +425,7 @@ void func_0000D174(M2C_UNK **arg0) {
     func_0000D214((s32) arg0);
 }
 
-void func_0000D19C(M2C_UNK **arg0) {
+void func_0000D19C(s32 **arg0) {
     *arg0 = &D_000224F8;
     func_0000D214((s32) arg0);
 }
@@ -436,7 +436,7 @@ INCLUDE_ASM("nonmatchings/savedata_plugin_00CE3C", func_0000D1C4);
 #endif
 
 #if FW_VERSION >= 282 && FW_VERSION < 350
-void func_0000D1C4(M2C_UNK **arg0) {
+void func_0000D1C4(s32 **arg0) {
     *arg0 = &D_000224F8;
     func_0000D214((s32) arg0);
     _ZdlPv(arg0);
@@ -1206,7 +1206,7 @@ INCLUDE_ASM("nonmatchings/savedata_plugin_00CE3C", func_0000C900);
 Class_00022578::~Class_00022578() {
 }
 
-void func_0000F280(struct Unk_func_000040AC_0 *arg0) {
+void func_0000F280(Class_00022578 *arg0) {
     arg0->unk8 = 1;
     arg0->unkC = 0;
 }
@@ -1217,7 +1217,7 @@ void func_0000C9A4(void *arg0, s32 arg1) {
 #else
 void func_0000F1EC(struct Unk_func_000040AC_0 *arg0, s32 arg1) {
     arg0->unk0 = &D_00022578;
-    func_0000F280(arg0);
+    func_0000F280((Class_00022578*) arg0);
     arg0->unk4 = arg1;
     arg0->unk10 = -1;
     arg0->unk14 = -1;
@@ -1226,7 +1226,7 @@ void func_0000F1EC(struct Unk_func_000040AC_0 *arg0, s32 arg1) {
 Class_00022578::~Class_00022578() {
 }
 
-void func_0000F280(struct Unk_func_000040AC_0 *arg0) {
+void func_0000F280(Class_00022578 *arg0) {
     arg0->unk8 = 1;
     arg0->unkC = 0;
 }
@@ -1424,18 +1424,17 @@ INCLUDE_ASM("nonmatchings/savedata_plugin_00CE3C", func_0000FA70);
 
 INCLUDE_ASM("nonmatchings/savedata_plugin_00CE3C", func_0000FB1C);
 
+#if FW_VERSION >= 282
+Class_000226A0::Class_000226A0(s32 arg1) {
+    this->unk4 = arg1;
+    func_0000FBF8((s32) this);
+}
+#else
 INCLUDE_ASM("nonmatchings/savedata_plugin_00CE3C", func_0000FB58);
 
-#if FW_VERSION < 282
 void func_0000D284(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, M2C_UNK **, 0) = &D_000226A0;
     M2C_FIELD(arg0, s32 *, 4) = arg1;
-    func_0000FBF8((s32) arg0);
-}
-#else
-void func_0000FB84(struct Unk_func_0000FB84_0 *arg0, s32 arg1) {
-    arg0->unk0 = &D_000226A0;
-    arg0->unk4 = arg1;
     func_0000FBF8((s32) arg0);
 }
 #endif

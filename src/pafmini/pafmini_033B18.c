@@ -18,7 +18,8 @@ s32 *func_00033B18(s32 **arg0, s32 arg1) {
     return temp_s1;
 }
 
-void _ZN3paf5SleepEi(s32 arg0) {
+void paf::Sleep(int cxxp1) {
+    s32 arg0 = (s32) cxxp1;
     sceKernelDelayThread(arg0 * 0x3E8);
 }
 

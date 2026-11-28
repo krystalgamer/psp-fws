@@ -61,7 +61,7 @@ INCLUDE_ASM("nonmatchings/common_gui_000438", _ZN3vsh12BusyIcon_IncEv);
 #endif
 
 #if FW_VERSION < 201
-void _ZN3vsh12BusyIcon_IncEv(void) {
+void vsh::BusyIcon_Inc() {
     s32 temp_v0;
     void *temp_v0_2;
 
@@ -76,7 +76,7 @@ void _ZN3vsh12BusyIcon_IncEv(void) {
 #endif
 
 #if FW_VERSION >= 282 && FW_VERSION < 350
-void _ZN3vsh12BusyIcon_IncEv(void) {
+void vsh::BusyIcon_Inc() {
     s32 temp_v0;
     struct Unk_sceVshCommonGui_80271F41_temp_v0_2 *temp_v0_2;
 
@@ -95,7 +95,7 @@ INCLUDE_ASM("nonmatchings/common_gui_000438", _ZN3vsh12BusyIcon_DecEv);
 #endif
 
 #if FW_VERSION < 201
-void _ZN3vsh12BusyIcon_DecEv(void) {
+void vsh::BusyIcon_Dec() {
     s32 temp_v0;
     void *temp_v0_2;
 
@@ -437,25 +437,25 @@ INCLUDE_ASM("nonmatchings/common_gui_000438", sceVshCommonGui_74D1220B);
 #endif
 
 #if FW_VERSION >= 260 && FW_VERSION < 350
-void _ZN3vsh15GetString_EnterEv(void) {
+void vsh::GetString_Enter() {
     func_000005CC((s32) "msgsystem_enter");
 }
 
-void _ZN3vsh14GetString_BackEv(void) {
+void vsh::GetString_Back() {
     func_000005CC((s32) "msgsystem_back");
 }
 
-void _ZN3vsh16GetString_OptionEv(void) {
+void vsh::GetString_Option() {
     func_000005CC((s32) "msgsystem_option");
 }
 
-void _ZN3vsh16GetString_CancelEv(void) {
+void vsh::GetString_Cancel() {
     func_000005CC((s32) "msgsystem_cancel");
 }
 #endif
 
 #if FW_VERSION >= 300 && FW_VERSION < 350
-void _ZN3vsh12GetString_OKEv(void) {
+void vsh::GetString_OK() {
     func_000005CC((s32) "msgsystem_ok");
 }
 #endif
@@ -497,7 +497,7 @@ INCLUDE_ASM("nonmatchings/common_gui_000438", _ZN3vsh13Infobar_CloseEb);
 #endif
 
 #if FW_VERSION == 100
-void _ZN3vsh13Infobar_CloseEv(void) {
+void vsh::Infobar_Close() {
     s32 temp_v0;
     void *temp_v0_2;
 
