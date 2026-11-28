@@ -4,10 +4,16 @@
 #include "common.h"
 #include "m2c_macros.h"
 
-struct D_000079C0_s {
-    s32 unk0;
-    M2C_UNK * unk4;
-};
+/* game-mode master/replica entry (partial) */
+typedef struct SceNetAdhocGameMode {
+    struct SceNetAdhocGameMode *next;   /* 0x00 TAILQ */
+    struct SceNetAdhocGameMode **prev;  /* 0x04 */
+} SceNetAdhocGameMode;
+
+typedef struct {
+    SceNetAdhocGameMode *first;
+    SceNetAdhocGameMode **last;
+} SceNetAdhocGameModeList;
 
 /* queued PDP send entry (callout-driven) */
 typedef struct SceNetAdhocPdpQent {
@@ -249,7 +255,7 @@ extern SceNetAdhocDescList D_00007998;
 extern s32 D_000079A0;
 extern SceNetAdhocPdpList D_000079A4;
 extern u16 D_000079AC;
-extern struct D_000079C0_s D_000079C0;
+extern SceNetAdhocGameModeList D_000079C0;
 extern M2C_UNK D_000079CC;
 extern u16 D_000079E4;
 extern M2C_UNK D_000079E8;
@@ -319,10 +325,14 @@ void func_00005708(struct Unk_func_00005708_0 *arg0);
 void func_0000578C(struct mbuf *m);
 s32 func_00006880(void);
 s32 func_00006C3C(s32, s32, s32);
-s32 func_00006DA4(s32, s32);
+void *func_00006D6C(const void *s, s32 c, s32 n);
+void *func_00006DA4(void *dst, const void *src, s32 n);
 s32 func_00006E18(const void *a, const void *b, s32 n);
-u8 *func_00006E58(u8 *arg0, u8 *arg1, s32 arg2);
-void func_00006EF8(s32 arg0, s32 arg1);
+void *func_00006E58(void *dst, const void *src, s32 n);
+void *func_00006E8C(void *s, s32 c, s32 n);
+s32 func_00006EB8(const void *a, const void *b, s32 n);
+void func_00006EF8(const void *src, void *dst, s32 n);
+void func_00006F1C(void *s, s32 n);
 s32 func_00006F68(void);
 void func_00006F80(void);
 s32 func_00007298(s32, s32, s32);

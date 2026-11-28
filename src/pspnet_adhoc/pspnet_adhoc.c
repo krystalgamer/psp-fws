@@ -1199,16 +1199,31 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc", sceNetAdhocGameModeDeleteMaster);
 #endif
 
 #if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00006880);
+s32 func_00006880(void) {
+    D_000079C0.first = NULL;
+    D_000079C0.last = &D_000079C0.first;
+    return 0;
+}
 #else
 s32 func_00006F68(void) {
-    D_000079C0.unk0 = 0;
-    D_000079C0.unk4 = &D_000079C0;
+    D_000079C0.first = NULL;
+    D_000079C0.last = &D_000079C0.first;
     return 0;
 }
 #endif
 
-INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00006F80);
+void func_00006F80(void) {
+    SceNetAdhocGameMode *gm;
+
+    while ((gm = D_000079C0.first) != NULL) {
+        if (gm->next != NULL)
+            gm->next->prev = gm->prev;
+        else
+            D_000079C0.last = gm->prev;
+        *gm->prev = gm->next;
+        sceNetFreeInternal(gm);
+    }
+}
 
 #if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", sceNetAdhocGameModeCreateReplica);
@@ -1263,39 +1278,73 @@ s32 module_stop(void) {
     return 0;
 }
 
-INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00006D6C);
+void *func_00006D6C(const void *s, s32 c, s32 n) {
+    const u8 *p;
+    u8 ch = c;
 
-INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00006DA4);
-
-INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00006E18);
-
-u8 *func_00006E58(u8 *arg0, u8 *arg1, s32 arg2) {
-    s32 var_a2;
-    u8 *var_a1;
-    u8 *var_v0;
-    u8 *var_v1;
-    u8 temp_a3;
-
-    var_a1 = arg1;
-    var_a2 = arg2;
-    var_v0 = NULL;
-    if (arg0 != NULL) {
-        var_v1 = arg0;
-        if (var_a2 > 0) {
-            do {
-                temp_a3 = *var_a1;
-                var_a2 -= 1;
-                var_a1 += 1;
-                *var_v1 = temp_a3;
-                var_v1 += 1;
-            } while (var_a2 > 0);
+    if (s != NULL) {
+        for (p = s; n > 0; n--, p++) {
+            if (*p == ch)
+                return (void *)p;
         }
-        var_v0 = arg0;
     }
-    return var_v0;
+    return NULL;
 }
 
-INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00006E8C);
+void *func_00006DA4(void *dst, const void *src, s32 n) {
+    u8 *d;
+    const u8 *s;
+
+    d = dst;
+    s = src;
+    if (dst == NULL)
+        return NULL;
+    if (d >= s) {
+        for (n--; n >= 0; n--)
+            d[n] = s[n];
+    } else {
+        while (n > 0) {
+            *d++ = *s++;
+            n--;
+        }
+    }
+    return dst;
+}
+
+s32 func_00006E18(const void *a, const void *b, s32 n) {
+    const u8 *p1 = a;
+    const u8 *p2 = b;
+
+    for (; n > 0; n--) {
+        if (*p1 != *p2)
+            return (*p1 < *p2) ? -1 : 1;
+        p1++;
+        p2++;
+    }
+    return 0;
+}
+
+void *func_00006E58(void *dst, const void *src, s32 n) {
+    u8 *d;
+    const u8 *s;
+
+    if (dst == NULL)
+        return NULL;
+    for (d = dst, s = src; n > 0; n--)
+        *d++ = *s++;
+    return dst;
+}
+
+void *func_00006E8C(void *s, s32 c, s32 n) {
+    u8 *p;
+
+    if (s != NULL) {
+        c &= 0xFF;
+        for (p = s; n > 0; n--)
+            *p++ = c;
+    }
+    return s;
+}
 #endif
 
 #if FW_VERSION == 152
@@ -1303,15 +1352,33 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00007344);
 #endif
 
 #if FW_VERSION < 152
-INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00006EB8);
+s32 func_00006EB8(const void *a, const void *b, s32 n) {
+    const u8 *p1 = a;
+    const u8 *p2 = b;
 
-void func_00006EF8(s32 arg0, s32 arg1) {
-    func_00006DA4(arg1, arg0);
+    for (; n > 0; n--) {
+        if (*p1 != *p2)
+            return (*p1 < *p2) ? -1 : 1;
+        p1++;
+        p2++;
+    }
+    return 0;
+}
+
+void func_00006EF8(const void *src, void *dst, s32 n) {
+    func_00006DA4(dst, src, n);
 }
 #endif
 
 #if FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00006F1C);
+void func_00006F1C(void *s, s32 n) {
+    u8 *p;
+
+    if (s != NULL) {
+        for (p = s; n > 0; n--)
+            *p++ = 0;
+    }
+}
 #endif
 
 #if FW_VERSION >= 282
