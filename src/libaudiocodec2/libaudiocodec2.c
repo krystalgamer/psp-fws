@@ -1,3 +1,5 @@
+/* compiler[330,340]: 1.9.2 */
+/* cflags[330,340]: -O2 -frename-registers -mext */
 /* cflags: -O2 -frename-registers */
 #include "common.h"
 #include "libaudiocodec2_decls.h"

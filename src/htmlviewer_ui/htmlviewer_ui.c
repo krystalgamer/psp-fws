@@ -1,3 +1,7 @@
+/* compiler[280,282,303,311,340]: 1.9.2 */
+/* cflags[280,282,303,311,340]: -Os */
+/* compiler[271]: 1.9.2 */
+/* cflags[271]: -Os */
 /* cflags: -Os */
 #include "common.h"
 #include "htmlviewer_ui_decls.h"

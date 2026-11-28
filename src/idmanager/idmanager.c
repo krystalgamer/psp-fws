@@ -1,3 +1,5 @@
+/* compiler[302,303,311,340]: 1.9.2 */
+/* cflags[302,303,311,340]: -O2 -mext */
 #include "common.h"
 
 #if FW_VERSION >= 311

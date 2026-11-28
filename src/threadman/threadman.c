@@ -1,3 +1,5 @@
+/* compiler[270,271]: 1.9.2 */
+/* cflags[270,271]: -O2 -frename-registers -mext */
 /* compiler[282,300,301,302,303,310,311,330,340,350,351,352]: 1.9.2 */
 /* cflags[282,300,301,302,303,310,311,330,340,350,351,352]: -O2 -frename-registers -mext */
 /* cflags[100,102,103]: -O2 */
@@ -284,7 +286,10 @@ INCLUDE_RODATA("nonmatchings/threadman", D_00015410);
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/threadman", func_00000554);
+s32 func_00000554(void) {
+    sceKernelCreateUIDtype("WaitQ", 0x14, &D_00015410, 0, &D_00016444);
+    return 0;
+}
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 201
