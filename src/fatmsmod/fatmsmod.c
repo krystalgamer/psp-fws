@@ -1715,9 +1715,29 @@ s32 stub_pf_chmod(s32 a0, s32 a1, s32 a2) {
 #endif
 
 #if FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/fatmsmod", stub_pf_mkdir);
+s32 stub_pf_mkdir(s32 a0, s32 a1) {
+    SceMsStubMsg msg;
 
-INCLUDE_ASM("nonmatchings/fatmsmod", stub_pf_rmdir);
+    msg.cmd = 0x9;
+    msg.p2 = a0;
+    msg.p7 = a1;
+    if (FcpSendMsg(&msg) == -1) {
+        return -1;
+    }
+    return msg.ret;
+}
+
+s32 stub_pf_rmdir(s32 a0, s32 a1) {
+    SceMsStubMsg msg;
+
+    msg.cmd = 0xa;
+    msg.p2 = a0;
+    msg.p7 = a1;
+    if (FcpSendMsg(&msg) == -1) {
+        return -1;
+    }
+    return msg.ret;
+}
 
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00004D24);
 #endif
@@ -1844,9 +1864,7 @@ s32 stub_pf_remove(s32 a0) {
     }
     return msg.ret;
 }
-#endif
-
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#else
 s32 stub_pf_remove(s32 a0, s32 a1) {
     SceMsStubMsg msg;
 
@@ -1858,10 +1876,6 @@ s32 stub_pf_remove(s32 a0, s32 a1) {
     }
     return msg.ret;
 }
-#endif
-
-#if FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/fatmsmod", stub_pf_remove);
 #endif
 
 s32 func_00004F40(s32 a0, s32 a1, s32 a2) {
@@ -2049,7 +2063,18 @@ s32 stub_pf_rename(s32 a0, s32 a1, s32 a2) {
 #if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00005168);
 
-INCLUDE_ASM("nonmatchings/fatmsmod", stub_pf_rename);
+s32 stub_pf_rename(s32 a0, s32 a1, s32 a2) {
+    SceMsStubMsg msg;
+
+    msg.cmd = 0x8;
+    msg.p2 = a0;
+    msg.p3 = a1;
+    msg.p7 = a2;
+    if (FcpSendMsg(&msg) == -1) {
+        return -1;
+    }
+    return msg.ret;
+}
 #endif
 
 s32 func_000051F8(s32 a0) {
