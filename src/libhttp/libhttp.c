@@ -2375,9 +2375,34 @@ s32 sceHttpsEnableOption(s32 arg0) {
     }
     return 0;
 }
+
+s32 sceHttpsDisableOption(s32 arg0) {
+    s32 temp_a1;
+
+    temp_a1 = arg0 & 2;
+    if (temp_a1 != 0) {
+        D_0000DC24 = 0;
+    }
+    if (arg0 & 1) {
+        D_0000DC20 = 0;
+    }
+    if (temp_a1 != 0) {
+        D_0000DC24 = 0;
+    }
+    if (arg0 & 4) {
+        D_0000DC28 = 0;
+    }
+    if (arg0 & 8) {
+        D_0000DC2C = 0;
+    }
+    if (arg0 & 0x10) {
+        D_0000DC30 = 0;
+    }
+    return 0;
+}
 #endif
 
-#if FW_VERSION < 350
+#if FW_VERSION >= 150 && FW_VERSION < 350
 INCLUDE_ASM("nonmatchings/libhttp", sceHttpsDisableOption);
 #endif
 
@@ -3745,7 +3770,24 @@ INCLUDE_ASM("nonmatchings/libhttp", func_0000BC98);
 
 INCLUDE_ASM("nonmatchings/libhttp", func_0000BD18);
 
-INCLUDE_ASM("nonmatchings/libhttp", func_0000BDF0);
+char *func_0000BDF0(const char *s, int c) {
+    const char *p;
+
+    c = (char)c;
+    p = s;
+    if (s == NULL) {
+        return NULL;
+    }
+    while (*p++ != '\0') {
+    }
+    p--;
+    do {
+        if (*p == c) {
+            return (char *)p;
+        }
+    } while (s < p--);
+    return NULL;
+}
 
 int func_0000BE38(const char *s) {
     int len = 0;
