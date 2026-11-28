@@ -1037,17 +1037,148 @@ s32 sceMgrAESEncrypt(u32 *dst, u32 *src, u32 size, u32 *key, u32 *iv) {
 INCLUDE_ASM("nonmatchings/mgr", sceMgrAESEncrypt);
 #endif
 
+#if FW_VERSION < 250
+void func_000023F4(void) {
+    s32 n;
+    s32 i;
+
+    n = 0;
+    for (i = 0; i < 4; i++) {
+        D_00009C8C[n].offset = i << 6;
+        D_00009C8C[n].type = 0;
+        D_00009C7C[i] = n;
+        D_00009C8C[n].flags = 0;
+        D_00009C8C[n].slot = &D_00009C7C[i];
+        n++;
+    }
+    for (i = 0; i < 8; i++) {
+        D_00009C8C[n].type = 1;
+        D_00009C8C[n].offset = i << 10;
+        D_00009C80[i] = n;
+        D_00009C8C[n].flags = 0;
+        D_00009C8C[n].slot = &D_00009C80[i];
+        n++;
+    }
+    for (i = 0; i < 2; i++) {
+        D_00009C8C[n].type = 2;
+        D_00009C8C[n].offset = i << 4;
+        D_00009C88[i] = n;
+        D_00009C8C[n].flags = 0;
+        D_00009C8C[n].slot = &D_00009C88[i];
+        n++;
+    }
+    D_00009550 = sceMgrAllocKeyReg(0);
+    D_00009554 = sceMgrAllocKeyReg(1);
+    D_00009C78 = 0;
+}
+#else
 INCLUDE_ASM("nonmatchings/mgr", func_000023F4);
+#endif
 
+#if FW_VERSION < 250
+void func_00002588(void) {
+    s32 i;
+
+    for (i = 0; i < 14; i++) {
+        if (D_00009C8C[i].flags & 1) {
+            sceMgrFreeKeyReg(i);
+        }
+    }
+    D_00009C78 = 0;
+}
+#else
 INCLUDE_ASM("nonmatchings/mgr", func_00002588);
+#endif
 
+#if FW_VERSION < 250
+s32 sceMgrAllocKeyReg(s32 type) {
+    s8 *pool;
+    s32 count;
+    s32 intr;
+    s32 i;
+    s32 id;
+
+    switch (type) {
+    case 0:
+        pool = D_00009C7C;
+        count = 4;
+        break;
+    case 1:
+        pool = D_00009C80;
+        count = 8;
+        break;
+    case 2:
+        pool = D_00009C88;
+        count = 2;
+        break;
+    case -1:
+    case 3:
+    default:
+        return 0x80501005;
+    }
+    intr = sceKernelCpuSuspendIntr();
+    for (i = 0; i < count; i++) {
+        id = pool[i];
+        if (!(D_00009C8C[id].flags & 1)) {
+            D_00009C8C[id].flags |= 1;
+            sceKernelCpuResumeIntr(intr);
+            return id;
+        }
+    }
+    sceKernelCpuResumeIntr(intr);
+    return 0x80501006;
+}
+#else
 INCLUDE_ASM("nonmatchings/mgr", sceMgrAllocKeyReg);
+#endif
 
+#if FW_VERSION < 250
+s32 sceMgrFreeKeyReg(s32 id) {
+    if (id >= 14) {
+        return 0x80501006;
+    }
+    if (!(D_00009C8C[id].flags & 1)) {
+        return 0x80501006;
+    }
+    D_00009C8C[id].flags &= ~1;
+    return 0;
+}
+#else
 INCLUDE_ASM("nonmatchings/mgr", sceMgrFreeKeyReg);
+#endif
 
+#if FW_VERSION < 250
+s32 func_00002748(s32 id) {
+    if (id >= 14) {
+        return 0x80501006;
+    }
+    if (!(D_00009C8C[id].flags & 1)) {
+        return 0x80501006;
+    }
+    return D_00009C8C[id].offset;
+}
+#else
 INCLUDE_ASM("nonmatchings/mgr", func_00002748);
+#endif
 
+#if FW_VERSION < 250
+s32 func_00002788(s32 type) {
+    switch (type) {
+    case 0:
+        D_00009C78 = 0;
+        return D_00009550;
+    case 1:
+        return D_00009554;
+    case -1:
+    case 2:
+    case 3:
+    default:
+        return 0x80501005;
+    }
+}
+#else
 INCLUDE_ASM("nonmatchings/mgr", func_00002788);
+#endif
 
 #if FW_VERSION < 340
 s32 func_00002498(void) {

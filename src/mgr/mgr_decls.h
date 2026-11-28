@@ -37,6 +37,14 @@ typedef struct {
 } MgrId16;
 
 typedef struct {
+    s8 *slot;
+    u8 type;
+    u8 flags;
+    u16 offset;
+} MgrKeyReg;
+typedef char chk_MgrKeyReg[(sizeof(MgrKeyReg) == 0x8) ? 1 : -1];
+
+typedef struct {
     u32 w0;
     u32 w1;
 } MgrSeed;
@@ -53,6 +61,8 @@ struct Unk_func_000018F4_temp_a4 {
     u8 unk3;
 };
 
+extern s32 D_00009550;
+extern s32 D_00009554;
 extern s32 D_0000955C;
 extern s32 D_00009C0C;
 extern u32 D_00009C10;
@@ -63,6 +73,11 @@ extern s32 D_00009C40;
 extern s32 D_00009C48;
 extern M2C_UNK D_00009C58;
 extern MgrIb2Ctrl D_00009C68;
+extern s32 D_00009C78;
+extern s8 D_00009C7C[4];
+extern s8 D_00009C80[8];
+extern s8 D_00009C88[2];
+extern MgrKeyReg D_00009C8C[14];
 extern const u64 D_0000AE68;
 extern s32 D_0000AEE0;
 extern M2C_UNK D_0000AFA0;
@@ -146,10 +161,12 @@ s32 func_00001D2C(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
 s32 func_00001D40(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
 s32 func_00001E14(u32 mode, u32 cmd, u32 *dst, u32 *src, u32 size, u32 *key, u32 *iv);
 s32 func_00001E3C(u32 mode, u32 *dst, u32 *src, u32 size, u32 *key, u32 *iv, s32 keyReg);
+void func_000023F4(void);
 s32 func_00002498(void);
 void func_000024A4(void);
-M2C_UNK func_00002588();
-s32 func_00002748(s32 arg0);
+void func_00002588(void);
+s32 func_00002748(s32 id);
+s32 func_00002788(s32 type);
 s32 func_000027E0(void);
 void func_000027EC(void);
 s32 func_00002934(s32, M2C_UNK);
@@ -213,6 +230,7 @@ s32 sceMgrAESDecrypt(u32 *dst, u32 *src, u32 size, u32 *key, u32 *iv);
 s32 sceMgrAESEncrypt(u32 *dst, u32 *src, u32 size, u32 *key, u32 *iv);
 void sceMgrAesEnd(void);
 s32 sceMgrAesInit(void);
+s32 sceMgrAllocKeyReg(s32 type);
 s32 sceMgrCreateKc(s32 arg0, s32 arg1);
 s32 sceMgrDESDecrypt(u32 *dst, u32 *src, u32 size, u32 *key, u32 *iv);
 s32 sceMgrDESDecryptBlock(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
@@ -228,6 +246,7 @@ s32 sceMgrEncryptKcWithKse(s32 arg0, s32 arg1);
 s32 sceMgrEncryptWithKbCBC(s32 arg0, s32 arg1, s32 *arg2, u32 arg3, s32 arg4);
 void sceMgrEncryptWithKse(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
 void sceMgrEnd(void);
+s32 sceMgrFreeKeyReg(s32 id);
 s32 sceMgrGenerateICV(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
 s32 sceMgrGenerateKb(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
 s32 sceMgrGenerateKse(s32 arg0, s32 arg1, s32 arg2);
