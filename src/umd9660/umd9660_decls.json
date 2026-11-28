@@ -18,7 +18,6 @@
   "func_00001E0C": "s32 func_00001E0C(void);",
   "func_00001E18": "s32 func_00001E18(void);",
   "func_00001E24": "s32 func_00001E24(void);",
-  "func_00001E30": "SceOff func_00001E30(SceUmd9660File *file, SceOff ofs, s32 whence);",
   "func_000022E8": "void func_000022E8(void);",
   "func_000026E4": "SceUmd9660Mgr *func_000026E4(void);",
   "func_00002910": "SceUmd9660File *func_00002910(SceIoIob *iob);",
@@ -126,7 +125,8 @@
   "sceUmdRegisterGetUMDInfoCallBack": "M2C_UNK sceUmdRegisterGetUMDInfoCallBack(M2C_UNK *, M2C_UNK *);",
   "sceUmdUnRegisterGetUMDInfoCallBack": "M2C_UNK sceUmdUnRegisterGetUMDInfoCallBack();",
   "sprintf": "s32 sprintf(char *buf, const char *fmt, ...);",
-  "strlen": "SceSize strlen(const char *s);"
+  "strlen": "SceSize strlen(const char *s);",
+  "umd9660_set_lseek": "SceOff umd9660_set_lseek(SceUmd9660File *file, SceOff ofs, s32 whence);"
  },
  "types": {
   "SceIoIob": "/* iofilemgr file descriptor block (first 0x20 bytes) */\ntypedef struct SceIoIob {\n    s32 i_flgs; /* 0x0 */\n    s32 i_unit; /* 0x4 */\n    void *i_de; /* 0x8 */\n    s32 d_type; /* 0xC */\n    void *i_private; /* 0x10 */\n    void *i_cwd; /* 0x14 */\n    SceOff i_fpos; /* 0x18 */\n} SceIoIob;",

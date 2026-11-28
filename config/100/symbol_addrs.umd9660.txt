@@ -112,3 +112,14 @@ func_00004EE8 = 0x0000509C; // type:func
 func_00004FE4 = 0x00005330; // type:func rom:0x53B0
 D_00005B30_v100 = 0x00005B30; // rom:0x5BB0
 // shared names (tools/add_version.py) end
+umd9660_close = 0x00000134; // type:func
+umd9660_read = 0x000001BC; // type:func
+umd9660_exit = 0x0000043C; // type:func
+umd9660_open = 0x000004F8; // type:func
+umd9660_devctl = 0x0000081C; // type:func
+umd9660_init = 0x000009F4; // type:func
+umd9660_exec_devctl = 0x00000A80; // type:func
+umd9660_set_lseek = 0x00001E30; // type:func
+sceUmd9660ReadPvd4DVD = 0x00004784; // type:func
+sceUmd9660ReadRootDir4DVD = 0x00004964; // type:func
+dvd_get_controlimg_lbn = 0x00004AFC; // type:func

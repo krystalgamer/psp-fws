@@ -254,7 +254,6 @@ s32 func_00001E00(void);
 s32 func_00001E0C(void);
 s32 func_00001E18(void);
 s32 func_00001E24(void);
-SceOff func_00001E30(SceUmd9660File *file, SceOff ofs, s32 whence);
 void func_000022E8(void);
 SceUmd9660Mgr *func_000026E4(void);
 SceUmd9660File *func_00002910(SceIoIob *iob);
@@ -363,5 +362,6 @@ M2C_UNK sceUmdRegisterGetUMDInfoCallBack(M2C_UNK *, M2C_UNK *);
 M2C_UNK sceUmdUnRegisterGetUMDInfoCallBack();
 s32 sprintf(char *buf, const char *fmt, ...);
 SceSize strlen(const char *s);
+SceOff umd9660_set_lseek(SceUmd9660File *file, SceOff ofs, s32 whence);
 
 #endif

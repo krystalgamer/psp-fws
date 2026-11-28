@@ -113,14 +113,14 @@ SceOff func_00000000(SceIoIob *iob, SceOff ofs, s32 whence) {
     if (iob->i_private == NULL) {
         return 0x80010013;
     }
-    ret = func_00001E30(iob->i_private, ofs, whence);
+    ret = umd9660_set_lseek(iob->i_private, ofs, whence);
     iob->i_fpos = ret;
     return ret;
 }
 
 INCLUDE_RODATA("nonmatchings/umd9660", D_00005A70);
 
-s32 func_00000134(SceIoIob *iob) {
+s32 umd9660_close(SceIoIob *iob) {
     s32 ret;
     UMD9660_ASSERT(iob != NULL, D_00005A70, D_00005AFC, "umd9660_close", UMD9660_V(0x1D5, 0x1D5, 0x1D5, 0x145, 0x146));
     ret = 0x80010016;
@@ -135,7 +135,7 @@ s32 func_00000134(SceIoIob *iob) {
 #endif
 
 #if FW_VERSION == 100
-s32 func_000001BC(SceIoIob *iob, void *buf, SceSize cnt) {
+s32 umd9660_read(SceIoIob *iob, void *buf, SceSize cnt) {
     SceUmd9660File *file = iob->i_private;
     SceUmdLbnParam param;
     s32 ret;
@@ -178,11 +178,11 @@ end:
 #endif
 
 #if FW_VERSION >= 102 && FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/umd9660", func_000001BC);
+INCLUDE_ASM("nonmatchings/umd9660", umd9660_read);
 #endif
 
 #if FW_VERSION < 201
-s32 func_0000043C(void *dev) {
+s32 umd9660_exit(void *dev) {
     s32 ret = 0;
     UMD9660_ASSERT(dev != NULL, D_00005A70, D_00005AFC, "umd9660_exit", UMD9660_V(0x275, 0x280, 0x27F, 0x1FD, 0x1FE));
     if (dev == NULL) {
@@ -203,7 +203,7 @@ s32 func_0000043C(void *dev) {
     return ret;
 }
 
-INCLUDE_ASM("nonmatchings/umd9660", func_000004F8);
+INCLUDE_ASM("nonmatchings/umd9660", umd9660_open);
 #endif
 
 #if FW_VERSION == 152
@@ -215,7 +215,7 @@ INCLUDE_ASM("nonmatchings/umd9660", func_00000780);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/umd9660", func_00000860);
+INCLUDE_ASM("nonmatchings/umd9660", umd9660_devctl);
 #endif
 
 #if FW_VERSION >= 151 && FW_VERSION < 282
@@ -225,7 +225,7 @@ s32 func_000009BC(s32 arg0) {
 #endif
 
 #if FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/umd9660", func_0000081C);
+INCLUDE_ASM("nonmatchings/umd9660", umd9660_devctl);
 #endif
 
 #if FW_VERSION < 151
@@ -315,7 +315,7 @@ s32 module_start(void) {
 #endif
 
 #if FW_VERSION < 201
-s32 func_000009F4(void *dev) {
+s32 umd9660_init(void *dev) {
     s32 ret;
     UMD9660_ASSERT(dev != NULL, D_00005A70, D_00005AFC, "umd9660_init", UMD9660_V(0x252, 0x25D, 0x25C, 0x1DA, 0x1DB));
     if (dev == NULL) {
@@ -330,15 +330,15 @@ s32 func_000009F4(void *dev) {
 #endif
 
 #if FW_VERSION >= 102 && FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/umd9660", func_00000AAC);
+INCLUDE_ASM("nonmatchings/umd9660", umd9660_exec_devctl);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/umd9660", func_00000AD0);
+INCLUDE_ASM("nonmatchings/umd9660", umd9660_exec_devctl);
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/umd9660", func_00000A80);
+INCLUDE_ASM("nonmatchings/umd9660", umd9660_exec_devctl);
 #endif
 
 #if FW_VERSION < 201
@@ -424,7 +424,7 @@ s32 func_00001E24(void) {
 #endif
 
 #if FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/umd9660", func_00001E30);
+INCLUDE_ASM("nonmatchings/umd9660", umd9660_set_lseek);
 #endif
 
 #if FW_VERSION >= 282
@@ -1616,7 +1616,7 @@ INCLUDE_RODATA("nonmatchings/umd9660", D_00005BF0);
 #endif
 
 #if FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/umd9660", func_00004784);
+INCLUDE_ASM("nonmatchings/umd9660", sceUmd9660ReadPvd4DVD);
 #endif
 
 #if FW_VERSION < 271
@@ -1650,19 +1650,19 @@ INCLUDE_ASM("nonmatchings/umd9660", func_00004240);
 #endif
 
 #if FW_VERSION == 152
-INCLUDE_ASM("nonmatchings/umd9660", func_00004EA4);
+INCLUDE_ASM("nonmatchings/umd9660", sceUmd9660ReadRootDir4DVD);
 #endif
 
 #if FW_VERSION < 152
-INCLUDE_ASM("nonmatchings/umd9660", func_00004964);
+INCLUDE_ASM("nonmatchings/umd9660", sceUmd9660ReadRootDir4DVD);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/umd9660", func_00005038);
+INCLUDE_ASM("nonmatchings/umd9660", dvd_get_controlimg_lbn);
 #endif
 
 #if FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/umd9660", func_00004AFC);
+INCLUDE_ASM("nonmatchings/umd9660", dvd_get_controlimg_lbn);
 #endif
 
 #if FW_VERSION >= 282
