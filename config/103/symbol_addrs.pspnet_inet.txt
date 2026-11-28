@@ -720,3 +720,5 @@ tcp_segsize = 0x00023C74; // type:func
 tcp_quench = 0x0002544C; // type:func
 syn_cache_respond = 0x000227D4; // type:func
 syn_cache_insert = 0x00020B74; // type:func
+syn_cache_reset = 0x00021D08; // type:func
+syn_cache_unreach = 0x00021FCC; // type:func

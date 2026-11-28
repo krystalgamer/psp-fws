@@ -593,3 +593,5 @@ syn_hash2 = 0x00030350;
 tcp_syn_bucket_limit = 0x0002E79C; // rom:0x2E81C
 tcp_syn_cache_limit = 0x0002E798; // rom:0x2E818
 syn_cache_insert = 0x00020B74; // type:func
+syn_cache_reset = 0x00021D08; // type:func
+syn_cache_unreach = 0x00021FCC; // type:func

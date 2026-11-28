@@ -916,14 +916,57 @@ __inline struct syn_cache *syn_cache_lookup(struct sockaddr *src, struct sockadd
 	_sce_pspnet_splunlock(s);
 	return (NULL);
 }
-#endif
 
-#if FW_VERSION < 151
 INCLUDE_ASM("nonmatchings/pspnet_inet_udp", func_000215D8);
 
-INCLUDE_ASM("nonmatchings/pspnet_inet_udp", func_00021D08);
+void syn_cache_reset(struct sockaddr *src, struct sockaddr *dst, struct tcphdr *th)
+{
+	struct syn_cache *sc;
+	struct syn_cache_head *scp;
+	int s = _sce_pspnet_spllock();
 
-INCLUDE_ASM("nonmatchings/pspnet_inet_udp", func_00021FCC);
+	if ((sc = syn_cache_lookup(src, dst, &scp)) == NULL) {
+		_sce_pspnet_splunlock(s);
+		return;
+	}
+	if (SEQ_LT(th->th_seq, sc->sc_irs) ||
+	    SEQ_GT(th->th_seq, sc->sc_irs+1)) {
+		_sce_pspnet_splunlock(s);
+		return;
+	}
+	SYN_CACHE_RM(sc);
+	_sce_pspnet_splunlock(s);
+	tcp_stat.tcps_sc_reset++;
+	SYN_CACHE_PUT(sc);
+}
+
+void syn_cache_unreach(struct sockaddr *src, struct sockaddr *dst, struct tcphdr *th)
+{
+	struct syn_cache *sc;
+	struct syn_cache_head *scp;
+	int s;
+
+	s = _sce_pspnet_spllock();
+	if ((sc = syn_cache_lookup(src, dst, &scp)) == NULL) {
+		_sce_pspnet_splunlock(s);
+		return;
+	}
+	if (ntohl (th->th_seq) != sc->sc_iss) {
+		_sce_pspnet_splunlock(s);
+		return;
+	}
+
+	if ((sc->sc_flags & SCF_UNREACH) == 0 || sc->sc_rxtshift < 3) {
+		sc->sc_flags |= SCF_UNREACH;
+		_sce_pspnet_splunlock(s);
+		return;
+	}
+
+	SYN_CACHE_RM(sc);
+	_sce_pspnet_splunlock(s);
+	tcp_stat.tcps_sc_unreach++;
+	SYN_CACHE_PUT(sc);
+}
 
 INCLUDE_ASM("nonmatchings/pspnet_inet_udp", func_000222B0);
 #endif

@@ -1088,6 +1088,8 @@ struct syn_cache_head {
     u16 sch_length;                     /* 0x4 */
 };
 TAILQ_HEAD(syn_cache_timeq_head, syn_cache);
+#define SCF_UNREACH 0x0001
+#define SCF_TIMESTAMP 0x0002
 #define SYN_HASH(sa, sp, dp) \
     ((((sa)->s_addr^syn_hash1)*(((((u32)(dp))<<16) + \
                      ((u32)(sp)))^syn_hash2)))
@@ -1478,6 +1480,76 @@ struct ipoption {
     struct in_addr ipopt_dst;           /* 0x00 */
     s8 ipopt_list[40];                  /* 0x04 */
 };
+
+/* tcp/ip constants and SCE mbuf/timer macros (NetBSD-current, late 2000) */
+#define TH_FIN 0x01
+#define TH_SYN 0x02
+#define TH_RST 0x04
+#define TH_PUSH 0x08
+#define TH_ACK 0x10
+#define TH_URG 0x20
+#define TF_ACKNOW 0x0001
+#define TF_DELACK 0x0002
+#define TF_NODELAY 0x0004
+#define TF_NOOPT 0x0008
+#define TF_REQ_SCALE 0x0020
+#define TF_RCVD_SCALE 0x0040
+#define TF_REQ_TSTMP 0x0080
+#define TF_RCVD_TSTMP 0x0100
+#define TCPOPT_NOP 1
+#define TCPOPT_MAXSEG 2
+#define TCPOPT_WINDOW 3
+#define TCPOLEN_WINDOW 3
+#define TCPOPT_TIMESTAMP 8
+#define TCPOLEN_TIMESTAMP 10
+#define TCPOLEN_TSTAMP_APPA (TCPOLEN_TIMESTAMP + 2)
+#define TCPOPT_TSTAMP_HDR (TCPOPT_NOP << 24 | TCPOPT_NOP << 16 | TCPOPT_TIMESTAMP << 8 | TCPOLEN_TIMESTAMP)
+#define MAX_TCPOPTLEN 32
+#define TCP_MAXBURST 4
+#define TCP_MAXWIN 65535
+#define IP_MAXPACKET 65535
+#define IP_MTUDISC 0x0400
+#define SO_DEBUG 0x0001
+#define SO_DONTROUTE 0x0010
+#define ENETDOWN 0x73
+#define SEQ_LT(a, b) ((int)((a) - (b)) < 0)
+#define SEQ_LEQ(a, b) ((int)((a) - (b)) <= 0)
+#define SEQ_GT(a, b) ((int)((a) - (b)) > 0)
+#define SEQ_GEQ(a, b) ((int)((a) - (b)) >= 0)
+#define TCP_TIMER_ARM(tp, timer, nticks) ((tp)->t_timer[(timer)] = pfslowtimo_now + (nticks))
+#define TCP_TIMER_DISARM(tp, timer) ((tp)->t_timer[(timer)] = 0)
+#define TCP_TIMER_ISARMED(tp, timer) ((tp)->t_timer[(timer)])
+#define TCP_CLEAR_DELACK(tp) do { \
+    if ((tp)->t_flags & TF_DELACK) { \
+        (tp)->t_flags &= ~TF_DELACK; \
+        LIST_REMOVE(tp, t_delack); \
+    } \
+} while (0)
+#define MHLEN (MSIZE - 0x30)
+#define MGETHDR(m, how, type) do { \
+    (m) = sceNetMallocInternal(MSIZE); \
+    if (m) { \
+        (m)->m_type = (type); \
+        (m)->m_data = (u8 *)&(m)->m_ext; \
+        (m)->m_flags = M_PKTHDR; \
+        (m)->m_next = NULL; \
+        (m)->m_nextpkt = NULL; \
+        (m)->m_pkthdr.aux = NULL; \
+    } \
+} while (0)
+#define M_TRAILINGSPACE(m) \
+    ((m)->m_flags & M_EXT ? (m)->m_ext.ext_buf + (m)->m_ext.ext_size - \
+        ((m)->m_data + (m)->m_len) : \
+        &((u8 *)(m) + 0x14)[MLEN] - ((m)->m_data + (m)->m_len))
+#define m_copy(m, o, l) sceNetMCopym((m), (o), (l), M_DONTWAIT)
+#define htonl(x) __builtin_allegrex_wsbw(x)
+#define ntohl(x) __builtin_allegrex_wsbw(x)
+#define EINVAL 0x16
+#define ENOBUFS 0x69
+#define EAFNOSUPPORT 0x6A
+#define EHOSTUNREACH 0x76
+typedef u32 tcp_seq;
+#define m_copydata sceNetMCopydata
 
 struct SceTailqHead {
     void *tqh_first;
@@ -1886,6 +1958,7 @@ extern s32 tcp_maxpersistidle; /* tcp_maxpersistidle */
 extern s32 tcp_mss_ifmtu;
 extern s32 tcp_mssdflt; /* tcp_mssdflt */
 extern u32 tcp_now; /* tcp_now */
+extern u8 tcp_outflags[];
 extern u32 tcp_recvspace; /* tcp_recvspace */
 extern u32 tcp_sendspace; /* tcp_sendspace */
 extern struct tcpstat tcp_stat;
@@ -2242,6 +2315,7 @@ s32 sceNetInetTerm(void);
 char *sceNetInet_lib_2595064C(struct in_addr in);
 struct ifqueue *sceNetInet_lib_D7928A6D(void);
 void sceNetMAdj(struct mbuf *mp, s32 req_len);
+s32 sceNetMCopydata(struct mbuf *m, s32 off, s32 len, void *cp);
 struct mbuf *sceNetMCopym(struct mbuf *m, s32 off, s32 len, s32 wait);
 struct mbuf *sceNetMFree(struct mbuf *m);
 void sceNetMFreem(struct mbuf *m);
@@ -2307,8 +2381,10 @@ void syn_cache_cleanup(struct tcpcb *tp);
 void syn_cache_init(void);
 void syn_cache_insert(struct syn_cache *sc, struct tcpcb *tp);
 struct syn_cache *syn_cache_lookup(struct sockaddr *src, struct sockaddr *dst, struct syn_cache_head **headp);
+void syn_cache_reset(struct sockaddr *src, struct sockaddr *dst, struct tcphdr *th);
 s32 syn_cache_respond(struct syn_cache *sc, struct mbuf *m);
 void syn_cache_timer(void);
+void syn_cache_unreach(struct sockaddr *src, struct sockaddr *dst, struct tcphdr *th);
 s32 sysctl_int(void *oldp, u32 *oldlenp, void *newp, u32 newlen, s32 *valp);
 s32 sysctl_rdint(void *oldp, u32 *oldlenp, void *newp, s32 val);
 s32 sysctl_rdstruct(void *oldp, u32 *oldlenp, void *newp, const void *sp, u32 len);
