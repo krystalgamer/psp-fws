@@ -254,6 +254,12 @@ typedef struct {
     u32 s_addr;
 } __attribute__((packed)) SceNetInAddrPacked;
 
+/* DHCP times are signed in 1.00, unsigned from 1.02 */
+#if FW_VERSION >= 102
+typedef u32 SceNetDhcpTime;
+#else
+typedef s32 SceNetDhcpTime;
+#endif
 typedef struct {
     u8 unk0[0xD];
     SceNetInAddrPacked yiaddr;  /* 0x00D */
@@ -262,9 +268,9 @@ typedef struct {
     char domain[0x100];         /* 0x1D9 option 15 */
     char message[0x100];        /* 0x2D9 option 56 */
     u8 unk3D9[3];
-    u32 unk3DC;                 /* 0x3DC option 51 lease time */
-    u32 unk3E0;                 /* 0x3E0 option 58 T1 */
-    u32 unk3E4;                 /* 0x3E4 option 59 T2 */
+    SceNetDhcpTime unk3DC;      /* 0x3DC option 51 lease time */
+    SceNetDhcpTime unk3E0;      /* 0x3E0 option 58 T1 */
+    SceNetDhcpTime unk3E4;      /* 0x3E4 option 59 T2 */
     u32 unk3E8;                 /* 0x3E8 option 54 server id */
     u32 netmask;                /* 0x3EC option 1 */
     u32 broadcast;              /* 0x3F0 option 28 */
@@ -303,23 +309,24 @@ typedef struct {
     u8 hwaddr[6];               /* 0xE66 own MAC */
     u8 unkE6C[0x118];
     SceNetDhcpLease *lease;     /* 0xF84 */
-    s32 timeout;                /* 0xF88 */
-    s32 initInterval;           /* 0xF8C */
-    s32 maxInterval;            /* 0xF90 */
-    s32 startTime;              /* 0xF94 */
-    s32 unkF98;
-    s32 interval;               /* 0xF9C */
+    SceNetDhcpTime timeout;                /* 0xF88 */
+    SceNetDhcpTime initInterval;           /* 0xF8C */
+    SceNetDhcpTime maxInterval;            /* 0xF90 */
+    SceNetDhcpTime startTime;              /* 0xF94 */
+    SceNetDhcpTime unkF98;
+    SceNetDhcpTime interval;               /* 0xF9C */
     s32 unkFA0;
     SceUID sema;                /* 0xFA4 */
     SceUID thid;                /* 0xFA8 */
     s32 state;                  /* 0xFAC */
-    u8 unkFB0[8];
+    u32 unkFB0;
+    s32 bound;                  /* 0xFB4 */
     u32 curDns1;                /* 0xFB8 */
     u32 curDns2;                /* 0xFBC */
     u32 curRoute;               /* 0xFC0 */
     SceNetDhcpLease offer;      /* 0xFC4 */
-    u8 arpAddr[6];              /* 0x13C8 */
-    u8 arpHw[0xE];              /* 0x13CE */
+    u8 arpAddr[6];              /* 0x13C8 server/router MAC */
+    u16 arpHw[7];               /* 0x13CE server/router IP */
     void (*callback)(s32 event, s32 arg); /* 0x13DC */
     SceNetApctlIpParam *param;  /* 0x13E0 */
     s32 sock;                   /* 0x13E4 */
@@ -645,6 +652,7 @@ void func_00003E70();
 void func_00003EF0();
 s32 func_0000407C(const char *ifname, SceNetDhcpLease *l);
 u32 func_00004270(SceNetInAddrPacked *addr);
+s32 func_000042D0(SceNetDhcpCtx *dc);
 s32 func_00004424(const char *ifname);
 s32 func_000045B8(SceNetDhcpCtx *dc, void *addr);
 s32 func_00004704(s32 sock, u32 *dst, void *buf);
@@ -671,6 +679,7 @@ s32 func_00006050(s32 sock);
 s32 func_00006088(s32 sock, u32 *dst, void *buf);
 s32 func_000060AC(SceNetDhcpCtx *dc);
 s32 func_00006304(s32 arg0);
+s32 func_00006340(SceNetDhcpCtx *dc, void *addr);
 s32 func_00006414(SceNetDhcpCtx *dc, void *tpa);
 s32 func_0000643C(SceNetDhcpCtx *dc);
 s32 func_00006870(void *pkt, s32 len);
