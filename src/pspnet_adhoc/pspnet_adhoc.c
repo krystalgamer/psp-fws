@@ -4,20 +4,33 @@
 #include "common.h"
 #include "pspnet_adhoc_decls.h"
 
-#if FW_VERSION < 201
+#if FW_VERSION < 282
 s32 sceNetAdhocInit(void) {
     s32 s;
     s32 ret;
 
+#if FW_VERSION >= 201
+    if (sceKernelCheckThreadStack() < 0x7F0)
+        return 0x80410005;
     s = _sce_pspnet_spllock();
+    if (s < 0)
+        return s;
+#else
+    s = _sce_pspnet_spllock();
+#endif
     ret = 0x80410713;
     if (g_adhocInit > 0)
         goto end;
+#if FW_VERSION >= 201
+    sceNetMemset(&g_adhocIntrq, 0, sizeof(g_adhocIntrq));
+    g_adhocIntrq.ifq_maxlen = 50;
+#else
     g_adhocIntrq.ifq_maxlen = 50;
     g_adhocIntrq.ifq_len = 0;
     g_adhocIntrq.ifq_head = NULL;
     g_adhocIntrq.ifq_drops = 0;
     g_adhocIntrq.ifq_tail = NULL;
+#endif
     ret = func_00000DD0();
     if (ret < 0)
         goto end;
