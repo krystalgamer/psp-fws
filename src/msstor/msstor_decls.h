@@ -123,7 +123,8 @@ typedef struct SceMSstorDev {
     s32 mediaType2;         /* 0x14: SceMSstorMediaType2 (0x10/0x11 Std, 0x40/0x41 Pro, 0x20) */
     s32 writable;           /* 0x18: 0 = ROM medium */
     s32 wpSwitch;           /* 0x1C: write-protect switch (status reg bit 0) */
-    u8 unk20[0x260 - 0x20];
+    s32 freeCount[16];      /* 0x20: Std free blocks per segment */
+    u16 freeBlk[16][16];    /* 0x60: Std free block lists */
     u16 l2p[0x2000];        /* 0x260: Std logical -> physical block table */
     u8 boot[0x200];         /* 0x4260: Std boot block */
     u8 unk4460[0x4E60 - 0x4460];
@@ -443,7 +444,7 @@ s32 func_0000299C(SceMSstorDev *dev, s32 arg1, void *arg2);
 s32 func_000031EC(SceMSstorDev *dev, s32 *blk, s32 seg);
 u32 func_00003298(SceMSstorDev *dev);
 s32 func_000034CC(void *arg0, s32 arg1, s32 *arg2);
-s32 func_0000366C(SceMSstorDev *dev, s32 a1, s32 a2, s32 a3);
+s32 func_0000366C(SceMSstorDev *dev, s32 block, s32 page, u8 *extra);
 s32 func_00003BD4(SceMSstorDev *dev, s32 a1, s32 a2, s32 a3);
 s32 func_00003C2C(SceMSstorDev *dev);
 s32 func_00003C4C(SceMSstorDev *dev);

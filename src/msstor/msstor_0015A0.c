@@ -205,7 +205,29 @@ INCLUDE_RODATA("nonmatchings/msstor_0015A0", D_00009214);
 
 INCLUDE_ASM("nonmatchings/msstor_0015A0", func_00002A54);
 
+#if FW_VERSION < 201
+s32 func_000031EC(SceMSstorDev *dev, s32 *blk, s32 seg) {
+    u16 *list;
+    s32 n;
+    s32 last;
+
+    n = dev->freeCount[seg];
+    last = (seg == (dev->boot[0x1A4] >> 1) - 1);
+    list = dev->freeBlk[seg];
+    if (last < n) {
+        *blk = list[0];
+        n--;
+        func_0000432C((u8 *)list, (u8 *)&list[1], n * 2);
+        list[n] = 0xFFFF;
+        dev->freeCount[seg] = n;
+        return 0;
+    }
+    dev->writable = 0;
+    return -13;
+}
+#else
 INCLUDE_ASM("nonmatchings/msstor_0015A0", func_000031EC);
+#endif
 
 INCLUDE_ASM("nonmatchings/msstor_0015A0", func_000032A4);
 
@@ -264,7 +286,29 @@ INCLUDE_ASM("nonmatchings/msstor_0015A0", func_0000351C);
 
 INCLUDE_ASM("nonmatchings/msstor_0015A0", func_00003588);
 
+#if FW_VERSION < 201
+s32 func_0000366C(SceMSstorDev *dev, s32 block, s32 page, u8 *extra) {
+    s32 ret;
+
+    if (dev->writable == 0) {
+        return -13;
+    }
+    if (dev->wpSwitch != 0) {
+        return -12;
+    }
+    ret = func_000008F0(dev, block, page, 0x80, extra, 1);
+    if (ret != 0) {
+        return ret;
+    }
+    ret = func_000008B8(dev, 0x55, 10);
+    if (ret != 0 && ret != -6) {
+        return ret;
+    }
+    return 0;
+}
+#else
 INCLUDE_ASM("nonmatchings/msstor_0015A0", func_0000366C);
+#endif
 
 INCLUDE_ASM("nonmatchings/msstor_0015A0", func_000036F8);
 
