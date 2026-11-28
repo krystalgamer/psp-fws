@@ -115,3 +115,4 @@ gameModeUpdateReplica = 0x00007298; // type:func
 ptpAllocPort = 0x000057CC; // type:func
 ptpBind2 = 0x000053EC; // type:func
 ptpConnectStart = 0x000055BC; // type:func
+pdpBind = 0x00002AFC; // type:func
