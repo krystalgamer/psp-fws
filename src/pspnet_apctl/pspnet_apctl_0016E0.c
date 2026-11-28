@@ -687,11 +687,57 @@ s32 func_000038E4(void) {
 }
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION >= 282
+#if FW_VERSION == 100
+s32 func_000038EC(SceNetApctlCtx *ctx, SceNetInAddrPacked *ip, SceNetInAddrPacked *bcast, SceNetInAddrPacked *mask, SceNetInAddrPacked *route, SceNetInAddrPacked *dns1, SceNetInAddrPacked *dns2) {
+    s32 ret;
+
+    ret = sceNetConfigSetIfaddr(ctx, ip, bcast, mask);
+    if (ret >= 0) {
+        sceNetConfigSetDefaultRoute(route);
+        if (ctx->conf.manualDns == 1) {
+            ret = sceNetConfigSetDNS(dns1, dns2);
+        }
+    }
+    return ret;
+}
+#endif
+
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_000038EC);
 #endif
 
-#if FW_VERSION < 150
+#if FW_VERSION == 100
+s32 func_00001C54(SceNetApctlCtx *ctx) {
+    u32 ip[4];
+    u32 bcast[4];
+    u32 mask[4];
+    u32 route[4];
+    u32 dns1[4];
+    u32 dns2[4];
+    s32 ret;
+
+    ret = apctlResetDns();
+    if (ret < 0) {
+        goto fail;
+    }
+    ret = func_00001E20(ctx, (SceNetInAddrPacked *)ip, (SceNetInAddrPacked *)bcast, (SceNetInAddrPacked *)mask, (SceNetInAddrPacked *)route, (SceNetInAddrPacked *)dns1, (SceNetInAddrPacked *)dns2);
+    if (ret < 0) {
+        goto fail;
+    }
+    ret = apctlSetStatic(ctx, ip, bcast, mask, route, dns1, dns2);
+    if (ret >= 0) {
+        goto end;
+    }
+fail:
+    if (sceNetConfigDelIfaddr(ctx) >= 0) {
+        apctlResetDns();
+    }
+end:
+    return ret;
+}
+#endif
+
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00001C54);
 #endif
 

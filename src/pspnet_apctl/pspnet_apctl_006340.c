@@ -59,13 +59,83 @@ INCLUDE_ASM("nonmatchings/pspnet_apctl_006340", func_00006870);
 
 #if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_apctl_006340", func_00004AEC);
+#endif
 
+#if FW_VERSION < 250
+s32 func_00006BD8(s8 tag, u8 len) {
+    switch (tag) {
+    case 53:
+        if (len != 1) {
+            return -1;
+        }
+        break;
+    case 1:
+    case 28:
+    case 51:
+    case 54:
+    case 58:
+    case 59:
+        if (len != 4) {
+            return -1;
+        }
+        break;
+    case 3:
+    case 6:
+        if (len & 3) {
+            return -1;
+        }
+        break;
+    case 12:
+    case 15:
+    case 56:
+        if (len == 0) {
+            return -1;
+        }
+        break;
+    }
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_apctl_006340", func_00006BD8);
+#endif
 
-INCLUDE_ASM("nonmatchings/pspnet_apctl_006340", func_00006C50);
+#if FW_VERSION < 151
+s32 func_00006C50(s8 *opt, SceNetDhcpLease *l) {
+    s32 ret = 0;
+
+    switch (opt[0]) {
+    case 53:
+        l->msgType = opt[2];
+        break;
+    case 1:
+    case 28:
+    case 54:
+        ret = func_00004FC4(opt, l);
+        break;
+    case 3:
+    case 6:
+        ret = func_00005064(opt, l);
+        break;
+    case 12:
+    case 15:
+    case 56:
+        ret = func_00004EBC(opt, l);
+        break;
+    case 51:
+    case 58:
+    case 59:
+        ret = func_00006F34(opt, l);
+        break;
+    }
+    return ret;
+}
 #endif
 
 #if FW_VERSION >= 151 && FW_VERSION < 282
+INCLUDE_ASM("nonmatchings/pspnet_apctl_006340", func_00006C50);
+
 INCLUDE_ASM("nonmatchings/pspnet_apctl_006340", func_00004CDC);
 #endif
 

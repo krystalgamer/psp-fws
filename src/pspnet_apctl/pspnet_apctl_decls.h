@@ -252,6 +252,7 @@ typedef struct {
     u32 broadcast;              /* 0x3F0 option 28 */
     u32 router;                 /* 0x3F4 option 3 */
     u32 dns[2];                 /* 0x3F8 option 6 */
+    u8 msgType;                 /* 0x400 option 53 */
 } SceNetDhcpLease;
 
 /* DHCP client state (1.00: D_00008B38) */
@@ -481,6 +482,20 @@ static __inline s32 apctlResetDns(void) {
     return sceNetConfigSetDNS(dns1, dns2);
 }
 
+/* static address setup (inlined into func_00001C54; func_000038EC is the same code) */
+static __inline s32 apctlSetStatic(SceNetApctlCtx *ctx, u32 *ip, u32 *bcast, u32 *mask, u32 *route, u32 *dns1, u32 *dns2) {
+    s32 ret;
+
+    ret = sceNetConfigSetIfaddr(ctx, ip, bcast, mask);
+    if (ret >= 0) {
+        sceNetConfigSetDefaultRoute(route);
+        if (ctx->conf.manualDns == 1) {
+            ret = sceNetConfigSetDNS(dns1, dns2);
+        }
+    }
+    return ret;
+}
+
 extern s32 (*D_00008120[5])(SceNetApctlCtx *ctx, s32 prev, s32 *state, s32 *event);
 extern s32 D_00008134;
 extern s32 (*D_00008138[7])(SceNetDhcpCtx *dc, s32 prev);
@@ -573,6 +588,9 @@ s32 func_0000407C(const char *ifname, SceNetDhcpLease *l);
 u32 func_00004270(SceNetInAddrPacked *addr);
 s32 func_00004424(const char *ifname);
 s32 func_0000487C(SceNetDhcpCtx *dc, s32 *n, s32 arg);
+s32 func_00004EBC(s8 *opt, SceNetDhcpLease *l);
+s32 func_00004FC4(s8 *opt, SceNetDhcpLease *l);
+s32 func_00005064(s8 *opt, SceNetDhcpLease *l);
 s32 func_000051A0(const char *ifname, void *func, s32 a2, s32 prio, s32 a4, SceNetApctlIpParam *param);
 void func_00005290(void *arg0);
 void func_00005634(void);
@@ -583,7 +601,9 @@ u16 func_00005E90(u16 *p, s32 nwords);
 s32 func_00006304(s32 arg0);
 s32 func_0000643C(SceNetDhcpCtx *dc);
 s32 func_00006A14(const char *ifname, void *func, s32 a2, s32 prio, s32 a4, SceNetApctlIpParam *param);
+s32 func_00006F34(s8 *opt, SceNetDhcpLease *l);
 void func_000070C0(s32 *arg0);
+s32 func_000070E8(void *pkt, s32 len, s32 area, u32 *overload);
 s32 func_00007244(void *pkt, void *arg, s8 tag, s32 area, u32 *overload);
 s32 func_00007324(void);
 s32 func_0000741C(s32, s32);
