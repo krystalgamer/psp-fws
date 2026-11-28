@@ -1457,7 +1457,7 @@ INCLUDE_ASM("nonmatchings/umd9660", func_00003D28);
 s32 func_00003F7C(const char *name) {
     s32 ret = 0x80010016;
     if (name != NULL) {
-        ret = (strlen(name) < 0x20) ? 0 : 0x80010024;
+        ret = (strlen(name) < sizeof(D_00005DC0[0].name)) ? 0 : 0x80010024;
     }
     return ret;
 }
