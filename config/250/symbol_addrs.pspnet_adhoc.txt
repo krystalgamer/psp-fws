@@ -141,3 +141,4 @@ D_000079A0_v250 = 0x000079A0; // rom:0x7A20
 D_000079B0_v250 = 0x000079B0; // rom:0x7A30
 // shared names (tools/add_version.py) end
 g_adhocInit = 0x00007C60;
+g_adhocStat = 0x00007CC8;

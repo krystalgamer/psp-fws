@@ -24,10 +24,22 @@ typedef struct {
     u32 flags;                          /* 0x14 1: wakeup sb, 2: wakeup select */
 } SceNetAdhocPtpSockbuf;
 
-/* 1.00 adhoc statistics counters (0x30) */
+/* adhoc statistics counters (1.00: 0x30, 1.50+: 0x7C) */
 typedef struct {
+#if FW_VERSION < 150
     u32 stat[12];
-} SceNetAdhocStat100;
+#else
+    u32 stat[31];
+#endif
+} SceNetAdhocStat;
+typedef char chk_SceNetAdhocStat[(sizeof(SceNetAdhocStat) == ((FW_VERSION < 150) ? 0x30 : 0x7C)) ? 1 : -1];
+#if FW_VERSION < 150
+#define ADHOC_STAT_PTP_REXMT 9
+#define ADHOC_STAT_PTP_PROBE 10
+#define ADHOC_STAT_PTP_WNDWAIT 11
+#else
+#define ADHOC_STAT_PTP_REXMT 28
+#endif
 
 typedef struct {
     u8 data[6];
@@ -302,15 +314,13 @@ extern const SceNetEtherAddr D_000078A4; /* ff:ff:ff:ff:ff:ff */
 extern const SceNetEtherAddr D_000078AC; /* 00:00:00:00:00:00 */
 extern M2C_UNK D_000079CC;
 extern u16 D_000079E4;
-extern M2C_UNK D_000079E8;
 extern M2C_UNK D_00007A8C;
-extern M2C_UNK D_00007CC8;
 extern SceNetAdhocDescList g_adhocDescList;
 extern s32 g_adhocInit;
 extern struct ifqueue g_adhocIntrq;
 extern s32 g_adhocLastId;
 extern s32 g_adhocSelChan;
-extern SceNetAdhocStat100 g_adhocStat;
+extern SceNetAdhocStat g_adhocStat;
 extern SceNetAdhocGameModeList g_gameModeList;
 extern s32 g_gameModeMasterId;
 extern u16 g_pdpLastPort;
@@ -463,7 +473,7 @@ s32 sceNetAdhocPtpRecv(s32 id, void *buf, s32 *len, u32 timeout, s32 nonblock);
 s32 sceNetAdhocPtpSend(s32 id, const void *data, s32 *len, u32 timeout, s32 nonblock);
 s32 sceNetAdhocSetSocketAlert(s32 id, s32 flag);
 s32 sceNetAdhocTerm(void);
-s32 sceNetAdhoc_lib_2CA12790(SceNetAdhocStat100 *out);
+s32 sceNetAdhoc_lib_2CA12790(SceNetAdhocStat *out);
 void sceNetAdhoc_lib_62B875A8(void);
 void sceNetAdhoc_lib_F9240FBA(void);
 void sceNetFreeInternal(void *p);

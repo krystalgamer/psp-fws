@@ -2950,7 +2950,7 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc", sceNetAdhoc_lib_62B875A8);
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
 void sceNetAdhoc_lib_62B875A8(void) {
-    sceNetMemset(&D_00007CC8, 0, 0x7C);
+    sceNetMemset(&g_adhocStat, 0, sizeof(g_adhocStat));
 }
 #endif
 
@@ -2964,12 +2964,12 @@ void sceNetAdhoc_lib_62B875A8(void) {
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_0000473C);
 
 void sceNetAdhoc_lib_62B875A8(void) {
-    sceNetMemset(&D_000079E8, 0, 0x7C);
+    sceNetMemset(&g_adhocStat, 0, sizeof(g_adhocStat));
 }
 #endif
 
 #if FW_VERSION < 150
-s32 sceNetAdhoc_lib_2CA12790(SceNetAdhocStat100 *out) {
+s32 sceNetAdhoc_lib_2CA12790(SceNetAdhocStat *out) {
     if (out == NULL)
         return 0x80410711;
     *out = g_adhocStat;
@@ -3540,12 +3540,12 @@ void func_0000648C(SceNetAdhocPtpPcb *pcb, s32 rexmt) {
                 goto out;
             if (rexmt != 0) {
                 func_00005FF8(pcb->ifp, &pcb->laddr, pcb->lport, &pcb->paddr, pcb->pport, 4, pcb->snd_una - 1, NULL);
-                g_adhocStat.stat[10]++;
+                g_adhocStat.stat[ADHOC_STAT_PTP_PROBE]++;
                 goto out;
             }
             if (pcb->callout.c_flags & CALLOUT_PENDING)
                 goto out;
-            g_adhocStat.stat[11]++;
+            g_adhocStat.stat[ADHOC_STAT_PTP_WNDWAIT]++;
             pcb->rexmt_left = pcb->rexmt_cnt;
             _sce_pspnet_callout_reset_usec(&pcb->callout, pcb->rexmt_int, func_000069D4, pcb);
             goto out;
@@ -3594,7 +3594,7 @@ void func_000069D4(SceNetAdhocPtpPcb *pcb) {
         pcb->snd_inflight = 0;
         pcb->snd_nxt = pcb->snd_una;
         func_0000648C(pcb, 1);
-        g_adhocStat.stat[9]++;
+        g_adhocStat.stat[ADHOC_STAT_PTP_REXMT]++;
         break;
     }
     _sce_pspnet_callout_reset_usec(&pcb->callout, pcb->rexmt_int, func_000069D4, pcb);
