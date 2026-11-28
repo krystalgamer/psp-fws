@@ -824,6 +824,7 @@ struct rt_msghdr {
 struct route_cb {
     s32 ip_count;
     s32 ip6_count;
+    s32 ipx_count;
     s32 ns_count;
     s32 iso_count;
     s32 any_count;
@@ -1995,7 +1996,6 @@ extern s32 D_0002EB94;
 extern char D_0002EBB0[16]; /* inet_ntoa buf */
 extern char D_0002F288[18] __attribute__((aligned(4)));
 extern s32 D_0002F2F8;
-extern struct { s32 w[6]; } D_0002F3B8;
 extern s32 D_0002F500;
 extern s32 D_0002F50C;
 extern s32 D_0002F510;
