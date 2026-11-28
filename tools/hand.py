@@ -53,11 +53,21 @@ def main():
         from concurrent.futures import ThreadPoolExecutor
         vs = sharing_versions(a.ver, a.module)
         with ThreadPoolExecutor(int(os.environ.get("HAND_JOBS", "4"))) as ex:
-            bad = [v for v, (ok, _) in zip(vs, ex.map(lambda v: build(v, a.module), vs)) if not ok]
+            res = dict(zip(vs, ex.map(lambda v: build(v, a.module), vs)))
+
+        def first_err(out):
+            return next((l.strip() for l in out.splitlines() if re.search(r"error|Error|MISMATCH|No rule", l)),
+                        out.strip().splitlines()[-1] if out.strip() else "?")
+        bad = [v for v in vs if not res[v][0]]
         if bad:  # a stale split/asm state (e.g. right after another tool) gives false failures: re-split those once
+            for v in bad:
+                print(f"pre-flight: {v} did not build ({first_err(res[v][1])[:200]}); re-splitting", flush=True)
             subprocess.run(["tools/regress.sh"] + [f"{v}:{a.module}" for v in bad], cwd=ROOT, capture_output=True)
-            bad = [v for v in bad if not build(v, a.module)[0]]
+            res.update({v: build(v, a.module) for v in bad})
+            bad = [v for v in bad if not res[v][0]]
         if bad:
+            for v in bad:
+                print(f"pre-flight: {v}: {first_err(res[v][1])[:300]}")
             sys.exit(f"pre-flight: {a.module} does not build in {bad} before any change — fix that first "
                      f"(HAND_PREFLIGHT=0 to skip)")
     done = []
