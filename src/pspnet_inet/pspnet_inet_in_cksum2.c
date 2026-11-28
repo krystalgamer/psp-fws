@@ -1048,7 +1048,48 @@ struct mbuf *ip_insertoptions(struct mbuf *m, struct mbuf *opt, s32 *phlen) {
     return (m);
 }
 #else
-INCLUDE_ASM("nonmatchings/pspnet_inet_in_cksum2", ip_insertoptions);
+struct mbuf *ip_insertoptions(struct mbuf *m, struct mbuf *opt, s32 *phlen) {
+    struct ipoption *p = mtod(opt, struct ipoption *);
+    struct mbuf *n;
+    struct ip *ip = mtod(m, struct ip *);
+    u32 optlen;
+    s32 max_linkhdr;
+
+    optlen = opt->m_len - sizeof(p->ipopt_dst);
+    if (optlen + (u16)ip->ip_len > 0xFFFF)
+        return (m);
+    if (p->ipopt_dst.s_addr != __builtin_allegrex_wsbw(0))
+        ip->ip_dst = p->ipopt_dst;
+    if (m->m_flags & M_EXT || m->m_data - optlen < (u8 *)&m->m_ext) {
+        n = sceNetMallocInternal(MSIZE);
+        if (n == 0)
+            return (m);
+        n->m_type = MT_HEADER;
+        n->m_flags = M_PKTHDR;
+        n->m_data = (u8 *)&n->m_ext;
+        n->m_nextpkt = NULL;
+        n->m_pkthdr.aux = NULL;
+        n->m_pkthdr.len = m->m_pkthdr.len + optlen;
+        m->m_len -= sizeof(struct ip);
+        m->m_data += sizeof(struct ip);
+        n->m_next = m;
+        m = n;
+        m->m_len = optlen + sizeof(struct ip);
+        sceNetIfhandle_lib_5FB31C72(&max_linkhdr, NULL, NULL, NULL);
+        m->m_data += max_linkhdr;
+        sceNetBcopy((char *)ip, mtod(m, char *), sizeof(struct ip));
+    } else {
+        m->m_data -= optlen;
+        m->m_len += optlen;
+        m->m_pkthdr.len += optlen;
+        sceNetMemmove(mtod(m, char *), ip, sizeof(struct ip));
+    }
+    ip = mtod(m, struct ip *);
+    sceNetBcopy((char *)p->ipopt_list, (char *)(ip + 1), (u32)optlen);
+    *phlen = sizeof(struct ip) + optlen;
+    ip->ip_len += optlen;
+    return (m);
+}
 #endif
 
 #if FW_VERSION < 201
@@ -1084,7 +1125,37 @@ s32 ip_optcopy(struct ip *ip, struct ip *jp) {
     return optlen;
 }
 #else
-INCLUDE_ASM("nonmatchings/pspnet_inet_in_cksum2", ip_optcopy);
+s32 ip_optcopy(struct ip *ip, struct ip *jp) {
+    u8 *cp, *dp;
+    s32 opt, optlen, cnt;
+
+    cp = (u8 *)(ip + 1);
+    dp = (u8 *)(jp + 1);
+    cnt = ((ip->ip_hl_v & 0xF) << 2) - sizeof(struct ip);
+    for (; cnt > 0; cnt -= optlen, cp += optlen) {
+        opt = cp[0];
+        if (opt == 0) { /* IPOPT_EOL */
+            break;
+        }
+        if (opt == 1) { /* IPOPT_NOP */
+            *dp++ = 1;
+            optlen = 1;
+            continue;
+        }
+        optlen = cp[1];
+        if (optlen > cnt) {
+            optlen = cnt;
+        }
+        if (opt & 0x80) { /* IPOPT_COPIED */
+            sceNetBcopy(cp, dp, (u32)optlen);
+            dp += optlen;
+        }
+    }
+    for (optlen = dp - (u8 *)(jp + 1); optlen & 0x3; optlen++) {
+        *dp++ = 0;
+    }
+    return optlen;
+}
 #endif
 
 #if FW_VERSION >= 271

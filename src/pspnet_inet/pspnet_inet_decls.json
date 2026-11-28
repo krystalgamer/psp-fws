@@ -371,6 +371,7 @@
   "sceNetMPullup": "struct mbuf *sceNetMPullup(struct mbuf *n, s32 len);",
   "sceNetMallocInternal": "void *sceNetMallocInternal(u32 size);",
   "sceNetMemcpy": "u8 *sceNetMemcpy(u8 *dst, const u8 *src, s32 n);",
+  "sceNetMemmove": "void *sceNetMemmove(void *dst, const void *src, s32 n);",
   "sceNetMemset": "M2C_UNK sceNetMemset(M2C_UNK *, M2C_UNK, M2C_UNK);",
   "sceNetRand": "u32 sceNetRand(void);",
   "sce_alignbytes": "s32 sce_alignbytes(void);",

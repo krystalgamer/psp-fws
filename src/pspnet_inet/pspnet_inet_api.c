@@ -173,7 +173,33 @@ s32 sockargs(struct mbuf **mp, const void *buf, u32 buflen, s32 type) {
     return 0;
 }
 #else
-INCLUDE_ASM("nonmatchings/pspnet_inet_api", sockargs);
+s32 sockargs(struct mbuf **mp, const void *buf, u32 buflen, s32 type) {
+    struct sockaddr *sa;
+    struct mbuf *m;
+
+    if (type == MT_SONAME && buflen > 255) {
+        return 22; /* EINVAL */
+    }
+    m = sceNetMGet(M_WAITOK, type);
+    if (m == NULL) {
+        return 12; /* ENOMEM */
+    }
+    if (buflen > MLEN) {
+        MEXTMALLOC(m, buflen, M_WAITOK);
+        if ((m->m_flags & M_EXT) == 0) {
+            sceNetMFree(m);
+            return 12;
+        }
+    }
+    m->m_len = buflen;
+    sceNetBcopy(buf, mtod(m, u8 *), buflen);
+    *mp = m;
+    if (type == MT_SONAME) {
+        sa = mtod(m, struct sockaddr *);
+        sa->sa_len = buflen;
+    }
+    return 0;
+}
 #endif
 
 INCLUDE_ASM("nonmatchings/pspnet_inet_api", sceNetInetSelect);
@@ -529,7 +555,24 @@ s32 sysctl_rdstruct(void *oldp, u32 *oldlenp, void *newp, const void *sp, u32 le
     return 0;
 }
 #else
-INCLUDE_ASM("nonmatchings/pspnet_inet_api", sysctl_rdstruct);
+s32 sysctl_rdstruct(void *oldp, u32 *oldlenp, void *newp, const void *sp, u32 len) {
+    if (newp != NULL) {
+        return 1;
+    }
+    if (oldlenp == NULL) {
+        return 0;
+    }
+    if (oldp != NULL) {
+        if (*oldlenp < len) {
+            return 12;
+        }
+        *oldlenp = len;
+        sceNetBcopy(sp, oldp, len);
+        return 0;
+    }
+    *oldlenp = len;
+    return 0;
+}
 #endif
 
 char *intoa(u32 addr) {

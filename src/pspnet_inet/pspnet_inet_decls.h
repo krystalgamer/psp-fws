@@ -2500,6 +2500,7 @@ struct mbuf *sceNetMPrepend(struct mbuf *m, s32 plen, s32 how);
 struct mbuf *sceNetMPullup(struct mbuf *n, s32 len);
 void *sceNetMallocInternal(u32 size);
 u8 *sceNetMemcpy(u8 *dst, const u8 *src, s32 n);
+void *sceNetMemmove(void *dst, const void *src, s32 n);
 M2C_UNK sceNetMemset(M2C_UNK *, M2C_UNK, M2C_UNK);
 u32 sceNetRand(void);
 s32 sce_alignbytes(void);

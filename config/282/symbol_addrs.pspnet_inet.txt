@@ -359,3 +359,4 @@ tcp_keepidle = 0x0002C358; // rom:0x2C3F8
 tcp_init_win = 0x0002C350; // rom:0x2C3F0
 tcp_sendspace = 0x0002C3A0; // rom:0x2C440
 tcp_recvspace = 0x0002C3A4; // rom:0x2C444
+ip_nhops = 0x0002C580;
