@@ -1065,7 +1065,7 @@ INCLUDE_ASM("nonmatchings/power", _scePowerFreqInit);
 INCLUDE_ASM("nonmatchings/power", func_00002FA0);
 #endif
 
-#if FW_VERSION < 150
+#if FW_VERSION < 152
 s32 scePowerSetCpuClockFrequency(s32 freq) {
     s32 intr;
     u32 oldK1;
@@ -1304,7 +1304,7 @@ s32 scePowerGetDdrStrength(s32 *arg0, s32 *arg1) {
 INCLUDE_ASM("nonmatchings/power", scePowerSetDdrStrength);
 #endif
 
-#if FW_VERSION < 150
+#if FW_VERSION < 201
 s32 scePowerLimitScCpuClock(s32 lower, s32 upper) {
     g_PowerFreq.scCpuClockLowerLimit = lower;
     g_PowerFreq.scCpuClockUpperLimit = upper;
@@ -1314,7 +1314,7 @@ s32 scePowerLimitScCpuClock(s32 lower, s32 upper) {
 INCLUDE_ASM("nonmatchings/power", scePowerLimitScCpuClock);
 #endif
 
-#if FW_VERSION < 150
+#if FW_VERSION < 201
 s32 scePowerLimitScBusClock(s32 lower, s32 upper) {
     g_PowerFreq.scBusClockLowerLimit = lower;
     g_PowerFreq.scBusClockUpperLimit = upper;
@@ -1324,7 +1324,7 @@ s32 scePowerLimitScBusClock(s32 lower, s32 upper) {
 INCLUDE_ASM("nonmatchings/power", scePowerLimitScBusClock);
 #endif
 
-#if FW_VERSION < 150
+#if FW_VERSION < 201
 s32 scePowerLimitPllClock(s32 lower, s32 upper) {
     g_PowerFreq.pllClockLowerLimit = lower;
     g_PowerFreq.pllClockUpperLimit = upper;
