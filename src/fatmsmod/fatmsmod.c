@@ -1627,7 +1627,7 @@ s32 func_00002B98(s32 a0, s32 a1) {
     return msg.ret;
 }
 
-s32 func_00003A74(s32 a0, s32 a1, s32 a2) {
+s32 stub_pf_chdmod(s32 a0, s32 a1, s32 a2) {
     SceMsStubMsg msg;
 
     msg.cmd = 0x18;

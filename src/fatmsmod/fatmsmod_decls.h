@@ -557,7 +557,6 @@ void func_00003940(s32 arg0);
 s32 func_000039E8(void);
 s32 func_00003A34(s32 unit, s32 stat);
 s32 func_00003A50(s32 unit, s32 arg);
-s32 func_00003A74(); /* stub cmd 0x18 (1.50+) */
 s32 func_00003CD8(void);
 s32 func_00004544(void);
 s8 *func_000045F4(void);

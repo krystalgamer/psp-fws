@@ -58,7 +58,6 @@
   "func_000039E8": "s32 func_000039E8(void);",
   "func_00003A34": "s32 func_00003A34(s32 unit, s32 stat);",
   "func_00003A50": "s32 func_00003A50(s32 unit, s32 arg);",
-  "func_00003A74": "s32 func_00003A74(); /* stub cmd 0x18 (1.50+) */",
   "func_00003CD8": "s32 func_00003CD8(void);",
   "func_00004544": "s32 func_00004544(void);",
   "func_000045F4": "s8 *func_000045F4(void);",
