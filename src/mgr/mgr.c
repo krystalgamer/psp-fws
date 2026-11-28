@@ -2807,14 +2807,69 @@ s32 func_00008EB0(s32 *out, s32 pos) {
     return r % n;
 }
 
+#if FW_VERSION < 340
+s32 sceMgrMSReadSeqPage(s32 arg0, u8 *buf, s32 which) {
+    u8 extra[16];
+    s32 seg;
+    s32 *blks = g_mgrMsCtrl.map.seqBlk;
+    s32 ret;
+    s32 page;
+    s32 blk;
+    s32 i;
+    u8 *p;
+
+    ret = func_00006030();
+    if (ret < 0) {
+        return ret;
+    }
+    ret = func_00005194(arg0, 3);
+    if (ret >= 0) {
+        page = func_00008EB0(&seg, which ? g_mgrMsCtrl.map.seqPos[1] : g_mgrMsCtrl.map.seqPos[0]);
+        ret = 0x80504003;
+        if (page >= 0) {
+            blk = blks[seg];
+            ret = 0x80505003;
+            if (blk >= 0) {
+                p = buf;
+                for (i = 0; i < 8; i++) {
+                    ret = func_00006C40(arg0, blk, page + i, (s32)p, extra);
+                    p += 0x200;
+                    if (ret < 0) {
+                        if (ret == 0x80505003) {
+                            blks[seg] = -1;
+                        }
+                        goto end;
+                    }
+                    ret = 0x80505003;
+                    if (!(extra[0] & 0x40)) {
+                        goto end;
+                    }
+                }
+                if (blks[0] < 0 || blks[1] < 0) {
+                    ret = 1;
+                } else {
+                    ret = 0;
+                }
+            }
+        }
+    }
+end:
+    if (blks[0] < 0 && blks[1] < 0) {
+        ret = 0x80505004;
+    }
+    func_0000608C();
+    return ret;
+}
+#else
 INCLUDE_ASM("nonmatchings/mgr", sceMgrMSReadSeqPage);
+#endif
 
 #if FW_VERSION < 340
 s32 sceMgrMSReadPoolPage(s32 arg0, u8 *buf, s32 pool) {
     u8 extra[16];
     s32 seg;
     MgrMsMap *map = &g_mgrMsCtrl.map;
-    s32 *blks = map->segBlk;
+    s32 *blks = map->poolBlk;
     s32 ret;
     s32 page;
     s32 blk;
@@ -2826,8 +2881,8 @@ s32 sceMgrMSReadPoolPage(s32 arg0, u8 *buf, s32 pool) {
     ret = func_00005194(arg0, 3);
     if (ret >= 0) {
         ret = 0x80505003;
-        if (map->valid >= 0) {
-            page = func_00008EB0(&seg, pool ? g_mgrMsCtrl.poolPos : g_mgrMsCtrl.seqPos);
+        if (map->poolValid >= 0) {
+            page = func_00008EB0(&seg, pool ? g_mgrMsCtrl.map.poolPos[1] : g_mgrMsCtrl.map.poolPos[0]);
             ret = 0x80504003;
             if (page >= 0) {
                 blk = blks[seg];

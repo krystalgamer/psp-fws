@@ -52,9 +52,12 @@ typedef struct {
 } MgrMsAuthInfo;
 
 typedef struct {
-    s32 valid;
-    s32 unk4[2];
-    s32 segBlk[5];
+    s32 poolValid;
+    s32 seqBlk[2];
+    s32 poolBlk[2];
+    s32 seqPos[2];
+    s32 unk1C;
+    s32 poolPos[2];
 } MgrMsMap;
 
 typedef struct {
@@ -65,8 +68,6 @@ typedef struct {
     s32 unk10;
     s32 segBlocks;
     MgrMsMap map;
-    s32 seqPos;
-    s32 poolPos;
     u32 unk40[2];
     u64 mediaId[2];
 } MgrMsCtrl;
@@ -362,6 +363,7 @@ s32 sceMgrMSGetMediaType(s32 arg0);
 s32 sceMgrMSInit(void);
 s32 sceMgrMSReadIBD(s32 arg0, u8 page, s32 arg2, s32 arg3);
 s32 sceMgrMSReadPoolPage(s32 arg0, u8 *buf, s32 pool);
+s32 sceMgrMSReadSeqPage(s32 arg0, u8 *buf, s32 which);
 s32 sceMgrMSReset(void);
 s32 sceMgrMSSetLeafID(s32 arg0, u64 *id);
 s32 sceMgrMSSetMAC2d(s32 arg0, u64 *mac);
