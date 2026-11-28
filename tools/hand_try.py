@@ -188,6 +188,32 @@ def target_reloc_syms(mod, name):
     return [n for _, n in sorted(out)]
 
 
+def undeclared_before(mod, name, ver):
+    """Functions with a prototype only because the source defines them (auto_decomp adds those to the store)
+    that the real file has not declared or defined before NAME (for VER)."""
+    import json
+    import fwmodel as FM
+    v = int(re.match(r"\d+", ver)[0])
+    have = set(json.loads(mod.store_path.read_text()).get("funcs", {})) if mod.store_path.exists() else set()
+    auto = set(mod.store["funcs"]) - have
+    f = Path(mod.file_of(name))
+    if not auto or not f.exists():
+        return set()
+    ents = FM.parse(f.read_text(), mod.fwvers)
+    k = next((i for i, e in enumerate(ents) if e.name == name and v in e.vers), None)
+    if k is None:
+        return set()
+    seen = set()
+    for e in ents[:k]:
+        if v not in e.vers:
+            continue
+        if e.kind == "cfunc":
+            seen.add(e.name)
+        # prototypes and static definitions in file-scope text before the function
+        seen.update(re.findall(r"\b(\w+)\s*\([^;{}]*\)\s*[;{]", "\n".join(top_level_lines(e.text))))
+    return auto - seen - {name}
+
+
 def cxx_name(mod, cls, dtor):
     """A C++ ctor/dtor definition emits several functions (ctor C2, C1; dtor D2, D1 and, if virtual, D0) back
     to back: register them as one pseudo function 'X::X' / 'X::~X' covering the original's variants."""
@@ -460,6 +486,15 @@ def main():
         sys.exit("C++ definitions: only parameterless constructors/destructors (X::X(), X::~X()) can be scored; "
                  "for other members score the mangled C wrapper or use the asm name")
     extra = Path(a.decls).read_text() if a.decls else ""
+    # the real file sees the decls' prototypes plus what it defines/declares before the function: a function
+    # defined later (or in another file) without a decls prototype is an implicit `int f()` there
+    implicit = undeclared_before(mod, name, a.ver)
+    for n in implicit:
+        mod.store["funcs"].pop(n, None)
+    called = sorted(n for n in implicit if re.search(rf"\b{re.escape(n)}\b", body))
+    if called:
+        print(f"note: {', '.join(called)}: no prototype before {name} in the real file (implicit int f(), as in "
+              f"the build); add one to the decls if the original was compiled with it")
     # drop the decls' own prototype/vars that the hand decls redefine
     hdr = mod.header()
     # only file-scope lines count (struct members and statements inside bodies don't)
