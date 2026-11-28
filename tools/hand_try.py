@@ -188,6 +188,30 @@ def target_reloc_syms(mod, name):
     return [n for _, n in sorted(out)]
 
 
+def cxx_name(mod, cls, dtor):
+    """A C++ ctor/dtor definition emits several functions (ctor C2, C1; dtor D2, D1 and, if virtual, D0) back
+    to back: register them as one pseudo function 'X::X' / 'X::~X' covering the original's variants."""
+    key = f"{cls}::{'~' if dtor else ''}{cls}"
+    rngs = []
+    for v in (("D2", "D1", "D0") if dtor else ("C2", "C1")):
+        n = f"_ZN{len(cls)}{cls}{v}Ev"
+        try:
+            mod.target_words(n)
+        except KeyError:
+            continue
+        rngs.append((mod.funcs[n][0], mod.funcs[n][1], n))
+    if not rngs:
+        sys.exit(f"{key}: none of its mangled variants (_ZN{len(cls)}{cls}{'D2' if dtor else 'C2'}Ev, ...) "
+                 f"is an asm function or in the build of {mod.ver}")
+    rngs.sort()
+    for (_, e, a), (r, _, b) in zip(rngs, rngs[1:]):
+        if e != r:
+            sys.exit(f"{key}: {a} and {b} are not adjacent; score them separately")
+    print(f"{key}: scored as {' + '.join(n for _, _, n in rngs)}")
+    mod.funcs[key] = (rngs[0][0], rngs[-1][1], None)
+    return key
+
+
 def top_level_lines(text):
     """Lines of TEXT that start at brace depth 0."""
     out, depth = [], 0
@@ -426,6 +450,12 @@ def main():
     mod = AD.Module(a.ver, a.module)
     body = Path(a.cfile).read_text()
     name = re.search(r"^(?!static)[^\n;#]*?\b(\w+)\([^;{}]*\)\s*\{", body, re.M)[1]
+    cxx_def = re.search(r"^(\w+)::(~?)(\w+)\s*\(\s*(void)?\s*\)\s*(?::[^{;]*)?\{", body, re.M)
+    if cxx_def and cxx_def[1] == cxx_def[3]:
+        name = cxx_name(mod, cxx_def[1], bool(cxx_def[2]))
+    elif re.search(r"^\w+::~?\w+\s*\(", body, re.M):
+        sys.exit("C++ definitions: only parameterless constructors/destructors (X::X(), X::~X()) can be scored; "
+                 "for other members score the mangled C wrapper or use the asm name")
     extra = Path(a.decls).read_text() if a.decls else ""
     # drop the decls' own prototype/vars that the hand decls redefine
     hdr = mod.header()
