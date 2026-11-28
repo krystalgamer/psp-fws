@@ -514,6 +514,19 @@ typedef struct {
     struct SceHttpMd5Entry *md5_table[16]; /* 0x1C, bucket = digest[0] >> 4 */
 } SceHttpGlobals;
 
+/* lists freed by func_00009E68 (https/cert side, 0xE0A0 in 1.00); meaning unknown */
+typedef struct SceHttpsUnkItem {
+    void *buf[6];           /* 0x00-0x14, freed by func_00009DA0 */
+    u8 unk18[0x48 - 0x18];
+    struct SceHttpsUnkItem *next; /* 0x48 */
+} SceHttpsUnkItem;
+typedef struct SceHttpsUnkGroup {
+    struct SceHttpsUnkGroup *next; /* 0x00 */
+    s32 unk04;
+    SceHttpsUnkItem *items; /* 0x08 */
+    void *buf0C;            /* 0x0C */
+} SceHttpsUnkGroup;
+
 struct Unk_func_00005CD0_var_a0 {
     u8 pad0[0x7C];
     void *unk7C;
@@ -549,7 +562,7 @@ extern s32 D_0000DD28;
 extern SceHttpTmpl D_0000DD2C;
 extern SceHttpConn D_0000DDB0;
 extern SceHttpReq D_0000DF18;
-extern s32 D_0000E0A0;
+extern SceHttpsUnkGroup *D_0000E0A0;
 extern SceHttpReq D_0000E7D8;
 extern s32 D_0000F0F0;
 extern s32 D_0000F0F4;
@@ -656,7 +669,7 @@ int func_0000992C(int connection_id, int method, const unsigned char *path, SceU
 void func_00009A38(void);
 s32 func_00009ADC(void);
 void func_00009DA0(void *arg0);
-s32 func_00009E68(s32);
+void func_00009E68(SceHttpsUnkGroup *g);
 s32 func_0000A02C(s32);
 void func_0000A08C(s32 arg0);
 s32 func_0000A0C0();

@@ -2540,14 +2540,41 @@ INCLUDE_ASM("nonmatchings/libhttp", func_000097F8);
 #if FW_VERSION < 201
 void func_00009A38(void) {
     func_00009E68(D_0000E0A0);
-    D_0000E0A0 = 0;
+    D_0000E0A0 = NULL;
 }
 
 INCLUDE_ASM("nonmatchings/libhttp", func_00009A68);
 #endif
 
 #if FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/libhttp", func_00009DA0);
+void func_00009DA0(void *arg0) {
+    void **p = arg0;
+
+    if (p[4] != NULL) {
+        _sceHttpFreeInternal(p[4]);
+        p[4] = NULL;
+    }
+    if (p[5] != NULL) {
+        _sceHttpFreeInternal(p[5]);
+        p[5] = NULL;
+    }
+    if (p[2] != NULL) {
+        _sceHttpFreeInternal(p[2]);
+        p[2] = NULL;
+    }
+    if (p[0] != NULL) {
+        _sceHttpFreeInternal(p[0]);
+        p[0] = NULL;
+    }
+    if (p[3] != NULL) {
+        _sceHttpFreeInternal(p[3]);
+        p[3] = NULL;
+    }
+    if (p[1] != NULL) {
+        _sceHttpFreeInternal(p[1]);
+        p[1] = NULL;
+    }
+}
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 201
@@ -2592,9 +2619,33 @@ void func_00009DA0(void *arg0) {
 }
 #endif
 
-#if FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/libhttp", func_00009E68);
+#if FW_VERSION < 150
+void func_00009E68(SceHttpsUnkGroup *g) {
+    SceHttpsUnkGroup *gnext;
+    SceHttpsUnkItem *item;
+    SceHttpsUnkItem *next;
 
+    while (g != NULL) {
+        item = g->items;
+        while (item != NULL) {
+            func_00009DA0(item);
+            next = item->next;
+            _sceHttpFreeInternal(item);
+            item = next;
+        }
+        _sceHttpFreeInternal(g->buf0C);
+        gnext = g->next;
+        _sceHttpFreeInternal(g);
+        g = gnext;
+    }
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 201
+INCLUDE_ASM("nonmatchings/libhttp", func_00009E68);
+#endif
+
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/libhttp", func_00009EE0);
 #endif
 
