@@ -541,6 +541,7 @@ extern SceNetApctlHandlerEntry D_00008B98[1]; /* 1.50+ internal handler */
 extern char D_00010A8C[]; /* "wlan" */
 extern s32 D_00011710;
 extern s32 D_00011870;
+extern s32 D_00011D64;
 extern SceNetApctlCtx D_00011DD4;
 extern s32 D_00011DE4;
 extern u32 D_00011DF0;
@@ -687,7 +688,7 @@ s32 func_00009098(s32, s32, s32, s32, s32, s32, s32, s32);
 s32 func_000090A4(s32 arg0);
 s32 func_00009328(void);
 s32 func_00009348(void);
-M2C_UNK *func_0000936C(void *arg0);
+s32 *func_0000936C(void *arg0);
 s32 func_0000939C(s32 arg0);
 s32 func_000093C0(s32);
 s32 func_00009500(void);

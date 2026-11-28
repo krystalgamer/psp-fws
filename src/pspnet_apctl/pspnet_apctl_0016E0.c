@@ -245,8 +245,15 @@ s32 func_00001250(SceNetApctlCtx *ctx, u32 *bits) {
 INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00001250);
 #endif
 
-#if FW_VERSION >= 260 && FW_VERSION < 282
+#if FW_VERSION == 271
 INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_0000251C);
+#endif
+
+#if FW_VERSION == 260
+s32 func_0000251C(s32 arg0) {
+    D_0001253C = arg0;
+    return 0;
+}
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
@@ -655,11 +662,11 @@ INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00003644);
 INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_000036FC);
 #endif
 
-#if FW_VERSION >= 260 && FW_VERSION < 282
+#if FW_VERSION == 271
 INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_000037CC);
 #endif
 
-#if FW_VERSION == 250
+#if FW_VERSION >= 250 && FW_VERSION < 271
 s32 func_000037CC(void) {
     if (D_00012430 > 0) {
         func_0000901C();
