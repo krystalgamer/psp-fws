@@ -392,7 +392,14 @@ INCLUDE_ASM("nonmatchings/lfatfs", func_00000E3C);
 #if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/lfatfs", module_reboot_phase);
 
-INCLUDE_ASM("nonmatchings/lfatfs", sceLfatfsWaitReady);
+s32 sceLfatfsWaitReady(void) {
+    s32 ret = 0;
+
+    if (D_0000EB30 >= 0) {
+        ret = sceKernelWaitThreadEnd(D_0000EB30, NULL);
+    }
+    return ret;
+}
 
 s32 sceLfatfsStop(void) {
     return 0;
@@ -2535,7 +2542,27 @@ INCLUDE_RODATA("nonmatchings/lfatfs", D_0000D290);
 INCLUDE_RODATA("nonmatchings/lfatfs", D_0000D2A0);
 #endif
 
-#if FW_VERSION >= 282
+#if FW_VERSION >= 282 && FW_VERSION < 310
+s32 disk_read(UFatUnit *unit, void *buf, s32 sector, s32 count) {
+    s32 ret;
+
+    if (sector < 0 || count < 1 || unit->devSectors < sector + count) {
+        return 0x80010005;
+    }
+    ret = sceIoLseek(unit->fd, (SceOff)sector << unit->devShift, 0);
+    if (ret < 0) {
+        return ret;
+    }
+    ret = sceIoRead(unit->fd, buf, count << unit->devShift);
+    if (ret < 0) {
+        Kprintf("lfatfs.c:%s:r:0x%x\n", "disk_read", ret);
+        return ret;
+    }
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 310
 INCLUDE_ASM("nonmatchings/lfatfs", disk_read);
 #endif
 
@@ -2574,7 +2601,23 @@ INCLUDE_ASM("nonmatchings/lfatfs", func_00007884);
 #if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/lfatfs", buf_read);
 
-INCLUDE_ASM("nonmatchings/lfatfs", func_00004268);
+s32 func_00004268(UFatUnit *unit, s32 sector) {
+    s32 ret;
+
+    if (sector != unit->cachedSector) {
+        ret = func_00000EF8(unit);
+        if (ret < 0) {
+            return ret;
+        }
+        unit->cachedSector = -1;
+        ret = buf_read(unit, sector << unit->sectorShift, unit->sectorBuf, 0x200);
+        if (ret < 0) {
+            return ret;
+        }
+        unit->cachedSector = sector;
+    }
+    return 0;
+}
 
 INCLUDE_ASM("nonmatchings/lfatfs", func_000042D8);
 
@@ -3531,7 +3574,14 @@ s32 sceLFatFs_driver_51C7F7AE(void) {
 #endif
 
 #if FW_VERSION == 282
-INCLUDE_ASM("nonmatchings/lfatfs", del_lflash_driver);
+s32 del_lflash_driver(void) {
+    s32 *temp_v1;
+
+    temp_v1 = "del_lflash_driver";
+    Kprintf(D_0000DA98, temp_v1, (s32) temp_v1);
+    sceIoDelDrv(D_0000DA50);
+    return 0;
+}
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
