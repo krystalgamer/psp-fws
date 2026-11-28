@@ -1005,7 +1005,22 @@ INCLUDE_ASM("nonmatchings/umd9660", func_00002AB0);
 #endif
 
 #if FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/umd9660", func_00002BA4);
+s32 func_00002BA4(void *a, void *b, void *c, s32 d, u32 e) {
+    s32 ret = 0x80010016;
+    s32 res;
+    if (a == NULL || b == NULL) {
+        goto end;
+    }
+    if (c == NULL || d >= 8) {
+        goto end;
+    }
+    if (e < 3) {
+        res = func_00002C08(a, b, c, d);
+    }
+    ret = res;
+end:
+    return ret;
+}
 
 INCLUDE_ASM("nonmatchings/umd9660", func_00002C08);
 #endif
