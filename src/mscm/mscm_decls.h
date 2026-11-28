@@ -195,9 +195,7 @@ extern SceUID D_00006F44;
 extern s32 D_00006F90[1];
 extern char D_00007120[]; /* "SceMScm" */
 extern SceKernelSysClock D_00007190; /* sysclock ticks per usec */
-extern SceUID D_00007198[1][32]; /* notify event flags (devctl register) */
 extern s32 D_00007218;
-extern SceUID D_0000721C[1][32]; /* notify callbacks (devctl register) */
 extern char D_00007300[]; /* "Assertion failed at %s:%s:%04d\n" (mscm_ioman.c) */
 extern SceUID D_00007330;
 extern s32 D_00007334[1];
@@ -212,6 +210,8 @@ extern u64 g_insertTime[1]; /* 1.50+: time of the last insertion */
 extern s32 g_irqMissCount[1];
 extern SceUID g_mainEvf[1];
 extern SceUID g_mediaEvf[1];
+extern SceUID g_notifyCb[1][32]; /* notify callbacks (devctl register) */
+extern SceUID g_notifyEvf[1][32]; /* notify event flags (devctl register) */
 
 s32 _sceMScmGetCLDMHelper(s32 slot, s32 n, SceMScmCLDMInfo **out);
 s32 _sceMScmReinitializeHC(s32 slot);

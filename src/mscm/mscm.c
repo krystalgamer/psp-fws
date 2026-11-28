@@ -759,12 +759,12 @@ s32 func_000018B8(s32 slot) {
     sceKernelDelayThread(100000);
     intr = sceKernelSuspendDispatchThread();
     for (i = 0; i < 32; i++) {
-        if (D_00007198[slot][i] != 0) {
-            sceKernelSetEventFlag(D_00007198[slot][i], 8);
+        if (g_notifyEvf[slot][i] != 0) {
+            sceKernelSetEventFlag(g_notifyEvf[slot][i], 8);
         }
-        if (D_0000721C[slot][i] != 0) {
-            if (sceKernelNotifyCallback(D_0000721C[slot][i], 8) == 0x800201A1) {
-                D_0000721C[slot][i] = 0;
+        if (g_notifyCb[slot][i] != 0) {
+            if (sceKernelNotifyCallback(g_notifyCb[slot][i], 8) == 0x800201A1) {
+                g_notifyCb[slot][i] = 0;
             }
         }
     }
@@ -786,12 +786,12 @@ s32 func_000018B8(s32 slot) {
     sceMScmUnRegisterCLD(slot, &cb->drv);
     intr = sceKernelSuspendDispatchThread();
     for (i = 0; i < 32; i++) {
-        if (D_00007198[slot][i] != 0) {
-            sceKernelSetEventFlag(D_00007198[slot][i], 2);
+        if (g_notifyEvf[slot][i] != 0) {
+            sceKernelSetEventFlag(g_notifyEvf[slot][i], 2);
         }
-        if (D_0000721C[slot][i] != 0) {
-            if (sceKernelNotifyCallback(D_0000721C[slot][i], 2) == 0x800201A1) {
-                D_0000721C[slot][i] = 0;
+        if (g_notifyCb[slot][i] != 0) {
+            if (sceKernelNotifyCallback(g_notifyCb[slot][i], 2) == 0x800201A1) {
+                g_notifyCb[slot][i] = 0;
             }
         }
     }

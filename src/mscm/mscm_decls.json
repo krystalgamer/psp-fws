@@ -154,9 +154,7 @@
   "D_00006F90": "extern s32 D_00006F90[1];",
   "D_00007120": "extern char D_00007120[]; /* \"SceMScm\" */",
   "D_00007190": "extern SceKernelSysClock D_00007190; /* sysclock ticks per usec */",
-  "D_00007198": "extern SceUID D_00007198[1][32]; /* notify event flags (devctl register) */",
   "D_00007218": "extern s32 D_00007218;",
-  "D_0000721C": "extern SceUID D_0000721C[1][32]; /* notify callbacks (devctl register) */",
   "D_00007300": "extern char D_00007300[]; /* \"Assertion failed at %s:%s:%04d\\n\" (mscm_ioman.c) */",
   "D_00007330": "extern SceUID D_00007330;",
   "D_00007334": "extern s32 D_00007334[1];",
@@ -170,6 +168,8 @@
   "g_insertTime": "extern u64 g_insertTime[1]; /* 1.50+: time of the last insertion */",
   "g_irqMissCount": "extern s32 g_irqMissCount[1];",
   "g_mainEvf": "extern SceUID g_mainEvf[1];",
-  "g_mediaEvf": "extern SceUID g_mediaEvf[1];"
+  "g_mediaEvf": "extern SceUID g_mediaEvf[1];",
+  "g_notifyCb": "extern SceUID g_notifyCb[1][32]; /* notify callbacks (devctl register) */",
+  "g_notifyEvf": "extern SceUID g_notifyEvf[1][32]; /* notify event flags (devctl register) */"
  }
 }
