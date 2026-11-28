@@ -95,7 +95,7 @@ INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00002204);
 
 #if FW_VERSION == 100 || (FW_VERSION >= 150 && FW_VERSION < 282)
 s32 func_00000FD0(void) {
-    sceKernelSetEventFlag(D_00008240, 2U);
+    sceKernelSetEventFlag(D_00011DD4.evf, 2);
     return 0;
 }
 #endif
@@ -160,7 +160,7 @@ s32 func_00001098(s32 code, void *info) {
 
 #if FW_VERSION == 100 || (FW_VERSION >= 150 && FW_VERSION < 260)
 s32 func_000010EC(s32 *state) {
-    *state = D_00008234;
+    *state = D_00011DD4.state;
     return 0;
 }
 #endif

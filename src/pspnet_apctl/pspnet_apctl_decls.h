@@ -598,7 +598,6 @@ extern u32 D_000081C8[2]; /* struct bpf_program for the DHCP filter */
 extern u32 D_000081FC; /* ARP BPF filter: target IP constant */
 extern u32 D_00008210[2]; /* struct bpf_program for the ARP filter */
 extern s32 D_00008220;
-extern s32 D_00008234; /* D_00011DD4.state (prx reloc target) */
 extern u32 D_00008240;
 extern u32 D_000082B0;
 extern SceNetApctlHandlerEntry D_00008B1C[2];
@@ -729,7 +728,7 @@ s32 func_000045B8(SceNetDhcpCtx *dc, void *addr);
 s32 func_00004704(s32 sock, u32 *dst, void *buf);
 s32 func_000047D8(SceNetDhcpCtx *dc);
 s32 func_0000487C(SceNetDhcpCtx *dc, void *spa, void *tpa);
-s32 func_00004AEC(void *pkt, s32 len, SceNetDhcpLease *l);
+s32 func_00004AEC(void *bp, s32 len, SceNetDhcpLease *l);
 s32 func_00004CDC(s8 *opt, SceNetDhcpLease *l);
 s32 func_00004DE0(s8 *opt, SceNetDhcpLease *l);
 s32 func_00004E50(s8 *opt, SceNetDhcpLease *l);
