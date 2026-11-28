@@ -69,6 +69,7 @@
   "sce_paf_private_printf": "M2C_UNK sce_paf_private_printf(M2C_UNK *);"
  },
  "types": {
+  "0_cxx_methods": "#ifdef __cplusplus\nnamespace vsh {\nclass RebootLock {\npublic:\n    void Init();\n    void Exit();\n    void Reboot();\n};\n}\n#endif",
   "Unk_sceVshCommonUtil_98E57F6D_0": "struct Unk_sceVshCommonUtil_98E57F6D_0 {\n    u8 unk0;\n    u8 pad1[0x3];\n    s32 unk4;\n    s32 unk8;\n    u8 padC[0x4];\n    u8 unk10;\n};",
   "hand_func_00008378": "typedef void (*func_ptr)(void);"
  },
