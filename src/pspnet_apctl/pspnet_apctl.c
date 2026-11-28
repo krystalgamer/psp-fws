@@ -311,7 +311,7 @@ s32 func_00000964(SceNetApctlCtx *ctx, u32 *bits) {
         if (ret < 0 && ret != 0x80410D0E) {
             goto end;
         }
-        ret = sceKernelPollEventFlag(ctx->evf, 2, 0x11, bits);
+        ret = sceKernelPollEventFlag(ctx->evf, 2, APCTL_EVF_MODE, bits);
         if (ret == 0 && (*bits & 2)) {
             goto end;
         }

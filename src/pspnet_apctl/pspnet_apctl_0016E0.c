@@ -150,7 +150,7 @@ s32 func_00002480(SceNetApctlCtx *ctx) {
     s32 ret;
 
 wait:
-    ret = sceKernelWaitEventFlag(ctx->evf, 0x20, 0x11, &bits, NULL);
+    ret = sceKernelWaitEventFlag(ctx->evf, 0x20, APCTL_EVF_MODE, &bits, NULL);
     if (ret < 0) {
         goto end;
     }
@@ -423,7 +423,7 @@ s32 func_00001780(SceNetApctlCtx *ctx, s32 prev, s32 *state, s32 *event) {
     sceKernelClearEventFlag(ctx->evf, ~0x20);
     ctx->error = 0;
     func_00007504(&ctx->conf, 0, sizeof(ctx->conf));
-    sceKernelWaitEventFlag(ctx->evf, -1, 0x11, &bits, NULL);
+    sceKernelWaitEventFlag(ctx->evf, -1, APCTL_EVF_MODE, &bits, NULL);
     if (bits & 2) {
         *state = 0;
         *event = 5;

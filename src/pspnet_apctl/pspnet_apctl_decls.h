@@ -176,9 +176,22 @@ typedef struct {
     s32 connIndex;              /* 0x6C0 */
     s32 error;                  /* 0x6C4 */
     s32 linkUp;                 /* 0x6C8 */
-    SceNetApctlNetConf conf;    /* 0x6CC */
+#if FW_VERSION >= 150
+    s32 unk6CC;                 /* 0x6CC */
+#endif
+    SceNetApctlNetConf conf;    /* 0x6CC (1.50+: 0x6D0) */
 } SceNetApctlCtx;
+#if FW_VERSION >= 150
+typedef char chk_SceNetApctlCtx[(sizeof(SceNetApctlCtx) == 0x8FC) ? 1 : -1];
+#else
 typedef char chk_SceNetApctlCtx[(sizeof(SceNetApctlCtx) == 0x8F8) ? 1 : -1];
+#endif
+/* event flag wait mode: OR | CLEAR (1.50+: OR | CLEARALL) */
+#if FW_VERSION >= 150
+#define APCTL_EVF_MODE 0x21
+#else
+#define APCTL_EVF_MODE 0x11
+#endif
 
 /* sceUtilityGetNetParam output buffer */
 typedef union {
