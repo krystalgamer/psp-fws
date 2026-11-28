@@ -263,21 +263,29 @@ s32 func_00001E18(void);
 s32 func_00001E24(void);
 SceOff func_00001E30(SceUmd9660File *file, SceOff ofs, s32 whence);
 void func_000022E8(void);
-s32 func_000023E4(void *arg0, void *arg1, s32 *unit);
+s32 func_000023E4();
 s32 func_00002694(void);
 SceUmd9660Mgr *func_000026E4(void);
 SceUmd9660File *func_00002910(SceIoIob *iob);
 s32 func_00002974(SceUmd9660Drive *drive, void *buf, SceSize size, SceUmdLbnParam *param);
 s32 func_000029FC(SceUmd9660Drive *drive, void *buf, SceSize size, s32 arg3, SceUmdLbnParam *param);
+s32 func_00002CE4();
+s32 func_000036C4();
 s32 func_000036D0(s32 arg0);
 s32 func_000037AC(SceUmd9660Drive *drive);
+s32 func_00003818();
+s32 func_000038F0();
+s32 func_0000397C();
 s32 func_00003A58(void);
+s32 func_00003A74();
+s32 func_00003AF8();
 s32 func_00003BFC(void);
 M2C_UNK *func_00003C04(void);
 s32 func_00003C80(s32 arg0);
 s32 func_00003C8C(SceUmd9660Drive *drive, void *buf);
 s32 func_00003D24(s32);
 s32 func_00003D28(SceIoIob *iob);
+s32 func_00003E54();
 s32 func_00003ED0(void *arg0, void *arg1, s32 *unit);
 s32 func_00003F70(void);
 s32 func_00003F7C(const char *name);
@@ -285,9 +293,11 @@ void func_00003FAC(void);
 void func_00003FD4(void);
 s32 func_00003FF0(struct Unk_func_00003FF0_0 *arg0);
 s32 func_00003FFC(struct Unk_func_00003FFC_0 *arg0);
+s32 func_00004004();
 s32 func_00004024(); /* 1.x: (SceUmd9660Drive *), 2.x: other layout */
 s32 func_00004064(); /* 1.x: (SceUmd9660Drive *), 2.x: other layout */
 s32 func_000040A4(); /* 1.x: (SceUmd9660Drive *), 2.x: other layout */
+s32 func_000040C8();
 s32 func_000040E4(); /* 1.x: (SceUmd9660Drive *), 2.x: other layout */
 s32 func_00004124(); /* 1.x: (SceUmd9660Drive *), 2.x: other layout */
 s32 func_00004148(s32 *arg0);
@@ -348,6 +358,7 @@ s32 sceKernelDeleteHeap(SceUID heap);
 s32 sceKernelDeleteSema(SceUID id);
 s32 sceKernelDipsw(M2C_UNK);
 u32 sceKernelDipswAll(void);
+s32 sceKernelExtendKernelStack(s32 size, s32 (*func)(SceUmd9660DevctlArgs *), void *arg);
 s32 sceKernelFreeHeapMemory(SceUID heap, void *p);
 s32 sceKernelSignalSema(SceUID id, s32 n);
 s32 sceKernelWaitSema(SceUID id, s32 n, u32 *timeout);

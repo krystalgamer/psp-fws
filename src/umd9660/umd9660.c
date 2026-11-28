@@ -329,16 +329,201 @@ s32 umd9660_init(void *dev) {
 }
 #endif
 
-#if FW_VERSION >= 102 && FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/umd9660", umd9660_exec_devctl);
-#endif
-
-#if FW_VERSION >= 150 && FW_VERSION < 201
+#if FW_VERSION >= 102 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/umd9660", umd9660_exec_devctl);
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/umd9660", umd9660_exec_devctl);
+s32 umd9660_exec_devctl(SceIoIob *iob, const char *name, s32 cmd, void *indata, SceSize inlen, void *outdata, SceSize outlen) {
+    SceUmd9660Drive *drive;
+    SceUmd9660DevctlArgs args;
+    s32 val;
+    s32 ret = 0;
+    UMD9660_ASSERT(cmd >= 0, D_00005A70, D_00005AFC, "umd9660_exec_devctl", 0x345);
+    UMD9660_ASSERT(iob != NULL, D_00005A70, D_00005AFC, "umd9660_exec_devctl", 0x346);
+    if (iob == NULL || cmd < 0) {
+        return 0x80010016;
+    }
+    drive = sceUmd9660GetDrive(iob->i_unit);
+    switch (cmd) {
+    case 0x1F21011:
+        UMD9660_ASSERT(outdata != NULL, D_00005A70, D_00005AFC, "umd9660_exec_devctl", 0x352);
+        UMD9660_ASSERT(outlen >= 0x10, D_00005A70, D_00005AFC, "umd9660_exec_devctl", 0x353);
+        ret = func_00003C8C(drive, outdata);
+        break;
+    case 0x1F20002:
+        UMD9660_ASSERT(outdata != NULL, D_00005A70, D_00005AFC, "umd9660_exec_devctl", 0x35C);
+        UMD9660_ASSERT(outlen >= 4, D_00005A70, D_00005AFC, "umd9660_exec_devctl", 0x35D);
+        *(s32 *)outdata = func_0000420C();
+        break;
+    case 0x1E380C0:
+        UMD9660_ASSERT(outlen != 0, D_00005A70, D_00005AFC, "umd9660_exec_devctl", 0x369);
+        UMD9660_ASSERT(indata != NULL, D_00005A70, D_00005AFC, "umd9660_exec_devctl", 0x36A);
+        UMD9660_ASSERT(outdata != NULL, D_00005A70, D_00005AFC, "umd9660_exec_devctl", 0x36B);
+        args.iob = iob;
+        args.name = name;
+        args.cmd = cmd;
+        args.indata = indata;
+        args.inlen = inlen;
+        args.outlen = outlen;
+        args.outdata = outdata;
+        args.drive = drive;
+        ret = sceKernelExtendKernelStack(0x1000, func_000013F4, &args);
+        break;
+    case 0x1F200A1:
+        UMD9660_ASSERT(outlen != 0, D_00005A70, D_00005AFC, "umd9660_exec_devctl", 0x37A);
+        UMD9660_ASSERT(indata != NULL, D_00005A70, D_00005AFC, "umd9660_exec_devctl", 0x37B);
+        UMD9660_ASSERT(outdata != NULL, D_00005A70, D_00005AFC, "umd9660_exec_devctl", 0x37C);
+        ret = func_00003FC0(drive, outdata, indata);
+        break;
+    case 0x1F200A2:
+        UMD9660_ASSERT(outlen != 0, D_00005A70, D_00005AFC, "umd9660_exec_devctl", 0x382);
+        UMD9660_ASSERT(indata != NULL, D_00005A70, D_00005AFC, "umd9660_exec_devctl", 0x383);
+        UMD9660_ASSERT(outdata != NULL, D_00005A70, D_00005AFC, "umd9660_exec_devctl", 0x384);
+        ret = func_00004004(drive, outdata, outlen, indata);
+        break;
+    case 0x1E180C1:
+        UMD9660_ASSERT(indata != NULL, D_00005A70, D_00005AFC, "umd9660_exec_devctl", 0x389);
+        UMD9660_ASSERT(inlen >= 0x1C, D_00005A70, D_00005AFC, "umd9660_exec_devctl", 0x38A);
+        ret = func_00003818(drive, indata);
+        break;
+    case 0x1E38012:
+        UMD9660_ASSERT(outdata != NULL, D_00005A70, D_00005AFC, "umd9660_exec_devctl", 0x390);
+        UMD9660_ASSERT(outlen >= 0x24, D_00005A70, D_00005AFC, "umd9660_exec_devctl", 0x391);
+        if (outdata == NULL || outlen < 0x24) {
+            return 0x80010016;
+        }
+        func_000022E8();
+        *(SceUmd9660DiscInfo *)outdata = drive->disc;
+        break;
+    case 0x1E18021:
+        UMD9660_ASSERT(indata != NULL, D_00005A70, D_00005AFC, "umd9660_exec_devctl", 0x3A1);
+        UMD9660_ASSERT(inlen >= 4, D_00005A70, D_00005AFC, "umd9660_exec_devctl", 0x3A2);
+        ret = func_000040C8(drive, indata, inlen);
+        break;
+    case 0x1E18024:
+        UMD9660_ASSERT(indata != NULL, D_00005A70, D_00005AFC, "umd9660_exec_devctl", 0x3AF);
+        UMD9660_ASSERT(inlen >= 0x14, D_00005A70, D_00005AFC, "umd9660_exec_devctl", 0x3B0);
+        ret = func_00002CE4(drive, indata, inlen);
+        break;
+    case 0x1F200A4:
+        UMD9660_ASSERT(outdata != NULL, D_00005A70, D_00005AFC, "umd9660_exec_devctl", 0x3B6);
+        UMD9660_ASSERT(outlen == 4, D_00005A70, D_00005AFC, "umd9660_exec_devctl", 0x3B7);
+        if (drive == NULL || drive->umdDrive == NULL) {
+            return 0x80010016;
+        }
+        *(s32 *)outdata = func_0000434C(drive);
+        break;
+    case 0x1F200A0:
+        UMD9660_ASSERT(outdata != NULL, D_00005A70, D_00005AFC, "umd9660_exec_devctl", 0x3C4);
+        UMD9660_ASSERT(outlen >= 4, D_00005A70, D_00005AFC, "umd9660_exec_devctl", 0x3C5);
+        ret = func_00003DEC(drive, outdata, outlen);
+        break;
+    case 0x1F20001:
+        UMD9660_ASSERT(outdata != NULL, D_00005A70, D_00005AFC, "umd9660_exec_devctl", 0x3CB);
+        UMD9660_ASSERT(outlen >= 8, D_00005A70, D_00005AFC, "umd9660_exec_devctl", 0x3CC);
+        if (outdata == NULL || outlen < 8) {
+            return 0x80010016;
+        }
+        ret = func_00004250(outdata);
+        break;
+    case 0x1E280DA:
+        UMD9660_ASSERT(outdata != NULL, D_00005A70, D_00005AFC, "umd9660_exec_devctl", 0x3DB);
+        UMD9660_ASSERT(outlen >= 0x10, D_00005A70, D_00005AFC, "umd9660_exec_devctl", 0x3DC);
+        if (outdata == NULL || outlen < 0x10) {
+            return 0x80010016;
+        }
+        ret = func_000042A8(outdata);
+        break;
+    case 0x1F200A5:
+        UMD9660_ASSERT(outdata != NULL, D_00005A70, D_00005AFC, "umd9660_exec_devctl", 0x3E9);
+        UMD9660_ASSERT(outlen == 4, D_00005A70, D_00005AFC, "umd9660_exec_devctl", 0x3EA);
+        if (outdata == NULL || outlen < 4) {
+            return 0x80010016;
+        }
+        *(s32 *)outdata = func_000037AC(drive);
+        break;
+    case 0x1F20014:
+        UMD9660_ASSERT(outlen != 0, D_00005A70, D_00005AFC, "umd9660_exec_devctl", 0x3F7);
+        UMD9660_ASSERT(outdata != NULL, D_00005A70, D_00005AFC, "umd9660_exec_devctl", 0x3F8);
+        if (outdata == NULL || outlen == 0) {
+            return 0x80010016;
+        }
+        ret = func_00003F3C(drive, outlen, outdata);
+        break;
+    case 0x1E180D0:
+        UMD9660_ASSERT(outdata != NULL, D_00005A70, D_00005AFC, "umd9660_exec_devctl", 0x405);
+        UMD9660_ASSERT(outlen >= 4, D_00005A70, D_00005AFC, "umd9660_exec_devctl", 0x406);
+        ret = func_000038F0(drive, *(s32 *)outdata);
+        break;
+    case 0x1E280D1:
+        UMD9660_ASSERT(outdata != NULL, D_00005A70, D_00005AFC, "umd9660_exec_devctl", 0x411);
+        UMD9660_ASSERT(outlen >= 0x18, D_00005A70, D_00005AFC, "umd9660_exec_devctl", 0x412);
+        ret = func_0000397C(drive, outdata);
+        break;
+    case 0x1E180D3:
+        UMD9660_ASSERT(indata != NULL, D_00005A70, D_00005AFC, "umd9660_exec_devctl", 0x41B);
+        UMD9660_ASSERT(inlen >= 0x18, D_00005A70, D_00005AFC, "umd9660_exec_devctl", 0x41C);
+        ret = func_00003AF8(drive, indata);
+        break;
+    case 0x1E280D2:
+        UMD9660_ASSERT(indata != NULL, D_00005A70, D_00005AFC, "umd9660_exec_devctl", 0x424);
+        UMD9660_ASSERT(outdata != NULL, D_00005A70, D_00005AFC, "umd9660_exec_devctl", 0x425);
+        UMD9660_ASSERT(inlen >= 8, D_00005A70, D_00005AFC, "umd9660_exec_devctl", 0x426);
+        UMD9660_ASSERT(outlen >= 0x1C, D_00005A70, D_00005AFC, "umd9660_exec_devctl", 0x427);
+        ret = func_000036C4(drive, indata, outdata);
+        break;
+    case 0x1F000A3:
+        UMD9660_ASSERT(outdata != NULL, D_00005A70, D_00005AFC, "umd9660_exec_devctl", 0x42D);
+        UMD9660_ASSERT(outlen >= 4, D_00005A70, D_00005AFC, "umd9660_exec_devctl", 0x42E);
+        ret = func_00003A74(drive, *(s32 *)outdata);
+        break;
+    case 0x1F000A6:
+        val = 0x20;
+        ret = func_000040C8(drive, &val, 4);
+        break;
+    case 0x1F00003:
+        ret = func_000023E4(NULL, NULL, &iob->i_unit, 4);
+        break;
+    case 0x1E000D5:
+        ret = func_00004064(drive);
+        break;
+    case 0x1E080D4:
+        ret = func_00004024(drive);
+        break;
+    case 0x1E080D7:
+        ret = func_000040E4(drive);
+        break;
+    case 0x1E080D8:
+        ret = func_000040A4(drive);
+        break;
+    case 0x1E180D6:
+        UMD9660_ASSERT(indata != NULL, D_00005A70, D_00005AFC, "umd9660_exec_devctl", 0x44D);
+        UMD9660_ASSERT(inlen >= 0x1C, D_00005A70, D_00005AFC, "umd9660_exec_devctl", 0x44E);
+        ret = func_00004358(drive, ((u32 *)indata)[3], ((u32 *)indata)[4], ((u32 *)indata)[5]);
+        break;
+    case 0x1E280D9:
+        UMD9660_ASSERT(outdata != NULL, D_00005A70, D_00005AFC, "umd9660_exec_devctl", 0x464);
+        UMD9660_ASSERT(outlen >= 0x10, D_00005A70, D_00005AFC, "umd9660_exec_devctl", 0x465);
+        ret = func_00003E54(drive, outdata);
+        break;
+    case 0x1E18030:
+        UMD9660_ASSERT(indata != NULL, D_00005A70, D_00005AFC, "umd9660_exec_devctl", 0x46D);
+        UMD9660_ASSERT(inlen >= 0x10, D_00005A70, D_00005AFC, "umd9660_exec_devctl", 0x46E);
+        ret = func_00004124(drive, indata);
+        break;
+    case 0x1E38031:
+        UMD9660_ASSERT(indata != NULL, D_00005A70, D_00005AFC, "umd9660_exec_devctl", 0x476);
+        UMD9660_ASSERT(inlen >= 4, D_00005A70, D_00005AFC, "umd9660_exec_devctl", 0x477);
+        ret = func_000044C0(drive, *(s32 *)indata);
+        break;
+    case 0x1E28013:
+    default:
+        ret = 0x8001B000;
+        break;
+    }
+    return ret;
+}
 #endif
 
 #if FW_VERSION < 201
@@ -1527,19 +1712,9 @@ INCLUDE_RODATA("nonmatchings/umd9660", D_00005A38);
 INCLUDE_ASM("nonmatchings/umd9660", func_00004240);
 #endif
 
-#if FW_VERSION == 152
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/umd9660", sceUmd9660ReadRootDir4DVD);
-#endif
 
-#if FW_VERSION < 152
-INCLUDE_ASM("nonmatchings/umd9660", sceUmd9660ReadRootDir4DVD);
-#endif
-
-#if FW_VERSION >= 150 && FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/umd9660", dvd_get_controlimg_lbn);
-#endif
-
-#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/umd9660", dvd_get_controlimg_lbn);
 #endif
 
