@@ -522,27 +522,79 @@ s32 sceNandEraseAllBlock(void) {
 INCLUDE_ASM("nonmatchings/emc_sm", sceNandEraseAllBlock);
 #endif
 
+#if FW_VERSION < 201
+s32 sceNandTestBlock(u32 ppn) {
+    u8 user[32][0x200];
+    u8 spare[32][0x10];
+    s32 i;
+    s32 j;
+    s32 ret;
+
+    if (ppn % D_00002FD0.pagesPerBlock != 0) {
+        return 0x80230008;
+    }
+    ret = sceNandEraseBlockWithRetry(ppn);
+    if (ret < 0) {
+        return ret;
+    }
+    ret = sceNandReadPagesRawAll(ppn, user, spare, D_00002FD0.pagesPerBlock);
+    if (ret < 0) {
+        return ret;
+    }
+    for (i = 0; i < D_00002FD0.pagesPerBlock; i++) {
+        for (j = 0; j < 0x200; j += 4) {
+            if (*(u32 *)&user[i][j] != 0xFFFFFFFF) {
+                return 0x80230004;
+            }
+        }
+        for (j = 4; j < 0x10; j++) {
+            if (spare[i][j] != 0xFF) {
+                return 0x80230004;
+            }
+        }
+    }
+    for (i = 0; i < 2; i++) {
+        switch (i) {
+        case 0:
+            memset(user, 0, 0x4000);
+            memset(spare, 0, 0x180);
+            break;
+        case 1:
+            memset(user, 0xFF, 0x4000);
+            memset(spare, 0xFF, 0x180);
+            break;
+        }
+        ret = sceNandWriteBlockWithVerify(ppn, user, spare);
+        if (ret < 0) {
+            break;
+        }
+    }
+    sceNandEraseBlockWithRetry(ppn);
+    return ret;
+}
+#else
 INCLUDE_ASM("nonmatchings/emc_sm", sceNandTestBlock);
 
-#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/emc_sm", sceNandGetPageSize);
-#else
+#endif
+
+#if FW_VERSION < 201
 s32 sceNandGetPageSize(void) {
     return D_00002FD0.pageSize;
 }
+#else
+INCLUDE_ASM("nonmatchings/emc_sm", sceNandGetPagesPerBlock);
 #endif
 
-#if FW_VERSION >= 201
-INCLUDE_ASM("nonmatchings/emc_sm", sceNandGetPagesPerBlock);
-#else
+#if FW_VERSION < 201
 s32 sceNandGetPagesPerBlock(void) {
     return D_00002FD0.pagesPerBlock;
 }
+#else
+INCLUDE_ASM("nonmatchings/emc_sm", sceNandGetTotalBlocks);
 #endif
 
-#if FW_VERSION >= 201
-INCLUDE_ASM("nonmatchings/emc_sm", sceNandGetTotalBlocks);
-#else
+#if FW_VERSION < 201
 s32 sceNandGetTotalBlocks(void) {
     return D_00002FD0.totalBlocks;
 }
