@@ -54,6 +54,7 @@ segments:
     vram: 0x0
     subsegments:
       - [0x80, c, pspnet_inet]
+      - [0x1BB9C, c, pspnet_inet_udp]
       - [0x225DC, c, pspnet_inet_tcp_subr]
       - { start: 0x2B154, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x2B3EC, type: prxpad, order: .text }
@@ -67,6 +68,7 @@ segments:
       - { start: 0x2B4B4, type: rodata, name: resident, linker_section: .rodata.sceResident }
       - { start: 0x2B6E4, type: rodata, name: nid, linker_section: .rodata.sceNid }
       - [0x2B830, .rodata, pspnet_inet]
+      - [0x2BB64, .rodata, pspnet_inet_udp]
       - [0x2BBFC, .rodata, pspnet_inet_tcp_subr]
       - { start: 0x2C014, type: prxpad, order: .rodata }
   - name: pspnet_inet_seg1
