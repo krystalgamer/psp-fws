@@ -63,6 +63,15 @@ public:
 #endif
 
 #ifdef __cplusplus
+/* vtable _ZTV14Class_000DAFE8 is data (vptr = label - 8 + 8) */
+class Class_000DAFE8 {
+public:
+    u32 unk4;
+    virtual ~Class_000DAFE8();
+};
+#endif
+
+#ifdef __cplusplus
 /* vtable _ZTV14Class_000DB140 is data (vptr = label - 8 + 8) */
 class Class_000DB140 {
 public:
@@ -71,9 +80,10 @@ public:
 #endif
 
 #ifdef __cplusplus
-/* dtor still asm/m2c (not trivial) */
+/* vtable _ZTV14Class_000FF5D8 is data (vptr = label - 8 + 8) */
 class Class_000FF5D8 {
 public:
+    s32 unk4;
     virtual ~Class_000FF5D8();
 };
 #endif
@@ -82,7 +92,7 @@ public:
 /* vtable _ZTV14Class_000D0798 is data (vptr = label - 8 + 8) */
 class Class_000D0798 : public Class_000FF5D8 {
 public:
-    s32 unk4;
+
     virtual ~Class_000D0798();
 };
 #endif
@@ -3038,6 +3048,9 @@ s32 _ZN14Class_000D8898D2Ev(s32);
 void _ZN14Class_000D8BF8D0Ev(M2C_UNK **arg0);
 void _ZN14Class_000D8BF8D1Ev(M2C_UNK **arg0);
 void _ZN14Class_000D8BF8D2Ev(M2C_UNK **arg0);
+void _ZN14Class_000DAFE8D0Ev(struct Unk_func_0008A244_0 *arg0);
+void _ZN14Class_000DAFE8D1Ev(struct Unk_func_0008A21C_0 *arg0);
+void _ZN14Class_000DAFE8D2Ev(void *arg0);
 void _ZN14Class_000FF5D8D0Ev(struct Unk_func_00013BB8_0 *arg0);
 void _ZN14Class_000FF5D8D1Ev(struct Unk_func_00013BA4_0 *arg0);
 s32 _ZN14Class_000FF5D8D2Ev(s32);

@@ -1587,9 +1587,8 @@ INCLUDE_ASM("nonmatchings/pafmini_078748", scePaf_E05F3CEF);
 #if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/pafmini_078748", func_000A4810);
 
-void func_000A4940(void *arg0) {
-    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_000DAFE8;
-    sceKernelDeleteThread(M2C_FIELD(arg0, u32 *, 4));
+Class_000DAFE8::~Class_000DAFE8() {
+    sceKernelDeleteThread(this->unk4);
 }
 #endif
 
@@ -1788,7 +1787,6 @@ INCLUDE_ASM("nonmatchings/pafmini_078748", _ZN3paf6ThreadC2EjjPKcj);
 
 #if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/pafmini_078748", _ZN3paf6ThreadD2Ev);
-#endif
 
 void func_0008A21C(struct Unk_func_0008A21C_0 *arg0) {
     arg0->unk0 = &D_000DAFE8;
@@ -1801,7 +1799,6 @@ void func_0008A244(struct Unk_func_0008A244_0 *arg0) {
     _ZdlPv(arg0);
 }
 
-#if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/pafmini_078748", _ZN3paf6Thread5StartEv);
 #else
 INCLUDE_ASM("nonmatchings/pafmini_078748", func_000A49CC);
@@ -1870,6 +1867,10 @@ INCLUDE_ASM("nonmatchings/pafmini_078748", _ZmlRK4vec4f);
 INCLUDE_ASM("nonmatchings/pafmini_078748", func_0008A4B8);
 
 INCLUDE_RODATA("nonmatchings/pafmini_078748", D_000DAFE8);
+
+#if FW_VERSION == 100
+__asm__(".globl _ZTV14Class_000DAFE8\n_ZTV14Class_000DAFE8 = D_000DAFE8 - 8\n");
+#endif
 
 INCLUDE_ASM("nonmatchings/pafmini_078748", _ZdvRK4vec4f);
 
