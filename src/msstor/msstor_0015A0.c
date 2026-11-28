@@ -260,9 +260,50 @@ INCLUDE_ASM("nonmatchings/msstor_0015A0", func_0000432C);
 
 INCLUDE_ASM("nonmatchings/msstor_0015A0", func_00004360);
 
-INCLUDE_ASM("nonmatchings/msstor_0015A0", func_00004664);
+#if FW_VERSION < 150
+s32 func_00004664(SceMSstorDev *dev) {
+    SceUID fpl;
+    s32 ret;
 
-INCLUDE_ASM("nonmatchings/msstor_0015A0", func_000046FC);
+    if (dev->workFpl != 0) {
+        return 0xC0220100;
+    }
+    if (dev->workArea != NULL) {
+        return 0xC0220100;
+    }
+    dev->workArea = NULL;
+    dev->workFpl = 0;
+    fpl = sceKernelCreateFpl("SceMSstorWorkArea", 1, 1, 0x4000, 1, NULL);
+    dev->workFpl = fpl;
+    if (fpl < 0) {
+        return fpl;
+    }
+    ret = sceKernelTryAllocateFpl(fpl, &dev->workArea);
+    if (ret >= 0) {
+        return 0;
+    }
+    dev->workArea = NULL;
+    return ret;
+}
+#else
+INCLUDE_ASM("nonmatchings/msstor_0015A0", func_00004664);
+#endif
+
+s32 func_000046FC(SceMSstorDev *dev) {
+    s32 ret;
+
+    ret = sceKernelFreeFpl(dev->workFpl, dev->workArea);
+    if (ret < 0) {
+        return ret;
+    }
+    dev->workArea = NULL;
+    ret = sceKernelDeleteFpl(dev->workFpl);
+    if (ret < 0) {
+        return ret;
+    }
+    dev->workFpl = 0;
+    return 0;
+}
 
 #if FW_VERSION >= 102 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/msstor_0015A0", func_000047C8);
@@ -455,12 +496,25 @@ s32 func_00004A0C(SceIoIob *iob, char *name, s32 flags, SceMode mode) {
 
     ret = 0x80220183;
     if (iob->i_unit == 0) {
-        ret = func_00004A98(iob, name, flags);
+        ret = func_00004A98(iob, name, flags, mode);
     }
     return ret;
 }
 
-INCLUDE_ASM("nonmatchings/msstor_0015A0", func_00004A40);
+s32 func_00004A40(SceIoIob *iob, char *name, s32 flags, SceMode mode) {
+    SceMSstorIoCtx *ctx;
+    s32 ret;
+
+    ctx = iob->i_de->d_private;
+    ret = 0x80220183;
+    if (iob->i_unit == 1) {
+        ret = 0x80220182;
+        if (ctx->dev->unk4E64 & 1) {
+            ret = func_00004A98(iob, name, flags, mode);
+        }
+    }
+    return ret;
+}
 
 INCLUDE_ASM("nonmatchings/msstor_0015A0", func_00004A98);
 
@@ -519,13 +573,33 @@ INCLUDE_ASM("nonmatchings/msstor_0015A0", func_000050C8);
 INCLUDE_ASM("nonmatchings/msstor_0015A0", func_0000513C);
 #endif
 
+#if FW_VERSION < 150
+s32 func_000053B4(SceIoIob *iob, void *buf, SceSize size) {
+    if (func_00005684(iob, iob->i_fpos + size) == 0) {
+        return 0x80220183;
+    }
+    return func_00004B2C(iob, buf, size, 0, func_0000017C);
+}
+#else
 INCLUDE_ASM("nonmatchings/msstor_0015A0", func_000053B4);
+#endif
 
 INCLUDE_ASM("nonmatchings/msstor_0015A0", func_0000544C);
 
-#if FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/msstor_0015A0", func_00004E70);
+#if FW_VERSION < 150
+s32 func_00004E70(SceIoIob *iob, const void *buf, SceSize size) {
+    if (func_00005684(iob, iob->i_fpos + size) == 0) {
+        return 0x80220183;
+    }
+    return func_00004B2C(iob, (void *)buf, size, 1, func_00000220);
+}
+#endif
 
+#if FW_VERSION >= 150 && FW_VERSION < 201
+INCLUDE_ASM("nonmatchings/msstor_0015A0", func_00004E70);
+#endif
+
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/msstor_0015A0", func_00004F04);
 #else
 INCLUDE_ASM("nonmatchings/msstor_0015A0", func_000054E4);
