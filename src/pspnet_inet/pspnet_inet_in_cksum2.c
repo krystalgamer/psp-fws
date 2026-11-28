@@ -5,6 +5,7 @@
 #if FW_VERSION < 271
 #define ADDCARRY(x)  (x > 65535 ? x -= 65535 : x)
 #define REDUCE {l_util.l = sum; sum = l_util.s[0] + l_util.s[1]; ADDCARRY(sum);}
+
 s32 in_cksum(struct mbuf *m, s32 len)
 {
 	u16 *w;
@@ -547,7 +548,7 @@ s32 in_pcballoc(struct socket *so, void *v) {
 INCLUDE_ASM("nonmatchings/pspnet_inet_in_cksum2", in_pcballoc);
 #endif
 
-#if FW_VERSION < 201
+#if FW_VERSION < 282
 void in_pcbdisconnect(void *v) {
     struct inpcb *inp = v;
 
@@ -1995,11 +1996,7 @@ void func_0001A49C(void) {
 }
 #endif
 
-#if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet_in_cksum2", icmp_mtudisc_timeout);
-#endif
-
-#if FW_VERSION < 201
+#if FW_VERSION < 282
 void icmp_mtudisc_timeout(struct rtentry *rt) {
     s32 flags = rt->rt_flags;
     if ((flags & (RTF_HOST | RTF_DYNAMIC)) != (RTF_HOST | RTF_DYNAMIC)) {
@@ -2065,7 +2062,7 @@ void igmp_fasttimo(void) {
     _sce_pspnet_splunlock(s);
 }
 
-#if FW_VERSION < 201
+#if FW_VERSION < 282
 void igmp_sendpkt(struct in_multi *inm, s32 type) {
     struct mbuf *m;
     struct igmp *igmp;
@@ -2150,11 +2147,7 @@ void igmp_joingroup(struct in_multi *inm) {
     _sce_pspnet_splunlock(s);
 }
 
-#if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet_in_cksum2", igmp_leavegroup);
-#endif
-
-#if FW_VERSION < 201
+#if FW_VERSION < 282
 void igmp_leavegroup(void *arg0) {
     s32 temp_a3;
     s32 temp_v1_2;
@@ -2167,9 +2160,7 @@ void igmp_leavegroup(void *arg0) {
         }
     }
 }
-#endif
-
-#if FW_VERSION >= 282
+#else
 void func_0001AA20(struct Unk_func_0001AA20_0 *arg0) {
     s32 temp_a3;
     s32 temp_v1_2;

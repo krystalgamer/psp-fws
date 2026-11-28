@@ -596,7 +596,6 @@ struct ifaddr *ifa_ifwithnet(struct sockaddr *addr) {
     return (ifa_maybe);
 }
 
-#if FW_VERSION < 201
 struct ifaddr *ifaof_ifpforaddr(struct sockaddr *addr, struct ifnet *ifp) {
     struct ifaddr *ifa;
     char *cp, *cp2, *cp3;
@@ -632,22 +631,14 @@ struct ifaddr *ifaof_ifpforaddr(struct sockaddr *addr, struct ifnet *ifp) {
     }
     return (ifa_maybe);
 }
-#else
-INCLUDE_ASM("nonmatchings/pspnet_inet_api", ifaof_ifpforaddr);
-#endif
 
-#if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet_api", if_rtdel);
-#else
 s32 if_rtdel(struct rtentry *rt, void *arg) {
     if (rt->rt_ifp == arg) {
         rtrequest(2, rt->rt_nodes[0].rn_key, rt->rt_gateway, rt->rt_nodes[0].rn_mask, rt->rt_flags, NULL);
     }
     return 0;
 }
-#endif
 
-#if FW_VERSION < 201
 struct ifaddr *ifa_ifwithaddr(struct sockaddr *addr) {
     struct ifnet *ifp;
     struct ifaddr *ifa;
@@ -670,11 +661,7 @@ struct ifaddr *ifa_ifwithaddr(struct sockaddr *addr) {
     }
     return ((struct ifaddr *)0);
 }
-#else
-INCLUDE_ASM("nonmatchings/pspnet_inet_api", ifa_ifwithaddr);
-#endif
 
-#if FW_VERSION < 201
 struct ifaddr *ifa_ifwithdstaddr(struct sockaddr *addr) {
     struct ifnet *ifp;
     struct ifaddr *ifa;
@@ -694,9 +681,6 @@ struct ifaddr *ifa_ifwithdstaddr(struct sockaddr *addr) {
     }
     return (NULL);
 }
-#else
-INCLUDE_ASM("nonmatchings/pspnet_inet_api", ifa_ifwithdstaddr);
-#endif
 
 INCLUDE_ASM("nonmatchings/pspnet_inet_api", ifa_ifwithladdr);
 

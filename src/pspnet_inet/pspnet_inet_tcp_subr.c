@@ -2461,7 +2461,16 @@ INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", _sce_pspnet_pppoe_init);
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", _sce_pspnet_pppoe_term);
+s32 _sce_pspnet_pppoe_term(void) {
+    s32 temp_s0;
+
+    temp_s0 = _sce_pspnet_spllock();
+    func_00009984();
+    _sce_pspnet_stop_of_pppoe_module_in_netintr();
+    func_00028D50();
+    _sce_pspnet_splunlock(temp_s0);
+    return 0;
+}
 #endif
 
 #if FW_VERSION >= 282
