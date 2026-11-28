@@ -10,23 +10,29 @@
 #if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/libhttp_strtol", func_0000C114);
 
-INCLUDE_ASM("nonmatchings/libhttp_strtol", func_0000C2F0);
-#endif
+int func_0000C2F0(int c) {
+    char ch = c;
+    int ret;
 
-#if FW_VERSION < 201
+    if (func_0000BB00(ch) & 4) {
+        ret = ch - '0';
+    } else {
+        if (func_0000BB00(ch) & 3) {
+            ret = func_0000BAD4(ch) - 0x57;
+        } else {
+            ret = 9999999;
+        }
+    }
+    return ret;
+}
+
 void func_00015A10(s32 arg0) {
     func_0000C114(arg0, 0, 0xA);
 }
-#endif
 
-#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/libhttp_strtol", __udivdi3);
-#endif
 
-#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/libhttp_strtol", __umoddi3);
-#endif
 
-#if FW_VERSION < 201
 INCLUDE_RODATA("nonmatchings/libhttp_strtol", D_000179D0);
 #endif
