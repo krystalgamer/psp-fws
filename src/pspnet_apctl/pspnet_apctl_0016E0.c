@@ -1220,7 +1220,7 @@ s32 func_000021A4(SceNetDhcpCtx *dc, s32 prev) {
             dc->rx.ip = dc->rx.ether + 14;
             dc->rx.udp = (SceNetDhcpUdpHdr *)(p + (hl + (dc->rx.ether[14] & 0xF) * 4) + 14);
             dc->rx.bootp = p + (hl + (dc->rx.ether[14] & 0xF) * 4) + 22;
-            if (func_00003A18(dc) == 0) {
+            if (func_00003AA8(dc) == 0) {
                 SceNetDhcpLease *l = &dc->offer;
 
                 func_00007504(l, 0, sizeof(*l));
@@ -2087,9 +2087,9 @@ INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00005394);
 #endif
 
 #if FW_VERSION >= 151 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00003A18);
+INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00003AA8);
 
-INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00003C00);
+INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00003CD0);
 #endif
 
 #if FW_VERSION < 151
