@@ -1084,9 +1084,12 @@ static __inline s32 tcp_reass_lock_try(struct tcpcb *tp) {
 
 /* struct icmp (partial) */
 struct icmp {
-    u8 icmp_type;
-    u8 icmp_code;
-    u16 icmp_cksum;
+    u8 icmp_type;                       /* 0x0 */
+    u8 icmp_code;                       /* 0x1 */
+    u16 icmp_cksum;                     /* 0x2 */
+    u16 icmp_pmvoid;                    /* 0x4 icmp_hun.ih_pmtu.ipm_void */
+    u16 icmp_nextmtu;                   /* 0x6 icmp_hun.ih_pmtu.ipm_nextmtu */
+    struct ip icmp_ip;                  /* 0x8 icmp_dun.id_ip.idi_ip */
 };
 
 /* struct ipq (NetBSD 1.5 ip_var.h, partial) */
@@ -1698,6 +1701,7 @@ extern s32 D_0002E7B0; /* ip_defttl */
 extern struct sockaddr_in D_0002E834 __attribute__((aligned(4)));
 extern struct sockaddr_in D_0002E844 __attribute__((aligned(4)));
 extern struct sockaddr_in D_0002E854 __attribute__((aligned(4)));
+extern u32 D_0002E864[]; /* mtu_table (icmp_mtudisc) */
 extern s32 D_0002E8D8;
 extern s32 D_0002E8E4;
 extern s32 D_0002E8F4;
@@ -1749,6 +1753,7 @@ extern s32 inetctlerrmap[]; /* inetctlerrmap */
 extern struct protosw inetsw[]; /* inetsw */
 extern u16 ip_id_seq; /* ip_id */
 extern s32 ip_mtudisc; /* ip_mtudisc */
+extern struct rttimer_queue *ip_mtudisc_timeout_q;
 extern s32 ip_nhops; /* ip_nhops */
 extern u8 ip_protox[]; /* ip_protox */
 extern struct ip_srcrt_s ip_srcrt; /* ip_srcrt */
@@ -1989,7 +1994,7 @@ s32 func_0002CCF8(void *putc, void *arg, const char *fmt, __builtin_va_list ap);
 void func_0002D420();
 struct socket *getsock(s32 s);
 void icmp_mtudisc_callback_register(void *key);
-void icmp_mtudisc_timeout(struct rtentry *rt);
+void icmp_mtudisc_timeout(struct rtentry *rt, struct rttimer *r);
 void icmp_send(struct mbuf *m, struct mbuf *opts);
 s32 icmp_sysctl(s32 *name, u32 namelen, void *oldp, u32 *oldlenp, void *newp, u32 newlen);
 s32 if_rtdel(struct rtentry *rt, void *arg);
@@ -2086,6 +2091,7 @@ struct radix_node *rn_search_m(void *v_arg, struct radix_node *head, void *m_arg
 s32 rn_walktree(struct radix_node_head *h, s32 (*f)(struct radix_node *, void *), void *w);
 void rt_maskedcopy(struct sockaddr *src, struct sockaddr *dst, struct sockaddr *netmask);
 void rt_missmsg(s32 type, struct rt_addrinfo *rtinfo, s32 flags, s32 error);
+s32 rt_timer_add(struct rtentry *rt, void (*func)(), struct rttimer_queue *queue);
 void rt_timer_remove_all(struct rtentry *rt);
 void rt_timer_timer(void *arg);
 void rt_xaddrs(u8 *cp, u8 *cplim, struct rt_addrinfo *rtinfo);
