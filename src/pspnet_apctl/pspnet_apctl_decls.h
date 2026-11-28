@@ -769,6 +769,8 @@ s32 func_0000741C(s32, s32);
 u8 *func_000074D0(u8 *dst, u8 *src, s32 n);
 void *func_00007504(void *dst, s32 c, s32 n);
 void func_00007594(void *dst, s32 n);
+s32 func_000075BC(const char *a, const char *b);
+char *func_0000763C(const char *s, s32 c);
 char *func_0000766C(const char *s, s32 c);
 char *func_0000774C(char *dst, const char *src, s32 n);
 char *func_000077C8(const char *s, s32 c);
