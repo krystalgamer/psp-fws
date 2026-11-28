@@ -763,6 +763,11 @@ struct rt_addrinfo {
     s32 rti_addrs;                      /* 0x00 */
     struct sockaddr *rti_info[RTAX_MAX]; /* 0x04 */
 };
+typedef __builtin_va_list va_list;
+#define va_start(ap, last) __builtin_va_start((ap), (last))
+#define va_arg(ap, type) __builtin_va_arg((ap), type)
+#define va_end(ap) __builtin_va_end(ap)
+#define M_COPYALL 1000000000
 /* struct rt_msghdr (route.h), route_cb (rtsock.c) */
 #define AF_NS 6
 #define AF_ISO 7

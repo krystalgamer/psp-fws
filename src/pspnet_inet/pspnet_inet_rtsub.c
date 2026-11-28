@@ -675,7 +675,60 @@ void func_0000EE04(struct Unk_func_0000EE04_0 *arg0) {
 }
 #endif
 
-INCLUDE_ASM("nonmatchings/pspnet_inet_rtsub", func_0000EE68);
+void func_0000EE68(struct mbuf *m0, ...)
+{
+	struct rawcb *rp;
+	struct mbuf *m = m0;
+	int sockets = 0;
+	struct socket *last;
+	va_list ap;
+	struct sockproto *proto;
+	struct sockaddr *src, *dst;
+
+	va_start(ap, m0);
+	proto = va_arg(ap, struct sockproto *);
+	src = va_arg(ap, struct sockaddr *);
+	dst = va_arg(ap, struct sockaddr *);
+	va_end(ap);
+
+	last = 0;
+	for (rp = rawcb.lh_first; rp != 0; rp = rp->rcb_list.le_next) {
+		if (rp->rcb_proto.sp_family != proto->sp_family)
+			continue;
+		if (rp->rcb_proto.sp_protocol  &&
+		    rp->rcb_proto.sp_protocol != proto->sp_protocol)
+			continue;
+#define	equal(a1, a2) \
+  (func_0002C978((char *)(a1), (char *)(a2), a1->sa_len) == 0)
+		if (rp->rcb_laddr && !equal(rp->rcb_laddr, dst))
+			continue;
+		if (rp->rcb_faddr && !equal(rp->rcb_faddr, src))
+			continue;
+		if (last) {
+			struct mbuf *n;
+			if ((n = sceNetMCopym(m, 0, (int)M_COPYALL, M_DONTWAIT)) != NULL) {
+				if (sbappendaddr(&last->so_rcv, src,
+				    n, (struct mbuf *)0) == 0)
+					sceNetMFreem(n);
+				else {
+					sorwakeup(last);
+					sockets++;
+				}
+			}
+		}
+		last = rp->rcb_socket;
+	}
+	if (last) {
+		if (sbappendaddr(&last->so_rcv, src,
+		    m, (struct mbuf *)0) == 0)
+			sceNetMFreem(m);
+		else {
+			sorwakeup(last);
+			sockets++;
+		}
+	} else
+		sceNetMFreem(m);
+}
 
 INCLUDE_RODATA("nonmatchings/pspnet_inet_rtsub", D_0002B6FC);
 
