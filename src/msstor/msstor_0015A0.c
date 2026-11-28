@@ -1321,7 +1321,32 @@ INCLUDE_ASM("nonmatchings/msstor_0015A0", func_00006758);
 
 INCLUDE_ASM("nonmatchings/msstor_0015A0", func_00006A68);
 
+#if FW_VERSION < 201
+s32 func_00006AC8(SceIoIob *iob, s32 cmd, void *in, SceSize inlen, void *out, SceSize outlen) {
+    SceMSstorDev *dev;
+
+    if (in == NULL || inlen != 4) {
+        return 0x80220183;
+    }
+    if (out == NULL || outlen < 0x200) {
+        return 0x80220183;
+    }
+    if (*(s32 *)in != 1) {
+        return 0x80220183;
+    }
+    dev = ((SceMSstorIoCtx *)iob->i_private)->dev;
+    if (dev->mediaType2 & 0x40) {
+        return 0x80220183;
+    }
+    if (dev->unk8 < 0 && dev->unkC < 0) {
+        return 0x80220183;
+    }
+    __builtin_memcpy(out, dev->unk4460, 0x200);
+    return 0;
+}
+#else
 INCLUDE_ASM("nonmatchings/msstor_0015A0", func_00006AC8);
+#endif
 
 INCLUDE_ASM("nonmatchings/msstor_0015A0", func_00006BE8);
 
