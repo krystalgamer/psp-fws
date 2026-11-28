@@ -398,7 +398,7 @@ INCLUDE_ASM("nonmatchings/power", func_00000D20);
 
 INCLUDE_RODATA("nonmatchings/power", D_00005D60);
 
-#if FW_VERSION >= 102 && FW_VERSION < 150
+#if FW_VERSION < 150
 INCLUDE_RODATA("nonmatchings/power", g_PowerHandler);
 #endif
 
@@ -412,10 +412,6 @@ INCLUDE_ASM("nonmatchings/power", func_00000F08);
 
 #if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/power", func_00000CF4);
-#endif
-
-#if FW_VERSION == 100
-INCLUDE_RODATA("nonmatchings/power", g_PowerHandler);
 #endif
 
 #if FW_VERSION < 150
@@ -480,7 +476,31 @@ s32 _scePowerOffCommon(s32 arg0) {
 }
 #endif
 
-#if FW_VERSION >= 102 && FW_VERSION < 282
+#if FW_VERSION >= 102 && FW_VERSION < 150
+s32 _scePowerSwInit(void) {
+    g_PowerSwitch.mode = 2;
+    g_PowerSwitch.wakeupCondition = 8;
+    g_PowerSwitch.eventId = 0;
+    g_PowerSwitch.workerThreadId = 0;
+    g_PowerSwitch.powerLockForUserShouldForceWait = 0;
+    g_PowerSwitch.numPowerLocksUser = 0;
+    g_PowerSwitch.numPowerLocksKernel = 0;
+    g_PowerSwitch.curHardwarePowerSwitchRequest = 0;
+    g_PowerSwitch.curSoftwarePowerSwitchRequest = 0;
+    g_PowerSwitch.isRebootPowerLockExist = 0;
+    g_PowerSwitch.resumeCount = 0;
+    g_PowerSwitch.eventId = sceKernelCreateEventFlag("ScePowerSw", 0x201, 0x50000, NULL);
+    g_PowerSwitch.workerThreadId = sceKernelCreateThread("ScePowerMain", _scePowerOffThread, 4, 0x800, 1, NULL);
+    sceKernelStartThread(g_PowerSwitch.workerThreadId, 0, NULL);
+    sceSysconSetPowerSwitchCallback(_scePowerPowerSwCallback, NULL);
+    sceSysconSetHoldSwitchCallback(_scePowerHoldSwCallback, NULL);
+    _scePowerLock(0, 0);
+    sceKernelRegisterPowerHandlers(&g_PowerHandler);
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/power", _scePowerSwInit);
 #endif
 
@@ -1615,7 +1635,24 @@ s32 scePowerGetInnerTemp(float *temp) {
 INCLUDE_ASM("nonmatchings/power", scePowerGetInnerTemp);
 #endif
 
-#if FW_VERSION >= 102 && FW_VERSION < 150
+#if FW_VERSION == 102
+s32 _scePowerBatteryInit(void) {
+    char *name;
+    SceUID thid;
+
+    memset(&g_Battery, 0, sizeof(ScePowerBattery));
+    name = "ScePowerBattery";
+    g_Battery.innerTempStatus = -1;
+    g_Battery.unk20 = -1;
+    g_Battery.batteryEventFlagId = sceKernelCreateEventFlag(name, 1, 0, NULL);
+    thid = sceKernelCreateThread(name, (s32)&_scePowerBatteryThread, 0x40, 0x400, 1, NULL);
+    g_Battery.workerThreadId = thid;
+    sceKernelStartThread(thid, 0, NULL);
+    return 0;
+}
+#endif
+
+#if FW_VERSION == 103
 INCLUDE_ASM("nonmatchings/power", _scePowerBatteryInit);
 #endif
 
