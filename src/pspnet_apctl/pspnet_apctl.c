@@ -6,7 +6,25 @@
 #include "common.h"
 #include "pspnet_apctl_decls.h"
 
+#if FW_VERSION < 250
+s32 sceNetApctlInit(s32 stackSize, s32 initPriority) {
+    s32 ret;
+
+    if (D_00008220 > 0) {
+        ret = 0x80410A01;
+    } else {
+        ret = func_00000B68(stackSize, initPriority);
+        if (ret >= 0) {
+            D_00008220 = 1;
+            return 0;
+        }
+    }
+    func_00000CB0();
+    return ret;
+}
+#else
 INCLUDE_ASM("nonmatchings/pspnet_apctl", sceNetApctlInit);
+#endif
 
 #if FW_VERSION < 250
 s32 sceNetApctlTerm(void) {
@@ -336,13 +354,21 @@ INCLUDE_ASM("nonmatchings/pspnet_apctl", func_000002BC);
 
 #if FW_VERSION < 250
 INCLUDE_ASM("nonmatchings/pspnet_apctl", func_00000A74);
-#endif
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_apctl", func_00000B24);
+s32 func_00000B24(SceNetApctlCtx *ctx) {
+    s32 buf[4];
+    s32 ret;
+
+    buf[0] = 0;
+    ret = sceNetConfig80211LeaveRequest(ctx, buf);
+    sceNetConfigDownInterface(ctx);
+    return ret;
+}
 #endif
 
 #if FW_VERSION >= 250 && FW_VERSION < 282
+INCLUDE_ASM("nonmatchings/pspnet_apctl", func_00000B24);
+
 INCLUDE_ASM("nonmatchings/pspnet_apctl", func_000016AC);
 
 INCLUDE_ASM("nonmatchings/pspnet_apctl", func_00001914);
@@ -366,15 +392,82 @@ INCLUDE_ASM("nonmatchings/pspnet_apctl", func_000020DC);
 INCLUDE_ASM("nonmatchings/pspnet_apctl", func_00002024);
 #endif
 
-#if FW_VERSION < 250
-INCLUDE_ASM("nonmatchings/pspnet_apctl", func_00000B68);
+#if FW_VERSION == 100
+s32 func_00000B68(s32 stackSize, s32 prio) {
+    SceNetApctlCtx *ctx = &D_00011DD4;
+    s32 ret;
+
+    ret = func_00001BB0((s32)ctx);
+    if (ret < 0) {
+        goto end;
+    }
+    D_00008B1C[0].id = 0;
+    D_00008B1C[0].func = NULL;
+    D_00008B1C[0].arg = NULL;
+    D_00008B1C[1].id = 0;
+    D_00008B1C[1].func = NULL;
+    D_00008B1C[1].arg = NULL;
+    func_00007504(ctx, 0, sizeof(SceNetApctlCtx));
+    ctx->sema = -1;
+    ctx->evf = -1;
+    ctx->idle = 1;
+    ctx->thid = -1;
+    ctx->priority = prio;
+    func_0000774C(ctx->ifname, "wlan", 0x10);
+    ret = sceKernelCreateSema("SceNetApctl", 0, 1, 1, NULL);
+    if (ret < 0) {
+        goto end;
+    }
+    ctx->sema = ret;
+    ret = sceKernelCreateEventFlag("SceNetApctl", 0, 0, NULL);
+    if (ret < 0) {
+        goto end;
+    }
+    ctx->evf = ret;
+    ret = sceKernelCreateThread("SceNetApctl", func_00001710, ctx->priority, stackSize, 0, NULL);
+    if (ret < 0) {
+        goto end;
+    }
+    ctx->thid = ret;
+    ret = sceKernelStartThread(ret, 4, &ctx);
+end:
+    return ret;
+}
 #endif
 
 #if FW_VERSION >= 102 && FW_VERSION < 250
+INCLUDE_ASM("nonmatchings/pspnet_apctl", func_00000B68);
+
 INCLUDE_ASM("nonmatchings/pspnet_apctl", func_00000D60);
 #endif
 
-#if FW_VERSION < 250
+#if FW_VERSION < 150
+s32 func_00000CB0(void) {
+    SceNetApctlCtx *ctx = &D_00011DD4;
+
+    if (ctx->idle == 0) {
+        return 0x80410A04;
+    }
+    if (ctx->thid >= 0) {
+        sceKernelTerminateThread(ctx->thid);
+        sceKernelDeleteThread(ctx->thid);
+        sceNetFreeThreadinfo(ctx->thid);
+        ctx->thid = -1;
+    }
+    if (ctx->evf >= 0) {
+        sceKernelDeleteEventFlag(ctx->evf);
+        ctx->evf = -1;
+    }
+    if (ctx->sema >= 0) {
+        sceKernelDeleteSema(ctx->sema);
+        ctx->sema = -1;
+    }
+    func_00001BC0();
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 250
 INCLUDE_ASM("nonmatchings/pspnet_apctl", func_00000CB0);
 #endif
 
@@ -405,9 +498,48 @@ INCLUDE_ASM("nonmatchings/pspnet_apctl", func_00000FE8);
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/pspnet_apctl", func_00000D54);
+s32 func_00000D54(void *func, void *arg, s32 *id) {
+    SceNetApctlCtx *ctx = &D_00011DD4;
+    s32 ret = 0;
+    s32 i;
 
-INCLUDE_ASM("nonmatchings/pspnet_apctl", func_00000E28);
+    sceKernelWaitSema(ctx->sema, 1, NULL);
+    for (i = 0; i < 2; i++) {
+        if (D_00008B1C[i].func == NULL) {
+            break;
+        }
+    }
+    if (i == 2) {
+        ret = 0x80410A81;
+    } else {
+        D_00008B1C[i].func = func;
+        D_00008B1C[i].arg = arg;
+        D_00008B1C[i].id = i;
+        *id = i;
+    }
+    sceKernelSignalSema(ctx->sema, 1);
+    return ret;
+}
+
+s32 func_00000E28(s32 id) {
+    SceNetApctlCtx *ctx = &D_00011DD4;
+    s32 ret;
+
+    sceKernelWaitSema(ctx->sema, 1, NULL);
+    ret = 0;
+    if ((u32)id >= 2) {
+        ret = 0x80410A82;
+        goto end;
+    }
+    if (D_00008B1C[id].func == NULL) {
+        ret = 0x80410A09;
+        goto end;
+    }
+    D_00008B1C[id].func = NULL;
+end:
+    sceKernelSignalSema(ctx->sema, 1);
+    return ret;
+}
 
 INCLUDE_ASM("nonmatchings/pspnet_apctl", func_00000EC8);
 #endif
