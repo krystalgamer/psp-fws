@@ -101,23 +101,31 @@ def main():
             if ct2 == ct:
                 sys.exit(f"{cfg}: cannot find symbol_addrs_path to extend")
             write(cfg, ct2)
-    # source: INCLUDE_ASM for the new entry after each parent entry that covers versions having it
+    # source: an INCLUDE_ASM entry for the new function right after each parent entry, guarded by exactly
+    # the versions (of those the parent entry covers) that have the hidden code
+    import fwmodel as FM
     sd = src_dir(a.ver, a.module)
+    fv = sorted({int(re.match(r"\d+", v)[0]) for v in sharing_versions(a.ver, a.module)})
+    have = {int(re.match(r"\d+", v)[0]): v for v in found}
     for f in sd.glob("*.c"):
-        t = f.read_text()
-        parents = {n for n, _ in found.values()}
+        ents = FM.parse(f.read_text(), fv)
         out, changed = [], False
-        for line in t.splitlines(keepends=True):
-            out.append(line)
-            m = re.match(r'^INCLUDE_ASM\("([^"]+)", (\w+)\);\s*$', line)
-            if m and m[2] in parents:
-                vs = [v for v, (n, _) in found.items() if n == m[2]]
-                names = {vname[v] for v in vs}
-                if len(names) == 1:
-                    out.append(f'INCLUDE_ASM("{m[1]}", {names.pop()});\n')
-                    changed = True
+        for e in ents:
+            out.append(e)
+            if e.kind != "asm":
+                continue
+            vs = [n for n in e.vers if n in have and found[have[n]][0] == e.name]
+            if not vs:
+                continue
+            names = {vname[have[n]] for n in vs}
+            if len(names) != 1:
+                sys.exit(f"{e.name}: the hidden function has different names per version {names}; pass NAME")
+            nm = names.pop()
+            folder = re.match(r'INCLUDE_ASM\("([^"]+)"', e.text)[1]
+            out.append(FM.Entry(frozenset(vs), "asm", nm, f'INCLUDE_ASM("{folder}", {nm});\n'))
+            changed = True
         if changed:
-            write(f, "".join(out))
+            write(f, FM.emit(out, fv))
     r = subprocess.run(["tools/regress.sh", "--shared", f"{a.ver}:{a.module}"], cwd=ROOT, capture_output=True, text=True)
     bad = [l for l in r.stdout.splitlines() if ": OK" not in l]
     if bad:
