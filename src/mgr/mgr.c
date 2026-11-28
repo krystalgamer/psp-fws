@@ -359,7 +359,70 @@ INCLUDE_ASM("nonmatchings/mgr", func_000008A4);
 INCLUDE_ASM("nonmatchings/mgr", func_00000898);
 #endif
 
+#if FW_VERSION < 250
+s32 sceMgrInit(void) {
+    s32 state;
+    s32 ret;
+    s32 intr;
+    u8 seed[16];
+
+    state = sceKernelSuspendDispatchThread();
+    if (D_0000B690.initCount > 0) {
+        D_0000B690.initCount++;
+        sceKernelResumeDispatchThread(state);
+        return 0;
+    }
+    sceMgrReset();
+    func_00001980();
+    if (D_0000B690.sema <= 0) {
+        ret = sceKernelCreateSema("SceMgrDrv", 0x100, 1, 1, NULL);
+        if (ret < 0) {
+            goto fail_resume;
+        }
+        D_0000B690.sema = ret;
+    }
+    if (D_0000B690.evf <= 0) {
+        ret = sceKernelCreateEventFlag("SceMgrDev", 0, 0, NULL);
+        if (ret < 0) {
+            goto fail_resume;
+        }
+        D_0000B690.evf = ret;
+    }
+    ret = func_0000199C();
+    if (ret < 0) {
+        goto fail_resume;
+    }
+    D_0000B690.initCount = 1;
+    intr = sceKernelCpuSuspendIntr();
+    sceKernelRegisterIntrHandler(9, 1, func_00000170, &D_0000B690, NULL);
+    sceKernelEnableIntr(9);
+    sceKernelCpuResumeIntr(intr);
+    func_000023F4();
+    sceKernelResumeDispatchThread(state);
+    ret = func_00001308();
+    if (ret < 0) {
+        Kprintf("no MG-R DKS available %x\n", ret);
+        goto fail;
+    }
+    ret = sceMgrInitSeed(seed);
+    if (ret >= 0) {
+        return 0;
+    }
+    goto fail;
+
+fail_resume:
+    if (state >= 0) {
+        sceKernelResumeDispatchThread(state);
+    }
+fail:
+    func_00000AC4();
+    return ret;
+}
+
+const char D_0000948C[4] = "";
+#else
 INCLUDE_ASM("nonmatchings/mgr", sceMgrInit);
+#endif
 
 #if FW_VERSION >= 250 && FW_VERSION < 340
 s32 sceMgrAesInit(void) {
@@ -391,9 +454,35 @@ s32 sceMgrAesInit(void) {
 }
 #endif
 
-INCLUDE_ASM("nonmatchings/mgr", func_00000AC4);
+void func_00000AC4(void) {
+    sceKernelDisableIntr(9);
+    sceKernelReleaseIntrHandler(9);
+    func_00001980();
+    func_00001A44();
+    sceMgrReset();
+    if (D_0000B690.sema > 0) {
+        sceKernelDeleteSema(D_0000B690.sema);
+        D_0000B690.sema = 0;
+    }
+    if (D_0000B690.evf > 0) {
+        sceKernelDeleteEventFlag(D_0000B690.evf);
+        D_0000B690.evf = 0;
+    }
+    D_0000B690.initCount = 0;
+}
 
-INCLUDE_ASM("nonmatchings/mgr", sceMgrEnd);
+void sceMgrEnd(void) {
+    if (sceMgrLock() < 0) {
+        return;
+    }
+    if (D_0000B690.initCount >= 2) {
+        D_0000B690.initCount--;
+        sceMgrUnLock();
+    } else {
+        sceKernelPowerUnlock(0);
+        func_00000AC4();
+    }
+}
 
 #if FW_VERSION >= 250
 void sceMgrAesEnd(void) {
@@ -401,7 +490,13 @@ void sceMgrAesEnd(void) {
 }
 #endif
 
-INCLUDE_ASM("nonmatchings/mgr", sceMgrGetHwVersion);
+s32 sceMgrGetHwVersion(u32 *version) {
+    if (version == NULL) {
+        return 0x80501003;
+    }
+    *version = (*(volatile u32 *)0xBE100098 << 16) | (*(volatile u32 *)0xBE100030 & 0xFFFF);
+    return 0;
+}
 
 #if FW_VERSION < 340
 s32 func_00000B7C(void) {
@@ -415,7 +510,14 @@ s32 func_00000BF8(void) {
 
 INCLUDE_ASM("nonmatchings/mgr", func_00000C00);
 
-INCLUDE_ASM("nonmatchings/mgr", func_00000DBC);
+s32 func_00000DBC(s32 id, void *buf, s32 size) {
+    s32 args[3];
+
+    args[0] = id;
+    args[1] = (s32)buf;
+    args[2] = size;
+    return sceKernelExtendKernelStack(0x5000, func_00000C00, args);
+}
 
 INCLUDE_ASM("nonmatchings/mgr", func_00000DFC);
 
