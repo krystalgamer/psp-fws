@@ -489,6 +489,20 @@ typedef struct {
     u8 unk1C[0x5C - 0x1C];
 } SceHttpGlobals;
 
+/* 0x40-byte entry keyed by the MD5 of a string (func_00003E34); purpose unknown */
+typedef struct SceHttpMd5Entry {
+    s32 unk00;
+    s32 unk04;              /* 0x04 */
+    u8 unk08[0x10 - 0x08];
+    u8 digest[16];          /* 0x10 sceKernelUtilsMd5Digest(key) */
+    char *key;              /* 0x20 */
+    char *value;            /* 0x24 */
+    s32 unk28;
+    s32 status;             /* 0x2C */
+    u8 unk30[0x40 - 0x30];
+} SceHttpMd5Entry;
+typedef char chk_SceHttpMd5Entry[(sizeof(SceHttpMd5Entry) == 0x40) ? 1 : -1];
+
 struct Unk_func_00005CD0_var_a0 {
     u8 pad0[0x7C];
     void *unk7C;
@@ -547,6 +561,7 @@ extern s32 D_0001AF9C;
 extern s32 D_0001B0CC;
 extern s32 D_0001B0E0;
 
+SceSize BuildHttpHeader(SceHttpReq *req, char *header, unsigned short calc_only);
 int CloneHeader(SceHttpReq *req);
 int CopyHttpHeaderList(_SceHttpReqHeaderList **out, const _SceHttpReqHeaderList *src);
 s32 CreateConnectionWithUrl(s32, s32, s32, s32, s32);
@@ -575,7 +590,7 @@ void __HttpI64toa(char **pStr, const SceUInt64 val);
 void _sceHttpFreeInternal(void *ptr);
 void *_sceHttpMallocInternal(SceSize size);
 void *_sceHttpReallocInternal(void *ptr, SceSize size);
-int _try_build_header(SceUChar8 **out, _SceHttpRequest *request);
+int _try_build_header(SceUChar8 **out, SceHttpReq *request);
 s32 func_000031DC(SceHttpReq *arg0);
 int func_0000325C(SceHttpReq *req);
 s32 func_000032B0(SceHttpReq *req);
@@ -587,6 +602,9 @@ void func_00003C04(void *arg0);
 s32 func_00003C90(void *arg0);
 void func_00003CEC(void *arg0);
 void func_00003D08(void *arg0);
+void func_00003D28(const char *key, SceHttpMd5Entry **out);
+void func_00003E34(const char *key, SceHttpMd5Entry **out);
+void func_00003EEC(SceHttpMd5Entry *entry);
 s32 func_000042D4(void);
 s32 func_000043A0(SceHttpReq *req);
 int func_00004A6C(SceHttpReq *request);
@@ -611,6 +629,7 @@ s32 func_0000649C(s32);
 void func_000064A8(void *arg0, void *arg1, u32 arg2, s32 arg3);
 void func_00006558(void);
 int func_00006658(SceHttpReq *req);
+void func_000073F4(SceHttpMd5Entry *entry, const char *value);
 s32 func_00007C58(void);
 void func_00008360(void *arg0);
 s32 func_00008510(void);
@@ -648,9 +667,10 @@ void func_0000BA84(s32 arg0);
 void func_0000BAF8(void *arg0);
 s32 *func_0000BB14(void);
 u8 *func_0000BB98(u8 *arg0, u8 *arg1, s32 arg2);
+void *func_0000BBCC(void *s, int c, int n);
 int func_0000BC98(const char *s1, const char *s2);
 int func_0000BE38(const char *s);
-u8 *func_0000C0DC(u8 *arg0, u8 *arg1);
+char *func_0000C0DC(char *dst, const char *src);
 s32 func_0000C114(s32, s32, s32);
 s32 func_0000C1F0(s32);
 void func_0000CD48(void);

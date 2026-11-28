@@ -1721,7 +1721,31 @@ INCLUDE_ASM("nonmatchings/libhttp", _try_connect);
 #endif
 
 #if FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/libhttp", _try_build_header);
+int _try_build_header(SceUChar8 **out, SceHttpReq *request) {
+    int ret = 0;
+    int old;
+    SceSize header_size;
+    SceUChar8 *header;
+
+    old = sceKernelSuspendDispatchThread();
+    header_size = BuildHttpHeader(request, NULL, 1);
+    header = _sceHttpMallocInternal(header_size);
+    if (header == NULL) {
+        ret = 0x80431022;
+    } else {
+        func_0000BBCC(header, 0, header_size);
+        BuildHttpHeader(request, (char *)header, 0);
+    }
+    sceKernelResumeDispatchThread(old);
+    if (ret < 0) {
+        if (header != NULL) {
+            _sceHttpFreeInternal(header);
+        }
+    } else {
+        *out = header;
+    }
+    return ret;
+}
 
 INCLUDE_ASM("nonmatchings/libhttp", _try_resolve_hostname);
 #endif
@@ -3987,15 +4011,15 @@ INCLUDE_ASM("nonmatchings/libhttp", func_0000DD2C);
 #endif
 
 #if FW_VERSION < 201
-u8 *func_0000C0DC(u8 *arg0, u8 *arg1) {
+char *func_0000C0DC(char *arg0, const char *arg1) {
     u8 *var_a1;
     u8 *var_a2;
     u8 *var_v0;
     u8 temp_a3;
 
-    var_a1 = arg1;
+    var_a1 = (u8 *)arg1;
     var_v0 = NULL;
-    var_a2 = arg0;
+    var_a2 = (u8 *)arg0;
     if (((arg0 == NULL) | (var_a1 == NULL)) == 0) {
         do {
             temp_a3 = *var_a1;
@@ -4003,9 +4027,9 @@ u8 *func_0000C0DC(u8 *arg0, u8 *arg1) {
             *var_a2 = temp_a3;
             var_a2 += 1;
         } while (temp_a3 != 0);
-        var_v0 = arg0;
+        var_v0 = (u8 *)arg0;
     }
-    return var_v0;
+    return (char *)var_v0;
 }
 
 INCLUDE_ASM("nonmatchings/libhttp", func_0000C114);
