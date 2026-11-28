@@ -15,6 +15,7 @@ options:
   cache_path: tmp/build/152/.splat_cache.libhttp
   symbol_addrs_path:
     - config/152/symbol_addrs.libhttp.txt
+    - config/152/func_starts.libhttp.txt
     - tmp/build/152/prx_syms.libhttp.txt
   reloc_addrs_path: [tmp/build/152/reloc_addrs.libhttp.txt]
   asset_path: tmp/assets/152/libhttp
@@ -53,6 +54,7 @@ segments:
     vram: 0x0
     subsegments:
       - [0x80, c, libhttp]
+      - [0xDE2C, c, libhttp_strtol]
       - { start: 0xEBAC, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0xEE8C, type: prxpad, order: .text }
       - { start: 0xEE90, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
@@ -66,6 +68,7 @@ segments:
       - { start: 0xF280, type: rodata, name: nid, linker_section: .rodata.sceNid }
       - { start: 0xF3F0, type: rodata, name: eh_frame, linker_section: .eh_frame }
       - [0xF450, .rodata, libhttp]
+      - [0xF948, .rodata, libhttp_strtol]
       - { start: 0xFA48, type: prxpad, order: .rodata }
   - name: libhttp_seg1
     type: code

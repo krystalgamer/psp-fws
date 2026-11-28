@@ -4428,10 +4428,6 @@ char *func_0000C0DC(char *arg0, const char *arg1) {
     }
     return (char *)var_v0;
 }
-
-INCLUDE_ASM("nonmatchings/libhttp", func_0000C114);
-
-INCLUDE_ASM("nonmatchings/libhttp", func_0000C2F0);
 #endif
 
 #if FW_VERSION >= 282
@@ -4968,10 +4964,6 @@ INCLUDE_ASM("nonmatchings/libhttp", func_000159BC);
 
 #if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/libhttp", func_00015A10);
-#else
-void func_00015A10(s32 arg0) {
-    func_0000C114(arg0, 0, 0xA);
-}
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
@@ -5002,9 +4994,13 @@ INCLUDE_ASM("nonmatchings/libhttp", func_00015B00);
 INCLUDE_ASM("nonmatchings/libhttp", func_00015BC0);
 #endif
 
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/libhttp", __udivdi3);
+#endif
 
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/libhttp", __umoddi3);
+#endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/libhttp", D_00017414);
@@ -5022,4 +5018,6 @@ INCLUDE_RODATA("nonmatchings/libhttp", D_00017860);
 INCLUDE_RODATA("nonmatchings/libhttp", D_00017960);
 #endif
 
+#if FW_VERSION >= 201
 INCLUDE_RODATA("nonmatchings/libhttp", D_000179D0);
+#endif
