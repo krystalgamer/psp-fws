@@ -1,3 +1,5 @@
+/* compiler[260,352]: 1.9.2 */
+/* cflags[260,352]: -O2 -mext */
 #include "common.h"
 #include "mlnbridge_decls.h"
 

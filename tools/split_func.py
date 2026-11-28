@@ -11,7 +11,9 @@ version that has it gets a `NAME = 0xADDR; // type:func` line in
 config/V/func_starts.MODULE.txt (created and added to the yaml's
 symbol_addrs_path if needed), and the shared source gets an INCLUDE_ASM entry
 for it right after its parent's entry (same version condition). Every version
-is rebuilt; everything is restored on a mismatch.
+is rebuilt; everything is restored on a mismatch or error. An explicit NAME is
+used in every version; without one, the versions sharing a source entry share
+the lowest (or VER's) func_<addr> name. Versions not split yet are split first.
 """
 import argparse
 import re
@@ -67,6 +69,9 @@ def main():
     name = a.name or f"func_{addr:08X}"
     found = {}
     for v in sharing_versions(a.ver, a.module):
+        if v != a.ver and not (ROOT / "tmp/build" / v / f"reloc_addrs.{a.module}.txt").exists():
+            print(f"{v}: not split yet, splitting")
+            subprocess.run(["make", "split", f"VERSION={v}", f"MODULE={a.module}"], cwd=ROOT, capture_output=True)
         mod = AD.Module(v, a.module) if v != a.ver else ref
         for n, (r, e, _) in mod.funcs.items():
             n_words = (e - r) // 4
@@ -86,51 +91,73 @@ def main():
         if p not in backup:
             backup[p] = p.read_text() if p.exists() else None
         p.write_text(t)
-    vname = {v: (name if v == a.ver or not re.fullmatch(r"func_[0-9A-F]{8}", name) else f"func_{x:08X}")
-             for v, (_, x) in found.items()}
-    for v, (n, x) in found.items():
-        fs = ROOT / "config" / v / f"func_starts.{a.module}.txt"
-        t = fs.read_text() if fs.exists() else "// hidden functions split out of their predecessors (tools/split_func.py)\n"
-        if f"0x{x:08X};" not in t:
-            write(fs, t.rstrip("\n") + f"\n{vname[v]} = 0x{x:08X}; // type:func\n")
-        cfg = ROOT / "config" / v / f"{a.module}.yaml"
-        ct = cfg.read_text()
-        rel = f"config/{v}/func_starts.{a.module}.txt"
-        if rel not in ct:
-            ct2 = re.sub(rf"(\n\s*- config/{v}/symbol_addrs\.{a.module}\.txt\n)", rf"\1    - {rel}\n", ct, count=1)
-            if ct2 == ct:
-                sys.exit(f"{cfg}: cannot find symbol_addrs_path to extend")
-            write(cfg, ct2)
-    # source: an INCLUDE_ASM entry for the new function right after each parent entry, guarded by exactly
-    # the versions (of those the parent entry covers) that have the hidden code
+
+    def restore():
+        for p, t in backup.items():
+            p.unlink() if t is None else p.write_text(t)
+
+    # an explicit NAME is used in every version; otherwise each version gets func_<its address>, except
+    # that the versions sharing one source entry must share its name (the lowest version's)
+    vname = {v: (name if a.name or v == a.ver else f"func_{x:08X}") for v, (_, x) in found.items()}
     import fwmodel as FM
     sd = src_dir(a.ver, a.module)
     fv = sorted({int(re.match(r"\d+", v)[0]) for v in sharing_versions(a.ver, a.module)})
     have = {int(re.match(r"\d+", v)[0]): v for v in found}
-    for f in sd.glob("*.c"):
-        ents = FM.parse(f.read_text(), fv)
-        out, changed = [], False
+    parsed = {f: FM.parse(f.read_text(), fv) for f in sorted(sd.glob("*.c"))}
+    groups = []  # (file, entry, versions)
+    for f, ents in parsed.items():
         for e in ents:
-            out.append(e)
             if e.kind != "asm":
                 continue
             vs = [n for n in e.vers if n in have and found[have[n]][0] == e.name]
-            if not vs:
-                continue
-            names = {vname[have[n]] for n in vs}
-            if len(names) != 1:
-                sys.exit(f"{e.name}: the hidden function has different names per version {names}; pass NAME")
-            nm = names.pop()
-            folder = re.match(r'INCLUDE_ASM\("([^"]+)"', e.text)[1]
-            out.append(FM.Entry(frozenset(vs), "asm", nm, f'INCLUDE_ASM("{folder}", {nm});\n'))
-            changed = True
-        if changed:
-            write(f, FM.emit(out, fv))
-    r = subprocess.run(["tools/regress.sh", "--shared", f"{a.ver}:{a.module}"], cwd=ROOT, capture_output=True, text=True)
+            if vs:
+                groups.append((f, e, vs))
+                names = {vname[have[n]] for n in vs}
+                if len(names) != 1:
+                    nm = vname[a.ver] if a.ver in (have[n] for n in vs) else vname[have[min(vs)]]
+                    print(f"{e.name}: one entry for {sorted(have[n] for n in vs)}: naming it {nm} in all of them")
+                    for n in vs:
+                        vname[have[n]] = nm
+    try:
+        for v, (n, x) in found.items():
+            fs = ROOT / "config" / v / f"func_starts.{a.module}.txt"
+            t = fs.read_text() if fs.exists() else "// hidden functions split out of their predecessors (tools/split_func.py)\n"
+            if f"0x{x:08X};" not in t:
+                write(fs, t.rstrip("\n") + f"\n{vname[v]} = 0x{x:08X}; // type:func\n")
+            cfg = ROOT / "config" / v / f"{a.module}.yaml"
+            ct = cfg.read_text()
+            rel = f"config/{v}/func_starts.{a.module}.txt"
+            if rel not in ct:
+                ct2 = re.sub(rf"(\n\s*- config/{v}/symbol_addrs\.{a.module}\.txt\n)", rf"\1    - {rel}\n", ct, count=1)
+                if ct2 == ct:
+                    raise RuntimeError(f"{cfg}: cannot find symbol_addrs_path to extend")
+                write(cfg, ct2)
+        # source: an INCLUDE_ASM entry for the new function right after each parent entry, guarded by exactly
+        # the versions (of those the parent entry covers) that have the hidden code
+        for f, ents in parsed.items():
+            out, changed = [], False
+            for e in ents:
+                out.append(e)
+                g = next((g for g in groups if g[0] == f and g[1] is e), None)
+                if g is None:
+                    continue
+                nm = vname[have[g[2][0]]]
+                folder = re.match(r'INCLUDE_ASM\("([^"]+)"', e.text)[1]
+                out.append(FM.Entry(frozenset(g[2]), "asm", nm, f'INCLUDE_ASM("{folder}", {nm});\n'))
+                changed = True
+            if changed:
+                write(f, FM.emit(out, fv))
+    except BaseException as ex:
+        restore()
+        sys.exit(f"{name}: FAILED ({ex}), restored")
+    try:
+        r = subprocess.run(["tools/regress.sh", "--shared", f"{a.ver}:{a.module}"], cwd=ROOT, capture_output=True, text=True)
+    except KeyboardInterrupt:
+        restore()
+        sys.exit(f"{name}: interrupted, restored (re-run the shared regress)")
     bad = [l for l in r.stdout.splitlines() if ": OK" not in l]
     if bad:
-        for p, t in backup.items():
-            p.unlink() if t is None else p.write_text(t)
+        restore()
         subprocess.run(["tools/regress.sh", "--shared", f"{a.ver}:{a.module}"], cwd=ROOT, capture_output=True)
         sys.exit(f"{name}: FAILED, restored: {bad[:3]}")
     print(f"{name}: OK, split in {sorted(found)}")

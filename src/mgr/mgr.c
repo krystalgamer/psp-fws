@@ -1,3 +1,5 @@
+/* compiler[340]: 1.9.2 */
+/* cflags[340]: -Os -mext */
 /* cflags: -Os */
 #include "common.h"
 #include "mgr_decls.h"

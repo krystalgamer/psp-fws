@@ -1,3 +1,7 @@
+/* compiler[282,303,311,340]: 1.9.2 */
+/* cflags[282,303,311,340]: -O2 */
+/* compiler[271]: 1.9.2 */
+/* cflags[271]: -O2 -mext */
 /* cflags: -O2 */
 #include "common.h"
 #include "netfront_decls.h"

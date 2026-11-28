@@ -334,6 +334,14 @@ def main():
                 r"target label (\w+) assumed inside (\w+);[^\[\n]*(?:\[\w+\+0x([0-9A-F]+)\])?", out)
                 if int(o or "0", 16) == 0 and t != m and AUTO.fullmatch(t)]
             prs = [(t, m) for t, m in dict.fromkeys(prs) if t != m]
+            for tb, toff, mine in dict.fromkeys(re.findall(r"reloc \d+: target (\w+)\+0x([0-9A-F]+), mine (\w+)", out)):
+                print(f"  {name}: {mine} is {tb}+0x{toff} in {a.dst_ver} (a field of a sized symbol): "
+                      f"write it as a member of {tb}, not substituted")
+            for t, m in prs:
+                if re.fullmatch(r"D_[0-9A-F]{8}", t) and (m in sstore["vars"] or m.startswith("xp_")):
+                    print(f"  {name}: adopting the address label {t} for {m}; if it is a struct member, give the "
+                          f"containing global a `// size:` in config/{a.dst_ver}/symbol_addrs.{a.dst_mod}.txt and "
+                          f"re-split (references become sym+offset)")
             if "RESULT: MATCH" in result and not prs:
                 break
             if not prs:
@@ -361,6 +369,9 @@ def main():
         for k, t in used_types.items():
             store.setdefault("types", {})[f"x_{a.src_mod}_{k}"] = t
         for n, (kind, line) in new_decls.items():
+            if "#if" in store[kind].get(n, ""):  # per-version declaration: keep it for the other versions
+                print(f"{n}: per-version declaration in the decls kept")
+                continue
             other = "vars" if kind == "funcs" else "funcs"
             store[other].pop(n, None)
             store[kind][n] = line
@@ -385,7 +396,7 @@ def main():
                 hit[0].text = body
                 f.write_text(FM.emit(ents, fv))
                 sig = re.match(r"^(?!static)([^\n;#{]*?\b" + re.escape(dname) + r"\([^;{}]*\))\s*\{", body, re.M)
-                if sig:
+                if sig and "#if" not in store["funcs"].get(dname, ""):
                     store["funcs"][dname] = " ".join(sig[1].split()) + ";"
                 print(f"{dname}: C replaced")
                 break

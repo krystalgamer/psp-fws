@@ -258,7 +258,7 @@ s32 sceAtaAhbSetUDMATiming();
 s32 sceAtaAhbTerm(void);
 s32 sceAtaBufferSelectSemaphore(u32 *stat);
 s32 sceAtaCheckDeviceReady(SceAtaDrive *drive);
-void sceAtaClearDriveStat(s32 arg0, s32 arg1);
+void sceAtaClearDriveStat(s32 arg0, M2C_UNK arg1);
 void sceAtaClearIntrStateFlag(s32 arg0);
 s32 sceAtaDisableClkIo(u32 flags);
 void sceAtaDisplayReqSense(void);
