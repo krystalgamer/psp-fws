@@ -289,7 +289,6 @@ def apply(mod, classes, vers, no_build):
             declared[m[1]] = (k, m[2])
     Vs = {v: Version(v, mod) for v in vers}
     loaders = {v: Vs[v].vptr_loaders() for v in vers}
-    class_end = {}  # class -> end of its last field
     keep = {q: q.read_text() for q in sorted(sd.iterdir()) if q.is_file()}
     total = 0
     if classes == ["all"]:
@@ -304,7 +303,27 @@ def apply(mod, classes, vers, no_build):
             print(f"{cls}: not a class of the decls store")
             continue
         key, base = declared[cls]
-        base_end = class_end.get(base, 4) if base else 4
+        # generated declarations only (hand-written classes have members of their own), bases too;
+        # a base's fields end where this class's may start
+        chain, c, ok = [], cls, True
+        while c:
+            if c not in declared:
+                ok = False  # e.g. a paf.h class
+                break
+            t = types[declared[c][0]]
+            if "is data (vptr = label" not in t and "dtor still asm/m2c" not in t:
+                ok = False
+                break
+            chain.append(c)
+            c = declared[c][1]
+        if not ok:
+            print(f"{cls}: hand-written class or base, left alone")
+            continue
+        base_end = 4
+        for b in chain[1:]:
+            for o, (ty, sz, d) in struct_fields(types[declared[b][0]]).items():
+                if sz:
+                    base_end = max(base_end, o + sz)
         # candidate C methods: (file, entry index, struct name, fields used)
         cands = []
         for v in vers:
@@ -351,7 +370,6 @@ def apply(mod, classes, vers, no_build):
                 body.append(f"    u8 pad{pos:X}[0x{o - pos:X}];")
             body.append(f"    {d}")
             pos = o + sz
-        class_end[cls] = pos
         t = types[key]
         t = re.sub(r"\n    (?:u8 pad\w+\[[^\]]*\];|[^\n]*\bunk[0-9A-F]+(?:\[[^\]]*\])?;)(?=\n)", "", t)  # earlier fields
         t = re.sub(rf"(class {cls}\b[^{{]*\{{\npublic:\n)", lambda m: m[1] + "\n".join(body) + "\n", t, count=1)
