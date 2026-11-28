@@ -546,7 +546,12 @@ char *inet_ntoa(struct in_addr ina) {
 #endif
 
 #if FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/pspnet_inet_if_loop", func_000128AC);
+char *func_000128AC(struct in_addr ina) {
+    ina.s_addr = __builtin_allegrex_wsbw(ina.s_addr);
+    sceNetSprintf(D_0002C560, "%d.%d.%d.%d", ina.s_addr >> 24, (ina.s_addr >> 16) & 0xff,
+                  (ina.s_addr >> 8) & 0xff, ina.s_addr & 0xff);
+    return D_0002C560;
+}
 #endif
 
 void in_setmaxmtu(void) {
