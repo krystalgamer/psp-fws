@@ -1,4 +1,4 @@
-/* cflags[100,102,103]: -Os */
+/* cflags[100,102,103,150,152]: -Os */
 #include "common.h"
 #include "msstor_decls.h"
 
@@ -6,16 +6,16 @@
 INCLUDE_ASM("nonmatchings/msstor_0015A0", func_000015A0);
 
 INCLUDE_ASM("nonmatchings/msstor_0015A0", func_00001660);
-#endif
-
-#if FW_VERSION < 150
+#else
 s32 func_000016E4(SceMSstorDev *dev, s32 on) {
     if (on != 0) {
         return sceMScmSetHCTransferMode(dev->hc, 2, 2, 3);
     }
     return sceMScmSetHCTransferMode(dev->hc, 1, 1, 2);
 }
-#else
+#endif
+
+#if FW_VERSION == 201
 INCLUDE_ASM("nonmatchings/msstor_0015A0", func_000016E4);
 #endif
 
@@ -260,7 +260,7 @@ INCLUDE_ASM("nonmatchings/msstor_0015A0", func_0000432C);
 
 INCLUDE_ASM("nonmatchings/msstor_0015A0", func_00004360);
 
-#if FW_VERSION < 150
+#if FW_VERSION < 201
 s32 func_00004664(SceMSstorDev *dev) {
     SceUID fpl;
     s32 ret;
@@ -580,7 +580,21 @@ s32 func_000053B4(SceIoIob *iob, void *buf, SceSize size) {
     }
     return func_00004B2C(iob, buf, size, 0, func_0000017C);
 }
-#else
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 201
+s32 func_000053B4(SceIoIob *iob, void *buf, SceSize size) {
+    if (iob == NULL) {
+        return 0x80020328;
+    }
+    if (func_00005684(iob, iob->i_fpos + size) == 0) {
+        return 0x80220183;
+    }
+    return func_00004B2C(iob, buf, size, 0, func_0000017C);
+}
+#endif
+
+#if FW_VERSION == 201
 INCLUDE_ASM("nonmatchings/msstor_0015A0", func_000053B4);
 #endif
 
@@ -596,7 +610,15 @@ s32 func_00004E70(SceIoIob *iob, const void *buf, SceSize size) {
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/msstor_0015A0", func_00004E70);
+s32 func_00004E70(SceIoIob *iob, const void *buf, SceSize size) {
+    if (iob == NULL) {
+        return 0x80020328;
+    }
+    if (func_00005684(iob, iob->i_fpos + size) == 0) {
+        return 0x80220183;
+    }
+    return func_00004B2C(iob, (void *)buf, size, 1, func_00000220);
+}
 #endif
 
 #if FW_VERSION < 201
