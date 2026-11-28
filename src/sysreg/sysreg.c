@@ -47,7 +47,42 @@ s32 func_000000C4(void) {
     return 0;
 }
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregDoTimerEvent);
+s32 sceSysregDoTimerEvent(u32 n, u32 mode) {
+    s32 intr;
+    u32 v;
+    s32 ret;
+
+    ret = 0x80000102;
+    if (n >= 2) {
+        goto end;
+    }
+    ret = 0x80000107;
+    if (mode >= 4) {
+        goto end;
+    }
+    intr = sceKernelCpuSuspendIntr();
+    v = *(volatile u32 *)0xBC10003C;
+    switch (mode) {
+    case 0:
+        *(volatile u32 *)0xBC10003C = v & ~(1 << n);
+        break;
+    case 1:
+        *(volatile u32 *)0xBC10003C = v | (1 << n);
+        break;
+    case 2:
+        *(volatile u32 *)0xBC10003C = v | (1 << n);
+        *(volatile u32 *)0xBC10003C = v & ~(1 << n);
+        break;
+    case 3:
+        *(volatile u32 *)0xBC10003C = v & ~(1 << n);
+        *(volatile u32 *)0xBC10003C = v | (1 << n);
+        break;
+    }
+    sceKernelCpuResumeIntrWithSync(intr);
+    ret = 0;
+end:
+    return ret;
+}
 
 #if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregSetAwEdramSize);
@@ -304,7 +339,22 @@ INCLUDE_ASM("nonmatchings/sysreg", sceSysregPllUpdateFrequency);
 #endif
 
 #if FW_VERSION < 271
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregPllSetOutSelect);
+s32 sceSysregPllSetOutSelect(s32 sel) {
+    s32 intr;
+    u32 v;
+    s32 ret;
+    ret = 0x800001FE;
+    if (sel < 0 || (sel & 7) >= 6) {
+        return ret;
+    }
+    intr = sceKernelCpuSuspendIntr();
+    v = *(volatile u32 *)0xBC100068;
+    *(volatile u32 *)0xBC100068 = (v & ~0xF) | sel | 0x80;
+    ret = v & 0xF;
+    sceSysregPllUpdateFrequency();
+    sceKernelCpuResumeIntr(intr);
+    return ret;
+}
 #endif
 
 #if FW_VERSION < 201
@@ -841,197 +891,354 @@ INCLUDE_ASM("nonmatchings/sysreg", sceSysregUsbClkEnable);
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregUsbClkDisable);
 #else
 INCLUDE_ASM("nonmatchings/sysreg", func_00001104);
+
+s32 sceSysregMsifClkSelect(u32 n, u32 sel) {
+    s32 intr;
+    u32 v;
+    s32 ret;
+    u32 sh;
+
+    ret = 0x80000102;
+    if (n >= 2) {
+        return ret;
+    }
+    ret = 0x800001FE;
+    if (sel >= 4) {
+        goto end;
+    }
+    intr = sceKernelCpuSuspendIntr();
+    sh = n * 2;
+    v = *(volatile u32 *)0xBC10005C;
+    ret = (v >> sh) & 3;
+    *(volatile u32 *)0xBC10005C = (v & ~(3 << sh)) | (sel << sh);
+    sceKernelCpuResumeIntr(intr);
+    return ret;
+end:
+    return ret;
+}
 #endif
 
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregMsifClkSelect);
+#endif
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregMsifDelaySelect);
+s32 sceSysregMsifDelaySelect(u32 n, u32 sel) {
+    s32 intr;
+    u32 v;
+    s32 ret;
+    u32 sh;
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregApbTimerClkSelect);
+    ret = 0x80000102;
+    if (n >= 2) {
+        return ret;
+    }
+    ret = 0x800001FE;
+    if (sel >= 8) {
+        goto end;
+    }
+    intr = sceKernelCpuSuspendIntr();
+    sh = n * 4;
+    v = *(volatile u32 *)0xBC000050;
+    ret = (v >> sh) & 7;
+    *(volatile u32 *)0xBC000050 = (v & ~(7 << sh)) | (sel << sh);
+    sceKernelCpuResumeIntr(intr);
+    return ret;
+end:
+    return ret;
+}
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregAudioClkSelect);
+s32 sceSysregApbTimerClkSelect(u32 n, u32 sel) {
+    s32 intr;
+    u32 v;
+    s32 ret;
+    u32 sh;
+
+    ret = 0x80000102;
+    if (n >= 4) {
+        return ret;
+    }
+    ret = 0x800001FE;
+    if (sel >= 8) {
+        goto end;
+    }
+    intr = sceKernelCpuSuspendIntr();
+    sh = n * 4;
+    v = *(volatile u32 *)0xBC100060;
+    ret = (v >> sh) & 7;
+    *(volatile u32 *)0xBC100060 = (v & ~(7 << sh)) | (sel << sh);
+    sceKernelCpuResumeIntr(intr);
+    return ret;
+end:
+    return ret;
+}
+
+s32 sceSysregAudioClkSelect(u32 n, u32 sel) {
+    s32 intr;
+    u32 v;
+    s32 ret;
+    u32 sh;
+
+    ret = 0x80000102;
+    if (n >= 2) {
+        return ret;
+    }
+    ret = 0x800001FE;
+    if (sel >= 2) {
+        goto end;
+    }
+    intr = sceKernelCpuSuspendIntr();
+    sh = n + 16;
+    v = *(volatile u32 *)0xBC100060;
+    ret = (v >> sh) & 1;
+    *(volatile u32 *)0xBC100060 = (v & ~(1 << sh)) | (sel << sh);
+    sceKernelCpuResumeIntr(intr);
+    return ret;
+end:
+    return ret;
+}
 
 #if FW_VERSION < 271
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregAudioClkoutClkSelect);
+s32 sceSysregAudioClkoutClkSelect(u32 sel) {
+    s32 intr;
+    u32 v;
+    s32 ret;
+
+    ret = 0x800001FE;
+    if (sel >= 2) {
+        goto end;
+    }
+    intr = sceKernelCpuSuspendIntr();
+    v = *(volatile u32 *)0xBC100060;
+    ret = __builtin_allegrex_ext(v, 18, 1);
+    *(volatile u32 *)0xBC100060 = (v & ~0x40000) | (sel << 18);
+    sceKernelCpuResumeIntr(intr);
+    return ret;
+end:
+    return ret;
+}
 #endif
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregSpiClkSelect);
+s32 sceSysregSpiClkSelect(u32 n, u32 sel) {
+    s32 intr;
+    u32 v;
+    s32 ret;
+    u32 sh;
+
+    ret = 0x80000102;
+    if (n >= 6) {
+        return ret;
+    }
+    ret = 0x800001FE;
+    if (sel >= 8) {
+        goto end;
+    }
+    intr = sceKernelCpuSuspendIntr();
+    sh = n * 4;
+    v = *(volatile u32 *)0xBC100064;
+    ret = (v >> sh) & 7;
+    *(volatile u32 *)0xBC100064 = (v & ~(7 << sh)) | (sel << sh);
+    sceKernelCpuResumeIntr(intr);
+    return ret;
+end:
+    return ret;
+}
 
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregLcdcClkSelect);
 
+#if FW_VERSION < 271
+s32 sceSysregAtaClkSelect(u32 sel) {
+    s32 intr;
+    u32 v;
+    s32 ret;
+
+    ret = 0x800001FE;
+    if (sel >= 3) {
+        goto end;
+    }
+    intr = sceKernelCpuSuspendIntr();
+    v = *(volatile u32 *)0xBC10005C;
+    ret = __builtin_allegrex_ext(v, 4, 2);
+    *(volatile u32 *)0xBC10005C = (v & ~0x30) | (sel << 4);
+    sceKernelCpuResumeIntr(intr);
+    return ret;
+end:
+    return ret;
+}
+#else
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregAtaClkSelect);
 
-#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregAtahddClkSelect);
 
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregAudioClkoutClkSelect);
-#else
+#endif
+
+#if FW_VERSION < 271
 s32 sceSysregEmcsmIoEnable(void) {
     return func_00001AF8(0x2, 1);
 }
+#else
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregEmcsmIoEnable);
 #endif
 
-#if FW_VERSION >= 271
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregEmcsmIoEnable);
-#else
+#if FW_VERSION < 271
 s32 sceSysregEmcsmIoDisable(void) {
     return func_00001AF8(0x2, 0);
 }
+#else
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregEmcsmIoDisable);
 #endif
 
-#if FW_VERSION >= 271
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregEmcsmIoDisable);
-#else
+#if FW_VERSION < 271
 s32 sceSysregUsbIoEnable(void) {
     return func_00001AF8(0x4, 1);
 }
+#else
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregUsbIoEnable);
 #endif
 
-#if FW_VERSION >= 271
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregUsbIoEnable);
-#else
+#if FW_VERSION < 271
 s32 sceSysregUsbIoDisable(void) {
     return func_00001AF8(0x4, 0);
 }
+#else
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregUsbIoDisable);
 #endif
 
-#if FW_VERSION >= 271
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregUsbIoDisable);
-#else
+#if FW_VERSION < 271
 s32 sceSysregAtaIoEnable(void) {
     return func_00001AF8(0x8, 1);
 }
+#else
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregAtaIoEnable);
 #endif
 
-#if FW_VERSION >= 271
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregAtaIoEnable);
-#else
+#if FW_VERSION < 271
 s32 sceSysregAtaIoDisable(void) {
     return func_00001AF8(0x8, 0);
 }
+#else
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregAtaIoDisable);
 #endif
 
-#if FW_VERSION >= 271
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregAtaIoDisable);
-#else
+#if FW_VERSION < 271
 s32 sceSysregMsifIoEnable(u32 n) {
     if (n < 2) {
         return func_00001AF8(0x10 << n, 1);
     }
     return 0x80000102;
 }
+#else
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregMsifIoEnable);
 #endif
 
-#if FW_VERSION >= 271
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregMsifIoEnable);
-#else
+#if FW_VERSION < 271
 s32 sceSysregMsifIoDisable(u32 n) {
     if (n < 2) {
         return func_00001AF8(0x10 << n, 0);
     }
     return 0x80000102;
 }
+#else
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregMsifIoDisable);
 #endif
 
-#if FW_VERSION >= 271
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregMsifIoDisable);
-#else
+#if FW_VERSION < 271
 s32 sceSysregLcdcIoEnable(void) {
     return func_00001AF8(0x40, 1);
 }
+#else
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregLcdcIoEnable);
 #endif
 
-#if FW_VERSION >= 271
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregLcdcIoEnable);
-#else
+#if FW_VERSION < 271
 s32 sceSysregLcdcIoDisable(void) {
     return func_00001AF8(0x40, 0);
 }
+#else
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregLcdcIoDisable);
 #endif
 
-#if FW_VERSION >= 271
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregLcdcIoDisable);
-#else
+#if FW_VERSION < 271
 s32 sceSysregAudioIoEnable(u32 n) {
     if (n < 2) {
         return func_00001AF8(0x80 << n, 1);
     }
     return 0x80000102;
 }
+#else
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregAudioIoEnable);
 #endif
 
-#if FW_VERSION >= 271
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregAudioIoEnable);
-#else
+#if FW_VERSION < 271
 s32 sceSysregAudioIoDisable(u32 n) {
     if (n < 2) {
         return func_00001AF8(0x80 << n, 0);
     }
     return 0x80000102;
 }
+#else
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregAudioIoDisable);
 #endif
 
-#if FW_VERSION >= 271
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregAudioIoDisable);
-#else
+#if FW_VERSION < 271
 s32 sceSysregIicIoEnable(void) {
     return func_00001AF8(0x200, 1);
 }
+#else
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregIicIoEnable);
 #endif
 
-#if FW_VERSION >= 271
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregIicIoEnable);
-#else
+#if FW_VERSION < 271
 s32 sceSysregIicIoDisable(void) {
     return func_00001AF8(0x200, 0);
 }
+#else
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregIicIoDisable);
 #endif
 
-#if FW_VERSION >= 271
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregIicIoDisable);
-#else
+#if FW_VERSION < 271
 s32 sceSysregSircsIoEnable(void) {
     return func_00001AF8(0x400, 1);
 }
+#else
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregSircsIoEnable);
 #endif
 
-#if FW_VERSION >= 271
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregSircsIoEnable);
-#else
+#if FW_VERSION < 271
 s32 sceSysregSircsIoDisable(void) {
     return func_00001AF8(0x400, 0);
 }
+#else
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregSircsIoDisable);
 #endif
 
-#if FW_VERSION >= 271
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregSircsIoDisable);
-#else
+#if FW_VERSION < 271
 s32 sceSysregAudioClkoutIoEnable(void) {
     return func_00001AF8(0x800, 1);
 }
+#else
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregAudioClkoutIoEnable);
 #endif
 
-#if FW_VERSION >= 271
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregAudioClkoutIoEnable);
-#else
+#if FW_VERSION < 271
 s32 sceSysregAudioClkoutIoDisable(void) {
     return func_00001AF8(0x800, 0);
 }
-#endif
-
-#if FW_VERSION >= 271
+#else
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregAudioClkoutIoDisable);
 
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregKeyIoEnable);
-#else
+#endif
+
+#if FW_VERSION < 271
 s32 sceSysregKeyIoEnable(void) {
     return 0x80000004;
 }
+#else
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregKeyIoDisable);
 #endif
 
-#if FW_VERSION >= 271
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregKeyIoDisable);
-#else
+#if FW_VERSION < 271
 s32 sceSysregKeyIoDisable(void) {
     return 0x80000004;
 }
@@ -1039,77 +1246,77 @@ s32 sceSysregKeyIoDisable(void) {
 s32 sceSysregPwmIoEnable(void) {
     return func_00001AF8(0x2000, 1);
 }
+#else
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregPwmIoEnable);
 #endif
 
-#if FW_VERSION >= 271
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregPwmIoEnable);
-#else
+#if FW_VERSION < 271
 s32 sceSysregPwmIoDisable(void) {
     return func_00001AF8(0x2000, 0);
 }
-#endif
-
-#if FW_VERSION >= 271
+#else
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregPwmIoDisable);
 
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregAtahddIoEnable);
 
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregAtahddIoDisable);
-#else
+#endif
+
+#if FW_VERSION < 271
 s32 sceSysregUartIoEnable(u32 n) {
     if (n < 6) {
         return func_00001AF8(0x10000 << n, 1);
     }
     return 0x80000102;
 }
+#else
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregUartIoEnable);
 #endif
 
-#if FW_VERSION >= 271
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregUartIoEnable);
-#else
+#if FW_VERSION < 271
 s32 sceSysregUartIoDisable(u32 n) {
     if (n < 6) {
         return func_00001AF8(0x10000 << n, 0);
     }
     return 0x80000102;
 }
+#else
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregUartIoDisable);
 #endif
 
-#if FW_VERSION >= 271
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregUartIoDisable);
-#else
+#if FW_VERSION < 271
 s32 sceSysregSpiIoEnable(u32 n) {
     if (n < 6) {
         return func_00001AF8(0x1000000 << n, 1);
     }
     return 0x80000102;
 }
+#else
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregSpiIoEnable);
 #endif
 
-#if FW_VERSION >= 271
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregSpiIoEnable);
-#else
+#if FW_VERSION < 271
 s32 sceSysregSpiIoDisable(u32 n) {
     if (n < 6) {
         return func_00001AF8(0x1000000 << n, 0);
     }
     return 0x80000102;
 }
-#endif
-
-#if FW_VERSION >= 271
+#else
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregSpiIoDisable);
 
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregGpioIoEnable);
-#else
+#endif
+
+#if FW_VERSION < 271
 void sceSysregGpioIoEnable(s32 arg0) {
     func_00001A68(arg0, 1);
 }
+#else
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregGpioIoDisable);
 #endif
 
-#if FW_VERSION >= 271
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregGpioIoDisable);
-#else
+#if FW_VERSION < 271
 void sceSysregGpioIoDisable(s32 arg0) {
     func_00001A68(arg0, 0);
 }
@@ -1124,22 +1331,22 @@ s32 sceSysreg_driver_55B18B84(u32 n) {
     }
     return 0x80000102;
 }
+#else
+INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_55B18B84);
 #endif
 
-#if FW_VERSION >= 271
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_55B18B84);
-#else
+#if FW_VERSION < 271
 s32 sceSysreg_driver_2112E686(u32 n) {
     if (n < 2) {
         return func_00001BF4(1 << (n * 4), 1);
     }
     return 0x80000102;
 }
+#else
+INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_2112E686);
 #endif
 
-#if FW_VERSION >= 271
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_2112E686);
-#else
+#if FW_VERSION < 271
 INCLUDE_ASM("nonmatchings/sysreg", func_00001BF4);
 
 s32 sceSysreg_driver_7B9E9A53(u32 n) {
@@ -1148,36 +1355,34 @@ s32 sceSysreg_driver_7B9E9A53(u32 n) {
     }
     return 0x80000102;
 }
+#else
+INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_7B9E9A53);
 #endif
 
-#if FW_VERSION >= 271
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_7B9E9A53);
-#else
+#if FW_VERSION < 271
 s32 sceSysreg_driver_7BDF0556(u32 n) {
     if (n < 2) {
         return func_00001BF4(2 << (n * 4), 1);
     }
     return 0x80000102;
 }
+#else
+INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_7BDF0556);
 #endif
 
-#if FW_VERSION >= 271
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_7BDF0556);
-#else
+#if FW_VERSION < 271
 s32 sceSysreg_driver_8D0FED1E(void) {
     return func_00001BF4(0x100, 1);
 }
+#else
+INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_8D0FED1E);
 #endif
 
-#if FW_VERSION >= 271
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_8D0FED1E);
-#else
+#if FW_VERSION < 271
 s32 sceSysreg_driver_A46E9CA8(void) {
     return func_00001BF4(0x100, 0);
 }
-#endif
-
-#if FW_VERSION >= 271
+#else
 INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_A46E9CA8);
 
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregUsbGetConnectStatus);
@@ -1189,31 +1394,52 @@ INCLUDE_ASM("nonmatchings/sysreg", sceSysregUsbAcquireIntr);
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregUsbhostQueryIntr);
 
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregUsbhostAcquireIntr);
-#else
+#endif
+
+#if FW_VERSION < 271
 s32 sceSysregMsifGetConnectStatus(u32 n) {
     if (n < 2) {
         return (*(volatile u32 *)0xBC100080 >> (n * 8 + 8)) & 1;
     }
     return 0x80000102;
 }
+#else
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregMsifGetConnectStatus);
 #endif
 
-#if FW_VERSION >= 271
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregMsifGetConnectStatus);
-#else
+#if FW_VERSION < 271
 s32 sceSysregMsifQueryConnectIntr(u32 n) {
     if (n < 2) {
         return (*(volatile u32 *)0xBC100080 >> (n * 8 + 9)) & 3;
     }
     return 0x80000102;
 }
-#endif
-
-#if FW_VERSION >= 271
+#else
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregMsifQueryConnectIntr);
 #endif
 
+#if FW_VERSION < 271
+s32 sceSysregMsifAcquireConnectIntr(u32 n, s32 mask) {
+    s32 intr;
+    s32 ret;
+    u32 sh;
+
+    ret = 0x80000102;
+    if (n >= 2) {
+        goto end;
+    }
+    intr = sceKernelCpuSuspendIntr();
+    sh = n * 8 + 9;
+    ret = (*(volatile u32 *)0xBC100080 >> sh) & 3;
+    *(volatile u32 *)0xBC100080 = (mask & ret) << sh;
+    sceKernelCpuResumeIntrWithSync(intr);
+    return ret;
+end:
+    return ret;
+}
+#else
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregMsifAcquireConnectIntr);
+#endif
 
 #if FW_VERSION < 271
 s32 sceSysregUsbGetConnectStatus(void) {
