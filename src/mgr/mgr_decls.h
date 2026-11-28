@@ -17,11 +17,6 @@ struct D_0000B050_s {
     u8 unk3;
 };
 
-struct D_0000B708_s {
-    s32 unk0;
-    s32 unk4;
-};
-
 typedef struct {
     SceUID sema;
     SceUID evf;
@@ -31,6 +26,15 @@ typedef struct {
     void *cbArg;
 } MgrCtrl;
 typedef char chk_MgrCtrl[(sizeof(MgrCtrl) == 0x18) ? 1 : -1];
+
+typedef struct {
+    SceUID sema;
+    SceUID evf;
+} MgrIb2Ctrl;
+
+typedef struct {
+    u32 w[4];
+} MgrId16;
 
 typedef struct {
     u32 w0;
@@ -52,11 +56,14 @@ struct Unk_func_000018F4_temp_a4 {
 extern s32 D_0000955C;
 extern s32 D_00009C0C;
 extern u32 D_00009C10;
+extern u32 D_00009C14;
+extern u32 D_00009C18;
 extern s32 D_00009C38;
 extern s32 D_00009C40;
 extern s32 D_00009C48;
 extern M2C_UNK D_00009C58;
-extern M2C_UNK D_00009C68;
+extern MgrIb2Ctrl D_00009C68;
+extern const u64 D_0000AE68;
 extern s32 D_0000AEE0;
 extern M2C_UNK D_0000AFA0;
 extern M2C_UNK D_0000AFCC;
@@ -74,7 +81,7 @@ extern M2C_UNK D_0000B6D8;
 extern M2C_UNK D_0000B6E0;
 extern M2C_UNK D_0000B6E8;
 extern M2C_UNK D_0000B6F8;
-extern struct D_0000B708_s D_0000B708;
+extern MgrIb2Ctrl D_0000B708;
 
 s32 Kprintf(const char *fmt, ...);
 void func_0000011C(void);
@@ -111,6 +118,9 @@ s32 func_00000B7C(void);
 s32 func_00000BF8(void);
 s32 func_00000C00(s32 *args);
 s32 func_00000DBC(s32 id, void *buf, s32 size);
+s32 func_00000EE8(s32 id, void *mac);
+s32 func_00000FE8(void);
+s32 func_00001308(void);
 M2C_UNK *func_00001394(void);
 s32 func_000013B8(s32 arg0, s32 arg1);
 s32 *func_000013C8(void);
@@ -124,9 +134,12 @@ s32 func_00001868(s32 arg0, s32 arg1, s32 arg2, s32 arg3, void *arg4, s32 arg5);
 s32 func_000018F4(s32 arg0, s32 arg1, s32 arg2, s32 arg3, struct Unk_func_000018F4_4 *arg4, s32 arg5);
 void func_00001980(void);
 void func_00001A44(void);
-s32 func_00001B90(void);
-s32 func_00001BD8(s32, s32);
-s32 func_00001BE8(s32, s32, s32);
+void func_00001AAC(void);
+s32 func_00001AC8(MgrIb2Ctrl *ctrl);
+s32 func_00001B24(void);
+void func_00001B90(void);
+void func_00001BD8(u32 arg0, u32 arg1);
+s32 func_00001BE8(u32 *dst, u32 *src, u32 size);
 s32 func_00001C64(s32, s32, s32);
 void func_00001CB4(s32 arg0, s32 arg1, s32 arg2);
 s32 func_00001D2C(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
@@ -171,12 +184,15 @@ void func_00008388(s32 arg0);
 s32 func_00008584(s32 arg0, s32 arg1, s32 arg2, s32 *arg3);
 void func_00009BAC(s32 arg0);
 s32 func_0000A1C8(s32 arg0, s32 arg1, s32 arg2);
+s32 memcmp(const void *, const void *, u32);
 s32 module_start(void);
 s32 module_stop(void);
+s32 sceIdStorageGetLeafSize(void);
 s32 sceIdStorageLookup(u16 key, u32 offset, void *buf, u32 len);
 s32 sceIoClose(s32);
 s32 sceIoDevctl(void *, s32, void *, u32, void *, u32);
 s32 sceIoIoctl(s32, s32, void *, u32, void *, u32);
+s32 sceKernelClearEventFlag(s32, u32);
 s32 sceKernelCreateEventFlag(const char *, u32, s32, void *);
 s32 sceKernelCreateSema(const char *, u32, s32, s32, void *);
 s32 sceKernelDeleteEventFlag(s32);
@@ -195,7 +211,9 @@ s32 sceMScmHCLastStatus();
 void sceMgrAesEnd(void);
 s32 sceMgrAesInit(void);
 s32 sceMgrCreateKc(s32 arg0, s32 arg1);
+s32 sceMgrDESDecrypt(void *dst, void *src, u32 size, void *key, void *iv);
 s32 sceMgrDESDecryptBlock(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
+s32 sceMgrDESEncrypt(void *dst, void *src, u32 size, void *key, void *iv);
 s32 sceMgrDESEncryptBlock(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
 s32 sceMgrDecryptKc(s32 arg0, s32 arg1, s32 arg2);
 s32 sceMgrDecryptKcWithKse(s32 arg0, s32 arg1);
@@ -212,7 +230,9 @@ s32 sceMgrGenerateKb(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
 s32 sceMgrGenerateKse(s32 arg0, s32 arg1, s32 arg2);
 s32 sceMgrGenerateMACWithKbCBC(s32 arg0, s32 arg1, s32 *arg2, s32 arg3, s32 arg4);
 void sceMgrGenerateMACWithKseCBC(s32 arg0, s32 arg1, s32 *arg2, s32 arg3);
+s32 sceMgrGetDefaultEKB(void *buf, u32 size);
 u32 sceMgrGetInitialEKB(s32 arg0, u32 arg1);
+s32 sceMgrGetLeafID(u64 *out);
 s32 sceMgrInitSeed(void *seed);
 s32 sceMgrLock(void);
 s32 sceMgrMSDeauth(s32 arg0);

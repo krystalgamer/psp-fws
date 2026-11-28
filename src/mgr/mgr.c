@@ -527,7 +527,36 @@ INCLUDE_RODATA("nonmatchings/mgr", D_0000AE68);
 
 INCLUDE_RODATA("nonmatchings/mgr", D_0000AE6C);
 
-INCLUDE_ASM("nonmatchings/mgr", func_00000EE8);
+s32 func_00000EE8(s32 id, void *mac) {
+    u32 out[4];
+    u8 buf[16];
+    u64 key = D_0000AE68;
+    s32 i;
+    s32 end;
+    s32 ret;
+
+    if (id & 0xF) {
+        return 0x80502000;
+    }
+    end = (id + 0x80) >> 1;
+    out[2] = 0;
+    out[3] = 0;
+    for (i = 0x40; i < end; i += 8) {
+        ret = func_00000DBC(i, buf, 0x10);
+        if (ret < 0) {
+            return ret;
+        }
+        ret = sceMgrDESEncrypt(out, buf, 0x10, &key, &out[2]);
+        if (ret < 0) {
+            return ret;
+        }
+    }
+    if (memcmp(&out[2], mac, 8) != 0) {
+        Kprintf("bad DKS MAC\n");
+        return 0x80502000;
+    }
+    return 0;
+}
 
 INCLUDE_ASM("nonmatchings/mgr", func_00000FE8);
 
@@ -645,7 +674,16 @@ s32 func_0000142C(s32 arg0, s32 arg1) {
 }
 #endif
 
-INCLUDE_ASM("nonmatchings/mgr", sceMgrGetLeafID);
+s32 sceMgrGetLeafID(u64 *out) {
+    u64 *id = (u64 *)func_000013E8();
+
+    if (id == NULL) {
+        return 0x80501001;
+    }
+    out[0] = id[0];
+    out[1] = id[1];
+    return 0;
+}
 
 #if FW_VERSION >= 152
 INCLUDE_ASM("nonmatchings/mgr", sceMgrGetInitialEKB);
@@ -669,9 +707,30 @@ u32 sceMgrGetInitialEKB(s32 arg0, u32 arg1) {
     }
     return (u32) var_v1;
 }
+
+s32 sceMgrGetDefaultEKB(void *buf, u32 size) {
+    s32 ret;
+    u32 len;
+    u32 id = D_00009C14 >> 1;
+
+    len = size;
+    ret = 0x80501001;
+    if (D_00009C0C != 0) {
+        if (D_00009C18 < len) {
+            len = D_00009C18;
+        }
+        ret = func_00000DBC(id, buf, len);
+        if (ret >= 0) {
+            ret = D_00009C18;
+        }
+    }
+    return ret;
+}
 #endif
 
+#if FW_VERSION >= 152
 INCLUDE_ASM("nonmatchings/mgr", sceMgrGetDefaultEKB);
+#endif
 
 INCLUDE_ASM("nonmatchings/mgr", func_000015A4);
 
@@ -718,41 +777,94 @@ INCLUDE_ASM("nonmatchings/mgr", func_0000199C);
 #if FW_VERSION < 340
 void func_00001A44(void) {
     func_0000015C(0, 0);
-    if (M2C_FIELD(&D_00009C68, s32 *, 0) != 0) {
-        sceKernelDeleteSema(M2C_FIELD(&D_00009C68, s32 *, 0));
-        M2C_FIELD(&D_00009C68, s32 *, 0) = 0;
+    if (D_00009C68.sema != 0) {
+        sceKernelDeleteSema(D_00009C68.sema);
+        D_00009C68.sema = 0;
     }
-    if (M2C_FIELD(&D_00009C68, s32 *, 4) != 0) {
-        sceKernelDeleteEventFlag(M2C_FIELD(&D_00009C68, s32 *, 4));
-        M2C_FIELD(&D_00009C68, s32 *, 4) = 0;
+    if (D_00009C68.evf != 0) {
+        sceKernelDeleteEventFlag(D_00009C68.evf);
+        D_00009C68.evf = 0;
     }
 }
 #else
 void func_00001A44(void) {
     func_0000015C(0, 0);
-    if (D_0000B708.unk0 != 0) {
-        sceKernelDeleteSema(D_0000B708.unk0);
-        D_0000B708.unk0 = 0;
+    if (D_0000B708.sema != 0) {
+        sceKernelDeleteSema(D_0000B708.sema);
+        D_0000B708.sema = 0;
     }
-    if (D_0000B708.unk4 != 0) {
-        sceKernelDeleteEventFlag(D_0000B708.unk4);
-        D_0000B708.unk4 = 0;
+    if (D_0000B708.evf != 0) {
+        sceKernelDeleteEventFlag(D_0000B708.evf);
+        D_0000B708.evf = 0;
     }
 }
 #endif
 
-INCLUDE_ASM("nonmatchings/mgr", func_00001AAC);
+void func_00001AAC(void) {
+    *(volatile u32 *)0xBE100080 = 0x8000;
+    __asm__ volatile("sync");
+}
 
-INCLUDE_ASM("nonmatchings/mgr", func_00001AC8);
+s32 func_00001AC8(MgrIb2Ctrl *ctrl) {
+    if ((*(volatile u32 *)0xBE100090 & 0x100) && (*(volatile u32 *)0xBE100084 & 2)) {
+        *(volatile u32 *)0xBE100080 = 1;
+        sceKernelSetEventFlag(ctrl->evf, 1);
+        return 1;
+    }
+    return 0;
+}
 
 INCLUDE_ASM("nonmatchings/mgr", func_00001B24);
 
+#if FW_VERSION < 340
+void func_00001B90(void) {
+    *(volatile u32 *)0xBE100010 &= ~0x1000;
+    __asm__ volatile("sync");
+    if (*(volatile u32 *)0xBE100084 & 1) {
+        func_00001AAC();
+    }
+}
+#else
 INCLUDE_ASM("nonmatchings/mgr", func_00001B90);
-
-INCLUDE_ASM("nonmatchings/mgr", func_00001BD8);
+#endif
 
 #if FW_VERSION < 340
-INCLUDE_ASM("nonmatchings/mgr", func_00001BE8);
+void func_00001BD8(u32 arg0, u32 arg1) {
+    *(volatile u32 *)0xBE100000 = 0x80;
+    *(volatile u32 *)0xBE100010 = 0x1100;
+    *(volatile u32 *)0xBE100080 = 3;
+    *(volatile u32 *)0xBE100090 = 0x100;
+    *(volatile u32 *)0xBE100094 = arg1;
+    sceKernelClearEventFlag(D_00009C68.evf, 0);
+    *(volatile u32 *)0xBE100088 = arg0;
+    __asm__ volatile("sync");
+}
+#else
+INCLUDE_ASM("nonmatchings/mgr", func_00001BD8);
+#endif
+
+#if FW_VERSION < 340
+s32 func_00001BE8(u32 *dst, u32 *src, u32 size) {
+    s32 n;
+    s32 i;
+    s32 ret;
+
+    while (size != 0) {
+        n = (size < 0x801) ? size : 0x800;
+        for (i = 0; i < n; i += 4) {
+            *(volatile u32 *)0xBE1000A0 = *src++;
+        }
+        ret = func_00001B24();
+        if (ret != 0) {
+            return ret;
+        }
+        for (i = 0; i < n; i += 4) {
+            *dst++ = *(volatile u32 *)0xBE1000A0;
+        }
+        size -= n;
+    }
+    return 0;
+}
 #endif
 
 #if FW_VERSION >= 250 && FW_VERSION < 340
