@@ -178,9 +178,21 @@ s32 scePowerCheckWlanCondition(s32 arg0) {
 }
 #endif
 
-#if FW_VERSION >= 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
+s32 scePowerWlanActivate(void) {
+    g_Power.wlanActivity = 1;
+    if (g_Power.isWlanSuppressChargingEnabled != 0) {
+        scePowerBatteryForbidCharging();
+    }
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/power", scePowerWlanActivate);
-#else
+#endif
+
+#if FW_VERSION == 100
 s32 scePowerWlanActivate(void) {
     if (g_Power.isWlanSuppressChargingEnabled == 0) {
 
@@ -191,9 +203,21 @@ s32 scePowerWlanActivate(void) {
 }
 #endif
 
-#if FW_VERSION >= 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
+s32 scePowerWlanDeactivate(void) {
+    g_Power.wlanActivity = 0;
+    if (g_Power.isWlanSuppressChargingEnabled != 0) {
+        scePowerBatteryPermitCharging();
+    }
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/power", scePowerWlanDeactivate);
-#else
+#endif
+
+#if FW_VERSION == 100
 s32 scePowerWlanDeactivate(void) {
     if (g_Power.isWlanSuppressChargingEnabled == 0) {
 
@@ -360,16 +384,12 @@ void _scePowerLowBatteryCallback(s32 enable, void *argp) {
 INCLUDE_ASM("nonmatchings/power", scePowerWaitRequestCompletion);
 #endif
 
-#if FW_VERSION >= 102 && FW_VERSION < 150
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/power", _scePowerOffThread);
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/power", func_00000C38);
-#endif
-
-#if FW_VERSION == 100 || (FW_VERSION >= 150 && FW_VERSION < 201)
-INCLUDE_ASM("nonmatchings/power", _scePowerOffThread);
 #endif
 
 #if FW_VERSION >= 152 && FW_VERSION < 282
@@ -380,8 +400,6 @@ INCLUDE_RODATA("nonmatchings/power", D_00005D60);
 
 #if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_RODATA("nonmatchings/power", D_00003FBC);
-
-INCLUDE_ASM("nonmatchings/power", _scePowerSuspendOperation);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
@@ -398,7 +416,9 @@ INCLUDE_ASM("nonmatchings/power", func_00000CF4);
 
 #if FW_VERSION == 100
 INCLUDE_RODATA("nonmatchings/power", g_PowerHandler);
+#endif
 
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/power", _scePowerSuspendOperation);
 #endif
 
@@ -460,7 +480,7 @@ s32 _scePowerOffCommon(s32 arg0) {
 }
 #endif
 
-#if FW_VERSION >= 102 && FW_VERSION < 150
+#if FW_VERSION >= 102 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/power", _scePowerSwInit);
 #endif
 
@@ -484,10 +504,6 @@ s32 _scePowerSwInit(void) {
     sceKernelRegisterPowerHandlers(&g_PowerHandler);
     return 0;
 }
-#endif
-
-#if FW_VERSION >= 150 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/power", _scePowerSwInit);
 #endif
 
 #if FW_VERSION >= 282
@@ -534,24 +550,6 @@ s32 scePowerGetPowerSwMode(void) {
 
 #if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/power", scePowerRebootStart);
-
-void scePower_D6D016EF(s32 arg0) {
-    u32 temp_s0;
-
-    temp_s0 = shiftK1();
-    _scePowerLock(arg0, 1);
-    setK1(temp_s0);
-}
-
-void scePower_driver_D6D016EF(s32 arg0) {
-    _scePowerLock(arg0, 0);
-}
-
-INCLUDE_ASM("nonmatchings/power", scePower_CA3D34C1);
-
-void scePower_driver_CA3D34C1(s32 arg0) {
-    _scePowerUnlock(arg0, 0);
-}
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
@@ -571,7 +569,9 @@ s32 scePowerRebootStart(void) {
     sceKernelCpuResumeIntr(temp_s1);
     return 0;
 }
+#endif
 
+#if FW_VERSION >= 102 && FW_VERSION < 282
 void scePower_D6D016EF(s32 arg0) {
     u32 temp_s0;
 
@@ -630,7 +630,26 @@ s32 scePower_CA3D34C1(s32 lockType) {
 }
 #endif
 
-#if FW_VERSION >= 150
+#if FW_VERSION >= 102 && FW_VERSION < 282
+s32 scePower_CA3D34C1(s32 lockType) {
+    s32 ret;
+    u32 oldK1;
+    s32 unlocked;
+
+    ret = 0x80000107;
+    if (lockType != 0) {
+        goto end;
+    }
+    oldK1 = shiftK1Noreorder();
+    unlocked = _scePowerUnlock(lockType, 1);
+    setK1(oldK1);
+    ret = unlocked;
+end:
+    return ret;
+}
+#endif
+
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/power", scePower_CA3D34C1);
 #endif
 
@@ -640,7 +659,7 @@ void scePower_driver_CA3D34C1(s32 arg0) {
 }
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION >= 102 && FW_VERSION < 282
 void scePower_driver_CA3D34C1(s32 arg0) {
     _scePowerUnlock(arg0, 0);
 }
@@ -746,13 +765,7 @@ s32 scePowerSetWakeupCondition(s32 arg0) {
 }
 #endif
 
-#if FW_VERSION >= 102 && FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/power", _scePowerLock);
-
-INCLUDE_ASM("nonmatchings/power", _scePowerUnlock);
-#endif
-
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION >= 102 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/power", _scePowerLock);
 
 INCLUDE_ASM("nonmatchings/power", _scePowerUnlock);
@@ -1053,16 +1066,12 @@ u32 GetGp(void) {
     return gp;
 }
 
-#if FW_VERSION >= 102 && FW_VERSION < 150
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/power", _scePowerFreqInit);
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/power", func_0000294C);
-#endif
-
-#if FW_VERSION == 100 || (FW_VERSION >= 150 && FW_VERSION < 201)
-INCLUDE_ASM("nonmatchings/power", _scePowerFreqInit);
 #endif
 
 #if FW_VERSION >= 282
@@ -1152,7 +1161,7 @@ s32 _scePowerFreqEnd(void) {
 }
 #endif
 
-#if FW_VERSION >= 102 && FW_VERSION < 150
+#if FW_VERSION < 150
 s32 _scePowerFreqSuspend(void) {
     sceClkcGetCpuGear(&g_PowerFreq.clkcCpuGearNumerator, &g_PowerFreq.clkcCpuGearDenominator);
     sceClkcGetBusGear(&g_PowerFreq.clkcBusGearNumerator, &g_PowerFreq.clkcBusGearDenominator);
@@ -1186,33 +1195,9 @@ s32 func_00003A98(void) {
 }
 #endif
 
-#if FW_VERSION == 100
-s32 _scePowerFreqSuspend(void) {
-    sceClkcGetCpuGear(&g_PowerFreq.clkcCpuGearNumerator, &g_PowerFreq.clkcCpuGearDenominator);
-    sceClkcGetBusGear(&g_PowerFreq.clkcBusGearNumerator, &g_PowerFreq.clkcBusGearDenominator);
-    g_PowerFreq.oldGeEdramRefreshMode = g_PowerFreq.geEdramRefreshMode;
-    scePowerSetGeEdramRefreshMode(0);
-    return 0;
-}
-#endif
-
 #if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/power", _scePowerFreqSuspend);
-#endif
 
-#if FW_VERSION == 100
-s32 _scePowerFreqResume(s32 step) {
-    if (step == 0) {
-        sceClkcSetCpuGear(g_PowerFreq.clkcCpuGearNumerator, g_PowerFreq.clkcCpuGearDenominator);
-        sceClkcSetBusGear(g_PowerFreq.clkcBusGearNumerator, g_PowerFreq.clkcBusGearDenominator);
-    } else if (step == 1) {
-        scePowerSetGeEdramRefreshMode(g_PowerFreq.oldGeEdramRefreshMode);
-    }
-    return 0;
-}
-#endif
-
-#if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/power", _scePowerFreqResume);
 #endif
 
@@ -1368,8 +1353,6 @@ INCLUDE_ASM("nonmatchings/power", scePowerGetBusClockFrequencyFloat);
 INCLUDE_RODATA("nonmatchings/power", D_000040A0);
 
 INCLUDE_RODATA("nonmatchings/power", D_000040A4);
-
-INCLUDE_ASM("nonmatchings/power", _scePowerBatteryThread);
 #endif
 
 #if FW_VERSION >= 350
@@ -1429,9 +1412,13 @@ s32 scePowerGetCpuClockFrequency(void) {
 s32 scePowerGetBusClockFrequency(void) {
     return D_0000B35C;
 }
+#endif
 
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/power", _scePowerBatteryThread);
+#endif
 
+#if FW_VERSION == 100
 s32 scePowerIsBatteryCharging(void) {
     s32 ret;
     u32 oldK1 = shiftK1();
@@ -1535,7 +1522,19 @@ INCLUDE_ASM("nonmatchings/power", scePowerGetBatteryChargingStatus);
 
 INCLUDE_ASM("nonmatchings/power", scePowerIsSuspendRequired);
 
-#if FW_VERSION >= 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
+s32 scePowerGetBatteryRemainCapacity(void) {
+    if (g_Battery.batteryAvailabilityStatus == 0) {
+        return 0x802B0100;
+    }
+    if (g_Battery.batteryAvailabilityStatus == 1) {
+        return 0x802B0101;
+    }
+    return g_Battery.batteryRemainingCapacity;
+}
+#endif
+
+#if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/power", scePowerGetBatteryRemainCapacity);
 #endif
 
@@ -1550,7 +1549,29 @@ s32 scePowerGetBatteryRemainCapacity(void) {
     }
     return g_Battery.batteryRemainingCapacity;
 }
-#else
+#endif
+
+#if FW_VERSION >= 102 && FW_VERSION < 150
+s32 scePowerGetBatteryElec(s32 *elec) {
+    s32 ret;
+    u32 oldK1 = shiftK1();
+
+    if (k1IsUserMode() && (s32)elec < 0) {
+        ret = 0x80000023;
+    } else if (g_Battery.batteryAvailabilityStatus == 0) {
+        ret = 0x802B0100;
+    } else if (g_Battery.batteryAvailabilityStatus == 1) {
+        ret = 0x802B0101;
+    } else {
+        *elec = g_Battery.batteryElec;
+        ret = 0;
+    }
+    setK1(oldK1);
+    return ret;
+}
+#endif
+
+#if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/power", scePowerGetBatteryElec);
 #endif
 
@@ -1940,9 +1961,23 @@ s32 scePowerIsLowBattery(void) {
 INCLUDE_ASM("nonmatchings/power", scePowerIsLowBattery);
 #endif
 
-#if FW_VERSION >= 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
+s32 scePowerGetBatteryFullCapacity(void) {
+    if (g_Battery.batteryAvailabilityStatus == 0) {
+        return 0x802B0100;
+    }
+    if (g_Battery.batteryAvailabilityStatus == 1) {
+        return 0x802B0101;
+    }
+    return g_Battery.batteryFullCapacity;
+}
+#endif
+
+#if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/power", scePowerGetBatteryFullCapacity);
-#else
+#endif
+
+#if FW_VERSION == 100
 s32 scePowerGetBatteryFullCapacity(void) {
     if (g_Battery.batteryAvailabilityStatus != 2) {
         return 0x802B0100;
@@ -1951,9 +1986,23 @@ s32 scePowerGetBatteryFullCapacity(void) {
 }
 #endif
 
-#if FW_VERSION >= 102
+#if FW_VERSION >= 102 && FW_VERSION < 150
+s32 scePowerGetBatteryLifePercent(void) {
+    if (g_Battery.batteryAvailabilityStatus == 0) {
+        return 0x802B0100;
+    }
+    if (g_Battery.batteryAvailabilityStatus == 1) {
+        return 0x802B0101;
+    }
+    return g_Battery.batteryLifePercentage;
+}
+#endif
+
+#if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/power", scePowerGetBatteryLifePercent);
-#else
+#endif
+
+#if FW_VERSION == 100
 s32 scePowerGetBatteryLifePercent(void) {
     if (g_Battery.batteryAvailabilityStatus != 2) {
         return 0x802B0100;
@@ -1963,7 +2012,18 @@ s32 scePowerGetBatteryLifePercent(void) {
 #endif
 
 #if FW_VERSION == 102
-INCLUDE_ASM("nonmatchings/power", scePowerGetBatteryLifeTime);
+s32 scePowerGetBatteryLifeTime(void) {
+    s32 cap;
+
+    cap = scePowerGetBatteryRemainCapacity();
+    if (cap < 0) {
+        return cap;
+    }
+    if ((u32)cap < (u32)g_Battery.forceSuspendCapacity) {
+        return 0;
+    }
+    return g_Battery.limitTime;
+}
 #endif
 
 #if FW_VERSION == 100
@@ -1973,7 +2033,21 @@ s32 scePowerGetBatteryLifeTime(void) {
     }
     return g_Battery.limitTime;
 }
-#else
+#endif
+
+#if FW_VERSION >= 102 && FW_VERSION < 150
+s32 scePowerGetBatteryTemp(void) {
+    if (g_Battery.batteryAvailabilityStatus == 0) {
+        return 0x802B0100;
+    }
+    if (g_Battery.batteryAvailabilityStatus == 1) {
+        return 0x802B0101;
+    }
+    return g_Battery.batteryTemp;
+}
+#endif
+
+#if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/power", scePowerGetBatteryTemp);
 #endif
 
@@ -1984,7 +2058,21 @@ s32 scePowerGetBatteryTemp(void) {
     }
     return g_Battery.batteryTemp;
 }
-#else
+#endif
+
+#if FW_VERSION >= 102 && FW_VERSION < 150
+s32 scePowerGetBatteryVolt(void) {
+    if (g_Battery.batteryAvailabilityStatus == 0) {
+        return 0x802B0100;
+    }
+    if (g_Battery.batteryAvailabilityStatus == 1) {
+        return 0x802B0101;
+    }
+    return g_Battery.batteryVoltage;
+}
+#endif
+
+#if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/power", scePowerGetBatteryVolt);
 #endif
 
