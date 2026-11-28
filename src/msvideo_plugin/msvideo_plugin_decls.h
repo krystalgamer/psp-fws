@@ -55,6 +55,7 @@ public:
 /* dtor still asm/m2c (not trivial) */
 class Class_000657F8 {
 public:
+    Class_000657F8();
     virtual ~Class_000657F8();
 };
 #endif
@@ -63,6 +64,7 @@ public:
 /* vtable _ZTV14Class_000658B0 is data (vptr = label - 8 + 8) */
 class Class_000658B0 : public Class_000657F8 {
 public:
+    Class_000658B0();
     virtual ~Class_000658B0();
 };
 #endif
@@ -2182,9 +2184,13 @@ void _ZN14Class_00061CC8D2Ev(M2C_UNK **arg0);
 s32 _ZN14Class_00062640D2Ev(s32);
 void _ZN14Class_00063F60D1Ev(M2C_UNK **arg0);
 void _ZN14Class_00063F60D2Ev(M2C_UNK **arg0);
+void _ZN14Class_000657F8C1Ev(struct Unk_func_00059FCC_0 *arg0);
+void _ZN14Class_000657F8C2Ev(struct Unk_func_00059F54_0 *arg0);
 void _ZN14Class_000657F8D0Ev(s32 **arg0);
 void _ZN14Class_000657F8D1Ev(struct Unk_func_0005A084_0 *arg0);
 s32 _ZN14Class_000657F8D2Ev(s32);
+void _ZN14Class_000658B0C1Ev(M2C_UNK **arg0);
+void _ZN14Class_000658B0C2Ev(M2C_UNK **arg0);
 void _ZN14Class_000658B0D1Ev(M2C_UNK **arg0);
 void _ZN14Class_000658B0D2Ev(M2C_UNK **arg0);
 void _ZN14Class_00065968D1Ev(M2C_UNK **arg0);

@@ -427,7 +427,7 @@ s32 func_00059F44(s32 *arg0) {
     return *arg0 == 7;
 }
 
-void func_00059F54(struct Unk_func_00059F54_0 *arg0) {
+void _ZN14Class_000657F8C2Ev(struct Unk_func_00059F54_0 *arg0) {
     s32 temp_v0;
 
     arg0->unk0 = &D_000657F8;
@@ -443,7 +443,7 @@ void func_00059F54(struct Unk_func_00059F54_0 *arg0) {
     arg0->unk784 = 0x400;
 }
 
-void func_00059FCC(struct Unk_func_00059FCC_0 *arg0) {
+void _ZN14Class_000657F8C1Ev(struct Unk_func_00059FCC_0 *arg0) {
     s32 temp_v0;
 
     arg0->unk0 = &D_000657F8;
@@ -847,14 +847,7 @@ void func_0005AD3C(void) {
     func_0005ACE8(1, 0xFFFF);
 }
 
-void func_0005AD5C(M2C_UNK **arg0) {
-    func_00059F54((Unk_func_00059F54_0*) arg0);
-    *arg0 = &D_000658B0;
-}
-
-void func_0005AD8C(M2C_UNK **arg0) {
-    func_00059F54((Unk_func_00059F54_0*) arg0);
-    *arg0 = &D_000658B0;
+Class_000658B0::Class_000658B0() {
 }
 
 Class_000658B0::~Class_000658B0() {
