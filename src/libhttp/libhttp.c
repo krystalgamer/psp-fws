@@ -169,7 +169,39 @@ int sceHttpDeleteTemplate(int tmpl_id) {
 INCLUDE_ASM("nonmatchings/libhttp", sceHttpDeleteTemplate);
 #endif
 
-#if FW_VERSION < 150 || FW_VERSION >= 282
+#if FW_VERSION < 150
+int sceHttpCreateConnection(int template_id, const unsigned char *server_name, unsigned char *scheme, unsigned short port, int keepalive) {
+    int ret = 0x80431001;
+    unsigned char *name;
+    SceSize len;
+
+    if (D_0000DCCC.inited == 1) {
+        ret = 0x804311FE;
+        if (server_name != NULL) {
+            len = func_0000BE38((const char *)server_name) + 1;
+            ret = 0x80431022;
+            name = _sceHttpMallocInternal(len);
+            if (name == NULL) {
+                goto fail;
+            }
+            func_0000BB98(name, (u8 *)server_name, len);
+            ret = CreateConnection(template_id, name, scheme, NULL, NULL, port, keepalive, 0, NULL);
+            if (ret < 0) {
+                goto fail;
+            }
+        }
+    }
+    return ret;
+
+fail:
+    if (name != NULL) {
+        _sceHttpFreeInternal(name);
+    }
+    return ret;
+}
+#endif
+
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/libhttp", sceHttpCreateConnection);
 #endif
 
@@ -1926,7 +1958,39 @@ INCLUDE_ASM("nonmatchings/libhttp", func_00006988);
 #endif
 
 #if FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/libhttp", func_00006658);
+int func_00006658(SceHttpReq *req) {
+    void *list;
+    SceSize size = 0;
+    char *buf;
+    unsigned char *host;
+    int ret;
+
+    if (req->redirect_con == NULL) {
+        host = req->connection->hostname;
+    } else {
+        host = req->redirect_con->hostname;
+    }
+    ret = func_00008FB4(&list, host);
+    if (ret < 0) {
+        return ret;
+    }
+    ret = func_0000907C(NULL, list, req->unk68, &size, 0);
+    if (ret < 0) {
+        return ret;
+    }
+    ret = 0x80431022;
+    buf = _sceHttpMallocInternal(size);
+    if (buf != NULL) {
+        ret = func_0000907C(buf, list, req->unk68, NULL, size);
+        if (ret >= 0) {
+            ret = sceHttpAddExtraHeader(req->id, (const SceUChar8 *)"Cookie", (const SceUChar8 *)buf, 0);
+        }
+    }
+    if (buf != NULL) {
+        _sceHttpFreeInternal(buf);
+    }
+    return ret;
+}
 
 INCLUDE_ASM("nonmatchings/libhttp", CreateRequest);
 

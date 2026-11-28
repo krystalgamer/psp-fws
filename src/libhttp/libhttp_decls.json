@@ -168,7 +168,7 @@
   "module_start": "s32 module_start(void);",
   "module_stop": "s32 module_stop(void);",
   "sceHttpAddExtraHeader": "int sceHttpAddExtraHeader(int id, const SceUChar8 *name, const SceUChar8 *value, int mode);",
-  "sceHttpCreateConnection": "int sceHttpCreateConnection(int template_id, const unsigned char *server_name, unsigned char *scheme, short unsigned int port, int keepalive);",
+  "sceHttpCreateConnection": "int sceHttpCreateConnection(int template_id, const unsigned char *server_name, unsigned char *scheme, unsigned short port, int keepalive);",
   "sceHttpCreateConnectionWithURL": "s32 sceHttpCreateConnectionWithURL(s32 arg0, void *arg1, s32 arg2);",
   "sceHttpCreateRequest": "int sceHttpCreateRequest(int connection_id, int method, const unsigned char *path, SceULong64 content_length);",
   "sceHttpCreateTemplate": "s32 sceHttpCreateTemplate(void *arg0, s32 arg1, s32 arg2);",

@@ -758,7 +758,7 @@ void func_00015A40(void);
 s32 module_start(void);
 s32 module_stop(void);
 int sceHttpAddExtraHeader(int id, const SceUChar8 *name, const SceUChar8 *value, int mode);
-int sceHttpCreateConnection(int template_id, const unsigned char *server_name, unsigned char *scheme, short unsigned int port, int keepalive);
+int sceHttpCreateConnection(int template_id, const unsigned char *server_name, unsigned char *scheme, unsigned short port, int keepalive);
 s32 sceHttpCreateConnectionWithURL(s32 arg0, void *arg1, s32 arg2);
 int sceHttpCreateRequest(int connection_id, int method, const unsigned char *path, SceULong64 content_length);
 s32 sceHttpCreateTemplate(void *arg0, s32 arg1, s32 arg2);
