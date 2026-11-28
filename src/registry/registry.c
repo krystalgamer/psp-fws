@@ -620,7 +620,9 @@ INCLUDE_ASM("nonmatchings/registry", regLoadHive);
 #endif
 
 #if FW_VERSION == 271
-INCLUDE_ASM("nonmatchings/registry", regHiveAddRef);
+void regHiveAddRef(SceRegHive *h) {
+    h->openCount++;
+}
 #endif
 
 #if FW_VERSION >= 201
