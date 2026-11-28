@@ -1073,10 +1073,53 @@ s32 sb_lock(struct sockbuf *sb) {
     return 0;
 }
 
+#if FW_VERSION < 201
+__inline void sbappendrecord(struct sockbuf *sb, struct mbuf *m0) {
+    struct mbuf *m;
+
+    if (m0 == 0)
+        return;
+    m = sb->sb_mb;
+    if (m)
+        while (m->m_nextpkt)
+            m = m->m_nextpkt;
+    sballoc(sb, m0);
+    if (m)
+        m->m_nextpkt = m0;
+    else
+        sb->sb_mb = m0;
+    m = m0->m_next;
+    m0->m_next = 0;
+    if (m && (m0->m_flags & M_EOR)) {
+        m0->m_flags &= ~M_EOR;
+        m->m_flags |= M_EOR;
+    }
+    sbcompress(sb, m, m0);
+}
+
+void sbappend(struct sockbuf *sb, struct mbuf *m) {
+    struct mbuf *n;
+
+    if (m == 0)
+        return;
+    if ((n = sb->sb_mb) != NULL) {
+        while (n->m_nextpkt)
+            n = n->m_nextpkt;
+        do {
+            if (n->m_flags & M_EOR) {
+                sbappendrecord(sb, m);
+                return;
+            }
+        } while (n->m_next && (n = n->m_next));
+    }
+    sbcompress(sb, m, n);
+}
+#else
 INCLUDE_ASM("nonmatchings/pspnet_inet", sbappend);
 
 #if FW_VERSION < 271
 INCLUDE_ASM("nonmatchings/pspnet_inet", sbappendrecord);
+#endif
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
