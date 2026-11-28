@@ -1020,7 +1020,75 @@ int sceHttpSetAuthInfoCB(int id, void *cbfunc) {
 
 INCLUDE_ASM("nonmatchings/libhttp", sceHttpAddExtraHeader);
 
-INCLUDE_ASM("nonmatchings/libhttp", sceHttpDeleteHeader);
+int sceHttpDeleteHeader(int id, const SceUChar8 *name) {
+    SceHttpTmpl *tmpl = NULL;
+    SceHttpConn *con = NULL;
+    SceHttpReq *req = NULL;
+    int ret = 0x80431001;
+    int found = 0;
+    int intr;
+
+    if (D_0000DCCC.inited == 1) {
+        ret = 0x80431025;
+        if (name != NULL) {
+            ret = HttpWhichId(id);
+            if (ret < 0) {
+                goto end;
+            }
+            if (ret == 0) {
+                ret = GetHttpTmpl(id, &tmpl);
+                if (ret < 0) {
+                    goto end;
+                }
+            } else if (ret == 0x1000000) {
+                ret = GetHttpConnection(id, &con);
+                if (ret < 0) {
+                    goto end;
+                }
+                tmpl = &con->tmpl;
+            } else if (ret == 0x2000000) {
+                ret = GetHttpReq(id, &req);
+                if (ret < 0) {
+                    goto end;
+                }
+                tmpl = &req->tmpl;
+            } else {
+                ret = 0x80431100;
+                goto end;
+            }
+            intr = sceKernelSuspendDispatchThread();
+            if (tmpl->header_lock == 1) {
+                ret = 0x80431067;
+            } else {
+                tmpl->header_lock = 1;
+            }
+            sceKernelResumeDispatchThread(intr);
+            if (ret >= 0) {
+                do {
+                    ret = DeleteHttpHeader(&tmpl->header_list, name);
+                    if (ret > 0) {
+                        found = 1;
+                    }
+                } while (ret >= 0);
+                if (found == 1) {
+                    ret = 0;
+                }
+                if (tmpl != NULL) {
+                    tmpl->header_lock = 0;
+                }
+            }
+        }
+    }
+end:
+    if (req != NULL) {
+        req->reference_counter--;
+    } else if (con != NULL) {
+        con->reference_counter--;
+    } else if (tmpl != NULL) {
+        tmpl->reference_counter--;
+    }
+    return ret;
+}
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 260
