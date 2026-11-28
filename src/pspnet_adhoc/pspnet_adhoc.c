@@ -4014,7 +4014,44 @@ end:
 }
 
 #if FW_VERSION >= 201
-INCLUDE_ASM("nonmatchings/pspnet_adhoc", sceNetAdhocGameModeDeleteMaster);
+/* 2.01+: the master delete has gameModeDelete's body inlined */
+static __inline s32 gameModeDeleteInl(s32 id) {
+    SceNetAdhocGameMode *gm;
+
+    for (gm = g_gameModeList.first; gm != NULL; gm = gm->next) {
+        if (gm->id == id)
+            break;
+    }
+    if (gm == NULL)
+        return 0x8041071C;
+    if (gm->next != NULL)
+        gm->next->prev = gm->prev;
+    else
+        g_gameModeList.last = gm->prev;
+    *gm->prev = gm->next;
+    sceNetFreeInternal(gm->buf);
+    sceNetFreeInternal(gm);
+    return 0;
+}
+
+s32 sceNetAdhocGameModeDeleteMaster(void) {
+    s32 s;
+    s32 ret;
+
+    if (sceKernelCheckThreadStack() < 0x7F0)
+        return 0x80410005;
+    s = _sce_pspnet_spllock();
+    if (s < 0)
+        return s;
+    ret = 0x80410712;
+    if (g_adhocInit != 0) {
+        ret = 0x8041071C;
+        if (g_gameModeMasterId >= 0)
+            ret = gameModeDeleteInl(g_gameModeMasterId);
+    }
+    _sce_pspnet_splunlock(s);
+    return ret;
+}
 #endif
 
 #if FW_VERSION < 282
