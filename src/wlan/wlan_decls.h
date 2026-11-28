@@ -115,6 +115,50 @@ typedef struct SceWlanRingEnt {
     struct SceWlanRingEnt *next;    /* 0x04 */
 } SceWlanRingEnt;
 
+/* BSS descriptor kept by the driver (source of func_0000529C) */
+typedef struct {
+    u32 unk0;
+    SceWlanEtherAddr bssid;     /* 0x04 */
+    u8 unkA[2];
+    u8 ssid[32];                /* 0x0C */
+    s8 rssi;                    /* 0x2C */
+    u8 unk2D[3];
+    u8 unk30;                   /* 0x30 */
+    u8 unk31;
+    u8 unk32;                   /* 0x32 */
+    u8 unk33[9];
+    u32 unk3C;                  /* 0x3C */
+    u16 unk40;                  /* 0x40 */
+    u8 unk42[10];
+    u32 unk4C;                  /* 0x4C */
+    u8 unk50[12];
+    u32 unk5C;                  /* 0x5C */
+    struct {
+        u8 basic;
+        u8 rate;
+    } rates[8];                 /* 0x60 */
+    u8 unk70[0x10];
+    u8 unk80[5];                /* 0x80 */
+} SceWlanBssDesc;
+
+/* scan result as returned to the caller (0x50 bytes) */
+typedef struct {
+    SceWlanEtherAddr bssid;     /* 0x00 */
+    u8 channel;                 /* 0x06 */
+    u8 ssidLen;                 /* 0x07 */
+    u8 ssid[32];                /* 0x08 */
+    u32 bssType;                /* 0x28 */
+    u32 unk2C;                  /* 0x2C */
+    u32 unk30;                  /* 0x30 */
+    u8 unk34[8];
+    u16 unk3C;                  /* 0x3C */
+    u16 unk3E;                  /* 0x3E */
+    u8 rates[8];                /* 0x40 */
+    s16 rssi;                   /* 0x48 */
+    u8 unk4A[5];                /* 0x4A */
+    u8 unk4F;
+} SceWlanScanInfo;
+
 typedef struct SceWlanSoftc SceWlanSoftc;
 typedef struct SceWlanMac SceWlanMac;
 

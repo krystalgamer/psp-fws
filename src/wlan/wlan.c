@@ -1785,7 +1785,38 @@ INCLUDE_ASM("nonmatchings/wlan", func_00005184);
 #endif
 
 #if FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/wlan", func_0000529C);
+void func_0000529C(SceWlanScanInfo *dst, SceWlanBssDesc *src) {
+    s32 i;
+
+    memset(dst, 0, sizeof(SceWlanScanInfo));
+    dst->bssid = src->bssid;
+    for (i = 0; i < 32; i++) {
+        if (src->ssid[i] == 0)
+            break;
+        dst->ssid[i] = src->ssid[i];
+    }
+    dst->ssidLen = i;
+    if (src->unk5C == 0)
+        dst->bssType = 2;
+    else
+        dst->bssType = 1;
+    dst->unk3E = src->unk30;
+    dst->unk2C = src->unk3C;
+    dst->unk30 = src->unk32;
+    dst->channel = func_00003B78(src->unk4C);
+    dst->unk3C = src->unk40;
+    for (i = 0; i < 8; i++) {
+        dst->rates[i] = src->rates[i].rate;
+        dst->rates[i] |= (src->rates[i].basic == 0) << 7;
+    }
+    dst->unk4A[0] = src->unk80[0] & 7;
+    dst->unk4A[1] = src->unk80[1];
+    dst->unk4A[2] = src->unk80[2];
+    dst->unk4A[3] = src->unk80[3];
+    dst->unk4A[4] = src->unk80[4];
+    dst->rssi = src->rssi;
+    dst->rssi = func_0000321C(dst->rssi);
+}
 
 INCLUDE_ASM("nonmatchings/wlan", func_000053CC);
 #endif
