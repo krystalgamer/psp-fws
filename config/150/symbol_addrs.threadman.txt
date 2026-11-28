@@ -281,3 +281,4 @@ func_0000B634 = 0x0000B490; // type:func
 func_0000F034 = 0x0000F200; // type:func
 func_0000BEBC = 0x0000DAF4; // type:func
 func_000106E4 = 0x00013B34; // type:func
+wakeFirstWaitThread = 0x00000480; // type:func

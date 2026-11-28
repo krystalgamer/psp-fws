@@ -207,3 +207,4 @@ func_00010CFC = 0x00010254; // type:func rom:0x102D4
 func_00014480 = 0x00010840; // type:func rom:0x108C0
 func_000153A8 = 0x00013288; // type:func rom:0x13308
 // shared names (tools/add_version.py) end
+wakeFirstWaitThread = 0x00000308; // type:func

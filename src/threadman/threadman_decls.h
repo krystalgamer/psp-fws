@@ -415,7 +415,8 @@ typedef struct SceThread {
     s32 waitType; /* 0x1C */
     SceSysmemUidCB *waitObj; /* 0x20 */
     s32 waitArg0; /* 0x24: e.g. the count a sema waiter needs */
-    u8 unk28[0x38 - 0x28];
+    s32 waitArg1; /* 0x28: e.g. the size a Vpl waiter needs */
+    u8 unk2C[0x38 - 0x2C];
     s32 unk38; /* 0x38 */
     s32 *unk3C; /* 0x3C: where the remaining timeout is written back */
     s32 waitRet; /* 0x40 */
@@ -790,6 +791,7 @@ s32 func_000136C0(void);
 s32 func_0001444C(void);
 M2C_UNK memset(s32, M2C_UNK, s32);
 s32 module_reboot_before(void);
+void *sceKernelAllocHeapMemory(SceUID heapId, SceSize size);
 void sceKernelAssert(s32 test, s32 lvl);
 M2C_UNK sceKernelCallUIDObjCommonFunction();
 M2C_UNK sceKernelCallUIDObjFunction(s32, M2C_UNK);
@@ -813,5 +815,6 @@ s32 sceKernelRegisterDeadThreadHandler(s32 arg0);
 M2C_UNK sceKernelReleaseExceptionHandler(M2C_UNK, M2C_UNK *);
 M2C_UNK sceKernelReleaseIntrHandler(s32);
 s64 sceKernelUSec2SysClockWide(u32 arg0);
+void wakeFirstWaitThread(SceSysmemUidCB *cb, s32 waitRet, s32 isIntr, s32 intr);
 
 #endif
