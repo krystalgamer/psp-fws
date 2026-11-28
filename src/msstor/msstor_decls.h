@@ -474,6 +474,8 @@ void func_000077A0(struct Unk_func_000077A0_0 *arg0, s32 arg1);
 s32 func_000077B8(struct Unk_func_000077B8_0 *arg0);
 s32 func_000077C4(s32 err);
 s32 func_00007850(s32 err);
+s32 func_00007CF0(s32);
+s32 func_00007D38_v102(s32);
 s32 memcmp(const void *a, const void *b, SceSize n);
 void *memcpy(void *dst, const void *src, SceSize n);
 s32 module_reboot_before(void);

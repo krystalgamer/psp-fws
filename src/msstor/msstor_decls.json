@@ -111,6 +111,8 @@
   "func_000077B8": "s32 func_000077B8(struct Unk_func_000077B8_0 *arg0);",
   "func_000077C4": "s32 func_000077C4(s32 err);",
   "func_00007850": "s32 func_00007850(s32 err);",
+  "func_00007CF0": "s32 func_00007CF0(s32);",
+  "func_00007D38_v102": "s32 func_00007D38_v102(s32);",
   "memcmp": "s32 memcmp(const void *a, const void *b, SceSize n);",
   "memcpy": "void *memcpy(void *dst, const void *src, SceSize n);",
   "module_reboot_before": "s32 module_reboot_before(void);",

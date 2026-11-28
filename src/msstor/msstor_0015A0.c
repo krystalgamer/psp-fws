@@ -518,8 +518,36 @@ s32 func_00004990(void) {
 }
 #endif
 
-#if FW_VERSION >= 102 && FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/msstor_0015A0", func_00004990);
+#if FW_VERSION == 102
+s32 func_00004990(void) {
+    if (D_00008934.sema > 0) {
+        sceKernelDeleteSema(D_00008934.sema);
+    }
+    if (D_00008934.thread > 0) {
+        func_00007D38_v102(D_00008934.thread);
+    }
+    if (D_00008934.evf > 0) {
+        sceKernelDeleteEventFlag(D_00008934.evf);
+    }
+    D_00008934.sema = -1;
+    return 0;
+}
+#endif
+
+#if FW_VERSION == 103
+s32 func_00004990(void) {
+    if (D_00008934.sema > 0) {
+        sceKernelDeleteSema(D_00008934.sema);
+    }
+    if (D_00008934.thread > 0) {
+        func_00007D38_v102(D_00008934.thread);
+    }
+    if (D_00008934.evf > 0) {
+        func_00007CF0(D_00008934.evf);
+    }
+    D_00008934.sema = -1;
+    return 0;
+}
 #endif
 
 #if FW_VERSION == 100
