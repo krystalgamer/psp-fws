@@ -564,7 +564,6 @@ SceNetAdhocDesc *adhocDescLookup(u8 type, s32 id) {
     return d;
 }
 
-#if FW_VERSION < 282
 s32 adhocDescAllocId(void) {
     s32 id;
     SceNetAdhocDesc *d;
@@ -582,7 +581,6 @@ s32 adhocDescAllocId(void) {
     }
     return -1;
 }
-#endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00000FB4);
@@ -608,24 +606,6 @@ s32 func_00000ED0(u8 type, SceNetAdhocDesc **out) {
 #endif
 
 #if FW_VERSION >= 282
-s32 adhocDescAllocId(void) {
-    s32 id;
-    SceNetAdhocDesc *d;
-
-    id = (g_adhocLastId == 255) ? 1 : g_adhocLastId + 1;
-    for (; id != g_adhocLastId; id = (id == 255) ? 1 : id + 1) {
-        for (d = g_adhocDescList.first; d != NULL; d = d->next) {
-            if (d->id == id)
-                break;
-        }
-        if (d == NULL) {
-            g_adhocLastId = id;
-            return id;
-        }
-    }
-    return -1;
-}
-
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00000F60);
 #endif
 
@@ -1501,29 +1481,6 @@ s32 pdpPoll(SceNetAdhocDesc *d, s32 events) {
 }
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
-s32 pdpPoll(SceNetAdhocDesc *d, s32 events) {
-    SceNetAdhocPdpPcb *pcb;
-    struct ifnet *ifp;
-    s32 ret;
-
-    ret = 0;
-    pcb = d->pcb;
-    ifp = _sce_pspnet_ifplookup_lladdr(&pcb->laddr);
-    if ((events & 2) && pcb->rcvq_first != NULL)
-        ret = 2;
-    if ((events & 1) && (ifp == NULL || ifp->if_snd.ifq_len < ifp->if_snd.ifq_maxlen))
-        ret |= 1;
-    if (ret == 0) {
-        if (events & 2)
-            pcb->flags |= 2;
-        if ((events & 1) && ifp != NULL)
-            ifp->if_adhocflags |= 2;
-    }
-    return ret;
-}
-#endif
-
 #if FW_VERSION >= 282
 s32 func_00002D20(SceNetAdhocPdpPcb *pcb, s32 size) {
     pcb->rcvbufsize = size;
@@ -1531,7 +1488,9 @@ s32 func_00002D20(SceNetAdhocPdpPcb *pcb, s32 size) {
 }
 
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00002D2C);
+#endif
 
+#if FW_VERSION >= 150
 s32 pdpPoll(SceNetAdhocDesc *d, s32 events) {
     SceNetAdhocPdpPcb *pcb;
     struct ifnet *ifp;
@@ -1552,9 +1511,7 @@ s32 pdpPoll(SceNetAdhocDesc *d, s32 events) {
     }
     return ret;
 }
-#endif
-
-#if FW_VERSION < 150
+#else
 void pdpQentFree(SceNetAdhocPdpQent *e) {
     _sce_pspnet_callout_stop(e->callout);
     sceNetMFreem(e->m);
@@ -1565,7 +1522,9 @@ void pdpQentFree(SceNetAdhocPdpQent *e) {
     *e->prev = e->next;
     sceNetFreeInternal(e);
 }
-#else
+#endif
+
+#if FW_VERSION >= 150
 void pdpQentFree(SceNetAdhocPdpQent *e) {
     _sce_pspnet_callout_stop(e->callout);
     sceNetMFreem(e->m);
@@ -3297,77 +3256,9 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00004DFC);
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00004C0C);
 #endif
 
-#if FW_VERSION < 282
-void ptpEstablished(SceNetAdhocPtpPcb *pcb) {
-    _sce_pspnet_callout_stop(&pcb->callout);
-    pcb->state = 4;
-    pcb->desc->flags = (pcb->desc->flags & ~0x2000) | 0x4000;
-    if (pcb->parent != NULL)
-        PTP_SBWAKEUP(&pcb->parent->rcv);
-    else
-        PTP_SBWAKEUP(&pcb->rcv);
-#if FW_VERSION >= 150
-    _sce_pspnet_callout_reset_usec(&pcb->callout2, pcb->rexmt_int, ptpKeepAlive, pcb);
-#endif
-}
-
-void ptpDrop(SceNetAdhocPtpPcb *pcb) {
-#if FW_VERSION >= 150
-    _sce_pspnet_callout_stop(&pcb->callout2);
-#endif
-    _sce_pspnet_callout_stop(&pcb->callout);
-    if (pcb->desc->flags & 0x6000)
-        ptpSendCtl(pcb, 7);
-    pcb->desc->flags = (pcb->desc->flags & ~0x3000) | 0x8000;
-    pcb->state = 0;
-    if (pcb->parent != NULL) {
-        PTP_SBWAKEUP(&pcb->parent->rcv);
-        PTP_SBWAKEUP(&pcb->parent->snd);
-    } else {
-        PTP_SBWAKEUP(&pcb->rcv);
-        PTP_SBWAKEUP(&pcb->snd);
-    }
-}
-
-s32 ptpPoll(SceNetAdhocDesc *d, s32 events) {
-    SceNetAdhocPtpPcb *pcb;
-    SceNetAdhocPtpPcb *c;
-    s32 ret;
-
-    ret = 0;
-    pcb = d->pcb;
-    if ((events & 2) && pcb->rcv.cc >= pcb->rcv.lowat)
-        ret = 2;
-    if ((events & 1) && pcb->snd.hiwat - pcb->snd.cc >= pcb->snd.lowat)
-        ret |= 1;
-    if ((events & 4) && (d->flags & 0x4000))
-        ret |= 4;
-    if ((events & 8) && (d->flags & 0x1000)) {
-        for (c = pcb->cfirst; c != NULL; c = c->cnext) {
-            if (c->desc->flags & 0x4000) {
-                ret |= 8;
-                break;
-            }
-        }
-    }
-    if ((events & 0x10) && pcb->snd.cc == 0)
-        ret |= 0x10;
-    if (ret == 0) {
-        if (events & 2)
-            pcb->rcv.flags |= 2;
-        if (events & 1)
-            pcb->snd.flags |= 2;
-        if (events & 4)
-            pcb->rcv.flags |= 2;
-        if (events & 8)
-            pcb->rcv.flags |= 2;
-        if (events & 0x10)
-            pcb->snd.flags |= 2;
-    }
-    return ret;
-}
-#else
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00004BD8);
+#endif
 
 void ptpEstablished(SceNetAdhocPtpPcb *pcb) {
     _sce_pspnet_callout_stop(&pcb->callout);
@@ -3437,7 +3328,6 @@ s32 ptpPoll(SceNetAdhocDesc *d, s32 events) {
     }
     return ret;
 }
-#endif
 
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", sceNetAdhocGetPtpStat);
 
@@ -3920,20 +3810,31 @@ void ptpTimer(SceNetAdhocPtpPcb *pcb) {
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", ptpKeepAlive);
 #endif
 
-#if FW_VERSION < 201
+#if FW_VERSION < 282
 s32 sceNetAdhocGameModeCreateMaster(void *ptr, s32 size) {
     s32 s;
     s32 ret;
     SceNetEtherAddr addr;
 
+#if FW_VERSION >= 201
+    if (sceKernelCheckThreadStack() < 0x7D0)
+        return 0x80410005;
+#endif
     if (ptr == NULL)
         return 0x80410711;
 #if FW_VERSION >= 150
     if ((u32)(size - 1) >= 0x400)
         return 0x80410705;
 #endif
+#if FW_VERSION >= 201
+    s = _sce_pspnet_spllock();
+    if (s < 0)
+        return s;
+    ret = 0x80410712;
+#else
     ret = 0x80410712;
     s = _sce_pspnet_spllock();
+#endif
     if (g_adhocInit == 0)
         goto end;
     ret = 0x8041071B;
@@ -3955,19 +3856,30 @@ end:
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", sceNetAdhocGameModeCreateMaster);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 201
+#if FW_VERSION >= 150 && FW_VERSION < 282
 s32 sceNetAdhocGameModeCreateReplica(const SceNetEtherAddr *addr, void *ptr, s32 size) {
     s32 s;
     s32 ret;
 
+#if FW_VERSION >= 201
+    if (sceKernelCheckThreadStack() < 0x7E0)
+        return 0x80410005;
+#endif
     if (addr == NULL || ptr == NULL)
         return 0x80410711;
 #if FW_VERSION >= 150
     if ((u32)(size - 1) >= 0x400)
         return 0x80410705;
 #endif
+#if FW_VERSION >= 201
+    s = _sce_pspnet_spllock();
+    if (s < 0)
+        return s;
+    ret = 0x80410712;
+#else
     ret = 0x80410712;
     s = _sce_pspnet_spllock();
+#endif
     if (g_adhocInit == 0)
         goto end;
     ret = 0x8041071B;
@@ -3980,9 +3892,11 @@ end:
 }
 #endif
 
-#if FW_VERSION >= 201
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", sceNetAdhocGameModeCreateReplica);
-#else
+#endif
+
+#if FW_VERSION < 201
 s32 sceNetAdhocGameModeUpdateMaster(void) {
     s32 s;
     s32 ret;
@@ -4019,9 +3933,7 @@ end:
     _sce_pspnet_splunlock(s);
     return ret;
 }
-#endif
-
-#if FW_VERSION >= 201
+#else
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", sceNetAdhocGameModeUpdateMaster);
 
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", sceNetAdhocGameModeDeleteMaster);
@@ -4059,14 +3971,25 @@ s32 sceNetAdhocGameModeCreateReplica(const SceNetEtherAddr *addr, void *ptr, s32
     s32 s;
     s32 ret;
 
+#if FW_VERSION >= 201
+    if (sceKernelCheckThreadStack() < 0x7E0)
+        return 0x80410005;
+#endif
     if (addr == NULL || ptr == NULL)
         return 0x80410711;
 #if FW_VERSION >= 150
     if ((u32)(size - 1) >= 0x400)
         return 0x80410705;
 #endif
+#if FW_VERSION >= 201
+    s = _sce_pspnet_spllock();
+    if (s < 0)
+        return s;
+    ret = 0x80410712;
+#else
     ret = 0x80410712;
     s = _sce_pspnet_spllock();
+#endif
     if (g_adhocInit == 0)
         goto end;
     ret = 0x8041071B;
