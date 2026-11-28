@@ -67,7 +67,55 @@ end:
     return ret;
 }
 #else
-INCLUDE_ASM("nonmatchings/pspnet_adhoc", sceNetAdhocInit);
+s32 sceNetAdhocInit(void) {
+    s32 s;
+    s32 ret;
+
+    if (sceKernelCheckThreadStack() < 0x7F0)
+        return 0x80410005;
+    s = _sce_pspnet_spllock();
+    if (s < 0)
+        return s;
+    ret = 0x80410713;
+    if (g_adhocInit > 0)
+        goto end;
+    sceNetMemset(&g_adhocIntrq, 0, sizeof(g_adhocIntrq));
+    g_adhocIntrq.ifq_maxlen = 50;
+    ret = func_00000DD0();
+    if (ret < 0)
+        goto end;
+    ret = func_0000297C();
+    if (ret < 0)
+        goto err1;
+    ret = func_000052D4();
+    if (ret < 0)
+        goto err2;
+    ret = _sce_pspnet_start_of_adhoc_module_in_netintr(func_00000270, func_00000490);
+    if (ret < 0)
+        goto err3;
+    ret = _sce_pspnet_start_of_adhoc_module_in_if_ethersubr_core(func_0000047C);
+    if (ret < 0)
+        goto err4;
+    if (func_00006F68() < 0)
+        goto err5;
+    g_adhocInit = 1;
+    _sce_pspnet_splunlock(s);
+    return 0;
+
+err5:
+    _sce_pspnet_stop_of_adhoc_module_in_if_ethersubr_core();
+err4:
+    _sce_pspnet_stop_of_adhoc_module_in_netintr();
+err3:
+    func_00004964();
+err2:
+    func_000029E8();
+err1:
+    func_00000E18();
+end:
+    _sce_pspnet_splunlock(s);
+    return ret;
+}
 #endif
 
 s32 sceNetAdhocTerm(void) {
