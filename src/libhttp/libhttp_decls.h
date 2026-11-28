@@ -576,6 +576,7 @@ SceSize BuildHttpHeader(SceHttpReq *req, char *header, unsigned short calc_only)
 int CloneHeader(SceHttpReq *req);
 int CopyHttpHeaderList(_SceHttpReqHeaderList **out, const _SceHttpReqHeaderList *src);
 s32 CreateConnectionWithUrl(s32, s32, s32, s32, s32);
+int CreateHttpExtraHeader(_SceHttpReqHeaderList **out, const SceUChar8 *name, const SceUChar8 *value);
 int CreateRequest(int connection_id, int method, const unsigned char *path, const unsigned char *query, const unsigned char *fragment, SceULong64 content_length, const unsigned char *username, const unsigned char *password, const unsigned char *hostname);
 int DeleteHttpHeader(_SceHttpReqHeaderList **header_list, const SceUChar8 *name);
 void FreeHttpHederList(_SceHttpReqHeaderList *list);
@@ -679,7 +680,7 @@ void func_0000BA84(s32 arg0);
 void func_0000BAF8(void *arg0);
 s32 *func_0000BB14(void);
 int func_0000BB58(const void *s1, const void *s2, int n);
-u8 *func_0000BB98(u8 *arg0, u8 *arg1, s32 arg2);
+u8 *func_0000BB98(u8 *dst, u8 *src, s32 n);
 void *func_0000BBCC(void *s, int c, int n);
 int func_0000BC98(const char *s1, const char *s2);
 int func_0000BE38(const char *s);

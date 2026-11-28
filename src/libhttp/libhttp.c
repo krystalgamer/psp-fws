@@ -1421,7 +1421,70 @@ int InsertNewHttpReq(SceHttpReq *new_request) {
 #if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/libhttp", CopyHttpTmpl);
 
-INCLUDE_ASM("nonmatchings/libhttp", CopyHttpHeaderList);
+int CopyHttpHeaderList(_SceHttpReqHeaderList **out, const _SceHttpReqHeaderList *src) {
+    _SceHttpReqHeaderList *head;
+    _SceHttpReqHeaderList *dst;
+    unsigned char *p;
+    _SceHttpReqHeaderList *n;
+    int ret = 0;
+    int intr;
+
+    if (src == NULL) {
+        *out = NULL;
+        return 0;
+    }
+    head = _sceHttpMallocInternal(sizeof(_SceHttpReqHeaderList));
+    if (head == NULL) {
+        return 0x80431022;
+    }
+    head->field_name = NULL;
+    head->field_value = NULL;
+    head->next = NULL;
+    dst = head;
+    intr = sceKernelSuspendDispatchThread();
+    do {
+        if (src->field_name != NULL) {
+            p = _sceHttpMallocInternal(func_0000BE38((const char *)src->field_name) + 1);
+            dst->field_name = p;
+            if (p == NULL) {
+                goto nomem;
+            }
+            func_0000C0DC((char *)p, (const char *)src->field_name);
+        }
+        if (src->field_value != NULL) {
+            p = _sceHttpMallocInternal(func_0000BE38((const char *)src->field_value) + 1);
+            dst->field_value = p;
+            if (p == NULL) {
+                goto nomem;
+            }
+            func_0000C0DC((char *)p, (const char *)src->field_value);
+        }
+        if (src->next != NULL) {
+            n = _sceHttpMallocInternal(sizeof(_SceHttpReqHeaderList));
+            dst->next = n;
+            if (n == NULL) {
+                goto nomem;
+            }
+            n->field_name = NULL;
+            n->field_value = NULL;
+            n->next = NULL;
+        }
+        src = src->next;
+        dst = dst->next;
+    } while (src != NULL);
+    goto end;
+nomem:
+    ret = 0x80431022;
+end:
+    sceKernelResumeDispatchThread(intr);
+    if (ret < 0) {
+        FreeHttpHederList(head);
+    } else {
+        *out = head;
+        return ret;
+    }
+    return ret;
+}
 
 int HttpWhichId(int id) {
     int tmp;
@@ -1447,7 +1510,56 @@ int HttpWhichId(int id) {
 
 INCLUDE_ASM("nonmatchings/libhttp", ConnectNonblock);
 
-INCLUDE_ASM("nonmatchings/libhttp", CreateHttpExtraHeader);
+int CreateHttpExtraHeader(_SceHttpReqHeaderList **out, const SceUChar8 *name, const SceUChar8 *value) {
+    _SceHttpReqHeaderList *h;
+    int ret = 0x804311FE;
+    SceSize len;
+
+    if (name == NULL || value == NULL) {
+        goto out;
+    }
+    h = _sceHttpMallocInternal(sizeof(_SceHttpReqHeaderList));
+    if (h == NULL) {
+        ret = 0x80431022;
+        goto fail;
+    }
+    h->field_name = NULL;
+    h->field_value = NULL;
+    h->next = NULL;
+    len = func_0000BE38((const char *)name);
+    h->field_name = _sceHttpMallocInternal(len + 1);
+    if (h->field_name == NULL) {
+        ret = 0x80431022;
+        goto fail;
+    }
+    func_0000BB98(h->field_name, (u8 *)name, len);
+    h->field_name[len] = '\0';
+    if (value != NULL) {
+        len = func_0000BE38((const char *)value);
+        h->field_value = _sceHttpMallocInternal(len + 1);
+        if (h->field_value == NULL) {
+            ret = 0x80431022;
+            goto fail;
+        }
+        func_0000BB98(h->field_value, (u8 *)value, len);
+        h->field_value[len] = '\0';
+    }
+    *out = h;
+    return 0;
+
+fail:
+    if (h != NULL) {
+        if (h->field_name != NULL) {
+            _sceHttpFreeInternal(h->field_name);
+        }
+        if (h->field_value != NULL) {
+            _sceHttpFreeInternal(h->field_value);
+        }
+        _sceHttpFreeInternal(h);
+    }
+out:
+    return ret;
+}
 
 void FreeHttpHederList(_SceHttpReqHeaderList *list) {
     _SceHttpReqHeaderList *next;
