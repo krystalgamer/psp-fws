@@ -1814,12 +1814,20 @@ extern s32 D_0002C208; /* ip_maxfragpackets */
 extern s32 D_0002C228;
 extern s32 D_0002C22C;
 extern s32 D_0002C234;
+extern s32 D_0002C240;
 extern s32 D_0002C270; /* icmpreturndatabytes */
 extern s32 D_0002C318;
 extern s32 D_0002C358;
 extern s32 D_0002C364;
 extern s32 D_0002C368;
+extern s32 D_0002C374;
+extern s32 D_0002C384;
+extern s32 D_0002C38C;
+extern s32 D_0002C390;
+extern s32 D_0002C394;
+extern s32 D_0002C398;
 extern s32 D_0002C39C;
+extern s32 D_0002C3A4;
 extern s32 D_0002C4F0;
 extern s32 D_0002C4F4;
 extern s32 D_0002C504;
@@ -1839,6 +1847,9 @@ extern s32 D_0002C594;
 extern s32 D_0002C5B4; /* icmpmaskrepl */
 extern struct { struct SceNetInetKeyNode *lh_first; } D_0002C5B8;
 extern u8 D_0002C5DC[];
+extern s32 D_0002C610;
+extern s32 D_0002C614_v201;
+extern s32 D_0002C618;
 extern u8 D_0002CC50[]; /* pffasttimo_ch */
 extern u8 D_0002CC74[]; /* pfslowtimo_ch */
 extern struct { struct rttimer_queue *lh_first; } D_0002CCB4; /* rttimer_queue_head */
@@ -1856,6 +1867,7 @@ extern struct { struct ipq *lh_first; } D_0002DA48; /* ipq */
 extern u8 D_0002DA50[0x170]; /* icmpstat */
 extern M2C_UNK D_0002DBC8;
 extern struct inpcbtable D_0002DC78;
+extern s32 D_0002DCE4;
 extern struct route D_0002E19C;
 extern s32 D_0002E5EC;
 extern s32 D_0002E5F0;
@@ -2115,8 +2127,11 @@ void func_00010528(struct mbuf *m);
 s32 func_000106E0(void);
 s32 func_00010700(void);
 s32 func_00010874(struct socket *so, s32 cmd, void *data, struct ifnet *ifp);
+s32 func_00010D50(struct socket *so, s32 cmd, void *data, struct ifnet *ifp);
 s32 func_000123FC(struct in_addr in);
 s32 func_00013114(void *v, struct mbuf *nam);
+void func_00014260(struct inpcb *inp, struct mbuf *nam);
+void func_000142CC(struct inpcb *inp, struct mbuf *nam);
 s32 func_00019A98(void);
 void func_00019C00(struct rtentry *rt);
 s32 func_0001A410(void);
@@ -2414,7 +2429,7 @@ void tcp_mtudisc_callback(struct in_addr addr);
 u32 tcp_new_iss(struct tcpcb *tp, u32 len, u32 addin);
 struct tcpcb *tcp_newtcpcb(s32 family, void *aux);
 void tcp_notify(struct inpcb *inp, s32 error);
-s32 tcp_optlen(void *tp);
+s32 tcp_optlen(void *arg0);
 s32 tcp_output(struct tcpcb *tp);
 void tcp_pulloutofband(struct socket *so, struct tcphdr *th, struct mbuf *m, s32 off);
 void tcp_quench(struct inpcb *inp, s32 errno);
