@@ -12,4 +12,4 @@ func_000021B8 = 0x000021B8; // type:func
 func_000024D4 = 0x000024D4; // type:func
 func_00002BA4 = 0x00002BA4; // type:func
 func_00002FC0 = 0x00002FC0; // type:func
-func_0000762C = 0x00007634; // type:func
+func_0000763C = 0x00007644; // type:func
