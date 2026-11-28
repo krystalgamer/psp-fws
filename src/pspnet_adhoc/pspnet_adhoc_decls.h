@@ -449,6 +449,7 @@ s32 func_00000F60(u8 type, SceNetAdhocDesc **out);
 s32 func_00000FB4(u8 type, SceNetAdhocDesc **out);
 s32 func_00001600(SceNetAdhocDesc *d, const SceNetEtherAddr *daddr, u16 dport, const void *data, s32 len, u32 timeout, s32 nonblock);
 s32 func_000016B4(SceNetAdhocDesc *d, const SceNetEtherAddr *daddr, u16 dport, const void *data, s32 len, u32 timeout, s32 nonblock);
+s32 func_00001C28(SceNetAdhocDesc *d, SceNetEtherAddr *addr, u16 *port, void *buf, s32 *len, u32 timeout, s32 nonblock, SceNetAdhocPdpRfInfo *rfinfo);
 s32 func_0000215C(s32 id, SceNetEtherAddr *addr, u16 *port, void *buf, s32 *len, u32 timeout, s32 nonblock, void *rfinfo);
 void func_000022FC(struct mbuf *m);
 s32 func_00002D20(SceNetAdhocPdpPcb *pcb, s32 size);
