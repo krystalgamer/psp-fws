@@ -828,7 +828,74 @@ end:
     _sce_pspnet_splunlock(s);
     return ret;
 }
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 282
+s32 sceNetAdhocPdpDelete(s32 id, s32 flag) {
+    s32 s;
+    s32 ret;
+    SceNetAdhocDesc *d;
+    SceNetAdhocPdpPcb *pcb;
+    struct ifnet *ifp;
+
+    ret = 0;
+#if FW_VERSION >= 201
+    if (sceKernelCheckThreadStack() < 0x7E0)
+        return 0x80410005;
+    if (flag != 0)
+        return 0x80410711;
+    s = _sce_pspnet_spllock();
+    if (s < 0)
+        return s;
 #else
+    s = _sce_pspnet_spllock();
+#endif
+    if (g_adhocInit == 0) {
+        ret = 0x80410712;
+        goto end;
+    }
+    d = func_00000E90(1, id);
+    if (d == NULL) {
+        ret = 0x80410701;
+        goto end;
+    }
+    pcb = d->pcb;
+    if (pcb->flags & 1) {
+        pcb->flags &= ~1;
+        _sce_pspnet_wakeup(&pcb->rcvq_first);
+    }
+    if (pcb->flags & 2) {
+        pcb->flags &= ~2;
+        _sce_pspnet_wakeup(&g_adhocSelChan);
+    }
+    ifp = _sce_pspnet_ifplookup_lladdr(&pcb->laddr);
+    if (ifp != NULL) {
+        if (ifp->if_adhocflags & 1) {
+            ifp->if_adhocflags &= ~1;
+            _sce_pspnet_wakeup(&ifp->if_snd);
+        }
+        if (ifp->if_adhocflags & 2) {
+            ifp->if_adhocflags &= ~2;
+            _sce_pspnet_wakeup(&g_adhocSelChan);
+        }
+    } else {
+        _sce_pspnet_wakeup(d->sndchan);
+        _sce_pspnet_wakeup(&g_adhocSelChan);
+    }
+    func_0000223C(pcb);
+    d->flags |= 1;
+    d->id = -1;
+    if (d->waiters == NULL) {
+        func_00002CD4(d);
+        func_00000FFC(d);
+    }
+end:
+    _sce_pspnet_splunlock(s);
+    return ret;
+}
+#endif
+
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", sceNetAdhocPdpDelete);
 #endif
 
