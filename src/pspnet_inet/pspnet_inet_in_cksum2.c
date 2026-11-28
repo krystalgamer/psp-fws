@@ -532,7 +532,6 @@ s32 in_pcballoc(struct socket *so, void *v) {
 INCLUDE_ASM("nonmatchings/pspnet_inet_in_cksum2", in_pcballoc);
 #endif
 
-#if FW_VERSION < 282
 void in_pcbdisconnect(void *v) {
     struct inpcb *inp = v;
 
@@ -559,9 +558,6 @@ void in_pcbdisconnect(void *v) {
         sceNetFreeInternal(inp);
     }
 }
-#else
-INCLUDE_ASM("nonmatchings/pspnet_inet_in_cksum2", in_pcbdisconnect);
-#endif
 
 void in_pcbdetach(void *v) {
     struct inpcb *inp = v;
@@ -1653,7 +1649,8 @@ s32 ip_setmoptions(s32 optname, struct ip_moptions **imop, struct mbuf *m) {
 
 #if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/pspnet_inet_in_cksum2", func_00017DA0);
-#else
+#endif
+
 s32 ip_getmoptions(s32 optname, struct ip_moptions *imo, struct mbuf **mp) {
     u8 *ttl;
     u8 *loop;
@@ -1689,11 +1686,6 @@ s32 ip_getmoptions(s32 optname, struct ip_moptions *imo, struct mbuf **mp) {
         return (0x5F);
     }
 }
-#endif
-
-#if FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/pspnet_inet_in_cksum2", ip_getmoptions);
-#endif
 
 #if FW_VERSION < 250
 void ip_mloopback(struct ifnet *ifp, struct mbuf *m, struct sockaddr_in *dst) {
@@ -2042,7 +2034,6 @@ void igmp_fasttimo(void) {
     _sce_pspnet_splunlock(s);
 }
 
-#if FW_VERSION < 282
 void igmp_sendpkt(struct in_multi *inm, s32 type) {
     struct mbuf *m;
     struct igmp *igmp;
@@ -2088,9 +2079,6 @@ void igmp_sendpkt(struct in_multi *inm, s32 type) {
     ip_output(m, (struct mbuf *)0, (struct route *)0, 0, &imo);
     ++igmp_stat.igps_snd_reports;
 }
-#else
-INCLUDE_ASM("nonmatchings/pspnet_inet_in_cksum2", igmp_sendpkt);
-#endif
 
 #if FW_VERSION < 201
 void func_0001B398(void) {
@@ -2250,7 +2238,8 @@ void rip_input(struct mbuf *m, ...) {
 
 #if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/pspnet_inet_in_cksum2", func_0001AAFC);
-#else
+#endif
+
 s32 rip_output(struct mbuf *m, ...) {
     struct inpcb *inp;
     struct ip *ip;
@@ -2297,11 +2286,6 @@ s32 rip_output(struct mbuf *m, ...) {
     }
     return (ip_output(m, opts, &inp->inp_route, flags, inp->inp_moptions, &inp->inp_errormtu));
 }
-#endif
-
-#if FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/pspnet_inet_in_cksum2", rip_output);
-#endif
 
 #if FW_VERSION < 250
 s32 rip_ctloutput(s32 op, struct socket *so, s32 level, s32 optname, struct mbuf **m) {

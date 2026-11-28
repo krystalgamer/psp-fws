@@ -546,7 +546,8 @@ s32 func_00004124(struct socket *so, struct mbuf *nam) {
     _sce_pspnet_splunlock(s);
     return error;
 }
-#else
+#endif
+
 s32 solisten(struct socket *so, s32 backlog) {
     s32 s = _sce_pspnet_spllock();
     s32 error;
@@ -566,11 +567,6 @@ s32 solisten(struct socket *so, s32 backlog) {
     _sce_pspnet_splunlock(s);
     return 0;
 }
-#endif
-
-#if FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/pspnet_inet", solisten);
-#endif
 
 #if FW_VERSION < 271
 s32 soaccept(struct socket *so, struct mbuf *nam) {

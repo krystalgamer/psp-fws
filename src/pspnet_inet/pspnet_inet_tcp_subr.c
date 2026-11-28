@@ -508,7 +508,8 @@ s32 tcp_optlen(void *arg0) {
 s32 func_00023828(struct Unk_func_00023828_0 *arg0) {
     return (((arg0->unk2A & 0x188) ^ 0x180) != 0) ? 0 : 0xC;
 }
-#else
+#endif
+
 struct tcpcb *tcp_drop(struct tcpcb *tp, s32 errno) {
     struct socket *so;
 
@@ -530,11 +531,6 @@ struct tcpcb *tcp_drop(struct tcpcb *tp, s32 errno) {
     so->so_error = errno;
     return tcp_close(tp);
 }
-#endif
-
-#if FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", tcp_drop);
-#endif
 
 INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", tcp_drain);
 
@@ -637,10 +633,30 @@ void func_00023AB8(struct Unk_func_00023AB8_0 *arg0) {
 
 INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", func_00023AD4);
 
-INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", tcp_mtudisc);
+void tcp_mtudisc(struct inpcb *inp, s32 errno) {
+    struct tcpcb *tp = (struct tcpcb *)inp->inp_ppcb;
+    struct rtentry *rt = in_pcbrtentry(inp);
+
+    if (tp != 0) {
+        if (rt != 0) {
+            if ((rt->rt_flags & RTF_HOST) == 0) {
+                in_rtchange(inp, errno);
+                if ((rt = in_pcbrtentry(inp)) == 0) {
+                    return;
+                }
+            }
+            if (rt->rt_rmx.rmx_mtu != 0) {
+                tp->snd_cwnd = TCP_INITIAL_WINDOW(tcp_init_win, rt->rt_rmx.rmx_mtu);
+            }
+        }
+        tp->snd_nxt = tp->snd_una;
+        tcp_output(tp);
+    }
+}
 
 INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", func_00023BD8);
-#else
+#endif
+
 void tcp_established(struct tcpcb *tp) {
     struct socket *so;
     struct rtentry *rt;
@@ -667,11 +683,6 @@ void tcp_established(struct tcpcb *tp) {
         (void)sbreserve(&so->so_rcv, bufsize);
     }
 }
-#endif
-
-#if FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", tcp_established);
-#endif
 
 #if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", func_00023D1C);

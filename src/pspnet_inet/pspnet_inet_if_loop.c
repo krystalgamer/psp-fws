@@ -53,9 +53,7 @@ void loopattach(void) {
     ifp->if_addrlen = 0; //P
     _sce_pspnet_if_attach(ifp);
 }
-#endif
-
-#if FW_VERSION >= 201 && FW_VERSION < 282
+#else
 void loopattach(void) {
     struct ifnet *ifp = &loif;
 
@@ -70,10 +68,6 @@ void loopattach(void) {
     ifp->if_addrlen = 0; //P
     _sce_pspnet_if_attach(ifp);
 }
-#endif
-
-#if FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/pspnet_inet_if_loop", loopattach);
 #endif
 
 void lortrequest(s32 cmd, struct rtentry *rt) {
