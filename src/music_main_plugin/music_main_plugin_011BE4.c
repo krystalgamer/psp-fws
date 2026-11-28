@@ -62,9 +62,23 @@ Class_000B2FE0::~Class_000B2FE0() {
 }
 
 INCLUDE_ASM("nonmatchings/music_main_plugin_011BE4", func_000154A8);
+#endif
 
+#if FW_VERSION >= 301
 INCLUDE_ASM("nonmatchings/music_main_plugin_011BE4", func_0001561C);
+#endif
 
+#if FW_VERSION == 300
+s32 func_0001561C(void *arg0) {
+    s32 temp_v0;
+
+    temp_v0 = M2C_FIELD(arg0, s32 *, 0xC);
+    M2C_FIELD(arg0, s32 *, 0xC) = 1;
+    return temp_v0;
+}
+#endif
+
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/music_main_plugin_011BE4", func_0001562C);
 
 INCLUDE_ASM("nonmatchings/music_main_plugin_011BE4", func_0001588C);
