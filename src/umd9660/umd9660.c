@@ -1051,7 +1051,34 @@ INCLUDE_ASM("nonmatchings/umd9660", func_00003328);
 INCLUDE_ASM("nonmatchings/umd9660", func_00003370);
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION < 271
+s32 sceUmd9660GetUnitNum(const char *name) {
+    s32 i = 0;
+    const char *p = name;
+    char buf[0x10];
+    char *c;
+    if (name == NULL) {
+        return 0x80010016;
+    }
+    for (i = 0; i < strlen(name); i++) {
+        if (!(look_ctype_table(name[i]) & 8)) {
+            break;
+        }
+        p++;
+    }
+    if (strcmp(p, D_00005B30) != 0) {
+        return 0x80010013;
+    }
+    c = strchr(p, ':');
+    if (c == NULL) {
+        return 0x80010013;
+    }
+    memcpy(buf, p + 3, c - ((u8 *)p)[i + 3]);
+    return strtol(buf, NULL, 16);
+}
+#endif
+
+#if FW_VERSION == 271
 INCLUDE_ASM("nonmatchings/umd9660", sceUmd9660GetUnitNum);
 #endif
 
