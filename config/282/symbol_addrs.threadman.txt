@@ -202,3 +202,7 @@ sceKernelRegisterResumeHandler = 0x000157C4; // type:func
 g_threadmanInfo = 0x00016C74;
 func_00000268 = 0x0000022C; // type:func
 func_000000B0 = 0x00000000; // type:func
+threadReturnStub = 0x00014480; // type:func
+setAlarm = 0x0000EFF4; // type:func
+deleteUIDDeferred = 0x0000FE78; // type:func
+timerUpdate = 0x0000C2EC; // type:func

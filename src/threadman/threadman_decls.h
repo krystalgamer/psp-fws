@@ -28,54 +28,13 @@ typedef struct SceSysmemUidCB {
 
 #define UID_CB_TO_DATA(cb, type, T) ((T *)((u8 *)(cb) + (type)->size * 4))
 
-/* user-visible status structs (uOFW threadman_kernel.h) */
-typedef struct {
-    SceSize size;
-    u32 status;
-    u32 idleClocksLow;
-    u32 idleClocksHi;
-    u32 comesOutOfIdleCount;
-    u32 threadSwitchCount;
-    u32 vfpuSwitchCount;
-} SceKernelSystemStatus;
-
-typedef struct {
-    SceSize size;
-    char name[32];
-    u32 attr;
-    s32 initCount;
-    s32 currentCount;
-    s32 maxCount;
-    s32 numWaitThreads;
-} SceKernelSemaInfo;
-
-typedef struct {
-    SceSize size;
-    char name[32];
-    u32 attr;
-    u32 initPattern;
-    u32 currentPattern;
-    s32 numWaitThreads;
-} SceKernelEventFlagInfo;
-
-/* "Semaphore" uid type data */
-typedef struct SceSema {
-    s32 unk0;
-    s32 currentCount; /* 0x04 */
-    s32 maxCount; /* 0x08 */
-    s32 initCount; /* 0x0C */
-} SceSema;
-
-/* "EventFlag" uid type data (partial) */
-typedef struct SceEventFlag {
-    u32 initPattern; /* 0x00 */
-    u32 currentPattern; /* 0x04 */
-} SceEventFlag;
-
 /* "MsgPipe" uid type data (partial) */
 typedef struct SceMsgPipe {
     s32 unk0;
-    s32 unk4; /* 0x04: cleared when the last waiting thread leaves */
+    s32 unk4; /* 0x04: who waits: 1 = senders, 2 = receivers, 0 = nobody */
+    u8 unk8[0x14 - 0x8];
+    s32 bufSize; /* 0x14 */
+    s32 usedSize; /* 0x18 */
 } SceMsgPipe;
 
 struct Unk_func_00000448_temp_s0 {
@@ -270,6 +229,9 @@ typedef struct SceThreadCbObj {
     struct SceThread *thread; /* 0x14: owner (Callback) */
     s32 notifyCount; /* 0x18 (Callback) */
     s32 notifyArg; /* 0x1C (Callback) */
+    s32 unk20; /* 0x20 */
+    void *callback; /* 0x24 (Callback) */
+    void *common; /* 0x28 (Callback) */
 } SceThreadCbObj;
 
 typedef struct {
@@ -282,12 +244,16 @@ typedef struct SceTimer {
     struct SceTimer *next; /* 0x00 */
     struct SceTimer *prev; /* 0x04 */
     SceKernelSysClock time; /* 0x08: expiry time */
+    s32 unk10; /* 0x10: firing; set when cancelled from an interrupt */
 } SceTimer;
 
 /* "VTimer" uid type data (partial) */
 typedef struct SceVTimer {
     s32 active; /* 0x00 */
     SceKernelSysClock base; /* 0x04: system time when started */
+    SceKernelSysClock schedule; /* 0x0C: handler time, relative to base */
+    u32 unk14;
+    void *handler; /* 0x18 */
 } SceVTimer;
 
 enum SceThreadStatus {
@@ -299,6 +265,139 @@ enum SceThreadStatus {
     THREAD_STOPPED = 0x10,
     THREAD_KILLED = 0x20
 };
+
+/* user-visible status structs (uOFW threadman_kernel.h) */
+typedef struct {
+    SceSize size;
+    u32 status;
+    u32 idleClocksLow;
+    u32 idleClocksHi;
+    u32 comesOutOfIdleCount;
+    u32 threadSwitchCount;
+    u32 vfpuSwitchCount;
+} SceKernelSystemStatus;
+
+typedef struct {
+    SceSize size;
+    char name[32];
+    u32 attr;
+    s32 initCount;
+    s32 currentCount;
+    s32 maxCount;
+    s32 numWaitThreads;
+} SceKernelSemaInfo;
+
+typedef struct {
+    SceSize size;
+    char name[32];
+    u32 attr;
+    u32 initPattern;
+    u32 currentPattern;
+    s32 numWaitThreads;
+} SceKernelEventFlagInfo;
+
+/* "Semaphore" uid type data */
+typedef struct SceSema {
+    s32 unk0;
+    s32 currentCount; /* 0x04 */
+    s32 maxCount; /* 0x08 */
+    s32 initCount; /* 0x0C */
+} SceSema;
+
+/* "EventFlag" uid type data (partial) */
+typedef struct SceEventFlag {
+    u32 unk0; /* 0x00 */
+    u32 currentPattern; /* 0x04 */
+    u32 initPattern; /* 0x08 */
+} SceEventFlag;
+
+typedef struct {
+    SceSize size;
+    char name[32];
+    u32 attr;
+    s32 blockSize;
+    s32 numBlocks;
+    s32 freeBlocks;
+    s32 numWaitThreads;
+} SceKernelFplInfo;
+
+typedef struct {
+    SceSize size;
+    char name[32];
+    u32 attr;
+    s32 poolSize;
+    s32 freeSize;
+    s32 numWaitThreads;
+} SceKernelVplInfo;
+
+typedef struct {
+    SceSize size;
+    char name[32];
+    u32 attr;
+    s32 numWaitThreads;
+    s32 numMessages;
+    void *firstMessage;
+} SceKernelMbxInfo;
+
+typedef struct {
+    SceSize size;
+    char name[32];
+    SceUID threadId;
+    void *callback;
+    void *common;
+    s32 notifyCount;
+    s32 notifyArg;
+} SceKernelCallbackInfo;
+
+typedef struct {
+    SceSize size;
+    SceKernelSysClock schedule;
+    void *handler;
+    void *common;
+} SceKernelAlarmInfo;
+
+typedef struct {
+    SceSize size;
+    char name[32];
+    u32 attr;
+    s32 bufSize;
+    s32 freeSize;
+    s32 numSendWaitThreads;
+    s32 numReceiveWaitThreads;
+} SceKernelMppInfo;
+
+/* "Alarm" uid type data (partial) */
+typedef struct SceAlarm {
+    u32 unk0;
+    void *handler; /* 0x04 */
+    void *common; /* 0x08 */
+} SceAlarm;
+
+/* "Fpl" uid type data (partial) */
+typedef struct SceFpl {
+    u32 unk0;
+    u8 *pool; /* 0x04 */
+    void **freeList; /* 0x08: last free block of a ring */
+    u8 *unkC; /* 0x0C */
+    s32 freeBlocks; /* 0x10 */
+    s32 blockSize; /* 0x14 */
+    s32 numBlocks; /* 0x18 */
+    s32 blockStride; /* 0x1C */
+} SceFpl;
+
+/* "Vpl" uid type data (partial) */
+typedef struct SceVpl {
+    u32 unk0;
+    SceUID heapId; /* 0x04 */
+    s32 poolSize; /* 0x08 */
+} SceVpl;
+
+/* "Mbx" uid type data (partial) */
+typedef struct SceMbx {
+    u32 unk0;
+    s32 numMessages; /* 0x04 */
+    void **lastMessage; /* 0x08: messages form a ring; lastMessage[0] is the first */
+} SceMbx;
 
 /* saved state of the syscall the thread is in (partial) */
 typedef struct SceThreadSyscallFrame {
@@ -320,7 +419,8 @@ typedef struct SceThread {
     s32 waitType; /* 0x1C */
     SceSysmemUidCB *waitObj; /* 0x20 */
     s32 waitArg0; /* 0x24: e.g. the count a sema waiter needs */
-    u8 unk28[0x38 - 0x28];
+    s32 waitArg1; /* 0x28: e.g. the size a Vpl waiter needs */
+    u8 unk2C[0x38 - 0x2C];
     s32 unk38; /* 0x38 */
     s32 *unk3C; /* 0x3C: where the remaining timeout is written back */
     s32 waitRet; /* 0x40 */
@@ -404,7 +504,9 @@ typedef struct SceThreadmanInfo {
     u32 unk430; /* 0x430: system time low word at last update */
     u32 unk434; /* 0x434: system time high word */
     u32 unk438; /* 0x438: next timer event (low word) */
-    u8 unk43C[0x584 - 0x43C];
+    u8 unk43C[0x440 - 0x43C];
+    SceUID unk440; /* 0x440: the alarm whose handler is running */
+    u8 unk444[0x584 - 0x444];
     SceThread *idleThread; /* 0x584 */
     u8 unk588[0x5B8 - 0x588];
     s32 unk5B8; /* 0x5B8: number of free Delay uids in unk5C4 */
@@ -439,6 +541,12 @@ typedef struct SceThreadmanInfo {
         u32 size;
         SceKernelSemaInfo sema;
         SceKernelEventFlagInfo eventFlag;
+        SceKernelFplInfo fpl;
+        SceKernelVplInfo vpl;
+        SceKernelMbxInfo mbx;
+        SceKernelCallbackInfo callback;
+        SceKernelAlarmInfo alarm;
+        SceKernelMppInfo msgPipe;
         u8 buf[0x84];
     } tmpInfo; /* 0x660: refer-status scratch buffer */
     u8 unk6E4[0x6E8 - 0x6E4];
@@ -452,7 +560,9 @@ typedef struct SceThreadmanInfo {
     u32 unk430; /* 0x430 */
     u32 unk434; /* 0x434 */
     u32 unk438; /* 0x438 */
-    u8 unk43C[0x5F8 - 0x43C];
+    u8 unk43C[0x440 - 0x43C];
+    SceUID unk440; /* 0x440: the alarm whose handler is running */
+    u8 unk444[0x5F8 - 0x444];
     s32 unk5B8; /* 0x5F8 (0x5B8 in 1.00) */
     SceThreadQueue timers; /* 0x5FC */
     SceThreadQueue unk5C4; /* 0x604 */
@@ -478,12 +588,31 @@ typedef struct SceThreadmanInfo {
     SceSysmemUidCB *uidDelayType;
     SceSysmemUidCB *uidAlarmType;
     SceSysmemUidCB *uidVTimerType;
+    u8 unkUidEnd[0x2C];
+    union {
+        u32 size;
+        SceKernelSemaInfo sema;
+        SceKernelEventFlagInfo eventFlag;
+        SceKernelFplInfo fpl;
+        SceKernelVplInfo vpl;
+        SceKernelMbxInfo mbx;
+        SceKernelCallbackInfo callback;
+        SceKernelAlarmInfo alarm;
+        SceKernelMppInfo msgPipe;
+        u8 buf[0x84];
+    } tmpInfo; /* refer-status scratch buffer (0x660 in 1.00) */
 #if FW_VERSION < 282
-    u8 unkUidEnd[THREADMAN_TIMERINTR_OFF - THREADMAN_UID_OFF - THREADMAN_NUM_UID * 4];
+    u8 unkTmpEnd[THREADMAN_TIMERINTR_OFF - THREADMAN_UID_OFF - THREADMAN_NUM_UID * 4 - 0x2C - 0x84];
     s32 unk6E8; /* system timer interrupt number (0x6E8 in 1.00) */
-    u8 unkTimerEnd[THREADMAN_LOG_OFF - THREADMAN_TIMERINTR_OFF - 4];
+#if FW_VERSION >= 152
+    u8 unkTimerEnd[8];
+    SceTimer *timerCursor; /* 1.52+: next timer of the expiry walk, kept valid by cancels */
+    u8 unkTimerEnd2[THREADMAN_LOG_OFF - THREADMAN_TIMERINTR_OFF - 0x10];
 #else
-    u8 unkUidEnd[THREADMAN_LOG_OFF - THREADMAN_UID_OFF - THREADMAN_NUM_UID * 4];
+    u8 unkTimerEnd[THREADMAN_LOG_OFF - THREADMAN_TIMERINTR_OFF - 4];
+#endif
+#else
+    u8 unkTmpEnd[THREADMAN_LOG_OFF - THREADMAN_UID_OFF - THREADMAN_NUM_UID * 4 - 0x2C - 0x84];
 #endif
 #else
     u8 unk41C[THREADMAN_LOG_OFF - 0x41C];
@@ -633,6 +762,7 @@ s32 func_000087C0(void *arg0);
 s32 func_00009874(void *arg0);
 s32 func_00009B94(struct Unk_func_00009B94_0 *arg0);
 s32 func_00009BBC(s32 arg0, struct Unk_func_00009BBC_1 *arg1, s32 arg2, s32 arg3);
+void func_0000A818(SceFpl *fpl, s32 block);
 s32 func_0000A8A8(void *arg0);
 s32 func_0000ABD8(struct Unk_func_0000ABD8_0 *arg0);
 u64 func_0000B490(void);
@@ -673,8 +803,10 @@ void func_00011B68(void *arg0, s32 arg1);
 void func_000127F8(struct Unk_func_000127F8_0 *arg0, s32 arg1);
 s32 func_000136C0(void);
 s32 func_0001444C(void);
+s32 mbxAddMessage(SceMbx *mbx, SceWaitQ *wq, void *message);
 M2C_UNK memset(s32, M2C_UNK, s32);
 s32 module_reboot_before(void);
+void *sceKernelAllocHeapMemory(SceUID heapId, SceSize size);
 void sceKernelAssert(s32 test, s32 lvl);
 M2C_UNK sceKernelCallUIDObjCommonFunction();
 M2C_UNK sceKernelCallUIDObjFunction(s32, M2C_UNK);
@@ -690,6 +822,7 @@ s32 sceKernelFreePartitionMemory(); /* (SceUID blockId); one 2.x draft passes tw
 void sceKernelGetKTLS(s32 arg0);
 s32 sceKernelGetSystemStatusFlag(void);
 s32 sceKernelGetThreadKTLS(s32, s32, s32);
+s32 sceKernelHeapTotalFreeSize(SceUID id);
 s32 sceKernelIsIntrContext(void);
 void * sceKernelMemset(void *, s32, u32);
 s32 sceKernelQueryMemoryInfo(u32 address, s32 *partitionId, SceUID *memoryBlockId);
@@ -697,5 +830,7 @@ s32 sceKernelRegisterDeadThreadHandler(s32 arg0);
 M2C_UNK sceKernelReleaseExceptionHandler(M2C_UNK, M2C_UNK *);
 M2C_UNK sceKernelReleaseIntrHandler(s32);
 s64 sceKernelUSec2SysClockWide(u32 arg0);
+SceUID setAlarm(u64 clock, void *handler, void *common);
+void wakeFirstWaitThread(SceSysmemUidCB *cb, s32 waitRet, s32 isIntr, s32 intr);
 
 #endif
