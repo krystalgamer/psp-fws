@@ -28,7 +28,12 @@ void func_000243B8(struct Unk_func_000243B8_0 *arg0) {
 }
 #endif
 
-#if FW_VERSION < 350
+#if FW_VERSION >= 310 && FW_VERSION < 350
+Class_0002C150::Class_0002C150() {
+}
+#endif
+
+#if FW_VERSION == 300
 void func_000243CC(M2C_UNK **arg0) {
     *arg0 = &D_0002C150;
 }
@@ -36,12 +41,12 @@ void func_000243CC(M2C_UNK **arg0) {
 void func_000243DC(M2C_UNK **arg0) {
     *arg0 = &D_0002C150;
 }
-#endif
-
-#if FW_VERSION >= 310
+#else
 Class_0002C150::~Class_0002C150() {
 }
-#else
+#endif
+
+#if FW_VERSION == 300
 INCLUDE_ASM("nonmatchings/premo_plugin_02435C", func_0001C404);
 
 INCLUDE_ASM("nonmatchings/premo_plugin_02435C", func_0001C414);

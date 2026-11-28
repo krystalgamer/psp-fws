@@ -23,6 +23,7 @@ public:
 /* vtable _ZTV14Class_0002C150 is data (vptr = label - 8 + 8) */
 class Class_0002C150 {
 public:
+    Class_0002C150();
     virtual ~Class_0002C150();
 };
 #endif
@@ -1585,6 +1586,8 @@ M2C_UNK InputDevice_PspPad_Lock(...);
 void _ZN14Class_0002AAF0D0Ev(M2C_UNK **arg0);
 void _ZN14Class_0002AAF0D1Ev(M2C_UNK **arg0);
 void _ZN14Class_0002AAF0D2Ev(M2C_UNK **arg0);
+void _ZN14Class_0002C150C1Ev(M2C_UNK **arg0);
+void _ZN14Class_0002C150C2Ev(M2C_UNK **arg0);
 void _ZN14Class_0002C150D0Ev(M2C_UNK **arg0);
 void _ZN14Class_0002C150D1Ev(M2C_UNK **arg0);
 s32 _ZN14Class_0002C150D2Ev(void *self);

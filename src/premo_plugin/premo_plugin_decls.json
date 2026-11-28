@@ -7,6 +7,8 @@
   "_ZN14Class_0002AAF0D0Ev": "void _ZN14Class_0002AAF0D0Ev(M2C_UNK **arg0);",
   "_ZN14Class_0002AAF0D1Ev": "void _ZN14Class_0002AAF0D1Ev(M2C_UNK **arg0);",
   "_ZN14Class_0002AAF0D2Ev": "void _ZN14Class_0002AAF0D2Ev(M2C_UNK **arg0);",
+  "_ZN14Class_0002C150C1Ev": "void _ZN14Class_0002C150C1Ev(M2C_UNK **arg0);",
+  "_ZN14Class_0002C150C2Ev": "void _ZN14Class_0002C150C2Ev(M2C_UNK **arg0);",
   "_ZN14Class_0002C150D0Ev": "void _ZN14Class_0002C150D0Ev(M2C_UNK **arg0);",
   "_ZN14Class_0002C150D1Ev": "void _ZN14Class_0002C150D1Ev(M2C_UNK **arg0);",
   "_ZN14Class_0002C150D2Ev": "s32 _ZN14Class_0002C150D2Ev(void *self);",
@@ -831,7 +833,7 @@
  },
  "types": {
   "Class_0002AAF0": "#ifdef __cplusplus\n/* vtable _ZTV14Class_0002AAF0 is data (vptr = label - 8 + 8) */\nclass Class_0002AAF0 {\npublic:\n    virtual ~Class_0002AAF0();\n};\n#endif",
-  "Class_0002C150": "#ifdef __cplusplus\n/* vtable _ZTV14Class_0002C150 is data (vptr = label - 8 + 8) */\nclass Class_0002C150 {\npublic:\n    virtual ~Class_0002C150();\n};\n#endif",
+  "Class_0002C150": "#ifdef __cplusplus\n/* vtable _ZTV14Class_0002C150 is data (vptr = label - 8 + 8) */\nclass Class_0002C150 {\npublic:\n    Class_0002C150();\n    virtual ~Class_0002C150();\n};\n#endif",
   "Unk_D_0002C9D0": "struct Unk_D_0002C9D0 {\n    u8 pad0[0x254];\n    void *unk254;\n};",
   "Unk_D_0002CB34": "struct Unk_D_0002CB34 {\n    u8 pad0[0x4];\n    s32 unk4;\n};",
   "Unk_Unk_func_00016BBC_0_20": "struct Unk_Unk_func_00016BBC_0_20 {\n    u8 pad0[0xB4];\n    s32 unkB4;\n};",
