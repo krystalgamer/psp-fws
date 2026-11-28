@@ -304,11 +304,15 @@ typedef struct {
     SceUID sema;                /* 0xFA4 */
     SceUID thid;                /* 0xFA8 */
     s32 state;                  /* 0xFAC */
-    u8 unkFB0[0x418];
+    u8 unkFB0[8];
+    u32 curDns1;                /* 0xFB8 */
+    u32 curDns2;                /* 0xFBC */
+    u32 curRoute;               /* 0xFC0 */
+    u8 unkFC4[0x404];
     u8 arpAddr[6];              /* 0x13C8 */
     u8 arpHw[0xE];              /* 0x13CE */
     void (*callback)(s32 event, s32 arg); /* 0x13DC */
-    s32 unk13E0;
+    SceNetApctlIpParam *param;  /* 0x13E0 */
     s32 sock;                   /* 0x13E4 */
 } SceNetDhcpCtx;
 typedef char chk_SceNetDhcpCtx[(sizeof(SceNetDhcpCtx) == 0x13E8) ? 1 : -1];
