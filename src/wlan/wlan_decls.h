@@ -620,6 +620,7 @@ extern u8 D_0001373C[];
 extern u32 D_0001378C[];
 extern SceWlanChipOps D_0001379C;
 extern s32 (*D_000137D0[0x50])(SceWlanMac *, u8 *, s32, s32);
+extern u32 D_00013D3C[];
 extern const u32 D_00018A00[15];
 extern const u16 D_00018A3C[6];
 extern const u8 D_00018A48[][14];

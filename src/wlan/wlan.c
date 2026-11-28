@@ -1881,7 +1881,32 @@ s32 func_00005FA8(SceWlanSoftc *sc, SceWlanKeyReq *in) {
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/wlan", func_00005FA8);
+s32 func_00005FA8(SceWlanSoftc *sc, SceWlanKeyReq *in) {
+    s32 ret = 0;
+    SceWlanKeyCmd *cmd = func_0000840C(sc, sizeof(SceWlanKeyCmd));
+    SceWlanU32x4 map;
+    s32 i;
+
+    memset(cmd, 0, sizeof(SceWlanKeyCmd));
+    if (in->mode == 1) {
+        map = D_00018CF0;
+        cmd->mode = in->mode;
+        cmd->index = in->index;
+        for (i = 0; i < 4; i++) {
+            cmd->keys[i].type = map.v[in->keys[i].type];
+            memcpy(cmd->keys[i].data, in->keys[i].data, D_00013D3C[in->keys[i].type]);
+        }
+        ret = func_0000B050(sc->mac, 0xE, cmd);
+    } else if (in->mode == 2) {
+    } else if (in->mode == 0) {
+        cmd->mode = 0;
+        ret = func_0000B050(sc->mac, 0xE, cmd);
+    } else {
+        ret = 0x80410D04;
+    }
+    func_000067B8(sc, cmd);
+    return ret;
+}
 
 INCLUDE_ASM("nonmatchings/wlan", func_00006278);
 

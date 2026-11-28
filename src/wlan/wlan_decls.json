@@ -202,6 +202,7 @@
   "D_0001378C": "extern u32 D_0001378C[];",
   "D_0001379C": "extern SceWlanChipOps D_0001379C;",
   "D_000137D0": "extern s32 (*D_000137D0[0x50])(SceWlanMac *, u8 *, s32, s32);",
+  "D_00013D3C": "extern u32 D_00013D3C[];",
   "D_00018A00": "extern const u32 D_00018A00[15];",
   "D_00018A3C": "extern const u16 D_00018A3C[6];",
   "D_00018A48": "extern const u8 D_00018A48[][14];",
