@@ -917,9 +917,7 @@ struct mbuf *sbcreatecontrol(void *p, s32 size, s32 type, s32 level) {
     cp->cmsg_type = type;
     return m;
 }
-#endif
-
-#if FW_VERSION >= 201 && FW_VERSION < 282
+#else
 struct mbuf *sbcreatecontrol(void *p, s32 size, s32 type, s32 level) {
     struct cmsghdr *cp;
     struct mbuf *m;
@@ -945,10 +943,6 @@ struct mbuf *sbcreatecontrol(void *p, s32 size, s32 type, s32 level) {
     cp->cmsg_type = type;
     return m;
 }
-#endif
-
-#if FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/pspnet_inet", sbcreatecontrol);
 #endif
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", falloc);
