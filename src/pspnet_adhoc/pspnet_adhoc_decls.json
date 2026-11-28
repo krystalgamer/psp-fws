@@ -107,6 +107,7 @@
   "ptpFlushWait": "s32 ptpFlushWait(SceNetAdhocDesc *d, u32 timeout, s32 nonblock);",
   "ptpInit": "s32 ptpInit(void);",
   "ptpInput": "void ptpInput(struct mbuf *m);",
+  "ptpKeepAlive": "void ptpKeepAlive(SceNetAdhocPtpPcb *pcb);",
   "ptpListenSetup": "s32 ptpListenSetup(SceNetAdhocPtpPcb *pcb, s32 a1);",
   "ptpLookup": "SceNetAdhocPtpPcb *ptpLookup(const SceNetEtherAddr *laddr, u16 lport, const SceNetEtherAddr *paddr, u16 pport);",
   "ptpOutput": "void ptpOutput(SceNetAdhocPtpPcb *pcb, s32 rexmt);",

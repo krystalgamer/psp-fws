@@ -151,3 +151,4 @@ D_000079BC_v260 = 0x000079BC; // rom:0x7A3C
 // shared names (tools/add_version.py) end
 adhocDescFree = 0x00000FFC; // type:func
 adhocEtherInput = 0x0000036C; // type:func
+ptpKeepAlive = 0x00006B1C; // type:func

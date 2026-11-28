@@ -160,3 +160,4 @@ ptpOutput = 0x00006878; // type:func
 g_pdpStat = 0x00007A8C;
 adhocDescAllocId = 0x00000E44; // type:func
 adhocPollScan = 0x0000092C; // type:func
+ptpKeepAlive = 0x00006B1C; // type:func

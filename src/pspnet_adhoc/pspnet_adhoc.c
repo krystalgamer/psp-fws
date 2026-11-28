@@ -3248,7 +3248,9 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00004DFC);
 
 #if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00004C0C);
+#endif
 
+#if FW_VERSION < 271
 void ptpEstablished(SceNetAdhocPtpPcb *pcb) {
     _sce_pspnet_callout_stop(&pcb->callout);
     pcb->state = 4;
@@ -3257,11 +3259,10 @@ void ptpEstablished(SceNetAdhocPtpPcb *pcb) {
         PTP_SBWAKEUP(&pcb->parent->rcv);
     else
         PTP_SBWAKEUP(&pcb->rcv);
-}
+#if FW_VERSION >= 150
+    _sce_pspnet_callout_reset_usec(&pcb->callout2, pcb->rexmt_int, ptpKeepAlive, pcb);
 #endif
-
-#if FW_VERSION >= 150 && FW_VERSION < 271
-INCLUDE_ASM("nonmatchings/pspnet_adhoc", ptpEstablished);
+}
 #endif
 
 #if FW_VERSION < 282
@@ -3797,7 +3798,7 @@ void ptpTimer(SceNetAdhocPtpPcb *pcb) {
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00006B1C);
+INCLUDE_ASM("nonmatchings/pspnet_adhoc", ptpKeepAlive);
 #endif
 
 #if FW_VERSION >= 282

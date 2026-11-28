@@ -488,6 +488,7 @@ void ptpFlushSockbufs(SceNetAdhocPtpPcb *pcb);
 s32 ptpFlushWait(SceNetAdhocDesc *d, u32 timeout, s32 nonblock);
 s32 ptpInit(void);
 void ptpInput(struct mbuf *m);
+void ptpKeepAlive(SceNetAdhocPtpPcb *pcb);
 s32 ptpListenSetup(SceNetAdhocPtpPcb *pcb, s32 a1);
 SceNetAdhocPtpPcb *ptpLookup(const SceNetEtherAddr *laddr, u16 lport, const SceNetEtherAddr *paddr, u16 pport);
 void ptpOutput(SceNetAdhocPtpPcb *pcb, s32 rexmt);
