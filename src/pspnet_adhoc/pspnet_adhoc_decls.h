@@ -275,6 +275,7 @@ extern M2C_UNK D_000079E8;
 extern M2C_UNK D_00007A8C;
 extern M2C_UNK D_00007CC8;
 
+void _sce_pspnet_adhoc_sabort(SceNetAdhocDesc *d, s32 flag);
 void _sce_pspnet_callout_init(void *c);
 void _sce_pspnet_callout_stop(void *c);
 struct ifnet *_sce_pspnet_ifplookup_lladdr(const SceNetEtherAddr *addr);
@@ -373,6 +374,7 @@ s32 sceNetAdhocPdpDelete(s32 id, s32 flag);
 s32 sceNetAdhocPdpRecv(s32 id, SceNetEtherAddr *addr, u16 *port, void *buf, s32 *len, u32 timeout, s32 nonblock);
 s32 sceNetAdhocPdpRecvWithRfInfo(s32 id, SceNetEtherAddr *addr, u16 *port, void *buf, s32 *len, u32 timeout, s32 nonblock, void *rfinfo);
 s32 sceNetAdhocPtpClose(s32 id, s32 flag);
+s32 sceNetAdhocSetSocketAlert(s32 id, s32 flag);
 s32 sceNetAdhocTerm(void);
 void sceNetAdhoc_lib_62B875A8(void);
 void sceNetAdhoc_lib_F9240FBA(void);

@@ -1,5 +1,6 @@
 {
  "funcs": {
+  "_sce_pspnet_adhoc_sabort": "void _sce_pspnet_adhoc_sabort(SceNetAdhocDesc *d, s32 flag);",
   "_sce_pspnet_callout_init": "void _sce_pspnet_callout_init(void *c);",
   "_sce_pspnet_callout_stop": "void _sce_pspnet_callout_stop(void *c);",
   "_sce_pspnet_ifplookup_lladdr": "struct ifnet *_sce_pspnet_ifplookup_lladdr(const SceNetEtherAddr *addr);",
@@ -98,6 +99,7 @@
   "sceNetAdhocPdpRecv": "s32 sceNetAdhocPdpRecv(s32 id, SceNetEtherAddr *addr, u16 *port, void *buf, s32 *len, u32 timeout, s32 nonblock);",
   "sceNetAdhocPdpRecvWithRfInfo": "s32 sceNetAdhocPdpRecvWithRfInfo(s32 id, SceNetEtherAddr *addr, u16 *port, void *buf, s32 *len, u32 timeout, s32 nonblock, void *rfinfo);",
   "sceNetAdhocPtpClose": "s32 sceNetAdhocPtpClose(s32 id, s32 flag);",
+  "sceNetAdhocSetSocketAlert": "s32 sceNetAdhocSetSocketAlert(s32 id, s32 flag);",
   "sceNetAdhocTerm": "s32 sceNetAdhocTerm(void);",
   "sceNetAdhoc_lib_62B875A8": "void sceNetAdhoc_lib_62B875A8(void);",
   "sceNetAdhoc_lib_F9240FBA": "void sceNetAdhoc_lib_F9240FBA(void);",

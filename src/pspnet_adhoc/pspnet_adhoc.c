@@ -215,7 +215,85 @@ s32 func_00000974(void *arg0, s32 arg1) {
 }
 #endif
 
+#if FW_VERSION < 201
+s32 sceNetAdhocSetSocketAlert(s32 id, s32 flag) {
+    s32 s;
+    s32 ret;
+    s32 n;
+    SceNetAdhocDesc *d;
+
+    ret = 0;
+    s = _sce_pspnet_spllock();
+    n = 0;
+    if (D_00007400 == 0) {
+        ret = 0x80410712;
+        goto end;
+    }
+    for (d = D_00007998.first; d != NULL; d = d->next) {
+        if (d->id == id)
+            break;
+    }
+    if (d == NULL) {
+        ret = 0x80410701;
+        goto end;
+    }
+    if (flag & 0x10) {
+        if ((d->flags & 0x10) == 0) {
+            d->flags |= 0x10;
+            n++;
+        }
+    } else {
+        d->flags &= ~0x10;
+    }
+    if (flag & 0x20) {
+        if ((d->flags & 0x20) == 0) {
+            d->flags |= 0x20;
+            n++;
+        }
+    } else {
+        d->flags &= ~0x20;
+    }
+    if (flag & 0x40) {
+        if ((d->flags & 0x40) == 0) {
+            d->flags |= 0x40;
+            n++;
+        }
+    } else {
+        d->flags &= ~0x40;
+    }
+    if (flag & 0x80) {
+        if ((d->flags & 0x80) == 0) {
+            d->flags |= 0x80;
+            n++;
+        }
+    } else {
+        d->flags &= ~0x80;
+    }
+    if (flag & 0x100) {
+        if ((d->flags & 0x100) == 0) {
+            d->flags |= 0x100;
+            n++;
+        }
+    } else {
+        d->flags &= ~0x100;
+    }
+    if (flag & 0x200) {
+        if ((d->flags & 0x200) == 0) {
+            d->flags |= 0x200;
+            n++;
+        }
+    } else {
+        d->flags &= ~0x200;
+    }
+    if (n != 0)
+        _sce_pspnet_adhoc_sabort(d, flag);
+end:
+    _sce_pspnet_splunlock(s);
+    return ret;
+}
+#else
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", sceNetAdhocSetSocketAlert);
+#endif
 
 #if FW_VERSION < 201
 s32 sceNetAdhocGetSocketAlert(s32 id, s32 *flag) {
