@@ -614,13 +614,9 @@ s32 sceAta_driver_689FCB7D(SceAtaIntrFunc func, void *arg) {
     return 0;
 }
 
-#if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/ata", sceAtaGetAtaCallBack);
-#else
 SceAtaCallBack *sceAtaGetAtaCallBack(void) {
     return &D_000046A8;
 }
-#endif
 
 s32 sceAta_driver_C144826E(SceAtaIntrFunc func) {
     s32 intr = sceKernelCpuSuspendIntr();
@@ -656,7 +652,7 @@ s32 sceAtaGetDriveStat(s32 arg0) {
 }
 #endif
 
-#if (FW_VERSION >= 150 && FW_VERSION < 271) || FW_VERSION >= 282
+#if FW_VERSION >= 150
 s32 sceAtaIsReadableDriveStat(u32 id) {
     SceAtaDrive *drive = sceAtaGetAtaDrive(id);
     u32 stat = 0x80211009;
@@ -671,13 +667,7 @@ s32 sceAtaIsReadableDriveStat(u32 id) {
     }
     return 0;
 }
-#endif
-
-#if FW_VERSION == 271
-INCLUDE_ASM("nonmatchings/ata", sceAtaIsReadableDriveStat);
-#endif
-
-#if FW_VERSION < 150
+#else
 s32 sceAtaIsReadableDriveStat(u32 id) {
     SceAtaDrive *temp_v0;
     s32 var_v0;
@@ -692,7 +682,7 @@ s32 sceAtaIsReadableDriveStat(u32 id) {
 }
 #endif
 
-#if (FW_VERSION >= 150 && FW_VERSION < 271) || FW_VERSION >= 282
+#if FW_VERSION >= 150
 s32 sceAtaIsNormalDriveStat(u32 id) {
     SceAtaDrive *drive = sceAtaGetAtaDrive(id);
     u32 stat = 0x80211009;
@@ -709,10 +699,6 @@ s32 sceAtaIsNormalDriveStat(u32 id) {
 }
 #endif
 
-#if FW_VERSION == 271
-INCLUDE_ASM("nonmatchings/ata", sceAtaIsNormalDriveStat);
-#endif
-
 #if FW_VERSION >= 150 && FW_VERSION < 282
 void sceAtaSetIntrFlag(s32 arg0) {
     D_00004324 = arg0;
@@ -724,7 +710,17 @@ s32 sceAtaGetIntrFlag(void) {
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/ata", sceAtaClearDriveStat);
+void sceAtaClearDriveStat(s32 arg0, M2C_UNK arg1) {
+    s32 temp_s1;
+    SceAtaDrive *temp_v0;
+
+    temp_s1 = sceKernelCpuSuspendIntr();
+    temp_v0 = sceAtaGetAtaDrive(arg0);
+    if (temp_v0 != NULL) {
+        temp_v0->driveStat &= ~arg1;
+    }
+    sceKernelCpuResumeIntr(temp_s1);
+}
 #endif
 
 #if FW_VERSION < 201
