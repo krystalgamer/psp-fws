@@ -2893,7 +2893,7 @@ s32 func_00003A68(const SceNetEtherAddr *saddr, u16 sport, const SceNetEtherAddr
     ret = ptpSetSockbuf(d->pcb, sndbuf, rcvbuf);
     if (ret < 0)
         goto err2;
-    ret = func_000056CC(d->pcb, saddr, sport, daddr, dport);
+    ret = ptpBind2(d->pcb, saddr, sport, daddr, dport);
     if (ret < 0)
         goto err3;
     ptpSetRexmt(d->pcb, rexmt_int, rexmt_cnt);
@@ -2929,7 +2929,7 @@ s32 func_00003A68(const SceNetEtherAddr *saddr, u16 sport, const SceNetEtherAddr
     ret = func_00005594(d->pcb, sndbuf, rcvbuf);
     if (ret < 0)
         goto err2;
-    ret = func_000053EC(d->pcb, saddr, sport, daddr, dport);
+    ret = ptpBind2(d->pcb, saddr, sport, daddr, dport);
     if (ret < 0)
         goto err3;
     func_000055B0(d->pcb, rexmt_int, rexmt_cnt);
@@ -3346,8 +3346,8 @@ SceNetAdhocPtpPcb *ptpLookup(const SceNetEtherAddr *laddr, u16 lport, const SceN
     return p;
 }
 
-#if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_000056CC);
+#if FW_VERSION >= 201
+INCLUDE_ASM("nonmatchings/pspnet_adhoc", ptpBind2);
 #endif
 
 #if FW_VERSION < 150
@@ -3396,17 +3396,9 @@ void ptpSetRexmt(SceNetAdhocPtpPcb *pcb, s32 a1, s32 a2) {
     pcb->rexmt_int = a1;
     pcb->rexmt_cnt = a2;
 }
-#endif
 
-#if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_0000589C);
-#endif
-
-#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", ptpConnectStart);
-#endif
 
-#if FW_VERSION < 282
 s32 ptpListenSetup(SceNetAdhocPtpPcb *pcb, s32 a1) {
     pcb->state = 1;
     pcb->unkBC = a1;
@@ -3482,10 +3474,6 @@ void ptpCloseChildren(SceNetAdhocPtpPcb *arg0) {
 }
 #endif
 
-#if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00005AAC);
-#endif
-
 #if FW_VERSION < 150
 void ptpCloseChildren(SceNetAdhocPtpPcb *arg0) {
     s32 temp_s2;
@@ -3521,10 +3509,6 @@ void ptpCloseChildren(SceNetAdhocPtpPcb *arg0) {
 }
 #endif
 
-#if FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_000053EC);
-#endif
-
 #if FW_VERSION >= 300
 void ptpDetach(SceNetAdhocDesc *d) {
     SceNetAdhocPtpPcb *pcb;
@@ -3554,7 +3538,7 @@ void func_000055B0(SceNetAdhocPtpPcb *pcb, s32 a1, s32 a2) {
     pcb->rexmt_cnt = a2;
 }
 
-INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_000055BC);
+INCLUDE_ASM("nonmatchings/pspnet_adhoc", ptpConnectStart);
 
 s32 func_000056E4(SceNetAdhocPtpPcb *pcb, s32 a1) {
     pcb->state = 1;
@@ -3600,8 +3584,24 @@ void func_00005708(SceNetAdhocPtpPcb *arg0) {
 }
 #endif
 
-#if FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_000057CC);
+#if FW_VERSION >= 201
+u16 ptpAllocPort(const SceNetEtherAddr *addr) {
+    u16 port;
+    SceNetAdhocPtpPcb *p;
+
+    port = (g_ptpLastPort == 0x7FFF) ? 0x4000 : g_ptpLastPort + 1;
+    for (; port != g_ptpLastPort; port = (port == 0x7FFF) ? 0x4000 : port + 1) {
+        for (p = g_ptpList.first; p != NULL; p = p->next) {
+            if (ADHOC_MEMCMP(&p->laddr, addr, 6) == 0 && p->lport == port)
+                break;
+        }
+        if (p == NULL) {
+            g_ptpLastPort = port;
+            return port;
+        }
+    }
+    return 0;
+}
 #endif
 
 #if FW_VERSION >= 350
@@ -4251,11 +4251,9 @@ s32 sceNetAdhocGameModeUpdateReplica(s32 id, SceNetAdhocGameModeOptData *opt) {
 }
 #endif
 
-#if FW_VERSION < 282
 s32 sceNetAdhocGameModeUpdateReplicaInternal(s32 id, SceNetAdhocGameModeOptData *opt) {
     return gameModeUpdateReplica(id, opt, 1);
 }
-#endif
 
 #if FW_VERSION < 201
 s32 sceNetAdhocGameModeDeleteMaster(void) {
@@ -4272,15 +4270,7 @@ s32 sceNetAdhocGameModeDeleteMaster(void) {
     _sce_pspnet_splunlock(s);
     return ret;
 }
-#endif
 
-#if FW_VERSION >= 282
-s32 sceNetAdhocGameModeUpdateReplicaInternal(s32 id, SceNetAdhocGameModeOptData *opt) {
-    return gameModeUpdateReplica(id, opt, 1);
-}
-#endif
-
-#if FW_VERSION < 201
 s32 sceNetAdhocGameModeDeleteReplica(s32 id) {
     s32 s;
     s32 ret;

@@ -151,3 +151,6 @@ g_gameModeMasterId = 0x00007C50; // rom:0x7CD0
 ptpSendFrameL = 0x000065F8; // type:func
 adhocDescAlloc = 0x00000FB4; // type:func
 pdpAttach = 0x00002B7C; // type:func
+ptpAllocPort = 0x00005AAC; // type:func
+ptpBind2 = 0x000056CC; // type:func
+ptpConnectStart = 0x0000589C; // type:func

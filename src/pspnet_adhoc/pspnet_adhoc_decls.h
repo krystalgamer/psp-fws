@@ -480,10 +480,8 @@ void func_00003BB0(SceNetAdhocDesc *d);
 s32 func_00003BE8(SceNetAdhocDesc *d, u32 timeout, s32 nonblock);
 s32 func_00003D9C(SceNetAdhocDesc *d, SceNetEtherAddr *addr, u16 *port, u32 timeout, s32 nonblock);
 s32 func_0000473C(SceNetAdhocDesc *d, u32 timeout, s32 nonblock);
-s32 func_000053EC(SceNetAdhocPtpPcb *pcb, const SceNetEtherAddr *saddr, u16 sport, const SceNetEtherAddr *daddr, u16 dport);
 s32 func_00005594(SceNetAdhocPtpPcb *pcb, s32 sndsize, s32 rcvsize);
 void func_000055B0(SceNetAdhocPtpPcb *pcb, s32 a1, s32 a2);
-s32 func_000056CC(SceNetAdhocPtpPcb *pcb, const SceNetEtherAddr *saddr, u16 sport, const SceNetEtherAddr *daddr, u16 dport);
 s32 func_000056E4(SceNetAdhocPtpPcb *pcb, s32 a1);
 void func_00005708(SceNetAdhocPtpPcb *pcb);
 void func_000058B8(struct mbuf *m);
@@ -511,11 +509,17 @@ s32 pdpRecvWait(SceNetAdhocDesc *d, SceNetEtherAddr *addr, u16 *port, void *buf,
 s32 pdpSetRcvBuf(SceNetAdhocPdpPcb *pcb, s32 size);
 void pdpTerm(void);
 s32 ptpAcceptWait(SceNetAdhocDesc *d, SceNetEtherAddr *addr, u16 *port, u32 timeout, s32 nonblock);
+u16 ptpAllocPort(const SceNetEtherAddr *addr);
 s32 ptpAttach(SceNetAdhocDesc *d);
 s32 ptpBind(SceNetAdhocPtpPcb *pcb, const SceNetEtherAddr *addr, u16 port);
+s32 ptpBind2(SceNetAdhocPtpPcb *pcb, const SceNetEtherAddr *saddr, u16 sport, const SceNetEtherAddr *daddr, u16 dport);
 void ptpClearAddr(SceNetAdhocPtpPcb *pcb);
 void ptpCloseChildren(SceNetAdhocPtpPcb *pcb);
+#if FW_VERSION < 201
 s32 ptpConnectStart(SceNetAdhocPtpPcb *pcb, const SceNetEtherAddr *daddr, u16 dport);
+#else
+s32 ptpConnectStart(SceNetAdhocPtpPcb *pcb);
+#endif
 s32 ptpConnectWait(SceNetAdhocDesc *d, u32 timeout, s32 nonblock);
 s32 ptpCreate(const SceNetEtherAddr *saddr, u16 sport, s32 sndbuf, s32 rcvbuf, u32 rexmt_int, s32 rexmt_cnt, SceNetAdhocDesc **out);
 void ptpDetach(SceNetAdhocDesc *d);
