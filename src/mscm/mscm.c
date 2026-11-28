@@ -226,7 +226,115 @@ INCLUDE_ASM("nonmatchings/mscm", func_00000244);
 
 INCLUDE_ASM("nonmatchings/mscm", sceMScmStartModule);
 
+#if FW_VERSION < 150
+s32 sceMScmStopModule(SceSize args, void *argp) {
+    SceMScmCLDM *p;
+    SceMScmCLDM *list;
+    s32 i;
+    s32 j;
+
+    p = NULL;
+    sceKernelUnregisterSysEventHandler(D_000069A0);
+    func_00005270(0, 0x11);
+    sceMScmSetPullDownReg(0, 0);
+    func_00005A44(0, 0x11, 0);
+    func_00005804(0);
+    sceKernelTerminateDeleteThread(D_00006F10);
+    sceKernelTerminateDeleteThread(D_00006ED0);
+    func_000000AC(0);
+    func_00005A44_v100(0);
+    func_00005A44_v100(1);
+    for (i = 0; i < 1; i++) {
+        for (j = 0; j < 3; j++) {
+            list = &D_00006B54[i][j];
+            /* the original reads p->next before p is set (p == NULL on the first list) */
+            while (list != p->next) {
+                if (p->info.args != 0) {
+                    sceKernelFreeVpl(D_00006B50, (void *)p->info.args);
+                }
+                if (p->info.path != NULL) {
+                    sceKernelFreeVpl(D_00006B50, p->info.path);
+                }
+                p->next->prev = p->prev;
+                p->prev->next = p->next;
+                sceKernelFreeVpl(D_00006B50, p);
+                p = list->next;
+            }
+        }
+    }
+    for (i = 0; i < 1; i++) {
+        sceKernelDeleteSema(D_00006ECC[i]);
+        D_00006ECC[i] = 0;
+        for (j = 0; j < 3; j++) {
+            D_00006B54[i][j].unk124 = 0;
+            D_00006F00[i * 3 + j] = 0;
+        }
+    }
+    D_00006EFC = NULL;
+    sceKernelDeleteEventFlag(g_mainEvf[0]);
+    sceKernelDeleteEventFlag(g_mediaEvf[0]);
+    sceKernelDeleteEventFlag(D_00006F44);
+    sceKernelDeleteVpl(D_00006B50);
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 201
+s32 sceMScmStopModule(SceSize args, void *argp) {
+    SceMScmCLDM *p;
+    SceMScmCLDM *list;
+    s32 i;
+    s32 j;
+
+    p = NULL;
+    sceKernelUnregisterSysEventHandler(D_00006DF0);
+    func_00005270(0, 0x11);
+    sceMScmSetPullDownReg(0, 0);
+    func_00005A44(0, 0x11, 0);
+    func_00005804(0);
+    sceKernelTerminateDeleteThread(D_00007370);
+    sceKernelTerminateDeleteThread(D_00007330);
+    func_000000AC(0);
+    func_00005EE4(0);
+    func_00005EE4(1);
+    for (i = 0; i < 1; i++) {
+        for (j = 0; j < 3; j++) {
+            list = &D_00006B54[i][j];
+            /* the original reads p->next before p is set (p == NULL on the first list) */
+            while (list != p->next) {
+                if (p->info.args != 0) {
+                    sceKernelFreeVpl(D_00006B50, (void *)p->info.args);
+                }
+                if (p->info.path != NULL) {
+                    sceKernelFreeVpl(D_00006B50, p->info.path);
+                }
+                p->next->prev = p->prev;
+                p->prev->next = p->next;
+                sceKernelFreeVpl(D_00006B50, p);
+                p = list->next;
+            }
+        }
+    }
+    for (i = 0; i < 1; i++) {
+        sceKernelDeleteSema(D_00006ECC[i]);
+        D_00006ECC[i] = 0;
+        for (j = 0; j < 3; j++) {
+            D_00006B54[i][j].unk124 = 0;
+            D_00006F00[i * 3 + j] = 0;
+        }
+    }
+    D_0000735C = NULL;
+    sceKernelDeleteEventFlag(g_mainEvf[0]);
+    sceKernelDeleteEventFlag(g_mediaEvf[0]);
+    sceKernelDeleteEventFlag(D_000073A4);
+    sceKernelDeleteVpl(D_00006B50);
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/mscm", sceMScmStopModule);
+#endif
 
 #if FW_VERSION >= 310
 INCLUDE_ASM("nonmatchings/mscm", module_reboot_before);
@@ -324,7 +432,31 @@ end:
 INCLUDE_ASM("nonmatchings/mscm", sceMScmRegisterCLD);
 #endif
 
+#if FW_VERSION < 201
+s32 sceMScmUnRegisterCLD(s32 slot, SceMScmCLD *cld) {
+    SceMScmSlotCB *cb;
+
+    if (cld == NULL) {
+        return 0x80220081;
+    }
+    if (slot != 0) {
+        return 0x80220081;
+    }
+    cb = &D_00006ED8[slot];
+    if (strncmp(D_00006ED8[slot].drv.name, cld->name, 0xFF) != 0) {
+        return 0x80220081;
+    }
+    {
+        SceUID vpl = D_00006B50;
+        cb->attached = 0;
+        sceKernelFreeVpl(vpl, D_00006ED8[slot].drv.name);
+    }
+    memset(cb, 0, 0x20);
+    return 0;
+}
+#else
 INCLUDE_ASM("nonmatchings/mscm", sceMScmUnRegisterCLD);
+#endif
 
 #if FW_VERSION < 150
 s32 sceMScmDetachCLD(s32 slot, SceMScmCLD *cld) {
@@ -340,7 +472,7 @@ s32 sceMScmDetachCLD(s32 slot, SceMScmCLD *cld) {
         return 0x80220081;
     }
     func_00002194(cb->drv.cmd, (s32)&D_00006F14[slot], 4, (s32)buf, 0, cb->drv.cmdArg);
-    stop = (s32 (*)(s32, s32, s32))cb->cldm->info.entry;
+    stop = (s32 (*)(s32, s32, s32))cb->cldm->unload;
     if (stop != NULL) {
         stop(0, 0, 0);
     }
@@ -366,7 +498,7 @@ s32 sceMScmDetachCLD(s32 slot, SceMScmCLD *cld) {
         return 0x80220081;
     }
     func_00002194(cb->drv.cmd, (s32)&D_00006F14[slot], 4, (s32)buf, 0, cb->drv.cmdArg);
-    stop = (s32 (*)(s32, s32, s32))cb->cldm->info.entry;
+    stop = (s32 (*)(s32, s32, s32))cb->cldm->unload;
     if (stop != NULL) {
         stop(0, 0, 0);
     }
@@ -605,7 +737,8 @@ INCLUDE_ASM("nonmatchings/mscm", func_0000179C);
 INCLUDE_ASM("nonmatchings/mscm", func_00001B88);
 #endif
 
-#if FW_VERSION == 100
+
+#if FW_VERSION < 150
 s32 func_000018B8(s32 slot) {
     s32 st;
     s32 buf[1];
@@ -618,6 +751,7 @@ s32 func_000018B8(s32 slot) {
 
     st = 0;
     sceLedSetMode(0, 0, 0);
+#if FW_VERSION == 100
     ret = func_00005C8C(slot, &st);
     if (st != 0) {
         return 0;
@@ -625,14 +759,28 @@ s32 func_000018B8(s32 slot) {
     sceKernelPowerLock(0);
     sceMScmSetSlotPower(&D_00006F14[slot], 1);
     sceKernelDelayThread(100000);
+#else
+    func_00005C8C(slot, &st);
+    if (st != 0) {
+        return 0;
+    }
+    sceKernelPowerLock(0);
+    sceMScmSetSlotPower(&D_00006F14[slot], 1);
+    sceKernelDelayThread(100000);
+    ret = func_00005C8C(slot, &st);
+    if (st != 0) {
+        sceKernelPowerUnlock(0);
+        return 0;
+    }
+#endif
     intr = sceKernelSuspendDispatchThread();
     for (i = 0; i < 32; i++) {
-        if (D_00007198[slot][i] != 0) {
-            sceKernelSetEventFlag(D_00007198[slot][i], 8);
+        if (g_notifyEvf[slot][i] != 0) {
+            sceKernelSetEventFlag(g_notifyEvf[slot][i], 8);
         }
-        if (D_0000721C[slot][i] != 0) {
-            if (sceKernelNotifyCallback(D_0000721C[slot][i], 8) == 0x800201A1) {
-                D_0000721C[slot][i] = 0;
+        if (g_notifyCb[slot][i] != 0) {
+            if (sceKernelNotifyCallback(g_notifyCb[slot][i], 8) == 0x800201A1) {
+                g_notifyCb[slot][i] = 0;
             }
         }
     }
@@ -647,19 +795,19 @@ s32 func_000018B8(s32 slot) {
     func_00002194(cmd, (s32)&D_00006F14[slot], 3, (s32)buf, 0, cb->drv.cmdArg);
     cb->attached = 0;
     func_00002194(cmd, (s32)&D_00006F14[slot], 4, (s32)buf, 0, cb->drv.cmdArg);
-    entry = (u32)cb->cldm->info.entry;
+    entry = (u32)cb->cldm->unload;
     if (entry != 0) {
         ((s32 (*)(s32, s32, s32))entry)(0, 0, 0);
     }
     sceMScmUnRegisterCLD(slot, &cb->drv);
     intr = sceKernelSuspendDispatchThread();
     for (i = 0; i < 32; i++) {
-        if (D_00007198[slot][i] != 0) {
-            sceKernelSetEventFlag(D_00007198[slot][i], 2);
+        if (g_notifyEvf[slot][i] != 0) {
+            sceKernelSetEventFlag(g_notifyEvf[slot][i], 2);
         }
-        if (D_0000721C[slot][i] != 0) {
-            if (sceKernelNotifyCallback(D_0000721C[slot][i], 2) == 0x800201A1) {
-                D_0000721C[slot][i] = 0;
+        if (g_notifyCb[slot][i] != 0) {
+            if (sceKernelNotifyCallback(g_notifyCb[slot][i], 2) == 0x800201A1) {
+                g_notifyCb[slot][i] = 0;
             }
         }
     }
@@ -673,7 +821,7 @@ s32 func_000018B8(s32 slot) {
 }
 #endif
 
-#if FW_VERSION >= 102 && FW_VERSION < 250
+#if FW_VERSION >= 150 && FW_VERSION < 250
 INCLUDE_ASM("nonmatchings/mscm", func_000018B8);
 #endif
 
@@ -1229,7 +1377,58 @@ INCLUDE_ASM("nonmatchings/mscm", func_00003624);
 
 INCLUDE_ASM("nonmatchings/mscm", sceMScmStartReadDataDMA);
 
+#if FW_VERSION < 201
+s32 sceMScmWaitAndEndDMA(SceMScmHC *hc, u32 mode, s32 nowait) {
+    SceMScmHC *h;
+    s32 ret;
+    u32 bits;
+    u32 tmo;
+    s32 i;
+
+    h = hc->hc;
+    ret = 0;
+again:
+    if (nowait == 0) {
+        if (h->dmaTimeout != 0) {
+            tmo = h->dmaTimeout;
+            ret = sceKernelWaitEventFlag(h->dmaEvf, h->dmaWaitBits, 0x10, &bits, &tmo);
+        } else {
+            ret = sceKernelWaitEventFlag(h->dmaEvf, h->dmaWaitBits, 0x10, &bits, NULL);
+        }
+    }
+    for (i = 0; i < 2; i++) {
+        if (h->dmaOp[i] != 0) {
+            ret = sceKernelDmaOpSync(h->dmaOp[i], 0, 0);
+            if (ret < 0) {
+                if (((mode >> 1) & 1) && nowait == 0 && (hc->reg->unk0 & 1)) {
+                    if (--h->dmaRetry != -1) {
+                        goto again;
+                    }
+                }
+                ret = 0x8022008A;
+                sceKernelDmaOpQuit(h->dmaOp[i]);
+                sceKernelDmaOpDeQueue(h->dmaOp[i]);
+            }
+        }
+    }
+    if (!(hc->reg->unk0 & 1) && (hc->reg->status & 0x100)) {
+        ret = 0x80220089;
+    }
+    for (i = 0; i < 2; i++) {
+        if (h->dmaOp[i] != 0) {
+            sceKernelDmaOpFreeLink(h->dmaOp[i]);
+            sceKernelDmaOpFree(h->dmaOp[i]);
+        }
+    }
+    sceKernelDeleteEventFlag(h->dmaEvf);
+    h->dmaEvf = 0;
+    hc->reg->unk40 = 0;
+    asm volatile("sync");
+    return ret;
+}
+#else
 INCLUDE_ASM("nonmatchings/mscm", sceMScmWaitAndEndDMA);
+#endif
 
 INCLUDE_ASM("nonmatchings/mscm", sceMScmStartWriteDataDMA);
 

@@ -147,3 +147,5 @@ _sceMScmIomanOpen = 0x00005358; // type:func
 _sceMScmIomanDevctl = 0x000053F4; // type:func
 g_mediaEvf = 0x00006B4C;
 g_mainEvf = 0x00006B48;
+g_notifyEvf = 0x00007198;
+g_notifyCb = 0x0000721C;
