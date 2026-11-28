@@ -1516,15 +1516,15 @@ INCLUDE_ASM("nonmatchings/pspnet_inet_udp", syn_cache_add);
 #if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_inet_udp", syn_cache_respond);
 #else
-INCLUDE_ASM("nonmatchings/pspnet_inet_udp", func_0001FFF0);
+INCLUDE_ASM("nonmatchings/pspnet_inet_udp", syn_cache_get);
 
 INCLUDE_ASM("nonmatchings/pspnet_inet_udp", syn_cache_reset);
 
 INCLUDE_ASM("nonmatchings/pspnet_inet_udp", syn_cache_unreach);
 
-INCLUDE_ASM("nonmatchings/pspnet_inet_udp", func_00020BB8);
+INCLUDE_ASM("nonmatchings/pspnet_inet_udp", syn_cache_add);
 
-INCLUDE_ASM("nonmatchings/pspnet_inet_udp", func_00021070);
+INCLUDE_ASM("nonmatchings/pspnet_inet_udp", syn_cache_respond);
 #endif
 
 void syn_cache_init(void) {
