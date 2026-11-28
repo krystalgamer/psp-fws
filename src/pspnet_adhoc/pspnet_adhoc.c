@@ -3968,13 +3968,20 @@ end:
 }
 #endif
 
-#if FW_VERSION < 201
 s32 sceNetAdhocGameModeUpdateMaster(void) {
     s32 s;
     s32 ret;
     SceNetAdhocGameMode *gm;
 
+#if FW_VERSION >= 201
+    if (sceKernelCheckThreadStack() < 0x7F0)
+        return 0x80410005;
     s = _sce_pspnet_spllock();
+    if (s < 0)
+        return s;
+#else
+    s = _sce_pspnet_spllock();
+#endif
     ret = 0x80410712;
     if (g_adhocInit == 0)
         goto end;
@@ -3993,7 +4000,7 @@ s32 sceNetAdhocGameModeUpdateMaster(void) {
         goto end;
     }
 #if FW_VERSION >= 150
-    adhocMemcpy(gm->buf, gm->ptr, gm->size);
+    ADHOC_MEMCPY(gm->buf, gm->ptr, gm->size);
     ret = sceNetAdhocAuth_lib_AAB06250(gm->buf, gm->buflen);
     if (ret < 0)
         goto end;
@@ -4005,9 +4012,8 @@ end:
     _sce_pspnet_splunlock(s);
     return ret;
 }
-#else
-INCLUDE_ASM("nonmatchings/pspnet_adhoc", sceNetAdhocGameModeUpdateMaster);
 
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", sceNetAdhocGameModeDeleteMaster);
 #endif
 
