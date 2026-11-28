@@ -2555,7 +2555,74 @@ int func_00006658(SceHttpReq *req) {
 
 INCLUDE_ASM("nonmatchings/libhttp", CreateRequest);
 
-INCLUDE_ASM("nonmatchings/libhttp", CreateConnectionWithUrl);
+int CreateConnectionWithUrl(int template_id, const unsigned char *uri, int keepalive, int option, SceHttpReq *req) {
+    SceSize size = 0;
+    SceUriElement100 elem = {0};
+    void *buf;
+    unsigned char *host = NULL;
+    unsigned char *user = NULL;
+    unsigned char *pass = NULL;
+    SceSize len;
+    int ret;
+
+    ret = sceUriParse(NULL, uri, NULL, &size, 0);
+    if (ret < 0) {
+        return ret;
+    }
+    buf = _sceHttpMallocInternal(size);
+    if (buf == NULL) {
+        ret = 0x80431022;
+        goto fail;
+    }
+    sceUriParse(&elem, uri, buf, NULL, size);
+    if (elem.hostname != NULL) {
+        len = func_0000BE38(elem.hostname) + 1;
+        host = _sceHttpMallocInternal(len);
+        if (host == NULL) {
+            ret = 0x80431022;
+            goto fail;
+        }
+        func_0000BB98(host, (u8 *)elem.hostname, len);
+    }
+    if (elem.username != NULL) {
+        len = func_0000BE38(elem.username) + 1;
+        user = _sceHttpMallocInternal(len);
+        if (user == NULL) {
+            ret = 0x80431022;
+            goto fail;
+        }
+        func_0000BB98(user, (u8 *)elem.username, len);
+    }
+    if (elem.password != NULL) {
+        len = func_0000BE38(elem.password) + 1;
+        pass = _sceHttpMallocInternal(len);
+        if (pass == NULL) {
+            ret = 0x80431022;
+            goto fail;
+        }
+        func_0000BB98(pass, (u8 *)elem.password, len);
+    }
+    ret = CreateConnection(template_id, host, (unsigned char *)elem.scheme, user, pass, elem.port, keepalive, option, req);
+    if (ret < 0) {
+        goto fail;
+    }
+    if (buf != NULL) {
+        _sceHttpFreeInternal(buf);
+    }
+    return ret;
+
+fail:
+    if (buf != NULL) {
+        _sceHttpFreeInternal(buf);
+    }
+    if (user != NULL) {
+        _sceHttpFreeInternal(user);
+    }
+    if (pass != NULL) {
+        _sceHttpFreeInternal(pass);
+    }
+    return ret;
+}
 
 INCLUDE_ASM("nonmatchings/libhttp", DeleteHttpHeader);
 

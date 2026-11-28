@@ -19,7 +19,7 @@
   "CopyHttpHeaderList": "int CopyHttpHeaderList(_SceHttpReqHeaderList **out, const _SceHttpReqHeaderList *src);",
   "CopyHttpTmpl": "int CopyHttpTmpl(const SceHttpTmpl *src, SceHttpTmpl *dst);",
   "CreateConnection": "int CreateConnection(int template_id, unsigned char *server_name, unsigned char *scheme, unsigned char *username, unsigned char *password, unsigned short port, int keepalive, int option, SceHttpReq *req);",
-  "CreateConnectionWithUrl": "s32 CreateConnectionWithUrl(s32, s32, s32, s32, s32);",
+  "CreateConnectionWithUrl": "int CreateConnectionWithUrl(int template_id, const unsigned char *uri, int keepalive, int option, SceHttpReq *req);",
   "CreateHttpExtraHeader": "int CreateHttpExtraHeader(_SceHttpReqHeaderList **out, const SceUChar8 *name, const SceUChar8 *value);",
   "CreateRequest": "int CreateRequest(int connection_id, int method, const unsigned char *path, const unsigned char *query, const unsigned char *fragment, SceULong64 content_length, const unsigned char *username, const unsigned char *password, const unsigned char *hostname);",
   "DeleteHttpHeader": "int DeleteHttpHeader(_SceHttpReqHeaderList **header_list, const SceUChar8 *name);",
