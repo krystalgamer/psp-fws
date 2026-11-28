@@ -71,7 +71,6 @@ rip_connect = 0x0001B6BC; // type:func
 func_0001CBCC = 0x0001CBCC; // type:func
 func_0001F088 = 0x0001F088; // type:func
 func_0001F3B0 = 0x0001F3B0; // type:func
-syn_cache_lookup = 0x000214B0; // type:func
 func_00023D1C = 0x00023D1C; // type:func
 func_00024FB0 = 0x00024FB0; // type:func
 func_000253FC = 0x000253FC; // type:func

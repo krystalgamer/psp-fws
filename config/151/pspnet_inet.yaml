@@ -57,6 +57,7 @@ segments:
       - [0x5B44, c, pspnet_inet_api]
       - [0xB64C, c, pspnet_inet_route]
       - [0xCE80, c, pspnet_inet_rtsub]
+      - [0xEFAC, c, pspnet_inet_if_loop]
       - [0x128F0, c, pspnet_inet_in_init]
       - [0x12920, c, pspnet_inet_in_cksum]
       - [0x12CA8, c, pspnet_inet_in_cksum2]
@@ -76,6 +77,7 @@ segments:
       - { start: 0x2BBEC, type: rodata, name: nid, linker_section: .rodata.sceNid }
       - [0x2BD04, .rodata, pspnet_inet]
       - [0x2BD08, .rodata, pspnet_inet_rtsub]
+      - [0x2BD84, .rodata, pspnet_inet_if_loop]
       - [0x2BD94, .rodata, pspnet_inet_in_cksum2]
       - [0x2C03C, .rodata, pspnet_inet_udp]
       - [0x2C0D4, .rodata, pspnet_inet_tcp_subr]

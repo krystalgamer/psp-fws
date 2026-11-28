@@ -86,6 +86,12 @@ struct protosw {
 #define PRU_SEND        9
 #define PRU_ABORT       10
 #define PRU_CONTROL     11
+#define PRU_SENSE       12
+#define PRU_RCVOOB      13
+#define PRU_SENDOOB     14
+#define PRU_SOCKADDR    15
+#define PRU_PEERADDR    16
+#define PRU_CONNECT2    17
 
 TAILQ_HEAD(soqhead, socket);
 
@@ -1662,6 +1668,9 @@ typedef u32 tcp_seq;
 #if FW_VERSION >= 201
 #define func_0002C978 sceNetBcmp
 #endif
+#define EOPNOTSUPP 0x5F
+#define EISCONN 0x7F
+#define ENOTCONN 0x80
 
 struct SceTailqHead {
     void *tqh_first;

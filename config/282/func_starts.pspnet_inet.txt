@@ -174,7 +174,6 @@ func_00020690 = 0x00020690; // type:func
 func_00020914 = 0x00020914; // type:func
 func_00020BB8 = 0x00020BB8; // type:func
 func_00021070 = 0x00021070; // type:func
-syn_cache_lookup = 0x000214B0; // type:func
 func_000223CC = 0x000223CC; // type:func
 func_00022450 = 0x00022450; // type:func
 func_00022714 = 0x00022714; // type:func
