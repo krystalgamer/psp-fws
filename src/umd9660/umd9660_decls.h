@@ -240,11 +240,11 @@ extern s32 D_000083AC;
 extern s32 D_000083B0;
 extern s32 D_000083C0;
 extern s32 D_000083D0;
-extern u8 *D_00008400;
-extern u8 *D_00008440;
 extern s32 D_00008CA0;
 extern s32 D_00008CB0;
 extern M2C_UNK func_000036D8;
+extern u8 *g_umd9660DvdDirBuf;
+extern u8 *g_umd9660DvdSectorBuf;
 
 s32 Kprintf(const char *fmt, ...);
 s32 dvd_get_controlimg_lbn(const char *name);

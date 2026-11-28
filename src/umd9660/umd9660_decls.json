@@ -231,10 +231,10 @@
   "D_000083B0": "extern s32 D_000083B0;",
   "D_000083C0": "extern s32 D_000083C0;",
   "D_000083D0": "extern s32 D_000083D0;",
-  "D_00008400": "extern u8 *D_00008400;",
-  "D_00008440": "extern u8 *D_00008440;",
   "D_00008CA0": "extern s32 D_00008CA0;",
   "D_00008CB0": "extern s32 D_00008CB0;",
-  "func_000036D8": "extern M2C_UNK func_000036D8;"
+  "func_000036D8": "extern M2C_UNK func_000036D8;",
+  "g_umd9660DvdDirBuf": "extern u8 *g_umd9660DvdDirBuf;",
+  "g_umd9660DvdSectorBuf": "extern u8 *g_umd9660DvdSectorBuf;"
  }
 }

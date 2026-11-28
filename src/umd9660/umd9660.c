@@ -1730,11 +1730,11 @@ s32 sceUmd9660ReadPvd4DVD(const char *name, SceUmdLbnParam *param) {
     param->byteSizeFirst = 0;
     param->byteSizeMiddle = 0x800;
     param->byteSizeLast = 0;
-    ret = sceIoDevctl(name, 0x1E380C0, param, 0x20, D_00008400, 0x800);
+    ret = sceIoDevctl(name, 0x1E380C0, param, 0x20, g_umd9660DvdSectorBuf, 0x800);
     if (ret < 0) {
         return ret;
     }
-    if (strncmp((char *)D_00008400 + 1, D_00005C34, 5) == 0) {
+    if (strncmp((char *)g_umd9660DvdSectorBuf + 1, D_00005C34, 5) == 0) {
         return 0;
     }
     param->lbn = 0x100;
@@ -1745,11 +1745,11 @@ s32 sceUmd9660ReadPvd4DVD(const char *name, SceUmdLbnParam *param) {
     param->byteSizeMiddle = 0x800;
     param->byteSizeFirst = 0;
     param->byteSizeLast = 0;
-    ret = sceIoDevctl(name, 0x1E380C0, param, 0x20, D_00008400, 0x800);
+    ret = sceIoDevctl(name, 0x1E380C0, param, 0x20, g_umd9660DvdSectorBuf, 0x800);
     if (ret < 0) {
         return ret;
     }
-    strncmp((char *)D_00008400 + 1, D_00005C34, 5);
+    strncmp((char *)g_umd9660DvdSectorBuf + 1, D_00005C34, 5);
     return 0;
 }
 #endif
@@ -1798,13 +1798,13 @@ s32 sceUmd9660ReadRootDir4DVD(const char *name, SceUmdLbnParam *param) {
     }
     param->unk0 = 0;
     param->cmd = 0;
-    param->lbn = D_00008400[0x9E] | (D_00008400[0x9F] << 8) | (D_00008400[0xA0] << 16) | (D_00008400[0xA1] << 24);
+    param->lbn = g_umd9660DvdSectorBuf[0x9E] | (g_umd9660DvdSectorBuf[0x9F] << 8) | (g_umd9660DvdSectorBuf[0xA0] << 16) | (g_umd9660DvdSectorBuf[0xA1] << 24);
     param->lbnSize = 1;
     param->size = 0x800;
     param->byteSizeMiddle = 0x800;
     param->byteSizeFirst = 0;
     param->byteSizeLast = 0;
-    ret = sceIoDevctl(name, 0x1E380C0, param, 0x20, D_00008440, 0x800);
+    ret = sceIoDevctl(name, 0x1E380C0, param, 0x20, g_umd9660DvdDirBuf, 0x800);
     if (ret < 0) {
         return ret;
     }
@@ -1844,7 +1844,7 @@ s32 func_00004C88(void) {
     u8 *rec;
     u32 len;
     for (;;) {
-        rec = D_00008440 + off;
+        rec = g_umd9660DvdDirBuf + off;
         if (rec[0] == 0) {
             return 0x80010002;
         }
@@ -1869,7 +1869,7 @@ s32 func_00004DDC(void) {
     u8 *rec;
     u32 len;
     for (;;) {
-        rec = D_00008440 + off;
+        rec = g_umd9660DvdDirBuf + off;
         if (rec[0] == 0) {
             return 0x80010002;
         }
@@ -1916,16 +1916,16 @@ INCLUDE_ASM("nonmatchings/umd9660", sceUmd9660_driver_DB1AC979);
 #if FW_VERSION == 100
 s32 func_00004FE4(void) {
     s32 ret;
-    if (D_00008400 != NULL) {
-        sceKernelFreeHeapMemory(D_00008310, D_00008400);
-        D_00008400 = NULL;
+    if (g_umd9660DvdSectorBuf != NULL) {
+        sceKernelFreeHeapMemory(D_00008310, g_umd9660DvdSectorBuf);
+        g_umd9660DvdSectorBuf = NULL;
     }
-    if (D_00008440 != NULL) {
-        ret = sceKernelFreeHeapMemory(D_00008310, D_00008440);
+    if (g_umd9660DvdDirBuf != NULL) {
+        ret = sceKernelFreeHeapMemory(D_00008310, g_umd9660DvdDirBuf);
         if (ret < 0) {
             return ret;
         }
-        D_00008440 = NULL;
+        g_umd9660DvdDirBuf = NULL;
     }
     return sceKernelDeleteHeap(D_00008310);
 }
