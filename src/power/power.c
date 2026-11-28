@@ -229,11 +229,15 @@ s32 scePowerWlanDeactivate(void) {
 #endif
 
 #if FW_VERSION >= 102 && FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/power", scePowerGetWlanActivity);
+u8 scePowerGetWlanActivity(void) {
+    return D_00004244;
+}
 #endif
 
 #if FW_VERSION == 103
-INCLUDE_ASM("nonmatchings/power", scePowerGetLedOffTiming);
+u8 scePowerGetLedOffTiming(void) {
+    return D_000045C7;
+}
 
 INCLUDE_ASM("nonmatchings/power", func_00000590);
 
@@ -568,13 +572,15 @@ s32 scePowerGetPowerSwMode(void) {
 }
 #endif
 
-#if FW_VERSION >= 102 && FW_VERSION < 150
+#if FW_VERSION == 102
 INCLUDE_ASM("nonmatchings/power", scePowerRebootStart);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/power", scePowerVolatileMemUnlock);
+#endif
 
+#if FW_VERSION >= 103 && FW_VERSION < 282
 s32 scePowerRebootStart(void) {
     s32 temp_s1;
     u32 temp_s0;
@@ -1652,8 +1658,21 @@ s32 _scePowerBatteryInit(void) {
 }
 #endif
 
-#if FW_VERSION == 103
-INCLUDE_ASM("nonmatchings/power", _scePowerBatteryInit);
+#if FW_VERSION >= 103 && FW_VERSION < 271
+s32 _scePowerBatteryInit(void) {
+    M2C_UNK *temp_v0;
+    s32 temp_v0_2;
+
+    memset(&g_Battery, 0, 0x58);
+    temp_v0 = "ScePowerBattery";
+    g_Battery.innerTempStatus = -1;
+    g_Battery.unk24 = -1;
+    g_Battery.batteryEventFlagId = sceKernelCreateEventFlag(temp_v0, 1U, 0U, NULL);
+    temp_v0_2 = sceKernelCreateThread(temp_v0, (s32) &_scePowerBatteryThread, 0x40, 0x400U, 1U, NULL);
+    g_Battery.workerThreadId = temp_v0_2;
+    sceKernelStartThread(temp_v0_2, 0U, NULL);
+    return 0;
+}
 #endif
 
 #if FW_VERSION == 271
@@ -1667,23 +1686,6 @@ s32 _scePowerBatteryInit(void) {
     g_Battery.unk24 = -1;
     g_Battery.batteryEventFlagId = sceKernelCreateEventFlag(temp_v0, 1U, 0U, NULL);
     temp_v0_2 = sceKernelCreateThread(temp_v0, (s32) &_scePowerBatteryThread, 0x40, 0x800U, 1U, NULL);
-    g_Battery.workerThreadId = temp_v0_2;
-    sceKernelStartThread(temp_v0_2, 0U, NULL);
-    return 0;
-}
-#endif
-
-#if FW_VERSION >= 150 && FW_VERSION < 271
-s32 _scePowerBatteryInit(void) {
-    M2C_UNK *temp_v0;
-    s32 temp_v0_2;
-
-    memset(&g_Battery, 0, 0x58);
-    temp_v0 = "ScePowerBattery";
-    g_Battery.innerTempStatus = -1;
-    g_Battery.unk24 = -1;
-    g_Battery.batteryEventFlagId = sceKernelCreateEventFlag(temp_v0, 1U, 0U, NULL);
-    temp_v0_2 = sceKernelCreateThread(temp_v0, (s32) &_scePowerBatteryThread, 0x40, 0x400U, 1U, NULL);
     g_Battery.workerThreadId = temp_v0_2;
     sceKernelStartThread(temp_v0_2, 0U, NULL);
     return 0;
@@ -1745,8 +1747,16 @@ s32 _scePowerBatteryIsBusy(void) {
 INCLUDE_ASM("nonmatchings/power", _scePowerBatteryResume);
 #endif
 
-#if FW_VERSION == 103
-INCLUDE_ASM("nonmatchings/power", scePowerBatteryUpdateInfo);
+#if FW_VERSION >= 103 && FW_VERSION < 282
+s32 scePowerBatteryUpdateInfo(void) {
+    s32 temp_s1;
+
+    temp_s1 = sceKernelCpuSuspendIntr();
+    sceKernelSetEventFlag(g_Battery.batteryEventFlagId, 0x10000000U);
+    sceKernelClearEventFlag(g_Battery.batteryEventFlagId, 0xEFFFFFFFU);
+    sceKernelCpuResumeIntr(temp_s1);
+    return 0;
+}
 #endif
 
 #if FW_VERSION == 100
@@ -1763,18 +1773,6 @@ s32 _scePowerBatteryResume(void) {
     sceKernelClearEventFlag(g_Battery.batteryEventFlagId, ~0x200);
     sceKernelSetEventFlag(g_Battery.batteryEventFlagId, flags);
     sceKernelCpuResumeIntr(intr);
-    return 0;
-}
-#endif
-
-#if FW_VERSION >= 150 && FW_VERSION < 282
-s32 scePowerBatteryUpdateInfo(void) {
-    s32 temp_s1;
-
-    temp_s1 = sceKernelCpuSuspendIntr();
-    sceKernelSetEventFlag(g_Battery.batteryEventFlagId, 0x10000000U);
-    sceKernelClearEventFlag(g_Battery.batteryEventFlagId, 0xEFFFFFFFU);
-    sceKernelCpuResumeIntr(temp_s1);
     return 0;
 }
 #endif

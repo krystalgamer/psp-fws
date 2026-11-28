@@ -221,6 +221,8 @@ typedef struct SceSysEventHandler {
 extern s32 D_00003DC4;
 extern s32 D_00003E08;
 extern s32 D_00003E20;
+extern u8 D_00004244;
+extern u8 D_000045C7;
 extern u8 D_00004FC5;
 extern u8 D_00004FC6;
 extern u8 D_00004FC9;
