@@ -272,7 +272,7 @@ s32 func_00000974(SceNetAdhocPollEnt *ent, s32 count) {
     for (i = 0; i < count; i++, ent++) {
         switch (ent->d->type) {
         case 2:
-            ent->sd->revents = func_00005024(ent->d, ent->sd->events);
+            ent->sd->revents = ptpPoll(ent->d, ent->sd->events);
             break;
         case 1:
             ent->sd->revents = pdpPoll(ent->d, ent->sd->events);
@@ -608,7 +608,7 @@ s32 func_00000ED0(u8 type, SceNetAdhocDesc **out) {
 #endif
 
 #if FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00000ED8);
+INCLUDE_ASM("nonmatchings/pspnet_adhoc", adhocDescAllocId);
 
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00000F60);
 #endif
@@ -1097,7 +1097,7 @@ s32 sceNetAdhocPdpRecv(s32 id, SceNetEtherAddr *addr, u16 *port, void *buf, s32 
         return 0x80410005;
     if (buf == NULL || len == NULL || (nonblock & ~1))
         return 0x80410711;
-    return func_000020A4(id, addr, port, buf, len, timeout, nonblock, NULL);
+    return func_0000215C(id, addr, port, buf, len, timeout, nonblock, NULL);
 }
 #endif
 
@@ -1121,7 +1121,7 @@ s32 sceNetAdhocPdpRecvWithRfInfo(s32 id, SceNetEtherAddr *addr, u16 *port, void 
 s32 sceNetAdhocPdpRecvWithRfInfo(s32 id, SceNetEtherAddr *addr, u16 *port, void *buf, s32 *len, u32 timeout, s32 nonblock, void *rfinfo) {
     if (buf == NULL || len == NULL || (nonblock & ~1) || rfinfo == NULL)
         return 0x80410711;
-    return func_000020A4(id, addr, port, buf, len, timeout, nonblock, rfinfo);
+    return func_0000215C(id, addr, port, buf, len, timeout, nonblock, rfinfo);
 }
 #endif
 
@@ -1315,7 +1315,7 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc", pdpBind);
 #endif
 
 #if FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_000020A4);
+INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_0000215C);
 #endif
 
 void pdpFlush(SceNetAdhocPdpPcb *pcb) {
@@ -2930,7 +2930,7 @@ s32 func_00003A68(const SceNetEtherAddr *saddr, u16 sport, const SceNetEtherAddr
     s32 ret;
     SceNetAdhocDesc *d;
 
-    id = func_00000ED8();
+    id = adhocDescAllocId();
     if (id < 0)
         return 0x8041070F;
     ret = func_00000F60(2, &d);
@@ -3363,7 +3363,7 @@ void ptpDrop(SceNetAdhocPtpPcb *pcb) {
     }
 }
 
-INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00005024);
+INCLUDE_ASM("nonmatchings/pspnet_adhoc", ptpPoll);
 #endif
 
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", sceNetAdhocGetPtpStat);
@@ -4262,7 +4262,7 @@ void adhocBzero(void *s, s32 n) {
 #if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_000070E8);
 
-INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00007204);
+INCLUDE_ASM("nonmatchings/pspnet_adhoc", gameModeDelete);
 
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00007298);
 #endif
