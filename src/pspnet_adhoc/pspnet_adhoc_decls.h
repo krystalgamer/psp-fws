@@ -34,13 +34,21 @@ typedef struct {
     u32 flags;                          /* 0x14 1: wakeup sb, 2: wakeup select */
 } SceNetAdhocPtpSockbuf;
 
+/* pspnet SceNetThreadInfo as seen by pspnet_adhoc (1.00: 0x64, 1.50+: no sleepcnt) */
 typedef struct SceNetAdhocWaiter {
-    u8 pad0[0x20];
-    s32 tid;                        /* 0x20 */
-    u8 pad24[0x28];
-    s32 sema;                       /* 0x4C */
-    u8 pad50[0x10];
-    struct SceNetAdhocWaiter *next; /* 0x60 */
+    u8 unk0[0x20];
+    void *wchan;                        /* 0x20 */
+    u8 callout[0x48 - 0x24];            /* 0x24 */
+    s32 flags;                          /* 0x48 */
+    s32 sema;                           /* 0x4C */
+#if FW_VERSION < 150
+    s16 sleepcnt;                       /* 0x50 */
+    u8 unk52[2];
+#endif
+    u32 unk54;
+    struct SceNetAdhocDesc *descs;      /* 0x58 descriptors this thread waits in (linked by desc->tnext) */
+    u32 unk5C;
+    struct SceNetAdhocWaiter *next;     /* 0x60 next waiter of the same descriptor */
 } SceNetAdhocWaiter;
 
 /* socket descriptor (0x2C), one per PDP/PTP id */
@@ -52,11 +60,11 @@ typedef struct SceNetAdhocDesc {
     u8 type;                        /* 0x10 SCE_NET_ADHOC_DESC_* */
     u8 pad11[3];
     void *pcb;                      /* 0x14 */
-    s32 unk18;                      /* 0x18 read-waiter tid */
-    s32 unk1C;                      /* 0x1C write-waiter tid */
-    s32 unk20;                      /* 0x20 except-waiter tid */
+    void *sndchan;                  /* 0x18 wait channel for send events */
+    void *rcvchan;                  /* 0x1C wait channel for recv events */
+    void *selchan;                  /* 0x20 wait channel for other events */
     SceNetAdhocWaiter *waiters;     /* 0x24 */
-    s32 unk28;
+    struct SceNetAdhocDesc *tnext;  /* 0x28 next desc of the same waiting thread */
 } SceNetAdhocDesc;
 typedef char chk_SceNetAdhocDesc[(sizeof(SceNetAdhocDesc) == 0x2C) ? 1 : -1];
 
@@ -293,6 +301,8 @@ s32 _sce_pspnet_start_of_adhoc_module_in_sched(void *func);
 void _sce_pspnet_stop_of_adhoc_module_in_if_ethersubr_core(void);
 void _sce_pspnet_stop_of_adhoc_module_in_netintr(void);
 void _sce_pspnet_stop_of_adhoc_module_in_sched(void);
+SceNetAdhocWaiter *_sce_pspnet_thread_enter(void);
+void _sce_pspnet_thread_leave(SceNetAdhocWaiter *ti, s32 flag);
 void _sce_pspnet_wakeup(void *chan);
 void func_00000270(void);
 void func_0000036C(struct ifnet *ifp, struct mbuf *m);

@@ -417,11 +417,11 @@ void func_00001078(SceNetAdhocDesc *d, s32 events) {
     SceNetAdhocWaiter *w;
 
     for (w = d->waiters; w != NULL; w = w->next) {
-        if (w->tid != 0) {
-            if (((events & 0x210) && w->tid == d->unk18)
-                || ((events & 0x1A0) && w->tid == d->unk1C)
-                || ((events & 0x40) && w->tid == d->unk20)) {
-                w->tid = 0;
+        if (w->wchan != NULL) {
+            if (((events & 0x210) && w->wchan == d->sndchan)
+                || ((events & 0x1A0) && w->wchan == d->rcvchan)
+                || ((events & 0x40) && w->wchan == d->selchan)) {
+                w->wchan = NULL;
                 sceKernelSignalSema(w->sema, 1);
             }
         }
