@@ -120,7 +120,7 @@ INCLUDE_ASM("nonmatchings/lftv_middleware_023ABC", func_00040594);
 INCLUDE_ASM("nonmatchings/lftv_middleware_023ABC", func_00024440);
 #endif
 
-void func_00024540(struct Unk_func_00024540_0 *arg0) {
+void func_00024540(Class_00055668 *arg0) {
     arg0->unkC = 0;
 }
 

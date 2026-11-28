@@ -15,6 +15,8 @@ extern "C" {
 /* dtor still asm/m2c (not trivial) */
 class Class_00055668 {
 public:
+    u8 pad4[0x8];
+    s8 unkC;
     virtual ~Class_00055668();
 };
 #endif
@@ -79,6 +81,7 @@ public:
 /* dtor still asm/m2c (not trivial) */
 class Class_00056AD0 {
 public:
+    s8 unk4;
     virtual ~Class_00056AD0();
 };
 #endif
@@ -1560,7 +1563,7 @@ s32 func_00023BDC(struct Unk_func_00023BDC_0 *arg0);
 s32 func_00023D24(s32);
 void func_000240E8(struct Unk_func_000240E8_0 *arg0, s32 arg1);
 s32 func_00024338(s32, s32);
-void func_00024540(struct Unk_func_00024540_0 *arg0);
+void func_00024540(Class_00055668 *arg0);
 void func_0002482C(M2C_UNK **arg0);
 void func_00024854(M2C_UNK **arg0);
 s32 func_00024DBC(struct Unk_func_00024DBC_0 *arg0);
@@ -1878,7 +1881,7 @@ s32 func_00041D04(struct Unk_func_00041D04_0 *arg0);
 s32 func_00041D10(struct Unk_func_00041D10_0 *arg0);
 s32 func_00041D1C(struct Unk_func_00041D1C_0 *arg0);
 s32 func_00041D28(struct Unk_func_00041D28_0 *arg0);
-s32 func_00041DB0(struct Unk_func_00041DB0_0 *arg0);
+s32 func_00041DB0(Class_00056AD0 *arg0);
 s32 func_00042110(s32, s32);
 s32 func_00042270(s32);
 s32 func_000425C8(s32, s32);
