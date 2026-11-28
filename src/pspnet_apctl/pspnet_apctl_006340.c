@@ -12,7 +12,21 @@
 INCLUDE_ASM("nonmatchings/pspnet_apctl_006340", func_00006340);
 #endif
 
+#if FW_VERSION < 151
+s32 func_00006414(SceNetDhcpCtx *dc, void *tpa) {
+    s32 spa = 0;
+    s32 ret;
+
+    ret = func_0000487C(dc, &spa, tpa);
+    if (ret < 0) {
+        return 0;
+    }
+    ret = sceNetBpfRead(dc->arpBpf, dc->unk5F8, dc->unkBD4) > 0;
+    return -ret;
+}
+#else
 INCLUDE_ASM("nonmatchings/pspnet_apctl_006340", func_00006414);
+#endif
 
 #if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_apctl_006340", func_00005F58);
