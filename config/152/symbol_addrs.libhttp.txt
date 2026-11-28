@@ -333,8 +333,8 @@ func_0000C0DC = 0x0000DD74; // type:func rom:0xDDF4
 func_0000C114 = 0x0000DDAC; // type:func rom:0xDE2C
 func_0000C2F0 = 0x0000DF84; // type:func rom:0xE004
 func_00015A10 = 0x0000DFEC; // type:func rom:0xE06C
-func_00015C90 = 0x0000E00C; // type:func rom:0xE08C
-func_00016204 = 0x0000E580; // type:func rom:0xE600
+__udivdi3 = 0x0000E00C; // type:func rom:0xE08C
+__umoddi3 = 0x0000E580; // type:func rom:0xE600
 D_0000F200_v152 = 0x0000F200; // rom:0xF280
 D_0000F590_v152 = 0x0000F590; // rom:0xF610
 // shared names (tools/add_version.py) end

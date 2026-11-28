@@ -1430,7 +1430,7 @@ int sceHttpCreateRequest(int connection_id, int method, const unsigned char *pat
     int ret = 0x80431001;
 
     if (D_0000DCCC.inited == 1) {
-        ret = func_0000673C(connection_id, method, path, NULL, NULL, content_length, NULL, NULL, NULL);
+        ret = CreateRequest(connection_id, method, path, NULL, NULL, content_length, NULL, NULL, NULL);
     }
     return ret;
 }
@@ -1510,7 +1510,7 @@ INCLUDE_ASM("nonmatchings/libhttp", func_00006988);
 #if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/libhttp", func_00006658);
 
-INCLUDE_ASM("nonmatchings/libhttp", func_0000673C);
+INCLUDE_ASM("nonmatchings/libhttp", CreateRequest);
 
 INCLUDE_ASM("nonmatchings/libhttp", CreateConnectionWithUrl);
 
@@ -4366,9 +4366,9 @@ INCLUDE_ASM("nonmatchings/libhttp", func_00015B00);
 INCLUDE_ASM("nonmatchings/libhttp", func_00015BC0);
 #endif
 
-INCLUDE_ASM("nonmatchings/libhttp", func_00015C90);
+INCLUDE_ASM("nonmatchings/libhttp", __udivdi3);
 
-INCLUDE_ASM("nonmatchings/libhttp", func_00016204);
+INCLUDE_ASM("nonmatchings/libhttp", __umoddi3);
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/libhttp", D_00017414);

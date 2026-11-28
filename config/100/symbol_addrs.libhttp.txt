@@ -153,8 +153,8 @@ func_000097A4 = 0x0000B514; // type:func
 func_00009CA4 = 0x0000B760; // type:func
 func_00009D54 = 0x0000B810; // type:func
 func_00015A10 = 0x0000C358; // type:func
-func_00015C90 = 0x0000C378; // type:func
-func_00016204 = 0x0000C8C8; // type:func
+__udivdi3 = 0x0000C378; // type:func
+__umoddi3 = 0x0000C8C8; // type:func
 // shared names (tools/add_version.py) end
 // real names (devkit DWARF, tools/dwarf_names.py)
 CopyHttpHeaderList = 0x0000520C; // type:func
@@ -186,3 +186,4 @@ BuildHttpHeader = 0x00005828; // type:func
 CreateConnectionWithUrl = 0x00006B7C; // type:func
 _try_connect = 0x000074AC; // type:func
 _try_resolve_hostname = 0x00007704; // type:func
+CreateRequest = 0x0000673C; // type:func
