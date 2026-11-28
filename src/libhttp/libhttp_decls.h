@@ -548,8 +548,14 @@ typedef struct SceHttpsUnkGroup {
     struct SceHttpsUnkGroup *next; /* 0x00 */
     s32 unk04;
     SceHttpsUnkItem *items; /* 0x08 */
-    void *buf0C;            /* 0x0C */
+    char *buf0C;            /* 0x0C domain */
 } SceHttpsUnkGroup;
+
+/* WWW-Authenticate parse result (func_0000786C/func_00007918); only the head is known */
+typedef struct {
+    s32 type;
+    s32 proxy;              /* 0x04 1 = from Proxy-WWW-Authenticate */
+} SceHttpAuth100;
 
 struct Unk_func_00005CD0_var_a0 {
     u8 pad0[0x7C];
@@ -695,6 +701,8 @@ void func_000064A8(void *arg0, void *arg1, u32 arg2, s32 arg3);
 void func_00006558(void);
 int func_00006658(SceHttpReq *req);
 void func_000073F4(SceHttpMd5Entry *entry, const char *value);
+int func_0000786C(SceHttpAuth100 *auth, unsigned char *header, SceSize size);
+int func_00007918(SceHttpAuth100 *auth, unsigned char *value, SceSize len);
 s32 func_00007C58(void);
 void func_00008360(void *arg0);
 s32 func_00008510(void);
@@ -810,6 +818,7 @@ M2C_UNK sceNetMemset(s32 *, M2C_UNK, M2C_UNK);
 int sceNetResolverCreate(int *rid, void *buf, SceSize buflen);
 int sceNetResolverDelete(int rid);
 int sceNetResolverStartNtoA(int rid, const char *hostname, struct SceNetInetInAddr *addr, unsigned int timeout, int retry);
+int sceParseHttpResponseHeader(); /* (const unsigned char *header, SceSize len, const unsigned char *field, unsigned char **value, SceSize *value_len) */
 M2C_UNK sceRtcFormatRFC2822();
 int sceRtcGetCurrentTick(); /* (u64 *tick); unprototyped for other versions' C */
 M2C_UNK sceRtcParseDateTime();

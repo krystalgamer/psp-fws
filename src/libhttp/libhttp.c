@@ -2783,7 +2783,32 @@ end:
 INCLUDE_ASM("nonmatchings/libhttp", _try_resolve_hostname);
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION == 100 || (FW_VERSION >= 150 && FW_VERSION < 201)
+int func_0000786C(SceHttpAuth100 *auth, unsigned char *header, SceSize size) {
+    unsigned char *value = NULL;
+    SceSize len;
+    int proxy = 0;
+    int ret;
+
+    ret = sceParseHttpResponseHeader(header, size, (const unsigned char *)"WWW-Authenticate", &value, &len);
+    if (ret < 0) {
+        proxy = 1;
+        ret = sceParseHttpResponseHeader(header, size, (const unsigned char *)"Proxy-WWW-Authenticate", &value, &len);
+        if (ret < 0) {
+            ret = 0x80431025;
+            goto end;
+        }
+    }
+    ret = func_00007918(auth, value, len);
+    if (ret >= 0) {
+        auth->proxy = proxy;
+    }
+end:
+    return ret;
+}
+#endif
+
+#if (FW_VERSION >= 102 && FW_VERSION < 150) || (FW_VERSION >= 201 && FW_VERSION < 282)
 INCLUDE_ASM("nonmatchings/libhttp", func_0000786C);
 #endif
 
