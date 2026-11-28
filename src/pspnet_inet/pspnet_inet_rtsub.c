@@ -180,7 +180,63 @@ INCLUDE_ASM("nonmatchings/pspnet_inet_rtsub", func_0000DE58);
 
 INCLUDE_ASM("nonmatchings/pspnet_inet_rtsub", func_0000DF08);
 
+#if FW_VERSION < 201
+void func_0000E0EC(s32 cmd, struct ifaddr *ifa, s32 error, struct rtentry *rt)
+{
+	struct rt_addrinfo info;
+	struct sockaddr *sa = NULL;
+	int pass;
+	struct mbuf *m = NULL;
+	struct ifnet *ifp = ifa->ifa_ifp;
+
+	if (route_cb.any_count == 0)
+		return;
+	for (pass = 1; pass < 3; pass++) {
+		__builtin_memset(&info, 0, sizeof(info));
+		if ((cmd == RTM_ADD && pass == 1) ||
+		    (cmd == RTM_DELETE && pass == 2)) {
+			struct ifa_msghdr ifam;
+			int ncmd = cmd == RTM_ADD ? RTM_NEWADDR : RTM_DELADDR;
+
+			info.rti_info[RTAX_IFA] = sa = ifa->ifa_addr;
+			info.rti_info[RTAX_IFP] = ifp->if_addrlist.tqh_first->ifa_addr;
+			info.rti_info[RTAX_NETMASK] = ifa->ifa_netmask;
+			info.rti_info[RTAX_BRD] = ifa->ifa_dstaddr;
+			__builtin_memset(&ifam, 0, sizeof(ifam));
+			ifam.ifam_index = ifp->if_index;
+			ifam.ifam_metric = ifa->ifa_metric;
+			ifam.ifam_flags = ifa->ifa_flags;
+			m = func_0000E5A4(ncmd, &info, (char *)&ifam, sizeof(ifam));
+			if (m == NULL)
+				continue;
+			mtod(m, struct ifa_msghdr *)->ifam_addrs =
+			    info.rti_addrs;
+		}
+		if ((cmd == RTM_ADD && pass == 2) ||
+		    (cmd == RTM_DELETE && pass == 1)) {
+			struct rt_msghdr rtm;
+
+			if (rt == 0)
+				continue;
+			info.rti_info[RTAX_NETMASK] = rt_mask(rt);
+			info.rti_info[RTAX_DST] = sa = rt_key(rt);
+			info.rti_info[RTAX_GATEWAY] = rt->rt_gateway;
+			func_0002C94C(&rtm, 0, sizeof(rtm));
+			rtm.rtm_index = ifp->if_index;
+			rtm.rtm_flags |= rt->rt_flags;
+			rtm.rtm_errno = error;
+			m = func_0000E5A4(cmd, &info, (char *)&rtm, sizeof(rtm));
+			if (m == NULL)
+				continue;
+			mtod(m, struct rt_msghdr *)->rtm_addrs = info.rti_addrs;
+		}
+		route_proto.sp_protocol = sa ? sa->sa_family : 0;
+		func_0000EE68(m, &route_proto, &route_src, &route_dst);
+	}
+}
+#else
 INCLUDE_ASM("nonmatchings/pspnet_inet_rtsub", func_0000E0EC);
+#endif
 
 #if FW_VERSION < 201
 void rt_missmsg(s32 type, struct rt_addrinfo *rtinfo, s32 flags, s32 error)

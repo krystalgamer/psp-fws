@@ -820,6 +820,12 @@ struct route_cb {
 };
 #define RTF_DONE 0x40
 #define RTAX_DST 0
+#define RTAX_GATEWAY 1
+#define RTAX_NETMASK 2
+#define RTAX_IFP 4
+#define RTAX_IFA 5
+#define RTAX_BRD 7
+#define rt_mask(r) ((struct sockaddr *)((r)->rt_nodes[0].rn_mask))
 
 /* struct arphdr (if_arp.h), byte-aligned */
 struct arphdr {
@@ -2188,6 +2194,7 @@ s32 func_0000D338(struct Unk_func_0000D338_0 *arg0, s32 arg1);
 s32 func_0000D378(s32);
 void func_0000DD34(s32 arg0, void *arg1, void *arg2);
 void func_0000DDCC(s32 arg0, struct Unk_func_0000DDCC_1 *arg1, struct Unk_func_0000DDCC_2 *arg2);
+void func_0000E0EC(s32 cmd, struct ifaddr *ifa, s32 error, struct rtentry *rt);
 void func_0000E3F0(struct ifnet *ifp);
 void func_0000E448(struct ifnet *ifp, s32 what);
 s32 func_0000E4E4(s32, s32);
