@@ -11,6 +11,8 @@ substituted into the C, with prototypes derived from the existing ones, and the
 body is scored again (a few rounds). --sub adds fixed text substitutions tried
 first (e.g. a helper that was renamed). With --apply, every function that
 reaches MATCH is inserted for DST_VER with one tools/hand.py call.
+A body with `#if FW_VERSION` lines is tried with them first (evaluated for DST, so
+the carried C keeps them), then resolved for SRC_VER.
 Work files go to tmp/port/MODULE/DST_VER/.
 """
 import argparse
@@ -30,14 +32,14 @@ def fw(v):
     return int(re.match(r"\d+", v)[0])
 
 
-def c_body(mod, ver, name):
+def c_body(mod, ver, name, raw=False):
     sd = src_dir(ver, mod)
     fv = sorted({fw(v) for v in sharing_versions(ver, mod)})
     for f in sd.glob("*.c"):
         ents = FM.parse(f.read_text(), fv)
         for k, e in enumerate(ents):
             if e.kind == "cfunc" and e.name == name and fw(ver) in e.vers:
-                body = resolve_fw(e.text, fw(ver))
+                body = e.text if raw else resolve_fw(e.text, fw(ver))
                 # file-scope data right before the function that it uses (e.g. per-file assert strings)
                 pre = ""
                 j = k - 1
@@ -117,52 +119,58 @@ def main():
         if body is None:
             print(f"{name}: no C for {a.src_ver}")
             continue
-        body = re.sub(rf"\b{name}\b(?=\s*\()", dname, body, count=1)
-        for s in a.sub:
-            o, n = s.split("=", 1)
-            body = re.sub(rf"\b{re.escape(o)}\b", n, body)
-        cf, df = work / f"{dname}.c", work / f"{dname}.h"
-        protos = []
-        result = "?"
-        for _ in range(4):
-            cf.write_text(body)
-            df.write_text("\n".join(protos) + "\n")
-            out = hand_try(a.module, a.dst_ver, cf, df)
-            res = [l for l in out.splitlines() if l.startswith("RESULT")]
-            result = res[-1] if res else (out.strip().splitlines() or ["error"])[-1]
-            pairs = re.findall(r"reloc \d+: target (\w+), mine (\w+)", out) + \
-                re.findall(r"call target differs: target (\w+), mine (\w+)", out)
-            # a global named in SRC but still auto-named in DST: hand_try accepts it as an interior label,
-            # but for a port it is usually the same global under its DST name
-            inside = re.findall(r"target label (\w+) assumed inside (\w+);[^\[\n]*(?:\[\w+\+0x([0-9A-F]+)\])?", out)
-            # base address of the global in DST = target label - offset of the reference
-            inside = [(f"D_{int(t[2:], 16) - int(o or '0', 16):08X}", m, int(o or "0", 16)) for t, m, o in inside
-                      if not re.fullmatch(r"D_[0-9A-F]{8}", m)]
-            # auto names are per version: a SRC D_ label is DST's label at the same place
-            raw = re.findall(r"target label (D_[0-9A-F]{8}) assumed inside (D_[0-9A-F]{8});[^\[\n]*(?:\[\w+\+0x([0-9A-F]+)\])?", out)
-            for t, m, o in raw:
-                if int(o or "0", 16) == 0 and t != m:
-                    pairs.append((t, m))
-            cpairs = [c for c in re.findall(r"call target differs: target (\w+), mine (\w+)", out) if c not in proposed]
-            if cpairs:
-                # which DST function looks like SRC's callee (a proposal; the target's name is adopted below)
-                import match_funcs
-                proposed.update(cpairs)
-                match_funcs.propose(a.src_ver, a.dst_ver, a.module, cpairs)
-            for tb, toff, mine in dict.fromkeys(re.findall(r"reloc \d+: target (\w+)\+0x([0-9A-F]+), mine (\w+)", out)):
-                print(f"  {name}: {mine} is {tb}+0x{toff} in {a.dst_ver} (a field of a sized symbol): "
-                      f"write it as a member of {tb}, not substituted")
-            if ("RESULT: MATCH" in result and not raw) or not pairs:
+        # a body with `#if FW_VERSION` lines is tried as it is first (hand_try evaluates them for DST, and the
+        # shared entry keeps them), then resolved for SRC
+        rawb = c_body(a.module, a.src_ver, name, raw=True)
+        for body in ([rawb] if rawb != body and re.search(r"^\s*#\s*if.*FW_VERSION", rawb, re.M) else []) + [body]:
+            body = re.sub(rf"\b{name}\b(?=\s*\()", dname, body, count=1)
+            for s in a.sub:
+                o, n = s.split("=", 1)
+                body = re.sub(rf"\b{re.escape(o)}\b", n, body)
+            cf, df = work / f"{dname}.c", work / f"{dname}.h"
+            protos = []
+            result = "?"
+            for _ in range(4):
+                cf.write_text(body)
+                df.write_text("\n".join(protos) + "\n")
+                out = hand_try(a.module, a.dst_ver, cf, df)
+                res = [l for l in out.splitlines() if l.startswith("RESULT")]
+                result = res[-1] if res else (out.strip().splitlines() or ["error"])[-1]
+                pairs = re.findall(r"reloc \d+: target (\w+), mine (\w+)", out) + \
+                    re.findall(r"call target differs: target (\w+), mine (\w+)", out)
+                # a global named in SRC but still auto-named in DST: hand_try accepts it as an interior label,
+                # but for a port it is usually the same global under its DST name
+                inside = re.findall(r"target label (\w+) assumed inside (\w+);[^\[\n]*(?:\[\w+\+0x([0-9A-F]+)\])?", out)
+                # base address of the global in DST = target label - offset of the reference
+                inside = [(f"D_{int(t[2:], 16) - int(o or '0', 16):08X}", m, int(o or "0", 16)) for t, m, o in inside
+                          if not re.fullmatch(r"D_[0-9A-F]{8}", m)]
+                # auto names are per version: a SRC D_ label is DST's label at the same place
+                raw = re.findall(r"target label (D_[0-9A-F]{8}) assumed inside (D_[0-9A-F]{8});[^\[\n]*(?:\[\w+\+0x([0-9A-F]+)\])?", out)
+                for t, m, o in raw:
+                    if int(o or "0", 16) == 0 and t != m:
+                        pairs.append((t, m))
+                cpairs = [c for c in re.findall(r"call target differs: target (\w+), mine (\w+)", out) if c not in proposed]
+                if cpairs:
+                    # which DST function looks like SRC's callee (a proposal; the target's name is adopted below)
+                    import match_funcs
+                    proposed.update(cpairs)
+                    match_funcs.propose(a.src_ver, a.dst_ver, a.module, cpairs)
+                for tb, toff, mine in dict.fromkeys(re.findall(r"reloc \d+: target (\w+)\+0x([0-9A-F]+), mine (\w+)", out)):
+                    print(f"  {name}: {mine} is {tb}+0x{toff} in {a.dst_ver} (a field of a sized symbol): "
+                          f"write it as a member of {tb}, not substituted")
+                if ("RESULT: MATCH" in result and not raw) or not pairs:
+                    break
+                for tgt, mine in dict.fromkeys(pairs):
+                    if re.fullmatch(r"D_[0-9A-F]{8}", tgt) and mine in store["vars"]:
+                        print(f"  {name}: adopting the address label {tgt} for {mine}; if it is a struct member, give the "
+                              f"containing global a `// size:` in config/{a.dst_ver}/symbol_addrs.{a.module}.txt and "
+                              f"re-split (references become sym+offset)")
+                    body = re.sub(rf"\b{mine}\b", tgt, body)
+                    proto = store["funcs"].get(mine) or store["vars"].get(mine)
+                    if proto and tgt not in store["funcs"] and tgt not in store["vars"]:
+                        protos.append(re.sub(rf"\b{mine}\b", tgt, proto))
+            if "RESULT: MATCH" in result:
                 break
-            for tgt, mine in dict.fromkeys(pairs):
-                if re.fullmatch(r"D_[0-9A-F]{8}", tgt) and mine in store["vars"]:
-                    print(f"  {name}: adopting the address label {tgt} for {mine}; if it is a struct member, give the "
-                          f"containing global a `// size:` in config/{a.dst_ver}/symbol_addrs.{a.module}.txt and "
-                          f"re-split (references become sym+offset)")
-                body = re.sub(rf"\b{mine}\b", tgt, body)
-                proto = store["funcs"].get(mine) or store["vars"].get(mine)
-                if proto and tgt not in store["funcs"] and tgt not in store["vars"]:
-                    protos.append(re.sub(rf"\b{mine}\b", tgt, proto))
         need = sorted(set(inside)) if "RESULT: MATCH" in result else []
         base, exact = {}, {}
         for t, m, off in need:
