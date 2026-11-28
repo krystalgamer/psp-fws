@@ -1339,7 +1339,33 @@ INCLUDE_ASM("nonmatchings/libhttp", func_00003FB0);
 
 INCLUDE_ASM("nonmatchings/libhttp", func_000041A8);
 
-INCLUDE_ASM("nonmatchings/libhttp", func_000042D4);
+void func_000042D4(void) {
+    SceHttpMd5Entry *e;
+    SceHttpMd5Entry *next;
+    int i;
+
+    for (i = 0; i < 16; i++) {
+        e = D_0000DCCC.md5_table[i];
+        while (e != NULL) {
+            if (e->unk30 != NULL) {
+                _sceHttpFreeInternal(e->unk30);
+                e->unk30 = NULL;
+            }
+            if (e->value != NULL) {
+                _sceHttpFreeInternal(e->value);
+                e->value = NULL;
+            }
+            if (e->key != NULL) {
+                _sceHttpFreeInternal(e->key);
+                e->key = NULL;
+            }
+            next = e->next;
+            _sceHttpFreeInternal(e);
+            e = next;
+        }
+        D_0000DCCC.md5_table[i] = NULL;
+    }
+}
 
 INCLUDE_ASM("nonmatchings/libhttp", func_000043A0);
 #endif

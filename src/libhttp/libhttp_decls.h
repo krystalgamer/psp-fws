@@ -443,7 +443,7 @@ typedef struct SceHttpMd5Entry {
     char *value;            /* 0x24 */
     s32 unk28;
     s32 status;             /* 0x2C */
-    s32 unk30;
+    void *unk30;            /* 0x30 freed */
     struct SceHttpMd5Entry *next; /* 0x34 */
     u8 unk38[0x40 - 0x38];
 } SceHttpMd5Entry;
@@ -652,7 +652,7 @@ void func_00003D08(void *arg0);
 void func_00003D28(const char *key, SceHttpMd5Entry **out);
 void func_00003E34(const char *key, SceHttpMd5Entry **out);
 void func_00003EEC(SceHttpMd5Entry *entry);
-s32 func_000042D4(void);
+void func_000042D4(void);
 s32 func_000043A0(SceHttpReq *req);
 int func_00004A6C(SceHttpReq *request);
 s32 func_00005004(s32, s32, s32);
