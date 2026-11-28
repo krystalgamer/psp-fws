@@ -161,7 +161,7 @@ typedef struct {
     SceNetAdhocPollSd *sd;
 } SceNetAdhocPollEnt;
 
-/* PTP control block (offsets are 1.00; 1.50+: no ifp (-4), 0x24 more bytes after the callout) */
+/* PTP control block (offsets are 1.00; 1.50+: no ifp (-4), a second callout) */
 typedef struct SceNetAdhocPtpPcb {
     struct SceNetAdhocPtpPcb *next;     /* 0x00 TAILQ on the PTP list */
     struct SceNetAdhocPtpPcb **prev;    /* 0x04 */
@@ -191,7 +191,7 @@ typedef struct SceNetAdhocPtpPcb {
     s32 snd_inflight;                   /* 0x84 */
     struct callout callout;             /* 0x88 */
 #if FW_VERSION >= 150
-    u8 unk150[0x24];
+    struct callout callout2;            /* 1.50+: 0xA8 */
 #endif
     u32 rexmt_int;                      /* 0xAC */
     s32 rexmt_cnt;                      /* 0xB0 */
@@ -404,7 +404,6 @@ s32 func_000056E4(SceNetAdhocPtpPcb *pcb, s32 a1);
 void func_00005708(SceNetAdhocPtpPcb *pcb);
 void func_0000578C(struct mbuf *m);
 void func_00005FF8(struct ifnet *ifp, const SceNetEtherAddr *laddr, u16 lport, const SceNetEtherAddr *paddr, u16 pport, u8 type, u32 seq, struct mbuf *m);
-void func_00006340(SceNetAdhocPtpPcb *pcb, u8 type);
 void func_0000648C(SceNetAdhocPtpPcb *pcb, s32 rexmt);
 s32 func_00006880(void);
 void func_000069D4(SceNetAdhocPtpPcb *pcb);
@@ -424,6 +423,7 @@ void func_00006F80(void);
 s32 func_00007298(s32 id, SceNetAdhocGameModeOptData *opt, s32 internal);
 s32 module_start(void);
 s32 module_stop(void);
+void ptpSendCtl(SceNetAdhocPtpPcb *pcb, u8 type);
 s32 sceKernelCheckThreadStack(void);
 s32 sceKernelSignalSema(s32 sema, s32 n);
 s32 sceNetAdhocGameModeCreateMaster(void *ptr, s32 size);

@@ -153,3 +153,4 @@ D_00007998_v150 = 0x00007998; // rom:0x7A18
 D_000079AC_v150 = 0x000079AC; // rom:0x7A2C
 D_000079C0_v150 = 0x000079C0; // rom:0x7A40
 // shared names (tools/add_version.py) end
+ptpSendCtl = 0x0000667C; // type:func
