@@ -63,6 +63,24 @@ struct Unk_func_00000B84_temp_v0 {
 
 typedef void (*func_ptr)(void);
 
+#ifndef __cplusplus
+typedef struct Class_00040E98 {
+    void *vptr;
+} Class_00040E98;
+typedef struct Class_00041F30 {
+    void *vptr;
+} Class_00041F30;
+typedef struct Class_00042AC0 {
+    void *vptr;
+} Class_00042AC0;
+typedef struct Class_00042AE0 {
+    void *vptr;
+} Class_00042AE0;
+typedef struct Class_00043FF0 {
+    void *vptr;
+} Class_00043FF0;
+#endif
+
 extern M2C_UNK D_000022F8;
 extern M2C_UNK D_00002340;
 extern func_ptr D_00002558[];
@@ -381,8 +399,8 @@ s32 func_0000D1FC(s32, s32, s32, s32, s32);
 s32 func_0000D3FC(void *arg0);
 void func_0000D464(s32 arg0, s32 arg1);
 s32 func_0000D484(s32 arg0);
-s32 func_0000D48C(s32);
-s32 func_0000D4C8(s32);
+s32 func_0000D48C(s32 self);
+s32 func_0000D4C8(s32 self);
 void func_0000D56C(void *arg0);
 s32 func_0000D650(s32);
 s32 func_0000D6FC(s32);
