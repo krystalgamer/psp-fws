@@ -72,7 +72,26 @@ s32 sceAtaStop(u32 flags) {
 }
 #endif
 
-#if FW_VERSION >= 150
+#if FW_VERSION >= 150 && FW_VERSION < 282
+s32 sceAtaStop(u32 flags) {
+    s32 n;
+    s32 ret;
+    n = D_000042E0 - 1;
+    if (n < 0) {
+        return 0x8021101C;
+    }
+    D_000042E0 = n;
+    if (n == 0) {
+        ret = sceAtaDisableClkIo(flags);
+        if (ret != 0) {
+            return ret;
+        }
+    }
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/ata", sceAtaStop);
 #endif
 
@@ -331,7 +350,7 @@ s32 func_00001134(u32 id) {
     return 0;
 }
 
-s32 sceAtaIsNormalDriveStat(void) {
+s32 sceAtaIsNormalDriveStat(u32 id) {
     SceAtaDrive *temp_v0;
     s32 var_v0;
 
@@ -476,14 +495,37 @@ s32 sceAtaDoSoftResetBit(void) {
     asm volatile("sync");
     i = 4999;
 loop:
-    if (--i >= 0) goto loop;
+    if (--i >= 0) {
+        goto loop;
+    }
     ATA_DEVCTL = 2;
     asm volatile("sync");
     sceKernelDelayThread(2000);
     return sceAtaWaitBusBusy1();
 }
 #else
-INCLUDE_ASM("nonmatchings/ata", sceAtaDoSoftResetBit);
+s32 sceAtaDoSoftResetBit(void) {
+    s32 i;
+    sceSysregAtaBusClockEnable();
+#if FW_VERSION < 150
+    asm volatile("sync");
+#endif
+    ATA_DEVCTL = 4;
+    asm volatile("sync");
+    i = 5999;
+loop:
+    if (--i >= 0) {
+        goto loop;
+    }
+    ATA_DEVCTL = 0;
+    asm volatile("sync");
+    i = 200000;
+loop2:
+    if (--i != 0) {
+        goto loop2;
+    }
+    return sceAtaWaitBusBusy1();
+}
 #endif
 
 s32 sceAtaCheckDeviceReady(SceAtaDrive *drive) {
@@ -578,10 +620,29 @@ s32 sceAtaGetDriveStat(s32 arg0) {
 }
 #endif
 
-#if FW_VERSION >= 150
+#if FW_VERSION >= 150 && FW_VERSION < 271
+s32 sceAtaIsReadableDriveStat(u32 id) {
+    SceAtaDrive *drive = sceAtaGetAtaDrive(id);
+    u32 stat = 0x80211009;
+    if (drive != NULL) {
+        stat = drive->driveStat;
+    }
+    if (stat == 0x80211009) {
+        return 0x80211009;
+    }
+    if (stat & 0x20) {
+        return 1;
+    }
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/ata", sceAtaIsReadableDriveStat);
-#else
-s32 sceAtaIsReadableDriveStat(void) {
+#endif
+
+#if FW_VERSION < 150
+s32 sceAtaIsReadableDriveStat(u32 id) {
     SceAtaDrive *temp_v0;
     s32 var_v0;
 
@@ -595,7 +656,24 @@ s32 sceAtaIsReadableDriveStat(void) {
 }
 #endif
 
-#if FW_VERSION >= 150
+#if FW_VERSION >= 150 && FW_VERSION < 271
+s32 sceAtaIsNormalDriveStat(u32 id) {
+    SceAtaDrive *drive = sceAtaGetAtaDrive(id);
+    u32 stat = 0x80211009;
+    if (drive != NULL) {
+        stat = drive->driveStat;
+    }
+    if (stat == 0x80211009) {
+        return 0x80211009;
+    }
+    if (stat & 0x10) {
+        return 1;
+    }
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/ata", sceAtaIsNormalDriveStat);
 #endif
 
@@ -908,7 +986,11 @@ SceAtaAhbBlock *sceAtaAhbGetAtaBlock(void) {
 #endif
 
 #if FW_VERSION >= 150
-INCLUDE_ASM("nonmatchings/ata", sceAta_driver_4222D6F3);
+void sceAta_driver_4222D6F3(void) {
+    asm volatile("sync");
+    ATA_AHB_REG(0x10) = 0;
+    asm volatile("sync");
+}
 #else
 void sceAta_driver_4D225674(void) {
     asm volatile("sync");
@@ -918,7 +1000,11 @@ void sceAta_driver_4D225674(void) {
 #endif
 
 #if FW_VERSION >= 150
-INCLUDE_ASM("nonmatchings/ata", sceAta_driver_4D225674);
+void sceAta_driver_4D225674(void) {
+    asm volatile("sync");
+    ATA_AHB_REG(0x10) = 1;
+    asm volatile("sync");
+}
 #else
 void sceAtaAhbEnableIntr(u32 mask) {
     asm volatile("sync");
@@ -1008,7 +1094,13 @@ s32 sceAta_driver_76C0923D(u32 *stat) {
     return 0;
 }
 #else
-INCLUDE_ASM("nonmatchings/ata", sceAta_driver_76C0923D);
+s32 sceAta_driver_76C0923D(u32 *stat) {
+    if (stat == NULL) {
+        return 0x800001FF;
+    }
+    *stat = ATA_AHB_REG(0x40);
+    return 0;
+}
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
@@ -1042,7 +1134,10 @@ void sceAta_driver_F61EAFC0(void) {
     asm volatile("sync");
 }
 #else
-INCLUDE_ASM("nonmatchings/ata", sceAta_driver_F61EAFC0);
+void sceAta_driver_F61EAFC0(void) {
+    ATA_AHB_REG(0x38) = 0x10100;
+    asm volatile("sync");
+}
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
