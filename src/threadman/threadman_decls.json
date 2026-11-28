@@ -3,6 +3,7 @@
   "Kprintf": "s32 Kprintf(const char *fmt, ...);",
   "_sceKernelExitThread": "void _sceKernelExitThread(void);",
   "_sceKernelReturnFromTimerHandler": "s32 _sceKernelReturnFromTimerHandler(void);",
+  "func_000000B0": "s32 func_000000B0(SceSysmemUidCB *cb, s32 waitType, u32 attr, void *clock, s32 *timeout);",
   "func_0000022C": "s32 func_0000022C(s32);",
   "func_00000268": "s32 func_00000268(SceThread *thread);",
   "func_000003F0": "s32 func_000003F0(SceSysmemUidCB *cb, s32 waitRet);",

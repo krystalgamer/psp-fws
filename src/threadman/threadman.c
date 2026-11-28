@@ -1090,7 +1090,34 @@ s32 func_0000261C(struct Unk_func_0000261C_0 *arg0) {
 }
 #endif
 
+#if FW_VERSION < 150
+s32 func_00002644(SceSysmemUidCB *cb, SceSysmemUidCB *type, s32 funcId, void *ap) {
+    s32 intr = sceKernelCpuSuspendIntr();
+    SceThreadCbObj *obj = UID_CB_TO_DATA(cb, type, SceThreadCbObj);
+    s32 ret;
+
+    if (obj->unk10 != 0) {
+        sceKernelCpuResumeIntr(intr);
+        return 0x800201A0;
+    }
+    obj->unk10 = 1;
+    while (obj->unkC > 0) {
+        func_000124A0();
+        ret = func_000000B0(cb, 0xA, 0, NULL, NULL);
+        if (ret != 0) {
+            sceKernelCpuResumeIntr(intr);
+            return ret;
+        }
+    }
+    obj->next->prev = obj->prev;
+    obj->prev->next = obj->next;
+    sceKernelCpuResumeIntr(intr);
+    sceKernelCallUIDObjCommonFunction(cb, type, funcId, ap);
+    return 0;
+}
+#else
 INCLUDE_ASM("nonmatchings/threadman", func_00002644);
+#endif
 
 #if FW_VERSION < 282
 s32 func_000024D4(void *arg0) {
@@ -1104,7 +1131,34 @@ s32 func_0000275C(struct Unk_func_0000275C_0 *arg0) {
 }
 #endif
 
+#if FW_VERSION < 150
+s32 func_00002784(SceSysmemUidCB *cb, SceSysmemUidCB *type, s32 funcId, void *ap) {
+    s32 intr = sceKernelCpuSuspendIntr();
+    SceThreadCbObj *obj = UID_CB_TO_DATA(cb, type, SceThreadCbObj);
+    s32 ret;
+
+    if (obj->unk10 != 0) {
+        sceKernelCpuResumeIntr(intr);
+        return 0x800201A1;
+    }
+    obj->unk10 = 1;
+    while (obj->unkC > 0) {
+        func_000124A0();
+        ret = func_000000B0(cb, 0xB, 0, NULL, NULL);
+        if (ret != 0) {
+            sceKernelCpuResumeIntr(intr);
+            return ret;
+        }
+    }
+    obj->next->prev = obj->prev;
+    obj->prev->next = obj->next;
+    sceKernelCpuResumeIntr(intr);
+    sceKernelCallUIDObjCommonFunction(cb, type, funcId, ap);
+    return 0;
+}
+#else
 INCLUDE_ASM("nonmatchings/threadman", func_00002784);
+#endif
 
 #if FW_VERSION >= 270 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/threadman", func_00002828);

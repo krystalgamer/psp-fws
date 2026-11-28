@@ -539,6 +539,7 @@ extern SceThreadmanInfo g_threadmanInfo;
 s32 Kprintf(const char *fmt, ...);
 void _sceKernelExitThread(void);
 s32 _sceKernelReturnFromTimerHandler(void);
+s32 func_000000B0(SceSysmemUidCB *cb, s32 waitType, u32 attr, void *clock, s32 *timeout);
 s32 func_0000022C(s32);
 s32 func_00000268(SceThread *thread);
 s32 func_000003F0(SceSysmemUidCB *cb, s32 waitRet);
