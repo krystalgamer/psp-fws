@@ -984,7 +984,7 @@ s32 sceWlanDevEnd(void) {
         mac = sc->mac;
         if (mac != NULL)
             func_0000806C(mac);
-        func_000067B8(sc, sc->unk24C);
+        func_000067B8(sc, sc->ring);
         func_000067B8(sc, sc->unk2B8);
         func_000065E4(&sc->q2A8);
         func_000065E4(&sc->q2B0);
@@ -2105,9 +2105,9 @@ s32 func_00006574(void *arg0, void *arg1) {
 #endif
 
 #if FW_VERSION < 282
-s32 func_000065D4(void *arg0) {
-    M2C_FIELD(arg0, s32 *, 0) = 0;
-    M2C_FIELD(arg0, s32 *, 4) = 0;
+s32 func_000065D4(SceWlanQueue *q) {
+    q->head = NULL;
+    q->tail = NULL;
     return 0;
 }
 
@@ -2314,8 +2314,8 @@ INCLUDE_RODATA("nonmatchings/wlan", D_00017650);
 #endif
 
 #if FW_VERSION < 282
-void func_00006708(u32 arg0) {
-    sceKernelCreateVpl("SceWlanDrvHeap", 1, 1U, arg0, NULL);
+SceUID func_00006708(u32 size) {
+    return sceKernelCreateVpl("SceWlanDrvHeap", 1, 1U, size, NULL);
 }
 
 void func_00006738(u32 arg0) {

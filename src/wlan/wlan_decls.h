@@ -108,6 +108,13 @@ typedef struct {
     u8 b[4];
 } SceWlanBytes4;
 
+/* ring of 100 entries allocated at init (SceWlanSoftc.ring) */
+typedef struct SceWlanRingEnt {
+    u16 flags;                  /* 0x00 bit 1: head */
+    u16 unk2;                   /* 0x02 */
+    struct SceWlanRingEnt *next;    /* 0x04 */
+} SceWlanRingEnt;
+
 typedef struct SceWlanSoftc SceWlanSoftc;
 typedef struct SceWlanMac SceWlanMac;
 
@@ -251,8 +258,9 @@ struct SceWlanSoftc {
     SceWlanQEnt *pool;          /* 0x234 */
     SceWlanQEnt *poolNext;      /* 0x238 */
     u8 unk23C[0x24C - 0x23C];
-    void *unk24C;               /* 0x24C */
-    u8 unk250[0x260 - 0x250];
+    SceWlanRingEnt *ring;       /* 0x24C 100 entries */
+    SceWlanRingEnt *ringHead;   /* 0x250 */
+    u8 unk254[0x260 - 0x254];
     SceUID thread;              /* 0x260 SceWlanMac */
 #if FW_VERSION >= 150
     u32 unk_v150;
@@ -564,6 +572,8 @@ extern SceWlanWakeUp D_0002A038;
 extern SceWlanMsg D_0002A060;
 extern SceWlanMsg D_0002A07C;
 extern SceWlanMsg D_0002A098;
+extern s32 D_0002A0B4;
+extern s32 D_0002A0B8;
 extern u16 D_0002A0C0;
 extern SceWlanMsg D_0002A83C;
 extern s32 D_0002D7A8;
@@ -612,10 +622,10 @@ s32 func_00004B20(s32 *arg0);
 s32 func_00006338(void *arg0, s32 arg1, s32 arg2, u32 arg3, s32 arg4);
 s32 func_00006458(void *arg0, void *arg1);
 s32 func_00006574(void *arg0, void *arg1);
-s32 func_000065D4(void *arg0);
+s32 func_000065D4(SceWlanQueue *q);
 void func_000065E4(SceWlanQueue *q);
 s32 func_000066FC(s32 *arg0);
-void func_00006708(u32 arg0);
+SceUID func_00006708(u32 size);
 void func_00006738(u32 arg0);
 void func_000067B8(void *arg0, void *arg1);
 s32 func_00006B04(SceWlanMac *mac);
