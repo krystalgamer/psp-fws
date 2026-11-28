@@ -126,6 +126,7 @@
   "sceUmdUnRegisterGetUMDInfoCallBack": "M2C_UNK sceUmdUnRegisterGetUMDInfoCallBack();",
   "sprintf": "s32 sprintf(char *buf, const char *fmt, ...);",
   "strlen": "SceSize strlen(const char *s);",
+  "umd9660_release_devfd": "s32 umd9660_release_devfd(SceIoIob *iob);",
   "umd9660_set_lseek": "SceOff umd9660_set_lseek(SceUmd9660File *file, SceOff ofs, s32 whence);"
  },
  "types": {

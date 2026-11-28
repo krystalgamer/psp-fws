@@ -30,6 +30,9 @@ def main():
     ap.add_argument("specs", nargs="+")
     ap.add_argument("--dry-run", action="store_true")
     ap.add_argument("--force", action="store_true", help="NEW may already be used (same function/global in other versions)")
+    ap.add_argument("--scoped", action="store_true",
+                    help="rename OLD only inside source entries whose versions are all being renamed (other versions "
+                         "keep OLD for a different function); the decls store gets NEW added, OLD kept")
     a = ap.parse_args()
     mod = a.module
     allv = sorted(p.parent.name for p in (ROOT / "config").glob(f"*/{mod}.yaml"))
@@ -45,11 +48,13 @@ def main():
                 texts[p] = p.read_text()
     new = dict(texts)
     src_renames = {}
+    scoped_vers = set()
     for spec in a.specs:
         m = re.match(r"^(?:([\w,]+):)?(\w+)=(\w+)$", spec)
         if not m:
             sys.exit(f"bad spec {spec}")
         vers = m[1].split(",") if m[1] else allv
+        scoped_vers.update(vers)
         old, nw = m[2], m[3]
         csrc = "\n".join(t for p2, t in texts.items() if p2.suffix in (".c", ".h"))
         csrc = re.sub(r"/\*.*?\*/|//[^\n]*", " ", csrc, flags=re.S)  # comments
@@ -98,6 +103,8 @@ def main():
                 if p2.suffix != ".c":
                     continue
                 for e in FM.parse(t, fv):
+                    if a.scoped:
+                        break
                     if e.name == old and e.kind in ("cfunc", "asm") and (e.vers & restn) and not (e.vers <= mine):
                         other = sorted(e.vers & restn)
                         sys.exit(f"{old}: {p2.name} has its own {e.kind} entry for versions {other} not being renamed; "
@@ -116,6 +123,49 @@ def main():
             if sizes and max(sizes.values()) > 1.5 * max(1, min(sizes.values())):
                 print(f"WARNING: {old} has very different sizes across versions {sizes} — "
                       f"possibly different functions sharing an auto name; restrict with VERS:")
+    if a.scoped:
+        import fwmodel as FM
+        fv = sorted({int(re.match(r"\d+", x)[0]) for x in allv})
+        mine = {int(re.match(r"\d+", x)[0]) for x in scoped_vers}
+        for p, t in list(new.items()):
+            if p.suffix == ".c":
+                # line by line: rename only where the enclosing FW_VERSION conditions select versions all in `mine`
+                out, stack = [], []  # stack of (versions selected by this branch, versions taken so far)
+                for line in t.splitlines(keepends=True):
+                    m = re.match(r"^#\s*(if|elif|else|endif)\b(.*)$", line.rstrip("\n"))
+                    if m and (m[1] in ("if", "elif") and "FW_VERSION" in m[2] or m[1] in ("else", "endif") and stack):
+                        kw, cond = m[1], m[2].strip()
+                        if kw == "if":
+                            sel = {v for v in fv if FM.evaluate(cond, v)}
+                            stack.append((sel, set(sel)))
+                        elif kw == "elif":
+                            _, taken = stack.pop()
+                            sel = {v for v in fv if v not in taken and FM.evaluate(cond, v)}
+                            stack.append((sel, taken | sel))
+                        elif kw == "else":
+                            _, taken = stack.pop()
+                            stack.append((set(fv) - taken, set(fv)))
+                        else:
+                            stack.pop()
+                        out.append(line)
+                        continue
+                    active = set(fv)
+                    for sel, _ in stack:
+                        active &= sel
+                    if active and active <= mine:
+                        for o, n in src_renames.items():
+                            line = re.sub(rf"\b{o}\b", n, line)
+                    out.append(line)
+                new[p] = "".join(out)
+            elif p.suffix == ".json":
+                import json
+                store = json.loads(t)
+                for sec in ("funcs", "vars"):
+                    for o, n in src_renames.items():
+                        if o in store.get(sec, {}) and n not in store[sec]:
+                            store[sec][n] = re.sub(rf"\b{o}\b", n, store[sec][o])
+                new[p] = json.dumps(store, indent=1, sort_keys=True)
+        src_renames = {}
     for p, t in list(new.items()):
         if p.suffix in (".c", ".h"):
             for o, n in src_renames.items():

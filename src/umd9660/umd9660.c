@@ -919,7 +919,7 @@ INCLUDE_ASM("nonmatchings/umd9660", func_00003CC8);
 
 #if FW_VERSION < 201
 s32 func_00003D28(SceIoIob *iob) {
-    return func_00004544(iob);
+    return umd9660_release_devfd(iob);
 }
 #endif
 
@@ -1575,7 +1575,7 @@ INCLUDE_ASM("nonmatchings/umd9660", func_00003D24);
 #endif
 
 #if FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/umd9660", func_00004544);
+INCLUDE_ASM("nonmatchings/umd9660", umd9660_release_devfd);
 #endif
 
 #if FW_VERSION >= 282
