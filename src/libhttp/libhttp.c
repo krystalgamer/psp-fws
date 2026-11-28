@@ -1060,7 +1060,35 @@ INCLUDE_ASM("nonmatchings/libhttp", func_000031D4);
 #endif
 
 #if FW_VERSION < 103
-INCLUDE_ASM("nonmatchings/libhttp", SchemeToProtocol);
+int SchemeToProtocol(const unsigned char *scheme) {
+    char buf[16];
+    int len;
+    int i;
+    int r;
+    unsigned char c;
+    int t;
+    int ret = 0x804311FE;
+
+    if (scheme != NULL) {
+        len = func_0000BE38((const char *)scheme);
+        ret = 0x80431061;
+        if (len < 10) {
+            for (i = 0; i < len; i++) {
+                c = scheme[i];
+                t = (D_0000DC35[c] << 4) & 0x20;
+                t = c - t;
+                buf[i] = t;
+            }
+            buf[i] = '\0';
+            r = func_0000BC98(buf, "HTTP");
+            ret = 0;
+            if (r != 0) {
+                ret = (func_0000BC98(buf, "HTTPS") == 0) ? 1 : 0x80431061;
+            }
+        }
+    }
+    return ret;
+}
 #endif
 
 #if FW_VERSION < 150
@@ -4996,9 +5024,7 @@ INCLUDE_ASM("nonmatchings/libhttp", func_00015BC0);
 
 #if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/libhttp", __udivdi3);
-#endif
 
-#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/libhttp", __umoddi3);
 #endif
 
