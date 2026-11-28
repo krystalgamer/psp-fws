@@ -145,3 +145,4 @@ __malloc_max_sbrked_mem = 0x0000F5B0;
 __malloc_max_total_mem = 0x0000F5B4;
 __malloc_current_mallinfo = 0x0000F5B8;
 __lc_ctype = 0x0000F148; // rom:0xF1C8
+__thenan_df = 0x0000C040; // size:0x18

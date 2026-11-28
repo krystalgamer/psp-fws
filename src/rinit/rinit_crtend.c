@@ -10,6 +10,6 @@ void __do_global_ctors_aux(void) {
     }
 }
 
-INCLUDE_RODATA("nonmatchings/rinit_crtend", D_0000C040);
+INCLUDE_RODATA("nonmatchings/rinit_crtend", __thenan_df);
 
 INCLUDE_RODATA("nonmatchings/rinit_crtend", D_0000C058);
