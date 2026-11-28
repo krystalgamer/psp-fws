@@ -208,3 +208,5 @@ _scePowerBatterySuspend = 0x00003D90; // type:func rom:0x3E10
 _scePowerBatteryIsBusy = 0x00003E08; // type:func rom:0x3E88
 _scePowerBatteryResume = 0x00003E18; // type:func rom:0x3E98
 // shared names (tools/add_version.py) end
+_scePowerLock = 0x00001EF4; // type:func
+_scePowerUnlock = 0x00001FEC; // type:func

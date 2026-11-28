@@ -542,7 +542,7 @@ INCLUDE_ASM("nonmatchings/power", scePower_driver_D6D016EF);
 INCLUDE_ASM("nonmatchings/power", scePower_CA3D34C1);
 
 void scePower_driver_CA3D34C1(s32 arg0) {
-    func_000017B0(arg0, 0);
+    _scePowerUnlock(arg0, 0);
 }
 #endif
 
@@ -554,7 +554,7 @@ s32 scePowerRebootStart(void) {
     u32 temp_s0;
 
     temp_s0 = shiftK1();
-    func_00001EF4(0, 1);
+    _scePowerLock(0, 1);
     setK1(temp_s0);
     g_PowerSwitch.isRebootPowerLockExist = 1;
     temp_s1 = sceKernelCpuSuspendIntr();
@@ -568,12 +568,12 @@ void scePower_D6D016EF(s32 arg0) {
     u32 temp_s0;
 
     temp_s0 = shiftK1();
-    func_00001EF4(arg0, 1);
+    _scePowerLock(arg0, 1);
     setK1(temp_s0);
 }
 
 void scePower_driver_D6D016EF(s32 arg0) {
-    func_00001EF4(arg0, 0);
+    _scePowerLock(arg0, 0);
 }
 #endif
 
@@ -634,7 +634,7 @@ void scePower_driver_CA3D34C1(s32 arg0) {
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
 void scePower_driver_CA3D34C1(s32 arg0) {
-    func_00001FEC(arg0, 0);
+    _scePowerUnlock(arg0, 0);
 }
 #endif
 
@@ -739,15 +739,15 @@ s32 scePowerSetWakeupCondition(s32 arg0) {
 #endif
 
 #if FW_VERSION >= 102 && FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/power", func_000016A0);
+INCLUDE_ASM("nonmatchings/power", _scePowerLock);
 
-INCLUDE_ASM("nonmatchings/power", func_000017B0);
+INCLUDE_ASM("nonmatchings/power", _scePowerUnlock);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/power", func_00001EF4);
+INCLUDE_ASM("nonmatchings/power", _scePowerLock);
 
-INCLUDE_ASM("nonmatchings/power", func_00001FEC);
+INCLUDE_ASM("nonmatchings/power", _scePowerUnlock);
 #endif
 
 #if FW_VERSION == 100
@@ -927,11 +927,7 @@ s32 func_000016D8(u16 val) {
 }
 #endif
 
-#if FW_VERSION >= 102 && FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/power", _scePowerResumePoint);
-#endif
-
-#if FW_VERSION == 100 || (FW_VERSION >= 150 && FW_VERSION < 310)
+#if FW_VERSION < 310
 INCLUDE_ASM("nonmatchings/power", _scePowerResumePoint);
 #endif
 
@@ -1149,9 +1145,23 @@ s32 _scePowerFreqEnd(void) {
 #endif
 
 #if FW_VERSION >= 102 && FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/power", _scePowerFreqSuspend);
+s32 _scePowerFreqSuspend(void) {
+    sceClkcGetCpuGear(&g_PowerFreq.clkcCpuGearNumerator, &g_PowerFreq.clkcCpuGearDenominator);
+    sceClkcGetBusGear(&g_PowerFreq.clkcBusGearNumerator, &g_PowerFreq.clkcBusGearDenominator);
+    g_PowerFreq.oldGeEdramRefreshMode = g_PowerFreq.geEdramRefreshMode;
+    scePowerSetGeEdramRefreshMode(0);
+    return 0;
+}
 
-INCLUDE_ASM("nonmatchings/power", _scePowerFreqResume);
+s32 _scePowerFreqResume(s32 step) {
+    if (step == 0) {
+        sceClkcSetCpuGear(g_PowerFreq.clkcCpuGearNumerator, g_PowerFreq.clkcCpuGearDenominator);
+        sceClkcSetBusGear(g_PowerFreq.clkcBusGearNumerator, g_PowerFreq.clkcBusGearDenominator);
+    } else if (step == 1) {
+        scePowerSetGeEdramRefreshMode(g_PowerFreq.oldGeEdramRefreshMode);
+    }
+    return 0;
+}
 #endif
 
 #if FW_VERSION >= 310
@@ -1346,13 +1356,7 @@ INCLUDE_ASM("nonmatchings/power", scePowerGetBusClockFrequencyFloat);
 INCLUDE_RODATA("nonmatchings/power", D_000040A0);
 
 INCLUDE_RODATA("nonmatchings/power", D_000040A4);
-#endif
 
-#if FW_VERSION == 103
-INCLUDE_ASM("nonmatchings/power", _scePowerBatteryThread);
-#endif
-
-#if FW_VERSION == 102
 INCLUDE_ASM("nonmatchings/power", _scePowerBatteryThread);
 #endif
 

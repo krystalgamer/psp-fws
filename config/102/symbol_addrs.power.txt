@@ -188,3 +188,5 @@ _scePowerFreqSuspend = 0x00002768; // type:func
 _scePowerFreqResume = 0x000027BC; // type:func
 _scePowerBatteryInit = 0x00003070; // type:func
 _scePowerBatteryThread = 0x0000289C; // type:func
+_scePowerLock = 0x000016A0; // type:func
+_scePowerUnlock = 0x000017B0; // type:func
