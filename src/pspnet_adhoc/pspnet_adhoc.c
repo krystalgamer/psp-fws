@@ -992,18 +992,7 @@ void sceNetAdhoc_lib_62B875A8(void) {
 
 #if FW_VERSION < 150
 void sceNetAdhoc_lib_62B875A8(void) {
-    M2C_VFIELD(&D_00007450, s32, 0) = 0;
-    M2C_VFIELD(&D_00007450, s32, 0x2C) = 0;
-    M2C_VFIELD(&D_00007450, s32, 4) = 0;
-    M2C_VFIELD(&D_00007450, s32, 8) = 0;
-    M2C_VFIELD(&D_00007450, s32, 0xC) = 0;
-    M2C_VFIELD(&D_00007450, s32, 0x10) = 0;
-    M2C_VFIELD(&D_00007450, s32, 0x14) = 0;
-    M2C_VFIELD(&D_00007450, s32, 0x18) = 0;
-    M2C_VFIELD(&D_00007450, s32, 0x1C) = 0;
-    M2C_VFIELD(&D_00007450, s32, 0x20) = 0;
-    M2C_VFIELD(&D_00007450, s32, 0x24) = 0;
-    M2C_VFIELD(&D_00007450, s32, 0x28) = 0;
+    __builtin_memset(&D_00007450, 0, sizeof(D_00007450));
 }
 #endif
 
@@ -1015,7 +1004,16 @@ void sceNetAdhoc_lib_62B875A8(void) {
 }
 #endif
 
+#if FW_VERSION < 150
+s32 sceNetAdhoc_lib_2CA12790(SceNetAdhocStat100 *out) {
+    if (out == NULL)
+        return 0x80410711;
+    *out = D_00007450;
+    return 0;
+}
+#else
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", sceNetAdhoc_lib_2CA12790);
+#endif
 
 #if FW_VERSION < 300
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00004964);

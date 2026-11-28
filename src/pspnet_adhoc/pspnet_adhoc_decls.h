@@ -34,6 +34,11 @@ typedef struct {
     u32 flags;                          /* 0x14 1: wakeup sb, 2: wakeup select */
 } SceNetAdhocPtpSockbuf;
 
+/* 1.00 adhoc statistics counters (0x30) */
+typedef struct {
+    u32 stat[12];
+} SceNetAdhocStat100;
+
 /* pspnet SceNetThreadInfo as seen by pspnet_adhoc (1.00: 0x64, 1.50: 0x60 (no sleepcnt), 2.60+: 0x5C (no descs chain)) */
 typedef struct SceNetAdhocWaiter {
     u8 unk0[0x20];
@@ -274,7 +279,7 @@ struct sockaddr_dl {
 extern s32 D_000073F0;
 extern s32 D_00007400;
 extern s32 D_00007448;
-extern M2C_UNK D_00007450;
+extern SceNetAdhocStat100 D_00007450;
 extern const SceNetEtherAddr D_000078A4; /* ff:ff:ff:ff:ff:ff */
 extern const SceNetEtherAddr D_000078AC; /* 00:00:00:00:00:00 */
 extern struct ifqueue D_00007984;
@@ -406,6 +411,7 @@ s32 sceNetAdhocPtpListen(const SceNetEtherAddr *saddr, u16 sport, s32 bufsize, u
 s32 sceNetAdhocPtpOpen(const SceNetEtherAddr *saddr, u16 sport, const SceNetEtherAddr *daddr, u16 dport, s32 bufsize, u32 rexmt_int, s32 rexmt_cnt, s32 flag);
 s32 sceNetAdhocSetSocketAlert(s32 id, s32 flag);
 s32 sceNetAdhocTerm(void);
+s32 sceNetAdhoc_lib_2CA12790(SceNetAdhocStat100 *out);
 void sceNetAdhoc_lib_62B875A8(void);
 void sceNetAdhoc_lib_F9240FBA(void);
 void sceNetFreeInternal(void *p);
