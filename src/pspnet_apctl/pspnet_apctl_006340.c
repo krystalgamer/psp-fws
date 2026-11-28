@@ -62,9 +62,7 @@ INCLUDE_ASM("nonmatchings/pspnet_apctl_006340", func_00006870);
 
 #if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_apctl_006340", func_00004AEC);
-#endif
 
-#if FW_VERSION < 250
 s32 func_00006BD8(s8 tag, u8 len) {
     switch (tag) {
     case 53:
@@ -98,10 +96,6 @@ s32 func_00006BD8(s8 tag, u8 len) {
     }
     return 0;
 }
-#endif
-
-#if FW_VERSION >= 250 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_apctl_006340", func_00006BD8);
 #endif
 
 #if FW_VERSION < 151
@@ -169,7 +163,35 @@ s32 func_00006C50(s8 *opt, SceNetDhcpLease *l) {
 #endif
 
 #if FW_VERSION >= 250 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_apctl_006340", func_00006C50);
+s32 func_00006C50(s8 *opt, SceNetDhcpLease *l) {
+    s32 ret = 0;
+
+    switch (opt[0]) {
+    case 53:
+        l->msgType = opt[2];
+        break;
+    case 1:
+    case 28:
+    case 54:
+        ret = func_000068D4(opt, l);
+        break;
+    case 3:
+    case 6:
+        ret = func_00006948(opt, l);
+        break;
+    case 12:
+    case 15:
+    case 56:
+        ret = func_00004CDC(opt, l);
+        break;
+    case 51:
+    case 58:
+    case 59:
+        ret = func_00006F34(opt, l);
+        break;
+    }
+    return ret;
+}
 #endif
 
 #if FW_VERSION >= 151 && FW_VERSION < 282
@@ -245,7 +267,7 @@ INCLUDE_ASM("nonmatchings/pspnet_apctl_006340", func_00006F34);
 
 INCLUDE_ASM("nonmatchings/pspnet_apctl_006340", func_00006FC8);
 
-#if FW_VERSION < 250
+#if FW_VERSION < 282
 void func_0000708C(const u8 *src, u8 *dst, s32 n) {
     s32 i;
 
@@ -269,7 +291,11 @@ void func_00005290(void *arg0) {
 #endif
 
 #if FW_VERSION >= 250 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_apctl_006340", func_00005290);
+void func_00005290(void *arg0) {
+    if (arg0 != NULL) {
+        sceNetMemset(arg0, 0, 0x404);
+    }
+}
 #endif
 
 #if FW_VERSION >= 282
@@ -379,7 +405,7 @@ s32 func_00008E00(void) {
 }
 #endif
 
-#if FW_VERSION < 250
+#if FW_VERSION < 282
 s32 func_00008E34(void) {
     if (D_00013F20 == NULL) {
         return 0x8041030B;

@@ -297,7 +297,7 @@ s32 sceNetApctl_lib_C519EDCD(s32 arg0) {
 }
 #endif
 
-#if FW_VERSION < 250
+#if FW_VERSION < 260
 s32 func_00000964(SceNetApctlCtx *ctx, u32 *bits) {
     s32 ret;
     s32 i;
@@ -328,7 +328,7 @@ end:
 }
 #endif
 
-#if FW_VERSION == 250 || FW_VERSION >= 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/pspnet_apctl", func_00000964);
 #endif
 
