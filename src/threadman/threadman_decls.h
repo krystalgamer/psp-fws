@@ -31,7 +31,13 @@ typedef struct SceSysmemUidCB {
 /* user-visible status structs (uOFW threadman_kernel.h) */
 typedef struct {
     SceSize size;
-} SceKernelSystemStatus; /* 0x1C bytes, partial */
+    u32 status;
+    u32 idleClocksLow;
+    u32 idleClocksHi;
+    u32 comesOutOfIdleCount;
+    u32 threadSwitchCount;
+    u32 vfpuSwitchCount;
+} SceKernelSystemStatus;
 
 typedef struct {
     SceSize size;
@@ -319,7 +325,8 @@ typedef struct SceThread {
     s32 unk58; /* 0x58 */
     SceSysmemUidCB *unk5C; /* 0x5C: callback being run */
     s32 initPriority; /* 0x60 */
-    u8 unk64[0x6C - 0x64];
+    u32 runClocksLow; /* 0x64 */
+    u32 runClocksHi; /* 0x68 */
     void *entry; /* 0x6C */
     void *stack; /* 0x70 */
     s32 stackSize; /* 0x74 */
@@ -381,11 +388,14 @@ typedef struct SceThreadmanInfo {
     SceThreadQueue readyQueue[128]; /* 0x018 */
     s32 dispatchDisabled; /* 0x418 */
 #if FW_VERSION < 150
-    u8 unk41C[0x430 - 0x41C];
+    u8 unk41C[0x428 - 0x41C];
+    SceKernelSysClock lastSwitchTime; /* 0x428: when the current thread started running */
     u32 unk430; /* 0x430: system time low word at last update */
     u32 unk434; /* 0x434: system time high word */
     u32 unk438; /* 0x438: next timer event (low word) */
-    u8 unk43C[0x5B8 - 0x43C];
+    u8 unk43C[0x584 - 0x43C];
+    SceThread *idleThread; /* 0x584 */
+    u8 unk588[0x5B8 - 0x588];
     s32 unk5B8; /* 0x5B8: number of free Delay uids in unk5C4 */
     SceThreadQueue timers; /* 0x5BC: active SceTimers, by time */
     SceThreadQueue unk5C4; /* 0x5C4: free Delay uids */
@@ -409,7 +419,10 @@ typedef struct SceThreadmanInfo {
     SceSysmemUidCB *uidVTimerType; /* 0x630 */
     s32 heapId; /* 0x634 */
     s32 systemStatusFlag; /* 0x638 */
-    u8 unk63C[0x660 - 0x63C];
+    s32 threadSwitchCount; /* 0x63C */
+    u8 unk640[0x644 - 0x640];
+    s32 vfpuSwitchCount; /* 0x644 */
+    u8 unk648[0x660 - 0x648];
     union {
         u32 size;
         SceKernelSemaInfo sema;

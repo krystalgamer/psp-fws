@@ -16,9 +16,10 @@ static inline u64 sysClockToU64(SceKernelSysClock *clock) {
     return ((u64)clock->hi << 32) + clock->low;
 }
 
-static inline void u64ToSysClock(SceKernelSysClock *clock, u64 value) {
-    clock->low = value;
+/* the stores keep their order (hi first) as if through a volatile pointer */
+static inline void u64ToSysClock(volatile SceKernelSysClock *clock, u64 value) {
     clock->hi = value >> 32;
+    clock->low = value;
 }
 
 /* the original assert loads the file and function name before testing; compiled out in 2.01+ */
@@ -1102,7 +1103,32 @@ s32 sceKernelGetCallbackCount(SceUID cbid) {
     return ret;
 }
 
-INCLUDE_ASM("nonmatchings/threadman", sceKernelCheckCallback);
+s32 sceKernelCheckCallback(void) {
+    SceThread *thread = g_threadmanInfo.currentThread;
+    s32 intr;
+    s32 ret = 0;
+    void *ra = getRa();
+    u32 oldK1 = shiftK1Noreorder();
+
+    if (sceKernelIsIntrContext()) {
+        setK1(oldK1);
+        return 0x80020064;
+    }
+    if (g_threadmanInfo.currentThread->unk5C != NULL) {
+        setK1(oldK1);
+        return 0x80020064;
+    }
+    intr = sceKernelCpuSuspendIntr();
+    if (thread->unk58 != 0) {
+        ret = func_00001FC4(intr) != 0;
+    }
+    if (g_threadmanInfo.logHandler != NULL) {
+        g_threadmanInfo.logHandler(0x87, ra, 1, ret);
+    }
+    sceKernelCpuResumeIntr(intr);
+    setK1(oldK1);
+    return ret;
+}
 
 INCLUDE_ASM("nonmatchings/threadman", func_00001FC4);
 #endif
@@ -3012,9 +3038,13 @@ u32 sceKernelGetSystemTimeLow(void) {
     return *(volatile u32 *)0xBC600000;
 }
 
-INCLUDE_ASM("nonmatchings/threadman", func_0000B7F4);
+void func_0000B7F4(SceKernelSysClock *clock, u32 usec) {
+    u64ToSysClock(clock, func_0000B634() + usec);
+}
 
-INCLUDE_ASM("nonmatchings/threadman", func_0000B84C);
+void func_0000B84C(SceKernelSysClock *out, SceKernelSysClock *in) {
+    u64ToSysClock(out, func_0000B634() + sysClockToU64(in));
+}
 #endif
 
 #if FW_VERSION >= 282
@@ -4605,7 +4635,14 @@ s32 sceKernelCheckThreadKernelStack(void) {
 
 INCLUDE_ASM("nonmatchings/threadman", sceKernelCheckThreadStack);
 
-INCLUDE_ASM("nonmatchings/threadman", func_000126C4);
+void func_000126C4(SceThread *thread, SceKernelSysClock *out) {
+    u64 clocks = ((u64)thread->runClocksHi << 32) + thread->runClocksLow;
+
+    if (g_threadmanInfo.currentThread == thread) {
+        clocks += func_0000B634() - sysClockToU64(&g_threadmanInfo.lastSwitchTime);
+    }
+    u64ToSysClock(out, clocks);
+}
 
 INCLUDE_ASM("nonmatchings/threadman", sceKernelGetThreadStackFreeSize);
 
@@ -4638,7 +4675,28 @@ INCLUDE_ASM("nonmatchings/threadman", func_00014F74);
 INCLUDE_ASM("nonmatchings/threadman", func_00015128);
 #endif
 
+#if FW_VERSION < 150
+void func_000153A8(SceKernelSystemStatus *status, s32 intr) {
+    memset(status, 0, sizeof(SceKernelSystemStatus));
+    status->size = sizeof(SceKernelSystemStatus);
+    if (sceKernelIsIntrContext()) {
+        status->status = 4;
+    } else if (intr == 0) {
+        status->status = 3;
+    } else if (g_threadmanInfo.dispatchDisabled != 0) {
+        status->status = 1;
+    } else {
+        status->status = 0;
+    }
+    status->idleClocksLow = g_threadmanInfo.idleThread->runClocksLow;
+    status->idleClocksHi = g_threadmanInfo.idleThread->runClocksHi;
+    status->threadSwitchCount = g_threadmanInfo.threadSwitchCount;
+    status->vfpuSwitchCount = g_threadmanInfo.vfpuSwitchCount;
+    status->comesOutOfIdleCount = g_threadmanInfo.idleThread->intrPreemptCount;
+}
+#else
 INCLUDE_ASM("nonmatchings/threadman", func_000153A8);
+#endif
 
 #if FW_VERSION < 150
 s32 sceKernelReferSystemStatus(SceKernelSystemStatus *status) {
