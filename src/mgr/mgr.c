@@ -2331,14 +2331,14 @@ s32 func_0000608C(void) {
     return 0;
 }
 
-void func_000060B4(s32 arg0, s32 *arg1) {
-    s32 temp_v0;
+s32 func_000060B4(s32 fd, s32 *out) {
+    s32 ret = sceIoIoctl(fd, 0x0211D817, NULL, 0, out, 4);
 
-    temp_v0 = sceIoIoctl(arg0, 0x0211D817, NULL, 0U, arg1, 4U);
-    if (temp_v0 < 0) {
-        func_00005834(temp_v0);
-        *arg1 = 0;
+    if (ret < 0) {
+        ret = func_00005834(ret);
+        *out = 0;
     }
+    return ret;
 }
 #endif
 
@@ -2366,14 +2366,14 @@ s32 func_0000608C(void) {
     return 0;
 }
 
-void func_000060B4(s32 arg0, s32 *arg1) {
-    s32 temp_v0;
+s32 func_000060B4(s32 fd, s32 *out) {
+    s32 ret = sceIoIoctl(fd, 0x0211D817, NULL, 0, out, 4);
 
-    temp_v0 = sceIoIoctl(arg0, 0x0211D817, NULL, 0U, arg1, 4U);
-    if (temp_v0 < 0) {
-        func_00005834(temp_v0);
-        *arg1 = 0;
+    if (ret < 0) {
+        ret = func_00005834(ret);
+        *out = 0;
     }
+    return ret;
 }
 #endif
 
@@ -2480,7 +2480,45 @@ s32 func_000065FC(s32 arg0, u8 *buf, s32 count) {
     return 0;
 }
 
-INCLUDE_ASM("nonmatchings/mgr", func_00006678);
+s32 func_00006678(s32 fd, s32 *out, s32 mode, s32 lock) {
+    s32 ret;
+    s32 err;
+
+    while ((ret = sceIoIoctl(fd, 0x210D016, NULL, 0, NULL, 0)) < 0) {
+        if (ret != 0x800201AD) {
+            err = ret;
+            ret = func_00005834(ret);
+            goto end;
+        }
+        sceKernelDelayThread(200000);
+    }
+    err = 0;
+    if (out != NULL) {
+        ret = func_000060B4(fd, out);
+        if (ret < 0) {
+            goto end;
+        }
+    }
+    if (lock) {
+        ret = func_00006030();
+        if (ret < 0) {
+            goto end;
+        }
+    }
+    ret = func_00006884(fd, mode);
+    if (ret < 0) {
+        if (lock) {
+            func_0000608C();
+        }
+    } else {
+        sceKernelPowerLock(0);
+    }
+end:
+    if (ret < 0 && err == 0) {
+        sceIoIoctl(fd, 0x210D017, NULL, 0, NULL, 0);
+    }
+    return ret;
+}
 
 s32 func_000067CC(s32 fd, s32 unlock) {
     s32 ret;
