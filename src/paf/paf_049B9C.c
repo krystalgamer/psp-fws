@@ -1,3 +1,4 @@
+/* lang: c++ */
 /* cflags: -O1 */
 #include "common.h"
 #include "paf_decls.h"
@@ -115,12 +116,12 @@ INCLUDE_ASM("nonmatchings/paf_049B9C", func_0004A108);
 INCLUDE_ASM("nonmatchings/paf_049B9C", func_0004A158);
 
 void func_0004A1F8(M2C_UNK **arg0) {
-    func_00044154(arg0);
+    func_00044154((Unk_func_00044154_0*) arg0);
     *arg0 = &D_00171640;
 }
 
 void func_0004A228(M2C_UNK **arg0) {
-    func_00044154(arg0);
+    func_00044154((Unk_func_00044154_0*) arg0);
     *arg0 = &D_00171640;
 }
 #endif

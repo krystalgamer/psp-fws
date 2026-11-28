@@ -1,3 +1,4 @@
+/* lang: c++ */
 #include "common.h"
 #include "paf_decls.h"
 
@@ -54,7 +55,7 @@ s32 func_00118998(struct Unk_func_00118998_0 *arg0) {
     return 0;
 }
 
-M2C_UNK *func_001189E8(void) {
+D_001A7CEC_s *func_001189E8(void) {
     return &D_001A7CEC;
 }
 #endif

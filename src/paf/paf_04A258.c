@@ -1,3 +1,4 @@
+/* lang: c++ */
 #include "common.h"
 #include "paf_decls.h"
 
@@ -51,12 +52,12 @@ s32 func_0004414C(void) {
 
 #if FW_VERSION < 270 || FW_VERSION == 282
 void func_0004AEA4(M2C_UNK **arg0) {
-    func_00044154(arg0);
+    func_00044154((Unk_func_00044154_0*) arg0);
     *arg0 = &D_00171684;
 }
 
 void func_0004AED4(M2C_UNK **arg0) {
-    func_00044154(arg0);
+    func_00044154((Unk_func_00044154_0*) arg0);
     *arg0 = &D_00171684;
 }
 
@@ -321,7 +322,7 @@ void func_0003A8A0(s32 **arg0) {
 #endif
 
 #if FW_VERSION == 100
-void func_0003A8A0(M2C_UNK **arg0) {
+void func_0003A8A0(s32 **arg0) {
     *arg0 = &D_00126EC8;
 }
 #endif
@@ -338,7 +339,7 @@ void func_0003A8B0(s32 **arg0) {
 #endif
 
 #if FW_VERSION == 100
-void func_0003A8B0(M2C_UNK **arg0) {
+void func_0003A8B0(s32 **arg0) {
     *arg0 = &D_00126EC8;
     _ZdlPv(arg0);
 }
@@ -348,7 +349,7 @@ void func_0003A8B0(M2C_UNK **arg0) {
 INCLUDE_ASM("nonmatchings/paf_04A258", func_0004B550);
 #else
 void func_0004B550(M2C_UNK **arg0) {
-    func_00044154(arg0);
+    func_00044154((Unk_func_00044154_0*) arg0);
     *arg0 = &D_001716C0;
 }
 #endif
@@ -357,7 +358,7 @@ void func_0004B550(M2C_UNK **arg0) {
 INCLUDE_ASM("nonmatchings/paf_04A258", func_0004B580);
 #else
 void func_0004B580(M2C_UNK **arg0) {
-    func_00044154(arg0);
+    func_00044154((Unk_func_00044154_0*) arg0);
     *arg0 = &D_001716C0;
 }
 #endif
@@ -514,7 +515,7 @@ void func_0003C504(s32 **arg0) {
 #endif
 
 #if FW_VERSION == 100
-void func_0003C504(M2C_UNK **arg0) {
+void func_0003C504(s32 **arg0) {
     *arg0 = &D_001717B4;
     func_0004417C((s32) arg0);
 }
@@ -532,7 +533,7 @@ void func_0003C52C(s32 **arg0) {
 #endif
 
 #if FW_VERSION == 100
-void func_0003C52C(M2C_UNK **arg0) {
+void func_0003C52C(s32 **arg0) {
     *arg0 = &D_001717B4;
     func_0004417C((s32) arg0);
 }
@@ -551,7 +552,7 @@ void func_0003C554(s32 **arg0) {
 #endif
 
 #if FW_VERSION == 100
-void func_0003C554(M2C_UNK **arg0) {
+void func_0003C554(s32 **arg0) {
     *arg0 = &D_001717B4;
     func_0004417C((s32) arg0);
     _ZdlPv(arg0);
@@ -1067,7 +1068,7 @@ void func_0004C57C(struct Unk_func_0004C57C_0 *arg0, s32 arg1) {
     struct Unk_func_0004C57C_temp_v1 *temp_v1;
 
     arg0->unk0 = 1;
-    temp_v1 = &arg0->unk4;
+    temp_v1 = (Unk_func_0004C57C_temp_v1*) &arg0->unk4;
     arg0->unk4 = &D_001ABCF0;
     temp_v1->unk4 = 0;
     func_00002AE4((s32) temp_v1, arg1);
@@ -1078,7 +1079,7 @@ void func_0004C5C4(struct Unk_func_0004C5C4_0 *arg0, s32 arg1) {
     struct Unk_func_0004C5C4_temp_v1 *temp_v1;
 
     arg0->unk0 = 1;
-    temp_v1 = &arg0->unk4;
+    temp_v1 = (Unk_func_0004C5C4_temp_v1*) &arg0->unk4;
     arg0->unk4 = &D_001ABCF0;
     temp_v1->unk4 = 0;
     func_00002AE4((s32) temp_v1, arg1);
@@ -1873,7 +1874,7 @@ INCLUDE_RODATA("nonmatchings/paf_04A258", D_001271EC);
 void func_000524AC(struct Unk_func_000524AC_0 *arg0) {
     struct Unk_func_000524AC_temp_v1 *temp_v1;
 
-    temp_v1 = &arg0->unk14;
+    temp_v1 = (Unk_func_000524AC_temp_v1*) &arg0->unk14;
     arg0->unk14 = 0;
     temp_v1->unk4 = 0;
     temp_v1->unk8 = 0;
@@ -2108,7 +2109,7 @@ INCLUDE_ASM("nonmatchings/paf_04A258", func_00051A6C);
 #endif
 
 #if FW_VERSION == 282
-void func_00053690(M2C_UNK **arg0) {
+void func_00053690(s32 **arg0) {
     *arg0 = &D_00171704;
 }
 

@@ -1,3 +1,4 @@
+/* lang: c++ */
 #include "common.h"
 #include "paf_decls.h"
 
@@ -178,7 +179,7 @@ u8 func_00100C44(struct Unk_func_00100C44_0 *arg0, s32 arg1) {
     if (arg0 != NULL) {
         if (arg1 == 0) {
             var_v1 = arg0->unk0;
-        } else if ((!(arg1 & 0xF) || (var_v1 = 1, (M2C_FIELD(arg0, s32 *, 0x70) == 0))) && ((var_v1 = 1, ((arg1 & 0xF0) == 0)) || (M2C_FIELD(arg0, s32 *, 0x60) != 0))) {
+        } else if ((((arg1 & 0xF) == 0) || (var_v1 = 1, (M2C_FIELD(arg0, s32 *, 0x70) == 0))) && ((var_v1 = 1, ((arg1 & 0xF0) == 0)) || (M2C_FIELD(arg0, s32 *, 0x60) != 0))) {
             var_v1 = 0;
         }
     }
@@ -194,7 +195,7 @@ u8 func_00100C44(struct Unk_func_00100C44_0 *arg0, s32 arg1) {
     if (arg0 != NULL) {
         if (arg1 == 0) {
             var_v1 = arg0->unk0;
-        } else if ((!(arg1 & 0xF) || (var_v1 = 1, (arg0->unkC0 == 0))) && ((var_v1 = 1, ((arg1 & 0xF0) == 0)) || (arg0->unkB0 != 0))) {
+        } else if ((((arg1 & 0xF) == 0) || (var_v1 = 1, (arg0->unkC0 == 0))) && ((var_v1 = 1, ((arg1 & 0xF0) == 0)) || (arg0->unkB0 != 0))) {
             var_v1 = 0;
         }
     }
@@ -344,7 +345,7 @@ u8 func_00101818(struct Unk_func_00101818_0 *arg0, s32 arg1) {
             var_v1 = arg0->unk0;
         } else {
             var_v1 = 1;
-            if (!(arg1 & 0xF0) || (arg0->unk14 == 0)) {
+            if (((arg1 & 0xF0) == 0) || (arg0->unk14 == 0)) {
                 var_v1 = 0;
             }
         }

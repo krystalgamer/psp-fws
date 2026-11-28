@@ -1,3 +1,4 @@
+/* lang: c++ */
 #include "common.h"
 #include "paf_decls.h"
 
@@ -25,7 +26,7 @@ s32 TIFFNumberOfTiles(void *arg0) {
     }
     var_a1 = 0;
     if (((var_a3 != 0) & (var_a4 != 0)) && (var_s2 != 0)) {
-        temp_s0 = "TIFFNumberOfTiles";
+        temp_s0 = (M2C_UNK*) ("TIFFNumberOfTiles");
         var_a1 = multiply(arg0, multiply(arg0, (s32) ((u32) ((temp_s1->unk10 + var_a3) - 1) / var_a3), (u32) ((temp_s1->unk14 + var_a4) - 1) / var_a4, (s32) temp_s0), (u32) ((temp_s1->unk18 + var_s2) - 1) / var_s2, (s32) temp_s0);
     }
     if (temp_s1->unk56 == 2) {

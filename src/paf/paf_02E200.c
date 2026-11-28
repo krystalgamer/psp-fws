@@ -1,3 +1,4 @@
+/* lang: c++ */
 /* cflags: -O2 -frename-registers */
 #include "common.h"
 #include "paf_decls.h"
@@ -29,20 +30,20 @@ INCLUDE_ASM("nonmatchings/paf_02E200", func_0002E484);
 
 INCLUDE_ASM("nonmatchings/paf_02E200", func_0002E884);
 
-void _ZN10PSJSObjectnwEj(void) {
-    _Z11PSJS_Mallocj();
+void _ZN10PSJSObjectnwEj(u32 arg0) {
+    _Z11PSJS_Mallocj(arg0);
 }
 
-void _ZN10PSJSObjectdlEPv(void) {
-    _Z9PSJS_FreePv();
+void _ZN10PSJSObjectdlEPv(void* arg0) {
+    _Z9PSJS_FreePv(arg0);
 }
 
-void func_0002E988(void) {
-    _Z11PSJS_Mallocj();
+void func_0002E988(u32 arg0) {
+    _Z11PSJS_Mallocj(arg0);
 }
 
-void func_0002E9A4(void) {
-    _Z9PSJS_FreePv();
+void func_0002E9A4(void* arg0) {
+    _Z9PSJS_FreePv(arg0);
 }
 
 void func_0002E9C0(void) {

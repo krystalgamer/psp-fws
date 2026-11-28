@@ -1,3 +1,4 @@
+/* lang: c++ */
 #include "common.h"
 #include "paf_decls.h"
 
@@ -1107,7 +1108,7 @@ s32 func_00152F40(struct Unk_func_00152F40_0 *arg0) {
 
     var_v0 = 0;
     if (arg0 != NULL) {
-        var_v0 = !(arg0->unk14 & 8) ? 0 : ((u8 *)arg0 + 0x100);
+        var_v0 = ((arg0->unk14 & 8) == 0) ? 0 : ((u8 *)arg0 + 0x100);
     }
     return var_v0;
 }
@@ -1149,7 +1150,7 @@ s32 func_00152FD4(struct Unk_func_00152FD4_0 *arg0) {
 
     var_v0 = 0;
     if (arg0 != NULL) {
-        var_v0 = !(arg0->unk14 & 1) ? 0 : ((u8 *)arg0 + 0x98);
+        var_v0 = ((arg0->unk14 & 1) == 0) ? 0 : ((u8 *)arg0 + 0x98);
     }
     return var_v0;
 }
@@ -1159,7 +1160,7 @@ s32 func_00152FF8(struct Unk_func_00152FF8_0 *arg0) {
 
     var_v0 = 0;
     if (arg0 != NULL) {
-        var_v0 = !(arg0->unk14 & 2) ? 0 : ((u8 *)arg0 + 0xB0);
+        var_v0 = ((arg0->unk14 & 2) == 0) ? 0 : ((u8 *)arg0 + 0xB0);
     }
     return var_v0;
 }
@@ -1169,7 +1170,7 @@ s32 func_0015301C(struct Unk_func_0015301C_0 *arg0) {
 
     var_v0 = 0;
     if (arg0 != NULL) {
-        var_v0 = !(arg0->unk14 & 4) ? 0 : ((u8 *)arg0 + 0xF0);
+        var_v0 = ((arg0->unk14 & 4) == 0) ? 0 : ((u8 *)arg0 + 0xF0);
     }
     return var_v0;
 }

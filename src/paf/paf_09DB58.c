@@ -1,3 +1,4 @@
+/* lang: c++ */
 /* cflags: -Os */
 #include "common.h"
 #include "paf_decls.h"
@@ -166,7 +167,7 @@ INCLUDE_ASM("nonmatchings/paf_09DB58", func_00053D90);
 
 #if FW_VERSION >= 151 && FW_VERSION < 200
 s32 func_00053D90(s32 arg0, s32 arg1) {
-    return !((arg0 != 0) & (arg1 != 0)) ? 0 : (arg1 + 0x20);
+    return (((arg0 != 0) & (arg1 != 0)) == 0) ? 0 : (arg1 + 0x20);
 }
 #endif
 
@@ -176,6 +177,6 @@ INCLUDE_ASM("nonmatchings/paf_09DB58", func_00054970);
 
 #if FW_VERSION == 282
 s32 func_0009DF34(s32 arg0, s32 arg1) {
-    return !((arg0 != 0) & (arg1 != 0)) ? 0 : (arg1 + 0x20);
+    return (((arg0 != 0) & (arg1 != 0)) == 0) ? 0 : (arg1 + 0x20);
 }
 #endif

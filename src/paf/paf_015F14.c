@@ -1,3 +1,4 @@
+/* lang: c++ */
 /* cflags: -Os */
 #include "common.h"
 #include "paf_decls.h"
@@ -30,7 +31,7 @@ s32 func_00015FC8(s32 arg0, s32 arg1) {
     s32 var_a2;
 
     var_a2 = 1;
-    if (arg1 != &D_0016F410) {
+    if ((s32) arg1 != (s32) &D_0016F410) {
         var_a2 = func_00014F04(arg0, arg1);
     }
     return var_a2;
@@ -54,7 +55,7 @@ s32 func_00016704(s32 arg0, s32 arg1) {
     s32 var_a2;
 
     var_a2 = 1;
-    if (arg1 != &D_0016F41C) {
+    if ((s32) arg1 != (s32) &D_0016F41C) {
         var_a2 = func_00014F04(arg0, arg1);
     }
     return var_a2;

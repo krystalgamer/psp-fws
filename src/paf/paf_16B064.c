@@ -1,3 +1,4 @@
+/* lang: c++ */
 /* cflags: -O2 -frename-registers */
 #include "common.h"
 #include "paf_decls.h"

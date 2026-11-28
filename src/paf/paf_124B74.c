@@ -1,3 +1,4 @@
+/* lang: c++ */
 #include "common.h"
 #include "paf_decls.h"
 
@@ -3374,7 +3375,7 @@ INCLUDE_ASM("nonmatchings/paf_124B74", func_00139724);
 void func_00139724(void) {
     struct Unk_func_00139724_temp_s0 *temp_s0;
 
-    temp_s0 = D_001E2988;
+    temp_s0 = (Unk_func_00139724_temp_s0*) D_001E2988;
     temp_s0->unk28 = func_00139758(temp_s0->unk2C, (s32) temp_s0->unk4);
 }
 #endif

@@ -1,3 +1,4 @@
+/* lang: c++ */
 #include "common.h"
 #include "paf_decls.h"
 
@@ -680,7 +681,7 @@ s32 _ZN3paf9PhHandler13PauseTimerAllEv(struct Unk_scePaf_01CF521E_0 *arg0) {
 
     temp_v0 = arg0->unk10;
     var_a1 = 1;
-    if (!(((u32) temp_v0 >> 0x10) & 1)) {
+    if ((((u32) temp_v0 >> 0x10) & 1) == 0) {
         arg0->unk10 = temp_v0 | 0x10000;
         var_a1 = 0;
     }
@@ -746,7 +747,7 @@ s32 func_0006FE18(void *arg0) {
 
     temp_v0 = M2C_FIELD(arg0, u32 *, 0x10);
     var_a1 = 1;
-    if (!((temp_v0 >> 0x10) & 1)) {
+    if (((temp_v0 >> 0x10) & 1) == 0) {
         M2C_FIELD(arg0, u32 *, 0x10) = (u32) (temp_v0 | 0x10000);
         var_a1 = 0;
     }

@@ -1,3 +1,4 @@
+/* lang: c++ */
 #include "common.h"
 #include "paf_decls.h"
 
@@ -77,7 +78,7 @@ INCLUDE_ASM("nonmatchings/paf_043468", func_000437E4);
 INCLUDE_ASM("nonmatchings/paf_043468", scePaf_891B7F7F);
 
 void func_000439FC(M2C_UNK **arg0) {
-    func_00044154(arg0);
+    func_00044154((Unk_func_00044154_0*) arg0);
     *arg0 = &D_00171338;
 }
 

@@ -1,3 +1,4 @@
+/* lang: c++ */
 #include "common.h"
 #include "paf_decls.h"
 
@@ -97,7 +98,7 @@ void func_0008A838(s32 **arg0) {
 #endif
 
 #if FW_VERSION == 100
-void func_0008A838(M2C_UNK **arg0) {
+void func_0008A838(s32 **arg0) {
     *arg0 = &D_0012EA98;
     _ZN3paf8PhWidgetD2Ev((s32) arg0);
 }
@@ -116,7 +117,7 @@ void func_0008A860(s32 **arg0) {
 #endif
 
 #if FW_VERSION == 100
-void func_0008A860(M2C_UNK **arg0) {
+void func_0008A860(s32 **arg0) {
     *arg0 = &D_0012EA98;
     _ZN3paf8PhWidgetD2Ev((s32) arg0);
     _ZdlPv(arg0);

@@ -1,3 +1,4 @@
+/* lang: c++ */
 #include "common.h"
 #include "paf_decls.h"
 
@@ -1006,13 +1007,13 @@ INCLUDE_ASM("nonmatchings/paf", _ZN3paf4View9PlaySoundEPKc);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 200
-void _ZN3paf4View9PlaySoundEPKc(struct Unk_scePaf_49CE42F7_0 *arg0) {
+void _ZN3paf4View9PlaySoundEPKc(struct Unk_scePaf_49CE42F7_0 *arg0, char* arg1) {
     s32 temp_v0;
 
     if (M2C_FIELD(arg0, u8 *, 0x1D4) == 0) {
 
     } else {
-        temp_v0 = _ZN3paf4View8GetSoundEPKc();
+        temp_v0 = _ZN3paf4View8GetSoundEPKc(arg0, arg1);
         if (temp_v0 != 0) {
             func_0000B914(arg0, temp_v0);
         }
@@ -1021,13 +1022,13 @@ void _ZN3paf4View9PlaySoundEPKc(struct Unk_scePaf_49CE42F7_0 *arg0) {
 #endif
 
 #if FW_VERSION == 100
-void _ZN3paf4View9PlaySoundEPKc(struct Unk_scePaf_49CE42F7_0 *arg0) {
+void _ZN3paf4View9PlaySoundEPKc(struct Unk_scePaf_49CE42F7_0 *arg0, char* arg1) {
     s32 temp_v0;
 
     if (M2C_FIELD(arg0, u8 *, 0x1D0) == 0) {
 
     } else {
-        temp_v0 = _ZN3paf4View8GetSoundEPKc();
+        temp_v0 = _ZN3paf4View8GetSoundEPKc(arg0, arg1);
         if (temp_v0 != 0) {
             func_0000B914(arg0, temp_v0);
         }
@@ -1036,13 +1037,13 @@ void _ZN3paf4View9PlaySoundEPKc(struct Unk_scePaf_49CE42F7_0 *arg0) {
 #endif
 
 #if FW_VERSION == 282
-void _ZN3paf4View9PlaySoundEPKc(struct Unk_scePaf_49CE42F7_0 *arg0) {
+void _ZN3paf4View9PlaySoundEPKc(struct Unk_scePaf_49CE42F7_0 *arg0, char* arg1) {
     s32 temp_v0;
 
     if (arg0->unk1C0 == 0) {
 
     } else {
-        temp_v0 = _ZN3paf4View8GetSoundEPKc();
+        temp_v0 = _ZN3paf4View8GetSoundEPKc(arg0, arg1);
         if (temp_v0 != 0) {
             func_0000B914(arg0, temp_v0);
         }
@@ -2399,7 +2400,7 @@ s32 func_00011D34(s32 arg0, s32 arg1) {
     s32 var_a2;
 
     var_a2 = 1;
-    if (arg1 != &D_0016EFE0) {
+    if ((s32) arg1 != (s32) &D_0016EFE0) {
         var_a2 = _ZNK10PSJSObject10IsSubClassEPKt(arg0, arg1);
     }
     return var_a2;
@@ -2423,7 +2424,7 @@ s32 func_00011FBC(s32 arg0, s32 arg1) {
     s32 var_a2;
 
     var_a2 = 1;
-    if (arg1 != &D_0016EFF4) {
+    if ((s32) arg1 != (s32) &D_0016EFF4) {
         var_a2 = _ZNK10PSJSObject10IsSubClassEPKt(arg0, arg1);
     }
     return var_a2;
@@ -2461,7 +2462,7 @@ s32 func_00012234(s32 arg0, s32 arg1) {
     s32 var_a2;
 
     var_a2 = 1;
-    if (arg1 != &D_0016F010) {
+    if ((s32) arg1 != (s32) &D_0016F010) {
         var_a2 = _ZNK10PSJSObject10IsSubClassEPKt(arg0, arg1);
     }
     return var_a2;
@@ -2481,7 +2482,7 @@ s32 func_00012370(s32 arg0, s32 arg1) {
     s32 var_a2;
 
     var_a2 = 1;
-    if (arg1 != &D_0016F020) {
+    if ((s32) arg1 != (s32) &D_0016F020) {
         var_a2 = _ZNK10PSJSObject10IsSubClassEPKt(arg0, arg1);
     }
     return var_a2;
@@ -2541,7 +2542,7 @@ s32 func_00012688(s32 arg0, s32 arg1) {
     s32 var_a2;
 
     var_a2 = 1;
-    if (arg1 != &D_0016F034) {
+    if ((s32) arg1 != (s32) &D_0016F034) {
         var_a2 = _ZNK10PSJSObject10IsSubClassEPKt(arg0, arg1);
     }
     return var_a2;
@@ -2619,7 +2620,7 @@ s32 func_00012BF0(s32 arg0, s32 arg1) {
     s32 var_a2;
 
     var_a2 = 1;
-    if (arg1 != &D_0016F090) {
+    if ((s32) arg1 != (s32) &D_0016F090) {
         var_a2 = _ZNK10PSJSObject10IsSubClassEPKt(arg0, arg1);
     }
     return var_a2;
@@ -2657,7 +2658,7 @@ s32 func_00012E58(s32 arg0, s32 arg1) {
     s32 var_a2;
 
     var_a2 = 1;
-    if (arg1 != &D_0016F0A4) {
+    if ((s32) arg1 != (s32) &D_0016F0A4) {
         var_a2 = _ZNK10PSJSObject10IsSubClassEPKt(arg0, arg1);
     }
     return var_a2;
@@ -2677,7 +2678,7 @@ s32 func_000130A0(s32 arg0, s32 arg1) {
     s32 var_a2;
 
     var_a2 = 1;
-    if (arg1 != &D_0016F0BC) {
+    if ((s32) arg1 != (s32) &D_0016F0BC) {
         var_a2 = _ZNK10PSJSObject10IsSubClassEPKt(arg0, arg1);
     }
     return var_a2;
@@ -2715,7 +2716,7 @@ s32 func_00013308(s32 arg0, s32 arg1) {
     s32 var_a2;
 
     var_a2 = 1;
-    if (arg1 != &D_0016F0D4) {
+    if ((s32) arg1 != (s32) &D_0016F0D4) {
         var_a2 = _ZNK10PSJSObject10IsSubClassEPKt(arg0, arg1);
     }
     return var_a2;
@@ -2835,7 +2836,7 @@ s32 func_00013DDC(s32 arg0, s32 arg1) {
     s32 var_a2;
 
     var_a2 = 1;
-    if (arg1 != &D_0016F2F0) {
+    if ((s32) arg1 != (s32) &D_0016F2F0) {
         var_a2 = _ZNK10PSJSObject10IsSubClassEPKt(arg0, arg1);
     }
     return var_a2;
@@ -2913,7 +2914,7 @@ s32 func_00014A38(s32 arg0, s32 arg1) {
     s32 var_a2;
 
     var_a2 = 1;
-    if (arg1 != &D_0016F328) {
+    if ((s32) arg1 != (s32) &D_0016F328) {
         var_a2 = _ZNK10PSJSObject10IsSubClassEPKt(arg0, arg1);
     }
     return var_a2;
@@ -2987,7 +2988,7 @@ s32 func_00014F04(s32 arg0, s32 arg1) {
     s32 var_a2;
 
     var_a2 = 1;
-    if (arg1 != &D_0016F3E8) {
+    if ((s32) arg1 != (s32) &D_0016F3E8) {
         var_a2 = _ZNK10PSJSObject10IsSubClassEPKt(arg0, arg1);
     }
     return var_a2;
@@ -3015,7 +3016,7 @@ s32 func_00015868(s32 arg0, s32 arg1) {
     s32 var_a2;
 
     var_a2 = 1;
-    if (arg1 != &D_0016F3F8) {
+    if ((s32) arg1 != (s32) &D_0016F3F8) {
         var_a2 = func_00014F04(arg0, arg1);
     }
     return var_a2;
@@ -3111,7 +3112,7 @@ s32 func_00015ED4(s32 arg0, s32 arg1) {
     s32 var_a2;
 
     var_a2 = 1;
-    if (arg1 != &D_0016F404) {
+    if ((s32) arg1 != (s32) &D_0016F404) {
         var_a2 = func_00014F04(arg0, arg1);
     }
     return var_a2;

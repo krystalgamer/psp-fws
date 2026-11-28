@@ -1,3 +1,4 @@
+/* lang: c++ */
 #include "common.h"
 #include "paf_decls.h"
 
@@ -124,28 +125,28 @@ void func_0011794C(s32 arg0) {
     _ZN3paf7PhSPrim8SetStyleEii(arg0 + 0x20);
 }
 
-void func_00117968(s32 arg0) {
-    _ZN3paf7PhSPrim8SetStyleEif(arg0 + 0x20);
+void func_00117968(s32 arg0, s32 arg1, float arg2) {
+    _ZN3paf7PhSPrim8SetStyleEif(arg0 + 0x20, arg1, arg2);
 }
 
-void func_00117984(s32 arg0) {
-    _ZN3paf7PhSPrim8SetStyleEiRK4vec4(arg0 + 0x20);
+void func_00117984(s32 arg0, s32 arg1, void* arg2) {
+    _ZN3paf7PhSPrim8SetStyleEiRK4vec4(arg0 + 0x20, arg1, arg2);
 }
 
-void func_001179A0(s32 arg0) {
-    _ZNK3paf7PhSPrim8GetStyleEiRb(arg0 + 0x20);
+void func_001179A0(s32 arg0, s32 arg1, bool* arg2) {
+    _ZNK3paf7PhSPrim8GetStyleEiRb(arg0 + 0x20, arg1, arg2);
 }
 
 void func_001179BC(s32 arg0) {
     _ZNK3paf7PhSPrim8GetStyleEiRi(arg0 + 0x20);
 }
 
-void func_001179D8(s32 arg0) {
-    _ZNK3paf7PhSPrim8GetStyleEiRf(arg0 + 0x20);
+void func_001179D8(s32 arg0, s32 arg1, float* arg2) {
+    _ZNK3paf7PhSPrim8GetStyleEiRf(arg0 + 0x20, arg1, arg2);
 }
 
-void func_001179F4(s32 arg0) {
-    _ZNK3paf7PhSPrim8GetStyleEiR4vec4(arg0 + 0x20);
+void func_001179F4(s32 arg0, s32 arg1, void* arg2) {
+    _ZNK3paf7PhSPrim8GetStyleEiR4vec4(arg0 + 0x20, arg1, arg2);
 }
 
 INCLUDE_ASM("nonmatchings/paf_1175E0", func_00117A10);
@@ -292,28 +293,28 @@ void func_00117DB8(s32 arg0) {
     func_000C2580(arg0 + 0x20);
 }
 
-void func_00117DD4(s32 arg0) {
-    _ZN3paf7PhSPrim8SetStyleEif(arg0 + 0x20);
+void func_00117DD4(s32 arg0, s32 arg1, float arg2) {
+    _ZN3paf7PhSPrim8SetStyleEif(arg0 + 0x20, arg1, arg2);
 }
 
-void func_00117DF0(s32 arg0) {
-    _ZN3paf7PhSPrim8SetStyleEiRK4vec4(arg0 + 0x20);
+void func_00117DF0(s32 arg0, s32 arg1, void* arg2) {
+    _ZN3paf7PhSPrim8SetStyleEiRK4vec4(arg0 + 0x20, arg1, arg2);
 }
 
-void func_00117E0C(s32 arg0) {
-    _ZNK3paf7PhSPrim8GetStyleEiRb(arg0 + 0x20);
+void func_00117E0C(s32 arg0, s32 arg1, bool* arg2) {
+    _ZNK3paf7PhSPrim8GetStyleEiRb(arg0 + 0x20, arg1, arg2);
 }
 
 void func_00117E28(s32 arg0) {
     func_000C25D8(arg0 + 0x20);
 }
 
-void func_00117E44(s32 arg0) {
-    _ZNK3paf7PhSPrim8GetStyleEiRf(arg0 + 0x20);
+void func_00117E44(s32 arg0, s32 arg1, float* arg2) {
+    _ZNK3paf7PhSPrim8GetStyleEiRf(arg0 + 0x20, arg1, arg2);
 }
 
-void func_00117E60(s32 arg0) {
-    _ZNK3paf7PhSPrim8GetStyleEiR4vec4(arg0 + 0x20);
+void func_00117E60(s32 arg0, s32 arg1, void* arg2) {
+    _ZNK3paf7PhSPrim8GetStyleEiR4vec4(arg0 + 0x20, arg1, arg2);
 }
 
 INCLUDE_ASM("nonmatchings/paf_1175E0", func_00117E7C);

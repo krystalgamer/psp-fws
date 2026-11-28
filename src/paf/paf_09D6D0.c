@@ -1,10 +1,11 @@
+/* lang: c++ */
 #include "common.h"
 #include "paf_decls.h"
 
 #if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_09D6D0", func_0009D6D0);
 #else
-M2C_UNK *func_0009D6D0(void) {
+const char *func_0009D6D0(void) {
     return " libpng version 1.2.10 - April 23, 2006 (header)\n";
 }
 #endif

@@ -1,3 +1,4 @@
+/* lang: c++ */
 #include "common.h"
 #include "paf_decls.h"
 
@@ -396,9 +397,9 @@ void func_000F202C(struct Unk_func_000F202C_0 *arg0, s32 arg1, s32 arg2) {
     _ZN3paf8PhWidget8SetStyleEib((s32) arg0, arg1, arg2 & 0xFF);
 }
 
-void func_000F2050(struct Unk_func_000F2050_0 *arg0) {
+void func_000F2050(struct Unk_func_000F2050_0 *arg0, s32 arg1, s32 arg2) {
     arg0->unk334 = 1;
-    _ZN3paf8PhWidget8SetStyleEii();
+    _ZN3paf8PhWidget8SetStyleEii(arg0, arg1, arg2);
 }
 
 void func_000F2074(struct Unk_func_000F2074_0 *arg0) {

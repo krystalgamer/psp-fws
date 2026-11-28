@@ -1,3 +1,4 @@
+/* lang: c++ */
 #include "common.h"
 #include "paf_decls.h"
 
@@ -777,7 +778,7 @@ INCLUDE_ASM("nonmatchings/paf_095A44", func_0009D648);
 #if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_095A44", func_0009D6AC);
 #else
-M2C_UNK *func_0009D6AC(void) {
+const char *func_0009D6AC(void) {
     return "\n libpng version 1.2.10 - April 23, 2006\n   Copyright (c) 1998-2006 Glenn Randers-Pehrson\n   Copyright (c) 1996-1997 Andreas Dilger\n   Copyright (c) 1995-1996 Guy Eric Schalnat, Group 42, Inc.\n";
 }
 #endif

@@ -1,3 +1,4 @@
+/* lang: c++ */
 #include "common.h"
 #include "paf_decls.h"
 
@@ -476,7 +477,7 @@ s32 _ZNK9PSJSError10IsSubClassEPKt(s32 arg0, s32 arg1) {
     s32 var_a2;
 
     var_a2 = 1;
-    if (arg1 != &D_0016FC7C) {
+    if ((s32) arg1 != (s32) &D_0016FC7C) {
         var_a2 = _ZNK10PSJSObject10IsSubClassEPKt(arg0, arg1);
     }
     return var_a2;
@@ -547,7 +548,7 @@ s32 func_00028C38(s32 arg0, s32 arg1) {
     s32 var_a2;
 
     var_a2 = 1;
-    if (arg1 != &D_0016FD08) {
+    if ((s32) arg1 != (s32) &D_0016FD08) {
         var_a2 = _ZNK10PSJSObject10IsSubClassEPKt(arg0, arg1);
     }
     return var_a2;
@@ -601,7 +602,7 @@ s32 func_000295B8(s32 arg0, s32 arg1) {
     s32 var_a2;
 
     var_a2 = 1;
-    if (arg1 != &D_0016FE80) {
+    if ((s32) arg1 != (s32) &D_0016FE80) {
         var_a2 = _ZNK10PSJSObject10IsSubClassEPKt(arg0, arg1);
     }
     return var_a2;
@@ -987,36 +988,36 @@ void func_0002CC90(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     func_0002CD9C(arg0, arg1, arg2, arg3);
 }
 
-void func_0002CCAC(void) {
-    _Z11PSJS_Mallocj();
+void func_0002CCAC(u32 arg0) {
+    _Z11PSJS_Mallocj(arg0);
 }
 
-void func_0002CCC8(void) {
-    _Z9PSJS_FreePv();
+void func_0002CCC8(void* arg0) {
+    _Z9PSJS_FreePv(arg0);
 }
 
-void func_0002CCE4(void) {
-    _Z11PSJS_Mallocj();
+void func_0002CCE4(u32 arg0) {
+    _Z11PSJS_Mallocj(arg0);
 }
 
-void func_0002CD00(void) {
-    _Z9PSJS_FreePv();
+void func_0002CD00(void* arg0) {
+    _Z9PSJS_FreePv(arg0);
 }
 
-void func_0002CD1C(void) {
-    _Z11PSJS_Mallocj();
+void func_0002CD1C(u32 arg0) {
+    _Z11PSJS_Mallocj(arg0);
 }
 
-void func_0002CD38(void) {
-    _Z9PSJS_FreePv();
+void func_0002CD38(void* arg0) {
+    _Z9PSJS_FreePv(arg0);
 }
 
-void func_0002CD54(void) {
-    _Z11PSJS_Mallocj();
+void func_0002CD54(u32 arg0) {
+    _Z11PSJS_Mallocj(arg0);
 }
 
-void func_0002CD70(void) {
-    _Z9PSJS_FreePv();
+void func_0002CD70(void* arg0) {
+    _Z9PSJS_FreePv(arg0);
 }
 
 INCLUDE_ASM("nonmatchings/paf_0274C4", func_0002CD8C);

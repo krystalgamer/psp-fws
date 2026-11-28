@@ -1,3 +1,4 @@
+/* lang: c++ */
 #include "common.h"
 #include "paf_decls.h"
 
@@ -8,7 +9,7 @@ u32 func_00077108(struct Unk_func_00077108_0 *arg0) {
     u32 var_a1;
     struct Unk_func_00077108_temp_s0 *temp_s0;
 
-    temp_s0 = (u8 *)arg0 + 0x20;
+    temp_s0 = (Unk_func_00077108_temp_s0*) ((u8 *)arg0 + 0x20);
     var_a1 = arg0->unk15C->unk6CC();
     if (var_a1 < (u32) temp_s0->unk14) {
         temp_a0 = temp_s0->unk9A;

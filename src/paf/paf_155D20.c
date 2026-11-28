@@ -1,3 +1,4 @@
+/* lang: c++ */
 #include "common.h"
 #include "paf_decls.h"
 
@@ -128,7 +129,7 @@ s32 func_0015792C(struct Unk_func_0015792C_0 *arg0) {
 
     var_v0 = 0;
     if (arg0 != NULL) {
-        var_v0 = !(arg0->unk8 & 1) ? 0 : ((u8 *)arg0 + 0x2C);
+        var_v0 = ((arg0->unk8 & 1) == 0) ? 0 : ((u8 *)arg0 + 0x2C);
     }
     return var_v0;
 }

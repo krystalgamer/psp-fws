@@ -1,3 +1,4 @@
+/* lang: c++ */
 #include "common.h"
 #include "paf_decls.h"
 
@@ -251,8 +252,8 @@ INCLUDE_ASM("nonmatchings/paf_0F29E0", func_000F5144);
 
 INCLUDE_ASM("nonmatchings/paf_0F29E0", func_000F5218);
 
-s32 func_000F52F4(void) {
-    _ZN3paf9PhHandler18HandleKeycodeEventEPNS_7PhEventE();
+s32 func_000F52F4(void* arg0, void* arg1) {
+    _ZN3paf9PhHandler18HandleKeycodeEventEPNS_7PhEventE(arg0, arg1);
     return 1;
 }
 
@@ -390,7 +391,7 @@ s32 func_000F614C(struct Unk_func_000F614C_0 *arg0) {
 }
 #endif
 
-s32 func_000F6184(struct Unk_func_000F6184_0 *arg0, s32 arg1) {
+s32 func_000F6184(struct Unk_func_000F6184_0 *arg0, s32 arg1, float arg2, float arg3, s32 arg4, void* arg5) {
     s32 var_v0;
     struct Unk_vt_func_000F6184_temp_v1 **temp_v1;
 
@@ -401,7 +402,7 @@ s32 func_000F6184(struct Unk_func_000F6184_0 *arg0, s32 arg1) {
             var_v0 = (*temp_v1)->unk84(temp_v1);
         }
     } else {
-        var_v0 = _ZN3paf8PhWidget7SetAnimEiffiRK4vec4();
+        var_v0 = _ZN3paf8PhWidget7SetAnimEiffiRK4vec4(arg0, arg1, arg2, arg3, arg4, arg5);
     }
     return var_v0;
 }
@@ -747,8 +748,8 @@ INCLUDE_ASM("nonmatchings/paf_0F29E0", _ZN3paf8PhXmList11FocusGlobalEf);
 
 INCLUDE_ASM("nonmatchings/paf_0F29E0", _ZN3paf8PhXmList10FocusLocalEf);
 
-void _ZN3paf8PhXmList9SelectOutEf(void) {
-    _ZN3paf8PhXmList7FocusInEf();
+void _ZN3paf8PhXmList9SelectOutEf(void* arg0, float arg1) {
+    _ZN3paf8PhXmList7FocusInEf(arg0, arg1);
 }
 
 INCLUDE_ASM("nonmatchings/paf_0F29E0", func_000FA800);
@@ -890,7 +891,7 @@ void func_000FC010(void) {
 }
 #endif
 
-s32 func_000FC018(struct Unk_func_000FC018_0 *arg0, s32 arg1) {
+s32 func_000FC018(struct Unk_func_000FC018_0 *arg0, s32 arg1, float arg2, float arg3, s32 arg4, void* arg5) {
     s32 var_v0;
     struct Unk_vt_func_000FC018_temp_v1 **temp_v1;
 
@@ -901,7 +902,7 @@ s32 func_000FC018(struct Unk_func_000FC018_0 *arg0, s32 arg1) {
             var_v0 = (*temp_v1)->unk84(temp_v1);
         }
     } else {
-        var_v0 = _ZN3paf8PhWidget7SetAnimEiffiRK4vec4();
+        var_v0 = _ZN3paf8PhWidget7SetAnimEiffiRK4vec4(arg0, arg1, arg2, arg3, arg4, arg5);
     }
     return var_v0;
 }
@@ -1100,31 +1101,31 @@ void func_000A1C0C(s32 arg0, s32 arg1) {
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 200
-void func_000A1C28(s32 arg0, s32 arg1) {
-    _ZN3paf7PhSPrim8SetStyleEif(arg0 + 0x20);
+void func_000A1C28(s32 arg0, s32 arg1, float arg2) {
+    _ZN3paf7PhSPrim8SetStyleEif(arg0 + 0x20, arg1, arg2);
 }
 #endif
 
 #if FW_VERSION == 100
-void func_000A1C28(s32 arg0, s32 arg1) {
+void func_000A1C28(s32 arg0, s32 arg1, float arg2) {
     func_00069280(arg0 + 0x20, arg1);
 }
 #endif
 
 #if FW_VERSION < 200
-void func_000A1C44(s32 arg0) {
-    _ZN3paf7PhSPrim8SetStyleEiRK4vec4(arg0 + 0x20);
+void func_000A1C44(s32 arg0, s32 arg1, void* arg2) {
+    _ZN3paf7PhSPrim8SetStyleEiRK4vec4(arg0 + 0x20, arg1, arg2);
 }
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 200
-void func_000A1C60(s32 arg0, s32 arg1) {
-    _ZNK3paf7PhSPrim8GetStyleEiRb(arg0 + 0x20);
+void func_000A1C60(s32 arg0, s32 arg1, bool* arg2) {
+    _ZNK3paf7PhSPrim8GetStyleEiRb(arg0 + 0x20, arg1, arg2);
 }
 #endif
 
 #if FW_VERSION == 100
-void func_000A1C60(s32 arg0, s32 arg1) {
+void func_000A1C60(s32 arg0, s32 arg1, bool* arg2) {
     func_0006946C(arg0 + 0x20, arg1);
 }
 #endif
@@ -1142,25 +1143,25 @@ void func_000A1C7C(s32 arg0, s32 arg1) {
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 200
-void func_000A1C98(s32 arg0, s32 arg1) {
-    _ZNK3paf7PhSPrim8GetStyleEiRf(arg0 + 0x20);
+void func_000A1C98(s32 arg0, s32 arg1, float* arg2) {
+    _ZNK3paf7PhSPrim8GetStyleEiRf(arg0 + 0x20, arg1, arg2);
 }
 #endif
 
 #if FW_VERSION == 100
-void func_000A1C98(s32 arg0, s32 arg1) {
+void func_000A1C98(s32 arg0, s32 arg1, float* arg2) {
     func_000694B4(arg0 + 0x20, arg1);
 }
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 200
-void func_000A1CB4(s32 arg0, s32 arg1) {
-    _ZNK3paf7PhSPrim8GetStyleEiR4vec4(arg0 + 0x20);
+void func_000A1CB4(s32 arg0, s32 arg1, void* arg2) {
+    _ZNK3paf7PhSPrim8GetStyleEiR4vec4(arg0 + 0x20, arg1, arg2);
 }
 #endif
 
 #if FW_VERSION == 100
-void func_000A1CB4(s32 arg0, s32 arg1) {
+void func_000A1CB4(s32 arg0, s32 arg1, void* arg2) {
     func_000694FC(arg0 + 0x20, arg1);
 }
 #endif
@@ -1203,13 +1204,13 @@ INCLUDE_ASM("nonmatchings/paf_0F29E0", func_000A1F3C);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 200
-void func_000A1F3C(s32 arg0, s32 arg1) {
-    _ZN3paf7PhSPrim8SetStyleEif(arg0 + 0x20);
+void func_000A1F3C(s32 arg0, s32 arg1, float arg2) {
+    _ZN3paf7PhSPrim8SetStyleEif(arg0 + 0x20, arg1, arg2);
 }
 #endif
 
 #if FW_VERSION == 100
-void func_000A1F3C(s32 arg0, s32 arg1) {
+void func_000A1F3C(s32 arg0, s32 arg1, float arg2) {
     func_00069280(arg0 + 0x20, arg1);
 }
 #endif
@@ -1219,8 +1220,8 @@ INCLUDE_ASM("nonmatchings/paf_0F29E0", func_000A1F58);
 #endif
 
 #if FW_VERSION < 200
-void func_000A1F58(s32 arg0) {
-    _ZN3paf7PhSPrim8SetStyleEiRK4vec4(arg0 + 0x20);
+void func_000A1F58(s32 arg0, s32 arg1, void* arg2) {
+    _ZN3paf7PhSPrim8SetStyleEiRK4vec4(arg0 + 0x20, arg1, arg2);
 }
 #endif
 
@@ -1229,13 +1230,13 @@ INCLUDE_ASM("nonmatchings/paf_0F29E0", func_000A1F74);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 200
-void func_000A1F74(s32 arg0, s32 arg1) {
-    _ZNK3paf7PhSPrim8GetStyleEiRb(arg0 + 0x20);
+void func_000A1F74(s32 arg0, s32 arg1, bool* arg2) {
+    _ZNK3paf7PhSPrim8GetStyleEiRb(arg0 + 0x20, arg1, arg2);
 }
 #endif
 
 #if FW_VERSION == 100
-void func_000A1F74(s32 arg0, s32 arg1) {
+void func_000A1F74(s32 arg0, s32 arg1, bool* arg2) {
     func_0006946C(arg0 + 0x20, arg1);
 }
 #endif
@@ -1255,13 +1256,13 @@ INCLUDE_ASM("nonmatchings/paf_0F29E0", func_000A1FAC);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 200
-void func_000A1FAC(s32 arg0, s32 arg1) {
-    _ZNK3paf7PhSPrim8GetStyleEiRf(arg0 + 0x20);
+void func_000A1FAC(s32 arg0, s32 arg1, float* arg2) {
+    _ZNK3paf7PhSPrim8GetStyleEiRf(arg0 + 0x20, arg1, arg2);
 }
 #endif
 
 #if FW_VERSION == 100
-void func_000A1FAC(s32 arg0, s32 arg1) {
+void func_000A1FAC(s32 arg0, s32 arg1, float* arg2) {
     func_000694B4(arg0 + 0x20, arg1);
 }
 #endif
@@ -1271,13 +1272,13 @@ INCLUDE_ASM("nonmatchings/paf_0F29E0", func_000A1FC8);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 200
-void func_000A1FC8(s32 arg0, s32 arg1) {
-    _ZNK3paf7PhSPrim8GetStyleEiR4vec4(arg0 + 0x20);
+void func_000A1FC8(s32 arg0, s32 arg1, void* arg2) {
+    _ZNK3paf7PhSPrim8GetStyleEiR4vec4(arg0 + 0x20, arg1, arg2);
 }
 #endif
 
 #if FW_VERSION == 100
-void func_000A1FC8(s32 arg0, s32 arg1) {
+void func_000A1FC8(s32 arg0, s32 arg1, void* arg2) {
     func_000694FC(arg0 + 0x20, arg1);
 }
 #endif

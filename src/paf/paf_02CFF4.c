@@ -1,3 +1,4 @@
+/* lang: c++ */
 /* cflags: -Os */
 #include "common.h"
 #include "paf_decls.h"
@@ -45,7 +46,7 @@ s32 func_0002D538(s32 arg0, s32 arg1) {
     s32 var_a2;
 
     var_a2 = 1;
-    if (arg1 != &D_001702B8) {
+    if ((s32) arg1 != (s32) &D_001702B8) {
         var_a2 = _ZNK10PSJSObject10IsSubClassEPKt(arg0, arg1);
     }
     return var_a2;

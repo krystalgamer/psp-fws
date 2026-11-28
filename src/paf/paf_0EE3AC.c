@@ -1,3 +1,4 @@
+/* lang: c++ */
 #include "common.h"
 #include "paf_decls.h"
 
@@ -144,7 +145,7 @@ INCLUDE_ASM("nonmatchings/paf_0EE3AC", func_000EF208);
 
 #if FW_VERSION < 200
 s32 func_000EF208(s32 arg0, s32 arg1) {
-    _ZN3paf9PhHandler17HandleSystemEventEPNS_7PhEventE();
+    _ZN3paf9PhHandler17HandleSystemEventEPNS_7PhEventE(arg0, arg1);
     _ZN3paf9PhHandler10DoCallBackEiPNS_7PhEventE(arg0, 0x80004, arg1);
     return 1;
 }
@@ -152,7 +153,7 @@ s32 func_000EF208(s32 arg0, s32 arg1) {
 
 #if FW_VERSION == 282
 s32 func_000EF208(s32 arg0, M2C_UNK arg1) {
-    _ZN3paf9PhHandler17HandleSystemEventEPNS_7PhEventE();
+    _ZN3paf9PhHandler17HandleSystemEventEPNS_7PhEventE(arg0, arg1);
     _ZN3paf9PhHandler10DoCallBackEiPNS_7PhEventE(arg0, 0x80005, arg1);
     return 1;
 }

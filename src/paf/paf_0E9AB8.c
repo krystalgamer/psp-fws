@@ -1,3 +1,4 @@
+/* lang: c++ */
 #include "common.h"
 #include "paf_decls.h"
 
@@ -361,10 +362,10 @@ INCLUDE_ASM("nonmatchings/paf_0E9AB8", _ZN3paf10PhMenuList10SetItemNumEi);
 #endif
 
 #if FW_VERSION == 282
-s32 _ZN3paf10PhMenuList10SetItemNumEi(s32 arg0) {
+s32 _ZN3paf10PhMenuList10SetItemNumEi(s32 arg0, s32 arg1) {
     s32 temp_v0;
 
-    temp_v0 = _ZN3paf6PhList10SetItemNumEi();
+    temp_v0 = _ZN3paf6PhList10SetItemNumEi(arg0, arg1);
     if (temp_v0 >= 0) {
         _ZN3paf9PhHandler11KillTimerCBEi(arg0, 0x0100000C);
     }

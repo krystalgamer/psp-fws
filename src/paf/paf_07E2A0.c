@@ -1,3 +1,4 @@
+/* lang: c++ */
 #include "common.h"
 #include "paf_decls.h"
 
@@ -61,7 +62,7 @@ void func_0007E3A8(struct Unk_func_0007E3A8_0 *arg0) {
             func_0006A618(temp_a0_5);
             temp_s0->unk6F8 = 0;
         }
-        if (!(arg0->unkC & 0x800)) {
+        if ((arg0->unkC & 0x800) == 0) {
             temp_a0_6 = arg0->unk178;
             if (temp_a0_6 != 0) {
                 func_0006A618(temp_a0_6);

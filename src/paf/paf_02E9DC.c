@@ -1,3 +1,4 @@
+/* lang: c++ */
 #include "common.h"
 #include "paf_decls.h"
 
@@ -107,7 +108,7 @@ s32 func_0002F598(s32 arg0, s32 arg1) {
     s32 var_a2;
 
     var_a2 = 1;
-    if (arg1 != &D_001704F0) {
+    if ((s32) arg1 != (s32) &D_001704F0) {
         var_a2 = _ZNK10PSJSObject10IsSubClassEPKt(arg0, arg1);
     }
     return var_a2;
@@ -163,7 +164,7 @@ s32 func_0002FC54(s32 arg0, s32 arg1) {
     s32 var_a2;
 
     var_a2 = 1;
-    if (arg1 != &D_001705A0) {
+    if ((s32) arg1 != (s32) &D_001705A0) {
         var_a2 = _ZNK10PSJSObject10IsSubClassEPKt(arg0, arg1);
     }
     return var_a2;
@@ -275,7 +276,7 @@ void _ZN15psjsstring_impl6DecRefEv(s32 *arg0) {
     if (temp_v0 > 0) {
 
     } else {
-        func_0003191C(arg0);
+        func_0003191C((Unk_func_0003191C_0* ) arg0);
         func_00031CDC(arg0);
     }
 }
@@ -293,34 +294,34 @@ INCLUDE_ASM("nonmatchings/paf_02E9DC", func_00031C1C);
 INCLUDE_ASM("nonmatchings/paf_02E9DC", func_0002F5B8);
 #endif
 
-void func_00031CC0(void) {
-    _Z11PSJS_Mallocj();
+void func_00031CC0(u32 arg0) {
+    _Z11PSJS_Mallocj(arg0);
 }
 
 INCLUDE_ASM("nonmatchings/paf_02E9DC", func_00031CDC);
 
-void func_00031CF8(void) {
-    _Z11PSJS_Mallocj();
+void func_00031CF8(u32 arg0) {
+    _Z11PSJS_Mallocj(arg0);
 }
 
-void func_00031D14(void) {
-    _Z9PSJS_FreePv();
+void func_00031D14(void* arg0) {
+    _Z9PSJS_FreePv(arg0);
 }
 
-void func_00031D30(void) {
-    _Z11PSJS_Mallocj();
+void func_00031D30(u32 arg0) {
+    _Z11PSJS_Mallocj(arg0);
 }
 
-void func_00031D4C(void) {
-    _Z9PSJS_FreePv();
+void func_00031D4C(void* arg0) {
+    _Z9PSJS_FreePv(arg0);
 }
 
-void func_00031D68(void) {
-    _Z11PSJS_Mallocj();
+void func_00031D68(u32 arg0) {
+    _Z11PSJS_Mallocj(arg0);
 }
 
-void func_00031D84(void) {
-    _Z9PSJS_FreePv();
+void func_00031D84(void* arg0) {
+    _Z9PSJS_FreePv(arg0);
 }
 
 INCLUDE_ASM("nonmatchings/paf_02E9DC", func_00031DA0);
@@ -905,28 +906,28 @@ INCLUDE_ASM("nonmatchings/paf_02E9DC", func_00035AB8);
 
 INCLUDE_ASM("nonmatchings/paf_02E9DC", _ZN9PSJSValue6AssignERK11PSJSContextP13PSJSValueImpl);
 
-void func_00035FFC(void) {
-    _Z11PSJS_Mallocj();
+void func_00035FFC(u32 arg0) {
+    _Z11PSJS_Mallocj(arg0);
 }
 
-void func_00036018(void) {
-    _Z9PSJS_FreePv();
+void func_00036018(void* arg0) {
+    _Z9PSJS_FreePv(arg0);
 }
 
-void func_00036034(void) {
-    _Z11PSJS_Mallocj();
+void func_00036034(u32 arg0) {
+    _Z11PSJS_Mallocj(arg0);
 }
 
-void func_00036050(void) {
-    _Z9PSJS_FreePv();
+void func_00036050(void* arg0) {
+    _Z9PSJS_FreePv(arg0);
 }
 
-void _ZN9PSJSValuenaEj(void) {
-    _Z11PSJS_Mallocj();
+void _ZN9PSJSValuenaEj(u32 arg0) {
+    _Z11PSJS_Mallocj(arg0);
 }
 
-void _ZN9PSJSValuedaEPv(void) {
-    _Z9PSJS_FreePv();
+void _ZN9PSJSValuedaEPv(void* arg0) {
+    _Z9PSJS_FreePv(arg0);
 }
 
 #if FW_VERSION >= 200
@@ -1458,7 +1459,7 @@ s32 func_000360C8(s32 arg0, s32 arg1) {
     s32 var_a2;
 
     var_a2 = 1;
-    if (arg1 != &D_00170D48) {
+    if ((s32) arg1 != (s32) &D_00170D48) {
         var_a2 = _ZNK10PSJSObject10IsSubClassEPKt(arg0, arg1);
     }
     return var_a2;
@@ -1643,12 +1644,12 @@ INCLUDE_ASM("nonmatchings/paf_02E9DC", func_0003AF78);
 
 INCLUDE_ASM("nonmatchings/paf_02E9DC", func_0003AFCC);
 
-void func_0003B020(void) {
-    _Z11PSJS_Mallocj();
+void func_0003B020(u32 arg0) {
+    _Z11PSJS_Mallocj(arg0);
 }
 
-void func_0003B03C(void) {
-    _Z9PSJS_FreePv();
+void func_0003B03C(void* arg0) {
+    _Z9PSJS_FreePv(arg0);
 }
 
 INCLUDE_ASM("nonmatchings/paf_02E9DC", func_0003B058);
@@ -1661,7 +1662,7 @@ s32 func_0003B23C(s32 arg0, s32 arg1) {
     s32 var_a2;
 
     var_a2 = 1;
-    if (arg1 != &D_00170F2C) {
+    if ((s32) arg1 != (s32) &D_00170F2C) {
         var_a2 = _ZNK10PSJSObject10IsSubClassEPKt(arg0, arg1);
     }
     return var_a2;
@@ -1682,7 +1683,7 @@ INCLUDE_ASM("nonmatchings/paf_02E9DC", func_0003B414);
 s32 func_0003B488(struct Unk_func_0003B488_0 *arg0, s32 arg1, s32 *arg2) {
     struct Unk_func_0003B488_temp_s1 *temp_s1;
 
-    temp_s1 = &arg0->unk20;
+    temp_s1 = (Unk_func_0003B488_temp_s1*) &arg0->unk20;
     if (arg1 >= temp_s1->unk4) {
         func_000278D0(temp_s1, arg1 + 1);
     }
@@ -1714,7 +1715,7 @@ s32 func_0003B8B4(s32 arg0, s32 arg1) {
     s32 var_a2;
 
     var_a2 = 1;
-    if (arg1 != &D_00170F78) {
+    if ((s32) arg1 != (s32) &D_00170F78) {
         var_a2 = _ZNK10PSJSObject10IsSubClassEPKt(arg0, arg1);
     }
     return var_a2;
@@ -1735,7 +1736,7 @@ INCLUDE_ASM("nonmatchings/paf_02E9DC", func_0003BA10);
 s32 func_0003BA60(struct Unk_func_0003BA60_0 *arg0, s32 arg1, s32 *arg2) {
     struct Unk_func_0003BA60_temp_s1 *temp_s1;
 
-    temp_s1 = &arg0->unk1C;
+    temp_s1 = (Unk_func_0003BA60_temp_s1*) &arg0->unk1C;
     if (arg1 >= temp_s1->unk4) {
         func_000278D0(temp_s1, arg1 + 1);
     }
@@ -1811,7 +1812,7 @@ s32 func_0003EBB0(s32 arg0, s32 arg1) {
     s32 var_a2;
 
     var_a2 = 1;
-    if (arg1 != &D_00171190) {
+    if ((s32) arg1 != (s32) &D_00171190) {
         var_a2 = _ZNK10PSJSObject10IsSubClassEPKt(arg0, arg1);
     }
     return var_a2;
