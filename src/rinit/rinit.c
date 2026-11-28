@@ -1,9 +1,9 @@
 #include "common.h"
 #include "rinit_decls.h"
 
-INCLUDE_ASM("nonmatchings/rinit", func_00000040);
+INCLUDE_ASM("nonmatchings/rinit", __do_global_dtors_aux);
 
-INCLUDE_ASM("nonmatchings/rinit", func_000000C8);
+INCLUDE_ASM("nonmatchings/rinit", frame_dummy);
 
 INCLUDE_ASM("nonmatchings/rinit", func_00000128);
 
@@ -237,7 +237,7 @@ INCLUDE_ASM("nonmatchings/rinit", func_00000750);
 
 INCLUDE_ASM("nonmatchings/rinit", func_00000848);
 
-s32 func_00001140(s32 arg0, M2C_UNK arg1, M2C_UNK arg2) {
+s32 _read(s32 arg0, M2C_UNK arg1, M2C_UNK arg2) {
     s32 var_v0;
     s32 var_v1;
 
@@ -262,7 +262,7 @@ s32 func_00001140(s32 arg0, M2C_UNK arg1, M2C_UNK arg2) {
     return var_v1;
 }
 
-s32 func_000011E4(s32 arg0, M2C_UNK arg1, M2C_UNK arg2) {
+s32 _write(s32 arg0, M2C_UNK arg1, M2C_UNK arg2) {
     s32 var_v0;
     s32 var_v1;
 
@@ -291,9 +291,9 @@ void func_00001288(void) {
     sceIoOpen();
 }
 
-INCLUDE_ASM("nonmatchings/rinit", func_000012A4);
+INCLUDE_ASM("nonmatchings/rinit", _open);
 
-s32 func_00001340(s32 arg0) {
+s32 _close(s32 arg0) {
     s32 var_v0;
     s32 var_v1;
 
@@ -320,15 +320,15 @@ s32 func_00001340(s32 arg0) {
 
 INCLUDE_ASM("nonmatchings/rinit", func_000013C4);
 
-INCLUDE_ASM("nonmatchings/rinit", func_0000145C);
+INCLUDE_ASM("nonmatchings/rinit", _lseek);
 
-INCLUDE_ASM("nonmatchings/rinit", func_00001520);
+INCLUDE_ASM("nonmatchings/rinit", _fstat);
 
-s32 func_00001530(void) {
+s32 isatty(void) {
     return 1;
 }
 
-INCLUDE_ASM("nonmatchings/rinit", func_00001538);
+INCLUDE_ASM("nonmatchings/rinit", _exit);
 
 s32 func_000015AC(void) {
     return -1;
@@ -338,7 +338,7 @@ void func_000015B4(void) {
     sceKernelFreePartitionMemory(D_0000F598);
 }
 
-INCLUDE_ASM("nonmatchings/rinit", func_000015D4);
+INCLUDE_ASM("nonmatchings/rinit", _sbrk);
 
 s32 func_000016B4(void) {
     return -1;
@@ -360,21 +360,21 @@ void func_000016FC(void) {
     sceKernelLibcGettimeofday();
 }
 
-INCLUDE_ASM("nonmatchings/rinit", func_00001718);
+INCLUDE_ASM("nonmatchings/rinit", memset);
 
-INCLUDE_ASM("nonmatchings/rinit", func_000017D0);
+INCLUDE_ASM("nonmatchings/rinit", _printf_r);
 
-INCLUDE_ASM("nonmatchings/rinit", func_00001810);
+INCLUDE_ASM("nonmatchings/rinit", printf);
 
-INCLUDE_ASM("nonmatchings/rinit", func_00001858);
+INCLUDE_ASM("nonmatchings/rinit", strcpy);
 
-INCLUDE_ASM("nonmatchings/rinit", func_000018F0);
+INCLUDE_ASM("nonmatchings/rinit", strlen);
 
-INCLUDE_ASM("nonmatchings/rinit", func_00001908);
+INCLUDE_ASM("nonmatchings/rinit", strncpy);
 
-INCLUDE_ASM("nonmatchings/rinit", func_00001A90);
+INCLUDE_ASM("nonmatchings/rinit", strrchr);
 
-s32 func_00001AF8(s32 arg0, struct Unk_func_00001AF8_1 *arg1) {
+s32 __sprint(s32 arg0, struct Unk_func_00001AF8_1 *arg1) {
     s32 temp_v0;
     s32 var_v1;
 
@@ -382,7 +382,7 @@ s32 func_00001AF8(s32 arg0, struct Unk_func_00001AF8_1 *arg1) {
     if (arg1->unk8 == 0) {
         arg1->unk4 = 0;
     } else {
-        temp_v0 = func_00005DD4(arg0, (s32) arg1);
+        temp_v0 = __sfvwrite(arg0, (s32) arg1);
         var_v1 = temp_v0;
         arg1->unk8 = 0;
         arg1->unk4 = 0;
@@ -390,57 +390,57 @@ s32 func_00001AF8(s32 arg0, struct Unk_func_00001AF8_1 *arg1) {
     return var_v1;
 }
 
-INCLUDE_ASM("nonmatchings/rinit", func_00001B44);
+INCLUDE_ASM("nonmatchings/rinit", __sbprintf);
 
-INCLUDE_ASM("nonmatchings/rinit", func_00001BEC);
+INCLUDE_ASM("nonmatchings/rinit", vfprintf);
 
 INCLUDE_RODATA("nonmatchings/rinit", D_0000BC30);
 
 INCLUDE_RODATA("nonmatchings/rinit", D_0000BC40);
 
-INCLUDE_ASM("nonmatchings/rinit", func_00001C64);
+INCLUDE_ASM("nonmatchings/rinit", _vfprintf_r);
 
-INCLUDE_ASM("nonmatchings/rinit", func_0000366C);
+INCLUDE_ASM("nonmatchings/rinit", cvt);
 
-INCLUDE_ASM("nonmatchings/rinit", func_00003834);
+INCLUDE_ASM("nonmatchings/rinit", exponent);
 
-INCLUDE_ASM("nonmatchings/rinit", func_0000390C);
+INCLUDE_ASM("nonmatchings/rinit", _wcrtomb_r);
 
-INCLUDE_ASM("nonmatchings/rinit", func_000039AC);
+INCLUDE_ASM("nonmatchings/rinit", _wcsrtombs_r);
 
-INCLUDE_ASM("nonmatchings/rinit", func_00003B44);
+INCLUDE_ASM("nonmatchings/rinit", _wctomb_r);
 
-INCLUDE_ASM("nonmatchings/rinit", func_00003FA4);
+INCLUDE_ASM("nonmatchings/rinit", __swsetup);
 
-INCLUDE_ASM("nonmatchings/rinit", func_000040B8);
+INCLUDE_ASM("nonmatchings/rinit", quorem);
 
-INCLUDE_ASM("nonmatchings/rinit", func_000042FC);
+INCLUDE_ASM("nonmatchings/rinit", _dtoa_r);
 
-INCLUDE_ASM("nonmatchings/rinit", func_00005694);
+INCLUDE_ASM("nonmatchings/rinit", fflush);
 
-INCLUDE_ASM("nonmatchings/rinit", func_00005788);
+INCLUDE_ASM("nonmatchings/rinit", std);
 
-INCLUDE_ASM("nonmatchings/rinit", func_000057E0);
+INCLUDE_ASM("nonmatchings/rinit", __sfmoreglue);
 
-INCLUDE_ASM("nonmatchings/rinit", func_00005854);
+INCLUDE_ASM("nonmatchings/rinit", __sfp);
 
-void func_00005938(s32 arg0) {
-    func_000061C0(arg0, (s32) &func_00005694);
+void _cleanup_r(s32 arg0) {
+    _fwalk(arg0, (s32) &fflush);
 }
 
-void func_00005958(void) {
-    func_00005938(D_0000F138);
+void _cleanup(void) {
+    _cleanup_r(D_0000F138);
 }
 
-INCLUDE_ASM("nonmatchings/rinit", func_0000597C);
+INCLUDE_ASM("nonmatchings/rinit", __sinit);
 
-INCLUDE_ASM("nonmatchings/rinit", func_00005A00);
+INCLUDE_ASM("nonmatchings/rinit", _free_r);
 
-INCLUDE_ASM("nonmatchings/rinit", func_00005C90);
+INCLUDE_ASM("nonmatchings/rinit", _malloc_trim_r);
 
-INCLUDE_ASM("nonmatchings/rinit", func_00005DD4);
+INCLUDE_ASM("nonmatchings/rinit", __sfvwrite);
 
-INCLUDE_ASM("nonmatchings/rinit", func_000061C0);
+INCLUDE_ASM("nonmatchings/rinit", _fwalk);
 
 INCLUDE_RODATA("nonmatchings/rinit", D_0000BE34);
 
@@ -498,33 +498,33 @@ INCLUDE_RODATA("nonmatchings/rinit", D_0000BEBC);
 
 INCLUDE_RODATA("nonmatchings/rinit", D_0000BEEC);
 
-INCLUDE_ASM("nonmatchings/rinit", func_000062C8);
+INCLUDE_ASM("nonmatchings/rinit", _setlocale_r);
 
-M2C_UNK *func_00006368(void) {
+M2C_UNK *_localeconv_r(void) {
     return &D_0000BEBC;
 }
 
-void func_00006374(s32 arg0, s32 arg1) {
-    func_000062C8(D_0000F138, arg0, arg1);
+void setlocale(s32 arg0, s32 arg1) {
+    _setlocale_r(D_0000F138, arg0, arg1);
 }
 
-INCLUDE_ASM("nonmatchings/rinit", func_000063A0);
+INCLUDE_ASM("nonmatchings/rinit", localeconv);
 
-INCLUDE_ASM("nonmatchings/rinit", func_000063C0);
+INCLUDE_ASM("nonmatchings/rinit", __smakebuf);
 
-INCLUDE_ASM("nonmatchings/rinit", func_0000653C);
+INCLUDE_ASM("nonmatchings/rinit", free);
 
-INCLUDE_ASM("nonmatchings/rinit", func_00006564);
+INCLUDE_ASM("nonmatchings/rinit", malloc_extend_top);
 
-INCLUDE_ASM("nonmatchings/rinit", func_00006794);
+INCLUDE_ASM("nonmatchings/rinit", _malloc_r);
 
-INCLUDE_ASM("nonmatchings/rinit", func_00006D0C);
+INCLUDE_ASM("nonmatchings/rinit", memchr);
 
-INCLUDE_ASM("nonmatchings/rinit", func_00006DF4);
+INCLUDE_ASM("nonmatchings/rinit", memcpy);
 
-INCLUDE_ASM("nonmatchings/rinit", func_00006F40);
+INCLUDE_ASM("nonmatchings/rinit", memmove);
 
-void func_00007340(void) {
+void __malloc_lock(void) {
     s32 temp_a0;
 
     temp_a0 = sceKernelCpuSuspendIntr();
@@ -534,7 +534,7 @@ void func_00007340(void) {
     D_0000F5E0 += 1;
 }
 
-void func_0000737C(void) {
+void __malloc_unlock(void) {
     s32 temp_v0;
 
     temp_v0 = D_0000F5E0 - 1;
@@ -546,9 +546,9 @@ void func_0000737C(void) {
     }
 }
 
-INCLUDE_ASM("nonmatchings/rinit", func_000073B8);
+INCLUDE_ASM("nonmatchings/rinit", _Balloc);
 
-void func_00007470(struct Unk_func_00007470_0 *arg0, struct Unk_func_00007470_1 *arg1) {
+void _Bfree(struct Unk_func_00007470_0 *arg0, struct Unk_func_00007470_1 *arg1) {
     void **temp_v0;
 
     if (arg1 != NULL) {
@@ -558,9 +558,9 @@ void func_00007470(struct Unk_func_00007470_0 *arg0, struct Unk_func_00007470_1 
     }
 }
 
-INCLUDE_ASM("nonmatchings/rinit", func_0000749C);
+INCLUDE_ASM("nonmatchings/rinit", _multadd);
 
-s32 func_000076CC(s32 arg0) {
+s32 _hi0bits(s32 arg0) {
     s32 var_a0;
     s32 var_a0_2;
     s32 var_v1;
@@ -589,41 +589,41 @@ s32 func_000076CC(s32 arg0) {
     return var_a0;
 }
 
-INCLUDE_ASM("nonmatchings/rinit", func_0000774C);
+INCLUDE_ASM("nonmatchings/rinit", _lo0bits);
 
-void func_00007804(s32 arg0, s32 arg1) {
+void _i2b(s32 arg0, s32 arg1) {
     struct Unk_func_00007804_temp_v0 *temp_v0;
 
-    temp_v0 = func_000073B8(arg0, 1);
+    temp_v0 = _Balloc(arg0, 1);
     temp_v0->unk14 = arg1;
     temp_v0->unk10 = 1;
 }
 
-INCLUDE_ASM("nonmatchings/rinit", func_00007838);
+INCLUDE_ASM("nonmatchings/rinit", _multiply);
 
-INCLUDE_ASM("nonmatchings/rinit", func_00007A50);
+INCLUDE_ASM("nonmatchings/rinit", _pow5mult);
 
-INCLUDE_ASM("nonmatchings/rinit", func_00007B68);
+INCLUDE_ASM("nonmatchings/rinit", _lshift);
 
-INCLUDE_ASM("nonmatchings/rinit", func_00007CA0);
+INCLUDE_ASM("nonmatchings/rinit", __mcmp);
 
-INCLUDE_ASM("nonmatchings/rinit", func_00007D00);
+INCLUDE_ASM("nonmatchings/rinit", __mdiff);
 
-INCLUDE_ASM("nonmatchings/rinit", func_00007EE8);
+INCLUDE_ASM("nonmatchings/rinit", _b2d);
 
-INCLUDE_ASM("nonmatchings/rinit", func_0000800C);
+INCLUDE_ASM("nonmatchings/rinit", _d2b);
 
-INCLUDE_ASM("nonmatchings/rinit", func_000082BC);
+INCLUDE_ASM("nonmatchings/rinit", _realloc_r);
 
-INCLUDE_ASM("nonmatchings/rinit", func_0000882C);
+INCLUDE_ASM("nonmatchings/rinit", isinf);
 
-INCLUDE_ASM("nonmatchings/rinit", func_00008868);
+INCLUDE_ASM("nonmatchings/rinit", isnan);
 
-s32 func_00008894(s32 *arg0, s32 arg1) {
+s32 _sbrk_r(s32 *arg0, s32 arg1) {
     s32 temp_v0;
 
     D_0000F5E8 = 0;
-    temp_v0 = func_000015D4(arg1);
+    temp_v0 = _sbrk(arg1);
     if (temp_v0 != -1) {
 
     } else if (D_0000F5E8 != 0) {
@@ -632,10 +632,10 @@ s32 func_00008894(s32 *arg0, s32 arg1) {
     return temp_v0;
 }
 
-s32 func_000088F0(struct Unk_func_000088F0_0 *arg0, s32 arg1, s32 arg2) {
+s32 __sread(struct Unk_func_000088F0_0 *arg0, s32 arg1, s32 arg2) {
     s32 temp_v0;
 
-    temp_v0 = func_00008E34(D_0000F138, (s32) arg0->unkE, arg1, arg2);
+    temp_v0 = _read_r(D_0000F138, (s32) arg0->unkE, arg1, arg2);
     if (temp_v0 >= 0) {
         arg0->unk50 = (s32) (arg0->unk50 + temp_v0);
     } else {
@@ -644,39 +644,39 @@ s32 func_000088F0(struct Unk_func_000088F0_0 *arg0, s32 arg1, s32 arg2) {
     return temp_v0;
 }
 
-void func_00008958(struct Unk_func_00008958_0 *arg0, s32 arg1, s32 arg2) {
+void __swrite(struct Unk_func_00008958_0 *arg0, s32 arg1, s32 arg2) {
     u16 var_v1;
 
     var_v1 = arg0->unkC;
     if (var_v1 & 0x100) {
-        func_00008DCC(D_0000F138, (s32) arg0->unkE, 0, 2);
+        _lseek_r(D_0000F138, (s32) arg0->unkE, 0, 2);
         var_v1 = arg0->unkC;
     }
     arg0->unkC = (u16) (var_v1 & 0xEFFF);
-    func_00008BE4(D_0000F138, (s32) arg0->unkE, arg1, arg2);
+    _write_r(D_0000F138, (s32) arg0->unkE, arg1, arg2);
 }
 
-INCLUDE_ASM("nonmatchings/rinit", func_000089E0);
+INCLUDE_ASM("nonmatchings/rinit", __sseek);
 
-void func_00008A4C(struct Unk_func_00008A4C_0 *arg0) {
-    func_00008D0C(D_0000F138, (s32) arg0->unkE);
+void __sclose(struct Unk_func_00008A4C_0 *arg0) {
+    _close_r(D_0000F138, (s32) arg0->unkE);
 }
 
-INCLUDE_ASM("nonmatchings/rinit", func_00008A70);
+INCLUDE_ASM("nonmatchings/rinit", strchr);
 
-INCLUDE_ASM("nonmatchings/rinit", func_00008B70);
+INCLUDE_ASM("nonmatchings/rinit", strcmp);
 
-INCLUDE_ASM("nonmatchings/rinit", func_00008BE4);
+INCLUDE_ASM("nonmatchings/rinit", _write_r);
 
-INCLUDE_ASM("nonmatchings/rinit", func_00008C4C);
+INCLUDE_ASM("nonmatchings/rinit", _calloc_r);
 
-INCLUDE_ASM("nonmatchings/rinit", func_00008D0C);
+INCLUDE_ASM("nonmatchings/rinit", _close_r);
 
-s32 func_00008D68(s32 *arg0, s32 arg1, s32 arg2) {
+s32 _fstat_r(s32 *arg0, s32 arg1, s32 arg2) {
     s32 temp_v0;
 
     D_0000F5E8 = 0;
-    temp_v0 = func_00001520(arg1, arg2);
+    temp_v0 = _fstat(arg1, arg2);
     if (temp_v0 != -1) {
 
     } else if (D_0000F5E8 != 0) {
@@ -685,44 +685,44 @@ s32 func_00008D68(s32 *arg0, s32 arg1, s32 arg2) {
     return temp_v0;
 }
 
-INCLUDE_ASM("nonmatchings/rinit", func_00008DCC);
+INCLUDE_ASM("nonmatchings/rinit", _lseek_r);
 
-INCLUDE_ASM("nonmatchings/rinit", func_00008E34);
+INCLUDE_ASM("nonmatchings/rinit", _read_r);
 
-INCLUDE_ASM("nonmatchings/rinit", func_00008E9C);
+INCLUDE_ASM("nonmatchings/rinit", cleanup_glue);
 
-INCLUDE_ASM("nonmatchings/rinit", func_000090B8);
+INCLUDE_ASM("nonmatchings/rinit", __udivdi3);
 
-INCLUDE_ASM("nonmatchings/rinit", func_00009608);
+INCLUDE_ASM("nonmatchings/rinit", __umoddi3);
 
-INCLUDE_ASM("nonmatchings/rinit", func_00009B90);
+INCLUDE_ASM("nonmatchings/rinit", _fpadd_parts);
 
-INCLUDE_ASM("nonmatchings/rinit", func_00009ED8);
+INCLUDE_ASM("nonmatchings/rinit", __adddf3);
 
-INCLUDE_ASM("nonmatchings/rinit", func_00009F40);
+INCLUDE_ASM("nonmatchings/rinit", __subdf3);
 
-INCLUDE_ASM("nonmatchings/rinit", func_00009FB4);
+INCLUDE_ASM("nonmatchings/rinit", __muldf3);
 
-INCLUDE_ASM("nonmatchings/rinit", func_0000A32C);
+INCLUDE_ASM("nonmatchings/rinit", __divdf3);
 
-INCLUDE_ASM("nonmatchings/rinit", func_0000A550);
+INCLUDE_ASM("nonmatchings/rinit", __eqdf2);
 
-INCLUDE_ASM("nonmatchings/rinit", func_0000A5D8);
+INCLUDE_ASM("nonmatchings/rinit", __nedf2);
 
-INCLUDE_ASM("nonmatchings/rinit", func_0000A660);
+INCLUDE_ASM("nonmatchings/rinit", __gtdf2);
 
-INCLUDE_ASM("nonmatchings/rinit", func_0000A6E8);
+INCLUDE_ASM("nonmatchings/rinit", __gedf2);
 
-INCLUDE_ASM("nonmatchings/rinit", func_0000A770);
+INCLUDE_ASM("nonmatchings/rinit", __ltdf2);
 
-INCLUDE_ASM("nonmatchings/rinit", func_0000A7F8);
+INCLUDE_ASM("nonmatchings/rinit", __floatsidf);
 
-INCLUDE_ASM("nonmatchings/rinit", func_0000A8D4);
+INCLUDE_ASM("nonmatchings/rinit", __fixdfsi);
 
-INCLUDE_ASM("nonmatchings/rinit", func_0000A9A4);
+INCLUDE_ASM("nonmatchings/rinit", __negdf2);
 
-INCLUDE_ASM("nonmatchings/rinit", func_0000A9E8);
+INCLUDE_ASM("nonmatchings/rinit", __pack_d);
 
-INCLUDE_ASM("nonmatchings/rinit", func_0000AC84);
+INCLUDE_ASM("nonmatchings/rinit", __unpack_d);
 
-INCLUDE_ASM("nonmatchings/rinit", func_0000ADA0);
+INCLUDE_ASM("nonmatchings/rinit", __fpcmp_parts_d);

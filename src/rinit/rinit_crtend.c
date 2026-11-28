@@ -2,7 +2,7 @@
 #include "common.h"
 #include "rinit_decls.h"
 
-void func_0000AEF0(void) {
+void __do_global_ctors_aux(void) {
     func_ptr *p;
 
     for (p = D_0000B28C - 1; *p != (func_ptr)-1; p--) {
