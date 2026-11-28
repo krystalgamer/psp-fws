@@ -54,6 +54,11 @@
 
 #define INT_MAX 2147483647
 #define LONG_MAX 2147483647L
+#define S_IFMT 0170000
+#define S_IFCHR 0020000
+#define S_IFREG 0100000
+#define _IFMT S_IFMT
+#define _IFCHR S_IFCHR
 #define EOF (-1)
 #define BUFSIZ 1024
 #define SEEK_SET 0

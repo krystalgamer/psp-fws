@@ -95,17 +95,6 @@ typedef long time_t;
 struct timeval;
 struct timezone;
 
-struct __siov {
-    const void *iov_base;
-    size_t iov_len;
-};
-struct __suio {
-    struct __siov *uio_iov;
-    int uio_iovcnt;
-    int uio_resid;
-};
-struct stat;
-
 struct _on_exit_args {
     void *_fnargs[32];
     __ULong _fntypes;
@@ -124,6 +113,43 @@ typedef struct {
         unsigned char __wchb[4];
     } __value;
 } _mbstate_t;
+
+struct __siov {
+    const void *iov_base;
+    size_t iov_len;
+};
+struct __suio {
+    struct __siov *uio_iov;
+    int uio_iovcnt;
+    int uio_resid;
+};
+typedef short dev_t;
+typedef unsigned short ino_t;
+typedef int mode_t;
+typedef unsigned short nlink_t;
+typedef unsigned short uid_t;
+typedef unsigned short gid_t;
+typedef long off_t;
+typedef _mbstate_t mbstate_t;
+struct stat {
+    dev_t st_dev;
+    ino_t st_ino;
+    mode_t st_mode;     /* 0x04 */
+    nlink_t st_nlink;
+    uid_t st_uid;
+    gid_t st_gid;
+    dev_t st_rdev;
+    off_t st_size;
+    time_t st_atime;
+    long st_spare1;
+    time_t st_mtime;
+    long st_spare2;
+    time_t st_ctime;
+    long st_spare3;
+    long st_blksize;
+    long st_blocks;
+    long st_spare4[2];
+};
 
 struct __sbuf {
     unsigned char *_base;
@@ -228,6 +254,7 @@ extern struct lconv D_0000BEBC;
 extern s32 D_0000F598;
 extern s32 D_0000F5E0;
 extern s32 D_0000F5E4;
+extern char __lc_ctype[12];
 extern struct _reent *_impure_ptr;
 extern int errno;
 

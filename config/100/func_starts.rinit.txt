@@ -23,3 +23,5 @@ _ulp = 0x00007E7C; // type:func
 _ratio = 0x0000817C; // type:func
 _mprec_log10 = 0x0000821C; // type:func
 func_0000AF48 = 0x0000AF48; // type:func
+_reclaim_reent = 0x00008EF0; // type:func
+_wrapup_reent = 0x0000900C; // type:func
