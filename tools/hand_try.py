@@ -212,7 +212,16 @@ def climb(pre, lines, idx, target, comp, opt, jobs):
             if time.time() > deadline:
                 print("climb: time cap (CLIMB_SECONDS) reached")
                 break
-            cur = list(start) if restart == 0 else rng.sample(start, len(start))
+            if restart == 0:
+                cur = list(start)
+            else:  # shuffle the movable units only, the others keep their relative order
+                mv = [u for u in start if MOVABLE(u)]
+                rng.shuffle(mv)
+                cur, it = [], iter(mv)
+                fixed = [u for u in start if not MOVABLE(u)]
+                slots = sorted(rng.sample(range(len(start)), len(fixed)))
+                fi = iter(fixed)
+                cur = [next(fi) if k in slots else next(it) for k in range(len(start))]
             best = _perm_score((pre, lines, idx, cur, target, comp, opt))
             best = best[0] if best else 10 ** 9
             best, cur = _climb1(pool, pre, lines, idx, cur, best, target, comp, opt)
@@ -231,6 +240,8 @@ def _climb1(pool, pre, lines, idx, cur, best, target, comp, opt):
         while best and time.time() < deadline:
             moves = []
             for i in range(len(cur)):
+                if not MOVABLE(cur[i]):
+                    continue
                 for j in range(len(cur)):
                     if i != j:
                         c = cur[:i] + cur[i + 1:]
@@ -247,15 +258,50 @@ def _climb1(pool, pre, lines, idx, cur, best, target, comp, opt):
     return best, cur
 
 
+CASES = False
+MOVABLE = lambda unit: True  # noqa: E731
+
+
 def permute(text, body, target, comp, opt, jobs):
     """Brute-force the order of the //P-tagged body lines (store order, statement order)."""
     import itertools
     from multiprocessing import Pool
     pre = text[:len(text) - len(body)]
+    if CASES:
+        # units = the case blocks of the first switch (each from its `case`/`default` to the next one)
+        m = re.search(r"\bswitch\s*\([^)]*\)\s*\{\n", body)
+        if not m:
+            sys.exit("--cases: no switch in the body")
+        depth, i, end = 1, m.end(), None
+        while i < len(body):
+            depth += (body[i] == "{") - (body[i] == "}")
+            if depth == 0:
+                end = i
+                break
+            i += 1
+        inner = body[m.end():end]
+        parts = re.split(r"(?m)(?=^\s*(?:case\b|default\s*:))", inner)
+        head_txt = parts[0] if not re.match(r"\s*(?:case\b|default)", parts[0]) else ""
+        blocks = [x for x in (parts[1:] if head_txt else parts) if x]
+        # units: head, one per case, tail (rejoined with "\n", so strip one trailing newline per unit)
+        lines = [body[:m.end()] + head_txt.rstrip("\n")] + [b.rstrip("\n") for b in blocks] + [body[end:]]
+        idx = list(range(1, len(blocks) + 1))
+        global MOVABLE
+        # cases with an assert keep their (line-number) order; the others move
+        MOVABLE = lambda unit: not re.search(r"ASSERT|Kprintf|__LINE__", unit)  # noqa: E731
+        print(f"--cases: {len(blocks)} case blocks, {sum(1 for b in blocks if MOVABLE(b))} movable")
+        return climb(pre, lines, idx, target, comp, opt, jobs) if len(idx) > 7 else \
+            _permute_units(pre, lines, idx, target, comp, opt, jobs)
     lines = body.split("\n")
     idx = [i for i, l in enumerate(lines) if "//P" in l]
     if len(idx) > 7:
         return climb(pre, lines, idx, target, comp, opt, jobs)
+    return _permute_units(pre, lines, idx, target, comp, opt, jobs)
+
+
+def _permute_units(pre, lines, idx, target, comp, opt, jobs):
+    import itertools
+    from multiprocessing import Pool
     jobsl = ((pre, lines, idx, p, target, comp, opt) for p in itertools.permutations([lines[i] for i in idx]))
     res = []
     with Pool(jobs) as pool:
@@ -289,6 +335,9 @@ def main():
     ap.add_argument("--decls")
     ap.add_argument("--diff", action="store_true")
     ap.add_argument("--diff-opt", help="with --diff: show the diff for this option set (e.g. '-O2') instead of the own one")
+    ap.add_argument("--cases", action="store_true",
+                    help="with --permute: reorder the case blocks of the body's first switch (cases ending in "
+                         "a break/return/goto; //P not needed). Order steers -frename-registers and block layout")
     ap.add_argument("--permute", action="store_true",
                     help="try every order of the body lines tagged //P (own setting); >7 lines: hill-climb over single-line moves")
     ap.add_argument("--variants", action="store_true",
@@ -456,6 +505,8 @@ def main():
         if a.write and bestsrc is not None:
             Path(a.cfile).write_text(bestsrc)
             print(f"wrote the best combination to {a.cfile}")
+    global CASES
+    CASES = a.cases
     if a.permute:
         permute(text, body, target, comp, own.split(" ", 1)[1], a.j)
     if a.perm:
