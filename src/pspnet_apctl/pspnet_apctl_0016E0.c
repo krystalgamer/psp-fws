@@ -720,8 +720,28 @@ s32 func_000038EC(SceNetApctlCtx *ctx, SceNetInAddrPacked *ip, SceNetInAddrPacke
 }
 #endif
 
-#if FW_VERSION >= 282
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_000038EC);
+#endif
+
+#if FW_VERSION == 282
+s32 func_000038EC(SceNetApctlCtx *ctx, SceNetInAddrPacked *ip, SceNetInAddrPacked *bcast, SceNetInAddrPacked *mask, SceNetInAddrPacked *route, SceNetInAddrPacked *dns1, SceNetInAddrPacked *dns2) {
+    s32 temp_v0;
+    s32 temp_v0_2;
+    s32 var_s1;
+
+    temp_v0 = sceNetConfigSetIfaddr();
+    var_s1 = temp_v0;
+    if (temp_v0 >= 0) {
+        sceNetConfigSetDefaultRoute(route);
+        temp_v0_2 = sceNetConfigSetDNS(dns1, dns2);
+        var_s1 = temp_v0_2;
+        if (temp_v0_2 >= 0) {
+            sceNetConfigAddMRoute(ip);
+        }
+    }
+    return var_s1;
+}
 #endif
 
 #if FW_VERSION == 100

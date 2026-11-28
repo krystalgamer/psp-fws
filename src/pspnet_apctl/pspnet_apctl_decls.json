@@ -292,8 +292,12 @@
   "sceNetApctl_lib_C519EDCD": "s32 sceNetApctl_lib_C519EDCD(s32 arg0);",
   "sceNetBpfClose": "M2C_UNK sceNetBpfClose();",
   "sceNetBpfRead": "s32 sceNetBpfRead();",
+  "sceNetConfigAddMRoute": "M2C_UNK sceNetConfigAddMRoute(SceNetInAddrPacked *);",
   "sceNetConfigDelIfaddr": "s32 sceNetConfigDelIfaddr(s32);",
   "sceNetConfigFlushRoute": "s32 sceNetConfigFlushRoute();",
+  "sceNetConfigSetDNS": "s32 sceNetConfigSetDNS(SceNetInAddrPacked *, SceNetInAddrPacked *);",
+  "sceNetConfigSetDefaultRoute": "M2C_UNK sceNetConfigSetDefaultRoute(SceNetInAddrPacked *);",
+  "sceNetConfigSetIfaddr": "s32 sceNetConfigSetIfaddr();",
   "sceNetMemcpy": "M2C_UNK sceNetMemcpy(s32, s32, s32);",
   "sceNetMemset": "M2C_UNK sceNetMemset(M2C_UNK *, M2C_UNK, M2C_UNK);",
   "sceWlanDevDetach": "M2C_UNK sceWlanDevDetach();"
