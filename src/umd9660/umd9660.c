@@ -1132,7 +1132,37 @@ INCLUDE_ASM("nonmatchings/umd9660", func_00003D78);
 #if FW_VERSION < 103
 INCLUDE_ASM("nonmatchings/umd9660", func_00003690);
 
-INCLUDE_ASM("nonmatchings/umd9660", func_00003818);
+s32 func_00003818(SceUmd9660Drive *drive, SceUmd9660PrefetchArg *arg) {
+    SceUmdDrive *umd;
+    SceUmdPrefetchCmd cmd;
+    s32 ret = 0x80010016;
+    if (drive == NULL || arg == NULL) {
+        goto end;
+    }
+    ret = 0;
+    if (!(sceKernelDipswAll() & 0x10000)) {
+        umd = drive->umdDrive;
+        cmd.lbn = arg->lbn;
+        cmd.count = arg->count;
+        cmd.flags = 0;
+        cmd.unkB = 0;
+        if (arg->unk0 != 0) {
+            cmd.flags = 4;
+        }
+        if (arg->unk1 != 0) {
+            cmd.flags |= 1;
+        }
+        for (;;) {
+            if (sceUmdExecPrefetch10Cmd(umd, &cmd) == 0) {
+                ret = 0;
+                break;
+            }
+            sceUmdExecReqSenseCmd(umd, umd->sense, 0x12);
+        }
+    }
+end:
+    return ret;
+}
 #endif
 
 #if FW_VERSION == 100
@@ -1188,7 +1218,44 @@ end:
 INCLUDE_ASM("nonmatchings/umd9660", func_00003A74);
 #endif
 
-#if FW_VERSION < 150
+#if FW_VERSION < 103
+s32 func_00003AF8(SceUmd9660Drive *drive, SceUmd9660ClearCacheArg *arg) {
+    SceUmdDrive *umd;
+    SceUmdClearCacheCmd cmd;
+    s32 ret = 0x80010016;
+    s32 res;
+    if (drive == NULL || arg == NULL) {
+        goto end;
+    }
+    ret = 0;
+    if (!(sceKernelDipswAll() & 0x10000)) {
+        umd = drive->umdDrive;
+        ret = 0x80010016;
+        if (arg->mode < 4) {
+            cmd.mode = arg->mode & 3;
+            cmd.unk0 = arg->unk10;
+            cmd.unk2 = arg->unk14;
+            for (;;) {
+                res = sceUmdExecClearCacheInfoCmd(umd, &cmd);
+                if (res == 0) {
+                    break;
+                }
+                sceUmdExecReqSenseCmd(umd, umd->sense, 0x12);
+                res = sceAta_driver_BE07B3A7(umd->sense);
+                if (res == 0x80210001) {
+                    sceAtaDoSoftResetBit();
+                    break;
+                }
+            }
+            ret = res;
+        }
+    }
+end:
+    return ret;
+}
+#endif
+
+#if FW_VERSION == 103
 INCLUDE_ASM("nonmatchings/umd9660", func_00003AF8);
 #endif
 

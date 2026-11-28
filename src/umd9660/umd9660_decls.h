@@ -28,6 +28,14 @@ typedef struct {
     void *gp; /* 0x84 */
 } SceUmd9660BlkOps;
 
+/* devctl 0x1E180D3 input (0x18 bytes checked) */
+typedef struct {
+    u32 unk0[3];
+    u32 mode; /* 0x0C: < 4 */
+    u32 unk10; /* 0x10 */
+    u32 unk14; /* 0x14 */
+} SceUmd9660ClearCacheArg;
+
 /* copy of the umdman disc info (sceUmdMan_driver_E192C10A() + 0x64); 1.00: 0x24 bytes, 1.02+: 0x28 */
 typedef struct {
     u8 unk0; /* 0x0 */
@@ -103,6 +111,23 @@ typedef struct {
     SceUID heapId; /* 0x18 */
 } SceUmd9660Mgr;
 
+/* devctl 0x1E180C1 input (0x1C bytes checked) */
+typedef struct {
+    u8 unk0; /* 0x0: nonzero -> flag 4 */
+    u8 unk1; /* 0x1: nonzero -> flag 1 */
+    u8 pad2[2];
+    u32 lbn; /* 0x4 */
+    u16 count; /* 0x8 */
+} SceUmd9660PrefetchArg;
+
+/* sceUmdExecClearCacheInfoCmd parameter */
+typedef struct {
+    u16 unk0; /* 0x0 */
+    u16 unk2; /* 0x2 */
+    u16 unk4; /* 0x4 */
+    u8 mode; /* 0x6 */
+} SceUmdClearCacheCmd;
+
 /* sceUmdGetDiscInfo result */
 typedef struct {
     u32 size; /* 0x0 */
@@ -145,6 +170,22 @@ typedef struct {
     u32 unk20;
 #endif
 } SceUmdLbnParam;
+
+/* sceUmdExecPrefetch10Cmd parameter */
+typedef struct {
+    u64 lbn; /* 0x0 */
+    u16 count; /* 0x8 */
+    u8 flags; /* 0xA */
+    u8 unkB; /* 0xB */
+} SceUmdPrefetchCmd;
+
+/* sceUmdExecReportCacheCmd parameter */
+typedef struct {
+    u16 unk0; /* 0x0 */
+    u16 unk2; /* 0x2 */
+    u16 len; /* 0x4 */
+    u8 unk6; /* 0x6 */
+} SceUmdReportCacheCmd;
 
 /* SCE assert: Kprintf(fmt, __FILE__, __FUNCTION__, __LINE__) */
 #define UMD9660_ASSERT(cond, fmt, file, func, line) \
@@ -281,7 +322,7 @@ SceUmd9660Mgr *func_000026E4(void);
 SceUmd9660File *func_00002910(SceIoIob *iob);
 s32 func_00002974(SceUmd9660Drive *drive, void *buf, SceSize size, SceUmdLbnParam *param);
 s32 func_000029FC(SceUmd9660Drive *drive, void *buf, SceSize size, s32 arg3, SceUmdLbnParam *param);
-s32 func_00002CE4(SceUmd9660Drive *drive, u32 *arg, SceSize size);
+s32 func_00002CE4();
 s32 func_000036C4();
 s32 func_000036D0(s32 arg0);
 s32 func_000037AC(SceUmd9660Drive *drive);
@@ -290,14 +331,14 @@ s32 func_000038F0();
 s32 func_0000397C();
 s32 func_00003A58(void);
 s32 func_00003A74();
-s32 func_00003AF8();
+s32 func_00003AF8(SceUmd9660Drive *drive, SceUmd9660ClearCacheArg *arg);
 s32 func_00003BFC(void);
 M2C_UNK *func_00003C04(void);
 s32 func_00003C80(s32 arg0);
 s32 func_00003C8C(SceUmd9660Drive *drive, void *buf);
 s32 func_00003D24(s32);
 s32 func_00003D28(SceIoIob *iob);
-s32 func_00003E54(SceUmd9660Drive *drive, void *buf);
+s32 func_00003E54();
 s32 func_00003ED0(void *arg0, void *arg1, s32 *unit);
 s32 func_00003F70(void);
 s32 func_00003F7C(const char *name);
@@ -309,7 +350,7 @@ s32 func_00004004();
 s32 func_00004024(); /* 1.x: (SceUmd9660Drive *), 2.x: other layout */
 s32 func_00004064(); /* 1.x: (SceUmd9660Drive *), 2.x: other layout */
 s32 func_000040A4(); /* 1.x: (SceUmd9660Drive *), 2.x: other layout */
-s32 func_000040C8(SceUmd9660Drive *drive, s32 *mode, SceSize size);
+s32 func_000040C8();
 s32 func_000040E4(); /* 1.x: (SceUmd9660Drive *), 2.x: other layout */
 s32 func_00004124(); /* 1.x: (SceUmd9660Drive *), 2.x: other layout */
 s32 func_00004148(s32 *arg0);
@@ -360,8 +401,10 @@ void *memcpy(void *dst, const void *src, SceSize n);
 void *memset(void *dst, s32 c, SceSize n);
 s32 module_start(void);
 void sceAtaDisplayReqSense(void *sense);
+s32 sceAtaDoSoftResetBit(void);
 s32 sceAtaExecSetFeaturesCmd(void *ata, s32 feature, s32 count, s32 driveId, s32 arg4);
 s32 sceAtaIsDvdDrive(void);
+s32 sceAta_driver_BE07B3A7(void *sense);
 s32 sceBLKRegister(const char *name, s32 type, s32 unit, void *data, SceUmd9660BlkOps *ops);
 s32 sceBLKUnRegister(const char *name, s32 unit);
 M2C_UNK sceIoAddDrv(M2C_UNK *);
@@ -391,7 +434,10 @@ s32 sceUmd9660_driver_B23266CA(void);
 s32 sceUmd9660_driver_C7CD9CE8(void);
 s32 sceUmd9660_driver_CAAFFE8D(void);
 s32 sceUmd9660_driver_F42C0AEE(void);
+s32 sceUmdExecClearCacheInfoCmd(SceUmdDrive *umd, SceUmdClearCacheCmd *cmd);
 s32 sceUmdExecMechaStatCmd(SceUmdDrive *umd, SceSize size, void *buf);
+s32 sceUmdExecPrefetch10Cmd(SceUmdDrive *umd, SceUmdPrefetchCmd *cmd);
+s32 sceUmdExecReportCacheCmd(SceUmdDrive *umd, SceUmdReportCacheCmd *cmd, void *buf);
 s32 sceUmdExecReqSenseCmd(SceUmdDrive *umd, void *buf, SceSize size);
 s32 sceUmdExecSeekCmd(SceUmdDrive *umd, u32 lbn, s32 arg2);
 s32 sceUmdExecSetLockLengthCmd(SceUmdDrive *umd, u32 len);
