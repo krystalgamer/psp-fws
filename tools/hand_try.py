@@ -355,7 +355,7 @@ def main():
                     help="try every combination of '//V{' ... '//V|' ... '//V}' alternative blocks in the body")
     ap.add_argument("--write", action="store_true", help="with --variants: write the best combination back to FILE.c")
     ap.add_argument("-j", type=int, default=4, help="processes for --permute")
-    ap.add_argument("--opts", help="';'-separated option sets to try instead of the standard list (own setting kept)")
+    ap.add_argument("--opts", help="';'-separated option sets to try instead of the standard list (own setting kept); --variants/--permute use the first")
     ap.add_argument("--extra", default="", help="flags appended to every tried setting, e.g. --extra=-mext")
     ap.add_argument("--perm", action="store_true", help="write tmp/perm/MODULE/FUNC for decomp-permuter (own setting)")
     a = ap.parse_args()
@@ -529,15 +529,21 @@ def main():
     elif best is not None:
         sm = difflib.SequenceMatcher(None, target, best, autojunk=False)
         print(f"RESULT: {max(len(target), len(best)) - sum(b.size for b in sm.get_matching_blocks())} off (own setting)")
+    # --variants / --permute score one option set: the first --opts set if given, else the file's own
+    sopt = own.split(" ", 1)[1]
+    if a.opts:
+        sopt = [o.strip() for o in a.opts.split(";") if o.strip()][0]
+    if a.extra:
+        sopt = f"{sopt} {a.extra}"
     if a.variants:
-        bestsrc = variants(text, body, target, comp, own.split(" ", 1)[1], a.j)
+        bestsrc = variants(text, body, target, comp, sopt, a.j)
         if a.write and bestsrc is not None:
             Path(a.cfile).write_text(bestsrc)
             print(f"wrote the best combination to {a.cfile}")
     global CASES
     CASES = a.cases
     if a.permute:
-        permute(text, body, target, comp, own.split(" ", 1)[1], a.j)
+        permute(text, body, target, comp, sopt, a.j)
     if a.perm:
         import perm_near
         d = perm_near.write_perm_dir(mod, name, text, comp, own.split(" ", 1)[1])
