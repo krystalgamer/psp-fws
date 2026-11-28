@@ -94,7 +94,22 @@ s32 sceAtaStop(u32 flags) {
 #endif
 
 #if FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/ata", sceAtaStop);
+s32 sceAtaStop(u32 flags) {
+    s32 n;
+    s32 ret;
+    n = D_000046A4 - 1;
+    if (n < 0) {
+        return 0x8021101C;
+    }
+    D_000046A4 = n;
+    if (n == 0) {
+        ret = sceAtaDisableClkIo(flags);
+        if (ret != 0) {
+            return ret;
+        }
+    }
+    return 0;
+}
 #endif
 
 s32 sceAtaDisableClkIo(u32 flags) {
@@ -641,7 +656,7 @@ s32 sceAtaGetDriveStat(s32 arg0) {
 }
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 271
+#if (FW_VERSION >= 150 && FW_VERSION < 271) || FW_VERSION >= 282
 s32 sceAtaIsReadableDriveStat(u32 id) {
     SceAtaDrive *drive = sceAtaGetAtaDrive(id);
     u32 stat = 0x80211009;
@@ -658,7 +673,7 @@ s32 sceAtaIsReadableDriveStat(u32 id) {
 }
 #endif
 
-#if FW_VERSION >= 271
+#if FW_VERSION == 271
 INCLUDE_ASM("nonmatchings/ata", sceAtaIsReadableDriveStat);
 #endif
 
@@ -677,7 +692,7 @@ s32 sceAtaIsReadableDriveStat(u32 id) {
 }
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 271
+#if (FW_VERSION >= 150 && FW_VERSION < 271) || FW_VERSION >= 282
 s32 sceAtaIsNormalDriveStat(u32 id) {
     SceAtaDrive *drive = sceAtaGetAtaDrive(id);
     u32 stat = 0x80211009;
@@ -694,7 +709,7 @@ s32 sceAtaIsNormalDriveStat(u32 id) {
 }
 #endif
 
-#if FW_VERSION >= 271
+#if FW_VERSION == 271
 INCLUDE_ASM("nonmatchings/ata", sceAtaIsNormalDriveStat);
 #endif
 

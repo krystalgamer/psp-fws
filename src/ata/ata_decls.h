@@ -162,6 +162,7 @@ extern s32 D_00004324;
 extern s32 D_00004328;
 extern s32 D_00004370;
 extern s32 D_00004640;
+extern SceUID D_000046A4;
 extern SceAtaCallBack D_000046A8;
 extern s32 D_000046E8;
 extern s32 D_000046EC;
