@@ -1,0 +1,3 @@
+// hidden second functions inside func_00008524 / func_0000F984
+func_000085CC = 0x000086AC; // type:func
+func_0000CD60 = 0x0000CE58; // type:func

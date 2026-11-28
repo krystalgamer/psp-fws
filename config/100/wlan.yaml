@@ -15,6 +15,7 @@ options:
   cache_path: tmp/build/100/.splat_cache.wlan
   symbol_addrs_path:
     - config/100/symbol_addrs.wlan.txt
+    - config/100/func_starts.wlan.txt
     - tmp/build/100/prx_syms.wlan.txt
   reloc_addrs_path: [tmp/build/100/reloc_addrs.wlan.txt]
   asset_path: tmp/assets/100/wlan

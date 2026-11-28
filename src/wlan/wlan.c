@@ -2940,6 +2940,8 @@ INCLUDE_ASM("nonmatchings/wlan", func_00008480);
 
 #if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/wlan", func_00008524);
+
+INCLUDE_ASM("nonmatchings/wlan", func_000085CC);
 #else
 void func_0000AC3C(void) {
     sceSysregMsifResetEnable(1);
@@ -3938,6 +3940,10 @@ INCLUDE_ASM("nonmatchings/wlan", func_0000F6C8);
 INCLUDE_ASM("nonmatchings/wlan", func_0000F81C);
 
 INCLUDE_ASM("nonmatchings/wlan", func_0000F984);
+
+#if FW_VERSION < 282
+INCLUDE_ASM("nonmatchings/wlan", func_0000CD60);
+#endif
 
 INCLUDE_ASM("nonmatchings/wlan", func_0000FA98);
 
