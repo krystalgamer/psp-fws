@@ -97,49 +97,47 @@ INCLUDE_ASM("nonmatchings/mediaman", func_000002C0);
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/mediaman", sceUmd_659587F7);
-
-INCLUDE_ASM("nonmatchings/mediaman", sceUmdGetUserEventFlagId);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 201
+#if FW_VERSION >= 150 && FW_VERSION < 271
 s32 sceUmdGetUserEventFlagId(void) {
     return D_00000FDC;
 }
+#endif
+
+#if FW_VERSION == 271
+INCLUDE_ASM("nonmatchings/mediaman", sceUmdGetUserEventFlagId);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/mediaman", sceUmdGetDriveStatus);
 #endif
 
-#if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/mediaman", sceUmdGetAssignedFlag);
-#endif
-
-#if FW_VERSION >= 150 && FW_VERSION < 201
+#if FW_VERSION >= 150 && FW_VERSION < 271
 s32 sceUmdGetAssignedFlag(void) {
     return D_00000FD0;
 }
 #endif
 
-#if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/mediaman", sceUmdSetAssignedFlag);
+#if FW_VERSION == 271
+INCLUDE_ASM("nonmatchings/mediaman", sceUmdGetAssignedFlag);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 201
+#if FW_VERSION >= 150 && FW_VERSION < 271
 void sceUmdSetAssignedFlag(s32 arg0) {
     D_00000FD0 = arg0;
 }
+#endif
+
+#if FW_VERSION == 271
+INCLUDE_ASM("nonmatchings/mediaman", sceUmdSetAssignedFlag);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/mediaman", sceUmdClearDriveStatus);
 #endif
 
-#if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/mediaman", sceUmdSetDriveStatus);
-#endif
-
-#if FW_VERSION >= 150 && FW_VERSION < 201
+#if FW_VERSION >= 150 && FW_VERSION < 271
 void sceUmdSetDriveStatus(u32 arg0) {
     s32 temp_s1;
 
@@ -150,11 +148,11 @@ void sceUmdSetDriveStatus(u32 arg0) {
 }
 #endif
 
-#if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/mediaman", sceUmdSetErrorStatus);
+#if FW_VERSION == 271
+INCLUDE_ASM("nonmatchings/mediaman", sceUmdSetDriveStatus);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 201
+#if FW_VERSION >= 150 && FW_VERSION < 271
 void sceUmdSetErrorStatus(s32 arg0) {
     s32 temp_a0;
 
@@ -162,6 +160,10 @@ void sceUmdSetErrorStatus(s32 arg0) {
     D_00000FD8 = arg0;
     sceKernelCpuResumeIntr(temp_a0);
 }
+#endif
+
+#if FW_VERSION == 271
+INCLUDE_ASM("nonmatchings/mediaman", sceUmdSetErrorStatus);
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
@@ -525,11 +527,7 @@ INCLUDE_ASM("nonmatchings/mediaman", sceUmdWaitDriveStatCB);
 INCLUDE_ASM("nonmatchings/mediaman", sceUmdRegisterUMDCallBack);
 #endif
 
-#if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/mediaman", sceUmdSetDetectUMDCallBackId);
-#endif
-
-#if FW_VERSION >= 150 && FW_VERSION < 201
+#if FW_VERSION >= 150 && FW_VERSION < 271
 void sceUmdSetDetectUMDCallBackId(s32 arg0) {
     s32 temp_a0;
 
@@ -539,11 +537,11 @@ void sceUmdSetDetectUMDCallBackId(s32 arg0) {
 }
 #endif
 
-#if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/mediaman", sceUmdUnRegisterUMDCallBack);
+#if FW_VERSION == 271
+INCLUDE_ASM("nonmatchings/mediaman", sceUmdSetDetectUMDCallBackId);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 201
+#if FW_VERSION >= 150 && FW_VERSION < 271
 s32 sceUmdUnRegisterUMDCallBack(s32 arg0) {
     s32 var_a0;
     u32 temp_v1;
@@ -560,11 +558,11 @@ s32 sceUmdUnRegisterUMDCallBack(s32 arg0) {
 }
 #endif
 
-#if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/mediaman", sceUmdGetDiscInfo);
+#if FW_VERSION == 271
+INCLUDE_ASM("nonmatchings/mediaman", sceUmdUnRegisterUMDCallBack);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 201
+#if FW_VERSION >= 150 && FW_VERSION < 271
 s32 sceUmdGetDiscInfo(s32 *arg0) {
     s32 var_a1;
     u32 temp_s0;
@@ -579,14 +577,18 @@ s32 sceUmdGetDiscInfo(s32 *arg0) {
 }
 #endif
 
-#if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/mediaman", sceUmdGetDetectUMDCallBackId);
+#if FW_VERSION == 271
+INCLUDE_ASM("nonmatchings/mediaman", sceUmdGetDiscInfo);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 201
+#if FW_VERSION >= 150 && FW_VERSION < 271
 s32 sceUmdGetDetectUMDCallBackId(void) {
     return D_00001004;
 }
+#endif
+
+#if FW_VERSION == 271
+INCLUDE_ASM("nonmatchings/mediaman", sceUmdGetDetectUMDCallBackId);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
@@ -904,24 +906,24 @@ void sceUmdGetDriveStat(void) {
 INCLUDE_ASM("nonmatchings/mediaman", sceUmdGetErrorStat);
 #endif
 
-#if FW_VERSION >= 201
-INCLUDE_ASM("nonmatchings/mediaman", sceUmdGetSuspendResumeMode);
-#endif
-
-#if FW_VERSION >= 150 && FW_VERSION < 201
+#if FW_VERSION >= 150 && FW_VERSION < 271
 s32 sceUmdGetSuspendResumeMode(void) {
     return D_00001000;
 }
 #endif
 
-#if FW_VERSION >= 201
-INCLUDE_ASM("nonmatchings/mediaman", sceUmdSetSuspendResumeMode);
+#if FW_VERSION >= 271
+INCLUDE_ASM("nonmatchings/mediaman", sceUmdGetSuspendResumeMode);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 201
+#if FW_VERSION >= 150 && FW_VERSION < 271
 void sceUmdSetSuspendResumeMode(s32 arg0) {
     D_00001000 = arg0;
 }
+#endif
+
+#if FW_VERSION >= 271
+INCLUDE_ASM("nonmatchings/mediaman", sceUmdSetSuspendResumeMode);
 #endif
 
 #if FW_VERSION >= 201
