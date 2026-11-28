@@ -449,7 +449,46 @@ struct mbuf *func_0000E5A4(s32 type, struct rt_addrinfo *rtinfo, char *data, s32
 
 INCLUDE_ASM("nonmatchings/pspnet_inet_rtsub", func_0000E704);
 
+#if FW_VERSION < 201
+s32 func_0000E928(struct radix_node *rn, void *v)
+{
+	struct walkarg *w = v;
+	struct rtentry *rt = (struct rtentry *)rn;
+	int error = 0, size;
+	struct rt_addrinfo info;
+
+	if (w->w_op == NET_RT_FLAGS && !(rt->rt_flags & w->w_arg))
+		return 0;
+	__builtin_memset(&info, 0, sizeof(info));
+	info.rti_info[RTAX_DST] = rt_key(rt);
+	info.rti_info[RTAX_GATEWAY] = rt->rt_gateway;
+	info.rti_info[RTAX_NETMASK] = rt_mask(rt);
+	info.rti_info[RTAX_GENMASK] = rt->rt_genmask;
+	if (rt->rt_ifp) {
+		info.rti_info[RTAX_IFP] = rt->rt_ifp->if_addrlist.tqh_first->ifa_addr;
+		info.rti_info[RTAX_IFA] = rt->rt_ifa->ifa_addr;
+		if (rt->rt_ifp->if_flags & IFF_POINTOPOINT)
+			info.rti_info[RTAX_BRD] = rt->rt_ifa->ifa_dstaddr;
+	}
+	if ((error = func_0000DF08(RTM_GET, &info, 0, w, &size)))
+		return (error);
+	if (w->w_where && w->w_tmem && w->w_needed <= 0) {
+		struct rt_msghdr *rtm = (struct rt_msghdr *)w->w_tmem;
+
+		rtm->rtm_flags = rt->rt_flags;
+		rtm->rtm_use = rt->rt_use;
+		rtm->rtm_rmx = rt->rt_rmx;
+		rtm->rtm_index = rt->rt_ifp->if_index;
+		rtm->rtm_errno = rtm->rtm_pid = rtm->rtm_seq = 0;
+		rtm->rtm_addrs = info.rti_addrs;
+		func_0002C9B8(rtm, w->w_where, size);
+		w->w_where += size;
+	}
+	return (error);
+}
+#else
 INCLUDE_ASM("nonmatchings/pspnet_inet_rtsub", func_0000E928);
+#endif
 
 INCLUDE_ASM("nonmatchings/pspnet_inet_rtsub", func_0000EACC);
 
