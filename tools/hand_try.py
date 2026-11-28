@@ -445,6 +445,8 @@ def _permute_units(pre, lines, idx, target, comp, opt, jobs):
 def lock_shared():
     """Wait while tools/hand.py rewrites this tree's sources (it holds the lock exclusively)."""
     import fcntl
+    if os.environ.get("HAND_TRY_NOLOCK"):  # run by hand.py itself, which holds the lock
+        return None
     (ROOT / "tmp").mkdir(exist_ok=True)
     f = open(ROOT / "tmp" / "hand.lock", "a")
     fcntl.flock(f, fcntl.LOCK_SH)

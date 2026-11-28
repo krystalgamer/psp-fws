@@ -109,6 +109,7 @@ def main():
     work.mkdir(parents=True, exist_ok=True)
     matched = []
     names_needed = {}
+    proposed = set()
     for spec in a.funcs:
         name, _, dname = spec.partition("=")
         dname = dname or name
@@ -142,6 +143,12 @@ def main():
             for t, m, o in raw:
                 if int(o or "0", 16) == 0 and t != m:
                     pairs.append((t, m))
+            cpairs = [c for c in re.findall(r"call target differs: target (\w+), mine (\w+)", out) if c not in proposed]
+            if cpairs:
+                # which DST function looks like SRC's callee (a proposal; the target's name is adopted below)
+                import match_funcs
+                proposed.update(cpairs)
+                match_funcs.propose(a.src_ver, a.dst_ver, a.module, cpairs)
             for tb, toff, mine in dict.fromkeys(re.findall(r"reloc \d+: target (\w+)\+0x([0-9A-F]+), mine (\w+)", out)):
                 print(f"  {name}: {mine} is {tb}+0x{toff} in {a.dst_ver} (a field of a sized symbol): "
                       f"write it as a member of {tb}, not substituted")

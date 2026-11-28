@@ -94,6 +94,27 @@ def main():
         sys.exit(1)
 
 
+def propose_calls(a, name, cfile, vers_s):
+    """When the C calls other functions than VER's original: which VER function looks like each callee
+    (tools/match_funcs.py; a proposal only)."""
+    r = subprocess.run([sys.executable, str(ROOT / "tools/hand_try.py"), a.ver, a.module, str(cfile)]
+                       + (["--decls", a.decls] if a.decls else []), cwd=ROOT, capture_output=True, text=True,
+                       env={**os.environ, "HAND_TRY_NOLOCK": "1"})
+    pairs = re.findall(r"call target differs: target (\w+), mine (\w+)", r.stdout)
+    if not pairs:
+        return
+    import match_funcs
+    print(f"{name}: CALL TARGETS DIFFER in {a.ver}:")
+    for tgt, mine in dict.fromkeys(pairs):
+        src = next((v for v in [a.ver] + [x for x in vers_s if x != a.ver]
+                    if mine in match_funcs._module(v, a.module)[1]), None)
+        if src is None:
+            print(f"  {a.ver} calls {tgt} where the C calls {mine} ({mine} is no function of any sharing version)")
+            continue
+        print(f"  {a.ver} calls {tgt} where the C calls {mine}:")
+        match_funcs.propose(src, a.ver, a.module, [(tgt, mine)])
+
+
 def one(a, cfile, decls):
     """Insert one function; returns (name, keep, drop), or None (sources restored)."""
     body = Path(cfile).read_text().strip("\n") + "\n"
@@ -202,6 +223,7 @@ def one(a, cfile, decls):
         errs = [l for l in out.splitlines() if re.search(r"error:|warning: implicit|differ|FAILED|mismatch", l)]
         print(f"{name}: no version matches; build output for {a.ver}:")
         print("\n".join((errs or out.splitlines())[-15:]))
+        propose_calls(a, name, cfile, vers_s)
         return None
     if drop:
         ents = FM.parse(orig[f], fv)
