@@ -789,6 +789,7 @@ void func_00011B68(void *arg0, s32 arg1);
 void func_000127F8(struct Unk_func_000127F8_0 *arg0, s32 arg1);
 s32 func_000136C0(void);
 s32 func_0001444C(void);
+s32 mbxAddMessage(SceMbx *mbx, SceWaitQ *wq, void *message);
 M2C_UNK memset(s32, M2C_UNK, s32);
 s32 module_reboot_before(void);
 void *sceKernelAllocHeapMemory(SceUID heapId, SceSize size);

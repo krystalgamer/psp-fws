@@ -380,3 +380,4 @@ D_00016930_v271 = 0x00016930; // rom:0x169D0
 // shared names (tools/add_version.py) end
 func_00000268 = 0x0000022C; // type:func
 func_000000B0 = 0x00000000; // type:func
+mbxAddMessage = 0x00007B40; // type:func

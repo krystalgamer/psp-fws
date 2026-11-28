@@ -208,3 +208,4 @@ func_00014480 = 0x00010840; // type:func rom:0x108C0
 func_000153A8 = 0x00013288; // type:func rom:0x13308
 // shared names (tools/add_version.py) end
 wakeFirstWaitThread = 0x00000308; // type:func
+mbxAddMessage = 0x00005D40; // type:func
