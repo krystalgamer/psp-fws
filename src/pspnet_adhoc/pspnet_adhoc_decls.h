@@ -137,7 +137,7 @@ typedef struct SceNetAdhocWaiter {
 } SceNetAdhocWaiter;
 typedef char chk_SceNetAdhocWaiter[(sizeof(SceNetAdhocWaiter) == ((FW_VERSION < 150) ? 0x64 : (FW_VERSION < 260) ? 0x60 : 0x5C)) ? 1 : -1];
 
-/* socket descriptor (0x2C), one per PDP/PTP id */
+/* socket descriptor (0x2C; 2.60+: 0x28), one per PDP/PTP id */
 typedef struct SceNetAdhocDesc {
     struct SceNetAdhocDesc *next;   /* 0x00 TAILQ entry */
     struct SceNetAdhocDesc **prev;  /* 0x04 */
@@ -150,9 +150,11 @@ typedef struct SceNetAdhocDesc {
     void *rcvchan;                  /* 0x1C wait channel for recv events */
     void *selchan;                  /* 0x20 wait channel for other events */
     SceNetAdhocWaiter *waiters;     /* 0x24 */
-    struct SceNetAdhocDesc *tnext;  /* 0x28 next desc of the same waiting thread */
+#if FW_VERSION < 260
+    struct SceNetAdhocDesc *tnext;  /* 0x28 next desc of the same waiting thread (gone in 2.60+) */
+#endif
 } SceNetAdhocDesc;
-typedef char chk_SceNetAdhocDesc[(sizeof(SceNetAdhocDesc) == 0x2C) ? 1 : -1];
+typedef char chk_SceNetAdhocDesc[(sizeof(SceNetAdhocDesc) == ((FW_VERSION < 260) ? 0x2C : 0x28)) ? 1 : -1];
 
 typedef struct {
     SceNetAdhocDesc *first;
@@ -327,6 +329,12 @@ struct sockaddr_dl {
     char sdl_data[12];
 };
 #define LLADDR(s) ((u8 *)((s)->sdl_data + (s)->sdl_nlen))
+
+#if FW_VERSION < 201
+#define ADHOC_BZERO(p, n) __builtin_memset(p, 0, n)
+#else
+#define ADHOC_BZERO(p, n) sceNetMemset(p, 0, n)
+#endif
 
 #if FW_VERSION < 150
 #define ADHOC_CLOCK() sceNetGetSystemClockUsec()
