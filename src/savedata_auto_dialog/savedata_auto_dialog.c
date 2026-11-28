@@ -18,11 +18,11 @@ INCLUDE_ASM("nonmatchings/savedata_auto_dialog", func_0000010C);
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", module_start);
 #endif
 
-#if FW_VERSION < 150 || FW_VERSION == 201
+#if (FW_VERSION >= 102 && FW_VERSION < 150) || FW_VERSION == 201
 INCLUDE_ASM("nonmatchings/savedata_auto_dialog", module_stop);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 201
+#if FW_VERSION == 100 || (FW_VERSION >= 150 && FW_VERSION < 201)
 s32 module_stop(void) {
     func_0001EB8C();
     return 0;

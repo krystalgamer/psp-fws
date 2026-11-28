@@ -204,6 +204,36 @@ struct Unk_func_00018204_0 {
     s32 unk8;
 };
 
+#ifndef __cplusplus
+typedef struct Class_0001F5F8 {
+    void *vptr;
+} Class_0001F5F8;
+typedef struct Class_0001F790 {
+    void *vptr;
+} Class_0001F790;
+typedef struct Class_0001F988 {
+    void *vptr;
+} Class_0001F988;
+typedef struct Class_0001FE08 {
+    void *vptr;
+} Class_0001FE08;
+typedef struct Class_0001FE30 {
+    void *vptr;
+} Class_0001FE30;
+typedef struct Class_0001FE90 {
+    void *vptr;
+} Class_0001FE90;
+typedef struct Class_0001FEA0 {
+    void *vptr;
+} Class_0001FEA0;
+typedef struct Class_0001FFC8 {
+    void *vptr;
+} Class_0001FFC8;
+typedef struct Class_00020010 {
+    void *vptr;
+} Class_00020010;
+#endif
+
 extern s8 D_00010839;
 extern s32 D_0001083C;
 extern s32 D_00010848;
