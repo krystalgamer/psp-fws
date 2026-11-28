@@ -15,6 +15,7 @@ options:
   cache_path: tmp/build/302/.splat_cache.ata
   symbol_addrs_path:
     - config/302/symbol_addrs.ata.txt
+    - config/302/func_starts.ata.txt
     - tmp/build/302/prx_syms.ata.txt
   reloc_addrs_path: [tmp/build/302/reloc_addrs.ata.txt]
   asset_path: tmp/assets/302/ata
@@ -53,6 +54,7 @@ segments:
     vram: 0x0
     subsegments:
       - [0xA0, c, ata]
+      - [0x26F8, c, atacmd]
       - { start: 0x4134, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x41B4, type: prxpad, order: .text }
       - { start: 0x41C0, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }

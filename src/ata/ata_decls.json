@@ -184,7 +184,7 @@
   "D_00004140": "extern u32 D_00004140[3];",
   "D_00004180": "extern s32 D_00004180;",
   "D_00004200": "extern SceAtaDrive D_00004200[2];",
-  "D_00004250": "extern volatile s32 D_00004250; /* sceAtaSetIntrFlag/GetIntrFlag (set from interrupt context) */",
+  "D_00004250": "extern s32 D_00004250;",
   "D_00004260": "extern s32 D_00004260;",
   "D_00004280": "extern SceAtaAhbBlock D_00004280;",
   "D_000042A0": "extern s32 D_000042A0;",

@@ -151,7 +151,7 @@ extern M2C_UNK D_00003F1C;
 extern u32 D_00004140[3];
 extern s32 D_00004180;
 extern SceAtaDrive D_00004200[2];
-extern volatile s32 D_00004250; /* sceAtaSetIntrFlag/GetIntrFlag (set from interrupt context) */
+extern s32 D_00004250;
 extern s32 D_00004260;
 extern SceAtaAhbBlock D_00004280;
 extern s32 D_000042A0;
