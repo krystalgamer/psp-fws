@@ -214,7 +214,7 @@ INCLUDE_ASM("nonmatchings/umd9660", func_000007CC);
 INCLUDE_ASM("nonmatchings/umd9660", func_00000780);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 201
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/umd9660", umd9660_devctl);
 #endif
 
@@ -222,10 +222,6 @@ INCLUDE_ASM("nonmatchings/umd9660", umd9660_devctl);
 s32 func_000009BC(s32 arg0) {
     return !(arg0 & 0xF02) ? 0 : 0x8001B004;
 }
-#endif
-
-#if FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/umd9660", umd9660_devctl);
 #endif
 
 #if FW_VERSION < 151
@@ -327,9 +323,7 @@ s32 umd9660_init(void *dev) {
     }
     return 0;
 }
-#endif
 
-#if FW_VERSION < 201
 /* the devctl helpers have other auto names in these versions */
 #if FW_VERSION == 103
 #define func_00003818 func_000039E8
@@ -360,6 +354,7 @@ s32 umd9660_init(void *dev) {
 #define func_00003C8C func_00004038
 #define func_00003E54 func_00004218
 #endif
+
 s32 umd9660_exec_devctl(SceIoIob *iob, const char *name, s32 cmd, void *indata, SceSize inlen, void *outdata, SceSize outlen) {
     SceUmd9660Drive *drive;
     SceUmd9660DevctlArgs args;
@@ -567,9 +562,7 @@ s32 umd9660_exec_devctl(SceIoIob *iob, const char *name, s32 cmd, void *indata, 
 #undef func_00003C8C
 #undef func_00003E54
 #undef func_000042A8
-#endif
 
-#if FW_VERSION < 201
 s32 func_00001D6C(void) {
     return 0x8001B000;
 }
@@ -1721,7 +1714,47 @@ INCLUDE_ASM("nonmatchings/umd9660", func_000043DC);
 INCLUDE_RODATA("nonmatchings/umd9660", D_00005BF0);
 #endif
 
-#if FW_VERSION < 201
+#if FW_VERSION == 100
+s32 sceUmd9660ReadPvd4DVD(const char *name, SceUmdLbnParam *param) {
+    s32 ret;
+    UMD9660_ASSERT(param != NULL, D_00005C14, D_00005BF0, "sceUmd9660ReadPvd4DVD", 0x78);
+    UMD9660_ASSERT(name != NULL, D_00005C14, D_00005BF0, "sceUmd9660ReadPvd4DVD", 0x79);
+    if (name == NULL || param == NULL) {
+        return 0x80010016;
+    }
+    param->lbn = 0x10;
+    param->unk0 = 0;
+    param->cmd = 0;
+    param->lbnSize = 1;
+    param->size = 0x800;
+    param->byteSizeFirst = 0;
+    param->byteSizeMiddle = 0x800;
+    param->byteSizeLast = 0;
+    ret = sceIoDevctl(name, 0x1E380C0, param, 0x20, D_00008400, 0x800);
+    if (ret < 0) {
+        return ret;
+    }
+    if (strncmp((char *)D_00008400 + 1, D_00005C34, 5) == 0) {
+        return 0;
+    }
+    param->lbn = 0x100;
+    param->lbnSize = 1;
+    param->unk0 = 0;
+    param->cmd = 0;
+    param->size = 0x800;
+    param->byteSizeMiddle = 0x800;
+    param->byteSizeFirst = 0;
+    param->byteSizeLast = 0;
+    ret = sceIoDevctl(name, 0x1E380C0, param, 0x20, D_00008400, 0x800);
+    if (ret < 0) {
+        return ret;
+    }
+    strncmp((char *)D_00008400 + 1, D_00005C34, 5);
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 102 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/umd9660", sceUmd9660ReadPvd4DVD);
 #endif
 
@@ -1755,9 +1788,44 @@ INCLUDE_RODATA("nonmatchings/umd9660", D_00005A38);
 INCLUDE_ASM("nonmatchings/umd9660", func_00004240);
 #endif
 
-#if FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/umd9660", sceUmd9660ReadRootDir4DVD);
+#if FW_VERSION == 100
+s32 sceUmd9660ReadRootDir4DVD(const char *name, SceUmdLbnParam *param) {
+    s32 ret;
+    UMD9660_ASSERT(param != NULL, D_00005C14, D_00005BF0, "sceUmd9660ReadRootDir4DVD", 0xDC);
+    UMD9660_ASSERT(name != NULL, D_00005C14, D_00005BF0, "sceUmd9660ReadRootDir4DVD", 0xDD);
+    if (name == NULL || param == NULL) {
+        return 0x80010016;
+    }
+    param->unk0 = 0;
+    param->cmd = 0;
+    param->lbn = D_00008400[0x9E] | (D_00008400[0x9F] << 8) | (D_00008400[0xA0] << 16) | (D_00008400[0xA1] << 24);
+    param->lbnSize = 1;
+    param->size = 0x800;
+    param->byteSizeMiddle = 0x800;
+    param->byteSizeFirst = 0;
+    param->byteSizeLast = 0;
+    ret = sceIoDevctl(name, 0x1E380C0, param, 0x20, D_00008440, 0x800);
+    if (ret < 0) {
+        return ret;
+    }
+    ret = func_00004C88();
+    if (ret != 0) {
+        return ret;
+    }
+    func_00004DDC();
+    ret = dvd_get_controlimg_lbn(name);
+    if (ret != 0) {
+        return ret;
+    }
+    return 0;
+}
+#endif
 
+#if FW_VERSION >= 102 && FW_VERSION < 201
+INCLUDE_ASM("nonmatchings/umd9660", sceUmd9660ReadRootDir4DVD);
+#endif
+
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/umd9660", dvd_get_controlimg_lbn);
 #endif
 
@@ -1769,9 +1837,55 @@ INCLUDE_ASM("nonmatchings/umd9660", func_00004664);
 INCLUDE_ASM("nonmatchings/umd9660", func_00004824);
 #endif
 
+#if FW_VERSION == 100
+s32 func_00004C88(void) {
+    char name[0x20];
+    u32 off = 0;
+    u8 *rec;
+    u32 len;
+    for (;;) {
+        rec = D_00008440 + off;
+        if (rec[0] == 0) {
+            return 0x80010002;
+        }
+        memcpy(name, rec + 0x21, rec[0x20]);
+        len = rec[0x20];
+        name[len] = '\0';
+        if (strncmp(name, "USER_L0.IMG;1", len) == 0 || strncmp(name, "USER_L0.IMG", len) == 0) {
+            D_000083C0 = rec[2] | (rec[3] << 8) | (rec[4] << 16) | (rec[5] << 24);
+            return 0;
+        }
+        off += rec[0];
+    }
+}
+#else
 INCLUDE_ASM("nonmatchings/umd9660", func_00004C88);
+#endif
 
+#if FW_VERSION == 100
+s32 func_00004DDC(void) {
+    char name[0x20];
+    u32 off = 0;
+    u8 *rec;
+    u32 len;
+    for (;;) {
+        rec = D_00008440 + off;
+        if (rec[0] == 0) {
+            return 0x80010002;
+        }
+        memcpy(name, rec + 0x21, rec[0x20]);
+        len = rec[0x20];
+        name[len] = '\0';
+        if (strncmp(name, "USER_L1.IMG;1", len) == 0 || strncmp(name, "USER_L1.IMG", len) == 0) {
+            D_000083D0 = rec[2] | (rec[3] << 8) | (rec[4] << 16) | (rec[5] << 24);
+            return 0;
+        }
+        off += rec[0];
+    }
+}
+#else
 INCLUDE_ASM("nonmatchings/umd9660", func_00004DDC);
+#endif
 
 INCLUDE_ASM("nonmatchings/umd9660", func_00004EE8);
 
