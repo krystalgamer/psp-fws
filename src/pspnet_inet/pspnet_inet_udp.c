@@ -216,7 +216,7 @@ INCLUDE_ASM("nonmatchings/pspnet_inet_udp", udp4_realinput);
 #endif
 
 #if FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/pspnet_inet_udp", func_0001B754);
+INCLUDE_ASM("nonmatchings/pspnet_inet_udp", rip_disconnect);
 
 INCLUDE_ASM("nonmatchings/pspnet_inet_udp", func_0001B770);
 
@@ -706,7 +706,7 @@ s32 udp_usrreq(struct socket *so, s32 req, struct mbuf *m, struct mbuf *nam, str
         in_pcbdetach(inp);
         break;
     case 2:
-        error = func_00013338(inp, nam);
+        error = in_pcbbind(inp, nam);
         break;
     case 3:
         error = 0x5F;
@@ -856,7 +856,7 @@ void func_0001C208(void) {
     in_pcbinit(&D_0002DC78, D_0002C318, D_0002C318);
 }
 
-INCLUDE_ASM("nonmatchings/pspnet_inet_udp", func_0001C26C);
+INCLUDE_ASM("nonmatchings/pspnet_inet_udp", udp_ctlinput);
 #endif
 
 s32 udp_sysctl(s32 *name, u32 namelen, void *oldp, u32 *oldlenp, void *newp, u32 newlen) {
@@ -1489,9 +1489,9 @@ INCLUDE_ASM("nonmatchings/pspnet_inet_udp", syn_cache_respond);
 #else
 INCLUDE_ASM("nonmatchings/pspnet_inet_udp", func_0001FFF0);
 
-INCLUDE_ASM("nonmatchings/pspnet_inet_udp", func_00020690);
+INCLUDE_ASM("nonmatchings/pspnet_inet_udp", syn_cache_reset);
 
-INCLUDE_ASM("nonmatchings/pspnet_inet_udp", func_00020914);
+INCLUDE_ASM("nonmatchings/pspnet_inet_udp", syn_cache_unreach);
 
 INCLUDE_ASM("nonmatchings/pspnet_inet_udp", func_00020BB8);
 

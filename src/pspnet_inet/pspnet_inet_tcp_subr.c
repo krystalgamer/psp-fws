@@ -125,7 +125,7 @@ INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", tcp_segsize);
 #endif
 
 #if FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", func_000223CC);
+INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", tcp_setpersist);
 
 INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", func_00022450);
 #endif
@@ -230,7 +230,7 @@ void tcp_init(void) {
     if (max_protohdr < (s32)(sizeof(struct ip) + sizeof(struct tcphdr)))
         max_protohdr = sizeof(struct ip) + sizeof(struct tcphdr);
     sceNetIfhandle_lib_62B20015(max_linkhdr, max_protohdr, 0, 0);
-    icmp_mtudisc_callback_register((void *)func_00023AD4);
+    icmp_mtudisc_callback_register((void *)tcp_mtudisc_callback);
     syn_cache_init();
 }
 #endif
@@ -666,7 +666,7 @@ void func_00023AB8(struct Unk_func_00023AB8_0 *arg0) {
     }
 }
 
-INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", func_00023AD4);
+INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", tcp_mtudisc_callback);
 
 void tcp_mtudisc(struct inpcb *inp, s32 errno) {
     struct tcpcb *tp = (struct tcpcb *)inp->inp_ppcb;

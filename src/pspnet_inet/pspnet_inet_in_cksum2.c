@@ -274,7 +274,7 @@ INCLUDE_ASM("nonmatchings/pspnet_inet_in_cksum2", func_00012D0C);
 
 INCLUDE_ASM("nonmatchings/pspnet_inet_in_cksum2", in_cksum);
 
-INCLUDE_ASM("nonmatchings/pspnet_inet_in_cksum2", func_00013338);
+INCLUDE_ASM("nonmatchings/pspnet_inet_in_cksum2", in_pcbbind);
 
 INCLUDE_ASM("nonmatchings/pspnet_inet_in_cksum2", func_0001358C);
 #endif
@@ -406,11 +406,11 @@ out:
     return inp;
 }
 #else
-INCLUDE_ASM("nonmatchings/pspnet_inet_in_cksum2", func_000138F0);
+INCLUDE_ASM("nonmatchings/pspnet_inet_in_cksum2", in_pcblookup_port);
 
-INCLUDE_ASM("nonmatchings/pspnet_inet_in_cksum2", func_000139A8);
+INCLUDE_ASM("nonmatchings/pspnet_inet_in_cksum2", in_pcblookup_connect);
 
-INCLUDE_ASM("nonmatchings/pspnet_inet_in_cksum2", func_00013A94);
+INCLUDE_ASM("nonmatchings/pspnet_inet_in_cksum2", in_pcblookup_bind);
 #endif
 
 void in_pcbstate(struct inpcb *inp, s32 state) {
@@ -491,7 +491,7 @@ void in_pcbinit(struct inpcbtable *table, s32 bindhashsize, s32 connecthashsize)
     table->inpt_lastport = (u16)D_0002E5EC + (sceNetRand() % (u32)((D_0002E5F0 - D_0002E5EC) + 1));
 }
 #else
-INCLUDE_ASM("nonmatchings/pspnet_inet_in_cksum2", func_00013CC4);
+INCLUDE_ASM("nonmatchings/pspnet_inet_in_cksum2", in_selectsrc);
 
 void in_pcbinit(struct inpcbtable *table, s32 bindhashsize, s32 connecthashsize) {
     table->inpt_queue.cqh_first = (struct inpcb *)table;
@@ -677,9 +677,9 @@ INCLUDE_ASM("nonmatchings/pspnet_inet_in_cksum2", func_000141EC);
 
 INCLUDE_ASM("nonmatchings/pspnet_inet_in_cksum2", func_00014258);
 
-INCLUDE_ASM("nonmatchings/pspnet_inet_in_cksum2", func_000142C4);
+INCLUDE_ASM("nonmatchings/pspnet_inet_in_cksum2", in_pcbnotify);
 
-INCLUDE_ASM("nonmatchings/pspnet_inet_in_cksum2", func_000143E0);
+INCLUDE_ASM("nonmatchings/pspnet_inet_in_cksum2", in_pcbnotifyall);
 
 INCLUDE_ASM("nonmatchings/pspnet_inet_in_cksum2", func_00014480);
 #endif

@@ -126,7 +126,7 @@ s32 func_00010700(void) {
     return 0x5F;
 }
 
-INCLUDE_ASM("nonmatchings/pspnet_inet_if_loop", func_00010708);
+INCLUDE_ASM("nonmatchings/pspnet_inet_if_loop", arp_ifinit);
 #endif
 
 #if FW_VERSION < 250
