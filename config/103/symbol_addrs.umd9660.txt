@@ -208,3 +208,4 @@ sceUmdMan_driver_94A857C1 = 0x00005CE0; // type:func
 umd9660_close = 0x00000134; // type:func
 umd9660_read = 0x000001BC; // type:func
 umd9660_exec_devctl = 0x00000AAC; // type:func
+umd9660_lseek = 0x00000000; // type:func

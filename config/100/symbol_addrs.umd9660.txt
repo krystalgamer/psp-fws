@@ -124,3 +124,4 @@ sceUmd9660ReadPvd4DVD = 0x00004784; // type:func
 sceUmd9660ReadRootDir4DVD = 0x00004964; // type:func
 dvd_get_controlimg_lbn = 0x00004AFC; // type:func
 umd9660_release_devfd = 0x00004544; // type:func
+umd9660_lseek = 0x00000000; // type:func

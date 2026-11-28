@@ -206,3 +206,4 @@ D_00005D80_v151 = 0x00005D80; // rom:0x5E00
 umd9660_close = 0x00000134; // type:func
 umd9660_read = 0x000001BC; // type:func
 umd9660_devctl = 0x00000860; // type:func
+umd9660_lseek = 0x00000000; // type:func

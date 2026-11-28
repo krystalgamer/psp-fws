@@ -209,3 +209,4 @@ umd9660_close = 0x00000134; // type:func
 umd9660_read = 0x000001BC; // type:func
 umd9660_exit = 0x0000043C; // type:func
 sceUmd9660ReadRootDir4DVD = 0x00004EA4; // type:func
+umd9660_lseek = 0x00000000; // type:func

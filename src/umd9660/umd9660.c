@@ -103,7 +103,7 @@ INCLUDE_RODATA("nonmatchings/umd9660", D_00005AFC);
 #endif
 
 #if FW_VERSION < 201
-SceOff func_00000000(SceIoIob *iob, SceOff ofs, s32 whence) {
+SceOff umd9660_lseek(SceIoIob *iob, SceOff ofs, s32 whence) {
     SceOff ret;
     UMD9660_ASSERT(iob != NULL, D_00005A70, D_00005AFC, "umd9660_lseek", UMD9660_V(0x1B3, 0x1B3, 0x1B3, 0x124, 0x125));
     UMD9660_ASSERT(iob->i_private != NULL, D_00005A70, D_00005AFC, "umd9660_lseek", UMD9660_V(0x1B4, 0x1B4, 0x1B4, 0x125, 0x126));
