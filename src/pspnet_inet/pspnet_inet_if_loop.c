@@ -106,17 +106,11 @@ void arp_drain(void) {
     arp_unlock();
 }
 
-#if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet_if_loop", func_000106E0);
-#endif
-
-#if FW_VERSION < 201
+#if FW_VERSION < 282
 s32 func_000106E0(void) {
     return 0x5F;
 }
-#endif
 
-#if FW_VERSION < 282
 void arp_ifinit(struct ifnet *ifp, struct ifaddr *ifa) {
     struct in_addr *ip;
 
@@ -502,7 +496,16 @@ char *func_00012550(struct in_addr ina) {
 }
 #endif
 
-#if FW_VERSION >= 201 && FW_VERSION < 282
+#if FW_VERSION >= 201 && FW_VERSION < 271
+char *func_00012550(struct in_addr ina) {
+    ina.s_addr = __builtin_allegrex_wsbw(ina.s_addr);
+    sceNetSprintf(D_0002C5B0, "%d.%d.%d.%d", ina.s_addr >> 24, (ina.s_addr >> 16) & 0xff,
+                  (ina.s_addr >> 8) & 0xff, ina.s_addr & 0xff);
+    return D_0002C5B0;
+}
+#endif
+
+#if FW_VERSION == 271
 INCLUDE_ASM("nonmatchings/pspnet_inet_if_loop", func_00012550);
 #endif
 

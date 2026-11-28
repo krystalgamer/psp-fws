@@ -1963,19 +1963,11 @@ s32 func_00029330(void *arg0) {
 
 #if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", func_00029384);
-#endif
 
-#if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", func_00027C20);
-#endif
-
-#if FW_VERSION < 201
 void func_00027C20(void) {
 
 }
-#endif
-
-#if FW_VERSION >= 282
+#else
 s32 func_00027830(struct Unk_func_00027830_0 *arg0) {
     s32 temp_a0;
     s32 var_s1;

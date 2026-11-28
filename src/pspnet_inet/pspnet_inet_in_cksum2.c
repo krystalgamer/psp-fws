@@ -205,7 +205,7 @@ noname:
 }
 #endif
 
-#if FW_VERSION >= 151 && FW_VERSION < 282
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_inet_in_cksum2", in_pcbconnect);
 #endif
 
@@ -267,10 +267,6 @@ s32 in_pcbconnect(void *v, struct mbuf *nam) {
     in_pcbstate(inp, INP_CONNECTED);
     return 0;
 }
-#endif
-
-#if FW_VERSION == 150
-INCLUDE_ASM("nonmatchings/pspnet_inet_in_cksum2", in_pcbconnect);
 #endif
 
 #if FW_VERSION >= 282
@@ -710,7 +706,21 @@ void func_00014588(void) {
     D_0002E7A4 = 100;
     D_0002C1E8 = 100;
 }
-#else
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 282
+void func_00014588(void) {
+    tcp_syn_cache_size = 0x125;
+    D_0002C228 = 0x280F;
+    D_0002C22C = 0x69;
+    sceNetMemset(tcp_syn_cache, 0, 0x928);
+    tcp_syn_cache_interval = 1;
+    D_0002C234 = 100;
+    D_0002C1E8 = 100;
+}
+#endif
+
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/pspnet_inet_in_cksum2", func_00014588);
 #endif
 
@@ -1983,17 +1993,11 @@ s32 ip_next_mtu(s32 mtu, s32 dir) {
 }
 #endif
 
-#if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet_in_cksum2", func_0001A410);
-#endif
-
-#if FW_VERSION < 201
+#if FW_VERSION < 282
 s32 func_0001A410(void) {
     return 0;
 }
-#endif
-
-#if FW_VERSION >= 282
+#else
 s32 func_00019A98(void) {
     return 0;
 }
@@ -2160,7 +2164,11 @@ void func_0001B398(void) {
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet_in_cksum2", func_0001B398);
+void func_0001B398(void) {
+    sceNetMemset(&igmp_stat, 0, 0x48);
+    igmp_timers_are_running = 0;
+    rti_head = 0;
+}
 #endif
 
 #if FW_VERSION >= 282

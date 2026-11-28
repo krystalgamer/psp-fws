@@ -43,30 +43,18 @@ struct rttimer_queue *func_0000D188(u32 timeout)
 }
 #endif
 
-#if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet_rtsub", func_0000D25C);
-#endif
-
-#if FW_VERSION < 201
+#if FW_VERSION < 282
 void func_0000D25C(s32 *arg0, s32 arg1) {
     *arg0 = arg1;
 }
-#endif
 
-#if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet_rtsub", func_0000D264);
-#endif
-
-#if FW_VERSION < 201
 s32 func_0000D264(void *arg0, s32 arg1) {
     if ((M2C_FIELD(arg0, s32 *, 0x34) & 0x2000) && (M2C_FIELD(arg0, s32 *, 0x80) == arg1)) {
         func_0000D378((s32) arg0);
     }
     return 0;
 }
-#endif
-
-#if FW_VERSION >= 282
+#else
 INCLUDE_ASM("nonmatchings/pspnet_inet_rtsub", func_0000D254);
 
 void func_0000D330(s32 *arg0, s32 arg1) {
@@ -175,11 +163,7 @@ INCLUDE_RODATA("nonmatchings/pspnet_inet_rtsub", D_0002B7DC);
 
 INCLUDE_ASM("nonmatchings/pspnet_inet_rtsub", func_0000D6D0);
 
-#if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet_rtsub", func_0000DD34);
-#endif
-
-#if FW_VERSION < 201
+#if FW_VERSION < 282
 void func_0000DD34(s32 arg0, void *arg1, void *arg2) {
     if (arg0 & 8) {
         M2C_FIELD(arg2, s32 *, 0x10) = (s32) M2C_FIELD(arg1, s32 *, 0x10);
@@ -656,11 +640,7 @@ s32 raw_attach(struct socket *so, s32 proto) {
     return 0;
 }
 
-#if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet_rtsub", func_0000ED48);
-#endif
-
-#if FW_VERSION < 201
+#if FW_VERSION < 282
 void func_0000ED48(void *arg0) {
     void *temp_a0;
     void *temp_v1;
@@ -675,13 +655,7 @@ void func_0000ED48(void *arg0) {
     *M2C_FIELD(arg0, void ***, 4) = temp_v1;
     sceNetFreeInternal(arg0);
 }
-#endif
 
-#if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet_rtsub", func_0000ED94);
-#endif
-
-#if FW_VERSION < 201
 void func_0000ED94(void *arg0) {
     void *temp_v1;
     void *temp_v1_2;
@@ -700,9 +674,7 @@ void func_0000ED94(void *arg0) {
         sceNetFreeInternal(arg0);
     }
 }
-#endif
-
-#if FW_VERSION >= 282
+#else
 void func_0000EDB8(struct Unk_func_0000EDB8_0 *arg0) {
     struct Unk_func_0000EDB8_temp_a0 *temp_a0;
     struct Unk_func_0000EDB8_temp_v1 *temp_v1;

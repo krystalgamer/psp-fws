@@ -1982,6 +1982,7 @@ extern s32 D_0002C588;
 extern s32 D_0002C58C;
 extern s32 D_0002C590;
 extern s32 D_0002C594;
+extern char D_0002C5B0[16];
 extern s32 D_0002C5B4; /* icmpmaskrepl */
 extern struct { struct SceNetInetKeyNode *lh_first; } D_0002C5B8;
 extern s32 D_0002C5C0;
