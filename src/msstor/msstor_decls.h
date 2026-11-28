@@ -18,6 +18,16 @@ struct D_00009B54_s {
     s32 unk4E88;
 };
 
+/* SCE assert macro of msstor.c (file/function names read before the test) */
+#define MSSTOR_ASSERT(cond, line) { \
+    const char *file = "msstor.c", *func = "_sceMSstorCLDCallback"; \
+    s32 _ok = (cond); \
+    if (!_ok) { \
+        Kprintf("Assertion failed at %s:%s:%04d\n", file, func, line); \
+        sceKernelAssert(_ok, 0); \
+    } \
+}
+
 typedef int SceMode;
 typedef s64 SceOff;
 typedef s32 SceSSize;
@@ -404,6 +414,7 @@ void func_00003E88(s32 arg0);
 void func_00003EA8(s32 arg0);
 s32 func_00004514(void);
 s32 func_00004558(void);
+s32 func_00004588(SceMScmHC *hc, s32 cmd, unsigned long *result, s32 arg3, SceMSstorDev *dev);
 s32 func_00004664(SceMSstorDev *dev);
 s32 func_000046FC(SceMSstorDev *dev);
 void func_00004750(s32 arg0);
@@ -429,7 +440,10 @@ s32 func_0000544C(SceIoIob *iob, void *buf, SceSize size);
 s32 func_00005684(SceIoIob *iob, SceOff end);
 s32 func_00005708(SceIoIob *iob, SceOff end);
 s32 func_00005738(SceIoIob *iob, s32 cmd, void *in, SceSize inlen, void *out, SceSize outlen);
+SceOff func_000057A4(SceIoIob *iob, SceOff ofs, s32 whence);
 s32 func_00005AD4(SceIoIob *iob, s32 cmd, void *in, SceSize inlen, void *out, SceSize outlen);
+s32 func_00005D0C(SceIoIob *iob, char *name, s32 cmd, void *in, SceSize inlen, void *out, SceSize outlen);
+s32 func_00005D18(SceIoIob *iob, s32 cmd, void *in, SceSize inlen, void *out, SceSize outlen);
 s32 func_00006858(SceSize args, void *argp);
 s32 func_00006A68(SceIoIob *iob, s32 cmd, void *in, SceSize inlen, void *out, SceSize outlen);
 s32 func_00006AC8(SceIoIob *iob, s32 cmd, void *in, SceSize inlen, void *out, SceSize outlen);
