@@ -4,6 +4,14 @@
 #include "common.h"
 #include "m2c_macros.h"
 
+/* default registry key: one row of 20 per category, NULL name ends a row */
+struct RegKeyInit {
+    const char *name;   /* 0x0 */
+    int type;           /* 0x4: REG_TYPE_* */
+    SceSize size;       /* 0x8 */
+    u32 value;          /* 0xC: INT value, or STR/BIN pointer */
+};
+
 struct RegParam {
     unsigned int regtype;   /* 0x000: 1 = system */
     char name[256];         /* 0x004 */
@@ -262,6 +270,8 @@ struct _reent {
 extern func_ptr D_0000B28C[];
 extern char D_0000BAF0[];
 extern struct lconv D_0000BEBC;
+extern const char *D_0000C168[];
+extern struct RegKeyInit D_0000C1F8[][20];
 extern char *D_0000F58C;
 extern char *D_0000F590;
 extern char *D_0000F594;
@@ -322,6 +332,23 @@ int func_000002F0(void);
 int func_00000574(struct RegParam *reg, u32 *h);
 int func_00000620(u32 h, const char *path, int type, int size, void *buf);
 int func_00000750(u32 h, const char *path, SceSize size, const void *buf);
+int func_00000848(u32 h, int flush);
+int func_00000898(void *out);
+int func_0000091C(const void *buf);
+int func_0000099C(void *out);
+int func_00000A20(const void *buf);
+int func_00000AA0(void *out);
+int func_00000B24(const char *str, int len);
+int func_00000BCC(void *out);
+int func_00000C50(const void *buf);
+int func_00000CD0(void *out);
+int func_00000D54(const char *str, int len);
+int func_00000DFC(void *out);
+int func_00000E80(const void *buf);
+int func_00000F00(void *out);
+int func_00000F84(const void *buf);
+int func_00001004(void *dateFormat, void *timeFormat);
+int func_000010BC(void *out);
 SceUID func_00001288(const char *file, int flags, int mode);
 _off_t func_000013C4(int fd, _off_t offset, int whence);
 int func_000015A4(void);

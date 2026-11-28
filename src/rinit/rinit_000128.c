@@ -2,6 +2,11 @@
 #include "common.h"
 #include "rinit_decls.h"
 
+#define REG_TYPE_DIR 1
+#define REG_TYPE_INT 2
+#define REG_TYPE_STR 3
+#define REG_TYPE_BIN 4
+
 #define SCE_ERROR_REGISTRY_INVALID 0x80108401 /* uncertain name */
 
 int func_00000128(void) {
@@ -364,5 +369,313 @@ int func_00000750(u32 h, const char *path, SceSize size, const void *buf) {
     return 0;
 }
 
-INCLUDE_ASM("nonmatchings/rinit_000128", func_00000848);
+int func_00000848(u32 h, int flush) {
+    if (flush == 0) {
+        sceRegCloseRegistry(h);
+    } else if (flush == 1) {
+        sceRegFlushRegistry(h);
+        sceRegCloseRegistry(h);
+    }
+    return 0;
+}
 
+int func_00000898(void *out) {
+    struct RegParam reg;
+    u32 h;
+    int ret;
+
+    ret = func_00000574(&reg, &h);
+    if (ret != 0) {
+        return ret;
+    }
+    ret = func_00000620(h, "/CONFIG/SYSTEM/LOCK/password", REG_TYPE_BIN, 4, out);
+    if (ret != 0) {
+        func_00000848(h, 0);
+        return ret;
+    }
+    func_00000848(h, 0);
+    return 0;
+}
+
+int func_0000091C(const void *buf) {
+    struct RegParam reg;
+    u32 h;
+    int ret;
+
+    ret = func_00000574(&reg, &h);
+    if (ret != 0) {
+        return ret;
+    }
+    ret = func_00000750(h, "/CONFIG/SYSTEM/LOCK/password", 4, buf);
+    if (ret != 0) {
+        func_00000848(h, 0);
+        return ret;
+    }
+    func_00000848(h, 1);
+    return 0;
+}
+
+int func_0000099C(void *out) {
+    struct RegParam reg;
+    u32 h;
+    int ret;
+
+    ret = func_00000574(&reg, &h);
+    if (ret != 0) {
+        return ret;
+    }
+    ret = func_00000620(h, "/CONFIG/SYSTEM/LOCK/parental_level", REG_TYPE_INT, 4, out);
+    if (ret != 0) {
+        func_00000848(h, 0);
+        return ret;
+    }
+    func_00000848(h, 0);
+    return 0;
+}
+
+int func_00000A20(const void *buf) {
+    struct RegParam reg;
+    u32 h;
+    int ret;
+
+    ret = func_00000574(&reg, &h);
+    if (ret != 0) {
+        return ret;
+    }
+    ret = func_00000750(h, "/CONFIG/SYSTEM/LOCK/parental_level", 4, buf);
+    if (ret != 0) {
+        func_00000848(h, 0);
+        return ret;
+    }
+    func_00000848(h, 1);
+    return 0;
+}
+
+int func_00000AA0(void *out) {
+    struct RegParam reg;
+    u32 h;
+    int ret;
+
+    ret = func_00000574(&reg, &h);
+    if (ret != 0) {
+        return ret;
+    }
+    ret = func_00000620(h, "/CONFIG/SYSTEM/owner_name", REG_TYPE_STR, 0x80, out);
+    if (ret != 0) {
+        func_00000848(h, 0);
+        return ret;
+    }
+    func_00000848(h, 0);
+    return 0;
+}
+
+int func_00000B24(const char *str, int len) {
+    const char *path = "/CONFIG/SYSTEM/owner_name";
+    struct RegParam reg;
+    u32 h;
+    int ret;
+
+    if (len >= 0x80) {
+        return SCE_ERROR_REGISTRY_INVALID;
+    }
+    ret = func_00000574(&reg, &h);
+    if (ret != 0) {
+        return ret;
+    }
+    ret = func_00000750(h, path, len + 1, str);
+    if (ret != 0) {
+        func_00000848(h, 0);
+        return ret;
+    }
+    func_00000848(h, 1);
+    return 0;
+}
+
+int func_00000BCC(void *out) {
+    struct RegParam reg;
+    u32 h;
+    int ret;
+
+    ret = func_00000574(&reg, &h);
+    if (ret != 0) {
+        return ret;
+    }
+    ret = func_00000620(h, "/CONFIG/SYSTEM/XMB/language", REG_TYPE_INT, 4, out);
+    if (ret != 0) {
+        func_00000848(h, 0);
+        return ret;
+    }
+    func_00000848(h, 0);
+    return 0;
+}
+
+int func_00000C50(const void *buf) {
+    struct RegParam reg;
+    u32 h;
+    int ret;
+
+    ret = func_00000574(&reg, &h);
+    if (ret != 0) {
+        return ret;
+    }
+    ret = func_00000750(h, "/CONFIG/SYSTEM/XMB/language", 4, buf);
+    if (ret != 0) {
+        func_00000848(h, 0);
+        return ret;
+    }
+    func_00000848(h, 1);
+    return 0;
+}
+
+int func_00000CD0(void *out) {
+    struct RegParam reg;
+    u32 h;
+    int ret;
+
+    ret = func_00000574(&reg, &h);
+    if (ret != 0) {
+        return ret;
+    }
+    ret = func_00000620(h, "/CONFIG/DATE/time_zone_area", REG_TYPE_STR, 0x30, out);
+    if (ret != 0) {
+        func_00000848(h, 0);
+        return ret;
+    }
+    func_00000848(h, 0);
+    return 0;
+}
+
+int func_00000D54(const char *str, int len) {
+    const char *path = "/CONFIG/DATE/time_zone_area";
+    struct RegParam reg;
+    u32 h;
+    int ret;
+
+    if (len >= 0x30) {
+        return SCE_ERROR_REGISTRY_INVALID;
+    }
+    ret = func_00000574(&reg, &h);
+    if (ret != 0) {
+        return ret;
+    }
+    ret = func_00000750(h, path, len + 1, str);
+    if (ret != 0) {
+        func_00000848(h, 0);
+        return ret;
+    }
+    func_00000848(h, 1);
+    return 0;
+}
+
+int func_00000DFC(void *out) {
+    struct RegParam reg;
+    u32 h;
+    int ret;
+
+    ret = func_00000574(&reg, &h);
+    if (ret != 0) {
+        return ret;
+    }
+    ret = func_00000620(h, "/CONFIG/DATE/time_zone_offset", REG_TYPE_INT, 4, out);
+    if (ret != 0) {
+        func_00000848(h, 0);
+        return ret;
+    }
+    func_00000848(h, 0);
+    return 0;
+}
+
+int func_00000E80(const void *buf) {
+    struct RegParam reg;
+    u32 h;
+    int ret;
+
+    ret = func_00000574(&reg, &h);
+    if (ret != 0) {
+        return ret;
+    }
+    ret = func_00000750(h, "/CONFIG/DATE/time_zone_offset", 4, buf);
+    if (ret != 0) {
+        func_00000848(h, 0);
+        return ret;
+    }
+    func_00000848(h, 1);
+    return 0;
+}
+
+int func_00000F00(void *out) {
+    struct RegParam reg;
+    u32 h;
+    int ret;
+
+    ret = func_00000574(&reg, &h);
+    if (ret != 0) {
+        return ret;
+    }
+    ret = func_00000620(h, "/CONFIG/DATE/summer_time", REG_TYPE_INT, 4, out);
+    if (ret != 0) {
+        func_00000848(h, 0);
+        return ret;
+    }
+    func_00000848(h, 0);
+    return 0;
+}
+
+int func_00000F84(const void *buf) {
+    struct RegParam reg;
+    u32 h;
+    int ret;
+
+    ret = func_00000574(&reg, &h);
+    if (ret != 0) {
+        return ret;
+    }
+    ret = func_00000750(h, "/CONFIG/DATE/summer_time", 4, buf);
+    if (ret != 0) {
+        func_00000848(h, 0);
+        return ret;
+    }
+    func_00000848(h, 1);
+    return 0;
+}
+
+int func_00001004(void *dateFormat, void *timeFormat) {
+    struct RegParam reg;
+    u32 h;
+    int ret;
+
+    ret = func_00000574(&reg, &h);
+    if (ret != 0) {
+        return ret;
+    }
+    ret = func_00000620(h, "/CONFIG/DATE/date_format", REG_TYPE_INT, 4, dateFormat);
+    if (ret != 0) {
+        func_00000848(h, 0);
+        return ret;
+    }
+    ret = func_00000620(h, "/CONFIG/DATE/time_format", REG_TYPE_INT, 4, timeFormat);
+    if (ret != 0) {
+        func_00000848(h, 0);
+        return ret;
+    }
+    func_00000848(h, 0);
+    return 0;
+}
+
+int func_000010BC(void *out) {
+    struct RegParam reg;
+    u32 h;
+    int ret;
+
+    ret = func_00000574(&reg, &h);
+    if (ret != 0) {
+        return ret;
+    }
+    ret = func_00000620(h, "/CONFIG/SYSTEM/XMB/theme_type", REG_TYPE_INT, 4, out);
+    if (ret != 0) {
+        func_00000848(h, 0);
+        return ret;
+    }
+    func_00000848(h, 0);
+    return 0;
+}
