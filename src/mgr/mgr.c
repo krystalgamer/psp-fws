@@ -2924,7 +2924,41 @@ void func_0000798C(s32 arg0) {
 
 INCLUDE_ASM("nonmatchings/mgr", func_000079B0);
 
+#if FW_VERSION < 152
+s32 func_00007AD8(s32 fd) {
+    u8 *pg = g_mgrMsCtrl.page;
+    MgrMsCtrl *ms = &g_mgrMsCtrl;
+    s32 ret;
+    s32 ro;
+
+    ms->info.segBlocks = 0x20;
+    ms->info.unk4 = -1;
+    ms->info.map.poolValid = -1;
+    ms->info.map.seqBlk[0] = -1;
+    ms->info.map.seqBlk[1] = -1;
+    ms->info.map.poolBlk[0] = -1;
+    ms->info.map.poolBlk[1] = -1;
+    ro = 0;
+    ret = func_000053B0(fd, pg, 0);
+    if (ret < 0) {
+        return ret;
+    }
+    ret = (pg[0x1C8] << 8) | pg[0x1C9];
+    if (ret != 0x1001) {
+        ret = 0x80505009;
+    } else {
+        if ((u32)(pg[0x1D8] - 1) < 3) {
+            ro = 1;
+        }
+        ms->info.unk4 = ((pg[0x1A4] << 8) | pg[0x1A5]) - 1;
+        ms->info.segBlocks = ((pg[0x1A2] << 8) | pg[0x1A3]) << 1;
+        ret = ro ? 0x80505007 : 0;
+    }
+    return ret;
+}
+#else
 INCLUDE_ASM("nonmatchings/mgr", func_00007AD8);
+#endif
 
 INCLUDE_ASM("nonmatchings/mgr", func_00007BAC);
 

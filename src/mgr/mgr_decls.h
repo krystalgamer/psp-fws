@@ -74,8 +74,9 @@ typedef struct {
     SceUID sema;
     s32 initCount;
     MgrMsInfo info;
+    u8 page[0x200];
 } MgrMsCtrl;
-typedef char chk_MgrMsCtrl[(sizeof(MgrMsCtrl) == 0x58) ? 1 : -1];
+typedef char chk_MgrMsCtrl[(sizeof(MgrMsCtrl) == 0x258) ? 1 : -1];
 
 typedef union {
     u8 b[0x20];
@@ -285,6 +286,7 @@ s32 func_000077A0(s32 fd, u64 *a, u64 *b);
 s32 func_00007844(s32 fd, u64 *a, u64 *b, u64 *c, s32 flag);
 s32 func_000078F8(s32 fd, u64 *a, u64 *b);
 void func_0000798C(s32 arg0);
+s32 func_00007AD8(s32 fd);
 s32 func_00008274(s32 fd, s32 reg);
 s32 func_00008300(s32 fd, s32 reg);
 s32 func_00008374(s32 arg0, s32 arg1, s32 pos, s32 step);
