@@ -108,6 +108,7 @@
   "gameModeCreate": "s32 gameModeCreate(const SceNetEtherAddr *addr, void *ptr, s32 size);",
   "module_start": "s32 module_start(void);",
   "module_stop": "s32 module_stop(void);",
+  "ptpCreate": "s32 ptpCreate(const SceNetEtherAddr *saddr, u16 sport, s32 sndbuf, s32 rcvbuf, u32 rexmt_int, s32 rexmt_cnt, SceNetAdhocDesc **out);",
   "ptpSendCtl": "void ptpSendCtl(SceNetAdhocPtpPcb *pcb, u8 type);",
   "sceKernelCheckThreadStack": "s32 sceKernelCheckThreadStack(void);",
   "sceKernelSignalSema": "s32 sceKernelSignalSema(s32 sema, s32 n);",

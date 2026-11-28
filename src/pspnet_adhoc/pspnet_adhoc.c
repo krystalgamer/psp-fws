@@ -1487,7 +1487,7 @@ s32 sceNetAdhocPtpOpen(const SceNetEtherAddr *saddr, u16 sport, const SceNetEthe
     s = _sce_pspnet_spllock();
     if (g_adhocInit == 0)
         goto end;
-    ret = func_00003A68(saddr, sport, bufsize, bufsize, rexmt_int, rexmt_cnt, &d);
+    ret = ptpCreate(saddr, sport, bufsize, bufsize, rexmt_int, rexmt_cnt, &d);
     if (ret < 0)
         goto end;
     ret = func_0000556C(d->pcb, daddr, dport);
@@ -1746,7 +1746,7 @@ s32 sceNetAdhocPtpListen(const SceNetEtherAddr *saddr, u16 sport, s32 bufsize, u
     s = _sce_pspnet_spllock();
     if (g_adhocInit == 0)
         goto end;
-    ret = func_00003A68(saddr, sport, bufsize, bufsize, rexmt_int, rexmt_cnt, &d);
+    ret = ptpCreate(saddr, sport, bufsize, bufsize, rexmt_int, rexmt_cnt, &d);
     if (ret < 0)
         goto end;
     ret = func_000056B0(d->pcb, backlog);
@@ -2724,7 +2724,7 @@ end:
 #endif
 
 #if FW_VERSION < 201
-s32 func_00003A68(const SceNetEtherAddr *saddr, u16 sport, s32 sndbuf, s32 rcvbuf, u32 rexmt_int, s32 rexmt_cnt, SceNetAdhocDesc **out) {
+s32 ptpCreate(const SceNetEtherAddr *saddr, u16 sport, s32 sndbuf, s32 rcvbuf, u32 rexmt_int, s32 rexmt_cnt, SceNetAdhocDesc **out) {
     s32 id;
     s32 ret;
     SceNetAdhocDesc *d;

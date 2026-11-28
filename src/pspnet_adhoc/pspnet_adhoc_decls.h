@@ -427,6 +427,7 @@ s32 func_00007298(s32 id, SceNetAdhocGameModeOptData *opt, s32 internal);
 s32 gameModeCreate(const SceNetEtherAddr *addr, void *ptr, s32 size);
 s32 module_start(void);
 s32 module_stop(void);
+s32 ptpCreate(const SceNetEtherAddr *saddr, u16 sport, s32 sndbuf, s32 rcvbuf, u32 rexmt_int, s32 rexmt_cnt, SceNetAdhocDesc **out);
 void ptpSendCtl(SceNetAdhocPtpPcb *pcb, u8 type);
 s32 sceKernelCheckThreadStack(void);
 s32 sceKernelSignalSema(s32 sema, s32 n);
