@@ -418,7 +418,9 @@ typedef struct SceHttpConn {
 #endif
     s32 status;             /* 0x2C (1.03: 0x28) */
     unsigned char *hostname; /* 0x30 (1.03: 0x2C) */
-    u8 unk34[(FW_VERSION == 103) ? 0xA4 - 0x30 : 0xA4 - 0x34];
+    s32 unk34;
+    s32 unk38;              /* 0x38 (1.00) cleared by sceHttpSetProxy */
+    u8 unk3C[(FW_VERSION == 103) ? 0xA4 - 0x38 : 0xA4 - 0x3C];
     SceHttpTmpl tmpl;       /* 0xA4 */
     u8 unk128[0x138 - 0x128];
     void *recv_buf;         /* 0x138 */

@@ -206,7 +206,84 @@ INCLUDE_ASM("nonmatchings/libhttp", sceHttpCreateConnection);
 #endif
 
 #if FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/libhttp", sceHttpSetProxy);
+int sceHttpSetProxy(int id, int activate_flag, int mode, const unsigned char *new_proxy_host, unsigned short new_proxy_port) {
+    SceHttpTmpl *tmpl = NULL;
+    SceHttpConn *con = NULL;
+    char *copy = NULL;
+    int ret = 0x80431001;
+
+    if (D_0000DCCC.inited != 1) {
+        goto end;
+    }
+    ret = HttpWhichId(id);
+    if (ret < 0) {
+        goto end;
+    }
+    if (ret == 0) {
+        ret = GetHttpTmpl(id, &tmpl);
+        if (ret < 0) {
+            goto end;
+        }
+    } else if (ret == 0x1000000) {
+        ret = GetHttpConnection(id, &con);
+        if (ret < 0) {
+            goto end;
+        }
+        tmpl = &con->tmpl;
+        con->unk38 = 0;
+    } else {
+        ret = 0x80431100;
+        goto end;
+    }
+    if (activate_flag == 0) {
+        tmpl->proxy_mode = 0;
+        tmpl->proxy_status = 0;
+    } else if (mode == 0) {
+        ret = GetProxyInfoFromSystem(tmpl);
+        if (ret < 0) {
+            goto end;
+        }
+    } else if (mode == 1) {
+        if (new_proxy_host == NULL) {
+            ret = 0x804311FE;
+            goto end;
+        }
+        if ((SceSize)(func_0000BE38((const char *)new_proxy_host) + 1) > 0x80) {
+            ret = 0x80431104;
+            goto end;
+        }
+        copy = _sceHttpMallocInternal(func_0000BE38((const char *)new_proxy_host) + 1);
+        if (copy == NULL) {
+            ret = 0x80431022;
+            goto end;
+        }
+        func_0000C0DC(copy, (const char *)new_proxy_host);
+        if (tmpl->proxy_host != NULL) {
+            _sceHttpFreeInternal(tmpl->proxy_host);
+        }
+        tmpl->proxy_host = copy;
+        tmpl->proxy_port = new_proxy_port;
+        tmpl->proxy_status = mode;
+        tmpl->proxy_mode = 0;
+    }
+    if (con != NULL) {
+        con->reference_counter--;
+    } else {
+        tmpl->reference_counter--;
+    }
+    return ret;
+
+end:
+    if (con != NULL) {
+        con->reference_counter--;
+    } else {
+        tmpl->reference_counter--;
+    }
+    if (copy != NULL) {
+        _sceHttpFreeInternal(copy);
+    }
+    return ret;
+}
 
 INCLUDE_ASM("nonmatchings/libhttp", sceHttpGetProxy);
 
