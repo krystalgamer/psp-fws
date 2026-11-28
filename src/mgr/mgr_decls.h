@@ -22,6 +22,11 @@ typedef struct {
 typedef char chk_MgrCtrl[(sizeof(MgrCtrl) == 0x18) ? 1 : -1];
 
 typedef struct {
+    u32 w[4];
+    u8 data[0x3F0];
+} MgrEkbBuf;
+
+typedef struct {
     SceUID sema;
     SceUID evf;
 } MgrIb2Ctrl;
@@ -47,11 +52,25 @@ typedef struct {
 } MgrMsAuthInfo;
 
 typedef struct {
+    s32 valid;
+    s32 unk4[2];
+    s32 segBlk[5];
+} MgrMsMap;
+
+typedef struct {
     SceUID fd;
     SceUID sema;
     s32 initCount;
     volatile s32 unkC;
+    s32 unk10;
+    s32 segBlocks;
+    MgrMsMap map;
+    s32 seqPos;
+    s32 poolPos;
+    u32 unk40[2];
+    u64 mediaId[2];
 } MgrMsCtrl;
+typedef char chk_MgrMsCtrl[(sizeof(MgrMsCtrl) == 0x58) ? 1 : -1];
 
 typedef union {
     u8 b[0x20];
@@ -99,6 +118,7 @@ extern s32 D_00009C78;
 extern s8 D_00009C7C[4];
 extern s8 D_00009C80[8];
 extern s8 D_00009C88[2];
+extern MgrEkbBuf D_00009D00;
 extern const u64 D_0000AE68;
 extern s32 D_0000AEE0;
 extern const u16 D_0000AEF0[2];
@@ -310,6 +330,7 @@ s32 sceMgrDESDecrypt(u32 *dst, u32 *src, u32 size, u32 *key, u32 *iv);
 s32 sceMgrDESDecryptBlock(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
 s32 sceMgrDESEncrypt(u32 *dst, u32 *src, u32 size, u32 *key, u32 *iv);
 s32 sceMgrDESEncryptBlock(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
+s32 sceMgrDecryptEKB(s32 arg0, u8 *ekb, s32 size);
 s32 sceMgrDecryptKc(s32 arg0, s32 arg1, s32 arg2);
 s32 sceMgrDecryptKcWithKse(s32 arg0, s32 arg1);
 s32 sceMgrDecryptKicv(s32 arg0, s32 arg1, s32 arg2);
@@ -340,6 +361,7 @@ s32 sceMgrMSGetMediaID(s32 arg0, u64 *id);
 s32 sceMgrMSGetMediaType(s32 arg0);
 s32 sceMgrMSInit(void);
 s32 sceMgrMSReadIBD(s32 arg0, u8 page, s32 arg2, s32 arg3);
+s32 sceMgrMSReadPoolPage(s32 arg0, u8 *buf, s32 pool);
 s32 sceMgrMSReset(void);
 s32 sceMgrMSSetLeafID(s32 arg0, u64 *id);
 s32 sceMgrMSSetMAC2d(s32 arg0, u64 *mac);

@@ -2809,7 +2809,48 @@ s32 func_00008EB0(s32 *out, s32 pos) {
 
 INCLUDE_ASM("nonmatchings/mgr", sceMgrMSReadSeqPage);
 
+#if FW_VERSION < 340
+s32 sceMgrMSReadPoolPage(s32 arg0, u8 *buf, s32 pool) {
+    u8 extra[16];
+    s32 seg;
+    MgrMsMap *map = &g_mgrMsCtrl.map;
+    s32 *blks = map->segBlk;
+    s32 ret;
+    s32 page;
+    s32 blk;
+
+    ret = func_00006030();
+    if (ret < 0) {
+        return ret;
+    }
+    ret = func_00005194(arg0, 3);
+    if (ret >= 0) {
+        ret = 0x80505003;
+        if (map->valid >= 0) {
+            page = func_00008EB0(&seg, pool ? g_mgrMsCtrl.poolPos : g_mgrMsCtrl.seqPos);
+            ret = 0x80504003;
+            if (page >= 0) {
+                blk = blks[seg];
+                ret = 0x80505003;
+                if (blk >= 0) {
+                    ret = func_00006C40(arg0, blk, page, (s32)buf, extra);
+                    if (ret < 0) {
+                        if (ret == 0x80505003) {
+                            blks[seg] = -1;
+                        }
+                    } else if (!(extra[0] & 0x40)) {
+                        ret = 0x80505003;
+                    }
+                }
+            }
+        }
+    }
+    func_0000608C();
+    return ret;
+}
+#else
 INCLUDE_ASM("nonmatchings/mgr", sceMgrMSReadPoolPage);
+#endif
 
 INCLUDE_ASM("nonmatchings/mgr", sceMgrMSInvalidateICV);
 
