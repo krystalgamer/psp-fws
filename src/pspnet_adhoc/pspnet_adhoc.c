@@ -217,7 +217,48 @@ s32 func_00000974(void *arg0, s32 arg1) {
 
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", sceNetAdhocSetSocketAlert);
 
+#if FW_VERSION < 201
+s32 sceNetAdhocGetSocketAlert(s32 id, s32 *flag) {
+    s32 s;
+    s32 ret;
+    SceNetAdhocDesc *d;
+
+    ret = 0;
+    if (flag == NULL)
+        return 0x80410711;
+    s = _sce_pspnet_spllock();
+    if (D_00007400 == 0) {
+        ret = 0x80410712;
+        goto end;
+    }
+    for (d = D_00007998.first; d != NULL; d = d->next) {
+        if (d->id == id)
+            break;
+    }
+    if (d == NULL) {
+        ret = 0x80410701;
+        goto end;
+    }
+    *flag = 0;
+    if (d->flags & 0x10)
+        *flag = 0x10;
+    if (d->flags & 0x20)
+        *flag |= 0x20;
+    if (d->flags & 0x40)
+        *flag |= 0x40;
+    if (d->flags & 0x80)
+        *flag |= 0x80;
+    if (d->flags & 0x100)
+        *flag |= 0x100;
+    if (d->flags & 0x200)
+        *flag |= 0x200;
+end:
+    _sce_pspnet_splunlock(s);
+    return ret;
+}
+#else
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", sceNetAdhocGetSocketAlert);
+#endif
 
 s32 func_00000DD0(void) {
     s32 ret;
@@ -386,7 +427,7 @@ s32 sceNetAdhocPdpDelete(s32 id, s32 flag) {
         _sce_pspnet_wakeup(&D_00007448);
     }
     func_0000223C(pcb);
-    d->unkC |= 1;
+    d->flags |= 1;
     d->id = -1;
     if (d->waiters == NULL) {
         func_00002CD4(d);
@@ -681,7 +722,38 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc", sceNetAdhocPtpRecv);
 
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", sceNetAdhocPtpFlush);
 
+#if FW_VERSION < 201
+s32 sceNetAdhocPtpClose(s32 id, s32 flag) {
+    s32 s;
+    s32 ret;
+    SceNetAdhocDesc *d;
+
+    ret = 0;
+    s = _sce_pspnet_spllock();
+    if (D_00007400 == 0) {
+        ret = 0x80410712;
+        goto end;
+    }
+    d = func_00000E90(2, id);
+    if (d == NULL) {
+        ret = 0x80410701;
+        goto end;
+    }
+    func_00004F50(d->pcb);
+    func_000056D4(d->pcb);
+    d->flags |= 1;
+    d->id = -1;
+    if (d->waiters == NULL) {
+        func_00004AE4(d);
+        func_00000FFC(d);
+    }
+end:
+    _sce_pspnet_splunlock(s);
+    return ret;
+}
+#else
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", sceNetAdhocPtpClose);
+#endif
 
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00003A68);
 
@@ -828,7 +900,7 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00004C0C);
 void func_00004E60(SceNetAdhocPtpPcb *pcb) {
     _sce_pspnet_callout_stop(pcb->callout);
     pcb->state = 4;
-    pcb->desc->unkC = (pcb->desc->unkC & ~0x2000) | 0x4000;
+    pcb->desc->flags = (pcb->desc->flags & ~0x2000) | 0x4000;
     if (pcb->parent != NULL)
         PTP_SBWAKEUP(&pcb->parent->rcv);
     else
@@ -945,7 +1017,7 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_0000556C);
 s32 func_000056B0(SceNetAdhocPtpPcb *pcb, s32 a1) {
     pcb->state = 1;
     pcb->unkBC = a1;
-    pcb->desc->unkC |= 0x1000;
+    pcb->desc->flags |= 0x1000;
     return 0;
 }
 #endif
@@ -1094,7 +1166,7 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_000055BC);
 s32 func_000056E4(SceNetAdhocPtpPcb *pcb, s32 a1) {
     pcb->state = 1;
     pcb->unkBC = a1;
-    pcb->desc->unkC |= 0x1000;
+    pcb->desc->flags |= 0x1000;
     return 0;
 }
 #endif

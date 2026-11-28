@@ -42,7 +42,7 @@ typedef struct SceNetAdhocDesc {
     struct SceNetAdhocDesc *next;   /* 0x00 TAILQ entry */
     struct SceNetAdhocDesc **prev;  /* 0x04 */
     s32 id;                         /* 0x08 */
-    s32 unkC;
+    s32 flags;                          /* 0x0C 1: deleted, 0x10..0x200: socket alert bits */
     u8 type;                        /* 0x10 SCE_NET_ADHOC_DESC_* */
     u8 pad11[3];
     void *pcb;                      /* 0x14 */
@@ -367,10 +367,12 @@ s32 sceNetAdhocGameModeUpdateMaster(void);
 void sceNetAdhocGameModeUpdateReplica(s32 id, SceNetAdhocGameModeOptData *opt);
 void sceNetAdhocGameModeUpdateReplicaInternal(s32 id, SceNetAdhocGameModeOptData *opt);
 s32 sceNetAdhocGetPdpStat(s32 *buflen, SceNetAdhocPdpStat *buf);
+s32 sceNetAdhocGetSocketAlert(s32 id, s32 *flag);
 s32 sceNetAdhocInit(void);
 s32 sceNetAdhocPdpDelete(s32 id, s32 flag);
 s32 sceNetAdhocPdpRecv(s32 id, SceNetEtherAddr *addr, u16 *port, void *buf, s32 *len, u32 timeout, s32 nonblock);
 s32 sceNetAdhocPdpRecvWithRfInfo(s32 id, SceNetEtherAddr *addr, u16 *port, void *buf, s32 *len, u32 timeout, s32 nonblock, void *rfinfo);
+s32 sceNetAdhocPtpClose(s32 id, s32 flag);
 s32 sceNetAdhocTerm(void);
 void sceNetAdhoc_lib_62B875A8(void);
 void sceNetAdhoc_lib_F9240FBA(void);
