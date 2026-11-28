@@ -1999,6 +1999,7 @@ extern s32 D_0002C538;
 extern s32 D_0002C53C;
 extern s32 D_0002C540;
 extern s32 D_0002C544;
+extern char D_0002C560[16];
 extern s32 D_0002C57C; /* ip_nfragpackets */
 extern s32 D_0002C588;
 extern s32 D_0002C58C;

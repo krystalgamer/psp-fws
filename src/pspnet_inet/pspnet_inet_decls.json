@@ -595,6 +595,7 @@
   "D_0002C53C": "extern s32 D_0002C53C;",
   "D_0002C540": "extern s32 D_0002C540;",
   "D_0002C544": "extern s32 D_0002C544;",
+  "D_0002C560": "extern char D_0002C560[16];",
   "D_0002C57C": "extern s32 D_0002C57C; /* ip_nfragpackets */",
   "D_0002C588": "extern s32 D_0002C588;",
   "D_0002C58C": "extern s32 D_0002C58C;",

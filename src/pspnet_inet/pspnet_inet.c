@@ -166,7 +166,6 @@ void func_00001BC8(void) {
 }
 #endif
 
-#if FW_VERSION < 271
 void func_00001BE4(struct SceNetInetWaiter *w) {
     struct socket *so;
     for (so = w->sockets; so != NULL; so = so->so_selnext) {
@@ -176,9 +175,6 @@ void func_00001BE4(struct SceNetInetWaiter *w) {
         }
     }
 }
-#else
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_00001BE4);
-#endif
 
 #if FW_VERSION < 282
 void func_00001DD8(struct socket *so) {
@@ -598,7 +594,7 @@ void func_000044AC(struct socket *so) {
 }
 #endif
 
-#if FW_VERSION < 271
+#if FW_VERSION < 282
 s32 func_000044C8(struct socket *so, u32 cmd, void *data) {
     if (((cmd >> 8) & 0xFF) == 'i') {
         return _sce_pspnet_ifioctl(so, cmd, data, 1);

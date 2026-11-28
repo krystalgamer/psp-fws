@@ -218,7 +218,6 @@ INCLUDE_ASM("nonmatchings/pspnet_inet_if_loop", func_0001184C);
 INCLUDE_ASM("nonmatchings/pspnet_inet_if_loop", func_00011820);
 #endif
 
-#if FW_VERSION < 271
 void func_00011D04(u8 *arg0, u8 *arg1) {
     if (*(s32 *)(arg1 + 0x2C) & 1) {
         if (*(u16 *)(arg0 + 0x30) & 0x18) {
@@ -229,9 +228,6 @@ void func_00011D04(u8 *arg0, u8 *arg1) {
         *(s32 *)(arg1 + 0x2C) &= ~1;
     }
 }
-#else
-INCLUDE_ASM("nonmatchings/pspnet_inet_if_loop", func_00011D04);
-#endif
 
 #if FW_VERSION >= 151 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_inet_if_loop", func_000119FC);
@@ -532,7 +528,12 @@ char *func_00012550(struct in_addr ina) {
 #endif
 
 #if FW_VERSION == 271
-INCLUDE_ASM("nonmatchings/pspnet_inet_if_loop", func_00012550);
+char *func_00012550(struct in_addr ina) {
+    ina.s_addr = __builtin_allegrex_wsbw(ina.s_addr);
+    sceNetSprintf(D_0002C560, "%d.%d.%d.%d", ina.s_addr >> 24, (ina.s_addr >> 16) & 0xff,
+                  (ina.s_addr >> 8) & 0xff, ina.s_addr & 0xff);
+    return D_0002C560;
+}
 #endif
 
 #if FW_VERSION < 151
