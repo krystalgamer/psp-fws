@@ -1,5 +1,24 @@
+/* newlib-1.12.0 libc/reent/readr.c (BSD-style licence, see the newlib COPYING.NEWLIB) */
 #include "common.h"
 #include "rinit_decls.h"
+#include "rinit_newlib.h"
 
-INCLUDE_ASM("nonmatchings/rinit_008E34", _read_r);
+/* Reentrant versions of read system call. */
 
+/* Some targets provides their own versions of this functions.  Those
+   targets should define REENTRANT_SYSCALLS_PROVIDED in TARGET_CFLAGS.  */
+
+/* We use the errno variable used by the system dependent layer.  */
+#undef errno
+extern int errno;
+
+_ssize_t
+_read_r(struct _reent *ptr, int fd, void * buf, size_t cnt)
+{
+  _ssize_t ret;
+
+  errno = 0;
+  if ((ret = (_ssize_t)_read (fd, buf, cnt)) == -1 && errno != 0)
+    ptr->_errno = errno;
+  return ret;
+}

@@ -1,16 +1,27 @@
+/* newlib-1.12.0 libc/reent/sbrkr.c (BSD-style licence, see the newlib COPYING.NEWLIB) */
 #include "common.h"
 #include "rinit_decls.h"
+#include "rinit_newlib.h"
 
-s32 _sbrk_r(s32 *arg0, s32 arg1) {
-    s32 temp_v0;
+/* Reentrant version of sbrk system call. */
 
-    D_0000F5E8 = 0;
-    temp_v0 = _sbrk(arg1);
-    if (temp_v0 != -1) {
+/* Some targets provides their own versions of these functions.  Those
+   targets should define REENTRANT_SYSCALLS_PROVIDED in TARGET_CFLAGS.  */
 
-    } else if (D_0000F5E8 != 0) {
-        *arg0 = D_0000F5E8;
-    }
-    return temp_v0;
+/* If MALLOC_PROVIDED is defined, we don't need this function.  */
+
+/* We use the errno variable used by the system dependent layer.  */
+#undef errno
+extern int errno;
+
+void *
+_sbrk_r(struct _reent *ptr, ptrdiff_t incr)
+{
+  char *ret;
+  void *_sbrk(ptrdiff_t);
+
+  errno = 0;
+  if ((ret = (char *)(_sbrk (incr))) == (void *) -1 && errno != 0)
+    ptr->_errno = errno;
+  return ret;
 }
-

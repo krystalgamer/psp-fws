@@ -1,85 +1,87 @@
+/* SCE's newlib system layer for user-mode PRX (fd 0-2 = sceKernelStdin/Stdout/Stderr) */
 #include "common.h"
 #include "rinit_decls.h"
+#include "rinit_newlib.h"
 
-s32 _read(s32 arg0, M2C_UNK arg1, M2C_UNK arg2) {
-    s32 var_v0;
-    s32 var_v1;
+int _read(int fd, void *buf, size_t n) {
+    SceUID uid;
+    int ret;
 
-    switch (arg0) {                                 /* irregular */
+    switch (fd) {
     default:
-        var_v0 = arg0;
+        uid = fd;
         break;
     case 2:
-        var_v0 = sceKernelStderr();
+        uid = sceKernelStderr();
         break;
     case 0:
-        var_v0 = sceKernelStdin();
+        uid = sceKernelStdin();
         break;
     case 1:
-        var_v0 = sceKernelStdout();
+        uid = sceKernelStdout();
         break;
     }
-    var_v1 = -9;
-    if (var_v0 >= 0) {
-        var_v1 = sceIoRead(var_v0, arg1, arg2);
+    ret = -EBADF;
+    if (uid >= 0) {
+        ret = sceIoRead(uid, buf, n);
     }
-    return var_v1;
+    return ret;
 }
 
-s32 _write(s32 arg0, M2C_UNK arg1, M2C_UNK arg2) {
-    s32 var_v0;
-    s32 var_v1;
+int _write(int fd, const void *buf, size_t n) {
+    SceUID uid;
+    int ret;
 
-    switch (arg0) {                                 /* irregular */
+    switch (fd) {
     default:
-        var_v0 = arg0;
+        uid = fd;
         break;
     case 2:
-        var_v0 = sceKernelStderr();
+        uid = sceKernelStderr();
         break;
     case 0:
-        var_v0 = sceKernelStdin();
+        uid = sceKernelStdin();
         break;
     case 1:
-        var_v0 = sceKernelStdout();
+        uid = sceKernelStdout();
         break;
     }
-    var_v1 = -9;
-    if (var_v0 >= 0) {
-        var_v1 = sceIoWrite(var_v0, arg1, arg2);
+    ret = -EBADF;
+    if (uid >= 0) {
+        ret = sceIoWrite(uid, buf, n);
     }
-    return var_v1;
+    return ret;
 }
 
-void func_00001288(void) {
-    sceIoOpen();
+SceUID func_00001288(const char *file, int flags, int mode) {
+    return sceIoOpen(file, flags, mode);
 }
 
 INCLUDE_ASM("nonmatchings/rinit_001140", _open);
 
-s32 _close(s32 arg0) {
-    s32 var_v0;
-    s32 var_v1;
+int _close(int fd) {
+    SceUID uid;
+    int ret;
 
-    switch (arg0) {                                 /* irregular */
+    switch (fd) {
     default:
-        var_v0 = arg0;
+        uid = fd;
         break;
     case 2:
-        var_v0 = sceKernelStderr();
+        uid = sceKernelStderr();
         break;
     case 0:
-        var_v0 = sceKernelStdin();
+        uid = sceKernelStdin();
         break;
     case 1:
-        var_v0 = sceKernelStdout();
+        uid = sceKernelStdout();
         break;
     }
-    var_v1 = -9;
-    if (var_v0 >= 0) {
-        var_v1 = sceIoClose(var_v0);
+    ret = -EBADF;
+    if (uid >= 0) {
+        ret = sceIoClose(uid);
     }
-    return var_v1;
+    return ret;
 }
 
 INCLUDE_ASM("nonmatchings/rinit_001140", func_000013C4);
@@ -88,13 +90,13 @@ INCLUDE_ASM("nonmatchings/rinit_001140", _lseek);
 
 INCLUDE_ASM("nonmatchings/rinit_001140", _fstat);
 
-s32 isatty(void) {
+int isatty(int fd) {
     return 1;
 }
 
 INCLUDE_ASM("nonmatchings/rinit_001140", _exit);
 
-s32 func_000015AC(void) {
+int func_000015AC(void) {
     return -1;
 }
 
@@ -104,23 +106,22 @@ void func_000015B4(void) {
 
 INCLUDE_ASM("nonmatchings/rinit_001140", _sbrk);
 
-s32 func_000016B4(void) {
+int func_000016B4(void) {
     return -1;
 }
 
-s32 func_000016BC(void) {
+int func_000016BC(void) {
     return -1;
 }
 
-void func_000016C4(void) {
-    sceKernelLibcClock();
+clock_t clock(void) {
+    return sceKernelLibcClock();
 }
 
-void func_000016E0(void) {
-    sceKernelLibcTime();
+time_t time(time_t *t) {
+    return sceKernelLibcTime(t);
 }
 
-void func_000016FC(void) {
-    sceKernelLibcGettimeofday();
+int _gettimeofday(struct timeval *tp, struct timezone *tzp) {
+    return sceKernelLibcGettimeofday(tp, tzp);
 }
-
