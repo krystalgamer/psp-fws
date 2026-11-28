@@ -224,7 +224,55 @@ INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00002524);
 INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_000027A8);
 #endif
 
+#if FW_VERSION < 250
+s32 func_000028B0(SceNetApctlCtx *ctx, s32 prev, s32 *state, s32 *event) {
+    u32 bits;
+    s32 ret;
+
+    ret = func_00000964(ctx, &bits);
+    if (ret < 0) {
+        goto error;
+    }
+    if (bits & 2) {
+        *event = 5;
+        goto done;
+    }
+    ret = sceNetConfigSetIfEventFlag(ctx, ctx->evf, 0x20);
+    if (ret < 0) {
+        goto error;
+    }
+    ret = 0x80410A06;
+    if (sceWlanGetSwitchState() == 0) {
+        goto error;
+    }
+    ret = func_000002BC(ctx);
+    bits = 0;
+    func_000023BC(ctx, 0x22, &bits, 0);
+    if (bits != 0) {
+        if (bits & 2) {
+            *event = 5;
+        } else {
+            *event = 6;
+        }
+        goto done;
+    }
+    if (ret < 0) {
+        goto error;
+    }
+    *event = 2;
+    goto done;
+error:
+    *event = 6;
+    ctx->error = ret;
+done:
+    *state = 0;
+    ctx->idle = 1;
+    func_00000A30(ctx, *event, ctx->error);
+    return 0;
+}
+#else
 INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_000028B0);
+#endif
 
 #if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_0000280C);
@@ -500,11 +548,37 @@ INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00001C54);
 #endif
 
 #if FW_VERSION < 250
-INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00001D84);
+void func_00001D84(SceNetApctlCtx *ctx) {
+    u32 dns1[4];
+    u32 dns2[4];
 
-INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00001DB8);
+    if (sceNetConfigDelIfaddr(ctx) >= 0) {
+        dns2[0] = 0;
+        dns1[0] = 0;
+        sceNetConfigSetDNS(dns1, dns2);
+    }
+}
 
-INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00001DE8);
+void func_00001DB8(SceNetApctlCtx *ctx) {
+    u32 dns1[4];
+    u32 dns2[4];
+
+    func_00005634(ctx);
+    dns2[0] = 0;
+    dns1[0] = 0;
+    sceNetConfigSetDNS(dns1, dns2);
+}
+
+void func_00001DE8(SceNetApctlCtx *ctx) {
+    u32 dns1[4];
+    u32 dns2[4];
+
+    func_00007324();
+    func_00008E34();
+    dns2[0] = 0;
+    dns1[0] = 0;
+    sceNetConfigSetDNS(dns1, dns2);
+}
 #endif
 
 #if FW_VERSION == 100
