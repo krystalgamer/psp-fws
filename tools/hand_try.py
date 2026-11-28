@@ -53,6 +53,20 @@ def compiled_reloc_syms(c_text, comp, opt):
         symtab = elf.get_section_by_name(".symtab")
         text = elf.get_section_by_name(".text").data()
         out, strs, hi, calls, addend, consts = [], {}, {}, [], {}, {}
+        # words of .rodata* that are relocated against .text: jump tables (case labels), not literals
+        rodata_text = {}  # rodata section name -> {offset: .text offset the word points at}
+        func_off = {s.name: s["st_value"] for s in symtab.iter_symbols() if s["st_info"]["type"] == "STT_FUNC"}
+        for sec in elf.iter_sections():
+            if isinstance(sec, RelocationSection) and sec.name.startswith(".rel.rodata"):
+                tsec = elf.get_section(sec["sh_info"])
+                d = tsec.data()
+                for rel in sec.iter_relocations():
+                    sym = symtab.get_symbol(rel["r_info_sym"])
+                    if rel["r_info_type"] == 2 and sym["st_shndx"] not in ("SHN_UNDEF", "SHN_ABS") \
+                            and elf.get_section(sym["st_shndx"]).name == ".text":
+                        rodata_text.setdefault(tsec.name, {})[rel["r_offset"]] = \
+                            sym["st_value"] + struct.unpack_from("<I", d, rel["r_offset"])[0]
+        jtabs = {}
         for sec in elf.iter_sections():
             if isinstance(sec, RelocationSection) and sec.name == ".rel.text":
                 for rel in sorted(sec.iter_relocations(), key=lambda r: r["r_offset"]):
@@ -76,6 +90,14 @@ def compiled_reloc_syms(c_text, comp, opt):
                         if target.name.startswith(".rodata"):
                             off = (hi.get(rel["r_info_sym"], 0) << 16) + (imm - 0x10000 if imm & 0x8000 else imm)
                             d = target.data()
+                            jt = rodata_text.get(target.name, {})
+                            if off in jt:
+                                ents, o2 = [], off
+                                while o2 in jt:
+                                    ents.append(jt[o2])
+                                    o2 += 4
+                                jtabs[rel["r_offset"]] = ents
+                                continue
                             strs[rel["r_offset"]] = d[off:d.find(b"\0", off)] if 0 <= off < len(d) else None
                             # raw constant words too (float/double literals: .rodata.cst4/cst8 or plain .rodata)
                             width = 8 if target.name.endswith("cst8") else 4
@@ -86,6 +108,11 @@ def compiled_reloc_syms(c_text, comp, opt):
         compiled_reloc_syms.calls = calls
         compiled_reloc_syms.addends = [addend.get(o2) for o2, _ in sorted(out)]
         compiled_reloc_syms.consts = [consts.get(o2) for o2, _ in sorted(out)]
+        # jump tables: .text offsets of the entries, relative to the function using them
+        def fstart(o2):
+            return max([v for v in func_off.values() if v <= o2], default=0)
+        compiled_reloc_syms.jtabs = [None if o2 not in jtabs else [t - fstart(o2) for t in jtabs[o2]]
+                                     for o2, _ in sorted(out)]
         return names
 
 
@@ -493,6 +520,19 @@ def main():
                     bad_str.append((want[i], tb, mine_b))
             for w, ts, ms in dict.fromkeys(bad_str):
                 print(f"  literal for {w} differs: target {ts!r}, mine {ms!r}")
+            # jump tables: compare the case labels (entry offsets inside the function), not the raw words
+            fvaddr = mod.funcs[name][0] - mod.text_off
+            for i, jt in enumerate(getattr(compiled_reloc_syms, "jtabs", [])):
+                ta = taddrs[i] if i < len(taddrs) else None
+                if not jt or ta is None:
+                    continue
+                at = mod.text_off + ta
+                tw = [struct.unpack_from("<I", mod.base, at + 4 * k)[0] - fvaddr for k in range(len(jt))]
+                if tw != jt:
+                    k = next(k for k in range(len(jt)) if tw[k] != jt[k])
+                    print(f"  jump table {want[i]} differs: entry {k} -> +0x{tw[k] & 0xFFFFFFFF:X} in the target, "
+                          f"+0x{jt[k]:X} in mine")
+                    bad_str.append((want[i], None, None))
             # call targets: the original's jal names (from its asm) must be the functions the C calls
             bad_call = []
             asm_path = mod.funcs[name][2]
