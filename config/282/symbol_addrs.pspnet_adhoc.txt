@@ -94,3 +94,5 @@ ptpFlushSockbufs = 0x00004B30; // type:func
 ptpLookup = 0x0000532C; // type:func
 ptpTimer = 0x000069D4; // type:func
 adhocEtherInput = 0x0000036C; // type:func
+ptpSendData = 0x00004058; // type:func
+ptpRecvData = 0x00004408; // type:func

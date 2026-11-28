@@ -681,7 +681,7 @@ s32 sceNetAdhocPdpSend(s32 id, const SceNetEtherAddr *daddr, u16 dport, const vo
     ti->next = pw;
     d->tnext = pd;
     d->waiters = ti;
-    ret = func_00001530(d, daddr, dport, data, len, timeout, nonblock);
+    ret = pdpOutput(d, daddr, dport, data, len, timeout, nonblock);
     if (ti->descs == d) {
         ti->descs = d->tnext;
     } else {
@@ -1062,11 +1062,11 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_000016B4);
 #endif
 
 #if FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00001530);
+INCLUDE_ASM("nonmatchings/pspnet_adhoc", pdpOutput);
 #endif
 
 #if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00001B90);
+INCLUDE_ASM("nonmatchings/pspnet_adhoc", pdpRecvWait);
 #else
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00001600);
 
@@ -1077,7 +1077,7 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00001C28);
 s32 sceNetAdhocPdpRecv(s32 id, SceNetEtherAddr *addr, u16 *port, void *buf, s32 *len, u32 timeout, s32 nonblock) {
     if (buf == NULL || len == NULL)
         return 0x80410711;
-    return func_00001F20(id, addr, port, buf, len, timeout, nonblock, NULL);
+    return pdpRecvCommon(id, addr, port, buf, len, timeout, nonblock, NULL);
 }
 #endif
 
@@ -1105,7 +1105,7 @@ s32 sceNetAdhocPdpRecv(s32 id, SceNetEtherAddr *addr, u16 *port, void *buf, s32 
 s32 sceNetAdhocPdpRecvWithRfInfo(s32 id, SceNetEtherAddr *addr, u16 *port, void *buf, s32 *len, u32 timeout, s32 nonblock, void *rfinfo) {
     if (buf == NULL || len == NULL || rfinfo == NULL)
         return 0x80410711;
-    return func_00001F20(id, addr, port, buf, len, timeout, nonblock, rfinfo);
+    return pdpRecvCommon(id, addr, port, buf, len, timeout, nonblock, rfinfo);
 }
 #endif
 
@@ -1175,7 +1175,7 @@ s32 func_0000215C(s32 id, SceNetEtherAddr *addr, u16 *port, void *buf, s32 *len,
     ti->next = pw;
     d->tnext = pd;
     d->waiters = ti;
-    ret = func_00001B90(d, addr, port, buf, len, timeout, nonblock, rfinfo);
+    ret = pdpRecvWait(d, addr, port, buf, len, timeout, nonblock, rfinfo);
     if (ti->descs == d) {
         ti->descs = d->tnext;
     } else {
@@ -1231,7 +1231,7 @@ s32 func_0000215C(s32 id, SceNetEtherAddr *addr, u16 *port, void *buf, s32 *len,
     }
     ti->next = d->waiters;
     d->waiters = ti;
-    ret = func_00001B90(d, addr, port, buf, len, timeout, nonblock, rfinfo);
+    ret = pdpRecvWait(d, addr, port, buf, len, timeout, nonblock, rfinfo);
     if (d->waiters == ti) {
         d->waiters = ti->next;
     } else {
@@ -1254,7 +1254,7 @@ end:
 #endif
 
 #if FW_VERSION < 201
-s32 func_00001F20(s32 id, SceNetEtherAddr *addr, u16 *port, void *buf, s32 *len, u32 timeout, s32 nonblock, void *rfinfo) {
+s32 pdpRecvCommon(s32 id, SceNetEtherAddr *addr, u16 *port, void *buf, s32 *len, u32 timeout, s32 nonblock, void *rfinfo) {
     SceNetAdhocWaiter *ti;
     SceNetAdhocWaiter *w;
     SceNetAdhocDesc *d;
@@ -1281,7 +1281,7 @@ s32 func_00001F20(s32 id, SceNetEtherAddr *addr, u16 *port, void *buf, s32 *len,
     ti->next = pw;
     d->tnext = pd;
     d->waiters = ti;
-    ret = func_00001B90(d, addr, port, buf, len, timeout, nonblock, rfinfo);
+    ret = pdpRecvWait(d, addr, port, buf, len, timeout, nonblock, rfinfo);
     if (ti->descs == d) {
         ti->descs = d->tnext;
     } else {
@@ -1311,7 +1311,7 @@ end:
 #endif
 
 #if FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00002108);
+INCLUDE_ASM("nonmatchings/pspnet_adhoc", pdpBind);
 #endif
 
 #if FW_VERSION >= 282
@@ -1403,7 +1403,7 @@ s32 pdpAttach(SceNetAdhocDesc *d) {
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00002108);
+INCLUDE_ASM("nonmatchings/pspnet_adhoc", pdpBind);
 #endif
 
 #if FW_VERSION >= 282
@@ -1540,7 +1540,7 @@ s32 sceNetAdhocPtpOpen(const SceNetEtherAddr *saddr, u16 sport, const SceNetEthe
     ret = ptpCreate(saddr, sport, bufsize, bufsize, rexmt_int, rexmt_cnt, &d);
     if (ret < 0)
         goto end;
-    ret = func_0000556C(d->pcb, daddr, dport);
+    ret = ptpConnectStart(d->pcb, daddr, dport);
     if (ret < 0) {
         ptpSocketDestroy(d);
         goto end;
@@ -1582,7 +1582,7 @@ s32 sceNetAdhocPtpConnect(s32 id, u32 timeout, s32 nonblock) {
     ti->next = pw;
     d->tnext = pd;
     d->waiters = ti;
-    ret = func_00003A34(d, timeout, nonblock);
+    ret = ptpConnectWait(d, timeout, nonblock);
     if (ti->descs == d) {
         ti->descs = d->tnext;
     } else {
@@ -1649,7 +1649,7 @@ s32 sceNetAdhocPtpConnect(s32 id, u32 timeout, s32 nonblock) {
     ti->next = pw;
     d->tnext = pd;
     d->waiters = ti;
-    ret = func_00003A34(d, timeout, nonblock);
+    ret = ptpConnectWait(d, timeout, nonblock);
     if (ti->descs == d) {
         ti->descs = d->tnext;
     } else {
@@ -1709,7 +1709,7 @@ s32 sceNetAdhocPtpConnect(s32 id, u32 timeout, s32 nonblock) {
     }
     ti->next = d->waiters;
     d->waiters = ti;
-    ret = func_00003A34(d, timeout, nonblock);
+    ret = ptpConnectWait(d, timeout, nonblock);
     if (d->waiters == ti) {
         d->waiters = ti->next;
     } else {
@@ -1901,7 +1901,7 @@ s32 sceNetAdhocPtpAccept(s32 id, SceNetEtherAddr *addr, u16 *port, u32 timeout, 
     ti->next = pw;
     d->tnext = pd;
     d->waiters = ti;
-    ret = func_00003C00(d, addr, port, timeout, nonblock);
+    ret = ptpAcceptWait(d, addr, port, timeout, nonblock);
     if (ti->descs == d) {
         ti->descs = d->tnext;
     } else {
@@ -1968,7 +1968,7 @@ s32 sceNetAdhocPtpAccept(s32 id, SceNetEtherAddr *addr, u16 *port, u32 timeout, 
     ti->next = pw;
     d->tnext = pd;
     d->waiters = ti;
-    ret = func_00003C00(d, addr, port, timeout, nonblock);
+    ret = ptpAcceptWait(d, addr, port, timeout, nonblock);
     if (ti->descs == d) {
         ti->descs = d->tnext;
     } else {
@@ -2028,7 +2028,7 @@ s32 sceNetAdhocPtpAccept(s32 id, SceNetEtherAddr *addr, u16 *port, u32 timeout, 
     }
     ti->next = d->waiters;
     d->waiters = ti;
-    ret = func_00003C00(d, addr, port, timeout, nonblock);
+    ret = ptpAcceptWait(d, addr, port, timeout, nonblock);
     if (d->waiters == ti) {
         d->waiters = ti->next;
     } else {
@@ -2136,7 +2136,7 @@ s32 sceNetAdhocPtpSend(s32 id, const void *data, s32 *len, u32 timeout, s32 nonb
     ti->next = pw;
     d->tnext = pd;
     d->waiters = ti;
-    ret = func_00004058(d, data, len, timeout, nonblock);
+    ret = ptpSendData(d, data, len, timeout, nonblock);
     if (ti->descs == d) {
         ti->descs = d->tnext;
     } else {
@@ -2207,7 +2207,7 @@ s32 sceNetAdhocPtpSend(s32 id, const void *data, s32 *len, u32 timeout, s32 nonb
     ti->next = pw;
     d->tnext = pd;
     d->waiters = ti;
-    ret = func_00004058(d, data, len, timeout, nonblock);
+    ret = ptpSendData(d, data, len, timeout, nonblock);
     if (ti->descs == d) {
         ti->descs = d->tnext;
     } else {
@@ -2271,7 +2271,7 @@ s32 sceNetAdhocPtpSend(s32 id, const void *data, s32 *len, u32 timeout, s32 nonb
     }
     ti->next = d->waiters;
     d->waiters = ti;
-    ret = func_00004058(d, data, len, timeout, nonblock);
+    ret = ptpSendData(d, data, len, timeout, nonblock);
     if (d->waiters == ti) {
         d->waiters = ti->next;
     } else {
@@ -2326,7 +2326,7 @@ s32 sceNetAdhocPtpRecv(s32 id, void *buf, s32 *len, u32 timeout, s32 nonblock) {
     ti->next = pw;
     d->tnext = pd;
     d->waiters = ti;
-    ret = func_00004408(d, buf, len, timeout, nonblock);
+    ret = ptpRecvData(d, buf, len, timeout, nonblock);
     if (ti->descs == d) {
         ti->descs = d->tnext;
     } else {
@@ -2397,7 +2397,7 @@ s32 sceNetAdhocPtpRecv(s32 id, void *buf, s32 *len, u32 timeout, s32 nonblock) {
     ti->next = pw;
     d->tnext = pd;
     d->waiters = ti;
-    ret = func_00004408(d, buf, len, timeout, nonblock);
+    ret = ptpRecvData(d, buf, len, timeout, nonblock);
     if (ti->descs == d) {
         ti->descs = d->tnext;
     } else {
@@ -2461,7 +2461,7 @@ s32 sceNetAdhocPtpRecv(s32 id, void *buf, s32 *len, u32 timeout, s32 nonblock) {
     }
     ti->next = d->waiters;
     d->waiters = ti;
-    ret = func_00004408(d, buf, len, timeout, nonblock);
+    ret = ptpRecvData(d, buf, len, timeout, nonblock);
     if (d->waiters == ti) {
         d->waiters = ti->next;
     } else {
@@ -2514,7 +2514,7 @@ s32 sceNetAdhocPtpFlush(s32 id, u32 timeout, s32 nonblock) {
     ti->next = pw;
     d->tnext = pd;
     d->waiters = ti;
-    ret = func_000045E4(d, timeout, nonblock);
+    ret = ptpFlushWait(d, timeout, nonblock);
     if (ti->descs == d) {
         ti->descs = d->tnext;
     } else {
@@ -2851,7 +2851,7 @@ s32 ptpCreate(const SceNetEtherAddr *saddr, u16 sport, s32 sndbuf, s32 rcvbuf, u
     ret = ptpSetSockbuf(d->pcb, sndbuf, rcvbuf);
     if (ret < 0)
         goto err2;
-    ret = func_00004918(d->pcb, saddr, sport);
+    ret = ptpBind(d->pcb, saddr, sport);
     if (ret < 0)
         goto err3;
     ptpSetRexmt(d->pcb, rexmt_int, rexmt_cnt);
@@ -2946,9 +2946,9 @@ void ptpSocketDestroy(SceNetAdhocDesc *d) {
     adhocDescFree(d);
 }
 
-INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00003A34);
+INCLUDE_ASM("nonmatchings/pspnet_adhoc", ptpConnectWait);
 
-INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00003C00);
+INCLUDE_ASM("nonmatchings/pspnet_adhoc", ptpAcceptWait);
 #endif
 
 #if FW_VERSION >= 282
@@ -2963,16 +2963,16 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00003BE8);
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00003D9C);
 #endif
 
-INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00004058);
+INCLUDE_ASM("nonmatchings/pspnet_adhoc", ptpSendData);
 
-INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00004408);
+INCLUDE_ASM("nonmatchings/pspnet_adhoc", ptpRecvData);
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_000049E4);
 #endif
 
 #if FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_000045E4);
+INCLUDE_ASM("nonmatchings/pspnet_adhoc", ptpFlushWait);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 201
@@ -3017,7 +3017,7 @@ s32 ptpAttach(SceNetAdhocDesc *d) {
     pcb = sceNetMallocInternal(sizeof(SceNetAdhocPtpPcb));
     if (pcb == NULL)
         return 0x80410001;
-    func_00006E8C(pcb, 0, sizeof(SceNetAdhocPtpPcb));
+    adhocMemset(pcb, 0, sizeof(SceNetAdhocPtpPcb));
     pcb->cfirst = NULL;
     pcb->clast = &pcb->cfirst;
     _sce_pspnet_callout_init(&pcb->callout);
@@ -3040,7 +3040,7 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc", ptpAttach);
 #endif
 
 #if FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00004918);
+INCLUDE_ASM("nonmatchings/pspnet_adhoc", ptpBind);
 #endif
 
 #if FW_VERSION >= 282
@@ -3200,10 +3200,10 @@ SceNetAdhocPtpPcb *ptpLookup(const SceNetEtherAddr *laddr, u16 lport, const SceN
     SceNetAdhocPtpPcb *p;
 
     for (p = g_ptpList.first; p != NULL; p = p->next) {
-        if (func_00006E18(&p->laddr, laddr, 6) == 0 && p->lport == lport) {
+        if (adhocMemcmp(&p->laddr, laddr, 6) == 0 && p->lport == lport) {
             if (paddr == NULL)
                 break;
-            if (func_00006E18(&p->paddr, paddr, 6) == 0 && p->pport == pport)
+            if (adhocMemcmp(&p->paddr, paddr, 6) == 0 && p->pport == pport)
                 break;
         }
     }
@@ -3224,7 +3224,7 @@ s32 ptpAttach(SceNetAdhocDesc *d) {
     pcb = sceNetMallocInternal(sizeof(SceNetAdhocPtpPcb));
     if (pcb == NULL)
         return 0x80410001;
-    func_00006E8C(pcb, 0, sizeof(SceNetAdhocPtpPcb));
+    adhocMemset(pcb, 0, sizeof(SceNetAdhocPtpPcb));
     pcb->cfirst = NULL;
     pcb->clast = &pcb->cfirst;
     _sce_pspnet_callout_init(&pcb->callout);
@@ -3241,7 +3241,7 @@ s32 ptpAttach(SceNetAdhocDesc *d) {
     return 0;
 }
 
-void func_00005528(SceNetAdhocPtpPcb *pcb) {
+void ptpClearAddr(SceNetAdhocPtpPcb *pcb) {
     __builtin_memset(&pcb->laddr, 0, sizeof(pcb->laddr));
     __builtin_memset(&pcb->paddr, 0, sizeof(pcb->paddr));
     pcb->lport = 0;
@@ -3268,7 +3268,7 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_0000589C);
 #endif
 
 #if FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_0000556C);
+INCLUDE_ASM("nonmatchings/pspnet_adhoc", ptpConnectStart);
 #endif
 
 #if FW_VERSION < 282
@@ -3534,7 +3534,7 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc", ptpOutput);
 #endif
 
 #if FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00005FF8);
+INCLUDE_ASM("nonmatchings/pspnet_adhoc", ptpSendFrame);
 
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", ptpSendCtl);
 
@@ -3558,7 +3558,7 @@ void ptpOutput(SceNetAdhocPtpPcb *pcb, s32 rexmt) {
             if (n != 0)
                 goto out;
             if (rexmt != 0) {
-                func_00005FF8(pcb->ifp, &pcb->laddr, pcb->lport, &pcb->paddr, pcb->pport, 4, pcb->snd_una - 1, NULL);
+                ptpSendFrame(pcb->ifp, &pcb->laddr, pcb->lport, &pcb->paddr, pcb->pport, 4, pcb->snd_una - 1, NULL);
                 g_adhocStat.stat[ADHOC_STAT_PTP_PROBE]++;
                 goto out;
             }
@@ -3569,7 +3569,7 @@ void ptpOutput(SceNetAdhocPtpPcb *pcb, s32 rexmt) {
             _sce_pspnet_callout_reset_usec(&pcb->callout, pcb->rexmt_int, ptpTimer, pcb);
             goto out;
         }
-        func_00005FF8(pcb->ifp, &pcb->laddr, pcb->lport, &pcb->paddr, pcb->pport, 4, pcb->snd_nxt, m);
+        ptpSendFrame(pcb->ifp, &pcb->laddr, pcb->lport, &pcb->paddr, pcb->pport, 4, pcb->snd_nxt, m);
         n++;
         pcb->snd_nxt++;
         pcb->snd_inflight += m->m_pkthdr.len;
@@ -3742,7 +3742,7 @@ s32 sceNetAdhocGameModeUpdateMaster(void) {
         goto end;
     }
 #if FW_VERSION >= 150
-    func_00006E58(gm->buf, gm->ptr, gm->size);
+    adhocMemcpy(gm->buf, gm->ptr, gm->size);
     ret = sceNetAdhocAuth_lib_AAB06250(gm->buf, gm->buflen);
     if (ret < 0)
         goto end;
@@ -3951,7 +3951,7 @@ s32 module_stop(void) {
     return 0;
 }
 
-void *func_00006D6C(const void *s, s32 c, s32 n) {
+void *adhocMemchr(const void *s, s32 c, s32 n) {
     const u8 *p;
     u8 ch = c;
 
@@ -3964,7 +3964,7 @@ void *func_00006D6C(const void *s, s32 c, s32 n) {
     return NULL;
 }
 
-void *func_00006DA4(void *dst, const void *src, s32 n) {
+void *adhocMemmove(void *dst, const void *src, s32 n) {
     u8 *d;
     const u8 *s;
 
@@ -3984,7 +3984,7 @@ void *func_00006DA4(void *dst, const void *src, s32 n) {
     return dst;
 }
 
-s32 func_00006E18(const void *a, const void *b, s32 n) {
+s32 adhocMemcmp(const void *a, const void *b, s32 n) {
     const u8 *p1 = a;
     const u8 *p2 = b;
 
@@ -3997,7 +3997,7 @@ s32 func_00006E18(const void *a, const void *b, s32 n) {
     return 0;
 }
 
-void *func_00006E58(void *dst, const void *src, s32 n) {
+void *adhocMemcpy(void *dst, const void *src, s32 n) {
     u8 *d;
     const u8 *s;
 
@@ -4008,7 +4008,7 @@ void *func_00006E58(void *dst, const void *src, s32 n) {
     return dst;
 }
 
-void *func_00006E8C(void *s, s32 c, s32 n) {
+void *adhocMemset(void *s, s32 c, s32 n) {
     u8 *p;
 
     if (s != NULL) {
@@ -4025,7 +4025,7 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00007344);
 #endif
 
 #if FW_VERSION < 152
-s32 func_00006EB8(const void *a, const void *b, s32 n) {
+s32 adhocMemcmp2(const void *a, const void *b, s32 n) {
     const u8 *p1 = a;
     const u8 *p2 = b;
 
@@ -4038,13 +4038,13 @@ s32 func_00006EB8(const void *a, const void *b, s32 n) {
     return 0;
 }
 
-void func_00006EF8(const void *src, void *dst, s32 n) {
-    func_00006DA4(dst, src, n);
+void adhocBcopy(const void *src, void *dst, s32 n) {
+    adhocMemmove(dst, src, n);
 }
 #endif
 
 #if FW_VERSION < 201
-void func_00006F1C(void *s, s32 n) {
+void adhocBzero(void *s, s32 n) {
     u8 *p;
 
     if (s != NULL) {

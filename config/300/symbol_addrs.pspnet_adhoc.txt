@@ -129,3 +129,5 @@ pdpDetach = 0x00002CD4; // type:func
 pdpFlush = 0x0000223C; // type:func
 pdpQentFree = 0x00002E48; // type:func
 adhocEtherInput = 0x0000036C; // type:func
+ptpSendData = 0x00004058; // type:func
+ptpRecvData = 0x00004408; // type:func
