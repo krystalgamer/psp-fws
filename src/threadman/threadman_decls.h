@@ -411,7 +411,8 @@ typedef struct SceThreadmanInfo {
     SceThreadQueue timers; /* 0x5BC: active SceTimers, by time */
     SceThreadQueue unk5C4; /* 0x5C4: free Delay uids */
     SceThreadQueue unk5CC; /* 0x5CC: thread event handlers */
-    u8 unk5D4[0x5EC - 0x5D4];
+    SceThreadQueue sleepingThreads; /* 0x5D4 */
+    u8 unk5DC[0x5EC - 0x5DC];
     SceThreadQueue suspendedThreads; /* 0x5EC */
     u8 unk5F4[0x5FC - 0x5F4];
     SceSysmemUidCB *uidWaitQType; /* 0x5FC */
@@ -588,6 +589,7 @@ s32 func_0000022C(s32);
 s32 func_00000268(SceThread *thread);
 s32 func_000003F0(SceSysmemUidCB *cb, s32 waitRet);
 s32 func_00000448(s32 arg0, s32 arg1);
+void func_00000474(SceThread *thread);
 void func_000004CC(struct Unk_func_000004CC_0 *arg0);
 s32 func_00000524(SceSysmemUidCB *cb);
 void func_00000534(s32 arg0);

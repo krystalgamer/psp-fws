@@ -90,7 +90,28 @@ void func_000001D0(SceThread *thread) {
     sceKernelCpuResumeIntr(intr);
 }
 
-INCLUDE_ASM("nonmatchings/threadman", func_00000268);
+s32 func_00000268(SceThread *thread) {
+    SceThread *queue;
+
+    if (thread->status == THREAD_KILLED) {
+        return 0;
+    }
+    func_00000474(thread);
+    thread->next->prev = thread->prev;
+    thread->prev->next = thread->next;
+    if (thread->status == THREAD_WAITING_SUSPEND) {
+        queue = (SceThread *)&g_threadmanInfo.suspendedThreads;
+        thread->next = queue;
+        thread->prev = queue->prev;
+        queue->prev = thread;
+        thread->status = THREAD_SUSPEND;
+        thread->prev->next = thread;
+        return 0;
+    }
+    thread->status = THREAD_READY;
+    func_0000F034(thread);
+    return 1;
+}
 
 INCLUDE_ASM("nonmatchings/threadman", func_00000308);
 
@@ -1415,19 +1436,277 @@ s32 func_00002614(void) {
 INCLUDE_ASM("nonmatchings/threadman", func_0000289C);
 #endif
 
+#if FW_VERSION < 150
+s32 sceKernelSleepThread(void) {
+    SceThread *thread;
+    s32 intr;
+    void *ra = getRa();
+    u32 oldK1 = shiftK1Noreorder();
+
+    if (sceKernelIsIntrContext()) {
+        setK1(oldK1);
+        Kprintf("thsleep.c:%s:SCE_KERNEL_ERROR_ILLEGAL_CONTEXT\n", "sceKernelSleepThread");
+        return 0x80020064;
+    }
+    intr = sceKernelCpuSuspendIntr();
+    if (intr == 0 || g_threadmanInfo.dispatchDisabled != 0) {
+        sceKernelCpuResumeIntr(intr);
+        setK1(oldK1);
+        Kprintf("thsleep.c:%s:SCE_KERNEL_ERROR_CAN_NOT_WAIT\n", "sceKernelSleepThread");
+        return 0x800201A7;
+    }
+    if (g_threadmanInfo.logHandler != NULL) {
+        g_threadmanInfo.logHandler(0x2E, ra, 0);
+    }
+    func_000124A0();
+    thread = g_threadmanInfo.currentThread;
+    thread->waitRet = 0;
+    if (thread->wakeupCount != 0) {
+        thread->wakeupCount--;
+    } else {
+        func_00000000(&g_threadmanInfo.sleepingThreads, 1);
+        g_threadmanInfo.nextThread = NULL;
+        func_000007F4(1, 1);
+    }
+    sceKernelCpuResumeIntr(intr);
+    setK1(oldK1);
+    return thread->waitRet;
+}
+#else
 INCLUDE_ASM("nonmatchings/threadman", sceKernelSleepThread);
+#endif
 
+#if FW_VERSION < 150
+s32 sceKernelSleepThreadCB(void) {
+    SceThread *thread;
+    s32 intr;
+    void *ra = getRa();
+    u32 oldK1 = shiftK1Noreorder();
+
+    if (sceKernelIsIntrContext()) {
+        setK1(oldK1);
+        return 0x80020064;
+    }
+    intr = sceKernelCpuSuspendIntr();
+    if (intr == 0 || g_threadmanInfo.dispatchDisabled != 0) {
+        sceKernelCpuResumeIntr(intr);
+        setK1(oldK1);
+        return 0x800201A7;
+    }
+    if (g_threadmanInfo.logHandler != NULL) {
+        g_threadmanInfo.logHandler(0x2F, ra, 0);
+    }
+    func_000124A0();
+    thread = g_threadmanInfo.currentThread;
+    do {
+        if (thread->unk58 != 0) {
+            func_00001FC4(intr);
+        }
+        thread->waitRet = 0;
+        if (thread->wakeupCount != 0) {
+            thread->wakeupCount--;
+        } else {
+            func_00000000(&g_threadmanInfo.sleepingThreads, 1);
+            thread->unk54 = 1;
+            g_threadmanInfo.nextThread = NULL;
+            func_000007F4(1, 1);
+        }
+    } while (thread->waitRet == 0x800201AB);
+    sceKernelCpuResumeIntr(intr);
+    setK1(oldK1);
+    return thread->waitRet;
+}
+#else
 INCLUDE_ASM("nonmatchings/threadman", sceKernelSleepThreadCB);
+#endif
 
+#if FW_VERSION < 150
+s32 sceKernelWakeupThread(SceUID thid) {
+    SceSysmemUidCB *cb;
+    SceSysmemUidCB *uid;
+    SceThread *thread;
+    s32 isIntr;
+    s32 intr;
+    void *ra = getRa();
+    u32 oldK1 = shiftK1Noreorder();
+
+    if (thid == 0) {
+        setK1(oldK1);
+        return 0x80020197;
+    }
+    isIntr = sceKernelIsIntrContext();
+    intr = sceKernelCpuSuspendIntr();
+    if (sceKernelGetUIDcontrolBlockWithType(thid, g_threadmanInfo.uidThreadType, &uid) != 0) {
+        sceKernelCpuResumeIntr(intr);
+        setK1(oldK1);
+        return 0x80020198;
+    }
+    cb = uid;
+    if (k1IsUserMode() && !(cb->attr & 2)) {
+        sceKernelCpuResumeIntr(intr);
+        setK1(oldK1);
+        return 0x800200D1;
+    }
+    thread = UID_CB_TO_DATA(cb, g_threadmanInfo.uidThreadType, SceThread);
+    if (!isIntr && thread == g_threadmanInfo.currentThread) {
+        sceKernelCpuResumeIntr(intr);
+        setK1(oldK1);
+        return 0x80020197;
+    }
+    if (thread->status == THREAD_STOPPED || thread->status == THREAD_KILLED) {
+        sceKernelCpuResumeIntr(intr);
+        setK1(oldK1);
+        return 0x800201A2;
+    }
+    if (g_threadmanInfo.logHandler != NULL) {
+        g_threadmanInfo.logHandler(0x30, ra, 1, thid);
+    }
+    if ((thread->status == THREAD_WAITING || thread->status == THREAD_WAITING_SUSPEND) && thread->waitType == 1) {
+        func_0000072C(thread, isIntr, intr);
+    } else {
+        thread->wakeupCount++;
+    }
+    sceKernelCpuResumeIntr(intr);
+    setK1(oldK1);
+    return 0;
+}
+#else
 INCLUDE_ASM("nonmatchings/threadman", sceKernelWakeupThread);
+#endif
 
+#if FW_VERSION < 270
+s32 sceKernelCancelWakeupThread(SceUID thid) {
+    SceSysmemUidCB *cb;
+    SceSysmemUidCB *uid;
+    SceThread *thread;
+    s32 isIntr;
+    s32 intr;
+    s32 ret;
+    void *ra = getRa();
+    u32 oldK1 = shiftK1Noreorder();
+
+    isIntr = sceKernelIsIntrContext();
+    intr = sceKernelCpuSuspendIntr();
+    if (thid == 0) {
+        if (isIntr) {
+            sceKernelCpuResumeIntr(intr);
+            setK1(oldK1);
+            return 0x80020197;
+        }
+        thid = g_threadmanInfo.currentThread->uid;
+    }
+    if (sceKernelGetUIDcontrolBlockWithType(thid, g_threadmanInfo.uidThreadType, &uid) != 0) {
+        sceKernelCpuResumeIntr(intr);
+        setK1(oldK1);
+        return 0x80020198;
+    }
+    cb = uid;
+    if (k1IsUserMode() && !(cb->attr & 8)) {
+        sceKernelCpuResumeIntr(intr);
+        setK1(oldK1);
+        return 0x800200D1;
+    }
+    thread = UID_CB_TO_DATA(cb, g_threadmanInfo.uidThreadType, SceThread);
+    if (g_threadmanInfo.logHandler != NULL) {
+        g_threadmanInfo.logHandler(0x31, ra, 1, thid);
+    }
+    ret = thread->wakeupCount;
+    thread->wakeupCount = 0;
+    sceKernelCpuResumeIntr(intr);
+    setK1(oldK1);
+    return ret;
+}
+#else
 INCLUDE_ASM("nonmatchings/threadman", sceKernelCancelWakeupThread);
+#endif
 
 #if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/threadman", sceKernelDonateWakeupThread);
 #endif
 
+#if FW_VERSION < 150
+s32 sceKernelSuspendThread(SceUID thid) {
+    SceSysmemUidCB *cb;
+    SceSysmemUidCB *uid;
+    SceThread *thread;
+    SceThread *queue;
+    s32 isIntr;
+    s32 intr;
+    s32 ret;
+    void *ra = getRa();
+    u32 oldK1 = shiftK1Noreorder();
+
+    if (thid == 0) {
+        setK1(oldK1);
+        return 0x80020197;
+    }
+    isIntr = sceKernelIsIntrContext();
+    intr = sceKernelCpuSuspendIntr();
+    if (sceKernelGetUIDcontrolBlockWithType(thid, g_threadmanInfo.uidThreadType, &uid) != 0) {
+        sceKernelCpuResumeIntr(intr);
+        setK1(oldK1);
+        return 0x80020198;
+    }
+    cb = uid;
+    if (k1IsUserMode() && !(cb->attr & 2)) {
+        sceKernelCpuResumeIntr(intr);
+        setK1(oldK1);
+        return 0x800200D1;
+    }
+    thread = UID_CB_TO_DATA(cb, g_threadmanInfo.uidThreadType, SceThread);
+    if (!isIntr && thread == g_threadmanInfo.currentThread) {
+        sceKernelCpuResumeIntr(intr);
+        setK1(oldK1);
+        return 0x80020197;
+    }
+    if (g_threadmanInfo.logHandler != NULL) {
+        g_threadmanInfo.logHandler(0x32, ra, 1, thid);
+    }
+    switch (thread->status) {
+    case THREAD_RUNNING:
+        if (g_threadmanInfo.dispatchDisabled != 0) {
+            if (g_threadmanInfo.dispatchDisabled != 3) {
+                g_threadmanInfo.dispatchDisabled = 2;
+            }
+            ret = 0;
+            break;
+        }
+        /* fallthrough */
+    case THREAD_READY:
+        if (isIntr && thread == g_threadmanInfo.currentThread) {
+            g_threadmanInfo.nextThread = NULL;
+        } else {
+            func_0000F0E4(thread, thread->currentPriority);
+        }
+        queue = (SceThread *)&g_threadmanInfo.suspendedThreads;
+        thread->next = queue;
+        thread->prev = queue->prev;
+        queue->prev = thread;
+        thread->status = THREAD_SUSPEND;
+        thread->prev->next = thread;
+        ret = 0;
+        break;
+    case THREAD_WAITING:
+        thread->status = THREAD_WAITING_SUSPEND;
+        ret = 0;
+        break;
+    case THREAD_SUSPEND:
+    case THREAD_WAITING_SUSPEND:
+        ret = 0x800201A3;
+        break;
+    case THREAD_STOPPED:
+    case THREAD_KILLED:
+    default:
+        ret = 0x800201A2;
+        break;
+    }
+    sceKernelCpuResumeIntr(intr);
+    setK1(oldK1);
+    return ret;
+}
+#else
 INCLUDE_ASM("nonmatchings/threadman", sceKernelSuspendThread);
+#endif
 
 INCLUDE_ASM("nonmatchings/threadman", sceKernelResumeThread);
 
