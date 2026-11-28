@@ -1046,7 +1046,27 @@ INCLUDE_ASM("nonmatchings/threadman", _sceKernelReturnFromCallback);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/threadman", func_00001430);
+void func_00001430(SceThread *thread) {
+    SceSysmemUidCB *cb = thread->unk48;
+    SceThreadCbObj *obj;
+
+    if (cb == NULL) {
+        return;
+    }
+    obj = UID_CB_TO_DATA(cb, g_threadmanInfo.uidThreadEventHandlerType, SceThreadCbObj);
+    obj->unkC--;
+    if (obj->unk10 != 0 && obj->unkC == 0) {
+        SceThreadCbObj *next = obj->next;
+
+        next->prev = obj->prev;
+        obj->prev->next = next;
+        obj->prev = obj;
+        obj->next = obj;
+        func_000003F0(cb, 0);
+    }
+    thread->unk44 = 0;
+    thread->unk48 = NULL;
+}
 #endif
 
 #if FW_VERSION >= 270 && FW_VERSION < 282
@@ -1821,7 +1841,7 @@ s32 func_00004B48(void) {
 }
 #endif
 
-#if FW_VERSION < 150
+#if FW_VERSION < 300
 s32 func_00004B68(SceSysmemUidCB *cb) {
     SceWaitQ *wq = UID_CB_TO_DATA(cb, g_threadmanInfo.uidWaitQType, SceWaitQ);
     SceSema *sema = UID_CB_TO_DATA(cb, g_threadmanInfo.uidSemaType, SceSema);
@@ -3057,7 +3077,9 @@ INCLUDE_ASM("nonmatchings/threadman", func_0000ADAC);
 INCLUDE_ASM("nonmatchings/threadman", func_0000AE54);
 
 INCLUDE_ASM("nonmatchings/threadman", func_0000AF9C);
+#endif
 
+#if FW_VERSION < 201
 void func_0000B258(SceTimer *timer) {
     SceTimer *head = (SceTimer *)&g_threadmanInfo.timers;
     SceTimer *t;
@@ -3072,22 +3094,12 @@ void func_0000B258(SceTimer *timer) {
     t->prev = timer;
     timer->prev->next = timer;
 }
-#endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/threadman", func_0000B258);
-#endif
-
-#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/threadman", func_0000B304);
 #endif
 
 #if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/threadman", sceKernelUSec2SysClock);
-#endif
-
-#if FW_VERSION >= 150 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/threadman", func_0000B634);
 #endif
 
 #if FW_VERSION < 150
@@ -3098,9 +3110,13 @@ s64 sceKernelUSec2SysClockWide(u32 arg0) {
 INCLUDE_ASM("nonmatchings/threadman", sceKernelSysClock2USec);
 
 INCLUDE_ASM("nonmatchings/threadman", sceKernelSysClock2USecWide);
+#endif
 
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/threadman", func_0000B634);
+#endif
 
+#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/threadman", sceKernelGetSystemTime);
 
 s64 sceKernelGetSystemTimeWide(void) {
@@ -3324,10 +3340,22 @@ u32 sceKernelGetSystemTimeLow(void) {
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/threadman", func_0000B7F4);
+void func_0000B7F4(SceKernelSysClock *clock, u32 usec) {
+    u64ToSysClock(clock, func_0000B634() + usec);
+}
+#endif
 
+#if FW_VERSION >= 150 && FW_VERSION < 201
+void func_0000B84C(SceKernelSysClock *out, SceKernelSysClock *in) {
+    u64ToSysClock(out, func_0000B634() + sysClockToU64(in));
+}
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/threadman", func_0000B84C);
+#endif
 
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/threadman", sceKernelSetAlarm);
 
 INCLUDE_ASM("nonmatchings/threadman", sceKernelSetSysClockAlarm);
@@ -3972,7 +4000,18 @@ s32 sceKernelSetThreadmanLogHandler(SceThreadmanLogHandler handler, SceThreadman
 
 INCLUDE_ASM("nonmatchings/threadman", func_00012FD8);
 
-INCLUDE_ASM("nonmatchings/threadman", func_0000F0E4);
+void func_0000F0E4(SceThread *thread, u32 prio) {
+    SceThread *next = thread->next;
+    SceThread *prev = thread->prev;
+
+    if (next == prev) {
+        if (next != thread) {
+            g_threadmanInfo.readyPriorityMask[prio >> 5] &= ~(1 << (prio & 0x1F));
+        }
+    }
+    next->prev = prev;
+    thread->prev->next = next;
+}
 
 INCLUDE_ASM("nonmatchings/threadman", func_0001313C);
 #endif
