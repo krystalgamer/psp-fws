@@ -189,13 +189,13 @@ extern u64 g_ejectTime[1]; /* 1.50+: time of the last ejection */
 extern u64 g_insertTime[1]; /* 1.50+: time of the last insertion */
 extern s32 g_irqMissCount[1];
 
+s32 _sceMScmGetCLDMHelper(s32 slot, s32 n, SceMScmCLDMInfo **out);
 s32 _sceMScmReinitializeHC(s32 slot);
 s32 func_00000000(s32 slot);
 s32 func_000000AC(s32 slot);
 s32 func_000001E4(SceMScmHC *hc);
 void func_00000930(s32 arg0);
 s32 func_00000C1C(SceMScmHC *hc);
-s32 func_00001478(s32 slot, s32 n, SceMScmCLDMInfo **out);
 s32 func_0000179C(SceSize args, void *argp);
 s32 func_00002194(s32 (*arg0)(s32, s32, s32, s32, s32), s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5);
 s32 func_00002238(SceSize args, void *argp);
@@ -209,7 +209,6 @@ s32 func_00004430(SceMScmHC *hc, s32 mode);
 s32 func_000047C0(SceMScmHC *hc, s32 timeout);
 s32 func_00004870(void);
 s32 func_0000488C(u32 start, s32 timeout);
-s32 func_00004B70(s32 intno, SceMScmHC *hc);
 s32 func_00004D30(s32 intno, SceMScmHC *hc);
 void func_00004E4C(void);
 u32 func_00004E50(u32 bits);
@@ -260,6 +259,7 @@ s32 sceMScmGetCLDM(s32 slot, s32 n, SceMScmCLDMInfo *out);
 s32 sceMScmGetRegisteredCLDMCount(s32 slot);
 s32 sceMScmGetSlotPower(SceMScmHC *hc, s32 *out);
 s32 sceMScmGetSlotState(SceMScmHC *hc, s32 *out);
+s32 sceMScmHCIrqPrimaryHandler(s32 intno, SceMScmHC *hc);
 s32 sceMScmHCLastStatus(SceMScmHC *hc);
 u16 sceMScmHCSetBusyCount(SceMScmHC *hc, u16 count);
 s32 sceMScmIconLoadUcode(SceMScmHC *hc, u32 addr, u16 *code, s32 count);

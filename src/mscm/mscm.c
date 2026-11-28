@@ -424,7 +424,7 @@ INCLUDE_RODATA("nonmatchings/mscm", D_000070F8);
 static const char cldmFile[] = "cldm.c";
 static const char cldmAssertFmt[] = "Assertion failed at %s:%s:%04d\n";
 
-s32 func_00001478(s32 slot, s32 n, SceMScmCLDMInfo **out) {
+s32 _sceMScmGetCLDMHelper(s32 slot, s32 n, SceMScmCLDMInfo **out) {
     s32 ret;
     s32 sum;
     s32 i;
@@ -475,7 +475,7 @@ end:
 #endif
 
 #if FW_VERSION == 201
-INCLUDE_ASM("nonmatchings/mscm", func_00001478);
+INCLUDE_ASM("nonmatchings/mscm", _sceMScmGetCLDMHelper);
 #endif
 
 #if FW_VERSION >= 282
@@ -489,7 +489,7 @@ s32 sceMScmGetCLDM(s32 slot, s32 n, SceMScmCLDMInfo *out) {
     SceMScmCLDMInfo *info;
     s32 ret;
 
-    ret = func_00001478(slot, n, &info);
+    ret = _sceMScmGetCLDMHelper(slot, n, &info);
     if (ret >= 0) {
         if (out != NULL) {
             *out = *info;
@@ -1637,7 +1637,7 @@ static const char intrAssertFmt[] = "Assertion failed at %s:%s:%04d\n";
 #endif
 
 #if FW_VERSION < 152
-s32 func_00004B70(s32 intno, SceMScmHC *hc) {
+s32 sceMScmHCIrqPrimaryHandler(s32 intno, SceMScmHC *hc) {
     s32 index = hc->index;
     s32 slot;
     s32 ret;
@@ -1685,7 +1685,7 @@ s32 func_00004B70(s32 intno, SceMScmHC *hc) {
 /* intr.c is its own object: its assert format is not merged with init.c's */
 static const char intrAssertFmt[] = "Assertion failed at %s:%s:%04d\n";
 
-s32 func_00004B70(s32 intno, SceMScmHC *hc) {
+s32 sceMScmHCIrqPrimaryHandler(s32 intno, SceMScmHC *hc) {
     s32 index = hc->index;
     s32 slot;
     s32 ret;
@@ -1730,7 +1730,7 @@ s32 func_00004B70(s32 intno, SceMScmHC *hc) {
 #endif
 
 #if FW_VERSION == 201
-INCLUDE_ASM("nonmatchings/mscm", func_00004B70);
+INCLUDE_ASM("nonmatchings/mscm", sceMScmHCIrqPrimaryHandler);
 #endif
 
 #if FW_VERSION < 150
@@ -2151,7 +2151,7 @@ INCLUDE_RODATA("nonmatchings/mscm", D_00006950);
 #endif
 
 #if FW_VERSION < 150
-s32 func_000052FC(void *arg) {
+s32 _sceMScmIomanExit(void *arg) {
     s32 ok = (arg != NULL);
     const char *file = D_00006950, *fn = "_sceMScmIomanExit";
 
@@ -2164,7 +2164,7 @@ s32 func_000052FC(void *arg) {
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 201
-s32 func_000052FC(void *arg) {
+s32 _sceMScmIomanExit(void *arg) {
     s32 ok = (arg != NULL);
     const char *file = D_00006950, *fn = "_sceMScmIomanExit";
 
@@ -2177,7 +2177,7 @@ s32 func_000052FC(void *arg) {
 #endif
 
 #if FW_VERSION < 150
-s32 func_00005358(SceIoIob *iob) {
+s32 _sceMScmIomanOpen(SceIoIob *iob) {
     s32 ok = (iob != NULL);
     const char *file = D_00006950, *fn = "_sceMScmIomanOpen";
     s32 ret;
@@ -2195,7 +2195,7 @@ s32 func_00005358(SceIoIob *iob) {
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 201
-s32 func_00005358(SceIoIob *iob) {
+s32 _sceMScmIomanOpen(SceIoIob *iob) {
     s32 ok = (iob != NULL);
     const char *file = D_00006950, *fn = "_sceMScmIomanOpen";
     s32 ret;
@@ -2257,7 +2257,7 @@ INCLUDE_ASM("nonmatchings/mscm", func_000057F8);
 #endif
 
 #if FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/mscm", func_000053F4);
+INCLUDE_ASM("nonmatchings/mscm", _sceMScmIomanDevctl);
 #endif
 
 #if FW_VERSION == 201
