@@ -55,7 +55,28 @@ INCLUDE_ASM("nonmatchings/threadman", func_000000B0);
 INCLUDE_ASM("nonmatchings/threadman", func_0000017C);
 #endif
 
+#if FW_VERSION < 330
+void func_000001B4(SceThread *thread, SceSysmemUidCB *cb) {
+    SceWaitQ *wq = UID_CB_TO_DATA(cb, g_threadmanInfo.uidWaitQType, SceWaitQ);
+    SceThread *head = (SceThread *)&wq->waitQueue;
+    SceThread *t;
+
+    for (t = wq->waitQueue.next; t != head; t = t->next) {
+        if (thread->currentPriority < t->currentPriority) {
+            break;
+        }
+    }
+    if (wq->unk4 != 0 && t->prev == head) {
+        t = t->next;
+    }
+    thread->prev = t->prev;
+    t->prev = thread;
+    thread->next = t;
+    thread->prev->next = thread;
+}
+#else
 INCLUDE_ASM("nonmatchings/threadman", func_000001B4);
+#endif
 
 #if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/threadman", func_00000268);
@@ -68,7 +89,39 @@ INCLUDE_ASM("nonmatchings/threadman", func_00000480);
 #endif
 
 #if FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/threadman", func_000000B0);
+s32 func_000000B0(SceSysmemUidCB *cb, s32 waitType, u32 attr, void *clock, s32 *timeout) {
+    SceThread *thread = g_threadmanInfo.currentThread;
+    SceWaitQ *wq = UID_CB_TO_DATA(cb, g_threadmanInfo.uidWaitQType, SceWaitQ);
+    SceThread *queue;
+    s32 ret;
+
+    thread->unk38 = 0;
+    if (timeout != NULL) {
+        ret = func_0000BDC8(clock, func_000001D0, thread);
+        if (ret < 0) {
+            return ret;
+        }
+        thread->unk38 = ret;
+        thread->unk3C = timeout;
+    }
+    thread->status = THREAD_WAITING;
+    thread->waitType = waitType;
+    thread->waitRet = 0;
+    thread->waitObj = cb;
+    wq->numWaitThreads++;
+    if (attr & 0x100) {
+        func_000001B4(thread, cb);
+    } else {
+        queue = (SceThread *)&wq->waitQueue;
+        thread->next = queue;
+        thread->prev = queue->prev;
+        queue->prev = thread;
+        thread->prev->next = thread;
+    }
+    g_threadmanInfo.nextThread = NULL;
+    func_000007F4(1, 1);
+    return thread->waitRet;
+}
 
 void func_000001D0(SceThread *thread) {
     s32 intr = sceKernelCpuSuspendIntr();
