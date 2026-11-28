@@ -480,6 +480,7 @@ s32 func_00004E40(void);
 s32 func_00004E70(SceIoIob *iob, const void *buf, SceSize size);
 s32 func_00004EC8(void);
 s32 func_00004F04(SceIoIob *iob, const void *buf, SceSize size);
+s32 func_0000513C(SceIoIob *iob, void *buf, SceSize size, s32 write, s32 (*io)(s32 lba, s32 count, void *buf));
 s32 func_000053B4(SceIoIob *iob, void *buf, SceSize size);
 s32 func_0000544C(SceIoIob *iob, void *buf, SceSize size);
 s32 func_00005684(SceIoIob *iob, SceOff end);

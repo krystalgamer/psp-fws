@@ -942,7 +942,15 @@ s32 func_000053B4(SceIoIob *iob, void *buf, SceSize size) {
 #endif
 
 #if FW_VERSION == 201
-INCLUDE_ASM("nonmatchings/msstor_0015A0", func_000053B4);
+s32 func_000053B4(SceIoIob *iob, void *buf, SceSize size) {
+    if (iob == NULL) {
+        return 0x80020328;
+    }
+    if (func_00005684(iob, iob->i_fpos + size) == 0) {
+        return 0x80220183;
+    }
+    return func_0000513C(iob, buf, size, 0, func_0000017C);
+}
 #endif
 
 #if FW_VERSION < 150
@@ -967,7 +975,15 @@ s32 func_0000544C(SceIoIob *iob, void *buf, SceSize size) {
 #endif
 
 #if FW_VERSION == 201
-INCLUDE_ASM("nonmatchings/msstor_0015A0", func_0000544C);
+s32 func_0000544C(SceIoIob *iob, void *buf, SceSize size) {
+    if (iob == NULL) {
+        return 0x80020328;
+    }
+    if (func_00005708(iob, iob->i_fpos + size) == 0) {
+        return 0x80220183;
+    }
+    return func_0000513C(iob, buf, size, 0, func_00000134);
+}
 #endif
 
 #if FW_VERSION < 150

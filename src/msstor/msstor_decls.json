@@ -96,6 +96,7 @@
   "func_00004E70": "s32 func_00004E70(SceIoIob *iob, const void *buf, SceSize size);",
   "func_00004EC8": "s32 func_00004EC8(void);",
   "func_00004F04": "s32 func_00004F04(SceIoIob *iob, const void *buf, SceSize size);",
+  "func_0000513C": "s32 func_0000513C(SceIoIob *iob, void *buf, SceSize size, s32 write, s32 (*io)(s32 lba, s32 count, void *buf));",
   "func_000053B4": "s32 func_000053B4(SceIoIob *iob, void *buf, SceSize size);",
   "func_0000544C": "s32 func_0000544C(SceIoIob *iob, void *buf, SceSize size);",
   "func_00005684": "s32 func_00005684(SceIoIob *iob, SceOff end);",
