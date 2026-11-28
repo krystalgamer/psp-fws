@@ -52,6 +52,8 @@
 #define va_end(v) __builtin_va_end(v)
 #define va_arg(v, l) __builtin_va_arg(v, l)
 
+#define INT_MAX 2147483647
+#define LONG_MAX 2147483647L
 #define EOF (-1)
 #define BUFSIZ 1024
 #define SEEK_SET 0
