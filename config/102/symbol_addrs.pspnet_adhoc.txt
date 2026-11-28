@@ -137,3 +137,4 @@ ptpFlushWait = 0x000045E4; // type:func
 adhocMemcmp = 0x00006E18; // type:func
 adhocMemset = 0x00006E8C; // type:func
 adhocMemcpy = 0x00006E58; // type:func
+adhocDescAlloc = 0x00000ED0; // type:func

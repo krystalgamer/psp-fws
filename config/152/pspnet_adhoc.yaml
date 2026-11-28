@@ -15,6 +15,7 @@ options:
   cache_path: tmp/build/152/.splat_cache.pspnet_adhoc
   symbol_addrs_path:
     - config/152/symbol_addrs.pspnet_adhoc.txt
+    - config/152/func_starts.pspnet_adhoc.txt
     - tmp/build/152/prx_syms.pspnet_adhoc.txt
   reloc_addrs_path: [tmp/build/152/reloc_addrs.pspnet_adhoc.txt]
   asset_path: tmp/assets/152/pspnet_adhoc
