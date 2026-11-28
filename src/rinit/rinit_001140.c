@@ -174,7 +174,23 @@ int isatty(int fd) {
     return 1;
 }
 
-INCLUDE_ASM("nonmatchings/rinit_001140", _exit);
+extern int sce_newlib_nocreate_thread_in_start __attribute__((weak));
+
+void _exit(int status) {
+    if (&sce_newlib_nocreate_thread_in_start != NULL) {
+        if (status == 0) {
+            func_000015B4();
+        }
+        sceKernelExitThread(status);
+    } else {
+        func_000015B4();
+        sceKernelSelfStopUnloadModule(1, 0, NULL);
+    }
+}
+
+int func_000015A4(void) {
+    return -1;
+}
 
 int func_000015AC(void) {
     return -1;
