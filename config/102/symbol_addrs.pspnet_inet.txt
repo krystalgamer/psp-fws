@@ -594,3 +594,5 @@ tcp_syn_cache_limit = 0x0002E798; // rom:0x2E818
 syn_cache_insert = 0x00020B74; // type:func
 syn_cache_reset = 0x00021D08; // type:func
 syn_cache_unreach = 0x00021FCC; // type:func
+syn_cache_get = 0x000215D8; // type:func
+syn_cache_add = 0x000222B0; // type:func
