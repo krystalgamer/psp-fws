@@ -136,7 +136,7 @@ def main():
     ref, new = fw(a.ref), fw(a.new)
     versions = sorted({fw(p.parent.name) for p in (ROOT / "config").glob(f"*/{a.module}.yaml")} | {new})
     sd = src_dir(a.ref, a.module)
-    changed = []
+    changed, widened = [], []
     for p in sorted(sd.iterdir()):
         if p.suffix in (".c", ".h"):
             t = p.read_text()
@@ -151,11 +151,21 @@ def main():
                 n = t
         else:
             continue
+        if n != t and p.suffix == ".h":
+            # type definitions / declarations: a widened test may change a layout for NEW; list each one
+            for ln, (o, w) in enumerate(zip(t.split("\n"), n.split("\n")), 1):
+                if o != w:
+                    widened.append(f"{p.name}:{ln}: {o.strip()}  ->  {w.strip()}")
         if n != t:
             changed.append(p.name)
             if not a.dry_run:
                 p.write_text(n)
     print(f"{a.module}: {a.new} like {a.ref} in {changed or 'nothing'}")
+    if widened:
+        print(f"WARNING: {len(widened)} FW_VERSION test(s) in headers now include {a.new} (check that the types/layouts "
+              f"really are {a.ref}'s; name {a.new} in the chain where they differ):")
+        for w in widened:
+            print("  " + w)
 
 
 if __name__ == "__main__":
