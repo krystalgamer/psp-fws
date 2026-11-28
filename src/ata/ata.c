@@ -369,7 +369,9 @@ s32 sceAtaIsNormalDriveStat(u32 id) {
     temp_v0 = sceAtaGetAtaDrive(0);
     var_v0 = 0x80211009;
     if (temp_v0 != NULL) {
-        var_v0 = temp_v0->driveStat;
+        /* volatile view: atacmd.c callers (func_00002E58) keep every call, i.e.
+           this getter was not visible as pure there (other TU) */
+        var_v0 = ((volatile SceAtaDrive *)temp_v0)->driveStat;
     }
     s32 cmp_tmp = var_v0 & 0x10;
     return cmp_tmp != 0;
@@ -446,26 +448,26 @@ s32 func_0000176C(void) {
 #if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/ata", func_00001218);
 
-void func_00001274(u32 arg0) {
-    s32 temp_a0;
+s32 func_00001274(u32 usec) {
+    s32 intr;
 
-    temp_a0 = sceKernelCpuSuspendIntr();
+    intr = sceKernelCpuSuspendIntr();
     D_00004260 = 0;
-    sceKernelCpuResumeIntr(temp_a0);
-    sceKernelSetAlarm(arg0, (s32) &func_000018B8, &D_00004260);
+    sceKernelCpuResumeIntr(intr);
+    return sceKernelSetAlarm(usec, func_000018B8, &D_00004260);
 }
 
 s32 func_000012C8(void) {
     return D_00004260;
 }
 
-void func_000012D4(s32 arg0) {
-    s32 temp_a0;
+void func_000012D4(s32 alarm) {
+    s32 intr;
 
-    temp_a0 = sceKernelCpuSuspendIntr();
+    intr = sceKernelCpuSuspendIntr();
     D_00004260 = 0;
-    sceKernelCpuResumeIntr(temp_a0);
-    sceKernelCancelAlarm(arg0);
+    sceKernelCpuResumeIntr(intr);
+    sceKernelCancelAlarm(alarm);
 }
 
 s32 sceAtaTerm(void) {
@@ -782,7 +784,39 @@ s32 module_start(void) {
 }
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION < 150
+s32 func_0000171C(SceAtaDrive *drive) {
+    u8 ns, sec, lc, hc;
+    ns = ATA_NSECTOR;
+    sec = ATA_SECTOR;
+    lc = ATA_LCYL;
+    hc = ATA_HCYL;
+    ATA_SELECT;
+    asm volatile("sync");
+    if (ns != 1 || sec != 1) {
+        drive->state = 0;
+        drive->driveId = -1;
+        drive->driveStat = 0;
+        return 0x80211003;
+    }
+    if (lc == 0x14 && hc == 0xEB) {
+        drive->state = 2;
+    } else if (lc == 0 && hc == 0) {
+        drive->state = 1;
+    } else {
+        drive->state = 0;
+    }
+    if (drive->state == 0) {
+        drive->driveStat = 0;
+        return 0x80211003;
+    }
+    drive->driveId = (ATA_SELECT >> 4) & 1;
+    sceAtaSetDriveStat(drive->driveId, 1);
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/ata", func_0000171C);
 #endif
 
@@ -1411,7 +1445,40 @@ s32 func_000020F8(SceAtaDrive *arg0, SceAtaCmd *arg1, void *arg2) {
 }
 #endif
 
-#if FW_VERSION < 150
+#if FW_VERSION == 100
+s32 func_00002124(SceAtaTaskFile *tf) {
+    s32 intr;
+    u8 stat;
+    intr = sceKernelCpuSuspendIntr();
+    ATA_DEVCTL = tf->devctl;
+    ATA_FEATURES = tf->features;
+    ATA_NSECTOR = tf->nsector;
+    ATA_SELECT = tf->select;
+    ATA_SECTOR = 0;
+    ATA_LCYL = tf->lcyl;
+    ATA_HCYL = tf->hcyl;
+    ATA_COMMAND = 0xA0;
+    sceKernelCpuResumeIntr(intr);
+    asm volatile("sync");
+    ATA_ALTSTATUS;
+    ATA_ALTSTATUS;
+    ATA_ALTSTATUS;
+    for (;;) {
+        stat = ATA_ALTSTATUS;
+        if ((s8)stat >= 0) {
+            break;
+        }
+        sceKernelDelayThread(100);
+    }
+    stat &= 9;
+    if (stat == 8) {
+        return 0;
+    }
+    return (stat != 0) ? -1 : 1;
+}
+#endif
+
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/ata", func_00002124);
 #endif
 
@@ -1632,7 +1699,7 @@ INCLUDE_ASM("nonmatchings/ata", func_0000349C);
 
 #if FW_VERSION < 150
 void func_000029DC(u8 a0, u16 count, u8 a2, s8 dev, u8 a4, s32 mode, SceAtaCmd *cmd) {
-    cmd->tf.unk0 = (a0 << 1) | 8;
+    cmd->tf.devctl = (a0 << 1) | 8;
     cmd->unk8 = 0;
     cmd->unkC = 0;
     if (mode == 8 || mode == 0x10 || mode == 0x100) {
@@ -1722,7 +1789,28 @@ INCLUDE_ASM("nonmatchings/ata", func_00003818);
 INCLUDE_ASM("nonmatchings/ata", func_000039AC);
 
 #if FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/ata", func_00002E58);
+s32 func_00002E58(u32 cmd, u32 id) {
+    if (sceAtaIsNormalDriveStat(id) == 0) {
+        if (sceAtaGetIntrFlag() != 2 && sceAtaGetIntrFlag() != 0x10 && sceAtaGetIntrFlag() != 0x20) {
+            if (func_00001218() == 0) {
+                return 0x80210003;
+            }
+        }
+        if (func_00001134(id) == 0) {
+            return 0x80211009;
+        }
+    } else {
+        if (sceAtaGetIntrFlag() == 1) {
+            return 0x80211009;
+        }
+        if (sceAtaGetIntrFlag() == 4) {
+            sceAtaSetIntrFlag(0);
+            return 0x80211009;
+        }
+    }
+    sceAtaWaitBusBusy2();
+    return 0x80211004;
+}
 #endif
 
 INCLUDE_ASM("nonmatchings/ata", func_00003A4C);

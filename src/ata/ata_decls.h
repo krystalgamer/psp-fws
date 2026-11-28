@@ -100,7 +100,7 @@ typedef char chk_SceAtaSubIntrTable[(sizeof(SceAtaSubIntrTable) == 0xD0) ? 1 : -
 
 /* ATA task-file image, written to ATA_FEATURES..ATA_COMMAND */
 typedef struct {
-    u8 unk0;
+    u8 devctl;    /* 0x0: written to ATA_DEVCTL */
     u8 features;  /* 0x1 */
     u8 nsector;   /* 0x2 */
     u8 sector;    /* 0x3 */
@@ -143,7 +143,7 @@ static inline u32 pspGetGp(void) {
 }
 static inline u32 pspSetGp(u32 gp) {
     u32 old;
-    asm volatile("move %0, $gp\n\tmove $gp, %1" : "=&r"(old) : "r"(gp));
+    asm volatile("move %0, $gp\n\tmove $gp, %1" : "=&r"(old) : "r"(gp) : "memory");
     return old;
 }
 
@@ -151,7 +151,7 @@ extern M2C_UNK D_00003F1C;
 extern u32 D_00004140[3];
 extern s32 D_00004180;
 extern SceAtaDrive D_00004200[2];
-extern s32 D_00004250;
+extern volatile s32 D_00004250; /* sceAtaSetIntrFlag/GetIntrFlag (set from interrupt context) */
 extern s32 D_00004260;
 extern SceAtaAhbBlock D_00004280;
 extern s32 D_000042A0;
@@ -174,9 +174,10 @@ s32 func_00000000(s32);
 s32 func_00000280(void);
 s32 func_00000E8C(SceAtaDrive *drive, s32 mode, s32 size);
 s32 func_00001134(u32 id);
-void func_00001274(u32 arg0);
+s32 func_00001218(void);
+s32 func_00001274(u32 usec);
 s32 func_000012C8(void);
-void func_000012D4(s32 arg0);
+void func_000012D4(s32 alarm);
 s32 func_0000171C(SceAtaDrive *drive);
 s32 func_0000176C(void);
 void func_00001810(void);
@@ -187,6 +188,7 @@ void func_00001F5C(s32 mode);
 s32 func_00002074(SceAtaDrive *drive, u8 features, s8 dev, s32 a3, u32 a4, SceAtaCmd *cmd, s32 a6);
 s32 func_000020F8(SceAtaDrive *drive, SceAtaCmd *cmd, void *buf);
 s32 func_00002120(void);
+s32 func_00002124(SceAtaTaskFile *tf);
 s32 func_0000212C(void);
 void func_00002134(void);
 SceAtaAhbBlock *func_00002160(void);
@@ -203,6 +205,7 @@ void func_00002570(s32 mode);
 void func_000025E4(s32 mode);
 s32 func_0000277C(struct Unk_func_0000277C_0 *arg0, struct Unk_func_0000277C_1 *arg1, s32 arg2);
 void func_000029DC(u8 a0, u16 count, u8 a2, s8 dev, u8 a4, s32 mode, SceAtaCmd *cmd);
+s32 func_00002E58(u32 cmd, u32 id);
 s32 func_00003264(void);
 s32 func_000032C8(void);
 s32 func_000033D4(void);
@@ -304,7 +307,7 @@ s32 sceKernelDelayThread(u32 usec);
 s32 sceKernelDeleteEventFlag(SceUID id);
 s32 sceKernelDeleteSema(SceUID id);
 s32 sceKernelDipsw(M2C_UNK);
-u32 sceKernelDipswAll();
+u32 sceKernelDipswAll(void);
 M2C_UNK sceKernelDisableIntr(M2C_UNK);
 M2C_UNK sceKernelDisableSubIntr(M2C_UNK, M2C_UNK);
 s32 sceKernelEnableIntr(s32 intno);
@@ -313,7 +316,7 @@ s32 sceKernelRegisterIntrHandler(s32 intno, s32 no, void *handler, void *arg, vo
 s32 sceKernelRegisterSubIntrHandler(s32 intno, s32 no, void *handler, void *arg);
 M2C_UNK sceKernelReleaseIntrHandler(M2C_UNK);
 M2C_UNK sceKernelReleaseSubIntrHandler(M2C_UNK, M2C_UNK);
-s32 sceKernelSetAlarm(u32, s32, void *);
+s32 sceKernelSetAlarm(u32 clock, void *handler, void *common);
 s32 sceKernelSignalSema(SceUID id, s32 signal);
 s32 sceKernelWaitSema(SceUID id, s32 signal, u32 *timeout);
 s32 sceSysregAtaBusClockDisable(void);
