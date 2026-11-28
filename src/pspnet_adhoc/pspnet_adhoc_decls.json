@@ -172,25 +172,25 @@
   "zz_ptp_macros": "#define PTP_SBWAKEUP(sb) do { \\\n        if ((sb)->flags & 1) { \\\n            (sb)->flags &= ~1; \\\n            _sce_pspnet_wakeup(sb); \\\n        } \\\n        if ((sb)->flags & 2) { \\\n            (sb)->flags &= ~2; \\\n            _sce_pspnet_wakeup(&D_00007448); \\\n        } \\\n    } while (0)"
  },
  "vars": {
-  "D_000073F0": "extern s32 D_000073F0;",
   "D_00007448": "extern s32 D_00007448;",
   "D_00007450": "extern SceNetAdhocStat100 D_00007450;",
   "D_000078A4": "extern const SceNetEtherAddr D_000078A4; /* ff:ff:ff:ff:ff:ff */",
   "D_000078AC": "extern const SceNetEtherAddr D_000078AC; /* 00:00:00:00:00:00 */",
-  "D_00007984": "extern struct ifqueue D_00007984;",
-  "D_00007998": "extern SceNetAdhocDescList D_00007998;",
-  "D_000079A0": "extern s32 D_000079A0;",
-  "D_000079A4": "extern SceNetAdhocPdpList D_000079A4;",
-  "D_000079AC": "extern u16 D_000079AC;",
-  "D_000079B0": "extern SceNetAdhocPtpList D_000079B0;",
-  "D_000079B8": "extern u16 D_000079B8;",
-  "D_000079BC": "extern u32 D_000079BC;",
-  "D_000079C0": "extern SceNetAdhocGameModeList D_000079C0;",
   "D_000079CC": "extern M2C_UNK D_000079CC;",
   "D_000079E4": "extern u16 D_000079E4;",
   "D_000079E8": "extern M2C_UNK D_000079E8;",
   "D_00007A8C": "extern M2C_UNK D_00007A8C;",
   "D_00007CC8": "extern M2C_UNK D_00007CC8;",
-  "g_adhocInit": "extern s32 g_adhocInit;"
+  "g_adhocDescList": "extern SceNetAdhocDescList g_adhocDescList;",
+  "g_adhocInit": "extern s32 g_adhocInit;",
+  "g_adhocIntrq": "extern struct ifqueue g_adhocIntrq;",
+  "g_adhocLastId": "extern s32 g_adhocLastId;",
+  "g_gameModeList": "extern SceNetAdhocGameModeList g_gameModeList;",
+  "g_gameModeMasterId": "extern s32 g_gameModeMasterId;",
+  "g_pdpLastPort": "extern u16 g_pdpLastPort;",
+  "g_pdpList": "extern SceNetAdhocPdpList g_pdpList;",
+  "g_ptpIss": "extern u32 g_ptpIss;",
+  "g_ptpLastPort": "extern u16 g_ptpLastPort;",
+  "g_ptpList": "extern SceNetAdhocPtpList g_ptpList;"
  }
 }

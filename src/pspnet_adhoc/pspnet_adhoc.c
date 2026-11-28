@@ -11,11 +11,11 @@ s32 sceNetAdhocInit(void) {
     ret = 0x80410713;
     if (g_adhocInit > 0)
         goto end;
-    D_00007984.ifq_maxlen = 50;
-    D_00007984.ifq_len = 0;
-    D_00007984.ifq_head = NULL;
-    D_00007984.ifq_drops = 0;
-    D_00007984.ifq_tail = NULL;
+    g_adhocIntrq.ifq_maxlen = 50;
+    g_adhocIntrq.ifq_len = 0;
+    g_adhocIntrq.ifq_head = NULL;
+    g_adhocIntrq.ifq_drops = 0;
+    g_adhocIntrq.ifq_tail = NULL;
     ret = func_00000DD0();
     if (ret < 0)
         goto end;
@@ -75,8 +75,8 @@ s32 sceNetAdhocTerm(void) {
     func_00004964();
     func_000029E8();
     func_00000E18();
-    while (D_00007984.ifq_head != NULL) {
-        IF_DEQUEUE(&D_00007984, m);
+    while (g_adhocIntrq.ifq_head != NULL) {
+        IF_DEQUEUE(&g_adhocIntrq, m);
         sceNetMFreem(m);
     }
     g_adhocInit = 0;
@@ -94,7 +94,7 @@ void func_00000270(void) {
     u8 type;
 
     for (;;) {
-        IF_DEQUEUE(&D_00007984, m);
+        IF_DEQUEUE(&g_adhocIntrq, m);
         if (m == NULL)
             break;
         if ((u32)m->m_pkthdr.len <= 0x30) {
@@ -125,7 +125,7 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00000270);
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_0000036C);
 
 s32 func_0000047C(s32 a0, s32 a1, struct ifqueue **out) {
-    *out = &D_00007984;
+    *out = &g_adhocIntrq;
     return 0;
 }
 
@@ -195,7 +195,7 @@ s32 sceNetAdhocSetSocketAlert(s32 id, s32 flag) {
         ret = 0x80410712;
         goto end;
     }
-    for (d = D_00007998.first; d != NULL; d = d->next) {
+    for (d = g_adhocDescList.first; d != NULL; d = d->next) {
         if (d->id == id)
             break;
     }
@@ -275,7 +275,7 @@ s32 sceNetAdhocGetSocketAlert(s32 id, s32 *flag) {
         ret = 0x80410712;
         goto end;
     }
-    for (d = D_00007998.first; d != NULL; d = d->next) {
+    for (d = g_adhocDescList.first; d != NULL; d = d->next) {
         if (d->id == id)
             break;
     }
@@ -307,12 +307,12 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc", sceNetAdhocGetSocketAlert);
 s32 func_00000DD0(void) {
     s32 ret;
 
-    D_00007998.first = NULL;
-    D_00007998.last = &D_00007998.first;
+    g_adhocDescList.first = NULL;
+    g_adhocDescList.last = &g_adhocDescList.first;
     ret = _sce_pspnet_start_of_adhoc_module_in_sched(func_00001078);
     if (ret < 0)
         return ret;
-    D_000079A0 = 0;
+    g_adhocLastId = 0;
     return 0;
 }
 
@@ -320,12 +320,12 @@ void func_00000E18(void) {
     SceNetAdhocDesc *d;
 
     _sce_pspnet_stop_of_adhoc_module_in_sched();
-    while ((d = D_00007998.first) != NULL) {
+    while ((d = g_adhocDescList.first) != NULL) {
         if (d->pcb == NULL) {
             if (d->next != NULL)
                 d->next->prev = d->prev;
             else
-                D_00007998.last = d->prev;
+                g_adhocDescList.last = d->prev;
             *d->prev = d->next;
             sceNetFreeInternal(d);
         }
@@ -335,7 +335,7 @@ void func_00000E18(void) {
 SceNetAdhocDesc *func_00000E90(u8 type, s32 id) {
     SceNetAdhocDesc *d;
 
-    for (d = D_00007998.first; d != NULL; d = d->next) {
+    for (d = g_adhocDescList.first; d != NULL; d = d->next) {
         if ((type == 0 || d->type == type) && d->id == id)
             break;
     }
@@ -347,14 +347,14 @@ s32 func_00000E44(void) {
     s32 id;
     SceNetAdhocDesc *d;
 
-    id = (D_000079A0 == 255) ? 1 : D_000079A0 + 1;
-    for (; id != D_000079A0; id = (id == 255) ? 1 : id + 1) {
-        for (d = D_00007998.first; d != NULL; d = d->next) {
+    id = (g_adhocLastId == 255) ? 1 : g_adhocLastId + 1;
+    for (; id != g_adhocLastId; id = (id == 255) ? 1 : id + 1) {
+        for (d = g_adhocDescList.first; d != NULL; d = d->next) {
             if (d->id == id)
                 break;
         }
         if (d == NULL) {
-            D_000079A0 = id;
+            g_adhocLastId = id;
             return id;
         }
     }
@@ -376,9 +376,9 @@ s32 func_00000ED0(u8 type, SceNetAdhocDesc **out) {
     __builtin_memset(d, 0, sizeof(SceNetAdhocDesc));
     d->type = type;
     d->next = NULL;
-    d->prev = D_00007998.last;
-    *D_00007998.last = d;
-    D_00007998.last = &d->next;
+    d->prev = g_adhocDescList.last;
+    *g_adhocDescList.last = d;
+    g_adhocDescList.last = &d->next;
     d->id = -1;
     *out = d;
     return 0;
@@ -397,7 +397,7 @@ void func_00000FFC(SceNetAdhocDesc *d) {
     if (d->next != NULL)
         d->next->prev = d->prev;
     else
-        D_00007998.last = d->prev;
+        g_adhocDescList.last = d->prev;
     *d->prev = d->next;
     sceNetFreeInternal(d);
 }
@@ -405,7 +405,7 @@ void func_00000FFC(SceNetAdhocDesc *d) {
 s32 func_00001044(void) {
     SceNetAdhocDesc *d;
 
-    for (d = D_00007998.first; d != NULL; d = d->next) {
+    for (d = g_adhocDescList.first; d != NULL; d = d->next) {
         if (d->waiters != NULL)
             return 1;
     }
@@ -712,9 +712,9 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_000022FC);
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", sceNetAdhocGetPdpStat);
 
 s32 func_0000297C(void) {
-    D_000079A4.first = NULL;
-    D_000079A4.last = &D_000079A4.first;
-    D_000079AC = sceNetRand() / 0x20009 + 0x4000;
+    g_pdpList.first = NULL;
+    g_pdpList.last = &g_pdpList.first;
+    g_pdpLastPort = sceNetRand() / 0x20009 + 0x4000;
     D_000079E4 = sceNetRand() / 0x8001;
     return 0;
 }
@@ -724,7 +724,7 @@ void func_000029E8(void) {
     SceNetAdhocPdpPcb *p;
     SceNetAdhocDesc *d;
 
-    while ((pcb = D_000079A4.first) != NULL) {
+    while ((pcb = g_pdpList.first) != NULL) {
         func_0000223C(pcb);
         d = pcb->desc;
         p = d->pcb;
@@ -732,7 +732,7 @@ void func_000029E8(void) {
         if (p->next != NULL)
             p->next->prev = p->prev;
         else
-            D_000079A4.last = p->prev;
+            g_pdpList.last = p->prev;
         *p->prev = p->next;
         sceNetFreeInternal(p);
     }
@@ -755,9 +755,9 @@ s32 func_00002A9C(SceNetAdhocDesc *d) {
     pcb->desc = d;
     d->pcb = pcb;
     pcb->next = NULL;
-    pcb->prev = D_000079A4.last;
-    *D_000079A4.last = pcb;
-    D_000079A4.last = &pcb->next;
+    pcb->prev = g_pdpList.last;
+    *g_pdpList.last = pcb;
+    g_pdpList.last = &pcb->next;
     return 0;
 }
 #endif
@@ -780,7 +780,7 @@ void func_00002CD4(SceNetAdhocDesc *d) {
     if (pcb->next != NULL)
         pcb->next->prev = pcb->prev;
     else
-        D_000079A4.last = pcb->prev;
+        g_pdpList.last = pcb->prev;
     *pcb->prev = pcb->next;
     sceNetFreeInternal(pcb);
 }
@@ -1391,7 +1391,7 @@ void func_00004AE4(SceNetAdhocDesc *d) {
     if (pcb->next != NULL)
         pcb->next->prev = pcb->prev;
     else
-        D_000079B0.last = pcb->prev;
+        g_ptpList.last = pcb->prev;
     *pcb->prev = pcb->next;
     sceNetFreeInternal(pcb);
 }
@@ -1522,10 +1522,10 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00005024);
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", sceNetAdhocGetPtpStat);
 
 s32 func_000052D4(void) {
-    D_000079B0.first = NULL;
-    D_000079B0.last = &D_000079B0.first;
-    D_000079B8 = sceNetRand() / 0x20009 + 0x4000;
-    D_000079BC = sceNetRand();
+    g_ptpList.first = NULL;
+    g_ptpList.last = &g_ptpList.first;
+    g_ptpLastPort = sceNetRand() / 0x20009 + 0x4000;
+    g_ptpIss = sceNetRand();
     return 0;
 }
 
@@ -1537,7 +1537,7 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00004964);
 SceNetAdhocPtpPcb *func_0000532C(const SceNetEtherAddr *laddr, u16 lport, const SceNetEtherAddr *paddr, u16 pport) {
     SceNetAdhocPtpPcb *p;
 
-    for (p = D_000079B0.first; p != NULL; p = p->next) {
+    for (p = g_ptpList.first; p != NULL; p = p->next) {
         if (func_00006E18(&p->laddr, laddr, 6) == 0 && p->lport == lport) {
             if (paddr == NULL)
                 break;
@@ -1567,9 +1567,9 @@ s32 func_0000548C(SceNetAdhocDesc *d) {
     pcb->clast = &pcb->cfirst;
     _sce_pspnet_callout_init(&pcb->callout);
     pcb->next = NULL;
-    pcb->prev = D_000079B0.last;
-    *D_000079B0.last = pcb;
-    D_000079B0.last = &pcb->next;
+    pcb->prev = g_ptpList.last;
+    *g_ptpList.last = pcb;
+    g_ptpList.last = &pcb->next;
     pcb->state = 0;
     pcb->desc = d;
     d->pcb = pcb;
@@ -1734,7 +1734,7 @@ void func_00004AE4(SceNetAdhocDesc *d) {
     if (pcb->next != NULL)
         pcb->next->prev = pcb->prev;
     else
-        D_000079B0.last = pcb->prev;
+        g_ptpList.last = pcb->prev;
     *pcb->prev = pcb->next;
     sceNetFreeInternal(pcb);
 }
@@ -1994,7 +1994,7 @@ s32 sceNetAdhocGameModeCreateMaster(void *ptr, s32 size) {
     ret = func_00006AB8(&addr, ptr, size);
     if (ret < 0)
         goto end;
-    D_000073F0 = ret;
+    g_gameModeMasterId = ret;
     ret = 0;
 end:
     _sce_pspnet_splunlock(s);
@@ -2020,10 +2020,10 @@ s32 sceNetAdhocGameModeUpdateMaster(void) {
     if (sceWlanDevIsGameMode() == 0)
         goto end;
     ret = 0x8041071C;
-    if (D_000073F0 < 0)
+    if (g_gameModeMasterId < 0)
         goto end;
-    for (gm = D_000079C0.first; gm != NULL; gm = gm->next) {
-        if (gm->id == D_000073F0)
+    for (gm = g_gameModeList.first; gm != NULL; gm = gm->next) {
+        if (gm->id == g_gameModeMasterId)
             break;
     }
     if (gm == NULL) {
@@ -2045,14 +2045,14 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc", sceNetAdhocGameModeDeleteMaster);
 
 #if FW_VERSION < 282
 s32 func_00006880(void) {
-    D_000079C0.first = NULL;
-    D_000079C0.last = &D_000079C0.first;
+    g_gameModeList.first = NULL;
+    g_gameModeList.last = &g_gameModeList.first;
     return 0;
 }
 #else
 s32 func_00006F68(void) {
-    D_000079C0.first = NULL;
-    D_000079C0.last = &D_000079C0.first;
+    g_gameModeList.first = NULL;
+    g_gameModeList.last = &g_gameModeList.first;
     return 0;
 }
 #endif
@@ -2060,11 +2060,11 @@ s32 func_00006F68(void) {
 void func_00006F80(void) {
     SceNetAdhocGameMode *gm;
 
-    while ((gm = D_000079C0.first) != NULL) {
+    while ((gm = g_gameModeList.first) != NULL) {
         if (gm->next != NULL)
             gm->next->prev = gm->prev;
         else
-            D_000079C0.last = gm->prev;
+            g_gameModeList.last = gm->prev;
         *gm->prev = gm->next;
         sceNetFreeInternal(gm);
     }
@@ -2114,8 +2114,8 @@ s32 sceNetAdhocGameModeDeleteMaster(void) {
     ret = 0x80410712;
     if (g_adhocInit != 0) {
         ret = 0x8041071C;
-        if (D_000073F0 >= 0)
-            ret = func_00006BB8(D_000073F0);
+        if (g_gameModeMasterId >= 0)
+            ret = func_00006BB8(g_gameModeMasterId);
     }
     _sce_pspnet_splunlock(s);
     return ret;
@@ -2156,7 +2156,7 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00006AB8);
 s32 func_00006BB8(s32 id) {
     SceNetAdhocGameMode *gm;
 
-    for (gm = D_000079C0.first; gm != NULL; gm = gm->next) {
+    for (gm = g_gameModeList.first; gm != NULL; gm = gm->next) {
         if (gm->id == id)
             break;
     }
@@ -2165,7 +2165,7 @@ s32 func_00006BB8(s32 id) {
     if (gm->next != NULL)
         gm->next->prev = gm->prev;
     else
-        D_000079C0.last = gm->prev;
+        g_gameModeList.last = gm->prev;
     *gm->prev = gm->next;
     sceNetFreeInternal(gm);
     return 0;
@@ -2192,7 +2192,7 @@ s32 func_00006C3C(s32 id, SceNetAdhocGameModeOptData *opt, s32 internal) {
     ret = 0x8041071B;
     if (sceWlanDevIsGameMode() == 0)
         goto end;
-    for (gm = D_000079C0.first; gm != NULL; gm = gm->next) {
+    for (gm = g_gameModeList.first; gm != NULL; gm = gm->next) {
         if (gm->id == id)
             break;
     }

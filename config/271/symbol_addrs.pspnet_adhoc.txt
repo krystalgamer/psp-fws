@@ -114,3 +114,12 @@ func_00007018 = 0x000070E8; // type:func rom:0x7188
 func_00006BB8 = 0x00007204; // type:func rom:0x72A4
 func_00006C3C = 0x00007298; // type:func rom:0x7338
 // shared names (tools/add_version.py) end
+g_adhocDescList = 0x00007998;
+g_adhocLastId = 0x000079A0;
+g_pdpList = 0x000079A4;
+g_pdpLastPort = 0x000079AC;
+g_ptpList = 0x000079B0;
+g_ptpLastPort = 0x000079B8;
+g_ptpIss = 0x000079BC;
+g_gameModeList = 0x000079C0;
+g_adhocIntrq = 0x00007984;

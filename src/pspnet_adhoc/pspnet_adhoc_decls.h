@@ -294,26 +294,26 @@ struct sockaddr_dl {
         } \
     } while (0)
 
-extern s32 D_000073F0;
 extern s32 D_00007448;
 extern SceNetAdhocStat100 D_00007450;
 extern const SceNetEtherAddr D_000078A4; /* ff:ff:ff:ff:ff:ff */
 extern const SceNetEtherAddr D_000078AC; /* 00:00:00:00:00:00 */
-extern struct ifqueue D_00007984;
-extern SceNetAdhocDescList D_00007998;
-extern s32 D_000079A0;
-extern SceNetAdhocPdpList D_000079A4;
-extern u16 D_000079AC;
-extern SceNetAdhocPtpList D_000079B0;
-extern u16 D_000079B8;
-extern u32 D_000079BC;
-extern SceNetAdhocGameModeList D_000079C0;
 extern M2C_UNK D_000079CC;
 extern u16 D_000079E4;
 extern M2C_UNK D_000079E8;
 extern M2C_UNK D_00007A8C;
 extern M2C_UNK D_00007CC8;
+extern SceNetAdhocDescList g_adhocDescList;
 extern s32 g_adhocInit;
+extern struct ifqueue g_adhocIntrq;
+extern s32 g_adhocLastId;
+extern SceNetAdhocGameModeList g_gameModeList;
+extern s32 g_gameModeMasterId;
+extern u16 g_pdpLastPort;
+extern SceNetAdhocPdpList g_pdpList;
+extern u32 g_ptpIss;
+extern u16 g_ptpLastPort;
+extern SceNetAdhocPtpList g_ptpList;
 
 void _sce_pspnet_adhoc_sabort(SceNetAdhocDesc *d, s32 flag);
 void _sce_pspnet_callout_init(void *c);
