@@ -78,12 +78,7 @@ void func_00084058(void) {
 
 INCLUDE_ASM("nonmatchings/music_main_plugin_083810", func_00084060);
 
-void func_000842A8(M2C_UNK **arg0) {
-    *arg0 = &D_000A1F90;
-}
-
-void func_000842B8(M2C_UNK **arg0) {
-    *arg0 = &D_000A1F90;
+Class_000A1F90::Class_000A1F90() {
 }
 
 Class_000A1F90::~Class_000A1F90() {

@@ -45,12 +45,7 @@ Class_000A2998::~Class_000A2998() {
 
 INCLUDE_ASM("nonmatchings/music_main_plugin_092074", func_00092538);
 
-void func_00092624(M2C_UNK **arg0) {
-    *arg0 = &D_000A29A8;
-}
-
-void func_00092634(M2C_UNK **arg0) {
-    *arg0 = &D_000A29A8;
+Class_000A29A8::Class_000A29A8() {
 }
 
 Class_000A29A8::~Class_000A29A8() {
@@ -105,9 +100,8 @@ INCLUDE_ASM("nonmatchings/music_main_plugin_092074", func_0008463C);
 
 INCLUDE_ASM("nonmatchings/music_main_plugin_092074", func_00084644);
 
-INCLUDE_ASM("nonmatchings/music_main_plugin_092074", func_000848E4);
-
-INCLUDE_ASM("nonmatchings/music_main_plugin_092074", func_000848F4);
+Class_00097C60::Class_00097C60() {
+}
 
 Class_00097C60::~Class_00097C60() {
 }
@@ -1375,9 +1369,8 @@ Class_000A2998::~Class_000A2998() {
 
 INCLUDE_ASM("nonmatchings/music_main_plugin_092074", func_00090698);
 
-INCLUDE_ASM("nonmatchings/music_main_plugin_092074", func_0009079C);
-
-INCLUDE_ASM("nonmatchings/music_main_plugin_092074", func_000907AC);
+Class_000A29A8::Class_000A29A8() {
+}
 
 Class_000A29A8::~Class_000A29A8() {
 }

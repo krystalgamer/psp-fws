@@ -88,12 +88,7 @@ void func_00078738(void) {
     func_00078664(0, 0xFFFF);
 }
 
-void func_00078758(M2C_UNK **arg0) {
-    *arg0 = &D_000A1800;
-}
-
-void func_00078768(M2C_UNK **arg0) {
-    *arg0 = &D_000A1800;
+Class_000A1800::Class_000A1800() {
 }
 
 Class_000A1800::~Class_000A1800() {
@@ -275,12 +270,7 @@ void func_0007AFA4(void) {
     func_0007AED0(0, 0xFFFF);
 }
 
-void func_0007AFC4(M2C_UNK **arg0) {
-    *arg0 = &D_000A1998;
-}
-
-void func_0007AFD4(M2C_UNK **arg0) {
-    *arg0 = &D_000A1998;
+Class_000A1998::Class_000A1998() {
 }
 
 Class_000A1998::~Class_000A1998() {
@@ -678,9 +668,8 @@ INCLUDE_ASM("nonmatchings/music_main_plugin_0772FC", func_00096554);
 #endif
 
 #if FW_VERSION >= 300 && FW_VERSION < 330
-INCLUDE_ASM("nonmatchings/music_main_plugin_0772FC", func_00095774);
-
-INCLUDE_ASM("nonmatchings/music_main_plugin_0772FC", func_00095784);
+Class_000BB2F8::Class_000BB2F8() {
+}
 
 Class_000BB2F8::~Class_000BB2F8() {
 }

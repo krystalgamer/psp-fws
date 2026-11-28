@@ -145,12 +145,7 @@ void func_00075154(void) {
     func_00075080(0, 0xFFFF);
 }
 
-void func_00075174(M2C_UNK **arg0) {
-    *arg0 = &D_000A1668;
-}
-
-void func_00075184(M2C_UNK **arg0) {
-    *arg0 = &D_000A1668;
+Class_000A1668::Class_000A1668() {
 }
 
 Class_000A1668::~Class_000A1668() {
