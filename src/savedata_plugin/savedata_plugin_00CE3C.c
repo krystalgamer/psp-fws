@@ -1236,7 +1236,24 @@ void func_0000F290(struct Unk_func_0000F290_0 *arg0, s32 arg1) {
 }
 #endif
 
+#if FW_VERSION >= 102
 INCLUDE_ASM("nonmatchings/savedata_plugin_00CE3C", func_0000F298);
+#else
+void func_0000F298(Class_00022578 *arg0, s32 arg1, s32 arg2) {
+    if (arg0->unk8 & 0x19) {
+        M2C_FIELD(arg0, s32 *, 0x10) = arg1;
+        M2C_FIELD(arg0, s32 *, 0x14) = -1;
+        if ((arg2 & 0xFF) != 1) {
+
+        } else {
+            func_0000F280(arg0);
+        }
+    } else {
+        M2C_FIELD(arg0, s32 *, 0x14) = arg1;
+        func_0000F3D4((s32) arg0);
+    }
+}
+#endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/savedata_plugin_00CE3C", func_0000D5C8);

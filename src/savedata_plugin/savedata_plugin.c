@@ -1357,8 +1357,15 @@ void func_00003234(void *arg0, s32 arg1) {
 }
 #endif
 
-#if FW_VERSION < 260
+#if FW_VERSION >= 102 && FW_VERSION < 260
 INCLUDE_ASM("nonmatchings/savedata_plugin", func_0000328C);
+#endif
+
+#if FW_VERSION == 100
+void func_0000328C(Class_00022578 *arg0, s32 arg1, s32 arg2) {
+    M2C_FIELD(arg0, s32 *, 0x18) = arg1;
+    func_0000F298(arg0, arg2, 1);
+}
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 260
@@ -2848,8 +2855,35 @@ INCLUDE_ASM("nonmatchings/savedata_plugin", func_000095F0);
 INCLUDE_ASM("nonmatchings/savedata_plugin", func_00009D5C);
 #endif
 
-#if FW_VERSION < 201
+#if FW_VERSION >= 102 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/savedata_plugin", func_000081E4);
+#endif
+
+#if FW_VERSION == 100
+void func_000081E4(void *arg0) {
+    s32 temp_v0;
+    void **temp_a0;
+    void **temp_a0_2;
+    void **temp_s0;
+
+    func_00010104(3, 0);
+    if (arg0 != NULL) {
+        func_00010260(M2C_FIELD(arg0, s32 *, 0x2C));
+        temp_a0 = M2C_FIELD(arg0, void ***, 0x1C);
+        temp_v0 = _ZNK3paf4View8PageRootEPKc(M2C_FIELD(*temp_a0, void *(**)(void **), 0x24)(temp_a0), &D_000221AC);
+        if (temp_v0 == 0) {
+
+        } else {
+            func_0000E180(temp_v0, (s32) arg0, 0);
+            temp_a0_2 = M2C_FIELD(arg0, void ***, 0x1C);
+            M2C_FIELD(*temp_a0_2, M2C_UNK (**)(void **), 0x1C)(temp_a0_2);
+            temp_s0 = M2C_FIELD(arg0, void ***, 0x1C);
+            func_00011224(temp_s0, M2C_FIELD(*temp_s0, s32 (**)(void **), 0x24)(temp_s0), (s32) &D_00021FAC, (s32) &D_00022088);
+            func_00000F20((s32) arg0);
+            func_00001E10(1);
+        }
+    }
+}
 #endif
 
 #if FW_VERSION >= 282
@@ -2901,9 +2935,24 @@ void func_00009978(struct Unk_func_00009978_0 *arg0) {
 }
 #endif
 
-#if FW_VERSION < 350
+#if FW_VERSION >= 102 && FW_VERSION < 350
 INCLUDE_ASM("nonmatchings/savedata_plugin", func_000099B0);
-#else
+#endif
+
+#if FW_VERSION == 100
+void func_000099B0(void *arg0) {
+    s32 temp_v0;
+    void **temp_a0;
+
+    if ((arg0 == NULL) || (func_00010260(M2C_FIELD(arg0, s32 *, 0x2C)), temp_a0 = M2C_FIELD(arg0, void ***, 0x1C), temp_v0 = _ZNK3paf4View8PageRootEPKc(M2C_FIELD(*temp_a0, void *(**)(void **), 0x24)(temp_a0), (s8 *) &D_00022378), (temp_v0 == 0))) {
+
+    } else {
+        func_00008DC4(temp_v0, (s32) arg0);
+    }
+}
+#endif
+
+#if FW_VERSION >= 350
 void func_000099B0(void *arg0) {
     s32 temp_v0;
 
@@ -2915,9 +2964,24 @@ void func_000099B0(void *arg0) {
 }
 #endif
 
-#if FW_VERSION < 350
+#if FW_VERSION >= 102 && FW_VERSION < 350
 INCLUDE_ASM("nonmatchings/savedata_plugin", func_00009A08);
-#else
+#endif
+
+#if FW_VERSION == 100
+void func_00009A08(void *arg0) {
+    s32 temp_v0;
+    void **temp_a0;
+
+    if ((arg0 == NULL) || (func_00010260(M2C_FIELD(arg0, s32 *, 0x2C)), temp_a0 = M2C_FIELD(arg0, void ***, 0x1C), temp_v0 = _ZNK3paf4View8PageRootEPKc(M2C_FIELD(*temp_a0, void *(**)(void **), 0x24)(temp_a0), (s8 *) &D_00022378), (temp_v0 == 0))) {
+
+    } else {
+        func_00008E98(temp_v0, (s32) arg0);
+    }
+}
+#endif
+
+#if FW_VERSION >= 350
 void func_00009A08(void *arg0) {
     s32 temp_v0;
 
@@ -2929,9 +2993,24 @@ void func_00009A08(void *arg0) {
 }
 #endif
 
-#if FW_VERSION < 350
+#if FW_VERSION >= 102 && FW_VERSION < 350
 INCLUDE_ASM("nonmatchings/savedata_plugin", func_00009A60);
-#else
+#endif
+
+#if FW_VERSION == 100
+void func_00009A60(void *arg0) {
+    s32 temp_v0;
+    void **temp_a0;
+
+    if ((arg0 == NULL) || (func_00010260(M2C_FIELD(arg0, s32 *, 0x2C)), temp_a0 = M2C_FIELD(arg0, void ***, 0x1C), temp_v0 = _ZNK3paf4View8PageRootEPKc(M2C_FIELD(*temp_a0, void *(**)(void **), 0x24)(temp_a0), (s8 *) &D_00022378), (temp_v0 == 0))) {
+
+    } else {
+        func_00008DC4(temp_v0, (s32) arg0);
+    }
+}
+#endif
+
+#if FW_VERSION >= 350
 void func_00009A60(void *arg0) {
     s32 temp_v0;
 
@@ -2943,9 +3022,24 @@ void func_00009A60(void *arg0) {
 }
 #endif
 
-#if FW_VERSION < 350
+#if FW_VERSION >= 102 && FW_VERSION < 350
 INCLUDE_ASM("nonmatchings/savedata_plugin", func_00009AB8);
-#else
+#endif
+
+#if FW_VERSION == 100
+void func_00009AB8(void *arg0) {
+    s32 temp_v0;
+    void **temp_a0;
+
+    if ((arg0 == NULL) || (func_00010260(M2C_FIELD(arg0, s32 *, 0x2C)), temp_a0 = M2C_FIELD(arg0, void ***, 0x1C), temp_v0 = _ZNK3paf4View8PageRootEPKc(M2C_FIELD(*temp_a0, void *(**)(void **), 0x24)(temp_a0), (s8 *) &D_00022378), (temp_v0 == 0))) {
+
+    } else {
+        func_00008E98(temp_v0, (s32) arg0);
+    }
+}
+#endif
+
+#if FW_VERSION >= 350
 void func_00009AB8(void *arg0) {
     s32 temp_v0;
 
