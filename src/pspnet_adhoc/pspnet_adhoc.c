@@ -9,7 +9,7 @@ s32 sceNetAdhocInit(void) {
 
     s = _sce_pspnet_spllock();
     ret = 0x80410713;
-    if (D_00007400 > 0)
+    if (g_adhocInit > 0)
         goto end;
     D_00007984.ifq_maxlen = 50;
     D_00007984.ifq_len = 0;
@@ -33,7 +33,7 @@ s32 sceNetAdhocInit(void) {
         goto err4;
     if (func_00006880() < 0)
         goto err5;
-    D_00007400 = 1;
+    g_adhocInit = 1;
     _sce_pspnet_splunlock(s);
     return 0;
 
@@ -63,7 +63,7 @@ s32 sceNetAdhocTerm(void) {
 
     ret = 0;
     s = _sce_pspnet_spllock();
-    if (D_00007400 == 0)
+    if (g_adhocInit == 0)
         goto end;
     if (func_00001044() != 0) {
         ret = 0x80410714;
@@ -79,7 +79,7 @@ s32 sceNetAdhocTerm(void) {
         IF_DEQUEUE(&D_00007984, m);
         sceNetMFreem(m);
     }
-    D_00007400 = 0;
+    g_adhocInit = 0;
 end:
     _sce_pspnet_splunlock(s);
     return ret;
@@ -191,7 +191,7 @@ s32 sceNetAdhocSetSocketAlert(s32 id, s32 flag) {
     ret = 0;
     s = _sce_pspnet_spllock();
     n = 0;
-    if (D_00007400 == 0) {
+    if (g_adhocInit == 0) {
         ret = 0x80410712;
         goto end;
     }
@@ -271,7 +271,7 @@ s32 sceNetAdhocGetSocketAlert(s32 id, s32 *flag) {
     if (flag == NULL)
         return 0x80410711;
     s = _sce_pspnet_spllock();
-    if (D_00007400 == 0) {
+    if (g_adhocInit == 0) {
         ret = 0x80410712;
         goto end;
     }
@@ -447,7 +447,7 @@ s32 sceNetAdhocPdpSend(s32 id, const SceNetEtherAddr *daddr, u16 dport, const vo
         return 0x80410002;
     s = _sce_pspnet_spllock();
     ret = 0x80410712;
-    if (D_00007400 == 0)
+    if (g_adhocInit == 0)
         goto end;
     d = func_00000E90(1, id);
     ret = 0x80410701;
@@ -499,7 +499,7 @@ s32 sceNetAdhocPdpDelete(s32 id, s32 flag) {
 
     ret = 0;
     s = _sce_pspnet_spllock();
-    if (D_00007400 == 0) {
+    if (g_adhocInit == 0) {
         ret = 0x80410712;
         goto end;
     }
@@ -617,7 +617,7 @@ s32 func_00001F20(s32 id, SceNetEtherAddr *addr, u16 *port, void *buf, s32 *len,
         return 0x80410002;
     s = _sce_pspnet_spllock();
     ret = 0x80410712;
-    if (D_00007400 == 0)
+    if (g_adhocInit == 0)
         goto end;
     d = func_00000E90(1, id);
     ret = 0x80410701;
@@ -870,7 +870,7 @@ s32 sceNetAdhocPtpOpen(const SceNetEtherAddr *saddr, u16 sport, const SceNetEthe
         return 0x80410711;
     ret = 0x80410712;
     s = _sce_pspnet_spllock();
-    if (D_00007400 == 0)
+    if (g_adhocInit == 0)
         goto end;
     ret = func_00003A68(saddr, sport, bufsize, bufsize, rexmt_int, rexmt_cnt, &d);
     if (ret < 0)
@@ -905,7 +905,7 @@ s32 sceNetAdhocPtpConnect(s32 id, u32 timeout, s32 nonblock) {
         return 0x80410002;
     s = _sce_pspnet_spllock();
     ret = 0x80410712;
-    if (D_00007400 == 0)
+    if (g_adhocInit == 0)
         goto end;
     d = func_00000E90(2, id);
     ret = 0x80410701;
@@ -958,7 +958,7 @@ s32 sceNetAdhocPtpListen(const SceNetEtherAddr *saddr, u16 sport, s32 bufsize, u
         return 0x80410711;
     ret = 0x80410712;
     s = _sce_pspnet_spllock();
-    if (D_00007400 == 0)
+    if (g_adhocInit == 0)
         goto end;
     ret = func_00003A68(saddr, sport, bufsize, bufsize, rexmt_int, rexmt_cnt, &d);
     if (ret < 0)
@@ -993,7 +993,7 @@ s32 sceNetAdhocPtpAccept(s32 id, SceNetEtherAddr *addr, u16 *port, u32 timeout, 
         return 0x80410002;
     s = _sce_pspnet_spllock();
     ret = 0x80410712;
-    if (D_00007400 == 0)
+    if (g_adhocInit == 0)
         goto end;
     d = func_00000E90(2, id);
     ret = 0x80410701;
@@ -1054,7 +1054,7 @@ s32 sceNetAdhocPtpSend(s32 id, const void *data, s32 *len, u32 timeout, s32 nonb
         return 0x80410002;
     s = _sce_pspnet_spllock();
     ret = 0x80410712;
-    if (D_00007400 == 0)
+    if (g_adhocInit == 0)
         goto end;
     d = func_00000E90(2, id);
     ret = 0x80410701;
@@ -1118,7 +1118,7 @@ s32 sceNetAdhocPtpRecv(s32 id, void *buf, s32 *len, u32 timeout, s32 nonblock) {
         return 0x80410002;
     s = _sce_pspnet_spllock();
     ret = 0x80410712;
-    if (D_00007400 == 0)
+    if (g_adhocInit == 0)
         goto end;
     d = func_00000E90(2, id);
     ret = 0x80410701;
@@ -1180,7 +1180,7 @@ s32 sceNetAdhocPtpFlush(s32 id, u32 timeout, s32 nonblock) {
         return 0x80410002;
     s = _sce_pspnet_spllock();
     ret = 0x80410712;
-    if (D_00007400 == 0)
+    if (g_adhocInit == 0)
         goto end;
     d = func_00000E90(2, id);
     ret = 0x80410701;
@@ -1234,7 +1234,7 @@ s32 sceNetAdhocPtpClose(s32 id, s32 flag) {
 
     ret = 0;
     s = _sce_pspnet_spllock();
-    if (D_00007400 == 0) {
+    if (g_adhocInit == 0) {
         ret = 0x80410712;
         goto end;
     }
@@ -1983,7 +1983,7 @@ s32 sceNetAdhocGameModeCreateMaster(void *ptr, s32 size) {
         return 0x80410711;
     ret = 0x80410712;
     s = _sce_pspnet_spllock();
-    if (D_00007400 == 0)
+    if (g_adhocInit == 0)
         goto end;
     ret = 0x8041071B;
     if (sceWlanDevIsGameMode() == 0)
@@ -2014,7 +2014,7 @@ s32 sceNetAdhocGameModeUpdateMaster(void) {
 
     s = _sce_pspnet_spllock();
     ret = 0x80410712;
-    if (D_00007400 == 0)
+    if (g_adhocInit == 0)
         goto end;
     ret = 0x8041071B;
     if (sceWlanDevIsGameMode() == 0)
@@ -2079,7 +2079,7 @@ s32 sceNetAdhocGameModeCreateReplica(const SceNetEtherAddr *addr, void *ptr, s32
         return 0x80410711;
     ret = 0x80410712;
     s = _sce_pspnet_spllock();
-    if (D_00007400 == 0)
+    if (g_adhocInit == 0)
         goto end;
     ret = 0x8041071B;
     if (sceWlanDevIsGameMode() == 0)
@@ -2112,7 +2112,7 @@ s32 sceNetAdhocGameModeDeleteMaster(void) {
 
     s = _sce_pspnet_spllock();
     ret = 0x80410712;
-    if (D_00007400 != 0) {
+    if (g_adhocInit != 0) {
         ret = 0x8041071C;
         if (D_000073F0 >= 0)
             ret = func_00006BB8(D_000073F0);
@@ -2135,7 +2135,7 @@ s32 sceNetAdhocGameModeDeleteReplica(s32 id) {
 
     s = _sce_pspnet_spllock();
     ret = 0x80410712;
-    if (D_00007400 == 0)
+    if (g_adhocInit == 0)
         goto end;
     ret = func_00006BB8(id);
 end:
@@ -2187,7 +2187,7 @@ s32 func_00006C3C(s32 id, SceNetAdhocGameModeOptData *opt, s32 internal) {
     info = NULL;
     s = _sce_pspnet_spllock();
     ret = 0x80410712;
-    if (D_00007400 == 0)
+    if (g_adhocInit == 0)
         goto end;
     ret = 0x8041071B;
     if (sceWlanDevIsGameMode() == 0)

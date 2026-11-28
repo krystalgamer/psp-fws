@@ -106,3 +106,4 @@ sceWlanGPPrevEstablishActive = 0x0000703C; // type:func rom:0x70BC
 sceWlanGPSend = 0x00007044; // type:func rom:0x70C4
 sceWlanGPRecv = 0x0000704C; // type:func rom:0x70CC
 // shared names (tools/add_version.py) end
+g_adhocInit = 0x00007400;

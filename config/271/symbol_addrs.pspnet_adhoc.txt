@@ -72,7 +72,7 @@ sceWlanGPRecv = 0x00007540; // type:func
 sceWlanGPSend = 0x00007548; // type:func
 // shared names (tools/add_version.py) begin
 D_00007C50 = 0x00007970; // rom:0x7A10
-D_00007C60 = 0x00007980;
+g_adhocInit = 0x00007980;
 D_00007448 = 0x000079C8;
 D_00007A8C = 0x000079CC;
 D_00007CC8 = 0x000079E8;

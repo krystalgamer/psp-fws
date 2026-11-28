@@ -295,7 +295,6 @@ struct sockaddr_dl {
     } while (0)
 
 extern s32 D_000073F0;
-extern s32 D_00007400;
 extern s32 D_00007448;
 extern SceNetAdhocStat100 D_00007450;
 extern const SceNetEtherAddr D_000078A4; /* ff:ff:ff:ff:ff:ff */
@@ -314,6 +313,7 @@ extern u16 D_000079E4;
 extern M2C_UNK D_000079E8;
 extern M2C_UNK D_00007A8C;
 extern M2C_UNK D_00007CC8;
+extern s32 g_adhocInit;
 
 void _sce_pspnet_adhoc_sabort(SceNetAdhocDesc *d, s32 flag);
 void _sce_pspnet_callout_init(void *c);
@@ -351,6 +351,7 @@ s32 func_00001530(SceNetAdhocDesc *d, const SceNetEtherAddr *daddr, u16 dport, c
 s32 func_00001B90(SceNetAdhocDesc *d, SceNetEtherAddr *addr, u16 *port, void *buf, s32 *len, u32 timeout, s32 nonblock, void *rfinfo);
 s32 func_00001F20(s32 id, SceNetEtherAddr *addr, u16 *port, void *buf, s32 *len, u32 timeout, s32 nonblock, void *rfinfo);
 s32 func_00002108(SceNetAdhocPdpPcb *pcb, const SceNetEtherAddr *addr, u16 port);
+s32 func_0000215C(s32 id, SceNetEtherAddr *addr, u16 *port, void *buf, s32 *len, u32 timeout, s32 nonblock, void *rfinfo);
 void func_0000223C(SceNetAdhocPdpPcb *pcb);
 void func_000023C4(struct mbuf *m);
 s32 func_0000297C(void);
@@ -416,6 +417,7 @@ void func_00006F80(void);
 s32 func_00007298(s32 id, SceNetAdhocGameModeOptData *opt, s32 internal);
 s32 module_start(void);
 s32 module_stop(void);
+s32 sceKernelCheckThreadStack(void);
 s32 sceKernelSignalSema(s32 sema, s32 n);
 s32 sceNetAdhocGameModeCreateMaster(void *ptr, s32 size);
 s32 sceNetAdhocGameModeCreateReplica(const SceNetEtherAddr *addr, void *ptr, s32 size);

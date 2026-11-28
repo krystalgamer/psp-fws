@@ -70,3 +70,4 @@ sceWlanDevIsGameMode = 0x00007530; // type:func
 sceWlanGPPrevEstablishActive = 0x00007538; // type:func
 sceWlanGPRecv = 0x00007540; // type:func
 sceWlanGPSend = 0x00007548; // type:func
+g_adhocInit = 0x00007980;

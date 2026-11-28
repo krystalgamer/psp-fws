@@ -36,6 +36,7 @@
   "func_00001B90": "s32 func_00001B90(SceNetAdhocDesc *d, SceNetEtherAddr *addr, u16 *port, void *buf, s32 *len, u32 timeout, s32 nonblock, void *rfinfo);",
   "func_00001F20": "s32 func_00001F20(s32 id, SceNetEtherAddr *addr, u16 *port, void *buf, s32 *len, u32 timeout, s32 nonblock, void *rfinfo);",
   "func_00002108": "s32 func_00002108(SceNetAdhocPdpPcb *pcb, const SceNetEtherAddr *addr, u16 port);",
+  "func_0000215C": "s32 func_0000215C(s32 id, SceNetEtherAddr *addr, u16 *port, void *buf, s32 *len, u32 timeout, s32 nonblock, void *rfinfo);",
   "func_0000223C": "void func_0000223C(SceNetAdhocPdpPcb *pcb);",
   "func_000023C4": "void func_000023C4(struct mbuf *m);",
   "func_0000297C": "s32 func_0000297C(void);",
@@ -101,6 +102,7 @@
   "func_00007298": "s32 func_00007298(s32 id, SceNetAdhocGameModeOptData *opt, s32 internal);",
   "module_start": "s32 module_start(void);",
   "module_stop": "s32 module_stop(void);",
+  "sceKernelCheckThreadStack": "s32 sceKernelCheckThreadStack(void);",
   "sceKernelSignalSema": "s32 sceKernelSignalSema(s32 sema, s32 n);",
   "sceNetAdhocGameModeCreateMaster": "s32 sceNetAdhocGameModeCreateMaster(void *ptr, s32 size);",
   "sceNetAdhocGameModeCreateReplica": "s32 sceNetAdhocGameModeCreateReplica(const SceNetEtherAddr *addr, void *ptr, s32 size);",
@@ -171,7 +173,6 @@
  },
  "vars": {
   "D_000073F0": "extern s32 D_000073F0;",
-  "D_00007400": "extern s32 D_00007400;",
   "D_00007448": "extern s32 D_00007448;",
   "D_00007450": "extern SceNetAdhocStat100 D_00007450;",
   "D_000078A4": "extern const SceNetEtherAddr D_000078A4; /* ff:ff:ff:ff:ff:ff */",
@@ -189,6 +190,7 @@
   "D_000079E4": "extern u16 D_000079E4;",
   "D_000079E8": "extern M2C_UNK D_000079E8;",
   "D_00007A8C": "extern M2C_UNK D_00007A8C;",
-  "D_00007CC8": "extern M2C_UNK D_00007CC8;"
+  "D_00007CC8": "extern M2C_UNK D_00007CC8;",
+  "g_adhocInit": "extern s32 g_adhocInit;"
  }
 }

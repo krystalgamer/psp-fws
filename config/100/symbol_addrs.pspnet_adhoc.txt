@@ -107,3 +107,4 @@ func_0000532C = 0x000053CC; // type:func rom:0x544C
 func_000069D4 = 0x00006624; // type:func rom:0x66A4
 func_00006F80 = 0x00006898; // type:func rom:0x6918
 // shared names (tools/add_version.py) end
+g_adhocInit = 0x00007400;
