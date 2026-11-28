@@ -292,11 +292,19 @@ def run_m2c(mod, name, ctx, target="mips-gcc-c"):
     asm = re.sub(r"\$(\d+)\b", lambda m: "$" + names[int(m[1])] if int(m[1]) < 32 else m[0], asm)
     if "$k1" in asm:
         asm = k1_as_global(asm)
+    cxx_ctx = "/* lang: c++ */" in ctx
     ctx = subprocess.run(["cpp", "-P", "-undef", "-nostdinc", "-DM2CTX", f"-I{ROOT/'include'}", "-"],
                          input=ctx, capture_output=True, text=True).stdout
     # C++ modules' decls declare unknown prototypes as `f(...)` (tools/structify.cxx_proto); m2c's C
     # parser rejects that, `f()` means the same to it
     ctx = re.sub(r"\(\.\.\.\);", "();", ctx)
+    if cxx_ctx:
+        # C++ lets struct tags be type names (fixer-made prototypes `X *f(void);`): typedefs for C
+        tags = set(re.findall(r"\bstruct (\w+) \{", ctx))
+        tds = set(re.findall(r"\btypedef\b[^;{]*?\b(\w+);", ctx)) | set(re.findall(r"\}\s*(\w+);", ctx))
+        ctx = "".join(f"typedef struct {t} {t};\n" for t in sorted(tags - tds)) + ctx
+    if re.search(r"\bbool\b", ctx) and not re.search(r"typedef[^;]*\bbool;", ctx):
+        ctx = "typedef unsigned char bool;\n" + ctx  # demangled prototypes (cxx_proto) use C++'s bool
     # the context lives at a path keyed by its content, so m2c's typemap cache
     # (<ctx>.m2c next to it) is reused across functions and runs
     import hashlib

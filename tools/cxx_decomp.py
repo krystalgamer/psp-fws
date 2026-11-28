@@ -109,6 +109,10 @@ def retype(header, name, cls):
     return header[:m.start()] + m[1] + f"{cls} *arg0" + m[3] + header[m.end():], True
 
 
+TYPEWORDS = {"s8", "u8", "s16", "u16", "s32", "u32", "f32", "int", "char", "short", "long", "float", "bool",
+             "unsigned", "signed", "void", "M2C_UNK", "const"}
+
+
 def keep_proto(body, proto, cls):
     """Define the method with the store's prototype (callers keep their types) and view `this` as the
     class through a copy: `T f(P0 cxxthis, ...) { Class_X *arg0 = (Class_X *) cxxthis; ...`."""
@@ -122,8 +126,8 @@ def keep_proto(body, proto, cls):
         return None
     names = []
     for i, pp in enumerate(pps):
-        nm = re.search(r"\b(arg\d+)$", pp)
-        ty = re.sub(r"\barg\d+$", "", pp).strip() if nm else pp
+        pm2 = re.match(r"^(.*?[\s*])(\w+)$", pp)
+        ty = pm2[1].strip() if pm2 and pm2[2] not in TYPEWORDS else pp
         names.append(f"{ty} {'cxxthis' if i == 0 else f'arg{i}'}".replace("* ", "*") if not ty.endswith("*")
                      else f"{ty}{'cxxthis' if i == 0 else f'arg{i}'}")
     head = f"{pm[1].strip()} {pm[2]}({', '.join(names)}) {{\n    {cls} *arg0 = ({cls} *) cxxthis;\n"
@@ -190,7 +194,7 @@ def main():
                           lambda mm: f"arg0->unk{int(mm[2], 0):X}" if fl.get(int(mm[2], 0)) == mm[1] else mm[0], body)
             new_decls = [d for d in decls if not re.search(rf"\b{nm}\(", d)]
             if nm in m.store["funcs"] and typed:
-                kb = keep_proto(body, m.store["funcs"][nm], cls)
+                kb = keep_proto(body, structify.cxx_proto(m.store["funcs"][nm]), cls)
                 if kb is None:
                     continue
                 body = kb
