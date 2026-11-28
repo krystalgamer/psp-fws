@@ -482,6 +482,7 @@ extern s8 D_00027C98;
 extern char D_00027C99[];
 extern u32 D_00027CC4[1]; /* per drive: first freed cluster hint */
 extern PfDrive *D_00027CC8[1]; /* per drive (index drive - A; one drive in 1.00) */
+extern s32 D_00027DCC; /* short-name tail position */
 extern s8 D_00027DD0[1]; /* per drive: 1 = flush after each operation */
 extern s32 D_00027DD4;
 extern SceIoDeviceTable D_0002B568; /* the fatms driver */
@@ -594,6 +595,7 @@ void func_000057CC(s32 arg0);
 s32 func_00005D18(s32 *flag);
 s32 func_00006148(char *name, s32 *index, u8 *kind);
 s32 func_0000635C(void);
+s32 func_00006414(PfDirCursor *cur, char *name, s32 a2, s32 a3);
 s32 func_00006724(void);
 s8 *func_000067D4(void);
 s32 func_000067E0(void);
@@ -601,6 +603,7 @@ s32 func_000067EC(void);
 s32 func_00006918(void);
 s32 func_00006960(void);
 void func_00006B10(PfDate *d, PfTime *t);
+s32 func_000072F0(PfDirCursor *cur);
 s32 func_000075CC(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
 s32 func_0000764C(void);
 s32 func_000076F4(s32, s32);
@@ -637,13 +640,15 @@ void func_00009F08(u16 *date, u16 *time);
 void func_00009F90(FatDirEnt *de, s8 create);
 s32 func_00009FA0(s32);
 void func_0000A128(void);
-s32 func_0000A3AC(s32);
+s32 func_0000A3AC(PfDirCursor *cur);
 s32 func_0000A460(s8 drive, s32 a1, s32 a2, s32 a3, s32 a4);
 s32 func_0000A698(s32 a0, s32 a1, s32 a2);
 s32 func_0000A714(s32 a0, s32 a1, s32 n);
 s32 func_0000A744(s32 a0, s32 a1, s32 a2); /* driver write (buf, sector, count) */
 s32 func_0000A7C0(const u8 *s);
 s32 func_0000A8F8(s32);
+void func_0000A90C(u8 *buf, s32 len); /* add the ~ tail of a short name */
+s32 func_0000A99C(PfDirCursor *cur);
 s32 func_0000AAC4(void);
 s32 func_0000ABF8(PfFile *fp);
 s32 func_0000ACF8(void);
@@ -677,6 +682,7 @@ s32 func_0000C108(s32 drv);
 s32 func_0000C120(s32);
 s32 func_0000C7A8(s32, s32, s32, s32);
 s32 func_0000C7E8(s8 drive, u32 mode);
+s32 func_0000C928(char *path, u32 attr);
 s32 func_0000CC88(void);
 s32 func_0000D440(s32, s32);
 void func_0000D70C(s32 arg0, s32 arg1, s8 arg2, s8 arg3);
@@ -733,8 +739,8 @@ void func_000149E0(void);
 s32 func_00014AF8(s32);
 void func_00014E4C(s32 arg0);
 s32 func_00015468(s32, s32, s32);
-s32 func_000155DC(s32, s32);
-s32 func_00015908(s32, s32);
+s32 func_000155DC(const char *path, u32 attr); /* mkdir */
+s32 func_00015908(const char *path, u32 attr);
 s32 func_00015AE8(s32, s32, s32);
 s32 func_000163EC(s32, s32);
 void func_00016484(s32 arg0, s32 arg1);
