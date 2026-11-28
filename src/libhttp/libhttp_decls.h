@@ -410,6 +410,22 @@ typedef struct SceHttpConn {
 } SceHttpConn;
 typedef char chk_SceHttpConn[(sizeof(SceHttpConn) == 0x164) ? 1 : -1];
 
+/* 0x40-byte entry keyed by the MD5 of a string (func_00003E34); purpose unknown */
+typedef struct SceHttpMd5Entry {
+    s32 reference_counter;  /* 0x00 */
+    s32 unk04;              /* 0x04 */
+    u8 unk08[0x10 - 0x08];
+    u8 digest[16];          /* 0x10 sceKernelUtilsMd5Digest(key) */
+    char *key;              /* 0x20 */
+    char *value;            /* 0x24 */
+    s32 unk28;
+    s32 status;             /* 0x2C */
+    s32 unk30;
+    struct SceHttpMd5Entry *next; /* 0x34 */
+    u8 unk38[0x40 - 0x38];
+} SceHttpMd5Entry;
+typedef char chk_SceHttpMd5Entry[(sizeof(SceHttpMd5Entry) == 0x40) ? 1 : -1];
+
 /* 1.00-1.03 request (ids 0x02xxxxxx); 1.02/1.03 grew by 0x18 */
 /* HTTP_REQ_V(1.00, 1.02, 1.03) */
 #if FW_VERSION < 102
@@ -486,22 +502,8 @@ typedef struct {
     u32 cache_size;         /* 0x10 */
     s32 cache_used;         /* 0x14 */
     struct SceHttpCacheEntry *cache_list; /* 0x18 */
-    u8 unk1C[0x5C - 0x1C];
+    struct SceHttpMd5Entry *md5_table[16]; /* 0x1C, bucket = digest[0] >> 4 */
 } SceHttpGlobals;
-
-/* 0x40-byte entry keyed by the MD5 of a string (func_00003E34); purpose unknown */
-typedef struct SceHttpMd5Entry {
-    s32 unk00;
-    s32 unk04;              /* 0x04 */
-    u8 unk08[0x10 - 0x08];
-    u8 digest[16];          /* 0x10 sceKernelUtilsMd5Digest(key) */
-    char *key;              /* 0x20 */
-    char *value;            /* 0x24 */
-    s32 unk28;
-    s32 status;             /* 0x2C */
-    u8 unk30[0x40 - 0x30];
-} SceHttpMd5Entry;
-typedef char chk_SceHttpMd5Entry[(sizeof(SceHttpMd5Entry) == 0x40) ? 1 : -1];
 
 struct Unk_func_00005CD0_var_a0 {
     u8 pad0[0x7C];
@@ -666,6 +668,7 @@ s32 func_0000BA74(void);
 void func_0000BA84(s32 arg0);
 void func_0000BAF8(void *arg0);
 s32 *func_0000BB14(void);
+int func_0000BB58(const void *s1, const void *s2, int n);
 u8 *func_0000BB98(u8 *arg0, u8 *arg1, s32 arg2);
 void *func_0000BBCC(void *s, int c, int n);
 int func_0000BC98(const char *s1, const char *s2);

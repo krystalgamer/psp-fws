@@ -1216,9 +1216,50 @@ void func_00003D08(void *arg0) {
 
 INCLUDE_ASM("nonmatchings/libhttp", func_00003D28);
 
-INCLUDE_ASM("nonmatchings/libhttp", func_00003E34);
+void func_00003E34(const char *key, SceHttpMd5Entry **out) {
+    char *copy;
+    SceHttpMd5Entry *entry;
 
-INCLUDE_ASM("nonmatchings/libhttp", func_00003EEC);
+    copy = _sceHttpMallocInternal(func_0000BE38(key) + 1);
+    if (copy == NULL) {
+        return;
+    }
+    func_0000C0DC(copy, key);
+    entry = _sceHttpMallocInternal(sizeof(SceHttpMd5Entry));
+    if (entry == NULL) {
+        _sceHttpFreeInternal(copy);
+        return;
+    }
+    func_0000BBCC(entry, 0, sizeof(SceHttpMd5Entry));
+    sceKernelUtilsMd5Digest((u8 *)key, func_0000BE38(key), entry->digest);
+    entry->key = copy;
+    *out = entry;
+}
+
+void func_00003EEC(SceHttpMd5Entry *entry) {
+    SceHttpMd5Entry *prev = NULL;
+    SceHttpMd5Entry *p;
+    int idx;
+    int intr;
+
+    if (entry == NULL) {
+        return;
+    }
+    idx = entry->digest[0] >> 4;
+    intr = sceKernelSuspendDispatchThread();
+    p = D_0000DCCC.md5_table[idx];
+    while (p != NULL && func_0000BB58(p->digest, entry->digest, 16) > 0) {
+        prev = p;
+        p = p->next;
+    }
+    if (prev != NULL) {
+        prev->next = entry;
+        entry->next = p;
+    } else {
+        D_0000DCCC.md5_table[idx] = entry;
+    }
+    sceKernelResumeDispatchThread(intr);
+}
 #endif
 
 #if FW_VERSION == 100
