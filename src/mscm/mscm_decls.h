@@ -162,8 +162,6 @@ extern SceMScmBitMap D_000069F8[13];
 extern u8 D_00006B10[];
 extern u8 D_00006B24[];
 extern s32 D_00006B40[1];
-extern SceUID D_00006B48[1];
-extern SceUID D_00006B4C[1];
 extern SceUID D_00006B50; /* "SceMScm" VPL */
 extern SceMScmCLDM D_00006B54[1][3];
 extern SceUID D_00006ECC[1]; /* "SceMScmCLDMList" sema */
@@ -179,7 +177,9 @@ extern s32 D_00006F20;
 extern s32 D_00006F90[1];
 extern char D_00007120[]; /* "SceMScm" */
 extern SceKernelSysClock D_00007190; /* sysclock ticks per usec */
+extern SceUID D_00007198[1][32]; /* notify event flags (devctl register) */
 extern s32 D_00007218;
+extern SceUID D_0000721C[1][32]; /* notify callbacks (devctl register) */
 extern char D_00007300[]; /* "Assertion failed at %s:%s:%04d\n" (mscm_ioman.c) */
 extern s32 D_00007334[1];
 extern s32 D_00007800;
@@ -188,6 +188,8 @@ extern s32 D_00007AF4;
 extern u64 g_ejectTime[1]; /* 1.50+: time of the last ejection */
 extern u64 g_insertTime[1]; /* 1.50+: time of the last insertion */
 extern s32 g_irqMissCount[1];
+extern SceUID g_mainEvf[1];
+extern SceUID g_mediaEvf[1];
 
 s32 _sceMScmGetCLDMHelper(s32 slot, s32 n, SceMScmCLDMInfo **out);
 s32 _sceMScmReinitializeHC(s32 slot);
@@ -197,6 +199,9 @@ s32 func_000001E4(SceMScmHC *hc);
 void func_00000930(s32 arg0);
 s32 func_00000C1C(SceMScmHC *hc);
 s32 func_0000179C(SceSize args, void *argp);
+s32 func_000018B8(s32 slot);
+s32 func_00001BA0(s32 slot);
+s32 func_00001D18(s32 slot);
 s32 func_00002194(s32 (*arg0)(s32, s32, s32, s32, s32), s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5);
 s32 func_00002238(SceSize args, void *argp);
 s32 func_0000254C(s32 (*arg0)(s32, s32, s32, s32, s32), s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5);

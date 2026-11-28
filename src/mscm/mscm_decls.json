@@ -8,6 +8,9 @@
   "func_00000930": "void func_00000930(s32 arg0);",
   "func_00000C1C": "s32 func_00000C1C(SceMScmHC *hc);",
   "func_0000179C": "s32 func_0000179C(SceSize args, void *argp);",
+  "func_000018B8": "s32 func_000018B8(s32 slot);",
+  "func_00001BA0": "s32 func_00001BA0(s32 slot);",
+  "func_00001D18": "s32 func_00001D18(s32 slot);",
   "func_00002194": "s32 func_00002194(s32 (*arg0)(s32, s32, s32, s32, s32), s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5);",
   "func_00002238": "s32 func_00002238(SceSize args, void *argp);",
   "func_0000254C": "s32 func_0000254C(s32 (*arg0)(s32, s32, s32, s32, s32), s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5);",
@@ -126,8 +129,6 @@
   "D_00006B10": "extern u8 D_00006B10[];",
   "D_00006B24": "extern u8 D_00006B24[];",
   "D_00006B40": "extern s32 D_00006B40[1];",
-  "D_00006B48": "extern SceUID D_00006B48[1];",
-  "D_00006B4C": "extern SceUID D_00006B4C[1];",
   "D_00006B50": "extern SceUID D_00006B50; /* \"SceMScm\" VPL */",
   "D_00006B54": "extern SceMScmCLDM D_00006B54[1][3];",
   "D_00006ECC": "extern SceUID D_00006ECC[1]; /* \"SceMScmCLDMList\" sema */",
@@ -143,7 +144,9 @@
   "D_00006F90": "extern s32 D_00006F90[1];",
   "D_00007120": "extern char D_00007120[]; /* \"SceMScm\" */",
   "D_00007190": "extern SceKernelSysClock D_00007190; /* sysclock ticks per usec */",
+  "D_00007198": "extern SceUID D_00007198[1][32]; /* notify event flags (devctl register) */",
   "D_00007218": "extern s32 D_00007218;",
+  "D_0000721C": "extern SceUID D_0000721C[1][32]; /* notify callbacks (devctl register) */",
   "D_00007300": "extern char D_00007300[]; /* \"Assertion failed at %s:%s:%04d\\n\" (mscm_ioman.c) */",
   "D_00007334": "extern s32 D_00007334[1];",
   "D_00007800": "extern s32 D_00007800;",
@@ -151,6 +154,8 @@
   "D_00007AF4": "extern s32 D_00007AF4;",
   "g_ejectTime": "extern u64 g_ejectTime[1]; /* 1.50+: time of the last ejection */",
   "g_insertTime": "extern u64 g_insertTime[1]; /* 1.50+: time of the last insertion */",
-  "g_irqMissCount": "extern s32 g_irqMissCount[1];"
+  "g_irqMissCount": "extern s32 g_irqMissCount[1];",
+  "g_mainEvf": "extern SceUID g_mainEvf[1];",
+  "g_mediaEvf": "extern SceUID g_mediaEvf[1];"
  }
 }

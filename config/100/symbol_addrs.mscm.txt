@@ -145,3 +145,5 @@ sceMScmHCIrqPrimaryHandler = 0x00004B70; // type:func
 _sceMScmIomanExit = 0x000052FC; // type:func
 _sceMScmIomanOpen = 0x00005358; // type:func
 _sceMScmIomanDevctl = 0x000053F4; // type:func
+g_mediaEvf = 0x00006B4C;
+g_mainEvf = 0x00006B48;

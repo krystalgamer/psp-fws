@@ -347,7 +347,7 @@ s32 sceMScmDetachCLD(s32 slot, SceMScmCLD *cld) {
     memset(cb, 0, sizeof(SceMScmSlotCB));
     D_00006B40[slot] = 0;
     D_00006ED4[slot] = 1;
-    sceKernelSetEventFlag(D_00006B48[slot], 0x40000000);
+    sceKernelSetEventFlag(g_mainEvf[slot], 0x40000000);
     return 0;
 }
 #endif
@@ -373,7 +373,7 @@ s32 sceMScmDetachCLD(s32 slot, SceMScmCLD *cld) {
     memset(cb, 0, sizeof(SceMScmSlotCB));
     D_00006F90[slot] = 0;
     D_00007334[slot] = 1;
-    sceKernelSetEventFlag(D_00006B48[slot], 0x40000000);
+    sceKernelSetEventFlag(g_mainEvf[slot], 0x40000000);
     return 0;
 }
 #endif
@@ -565,11 +565,43 @@ INCLUDE_ASM("nonmatchings/mscm", func_00001BF8);
 INCLUDE_ASM("nonmatchings/mscm", func_00001F10);
 
 INCLUDE_ASM("nonmatchings/mscm", func_00002114);
-#else
-INCLUDE_ASM("nonmatchings/mscm", func_0000179C);
+#endif
+
+#if FW_VERSION < 201
+s32 func_0000179C(SceSize args, void *argp) {
+    s32 index = ((SceMScmHC *)argp)->index;
+    SceUID evf = D_00006F14[index].evf;
+    u32 bits;
+    s32 st;
+
+    for (;;) {
+        bits = 0;
+        sceKernelWaitEventFlag(g_mainEvf[index], 0xC0007FF1, 0x21, &bits, NULL);
+        if (bits & 1) {
+            func_00005C8C(index, &st);
+            if (st != 0) {
+                bits |= 0x40000000;
+            }
+        }
+        if (bits & 0x7FF0) {
+            sceKernelSetEventFlag(evf, bits & 0x7FF0);
+        }
+        if ((s32)bits < 0) {
+            sceKernelSetEventFlag(g_mediaEvf[index], 0x80000000);
+        }
+        if (bits & 0x40000000) {
+#if FW_VERSION == 100
+            D_00006ED4[index] = 2;
+#endif
+            sceKernelSetEventFlag(g_mediaEvf[index], 0x40000000);
+        }
+    }
+}
 #endif
 
 #if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/mscm", func_0000179C);
+
 INCLUDE_ASM("nonmatchings/mscm", func_00001B88);
 #endif
 
@@ -615,8 +647,49 @@ s32 func_00002194(s32 (*arg0)(s32, s32, s32, s32, s32), s32 arg1, s32 arg2, s32 
 INCLUDE_ASM("nonmatchings/mscm", func_0000244C);
 #endif
 
-#if FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/mscm", func_00002238);
+#if FW_VERSION == 100
+s32 func_00002238(SceSize args, void *argp) {
+    s32 index = ((SceMScmHC *)argp)->index;
+    SceUID evf = D_00006F14[index].evf;
+    u32 bits;
+
+    for (;;) {
+        bits = 0;
+        sceKernelWaitEventFlag(g_mediaEvf[index], 0xC0000000, 0x11, &bits, NULL);
+        if ((s32)bits < 0) {
+            sceKernelSetEventFlag(evf, 0x80000000);
+            func_000018B8(index);
+        }
+        if (bits & 0x40000000) {
+            D_00006ED4[index] = 2;
+            sceKernelSetEventFlag(evf, 0x40000000);
+            func_00001BA0(index);
+        }
+    }
+}
+#endif
+
+#if FW_VERSION >= 102 && FW_VERSION < 150
+s32 func_00002238(SceSize args, void *argp) {
+    s32 index = ((SceMScmHC *)argp)->index;
+    SceUID evf = D_00006F14[index].evf;
+    u32 bits;
+
+    for (;;) {
+        bits = 0;
+        sceKernelWaitEventFlag(g_mediaEvf[index], 0xC0000000, 0x11, &bits, NULL);
+        sceKernelPowerLock(0);
+        if ((s32)bits < 0) {
+            sceKernelSetEventFlag(evf, 0x80000000);
+            func_000018B8(index);
+        } else if (bits & 0x40000000) {
+            D_00006ED4[index] = 2;
+            sceKernelSetEventFlag(evf, 0x40000000);
+            func_00001BA0(index);
+        }
+        sceKernelPowerUnlock(0);
+    }
+}
 #endif
 
 #if FW_VERSION >= 282
@@ -1675,7 +1748,7 @@ s32 sceMScmHCIrqPrimaryHandler(s32 intno, SceMScmHC *hc) {
     h = &D_00006F14[index];
     func_00005270(index, h->intrStatus);
     if (ret > 0) {
-        sceKernelSetEventFlag(D_00006B48[index], func_00004E50(h->intrStatus));
+        sceKernelSetEventFlag(g_mainEvf[index], func_00004E50(h->intrStatus));
     }
     return -1;
 }
@@ -1723,7 +1796,7 @@ s32 sceMScmHCIrqPrimaryHandler(s32 intno, SceMScmHC *hc) {
     h = &D_00006F14[index];
     func_00005270(index, h->intrStatus);
     if (ret > 0) {
-        sceKernelSetEventFlag(D_00006B48[index], func_00004E50(h->intrStatus));
+        sceKernelSetEventFlag(g_mainEvf[index], func_00004E50(h->intrStatus));
     }
     return -1;
 }
@@ -1754,10 +1827,10 @@ s32 func_00004D30(s32 intno, SceMScmHC *hc) {
     func_00005C58(index);
     if (ret > 0) {
         if (intno == 0x3C) {
-            sceKernelSetEventFlag(D_00006B48[index], 0x40000000);
+            sceKernelSetEventFlag(g_mainEvf[index], 0x40000000);
         } else {
             sceSysregMsifIoDisable(index);
-            sceKernelSetEventFlag(D_00006B48[index], 0x80000000);
+            sceKernelSetEventFlag(g_mainEvf[index], 0x80000000);
         }
     }
     return -1;
