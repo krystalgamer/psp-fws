@@ -3949,7 +3949,17 @@ INCLUDE_ASM("nonmatchings/threadman", func_0000EFD8);
 #if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/threadman", func_0000F0DC);
 
-INCLUDE_ASM("nonmatchings/threadman", func_0000F034);
+void func_0000F034(SceThread *thread) {
+    u32 prio = thread->currentPriority;
+    SceThread *queue;
+
+    g_threadmanInfo.readyPriorityMask[prio >> 5] |= 1 << (prio & 0x1F);
+    queue = (SceThread *)&g_threadmanInfo.readyQueue[prio];
+    thread->prev = queue->prev;
+    queue->prev = thread;
+    thread->next = queue;
+    thread->prev->next = thread;
+}
 
 INCLUDE_ASM("nonmatchings/threadman", func_0000F258);
 #endif
@@ -4507,7 +4517,17 @@ INCLUDE_ASM("nonmatchings/threadman", func_0000EE3C);
 
 INCLUDE_ASM("nonmatchings/threadman", func_0000EF10);
 
-INCLUDE_ASM("nonmatchings/threadman", func_0000F034);
+void func_0000F034(SceThread *thread) {
+    u32 prio = thread->currentPriority;
+    SceThread *queue;
+
+    g_threadmanInfo.readyPriorityMask[prio >> 5] |= 1 << (prio & 0x1F);
+    queue = (SceThread *)&g_threadmanInfo.readyQueue[prio];
+    thread->prev = queue->prev;
+    queue->prev = thread;
+    thread->next = queue;
+    thread->prev->next = thread;
+}
 
 void func_0000F08C(SceThread *thread) {
     u32 prio = thread->currentPriority;
