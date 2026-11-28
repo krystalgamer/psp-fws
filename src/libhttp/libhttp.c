@@ -1228,7 +1228,61 @@ INCLUDE_ASM("nonmatchings/libhttp", func_00003668);
 
 INCLUDE_ASM("nonmatchings/libhttp", func_00003830);
 
-INCLUDE_ASM("nonmatchings/libhttp", func_000038CC);
+void func_000038CC(SceHttpReq *req) {
+    SceHttpCacheEntry *entry = req->cache_entry;
+    SceHttpCacheEntry *p;
+    SceHttpCacheEntry *old;
+    SceHttpMd5Entry *m;
+    int intr;
+
+    if (entry == NULL) {
+        return;
+    }
+    if (req->cache_key == NULL) {
+        func_00003A24(entry);
+        req->cache_entry = NULL;
+        return;
+    }
+    intr = sceKernelSuspendDispatchThread();
+    p = D_0000DCCC.cache_list;
+    if (p == NULL) {
+        D_0000DCCC.cache_list = entry;
+    } else {
+        while (p->next != NULL) {
+            p = p->next;
+        }
+        p->next = entry;
+        entry->prev = p;
+    }
+    req->cache_entry = NULL;
+    sceKernelResumeDispatchThread(intr);
+    func_00003D28(req->cache_key, &m);
+    if (m == NULL) {
+        func_00003E34(req->cache_key, &m);
+        if (m == NULL) {
+            func_00003A24(entry);
+            return;
+        }
+        m->cache = entry;
+        func_00003EEC(m);
+        return;
+    }
+    intr = sceKernelSuspendDispatchThread();
+    if (m->cache == NULL) {
+        old = NULL;
+        m->cache = entry;
+    } else if (m->cache->reference_counter > 0 || m->cache->status == 1) {
+        old = entry;
+        entry->status = 1;
+    } else {
+        m->cache->status = 1;
+        old = m->cache;
+    }
+    sceKernelResumeDispatchThread(intr);
+    if (old != NULL) {
+        func_00003A24(old);
+    }
+}
 
 int func_00003A24(SceHttpCacheEntry *entry) {
     int ret = 0;

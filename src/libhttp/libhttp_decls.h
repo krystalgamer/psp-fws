@@ -441,7 +441,7 @@ typedef struct SceHttpMd5Entry {
     u8 digest[16];          /* 0x10 sceKernelUtilsMd5Digest(key) */
     char *key;              /* 0x20 */
     char *value;            /* 0x24 */
-    s32 unk28;
+    struct SceHttpCacheEntry *cache; /* 0x28 */
     s32 status;             /* 0x2C */
     void *unk30;            /* 0x30 freed */
     struct SceHttpMd5Entry *next; /* 0x34 */
@@ -470,7 +470,9 @@ typedef struct SceHttpReq {
     s32 status;             /* 0x2C */
     u8 unk30[0x34 - 0x30];
     u32 res_header_size;    /* 0x34 */
-    u8 unk38[HTTP_REQ_V(0x68, 0x6C, 0x70) - 0x38];
+    u8 unk38[HTTP_REQ_V(0x5C, 0x60, 0x64) - 0x38];
+    char *cache_key;        /* 0x5C (1.02: 0x60, 1.03: 0x64) */
+    u8 unk60[HTTP_REQ_V(0x68, 0x6C, 0x70) - HTTP_REQ_V(0x60, 0x64, 0x68)];
     unsigned char *unk68;   /* 0x68 (1.02: 0x6C, 1.03: 0x70) */
     u8 unk6C[HTTP_REQ_V(0x74, 0x78, 0x7C) - HTTP_REQ_V(0x6C, 0x70, 0x74)];
     unsigned char *res_header_buf; /* 0x74 (1.02: 0x78, 1.03: 0x7C) */
@@ -486,7 +488,8 @@ typedef struct SceHttpReq {
     u8 unk128[HTTP_REQ_V(0x168, 0x180, 0x180) - HTTP_REQ_V(0x128, 0x134, 0x138)];
     SceHttpConn *connection; /* 0x168 (1.02/1.03: 0x180) */
     SceHttpConn *redirect_con; /* 0x16C (1.02/1.03: 0x184) */
-    u8 unk170[HTTP_REQ_V(0x178, 0x190, 0x190) - HTTP_REQ_V(0x170, 0x188, 0x188)];
+    struct SceHttpCacheEntry *cache_entry; /* 0x170 (1.02/1.03: 0x188) */
+    u8 unk174[HTTP_REQ_V(0x178, 0x190, 0x190) - HTTP_REQ_V(0x174, 0x18C, 0x18C)];
     struct SceHttpReq *next; /* 0x178 (1.02: 0x190) */
     struct SceHttpReq *pre;  /* 0x17C (1.02: 0x194) */
     u8 unk180[HTTP_REQ_V(0x188, 0x1A0, 0x1A0) - HTTP_REQ_V(0x180, 0x198, 0x198)];
@@ -644,6 +647,7 @@ s32 func_000032B0(SceHttpReq *req);
 int func_00003614(SceHttpReq *req);
 s32 func_00003668(SceHttpReq *req);
 int func_00003830(SceHttpCacheEntry *entry);
+void func_000038CC(SceHttpReq *req);
 int func_00003A24(SceHttpCacheEntry *entry);
 void func_00003C04(void *arg0);
 s32 func_00003C90(void *arg0);
