@@ -170,8 +170,8 @@ INCLUDE_ASM("nonmatchings/threadman", func_00000544_v150);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
-void func_000005F4(s32 arg0) {
-    sceKernelCallUIDObjFunction(arg0, 0x85FE2B4C);
+s32 func_00000524(SceSysmemUidCB *cb) {
+    return sceKernelCallUIDObjFunction(cb, 0x85FE2B4C);
 }
 #endif
 

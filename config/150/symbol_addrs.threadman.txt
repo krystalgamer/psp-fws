@@ -269,3 +269,4 @@ func_000007F4 = 0x00000A38; // type:func
 func_00001FC4 = 0x00001E8C; // type:func
 func_000124A0 = 0x000134BC; // type:func
 func_000000B0 = 0x00000000; // type:func
+func_00000524 = 0x000005F4; // type:func

@@ -568,7 +568,7 @@ s32 func_00000524(SceSysmemUidCB *cb);
 void func_00000534(s32 arg0);
 s32 func_00000544(void *arg0, void *arg1);
 s32 func_00000554(void);
-void func_000005F4(s32 arg0);
+s32 func_000005F4(SceSysmemUidCB *cb);
 s32 func_00000680(void);
 s32 func_00000688(s32 arg0, void *arg1);
 s32 func_000006C8(struct Unk_func_000006C8_0 *arg0, struct Unk_func_000006C8_1 *arg1);
