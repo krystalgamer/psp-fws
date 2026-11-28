@@ -1018,7 +1018,91 @@ int sceHttpSetAuthInfoCB(int id, void *cbfunc) {
     return ret;
 }
 
-INCLUDE_ASM("nonmatchings/libhttp", sceHttpAddExtraHeader);
+int sceHttpAddExtraHeader(int id, const SceUChar8 *name, const SceUChar8 *value, int mode) {
+    _SceHttpReqHeaderList *h;
+    SceHttpTmpl *tmpl = NULL;
+    SceHttpConn *con = NULL;
+    SceHttpReq *req = NULL;
+    _SceHttpReqHeaderList *p;
+    _SceHttpReqHeaderList *last;
+    int ret = 0x80431001;
+    int intr;
+
+    if (D_0000DCCC.inited != 1) {
+        goto end;
+    }
+    if (mode == 0) {
+        sceHttpDeleteHeader(id, name);
+    }
+    ret = CreateHttpExtraHeader(&h, name, value);
+    if (ret < 0) {
+        goto end;
+    }
+    ret = HttpWhichId(id);
+    if (ret < 0) {
+        goto end;
+    }
+    if (ret == 0) {
+        ret = GetHttpTmpl(id, &tmpl);
+        if (ret < 0) {
+            goto end;
+        }
+    } else if (ret == 0x1000000) {
+        ret = GetHttpConnection(id, &con);
+        if (ret < 0) {
+            goto end;
+        }
+        tmpl = &con->tmpl;
+    } else if (ret == 0x2000000) {
+        ret = GetHttpReq(id, &req);
+        if (ret < 0) {
+            goto end;
+        }
+        tmpl = &req->tmpl;
+    } else {
+        ret = 0x80431100;
+        goto end;
+    }
+    intr = sceKernelSuspendDispatchThread();
+    if (tmpl->header_lock == 1) {
+        ret = 0x80431067;
+    } else {
+        tmpl->header_lock = 1;
+    }
+    sceKernelResumeDispatchThread(intr);
+    if (ret < 0) {
+        goto end;
+    }
+    last = NULL;
+    for (p = tmpl->header_list; p != NULL; p = p->next) {
+        last = p;
+    }
+    if (last == NULL) {
+        tmpl->header_list = h;
+    } else {
+        last->next = h;
+    }
+    tmpl->header_lock = 0;
+    if (req != NULL) {
+        req->reference_counter--;
+    } else if (con != NULL) {
+        con->reference_counter--;
+    } else {
+        tmpl->reference_counter--;
+    }
+    return ret;
+
+end:
+    if (req != NULL) {
+        req->reference_counter--;
+    } else if (con != NULL) {
+        con->reference_counter--;
+    } else if (tmpl != NULL) {
+        tmpl->reference_counter--;
+    }
+    FreeHttpHederList(h);
+    return ret;
+}
 
 int sceHttpDeleteHeader(int id, const SceUChar8 *name) {
     SceHttpTmpl *tmpl = NULL;
