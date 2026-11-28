@@ -906,7 +906,91 @@ INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00002898);
 #endif
 
 #if FW_VERSION == 100
-INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_000020D4);
+s32 func_000020D4(SceNetDhcpCtx *dc, s32 prev) {
+    s32 now;
+    s32 wait;
+    s32 n;
+    s32 ret;
+    u8 *p;
+    u8 *q;
+
+    if (prev == 0) {
+        if (dc->lease != NULL) {
+            func_00005290(dc->lease);
+            dc->lease = NULL;
+        }
+        dc->interval = dc->initInterval;
+    } else {
+        dc->interval += (u32)sceNetRand() % (u32)(dc->interval * 2);
+        if (dc->maxInterval < dc->interval) {
+            dc->interval = dc->maxInterval / 2 + (u32)sceNetRand() % (u32)dc->maxInterval;
+        }
+    }
+    now = sceNetGetSystemClockSec();
+    if (now < 0) {
+        return 0x80410586;
+    }
+    if (dc->timeout == 0 || now + dc->interval < dc->startTime + dc->timeout) {
+        wait = dc->interval;
+    } else {
+        if (now >= dc->startTime + dc->timeout) {
+            goto timeout;
+        }
+        wait = dc->startTime + dc->timeout - now;
+    }
+    for (; wait > 0; wait--) {
+        n = sceNetBpfRead(dc->bpf, dc->rxBuf, dc->rxLen);
+        if (n < 0) {
+            return 0x80410582;
+        }
+        if (sceKernelPollSema(dc->sema, 1) == 0) {
+            func_00005D14(dc, 1, 0);
+        }
+        for (p = dc->rxBuf; n > 0; n -= p - q) {
+            u32 hl = *(u16 *)(p + 0x10);
+
+            q = p;
+            dc->rxEther = p + hl;
+            dc->rxIp = dc->rxEther + 14;
+            dc->rxUdp = (SceNetDhcpUdpHdr *)(p + (hl + (dc->rxEther[14] & 0xF) * 4) + 14);
+            dc->rxBootp = p + (hl + (dc->rxEther[14] & 0xF) * 4) + 22;
+            if (func_00003AA8(dc) == 0) {
+                SceNetDhcpLease *l = &dc->offer;
+
+                func_00007504(l, 0, sizeof(*l));
+                if (func_00006870(dc->rxBootp, (u16)__builtin_allegrex_wsbh(dc->rxUdp->len) - 8) == 0) {
+                    ret = func_00004AEC(dc->rxBootp, (u16)__builtin_allegrex_wsbh(dc->rxUdp->len) - 8, l);
+                    if (ret < 0) {
+                        return ret;
+                    }
+                    if (l->unk3E8 != 0 && l->unk3DC != 0) {
+                        if (func_00006414(dc, &l->yiaddr) == 0) {
+                            dc->lease = l;
+                            return 2;
+                        }
+                    }
+                    func_00005290(l);
+                }
+            }
+            p += (*(u16 *)(p + 0x10) + *(u32 *)(p + 8) + 3) & ~3;
+        }
+    }
+    now = sceNetGetSystemClockSec();
+    if (now < 0) {
+        return 0x80410586;
+    }
+    if (dc->timeout != 0 && now >= dc->startTime + dc->timeout) {
+        goto timeout;
+    }
+    ret = func_000047D8(dc);
+    if (ret < 0) {
+        return ret;
+    }
+    return 1;
+timeout:
+    func_00005D14(dc, 1, 0x80410502);
+    return 0x80410502;
+}
 
 INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00002408);
 #endif
