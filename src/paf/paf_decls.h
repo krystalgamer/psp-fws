@@ -4576,6 +4576,134 @@ struct Unk_vt_scePaf_C2E4423A_temp_v1 {
 
 typedef void (*func_ptr)(void);
 
+#ifndef __cplusplus
+typedef struct Class_00126EC8 {
+    void *vptr;
+    s32 unk4;
+} Class_00126EC8;
+typedef struct Class_0016AAE0 {
+    void *vptr;
+    s32 unk4;
+} Class_0016AAE0;
+typedef struct Class_00171640 {
+    void *vptr;
+    s32 unk4;
+} Class_00171640;
+typedef struct Class_00171684 {
+    void *vptr;
+    s32 unk4;
+} Class_00171684;
+typedef struct Class_001716C0 {
+    void *vptr;
+    s32 unk4;
+} Class_001716C0;
+typedef struct Cond {
+    void *vptr;
+} Cond;
+typedef struct CriticalSection {
+    void *vptr;
+} CriticalSection;
+typedef struct Framework {
+    void *vptr;
+} Framework;
+typedef struct Image {
+    void *vptr;
+} Image;
+typedef struct MiconPointee {
+    void *vptr;
+} MiconPointee;
+typedef struct PSJSContext {
+    void *vptr;
+} PSJSContext;
+typedef struct PSJSError {
+    void *vptr;
+} PSJSError;
+typedef struct PSJSPage {
+    void *vptr;
+} PSJSPage;
+typedef struct PhAppear {
+    void *vptr;
+} PhAppear;
+typedef struct PhApplication {
+    void *vptr;
+} PhApplication;
+typedef struct PhButton {
+    void *vptr;
+} PhButton;
+typedef struct PhClock {
+    void *vptr;
+} PhClock;
+typedef struct PhHandler {
+    void *vptr;
+} PhHandler;
+typedef struct PhIPAddr {
+    void *vptr;
+} PhIPAddr;
+typedef struct PhInfoList {
+    void *vptr;
+} PhInfoList;
+typedef struct PhItemSpin {
+    void *vptr;
+} PhItemSpin;
+typedef struct PhLabelText {
+    void *vptr;
+} PhLabelText;
+typedef struct PhList {
+    void *vptr;
+} PhList;
+typedef struct PhMenuList {
+    void *vptr;
+} PhMenuList;
+typedef struct PhMicon {
+    void *vptr;
+} PhMicon;
+typedef struct PhModel {
+    void *vptr;
+} PhModel;
+typedef struct PhNumSpin {
+    void *vptr;
+} PhNumSpin;
+typedef struct PhPlane {
+    void *vptr;
+} PhPlane;
+typedef struct PhProgress {
+    void *vptr;
+} PhProgress;
+typedef struct PhSRender {
+    void *vptr;
+} PhSRender;
+typedef struct PhScene {
+    void *vptr;
+} PhScene;
+typedef struct PhScroll {
+    void *vptr;
+} PhScroll;
+typedef struct PhSpin {
+    void *vptr;
+} PhSpin;
+typedef struct PhText {
+    void *vptr;
+} PhText;
+typedef struct PhXmBar {
+    void *vptr;
+} PhXmBar;
+typedef struct PhXmItem {
+    void *vptr;
+} PhXmItem;
+typedef struct PhXmList {
+    void *vptr;
+} PhXmList;
+typedef struct SurfaceBase {
+    void *vptr;
+} SurfaceBase;
+typedef struct Thread {
+    void *vptr;
+} Thread;
+typedef struct psjsstring_impl {
+    void *vptr;
+} psjsstring_impl;
+#endif
+
 extern M2C_UNK D_0011F128;
 extern M2C_UNK D_00124FE8;
 extern M2C_UNK D_0012600C;
@@ -5124,10 +5252,21 @@ void _ZN3paf8PhWidget13UpdateCamerasEv(struct Unk_scePaf_86B41BA3_0 *arg0);
 void _ZN3paf8PhWidget16SetScale_ontimerERK4vec4(struct Unk_scePaf_58BFC2AC_0 *arg0, struct Unk_scePaf_58BFC2AC_1 *arg1);
 s32 _ZN3paf8PhWidget22HandleFocusSwitchEventEPNS_7PhEventE(struct Unk_func_000E4F0C_0 *arg0, struct Unk_func_000E4F0C_1 *arg1);
 s32 _ZN3paf8PhWidget7SetAnimEiffiRK4vec4(void *self, s32, float, float, s32, void *);
-s32 _ZN3paf8PhWidget8SetStyleEiRK4vec4(s32);
+M2C_UNK _ZN3paf8PhWidget8GetStyleEiR4vec4(void *self, s32, void *);
+M2C_UNK _ZN3paf8PhWidget8GetStyleEiRb(void *self, s32, bool *);
+M2C_UNK _ZN3paf8PhWidget8GetStyleEiRf(void *self, s32, float *);
+M2C_UNK _ZN3paf8PhWidget8GetStyleEiRi(void *self, s32, s32 *);
+M2C_UNK _ZN3paf8PhWidget8GetStyleEiiR4vec4(void *self, s32, s32, void *);
+M2C_UNK _ZN3paf8PhWidget8GetStyleEiiRb(void *self, s32, s32, bool *);
+M2C_UNK _ZN3paf8PhWidget8GetStyleEiiRf(void *self, s32, s32, float *);
+M2C_UNK _ZN3paf8PhWidget8GetStyleEiiRi(void *self, s32, s32, s32 *);
+s32 _ZN3paf8PhWidget8SetStyleEiRK4vec4(s32 self);
 s32 _ZN3paf8PhWidget8SetStyleEib(s32, s32, s32);
-s32 _ZN3paf8PhWidget8SetStyleEif(s32);
-M2C_UNK _ZN3paf8PhWidget8SetStyleEii(void *self, s32, s32);
+s32 _ZN3paf8PhWidget8SetStyleEif(s32 self);
+M2C_UNK _ZN3paf8PhWidget8SetStyleEii(void * self, s32 a1, s32 a2);
+M2C_UNK _ZN3paf8PhWidget8SetStyleEiiRK4vec4(void *self, s32, s32, void *);
+M2C_UNK _ZN3paf8PhWidget8SetStyleEiif(void *self, s32, s32, float);
+M2C_UNK _ZN3paf8PhWidget8SetStyleEiii(void * self, s32 a1, s32 a2, s32 a3);
 s32 _ZN3paf8PhWidgetC1EPS0_PNS_8PhAppearE(s32, s32, s32);
 s32 _ZN3paf8PhWidgetC2EPS0_PNS_8PhAppearE(s32, s32, s32);
 s32 _ZN3paf8PhWidgetD2Ev(s32);
