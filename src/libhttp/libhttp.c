@@ -1955,7 +1955,23 @@ void func_00008CB0(int val, char *out) {
 INCLUDE_ASM("nonmatchings/libhttp", func_00008CB0);
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION < 150
+int func_00008D10(u8 *data, u32 size, char *out) {
+    SceKernelUtilsMd5Context ctx;
+    u8 digest[16];
+
+    if (data == NULL || out == NULL) {
+        return 0x804311FE;
+    }
+    sceKernelUtilsMd5BlockInit(&ctx);
+    sceKernelUtilsMd5BlockUpdate(&ctx, data, size);
+    sceKernelUtilsMd5BlockResult(&ctx, digest);
+    func_00008EBC(digest, out);
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/libhttp", func_00008D10);
 #endif
 
@@ -2154,9 +2170,33 @@ INCLUDE_ASM("nonmatchings/libhttp", sceHttpGetCookie);
 INCLUDE_ASM("nonmatchings/libhttp", sceHttpAddCookie);
 #endif
 
-#if FW_VERSION < 150 || FW_VERSION >= 201
+#if FW_VERSION < 150
+void func_000050F4(void *arg0) {
+    _SceHttpReqHeaderList *list = arg0;
+    _SceHttpReqHeaderList *next;
+
+    while (list != NULL) {
+        if (list->field_name != NULL) {
+            _sceHttpFreeInternal(list->field_name);
+            list->field_name = NULL;
+        }
+        if (list->field_value != NULL) {
+            _sceHttpFreeInternal(list->field_value);
+            list->field_value = NULL;
+        }
+        next = list->next;
+        list->next = NULL;
+        _sceHttpFreeInternal(list);
+        list = next;
+    }
+}
+#endif
+
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/libhttp", func_000050F4);
-#else
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 201
 void func_000050F4(void *arg0) {
     s32 temp_v1;
     s32 temp_v1_2;
