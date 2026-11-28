@@ -5095,7 +5095,54 @@ s32 func_00017048(SceWlanMac *mac, s32 mode, u32 *arg) {
     func_0000C5E4(mac);
     return ret;
 }
-#else
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 282
+s32 func_00017048(SceWlanMac *mac, s32 mode, u32 *arg) {
+    s32 ret = 0;
+
+    switch (mode) {
+    case 2:
+        arg[0xF] = 0;
+        ret = -2;
+        break;
+    case 3:
+        ret = -2;
+        break;
+    case 4:
+        ret = -2;
+        break;
+    case 6:
+        sceKernelDelayThread(500000);
+        ret = -2;
+        break;
+    case 7:
+        sceKernelDelayThread(1000000);
+        ret = -2;
+        break;
+    case 8:
+        sceKernelDelayThread(100000);
+        ret = -2;
+        break;
+    case 0xB:
+        ret = -2;
+        break;
+    case 0x101:
+    case 0x102:
+        ret = -2;
+        break;
+    case 0x202:
+        break;
+    default:
+        ret = -2;
+        break;
+    }
+    func_0000C5E4(mac);
+    return ret;
+}
+#endif
+
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/wlan", func_00017048);
 #endif
 
