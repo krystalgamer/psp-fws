@@ -97,7 +97,7 @@ def main():
 def one(a, cfile, decls):
     """Insert one function; returns (name, keep, drop), or None (sources restored)."""
     body = Path(cfile).read_text().strip("\n") + "\n"
-    m = re.search(r"^(?!static)[^\n;#]*?\b(\w+)\([^;{}]*\)\s*\{", body, re.M)
+    m = re.search(r"^(?!static\b)(?!(?:if|while|for|switch|return|else|do)\b)(?=[A-Za-z_])[^\n;#]*?\b(\w+)\([^;{}]*\)\s*\{", body, re.M)
     if not m:
         print("no function definition in " + cfile)
         return None

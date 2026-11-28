@@ -449,7 +449,10 @@ def main():
     a = ap.parse_args()
     mod = AD.Module(a.ver, a.module)
     body = Path(a.cfile).read_text()
-    name = re.search(r"^(?!static)[^\n;#]*?\b(\w+)\([^;{}]*\)\s*\{", body, re.M)[1]
+    defm = re.search(r"^(?!static\b)(?!(?:if|while|for|switch|return|else|do)\b)(?=[A-Za-z_])[^\n;#]*?\b(\w+)\([^;{}]*\)\s*\{", body, re.M)
+    if not defm:
+        sys.exit(f"{a.cfile}: no function definition starting at column 0")
+    name = defm[1]
     cxx_def = re.search(r"^(\w+)::(~?)(\w+)\s*\(\s*(void)?\s*\)\s*(?::[^{;]*)?\{", body, re.M)
     if cxx_def and cxx_def[1] == cxx_def[3]:
         name = cxx_name(mod, cxx_def[1], bool(cxx_def[2]))
@@ -478,7 +481,7 @@ def main():
     # the source file's own prelude: includes, file-local externs and static inlines before the first entry
     src = Path(mod.file_of(name)).read_text()
     # (stops at the first non-static function definition too: earlier C functions would be compiled into the score)
-    m = re.search(r"^(INCLUDE_ASM|INCLUDE_RODATA|#if|(?!static)[^\n;#]*?\b\w+\([^;{}]*\)\s*\{)", src, re.M)
+    m = re.search(r"^(INCLUDE_ASM|INCLUDE_RODATA|#if|(?!static\b)(?!(?:if|while|for|switch|return|else|do)\b)(?=[A-Za-z_])[^\n;#]*?\b\w+\([^;{}]*\)\s*\{)", src, re.M)
     prelude = re.sub(r'^#include "\w+_decls\.h"\n', "", src[:m.start()] if m else "", flags=re.M)
     fwv = re.match(r"\d+", a.ver)[0]
     fwvar = (re.search(r"v(\d+)", a.ver) or [None, "0"])[1]
