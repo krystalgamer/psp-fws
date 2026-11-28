@@ -110,8 +110,11 @@ typedef struct {
 
 /* umdman drive (sceUmdManGetUmdDrive), only the fields umd9660 touches */
 typedef struct SceUmdDrive {
-    struct { s8 driveId; } *ataDrive; /* 0x00 */
-    u8 pad4[0x24];
+    struct { s8 driveId; u8 pad1[0x7]; u32 unk8; } *ataDrive; /* 0x00 */
+    s32 unk4; /* 0x04 */
+    u8 pad8[0x8];
+    s32 unk10; /* 0x10: 0x10 = UMD, 0x20 = not */
+    u8 pad14[0x14];
     s32 unk28; /* 0x28 */
     s32 unk2C; /* 0x2C */
     s32 unk30; /* 0x30 */
@@ -217,6 +220,7 @@ extern s32 D_000070D4;
 extern s32 D_000070D8;
 extern s32 D_00007690;
 extern s32 D_00007A50;
+extern SceUID D_00008310;
 extern u8 D_000083A4;
 extern u8 D_000083A5;
 extern u8 D_000083A6;
@@ -226,6 +230,8 @@ extern s32 D_000083AC;
 extern s32 D_000083B0;
 extern s32 D_000083C0;
 extern s32 D_000083D0;
+extern void *D_00008400;
+extern void *D_00008440;
 extern s32 D_00008CA0;
 extern s32 D_00008CB0;
 extern M2C_UNK func_000036D8;
@@ -259,6 +265,7 @@ s32 func_00003A58(void);
 s32 func_00003BFC(void);
 M2C_UNK *func_00003C04(void);
 s32 func_00003C80(s32 arg0);
+s32 func_00003C8C(SceUmd9660Drive *drive, void *buf);
 s32 func_00003D24(s32);
 s32 func_00003D28(SceIoIob *iob);
 s32 func_00003F70(void);
@@ -296,6 +303,7 @@ s32 func_00004BD8(void *arg0);
 s32 func_00004C2C(void *arg0, s32 arg1);
 void func_00004E14(void);
 void func_00004E20(void);
+s32 func_00004EE8(SceUmdDrive *umd, void *buf, void *buf2);
 void func_00005334(s32 arg0);
 s32 func_00005340(void);
 u8 func_00005358(void);
@@ -319,8 +327,10 @@ M2C_UNK sceIoAddDrv(M2C_UNK *);
 void sceKernelAssert(s32 ok, s32 lvl);
 void sceKernelCpuResumeIntr(s32);
 s32 sceKernelCpuSuspendIntr(void);
+s32 sceKernelDeleteHeap(SceUID heap);
 s32 sceKernelDipsw(M2C_UNK);
 u32 sceKernelDipswAll(void);
+s32 sceKernelFreeHeapMemory(SceUID heap, void *p);
 SceUmd9660Drive *sceUmd9660GetDrive(s32 unit);
 s32 sceUmd9660Init(void);
 s32 sceUmd9660Term(void);
@@ -331,10 +341,13 @@ s32 sceUmd9660_driver_B23266CA(void);
 s32 sceUmd9660_driver_C7CD9CE8(void);
 s32 sceUmd9660_driver_CAAFFE8D(void);
 s32 sceUmd9660_driver_F42C0AEE(void);
+s32 sceUmdIsUMD(void);
 s32 sceUmdManGetDiscInfo(SceUmdDiscInfo *info);
 s32 sceUmdManGetDiscInfo4VSH(SceUmdDiscInfo *info);
 s32 sceUmdManGetInquiry(SceUmdDrive *umd, s32 size, void *buf);
 s32 sceUmdManGetIntrStateFlag();
+s32 sceUmdManGetPowerStat(s32 driveId);
+SceUmdDrive *sceUmdManGetUmdDrive(s32 driveId);
 s32 sceUmdManIsDvdDrive();
 s32 sceUmdManSetCachedRead(s32);
 s32 sceUmdManSetDisableReadAhead(s32);

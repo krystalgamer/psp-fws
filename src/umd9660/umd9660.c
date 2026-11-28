@@ -1582,7 +1582,18 @@ INCLUDE_ASM("nonmatchings/umd9660", func_00004544);
 INCLUDE_ASM("nonmatchings/umd9660", func_00004300);
 #endif
 
-INCLUDE_ASM("nonmatchings/umd9660", func_0000438C);
+s32 func_0000438C(SceUmdDrive *umd) {
+    u8 buf2[0x10];
+    u8 buf[0x50];
+    u32 type = umd->ataDrive->unk8;
+    if (type == 0xB0) {
+        return 0;
+    }
+    if (type != 0xC0) {
+        return 0x80010016;
+    }
+    return func_00004EE8(umd, buf, buf2);
+}
 
 #if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/umd9660", func_00004FFC);
@@ -1692,7 +1703,25 @@ INCLUDE_ASM("nonmatchings/umd9660", func_00004FBC);
 INCLUDE_ASM("nonmatchings/umd9660", sceUmd9660_driver_DB1AC979);
 #endif
 
-#if FW_VERSION < 201 || FW_VERSION >= 282
+#if FW_VERSION == 100
+s32 func_00004FE4(void) {
+    s32 ret;
+    if (D_00008400 != NULL) {
+        sceKernelFreeHeapMemory(D_00008310, D_00008400);
+        D_00008400 = NULL;
+    }
+    if (D_00008440 != NULL) {
+        ret = sceKernelFreeHeapMemory(D_00008310, D_00008440);
+        if (ret < 0) {
+            return ret;
+        }
+        D_00008440 = NULL;
+    }
+    return sceKernelDeleteHeap(D_00008310);
+}
+#endif
+
+#if (FW_VERSION >= 102 && FW_VERSION < 201) || FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/umd9660", func_00004FE4);
 #endif
 
