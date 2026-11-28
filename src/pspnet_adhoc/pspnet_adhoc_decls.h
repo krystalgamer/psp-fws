@@ -329,7 +329,7 @@ s32 _sce_pspnet_start_of_adhoc_module_in_sched(void *func);
 void _sce_pspnet_stop_of_adhoc_module_in_if_ethersubr_core(void);
 void _sce_pspnet_stop_of_adhoc_module_in_netintr(void);
 void _sce_pspnet_stop_of_adhoc_module_in_sched(void);
-SceNetAdhocWaiter *_sce_pspnet_thread_enter(void);
+SceNetAdhocWaiter *_sce_pspnet_thread_enter(); /* 2.01+: (s32 *err) */
 void _sce_pspnet_thread_leave(SceNetAdhocWaiter *ti, s32 flag);
 void _sce_pspnet_wakeup(void *chan);
 void func_00000270(void);
@@ -348,6 +348,7 @@ void func_00000FFC(SceNetAdhocDesc *d);
 s32 func_00001044(void);
 void func_00001078(SceNetAdhocDesc *d, s32 events);
 s32 func_00001530(SceNetAdhocDesc *d, const SceNetEtherAddr *daddr, u16 dport, const void *data, s32 len, u32 timeout, s32 nonblock);
+s32 func_000016B4(SceNetAdhocDesc *d, const SceNetEtherAddr *daddr, u16 dport, const void *data, s32 len, u32 timeout, s32 nonblock);
 s32 func_00001B90(SceNetAdhocDesc *d, SceNetEtherAddr *addr, u16 *port, void *buf, s32 *len, u32 timeout, s32 nonblock, void *rfinfo);
 s32 func_00001F20(s32 id, SceNetEtherAddr *addr, u16 *port, void *buf, s32 *len, u32 timeout, s32 nonblock, void *rfinfo);
 s32 func_00002108(SceNetAdhocPdpPcb *pcb, const SceNetEtherAddr *addr, u16 port);
@@ -375,6 +376,7 @@ s32 func_00004408(SceNetAdhocDesc *d, void *buf, s32 *len, u32 timeout, s32 nonb
 s32 func_000045E4(SceNetAdhocDesc *d, u32 timeout, s32 nonblock);
 s32 func_00004918(SceNetAdhocPtpPcb *pcb, const SceNetEtherAddr *addr, u16 port);
 void func_00004964(void);
+s32 func_000049E4(SceNetAdhocDesc *d, u32 timeout, s32 nonblock);
 void func_00004AE4(SceNetAdhocDesc *d);
 void func_00004B30(SceNetAdhocPtpPcb *pcb);
 void func_00004E60(SceNetAdhocPtpPcb *pcb);
