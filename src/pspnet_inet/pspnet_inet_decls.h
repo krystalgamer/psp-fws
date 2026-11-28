@@ -409,16 +409,16 @@ typedef char chk_SceNetInetWaiter[(sizeof(struct SceNetInetWaiter) == 0x60) ? 1 
 
 /* struct rt_metrics (4.4BSD route.h, 0x28) */
 struct rt_metrics {
-    u32 rmx_locks;      /* 0x00 RTV_* */
-    u32 rmx_mtu;        /* 0x04 */
-    u32 rmx_hopcount;   /* 0x08 */
-    u32 rmx_expire;     /* 0x0C */
-    u32 rmx_recvpipe;   /* 0x10 */
-    u32 rmx_sendpipe;   /* 0x14 */
-    u32 rmx_ssthresh;   /* 0x18 */
-    u32 rmx_rtt;        /* 0x1C */
-    u32 rmx_rttvar;     /* 0x20 */
-    u32 rmx_pksent;     /* 0x24 */
+    unsigned long rmx_locks;      /* 0x00 RTV_* */
+    unsigned long rmx_mtu;        /* 0x04 */
+    unsigned long rmx_hopcount;   /* 0x08 */
+    unsigned long rmx_expire;     /* 0x0C */
+    unsigned long rmx_recvpipe;   /* 0x10 */
+    unsigned long rmx_sendpipe;   /* 0x14 */
+    unsigned long rmx_ssthresh;   /* 0x18 */
+    unsigned long rmx_rtt;        /* 0x1C */
+    unsigned long rmx_rttvar;     /* 0x20 */
+    unsigned long rmx_pksent;     /* 0x24 */
 };
 #define RTV_MTU 0x1
 #define RTV_SSTHRESH 0x20
@@ -431,7 +431,7 @@ struct rtentry {
     struct sockaddr *rt_gateway;    /* 0x30 */
     s32 rt_flags;                   /* 0x34 RTF_* */
     s32 rt_refcnt;                  /* 0x38 */
-    u32 rt_use;                     /* 0x3C */
+    long rt_use;                    /* 0x3C */
     struct ifnet *rt_ifp;           /* 0x40 */
     struct ifaddr *rt_ifa;          /* 0x44 */
     struct sockaddr *rt_genmask;    /* 0x48 */
@@ -835,6 +835,10 @@ struct route_cb {
 #define RTAX_IFP 4
 #define RTAX_IFA 5
 #define RTAX_BRD 7
+#define RTAX_GENMASK 3
+#define NET_RT_FLAGS 2
+#define IFF_POINTOPOINT 0x10
+#define RTM_GET 4
 #define rt_mask(r) ((struct sockaddr *)((r)->rt_nodes[0].rn_mask))
 
 /* struct arphdr (if_arp.h), byte-aligned */
@@ -2210,6 +2214,7 @@ void func_0000E3F0(struct ifnet *ifp);
 void func_0000E448(struct ifnet *ifp, s32 what);
 s32 func_0000E4E4(s32, s32);
 struct mbuf *func_0000E5A4(s32 type, struct rt_addrinfo *rtinfo, char *data, s32 datalen);
+s32 func_0000E928(struct radix_node *rn, void *v);
 void func_0000ED48(void *arg0);
 void func_0000ED94(void *arg0);
 void func_0000EDB8(struct Unk_func_0000EDB8_0 *arg0);
