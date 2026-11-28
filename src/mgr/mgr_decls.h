@@ -36,6 +36,12 @@ typedef struct {
 } MgrId16;
 
 typedef struct {
+    MgrId16 key;
+    u64 a;
+    u64 b;
+} MgrEkbMacBuf;
+
+typedef struct {
     s8 *slot;
     u8 type;
     u8 flags;
@@ -112,6 +118,7 @@ extern s32 D_00009554;
 extern s32 D_0000955C;
 extern u64 D_000095A0;
 extern u64 D_000095A8;
+extern u32 D_00009BD8;
 extern s32 D_00009C0C;
 extern u32 D_00009C10;
 extern u32 D_00009C14;
@@ -232,17 +239,18 @@ s32 func_00002788(s32 type);
 s32 func_000027E0(void);
 void func_000027EC(void);
 s32 func_00002934(u64 *out, u64 *seed);
-s32 func_00002F84(s32, s32, s32, s32, s32);
+s32 func_00002F84(u32 *mac, void *src, u32 *iv, u32 size, s32 keyReg);
 s32 func_0000310C(u64 *dst, u64 *src, s32 count, u32 cmd);
 s32 func_000031C8(u32 *dst, u64 *src, s32 count, u32 cmd);
 s32 func_0000341C(u64 *dst, u64 *src, u32 *iv, u32 size, s32 keyReg, u32 *key, s32 op);
+s32 func_00003578(u8 *mac, MgrId16 *key, u64 *a, u64 *b, u8 *ekb);
 s32 func_000038D0(u32 *arg0, u32 *arg1);
-s32 func_00003BFC(s32 arg0, MgrId16 *id, u8 *ekb, MgrId16 *key, u8 *data);
-void func_00003E08(s32 arg0);
+s32 func_00003BFC(s32 arg0, MgrId16 *id, u8 *ekb, MgrId16 *key, u32 *mac);
+s32 func_00003E08(u32 *key);
 s32 func_00004180(MgrMsInfo *info, s32 *out);
 s32 func_00004358(MgrMsInfo *info);
 s32 func_0000439C(u32 *a, u32 *b);
-void func_00004410(s32 arg0);
+s32 func_00004410(u32 *key);
 s32 func_00004460(u32 *p, s32 count);
 s32 func_000044DC(u32 *a0, u32 a1);
 s32 func_000045DC(void);
@@ -398,6 +406,7 @@ s32 sceMgrMSSetMAC2d(s32 arg0, u64 *mac);
 s32 sceMgrMSSetRd(s32 arg0, u64 *rd);
 s32 sceMgrMSWriteIBD(s32 arg0, u8 page, s32 arg2, s32 arg3);
 s32 sceMgrMSWriteICV(s32 arg0, u64 *icv, s32 flag);
+s32 sceMgrMSWritePoolPage(s32 arg0, u8 *buf);
 void sceMgrNetDecryptKc(s32 arg0, s32 arg1, s32 arg2);
 s32 sceMgrPollLock(void);
 s32 sceMgrRandom(s32 arg0, s32 arg1);

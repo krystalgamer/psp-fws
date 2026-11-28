@@ -15,6 +15,7 @@ options:
   cache_path: tmp/build/102/.splat_cache.mgr
   symbol_addrs_path:
     - config/102/symbol_addrs.mgr.txt
+    - config/102/func_starts.mgr.txt
     - tmp/build/102/prx_syms.mgr.txt
   reloc_addrs_path: [tmp/build/102/reloc_addrs.mgr.txt]
   asset_path: tmp/assets/102/mgr
@@ -53,6 +54,7 @@ segments:
     vram: 0x0
     subsegments:
       - [0x80, c, mgr]
+      - [0x252C, c, mgr_seed]
       - { start: 0x8EE8, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x9048, type: prxpad, order: .text }
       - { start: 0x9050, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }
@@ -66,6 +68,7 @@ segments:
       - { start: 0x9454, type: rodata, name: nid, linker_section: .rodata.sceNid }
       - { start: 0x9504, type: prxpad, order: .rodata }
       - [0x9508, .rodata, mgr]
+      - [0x95A0, .rodata, mgr_seed]
   - name: mgr_seg1
     type: code
     start: 0x9600
