@@ -224,7 +224,7 @@ void tcp_init(void) {
 
     D_0002C324 = 3;
     D_0002C334 = 4;
-    D_0002C338 = 0x200;
+    tcp_mssdflt = 0x200;
     D_0002C33C = 3;
     D_0002DC94 = 0;
     D_0002C5C0 = 0;
@@ -236,7 +236,7 @@ void tcp_init(void) {
     D_0002C5C4 = 0;
     D_0002C5C8 = 0;
     D_0002C5CC = 0;
-    D_0002C5D0 = 0;
+    tcp_compat_42 = 0;
     tcp_iss_seq = 0;
     tcp_now = 0;
     sceNetMemset(&tcp_stat, 0, sizeof(tcp_stat));
@@ -538,7 +538,7 @@ s32 func_000232C0(struct Unk_func_000232C0_0 *arg0) {
 
 INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", func_00023344);
 
-INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", func_000235D0);
+INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", tcp_mss_from_peer);
 #endif
 
 void tcp_rmx_rtt(struct tcpcb *tp) {
@@ -936,7 +936,7 @@ struct tcpcb *tcp_timers(struct tcpcb *tp, s32 timer) {
     return (tp);
 }
 #else
-INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", func_00023F70);
+INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", tcp_timers);
 #endif
 
 #if FW_VERSION < 282
@@ -975,10 +975,10 @@ void tcp_timer_init(void) {
 #else
 void func_000244B0(void) {
     tcp_keepidle = 0x3840;
-    D_0002C39C = 0x1FF;
+    tcp_totbackoff = 0x1FF;
     tcp_keepintvl = 0x96;
     tcp_keepcnt = 8;
-    D_0002C364 = 0x3840;
+    tcp_maxpersistidle = 0x3840;
     tcp_maxidle = 0;
     syn_cache_last = 0;
 }
