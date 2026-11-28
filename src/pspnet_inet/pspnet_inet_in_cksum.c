@@ -581,9 +581,9 @@ void in_losing(struct inpcb *inp) {
         info.rti_info[0] = &inp->inp_route.ro_dst;
         info.rti_info[1] = rt->rt_gateway;
         info.rti_info[2] = (struct sockaddr *)rt->rt_nodes[0].rn_mask;
-        func_0000E318(5, &info, rt->rt_flags, 0);
+        rt_missmsg(5, &info, rt->rt_flags, 0);
         if (rt->rt_flags & RTF_DYNAMIC) {
-            (void)func_0000BEE0(RTM_DELETE, rt->rt_nodes[0].rn_key, rt->rt_gateway, rt->rt_nodes[0].rn_mask, rt->rt_flags, NULL);
+            (void)rtrequest(RTM_DELETE, rt->rt_nodes[0].rn_key, rt->rt_gateway, rt->rt_nodes[0].rn_mask, rt->rt_flags, NULL);
         } else {
             rtfree(rt);
         }
@@ -1170,7 +1170,7 @@ void func_0001A548(struct rtentry *rt) {
             rt->rt_rmx.rmx_mtu = 0;
         }
     } else {
-        func_0000BEE0(RTM_DELETE, rt->rt_nodes[0].rn_key, rt->rt_gateway, rt->rt_nodes[0].rn_mask, flags, NULL);
+        rtrequest(RTM_DELETE, rt->rt_nodes[0].rn_key, rt->rt_gateway, rt->rt_nodes[0].rn_mask, flags, NULL);
     }
 }
 #endif
@@ -1193,7 +1193,7 @@ void func_00019C00(struct rtentry *rt) {
             rt->rt_rmx.rmx_mtu = 0;
         }
     } else {
-        func_0000BEE0(RTM_DELETE, rt->rt_nodes[0].rn_key, rt->rt_gateway, rt->rt_nodes[0].rn_mask, flags, NULL);
+        rtrequest(RTM_DELETE, rt->rt_nodes[0].rn_key, rt->rt_gateway, rt->rt_nodes[0].rn_mask, flags, NULL);
     }
 }
 

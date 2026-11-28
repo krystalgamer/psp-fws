@@ -1325,6 +1325,15 @@ struct udpstat {
         (m)->m_pkthdr.len += (plen); \
 } while (0)
 
+/* struct rtstat (4.4BSD route.h) */
+struct rtstat {
+    u16 rts_badredirect;                /* 0x0 */
+    u16 rts_dynamic;                    /* 0x2 */
+    u16 rts_newgateway;                 /* 0x4 */
+    u16 rts_unreach;                    /* 0x6 */
+    u16 rts_wildcard;                   /* 0x8 */
+};
+
 struct SceTailqHead {
     void *tqh_first;
     void **tqh_last;
@@ -1701,6 +1710,7 @@ extern struct { struct rawcb *lh_first; } rawcb; /* rawcb */
 extern struct inpcbtable rawcbtable;
 extern s32 rip_recvspace;
 extern s32 rip_sendspace;
+extern struct rtstat rt_stat; /* rtstat */
 extern struct radix_node_head *rt_tables[32]; /* rt_tables */
 extern s32 rttrash; /* rttrash */
 extern struct soqhead so_list;
@@ -1838,8 +1848,6 @@ void func_00009B5C(void);
 s32 func_00009B84();
 struct radix_node *func_0000A144(void *v_arg, struct radix_node_head *head);
 struct radix_node *func_0000A61C(void *n_arg, s32 search, s32 skip);
-struct rtentry *func_0000BA10(struct sockaddr *dst, s32 report);
-s32 func_0000BEE0(s32 req, void *dst, void *gateway, void *netmask, s32 flags, struct rtentry **ret_nrt);
 s32 func_0000C998(s32, s32, s32);
 void func_0000CE98(void *arg);
 s32 func_0000D128(u32 cmd, void *data);
@@ -1851,7 +1859,6 @@ s32 func_0000D338(struct Unk_func_0000D338_0 *arg0, s32 arg1);
 s32 func_0000D378(s32);
 void func_0000DD34(s32 arg0, void *arg1, void *arg2);
 void func_0000DDCC(s32 arg0, struct Unk_func_0000DDCC_1 *arg1, struct Unk_func_0000DDCC_2 *arg2);
-void func_0000E318(s32 type, struct rt_addrinfo *rtinfo, s32 flags, s32 error);
 s32 func_0000E3F0(s32);
 s32 func_0000E448(s32, s32);
 s32 func_0000E4E4(s32, s32);
@@ -2014,10 +2021,13 @@ struct radix_node *rn_lookup(void *v_arg, void *m_arg, struct radix_node_head *h
 struct radix_node *rn_newpair(void *v, s32 b, struct radix_node nodes[2]);
 struct radix_node *rn_search_m(void *v_arg, struct radix_node *head, void *m_arg);
 void rt_maskedcopy(struct sockaddr *src, struct sockaddr *dst, struct sockaddr *netmask);
+void rt_missmsg(s32 type, struct rt_addrinfo *rtinfo, s32 flags, s32 error);
 void rt_timer_remove_all(struct rtentry *rt);
 void rt_xaddrs(u8 *cp, u8 *cplim, struct rt_addrinfo *rtinfo);
 void rtalloc(struct route *ro);
+struct rtentry *rtalloc1(struct sockaddr *dst, s32 report);
 void rtfree(struct rtentry *rt);
+s32 rtrequest(s32 req, struct sockaddr *dst, struct sockaddr *gateway, struct sockaddr *netmask, s32 flags, struct rtentry **ret_nrt);
 void save_rte(u8 *option, struct in_addr dst);
 s32 sb_lock(struct sockbuf *sb);
 void sbappend(struct sockbuf *sb, struct mbuf *m);
@@ -2027,6 +2037,7 @@ void sbdrop(struct sockbuf *sb, s32 len);
 void sbdroprecord(struct sockbuf *sb);
 void sbflush(struct sockbuf *sb);
 s32 sbreserve(struct sockbuf *sb, u32 cc);
+s32 sceKernelGetThreadId(void);
 s32 sceKernelSignalSema(u32, s32);
 M2C_UNK sceNetBcopy(u8 *, s32, u8);
 s32 sceNetConfigAddArp(s32, s32);
@@ -2087,8 +2098,10 @@ s32 solisten(struct socket *so, s32 backlog);
 struct socket *sonewconn1(struct socket *head, s32 connstatus);
 s32 soo_poll(struct socket *so, s32 events, void *p);
 s32 soqremque(struct socket *so, s32 q);
+s32 soreceive();
 s32 soreserve(struct socket *so, u32 sndcc, u32 rcvcc);
 void sorflush(struct socket *so);
+s32 sosend();
 s32 soshutdown(struct socket *so, s32 how);
 void sowakeup(struct socket *so, struct sockbuf *sb);
 void sppp_cp_change_state(const struct cp *cp, struct sppp *sp, s32 newstate);

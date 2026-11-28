@@ -1600,7 +1600,7 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", if_rtdel);
 #else
 s32 if_rtdel(struct rtentry *rt, void *arg) {
     if (rt->rt_ifp == arg) {
-        func_0000BEE0(2, rt->rt_nodes[0].rn_key, rt->rt_gateway, rt->rt_nodes[0].rn_mask, rt->rt_flags, NULL);
+        rtrequest(2, rt->rt_nodes[0].rn_key, rt->rt_gateway, rt->rt_nodes[0].rn_mask, rt->rt_flags, NULL);
     }
     return 0;
 }
@@ -2010,7 +2010,7 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_0000A960);
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_0000AFE0);
 #endif
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_0000B41C);
+INCLUDE_ASM("nonmatchings/pspnet_inet", rn_walktree);
 
 struct radix_node *rn_search_m(void *v_arg, struct radix_node *head, void *m_arg) {
     struct radix_node *x;
@@ -2026,7 +2026,29 @@ struct radix_node *rn_search_m(void *v_arg, struct radix_node *head, void *m_arg
     return x;
 }
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", rn_refines);
+s32 rn_refines(void *m_arg, void *n_arg) {
+    char *m = m_arg, *n = n_arg;
+    char *lim, *lim2 = lim = n + *(u8 *)n;
+    s32 longer = (*(u8 *)n++) - (s32)(*(u8 *)m++);
+    s32 masks_are_equal = 1;
+
+    if (longer > 0)
+        lim -= longer;
+    while (n < lim) {
+        if (*n & ~(*m))
+            return 0;
+        if (*n++ != *m++)
+            masks_are_equal = 0;
+    }
+    while (n < lim2)
+        if (*n++)
+            return 0;
+    if (masks_are_equal && (longer < 0))
+        for (lim2 = m - longer; m < lim2;)
+            if (*m++)
+                return 1;
+    return (!masks_are_equal);
+}
 
 struct radix_node *rn_lookup(void *v_arg, void *m_arg, struct radix_node_head *head) {
     struct radix_node *x;
@@ -2060,19 +2082,87 @@ struct radix_node *rn_newpair(void *v, s32 b, struct radix_node nodes[2]) {
     return t;
 }
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_0000B7BC);
+INCLUDE_ASM("nonmatchings/pspnet_inet", rn_inithead);
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_0000B91C);
+INCLUDE_ASM("nonmatchings/pspnet_inet", rn_init);
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_0000BA10);
+#if FW_VERSION < 201
+struct rtentry *rtalloc1(struct sockaddr *dst, s32 report) {
+    struct radix_node_head *rnh = rt_tables[dst->sa_family];
+    struct rtentry *rt;
+    struct radix_node *rn;
+    struct rtentry *newrt = 0;
+    struct rt_addrinfo info;
+    s32 s = _sce_pspnet_spllock(), err = 0, msgtype = 7;
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_0000BB7C);
+    if (rnh && (rn = rnh->rnh_matchaddr((void *)dst, rnh)) &&
+        ((rn->rn_flags & 0x2) == 0)) {
+        newrt = rt = (struct rtentry *)rn;
+        if (report && (rt->rt_flags & 0x100)) {
+            err = rtrequest(11, dst, (struct sockaddr *)0, (struct sockaddr *)0, 0, &newrt);
+            if (err) {
+                newrt = rt;
+                rt->rt_refcnt++;
+                goto miss;
+            }
+            if ((rt = newrt) && (rt->rt_flags & 0x200)) {
+                msgtype = 11;
+                goto miss;
+            }
+        } else
+            rt->rt_refcnt++;
+    } else {
+        rt_stat.rts_unreach++;
+    miss:
+        if (report) {
+            __builtin_memset((char *)&info, 0, sizeof(info));
+            info.rti_info[0] = dst;
+            rt_missmsg(msgtype, &info, 0, err);
+        }
+    }
+    _sce_pspnet_splunlock(s);
+    return (newrt);
+}
+#else
+INCLUDE_ASM("nonmatchings/pspnet_inet", rtalloc1);
+#endif
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_0000BE00);
+INCLUDE_ASM("nonmatchings/pspnet_inet", rtredirect);
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_0000BEE0);
+struct ifaddr *ifa_ifwithroute(s32 flags, struct sockaddr *dst, struct sockaddr *gateway) {
+    struct ifaddr *ifa;
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_0000C6D4);
+    if ((flags & 0x2) == 0) {
+        ifa = 0;
+        if (flags & 0x4)
+            ifa = ifa_ifwithdstaddr(dst);
+        if (ifa == 0)
+            ifa = ifa_ifwithaddr(gateway);
+    } else {
+        ifa = ifa_ifwithdstaddr(gateway);
+    }
+    if (ifa == 0)
+        ifa = ifa_ifwithnet(gateway);
+    if (ifa == 0) {
+        struct rtentry *rt = rtalloc1(dst, 0);
+        if (rt == 0)
+            return (0);
+        rt->rt_refcnt--;
+        if ((ifa = rt->rt_ifa) == 0)
+            return (0);
+    }
+    if (ifa->ifa_addr->sa_family != dst->sa_family) {
+        struct ifaddr *oifa = ifa;
+        ifa = ifaof_ifpforaddr(dst, ifa->ifa_ifp);
+        if (ifa == 0)
+            ifa = oifa;
+    }
+    return (ifa);
+}
+
+INCLUDE_ASM("nonmatchings/pspnet_inet", rtrequest);
+
+INCLUDE_ASM("nonmatchings/pspnet_inet", rt_setgate);
 
 #if FW_VERSION < 201
 void rt_maskedcopy(struct sockaddr *src, struct sockaddr *dst, struct sockaddr *netmask) {
@@ -2150,7 +2240,7 @@ void rtalloc(struct route *ro) {
     if (ro->ro_rt != NULL && ro->ro_rt->rt_ifp != NULL && (ro->ro_rt->rt_flags & RTF_UP)) {
         return;
     }
-    ro->ro_rt = func_0000BA10(&ro->ro_dst, 1);
+    ro->ro_rt = rtalloc1(&ro->ro_dst, 1);
 }
 
 void rtfree(struct rtentry *rt) {
@@ -2368,7 +2458,7 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_0000DF08);
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_0000E0EC);
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_0000E318);
+INCLUDE_ASM("nonmatchings/pspnet_inet", rt_missmsg);
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_0000E3F0);
 
@@ -3153,7 +3243,6 @@ s32 in_broadcast(struct in_addr in, struct ifnet *ifp) {
     return 0;
 #undef ia
 }
-
 #endif
 
 #if FW_VERSION >= 282
