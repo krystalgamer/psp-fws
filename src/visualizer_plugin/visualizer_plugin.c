@@ -1044,6 +1044,10 @@ INCLUDE_ASM("nonmatchings/visualizer_plugin", func_0000A038);
 
 INCLUDE_ASM("nonmatchings/visualizer_plugin", func_0000A054);
 
+#if FW_VERSION < 350
+Class_0000DA28::Class_0000DA28() {
+}
+#else
 void func_0000A13C(M2C_UNK **arg0) {
     *arg0 = &D_0000DA28;
 }
@@ -1051,6 +1055,7 @@ void func_0000A13C(M2C_UNK **arg0) {
 void func_0000A14C(M2C_UNK **arg0) {
     *arg0 = &D_0000DA28;
 }
+#endif
 
 #if FW_VERSION < 350
 Class_0000DA28::~Class_0000DA28() {

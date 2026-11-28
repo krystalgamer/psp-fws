@@ -39,6 +39,7 @@ public:
 /* vtable _ZTV14Class_0000DA28 is data (vptr = label - 8 + 8) */
 class Class_0000DA28 {
 public:
+    Class_0000DA28();
     virtual ~Class_0000DA28();
 };
 #endif
@@ -298,6 +299,8 @@ void _ZN14Class_0000D908D2Ev(M2C_UNK **arg0);
 void _ZN14Class_0000D948D0Ev(M2C_UNK **arg0);
 void _ZN14Class_0000D948D1Ev(M2C_UNK **arg0);
 void _ZN14Class_0000D948D2Ev(M2C_UNK **arg0);
+void _ZN14Class_0000DA28C1Ev(M2C_UNK **arg0);
+void _ZN14Class_0000DA28C2Ev(M2C_UNK **arg0);
 void _ZN14Class_0000DA28D0Ev(M2C_UNK **arg0);
 void _ZN14Class_0000DA28D1Ev(M2C_UNK **arg0);
 void _ZN14Class_0000DA28D2Ev(M2C_UNK **arg0);
