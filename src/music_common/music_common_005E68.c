@@ -2276,7 +2276,7 @@ void func_00010438(M2C_UNK **arg0) {
 #endif
 
 #if FW_VERSION < 300
-s32 func_00010460(struct Unk_func_00010460_0 *arg0) {
+s32 func_00010460(Class_0001F980 *arg0) {
     return arg0->unk1D4;
 }
 
@@ -2310,7 +2310,7 @@ __asm__(".globl _ZTV14Class_0001FA68\n_ZTV14Class_0001FA68 = D_0001FA68 - 8\n");
 #endif
 
 #if FW_VERSION < 300
-s32 func_000104BC(struct Unk_func_000104BC_0 *arg0, s32 arg1) {
+s32 func_000104BC(Class_0001F980 *arg0, s32 arg1) {
     arg0->unk1EC = arg1;
     return 0;
 }

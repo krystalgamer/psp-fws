@@ -23,6 +23,10 @@ public:
 /* vtable _ZTV14Class_0001F980 is data (vptr = label - 8 + 8) */
 class Class_0001F980 : public paf::PhWidget {
 public:
+    u8 pad4[0x1D0];
+    s32 unk1D4;
+    u8 pad1D8[0x14];
+    s32 unk1EC;
     virtual ~Class_0001F980();
 };
 #endif
@@ -717,8 +721,8 @@ M2C_UNK func_000102B8(M2C_UNK, M2C_UNK);
 void func_000103D8(void);
 void func_00010428(M2C_UNK **arg0);
 void func_00010438(M2C_UNK **arg0);
-s32 func_00010460(struct Unk_func_00010460_0 *arg0);
-s32 func_000104BC(struct Unk_func_000104BC_0 *arg0, s32 arg1);
+s32 func_00010460(Class_0001F980 *arg0);
+s32 func_000104BC(Class_0001F980 *arg0, s32 arg1);
 void func_000104C8(M2C_UNK **arg0);
 void func_000104D8(M2C_UNK **arg0);
 void func_000104E8(M2C_UNK **arg0);
