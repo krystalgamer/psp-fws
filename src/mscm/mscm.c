@@ -737,7 +737,8 @@ INCLUDE_ASM("nonmatchings/mscm", func_0000179C);
 INCLUDE_ASM("nonmatchings/mscm", func_00001B88);
 #endif
 
-#if FW_VERSION == 100
+
+#if FW_VERSION < 150
 s32 func_000018B8(s32 slot) {
     s32 st;
     s32 buf[1];
@@ -750,6 +751,7 @@ s32 func_000018B8(s32 slot) {
 
     st = 0;
     sceLedSetMode(0, 0, 0);
+#if FW_VERSION == 100
     ret = func_00005C8C(slot, &st);
     if (st != 0) {
         return 0;
@@ -757,6 +759,20 @@ s32 func_000018B8(s32 slot) {
     sceKernelPowerLock(0);
     sceMScmSetSlotPower(&D_00006F14[slot], 1);
     sceKernelDelayThread(100000);
+#else
+    func_00005C8C(slot, &st);
+    if (st != 0) {
+        return 0;
+    }
+    sceKernelPowerLock(0);
+    sceMScmSetSlotPower(&D_00006F14[slot], 1);
+    sceKernelDelayThread(100000);
+    ret = func_00005C8C(slot, &st);
+    if (st != 0) {
+        sceKernelPowerUnlock(0);
+        return 0;
+    }
+#endif
     intr = sceKernelSuspendDispatchThread();
     for (i = 0; i < 32; i++) {
         if (g_notifyEvf[slot][i] != 0) {
@@ -805,7 +821,7 @@ s32 func_000018B8(s32 slot) {
 }
 #endif
 
-#if FW_VERSION >= 102 && FW_VERSION < 250
+#if FW_VERSION >= 150 && FW_VERSION < 250
 INCLUDE_ASM("nonmatchings/mscm", func_000018B8);
 #endif
 
