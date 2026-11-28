@@ -275,7 +275,7 @@ s32 func_00000974(SceNetAdhocPollEnt *ent, s32 count) {
             ent->sd->revents = func_00005024(ent->d, ent->sd->events);
             break;
         case 1:
-            ent->sd->revents = func_00002D94(ent->d, ent->sd->events);
+            ent->sd->revents = pdpPoll(ent->d, ent->sd->events);
             break;
         }
         n += ent->sd->revents != 0;
@@ -1495,7 +1495,7 @@ s32 func_00002D20(SceNetAdhocPdpPcb *pcb, s32 size) {
 
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00002D2C);
 
-INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00002D94);
+INCLUDE_ASM("nonmatchings/pspnet_adhoc", pdpPoll);
 #endif
 
 #if FW_VERSION < 150
@@ -2819,7 +2819,7 @@ s32 sceNetAdhocPtpClose(s32 id, s32 flag) {
         ret = 0x80410701;
         goto end;
     }
-    func_00004E98(d->pcb);
+    ptpDrop(d->pcb);
     func_00005708(d->pcb);
     d->flags |= 1;
     d->id = -1;
@@ -2917,7 +2917,7 @@ s32 func_00003A68(const SceNetEtherAddr *saddr, u16 sport, const SceNetEtherAddr
     ret = func_00000F60(2, &d);
     if (ret < 0)
         return ret;
-    ret = func_00004A40(d);
+    ret = ptpAttach(d);
     if (ret < 0)
         goto err1;
     ret = func_00005594(d->pcb, sndbuf, rcvbuf);
@@ -3294,7 +3294,7 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc", ptpBind);
 #endif
 
 #if FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00004A40);
+INCLUDE_ASM("nonmatchings/pspnet_adhoc", ptpAttach);
 #endif
 
 #if FW_VERSION < 300
@@ -3340,7 +3340,7 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00004E80);
 #endif
 
 #if FW_VERSION == 271
-INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00004DA4);
+INCLUDE_ASM("nonmatchings/pspnet_adhoc", ptpEstablished);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 201
@@ -3425,9 +3425,9 @@ s32 ptpPoll(SceNetAdhocDesc *d, s32 events) {
 #else
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00004BD8);
 
-INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00004DA4);
+INCLUDE_ASM("nonmatchings/pspnet_adhoc", ptpEstablished);
 
-INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00004E98);
+INCLUDE_ASM("nonmatchings/pspnet_adhoc", ptpDrop);
 
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00005024);
 #endif
@@ -3700,7 +3700,7 @@ void func_00005708(SceNetAdhocPtpPcb *arg0) {
             }
             *M2C_FIELD(var_s0, void ***, 0xC) = temp_a1;
             M2C_FIELD(arg0, s32 *, 0xD8) = (s32) (M2C_FIELD(arg0, s32 *, 0xD8) - 1);
-            func_00004E98(var_s0);
+            ptpDrop(var_s0);
             func_00005708(var_s0);
             ptpDetach(temp_s2);
             adhocDescFree((SceNetAdhocDesc *) temp_s2);
@@ -3856,7 +3856,7 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_000062FC);
 
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", ptpSendCtl);
 
-INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_000067F8);
+INCLUDE_ASM("nonmatchings/pspnet_adhoc", ptpOutput);
 #else
 void ptpTimer(SceNetAdhocPtpPcb *pcb) {
     if ((u32)pcb->state < 2)
@@ -3893,7 +3893,7 @@ void ptpTimer(SceNetAdhocPtpPcb *pcb) {
     if ((u32)pcb->state < 2)
         return;
     if (pcb->rexmt_left-- <= 0) {
-        func_00004E98(pcb);
+        ptpDrop(pcb);
         return;
     }
     switch (pcb->state) {
@@ -3905,7 +3905,7 @@ void ptpTimer(SceNetAdhocPtpPcb *pcb) {
         break;
     case 4:
         pcb->snd_nxt = pcb->snd_una;
-        func_000067F8(pcb, 1);
+        ptpOutput(pcb, 1);
         g_adhocStat.stat[ADHOC_STAT_PTP_REXMT]++;
         break;
     }

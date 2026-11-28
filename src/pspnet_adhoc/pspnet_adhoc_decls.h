@@ -455,14 +455,11 @@ s32 func_0000215C(s32 id, SceNetEtherAddr *addr, u16 *port, void *buf, s32 *len,
 void func_000022FC(struct mbuf *m);
 s32 func_00002D20(SceNetAdhocPdpPcb *pcb, s32 size);
 s32 func_00002D2C(s32);
-s32 func_00002D94(SceNetAdhocDesc *d, s32 events);
 s32 func_00003A68(const SceNetEtherAddr *saddr, u16 sport, const SceNetEtherAddr *daddr, u16 dport, s32 sndbuf, s32 rcvbuf, u32 rexmt_int, s32 rexmt_cnt, SceNetAdhocDesc **out);
 void func_00003BB0(SceNetAdhocDesc *d);
 s32 func_00003BE8(SceNetAdhocDesc *d, u32 timeout, s32 nonblock);
 s32 func_00003D9C(SceNetAdhocDesc *d, SceNetEtherAddr *addr, u16 *port, u32 timeout, s32 nonblock);
 s32 func_0000473C(SceNetAdhocDesc *d, u32 timeout, s32 nonblock);
-s32 func_00004A40(SceNetAdhocDesc *d);
-s32 func_00004E98(SceNetAdhocPtpPcb *pcb);
 s32 func_00005024(SceNetAdhocDesc *d, s32 events);
 s32 func_000053EC(SceNetAdhocPtpPcb *pcb, const SceNetEtherAddr *saddr, u16 sport, const SceNetEtherAddr *daddr, u16 dport);
 s32 func_00005594(SceNetAdhocPtpPcb *pcb, s32 sndsize, s32 rcvsize);
@@ -471,7 +468,6 @@ s32 func_000056CC(SceNetAdhocPtpPcb *pcb, const SceNetEtherAddr *saddr, u16 spor
 s32 func_000056E4(SceNetAdhocPtpPcb *pcb, s32 a1);
 void func_00005708(SceNetAdhocPtpPcb *pcb);
 void func_000058B8(struct mbuf *m);
-void func_000067F8(SceNetAdhocPtpPcb *pcb, s32 rexmt);
 s32 func_00006F68(void);
 s32 func_00007298(s32 id, SceNetAdhocGameModeOptData *opt, s32 internal);
 s32 gameModeCreate(const SceNetEtherAddr *addr, void *ptr, s32 size);
