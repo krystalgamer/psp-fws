@@ -155,6 +155,7 @@
   "sceNetFreeInternal": "void sceNetFreeInternal(void *p);",
   "sceNetGetLocalEtherAddr": "s32 sceNetGetLocalEtherAddr(SceNetEtherAddr *addr);",
   "sceNetGetSystemClockUsec": "u64 sceNetGetSystemClockUsec(void);",
+  "sceNetMAdj": "void sceNetMAdj(struct mbuf *m, s32 len);",
   "sceNetMCopydata": "void sceNetMCopydata(struct mbuf *m, s32 off, s32 len, void *cp);",
   "sceNetMFreem": "void sceNetMFreem(struct mbuf *m);",
   "sceNetMallocInternal": "void *sceNetMallocInternal(u32 size);",

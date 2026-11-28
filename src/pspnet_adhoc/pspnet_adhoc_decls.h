@@ -494,6 +494,7 @@ void sceNetAdhoc_lib_F9240FBA(void);
 void sceNetFreeInternal(void *p);
 s32 sceNetGetLocalEtherAddr(SceNetEtherAddr *addr);
 u64 sceNetGetSystemClockUsec(void);
+void sceNetMAdj(struct mbuf *m, s32 len);
 void sceNetMCopydata(struct mbuf *m, s32 off, s32 len, void *cp);
 void sceNetMFreem(struct mbuf *m);
 void *sceNetMallocInternal(u32 size);
