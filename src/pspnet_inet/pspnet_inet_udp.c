@@ -1421,7 +1421,7 @@ s32 syn_cache_add(struct sockaddr *src, struct sockaddr *dst, struct tcphdr *th,
 		return (0);
 	}
 
-	func_0002C94C(sc, 0, sizeof(struct syn_cache));
+	bzero(sc, sizeof(struct syn_cache));
 	func_0002C9B8(src, &sc->sc_src, src->sa_len);
 	func_0002C9B8(dst, &sc->sc_dst, dst->sa_len);
 	sc->sc_flags = 0;

@@ -1672,6 +1672,13 @@ typedef u32 tcp_seq;
 #define EISCONN 0x7F
 #define ENOTCONN 0x80
 
+/* bzero: a local memset in 1.x, sceNetBzero from 2.01 */
+#if FW_VERSION >= 201
+#define bzero(p, n) sceNetBzero((p), (n))
+#else
+#define bzero(p, n) func_0002C94C((p), 0, (n))
+#endif
+
 struct SceTailqHead {
     void *tqh_first;
     void **tqh_last;
@@ -2456,6 +2463,7 @@ s32 sceKernelGetThreadId(void);
 s32 sceKernelSignalSema(u32, s32);
 s32 sceNetBcmp(const void *b1, const void *b2, u32 len);
 void sceNetBcopy(const void *src, void *dst, s32 len);
+void sceNetBzero(void *p, u32 n);
 s32 sceNetConfigAddArp(s32, s32);
 s32 sceNetConfigDelArp(s32, s32);
 s32 sceNetConfigDelDefaultRoute(void);

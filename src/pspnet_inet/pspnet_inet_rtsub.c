@@ -111,7 +111,7 @@ s32 func_0000D484(struct socket *so, s32 req, struct mbuf *m, struct mbuf *nam, 
 	if (req == PRU_ATTACH) {
 		rp = sceNetMallocInternal(sizeof(*rp));
 		if ((so->so_pcb = rp) != NULL)
-			func_0002C94C(so->so_pcb, 0, sizeof(*rp));
+			bzero(so->so_pcb, sizeof(*rp));
 
 	}
 	if (req == PRU_DETACH && rp)
@@ -378,7 +378,7 @@ void func_0000E0EC(s32 cmd, struct ifaddr *ifa, s32 error, struct rtentry *rt)
 			info.rti_info[RTAX_NETMASK] = rt_mask(rt);
 			info.rti_info[RTAX_DST] = sa = rt_key(rt);
 			info.rti_info[RTAX_GATEWAY] = rt->rt_gateway;
-			func_0002C94C(&rtm, 0, sizeof(rtm));
+			bzero(&rtm, sizeof(rtm));
 			rtm.rtm_index = ifp->if_index;
 			rtm.rtm_flags |= rt->rt_flags;
 			rtm.rtm_errno = error;
@@ -404,7 +404,7 @@ void rt_missmsg(s32 type, struct rt_addrinfo *rtinfo, s32 flags, s32 error)
 
 	if (route_cb.any_count == 0)
 		return;
-	func_0002C94C(&rtm, 0, sizeof(rtm));
+	bzero(&rtm, sizeof(rtm));
 	rtm.rtm_flags = RTF_DONE | flags;
 	rtm.rtm_errno = error;
 	m = func_0000E5A4(type, rtinfo, (char *)&rtm, sizeof(rtm));
@@ -428,7 +428,7 @@ void func_0000E3F0(struct ifnet *ifp)
 	if (route_cb.any_count == 0)
 		return;
 	__builtin_memset(&info, 0, sizeof(info));
-	func_0002C94C(&ifm, 0, sizeof(ifm));
+	bzero(&ifm, sizeof(ifm));
 	ifm.ifm_index = ifp->if_index;
 	ifm.ifm_flags = ifp->if_flags;
 	ifm.ifm_data = ifp->if_data;
