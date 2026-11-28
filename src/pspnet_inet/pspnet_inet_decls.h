@@ -1759,6 +1759,7 @@ extern struct { struct llinfo_arp *lh_first; } llinfo_arp_head; /* llinfo_arp */
 extern struct ifnet loif; /* loif */
 extern struct radix_node_head *mask_rnhead; /* mask_rnhead */
 extern s32 max_keylen; /* max_keylen */
+extern s32 mtu_table[]; /* mtu_table */
 extern const struct cp pap; /* pap */
 extern s32 pffasttimo_now; /* pffasttimo_now */
 extern s32 pfslowtimo_now; /* pfslowtimo_now (SCE tcp timers are absolute slowtimo ticks) */
@@ -1940,7 +1941,6 @@ s32 func_00019A98(void);
 void func_00019C00(struct rtentry *rt);
 s32 func_0001A410(void);
 void func_0001A49C(void);
-void func_0001A548(struct rtentry *rt);
 void func_0001A8AC(void);
 void func_0001AA20(struct Unk_func_0001AA20_0 *arg0);
 void func_0001C208(void);
@@ -1989,6 +1989,7 @@ s32 func_0002CCF8(void *putc, void *arg, const char *fmt, __builtin_va_list ap);
 void func_0002D420();
 struct socket *getsock(s32 s);
 void icmp_mtudisc_callback_register(void *key);
+void icmp_mtudisc_timeout(struct rtentry *rt);
 void icmp_send(struct mbuf *m, struct mbuf *opts);
 s32 icmp_sysctl(s32 *name, u32 namelen, void *oldp, u32 *oldlenp, void *newp, u32 newlen);
 s32 if_rtdel(struct rtentry *rt, void *arg);

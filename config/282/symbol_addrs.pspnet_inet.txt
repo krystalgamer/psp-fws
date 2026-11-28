@@ -341,3 +341,4 @@ ip_getmoptions = 0x00018328; // type:func
 ip_mloopback = 0x00018478; // type:func
 looutput = 0x0000F2D4; // type:func
 ip_insertoptions = 0x000175DC; // type:func
+icmp_mtudisc = 0x000197D4; // type:func

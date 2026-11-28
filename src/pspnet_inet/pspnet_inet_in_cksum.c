@@ -1746,10 +1746,32 @@ s32 icmp_sysctl(s32 *name, u32 namelen, void *oldp, u32 *oldlenp, void *newp, u3
     return error;
 }
 
-INCLUDE_ASM("nonmatchings/pspnet_inet_in_cksum", func_000197D4);
+INCLUDE_ASM("nonmatchings/pspnet_inet_in_cksum", icmp_mtudisc);
 
 #if FW_VERSION < 151
-INCLUDE_ASM("nonmatchings/pspnet_inet_in_cksum", ip_next_mtu);
+s32 ip_next_mtu(s32 mtu, s32 dir) {
+    s32 i;
+
+    for (i = 0; i < 12U; i++)
+        if (mtu >= mtu_table[i])
+            break;
+
+    if (dir < 0) {
+        if (i == 0) {
+            return 0;
+        } else {
+            return mtu_table[i - 1];
+        }
+    } else {
+        if (mtu_table[i] == 0) {
+            return 0;
+        } else if (mtu > mtu_table[i]) {
+            return mtu_table[i];
+        } else {
+            return mtu_table[i + 1];
+        }
+    }
+}
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
@@ -1809,11 +1831,11 @@ void func_0001A49C(void) {
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet_in_cksum", func_0001A548);
+INCLUDE_ASM("nonmatchings/pspnet_inet_in_cksum", icmp_mtudisc_timeout);
 #endif
 
 #if FW_VERSION < 201
-void func_0001A548(struct rtentry *rt) {
+void icmp_mtudisc_timeout(struct rtentry *rt) {
     s32 flags = rt->rt_flags;
     if ((flags & (RTF_HOST | RTF_DYNAMIC)) != (RTF_HOST | RTF_DYNAMIC)) {
         if (!(rt->rt_rmx.rmx_locks & RTV_MTU)) {
