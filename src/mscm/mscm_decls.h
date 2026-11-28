@@ -82,7 +82,13 @@ typedef struct SceMScmHC {
     s32 writeAddr;          /* 0x28 */
     s32 writeSize;          /* 0x2C */
     SceUID evf;             /* 0x30: "SceMScmAl" */
-    u8 unk34[0x27C - 0x34];
+    SceUID dmaEvf;          /* 0x34 */
+    u8 unk38[0x258 - 0x38];
+    SceUID dmaOp[2];        /* 0x258: DMA ops (read/write) */
+    u8 unk260[0x270 - 0x260];
+    u32 dmaWaitBits;        /* 0x270 */
+    s32 dmaRetry;           /* 0x274 */
+    u32 dmaTimeout;         /* 0x278: 0 = wait forever */
 #if FW_VERSION >= 150
     s32 unk27C;
     s32 unk280;
@@ -314,7 +320,7 @@ s32 sceMScmTPCSetRWRegAdrs(SceMScmHC *hc, u8 *adr, s32 timeout);
 s32 sceMScmTPCWriteShortData(SceMScmHC *hc, u8 *buf, s32 size, s32 timeout);
 s32 sceMScmUnRegisterCLD(s32 slot, SceMScmCLD *cld);
 s32 sceMScmUnRegisterCLDM(SceMScmCLDMInfo *prm);
-s32 sceMScmWaitAndEndDMA(SceMScmHC *hc, s32 a1, s32 a2);
+s32 sceMScmWaitAndEndDMA(SceMScmHC *hc, u32 mode, s32 nowait);
 s32 sceMScmWaitHCIntr(SceMScmHC *hc, u32 *pattern, s32 timeout);
 s32 sceMScmWriteDataPIO(SceMScmHC *hc, u8 *buf, s32 size, s32 timeout);
 s32 sceMScmWriteMSReg(SceMScmHC *hc, s32 addr, s32 size, u8 *buf, s32 force, s32 timeout);

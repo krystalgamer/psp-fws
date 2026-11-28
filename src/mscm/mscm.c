@@ -1361,7 +1361,58 @@ INCLUDE_ASM("nonmatchings/mscm", func_00003624);
 
 INCLUDE_ASM("nonmatchings/mscm", sceMScmStartReadDataDMA);
 
+#if FW_VERSION < 201
+s32 sceMScmWaitAndEndDMA(SceMScmHC *hc, u32 mode, s32 nowait) {
+    SceMScmHC *h;
+    s32 ret;
+    u32 bits;
+    u32 tmo;
+    s32 i;
+
+    h = hc->hc;
+    ret = 0;
+again:
+    if (nowait == 0) {
+        if (h->dmaTimeout != 0) {
+            tmo = h->dmaTimeout;
+            ret = sceKernelWaitEventFlag(h->dmaEvf, h->dmaWaitBits, 0x10, &bits, &tmo);
+        } else {
+            ret = sceKernelWaitEventFlag(h->dmaEvf, h->dmaWaitBits, 0x10, &bits, NULL);
+        }
+    }
+    for (i = 0; i < 2; i++) {
+        if (h->dmaOp[i] != 0) {
+            ret = sceKernelDmaOpSync(h->dmaOp[i], 0, 0);
+            if (ret < 0) {
+                if (((mode >> 1) & 1) && nowait == 0 && (hc->reg->unk0 & 1)) {
+                    if (--h->dmaRetry != -1) {
+                        goto again;
+                    }
+                }
+                ret = 0x8022008A;
+                sceKernelDmaOpQuit(h->dmaOp[i]);
+                sceKernelDmaOpDeQueue(h->dmaOp[i]);
+            }
+        }
+    }
+    if (!(hc->reg->unk0 & 1) && (hc->reg->status & 0x100)) {
+        ret = 0x80220089;
+    }
+    for (i = 0; i < 2; i++) {
+        if (h->dmaOp[i] != 0) {
+            sceKernelDmaOpFreeLink(h->dmaOp[i]);
+            sceKernelDmaOpFree(h->dmaOp[i]);
+        }
+    }
+    sceKernelDeleteEventFlag(h->dmaEvf);
+    h->dmaEvf = 0;
+    hc->reg->unk40 = 0;
+    asm volatile("sync");
+    return ret;
+}
+#else
 INCLUDE_ASM("nonmatchings/mscm", sceMScmWaitAndEndDMA);
+#endif
 
 INCLUDE_ASM("nonmatchings/mscm", sceMScmStartWriteDataDMA);
 
