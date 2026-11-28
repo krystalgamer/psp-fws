@@ -4595,7 +4595,166 @@ s32 rip_ctloutput(s32 op, struct socket *so, s32 level, s32 optname, struct mbuf
 INCLUDE_ASM("nonmatchings/pspnet_inet", rip_ctloutput);
 #endif
 
+#if FW_VERSION < 151
+__inline s32 rip_bind(struct inpcb *inp, struct mbuf *nam) {
+    struct sockaddr_in *addr = mtod(nam, struct sockaddr_in *);
+    TAILQ_HEAD(, ifnet) ifnet;
+
+    _sce_pspnet_get_if_core_variables(NULL, NULL, NULL, (struct ifnet **)&ifnet);
+    if (nam->m_len != sizeof(*addr))
+        return (0x16);
+    if (ifnet.tqh_first == 0)
+        return (0x7D);
+    if (addr->sin_family != AF_INET && addr->sin_family != 3)
+        return (0x6A);
+    if (addr->sin_addr.s_addr != __builtin_allegrex_wsbw(0) &&
+        ifa_ifwithaddr((struct sockaddr *)addr) == 0)
+        return (0x7D);
+    inp->inp_laddr = addr->sin_addr;
+    return (0);
+}
+
+__inline s32 rip_connect(struct inpcb *inp, struct mbuf *nam) {
+    struct sockaddr_in *addr = mtod(nam, struct sockaddr_in *);
+    TAILQ_HEAD(, ifnet) ifnet;
+
+    _sce_pspnet_get_if_core_variables(NULL, NULL, NULL, (struct ifnet **)&ifnet);
+    if (nam->m_len != sizeof(*addr))
+        return (0x16);
+    if (ifnet.tqh_first == 0)
+        return (0x7D);
+    if (addr->sin_family != AF_INET && addr->sin_family != 3)
+        return (0x6A);
+    inp->inp_faddr = addr->sin_addr;
+    return (0);
+}
+
+__inline void rip_disconnect(struct inpcb *inp) {
+    inp->inp_faddr = zeroin_addr;
+}
+
+s32 func_0001B1B0(struct socket *so, s32 req, struct mbuf *m, struct mbuf *nam, struct mbuf *control) {
+    struct inpcb *inp;
+    s32 s;
+    s32 error = 0;
+
+    if (req == 11)
+        return (in_control(so, (s32)m, (void *)nam, (struct ifnet *)control));
+    if (req == 22) {
+        in_purgeif((struct ifnet *)control);
+        in_pcbpurgeif(&rawcbtable, (struct ifnet *)control);
+        return (0);
+    }
+    s = _sce_pspnet_spllock();
+    inp = (struct inpcb *)so->so_pcb;
+    if (inp == 0 && req != 0) {
+        error = 0x16;
+        goto release;
+    }
+    switch (req) {
+    case 0:
+        if (inp != 0) {
+            error = 0x7F;
+            break;
+        }
+        if (so->so_snd.sb_hiwat == 0 || so->so_rcv.sb_hiwat == 0) {
+            error = soreserve(so, D_0002C30C, D_0002C310);
+            if (error)
+                break;
+        }
+        error = in_pcballoc(so, &rawcbtable);
+        if (error)
+            break;
+        inp = (struct inpcb *)so->so_pcb;
+        inp->inp_ip.ip_p = (s32)nam;
+        break;
+    case 10:
+        soisdisconnected(so);
+    case 1:
+        in_pcbdetach(inp);
+        break;
+    case 2:
+        error = rip_bind(inp, nam);
+        break;
+    case 3:
+        error = 0x5F;
+        break;
+    case 4:
+        error = rip_connect(inp, nam);
+        if (error)
+            break;
+        soisconnected(so);
+        break;
+    case 17:
+        error = 0x5F;
+        break;
+    case 6:
+        soisdisconnected(so);
+        rip_disconnect(inp);
+        break;
+    case 7:
+        socantsendmore(so);
+        break;
+    case 8:
+        error = 0x5F;
+        break;
+    case 9:
+        if (control && control->m_len) {
+            sceNetMFreem(control);
+            sceNetMFreem(m);
+            error = 0x16;
+            break;
+        }
+        {
+            if (nam) {
+                if ((so->so_state & SS_ISCONNECTED) != 0) {
+                    error = 0x7F;
+                    goto die;
+                }
+                error = rip_connect(inp, nam);
+                if (error) {
+                die:
+                    sceNetMFreem(m);
+                    break;
+                }
+            } else {
+                if ((so->so_state & SS_ISCONNECTED) == 0) {
+                    error = 0x80;
+                    goto die;
+                }
+            }
+            error = rip_output(m, inp);
+            if (nam)
+                rip_disconnect(inp);
+        }
+        break;
+    case 12:
+        _sce_pspnet_splunlock(s);
+        return (0);
+    case 13:
+        error = 0x5F;
+        break;
+    case 14:
+        sceNetMFreem(control);
+        sceNetMFreem(m);
+        error = 0x5F;
+        break;
+    case 15:
+        in_setsockaddr(inp, nam);
+        break;
+    case 16:
+        in_setpeeraddr(inp, nam);
+        break;
+    default:
+        break;
+    }
+release:
+    _sce_pspnet_splunlock(s);
+    return (error);
+}
+#else
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_0001B1B0);
+#endif
 
 void rip_init(void) {
     D_0002C30C = 0x2000;
@@ -4603,6 +4762,7 @@ void rip_init(void) {
     in_pcbinit(&rawcbtable, 1, 1);
 }
 
+#if FW_VERSION >= 151
 s32 rip_bind(struct inpcb *inp, struct mbuf *nam) {
     struct sockaddr_in *addr = mtod(nam, struct sockaddr_in *);
     TAILQ_HEAD(, ifnet) ifnet;
@@ -4641,6 +4801,8 @@ void rip_disconnect(struct inpcb *inp) {
     inp->inp_faddr = zeroin_addr;
 }
 #endif
+#endif
+
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_inet", rip_disconnect);
