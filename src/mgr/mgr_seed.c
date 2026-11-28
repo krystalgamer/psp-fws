@@ -2366,7 +2366,70 @@ s32 sceMgrMSReadPoolPage(s32 arg0, u8 *buf, s32 pool) {
 }
 #endif
 
+#if FW_VERSION == 100
+s32 sceMgrMSInvalidateICV(s32 arg0) {
+    s32 seg;
+    s32 ret;
+    s32 page;
+    s32 blk;
+    MgrMsCtrl *ms;
+    MgrMsCtrl *ms2;
+    s32 *blks;
+
+    ret = func_00006030();
+    if (ret < 0) {
+        return ret;
+    }
+    sceKernelPowerLock(0);
+    ret = func_00005194(arg0, 2);
+    if (ret >= 0) {
+        ms = &g_mgrMsCtrl;
+        blks = ms->info.map.seqBlk;
+        page = func_00008EB0(&seg, ms->info.map.seqPos[0]);
+        blk = blks[seg];
+        if (page < 0 || blk < 0) {
+        } else {
+            ret = func_00005768(arg0, blk, page, -0x11);
+            if (ret < 0) {
+                if (ret != 0x80505003) {
+                    goto end;
+                }
+                blks[seg] = -1;
+                if (blks[seg ^ 1] < 0) {
+                    ms->info.status |= 4;
+                    ret = 0x80505004;
+                    goto end;
+                }
+            }
+        }
+        ms2 = &g_mgrMsCtrl;
+        ret = 0;
+        if (ms2->info.map.poolValid >= 0) {
+            blks = ms2->info.map.poolBlk;
+            ret = func_00008EB0(&seg, ms2->info.map.poolPos[0]);
+            page = ret;
+            blk = blks[seg];
+            ret = 0;
+            if ((blk | page) >= 0) {
+                ret = func_00005768(arg0, blk, page, -0x11);
+                if (ret < 0) {
+                    if (ret != 0x80505003) {
+                        goto end;
+                    }
+                    blks[seg] = -1;
+                }
+                ret = 0;
+            }
+        }
+    }
+end:
+    sceKernelPowerUnlock(0);
+    func_0000608C();
+    return ret;
+}
+#else
 INCLUDE_ASM("nonmatchings/mgr_seed", sceMgrMSInvalidateICV);
+#endif
 
 INCLUDE_ASM("nonmatchings/mgr_seed", sceMgrMSWriteSeqPage);
 
@@ -2417,7 +2480,7 @@ void func_00008388(s32 arg0) {
 }
 #endif
 
-#if FW_VERSION >= 102 && FW_VERSION < 151
+#if FW_VERSION < 152
 s32 sceMgrMSCheckICV(s32 arg0, u64 *icv) {
     MgrMsAuthInfo info;
     s32 handle[4];
@@ -2471,58 +2534,6 @@ s32 sceMgrMSCheckICV(s32 arg0, u64 *icv) {
 
 #if FW_VERSION >= 340
 INCLUDE_RODATA("nonmatchings/mgr_seed", D_0000AFD0);
-#endif
-
-#if FW_VERSION == 100 || FW_VERSION == 151
-s32 sceMgrMSCheckICV(s32 arg0, u64 *icv) {
-    MgrMsAuthInfo info;
-    s32 handle[4];
-    s32 *pfd = handle;
-    s32 mode = 2;
-    s32 ret;
-
-    func_00006288(&info, icv, NULL, NULL);
-    ret = func_00006678(arg0, pfd, 2, 1);
-    if (ret < 0) {
-        if ((u32)(ret - 0x80505006) >= 2) {
-            return ret;
-        }
-        ret = func_00006678(arg0, pfd, 3, 1);
-        mode = 3;
-        if (ret < 0) {
-            return ret;
-        }
-    }
-    ret = func_00006528(*pfd, 0x78);
-    if (ret >= 0) {
-        ret = func_00006134(*pfd, 0xC, (u8 *)&info, 0x1A);
-        if (ret >= 0) {
-            ret = func_000065FC(*pfd, (u8 *)"yz", 2);
-            if (ret >= 0) {
-                ret = func_00008300(*pfd, 0x7C);
-                if (ret >= 0) {
-                    ret = func_00008300(*pfd, 0x7B);
-                    if (ret < 0) {
-                        if (ret == 0x80504000) {
-                            ret = 0;
-                        } else if (ret == 0x80503003) {
-                            if (!(mode & 1)) {
-                                func_00006528(*pfd, 0x7D);
-                            }
-                            ret = 0;
-                        }
-                    }
-                }
-            }
-        }
-    }
-    func_0000684C(arg0);
-    func_000067CC(arg0, 1);
-    if (ret == 0x80504000) {
-        ret = 0x80505003;
-    }
-    return ret;
-}
 #endif
 
 #if FW_VERSION >= 152 && FW_VERSION < 340
@@ -2687,7 +2698,6 @@ INCLUDE_ASM("nonmatchings/mgr_seed", sceMgrMSWriteICV);
 
 INCLUDE_RODATA("nonmatchings/mgr_seed", D_0000AFD8);
 
-#if FW_VERSION >= 102 && FW_VERSION < 151
 s32 sceMgr_driver_016A843B(s32 arg0, u64 *out, u64 *in) {
     MgrMsAuthInfo info;
     s32 fd;
@@ -2737,57 +2747,6 @@ s32 sceMgr_driver_3EE1140B(s32 arg0, u64 *out, u64 *in) {
     func_000067CC(arg0, 1);
     return ret;
 }
-#else
-s32 sceMgr_driver_016A843B(s32 arg0, u64 *out, u64 *in) {
-    MgrMsAuthInfo info;
-    s32 fd;
-    s32 ret;
-
-    func_00006288(&info, in, NULL, NULL);
-    ret = func_00006678(arg0, &fd, 3, 1);
-    if (ret < 0) {
-        return ret;
-    }
-    ret = func_00006134(fd, 0xC, (u8 *)&info, 0x1A);
-    if (ret >= 0) {
-        ret = func_000065FC(fd, (u8 *)"uvw", 3);
-        if (ret >= 0) {
-            ret = func_00006134(fd, 3, (u8 *)&info, 0x18);
-            if (ret >= 0) {
-                *out = info.a;
-            }
-        }
-    }
-    func_0000684C(arg0);
-    func_000067CC(arg0, 1);
-    return ret;
-}
-
-s32 sceMgr_driver_3EE1140B(s32 arg0, u64 *out, u64 *in) {
-    MgrMsAuthInfo info;
-    s32 fd;
-    s32 ret;
-
-    func_00006288(&info, in, NULL, NULL);
-    ret = func_00006678(arg0, &fd, 3, 1);
-    if (ret < 0) {
-        return ret;
-    }
-    ret = func_00006134(fd, 0xC, (u8 *)&info, 0x1A);
-    if (ret >= 0) {
-        ret = func_000065FC(fd, (u8 *)"rst", 3);
-        if (ret >= 0) {
-            ret = func_00006134(fd, 3, (u8 *)&info, 0x18);
-            if (ret >= 0) {
-                *out = info.a;
-            }
-        }
-    }
-    func_0000684C(arg0);
-    func_000067CC(arg0, 1);
-    return ret;
-}
-#endif
 
 s32 func_0000A070(s32 arg0, u64 *out) {
     u64 buf[4];
