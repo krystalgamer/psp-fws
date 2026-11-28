@@ -1,11 +1,62 @@
+/* cflags: -O2 -fno-builtin */
 #include "common.h"
 #include "rinit_decls.h"
 
-INCLUDE_ASM("nonmatchings/rinit_000128", func_00000128);
+#define SCE_ERROR_REGISTRY_INVALID 0x80108401 /* uncertain name */
 
-INCLUDE_ASM("nonmatchings/rinit_000128", module_start);
+int func_00000128(void) {
+    struct RegParam reg;
 
-INCLUDE_ASM("nonmatchings/rinit_000128", func_0000025C);
+    memset(&reg, 0, sizeof(reg));
+    reg.regtype = 1;
+    reg.unk2 = 1;
+    reg.unk3 = 1;
+    sceRegRemoveRegistry(&reg);
+    return 0;
+}
+
+int module_start(SceSize args, void *argp) {
+    int ret;
+
+    printf("-------------------------------------------------------------\n");
+    printf("Init System Configuration\n");
+    ret = func_00000128();
+    if (ret < 0) {
+        printf("Error: System Configuration clear error. (code=%x)\n", ret);
+        printf("abort.\n");
+        return -1;
+    }
+    printf(".\n");
+    sceIoMkdir("flash1:/registry", 0xFFF);
+    printf(".\n");
+    ret = func_000002F0();
+    if (ret < 0) {
+        printf("Error: System Configuration create error. (code=%x)\n", ret);
+        printf("abort.\n");
+        return -2;
+    }
+    printf(".\n");
+    sceIoRemove("flash1:/registry/init.dat");
+    printf(".\n");
+    printf("done.\n");
+    return 0;
+}
+
+int func_0000025C(const char *path, char *dir, char *name) {
+    char buf[0x101];
+    char *p;
+
+    memset(buf, 0, sizeof(buf));
+    strncpy(buf, path, sizeof(buf));
+    p = strrchr(buf, '/');
+    if (p == NULL) {
+        return SCE_ERROR_REGISTRY_INVALID;
+    }
+    *p = '\0';
+    strcpy(name, p + 1);
+    strcpy(dir, buf);
+    return 0;
+}
 
 INCLUDE_RODATA("nonmatchings/rinit_000128", D_0000B40C);
 
@@ -225,11 +276,93 @@ INCLUDE_RODATA("nonmatchings/rinit_000128", D_0000BAF0);
 
 INCLUDE_ASM("nonmatchings/rinit_000128", func_000002F0);
 
-INCLUDE_ASM("nonmatchings/rinit_000128", func_00000574);
+int func_00000574(struct RegParam *reg, u32 *h) {
+    int ret;
 
-INCLUDE_ASM("nonmatchings/rinit_000128", func_00000620);
+    memset(reg, 0, sizeof(*reg));
+    reg->regtype = 1;
+    strcpy(reg->name, D_0000BAF0);
+    reg->namelen = strlen(D_0000BAF0);
+    reg->unk2 = 1;
+    reg->unk3 = 1;
+    ret = sceRegOpenRegistry(reg, 2, h);
+    if (ret == 0x80082714) {
+        return 0x80082714;
+    }
+    if (ret != 0) {
+        return ret;
+    }
+    return 0;
+}
 
-INCLUDE_ASM("nonmatchings/rinit_000128", func_00000750);
+int func_00000620(u32 h, const char *path, int type, int size, void *buf) {
+    char dir[0x101];
+    char name[0x101];
+    u32 cat;
+    u32 ktype;
+    int ksize;
+    int ret;
+
+    if (path == NULL) {
+        return 0;
+    }
+    memset(dir, 0, sizeof(dir));
+    memset(name, 0, sizeof(name));
+    ret = func_0000025C(path, dir, name);
+    if (ret != 0) {
+        return ret;
+    }
+    ret = sceRegOpenCategory(h, dir, 2, &cat);
+    if (ret != 0) {
+        return ret;
+    }
+    ret = sceRegGetKeyInfoByName(cat, name, &ktype, &ksize);
+    if (ret != 0) {
+        sceRegCloseCategory(cat);
+        return ret;
+    }
+    if (ktype != type || size < ksize) {
+        sceRegCloseCategory(cat);
+        return SCE_ERROR_REGISTRY_INVALID;
+    }
+    ret = sceRegGetKeyValueByName(cat, name, buf, ksize);
+    if (ret != 0) {
+        sceRegCloseCategory(cat);
+        return ret;
+    }
+    sceRegCloseCategory(cat);
+    return 0;
+}
+
+int func_00000750(u32 h, const char *path, SceSize size, const void *buf) {
+    char dir[0x101];
+    char name[0x101];
+    u32 cat;
+    int ret;
+
+    if (path == NULL) {
+        return 0;
+    }
+    memset(dir, 0, sizeof(dir));
+    memset(name, 0, sizeof(name));
+    ret = func_0000025C(path, dir, name);
+    if (ret != 0) {
+        return ret;
+    }
+    ret = sceRegOpenCategory(h, dir, 2, &cat);
+    if (ret != 0) {
+        return ret;
+    }
+    ret = sceRegSetKeyValue(cat, name, buf, size);
+    if (ret != 0) {
+        sceRegCloseCategory(cat);
+        return ret;
+    }
+    sceRegFlushCategory(cat);
+    sceRegCloseCategory(cat);
+    sceRegFlushRegistry(h);
+    return 0;
+}
 
 INCLUDE_ASM("nonmatchings/rinit_000128", func_00000848);
 

@@ -4,6 +4,15 @@
 #include "common.h"
 #include "m2c_macros.h"
 
+struct RegParam {
+    unsigned int regtype;   /* 0x000: 1 = system */
+    char name[256];         /* 0x004 */
+    unsigned int namelen;   /* 0x104 */
+    unsigned int unk2;      /* 0x108 */
+    unsigned int unk3;      /* 0x10C */
+};
+typedef char chk_RegParam[(sizeof(struct RegParam) == 0x110) ? 1 : -1];
+
 struct Unk_func_00001AF8_1 {
     u8 pad0[0x4];
     s32 unk4;
@@ -251,6 +260,7 @@ struct _reent {
 };
 
 extern func_ptr D_0000B28C[];
+extern char D_0000BAF0[];
 extern struct lconv D_0000BEBC;
 extern char *D_0000F58C;
 extern char *D_0000F590;
@@ -306,6 +316,12 @@ _ssize_t _write_r(struct _reent *ptr, int fd, const void *buf, size_t cnt);
 clock_t clock(void);
 int fflush(FILE *fp);
 void free(void *ptr);
+int func_00000128(void);
+int func_0000025C(const char *path, char *dir, char *name);
+int func_000002F0(void);
+int func_00000574(struct RegParam *reg, u32 *h);
+int func_00000620(u32 h, const char *path, int type, int size, void *buf);
+int func_00000750(u32 h, const char *path, SceSize size, const void *buf);
 SceUID func_00001288(const char *file, int flags, int mode);
 _off_t func_000013C4(int fd, _off_t offset, int whence);
 int func_000015A4(void);
@@ -321,11 +337,14 @@ void *memchr(const void *src_void, int c, size_t length);
 void *memcpy(void *dst0, const void *src0, size_t len0);
 void *memmove(void *dst_void, const void *src_void, size_t length);
 void *memset(void *m, int c, size_t n);
+int module_start(SceSize args, void *argp);
 int printf(const char *fmt, ...);
 int sceIoClose(SceUID fd);
 SceOff sceIoLseek(SceUID fd, SceOff offset, int whence);
+int sceIoMkdir(const char *dir, int mode);
 SceUID sceIoOpen(const char *file, int flags, int mode);
 int sceIoRead(SceUID fd, void *data, SceSize size);
+int sceIoRemove(const char *file);
 int sceIoWrite(SceUID fd, const void *data, SceSize size);
 SceUID sceKernelAllocPartitionMemory(SceUID partitionid, const char *name, int type, SceSize size, void *addr);
 void sceKernelCpuResumeIntr(int intr);
@@ -340,6 +359,17 @@ int sceKernelSelfStopUnloadModule(int exitcode, SceSize argsize, void *argp);
 SceUID sceKernelStderr(void);
 SceUID sceKernelStdin(void);
 SceUID sceKernelStdout(void);
+int sceRegCloseCategory(u32 catHandle);
+int sceRegCloseRegistry(u32 regHandle);
+int sceRegCreateKey(u32 catHandle, const char *name, int type, SceSize size);
+int sceRegFlushCategory(u32 catHandle);
+int sceRegFlushRegistry(u32 regHandle);
+int sceRegGetKeyInfoByName(u32 catHandle, const char *name, u32 *type, int *size);
+int sceRegGetKeyValueByName(u32 catHandle, const char *name, void *buf, SceSize size);
+int sceRegOpenCategory(u32 regHandle, const char *dirName, int mode, u32 *catHandle);
+int sceRegOpenRegistry(struct RegParam *reg, int mode, u32 *regHandle);
+int sceRegRemoveRegistry(struct RegParam *reg);
+int sceRegSetKeyValue(u32 catHandle, const char *name, const void *buf, SceSize size);
 char *setlocale(int category, const char *locale);
 char *strchr(const char *s1, int i);
 int strcmp(const char *s1, const char *s2);
