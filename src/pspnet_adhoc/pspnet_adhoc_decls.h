@@ -7,6 +7,9 @@
 typedef struct {
     u32 size;
     u32 flag;
+#if FW_VERSION >= 201
+    u64 last_recv;
+#endif
 } SceNetAdhocGameModeOptData;
 
 typedef struct {
