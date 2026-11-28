@@ -2642,7 +2642,25 @@ void func_00009E68(SceHttpsUnkGroup *g) {
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/libhttp", func_00009E68);
+void func_00009E68(SceHttpsUnkGroup *g) {
+    SceHttpsUnkGroup *gnext;
+    SceHttpsUnkItem *item;
+    SceHttpsUnkItem *next;
+
+    while (g != NULL) {
+        item = g->items;
+        while (item != NULL) {
+            func_00009DA0(item);
+            next = item->next;
+            func_00006388(item);
+            item = next;
+        }
+        func_00006388(g->buf0C);
+        gnext = g->next;
+        func_00006388(g);
+        g = gnext;
+    }
+}
 #endif
 
 #if FW_VERSION < 201
