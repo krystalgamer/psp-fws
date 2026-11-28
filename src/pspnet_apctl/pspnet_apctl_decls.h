@@ -94,6 +94,62 @@ union SceNetApctlInfo {
     SceUShort16 http_proxy_port;
 } /* size 0x80 */;
 
+typedef struct {
+    s32 id;
+    void (*func)(s32 oldState, s32 newState, s32 event, s32 error, void *arg);
+    void *arg;
+} SceNetApctlHandlerEntry;
+
+/* network configuration copied from sceUtilityGetNetParam (1.00: ctx+0x6CC) */
+typedef struct {
+    char name[0x40];            /* 0x00 NETPARAM 0 */
+    char ssid[0x24];            /* 0x40 NETPARAM 1 */
+    s32 secure;                 /* 0x64 NETPARAM 2: 1/2 = WEP */
+    union {
+        u32 w[3];
+        u8 b[13];
+    } wepKey;                   /* 0x68 NETPARAM 3 */
+    s32 powerSave;              /* 0x78 SYSTEMPARAM 3 */
+    s32 ipType;                 /* 0x7C NETPARAM 4: 0 DHCP, 1 static, 2 PPPoE */
+    union {
+        struct {
+            char ip[0x10];      /* 0x80 NETPARAM 5 */
+            char netmask[0x10]; /* 0x90 NETPARAM 6 */
+            char route[0x10];   /* 0xA0 NETPARAM 7 */
+        } s;
+        struct {
+            char user[0x80];    /* 0x80 NETPARAM 11 */
+            char pass[0x80];    /* 0x100 NETPARAM 12 */
+        } p;
+    } addr;
+    s32 manualDns;              /* 0x180 NETPARAM 8 */
+    char primaryDns[0x10];      /* 0x184 NETPARAM 9 */
+    char secondaryDns[0x10];    /* 0x194 NETPARAM 10 */
+    s32 useProxy;               /* 0x1A4 NETPARAM 13 */
+    char proxyServer[0x80];     /* 0x1A8 NETPARAM 14 */
+    u16 proxyPort;              /* 0x228 NETPARAM 15 */
+} SceNetApctlNetConf;
+typedef char chk_SceNetApctlNetConf[(sizeof(SceNetApctlNetConf) == 0x22C) ? 1 : -1];
+
+/* sceNetApctl main state (1.00 layout, g_apctl) */
+typedef struct {
+    char ifname[0x10];          /* 0x000 "wlan" */
+    s32 state;                  /* 0x010 */
+    s32 event;                  /* 0x014 */
+    SceUID thid;                /* 0x018 */
+    SceUID evf;                 /* 0x01C */
+    SceUID sema;                /* 0x020 */
+    s32 priority;               /* 0x024 */
+    u8 scanBuf[0x690];          /* 0x028 sceNetConfig80211ScanRequest output */
+    u32 scanBufLen;             /* 0x6B8 */
+    s32 idle;                   /* 0x6BC accepts Connect/Scan requests */
+    s32 connIndex;              /* 0x6C0 */
+    s32 error;                  /* 0x6C4 */
+    s32 linkUp;                 /* 0x6C8 */
+    SceNetApctlNetConf conf;    /* 0x6CC */
+} SceNetApctlCtx;
+typedef char chk_SceNetApctlCtx[(sizeof(SceNetApctlCtx) == 0x8F8) ? 1 : -1];
+
 struct Unk_D_00013F20 {
     u8 pad0[0x4];
     s32 unk4;
@@ -250,10 +306,13 @@ struct Unk_func_0000E8E8_0 {
     u32 unk10;
 };
 
+extern s32 (*D_00008120[5])(SceNetApctlCtx *ctx, s32 prev, s32 *state, s32 *event);
 extern s32 D_00008220;
+extern s32 D_00008234; /* D_00011DD4.state (prx reloc target) */
 extern u32 D_00008240;
+extern SceNetApctlHandlerEntry D_00008B1C[2];
 extern s32 D_00008B34;
-extern M2C_UNK D_00011DD4;
+extern SceNetApctlCtx D_00011DD4;
 extern s32 D_00011DE4;
 extern u32 D_00011DF0;
 extern s32 D_00012420;
@@ -279,26 +338,32 @@ extern s32 D_000170A8;
 extern M2C_UNK D_000177A0;
 extern u32 D_00017820;
 
+s32 func_0000038C(SceNetApctlCtx *ctx, u32 *buflen, void *buf);
+s32 func_0000050C(SceNetApctlCtx *ctx, s32 code, void *info);
 s32 func_00000A30(void *arg0, s32 arg1);
 s32 func_00000B54(s32, s32, s32);
+s32 func_00000B68(s32 stackSize, s32 prio);
+s32 func_00000C38(SceNetApctlCtx *ctx, s32 index, s32 code, void *info);
 s32 func_00000CB0(void);
-s32 func_00000D54(s32, s32, s32);
+s32 func_00000D54(void *func, void *arg, s32 *id);
 s32 func_00000D60(s32, s32, s32, s32);
 s32 func_00000E28(s32);
+s32 func_00000EC8(SceNetApctlCtx *ctx, s32 prev);
 s32 func_00000F18(s32, s32);
 s32 func_00000FD0(void);
 s32 func_00000FF8(void);
-s32 func_00001038(s32, s32);
-s32 func_00001098(s32, s32);
-s32 func_000010EC(void);
+s32 func_00001038(u32 *buflen, void *buf);
+s32 func_00001098(s32 code, void *info);
+s32 func_000010EC(s32 *state);
 s32 func_000016E0(struct Unk_func_000016E0_0 *arg0, s32 arg1);
+s32 func_00001710(SceSize args, void *argp);
 s32 func_00001BB0(s32 arg0);
 s32 func_00001BC0(void);
 s32 func_000020CC(s32 *arg0);
 s32 func_00002204(s32);
 s32 func_0000228C(void);
 void func_0000235C(s32 arg0, s32 arg1);
-s32 func_00002388(s32, s32, s32);
+s32 func_00002388(s32 index, s32 code, void *info);
 s32 func_00002480(s32);
 s32 func_00002514(s32 arg0);
 s32 func_000038E4(void);
@@ -310,7 +375,10 @@ void func_000070C0(s32 *arg0);
 s32 func_00007324(void);
 s32 func_0000741C(s32, s32);
 u8 *func_000074D0(u8 *arg0, u8 *arg1, s32 arg2);
+void *func_00007504(void *dst, s32 c, s32 n);
+char *func_0000774C(char *dst, const char *src, s32 n);
 u8 *func_000077F8(u8 *arg0, u8 *arg1);
+s32 func_00007830(const char *s);
 s32 func_00008BB0(s32, s32, s32, s32, s32, s32, s32, s32);
 s32 func_00008E00(void);
 s32 func_0000901C(void);
@@ -391,21 +459,21 @@ s32 module_stop(void);
 s32 sceKernelCheckThreadStack(void);
 s32 sceKernelSetEventFlag(u32, u32);
 s32 sceKernelSignalSema(s32, s32);
-s32 sceNetApctlAddHandler(s32 arg0, s32 arg1);
-s32 sceNetApctlAddInternalHandler(s32 arg0, s32 arg1);
-void sceNetApctlConnect(s32 arg0);
-void sceNetApctlDelHandler(s32 arg0);
-void sceNetApctlDelInternalHandler(s32 arg0);
-void sceNetApctlDisconnect(void);
-void sceNetApctlGetBSSDescEntry(s32 arg0, s32 arg1, s32 arg2);
-void sceNetApctlGetBSSDescEntryUser(s32 arg0, s32 arg1, s32 arg2);
-void sceNetApctlGetBSSDescIDList(s32 arg0, s32 arg1);
-void sceNetApctlGetBSSDescIDListUser(s32 arg0, s32 arg1);
-void sceNetApctlGetInfo(s32 arg0, s32 arg1);
-void sceNetApctlGetState(void);
-int sceNetApctlInit(SceSize stacksize, int prio);
-void sceNetApctlScan(void);
-void sceNetApctlScanUser(void);
+s32 sceNetApctlAddHandler(void *handler, void *arg);
+s32 sceNetApctlAddInternalHandler(void *handler, void *arg);
+s32 sceNetApctlConnect(s32 connIndex);
+s32 sceNetApctlDelHandler(s32 id);
+s32 sceNetApctlDelInternalHandler(s32 id);
+s32 sceNetApctlDisconnect(void);
+s32 sceNetApctlGetBSSDescEntry(s32 index, s32 code, void *info);
+s32 sceNetApctlGetBSSDescEntryUser(s32 index, s32 code, void *info);
+s32 sceNetApctlGetBSSDescIDList(u32 *buflen, void *buf);
+s32 sceNetApctlGetBSSDescIDListUser(u32 *buflen, void *buf);
+s32 sceNetApctlGetInfo(s32 code, void *info);
+s32 sceNetApctlGetState(s32 *state);
+s32 sceNetApctlInit(s32 stackSize, s32 prio);
+s32 sceNetApctlScan(void);
+s32 sceNetApctlScanUser(void);
 s32 sceNetApctlTerm(void);
 s32 sceNetApctl_lib_C519EDCD(s32 arg0);
 M2C_UNK sceNetBpfClose();

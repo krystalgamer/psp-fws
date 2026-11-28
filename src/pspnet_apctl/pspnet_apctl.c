@@ -38,7 +38,7 @@ INCLUDE_ASM("nonmatchings/pspnet_apctl", sceNetApctlAddHandler);
 #endif
 
 #if FW_VERSION == 150
-s32 sceNetApctlAddHandler(s32 arg0, s32 arg1) {
+s32 sceNetApctlAddHandler(void *arg0, void *arg1) {
     void *sp0;
     s32 var_v0;
 
@@ -51,20 +51,20 @@ s32 sceNetApctlAddHandler(s32 arg0, s32 arg1) {
 #endif
 
 #if FW_VERSION == 100
-s32 sceNetApctlAddHandler(s32 arg0, s32 arg1) {
-    void *sp0;
-    s32 var_v0;
+s32 sceNetApctlAddHandler(void *handler, void *arg) {
+    s32 id;
+    s32 ret;
 
-    var_v0 = func_00000D54(arg0, arg1, &sp0);
-    if (var_v0 >= 0) {
-        var_v0 = sp0;
+    ret = func_00000D54(handler, arg, &id);
+    if (ret >= 0) {
+        ret = id;
     }
-    return var_v0;
+    return ret;
 }
 #endif
 
 #if FW_VERSION >= 151 && FW_VERSION < 250
-s32 sceNetApctlAddHandler(s32 arg0, s32 arg1) {
+s32 sceNetApctlAddHandler(void *arg0, void *arg1) {
     void *sp0;
     s32 temp_v0;
 
@@ -78,8 +78,8 @@ INCLUDE_ASM("nonmatchings/pspnet_apctl", sceNetApctlDelHandler);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 250
-void sceNetApctlDelHandler(s32 arg0) {
-    func_00000F18(arg0, 0);
+s32 sceNetApctlDelHandler(s32 arg0) {
+    return func_00000F18(arg0, 0);
 }
 #endif
 
@@ -90,18 +90,18 @@ INCLUDE_ASM("nonmatchings/pspnet_apctl", sceNetApctlDisconnect);
 #endif
 
 #if FW_VERSION < 150
-void sceNetApctlDelHandler(s32 arg0) {
-    func_00000E28(arg0);
+s32 sceNetApctlDelHandler(s32 id) {
+    return func_00000E28(id);
 }
 #endif
 
 #if FW_VERSION < 250
-void sceNetApctlConnect(s32 arg0) {
-    func_00002204(arg0);
+s32 sceNetApctlConnect(s32 connIndex) {
+    return func_00002204(connIndex);
 }
 
-void sceNetApctlDisconnect(void) {
-    func_00000FD0();
+s32 sceNetApctlDisconnect(void) {
+    return func_00000FD0();
 }
 #else
 INCLUDE_ASM("nonmatchings/pspnet_apctl", func_0000028C);
@@ -110,8 +110,8 @@ INCLUDE_ASM("nonmatchings/pspnet_apctl", sceNetApctlScan);
 #endif
 
 #if FW_VERSION < 250
-void sceNetApctlScan(void) {
-    func_00000FF8();
+s32 sceNetApctlScan(void) {
+    return func_00000FF8();
 }
 #else
 INCLUDE_ASM("nonmatchings/pspnet_apctl", sceNetApctlScanSSID);
@@ -122,8 +122,8 @@ INCLUDE_ASM("nonmatchings/pspnet_apctl", sceNetApctlGetBSSDescIDList);
 #endif
 
 #if FW_VERSION < 250
-void sceNetApctlGetBSSDescIDList(s32 arg0, s32 arg1) {
-    func_00001038(arg0, arg1);
+s32 sceNetApctlGetBSSDescIDList(u32 *buflen, void *buf) {
+    return func_00001038(buflen, buf);
 }
 #else
 INCLUDE_ASM("nonmatchings/pspnet_apctl", func_0000044C);
@@ -132,8 +132,8 @@ INCLUDE_ASM("nonmatchings/pspnet_apctl", sceNetApctlGetBSSDescEntry);
 #endif
 
 #if FW_VERSION < 250
-void sceNetApctlGetBSSDescEntry(s32 arg0, s32 arg1, s32 arg2) {
-    func_00002388(arg0, arg1, arg2);
+s32 sceNetApctlGetBSSDescEntry(s32 index, s32 code, void *info) {
+    return func_00002388(index, code, info);
 }
 #endif
 
@@ -144,8 +144,8 @@ INCLUDE_ASM("nonmatchings/pspnet_apctl", func_000004E4);
 #if FW_VERSION >= 250
 INCLUDE_ASM("nonmatchings/pspnet_apctl", sceNetApctlGetInfo);
 #else
-void sceNetApctlGetInfo(s32 arg0, s32 arg1) {
-    func_00001098(arg0, arg1);
+s32 sceNetApctlGetInfo(s32 code, void *info) {
+    return func_00001098(code, info);
 }
 #endif
 
@@ -166,8 +166,8 @@ INCLUDE_ASM("nonmatchings/pspnet_apctl", sceNetApctlGetState);
 #endif
 
 #if FW_VERSION == 100 || (FW_VERSION >= 150 && FW_VERSION < 250)
-void sceNetApctlGetState(void) {
-    func_000010EC();
+s32 sceNetApctlGetState(s32 *state) {
+    return func_000010EC(state);
 }
 #endif
 
@@ -176,7 +176,7 @@ INCLUDE_ASM("nonmatchings/pspnet_apctl", sceNetApctlAddInternalHandler);
 #endif
 
 #if FW_VERSION == 150
-s32 sceNetApctlAddInternalHandler(s32 arg0, s32 arg1) {
+s32 sceNetApctlAddInternalHandler(void *arg0, void *arg1) {
     void *sp0;
     s32 var_v0;
 
@@ -189,7 +189,7 @@ s32 sceNetApctlAddInternalHandler(s32 arg0, s32 arg1) {
 #endif
 
 #if FW_VERSION >= 151 && FW_VERSION < 250
-s32 sceNetApctlAddInternalHandler(s32 arg0, s32 arg1) {
+s32 sceNetApctlAddInternalHandler(void *arg0, void *arg1) {
     void *sp0;
     s32 temp_v0;
 
@@ -203,8 +203,8 @@ INCLUDE_ASM("nonmatchings/pspnet_apctl", sceNetApctlDelInternalHandler);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 250
-void sceNetApctlDelInternalHandler(s32 arg0) {
-    func_00000F18(arg0, 1);
+s32 sceNetApctlDelInternalHandler(s32 arg0) {
+    return func_00000F18(arg0, 1);
 }
 #endif
 
@@ -213,8 +213,8 @@ INCLUDE_ASM("nonmatchings/pspnet_apctl", sceNetApctlScanUser);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 250
-void sceNetApctlScanUser(void) {
-    func_00000FF8();
+s32 sceNetApctlScanUser(void) {
+    return func_00000FF8();
 }
 #endif
 
@@ -223,8 +223,8 @@ INCLUDE_ASM("nonmatchings/pspnet_apctl", sceNetApctlGetBSSDescIDListUser);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 250
-void sceNetApctlGetBSSDescIDListUser(s32 arg0, s32 arg1) {
-    func_00001038(arg0, arg1);
+s32 sceNetApctlGetBSSDescIDListUser(u32 *buflen, void *buf) {
+    return func_00001038(buflen, buf);
 }
 #endif
 
@@ -233,8 +233,8 @@ INCLUDE_ASM("nonmatchings/pspnet_apctl", sceNetApctlGetBSSDescEntryUser);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 250
-void sceNetApctlGetBSSDescEntryUser(s32 arg0, s32 arg1, s32 arg2) {
-    func_00002388(arg0, arg1, arg2);
+s32 sceNetApctlGetBSSDescEntryUser(s32 index, s32 code, void *info) {
+    return func_00002388(index, code, info);
 }
 #endif
 
