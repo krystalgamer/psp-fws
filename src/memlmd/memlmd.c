@@ -1,3 +1,5 @@
+/* compiler[352]: 1.9.2 */
+/* cflags[352]: -O2 -frename-registers -mext */
 /* cflags[100,102,103]: -O2 */
 /* cflags: -O2 -frename-registers */
 #include "common.h"
