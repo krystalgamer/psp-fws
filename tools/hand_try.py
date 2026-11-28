@@ -328,6 +328,34 @@ def _permute_units(pre, lines, idx, target, comp, opt, jobs):
         print(f"  {sc}:", " | ".join(p))
 
 
+def cxx_group(mod, body):
+    """C++ constructor/destructor definitions compile to all their clones (gcc 3.3: C2 C1, D2 D1 D0,
+    in that order): their module names, or None for other definitions. Classes are found by the
+    mangled names of the module's functions (`_ZN<len><name>D2Ev`, `..C2E<params>`)."""
+    m = re.search(r"^(?!static)[^\n;#(]*?\b((?:\w+::)+)(~?)(\w+)\(([^;{}]*)\)\s*(?:const\s*)?\{", body, re.M)
+    if not m or m[1].split("::")[-2] != m[3]:
+        return None
+    pre = "_ZN" + "".join(f"{len(x)}{x}" for x in m[1].split("::")[:-1])
+    names = set(mod.funcs)
+    elfp = ROOT / "tmp/build" / mod.ver / f"{mod.mod}.elf"
+    if elfp.exists():  # functions that are C already (hand_try re-scores C too)
+        from elftools.elf.elffile import ELFFile
+        with open(elfp, "rb") as fh:
+            names |= {s.name for s in ELFFile(fh).get_section_by_name(".symtab").iter_symbols()
+                      if s["st_info"]["type"] == "STT_FUNC" and s.name.startswith(pre)}
+    if m[2]:
+        want = [f"{pre}D{k}Ev" for k in (2, 1, 0)]
+        got = [n for n in want if n in names]
+        return got or None
+    c2 = [n for n in names if n.startswith(pre + "C2E")]
+    if not m[4].strip() or m[4].strip() == "void":
+        c2 = [n for n in c2 if n == pre + "C2Ev"]
+    if len(c2) != 1:
+        return None
+    c1 = c2[0].replace("C2E", "C1E", 1)
+    return [c2[0]] + ([c1] if c1 in names else [])
+
+
 def lock_shared():
     """Wait while tools/hand.py rewrites this tree's sources (it holds the lock exclusively)."""
     import fcntl
@@ -362,6 +390,9 @@ def main():
     mod = AD.Module(a.ver, a.module)
     body = Path(a.cfile).read_text()
     name = re.search(r"^(?!static)[^\n;#]*?\b(\w+)\([^;{}]*\)\s*\{", body, re.M)[1]
+    group = cxx_group(mod, body)  # `X::~X() {}` / `X::X() {}`: cc1plus emits every clone
+    if group:
+        name = group[0]
     extra = Path(a.decls).read_text() if a.decls else ""
     # drop the decls' own prototype/vars that the hand decls redefine
     hdr = mod.header()
@@ -389,7 +420,7 @@ def main():
     fwv = re.match(r"\d+", a.ver)[0]
     fwvar = (re.search(r"v(\d+)", a.ver) or [None, "0"])[1]
     text = f"#define FW_VERSION {fwv}\n#define FW_VARIANT {fwvar}\n" + hdr + "\n" + prelude + "\n" + extra + "\n" + body
-    target = mod.target_words(name)
+    target = [w for n in group for w in mod.target_words(n)] if group else mod.target_words(name)
     comp, own = AD.Module.file_setting(mod.file_of(name))
     if os.environ.get("HT_COMP"):  # try another compiler release with the file's flags
         comp = os.environ["HT_COMP"]
@@ -423,7 +454,11 @@ def main():
     if best == target:
         # words are compared with relocated fields masked; check the symbols too
         mine = compiled_reloc_syms(text, comp, own.split(" ", 1)[1])
-        want = target_reloc_syms(mod, name)
+        want, _addrs = [], []
+        for n in (group or [name]):
+            want += target_reloc_syms(mod, n)
+            _addrs += target_reloc_syms.addrs
+        target_reloc_syms.addrs = _addrs
         # splat names an address inside a global's extent D_XXXXXXXX; the C reaches it as sym+off
         # (also auto-named: splat labels each referenced word of a big struct, the C uses the base + field offset)
         def interior(m, w):
@@ -502,7 +537,7 @@ def main():
                 want_calls = [None if c.startswith(".") else c
                               for c in re.findall(r"\bj(?:al)?\s+(\.?[A-Za-z_]\w*)", asm_path.read_text())]
             else:
-                want_calls = target_calls_from_words(mod, name)
+                want_calls = [x for n in (group or [name]) for x in target_calls_from_words(mod, n)]
             if want_calls is not None:
                 got = compiled_reloc_syms.calls
                 if len(want_calls) == len(got):
