@@ -15,6 +15,9 @@ extern "C" {
 /* dtor still asm/m2c (not trivial) */
 class Class_000AE948 {
 public:
+    s32 unk4;
+    u8 pad8[0x4];
+    s32 unkC;
     virtual ~Class_000AE948();
 };
 #endif
@@ -39,6 +42,10 @@ public:
 /* dtor still asm/m2c (not trivial) */
 class Class_000B2040 {
 public:
+    u8 pad4[0x1D0];
+    s32 unk1D4;
+    u8 pad1D8[0x14];
+    s32 unk1EC;
     virtual ~Class_000B2040();
 };
 #endif
@@ -55,6 +62,9 @@ public:
 /* dtor still asm/m2c (not trivial) */
 class Class_000B2390 {
 public:
+    u8 pad4[0x558];
+    s32 unk55C;
+    s32 unk560;
     virtual ~Class_000B2390();
 };
 #endif
@@ -3618,12 +3628,12 @@ s32 func_000041F4(s32, s32, s32, s32, s32);
 s32 func_00004374(s32);
 s32 func_00004794(s32, s32);
 void func_000048EC(struct Unk_func_000048EC_0 *arg0);
-s32 func_00004B1C(struct Unk_func_00004B1C_0 *arg0);
+s32 func_00004B1C(Class_000AE948 *arg0);
 void func_00004B68(void);
 s32 func_00004B70(void);
-void func_00004B78(struct Unk_func_00004B78_0 *arg0);
+void func_00004B78(Class_000AE948 *arg0);
 void func_00004BB8(void);
-void func_00004BC0(struct Unk_func_00004BC0_0 *arg0);
+void func_00004BC0(Class_000AE948 *arg0);
 void func_00004C38(void);
 void func_00004C74(void);
 void func_00004C7C(void);
@@ -3846,8 +3856,8 @@ M2C_UNK func_00020464(s32);
 M2C_UNK func_000205F8(s32);
 void func_00020604(struct Unk_func_00020604_0 *arg0, s8 arg1);
 void func_00020838(struct Unk_func_00020838_0 *arg0);
-s32 func_00020AD4(struct Unk_func_00020AD4_0 *arg0);
-s32 func_00020B30(struct Unk_func_00020B30_0 *arg0, s32 arg1);
+s32 func_00020AD4(Class_000B2040 *arg0);
+s32 func_00020B30(Class_000B2040 *arg0, s32 arg1);
 void func_00020B3C(struct Unk_func_00020B3C_0 *arg0);
 void func_00020B88(struct Unk_func_00020B88_0 *arg0);
 s32 func_00020C08(void);
@@ -4069,8 +4079,8 @@ s32 func_000353A4(void);
 s32 func_000353AC(void);
 s32 func_000353B4(void);
 s32 func_000353BC(void);
-s32 func_000353C4(struct Unk_func_000353C4_0 *arg0);
-s32 func_000353CC(struct Unk_func_000353CC_0 *arg0);
+s32 func_000353C4(Class_000B2390 *arg0);
+s32 func_000353CC(Class_000B2390 *arg0);
 s32 func_000353D4(void);
 s32 func_000353DC(void);
 s32 func_000353E4(void);

@@ -923,7 +923,7 @@ INCLUDE_ASM("nonmatchings/msvideo_main_plugin", func_00004A5C);
 #if FW_VERSION == 300 || (FW_VERSION >= 350 && FW_VERSION < 352)
 INCLUDE_ASM("nonmatchings/msvideo_main_plugin", func_00004B1C);
 #else
-s32 func_00004B1C(struct Unk_func_00004B1C_0 *arg0) {
+s32 func_00004B1C(Class_000AE948 *arg0) {
     s32 temp_v0;
     s32 temp_v1;
 
@@ -950,7 +950,7 @@ s32 func_00004B70(void) {
 #if FW_VERSION == 300 || (FW_VERSION >= 350 && FW_VERSION < 352)
 INCLUDE_ASM("nonmatchings/msvideo_main_plugin", func_00004B78);
 #else
-void func_00004B78(struct Unk_func_00004B78_0 *arg0) {
+void func_00004B78(Class_000AE948 *arg0) {
     s32 temp_v0;
     s32 temp_v1;
 
@@ -972,7 +972,7 @@ void func_00004BB8(void) {
 #if FW_VERSION == 300 || (FW_VERSION >= 350 && FW_VERSION < 352)
 INCLUDE_ASM("nonmatchings/msvideo_main_plugin", func_00004BC0);
 #else
-void func_00004BC0(struct Unk_func_00004BC0_0 *arg0) {
+void func_00004BC0(Class_000AE948 *arg0) {
     s32 temp_v0;
     s32 temp_v1;
 

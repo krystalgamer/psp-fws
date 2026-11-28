@@ -70,7 +70,7 @@ INCLUDE_ASM("nonmatchings/msvideo_main_plugin_020034", func_000208D4);
 
 INCLUDE_ASM("nonmatchings/msvideo_main_plugin_020034", func_000209F0);
 
-s32 func_00020AD4(struct Unk_func_00020AD4_0 *arg0) {
+s32 func_00020AD4(Class_000B2040 *arg0) {
     return arg0->unk1D4;
 }
 
@@ -86,7 +86,7 @@ INCLUDE_RODATA("nonmatchings/msvideo_main_plugin_020034", D_000B04F8);
 
 INCLUDE_ASM("nonmatchings/msvideo_main_plugin_020034", func_00020ADC);
 
-s32 func_00020B30(struct Unk_func_00020B30_0 *arg0, s32 arg1) {
+s32 func_00020B30(Class_000B2040 *arg0, s32 arg1) {
     arg0->unk1EC = arg1;
     return 0;
 }

@@ -586,7 +586,7 @@ s32 func_000353BC(void) {
 #if FW_VERSION < 310
 INCLUDE_ASM("nonmatchings/msvideo_main_plugin_02FA08", func_000353C4);
 #else
-s32 func_000353C4(struct Unk_func_000353C4_0 *arg0) {
+s32 func_000353C4(Class_000B2390 *arg0) {
     return arg0->unk55C;
 }
 #endif
@@ -595,7 +595,7 @@ s32 func_000353C4(struct Unk_func_000353C4_0 *arg0) {
 INCLUDE_ASM("nonmatchings/msvideo_main_plugin_02FA08", func_000368C4);
 #endif
 
-s32 func_000353CC(struct Unk_func_000353CC_0 *arg0) {
+s32 func_000353CC(Class_000B2390 *arg0) {
     return arg0->unk560;
 }
 
