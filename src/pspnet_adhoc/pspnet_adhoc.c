@@ -233,7 +233,55 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc", sceNetAdhocPdpCreate);
 
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", sceNetAdhocPdpSend);
 
+#if FW_VERSION < 150
+s32 sceNetAdhocPdpDelete(s32 id, s32 flag) {
+    s32 s;
+    s32 ret;
+    SceNetAdhocDesc *d;
+    SceNetAdhocPdpPcb *pcb;
+
+    ret = 0;
+    s = _sce_pspnet_spllock();
+    if (D_00007400 == 0) {
+        ret = 0x80410712;
+        goto end;
+    }
+    d = func_00000E90(1, id);
+    if (d == NULL) {
+        ret = 0x80410701;
+        goto end;
+    }
+    pcb = d->pcb;
+    if (pcb->flags & 1) {
+        pcb->flags &= ~1;
+        _sce_pspnet_wakeup(&pcb->rcvq_first);
+    }
+    if (pcb->flags & 2) {
+        pcb->flags &= ~2;
+        _sce_pspnet_wakeup(&D_00007448);
+    }
+    if (pcb->ifp->if_adhocflags & 1) {
+        pcb->ifp->if_adhocflags &= ~1;
+        _sce_pspnet_wakeup(&pcb->ifp->if_snd);
+    }
+    if (pcb->ifp->if_adhocflags & 2) {
+        pcb->ifp->if_adhocflags &= ~2;
+        _sce_pspnet_wakeup(&D_00007448);
+    }
+    func_0000223C(pcb);
+    d->unkC |= 1;
+    d->id = -1;
+    if (d->waiters == NULL) {
+        func_00002CD4(d);
+        func_00000FFC(d);
+    }
+end:
+    _sce_pspnet_splunlock(s);
+    return ret;
+}
+#else
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", sceNetAdhocPdpDelete);
+#endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_000016B4);
@@ -251,9 +299,25 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00001600);
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00001C28);
 #endif
 
+#if FW_VERSION < 201
+s32 sceNetAdhocPdpRecv(s32 id, SceNetEtherAddr *addr, u16 *port, void *buf, s32 *len, u32 timeout, s32 nonblock) {
+    if (buf == NULL || len == NULL)
+        return 0x80410711;
+    return func_00001F20(id, addr, port, buf, len, timeout, nonblock, NULL);
+}
+#else
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", sceNetAdhocPdpRecv);
+#endif
 
+#if FW_VERSION < 201
+s32 sceNetAdhocPdpRecvWithRfInfo(s32 id, SceNetEtherAddr *addr, u16 *port, void *buf, s32 *len, u32 timeout, s32 nonblock, void *rfinfo) {
+    if (buf == NULL || len == NULL || rfinfo == NULL)
+        return 0x80410711;
+    return func_00001F20(id, addr, port, buf, len, timeout, nonblock, rfinfo);
+}
+#else
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", sceNetAdhocPdpRecvWithRfInfo);
+#endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
 void sceNetAdhoc_lib_F9240FBA(void) {

@@ -2,6 +2,8 @@
  "funcs": {
   "_sce_pspnet_callout_stop": "void _sce_pspnet_callout_stop(void *c);",
   "_sce_pspnet_ifplookup_lladdr": "struct ifnet *_sce_pspnet_ifplookup_lladdr(const SceNetEtherAddr *addr);",
+  "_sce_pspnet_spllock": "s32 _sce_pspnet_spllock(void);",
+  "_sce_pspnet_splunlock": "void _sce_pspnet_splunlock(s32 s);",
   "_sce_pspnet_start_of_adhoc_module_in_sched": "s32 _sce_pspnet_start_of_adhoc_module_in_sched(void *func);",
   "_sce_pspnet_stop_of_adhoc_module_in_sched": "void _sce_pspnet_stop_of_adhoc_module_in_sched(void);",
   "_sce_pspnet_wakeup": "void _sce_pspnet_wakeup(void *chan);",
@@ -17,6 +19,7 @@
   "func_00000FFC": "void func_00000FFC(SceNetAdhocDesc *d);",
   "func_00001044": "s32 func_00001044(void);",
   "func_00001078": "void func_00001078(SceNetAdhocDesc *d, s32 events);",
+  "func_00001F20": "s32 func_00001F20(s32 id, SceNetEtherAddr *addr, u16 *port, void *buf, s32 *len, u32 timeout, s32 nonblock, void *rfinfo);",
   "func_00002108": "s32 func_00002108(SceNetAdhocPdpPcb *pcb, const SceNetEtherAddr *addr, u16 port);",
   "func_0000223C": "void func_0000223C(SceNetAdhocPdpPcb *pcb);",
   "func_0000297C": "s32 func_0000297C(void);",
@@ -58,6 +61,10 @@
   "sceKernelSignalSema": "s32 sceKernelSignalSema(s32 sema, s32 n);",
   "sceNetAdhocGameModeUpdateReplica": "void sceNetAdhocGameModeUpdateReplica(s32 arg0, s32 arg1);",
   "sceNetAdhocGameModeUpdateReplicaInternal": "void sceNetAdhocGameModeUpdateReplicaInternal(s32 arg0, s32 arg1);",
+  "sceNetAdhocGetPdpStat": "s32 sceNetAdhocGetPdpStat(s32 *buflen, SceNetAdhocPdpStat *buf);",
+  "sceNetAdhocPdpDelete": "s32 sceNetAdhocPdpDelete(s32 id, s32 flag);",
+  "sceNetAdhocPdpRecv": "s32 sceNetAdhocPdpRecv(s32 id, SceNetEtherAddr *addr, u16 *port, void *buf, s32 *len, u32 timeout, s32 nonblock);",
+  "sceNetAdhocPdpRecvWithRfInfo": "s32 sceNetAdhocPdpRecvWithRfInfo(s32 id, SceNetEtherAddr *addr, u16 *port, void *buf, s32 *len, u32 timeout, s32 nonblock, void *rfinfo);",
   "sceNetAdhoc_lib_62B875A8": "void sceNetAdhoc_lib_62B875A8(void);",
   "sceNetAdhoc_lib_F9240FBA": "void sceNetAdhoc_lib_F9240FBA(void);",
   "sceNetFreeInternal": "void sceNetFreeInternal(void *p);",
@@ -73,6 +80,7 @@
   "SceNetAdhocPdpList": "typedef struct {\n    SceNetAdhocPdpPcb *first;\n    SceNetAdhocPdpPcb **last;\n} SceNetAdhocPdpList;",
   "SceNetAdhocPdpPcb": "/* PDP control block (1.00: 0x38, 1.50+: 0x34; offsets in comments are 1.00) */\ntypedef struct SceNetAdhocPdpPcb {\n    struct SceNetAdhocPdpPcb *next;     /* 0x00 TAILQ on the PDP list */\n    struct SceNetAdhocPdpPcb **prev;    /* 0x04 */\n#if FW_VERSION < 150\n    struct ifnet *ifp;                  /* 0x08 (1.50+: looked up from laddr) */\n#endif\n    SceNetEtherAddr laddr;              /* 0x0C */\n    u16 lport;                          /* 0x12 */\n    struct mbuf *rcvq_first;            /* 0x14 */\n    struct mbuf *rcvq_last;             /* 0x18 */\n    s32 rcvcc;                          /* 0x1C */\n    s32 rcvbufsize;                     /* 0x20 */\n    s32 unk24;\n    u32 flags;                          /* 0x28 */\n    SceNetAdhocDesc *desc;              /* 0x2C */\n    SceNetAdhocPdpQent *qfirst;         /* 0x30 */\n    SceNetAdhocPdpQent **qlast;         /* 0x34 */\n} SceNetAdhocPdpPcb;\ntypedef char chk_SceNetAdhocPdpPcb[(sizeof(SceNetAdhocPdpPcb) == ((FW_VERSION < 150) ? 0x38 : 0x34)) ? 1 : -1];",
   "SceNetAdhocPdpQent": "/* queued PDP send entry (callout-driven) */\ntypedef struct SceNetAdhocPdpQent {\n    struct SceNetAdhocPdpQent *next;    /* 0x00 */\n    struct SceNetAdhocPdpQent **prev;   /* 0x04 */\n    s32 unk8;\n    struct mbuf *m;                     /* 0x0C */\n    u8 callout[0x34 - 0x10];            /* 0x10 */\n    struct SceNetAdhocPdpPcb *pcb;      /* 0x34 */\n} SceNetAdhocPdpQent;",
+  "SceNetAdhocPdpStat": "typedef struct SceNetAdhocPdpStat {\n    struct SceNetAdhocPdpStat *next;    /* 0x00 */\n    s32 id;                             /* 0x04 */\n    SceNetEtherAddr laddr;              /* 0x08 */\n    u16 lport;                          /* 0x0E */\n    u32 rcv_sb_cc;                      /* 0x10 */\n} SceNetAdhocPdpStat;",
   "SceNetAdhocWaiter": "typedef struct SceNetAdhocWaiter {\n    u8 pad0[0x20];\n    s32 tid;                        /* 0x20 */\n    u8 pad24[0x28];\n    s32 sema;                       /* 0x4C */\n    u8 pad50[0x10];\n    struct SceNetAdhocWaiter *next; /* 0x60 */\n} SceNetAdhocWaiter;",
   "SceNetEtherAddr": "typedef struct {\n    u8 data[6];\n} SceNetEtherAddr;",
   "Unk_func_00000974_temp_a1": "struct Unk_func_00000974_temp_a1 {\n    u8 pad0[0x10];\n    u8 unk10;\n};",
@@ -93,6 +101,7 @@
   "mbuf": "/* NetBSD 1.5 mbuf as in pspnet (partial) */\nstruct mbuf {\n    struct mbuf *m_next;        /* 0x00 */\n    struct mbuf *m_nextpkt;     /* 0x04 */\n    u8 *m_data;                 /* 0x08 */\n    s32 m_len;                  /* 0x0C */\n    s16 m_type;                 /* 0x10 */\n    s16 m_flags;                /* 0x12 */\n    struct {\n        struct ifnet *rcvif;    /* 0x14 */\n        s32 len;                /* 0x18 */\n    } m_pkthdr;\n};"
  },
  "vars": {
+  "D_00007400": "extern s32 D_00007400;",
   "D_00007448": "extern s32 D_00007448;",
   "D_00007450": "extern M2C_UNK D_00007450;",
   "D_00007998": "extern SceNetAdhocDescList D_00007998;",

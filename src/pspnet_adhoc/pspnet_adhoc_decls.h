@@ -80,6 +80,14 @@ typedef struct {
     SceNetAdhocPdpPcb **last;
 } SceNetAdhocPdpList;
 
+typedef struct SceNetAdhocPdpStat {
+    struct SceNetAdhocPdpStat *next;    /* 0x00 */
+    s32 id;                             /* 0x04 */
+    SceNetEtherAddr laddr;              /* 0x08 */
+    u16 lport;                          /* 0x0E */
+    u32 rcv_sb_cc;                      /* 0x10 */
+} SceNetAdhocPdpStat;
+
 struct Unk_func_00000974_temp_a1 {
     u8 pad0[0x10];
     u8 unk10;
@@ -193,6 +201,7 @@ struct mbuf {
     } m_pkthdr;
 };
 
+extern s32 D_00007400;
 extern s32 D_00007448;
 extern M2C_UNK D_00007450;
 extern SceNetAdhocDescList D_00007998;
@@ -208,6 +217,8 @@ extern M2C_UNK D_00007CC8;
 
 void _sce_pspnet_callout_stop(void *c);
 struct ifnet *_sce_pspnet_ifplookup_lladdr(const SceNetEtherAddr *addr);
+s32 _sce_pspnet_spllock(void);
+void _sce_pspnet_splunlock(s32 s);
 s32 _sce_pspnet_start_of_adhoc_module_in_sched(void *func);
 void _sce_pspnet_stop_of_adhoc_module_in_sched(void);
 void _sce_pspnet_wakeup(void *chan);
@@ -223,6 +234,7 @@ s32 func_00000ED0(u8 type, SceNetAdhocDesc **out);
 void func_00000FFC(SceNetAdhocDesc *d);
 s32 func_00001044(void);
 void func_00001078(SceNetAdhocDesc *d, s32 events);
+s32 func_00001F20(s32 id, SceNetEtherAddr *addr, u16 *port, void *buf, s32 *len, u32 timeout, s32 nonblock, void *rfinfo);
 s32 func_00002108(SceNetAdhocPdpPcb *pcb, const SceNetEtherAddr *addr, u16 port);
 void func_0000223C(SceNetAdhocPdpPcb *pcb);
 s32 func_0000297C(void);
@@ -264,6 +276,10 @@ s32 module_stop(void);
 s32 sceKernelSignalSema(s32 sema, s32 n);
 void sceNetAdhocGameModeUpdateReplica(s32 arg0, s32 arg1);
 void sceNetAdhocGameModeUpdateReplicaInternal(s32 arg0, s32 arg1);
+s32 sceNetAdhocGetPdpStat(s32 *buflen, SceNetAdhocPdpStat *buf);
+s32 sceNetAdhocPdpDelete(s32 id, s32 flag);
+s32 sceNetAdhocPdpRecv(s32 id, SceNetEtherAddr *addr, u16 *port, void *buf, s32 *len, u32 timeout, s32 nonblock);
+s32 sceNetAdhocPdpRecvWithRfInfo(s32 id, SceNetEtherAddr *addr, u16 *port, void *buf, s32 *len, u32 timeout, s32 nonblock, void *rfinfo);
 void sceNetAdhoc_lib_62B875A8(void);
 void sceNetAdhoc_lib_F9240FBA(void);
 void sceNetFreeInternal(void *p);
