@@ -1188,7 +1188,6 @@ void syn_cache_cleanup(struct tcpcb *tp)
 	_sce_pspnet_splunlock(s);
 }
 
-#if FW_VERSION < 282
 __inline struct syn_cache *syn_cache_lookup(struct sockaddr *src, struct sockaddr *dst, struct syn_cache_head **headp)
 {
 	struct syn_cache *sc;
@@ -1214,7 +1213,6 @@ __inline struct syn_cache *syn_cache_lookup(struct sockaddr *src, struct sockadd
 	_sce_pspnet_splunlock(s);
 	return (NULL);
 }
-#endif
 
 #if FW_VERSION < 201
 struct socket *syn_cache_get(struct sockaddr *src, struct sockaddr *dst, struct tcphdr *th, u32 hlen, u32 tlen, struct socket *so, struct mbuf *m)
@@ -1361,11 +1359,10 @@ abort:
 }
 #endif
 
-#if FW_VERSION >= 201 && FW_VERSION < 282
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/pspnet_inet_udp", syn_cache_get);
 #endif
 
-#if FW_VERSION < 282
 void syn_cache_reset(struct sockaddr *src, struct sockaddr *dst, struct tcphdr *th)
 {
 	struct syn_cache *sc;
@@ -1414,7 +1411,6 @@ void syn_cache_unreach(struct sockaddr *src, struct sockaddr *dst, struct tcphdr
 	tcp_stat.tcps_sc_unreach++;
 	SYN_CACHE_PUT(sc);
 }
-#endif
 
 #if FW_VERSION < 201
 s32 syn_cache_add(struct sockaddr *src, struct sockaddr *dst, struct tcphdr *th, u32 hlen, struct socket *so, struct mbuf *m, u8 *optp, s32 optlen, struct tcp_opt_info *oi)
@@ -1509,23 +1505,11 @@ s32 syn_cache_add(struct sockaddr *src, struct sockaddr *dst, struct tcphdr *th,
 }
 #endif
 
-#if FW_VERSION >= 201 && FW_VERSION < 282
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/pspnet_inet_udp", syn_cache_add);
 #endif
 
-#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_inet_udp", syn_cache_respond);
-#else
-INCLUDE_ASM("nonmatchings/pspnet_inet_udp", syn_cache_get);
-
-INCLUDE_ASM("nonmatchings/pspnet_inet_udp", syn_cache_reset);
-
-INCLUDE_ASM("nonmatchings/pspnet_inet_udp", syn_cache_unreach);
-
-INCLUDE_ASM("nonmatchings/pspnet_inet_udp", syn_cache_add);
-
-INCLUDE_ASM("nonmatchings/pspnet_inet_udp", syn_cache_respond);
-#endif
 
 void syn_cache_init(void) {
     s32 i;
@@ -1538,6 +1522,3 @@ void syn_cache_init(void) {
     }
 }
 
-#if FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/pspnet_inet_udp", syn_cache_lookup);
-#endif
