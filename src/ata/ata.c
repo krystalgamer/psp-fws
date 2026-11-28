@@ -149,7 +149,19 @@ SceAtaDrive *sceAtaGetAtaDrive(u32 id) {
     }
     return NULL;
 }
-#else
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 201
+SceAtaDrive *sceAtaGetAtaDrive(u32 id) {
+    SceAtaDrive *drive = NULL;
+    if (id == 0) {
+        drive = &D_000042C0;
+    }
+    return drive;
+}
+#endif
+
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/ata", sceAtaGetAtaDrive);
 #endif
 
@@ -423,7 +435,12 @@ void sceAta_driver_B5982381(void) {
 }
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/ata", func_0000176C);
+s32 func_0000176C(void) {
+    sceAtaStop(0x80);
+    func_00002134();
+    sceSysregAtaResetEnable();
+    return 0;
+}
 #endif
 
 #if FW_VERSION < 150
@@ -1024,17 +1041,35 @@ INCLUDE_ASM("nonmatchings/ata", func_0000239C);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 271
-INCLUDE_ASM("nonmatchings/ata", func_000021D0);
+void func_000021D0(u32 mask) {
+    asm volatile("sync");
+    ATA_AHB_REG(0x44) |= mask & 0xFFFF0000;
+    asm volatile("sync");
+}
 
-INCLUDE_ASM("nonmatchings/ata", func_000021FC);
+u32 func_000021FC(void) {
+    return ATA_AHB_REG(0x44) & 0xFFFF0000;
+}
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/ata", func_00002214);
+u32 func_00002214(void) {
+    return ATA_AHB_REG(0x44) & 0xFFFF;
+}
 
-INCLUDE_ASM("nonmatchings/ata", func_00002228);
+void func_00002228(u32 mask) {
+    asm volatile("sync");
+    *(volatile u32 *)0xBD600044 |= ~mask & 0xFFFF;
+    asm volatile("sync");
+}
 
-INCLUDE_ASM("nonmatchings/ata", func_00002254);
+s32 func_00002254(u32 *stat) {
+    if (stat == NULL) {
+        return 0x800001FF;
+    }
+    *stat = ATA_AHB_REG(0x4C);
+    return 0;
+}
 #endif
 
 #if FW_VERSION < 150
@@ -1104,7 +1139,13 @@ s32 sceAta_driver_76C0923D(u32 *stat) {
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/ata", func_0000229C);
+s32 func_0000229C(u32 *stat) {
+    if (stat == NULL) {
+        return 0x800001FF;
+    }
+    *stat = ATA_AHB_REG(0x00);
+    return 0;
+}
 #endif
 
 #if FW_VERSION < 150
@@ -1143,7 +1184,9 @@ void sceAta_driver_F61EAFC0(void) {
 #if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/ata", func_000022E0);
 
-INCLUDE_ASM("nonmatchings/ata", func_0000233C);
+u32 func_0000233C(void) {
+    return *(volatile u32 *)0xBC100040 & 3;
+}
 #endif
 
 #if FW_VERSION < 150
