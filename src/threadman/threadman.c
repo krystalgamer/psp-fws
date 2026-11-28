@@ -50,7 +50,7 @@ void func_00000000(SceThreadQueue *queue, s32 waitType) {
     thread->waitObj = NULL;
 }
 #else
-INCLUDE_ASM("nonmatchings/threadman", func_00000000);
+INCLUDE_ASM("nonmatchings/threadman", func_000000B0);
 
 INCLUDE_ASM("nonmatchings/threadman", func_0000017C);
 #endif
@@ -58,7 +58,7 @@ INCLUDE_ASM("nonmatchings/threadman", func_0000017C);
 INCLUDE_ASM("nonmatchings/threadman", func_000001B4);
 
 #if FW_VERSION >= 150
-INCLUDE_ASM("nonmatchings/threadman", func_0000022C);
+INCLUDE_ASM("nonmatchings/threadman", func_00000268);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
@@ -127,7 +127,7 @@ s32 func_000003F0(SceSysmemUidCB *arg0, s32 arg1) {
         do {
             temp_s0 = var_s1;
             var_s1 = M2C_FIELD(var_s1, M2C_UNK **, 0);
-            func_0000022C((s32) temp_s0);
+            func_00000268((s32) temp_s0);
             var_s2 += 1;
             M2C_FIELD(temp_s0, s32 *, 0x40) = arg1;
         } while (var_s1 != temp_s3);
@@ -296,7 +296,7 @@ s32 func_00000A18(s32 arg0, void *arg1) {
     return 0;
 }
 
-INCLUDE_ASM("nonmatchings/threadman", func_00000A38);
+INCLUDE_ASM("nonmatchings/threadman", func_000007F4);
 #endif
 
 #if FW_VERSION < 150
@@ -399,7 +399,7 @@ s32 func_00000448(s32 arg0, s32 arg1) {
         do {
             temp_s0 = var_s1;
             var_s1 = M2C_FIELD(var_s1, M2C_UNK **, 0);
-            func_0000022C((s32) temp_s0);
+            func_00000268((s32) temp_s0);
             var_s2 += 1;
             M2C_FIELD(temp_s0, s32 *, 0x48) = arg1;
         } while (var_s1 != temp_s3);
@@ -424,7 +424,7 @@ s32 func_00000448(s32 arg0, s32 arg1) {
         do {
             temp_s0 = var_s1;
             var_s1 = M2C_FIELD(var_s1, M2C_UNK **, 0);
-            func_0000022C((s32) temp_s0);
+            func_00000268((s32) temp_s0);
             var_s2 += 1;
             M2C_FIELD(temp_s0, s32 *, 0x44) = arg1;
         } while (var_s1 != temp_s3);
@@ -449,7 +449,7 @@ s32 func_00000448(s32 arg0, s32 arg1) {
         do {
             temp_s0 = var_s1;
             var_s1 = var_s1->unk0;
-            func_0000022C((s32) temp_s0);
+            func_00000268((s32) temp_s0);
             var_s2 += 1;
             temp_s0->unk40 = arg1;
         } while (var_s1 != temp_s3);
@@ -936,7 +936,7 @@ INCLUDE_ASM("nonmatchings/threadman", sceKernelCheckCallback);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/threadman", func_00001E8C);
+INCLUDE_ASM("nonmatchings/threadman", func_00001FC4);
 
 INCLUDE_ASM("nonmatchings/threadman", sceKernelReferCallbackStatus);
 #endif
@@ -1361,7 +1361,7 @@ void func_00003C3C(void *arg0) {
 
     temp_v0 = sceKernelCpuSuspendIntr();
     M2C_FIELD(arg0, s32 *, 0x38) = 0;
-    if (func_0000022C((s32) arg0) > 0) {
+    if (func_00000268((s32) arg0) > 0) {
         D_00015E0C = 0;
     }
     sceKernelCpuResumeIntr(temp_v0);
@@ -1374,7 +1374,7 @@ void func_00003CF8(struct Unk_func_00003CF8_0 *arg0) {
 
     temp_v0 = sceKernelCpuSuspendIntr();
     M2C_FIELD(arg0, s32 *, 0x40) = 0;
-    if (func_0000022C((s32) arg0) > 0) {
+    if (func_00000268((s32) arg0) > 0) {
         D_000174C8 = 0;
     }
     sceKernelCpuResumeIntr(temp_v0);
@@ -1387,7 +1387,7 @@ void func_00003CF8(struct Unk_func_00003CF8_0 *arg0) {
 
     temp_v0 = sceKernelCpuSuspendIntr();
     M2C_FIELD(arg0, s32 *, 0x3C) = 0;
-    if (func_0000022C((s32) arg0) > 0) {
+    if (func_00000268((s32) arg0) > 0) {
         D_00017328 = 0;
     }
     sceKernelCpuResumeIntr(temp_v0);
@@ -1400,7 +1400,7 @@ void func_00003CF8(struct Unk_func_00003CF8_0 *arg0) {
 
     temp_v0 = sceKernelCpuSuspendIntr();
     arg0->unk38 = 0;
-    if (func_0000022C((s32) arg0) > 0) {
+    if (func_00000268((s32) arg0) > 0) {
         D_00016C78 = 0;
     }
     sceKernelCpuResumeIntr(temp_v0);
@@ -3985,7 +3985,7 @@ INCLUDE_ASM("nonmatchings/threadman", sceKernelIsUserModeThread);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/threadman", func_000134BC);
+INCLUDE_ASM("nonmatchings/threadman", func_000124A0);
 
 s32 sceKernelCheckThreadKernelStack(void) {
     void *ra = getRa();
@@ -3999,7 +3999,7 @@ s32 sceKernelCheckThreadKernelStack(void) {
         g_threadmanInfo.logHandler(0x29, ra, 0);
     }
     setK1(oldK1);
-    return func_000134BC();
+    return func_000124A0();
 }
 
 s32 sceKernelGetSystemStatusFlag(void) {
