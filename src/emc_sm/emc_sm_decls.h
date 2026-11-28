@@ -14,6 +14,7 @@
 #define NAND_DMA_CTRL  (*(volatile u32 *)0xBD101024)
 #define NAND_DMA_STAT  (*(volatile u32 *)0xBD101028)
 #define NAND_INTR      (*(volatile u32 *)0xBD101038)
+#define NAND_TIMING    (*(volatile u32 *)0xBD101200) /* 1.02+: 0x0B040205 */
 #define NAND_DATA      (*(volatile u32 *)0xBD101300)
 #define NAND_DMA_PAGE  ((volatile u32 *)0xBFF00000) /* page buffer, 0x200 bytes */
 #define NAND_DMA_ECC   (*(volatile u32 *)0xBFF00800)
@@ -67,8 +68,8 @@ typedef struct {
     void *user;      /* 0x20 */
     void *spare;     /* 0x24 */
     s32 mode;        /* 0x28 */
-    s32 unk2C;
-    s32 unk30;
+    s32 wpReleased;  /* 0x2C: write protect was just released (sceNandEraseBlock waits 10 us) */
+    u32 wpReleaseTime; /* 0x30 */
 } SceNandState;
 #endif
 
@@ -127,6 +128,7 @@ s32 func_0000014C(void);
 s32 func_00000160(void);
 s32 func_00000F18(s32 arg0);
 s32 func_00000F58(s32 mode, void *user, void *spare);
+s32 func_00000FD4(s32 ev);
 s32 func_00001180(s32 mode, u32 ppn, void *user, void *spare);
 s32 func_0000135C(void);
 s32 func_0000214C(u8 *buf, u32 ecc, s32 correct);
@@ -138,9 +140,11 @@ void sceKernelCpuResumeIntrWithSync(s32 intr);
 s32 sceKernelCpuSuspendIntr(void);
 SceUID sceKernelCreateEventFlag(const char *name, u32 attr, u32 bits, void *opt);
 SceUID sceKernelCreateSema(const char *name, u32 attr, s32 initVal, s32 maxVal, void *option);
+s32 sceKernelDelayThread(u32 usec);
 s32 sceKernelDeleteEventFlag(SceUID evid);
 s32 sceKernelDeleteSema(SceUID semaid);
 s32 sceKernelEnableIntr(s32 intrNum);
+u32 sceKernelGetSystemTimeLow(void);
 s32 sceKernelIsIntrContext(void);
 s32 sceKernelRegisterIntrHandler(s32 intrNum, s32 arg1, void *func, void *arg3, void *handler);
 s32 sceKernelRegisterSysEventHandler(SceSysEventHandler *handler);

@@ -44,7 +44,33 @@ s32 sceNandInit(void) {
 }
 #endif
 
-#if (FW_VERSION >= 102 && FW_VERSION < 271) || FW_VERSION >= 282
+#if FW_VERSION >= 102 && FW_VERSION < 201
+s32 sceNandInit(void) {
+    __builtin_memset(&D_00002970, 0, sizeof(D_00002970));
+    sceSysregEmcsmBusClockEnable();
+    sceSysregEmcsmIoEnable();
+    D_00002970.semaId = sceKernelCreateSema(D_000026F0, 1, 1, 1, NULL);
+    D_00002970.evFlagId = sceKernelCreateEventFlag(D_000026F0, 1, 0, NULL);
+    D_00002970.ops = sceKernelSm1ReferOperations();
+    D_00002970.busClockOn = 0;
+    NAND_INTR = 0x303;
+    NAND_TIMING = 0x0B040205;
+    sceKernelRegisterIntrHandler(0x14, 1, func_00000160, NULL, NULL);
+    sceKernelEnableIntr(0x14);
+    sceKernelRegisterSysEventHandler(&D_00002930);
+    sceNandLock(0);
+    if (!func_0000014C()) {
+        Kprintf("NAND device busy!!\n");
+    } else {
+        sceNandReset(NULL);
+        sceNandDetectChip();
+    }
+    sceNandUnlock();
+    return 0;
+}
+#endif
+
+#if (FW_VERSION >= 201 && FW_VERSION < 271) || FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/emc_sm", sceNandInit);
 #endif
 
@@ -70,9 +96,28 @@ INCLUDE_RODATA("nonmatchings/emc_sm", D_00002828);
 INCLUDE_ASM("nonmatchings/emc_sm", func_0000015C);
 #endif
 
-#if FW_VERSION >= 102
+#if FW_VERSION >= 102 && FW_VERSION < 201
+s32 sceNandSetWriteProtect(s32 protect) {
+    u32 v = NAND_STATUS;
+    s32 old = __builtin_allegrex_ext(v ^ 0x80, 7, 1);
+    if (protect) {
+        NAND_STATUS = v & ~0x80;
+    } else {
+        NAND_STATUS = v | 0x80;
+        while (!(NAND_STATUS & 0x80)) {
+        }
+        D_00002970.wpReleased = 1;
+        D_00002970.wpReleaseTime = sceKernelGetSystemTimeLow();
+    }
+    return old;
+}
+#endif
+
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/emc_sm", sceNandSetWriteProtect);
-#else
+#endif
+
+#if FW_VERSION == 100
 s32 sceNandLock(s32 writeMode) {
     s32 ret = sceKernelWaitSema(D_00002970.semaId, 1, NULL);
     if (ret < 0) {
@@ -204,11 +249,47 @@ s32 sceNandEraseBlock(u32 ppn) {
     }
     return ret;
 }
-#else
-INCLUDE_ASM("nonmatchings/emc_sm", sceNandEraseBlock);
 #endif
 
-#if FW_VERSION < 201
+#if FW_VERSION >= 102 && FW_VERSION < 201
+s32 sceNandEraseBlock(u32 ppn) {
+    s32 ret;
+    u8 st;
+
+    ret = func_0000135C();
+    if (ret < 0) {
+        return ret;
+    }
+    if (D_00002970.wpReleased) {
+        D_00002970.wpReleased = 0;
+        if (sceKernelGetSystemTimeLow() - D_00002970.wpReleaseTime < 10) {
+            sceKernelDelayThread(10);
+        }
+    }
+    NAND_CMD = 0x60;
+    NAND_ADDR = ppn << 10;
+    NAND_INTR &= ~1;
+    NAND_CMD = 0xD0;
+    ret = func_0000135C();
+    if (ret < 0) {
+        return ret;
+    }
+    NAND_CMD = 0x70;
+    ret = 0;
+    st = NAND_DATA;
+    NAND_RESET = 1;
+    if ((s8)st >= 0) {
+        ret = 0x80230007;
+    } else if (st & 1) {
+        ret = 0x80230004;
+    }
+    return ret;
+}
+#endif
+
+#if FW_VERSION >= 201
+INCLUDE_ASM("nonmatchings/emc_sm", sceNandEraseBlock);
+#else
 s32 sceNandReadExtraOnly(u32 ppn, void *spare, s32 len) {
     s32 ret;
     s32 i;
@@ -246,7 +327,9 @@ s32 sceNandReadExtraOnly(u32 ppn, void *spare, s32 len) {
     NAND_RESET = 1;
     return ret;
 }
-#else
+#endif
+
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/emc_sm", sceNandReadExtraOnly);
 #endif
 
@@ -293,7 +376,26 @@ s32 sceNandResume(void) {
     NAND_STATUS |= 0x80;
     return 0;
 }
-#else
+#endif
+
+#if FW_VERSION >= 102 && FW_VERSION < 201
+s32 sceNandResume(void) {
+    sceSysregEmcsmBusClockEnable();
+    sceSysregEmcsmIoEnable();
+    NAND_INTR = 0x303;
+    NAND_TIMING = 0x0B040205;
+    sceNandSetWriteProtect(0);
+    if (D_00002970.ops == NULL || D_00002970.ops->isBusClockOn() == 0) {
+        D_00002970.busClockOn = 0;
+        sceSysregEmcsmBusClockDisable();
+    } else {
+        D_00002970.busClockOn = 1;
+    }
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/emc_sm", sceNandResume);
 #endif
 
@@ -373,11 +475,32 @@ s32 sceNandWritePagesRawAll(u32 ppn, void *user, void *spare, u32 len) {
     return sceNandWriteAccess(ppn, user, spare, len, 0x31);
 }
 
-#if FW_VERSION >= 102 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/emc_sm", func_00000FD4);
+#if FW_VERSION >= 102 && FW_VERSION < 201
+s32 func_00000FD4(s32 ev) {
+    switch (ev) {
+    case 0x4004:
+        break;
+    case 0x10004:
+        sceSysregEmcsmBusClockEnable();
+        sceSysregEmcsmIoEnable();
+        NAND_INTR = 0x303;
+        NAND_TIMING = 0x0B040205;
+        sceNandSetWriteProtect(0);
+        if (D_00002970.ops == NULL || D_00002970.ops->isBusClockOn() == 0) {
+            D_00002970.busClockOn = 0;
+            sceSysregEmcsmBusClockDisable();
+        } else {
+            D_00002970.busClockOn = 1;
+        }
+        break;
+    }
+    return 0;
+}
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
+INCLUDE_ASM("nonmatchings/emc_sm", func_00000FD4);
+
 INCLUDE_ASM("nonmatchings/emc_sm", func_00001044);
 #endif
 
