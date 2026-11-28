@@ -1424,7 +1424,10 @@ INCLUDE_ASM("nonmatchings/music_main_plugin_02EE90", func_0003E9EC);
 
 INCLUDE_ASM("nonmatchings/music_main_plugin_02EE90", func_00042560);
 
-INCLUDE_ASM("nonmatchings/music_main_plugin_02EE90", func_0003EDEC);
+void func_0003EDEC(void) {
+    D_000BC5F8 = -1;
+    vsh_D8D84529();
+}
 
 INCLUDE_ASM("nonmatchings/music_main_plugin_02EE90", func_000425D0);
 
