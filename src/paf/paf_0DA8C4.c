@@ -458,8 +458,23 @@ INCLUDE_ASM("nonmatchings/paf_0DA8C4", func_000D8558);
 INCLUDE_ASM("nonmatchings/paf_0DA8C4", func_000D85A0);
 #endif
 
-#if FW_VERSION < 200
+#if FW_VERSION >= 150 && FW_VERSION < 200
 INCLUDE_ASM("nonmatchings/paf_0DA8C4", func_00085428);
+#endif
+
+#if FW_VERSION == 100
+s32 func_00085428(void *arg0, s32 arg1, s32 arg2) {
+    s32 var_v0;
+
+    if (arg1 != 0xE) {
+        var_v0 = _ZN3paf8PhWidget8SetStyleEii(arg0, arg1, arg2);
+    } else {
+        M2C_FIELD(arg0, s32 *, 0x354) = arg2;
+        func_00086FB8((s32) arg0);
+        var_v0 = 0;
+    }
+    return var_v0;
+}
 #endif
 
 #if FW_VERSION == 282

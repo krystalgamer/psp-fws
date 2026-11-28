@@ -471,8 +471,22 @@ INCLUDE_ASM("nonmatchings/paf_0E4304", _ZN3paf6PhList8GetStyleEiRi);
 INCLUDE_ASM("nonmatchings/paf_0E4304", _ZN3paf6PhList8GetStyleEiRf);
 #endif
 
-#if FW_VERSION < 250
+#if FW_VERSION >= 150 && FW_VERSION < 250
 INCLUDE_ASM("nonmatchings/paf_0E4304", func_0008BABC);
+#endif
+
+#if FW_VERSION == 100
+s32 func_0008BABC(void *arg0, s32 arg1, s32 *arg2) {
+    s32 var_a5;
+
+    var_a5 = 0;
+    if (arg1 != 0xE) {
+        var_a5 = _ZN3paf8PhWidget8GetStyleEiRi(arg0, arg1, arg2);
+    } else {
+        *arg2 = M2C_FIELD(arg0, s32 *, 0x360);
+    }
+    return var_a5;
+}
 #endif
 
 #if FW_VERSION == 282
