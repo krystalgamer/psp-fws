@@ -144,7 +144,7 @@ void func_000004CC(struct Unk_func_000004CC_0 *arg0) {
     temp_v1 = arg0->unk38;
     arg0->unk54 = 0;
     if (temp_v1 != 0) {
-        func_0000DAF4(temp_v1, arg0->unk3C);
+        func_0000BEBC(temp_v1, arg0->unk3C);
         arg0->unk38 = 0;
         arg0->unk3C = 0;
     }
@@ -3087,7 +3087,7 @@ INCLUDE_ASM("nonmatchings/threadman", sceKernelUSec2SysClock);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/threadman", func_0000B490);
+INCLUDE_ASM("nonmatchings/threadman", func_0000B634);
 #endif
 
 #if FW_VERSION < 150
@@ -3302,7 +3302,7 @@ s64 sceKernelGetSystemTimeWide(void) {
     void *ra = getRa();
     u32 oldK1 = shiftK1Noreorder();
     s32 intr = sceKernelCpuSuspendIntr();
-    s64 t = func_0000B490();
+    s64 t = func_0000B634();
 
     if (g_threadmanInfo.logHandler != NULL) {
         g_threadmanInfo.logHandler(0x6A, ra, 1, (u32)t);
@@ -3334,7 +3334,7 @@ INCLUDE_ASM("nonmatchings/threadman", sceKernelSetSysClockAlarm);
 
 INCLUDE_ASM("nonmatchings/threadman", func_0000D994);
 
-INCLUDE_ASM("nonmatchings/threadman", func_0000DAF4);
+INCLUDE_ASM("nonmatchings/threadman", func_0000BEBC);
 #endif
 
 #if FW_VERSION >= 250 && FW_VERSION < 282
@@ -3358,7 +3358,7 @@ INCLUDE_ASM("nonmatchings/threadman", func_0000DBF8);
 #if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/threadman", func_0000DDB0);
 
-INCLUDE_ASM("nonmatchings/threadman", func_0000DDC8);
+INCLUDE_ASM("nonmatchings/threadman", func_0000AA0C);
 
 INCLUDE_ASM("nonmatchings/threadman", func_0000AA80);
 
@@ -3622,7 +3622,7 @@ INCLUDE_ASM("nonmatchings/threadman", func_0000EFD8);
 #if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/threadman", func_0000F0DC);
 
-INCLUDE_ASM("nonmatchings/threadman", func_0000F200);
+INCLUDE_ASM("nonmatchings/threadman", func_0000F034);
 
 INCLUDE_ASM("nonmatchings/threadman", func_0000F258);
 #endif

@@ -381,6 +381,11 @@ typedef s32 (*SceThreadmanLogHandler)(s32 id, void *ra, s32 nargs, ...);
 #define THREADMAN_UID_OFF 0x640
 #endif
 #if FW_VERSION < 270
+#define THREADMAN_TIMERINTR_OFF 0x72C
+#else
+#define THREADMAN_TIMERINTR_OFF 0x734
+#endif
+#if FW_VERSION < 270
 #define THREADMAN_NUM_UID 14
 #else
 #define THREADMAN_NUM_UID 15
@@ -440,7 +445,21 @@ typedef struct SceThreadmanInfo {
     u8 unk6EC[THREADMAN_LOG_OFF - 0x6EC];
 #elif FW_VERSION < 330
     /* 1.50-3.20: same uid type block as 1.00 (Mutex added in 2.70) */
+#if FW_VERSION < 282
+    u8 unk41C[0x428 - 0x41C];
+    SceKernelSysClock lastSwitchTime; /* 0x428 */
+    u32 unk430; /* 0x430 */
+    u32 unk434; /* 0x434 */
+    u32 unk438; /* 0x438 */
+    u8 unk43C[0x5F8 - 0x43C];
+    s32 unk5B8; /* 0x5F8 (0x5B8 in 1.00) */
+    SceThreadQueue timers; /* 0x5FC */
+    SceThreadQueue unk5C4; /* 0x604 */
+    SceThreadQueue unk5CC; /* 0x60C */
+    u8 unk614[THREADMAN_UID_OFF - 0x614];
+#else
     u8 unk41C[THREADMAN_UID_OFF - 0x41C];
+#endif
     SceSysmemUidCB *uidWaitQType;
     SceSysmemUidCB *uidThreadType;
     SceSysmemUidCB *uidSemaType;
@@ -458,7 +477,13 @@ typedef struct SceThreadmanInfo {
     SceSysmemUidCB *uidDelayType;
     SceSysmemUidCB *uidAlarmType;
     SceSysmemUidCB *uidVTimerType;
+#if FW_VERSION < 282
+    u8 unkUidEnd[THREADMAN_TIMERINTR_OFF - THREADMAN_UID_OFF - THREADMAN_NUM_UID * 4];
+    s32 unk6E8; /* system timer interrupt number (0x6E8 in 1.00) */
+    u8 unkTimerEnd[THREADMAN_LOG_OFF - THREADMAN_TIMERINTR_OFF - 4];
+#else
     u8 unkUidEnd[THREADMAN_LOG_OFF - THREADMAN_UID_OFF - THREADMAN_NUM_UID * 4];
+#endif
 #else
     u8 unk41C[THREADMAN_LOG_OFF - 0x41C];
 #endif
@@ -609,6 +634,7 @@ s32 func_0000ABD8(struct Unk_func_0000ABD8_0 *arg0);
 u64 func_0000B490(void);
 u64 func_0000B634(void);
 s32 func_0000BCAC(struct Unk_func_0000BCAC_0 *arg0);
+s32 func_0000BEBC(s32, s32);
 SceSysmemUidCB *func_0000BFC0(void);
 s32 func_0000DAF4(s32, s32);
 s32 func_0000DDDC(void *arg0);
