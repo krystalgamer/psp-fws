@@ -435,7 +435,36 @@ s32 sceMScmSendTPCDMA(SceMScmHC *hc, u8 dmaCh, s32 a2, s32 a3) {
 INCLUDE_ASM("nonmatchings/mscm", sceMScmSendTPCDMA);
 #endif
 
+#if FW_VERSION < 201 || (FW_VERSION >= 250 && FW_VERSION < 282)
+s32 sceMScmSendTPC(SceMScmHC *hc, u8 tpc, s32 size, s32 timeout) {
+    u32 start;
+
+    timeout = func_000029F8(hc, timeout);
+    start = func_00004870();
+    while (!(hc->reg->status & 0x1000)) {
+        if (func_0000488C(start, timeout)) {
+            if (!(hc->reg->status & 0x1000)) {
+                return 0x80220087;
+            }
+            break;
+        }
+    }
+    while (!(hc->reg->status & 0x20)) {
+        if (func_0000488C(start, timeout)) {
+            if (!(hc->reg->status & 0x20)) {
+                return 0x80220087;
+            }
+            break;
+        }
+    }
+    hc->hc->lastStatus = 0;
+    sceMScmClearALEvents(hc);
+    hcWrite16(&hc->reg->command, (tpc << 12) | (size & 0x3FF));
+    return 0;
+}
+#else
 INCLUDE_ASM("nonmatchings/mscm", sceMScmSendTPC);
+#endif
 
 #if FW_VERSION == 201
 INCLUDE_ASM("nonmatchings/mscm", sceMScmClearALEvents);
@@ -446,7 +475,45 @@ s32 sceMScmClearALEvents(SceMScmHC *hc) {
 }
 #endif
 
+#if FW_VERSION < 152
+s32 sceMScmWaitHCIntr(SceMScmHC *hc, u32 *pattern, s32 timeout) {
+    s32 index = hc->index;
+    u32 outBits;
+    unsigned long tmo; /* a different alias set from *pattern (keeps the load order) */
+    SceMScmHC *h;
+    SceUID evf;
+    u32 bits;
+    u32 old;
+    s32 res;
+    s32 ret;
+    u32 m;
+
+    sceKernelGetSystemTimeLow();
+    tmo = func_000029F8(hc, timeout);
+    h = &D_00006F14[index];
+    evf = h->evf;
+    bits = func_00004E50(*pattern);
+    if (bits == 0) {
+        bits = 0x7FF0;
+    }
+    res = sceKernelWaitEventFlag(evf, bits, 1, &outBits, &tmo);
+    old = *pattern;
+    *pattern = h->intrStatus;
+    if (res == 0) {
+        return 0;
+    }
+    m = func_00004E94(index);
+    sceMScmClearALEvents(hc);
+    m &= old;
+    ret = 0x80220087;
+    if (m != 0) {
+        ret = 0;
+    }
+    return ret;
+}
+#else
 INCLUDE_ASM("nonmatchings/mscm", sceMScmWaitHCIntr);
+#endif
 
 #if FW_VERSION < 201 || (FW_VERSION >= 250 && FW_VERSION < 282)
 s32 func_000029F8(SceMScmHC *hc, s32 timeout) {
@@ -674,11 +741,29 @@ INCLUDE_ASM("nonmatchings/mscm", sceMScmTPCGetIntHelper);
 INCLUDE_ASM("nonmatchings/mscm", func_00004DAC);
 #endif
 
-#if FW_VERSION < 250
-INCLUDE_ASM("nonmatchings/mscm", func_000047C0);
+#if FW_VERSION < 201
+s32 func_000047C0(SceMScmHC *hc, s32 timeout) {
+    s32 ret;
+    u32 start;
+
+    timeout = func_000029F8(hc, timeout);
+    start = func_00004870();
+    ret = 0;
+    while (!(hc->reg->status & 0x1000)) {
+        if (func_0000488C(start, timeout)) {
+            if (!(hc->reg->status & 0x1000)) {
+                ret = 0x80220087;
+            }
+            break;
+        }
+    }
+    return ret;
+}
 #endif
 
 #if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/mscm", func_000047C0);
+
 INCLUDE_ASM("nonmatchings/mscm", sceMScmHCLastStatus);
 #endif
 
@@ -869,7 +954,45 @@ INCLUDE_ASM("nonmatchings/mscm", func_0000514C);
 #endif
 
 #if FW_VERSION < 152
-INCLUDE_ASM("nonmatchings/mscm", func_00004E94);
+u32 func_00004E94(s32 index) {
+    SceMScmHCReg *reg = D_00006F14[index].reg;
+    u32 ret;
+    u32 v;
+
+    ret = (reg->unk0 & 4) ? 0x10 : 0x1;
+    v = reg->unk8;
+    if (v & 0x200) {
+        ret |= 0x400;
+    }
+    if (v & 0x100) {
+        ret |= 0x200;
+    }
+    if (v & 0x80) {
+        ret |= 0x100;
+    }
+    if (v & 0x40) {
+        ret |= 0x80;
+    }
+    if (v & 0x20) {
+        ret |= 0x40;
+    }
+    if (v & 0x10) {
+        ret |= 0x20;
+    }
+    if (!(reg->unk0 & 1)) {
+        v = reg->status;
+        if (v & 0x4000) {
+            ret |= 8;
+        }
+        if (v & 0x1000) {
+            ret |= 2;
+        }
+        if (v & 0x2000) {
+            ret |= 4;
+        }
+    }
+    return ret;
+}
 #endif
 
 #if FW_VERSION < 250
