@@ -23,6 +23,7 @@ public:
 /* vtable _ZTV14Class_0016AAE0 is data (vptr = label - 8 + 8) */
 class Class_0016AAE0 : public Class_00126EC8 {
 public:
+    s32 unk4;
     virtual ~Class_0016AAE0();
 };
 #endif
@@ -5327,7 +5328,7 @@ s32 func_0004417C(s32);
 void func_00044190(struct Unk_func_00044190_0 *arg0);
 void func_000441A4(struct Unk_func_000441A4_0 *arg0);
 s32 func_000441D0(struct Unk_func_000441D0_0 *arg0, void *arg1, s32 arg2, s32 arg3, s32 arg4);
-void func_00044394(struct Unk_func_00044394_0 *arg0);
+void func_00044394(Class_0016AAE0 *arg0);
 void func_00044678(void);
 void func_00044680(M2C_UNK **arg0);
 void func_00044690(M2C_UNK **arg0);
