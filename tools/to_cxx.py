@@ -426,7 +426,52 @@ def fix_undeclared(lines, idx, msg):
     return True
 
 
-FIXERS = [fix_too_few, fix_too_many, fix_convert_return, fix_undeclared, fix_convert_arg, fix_convert_passing, fix_convert_assign, fix_ptr_int_compare]
+def _field_type(off):
+    """Type of field `unk<off>` if the m2c structs in the store agree on one (else s32)."""
+    seen = set()
+    for t in STORE.get("types", {}).values():
+        for m in re.finditer(rf"^\s*(?:/\*[^*]*\*/\s*)?((?:unsigned |signed |struct )?\w+(?: \*+)?)\s*\*?unk{off};", t, re.M):
+            seen.add(m[1].strip())
+    seen.discard("M2C_UNK")
+    return seen.pop() if len(seen) == 1 and re.match(r"^[su](8|16|32)$|^f32$", next(iter(seen))) else "s32"
+
+
+def fix_void_field(lines, idx, msg):
+    """`void*' is not a pointer-to-object type`: a field read through a `void *` (an import renamed
+    by nid_map returns void *, or a void * local): `E->unkN` -> `M2C_FIELD(E, T *, 0xN)`."""
+    if "`void*' is not a pointer-to-object type" not in msg:
+        return False
+    line = lines[idx]
+    voids = {n for n, p in STORE.get("funcs", {}).items() if re.match(rf"^\s*(?:const )?void \*\s*{re.escape(n)}\(", p)}
+    j, _ = _enclosing_def(lines, idx)
+    if j is not None:
+        for k in range(j + 1, idx):
+            dm = re.match(r"^\s*void \*(\w+);\s*$", lines[k])
+            if dm:
+                voids.add(dm[1])
+    for m in reversed(list(re.finditer(r"->unk([0-9A-Fa-f]+)\b", line))):
+        lo = m.start()
+        b = lo
+        if b > 0 and line[b - 1] == ")":  # call: NAME(...)
+            depth, b = 0, b - 1
+            while b >= 0:
+                depth += {")": 1, "(": -1}.get(line[b], 0)
+                if depth == 0:
+                    break
+                b -= 1
+            if b < 0:
+                continue
+        nm = re.search(r"(\w+)$", line[:b])
+        if not nm or nm[1] not in voids:
+            continue
+        expr = line[nm.start():lo]
+        line = line[:nm.start()] + f"M2C_FIELD({expr}, {_field_type(m[1])} *, 0x{m[1]})" + line[m.end():]
+        lines[idx] = line
+        return True
+    return False
+
+
+FIXERS = [fix_void_field, fix_too_few, fix_too_many, fix_convert_return, fix_undeclared, fix_convert_arg, fix_convert_passing, fix_convert_assign, fix_ptr_int_compare]
 
 
 def unify_arity(files, store):
