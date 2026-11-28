@@ -527,6 +527,7 @@ extern s32 D_00008134;
 extern s32 (*D_00008138[7])(SceNetDhcpCtx *dc, s32 prev);
 extern s32 D_00008154[];
 extern s32 (*D_00008180[5])(SceNetApctlCtx *ctx, s32 prev, s32 *state, s32 *event);
+extern s32 (*D_00008198[7])(SceNetDhcpCtx *dc, s32 prev); /* 1.50 name of D_00008138 */
 extern u32 D_000081FC; /* ARP BPF filter: target IP constant */
 extern u32 D_00008210[2]; /* struct bpf_program for the ARP filter */
 extern s32 D_00008220;

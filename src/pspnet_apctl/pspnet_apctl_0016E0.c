@@ -980,7 +980,35 @@ end:
 }
 #endif
 
-#if FW_VERSION >= 102 && FW_VERSION < 250
+#if FW_VERSION >= 150 && FW_VERSION < 250
+s32 func_00003754(SceSize args, void *argp) {
+    SceNetDhcpCtx *dc = &D_00008B38;
+    s32 prev = 0;
+    s32 ret;
+
+    dc->state = 0;
+    dc->startTime = sceNetGetSystemClockSec();
+    for (;;) {
+        ret = D_00008198[dc->state](dc, prev);
+        if (ret < 0) {
+            break;
+        }
+        prev = dc->state;
+        dc->state = ret;
+        if (sceKernelPollSema(dc->sema, 1) == 0) {
+            func_00005D14(dc, dc->state, 0);
+        }
+    }
+    if (dc->callback != NULL) {
+        dc->callback(4, ret);
+    }
+    func_00004424(dc->ifname);
+    sceKernelExitThread(0);
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00003754);
 #endif
 
