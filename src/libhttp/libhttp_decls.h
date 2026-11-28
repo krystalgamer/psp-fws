@@ -396,10 +396,13 @@ typedef struct SceHttpConn {
 typedef char chk_SceHttpConn[(sizeof(SceHttpConn) == 0x164) ? 1 : -1];
 
 /* 1.00-1.03 request (ids 0x02xxxxxx); 1.02/1.03 grew by 0x18 */
+/* HTTP_REQ_V(1.00, 1.02, 1.03) */
 #if FW_VERSION < 102
-#define HTTP_REQ_V(a, b) (a)
+#define HTTP_REQ_V(a, b, c) (a)
+#elif FW_VERSION == 102
+#define HTTP_REQ_V(a, b, c) (b)
 #else
-#define HTTP_REQ_V(a, b) (b)
+#define HTTP_REQ_V(a, b, c) (c)
 #endif
 typedef struct SceHttpReq {
     u8 unk00[0x10];
@@ -408,16 +411,16 @@ typedef struct SceHttpReq {
     s32 reference_counter;  /* 0x18 */
     u8 unk1C[0x2C - 0x1C];
     s32 status;             /* 0x2C */
-    u8 unk30[HTTP_REQ_V(0x84, 0x88) - 0x30];
-    SceHttpTmpl tmpl;       /* 0x84 (1.02: 0x88) */
-    u8 unk108[HTTP_REQ_V(0x124, 0x130) - HTTP_REQ_V(0x108, 0x10C)];
-    s32 response_code;      /* 0x124 (1.02: 0x130) */
-    u8 unk128[HTTP_REQ_V(0x178, 0x190) - HTTP_REQ_V(0x128, 0x134)];
+    u8 unk30[HTTP_REQ_V(0x84, 0x88, 0x8C) - 0x30];
+    SceHttpTmpl tmpl;       /* 0x84 (1.02: 0x88, 1.03: 0x8C) */
+    u8 unk108[HTTP_REQ_V(0x124, 0x130, 0x134) - HTTP_REQ_V(0x108, 0x10C, 0x110)];
+    s32 response_code;      /* 0x124 (1.02: 0x130, 1.03: 0x134) */
+    u8 unk128[HTTP_REQ_V(0x178, 0x190, 0x190) - HTTP_REQ_V(0x128, 0x134, 0x138)];
     struct SceHttpReq *next; /* 0x178 (1.02: 0x190) */
     struct SceHttpReq *pre;  /* 0x17C (1.02: 0x194) */
-    u8 unk180[HTTP_REQ_V(0x188, 0x1A0) - HTTP_REQ_V(0x180, 0x198)];
+    u8 unk180[HTTP_REQ_V(0x188, 0x1A0, 0x1A0) - HTTP_REQ_V(0x180, 0x198, 0x198)];
 } SceHttpReq;
-typedef char chk_SceHttpReq[(sizeof(SceHttpReq) == HTTP_REQ_V(0x188, 0x1A0)) ? 1 : -1];
+typedef char chk_SceHttpReq[(sizeof(SceHttpReq) == HTTP_REQ_V(0x188, 0x1A0, 0x1A0)) ? 1 : -1];
 
 typedef void *(*SceHttpMallocFunction100)(SceSize size);
 typedef void (*SceHttpFreeFunction100)(void *ptr);
@@ -476,6 +479,7 @@ extern SceHttpTmpl D_0000DD2C;
 extern SceHttpConn D_0000DDB0;
 extern SceHttpReq D_0000DF18;
 extern s32 D_0000E0A0;
+extern SceHttpReq D_0000E7D8;
 extern s32 D_0000F0F0;
 extern s32 D_0000F0F4;
 extern s32 D_0000F0F8;

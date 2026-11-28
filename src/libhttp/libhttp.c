@@ -314,9 +314,7 @@ int sceHttpDisableKeepAlive(int id) {
     }
     return ret;
 }
-#endif
 
-#if FW_VERSION < 103
 int sceHttpEnableCookie(int id) {
     SceHttpTmpl *tmpl;
     SceHttpConn *con;
@@ -361,13 +359,7 @@ int sceHttpEnableCookie(int id) {
     }
     return ret;
 }
-#endif
 
-#if FW_VERSION == 103
-INCLUDE_ASM("nonmatchings/libhttp", sceHttpEnableCookie);
-#endif
-
-#if FW_VERSION < 103
 int sceHttpDisableCookie(int id) {
     SceHttpTmpl *tmpl;
     SceHttpConn *con;
@@ -412,13 +404,7 @@ int sceHttpDisableCookie(int id) {
     }
     return ret;
 }
-#endif
 
-#if FW_VERSION == 103
-INCLUDE_ASM("nonmatchings/libhttp", sceHttpDisableCookie);
-#endif
-
-#if FW_VERSION < 103
 int sceHttpEnableAuth(int id) {
     SceHttpTmpl *tmpl;
     SceHttpConn *con;
@@ -463,13 +449,7 @@ int sceHttpEnableAuth(int id) {
     }
     return ret;
 }
-#endif
 
-#if FW_VERSION == 103
-INCLUDE_ASM("nonmatchings/libhttp", sceHttpEnableAuth);
-#endif
-
-#if FW_VERSION < 103
 int sceHttpDisableAuth(int id) {
     SceHttpTmpl *tmpl;
     SceHttpConn *con;
@@ -514,13 +494,7 @@ int sceHttpDisableAuth(int id) {
     }
     return ret;
 }
-#endif
 
-#if FW_VERSION == 103
-INCLUDE_ASM("nonmatchings/libhttp", sceHttpDisableAuth);
-#endif
-
-#if FW_VERSION < 150
 int sceHttpEnableRedirect(int id) {
     SceHttpTmpl *tmpl = NULL;
     SceHttpConn *con = NULL;
@@ -578,9 +552,7 @@ int sceHttpDisableRedirect(int id) {
 }
 
 INCLUDE_ASM("nonmatchings/libhttp", sceHttpEndCache);
-#endif
 
-#if FW_VERSION < 103
 int sceHttpEnableCache(int id) {
     SceHttpTmpl *tmpl = NULL;
     SceHttpConn *con = NULL;
@@ -627,13 +599,7 @@ int sceHttpEnableCache(int id) {
     }
     return ret;
 }
-#endif
 
-#if FW_VERSION == 103
-INCLUDE_ASM("nonmatchings/libhttp", sceHttpEnableCache);
-#endif
-
-#if FW_VERSION < 103
 int sceHttpDisableCache(int id) {
     SceHttpTmpl *tmpl = NULL;
     SceHttpConn *con = NULL;
@@ -680,10 +646,6 @@ int sceHttpDisableCache(int id) {
     }
     return ret;
 }
-#endif
-
-#if FW_VERSION == 103
-INCLUDE_ASM("nonmatchings/libhttp", sceHttpDisableCache);
 #endif
 
 #if FW_VERSION < 201
@@ -746,7 +708,7 @@ INCLUDE_ASM("nonmatchings/libhttp", sceHttpGetAllHeader);
 INCLUDE_ASM("nonmatchings/libhttp", sceHttpReadData);
 #endif
 
-#if FW_VERSION < 103
+#if FW_VERSION < 150
 int sceHttpSetAuthInfoCB(int id, void *cbfunc) {
     SceHttpTmpl *tmpl;
     SceHttpConn *con;
@@ -795,13 +757,7 @@ int sceHttpSetAuthInfoCB(int id, void *cbfunc) {
     }
     return ret;
 }
-#endif
 
-#if FW_VERSION == 103
-INCLUDE_ASM("nonmatchings/libhttp", sceHttpSetAuthInfoCB);
-#endif
-
-#if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/libhttp", sceHttpAddExtraHeader);
 
 INCLUDE_ASM("nonmatchings/libhttp", sceHttpDeleteHeader);
@@ -1137,7 +1093,33 @@ int InsertNewHttpReq(SceHttpReq *new_request) {
 #endif
 
 #if FW_VERSION >= 102 && FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/libhttp", InsertNewHttpReq);
+int InsertNewHttpReq(SceHttpReq *new_request) {
+    SceHttpReq *p = &D_0000E7D8;
+    SceHttpReq *q;
+    int ret;
+    int intr;
+
+    intr = sceKernelSuspendDispatchThread();
+    while (p->next != NULL) {
+        if (p->next->id != p->id + 1) {
+            break;
+        }
+        p = p->next;
+    }
+    ret = 0x80431060;
+    if (p->id <= 0x2FFFFFF) {
+        ret = p->id + 1;
+        new_request->id = ret;
+        new_request->next = p->next;
+        new_request->pre = p;
+        if (p->next != NULL) {
+            p->next->pre = new_request;
+        }
+        p->next = new_request;
+    }
+    sceKernelResumeDispatchThread(intr);
+    return ret;
+}
 #endif
 
 #if FW_VERSION < 150
