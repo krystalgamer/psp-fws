@@ -99,6 +99,57 @@ def struct_fields(text):
     return out
 
 
+GENERATED = ("is data (vptr = label", "dtor still asm/m2c")
+
+
+def relayout(types):
+    """Fields of generated class declarations are `unkN` at absolute offset N: redo the padding of
+    every generated class after its base's fields (a base that got fields moves the derived
+    class's start). Returns the classes whose fields now overlap their base's (to be undone)."""
+    declared = {}
+    for k, t in types.items():
+        for m in re.finditer(r"^class (\w+)(?: : public ([\w:]+))? \{", t, re.M):
+            declared[m[1]] = (k, m[2])
+    end, bad = {}, []
+
+    def class_end(c, depth=0):
+        if c in end:
+            return end[c]
+        k, base = declared.get(c, (None, None))
+        e = class_end(base, depth + 1) if base and base in declared and depth < 30 else 4
+        if k is not None:
+            for o, (sz, d) in struct_fields(types[k]).items():
+                e = max(e, o + (sz or 4))
+        end[c] = e
+        return e
+    for c, (k, base) in declared.items():
+        t = types[k]
+        if not any(g in t for g in GENERATED):
+            continue
+        fs = struct_fields(t)
+        if not fs:
+            continue
+        pos = class_end(base) if base and base in declared else 4
+        inherited, b = {}, base
+        while b in declared and len(inherited) < 10000:
+            inherited.update({o: f for o, f in struct_fields(types[declared[b][0]]).items() if o not in inherited})
+            b = declared[b][1]
+        fs = {o: f for o, f in fs.items() if inherited.get(o) != f}  # the base declares it already
+        if fs and min(fs) < pos:
+            bad.append(c)
+            continue
+        body = []
+        for o in sorted(fs):
+            sz, d = fs[o]
+            if o > pos:
+                body.append(f"    u8 pad{pos:X}[0x{o - pos:X}];")
+            body.append(f"    {d}")
+            pos = o + sz
+        t = re.sub(r"\n    (?:u8 pad\w+\[[^\]]*\];|[^\n]*\bunk[0-9A-F]+(?:\[[^\]]*\])?;)(?=\n)", "", t)
+        types[k] = re.sub(rf"(class {c}\b[^{{]*\{{\npublic:\n)", lambda m: m[1] + "\n".join(body) + "\n", t, count=1)
+    return bad
+
+
 def dtor_body(text, label, structs):
     """m2c C of a non-trivial D2/D1 -> (body of `X::~X()`, base D2 name or None, {offset: field}) or
     None: the vptr store of `label` goes (the compiler emits it), a final `B(arg0);` is the base
@@ -340,6 +391,10 @@ def main():
         if fields is None:
             reasons["field types differ between versions"] += 1
             continue
+        have = struct_fields(store0.get("types", {}).get(cls, ""))
+        if any(o in have and have[o] != f for o, f in fields.items()):
+            reasons["field differs from the class's"] += 1
+            continue
         plans.append({"cls": cls, "sizes": sizes, "todo": todo, "done": [v for v in c["by"] if v not in todo],
                       "nt": nt, "fields": fields})
     # unique class names; bases
@@ -452,6 +507,7 @@ def main():
             ns, cn = base.rsplit("::", 1)
             types.setdefault(f"0_{base}", f"#ifdef __cplusplus\nnamespace {ns} {{\nclass {cn} {{\npublic:\n    virtual ~{cn}();\n}};\n}}\n#endif")
         inh = f" : public {base}" if base else ""
+        have = struct_fields(types.get(cls, ""))  # fields given earlier (tools/cxx_layout.py)
         if cls not in types or "dtor still asm/m2c" in types[cls]:  # a hand-written class (more members) is kept
             old_t = types.get(cls, "")
             types[cls] = (f"#ifdef __cplusplus\n/* vtable {vtable_name(cls)} is data (vptr = label - 8 + 8) */\n"
@@ -459,10 +515,10 @@ def main():
             ctor = re.search(rf"^    {cls}\(\);$", old_t, re.M)
             if ctor:
                 types[cls] = types[cls].replace("public:\n", f"public:\n    {cls}();\n", 1)
-        if p["fields"]:
-            have = struct_fields(types[cls])
+        if p["fields"] or have:
             allf = dict(have)
-            allf.update(p["fields"])
+            for o, f in p["fields"].items():
+                allf.setdefault(o, f)  # same type (checked when planning) or relayout reports it
             body, pos = [], 4
             for o in sorted(allf):
                 sz, d = allf[o]
@@ -529,6 +585,11 @@ def main():
     for nn in allnew:
         if nn.endswith("D2Ev") and nn not in store["funcs"] and any(re.search(rf"\b{nn}\(", f.read_text()) for f in files):
             store["funcs"][nn] = f"void {nn}(void *self);"
+    bad = relayout(types)
+    if bad:
+        for q, txt in list(keep.items()) + list(keepcfg.items()):
+            q.write_text(txt)
+        raise SystemExit(f"fields overlap the base's in {', '.join(bad)}; restored")
     structify.SRC[mod] = sd
     structify.write_decls(mod, store)
     print(f"converted {len(ok)} classes in {len({n for n in renames})} versions")

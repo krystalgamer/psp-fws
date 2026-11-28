@@ -383,6 +383,12 @@ def apply(mod, classes, vers, no_build):
         print(f"{cls}: {len(cands)} method copies, {len(chosen)} fields")
     if not total:
         return
+    spec = importlib.util.spec_from_file_location("cxx_classes", ROOT / "tools/cxx_classes.py")
+    CC = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(CC)
+    bad = CC.relayout(types)
+    if bad:
+        raise SystemExit(f"fields overlap the base's in {', '.join(bad)}; nothing written")
     for f in files:
         f.write_text(FM.emit(FM.dedupe(ents[f]), fv))
     structify.SRC[mod] = sd
