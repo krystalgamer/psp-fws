@@ -522,18 +522,54 @@ s32 nandSysEventHandler(s32 ev) {
 #endif
 
 #if FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/emc_sm", nandDmaReadPage);
+s32 nandDmaReadPage(s32 mode, void *user, void *spare) {
+    s32 ret = 0;
+    u32 sp[4];
+    s32 i;
+    u32 *src;
+    u32 *dst;
+
+    if (user != NULL) {
+        src = (u32 *)0x9FF00000;
+        NAND_CACHE_PAGE(0x19, src);
+        dst = user;
+        for (i = 0; i < 0x80; i++) {
+            *dst++ = *src++;
+        }
+    }
+    if (!(mode & 0x10)) {
+        if (NAND_DMA_STAT != 0) {
+            ret = 1;
+        }
+    }
+    sp[0] = NAND_DMA_ECC;
+    sp[1] = NAND_DMA_SPARE[0];
+    sp[2] = NAND_DMA_SPARE[1];
+    sp[3] = NAND_DMA_SPARE[2];
+    if (!(mode & 0x20)) {
+        if (sceNandCollectEcc((u8 *)&sp[1], (((u8 *)sp)[0xD] << 8 | ((u8 *)sp)[0xC]) & 0xFFF) == -3) {
+            ret |= 2;
+        }
+    }
+    if (spare != NULL) {
+        if (mode & 1) {
+            ((u32 *)spare)[0] = sp[0];
+            ((u32 *)spare)[1] = sp[1];
+            ((u32 *)spare)[2] = sp[2];
+            ((u32 *)spare)[3] = sp[3];
+        } else {
+            ((u32 *)spare)[0] = sp[1];
+            ((u32 *)spare)[1] = sp[2];
+            ((u32 *)spare)[2] = sp[3];
+        }
+    }
+    return ret;
+}
 #endif
 
 #if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/emc_sm", nandSysEventHandler);
-#endif
 
-#if FW_VERSION >= 300
-INCLUDE_ASM("nonmatchings/emc_sm", nandDmaReadPage);
-#endif
-
-#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/emc_sm", nandDmaReadPage);
 #endif
 

@@ -20,6 +20,11 @@
 #define NAND_DMA_ECC   (*(volatile u32 *)0xBFF00800)
 #define NAND_DMA_SPARE ((volatile u32 *)0xBFF00900) /* 3 words */
 
+/* cache op on the 8 lines (0x200 bytes) of the cached DMA page buffer alias; 0x19 = hit invalidate D, 0x18 = create dirty exclusive, 0x1B = hit writeback D */
+#define NAND_CACHE_PAGE(op, p) __asm__ volatile( \
+    "cache " #op ", 0x0(%0)\n\tcache " #op ", 0x40(%0)\n\tcache " #op ", 0x80(%0)\n\tcache " #op ", 0xC0(%0)\n\t" \
+    "cache " #op ", 0x100(%0)\n\tcache " #op ", 0x140(%0)\n\tcache " #op ", 0x180(%0)\n\tcache " #op ", 0x1C0(%0)" :: "r"(p))
+
 /* sceKernelSm1ReferOperations() result; only the 0xC entry is used here */
 typedef struct SceKernelSm1Ops {
     void *unk0;
@@ -130,7 +135,7 @@ s32 module_reboot_before(void);
 s32 module_start(void);
 s32 nandCorrectEcc(u8 *buf, u32 ecc, s32 correct);
 s32 nandDmaReadPage(s32 mode, void *user, void *spare);
-s32 nandDmaWritePage(s32 mode, u32 ppn, void *user, void *spare);
+s32 nandDmaWritePage(s32 mode, u32 ppn, void *user, u8 *spare);
 s32 nandIntrHandler(void);
 s32 nandIsReady(void);
 s32 nandSysEventHandler(s32 ev);
