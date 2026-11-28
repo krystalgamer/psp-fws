@@ -1435,9 +1435,88 @@ INCLUDE_ASM("nonmatchings/msstor_0015A0", func_00006EBC);
 
 INCLUDE_ASM("nonmatchings/msstor_0015A0", func_00006F10);
 
-INCLUDE_ASM("nonmatchings/msstor_0015A0", func_0000700C);
+#if FW_VERSION < 201
+s32 func_0000700C(s32 mode, SceIoIob *iob, s32 cmd, void *in, SceSize inlen, void *out, SceSize outlen) {
+    SceMSstorDev *dev;
+    SceMSstorRawParam *p;
+    s32 r;
+    s32 ret;
 
+    r = 0x80220183;
+    dev = ((SceMSstorIoCtx *)iob->i_private)->dev;
+    p = in;
+    if (dev->mediaType2 & 0x40) {
+        return r;
+    }
+    if (in == NULL || inlen < 0x20) {
+        return r;
+    }
+    if (p->unk14 < 0x200 || p->unk18 < 4) {
+        return 0x80220183;
+    }
+    if (p->unk8 != 1) {
+        return 0x80220183;
+    }
+    switch (mode) {
+    case 1:
+        r = func_000086F4(dev, p->unk0, p->unk4, p->unk4, p->unkC, p->unk10);
+        break;
+    case 2:
+        r = func_00008A54(dev, p->unk0, p->unk4, p->unk4, p->unkC, p->unk10);
+        break;
+    }
+    ret = func_00007850(r);
+    p->result = ret;
+    return ret;
+}
+#else
+INCLUDE_ASM("nonmatchings/msstor_0015A0", func_0000700C);
+#endif
+
+#if FW_VERSION < 201
+s32 func_00007108(s32 mode, SceIoIob *iob, s32 cmd, void *in, SceSize inlen, void *out, SceSize outlen) {
+    SceMSstorDev *dev;
+    SceMSstorRawParam *p;
+    s32 r;
+    s32 ret;
+
+    dev = ((SceMSstorIoCtx *)iob->i_private)->dev;
+    p = in;
+    if (dev->mediaType2 & 0x40) {
+        return 0x80220183;
+    }
+    if (in == NULL || inlen < 0x20) {
+        return 0x80220183;
+    }
+    if (mode == 3) {
+        if (p->unk18 <= 0) {
+            return 0x80220183;
+        }
+    } else if (p->unk18 < 4) {
+        return 0x80220183;
+    }
+    if (p->unk8 != 1) {
+        return 0x80220183;
+    }
+    r = 0;
+    switch (mode) {
+    case 1:
+        r = func_00003BD4(dev, p->unk0, p->unk4, p->unk10);
+        break;
+    case 2:
+        r = func_0000413C(dev, p->unk0, p->unk4, p->unk10);
+        break;
+    case 3:
+        r = func_0000366C(dev, p->unk0, p->unk4, p->unk10);
+        break;
+    }
+    ret = func_00007850(r);
+    p->result = ret;
+    return ret;
+}
+#else
 INCLUDE_ASM("nonmatchings/msstor_0015A0", func_00007108);
+#endif
 
 #if FW_VERSION < 201
 s32 func_00007234(SceIoIob *iob, s32 cmd, void *in, SceSize inlen, void *out, SceSize outlen) {

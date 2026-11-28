@@ -160,6 +160,19 @@ typedef struct {
     s32 (*unk10)(SceMSstorDev *dev);                                   /* 0x10 */
 } SceMSstorOps;
 
+/* in-buffer of the raw Std block ioctls 0x0211D01A-0x0211D01E (func_0000700C/func_00007108) */
+typedef struct {
+    s32 unk0;
+    s32 unk4;
+    s32 unk8;               /* must be 1 */
+    s32 unkC;
+    s32 unk10;
+    s32 unk14;              /* >= 0x200 */
+    s32 unk18;
+    s32 result;             /* 0x1C: written back */
+} SceMSstorRawParam;
+typedef char chk_SceMSstorRawParam[(sizeof(SceMSstorRawParam) == 0x20) ? 1 : -1];
+
 typedef struct {
     u16 year;
     u16 month;
@@ -429,11 +442,14 @@ s32 func_000026A8(SceMSstorDev *dev);
 s32 func_0000299C(SceMSstorDev *dev, s32 arg1, void *arg2);
 u32 func_00003298(SceMSstorDev *dev);
 s32 func_000034CC(void *arg0, s32 arg1, s32 *arg2);
+s32 func_0000366C(SceMSstorDev *dev, s32 a1, s32 a2, s32 a3);
+s32 func_00003BD4(SceMSstorDev *dev, s32 a1, s32 a2, s32 a3);
 s32 func_00003C2C(SceMSstorDev *dev);
 s32 func_00003C4C(SceMSstorDev *dev);
 s32 func_00003E20(SceMSstorDev *dev);
 void func_00003E88(s32 arg0);
 void func_00003EA8(s32 arg0);
+s32 func_0000413C(SceMSstorDev *dev, s32 a1, s32 a2, s32 a3);
 void func_00004300(u8 *p, u8 c, s32 n);
 void func_0000432C(u8 *dst, const u8 *src, s32 n);
 s32 func_00004514(void);
@@ -495,6 +511,8 @@ s32 func_00007B38(SceMSstorDev *dev, s32 lba, s32 count, void *buf);
 s32 func_00007CF0(s32);
 s32 func_00007D38(SceMSstorDev *dev, s32 lba, s32 count, void *buf);
 s32 func_00007D38_v102(s32);
+s32 func_000086F4(SceMSstorDev *dev, s32 a1, s32 a2, s32 a3, s32 a4, s32 a5);
+s32 func_00008A54(SceMSstorDev *dev, s32 a1, s32 a2, s32 a3, s32 a4, s32 a5);
 s32 memcmp(const void *a, const void *b, SceSize n);
 void *memcpy(void *dst, const void *src, SceSize n);
 s32 module_reboot_before(void);
