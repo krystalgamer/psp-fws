@@ -1370,9 +1370,25 @@ void _sceHttpFreeInternal(void *ptr) {
 
 INCLUDE_ASM("nonmatchings/libhttp", sceHttpSetMallocFunction);
 
-INCLUDE_ASM("nonmatchings/libhttp", _HttpAtoi64);
+SceUInt64 _HttpAtoi64(const char *str) {
+    SceUInt64 ret = 0;
 
-INCLUDE_ASM("nonmatchings/libhttp", _HttpI64toa);
+    if (str != NULL) {
+        while (*str != '\0') {
+            ret = ret * 10 + (*str - '0');
+            str++;
+        }
+    }
+    return ret;
+}
+
+void _HttpI64toa(char *str, const SceUInt64 val) {
+    if (val != 0) {
+        __HttpI64toa(&str, val / 10);
+        *str = val % 10 + '0';
+        str++;
+    }
+}
 #endif
 
 #if FW_VERSION == 103
@@ -1500,7 +1516,13 @@ void *_sceHttpReallocInternal(void *ptr, SceSize size) {
     return ret;
 }
 
-INCLUDE_ASM("nonmatchings/libhttp", __HttpI64toa);
+void __HttpI64toa(char **pStr, const SceUInt64 val) {
+    if (val != 0) {
+        __HttpI64toa(pStr, val / 10);
+        **pStr = val % 10 + '0';
+        (*pStr)++;
+    }
+}
 #endif
 
 #if FW_VERSION >= 102 && FW_VERSION < 150
