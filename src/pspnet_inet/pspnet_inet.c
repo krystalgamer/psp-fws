@@ -1675,7 +1675,7 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_0000940C);
 
 #if FW_VERSION < 201
 void func_0000940C(s32 arg0) {
-    func_0000C998(arg0, 2, 0);
+    rtinit(arg0, 2, 0);
 }
 #endif
 
@@ -1685,7 +1685,7 @@ void func_00009570(s32 arg0) {
 }
 
 void func_0000958C(s32 arg0) {
-    func_0000C998(arg0, 2, 0);
+    rtinit(arg0, 2, 0);
 }
 #endif
 

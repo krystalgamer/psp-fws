@@ -5,7 +5,7 @@
 void func_0000D1FC(void) {
     D_0002CCB4 = 0;
     _sce_pspnet_callout_init(&D_0002CD38);
-    _sce_pspnet_callout_reset(&D_0002CD38, 100, func_0000CE98, NULL);
+    _sce_pspnet_callout_reset(&D_0002CD38, 100, rt_timer_timer, NULL);
     D_0002C534 = 1;
 }
 
@@ -579,9 +579,9 @@ INCLUDE_ASM("nonmatchings/pspnet_inet_rtsub", func_00011820);
 void func_00011D04(u8 *arg0, u8 *arg1) {
     if (*(s32 *)(arg1 + 0x2C) & 1) {
         if (*(u16 *)(arg0 + 0x30) & 0x18) {
-            func_0000C998((s32)arg1, 2, 4);
+            rtinit((s32)arg1, 2, 4);
         } else {
-            func_0000C998((s32)arg1, 2, 0);
+            rtinit((s32)arg1, 2, 0);
         }
         *(s32 *)(arg1 + 0x2C) &= ~1;
     }

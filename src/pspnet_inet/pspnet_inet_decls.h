@@ -311,6 +311,8 @@ struct domain {
     struct protosw *dom_protosw;        /* 0x14 */
     struct protosw *dom_protoswNPROTOSW; /* 0x18 */
     struct domain *dom_next;            /* 0x1C */
+    s32 (*dom_rtattach)(void **head, s32 off); /* 0x20 */
+    s32 dom_rtoffset;                   /* 0x24 */
 };
 
 struct sockaddr {
@@ -440,6 +442,7 @@ struct rtentry {
 struct rttimer_queue {
     s32 rtq_timeout;                /* 0x0 */
     TAILQ_HEAD(, rttimer) rtq_head; /* 0x4 */
+    struct { struct rttimer_queue *le_next; struct rttimer_queue **le_prev; } rtq_link; /* 0xC */
 };
 struct rttimer {
     TAILQ_ENTRY(rttimer) rtt_next;  /* 0x00 */
@@ -1672,6 +1675,7 @@ extern s32 D_0002EC10;
 extern s32 D_0002EC14;
 extern s32 D_0002EC18;
 extern char D_0002F288[18] __attribute__((aligned(4)));
+extern struct { s32 w[6]; } D_0002F3B8;
 extern s32 D_0002F500;
 extern s32 D_0002F50C;
 extern s32 D_0002F510;
@@ -1849,8 +1853,6 @@ void func_00009B5C(void);
 s32 func_00009B84();
 struct radix_node *func_0000A144(void *v_arg, struct radix_node_head *head);
 struct radix_node *func_0000A61C(void *n_arg, s32 search, s32 skip);
-s32 func_0000C998(s32, s32, s32);
-void func_0000CE98(void *arg);
 s32 func_0000D1F4(void);
 void func_0000D25C(s32 *arg0, s32 arg1);
 s32 func_0000D264(void *arg0, s32 arg1);
@@ -2023,10 +2025,12 @@ struct radix_node *rn_search_m(void *v_arg, struct radix_node *head, void *m_arg
 void rt_maskedcopy(struct sockaddr *src, struct sockaddr *dst, struct sockaddr *netmask);
 void rt_missmsg(s32 type, struct rt_addrinfo *rtinfo, s32 flags, s32 error);
 void rt_timer_remove_all(struct rtentry *rt);
+void rt_timer_timer(void *arg);
 void rt_xaddrs(u8 *cp, u8 *cplim, struct rt_addrinfo *rtinfo);
 void rtalloc(struct route *ro);
 struct rtentry *rtalloc1(struct sockaddr *dst, s32 report);
 void rtfree(struct rtentry *rt);
+s32 rtinit(s32, s32, s32);
 s32 rtioctl(u32 cmd, void *data);
 s32 rtrequest(s32 req, struct sockaddr *dst, struct sockaddr *gateway, struct sockaddr *netmask, s32 flags, struct rtentry **ret_nrt);
 void save_rte(u8 *option, struct in_addr dst);
@@ -2050,6 +2054,7 @@ s32 sceNetConfigGetDefaultRoute(struct in_addr *gw);
 s32 sceNetConfigGetRouteInfo(s32 *len, void *buf);
 s32 sceNetConfigSetDNS(SceNetBytes4 *primary, SceNetBytes4 *secondary);
 void sceNetFreeInternal(void *p);
+s32 sceNetGetSystemClockSec(void);
 s32 sceNetIfhandle_lib_5FB31C72(s32 *max_linkhdr, s32 *a1, s32 *a2, s32 *a3);
 s32 sceNetIfhandle_lib_62B20015(s32 max_linkhdr, s32 max_protohdr, s32 a2, s32 a3);
 s32 sceNetInetBind(s32 s, const struct sockaddr *name, s32 namelen);

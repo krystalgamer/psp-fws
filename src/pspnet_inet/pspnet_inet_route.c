@@ -239,9 +239,33 @@ INCLUDE_ASM("nonmatchings/pspnet_inet_route", rt_maskedcopy);
 INCLUDE_ASM("nonmatchings/pspnet_inet_route", func_0000C8F8);
 #endif
 
-INCLUDE_ASM("nonmatchings/pspnet_inet_route", func_0000C998);
+INCLUDE_ASM("nonmatchings/pspnet_inet_route", rtinit);
 
-INCLUDE_ASM("nonmatchings/pspnet_inet_route", func_0000CC00);
+void rt_timer_queue_destroy(struct rttimer_queue *rtq, s32 destroy) {
+    struct rttimer *r;
+
+    while ((r = rtq->rtq_head.tqh_first) != NULL) {
+        if (r->rtt_link.le_next != NULL)
+            r->rtt_link.le_next->rtt_link.le_prev = r->rtt_link.le_prev;
+        *r->rtt_link.le_prev = r->rtt_link.le_next;
+        if (r->rtt_next.tqe_next != NULL)
+            r->rtt_next.tqe_next->rtt_next.tqe_prev = r->rtt_next.tqe_prev;
+        else
+            rtq->rtq_head.tqh_last = r->rtt_next.tqe_prev;
+        *r->rtt_next.tqe_prev = r->rtt_next.tqe_next;
+        if (destroy) {
+            if (r->rtt_func != NULL) {
+                (*r->rtt_func)(r->rtt_rt, r);
+            } else {
+                rtrequest(2, (struct sockaddr *)rt_key(r->rtt_rt), 0, 0, 0, 0);
+            }
+        }
+        sceNetFreeInternal(r);
+    }
+    if (rtq->rtq_link.le_next != NULL)
+        rtq->rtq_link.le_next->rtq_link.le_prev = rtq->rtq_link.le_prev;
+    *rtq->rtq_link.le_prev = rtq->rtq_link.le_next;
+}
 
 void rt_timer_remove_all(struct rtentry *rt) {
     struct rttimer *r;
@@ -260,20 +284,66 @@ void rt_timer_remove_all(struct rtentry *rt) {
     }
 }
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet_route", func_0000CC8C);
-#else
+#if FW_VERSION < 201
+s32 rt_timer_add(struct rtentry *rt, void (*func)(), struct rttimer_queue *queue) {
+    struct rttimer *r;
+    s32 current_time;
+
+    current_time = sceNetGetSystemClockSec();
+
+    for (r = rt->rt_timer; r != NULL; r = r->rtt_link.le_next) {
+        if (r->rtt_func == func) {
+            if (r->rtt_link.le_next != NULL)
+                r->rtt_link.le_next->rtt_link.le_prev = r->rtt_link.le_prev;
+            *r->rtt_link.le_prev = r->rtt_link.le_next;
+            if (r->rtt_next.tqe_next != NULL)
+                r->rtt_next.tqe_next->rtt_next.tqe_prev = r->rtt_next.tqe_prev;
+            else
+                r->rtt_queue->rtq_head.tqh_last = r->rtt_next.tqe_prev;
+            *r->rtt_next.tqe_prev = r->rtt_next.tqe_next;
+            sceNetFreeInternal(r);
+            break;
+        }
+    }
+
+    r = sceNetMallocInternal(sizeof(*r));
+    if (r == NULL)
+        return (0x69);
+    __builtin_memset(r, 0, sizeof(*r));
+
+    r->rtt_rt = rt;
+    r->rtt_time = current_time;
+    r->rtt_func = func;
+    r->rtt_queue = queue;
+    if ((r->rtt_link.le_next = rt->rt_timer) != NULL)
+        rt->rt_timer->rtt_link.le_prev = &r->rtt_link.le_next;
+    rt->rt_timer = r;
+    r->rtt_link.le_prev = &rt->rt_timer;
+    r->rtt_next.tqe_next = NULL;
+    r->rtt_next.tqe_prev = queue->rtq_head.tqh_last;
+    *queue->rtq_head.tqh_last = r;
+    queue->rtq_head.tqh_last = &r->rtt_next.tqe_next;
+
+    return (0);
+}
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 282
+INCLUDE_ASM("nonmatchings/pspnet_inet_route", rt_timer_add);
+#endif
+
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/pspnet_inet_route", func_0000CD64);
 #endif
 
-INCLUDE_ASM("nonmatchings/pspnet_inet_route", func_0000CE98);
+INCLUDE_ASM("nonmatchings/pspnet_inet_route", rt_timer_timer);
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_inet_route", func_0000D170);
 #endif
 
 #if FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/pspnet_inet_route", func_0000CF68);
+INCLUDE_ASM("nonmatchings/pspnet_inet_route", route_init);
 #endif
 
 #if FW_VERSION >= 282

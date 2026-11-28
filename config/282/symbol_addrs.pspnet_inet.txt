@@ -331,3 +331,6 @@ rn_inithead = 0x0000B7BC; // type:func
 rn_init = 0x0000B91C; // type:func
 rn_walktree = 0x0000B41C; // type:func
 rtredirect = 0x0000BB7C; // type:func
+rt_timer_queue_destroy = 0x0000CC00; // type:func
+rt_timer_timer = 0x0000CE98; // type:func
+rtinit = 0x0000C998; // type:func
