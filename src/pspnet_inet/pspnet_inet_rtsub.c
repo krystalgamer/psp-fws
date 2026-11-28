@@ -79,7 +79,65 @@ s32 func_0000D338(struct Unk_func_0000D338_0 *arg0, s32 arg1) {
 
 INCLUDE_ASM("nonmatchings/pspnet_inet_rtsub", func_0000D378);
 
+#if FW_VERSION < 201
+static __inline void rt_adjustcount(int af, int cnt) {
+	route_cb.any_count += cnt;
+	switch (af) {
+	case AF_INET:
+		route_cb.ip_count += cnt;
+		return;
+	case AF_IPX:
+		route_cb.ipx_count += cnt;
+		return;
+	case AF_NS:
+		route_cb.ns_count += cnt;
+		return;
+	case AF_ISO:
+		route_cb.iso_count += cnt;
+		return;
+	}
+}
+
+s32 func_0000D484(struct socket *so, s32 req, struct mbuf *m, struct mbuf *nam, struct mbuf *control)
+{
+	int error = 0;
+	struct rawcb *rp = (struct rawcb *)so->so_pcb;
+	int s;
+
+	if (req == PRU_ATTACH) {
+		rp = sceNetMallocInternal(sizeof(*rp));
+		if ((so->so_pcb = rp) != NULL)
+			func_0002C94C(so->so_pcb, 0, sizeof(*rp));
+
+	}
+	if (req == PRU_DETACH && rp)
+		rt_adjustcount(rp->rcb_proto.sp_protocol, -1);
+	s = _sce_pspnet_spllock();
+
+	if (req == PRU_ATTACH) {
+		error = raw_attach(so, (int)(long)nam);
+	} else
+		error = func_0000F040(so, req, m, nam, control);
+
+	rp = (struct rawcb *)so->so_pcb;
+	if (req == PRU_ATTACH && rp) {
+		if (error) {
+			sceNetFreeInternal(rp);
+			_sce_pspnet_splunlock(s);
+			return (error);
+		}
+		rt_adjustcount(rp->rcb_proto.sp_protocol, 1);
+		rp->rcb_laddr = &route_src;
+		rp->rcb_faddr = &route_dst;
+		soisconnected(so);
+		so->so_options |= SO_USELOOPBACK;
+	}
+	_sce_pspnet_splunlock(s);
+	return (error);
+}
+#else
 INCLUDE_ASM("nonmatchings/pspnet_inet_rtsub", func_0000D484);
+#endif
 
 #if FW_VERSION >= 350
 INCLUDE_RODATA("nonmatchings/pspnet_inet_rtsub", D_0002B4EC);

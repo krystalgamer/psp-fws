@@ -764,6 +764,10 @@ struct rt_addrinfo {
     struct sockaddr *rti_info[RTAX_MAX]; /* 0x04 */
 };
 /* struct rt_msghdr (route.h), route_cb (rtsock.c) */
+#define AF_NS 6
+#define AF_ISO 7
+#define AF_IPX 23
+#define SO_USELOOPBACK 0x0040
 struct walkarg {
     s32 w_op;
     s32 w_arg;
@@ -2207,6 +2211,7 @@ s32 func_0000D264(void *arg0, s32 arg1);
 void func_0000D330(s32 *arg0, s32 arg1);
 s32 func_0000D338(struct Unk_func_0000D338_0 *arg0, s32 arg1);
 s32 func_0000D378(s32);
+s32 func_0000D484(struct socket *so, s32 req, struct mbuf *m, struct mbuf *nam, struct mbuf *control);
 void func_0000DD34(s32 arg0, void *arg1, void *arg2);
 void func_0000DDCC(s32 arg0, struct Unk_func_0000DDCC_1 *arg1, struct Unk_func_0000DDCC_2 *arg2);
 s32 func_0000DF08(s32 type, struct rt_addrinfo *rtinfo, char *cp, struct walkarg *w, s32 *lenp);
@@ -2221,6 +2226,7 @@ void func_0000ED94(void *arg0);
 void func_0000EDB8(struct Unk_func_0000EDB8_0 *arg0);
 void func_0000EE04(struct Unk_func_0000EE04_0 *arg0);
 void func_0000EE68(struct mbuf *m0, ...);
+s32 func_0000F040(struct socket *so, s32 req, struct mbuf *m, struct mbuf *nam, struct mbuf *control);
 void func_0000F1F8(void);
 s32 func_0000F204(void);
 void func_0000F268(void);
