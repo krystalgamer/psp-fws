@@ -1,0 +1,2 @@
+// hidden functions split out of their predecessors (tools/split_func.py)
+ptpClearAddr = 0x0000555C; // type:func

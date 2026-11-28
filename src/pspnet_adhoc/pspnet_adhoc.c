@@ -3363,6 +3363,10 @@ SceNetAdhocPtpPcb *ptpLookup(const SceNetEtherAddr *laddr, u16 lport, const SceN
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", ptpLookup);
 #endif
 
+#if FW_VERSION >= 150 && FW_VERSION < 201
+INCLUDE_ASM("nonmatchings/pspnet_adhoc", ptpClearAddr);
+#endif
+
 #if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_000056CC);
 #endif
