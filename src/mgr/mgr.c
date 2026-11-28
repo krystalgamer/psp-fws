@@ -1197,7 +1197,41 @@ void func_000027EC(void) {
 }
 #endif
 
-INCLUDE_ASM("nonmatchings/mgr", sceMgrInitSeed);
+s32 sceMgrInitSeed(MgrSeed *seed) {
+    u8 *leaf = (u8 *)func_000013C8();
+    u32 *key = (u32 *)func_00001420();
+    u64 tmp[2];
+    s32 ret;
+
+    if (leaf == NULL) {
+        return 0x80501001;
+    }
+    func_00000DFC(seed);
+    ret = sceMgrLock();
+    if (ret < 0) {
+        return ret;
+    }
+    ret = func_00000708((u32 *)(leaf + 8), 0x2300);
+    if (ret < 0) {
+        goto end;
+    }
+    ret = func_00000708((u32 *)leaf, 0x2301);
+    if (ret < 0) {
+        goto end;
+    }
+    ret = func_00000708(key, 0x1101);
+    if (ret < 0) {
+        goto end;
+    }
+    ret = func_00002934(tmp, (u64 *)seed);
+    if (ret < 0) {
+        goto end;
+    }
+    func_00000EC0(seed);
+end:
+    sceMgrUnLock();
+    return ret;
+}
 
 #if FW_VERSION >= 201 && FW_VERSION < 340
 INCLUDE_ASM("nonmatchings/mgr", sceMgrRandom);
@@ -1233,7 +1267,24 @@ s32 sceMgrRandom(s32 arg0, M2C_UNK arg1) {
 }
 #endif
 
-INCLUDE_ASM("nonmatchings/mgr", func_00002934);
+s32 func_00002934(u64 *out, u64 *seed) {
+    s32 ret;
+
+    func_000002EC((u32 *)seed);
+    ret = func_000006CC(0x1202);
+    if (ret < 0) {
+        return ret;
+    }
+    func_00000310((u32 *)out);
+    if (*out != 0) {
+        *seed ^= *out;
+    } else {
+        ((u32 *)seed)[0] = 0;
+        ((u32 *)seed)[1] = 0;
+        *(u8 *)seed = 0x80;
+    }
+    return ret;
+}
 
 #if FW_VERSION >= 201 && FW_VERSION < 340
 INCLUDE_ASM("nonmatchings/mgr", sceMgrCreateKc);
@@ -1482,7 +1533,28 @@ INCLUDE_ASM("nonmatchings/mgr", func_00002F84);
 
 INCLUDE_ASM("nonmatchings/mgr", func_0000310C);
 
-INCLUDE_ASM("nonmatchings/mgr", func_000031C8);
+s32 func_000031C8(u32 *dst, u64 *src, s32 count, u32 cmd) {
+    s32 ret;
+
+    func_000002EC((u32 *)src++);
+    count--;
+    func_0000027C(cmd);
+    while (count != 0) {
+        func_000002EC((u32 *)src++);
+        ret = func_0000064C();
+        count--;
+        if (ret < 0) {
+            return ret;
+        }
+        func_0000027C(cmd);
+    }
+    ret = func_0000064C();
+    if (ret < 0) {
+        return ret;
+    }
+    func_00000310(dst);
+    return 0;
+}
 
 #if FW_VERSION >= 201 && FW_VERSION < 340
 INCLUDE_ASM("nonmatchings/mgr", sceMgrDecryptWithKbCBC);
