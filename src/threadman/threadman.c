@@ -295,8 +295,6 @@ s32 func_00000A18(s32 arg0, void *arg1) {
     M2C_FIELD(temp_a1, s32 *, 8) = (s32) (M2C_FIELD(temp_a1, s32 *, 8) - 1);
     return 0;
 }
-
-INCLUDE_ASM("nonmatchings/threadman", func_000007F4);
 #endif
 
 #if FW_VERSION < 150
@@ -324,9 +322,13 @@ s32 func_000006A8(void) {
 
 #if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/threadman", func_0000072C);
+#endif
 
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/threadman", func_000007F4);
+#endif
 
+#if FW_VERSION < 150
 s32 func_000008A0(void) {
     s32 temp_v0;
     s32 var_v1;
@@ -781,7 +783,59 @@ s32 sceKernelDeleteCallback(SceUID cbid) {
 INCLUDE_ASM("nonmatchings/threadman", sceKernelDeleteCallback);
 #endif
 
-#if FW_VERSION >= 150
+#if FW_VERSION >= 150 && FW_VERSION < 270
+s32 sceKernelNotifyCallback(SceUID cbid, s32 arg) {
+    SceSysmemUidCB *cb;
+    SceSysmemUidCB *uid;
+    SceThreadCbObj *obj;
+    SceThread *thread;
+    s32 isIntr;
+    s32 ret;
+    void *ra = getRa();
+    u32 oldK1 = shiftK1Noreorder();
+    s32 intr = sceKernelCpuSuspendIntr();
+
+    isIntr = sceKernelIsIntrContext();
+    ret = 0x800201A1;
+    if (sceKernelGetUIDcontrolBlockWithType(cbid, g_threadmanInfo.uidCallbackType, &uid) != 0) {
+        sceKernelCpuResumeIntr(intr);
+        setK1(oldK1);
+        return ret;
+    }
+    cb = uid;
+    if (k1IsUserMode() && !(cb->attr & 2)) {
+        sceKernelCpuResumeIntr(intr);
+        setK1(oldK1);
+        return 0x800200D1;
+    }
+    obj = UID_CB_TO_DATA(cb, g_threadmanInfo.uidCallbackType, SceThreadCbObj);
+    if (g_threadmanInfo.logHandler != NULL) {
+        g_threadmanInfo.logHandler(0x84, ra, 2, cbid, arg);
+    }
+    thread = obj->thread;
+    thread->unk58 = 1;
+    obj->notifyArg = arg;
+    obj->notifyCount++;
+    if (thread->unk54 != 0 && (thread->status == THREAD_WAITING || thread->status == THREAD_WAITING_SUSPEND)) {
+        ret = func_00000268(thread);
+        thread->waitRet = 0x800201AB;
+        if (thread->waitObj != NULL) {
+            ret += func_00000524(thread->waitObj);
+        }
+        if (ret != 0) {
+            g_threadmanInfo.nextThread = NULL;
+            if (!isIntr) {
+                func_000007F4(0, intr);
+            }
+        }
+    }
+    sceKernelCpuResumeIntr(intr);
+    setK1(oldK1);
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 270
 INCLUDE_ASM("nonmatchings/threadman", sceKernelNotifyCallback);
 #endif
 
@@ -931,7 +985,36 @@ s32 sceKernelGetCallbackCount(SceUID cbid) {
 INCLUDE_ASM("nonmatchings/threadman", sceKernelGetCallbackCount);
 #endif
 
-#if FW_VERSION >= 150
+#if FW_VERSION >= 150 && FW_VERSION < 270
+s32 sceKernelCheckCallback(void) {
+    SceThread *thread = g_threadmanInfo.currentThread;
+    s32 intr;
+    s32 ret = 0;
+    void *ra = getRa();
+    u32 oldK1 = shiftK1Noreorder();
+
+    if (sceKernelIsIntrContext()) {
+        setK1(oldK1);
+        return 0x80020064;
+    }
+    if (g_threadmanInfo.currentThread->unk5C != NULL) {
+        setK1(oldK1);
+        return 0x80020064;
+    }
+    intr = sceKernelCpuSuspendIntr();
+    if (thread->unk58 != 0) {
+        ret = func_00001FC4(intr) != 0;
+    }
+    if (g_threadmanInfo.logHandler != NULL) {
+        g_threadmanInfo.logHandler(0x87, ra, 1, ret);
+    }
+    sceKernelCpuResumeIntr(intr);
+    setK1(oldK1);
+    return ret;
+}
+#endif
+
+#if FW_VERSION >= 270
 INCLUDE_ASM("nonmatchings/threadman", sceKernelCheckCallback);
 #endif
 
@@ -963,7 +1046,7 @@ INCLUDE_ASM("nonmatchings/threadman", _sceKernelReturnFromCallback);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/threadman", func_00002228);
+INCLUDE_ASM("nonmatchings/threadman", func_00001430);
 #endif
 
 #if FW_VERSION >= 270 && FW_VERSION < 282
@@ -1206,9 +1289,7 @@ s32 func_0000261C(struct Unk_func_0000261C_0 *arg0) {
     sceKernelCallUIDObjCommonFunction();
     return arg0->unkC;
 }
-#endif
-
-#if FW_VERSION < 150
+#else
 s32 func_00002644(SceSysmemUidCB *cb, SceSysmemUidCB *type, s32 funcId, void *ap) {
     s32 intr = sceKernelCpuSuspendIntr();
     SceThreadCbObj *obj = UID_CB_TO_DATA(cb, type, SceThreadCbObj);
@@ -1233,23 +1314,23 @@ s32 func_00002644(SceSysmemUidCB *cb, SceSysmemUidCB *type, s32 funcId, void *ap
     sceKernelCallUIDObjCommonFunction(cb, type, funcId, ap);
     return 0;
 }
-#else
-INCLUDE_ASM("nonmatchings/threadman", func_00002644);
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION >= 282
+INCLUDE_ASM("nonmatchings/threadman", func_00002644);
+#else
 s32 func_000024D4(void *arg0) {
     sceKernelCallUIDObjCommonFunction();
     return M2C_FIELD(arg0, s32 *, 0xC);
 }
-#else
+#endif
+
+#if FW_VERSION >= 282
 s32 func_0000275C(struct Unk_func_0000275C_0 *arg0) {
     sceKernelCallUIDObjCommonFunction();
     return arg0->unkC;
 }
-#endif
-
-#if FW_VERSION < 150
+#else
 s32 func_00002784(SceSysmemUidCB *cb, SceSysmemUidCB *type, s32 funcId, void *ap) {
     s32 intr = sceKernelCpuSuspendIntr();
     SceThreadCbObj *obj = UID_CB_TO_DATA(cb, type, SceThreadCbObj);
@@ -1274,7 +1355,9 @@ s32 func_00002784(SceSysmemUidCB *cb, SceSysmemUidCB *type, s32 funcId, void *ap
     sceKernelCallUIDObjCommonFunction(cb, type, funcId, ap);
     return 0;
 }
-#else
+#endif
+
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/threadman", func_00002784);
 #endif
 
@@ -3095,7 +3178,7 @@ INCLUDE_ASM("nonmatchings/threadman", func_0000C46C);
 INCLUDE_ASM("nonmatchings/threadman", sceKernelCancelAlarm);
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/threadman", func_0000B694);
+INCLUDE_ASM("nonmatchings/threadman", func_0000C048);
 #endif
 
 #if FW_VERSION < 150
@@ -3241,9 +3324,9 @@ u32 sceKernelGetSystemTimeLow(void) {
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/threadman", func_0000D6D8);
+INCLUDE_ASM("nonmatchings/threadman", func_0000B7F4);
 
-INCLUDE_ASM("nonmatchings/threadman", func_0000D730);
+INCLUDE_ASM("nonmatchings/threadman", func_0000B84C);
 
 INCLUDE_ASM("nonmatchings/threadman", sceKernelSetAlarm);
 
@@ -3277,7 +3360,7 @@ INCLUDE_ASM("nonmatchings/threadman", func_0000DDB0);
 
 INCLUDE_ASM("nonmatchings/threadman", func_0000DDC8);
 
-INCLUDE_ASM("nonmatchings/threadman", func_0000DE3C);
+INCLUDE_ASM("nonmatchings/threadman", func_0000AA80);
 
 INCLUDE_ASM("nonmatchings/threadman", func_0000DEC0);
 
@@ -3889,7 +3972,7 @@ s32 sceKernelSetThreadmanLogHandler(SceThreadmanLogHandler handler, SceThreadman
 
 INCLUDE_ASM("nonmatchings/threadman", func_00012FD8);
 
-INCLUDE_ASM("nonmatchings/threadman", func_000130E4);
+INCLUDE_ASM("nonmatchings/threadman", func_0000F0E4);
 
 INCLUDE_ASM("nonmatchings/threadman", func_0001313C);
 #endif
