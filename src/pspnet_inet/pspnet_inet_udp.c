@@ -880,17 +880,7 @@ void syn_cache_cleanup(struct tcpcb *tp)
 	_sce_pspnet_splunlock(s);
 }
 
-#if FW_VERSION >= 151 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet_udp", syn_cache_get);
-
-INCLUDE_ASM("nonmatchings/pspnet_inet_udp", syn_cache_reset);
-
-INCLUDE_ASM("nonmatchings/pspnet_inet_udp", syn_cache_unreach);
-
-INCLUDE_ASM("nonmatchings/pspnet_inet_udp", func_00020788);
-#endif
-
-#if FW_VERSION < 151
+#if FW_VERSION < 201
 __inline struct syn_cache *syn_cache_lookup(struct sockaddr *src, struct sockaddr *dst, struct syn_cache_head **headp)
 {
 	struct syn_cache *sc;
@@ -916,6 +906,19 @@ __inline struct syn_cache *syn_cache_lookup(struct sockaddr *src, struct sockadd
 	_sce_pspnet_splunlock(s);
 	return (NULL);
 }
+#endif
+
+#if FW_VERSION >= 151 && FW_VERSION < 282
+INCLUDE_ASM("nonmatchings/pspnet_inet_udp", syn_cache_get);
+
+INCLUDE_ASM("nonmatchings/pspnet_inet_udp", syn_cache_reset);
+
+INCLUDE_ASM("nonmatchings/pspnet_inet_udp", syn_cache_unreach);
+
+INCLUDE_ASM("nonmatchings/pspnet_inet_udp", func_00020788);
+#endif
+
+#if FW_VERSION < 151
 
 INCLUDE_ASM("nonmatchings/pspnet_inet_udp", func_000215D8);
 
@@ -996,6 +999,6 @@ void syn_cache_init(void) {
     }
 }
 
-#if FW_VERSION >= 151
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/pspnet_inet_udp", syn_cache_lookup);
 #endif

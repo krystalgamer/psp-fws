@@ -59,7 +59,64 @@ void tcp_segsize(struct tcpcb *tp, int *txsegsizep, int *rxsegsizep)
 }
 #endif
 
-#if FW_VERSION >= 151 && FW_VERSION < 282
+#if FW_VERSION >= 151 && FW_VERSION < 250
+void tcp_segsize(struct tcpcb *tp, int *txsegsizep, int *rxsegsizep)
+{
+	struct inpcb *inp = tp->t_inpcb;
+	struct rtentry *rt;
+	struct ifnet *ifp;
+	int size;
+	int iphlen;
+
+	switch (tp->t_family) {
+	case AF_INET:
+		iphlen = sizeof(struct ip);
+		break;
+	default:
+		size = tcp_mssdflt;
+		goto out;
+	}
+
+	if (inp)
+		rt = in_pcbrtentry(inp);
+	else
+		rt = NULL;
+	if (rt == NULL) {
+		size = tcp_mssdflt;
+		goto out;
+	}
+
+	ifp = rt->rt_ifp;
+
+	size = tcp_mssdflt;
+	if (tp->t_mtudisc && rt->rt_rmx.rmx_mtu != 0)
+		size = rt->rt_rmx.rmx_mtu - iphlen - sizeof(struct tcphdr);
+	else if (tp->t_mtudisc || ifp->if_flags & IFF_LOOPBACK)
+		size = ifp->if_mtu - iphlen - sizeof(struct tcphdr);
+	else if (inp && func_000123FC(inp->inp_faddr))
+		size = ifp->if_mtu - iphlen - sizeof(struct tcphdr);
+	size -= tcp_optlen(tp);
+	if (inp) {
+		size -= ip_optlen(inp);
+	}
+
+ out:
+	*txsegsizep = min(tp->t_peermss, size);
+	*rxsegsizep = min(tp->t_ourmss, size);
+
+	if (*txsegsizep != tp->t_segsz) {
+		if (*txsegsizep < tp->t_segsz) {
+			tp->snd_cwnd = max((tp->snd_cwnd / tp->t_segsz)
+					   * *txsegsizep, *txsegsizep);
+			tp->snd_ssthresh = max((tp->snd_ssthresh / tp->t_segsz)
+						* *txsegsizep, *txsegsizep);
+		}
+		tp->t_segsz = *txsegsizep;
+	}
+}
+#endif
+
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", tcp_segsize);
 #endif
 

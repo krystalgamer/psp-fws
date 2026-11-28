@@ -2110,6 +2110,7 @@ void func_00010528(struct mbuf *m);
 s32 func_000106E0(void);
 s32 func_00010700(void);
 s32 func_00010874(struct socket *so, s32 cmd, void *data, struct ifnet *ifp);
+s32 func_000123FC(struct in_addr in);
 s32 func_00013114(void *v, struct mbuf *nam);
 s32 func_00019A98(void);
 void func_00019C00(struct rtentry *rt);

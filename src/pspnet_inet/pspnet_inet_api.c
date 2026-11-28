@@ -922,7 +922,7 @@ void func_0000993C(void) {
 }
 #endif
 
-#if FW_VERSION < 151 || FW_VERSION == 152
+#if FW_VERSION < 201
 s32 ether_multiaddr(struct sockaddr *sa, u8 *addrlo, u8 *addrhi) {
     struct sockaddr_in *sin;
 
