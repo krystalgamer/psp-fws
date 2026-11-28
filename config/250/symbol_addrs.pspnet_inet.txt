@@ -730,3 +730,7 @@ D_0002C368_v250 = 0x0002C368; // rom:0x2C3E8
 // shared names (tools/add_version.py) end
 soconnect2 = 0x00004498; // type:func (unreferenced, was merged into func_000042D4)
 func_00026930 = 0x000250A0; // type:func (split from func_00024EC4)
+tcp_mssdflt = 0x0002C418; // rom:0x2C498
+tcp_mss_ifmtu = 0x0002C6AC;
+tcp_delacks = 0x0002E034;
+D_0002C614_v201 = 0x0002C6A4;
