@@ -1681,9 +1681,11 @@ extern s32 igmp_timers_are_running; /* igmp_timers_are_running */
 extern TAILQ_HEAD(, in_ifaddr) in_ifaddrhead; /* in_ifaddr */
 extern u32 in_maxmtu;
 extern s32 inetctlerrmap[]; /* inetctlerrmap */
+extern struct protosw inetsw[]; /* inetsw */
 extern u16 ip_id_seq; /* ip_id */
 extern s32 ip_mtudisc; /* ip_mtudisc */
 extern s32 ip_nhops; /* ip_nhops */
+extern u8 ip_protox[]; /* ip_protox */
 extern struct ip_srcrt_s ip_srcrt; /* ip_srcrt */
 extern const struct cp ipcp; /* ipcp */
 extern struct ifqueue ipintrq; /* ipintrq, exported by sceNetInet_lib_D7928A6D */

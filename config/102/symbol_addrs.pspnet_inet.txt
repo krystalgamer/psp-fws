@@ -560,3 +560,6 @@ udp4_realinput = 0x0001C60C; // type:func
 udp_input = 0x0001C30C; // type:func
 in4_cksum = 0x00012D84; // type:func
 icmp_error = 0x00018E1C; // type:func
+rip_input = 0x0001B5E8; // type:func
+ip_protox = 0x0002F548;
+inetsw = 0x0002E5FC; // rom:0x2E67C

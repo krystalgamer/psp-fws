@@ -4485,7 +4485,79 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_0001ABA4);
 #endif
 
 #if FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_0001B5E8);
+void rip_input(struct mbuf *m, ...) {
+    s32 off, proto;
+    struct ip *ip = mtod(m, struct ip *);
+    struct inpcb *inp;
+    struct inpcb *last = 0;
+    struct mbuf *opts = 0;
+    struct sockaddr_in ripsrc;
+    __builtin_va_list ap;
+
+    __builtin_va_start(ap, m);
+    off = __builtin_va_arg(ap, s32);
+    proto = __builtin_va_arg(ap, s32);
+    __builtin_va_end(ap);
+
+    ripsrc.sin_family = AF_INET;
+    ripsrc.sin_len = sizeof(struct sockaddr_in);
+    ripsrc.sin_addr = ip->ip_src;
+    ripsrc.sin_port = 0;
+    __builtin_memset((char *)ripsrc.sin_zero, 0, sizeof(ripsrc.sin_zero));
+
+    ip->ip_len -= (ip->ip_hl_v & 0xF) << 2;
+
+    for (inp = rawcbtable.inpt_queue.cqh_first;
+         inp != (struct inpcb *)&rawcbtable.inpt_queue;
+         inp = inp->inp_queue.cqe_next) {
+        if (inp->inp_ip.ip_p && inp->inp_ip.ip_p != proto)
+            continue;
+        if (inp->inp_laddr.s_addr != __builtin_allegrex_wsbw(0) &&
+            inp->inp_laddr.s_addr != ip->ip_dst.s_addr)
+            continue;
+        if (inp->inp_faddr.s_addr != __builtin_allegrex_wsbw(0) &&
+            inp->inp_faddr.s_addr != ip->ip_src.s_addr)
+            continue;
+        if (last) {
+            struct mbuf *n;
+
+            if ((n = sceNetMCopym(m, 0, 1000000000, 1)) != NULL) {
+                if (last->inp_flags & 0x87 ||
+                    last->inp_socket->so_options & 0x400)
+                    ip_savecontrol(last, &opts, ip, n);
+                if (sbappendaddr(&last->inp_socket->so_rcv,
+                                 (struct sockaddr *)&ripsrc, n, opts) == 0) {
+                    sceNetMFreem(n);
+                    if (opts)
+                        sceNetMFreem(opts);
+                } else
+                    sorwakeup(last->inp_socket);
+                opts = NULL;
+            }
+        }
+        last = inp;
+    }
+    if (last) {
+        if (last->inp_flags & 0x87 ||
+            last->inp_socket->so_options & 0x400)
+            ip_savecontrol(last, &opts, ip, m);
+        if (sbappendaddr(&last->inp_socket->so_rcv,
+                         (struct sockaddr *)&ripsrc, m, opts) == 0) {
+            sceNetMFreem(m);
+            if (opts)
+                sceNetMFreem(opts);
+        } else
+            sorwakeup(last->inp_socket);
+    } else {
+        if (inetsw[ip_protox[ip->ip_p]].pr_input == (void *)rip_input) {
+            icmp_error(m, 3, 2, 0, 0);
+            D_0002D960.ips_noproto++;
+            D_0002D960.ips_delivered--;
+        } else
+            sceNetMFreem(m);
+    }
+    return;
+}
 #endif
 
 #if FW_VERSION >= 282
@@ -4797,12 +4869,13 @@ s32 rip_connect(struct inpcb *inp, struct mbuf *nam) {
 }
 
 #if FW_VERSION < 201
+
 void rip_disconnect(struct inpcb *inp) {
     inp->inp_faddr = zeroin_addr;
 }
-#endif
-#endif
 
+#endif
+#endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_inet", rip_disconnect);
