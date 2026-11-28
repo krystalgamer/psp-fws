@@ -3175,14 +3175,14 @@ s32 sceNetAdhoc_lib_2CA12790(SceNetAdhocStat *out) {
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", ptpTerm);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 201
+#if FW_VERSION >= 150
 s32 ptpAttach(SceNetAdhocDesc *d) {
     SceNetAdhocPtpPcb *pcb;
 
     pcb = sceNetMallocInternal(sizeof(SceNetAdhocPtpPcb));
     if (pcb == NULL)
         return 0x80410001;
-    adhocMemset(pcb, 0, sizeof(SceNetAdhocPtpPcb));
+    ADHOC_MEMSET(pcb, 0, sizeof(SceNetAdhocPtpPcb));
     pcb->cfirst = NULL;
     pcb->clast = &pcb->cfirst;
     _sce_pspnet_callout_init(&pcb->callout);
@@ -3200,9 +3200,7 @@ s32 ptpAttach(SceNetAdhocDesc *d) {
 }
 #endif
 
-#if FW_VERSION >= 201
-INCLUDE_ASM("nonmatchings/pspnet_adhoc", ptpAttach);
-#else
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", ptpBind);
 #endif
 
@@ -3368,7 +3366,7 @@ s32 ptpAttach(SceNetAdhocDesc *d) {
     pcb = sceNetMallocInternal(sizeof(SceNetAdhocPtpPcb));
     if (pcb == NULL)
         return 0x80410001;
-    adhocMemset(pcb, 0, sizeof(SceNetAdhocPtpPcb));
+    ADHOC_MEMSET(pcb, 0, sizeof(SceNetAdhocPtpPcb));
     pcb->cfirst = NULL;
     pcb->clast = &pcb->cfirst;
     _sce_pspnet_callout_init(&pcb->callout);

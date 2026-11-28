@@ -368,6 +368,12 @@ struct sockaddr_dl {
 #define ADHOC_MEMCPY sceNetMemcpy
 #endif
 
+#if FW_VERSION < 201
+#define ADHOC_MEMSET adhocMemset
+#else
+#define ADHOC_MEMSET sceNetMemset
+#endif
+
 #define PTP_SBWAKEUP(sb) do { \
         if ((sb)->flags & 1) { \
             (sb)->flags &= ~1; \
