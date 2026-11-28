@@ -1,3 +1,5 @@
+/* compiler[271]: 1.9.2 */
+/* cflags[271]: -Os -mext */
 /* cflags: -Os */
 #include "common.h"
 #include "mm_flash_decls.h"
