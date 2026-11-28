@@ -88,7 +88,7 @@
   "ptpBind2": "s32 ptpBind2(SceNetAdhocPtpPcb *pcb, const SceNetEtherAddr *saddr, u16 sport, const SceNetEtherAddr *daddr, u16 dport);",
   "ptpClearAddr": "void ptpClearAddr(SceNetAdhocPtpPcb *pcb);",
   "ptpCloseChildren": "void ptpCloseChildren(SceNetAdhocPtpPcb *pcb);",
-  "ptpConnectStart": "#if FW_VERSION < 201\ns32 ptpConnectStart(SceNetAdhocPtpPcb *pcb, const SceNetEtherAddr *daddr, u16 dport);\n#else\ns32 ptpConnectStart(SceNetAdhocPtpPcb *pcb);\n#endif",
+  "ptpConnectStart": "s32 ptpConnectStart(SceNetAdhocPtpPcb *pcb, const SceNetEtherAddr *daddr, u16 dport);",
   "ptpConnectWait": "s32 ptpConnectWait(SceNetAdhocDesc *d, u32 timeout, s32 nonblock);",
   "ptpCreate": "s32 ptpCreate(const SceNetEtherAddr *saddr, u16 sport, s32 sndbuf, s32 rcvbuf, u32 rexmt_int, s32 rexmt_cnt, SceNetAdhocDesc **out);",
   "ptpDetach": "void ptpDetach(SceNetAdhocDesc *d);",

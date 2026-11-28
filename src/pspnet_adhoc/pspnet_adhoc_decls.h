@@ -515,11 +515,7 @@ s32 ptpBind(SceNetAdhocPtpPcb *pcb, const SceNetEtherAddr *addr, u16 port);
 s32 ptpBind2(SceNetAdhocPtpPcb *pcb, const SceNetEtherAddr *saddr, u16 sport, const SceNetEtherAddr *daddr, u16 dport);
 void ptpClearAddr(SceNetAdhocPtpPcb *pcb);
 void ptpCloseChildren(SceNetAdhocPtpPcb *pcb);
-#if FW_VERSION < 201
 s32 ptpConnectStart(SceNetAdhocPtpPcb *pcb, const SceNetEtherAddr *daddr, u16 dport);
-#else
-s32 ptpConnectStart(SceNetAdhocPtpPcb *pcb);
-#endif
 s32 ptpConnectWait(SceNetAdhocDesc *d, u32 timeout, s32 nonblock);
 s32 ptpCreate(const SceNetEtherAddr *saddr, u16 sport, s32 sndbuf, s32 rcvbuf, u32 rexmt_int, s32 rexmt_cnt, SceNetAdhocDesc **out);
 void ptpDetach(SceNetAdhocDesc *d);

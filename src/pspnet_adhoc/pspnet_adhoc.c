@@ -3397,7 +3397,27 @@ void ptpSetRexmt(SceNetAdhocPtpPcb *pcb, s32 a1, s32 a2) {
     pcb->rexmt_cnt = a2;
 }
 
-INCLUDE_ASM("nonmatchings/pspnet_adhoc", ptpConnectStart);
+s32 ptpConnectStart(SceNetAdhocPtpPcb *pcb, const SceNetEtherAddr *daddr, u16 dport) {
+    if (ADHOC_MEMCMP(daddr, &D_000078AC, 6) == 0)
+        return 0x80410702;
+    if ((daddr->data[0] & 1) && ADHOC_MEMCMP(daddr, &D_000078A4, 6) != 0)
+        return 0x80410702;
+    if (dport == 0 || dport == 0xFFFF)
+        return 0x80410703;
+#if FW_VERSION >= 201
+    sceNetMemcpy(&pcb->paddr, daddr, sizeof(pcb->paddr));
+#else
+    __builtin_memcpy(&pcb->paddr, daddr, sizeof(pcb->paddr));
+#endif
+    pcb->state = 2;
+    pcb->iss = g_ptpIss++;
+    pcb->pport = dport;
+    pcb->desc->flags |= 0x2000;
+    ptpSendCtl(pcb, 1);
+    pcb->rexmt_left = pcb->rexmt_cnt;
+    _sce_pspnet_callout_reset_usec(&pcb->callout, pcb->rexmt_int, ptpTimer, pcb);
+    return 0;
+}
 
 s32 ptpListenSetup(SceNetAdhocPtpPcb *pcb, s32 a1) {
     pcb->state = 1;
@@ -3538,7 +3558,27 @@ void func_000055B0(SceNetAdhocPtpPcb *pcb, s32 a1, s32 a2) {
     pcb->rexmt_cnt = a2;
 }
 
-INCLUDE_ASM("nonmatchings/pspnet_adhoc", ptpConnectStart);
+s32 ptpConnectStart(SceNetAdhocPtpPcb *pcb, const SceNetEtherAddr *daddr, u16 dport) {
+    if (ADHOC_MEMCMP(daddr, &D_000078AC, 6) == 0)
+        return 0x80410702;
+    if ((daddr->data[0] & 1) && ADHOC_MEMCMP(daddr, &D_000078A4, 6) != 0)
+        return 0x80410702;
+    if (dport == 0 || dport == 0xFFFF)
+        return 0x80410703;
+#if FW_VERSION >= 201
+    sceNetMemcpy(&pcb->paddr, daddr, sizeof(pcb->paddr));
+#else
+    __builtin_memcpy(&pcb->paddr, daddr, sizeof(pcb->paddr));
+#endif
+    pcb->state = 2;
+    pcb->iss = g_ptpIss++;
+    pcb->pport = dport;
+    pcb->desc->flags |= 0x2000;
+    ptpSendCtl(pcb, 1);
+    pcb->rexmt_left = pcb->rexmt_cnt;
+    _sce_pspnet_callout_reset_usec(&pcb->callout, pcb->rexmt_int, ptpTimer, pcb);
+    return 0;
+}
 
 s32 func_000056E4(SceNetAdhocPtpPcb *pcb, s32 a1) {
     pcb->state = 1;
