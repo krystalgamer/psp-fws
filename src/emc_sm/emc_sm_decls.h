@@ -130,7 +130,7 @@ s32 sceNandIsBadBlock(u32 ppn);
 s32 sceNandLock(s32 writeMode);
 s32 sceNandReadAccess(u32 ppn, void *user, void *spare, u32 len, s32 mode);
 s32 sceNandReadBlockWithRetry(u32 ppn, void *user, void *spare);
-s32 sceNandReadExtraOnly(u32 ppn, void *spare, u32 len);
+s32 sceNandReadExtraOnly(u32 ppn, void *spare, s32 len);
 s32 sceNandReadId(u8 *buf, s32 len);
 s32 sceNandReadPages(u32 ppn, void *user, void *spare, u32 len);
 s32 sceNandReadPagesRawAll(u32 ppn, void *user, void *spare, u32 len);

@@ -46,7 +46,7 @@
   "sceNandLock": "s32 sceNandLock(s32 writeMode);",
   "sceNandReadAccess": "s32 sceNandReadAccess(u32 ppn, void *user, void *spare, u32 len, s32 mode);",
   "sceNandReadBlockWithRetry": "s32 sceNandReadBlockWithRetry(u32 ppn, void *user, void *spare);",
-  "sceNandReadExtraOnly": "s32 sceNandReadExtraOnly(u32 ppn, void *spare, u32 len);",
+  "sceNandReadExtraOnly": "s32 sceNandReadExtraOnly(u32 ppn, void *spare, s32 len);",
   "sceNandReadId": "s32 sceNandReadId(u8 *buf, s32 len);",
   "sceNandReadPages": "s32 sceNandReadPages(u32 ppn, void *user, void *spare, u32 len);",
   "sceNandReadPagesRawAll": "s32 sceNandReadPagesRawAll(u32 ppn, void *user, void *spare, u32 len);",
