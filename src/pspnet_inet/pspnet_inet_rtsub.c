@@ -732,46 +732,147 @@ void func_0000EE68(struct mbuf *m0, ...)
 
 INCLUDE_RODATA("nonmatchings/pspnet_inet_rtsub", D_0002B6FC);
 
-INCLUDE_ASM("nonmatchings/pspnet_inet_rtsub", func_0000F040);
-
-#if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet_rtsub", func_0000F1F8);
-#endif
-
 #if FW_VERSION < 201
-void func_0000F1F8(void) {
+__inline void func_0000F1F8(void) {
     rawcb.lh_first = NULL;
 }
-#endif
 
-#if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet_rtsub", func_0000F204);
-#endif
-
-#if FW_VERSION < 201
-s32 func_0000F204(void) {
+__inline s32 func_0000F204(void) {
     return 0;
 }
 
-void raw_setsockaddr(struct rawcb *rp, struct mbuf *nam) {
+__inline void raw_setsockaddr(struct rawcb *rp, struct mbuf *nam) {
     nam->m_len = rp->rcb_laddr->sa_len;
     func_0002C9B8(rp->rcb_laddr, mtod(nam, u8 *), nam->m_len);
 }
-#endif
 
-#if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet_rtsub", raw_setsockaddr);
-#endif
-
-#if FW_VERSION < 201
-void raw_setpeeraddr(struct rawcb *rp, struct mbuf *nam) {
+__inline void raw_setpeeraddr(struct rawcb *rp, struct mbuf *nam) {
     nam->m_len = rp->rcb_faddr->sa_len;
     func_0002C9B8(rp->rcb_faddr, mtod(nam, u8 *), nam->m_len);
 }
-#endif
 
-#if FW_VERSION >= 201 && FW_VERSION < 282
+s32 func_0000F040(struct socket *so, s32 req, struct mbuf *m, struct mbuf *nam, struct mbuf *control)
+{
+	struct rawcb *rp;
+	int s;
+	int error = 0;
+
+	if (req == PRU_CONTROL)
+		return (EOPNOTSUPP);
+
+	s = _sce_pspnet_spllock();
+	rp = (struct rawcb *)so->so_pcb;
+	if (rp == 0 && req != PRU_ATTACH) {
+		error = EINVAL;
+		goto release;
+	}
+
+	switch (req) {
+
+	case PRU_ATTACH:
+		error = raw_attach(so, (int)(long)nam);
+		break;
+
+	case PRU_DETACH:
+		func_0000ED48(rp);
+		break;
+
+	case PRU_BIND:
+	case PRU_LISTEN:
+	case PRU_CONNECT:
+	case PRU_CONNECT2:
+		error = EOPNOTSUPP;
+		break;
+
+	case PRU_DISCONNECT:
+		soisdisconnected(so);
+		func_0000ED94(rp);
+		break;
+
+	case PRU_SHUTDOWN:
+		socantsendmore(so);
+		break;
+
+	case PRU_RCVD:
+		error = EOPNOTSUPP;
+		break;
+
+	case PRU_SEND:
+		if (control && control->m_len) {
+			sceNetMFreem(control);
+			sceNetMFreem(m);
+			error = EINVAL;
+			break;
+		}
+		if (nam) {
+			if ((so->so_state & SS_ISCONNECTED) != 0) {
+				error = EISCONN;
+				goto die;
+			}
+			error = (*so->so_proto->pr_usrreq)(so, PRU_CONNECT,
+			    (struct mbuf *)0, nam, (struct mbuf *)0);
+			if (error) {
+			die:
+				sceNetMFreem(m);
+				break;
+			}
+		} else {
+			if ((so->so_state & SS_ISCONNECTED) == 0) {
+				error = ENOTCONN;
+				goto die;
+			}
+		}
+		error = (*so->so_proto->pr_output)(m, so);
+		if (nam)
+			func_0000ED94(rp);
+		break;
+
+	case PRU_SENSE:
+		return (0);
+
+	case PRU_RCVOOB:
+		error = EOPNOTSUPP;
+		break;
+
+	case PRU_SENDOOB:
+		sceNetMFreem(control);
+		sceNetMFreem(m);
+		error = EOPNOTSUPP;
+		break;
+
+	case PRU_SOCKADDR:
+		if (rp->rcb_laddr == 0) {
+			error = EINVAL;
+			break;
+		}
+		raw_setsockaddr(rp, nam);
+		break;
+
+	case PRU_PEERADDR:
+		if (rp->rcb_faddr == 0) {
+			error = ENOTCONN;
+			break;
+		}
+		raw_setpeeraddr(rp, nam);
+		break;
+	}
+
+release:
+	_sce_pspnet_splunlock(s);
+	return (error);
+}
+#else
+INCLUDE_ASM("nonmatchings/pspnet_inet_rtsub", func_0000F040);
+
+#if FW_VERSION < 282
+INCLUDE_ASM("nonmatchings/pspnet_inet_rtsub", func_0000F1F8);
+
+INCLUDE_ASM("nonmatchings/pspnet_inet_rtsub", func_0000F204);
+
+INCLUDE_ASM("nonmatchings/pspnet_inet_rtsub", raw_setsockaddr);
+
 INCLUDE_ASM("nonmatchings/pspnet_inet_rtsub", raw_setpeeraddr);
+#endif
 #endif
 
 #if FW_VERSION >= 282
