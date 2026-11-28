@@ -992,7 +992,26 @@ void tcp_pulloutofband(struct socket *so, struct tcphdr *th, struct mbuf *m, s32
     }
 }
 #else
-INCLUDE_ASM("nonmatchings/pspnet_inet_udp", tcp_pulloutofband);
+void tcp_pulloutofband(struct socket *so, struct tcphdr *th, struct mbuf *m, s32 off) {
+    s32 cnt = off + th->th_urp - 1;
+
+    while (cnt >= 0) {
+        if (m->m_len > cnt) {
+            char *cp = mtod(m, char *) + cnt;
+            struct tcpcb *tp = (struct tcpcb *)((struct inpcb *)so->so_pcb)->inp_ppcb;
+
+            tp->t_iobc = *cp;
+            tp->t_oobflags |= 0x1;
+            sceNetBcopy(cp + 1, cp, (u32)(m->m_len - cnt - 1));
+            m->m_len--;
+            return;
+        }
+        cnt -= m->m_len;
+        m = m->m_next;
+        if (m == 0)
+            break;
+    }
+}
 #endif
 
 INCLUDE_ASM("nonmatchings/pspnet_inet_udp", func_0001F3B0);

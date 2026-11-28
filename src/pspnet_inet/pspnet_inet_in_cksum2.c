@@ -1008,7 +1008,29 @@ void ip_stripoptions(struct mbuf *m, struct mbuf *mopt) {
     ip->ip_len -= olen;
     ip->ip_hl_v = (ip->ip_hl_v & 0xF0) | (sizeof(struct ip) >> 2);
 }
-#else
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 271
+void ip_stripoptions(struct mbuf *m, struct mbuf *mopt) {
+    s32 i;
+    struct ip *ip = mtod(m, struct ip *);
+    u8 *opts;
+    s32 olen;
+
+    olen = ((ip->ip_hl_v & 0xF) << 2) - sizeof(struct ip);
+    opts = (u8 *)(ip + 1);
+    i = m->m_len - (sizeof(struct ip) + olen);
+    sceNetBcopy(opts + olen, opts, (u32)i);
+    m->m_len -= olen;
+    if (m->m_flags & M_PKTHDR) {
+        m->m_pkthdr.len -= olen;
+    }
+    ip->ip_len -= olen;
+    ip->ip_hl_v = (ip->ip_hl_v & 0xF0) | (sizeof(struct ip) >> 2);
+}
+#endif
+
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/pspnet_inet_in_cksum2", ip_stripoptions);
 #endif
 
@@ -1344,7 +1366,174 @@ s32 ip_ctloutput(s32 op, struct socket *so, s32 level, s32 optname, struct mbuf 
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 271
-INCLUDE_ASM("nonmatchings/pspnet_inet_in_cksum2", ip_ctloutput);
+s32 ip_ctloutput(s32 op, struct socket *so, s32 level, s32 optname, struct mbuf **mp) {
+    struct inpcb *inp = (struct inpcb *)so->so_pcb;
+    struct mbuf *m = *mp;
+    s32 optval = 0;
+    s32 error = 0;
+
+    if (level != 0) {
+        error = 0x16;
+        if (op == 1 && *mp)
+            (void)sceNetMFree(*mp);
+    } else switch (op) {
+    case 1:
+        switch (optname) {
+        case 1:
+            return (ip_pcbopts(&inp->inp_options, m));
+        case 3:
+        case 4:
+        case 5:
+        case 6:
+        case 7:
+        case 20:
+            if (m == NULL || m->m_len != sizeof(s32))
+                error = 0x16;
+            else {
+                optval = *mtod(m, s32 *);
+                switch (optname) {
+                case 3:
+                    inp->inp_ip.ip_tos = optval;
+                    break;
+                case 4:
+                    inp->inp_ip.ip_ttl = optval;
+                    break;
+#define OPTSET(bit) \
+    if (optval) \
+        inp->inp_flags |= bit; \
+    else \
+        inp->inp_flags &= ~bit;
+                case 5:
+                    OPTSET(0x1);
+                    break;
+                case 6:
+                    OPTSET(0x2);
+                    break;
+                case 7:
+                    OPTSET(0x4);
+                    break;
+                case 20:
+                    OPTSET(0x80);
+                    break;
+                }
+            }
+            break;
+#undef OPTSET
+        case 9:
+        case 10:
+        case 11:
+        case 12:
+        case 13:
+            error = ip_setmoptions(optname, &inp->inp_moptions, m);
+            break;
+        case 19:
+            if (m == 0 || m->m_len != sizeof(s32))
+                error = 0x16;
+            else {
+                optval = *mtod(m, s32 *);
+                switch (optval) {
+                case 0:
+                case 1:
+                    inp->inp_flags &= ~(0x20);
+                    break;
+                case 2:
+                    inp->inp_flags |= 0x20;
+                    break;
+                default:
+                    error = 0x16;
+                    break;
+                }
+            }
+            break;
+        default:
+            error = 0x6D;
+            break;
+        }
+        if (m)
+            (void)sceNetMFree(m);
+        break;
+    case 0:
+        switch (optname) {
+        case 1:
+        case 8:
+            *mp = m = sceNetMGet(0, 4);
+            if (m == NULL) {
+                error = 0x69;
+                break;
+            }
+            if (inp->inp_options) {
+                m->m_len = inp->inp_options->m_len;
+                sceNetBcopy(mtod(inp->inp_options, char *), mtod(m, char *), (u32)m->m_len);
+            } else
+                m->m_len = 0;
+            break;
+        case 3:
+        case 4:
+        case 5:
+        case 6:
+        case 7:
+        case 20:
+        case 21:
+            *mp = m = sceNetMGet(0, 4);
+            if (m == NULL) {
+                error = 0x69;
+                break;
+            }
+            m->m_len = sizeof(s32);
+            switch (optname) {
+            case 3:
+                optval = inp->inp_ip.ip_tos;
+                break;
+            case 4:
+                optval = inp->inp_ip.ip_ttl;
+                break;
+            case 21:
+                optval = inp->inp_errormtu;
+                break;
+#define OPTBIT(bit) (inp->inp_flags & bit ? 1 : 0)
+            case 5:
+                optval = OPTBIT(0x1);
+                break;
+            case 6:
+                optval = OPTBIT(0x2);
+                break;
+            case 7:
+                optval = OPTBIT(0x4);
+                break;
+            case 20:
+                optval = OPTBIT(0x80);
+                break;
+            }
+            *mtod(m, s32 *) = optval;
+            break;
+        case 9:
+        case 10:
+        case 11:
+        case 12:
+        case 13:
+            error = ip_getmoptions(optname, inp->inp_moptions, mp);
+            break;
+        case 19:
+            *mp = m = sceNetMGet(0, 4);
+            if (m == NULL) {
+                error = 0x69;
+                break;
+            }
+            m->m_len = sizeof(s32);
+            if (inp->inp_flags & 0x20)
+                optval = 2;
+            else
+                optval = 0;
+            *mtod(m, s32 *) = optval;
+            break;
+        default:
+            error = 0x6D;
+            break;
+        }
+        break;
+    }
+    return (error);
+}
 #endif
 
 #if FW_VERSION < 201
