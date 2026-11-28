@@ -226,7 +226,115 @@ INCLUDE_ASM("nonmatchings/mscm", func_00000244);
 
 INCLUDE_ASM("nonmatchings/mscm", sceMScmStartModule);
 
+#if FW_VERSION < 150
+s32 sceMScmStopModule(SceSize args, void *argp) {
+    SceMScmCLDM *p;
+    SceMScmCLDM *list;
+    s32 i;
+    s32 j;
+
+    p = NULL;
+    sceKernelUnregisterSysEventHandler(D_000069A0);
+    func_00005270(0, 0x11);
+    sceMScmSetPullDownReg(0, 0);
+    func_00005A44(0, 0x11, 0);
+    func_00005804(0);
+    sceKernelTerminateDeleteThread(D_00006F10);
+    sceKernelTerminateDeleteThread(D_00006ED0);
+    func_000000AC(0);
+    func_00005A44_v100(0);
+    func_00005A44_v100(1);
+    for (i = 0; i < 1; i++) {
+        for (j = 0; j < 3; j++) {
+            list = &D_00006B54[i][j];
+            /* the original reads p->next before p is set (p == NULL on the first list) */
+            while (list != p->next) {
+                if (p->info.entry != 0) {
+                    sceKernelFreeVpl(D_00006B50, (void *)p->info.entry);
+                }
+                if (p->info.unk8 != NULL) {
+                    sceKernelFreeVpl(D_00006B50, p->info.unk8);
+                }
+                p->next->prev = p->prev;
+                p->prev->next = p->next;
+                sceKernelFreeVpl(D_00006B50, p);
+                p = list->next;
+            }
+        }
+    }
+    for (i = 0; i < 1; i++) {
+        sceKernelDeleteSema(D_00006ECC[i]);
+        D_00006ECC[i] = 0;
+        for (j = 0; j < 3; j++) {
+            D_00006B54[i][j].unk124 = 0;
+            D_00006F00[i * 3 + j] = 0;
+        }
+    }
+    D_00006EFC = NULL;
+    sceKernelDeleteEventFlag(g_mainEvf[0]);
+    sceKernelDeleteEventFlag(g_mediaEvf[0]);
+    sceKernelDeleteEventFlag(D_00006F44);
+    sceKernelDeleteVpl(D_00006B50);
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 201
+s32 sceMScmStopModule(SceSize args, void *argp) {
+    SceMScmCLDM *p;
+    SceMScmCLDM *list;
+    s32 i;
+    s32 j;
+
+    p = NULL;
+    sceKernelUnregisterSysEventHandler(D_00006DF0);
+    func_00005270(0, 0x11);
+    sceMScmSetPullDownReg(0, 0);
+    func_00005A44(0, 0x11, 0);
+    func_00005804(0);
+    sceKernelTerminateDeleteThread(D_00007370);
+    sceKernelTerminateDeleteThread(D_00007330);
+    func_000000AC(0);
+    func_00005EE4(0);
+    func_00005EE4(1);
+    for (i = 0; i < 1; i++) {
+        for (j = 0; j < 3; j++) {
+            list = &D_00006B54[i][j];
+            /* the original reads p->next before p is set (p == NULL on the first list) */
+            while (list != p->next) {
+                if (p->info.entry != 0) {
+                    sceKernelFreeVpl(D_00006B50, (void *)p->info.entry);
+                }
+                if (p->info.unk8 != NULL) {
+                    sceKernelFreeVpl(D_00006B50, p->info.unk8);
+                }
+                p->next->prev = p->prev;
+                p->prev->next = p->next;
+                sceKernelFreeVpl(D_00006B50, p);
+                p = list->next;
+            }
+        }
+    }
+    for (i = 0; i < 1; i++) {
+        sceKernelDeleteSema(D_00006ECC[i]);
+        D_00006ECC[i] = 0;
+        for (j = 0; j < 3; j++) {
+            D_00006B54[i][j].unk124 = 0;
+            D_00006F00[i * 3 + j] = 0;
+        }
+    }
+    D_0000735C = NULL;
+    sceKernelDeleteEventFlag(g_mainEvf[0]);
+    sceKernelDeleteEventFlag(g_mediaEvf[0]);
+    sceKernelDeleteEventFlag(D_000073A4);
+    sceKernelDeleteVpl(D_00006B50);
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/mscm", sceMScmStopModule);
+#endif
 
 #if FW_VERSION >= 310
 INCLUDE_ASM("nonmatchings/mscm", module_reboot_before);

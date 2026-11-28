@@ -164,6 +164,7 @@ extern u8 D_00006B24[];
 extern s32 D_00006B40[1];
 extern SceUID D_00006B50; /* "SceMScm" VPL */
 extern SceMScmCLDM D_00006B54[1][3];
+extern u8 D_00006DF0[];
 extern SceUID D_00006ECC[1]; /* "SceMScmCLDMList" sema */
 extern SceUID D_00006ED0; /* media thread */
 extern s32 D_00006ED4[1]; /* MSCM status per slot */
@@ -174,6 +175,7 @@ extern s32 D_00006F0C;
 extern SceUID D_00006F10; /* main thread */
 extern SceMScmHC D_00006F14[1];
 extern s32 D_00006F20;
+extern SceUID D_00006F44;
 extern s32 D_00006F90[1];
 extern char D_00007120[]; /* "SceMScm" */
 extern SceKernelSysClock D_00007190; /* sysclock ticks per usec */
@@ -181,7 +183,11 @@ extern SceUID D_00007198[1][32]; /* notify event flags (devctl register) */
 extern s32 D_00007218;
 extern SceUID D_0000721C[1][32]; /* notify callbacks (devctl register) */
 extern char D_00007300[]; /* "Assertion failed at %s:%s:%04d\n" (mscm_ioman.c) */
+extern SceUID D_00007330;
 extern s32 D_00007334[1];
+extern void *D_0000735C;
+extern SceUID D_00007370;
+extern SceUID D_000073A4;
 extern s32 D_00007800;
 extern s32 D_00007880;
 extern s32 D_00007AF4;
@@ -232,6 +238,7 @@ s32 func_000059CC(void);
 s32 func_000059D8(void);
 s32 func_000059E0(s32 n);
 s32 func_00005A44(s32 arg0, s32 arg1, s32 arg2);
+s32 func_00005A44_v100(s32 n);
 s32 func_00005AA8(SceMScmHC *hc, s32 mode);
 s32 func_00005AD0(s32 slot, u32 mode);
 s32 func_00005B3C(SceMScmHC *hc, s32 *out);
@@ -241,6 +248,7 @@ s32 func_00005C8C(s32 slot, s32 *out);
 s32 func_00005CE4(s32 slot, s32 *a, s32 *b);
 s32 func_00005E58(s32 slot, s32 on);
 s32 func_00005EB0(s32 slot);
+s32 func_00005EE4(s32 n);
 s32 func_00006440(SceMScmHC *hc);
 s32 func_00006474(s32 slot, s32 mode);
 s32 func_00006484(void);
