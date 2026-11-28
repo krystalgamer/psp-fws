@@ -1972,6 +1972,14 @@ extern s32 D_0002C394;
 extern s32 D_0002C398;
 extern s32 D_0002C39C;
 extern s32 D_0002C3A4;
+extern s32 D_0002C404;
+extern s32 D_0002C414;
+extern s32 D_0002C41C;
+extern s32 D_0002C420;
+extern s32 D_0002C424;
+extern s32 D_0002C428;
+extern s32 D_0002C42C;
+extern s32 D_0002C434;
 extern s32 D_0002C4F0;
 extern s32 D_0002C4F4;
 extern s32 D_0002C504;
@@ -2000,6 +2008,8 @@ extern u8 D_0002C5DC[];
 extern s32 D_0002C610;
 extern s32 D_0002C614_v201;
 extern s32 D_0002C618;
+extern s32 D_0002C6A0;
+extern s32 D_0002C6A8;
 extern u8 D_0002CC50[]; /* pffasttimo_ch */
 extern u8 D_0002CC74[]; /* pfslowtimo_ch */
 extern struct { struct rttimer_queue *lh_first; } D_0002CCB4; /* rttimer_queue_head */
@@ -2019,6 +2029,7 @@ extern M2C_UNK D_0002DBC8;
 extern struct inpcbtable D_0002DC78;
 extern s32 D_0002DC94;
 extern s32 D_0002DCE4;
+extern s32 D_0002DD74;
 extern struct tcpcb *D_0002DF54;
 extern struct route D_0002E19C;
 extern s32 D_0002E5EC;
