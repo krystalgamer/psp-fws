@@ -206,7 +206,21 @@ s32 func_000034CC(void *arg0, s32 arg1, s32 *arg2) {
 }
 
 #if FW_VERSION == 152
-INCLUDE_ASM("nonmatchings/msstor_0015A0", func_00003130);
+u32 func_00003130(SceMSstorDev *dev) {
+    u32 n;
+    s32 bs;
+    s32 nseg;
+
+    nseg = ((dev->boot[0x1A4] << 8) | dev->boot[0x1A5]) >> 9;
+    bs = (dev->boot[0x1A2] << 8) | dev->boot[0x1A3];
+    n = ((nseg * 496 - 2) * bs) << 1;
+    if (n > 0x3DF00) {
+        n = 0x3DF00;
+    } else if (n > 0x1EF80) {
+        n = 0x1EF80;
+    }
+    return n;
+}
 #endif
 
 #if FW_VERSION < 152
