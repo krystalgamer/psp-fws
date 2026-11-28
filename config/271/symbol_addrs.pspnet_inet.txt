@@ -596,3 +596,5 @@ tcp_syn_cache_timeq = 0x0002DC98;
 syn_cache_count = 0x0002DD04;
 tcp_syn_cache_size = 0x0002C1D4; // rom:0x2C274
 syn_cache_lookup = 0x000214B0; // type:func
+tcp_sendspace = 0x0002C3A0; // rom:0x2C440
+tcp_recvspace = 0x0002C3A4; // rom:0x2C444
