@@ -1,0 +1,2 @@
+// hidden functions split out of their predecessors (tools/split_func.py)
+func_0000BA78 = 0x0000CBC4; // type:func

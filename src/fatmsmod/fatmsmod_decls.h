@@ -465,7 +465,7 @@ extern PfDirCursor D_00027934;
 extern char D_00027B98[]; /* name being created */
 extern u32 D_00027CC4[1]; /* per drive: first freed cluster hint */
 extern PfDrive *D_00027CC8[1]; /* per drive (index drive - A; one drive in 1.00) */
-extern u8 D_00027DD0[26];
+extern s8 D_00027DD0[1]; /* per drive: 1 = flush after each operation */
 extern s32 D_00027DD4;
 extern s32 D_0002B568;
 extern s32 D_0002B5CC;
@@ -611,6 +611,7 @@ s32 func_0000931C(void);
 s32 func_00009BF0(void);
 void func_00009C74(void);
 s32 func_00009D50(void);
+s32 func_00009DC0(void); /* flush the directory buffer */
 s32 func_00009E3C(void);
 void func_00009F08(u16 *date, u16 *time);
 void func_00009F90(FatDirEnt *de, s8 create);
@@ -633,12 +634,15 @@ void func_0000B574(s32 arg0, s32 arg1, s32 arg2);
 void func_0000B57C(void);
 s32 func_0000B59C(s32, s32, s32);
 s32 func_0000B5CC(void);
+s32 func_0000B650(void);
 s32 func_0000B71C(s32, s32);
 s32 func_0000B738(s32, s32, s32, s32);
 s32 func_0000B7E4(void *arg0);
 void func_0000B818(s32 arg0);
 s32 func_0000B978(s32, s32);
 void func_0000BA20(void *arg0);
+void func_0000BA44(char *end);
+s32 func_0000BA78(void);
 void func_0000BAF8(u32 arg0);
 s32 func_0000BB3C(const u8 *end, const u8 *p);
 s32 func_0000BBAC(s32);

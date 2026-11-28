@@ -1659,9 +1659,7 @@ s32 stub_pf_mkdir(s32 a0) {
     }
     return msg.ret;
 }
-#endif
-
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#else
 s32 stub_pf_mkdir(s32 a0, s32 a1) {
     SceMsStubMsg msg;
 
@@ -1686,9 +1684,7 @@ s32 stub_pf_rmdir(s32 a0) {
     }
     return msg.ret;
 }
-#endif
-
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#else
 s32 stub_pf_rmdir(s32 a0, s32 a1) {
     SceMsStubMsg msg;
 
@@ -1732,30 +1728,6 @@ s32 stub_pf_chmod(s32 a0, s32 a1, s32 a2) {
 #endif
 
 #if FW_VERSION >= 282
-s32 stub_pf_mkdir(s32 a0, s32 a1) {
-    SceMsStubMsg msg;
-
-    msg.cmd = 0x9;
-    msg.p2 = a0;
-    msg.p7 = a1;
-    if (FcpSendMsg(&msg) == -1) {
-        return -1;
-    }
-    return msg.ret;
-}
-
-s32 stub_pf_rmdir(s32 a0, s32 a1) {
-    SceMsStubMsg msg;
-
-    msg.cmd = 0xa;
-    msg.p2 = a0;
-    msg.p7 = a1;
-    if (FcpSendMsg(&msg) == -1) {
-        return -1;
-    }
-    return msg.ret;
-}
-
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00004D24);
 #endif
 
@@ -2062,24 +2034,11 @@ s32 stub_pf_rename(s32 a0, s32 a1) {
 }
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
-s32 stub_pf_rename(s32 a0, s32 a1, s32 a2) {
-    SceMsStubMsg msg;
-
-    msg.cmd = 0x8;
-    msg.p2 = a0;
-    msg.p3 = a1;
-    msg.p7 = a2;
-    if (FcpSendMsg(&msg) == -1) {
-        return -1;
-    }
-    return msg.ret;
-}
-#endif
-
 #if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00005168);
+#endif
 
+#if FW_VERSION >= 150
 s32 stub_pf_rename(s32 a0, s32 a1, s32 a2) {
     SceMsStubMsg msg;
 
@@ -4015,8 +3974,30 @@ void func_0001378C(void *arg0, u32 arg1) {
 }
 #endif
 
-#if FW_VERSION < 271
+#if FW_VERSION < 201
+void func_0000BA44(char *end) {
+    while (end[-1] == '.') {
+        end[-1] = '\0';
+        end--;
+    }
+}
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 271
 INCLUDE_ASM("nonmatchings/fatmsmod", func_0000BA44);
+#endif
+
+#if FW_VERSION < 201
+s32 func_0000BA78(void) {
+    if (D_00027DD0[D_00019E0C - 'A'] == 1) {
+        if (func_00009DC0() == -1 || func_00009BF0() == -1) {
+            D_00019E08 = D_00019E04;
+            func_0000B650();
+            return -1;
+        }
+    }
+    return 0;
+}
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 260
