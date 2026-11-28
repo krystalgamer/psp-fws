@@ -12,6 +12,38 @@ extern "C" {
 #endif
 
 #ifdef __cplusplus
+/* dtor still asm/m2c (not trivial) */
+class Class_00062640 {
+public:
+    virtual ~Class_00062640();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_00061BA0 is data (vptr = label - 8 + 8) */
+class Class_00061BA0 : public Class_00062640 {
+public:
+    virtual ~Class_00061BA0();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_00061CC8 is data (vptr = label - 8 + 8) */
+class Class_00061CC8 : public Class_00062640 {
+public:
+    virtual ~Class_00061CC8();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_00063F60 is data (vptr = label - 8 + 8) */
+class Class_00063F60 {
+public:
+    virtual ~Class_00063F60();
+};
+#endif
+
+#ifdef __cplusplus
 /* vtable _ZTV14Class_00064420 is data (vptr = label - 8 + 8) */
 class Class_00064420 {
 public:
@@ -2141,6 +2173,15 @@ extern s32 func_000064B0;
 M2C_UNK InputDevice_PspHprm_Unlock(...);
 M2C_UNK InputDevice_PspPad_Unlock(...);
 M2C_UNK Job_Start(M2C_UNK, M2C_UNK *, M2C_UNK *, M2C_UNK, M2C_UNK, M2C_UNK *);
+void _ZN14Class_00061BA0D0Ev(s32 **arg0);
+void _ZN14Class_00061BA0D1Ev(s32 **arg0);
+void _ZN14Class_00061BA0D2Ev(M2C_UNK **arg0);
+void _ZN14Class_00061CC8D0Ev(s32 **arg0);
+void _ZN14Class_00061CC8D1Ev(s32 **arg0);
+void _ZN14Class_00061CC8D2Ev(M2C_UNK **arg0);
+s32 _ZN14Class_00062640D2Ev(s32);
+void _ZN14Class_00063F60D1Ev(M2C_UNK **arg0);
+void _ZN14Class_00063F60D2Ev(M2C_UNK **arg0);
 void _ZN14Class_000657F8D0Ev(s32 **arg0);
 void _ZN14Class_000657F8D1Ev(struct Unk_func_0005A084_0 *arg0);
 s32 _ZN14Class_000657F8D2Ev(s32);
