@@ -98,18 +98,12 @@ end:
     return ret;
 }
 
-#if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_00001584);
-#endif
-
-#if FW_VERSION < 201
+#if FW_VERSION < 282
 void func_00001584(void) {
     D_0002EB40 = 0;
     D_0002EB44 = 0;
 }
-#endif
-
-#if FW_VERSION >= 282
+#else
 void func_00001320(void) {
     D_0002C4F0 = 0;
     D_0002C4F4 = 0;
@@ -154,27 +148,15 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", sceNetInetGetTcpcbstat);
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", sceNetInetGetUdpcbstat);
 
-#if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_00001D50);
-#endif
-
-#if FW_VERSION < 201
+#if FW_VERSION < 282
 void func_00001D50(void) {
     _sce_pspnet_start_of_inet_module_in_sched(&func_00001BE4, func_00001DD8);
 }
-#endif
 
-#if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_00001D78);
-#endif
-
-#if FW_VERSION < 201
 s32 func_00001D78(void) {
     return _sce_pspnet_stop_of_inet_module_in_sched();
 }
-#endif
-
-#if FW_VERSION >= 282
+#else
 void func_00001BA0(void) {
     _sce_pspnet_start_of_inet_module_in_sched(&func_00001BE4, func_00001C28);
 }
@@ -198,11 +180,7 @@ void func_00001BE4(struct SceNetInetWaiter *w) {
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00001BE4);
 #endif
 
-#if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_00001DD8);
-#endif
-
-#if FW_VERSION < 201
+#if FW_VERSION < 282
 void func_00001DD8(struct socket *so) {
     struct SceNetInetWaiter *w = so->so_waiter;
     if (w == NULL || w->unk20 == 0) {
@@ -213,9 +191,7 @@ void func_00001DD8(struct socket *so) {
         sceKernelSignalSema(w->sema, 1);
     }
 }
-#endif
-
-#if FW_VERSION >= 282
+#else
 void func_00001C28(struct socket *so) {
     struct SceNetInetWaiter *w = so->so_waiter;
     if (w == NULL || w->unk20 == 0) {
@@ -513,22 +489,14 @@ void func_000042F4(void) {
     so_list.tqh_first = NULL;
     so_list.tqh_last = &so_list.tqh_first;
 }
-#endif
 
-#if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_0000431C);
-#endif
-
-#if FW_VERSION < 201
 s32 func_0000431C(struct socket *so, struct mbuf *nam) {
     s32 s = _sce_pspnet_spllock();
     s32 error = so->so_proto->pr_usrreq(so, PRU_BIND, NULL, nam, NULL);
     _sce_pspnet_splunlock(s);
     return error;
 }
-#endif
-
-#if FW_VERSION >= 282
+#else
 void func_000040FC(void) {
     somaxconn = 0x80;
     D_0002C504 = 0;
@@ -620,17 +588,11 @@ s32 soshutdown(struct socket *so, s32 how) {
     return 0;
 }
 
-#if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_000046A8);
-#endif
-
-#if FW_VERSION < 201
+#if FW_VERSION < 282
 void func_000046A8(struct socket *so) {
     _sce_pspnet_selwakeup(&so->so_rcv.sb_sel);
 }
-#endif
-
-#if FW_VERSION >= 282
+#else
 void func_000044AC(struct socket *so) {
     _sce_pspnet_selwakeup(&so->so_rcv.sb_sel);
 }
@@ -748,9 +710,6 @@ struct socket *sonewconn1(struct socket *head, s32 connstatus) {
 }
 #endif
 
-#if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_000047DC);
-#else
 void func_000047DC(struct socket *head, struct socket *so, s32 q) {
     struct soqhead *qh;
     so->so_head = head;
@@ -767,7 +726,6 @@ void func_000047DC(struct socket *head, struct socket *so, s32 q) {
     *qh->tqh_last = so;
     qh->tqh_last = &so->so_qe.tqe_next;
 }
-#endif
 
 s32 soqremque(struct socket *so, s32 q) {
     struct socket *head = so->so_head;
@@ -1058,22 +1016,14 @@ void socantsendmore(struct socket *so) {
         sowakeup(so, &so->so_snd);
     }
 }
-#endif
 
-#if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_00005AB8);
-#endif
-
-#if FW_VERSION < 201
 void func_00005AB8(struct socket *so) {
     so->so_state |= SS_CANTRCVMORE;
     if (so->so_rcv.sb_flags & SB_NOTIFY) {
         sowakeup(so, &so->so_rcv);
     }
 }
-#endif
-
-#if FW_VERSION >= 282
+#else
 void func_0000588C(struct socket *so) {
     so->so_state |= SS_CANTSENDMORE;
     if (so->so_snd.sb_flags & SB_NOTIFY) {
