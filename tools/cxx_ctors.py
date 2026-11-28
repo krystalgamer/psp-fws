@@ -96,6 +96,9 @@ def main():
             if g["kind"] != "pair" or g["vptr"] not in cls_of:
                 continue
             cls = cls_of[g["vptr"]]
+            if not any(f"{cls}::~{cls}()" in e.text for lst in comp.values() for _, e in lst):
+                reasons["dtor not C++ (no vtable alias)"] += 1
+                continue
             names = [x for _, x in g["funcs"]]
             new = ctor_names(cls)
             if names == new:
