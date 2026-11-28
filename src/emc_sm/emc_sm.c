@@ -5,9 +5,11 @@
 #include "common.h"
 #include "emc_sm_decls.h"
 
-#if FW_VERSION == 271
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/emc_sm", sceNandInit);
+#endif
 
+#if FW_VERSION == 271
 INCLUDE_ASM("nonmatchings/emc_sm", nandIsReady);
 #endif
 
@@ -45,7 +47,7 @@ s32 sceNandInit(void) {
 }
 #endif
 
-#if FW_VERSION >= 102 && FW_VERSION < 201
+#if FW_VERSION >= 102 && FW_VERSION < 271
 s32 sceNandInit(void) {
     __builtin_memset(&g_nand, 0, sizeof(g_nand));
     sceSysregEmcsmBusClockEnable();
@@ -71,18 +73,10 @@ s32 sceNandInit(void) {
 }
 #endif
 
-#if (FW_VERSION >= 201 && FW_VERSION < 271) || FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/emc_sm", sceNandInit);
-#endif
-
-#if FW_VERSION < 201
+#if FW_VERSION != 271
 s32 nandIsReady(void) {
     return *(u32 *)0xBD101004 & 1; /* not volatile: matches */
 }
-#endif
-
-#if (FW_VERSION >= 201 && FW_VERSION < 271) || FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/emc_sm", nandIsReady);
 #endif
 
 #if FW_VERSION < 271
@@ -97,7 +91,7 @@ INCLUDE_RODATA("nonmatchings/emc_sm", D_00002828);
 INCLUDE_ASM("nonmatchings/emc_sm", func_0000015C);
 #endif
 
-#if FW_VERSION >= 102 && FW_VERSION < 201
+#if FW_VERSION >= 102 && FW_VERSION < 271
 s32 sceNandSetWriteProtect(s32 protect) {
     u32 v = NAND_STATUS;
     s32 old = __builtin_allegrex_ext(v ^ 0x80, 7, 1);
@@ -114,7 +108,7 @@ s32 sceNandSetWriteProtect(s32 protect) {
 }
 #endif
 
-#if FW_VERSION >= 201
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/emc_sm", sceNandSetWriteProtect);
 #endif
 
@@ -134,9 +128,7 @@ s32 sceNandLock(s32 writeMode) {
     }
     return 0;
 }
-#endif
-
-#if FW_VERSION >= 102 && FW_VERSION < 201
+#else
 s32 sceNandLock(s32 writeMode) {
     s32 ret = sceKernelWaitSema(g_nand.semaId, 1, NULL);
     if (ret < 0) {
@@ -155,10 +147,6 @@ s32 sceNandLock(s32 writeMode) {
 }
 #endif
 
-#if FW_VERSION >= 201
-INCLUDE_ASM("nonmatchings/emc_sm", sceNandLock);
-#endif
-
 #if FW_VERSION >= 102 && FW_VERSION < 300
 void sceNandUnlock(void) {
     sceNandSetWriteProtect(1);
@@ -172,7 +160,7 @@ void sceNandUnlock(void) {
 INCLUDE_ASM("nonmatchings/emc_sm", sceNandUnlock);
 #endif
 
-#if FW_VERSION < 201
+#if FW_VERSION < 271
 s32 sceNandReset(u8 *status) {
     s32 ret;
     u32 v;
@@ -198,7 +186,6 @@ s32 sceNandReset(u8 *status) {
 INCLUDE_ASM("nonmatchings/emc_sm", sceNandReset);
 #endif
 
-#if FW_VERSION < 201
 s32 sceNandReadId(u8 *buf, s32 len) {
     s32 i;
     u8 v;
@@ -214,9 +201,6 @@ s32 sceNandReadId(u8 *buf, s32 len) {
     NAND_RESET = 1;
     return 0;
 }
-#else
-INCLUDE_ASM("nonmatchings/emc_sm", sceNandReadId);
-#endif
 
 INCLUDE_ASM("nonmatchings/emc_sm", sceNandReadAccess);
 
@@ -252,7 +236,7 @@ s32 sceNandEraseBlock(u32 ppn) {
 }
 #endif
 
-#if FW_VERSION >= 102 && FW_VERSION < 201
+#if FW_VERSION >= 102 && FW_VERSION < 271
 s32 sceNandEraseBlock(u32 ppn) {
     s32 ret;
     u8 st;
@@ -288,9 +272,10 @@ s32 sceNandEraseBlock(u32 ppn) {
 }
 #endif
 
-#if FW_VERSION >= 201
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/emc_sm", sceNandEraseBlock);
-#else
+#endif
+
 s32 sceNandReadExtraOnly(u32 ppn, void *spare, s32 len) {
     s32 ret;
     s32 i;
@@ -328,20 +313,12 @@ s32 sceNandReadExtraOnly(u32 ppn, void *spare, s32 len) {
     NAND_RESET = 1;
     return ret;
 }
-#endif
-
-#if FW_VERSION >= 201
-INCLUDE_ASM("nonmatchings/emc_sm", sceNandReadExtraOnly);
-#endif
 
 s32 module_start(void) {
     sceNandInit();
     return 0;
 }
 
-#if FW_VERSION >= 201
-INCLUDE_ASM("nonmatchings/emc_sm", module_reboot_before);
-#else
 s32 module_reboot_before(void) {
     sceNandLock(0);
     sceKernelUnregisterSysEventHandler(&g_nandSysEv);
@@ -350,11 +327,7 @@ s32 module_reboot_before(void) {
     sceKernelReleaseIntrHandler(0x14);
     return 0;
 }
-#endif
 
-#if FW_VERSION >= 201
-INCLUDE_ASM("nonmatchings/emc_sm", sceNandEnd);
-#else
 s32 sceNandEnd(void) {
     sceNandLock(0);
     sceKernelUnregisterSysEventHandler(&g_nandSysEv);
@@ -363,7 +336,6 @@ s32 sceNandEnd(void) {
     sceKernelReleaseIntrHandler(0x14);
     return 0;
 }
-#endif
 
 s32 sceNandSuspend(void) {
     return 0;
@@ -377,9 +349,7 @@ s32 sceNandResume(void) {
     NAND_STATUS |= 0x80;
     return 0;
 }
-#endif
-
-#if FW_VERSION >= 102 && FW_VERSION < 201
+#else
 s32 sceNandResume(void) {
     sceSysregEmcsmBusClockEnable();
     sceSysregEmcsmIoEnable();
@@ -396,10 +366,6 @@ s32 sceNandResume(void) {
 }
 #endif
 
-#if FW_VERSION >= 201
-INCLUDE_ASM("nonmatchings/emc_sm", sceNandResume);
-#endif
-
 #if FW_VERSION == 100
 s32 sceNandSetWriteProtect(s32 protect) {
     u32 v = NAND_STATUS;
@@ -414,7 +380,6 @@ s32 sceNandSetWriteProtect(s32 protect) {
 }
 #endif
 
-#if FW_VERSION < 201
 s32 sceNandReadStatus(void) {
     u32 v;
     NAND_CMD = 0x70;
@@ -422,15 +387,11 @@ s32 sceNandReadStatus(void) {
     NAND_RESET = 1;
     return v & 0xFF;
 }
-#else
-INCLUDE_ASM("nonmatchings/emc_sm", sceNandReadStatus);
-#endif
 
 #if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/emc_sm", sceNandSetScramble);
 #endif
 
-#if FW_VERSION < 201
 s32 sceNandReadPages(u32 ppn, void *user, void *spare, u32 len) {
     s32 ret = sceNandReadAccess(ppn, user, spare, len, 0);
     if (spare == NULL && ret == 0x80230009) {
@@ -438,11 +399,7 @@ s32 sceNandReadPages(u32 ppn, void *user, void *spare, u32 len) {
     }
     return ret;
 }
-#else
-INCLUDE_ASM("nonmatchings/emc_sm", sceNandReadPages);
-#endif
 
-#if FW_VERSION < 201
 s32 sceNandWritePages(u32 ppn, void *user, void *spare, u32 len) {
     s32 mode;
 
@@ -452,15 +409,11 @@ s32 sceNandWritePages(u32 ppn, void *user, void *spare, u32 len) {
     }
     return sceNandWriteAccess(ppn, user, spare, len, mode);
 }
-#else
-INCLUDE_ASM("nonmatchings/emc_sm", sceNandWritePages);
-#endif
 
 s32 sceNandReadPagesRawExtra(u32 ppn, void *user, void *spare, u32 len) {
     return sceNandReadAccess(ppn, user, spare, len, 0x20);
 }
 
-#if FW_VERSION < 201
 s32 sceNandWritePagesRawExtra(u32 ppn, void *user, void *spare, u32 len) {
     s32 mode = 0x20;
     if (user == NULL) {
@@ -468,9 +421,6 @@ s32 sceNandWritePagesRawExtra(u32 ppn, void *user, void *spare, u32 len) {
     }
     return sceNandWriteAccess(ppn, user, spare, len, mode);
 }
-#else
-INCLUDE_ASM("nonmatchings/emc_sm", sceNandWritePagesRawExtra);
-#endif
 
 s32 sceNandReadPagesRawAll(u32 ppn, void *user, void *spare, u32 len) {
     return sceNandReadAccess(ppn, user, spare, len, 0x31);
@@ -480,7 +430,7 @@ s32 sceNandWritePagesRawAll(u32 ppn, void *user, void *spare, u32 len) {
     return sceNandWriteAccess(ppn, user, spare, len, 0x31);
 }
 
-#if FW_VERSION >= 102 && FW_VERSION < 201
+#if FW_VERSION >= 102
 s32 nandSysEventHandler(s32 ev) {
     switch (ev) {
     case 0x4004:
@@ -503,9 +453,7 @@ s32 nandSysEventHandler(s32 ev) {
 }
 #endif
 
-#if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/emc_sm", nandSysEventHandler);
-
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/emc_sm", nandDmaReadPage);
 #endif
 
@@ -568,12 +516,6 @@ s32 nandDmaReadPage(s32 mode, void *user, void *spare) {
 }
 #endif
 
-#if FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/emc_sm", nandSysEventHandler);
-
-INCLUDE_ASM("nonmatchings/emc_sm", nandDmaReadPage);
-#endif
-
 INCLUDE_ASM("nonmatchings/emc_sm", nandDmaWritePage);
 
 INCLUDE_ASM("nonmatchings/emc_sm", nandWaitReady);
@@ -582,7 +524,6 @@ INCLUDE_ASM("nonmatchings/emc_sm", sceNandDetectChip);
 
 INCLUDE_ASM("nonmatchings/emc_sm", sceNandWriteBlockWithVerify);
 
-#if FW_VERSION < 201
 s32 sceNandReadBlockWithRetry(u32 ppn, void *user, void *spare) {
     s32 i;
     s32 ret;
@@ -598,11 +539,7 @@ s32 sceNandReadBlockWithRetry(u32 ppn, void *user, void *spare) {
     }
     return 0;
 }
-#else
-INCLUDE_ASM("nonmatchings/emc_sm", sceNandReadBlockWithRetry);
-#endif
 
-#if FW_VERSION < 201
 s32 sceNandVerifyBlockWithRetry(u32 ppn, void *user, void *spare) {
     s32 i;
     s32 retry;
@@ -627,11 +564,7 @@ s32 sceNandVerifyBlockWithRetry(u32 ppn, void *user, void *spare) {
     }
     return 0;
 }
-#else
-INCLUDE_ASM("nonmatchings/emc_sm", sceNandVerifyBlockWithRetry);
-#endif
 
-#if FW_VERSION < 201
 s32 sceNandEraseBlockWithRetry(u32 ppn) {
     s32 i;
     s32 ret;
@@ -647,13 +580,9 @@ s32 sceNandEraseBlockWithRetry(u32 ppn) {
     }
     return ret;
 }
-#else
-INCLUDE_ASM("nonmatchings/emc_sm", sceNandEraseBlockWithRetry);
-#endif
 
 INCLUDE_ASM("nonmatchings/emc_sm", sceNandIsBadBlock);
 
-#if FW_VERSION < 201
 s32 sceNandDoMarkAsBadBlock(u32 ppn) {
     s32 i;
     s32 retry;
@@ -675,13 +604,9 @@ s32 sceNandDoMarkAsBadBlock(u32 ppn) {
     }
     return 0;
 }
-#else
-INCLUDE_ASM("nonmatchings/emc_sm", sceNandDoMarkAsBadBlock);
-#endif
 
 INCLUDE_ASM("nonmatchings/emc_sm", sceNandDumpWearBBMSize);
 
-#if FW_VERSION < 201
 s32 sceNandCountChipMakersBBM(void) {
     s32 i;
     s32 count = 0;
@@ -698,11 +623,8 @@ s32 sceNandCountChipMakersBBM(void) {
     }
     return count;
 }
-#else
-INCLUDE_ASM("nonmatchings/emc_sm", sceNandCountChipMakersBBM);
-#endif
 
-#if FW_VERSION < 201
+#if FW_VERSION < 310
 s32 sceNandDetectChipMakersBBM(u32 ppn) {
     s32 i;
     s32 ret;
@@ -724,7 +646,6 @@ s32 sceNandDetectChipMakersBBM(u32 ppn) {
 INCLUDE_ASM("nonmatchings/emc_sm", sceNandDetectChipMakersBBM);
 #endif
 
-#if FW_VERSION < 201
 s32 sceNandEraseAllBlock(void) {
     s32 i;
     s32 count = 0;
@@ -742,11 +663,7 @@ s32 sceNandEraseAllBlock(void) {
     }
     return count;
 }
-#else
-INCLUDE_ASM("nonmatchings/emc_sm", sceNandEraseAllBlock);
-#endif
 
-#if FW_VERSION < 201
 s32 sceNandTestBlock(u32 ppn) {
     u8 user[32][0x200];
     u8 spare[32][0x10];
@@ -796,37 +713,19 @@ s32 sceNandTestBlock(u32 ppn) {
     sceNandEraseBlockWithRetry(ppn);
     return ret;
 }
-#else
-INCLUDE_ASM("nonmatchings/emc_sm", sceNandTestBlock);
 
-INCLUDE_ASM("nonmatchings/emc_sm", sceNandGetPageSize);
-#endif
-
-#if FW_VERSION < 201
 s32 sceNandGetPageSize(void) {
     return g_nandInfo.pageSize;
 }
-#else
-INCLUDE_ASM("nonmatchings/emc_sm", sceNandGetPagesPerBlock);
-#endif
 
-#if FW_VERSION < 201
 s32 sceNandGetPagesPerBlock(void) {
     return g_nandInfo.pagesPerBlock;
 }
-#else
-INCLUDE_ASM("nonmatchings/emc_sm", sceNandGetTotalBlocks);
-#endif
 
-#if FW_VERSION < 201
 s32 sceNandGetTotalBlocks(void) {
     return g_nandInfo.totalBlocks;
 }
-#else
-INCLUDE_ASM("nonmatchings/emc_sm", sceNandWriteBlock);
-#endif
 
-#if FW_VERSION < 201
 s32 sceNandWriteBlock(u32 ppn, void *user, void *spare) {
     s32 ret = sceNandEraseBlockWithRetry(ppn);
     if (ret < 0) {
@@ -838,7 +737,6 @@ s32 sceNandWriteBlock(u32 ppn, void *user, void *spare) {
     }
     return ret;
 }
-#endif
 
 INCLUDE_ASM("nonmatchings/emc_sm", sceNandCalcEcc);
 
