@@ -126,8 +126,27 @@ s32 sceNetApctlDisconnect(void) {
 }
 #else
 INCLUDE_ASM("nonmatchings/pspnet_apctl", func_0000028C);
+#endif
 
+#if FW_VERSION >= 260
 INCLUDE_ASM("nonmatchings/pspnet_apctl", sceNetApctlScan);
+#endif
+
+#if FW_VERSION == 250
+s32 sceNetApctlScan(void) {
+    s32 var_a2;
+    s32 var_v1;
+
+    var_v1 = 0x80410005;
+    if (sceKernelCheckThreadStack() >= 0x13F0) {
+        var_a2 = 0x80410A0D;
+        if (D_00011870 != 0) {
+            var_a2 = func_000020D8(0, 0);
+        }
+        var_v1 = var_a2;
+    }
+    return var_v1;
+}
 #endif
 
 #if FW_VERSION < 250
@@ -136,23 +155,57 @@ s32 sceNetApctlScan(void) {
 }
 #else
 INCLUDE_ASM("nonmatchings/pspnet_apctl", sceNetApctlScanSSID);
-
-INCLUDE_ASM("nonmatchings/pspnet_apctl", func_00000394);
-
-INCLUDE_ASM("nonmatchings/pspnet_apctl", sceNetApctlGetBSSDescIDList);
 #endif
 
-#if FW_VERSION < 250
+#if FW_VERSION >= 260
+INCLUDE_ASM("nonmatchings/pspnet_apctl", func_00000394);
+#endif
+
+#if FW_VERSION == 250
+s32 func_00000394(u32 *arg0, void *arg1) {
+    s32 var_v0;
+
+    var_v0 = 0x80410A0D;
+    if (D_00011870 != 0) {
+        var_v0 = 0x80410A03;
+        if (arg0 != NULL) {
+            var_v0 = func_00001038(arg0, arg1);
+        }
+    }
+    return var_v0;
+}
+#endif
+
+#if FW_VERSION >= 250
+INCLUDE_ASM("nonmatchings/pspnet_apctl", sceNetApctlGetBSSDescIDList);
+#else
 s32 sceNetApctlGetBSSDescIDList(u32 *buflen, void *buf) {
     return func_00001038(buflen, buf);
 }
-#else
-INCLUDE_ASM("nonmatchings/pspnet_apctl", func_0000044C);
-
-INCLUDE_ASM("nonmatchings/pspnet_apctl", sceNetApctlGetBSSDescEntry);
 #endif
 
-#if FW_VERSION < 250
+#if FW_VERSION >= 260
+INCLUDE_ASM("nonmatchings/pspnet_apctl", func_0000044C);
+#endif
+
+#if FW_VERSION == 250
+s32 func_0000044C(s32 arg0, s32 arg1, void *arg2) {
+    s32 var_v0;
+
+    var_v0 = 0x80410A0D;
+    if (D_00011870 != 0) {
+        var_v0 = 0x80410A03;
+        if (arg2 != NULL) {
+            var_v0 = func_00002388(arg0, arg1, arg2);
+        }
+    }
+    return var_v0;
+}
+#endif
+
+#if FW_VERSION >= 250
+INCLUDE_ASM("nonmatchings/pspnet_apctl", sceNetApctlGetBSSDescEntry);
+#else
 s32 sceNetApctlGetBSSDescEntry(s32 index, s32 code, void *info) {
     return func_00002388(index, code, info);
 }
@@ -182,8 +235,26 @@ INCLUDE_ASM("nonmatchings/pspnet_apctl", func_00000218);
 INCLUDE_ASM("nonmatchings/pspnet_apctl", func_00000234);
 #endif
 
-#if FW_VERSION >= 250
+#if FW_VERSION >= 260
 INCLUDE_ASM("nonmatchings/pspnet_apctl", sceNetApctlGetState);
+#endif
+
+#if FW_VERSION == 250
+s32 sceNetApctlGetState(s32 *state) {
+    s32 var_a1;
+
+    var_a1 = 0x80410005;
+    if (sceKernelCheckThreadStack() >= 0x13F0) {
+        var_a1 = 0x80410A0D;
+        if (D_00011870 != 0) {
+            var_a1 = 0x80410A03;
+            if (state != NULL) {
+                var_a1 = func_000010EC(state);
+            }
+        }
+    }
+    return var_a1;
+}
 #endif
 
 #if FW_VERSION == 100 || (FW_VERSION >= 150 && FW_VERSION < 250)
@@ -229,8 +300,25 @@ s32 sceNetApctlDelInternalHandler(s32 arg0) {
 }
 #endif
 
-#if FW_VERSION >= 250
+#if FW_VERSION >= 260
 INCLUDE_ASM("nonmatchings/pspnet_apctl", sceNetApctlScanUser);
+#endif
+
+#if FW_VERSION == 250
+s32 sceNetApctlScanUser(void) {
+    s32 var_a2;
+    s32 var_v1;
+
+    var_v1 = 0x80410005;
+    if (sceKernelCheckThreadStack() >= 0x13F0) {
+        var_a2 = 0x80410A0D;
+        if (D_00011870 != 0) {
+            var_a2 = func_000020D8(0, 0);
+        }
+        var_v1 = var_a2;
+    }
+    return var_v1;
+}
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 250
@@ -249,8 +337,28 @@ s32 sceNetApctlGetBSSDescIDListUser(u32 *buflen, void *buf) {
 }
 #endif
 
-#if FW_VERSION >= 250
+#if FW_VERSION >= 260
 INCLUDE_ASM("nonmatchings/pspnet_apctl", sceNetApctlGetBSSDescEntryUser);
+#endif
+
+#if FW_VERSION == 250
+s32 sceNetApctlGetBSSDescEntryUser(s32 index, s32 code, void *info) {
+    s32 var_a3;
+    s32 var_v1;
+
+    var_v1 = 0x80410005;
+    if (sceKernelCheckThreadStack() >= 0x13F0) {
+        var_a3 = 0x80410A0D;
+        if (D_00011870 != 0) {
+            var_a3 = 0x80410A03;
+            if (info != NULL) {
+                var_a3 = func_00002388(index, code, info);
+            }
+        }
+        var_v1 = var_a3;
+    }
+    return var_v1;
+}
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 250
