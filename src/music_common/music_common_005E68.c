@@ -2357,12 +2357,7 @@ void func_00010AD4(M2C_UNK **arg0) {
 }
 #endif
 
-void func_000104C8(M2C_UNK **arg0) {
-    *arg0 = &D_0001FA68;
-}
-
-void func_000104D8(M2C_UNK **arg0) {
-    *arg0 = &D_0001FA68;
+Class_0001FA68::Class_0001FA68() {
 }
 
 Class_0001FA68::~Class_0001FA68() {

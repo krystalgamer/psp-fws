@@ -9,6 +9,8 @@
   "_ZN14Class_0001F980D0Ev": "void _ZN14Class_0001F980D0Ev(M2C_UNK **arg0);",
   "_ZN14Class_0001F980D1Ev": "void _ZN14Class_0001F980D1Ev(M2C_UNK **arg0);",
   "_ZN14Class_0001F980D2Ev": "void _ZN14Class_0001F980D2Ev(M2C_UNK **arg0);",
+  "_ZN14Class_0001FA68C1Ev": "void _ZN14Class_0001FA68C1Ev(M2C_UNK **arg0);",
+  "_ZN14Class_0001FA68C2Ev": "void _ZN14Class_0001FA68C2Ev(M2C_UNK **arg0);",
   "_ZN14Class_0001FA68D0Ev": "void _ZN14Class_0001FA68D0Ev(M2C_UNK **arg0);",
   "_ZN14Class_0001FA68D1Ev": "void _ZN14Class_0001FA68D1Ev(M2C_UNK **arg0);",
   "_ZN14Class_0001FA68D2Ev": "void _ZN14Class_0001FA68D2Ev(M2C_UNK **arg0);",
@@ -421,7 +423,7 @@
  "types": {
   "Class_0001F2C8": "#ifdef __cplusplus\n/* vtable _ZTV14Class_0001F2C8 is data (vptr = label - 8 + 8) */\nclass Class_0001F2C8 {\npublic:\n    virtual ~Class_0001F2C8();\n};\n#endif",
   "Class_0001F980": "#ifdef __cplusplus\n/* vtable _ZTV14Class_0001F980 is data (vptr = label - 8 + 8) */\nclass Class_0001F980 : public paf::PhWidget {\npublic:\n    virtual ~Class_0001F980();\n};\n#endif",
-  "Class_0001FA68": "#ifdef __cplusplus\n/* vtable _ZTV14Class_0001FA68 is data (vptr = label - 8 + 8) */\nclass Class_0001FA68 {\npublic:\n    virtual ~Class_0001FA68();\n};\n#endif",
+  "Class_0001FA68": "#ifdef __cplusplus\n/* vtable _ZTV14Class_0001FA68 is data (vptr = label - 8 + 8) */\nclass Class_0001FA68 {\npublic:\n    Class_0001FA68();\n    virtual ~Class_0001FA68();\n};\n#endif",
   "Class_000202D8": "#ifdef __cplusplus\n/* vtable _ZTV14Class_000202D8 is data (vptr = label - 8 + 8) */\nclass Class_000202D8 {\npublic:\n    virtual ~Class_000202D8();\n};\n#endif",
   "Class_00025320": "#ifdef __cplusplus\n/* vtable _ZTV14Class_00025320 is data (vptr = label - 8 + 8) */\nclass Class_00025320 : public Class_000202D8 {\npublic:\n    virtual ~Class_00025320();\n};\n#endif",
   "Unk_func_00002340_0": "struct Unk_func_00002340_0 {\n    u8 pad0[0x8];\n    u8 unk8;\n};",
