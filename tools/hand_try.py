@@ -207,6 +207,12 @@ def _var_score(args):
     return combo, max(len(target), len(w)) - sum(b.size for b in sm.get_matching_blocks())
 
 
+def first_variant(body):
+    """BODY with every //V{ alt0 //V| alt1 ... //V} block reduced to its first alternative."""
+    return re.sub(r"[ \t]*//V\{[^\n]*\n(.*?)[ \t]*//V\}[^\n]*\n",
+                  lambda m: re.split(r"[ \t]*//V\|[^\n]*\n", m[1])[0], body, flags=re.S)
+
+
 def variants(text, body, target, comp, opt, jobs):
     """Score every combination of the body's //V{ alt0 //V| alt1 ... //V} blocks."""
     import itertools
@@ -415,6 +421,10 @@ def main():
     prelude = re.sub(r'^#include "\w+_decls\.h"\n', "", src[:m.start()] if m else "", flags=re.M)
     fwv = re.match(r"\d+", a.ver)[0]
     fwvar = (re.search(r"v(\d+)", a.ver) or [None, "0"])[1]
+    if not a.variants and re.search(r"//V\{", body):
+        # without --variants a body with //V blocks is scored (and --perm written) with the first alternatives
+        print("note: //V blocks: using their first alternatives (--variants scores every combination)")
+        body = first_variant(body)
     text = f"#define FW_VERSION {fwv}\n#define FW_VARIANT {fwvar}\n" + hdr + "\n" + prelude + "\n" + extra + "\n" + body
     target = mod.target_words(name)
     comp, own = AD.Module.file_setting(mod.file_of(name))
@@ -584,9 +594,17 @@ def main():
     CASES = a.cases
     if a.permute:
         permute(text, body, target, comp, sopt, a.j)
-    if a.perm:
+    if a.perm and mod.funcs[name][2] is None:
+        print(f"--perm: {name} has no asm in {a.ver} (already C), no permuter dir written")
+    elif a.perm:
         import perm_near
-        d = perm_near.write_perm_dir(mod, name, text, comp, own.split(" ", 1)[1])
+        ptext = text
+        if a.variants and re.search(r"//V\{", body):
+            # the permuter needs one compilable source: the best combination, else the first alternatives
+            best_v = bestsrc is not None
+            ptext = text[:len(text) - len(body)] + (bestsrc if best_v else first_variant(body))
+            print(f"--perm: //V blocks reduced to {'the best combination' if best_v else 'their first alternatives'}")
+        d = perm_near.write_perm_dir(mod, name, ptext, comp, own.split(" ", 1)[1])
         print(f"permuter dir: {d}")
     if a.diff and a.diff_opt:
         if a.diff_opt not in opts:
