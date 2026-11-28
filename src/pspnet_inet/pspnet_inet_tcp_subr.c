@@ -316,11 +316,7 @@ struct tcpcb *tcp_close(struct tcpcb *tp) {
 INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", tcp_close);
 #endif
 
-#if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", tcp_freeq);
-#endif
-
-#if FW_VERSION < 201
+#if FW_VERSION < 282
 s32 tcp_freeq(struct tcpcb *tp) {
     struct ipqent *qe;
     s32 rv = 0;
@@ -2501,7 +2497,10 @@ INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", sceNetInetInetNtop);
 INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", sceNetInetInetPton);
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", sceNetInetInetAddr);
+s32 sceNetInetInetAddr(s32 arg0) {
+    void *sp0;
+    return (func_0002C4CC(arg0, &sp0, 0) != 0) ? sp0 : -1;
+}
 #endif
 
 #if FW_VERSION < 151
@@ -2524,17 +2523,11 @@ s32 sceNetInetInetAddr(s32 arg0) {
 }
 #endif
 
-#if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", sceNetInetInetAton);
-#endif
-
-#if FW_VERSION < 201
+#if FW_VERSION < 282
 void sceNetInetInetAton(s32 arg0, s32 arg1) {
     func_0002C4CC(arg0, arg1, 0);
 }
-#endif
 
-#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", func_0002C4CC);
 #endif
 

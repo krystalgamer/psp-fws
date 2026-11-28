@@ -986,7 +986,9 @@ s32 func_000099D4(void) {
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet_api", sceNetInet_lib_D7928A6D);
+struct ifqueue *sceNetInet_lib_D7928A6D(void) {
+    return &ipintrq;
+}
 #endif
 
 #if FW_VERSION >= 282
