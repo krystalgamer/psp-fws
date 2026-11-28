@@ -425,7 +425,28 @@ s32 func_00001710(SceSize args, void *argp) {
 }
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION >= 150 && FW_VERSION < 250
+s32 func_00001710(SceSize args, void *argp) {
+    SceNetApctlCtx *ctx = *(SceNetApctlCtx **)argp;
+    s32 prev = 0;
+    s32 state;
+    s32 event;
+
+    for (;;) {
+        D_00008180[ctx->state](ctx, prev, &state, &event);
+        if (ctx->exitReq > 0) {
+            break;
+        }
+        prev = ctx->state;
+        ctx->state = state;
+        ctx->event = event;
+        func_00000FE8(ctx, prev);
+    }
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00001710);
 #endif
 

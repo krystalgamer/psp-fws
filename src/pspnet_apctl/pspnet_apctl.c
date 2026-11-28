@@ -674,7 +674,30 @@ s32 func_00000CB0(void) {
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 250
-INCLUDE_ASM("nonmatchings/pspnet_apctl", func_00000CB0);
+s32 func_00000CB0(void) {
+    SceNetApctlCtx *ctx = &D_00011DD4;
+
+    if (ctx->idle == 0) {
+        sceNetApctlDisconnect();
+    }
+    sceKernelSetEventFlag(ctx->evf, 0x40);
+    if (ctx->thid >= 0) {
+        sceKernelWaitThreadEnd(ctx->thid, NULL);
+        sceKernelDeleteThread(ctx->thid);
+        sceNetFreeThreadinfo(ctx->thid);
+        ctx->thid = -1;
+    }
+    if (ctx->evf >= 0) {
+        sceKernelDeleteEventFlag(ctx->evf);
+        ctx->evf = -1;
+    }
+    if (ctx->sema >= 0) {
+        sceKernelDeleteSema(ctx->sema);
+        ctx->sema = -1;
+    }
+    func_00001BC0();
+    return 0;
+}
 #endif
 
 #if FW_VERSION >= 102 && FW_VERSION < 150

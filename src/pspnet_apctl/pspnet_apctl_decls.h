@@ -177,7 +177,7 @@ typedef struct {
     s32 error;                  /* 0x6C4 */
     s32 linkUp;                 /* 0x6C8 */
 #if FW_VERSION >= 150
-    s32 unk6CC;                 /* 0x6CC */
+    s32 exitReq;                /* 0x6CC set by Term */
 #endif
     SceNetApctlNetConf conf;    /* 0x6CC (1.50+: 0x6D0) */
 } SceNetApctlCtx;
@@ -483,6 +483,7 @@ extern s32 (*D_00008120[5])(SceNetApctlCtx *ctx, s32 prev, s32 *state, s32 *even
 extern s32 D_00008134;
 extern s32 (*D_00008138[7])(SceNetDhcpCtx *dc, s32 prev);
 extern s32 D_00008154[];
+extern s32 (*D_00008180[5])(SceNetApctlCtx *ctx, s32 prev, s32 *state, s32 *event);
 extern s32 D_00008220;
 extern s32 D_00008234; /* D_00011DD4.state (prx reloc target) */
 extern u32 D_00008240;
@@ -534,6 +535,7 @@ s32 func_00000E28(s32 id);
 s32 func_00000EC8(SceNetApctlCtx *ctx, s32 prev);
 s32 func_00000F18(s32, s32);
 s32 func_00000FD0(void);
+s32 func_00000FE8(SceNetApctlCtx *ctx, s32 prev);
 s32 func_00000FF8(void);
 s32 func_00001038(u32 *buflen, void *buf);
 s32 func_00001098(s32 code, void *info);
