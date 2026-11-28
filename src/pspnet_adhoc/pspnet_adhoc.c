@@ -2965,8 +2965,6 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00003D9C);
 
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", ptpSendData);
 
-#if FW_VERSION < 201
-
 s32 ptpRecvData(SceNetAdhocDesc *d, void *buf, s32 *len, u32 timeout, s32 nonblock) {
     SceNetAdhocPtpPcb *pcb;
     struct mbuf *m;
@@ -3063,104 +3061,6 @@ s32 ptpRecvData(SceNetAdhocDesc *d, void *buf, s32 *len, u32 timeout, s32 nonblo
     *len -= left;
     return 0;
 }
-#else
-s32 ptpRecvData(SceNetAdhocDesc *d, void *buf, s32 *len, u32 timeout, s32 nonblock) {
-    SceNetAdhocPtpPcb *pcb;
-    struct mbuf *m;
-    u64 start;
-    u64 now;
-    u32 tmo;
-#if FW_VERSION < 201
-    u32 space;
-    u32 nspace;
-#else
-    s32 space;
-    s32 nspace;
-#endif
-    u32 cc;
-    s32 left;
-    s32 err;
-
-    start = 0;
-    left = *len;
-    pcb = d->pcb;
-    for (;;) {
-        if ((d->flags & 0x8000) && pcb->rcv.cc == 0)
-            return 0x8041070C;
-        if (d->flags & 0x20)
-            return 0x80410708;
-        cc = pcb->rcv.cc;
-        if (cc >= pcb->rcv.lowat || (d->flags & 0x8000))
-            break;
-        if (nonblock & 1)
-            return 0x80410709;
-        tmo = 0;
-        if (timeout != 0) {
-            if (start == 0)
-                start = ADHOC_CLOCK();
-            now = ADHOC_CLOCK();
-            if (now - start >= timeout) {
-                sceNetMFreem(NULL);
-                return 0x80410715;
-            }
-            tmo = timeout - ((u32)now - (u32)start);
-        }
-        pcb->rcv.flags |= 1;
-        err = _sce_pspnet_tsleep_usec(&pcb->rcv, tmo);
-        if (d->flags & 0x20)
-            err = 5;
-        if (d->flags & 1)
-            err = 0x20;
-        if (err != 0) {
-            switch (err) {
-            case 0xB:
-                err = 0x80410715;
-                break;
-            case 4:
-                err = 0x80410719;
-                break;
-            case 5:
-                err = 0x80410708;
-                break;
-            case 0x20:
-                err = 0x80410707;
-                break;
-            default:
-                err = 0x80410002;
-                break;
-            }
-            return err;
-        }
-    }
-    space = pcb->rcv.hiwat - cc;
-    while ((m = pcb->rcv.first) != NULL && left > 0) {
-        if (left < m->m_pkthdr.len) {
-            sceNetMCopydata(m, 0, left, (u8 *)buf + (*len - left));
-            sceNetMAdj(m, left);
-            pcb->rcv.cc -= left;
-            left = 0;
-        } else {
-            sceNetMCopydata(m, 0, m->m_pkthdr.len, (u8 *)buf + (*len - left));
-            left -= m->m_pkthdr.len;
-            m = pcb->rcv.first;
-            if (m != NULL) {
-                if ((pcb->rcv.first = m->m_nextpkt) == NULL)
-                    pcb->rcv.last = NULL;
-                m->m_nextpkt = NULL;
-                pcb->rcv.cc -= m->m_pkthdr.len;
-            }
-            sceNetMFreem(m);
-        }
-    }
-    nspace = pcb->rcv.hiwat - pcb->rcv.cc;
-    if (space < ADHOC_RCV_Q(pcb) && space < pcb->mss) {
-        if (nspace >= ADHOC_RCV_Q(pcb) || nspace >= pcb->mss)
-            ptpSendCtl(pcb, 5);
-    }
-    *len -= left;
-    return 0;
-}
-#endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", ptpFlushWait);
@@ -3285,16 +3185,10 @@ s32 ptpAttach(SceNetAdhocDesc *d) {
 }
 #endif
 
-#if FW_VERSION >= 201 && FW_VERSION < 282
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", ptpAttach);
-#endif
-
-#if FW_VERSION < 201
+#else
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", ptpBind);
-#endif
-
-#if FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/pspnet_adhoc", ptpAttach);
 #endif
 
 #if FW_VERSION < 300
@@ -3339,10 +3233,6 @@ void ptpFlushSockbufs(SceNetAdhocPtpPcb *pcb) {
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00004E80);
 #endif
 
-#if FW_VERSION == 271
-INCLUDE_ASM("nonmatchings/pspnet_adhoc", ptpEstablished);
-#endif
-
 #if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00004DFC);
 #endif
@@ -3351,7 +3241,7 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00004DFC);
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00004C0C);
 #endif
 
-#if FW_VERSION < 271
+#if FW_VERSION < 282
 void ptpEstablished(SceNetAdhocPtpPcb *pcb) {
     _sce_pspnet_callout_stop(&pcb->callout);
     pcb->state = 4;
@@ -3364,9 +3254,7 @@ void ptpEstablished(SceNetAdhocPtpPcb *pcb) {
     _sce_pspnet_callout_reset_usec(&pcb->callout2, pcb->rexmt_int, ptpKeepAlive, pcb);
 #endif
 }
-#endif
 
-#if FW_VERSION < 282
 void ptpDrop(SceNetAdhocPtpPcb *pcb) {
 #if FW_VERSION >= 150
     _sce_pspnet_callout_stop(&pcb->callout2);
@@ -3776,17 +3664,11 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_000065F8);
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", ptpSendFrameL);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_adhoc", ptpSendCtl);
-#endif
-
-#if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_adhoc", ptpOutput);
-#endif
-
 #if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", ptpSendFrame);
+#endif
 
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", ptpSendCtl);
 #endif
 
@@ -3855,9 +3737,13 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_000058B8);
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_000062FC);
 
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", ptpSendCtl);
+#endif
 
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", ptpOutput);
-#else
+#endif
+
+#if FW_VERSION < 282
 void ptpTimer(SceNetAdhocPtpPcb *pcb) {
     if ((u32)pcb->state < 2)
         return;
@@ -3886,9 +3772,7 @@ void ptpTimer(SceNetAdhocPtpPcb *pcb) {
     }
     _sce_pspnet_callout_reset_usec(&pcb->callout, pcb->rexmt_int, ptpTimer, pcb);
 }
-#endif
-
-#if FW_VERSION >= 282
+#else
 void ptpTimer(SceNetAdhocPtpPcb *pcb) {
     if ((u32)pcb->state < 2)
         return;
