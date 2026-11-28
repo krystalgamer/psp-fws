@@ -1,2 +1,3 @@
 // function starts pinned by tools/split_tu.py
 rtable_init = 0x0000CCFC; // type:func
+rn_search = 0x0000B218; // type:func

@@ -21,3 +21,4 @@ func_000297CC = 0x000297CC; // type:func
 func_000298B8 = 0x000298B8; // type:func
 func_00029B94 = 0x00029B94; // type:func
 rtable_init = 0x0000D10C; // type:func
+rn_search = 0x0000B65C; // type:func

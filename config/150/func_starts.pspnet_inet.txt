@@ -7,3 +7,4 @@ func_00001FA4 = 0x00001FA4; // type:func
 func_0002A538 = 0x0002A538; // type:func
 func_0002A548 = 0x0002A548; // type:func
 rtable_init = 0x0000CF1C; // type:func
+rn_search = 0x0000B414; // type:func

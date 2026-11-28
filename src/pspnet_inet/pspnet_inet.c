@@ -2048,7 +2048,43 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_0000A960);
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_0000AFE0);
 #endif
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", rn_walktree);
+s32 rn_walktree(struct radix_node_head *h, s32 (*f)(struct radix_node *, void *), void *w) {
+    s32 error;
+    struct radix_node *base, *next;
+    struct radix_node *rn = h->rnh_treetop;
+
+    while (rn->rn_b >= 0)
+        rn = rn->rn_l;
+    for (;;) {
+        base = rn;
+        while (rn->rn_p->rn_r == rn && (rn->rn_flags & RNF_ROOT) == 0)
+            rn = rn->rn_p;
+        for (rn = rn->rn_p->rn_r; rn->rn_b >= 0;)
+            rn = rn->rn_l;
+        next = rn;
+        while ((rn = base) != NULL) {
+            base = rn->rn_dupedkey;
+            if (!(rn->rn_flags & RNF_ROOT) && (error = (*f)(rn, w)))
+                return (error);
+        }
+        rn = next;
+        if (rn->rn_flags & RNF_ROOT)
+            return (0);
+    }
+}
+
+struct radix_node *rn_search(void *v_arg, struct radix_node *head) {
+    struct radix_node *x;
+    char *v;
+
+    for (x = head, v = v_arg; x->rn_b >= 0;) {
+        if (x->rn_bmask & v[x->rn_off])
+            x = x->rn_r;
+        else
+            x = x->rn_l;
+    }
+    return (x);
+}
 
 struct radix_node *rn_search_m(void *v_arg, struct radix_node *head, void *m_arg) {
     struct radix_node *x;
@@ -2122,4 +2158,28 @@ struct radix_node *rn_newpair(void *v, s32 b, struct radix_node nodes[2]) {
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", rn_inithead);
 
+#if FW_VERSION < 201
+void rn_init(void) {
+    char *cp, *cplim;
+    struct domain *dom;
+
+    max_keylen = 0;
+    for (dom = domains; dom; dom = dom->dom_next)
+        if (dom->dom_maxrtkey > max_keylen)
+            max_keylen = dom->dom_maxrtkey;
+    D_0002F2F8 = 0;
+    D_0002EB74 = 0;
+    mask_rnhead = 0;
+    if (max_keylen == 0)
+        return;
+    rn_zeros = sceNetMallocInternal(3 * max_keylen);
+    func_0002C94C(rn_zeros, 0, 3 * max_keylen);
+    rn_ones = cp = rn_zeros + max_keylen;
+    addmask_key = cplim = rn_ones + max_keylen;
+    while (cp < cplim)
+        *cp++ = -1;
+    rn_inithead((void **)&mask_rnhead, 0);
+}
+#else
 INCLUDE_ASM("nonmatchings/pspnet_inet", rn_init);
+#endif

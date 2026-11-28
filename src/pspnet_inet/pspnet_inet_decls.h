@@ -313,6 +313,7 @@ struct domain {
     struct domain *dom_next;            /* 0x1C */
     s32 (*dom_rtattach)(void **head, s32 off); /* 0x20 */
     s32 dom_rtoffset;                   /* 0x24 */
+    s32 dom_maxrtkey;                   /* 0x28 */
 };
 
 struct sockaddr {
@@ -1666,6 +1667,7 @@ extern s32 D_0002EAB1;
 extern s32 D_0002EB40;
 extern s32 D_0002EB44;
 extern s32 D_0002EB54;
+extern s32 D_0002EB74;
 extern s32 D_0002EB88;
 extern s32 D_0002EB8C;
 extern s32 D_0002EB90;
@@ -1675,12 +1677,14 @@ extern s32 D_0002EC10;
 extern s32 D_0002EC14;
 extern s32 D_0002EC18;
 extern char D_0002F288[18] __attribute__((aligned(4)));
+extern s32 D_0002F2F8;
 extern struct { s32 w[6]; } D_0002F3B8;
 extern s32 D_0002F500;
 extern s32 D_0002F50C;
 extern s32 D_0002F510;
 extern struct route D_0002FF98; /* ipforward_rt */
 extern s32 D_000302E4;
+extern char *addmask_key; /* addmask_key */
 extern s32 arp_locked; /* arp_locked */
 extern const struct cp chap; /* chap */
 extern const struct cp *cps[IDX_COUNT]; /* cps */
@@ -1706,6 +1710,8 @@ extern struct ifqueue ipintrq; /* ipintrq, exported by sceNetInet_lib_D7928A6D *
 extern const struct cp lcp; /* lcp */
 extern struct { struct llinfo_arp *lh_first; } llinfo_arp_head; /* llinfo_arp */
 extern struct ifnet loif; /* loif */
+extern struct radix_node_head *mask_rnhead; /* mask_rnhead */
+extern s32 max_keylen; /* max_keylen */
 extern const struct cp pap; /* pap */
 extern s32 pffasttimo_now; /* pffasttimo_now */
 extern s32 pfslowtimo_now; /* pfslowtimo_now (SCE tcp timers are absolute slowtimo ticks) */
@@ -1715,6 +1721,8 @@ extern struct { struct rawcb *lh_first; } rawcb; /* rawcb */
 extern struct inpcbtable rawcbtable;
 extern s32 rip_recvspace;
 extern s32 rip_sendspace;
+extern char *rn_ones; /* rn_ones */
+extern char *rn_zeros; /* rn_zeros */
 extern struct rtstat rt_stat; /* rtstat */
 extern struct radix_node_head *rt_tables[32]; /* rt_tables */
 extern s32 rttrash; /* rttrash */
@@ -2019,9 +2027,12 @@ void rip_init(void);
 void rip_input(struct mbuf *m, ...);
 s32 rip_output(struct mbuf *m, ...);
 s32 rip_usrreq(struct socket *so, s32 req, struct mbuf *m, struct mbuf *nam, struct mbuf *control);
+s32 rn_inithead(void **head, s32 off);
 struct radix_node *rn_lookup(void *v_arg, void *m_arg, struct radix_node_head *head);
 struct radix_node *rn_newpair(void *v, s32 b, struct radix_node nodes[2]);
+struct radix_node *rn_search(void *v_arg, struct radix_node *head);
 struct radix_node *rn_search_m(void *v_arg, struct radix_node *head, void *m_arg);
+s32 rn_walktree(struct radix_node_head *h, s32 (*f)(struct radix_node *, void *), void *w);
 void rt_maskedcopy(struct sockaddr *src, struct sockaddr *dst, struct sockaddr *netmask);
 void rt_missmsg(s32 type, struct rt_addrinfo *rtinfo, s32 flags, s32 error);
 void rt_timer_remove_all(struct rtentry *rt);
