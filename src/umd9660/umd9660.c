@@ -2276,7 +2276,7 @@ INCLUDE_ASM("nonmatchings/umd9660", func_00004664);
 INCLUDE_ASM("nonmatchings/umd9660", func_00004824);
 #endif
 
-#if FW_VERSION < 201
+#if FW_VERSION < 250
 s32 func_00004C88(void) {
     char name[0x20];
     u32 off = 0;
@@ -2301,7 +2301,7 @@ s32 func_00004C88(void) {
 INCLUDE_ASM("nonmatchings/umd9660", func_00004C88);
 #endif
 
-#if FW_VERSION < 201
+#if FW_VERSION < 250
 s32 func_00004DDC(void) {
     char name[0x20];
     u32 off = 0;
