@@ -46,10 +46,31 @@ s32 sceNetApctlTerm(void) {
 }
 #endif
 
-#if FW_VERSION >= 102 && FW_VERSION < 150
+#if FW_VERSION == 103
 INCLUDE_ASM("nonmatchings/pspnet_apctl", func_000000B0);
+#endif
 
+#if FW_VERSION == 102
+s32 func_000000B0(s32 arg0, s32 arg1) {
+    void *sp0;
+    s32 var_v0;
+
+    var_v0 = func_00000D60(arg0, arg1, &sp0, 0);
+    if (var_v0 >= 0) {
+        var_v0 = sp0;
+    }
+    return var_v0;
+}
+#endif
+
+#if FW_VERSION == 103
 INCLUDE_ASM("nonmatchings/pspnet_apctl", func_000000D8);
+#endif
+
+#if FW_VERSION == 102
+void func_000000D8(s32 arg0) {
+    func_00000F00(arg0, 0);
+}
 #endif
 
 #if FW_VERSION >= 250
@@ -245,16 +266,61 @@ s32 sceNetApctlGetInfo(s32 code, void *info) {
 }
 #endif
 
-#if FW_VERSION >= 102 && FW_VERSION < 150
+#if FW_VERSION == 103
 INCLUDE_ASM("nonmatchings/pspnet_apctl", func_000001B8);
+#endif
 
+#if FW_VERSION == 102
+s32 func_000001B8(s32 arg0, s32 arg1) {
+    void *sp0;
+    s32 var_v0;
+
+    var_v0 = func_00000D60(arg0, arg1, &sp0, 1);
+    if (var_v0 >= 0) {
+        var_v0 = sp0;
+    }
+    return var_v0;
+}
+#endif
+
+#if FW_VERSION == 103
 INCLUDE_ASM("nonmatchings/pspnet_apctl", func_000001E0);
+#endif
 
+#if FW_VERSION == 102
+void func_000001E0(s32 arg0) {
+    func_00000F00(arg0, 1);
+}
+#endif
+
+#if FW_VERSION == 103
 INCLUDE_ASM("nonmatchings/pspnet_apctl", func_000001FC);
+#endif
 
+#if FW_VERSION == 102
+void func_000001FC(void) {
+    func_00000FD0();
+}
+#endif
+
+#if FW_VERSION == 103
 INCLUDE_ASM("nonmatchings/pspnet_apctl", func_00000218);
+#endif
 
+#if FW_VERSION == 102
+void func_00000218(void) {
+    func_00000FF8();
+}
+#endif
+
+#if FW_VERSION == 103
 INCLUDE_ASM("nonmatchings/pspnet_apctl", func_00000234);
+#endif
+
+#if FW_VERSION == 102
+void func_00000234(u32 *arg0, void *arg1) {
+    func_00001038(arg0, arg1);
+}
 #endif
 
 #if FW_VERSION >= 282
@@ -851,17 +917,44 @@ INCLUDE_ASM("nonmatchings/pspnet_apctl", func_00000F00);
 INCLUDE_ASM("nonmatchings/pspnet_apctl", func_00000EC8);
 
 INCLUDE_ASM("nonmatchings/pspnet_apctl", func_00000E28);
+#endif
 
+#if FW_VERSION == 103
 INCLUDE_ASM("nonmatchings/pspnet_apctl", func_00002204);
+#endif
 
+#if FW_VERSION == 102
+s32 func_00002204(s32 connIndex) {
+    sceKernelSetEventFlag(D_000082B0, 2U);
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/pspnet_apctl", func_00000FD0);
 
 INCLUDE_ASM("nonmatchings/pspnet_apctl", func_00000FF8);
 
 INCLUDE_ASM("nonmatchings/pspnet_apctl", func_00001038);
+#endif
 
+#if FW_VERSION == 103
 INCLUDE_ASM("nonmatchings/pspnet_apctl", func_00002388);
+#endif
 
+#if FW_VERSION == 102
+s32 func_00002388(s32 index, s32 code, void *info) {
+    s32 var_a4;
+
+    var_a4 = 0x80410A05;
+    if (D_00011DD4.state == 4) {
+        var_a4 = func_0000050C(&D_00011DD4, index, (union SceNetApctlInfo *) code);
+    }
+    return var_a4;
+}
+#endif
+
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/pspnet_apctl", func_00001098);
 #endif
 
