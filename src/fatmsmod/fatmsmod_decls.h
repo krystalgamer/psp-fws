@@ -155,15 +155,18 @@ typedef struct {
 #endif
 } PfFile;
 
-/* Current volume geometry (D_0002790C, 0x28 bytes copied from PfDrive.geometry). */
+/* Volume geometry from the boot sector (D_0002790C is the current one; 0x28 bytes). */
 typedef struct {
     u16 bytesPerSector; /* 0x0 */
     u16 sectorsPerCluster; /* 0x2 */
-    u16 fatStart; /* 0x4, first FAT sector */
-    u8 pad6[0xA];
+    u16 fatStart; /* 0x4, reserved sectors = first FAT sector */
+    u16 rootEntries; /* 0x6, 0 = FAT32 */
+    u8 numFats; /* 0x8 */
+    u8 pad9[3];
+    u32 totalSectors; /* 0xC */
     u32 fatSectors; /* 0x10, sectors per FAT */
     u8 pad14[4];
-    u16 unk18; /* 0x18 */
+    u16 unk18; /* 0x18, power of two <= 0x80, else 1 */
     u8 pad1A[0xE];
 } PfGeometry;
 typedef char chk_PfGeometry[(sizeof(PfGeometry) == 0x28) ? 1 : -1];
@@ -634,11 +637,11 @@ void func_0000B574(s32 arg0, s32 arg1, s32 arg2);
 void func_0000B57C(void);
 s32 func_0000B59C(s32, s32, s32);
 s32 func_0000B5CC(void);
-s32 func_0000B650(void);
+void func_0000B650(void);
 s32 func_0000B71C(s32, s32);
 s32 func_0000B738(s32, s32, s32, s32);
-s32 func_0000B7E4(void *arg0);
-void func_0000B818(s32 arg0);
+s32 func_0000B7E4(void *arg0); /* path starts with a separator or drive */
+s32 func_0000B818(char *path); /* normalise a path in place */
 s32 func_0000B978(s32, s32);
 void func_0000BA20(void *arg0);
 void func_0000BA44(char *end);
@@ -691,8 +694,8 @@ s32 func_00013110(s32, s32);
 void func_000131D8(s32 arg0, s32 arg1);
 s32 func_00013214(void *arg0);
 s32 func_00013248(s32);
-s32 func_000132E8(s32);
-s32 func_00013448(s32);
+s32 func_000132E8();
+s32 func_00013448();
 void func_000135A8(struct Unk_func_000135A8_0 *arg0);
 void func_00013654(void *arg0);
 s32 func_00013684(s32, s32);
