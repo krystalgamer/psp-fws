@@ -2,15 +2,132 @@
 #include "common.h"
 #include "pspnet_adhoc_decls.h"
 
+#if FW_VERSION < 201
+s32 sceNetAdhocInit(void) {
+    s32 s;
+    s32 ret;
+
+    s = _sce_pspnet_spllock();
+    ret = 0x80410713;
+    if (D_00007400 > 0)
+        goto end;
+    D_00007984.ifq_maxlen = 50;
+    D_00007984.ifq_len = 0;
+    D_00007984.ifq_head = NULL;
+    D_00007984.ifq_drops = 0;
+    D_00007984.ifq_tail = NULL;
+    ret = func_00000DD0();
+    if (ret < 0)
+        goto end;
+    ret = func_0000297C();
+    if (ret < 0)
+        goto err1;
+    ret = func_000052D4();
+    if (ret < 0)
+        goto err2;
+    ret = _sce_pspnet_start_of_adhoc_module_in_netintr(func_00000270, func_00000444);
+    if (ret < 0)
+        goto err3;
+    ret = _sce_pspnet_start_of_adhoc_module_in_if_ethersubr_core(func_0000047C);
+    if (ret < 0)
+        goto err4;
+    if (func_00006880() < 0)
+        goto err5;
+    D_00007400 = 1;
+    _sce_pspnet_splunlock(s);
+    return 0;
+
+err5:
+    _sce_pspnet_stop_of_adhoc_module_in_if_ethersubr_core();
+err4:
+    _sce_pspnet_stop_of_adhoc_module_in_netintr();
+err3:
+    func_00004964();
+err2:
+    func_000029E8();
+err1:
+    func_00000E18();
+end:
+    _sce_pspnet_splunlock(s);
+    return ret;
+}
+#else
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", sceNetAdhocInit);
+#endif
 
+#if FW_VERSION < 201
+s32 sceNetAdhocTerm(void) {
+    s32 s;
+    s32 ret;
+    struct mbuf *m;
+
+    ret = 0;
+    s = _sce_pspnet_spllock();
+    if (D_00007400 == 0)
+        goto end;
+    if (func_00001044() != 0) {
+        ret = 0x80410714;
+        goto end;
+    }
+    func_00006F80();
+    _sce_pspnet_stop_of_adhoc_module_in_if_ethersubr_core();
+    _sce_pspnet_stop_of_adhoc_module_in_netintr();
+    func_00004964();
+    func_000029E8();
+    func_00000E18();
+    while (D_00007984.ifq_head != NULL) {
+        IF_DEQUEUE(&D_00007984, m);
+        sceNetMFreem(m);
+    }
+    D_00007400 = 0;
+end:
+    _sce_pspnet_splunlock(s);
+    return ret;
+}
+#else
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", sceNetAdhocTerm);
+#endif
 
+#if FW_VERSION < 201
+void func_00000270(void) {
+    struct mbuf *m;
+    u8 type;
+
+    for (;;) {
+        IF_DEQUEUE(&D_00007984, m);
+        if (m == NULL)
+            break;
+        if ((u32)m->m_pkthdr.len <= 0x30) {
+            sceNetMFreem(m);
+            continue;
+        }
+        if ((u32)m->m_len <= 0x30)
+            sceNetMCopydata(m, 0x30, 1, &type);
+        else
+            type = m->m_data[0x30];
+        switch (type) {
+        case 1:
+            func_000023C4(m);
+            break;
+        case 2:
+            func_0000578C(m);
+            break;
+        default:
+            sceNetMFreem(m);
+            break;
+        }
+    }
+}
+#else
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00000270);
+#endif
 
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_0000036C);
 
-INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_0000047C);
+s32 func_0000047C(s32 a0, s32 a1, struct ifqueue **out) {
+    *out = &D_00007984;
+    return 0;
+}
 
 #if FW_VERSION < 282
 void func_00000444(struct ifnet *ifp) {

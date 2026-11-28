@@ -181,11 +181,17 @@ struct ifqueue {
 
 /* pspnet struct ifnet (partial; 0x120 = adhoc wakeup flags) */
 struct ifnet {
-    u8 unk0[0xCC];
+    u8 unk0[0x30];
+    u16 if_flags;                       /* 0x30 IFF_* */
+    u8 unk32[0xB8 - 0x32];
+    void (*if_start)(struct ifnet *ifp); /* 0xB8 */
+    u8 unkBC[0xCC - 0xBC];
     struct ifqueue if_snd;              /* 0xCC */
-    u8 unkE0[0x120 - 0xE0];
+    struct sockaddr_dl *if_sadl;        /* 0xE0 */
+    u8 unkE4[0x120 - 0xE4];
     u32 if_adhocflags;                  /* 0x120 */
 };
+#define IFF_OACTIVE 0x400
 
 /* NetBSD 1.5 mbuf as in pspnet (partial) */
 struct mbuf {
@@ -201,9 +207,44 @@ struct mbuf {
     } m_pkthdr;
 };
 
+struct sockaddr_dl {
+    u8 sdl_len;
+    u8 sdl_family;
+    u16 sdl_index;
+    u8 sdl_type;
+    u8 sdl_nlen;
+    u8 sdl_alen;
+    u8 sdl_slen;
+    char sdl_data[12];
+};
+#define LLADDR(s) ((u8 *)((s)->sdl_data + (s)->sdl_nlen))
+
+/* NetBSD 1.5 if.h queue macros */
+#define IF_QFULL(ifq) ((ifq)->ifq_len >= (ifq)->ifq_maxlen)
+#define IF_DROP(ifq) ((ifq)->ifq_drops++)
+#define IF_ENQUEUE(ifq, m) do { \
+        (m)->m_nextpkt = 0; \
+        if ((ifq)->ifq_tail == 0) \
+            (ifq)->ifq_head = m; \
+        else \
+            (ifq)->ifq_tail->m_nextpkt = m; \
+        (ifq)->ifq_tail = m; \
+        (ifq)->ifq_len++; \
+    } while (0)
+#define IF_DEQUEUE(ifq, m) do { \
+        (m) = (ifq)->ifq_head; \
+        if (m) { \
+            if (((ifq)->ifq_head = (m)->m_nextpkt) == 0) \
+                (ifq)->ifq_tail = 0; \
+            (m)->m_nextpkt = 0; \
+            (ifq)->ifq_len--; \
+        } \
+    } while (0)
+
 extern s32 D_00007400;
 extern s32 D_00007448;
 extern M2C_UNK D_00007450;
+extern struct ifqueue D_00007984;
 extern SceNetAdhocDescList D_00007998;
 extern s32 D_000079A0;
 extern SceNetAdhocPdpList D_000079A4;
@@ -217,12 +258,20 @@ extern M2C_UNK D_00007CC8;
 
 void _sce_pspnet_callout_stop(void *c);
 struct ifnet *_sce_pspnet_ifplookup_lladdr(const SceNetEtherAddr *addr);
+void _sce_pspnet_schednetintr_with_evf(s32 bit);
 s32 _sce_pspnet_spllock(void);
 void _sce_pspnet_splunlock(s32 s);
+s32 _sce_pspnet_start_of_adhoc_module_in_if_ethersubr_core(void *func);
+s32 _sce_pspnet_start_of_adhoc_module_in_netintr(void *intr, void *wakeup);
 s32 _sce_pspnet_start_of_adhoc_module_in_sched(void *func);
+void _sce_pspnet_stop_of_adhoc_module_in_if_ethersubr_core(void);
+void _sce_pspnet_stop_of_adhoc_module_in_netintr(void);
 void _sce_pspnet_stop_of_adhoc_module_in_sched(void);
 void _sce_pspnet_wakeup(void *chan);
+void func_00000270(void);
+void func_0000036C(struct ifnet *ifp, struct mbuf *m);
 void func_00000444(struct ifnet *ifp);
+s32 func_0000047C(s32 a0, s32 a1, struct ifqueue **out);
 void func_00000490(s32 arg0);
 s32 func_0000092C(void *arg0, s32 arg1);
 s32 func_00000974(void *arg0, s32 arg1);
@@ -237,6 +286,7 @@ void func_00001078(SceNetAdhocDesc *d, s32 events);
 s32 func_00001F20(s32 id, SceNetEtherAddr *addr, u16 *port, void *buf, s32 *len, u32 timeout, s32 nonblock, void *rfinfo);
 s32 func_00002108(SceNetAdhocPdpPcb *pcb, const SceNetEtherAddr *addr, u16 port);
 void func_0000223C(SceNetAdhocPdpPcb *pcb);
+void func_000023C4(struct mbuf *m);
 s32 func_0000297C(void);
 void func_000029E8(void);
 s32 func_00002A9C(SceNetAdhocDesc *d);
@@ -250,12 +300,14 @@ s32 func_00002D94(s32, s32);
 void func_00002E48(SceNetAdhocPdpQent *e);
 void func_000039FC(void *arg0);
 void func_00003BB0(struct Unk_func_00003BB0_0 *arg0);
+void func_00004964(void);
 s32 func_00004AE4(s32);
 s32 func_00004B30(s32);
 s32 func_00004E98(s32);
 s32 func_00004F50(s32);
 s32 func_00005024(s32, s32);
 s32 func_000050F8(s32, s32);
+s32 func_000052D4(void);
 s32 func_00005544(void *arg0, s32 arg1, s32 arg2);
 void func_00005560(void *arg0, s32 arg1, s32 arg2);
 s32 func_00005594(struct Unk_func_00005594_0 *arg0, s32 arg1, s32 arg2);
@@ -264,12 +316,15 @@ s32 func_000056B0(void *arg0, s32 arg1);
 void func_000056D4(void *arg0);
 s32 func_000056E4(struct Unk_func_000056E4_0 *arg0, s32 arg1);
 void func_00005708(struct Unk_func_00005708_0 *arg0);
+void func_0000578C(struct mbuf *m);
+s32 func_00006880(void);
 s32 func_00006C3C(s32, s32, s32);
 s32 func_00006DA4(s32, s32);
 s32 func_00006E18(const void *a, const void *b, s32 n);
 u8 *func_00006E58(u8 *arg0, u8 *arg1, s32 arg2);
 void func_00006EF8(s32 arg0, s32 arg1);
 s32 func_00006F68(void);
+void func_00006F80(void);
 s32 func_00007298(s32, s32, s32);
 s32 module_start(void);
 s32 module_stop(void);
@@ -277,12 +332,15 @@ s32 sceKernelSignalSema(s32 sema, s32 n);
 void sceNetAdhocGameModeUpdateReplica(s32 arg0, s32 arg1);
 void sceNetAdhocGameModeUpdateReplicaInternal(s32 arg0, s32 arg1);
 s32 sceNetAdhocGetPdpStat(s32 *buflen, SceNetAdhocPdpStat *buf);
+s32 sceNetAdhocInit(void);
 s32 sceNetAdhocPdpDelete(s32 id, s32 flag);
 s32 sceNetAdhocPdpRecv(s32 id, SceNetEtherAddr *addr, u16 *port, void *buf, s32 *len, u32 timeout, s32 nonblock);
 s32 sceNetAdhocPdpRecvWithRfInfo(s32 id, SceNetEtherAddr *addr, u16 *port, void *buf, s32 *len, u32 timeout, s32 nonblock, void *rfinfo);
+s32 sceNetAdhocTerm(void);
 void sceNetAdhoc_lib_62B875A8(void);
 void sceNetAdhoc_lib_F9240FBA(void);
 void sceNetFreeInternal(void *p);
+void sceNetMCopydata(struct mbuf *m, s32 off, s32 len, void *cp);
 void sceNetMFreem(struct mbuf *m);
 void *sceNetMallocInternal(u32 size);
 M2C_UNK sceNetMemset(void *, M2C_UNK, M2C_UNK);
