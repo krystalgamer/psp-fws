@@ -299,7 +299,7 @@ INCLUDE_ASM("nonmatchings/paf", func_00001A88);
 
 INCLUDE_ASM("nonmatchings/paf", func_00001CF0);
 
-s32 _ZN3paf9Framework8InstanceEv(void) {
+s32 paf::Framework::Instance() {
     return D_001A4E1C;
 }
 
@@ -568,7 +568,11 @@ INCLUDE_ASM("nonmatchings/paf", _ZN3paf4View8PageOpenEPvii);
 #if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf", _ZN3paf4View8PageOpenEPKcii);
 #else
-void _ZN3paf4View8PageOpenEPKcii(struct Unk_scePaf_F609FA81_0 *arg0, s32 arg1, s32 arg2, s32 arg3) {
+void paf::View::PageOpen(char const* cxxp1, int cxxp2, int cxxp3) {
+    struct Unk_scePaf_F609FA81_0 *arg0 = (struct Unk_scePaf_F609FA81_0 *) this;
+    s32 arg1 = (s32) cxxp1;
+    s32 arg2 = (s32) cxxp2;
+    s32 arg3 = (s32) cxxp3;
     void *sp0;
     s32 temp_v0;
 
@@ -594,7 +598,9 @@ INCLUDE_ASM("nonmatchings/paf", _ZN3paf4View9PageCloseEPv);
 #if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf", _ZN3paf4View9PageCloseEPKc);
 #else
-void _ZN3paf4View9PageCloseEPKc(struct Unk_scePaf_3481F595_0 *arg0, s32 arg1) {
+void paf::View::PageClose(char const* cxxp1) {
+    struct Unk_scePaf_3481F595_0 *arg0 = (struct Unk_scePaf_3481F595_0 *) this;
+    s32 arg1 = (s32) cxxp1;
     void *sp0;
     s32 temp_v0;
 
@@ -614,7 +620,9 @@ INCLUDE_ASM("nonmatchings/paf", _ZN3paf4View12PageActivateEPv);
 #if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf", _ZN3paf4View12PageActivateEPKc);
 #else
-void _ZN3paf4View12PageActivateEPKc(struct Unk_scePaf_CAF05F1D_0 *arg0, s32 arg1) {
+void paf::View::PageActivate(char const* cxxp1) {
+    struct Unk_scePaf_CAF05F1D_0 *arg0 = (struct Unk_scePaf_CAF05F1D_0 *) this;
+    s32 arg1 = (s32) cxxp1;
     void *sp0;
     s32 temp_v0;
 
@@ -636,7 +644,9 @@ INCLUDE_ASM("nonmatchings/paf", _ZN3paf4View14PageInactivateEPv);
 #if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf", _ZN3paf4View14PageInactivateEPKc);
 #else
-void _ZN3paf4View14PageInactivateEPKc(struct Unk_scePaf_5470B915_0 *arg0, s32 arg1) {
+void paf::View::PageInactivate(char const* cxxp1) {
+    struct Unk_scePaf_5470B915_0 *arg0 = (struct Unk_scePaf_5470B915_0 *) this;
+    s32 arg1 = (s32) cxxp1;
     void *sp0;
     s32 temp_v0;
 
@@ -1007,7 +1017,9 @@ INCLUDE_ASM("nonmatchings/paf", _ZN3paf4View9PlaySoundEPKc);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 200
-void _ZN3paf4View9PlaySoundEPKc(struct Unk_scePaf_49CE42F7_0 *arg0, char* arg1) {
+void paf::View::PlaySound(char const* cxxp1) {
+    struct Unk_scePaf_49CE42F7_0 *arg0 = (struct Unk_scePaf_49CE42F7_0 *) this;
+    char* arg1 = (char*) cxxp1;
     s32 temp_v0;
 
     if (M2C_FIELD(arg0, u8 *, 0x1D4) == 0) {
@@ -1022,7 +1034,9 @@ void _ZN3paf4View9PlaySoundEPKc(struct Unk_scePaf_49CE42F7_0 *arg0, char* arg1) 
 #endif
 
 #if FW_VERSION == 100
-void _ZN3paf4View9PlaySoundEPKc(struct Unk_scePaf_49CE42F7_0 *arg0, char* arg1) {
+void paf::View::PlaySound(char const* cxxp1) {
+    struct Unk_scePaf_49CE42F7_0 *arg0 = (struct Unk_scePaf_49CE42F7_0 *) this;
+    char* arg1 = (char*) cxxp1;
     s32 temp_v0;
 
     if (M2C_FIELD(arg0, u8 *, 0x1D0) == 0) {
@@ -1037,7 +1051,9 @@ void _ZN3paf4View9PlaySoundEPKc(struct Unk_scePaf_49CE42F7_0 *arg0, char* arg1) 
 #endif
 
 #if FW_VERSION == 282
-void _ZN3paf4View9PlaySoundEPKc(struct Unk_scePaf_49CE42F7_0 *arg0, char* arg1) {
+void paf::View::PlaySound(char const* cxxp1) {
+    struct Unk_scePaf_49CE42F7_0 *arg0 = (struct Unk_scePaf_49CE42F7_0 *) this;
+    char* arg1 = (char*) cxxp1;
     s32 temp_v0;
 
     if (arg0->unk1C0 == 0) {
@@ -2561,7 +2577,8 @@ INCLUDE_ASM("nonmatchings/paf", func_000127C0);
 #if FW_VERSION == 100 || (FW_VERSION >= 200 && FW_VERSION < 282)
 INCLUDE_ASM("nonmatchings/paf", _ZNK8PSJSPage6IsOpenEv);
 #else
-s32 _ZNK8PSJSPage6IsOpenEv(struct Unk_scePaf_1A468B86_0 *arg0) {
+s32 PSJSPage::IsOpen() const {
+    struct Unk_scePaf_1A468B86_0 *arg0 = (struct Unk_scePaf_1A468B86_0 *) this;
     return *func_0003F340(arg0->unk24) != 0;
 }
 #endif

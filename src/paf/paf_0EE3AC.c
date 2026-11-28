@@ -54,7 +54,9 @@ INCLUDE_ASM("nonmatchings/paf_0EE3AC", _ZN3paf10PhProgress15SetShadowRenderEPNS_
 #endif
 
 #if FW_VERSION == 282
-void _ZN3paf10PhProgress15SetShadowRenderEPNS_9PhSRenderE(struct Unk_scePaf_2A5DDF04_0 *arg0, s32 arg1) {
+void paf::PhProgress::SetShadowRender(paf::PhSRender* cxxp1) {
+    struct Unk_scePaf_2A5DDF04_0 *arg0 = (struct Unk_scePaf_2A5DDF04_0 *) this;
+    s32 arg1 = (s32) cxxp1;
     arg0->unk1E8->unk3F8 = arg1;
 }
 #endif
@@ -75,7 +77,7 @@ s32 func_000EE97C(void) {
     return D_001A4814;
 }
 
-s32 _ZN3paf7PhScene10WidgetTypeEv(void) {
+s32 paf::PhScene::WidgetType() {
     return D_001A4814;
 }
 
@@ -187,7 +189,7 @@ s32 func_000EF4EC(void) {
     return D_001A4818;
 }
 
-s32 _ZN3paf8PhScroll10WidgetTypeEv(void) {
+s32 paf::PhScroll::WidgetType() {
     return D_001A4818;
 }
 

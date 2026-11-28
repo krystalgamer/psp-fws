@@ -18,7 +18,8 @@ void func_000FEF54(struct Unk_func_000FEF54_0 *arg0) {
 }
 #endif
 
-void _ZN3paf12MiconPointee6AddRefEv(void *arg0) {
+void paf::MiconPointee::AddRef() {
+    void *arg0 = (void *) this;
     sceKernelWaitSema(D_001A5C80, 1, NULL);
     M2C_FIELD(arg0, s32 *, 4) = (s32) (M2C_FIELD(arg0, s32 *, 4) + 1);
     sceKernelSignalSema((s32) D_001A5C80, 1);

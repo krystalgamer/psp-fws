@@ -16,7 +16,7 @@ s32 func_000EDF08(void) {
     return D_001A480C;
 }
 
-s32 _ZN3paf7PhPlane10WidgetTypeEv(void) {
+s32 paf::PhPlane::WidgetType() {
     return D_001A480C;
 }
 

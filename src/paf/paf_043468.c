@@ -2,7 +2,7 @@
 #include "common.h"
 #include "paf_decls.h"
 
-s32 _ZN3paf5Image12GetErrorTypeEv(void) {
+s32 paf::Image::GetErrorType() {
     return D_001A34E4;
 }
 
@@ -25,7 +25,8 @@ INCLUDE_ASM("nonmatchings/paf_043468", func_00040864);
 #endif
 
 #if FW_VERSION == 282
-s32 _ZN3paf5Image12CopyWithEdgeEv(s32 arg0) {
+s32 paf::Image::CopyWithEdge() {
+    s32 arg0 = (s32) this;
     s32 **temp_v0;
     s32 var_v0;
 
@@ -38,7 +39,8 @@ s32 _ZN3paf5Image12CopyWithEdgeEv(s32 arg0) {
     return var_v0;
 }
 
-s32 _ZN3paf5Image6MirrorEv(s32 arg0) {
+s32 paf::Image::Mirror() {
+    s32 arg0 = (s32) this;
     s32 **temp_v0;
     s32 var_v0;
 

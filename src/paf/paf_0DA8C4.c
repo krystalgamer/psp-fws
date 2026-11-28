@@ -126,7 +126,7 @@ s32 func_000DC0E4(void) {
     return D_001A47BC;
 }
 
-s32 _ZN3paf7PhClock10WidgetTypeEv(void) {
+s32 paf::PhClock::WidgetType() {
     return D_001A47BC;
 }
 
@@ -408,7 +408,7 @@ s32 func_000DE540(void) {
     return D_001A47C0;
 }
 
-s32 _ZN3paf10PhInfoList10WidgetTypeEv(void) {
+s32 paf::PhInfoList::WidgetType() {
     return D_001A47C0;
 }
 
@@ -677,7 +677,7 @@ s32 func_000E1B34(void) {
     return D_001A47C4;
 }
 
-s32 _ZN3paf8PhIPAddr10WidgetTypeEv(void) {
+s32 paf::PhIPAddr::WidgetType() {
     return D_001A47C4;
 }
 
@@ -935,7 +935,7 @@ s32 func_000E31BC(void) {
     return D_001A47C8;
 }
 
-s32 _ZN3paf10PhItemSpin10WidgetTypeEv(void) {
+s32 paf::PhItemSpin::WidgetType() {
     return D_001A47C8;
 }
 

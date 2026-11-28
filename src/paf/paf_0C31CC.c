@@ -26,7 +26,7 @@ INCLUDE_ASM("nonmatchings/paf_0C31CC", func_000C3250);
 #if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_0C31CC", _ZN3paf13PhApplication13StartDispListEv);
 #else
-void _ZN3paf13PhApplication13StartDispListEv(void) {
+void paf::PhApplication::StartDispList() {
     sceGuStart(0, D_001A5420, D_001A5424);
 }
 #endif
@@ -34,7 +34,7 @@ void _ZN3paf13PhApplication13StartDispListEv(void) {
 #if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_0C31CC", _ZN3paf13PhApplication14FinishDispListEv);
 #else
-void _ZN3paf13PhApplication14FinishDispListEv(void) {
+void paf::PhApplication::FinishDispList() {
     sceGuFinish();
     sceGuSync(0, 0);
 }
@@ -69,7 +69,7 @@ void func_0006B030(s32 arg0) {
 #endif
 
 #if FW_VERSION == 282
-M2C_UNK *_ZN3paf13PhApplication14GetRootSurfaceEv(void) {
+M2C_UNK * paf::PhApplication::GetRootSurface() {
     return &D_001A542C;
 }
 #endif

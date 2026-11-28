@@ -22,7 +22,7 @@ s32 func_000F2A44(void) {
     return D_001A4824;
 }
 
-s32 _ZN3paf7PhXmBar10WidgetTypeEv(void) {
+s32 paf::PhXmBar::WidgetType() {
     return D_001A4824;
 }
 
@@ -240,7 +240,7 @@ s32 func_000F4F08(void) {
     return D_001A4828;
 }
 
-s32 _ZN3paf8PhXmItem10WidgetTypeEv(void) {
+s32 paf::PhXmItem::WidgetType() {
     return D_001A4828;
 }
 
@@ -500,7 +500,7 @@ s32 func_000F631C(void) {
     return D_001A482C;
 }
 
-s32 _ZN3paf8PhXmList10WidgetTypeEv(void) {
+s32 paf::PhXmList::WidgetType() {
     return D_001A482C;
 }
 
@@ -640,7 +640,9 @@ INCLUDE_ASM("nonmatchings/paf_0F29E0", func_000F6BBC);
 INCLUDE_ASM("nonmatchings/paf_0F29E0", func_0009A354);
 #endif
 
-s32 _ZN3paf8PhXmList10SetItemNumEi(struct Unk_scePaf_4FC2470C_0 *arg0, s32 arg1) {
+s32 paf::PhXmList::SetItemNum(int cxxp1) {
+    struct Unk_scePaf_4FC2470C_0 *arg0 = (struct Unk_scePaf_4FC2470C_0 *) this;
+    s32 arg1 = (s32) cxxp1;
     s32 var_v0;
 
     var_v0 = -1;
@@ -839,7 +841,9 @@ INCLUDE_ASM("nonmatchings/paf_0F29E0", _ZN3paf8PhXmList10SetKeyMaskEi);
 #endif
 
 #if (FW_VERSION >= 150 && FW_VERSION < 200) || FW_VERSION == 282
-s32 _ZN3paf8PhXmList10SetKeyMaskEi(struct Unk_scePaf_C933B3C5_0 *arg0, s32 arg1) {
+s32 paf::PhXmList::SetKeyMask(int cxxp1) {
+    struct Unk_scePaf_C933B3C5_0 *arg0 = (struct Unk_scePaf_C933B3C5_0 *) this;
+    s32 arg1 = (s32) cxxp1;
     s32 temp_v0;
 
     temp_v0 = arg0->unk35C;

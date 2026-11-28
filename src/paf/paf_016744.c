@@ -331,7 +331,8 @@ INCLUDE_ASM("nonmatchings/paf_016744", _ZNK11PSJSContext11GetUserDataEv);
 #endif
 
 #if FW_VERSION < 200
-s32 _ZNK11PSJSContext11GetUserDataEv(void **arg0) {
+s32 PSJSContext::GetUserData() const {
+    void **arg0 = (void **) this;
     s32 var_v0;
     void *temp_a0;
 
@@ -345,7 +346,8 @@ s32 _ZNK11PSJSContext11GetUserDataEv(void **arg0) {
 #endif
 
 #if FW_VERSION == 282
-s32 _ZNK11PSJSContext11GetUserDataEv(void **arg0) {
+s32 PSJSContext::GetUserData() const {
+    void **arg0 = (void **) this;
     s32 var_v0;
     struct Unk_scePaf_D8739C4C_temp_a0 *temp_a0;
 
@@ -363,7 +365,9 @@ INCLUDE_ASM("nonmatchings/paf_016744", _ZN11PSJSContext11SetUserDataEPv);
 #endif
 
 #if FW_VERSION < 200
-s32 _ZN11PSJSContext11SetUserDataEPv(void **arg0, s32 arg1) {
+s32 PSJSContext::SetUserData(void* cxxp1) {
+    void **arg0 = (void **) this;
+    s32 arg1 = (s32) cxxp1;
     s32 var_v0;
     void *temp_a0;
 
@@ -378,7 +382,9 @@ s32 _ZN11PSJSContext11SetUserDataEPv(void **arg0, s32 arg1) {
 #endif
 
 #if FW_VERSION == 282
-s32 _ZN11PSJSContext11SetUserDataEPv(void **arg0, s32 arg1) {
+s32 PSJSContext::SetUserData(void* cxxp1) {
+    void **arg0 = (void **) this;
+    s32 arg1 = (s32) cxxp1;
     s32 var_v0;
     struct Unk_scePaf_D7E925A1_temp_a0 *temp_a0;
 

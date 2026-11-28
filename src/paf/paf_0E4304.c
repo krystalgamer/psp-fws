@@ -27,7 +27,8 @@ void func_000E4368(struct Unk_func_000E4368_0 *arg0) {
     func_000CEE18(arg0->unk1E8->unk20);
 }
 
-void _ZN3paf11PhLabelText14ReleaseSurfaceEv(struct Unk_scePaf_6E1B5B50_0 *arg0) {
+void paf::PhLabelText::ReleaseSurface() {
+    struct Unk_scePaf_6E1B5B50_0 *arg0 = (struct Unk_scePaf_6E1B5B50_0 *) this;
     func_000D0648(arg0->unk1E8->unk20);
 }
 
@@ -47,7 +48,9 @@ void func_000E4408(struct Unk_func_000E4408_0 *arg0) {
     func_000D0E94(arg0->unk1E8->unk20);
 }
 
-void _ZN3paf11PhLabelText21SetPrivateSurfacePoolEPNS_11SurfacePoolE(struct Unk_scePaf_7116224C_0 *arg0, s32 arg1) {
+void paf::PhLabelText::SetPrivateSurfacePool(paf::SurfacePool* cxxp1) {
+    struct Unk_scePaf_7116224C_0 *arg0 = (struct Unk_scePaf_7116224C_0 *) this;
+    s32 arg1 = (s32) cxxp1;
     arg0->unk1E8->unk20->unk194 = arg1;
 }
 
@@ -140,7 +143,8 @@ INCLUDE_ASM("nonmatchings/paf_0E4304", _ZN3paf11PhLabelText14ReleaseSurfaceEv);
 #endif
 
 #if FW_VERSION < 200
-void _ZN3paf11PhLabelText14ReleaseSurfaceEv(struct Unk_scePaf_6E1B5B50_0 *arg0) {
+void paf::PhLabelText::ReleaseSurface() {
+    struct Unk_scePaf_6E1B5B50_0 *arg0 = (struct Unk_scePaf_6E1B5B50_0 *) this;
     func_000D0648(M2C_FIELD(arg0->unk1E8, s32 *, 0x1C));
 }
 #endif
@@ -182,7 +186,9 @@ INCLUDE_ASM("nonmatchings/paf_0E4304", _ZN3paf11PhLabelText21SetPrivateSurfacePo
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 200
-void _ZN3paf11PhLabelText21SetPrivateSurfacePoolEPNS_11SurfacePoolE(struct Unk_scePaf_7116224C_0 *arg0, s32 arg1) {
+void paf::PhLabelText::SetPrivateSurfacePool(paf::SurfacePool* cxxp1) {
+    struct Unk_scePaf_7116224C_0 *arg0 = (struct Unk_scePaf_7116224C_0 *) this;
+    s32 arg1 = (s32) cxxp1;
     M2C_FIELD(M2C_FIELD(arg0->unk1E8, void **, 0x1C), s32 *, 0x194) = arg1;
 }
 #endif
@@ -580,7 +586,8 @@ INCLUDE_ASM("nonmatchings/paf_0E4304", _ZN3paf6PhList6RedrawEv);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 200
-void _ZN3paf6PhList6RedrawEv(struct Unk_scePaf_44EB8C62_0 *arg0) {
+void paf::PhList::Redraw() {
+    struct Unk_scePaf_44EB8C62_0 *arg0 = (struct Unk_scePaf_44EB8C62_0 *) this;
     s32 temp_a1;
     s32 var_s0;
 
@@ -598,7 +605,8 @@ void _ZN3paf6PhList6RedrawEv(struct Unk_scePaf_44EB8C62_0 *arg0) {
 #endif
 
 #if FW_VERSION == 100
-void _ZN3paf6PhList6RedrawEv(struct Unk_scePaf_44EB8C62_0 *arg0) {
+void paf::PhList::Redraw() {
+    struct Unk_scePaf_44EB8C62_0 *arg0 = (struct Unk_scePaf_44EB8C62_0 *) this;
     s32 temp_a1;
     s32 var_s0;
 
@@ -620,7 +628,8 @@ INCLUDE_ASM("nonmatchings/paf_0E4304", func_000E7C00);
 #endif
 
 #if FW_VERSION == 282
-void _ZN3paf6PhList6RedrawEv(struct Unk_scePaf_44EB8C62_0 *arg0) {
+void paf::PhList::Redraw() {
+    struct Unk_scePaf_44EB8C62_0 *arg0 = (struct Unk_scePaf_44EB8C62_0 *) this;
     s32 temp_a1;
     s32 var_s0;
 

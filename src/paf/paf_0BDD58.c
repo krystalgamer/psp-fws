@@ -108,7 +108,7 @@ INCLUDE_ASM("nonmatchings/paf_0BDD58", func_000C115C);
 INCLUDE_ASM("nonmatchings/paf_0BDD58", func_000C1208);
 #endif
 
-M2C_UNK *_ZN3paf8PhAppear12ShadowRenderEv(void) {
+M2C_UNK * paf::PhAppear::ShadowRender() {
     return &D_001A53C8;
 }
 
@@ -132,25 +132,25 @@ s32 _ZN3paf9PhSRender8SetStyleEib(void) {
     return -1;
 }
 
-s32 _ZN3paf9PhSRender8SetStyleEif(void) {
+s32 paf::PhSRender::SetStyle(int cxxp1, float cxxp2) {
     return -1;
 }
 
-s32 _ZN3paf9PhSRender8SetStyleEiRK4vec4(void) {
+s32 paf::PhSRender::SetStyle(int cxxp1, vec4 const& cxxp2) {
     return -1;
 }
 
 INCLUDE_ASM("nonmatchings/paf_0BDD58", _ZNK3paf9PhSRender8GetStyleEiRi);
 
-s32 _ZNK3paf9PhSRender8GetStyleEiRb(void) {
+s32 paf::PhSRender::GetStyle(int cxxp1, bool& cxxp2) const {
     return -1;
 }
 
-s32 _ZNK3paf9PhSRender8GetStyleEiRf(void) {
+s32 paf::PhSRender::GetStyle(int cxxp1, float& cxxp2) const {
     return -1;
 }
 
-s32 _ZNK3paf9PhSRender8GetStyleEiR4vec4(void) {
+s32 paf::PhSRender::GetStyle(int cxxp1, vec4& cxxp2) const {
     return -1;
 }
 
