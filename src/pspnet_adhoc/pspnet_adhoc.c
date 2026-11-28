@@ -3345,26 +3345,26 @@ s32 ptpInit(void) {
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", ptpTerm);
 #endif
 
-#if FW_VERSION < 150
 SceNetAdhocPtpPcb *ptpLookup(const SceNetEtherAddr *laddr, u16 lport, const SceNetEtherAddr *paddr, u16 pport) {
     SceNetAdhocPtpPcb *p;
 
     for (p = g_ptpList.first; p != NULL; p = p->next) {
-        if (adhocMemcmp(&p->laddr, laddr, 6) == 0 && p->lport == lport) {
+        if (ADHOC_MEMCMP(&p->laddr, laddr, 6) == 0 && p->lport == lport) {
             if (paddr == NULL)
                 break;
-            if (adhocMemcmp(&p->paddr, paddr, 6) == 0 && p->pport == pport)
+            if (ADHOC_MEMCMP(&p->paddr, paddr, 6) == 0 && p->pport == pport)
                 break;
         }
     }
     return p;
 }
-#else
-INCLUDE_ASM("nonmatchings/pspnet_adhoc", ptpLookup);
-#endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/pspnet_adhoc", ptpClearAddr);
+void ptpClearAddr(SceNetAdhocPtpPcb *pcb) {
+    __builtin_memset(&pcb->laddr, 0, sizeof(pcb->laddr));
+    __builtin_memset(&pcb->paddr, 0, sizeof(pcb->paddr));
+    pcb->lport = 0;
+}
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282

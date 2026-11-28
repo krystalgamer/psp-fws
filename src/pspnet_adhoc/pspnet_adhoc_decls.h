@@ -352,6 +352,12 @@ struct sockaddr_dl {
         } \
     } while (0)
 
+#if FW_VERSION < 201
+#define ADHOC_MEMCMP adhocMemcmp
+#else
+#define ADHOC_MEMCMP sceNetMemcmp
+#endif
+
 #define PTP_SBWAKEUP(sb) do { \
         if ((sb)->flags & 1) { \
             (sb)->flags &= ~1; \
@@ -542,6 +548,7 @@ void sceNetMCopydata(struct mbuf *m, s32 off, s32 len, void *cp);
 struct mbuf *sceNetMFree(struct mbuf *m);
 void sceNetMFreem(struct mbuf *m);
 void *sceNetMallocInternal(u32 size);
+s32 sceNetMemcmp(const void *a, const void *b, s32 n);
 void *sceNetMemset(void *s, s32 c, s32 n);
 u32 sceNetRand(void);
 s32 sceWlanDevIsGameMode(void);
