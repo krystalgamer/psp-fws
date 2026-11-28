@@ -2938,10 +2938,46 @@ s32 func_00008480(SceWlanMac *mac, s32 on) {
 INCLUDE_ASM("nonmatchings/wlan", func_00008480);
 #endif
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/wlan", func_00008524);
+#if FW_VERSION < 271
+s32 func_00008524(SceWlanMac *mac, s32 bit) {
+    u8 mask = 1 << bit;
+    u8 v;
 
-INCLUDE_ASM("nonmatchings/wlan", func_000085CC);
+    if (func_000090E8(mac, 0x27, &v) < 0)
+        return -1;
+    if ((mask & v) == 0) {
+        mac->flags &= ~2;
+        return 0;
+    }
+    v &= ~mask;
+    if (func_00009160(mac, 0x27, &v) < 0)
+        return -1;
+    mac->flags &= ~2;
+    return 0;
+}
+#endif
+
+#if FW_VERSION == 271
+INCLUDE_ASM("nonmatchings/wlan", func_00008524);
+#endif
+
+#if FW_VERSION < 282
+s32 func_000085CC(SceWlanMac *mac, s32 bit) {
+    u8 mask = 1 << bit;
+    u8 v;
+
+    if (func_000090E8(mac, 0x27, &v) < 0)
+        return -1;
+    if (mask & v) {
+        mac->flags |= 2;
+        return 0;
+    }
+    v |= mask;
+    if (func_00009160(mac, 0x27, &v) < 0)
+        return -1;
+    mac->flags |= 2;
+    return 0;
+}
 #else
 void func_0000AC3C(void) {
     sceSysregMsifResetEnable(1);
@@ -3942,7 +3978,9 @@ INCLUDE_ASM("nonmatchings/wlan", func_0000F81C);
 INCLUDE_ASM("nonmatchings/wlan", func_0000F984);
 
 #if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/wlan", func_0000CD60);
+s32 func_0000CD60(void) {
+    return 0;
+}
 #endif
 
 INCLUDE_ASM("nonmatchings/wlan", func_0000FA98);
