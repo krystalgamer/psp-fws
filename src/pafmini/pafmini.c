@@ -21,57 +21,257 @@ void paf_fini(void) {
     func_000CED84();
 }
 
-#if FW_VERSION < 282
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pafmini", _ZN3paf7PhModel10WidgetTypeEv);
+#endif
 
+#if FW_VERSION == 100
+void _ZN3paf7PhModel10WidgetTypeEv(void) {
+
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pafmini", _ZN3paf7PhModel14SetPatchDivideEi);
+#endif
 
+#if FW_VERSION == 100
+void _ZN3paf7PhModel14SetPatchDivideEi(void) {
+
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pafmini", _ZN3paf7PhModel8SetModelEPvi);
+#endif
 
+#if FW_VERSION == 100
+void _ZN3paf7PhModel8SetModelEPvi(void) {
+
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pafmini", _ZN3paf7PhModel16SetCurrentMotionEif);
+#endif
 
+#if FW_VERSION == 100
+void _ZN3paf7PhModel16SetCurrentMotionEif(void) {
+
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pafmini", _ZN3paf7PhModelC1EPNS_8PhWidgetEPNS_8PhAppearE);
+#endif
 
+#if FW_VERSION == 100
+void _ZN3paf7PhModelC1EPNS_8PhWidgetEPNS_8PhAppearE(void) {
+
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pafmini", _ZNK3paf7PhModel14GetMotionCountEv);
+#endif
 
+#if FW_VERSION == 100
+void _ZNK3paf7PhModel14GetMotionCountEv(void) {
+
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pafmini", _ZNK3paf7PhModel8GetFrameEv);
+#endif
 
+#if FW_VERSION == 100
+void _ZNK3paf7PhModel8GetFrameEv(void) {
+
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pafmini", _ZN3paf7PhModel12SetFrameLoopEff);
+#endif
 
+#if FW_VERSION == 100
+void _ZN3paf7PhModel12SetFrameLoopEff(void) {
+
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pafmini", _ZN3paf7PhModel14SetFrameRepeatEi);
+#endif
 
+#if FW_VERSION == 100
+void _ZN3paf7PhModel14SetFrameRepeatEi(void) {
+
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pafmini", _ZN3paf7PhModel8SetFrameEf);
+#endif
 
+#if FW_VERSION == 100
+void _ZN3paf7PhModel8SetFrameEf(void) {
+
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pafmini", _ZN3paf7PhModel12SetFrameRateEf);
+#endif
 
+#if FW_VERSION == 100
+void _ZN3paf7PhModel12SetFrameRateEf(void) {
+
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pafmini", _ZNK3paf7PhModel16GetCurrentMotionEv);
+#endif
 
+#if FW_VERSION == 100
+void _ZNK3paf7PhModel16GetCurrentMotionEv(void) {
+
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pafmini", _ZN3paf7PhModel15SetTextureImageERKNS_12SurfaceRCPtrINS_7SurfaceEEEi);
+#endif
 
+#if FW_VERSION == 100
+void _ZN3paf7PhModel15SetTextureImageERKNS_12SurfaceRCPtrINS_7SurfaceEEEi(void) {
+
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pafmini", _ZN3paf7PhModel17SetTexturePaletteERKNS_12SurfaceRCPtrINS_7SurfaceEEEif);
+#endif
 
+#if FW_VERSION == 100
+void _ZN3paf7PhModel17SetTexturePaletteERKNS_12SurfaceRCPtrINS_7SurfaceEEEif(void) {
+
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pafmini", _ZNK3paf7PhModel15GetTextureImageERNS_12SurfaceRCPtrINS_7SurfaceEEEi);
+#endif
 
+#if FW_VERSION == 100
+void _ZNK3paf7PhModel15GetTextureImageERNS_12SurfaceRCPtrINS_7SurfaceEEEi(void) {
+
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pafmini", _ZNK3paf7PhModel17GetTexturePaletteERNS_12SurfaceRCPtrINS_7SurfaceEEEi);
+#endif
 
+#if FW_VERSION == 100
+void _ZNK3paf7PhModel17GetTexturePaletteERNS_12SurfaceRCPtrINS_7SurfaceEEEi(void) {
+
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pafmini", _ZN3paf7PhXmBar10SetListNumEi);
+#endif
 
+#if FW_VERSION == 100
+void _ZN3paf7PhXmBar10SetListNumEi(void) {
+
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pafmini", _ZN3paf7PhXmBar13SetFocusIndexEii);
+#endif
 
+#if FW_VERSION == 100
+void _ZN3paf7PhXmBar13SetFocusIndexEii(void) {
+
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pafmini", _ZN3paf7PhXmBar6RedrawEii);
+#endif
 
+#if FW_VERSION == 100
+void _ZN3paf7PhXmBar6RedrawEii(void) {
+
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pafmini", _ZN3paf7PhXmBar10DeleteItemEiif);
+#endif
 
+#if FW_VERSION == 100
+void _ZN3paf7PhXmBar10DeleteItemEiif(void) {
+
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pafmini", _ZN3paf7PhXmBar10InsertItemEii);
+#endif
 
+#if FW_VERSION == 100
+void _ZN3paf7PhXmBar10InsertItemEii(void) {
+
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pafmini", scePaf_04EF78CD);
+#endif
 
+#if FW_VERSION == 100
+void scePaf_04EF78CD(void) {
+
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pafmini", _ZN3paf7PhXmBar11UpdateItemsEi);
+#endif
 
+#if FW_VERSION == 100
+void _ZN3paf7PhXmBar11UpdateItemsEi(void) {
+
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pafmini", _ZN3paf7PhXmBar12AnimIconPlayEiif);
+#endif
 
+#if FW_VERSION == 100
+void _ZN3paf7PhXmBar12AnimIconPlayEiif(void) {
+
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pafmini", _ZN3paf7PhXmBar12AnimIconStopEii);
+#endif
 
+#if FW_VERSION == 100
+void _ZN3paf7PhXmBar12AnimIconStopEii(void) {
+
+}
+#endif
+
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pafmini", _ZN3paf7PhXmBar19GetFocusedItemIndexEi);
 #endif
 
