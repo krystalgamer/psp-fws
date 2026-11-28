@@ -1,3 +1,5 @@
+/* compiler[303,311,340]: 1.9.2 */
+/* cflags[303,311,340]: -O2 -mext */
 #include "common.h"
 
 INCLUDE_ASM("nonmatchings/hvauth_r", sceHVAuthOpen);

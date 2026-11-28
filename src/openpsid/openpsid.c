@@ -1,3 +1,5 @@
+/* compiler[352]: 1.9.2 */
+/* cflags[352]: -O2 -mext */
 #include "common.h"
 #include "k1.h"
 #include "openpsid_decls.h"

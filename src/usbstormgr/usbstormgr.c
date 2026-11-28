@@ -1,3 +1,5 @@
+/* compiler[340]: 1.9.2 */
+/* cflags[340]: -O2 -mext */
 /* cflags[100,102,103]: -Os */
 /* cflags[151]: -Os */
 #include "common.h"

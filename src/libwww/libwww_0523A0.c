@@ -1,3 +1,7 @@
+/* compiler[303,311,340]: 1.9.2 */
+/* cflags[303,311,340]: -O1 -mext */
+/* compiler[271]: 1.9.2 */
+/* cflags[271]: -O1 -mext */
 /* cflags: -O1 */
 #include "common.h"
 #include "libwww_decls.h"
