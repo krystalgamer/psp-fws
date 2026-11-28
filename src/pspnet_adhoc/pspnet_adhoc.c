@@ -1793,7 +1793,34 @@ end:
 #endif
 
 #if FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/pspnet_adhoc", sceNetAdhocPtpListen);
+s32 sceNetAdhocPtpListen(const SceNetEtherAddr *saddr, u16 sport, s32 bufsize, u32 rexmt_int, s32 rexmt_cnt, s32 backlog, s32 flag) {
+    s32 s;
+    s32 ret;
+    SceNetAdhocDesc *d;
+
+    if (sceKernelCheckThreadStack() < 0x7B0)
+        return 0x80410005;
+    if (saddr == NULL || flag != 0)
+        return 0x80410711;
+    s = _sce_pspnet_spllock();
+    if (s < 0)
+        return s;
+    ret = 0x80410712;
+    if (g_adhocInit == 0)
+        goto end;
+    ret = func_00003A68(saddr, sport, NULL, 0, bufsize, bufsize, rexmt_int, rexmt_cnt, &d);
+    if (ret < 0)
+        goto end;
+    ret = func_000056E4(d->pcb, backlog);
+    if (ret < 0) {
+        func_00003BB0(d);
+        goto end;
+    }
+    ret = d->id;
+end:
+    _sce_pspnet_splunlock(s);
+    return ret;
+}
 #endif
 
 #if FW_VERSION < 201
@@ -2829,7 +2856,39 @@ err1:
 #endif
 
 #if FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00003A68);
+s32 func_00003A68(const SceNetEtherAddr *saddr, u16 sport, const SceNetEtherAddr *daddr, u16 dport, s32 sndbuf, s32 rcvbuf, u32 rexmt_int, s32 rexmt_cnt, SceNetAdhocDesc **out) {
+    s32 id;
+    s32 ret;
+    SceNetAdhocDesc *d;
+
+    id = func_00000ED8();
+    if (id < 0)
+        return 0x8041070F;
+    ret = func_00000F60(2, &d);
+    if (ret < 0)
+        return ret;
+    ret = func_00004A40(d);
+    if (ret < 0)
+        goto err1;
+    ret = func_00005594(d->pcb, sndbuf, rcvbuf);
+    if (ret < 0)
+        goto err2;
+    ret = func_000053EC(d->pcb, saddr, sport, daddr, dport);
+    if (ret < 0)
+        goto err3;
+    func_000055B0(d->pcb, rexmt_int, rexmt_cnt);
+    d->id = id;
+    *out = d;
+    return 0;
+
+err3:
+    func_00004B30(d->pcb);
+err2:
+    func_00004AE4(d);
+err1:
+    func_00000FFC(d);
+    return ret;
+}
 #else
 void func_000039FC(SceNetAdhocDesc *d) {
     func_00004B30(d->pcb);
