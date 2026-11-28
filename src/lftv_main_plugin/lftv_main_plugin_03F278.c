@@ -3270,7 +3270,7 @@ void func_000501BC(s32 arg0) {
     D_0005EE50 = arg0;
 }
 
-void func_000501C8(struct Unk_func_000501C8_0 *arg0, s32 arg1) {
+void func_000501C8(Class_0005D948 *arg0, s32 arg1) {
     arg0->unk4 = arg1;
 }
 

@@ -1467,7 +1467,7 @@ void func_0002B048(struct Unk_func_0002B048_0 *arg0) {
             _ZN3paf9PhHandler11KillTimerCBEi(temp_v0_2, 0x3E8);
         }
     }
-    func_0002D230(arg0);
+    func_0002D230((Class_0005B860*) arg0);
 }
 #endif
 
@@ -1942,7 +1942,7 @@ s32 func_0002D21C(struct Unk_func_0002D21C_0 *arg0, s32 arg1) {
     return 0;
 }
 
-void func_0002D230(struct Unk_func_0002B048_0 *arg0) {
+void func_0002D230(Class_0005B860 *arg0) {
     s32 temp_v0;
     s32 temp_v1;
 
@@ -1985,7 +1985,7 @@ INCLUDE_ASM("nonmatchings/lftv_main_plugin_02433C", func_0002D2C4);
 
 INCLUDE_ASM("nonmatchings/lftv_main_plugin_02433C", func_0002D2FC);
 
-void func_0002D330(struct Unk_func_0002D330_0 *arg0) {
+void func_0002D330(Class_0005B860 *arg0) {
     s32 temp_v0;
     s32 temp_v1;
 
