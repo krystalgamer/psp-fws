@@ -462,9 +462,6 @@ s32 func_00004588(SceMScmHC *hc, s32 cmd, unsigned long *result, s32 arg3, SceMS
     }
     return 0;
 }
-#endif
-
-#if FW_VERSION < 201
 
 s32 module_reboot_before(void) {
     sceKernelWaitSema(D_00008934.sema, 1, NULL);
@@ -473,12 +470,9 @@ s32 module_reboot_before(void) {
     sceKernelSignalSema(D_00008934.sema, 1);
     return 0;
 }
-#endif
-
-#if FW_VERSION >= 201
+#else
 INCLUDE_RODATA("nonmatchings/msstor_0015A0", D_00009284);
 #endif
-
 
 #if FW_VERSION < 201
 s32 func_000048A8(SceIoDeviceEntry *de) {
@@ -551,7 +545,21 @@ s32 func_00004A04(void) {
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/msstor_0015A0", func_00004A90);
+s32 func_00004A90(SceIoIob *iob, char *name, s32 flags, SceMode mode) {
+    s32 ret;
+    s32 intr;
+
+    ret = 0x80020328;
+    intr = sceKernelCpuSuspendIntr();
+    if (iob != NULL) {
+        ret = 0x80220183;
+        if (iob->i_unit == 0) {
+            ret = func_00004C00(iob, name, flags, mode);
+        }
+    }
+    sceKernelCpuResumeIntr(intr);
+    return ret;
+}
 
 INCLUDE_ASM("nonmatchings/msstor_0015A0", func_00004B30);
 
@@ -1063,11 +1071,59 @@ s32 func_00005D18(SceIoIob *iob, s32 cmd, void *in, SceSize inlen, void *out, Sc
     sceKernelPowerUnlockForUser(0);
     return ret;
 }
-#else
-INCLUDE_ASM("nonmatchings/msstor_0015A0", func_00005D18);
 #endif
 
-#if FW_VERSION < 201
+#if FW_VERSION >= 150 && FW_VERSION < 201
+s32 func_00005D18(SceIoIob *iob, s32 cmd, void *in, SceSize inlen, void *out, SceSize outlen) {
+    SceMSstorIoCtx *ctx;
+    u32 timeout;
+    u32 *pt;
+    s32 ret;
+
+    if (iob == NULL) {
+        return 0x80020328;
+    }
+    ctx = iob->i_private;
+    if (ctx == NULL) {
+        return 0xC0220100;
+    }
+    sceKernelSetEventFlag(ctx->evf, 1);
+    if (((cmd >> 15) & 1) && k1IsUserMode()) {
+        return 0x80220188;
+    }
+    switch (cmd) {
+    case 0x0210D016:
+        return sceKernelPollSema(ctx->sema, 1);
+    case 0x0210D017:
+        return sceKernelSignalSema(ctx->sema, 1);
+    }
+    timeout = ctx->lockTimeout;
+    pt = &timeout;
+    if (timeout == 0) {
+        pt = NULL;
+    }
+    sceKernelPowerLock(0);
+    if (cmd == 0x02125006) {
+        ret = sceKernelWaitSema(ctx->sema, 1, pt);
+        if (ret == 0) {
+            if (outlen != 4 || out == NULL) {
+                ret = 0x80220183;
+            } else {
+                *(s32 *)out = func_00000288() - ctx->dev->partStart;
+            }
+            sceKernelSignalSema(ctx->sema, 1);
+        }
+    } else {
+        ret = func_00005738(iob, cmd, in, inlen, out, outlen);
+    }
+    sceKernelPowerUnlock(0);
+    return ret;
+}
+#endif
+
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/msstor_0015A0", func_00005D18);
+#else
 s32 func_00005738(SceIoIob *iob, s32 cmd, void *in, SceSize inlen, void *out, SceSize outlen) {
     SceMSstorIoCtx *ctx;
     SceMSstorDev *dev;
@@ -1178,7 +1234,9 @@ s32 func_00005738(SceIoIob *iob, s32 cmd, void *in, SceSize inlen, void *out, Sc
 }
 
 INCLUDE_ASM("nonmatchings/msstor_0015A0", func_00005D0C);
-#else
+#endif
+
+#if FW_VERSION == 201
 INCLUDE_ASM("nonmatchings/msstor_0015A0", func_00005ED0);
 
 INCLUDE_ASM("nonmatchings/msstor_0015A0", func_00006758);
