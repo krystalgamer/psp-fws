@@ -436,7 +436,7 @@ int sceHttpSetProxy(int id, int activate_flag, int mode, const unsigned char *ne
             goto end;
         }
         tmpl = &con->tmpl;
-        con->unk38 = 0;
+        con->resolved = 0;
     } else {
         ret = 0x80431100;
         goto end;
@@ -2717,7 +2717,69 @@ int _try_build_header(SceUChar8 **out, SceHttpReq *request) {
     }
     return ret;
 }
+#endif
 
+#if FW_VERSION < 103
+int _try_resolve_hostname(SceHttpConn *connection) {
+    int ret;
+    long resolver_id = 0;
+    char *hostname;
+    void *resolver_buf = NULL;
+    u16 port;
+
+    if (connection->tmpl.use_netcnf == 1) {
+        ret = GetProxyInfoFromSystem(&connection->tmpl);
+        if (ret < 0) {
+            return ret;
+        }
+    }
+    if (connection->tmpl.proxy_status == 1) {
+        hostname = connection->tmpl.proxy_host;
+    } else {
+        hostname = (char *)connection->hostname;
+    }
+    ret = sceNetInetInetPton(2, hostname, &connection->sin.sin_addr);
+    if (ret != 1) {
+        resolver_buf = _sceHttpMallocInternal(5000);
+        if (resolver_buf == NULL) {
+            ret = 0x80431022;
+            goto end;
+        }
+        ret = sceNetResolverCreate((int *)&resolver_id, resolver_buf, 5000);
+        if (ret < 0) {
+            goto end;
+        }
+        connection->status = 1;
+        connection->resolver_id = resolver_id;
+        ret = sceNetResolverStartNtoA(resolver_id, hostname, &connection->sin.sin_addr,
+                                      connection->tmpl.resolver_timeo, connection->tmpl.resolver_retry);
+        connection->status = 2;
+        if (ret < 0) {
+            sceNetResolverDelete(resolver_id);
+            goto end;
+        }
+        ret = sceNetResolverDelete(resolver_id);
+        if (ret < 0) {
+            goto end;
+        }
+    }
+    connection->sin.sin_family = 2;
+    connection->resolved = 1;
+    if (connection->tmpl.proxy_status == 1) {
+        port = connection->tmpl.proxy_port;
+    } else {
+        port = connection->port;
+    }
+    connection->sin.sin_port = __builtin_allegrex_wsbh(port);
+end:
+    if (resolver_buf != NULL) {
+        _sceHttpFreeInternal(resolver_buf);
+    }
+    return ret;
+}
+#endif
+
+#if FW_VERSION == 103
 INCLUDE_ASM("nonmatchings/libhttp", _try_resolve_hostname);
 #endif
 

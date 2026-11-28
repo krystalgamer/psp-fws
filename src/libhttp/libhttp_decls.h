@@ -419,10 +419,10 @@ typedef struct SceHttpConn {
     s32 status;             /* 0x2C (1.03: 0x28) */
     unsigned char *hostname; /* 0x30 (1.03: 0x2C) */
     s32 unk34;
-    s32 unk38;              /* 0x38 (1.00) cleared by sceHttpSetProxy */
+    s32 resolved;           /* 0x38 (1.00) cleared by sceHttpSetProxy */
     u8 unk3C[(FW_VERSION == 103) ? 0xA4 - 0x38 : 0xA4 - 0x3C];
     SceHttpTmpl tmpl;       /* 0xA4 */
-    u8 unk128[0x138 - 0x128];
+    struct SceNetInetSockaddrIn sin; /* 0x128 */
     struct _SceHttpRecvBuf recv_buf; /* 0x138 (devkit layout) */
     struct SceHttpConn *redirect_list; /* 0x14C */
     struct SceHttpConn *next; /* 0x150 */
@@ -616,6 +616,7 @@ extern s32 D_0001B0E0;
 
 SceSize BuildHttpHeader(SceHttpReq *req, char *header, unsigned short calc_only);
 int CloneHeader(SceHttpReq *req);
+int ConnectNonblock(int sock_id, const struct SceNetInetSockaddrIn *sin_addr, int usec);
 int CopyHttpHeaderList(_SceHttpReqHeaderList **out, const _SceHttpReqHeaderList *src);
 int CopyHttpTmpl(const SceHttpTmpl *src, SceHttpTmpl *dst);
 int CreateConnection(int template_id, unsigned char *server_name, unsigned char *scheme, unsigned char *username, unsigned char *password, unsigned short port, int keepalive, int option, SceHttpReq *req);
@@ -649,6 +650,8 @@ void _sceHttpFreeInternal(void *ptr);
 void *_sceHttpMallocInternal(SceSize size);
 void *_sceHttpReallocInternal(void *ptr, SceSize size);
 int _try_build_header(SceUChar8 **out, SceHttpReq *request);
+int _try_connect(SceHttpConn *con);
+int _try_resolve_hostname(SceHttpConn *connection);
 s32 func_000031DC(SceHttpReq *arg0);
 int func_0000325C(SceHttpReq *req);
 s32 func_000032B0(SceHttpReq *req);
@@ -722,6 +725,7 @@ void func_0000AAAC(void *arg0);
 s32 func_0000AE54(s32);
 s32 func_0000AF34(void);
 s32 func_0000B2C0(s32);
+int func_0000B2D4(SceHttpConn *con);
 s32 func_0000B484(s32, s32, s32);
 void func_0000B560(void *arg0, void *arg1);
 s32 func_0000B598(void *arg0);
@@ -799,10 +803,13 @@ int sceKernelUtilsMd5BlockResult(); /* unprototyped: 1.50 C calls it without the
 int sceKernelUtilsMd5BlockUpdate(); /* unprototyped: 1.50 C calls it without the pass-through args */
 M2C_UNK sceKernelUtilsMd5Digest();
 int sceNetApctlGetInfo(int code, union SceNetApctlInfo *info);
-M2C_UNK sceNetInetInetPton();
+int sceNetInetInetPton(); /* (int af, const char *src, void *dst); unprototyped for other versions */
 s32 sceNetInetRecv(s32, void *, u32, s32);
 s32 sceNetInetSend(s32, void *, u32, s32);
 M2C_UNK sceNetMemset(s32 *, M2C_UNK, M2C_UNK);
+int sceNetResolverCreate(int *rid, void *buf, SceSize buflen);
+int sceNetResolverDelete(int rid);
+int sceNetResolverStartNtoA(int rid, const char *hostname, struct SceNetInetInAddr *addr, unsigned int timeout, int retry);
 M2C_UNK sceRtcFormatRFC2822();
 int sceRtcGetCurrentTick(); /* (u64 *tick); unprototyped for other versions' C */
 M2C_UNK sceRtcParseDateTime();
