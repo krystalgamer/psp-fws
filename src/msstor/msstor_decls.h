@@ -476,7 +476,7 @@ s32 func_00006A68(SceIoIob *iob, s32 cmd, void *in, SceSize inlen, void *out, Sc
 s32 func_00006AC8(SceIoIob *iob, s32 cmd, void *in, SceSize inlen, void *out, SceSize outlen);
 s32 func_00006BE8(SceIoIob *iob, s32 cmd, void *in, SceSize inlen, void *out, SceSize outlen);
 s32 func_00006C70(SceIoIob *iob, s32 cmd, void *in, SceSize inlen, void *out, SceSize outlen, s32 flag);
-s32 func_00006CD8(SceMSstorDev *dev, s32 arg1, s32 flag);
+s32 func_00006CD8(SceMSstorDev *dev, s32 delay, s32 flag);
 s32 func_00006DFC(SceIoIob *iob, s32 cmd, void *in, SceSize inlen, void *out, SceSize outlen);
 s32 func_00006E60(SceIoIob *iob, s32 cmd, void *in, SceSize inlen, void *out, SceSize outlen);
 s32 func_00006EBC(SceIoIob *iob, s32 cmd, void *in, SceSize inlen, void *out, SceSize outlen);

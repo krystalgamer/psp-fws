@@ -1325,9 +1325,59 @@ INCLUDE_ASM("nonmatchings/msstor_0015A0", func_00006AC8);
 
 INCLUDE_ASM("nonmatchings/msstor_0015A0", func_00006BE8);
 
-INCLUDE_ASM("nonmatchings/msstor_0015A0", func_00006C70);
+s32 func_00006C70(SceIoIob *iob, s32 cmd, void *in, SceSize inlen, void *out, SceSize outlen, s32 flag) {
+    s32 v;
 
+    if (in == NULL || inlen != 4) {
+        return 0x80220183;
+    }
+    v = *(s32 *)in;
+    if (v < 0) {
+        return 0x80220183;
+    }
+    return func_00007850(func_00006CD8(((SceMSstorIoCtx *)iob->i_private)->dev, v, flag));
+}
+
+#if FW_VERSION < 201
+s32 func_00006CD8(SceMSstorDev *dev, s32 delay, s32 flag) {
+    s32 ret;
+    s32 parallel;
+
+    ret = 0;
+    if (delay < 0) {
+        return 0x80220183;
+    }
+    if (flag != 0 && (dev->mediaType2 & 0x40)) {
+        return 0x80220183;
+    }
+    parallel = dev->parallel;
+    if (flag == 0) {
+        sceMScmSetSlotPower(dev->hc, 1);
+        sceKernelDelayThread(delay);
+        sceMScmSetSlotPower(dev->hc, 2);
+        if (dev->mediaType2 & 0x40) {
+            sceKernelDelayThread(0x5014);
+        } else {
+            sceKernelDelayThread(0x9C4);
+        }
+    } else {
+        if (dev->mediaType2 & 0x10) {
+            ret = func_000008B8(dev, 0x3C, delay);
+        }
+        sceKernelDelayThread(delay);
+    }
+    if (parallel == 1) {
+        func_000016E4(dev, 0);
+        func_00000654(dev, 1);
+    }
+    if (dev->mediaType2 & 0x40) {
+        ret = func_0000149C(dev);
+    }
+    return ret;
+}
+#else
 INCLUDE_ASM("nonmatchings/msstor_0015A0", func_00006CD8);
+#endif
 
 #if FW_VERSION < 201
 s32 func_00006DFC(SceIoIob *iob, s32 cmd, void *in, SceSize inlen, void *out, SceSize outlen) {
