@@ -2798,7 +2798,15 @@ void sceUtilityDdHelperGetStatus(void) {
 #endif
 
 #if FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/utility", sceUtilityHtmlViewerInitStart);
+s32 sceUtilityHtmlViewerInitStart(void *arg0) {
+    s32 temp_v0;
+    u32 temp_s0;
+
+    temp_s0 = shiftK1();
+    temp_v0 = func_000014FC(1, (s32) arg0);
+    setK1(temp_s0);
+    return temp_v0;
+}
 
 s32 sceUtilityHtmlViewerShutdownStart(void) {
     s32 temp_v0;

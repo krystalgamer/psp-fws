@@ -175,6 +175,7 @@ s32 func_000011C4(s32, s32);
 s32 func_000011D4(void);
 s32 func_00001200(s32);
 s32 func_0000135C(s32);
+s32 func_000014FC(s32, s32);
 s32 func_000015AC(void);
 s32 func_00001654(s32);
 s32 func_0000171C(s32);
