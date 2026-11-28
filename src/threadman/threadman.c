@@ -3850,7 +3850,13 @@ s32 module_reboot_before(void) {
 #endif
 
 #if FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/threadman", sceKernelSetThreadmanLogHandler);
+s32 sceKernelSetThreadmanLogHandler(SceThreadmanLogHandler handler, SceThreadmanInfo **info) {
+    g_threadmanInfo.logHandler = handler;
+    if (info != NULL) {
+        *info = &g_threadmanInfo;
+    }
+    return 0;
+}
 
 INCLUDE_ASM("nonmatchings/threadman", func_00013C4C);
 
