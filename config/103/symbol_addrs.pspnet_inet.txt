@@ -700,3 +700,6 @@ soisconnecting = 0x00005964; // type:func
 socantsendmore = 0x00005A78; // type:func
 tcp_timer_init = 0x00025E94; // type:func
 udp4_realinput = 0x0001C60C; // type:func
+udp_input = 0x0001C30C; // type:func
+in4_cksum = 0x00012D84; // type:func
+icmp_error = 0x00018E1C; // type:func

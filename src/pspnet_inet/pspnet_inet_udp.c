@@ -3,7 +3,84 @@
 #include "pspnet_inet_decls.h"
 
 #if FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/pspnet_inet_udp", func_0001C30C);
+void udp_input(struct mbuf *m, ...) {
+    __builtin_va_list ap;
+    struct sockaddr_in src, dst;
+    struct ip *ip;
+    struct udphdr *uh;
+    s32 iphlen, proto;
+    s32 len;
+    s32 n;
+
+    __builtin_va_start(ap, m);
+    iphlen = __builtin_va_arg(ap, s32);
+    proto = __builtin_va_arg(ap, s32);
+    __builtin_va_end(ap);
+
+    udp_stat.udps_ipackets++;
+
+    if (iphlen > sizeof(struct ip)) {
+        ip_stripoptions(m, (struct mbuf *)0);
+        iphlen = sizeof(struct ip);
+    }
+
+    ip = mtod(m, struct ip *);
+    if (m->m_len < iphlen + sizeof(struct udphdr)) {
+        if ((m = sceNetMPullup(m, iphlen + sizeof(struct udphdr))) == 0) {
+            udp_stat.udps_hdrops++;
+            return;
+        }
+        ip = mtod(m, struct ip *);
+    }
+    uh = (struct udphdr *)((char *)ip + iphlen);
+
+    if (uh->uh_dport == 0)
+        goto bad;
+
+    len = (u16)__builtin_allegrex_wsbh((u16)uh->uh_ulen);
+    if (ip->ip_len != iphlen + len) {
+        if (ip->ip_len < iphlen + len || len < sizeof(struct udphdr)) {
+            udp_stat.udps_badlen++;
+            goto bad;
+        }
+        sceNetMAdj(m, iphlen + len - ip->ip_len);
+    }
+
+    if (uh->uh_sum) {
+        if (in4_cksum(m, 17, iphlen, len) != 0) {
+            udp_stat.udps_badsum++;
+            sceNetMFreem(m);
+            return;
+        }
+    }
+
+    __builtin_memset(&src, 0, sizeof(src));
+    src.sin_family = AF_INET;
+    src.sin_len = sizeof(struct sockaddr_in);
+    func_0002C9B8(&ip->ip_src, &src.sin_addr, sizeof(src.sin_addr));
+    src.sin_port = uh->uh_sport;
+    __builtin_memset(&dst, 0, sizeof(dst));
+    dst.sin_family = AF_INET;
+    dst.sin_len = sizeof(struct sockaddr_in);
+    func_0002C9B8(&ip->ip_dst, &dst.sin_addr, sizeof(dst.sin_addr));
+    dst.sin_port = uh->uh_dport;
+
+    n = udp4_realinput(&src, &dst, m, iphlen);
+
+    if (n == 0) {
+        if (m->m_flags & (0x100 | 0x200)) {
+            udp_stat.udps_noportbcast++;
+            goto bad;
+        }
+        udp_stat.udps_noport++;
+        icmp_error(m, 3, 3, 0, 0);
+        m = NULL;
+    }
+
+bad:
+    if (m)
+        sceNetMFreem(m);
+}
 #endif
 
 #if FW_VERSION < 151

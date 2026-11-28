@@ -3149,7 +3149,7 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_00012D50);
 #endif
 
 #if FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_00012D84);
+INCLUDE_ASM("nonmatchings/pspnet_inet", in4_cksum);
 #endif
 
 #if FW_VERSION < 282
@@ -4132,7 +4132,7 @@ void ip_freemoptions(struct ip_moptions *imo) {
 }
 
 #if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_00018E1C);
+INCLUDE_ASM("nonmatchings/pspnet_inet", icmp_error);
 #endif
 
 #if FW_VERSION >= 250 && FW_VERSION < 282
