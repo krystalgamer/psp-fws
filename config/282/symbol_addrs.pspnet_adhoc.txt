@@ -102,3 +102,4 @@ ptpDrop = 0x00004E98; // type:func
 ptpOutput = 0x000067F8; // type:func
 ptpAttach = 0x00004A40; // type:func
 pdpPoll = 0x00002D94; // type:func
+ptpKeepAlive = 0x00006AA0; // type:func

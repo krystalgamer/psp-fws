@@ -3802,7 +3802,7 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc", ptpKeepAlive);
 #endif
 
 #if FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00006AA0);
+INCLUDE_ASM("nonmatchings/pspnet_adhoc", ptpKeepAlive);
 #endif
 
 #if FW_VERSION < 201
