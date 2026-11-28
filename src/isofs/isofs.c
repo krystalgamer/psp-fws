@@ -758,27 +758,15 @@ INCLUDE_ASM("nonmatchings/isofs", func_00001CC8);
 
 #if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/isofs", func_00002DDC);
-#endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/isofs", isofsReadIsoDir);
-#endif
 
-#if FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/isofs", isofsReadIsoDir);
-#endif
-
-#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/isofs", sceIsofsCheckVFile);
-#endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/isofs", sceIsofsReadDirent);
 #endif
 
 #if FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/isofs", sceIsofsReadDirent);
-
 s32 func_00003A24(IsofsUnit *unit, u32 lbn, void *buf) {
     IsofsMgr *mgr = isofsGetMgr();
     u32 args[8];
@@ -835,9 +823,8 @@ void func_00002364(struct Unk_func_00002364_0 *arg0) {
     arg0->unk0 = 0x2E;
     arg0->unk1 = 0;
 }
+#endif
 
-INCLUDE_ASM("nonmatchings/isofs", func_00002374);
-#else
 s32 func_00002374(void *arg0) {
     s32 var_v1;
 
@@ -847,7 +834,6 @@ s32 func_00002374(void *arg0) {
     }
     return var_v1;
 }
-#endif
 
 #if FW_VERSION >= 330
 void func_00002328(void) {
@@ -1531,7 +1517,6 @@ end:
 #if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/isofs", isofs_open);
 #endif
-
 
 #if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/isofs", isofs_read);

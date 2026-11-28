@@ -1262,11 +1262,7 @@ INCLUDE_ASM("nonmatchings/display", func_00001B00);
 INCLUDE_ASM("nonmatchings/display", func_00001B7C);
 #endif
 
-#if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/display", sceDisplayWaitVblankStart);
-#endif
-
-#if FW_VERSION == 100 || (FW_VERSION >= 150 && FW_VERSION < 201)
+#if FW_VERSION == 100 || (FW_VERSION >= 150 && FW_VERSION < 282)
 s32 sceDisplayWaitVblankStart(void) {
     s32 temp_v0;
     u32 temp_s1;
@@ -1279,13 +1275,7 @@ s32 sceDisplayWaitVblankStart(void) {
     setK1(temp_s1);
     return temp_v0;
 }
-#endif
 
-#if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/display", sceDisplayWaitVblankStartCB);
-#endif
-
-#if FW_VERSION == 100 || (FW_VERSION >= 150 && FW_VERSION < 201)
 s32 sceDisplayWaitVblankStartCB(void) {
     s32 temp_v0;
     u32 temp_s1;

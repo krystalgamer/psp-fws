@@ -6,9 +6,6 @@
 #include "common.h"
 #include "sysreg_decls.h"
 
-#if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/sysreg", module_start);
-#else
 s32 module_start(void) {
     sceKernelUnregisterSysEventHandler(&D_000025C0);
     sceSysregIntrInit();
@@ -16,22 +13,17 @@ s32 module_start(void) {
     sceKernelRegisterSysEventHandler(&D_000025C0);
     return 0;
 }
-#endif
 
 s32 module_reboot_before(void) {
     sceSysregIntrEnd();
     return 0;
 }
 
-#if FW_VERSION >= 201
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregInit);
-#else
 s32 sceSysregInit(void) {
     sceKernelUnregisterSysEventHandler(&D_000025C0);
     sceSysregIntrInit();
     return 0;
 }
-#endif
 
 s32 sceSysregEnd(void) {
     sceSysregIntrEnd();

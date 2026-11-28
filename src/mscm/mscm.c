@@ -1,3 +1,4 @@
+/* cflags[201]: -O2 */
 /* compiler[271]: 1.9.2 */
 /* cflags[271]: -O2 -frename-registers -mext */
 /* compiler[282,300,301,302,303,310,311,330,340,350,351,352]: 1.9.2 */
@@ -27,7 +28,7 @@ s32 func_00000000(s32 slot) {
 }
 #endif
 
-#if FW_VERSION >= 102 && FW_VERSION < 201
+#if FW_VERSION >= 102 && FW_VERSION < 250
 s32 func_00000000(s32 slot) {
     SceMScmHC *hc = &D_00006F14[slot];
     s32 pow;
@@ -49,11 +50,9 @@ s32 func_00000000(s32 slot) {
 }
 #endif
 
-#if FW_VERSION >= 201
-INCLUDE_ASM("nonmatchings/mscm", func_00000000);
-#endif
-
 #if FW_VERSION >= 250
+INCLUDE_ASM("nonmatchings/mscm", func_00000000);
+
 INCLUDE_ASM("nonmatchings/mscm", func_000000C8);
 #endif
 
@@ -358,9 +357,7 @@ s32 func_00000C1C(SceMScmHC *hc) {
     sceSysregMsifIoEnable(hc->index);
     return 0;
 }
-#endif
-
-#if FW_VERSION < 201
+#else
 s32 module_reboot_before(void) {
     sceMScmWaitAndEndDMA(&D_00006F14[0], 2, 1);
     func_00005E58(0, 0);
@@ -371,7 +368,7 @@ s32 module_reboot_before(void) {
 }
 #endif
 
-#if FW_VERSION >= 201 && FW_VERSION < 310
+#if FW_VERSION >= 250 && FW_VERSION < 310
 INCLUDE_ASM("nonmatchings/mscm", module_reboot_before);
 #endif
 
@@ -620,7 +617,7 @@ INCLUDE_RODATA("nonmatchings/mscm", D_0000716C);
 INCLUDE_ASM("nonmatchings/mscm", sceMScmQueryMSCMStatus);
 #endif
 
-#if FW_VERSION < 201
+#if FW_VERSION < 250
 s32 sceMScmGetCLDM(s32 slot, s32 n, SceMScmCLDMInfo *out) {
     SceMScmCLDMInfo *info;
     s32 ret;
@@ -635,7 +632,7 @@ s32 sceMScmGetCLDM(s32 slot, s32 n, SceMScmCLDMInfo *out) {
 }
 #endif
 
-#if FW_VERSION == 201 || FW_VERSION >= 282
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/mscm", sceMScmGetCLDM);
 #endif
 
@@ -832,13 +829,7 @@ INCLUDE_ASM("nonmatchings/mscm", func_000018B8);
 INCLUDE_ASM("nonmatchings/mscm", func_00001BA0);
 
 INCLUDE_ASM("nonmatchings/mscm", func_00001D18);
-#endif
 
-#if FW_VERSION == 201
-INCLUDE_ASM("nonmatchings/mscm", func_00002194);
-#endif
-
-#if FW_VERSION < 201
 s32 func_00002194(s32 (*arg0)(s32, s32, s32, s32, s32), s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5) {
     s32 temp_s0;
     s32 temp_v0;
@@ -1119,16 +1110,12 @@ s32 sceMScmWriteMSRegHelper(SceMScmHC *hc, u8 *buf, s32 size, s32 timeout) {
 INCLUDE_ASM("nonmatchings/mscm", sceMScmWriteMSRegHelper);
 #endif
 
-#if FW_VERSION < 201
+#if FW_VERSION < 250
 s32 sceMScmSendTPCDMA(SceMScmHC *hc, u8 dmaCh, s32 a2, s32 a3) {
     hc->reg->unk40 = (1 << dmaCh) | 0x10000;
     asm volatile("sync");
     return sceMScmSendTPC(hc, dmaCh, a2, a3);
 }
-#endif
-
-#if FW_VERSION == 201
-INCLUDE_ASM("nonmatchings/mscm", sceMScmSendTPCDMA);
 #endif
 
 #if FW_VERSION < 201 || (FW_VERSION >= 250 && FW_VERSION < 282)
@@ -1162,14 +1149,10 @@ s32 sceMScmSendTPC(SceMScmHC *hc, u8 tpc, s32 size, s32 timeout) {
 INCLUDE_ASM("nonmatchings/mscm", sceMScmSendTPC);
 #endif
 
-#if FW_VERSION == 201
-INCLUDE_ASM("nonmatchings/mscm", sceMScmClearALEvents);
-#else
 s32 sceMScmClearALEvents(SceMScmHC *hc) {
     sceKernelClearEventFlag(hc->hc->evf, 0);
     return 0;
 }
-#endif
 
 #if FW_VERSION < 152
 s32 sceMScmWaitHCIntr(SceMScmHC *hc, u32 *pattern, s32 timeout) {
@@ -1251,20 +1234,14 @@ s32 sceMScmWaitHCIntr(SceMScmHC *hc, u32 *pattern, s32 timeout) {
 INCLUDE_ASM("nonmatchings/mscm", sceMScmWaitHCIntr);
 #endif
 
-#if FW_VERSION < 201 || (FW_VERSION >= 250 && FW_VERSION < 282)
+#if FW_VERSION < 282
 s32 func_000029F8(SceMScmHC *hc, s32 timeout) {
     s32 ret;
 
     ret = (timeout != -1) ? timeout : 1000000;
     return ret;
 }
-#endif
-
-#if FW_VERSION == 201
-INCLUDE_ASM("nonmatchings/mscm", func_000029F8);
-#endif
-
-#if FW_VERSION >= 282
+#else
 INCLUDE_ASM("nonmatchings/mscm", func_00002FE0);
 #endif
 
@@ -1431,18 +1408,12 @@ INCLUDE_ASM("nonmatchings/mscm", sceMScmWriteDataPIO);
 INCLUDE_ASM("nonmatchings/mscm", func_00003628);
 #endif
 
-#if FW_VERSION < 201
+#if FW_VERSION < 250
 s32 func_00002FF0(s32 a0, s32 a1, s32 a2, u32 *arg) {
     sceKernelSetEventFlag(arg[0], arg[1] ? 2 : 1);
     return 0;
 }
-#endif
 
-#if FW_VERSION == 201
-INCLUDE_ASM("nonmatchings/mscm", func_00002FF0);
-#endif
-
-#if FW_VERSION < 250
 INCLUDE_ASM("nonmatchings/mscm", func_00003020);
 #endif
 
@@ -1539,11 +1510,7 @@ s32 sceMScmSetHCTransferMode(SceMScmHC *hc, s32 a, s32 b, s32 c) {
 INCLUDE_ASM("nonmatchings/mscm", sceMScmSetHCTransferMode);
 #endif
 
-#if FW_VERSION == 201
-INCLUDE_ASM("nonmatchings/mscm", sceMScm_driver_D6DB3199);
-#endif
-
-#if FW_VERSION < 201
+#if FW_VERSION < 250
 s32 sceMScm_driver_D6DB3199(SceMScmHC *hc, s32 *arg1, s32 *arg2, s32 *arg3) {
     s32 var_v0;
 
@@ -1749,7 +1716,6 @@ s32 sceMScmTPCSetCmdHelper(SceMScmHC *hc, u8 cmd, s32 timeout) {
 INCLUDE_ASM("nonmatchings/mscm", sceMScmTPCSetCmdHelper);
 #endif
 
-#if FW_VERSION != 201
 s32 sceMScmTPCExSetCmd(SceMScmHC *hc, u8 cmd, s8 *arg, u8 *intr, s32 timeout) {
     u8 st[4];
     s32 busy;
@@ -1772,9 +1738,6 @@ s32 sceMScmTPCExSetCmd(SceMScmHC *hc, u8 cmd, s8 *arg, u8 *intr, s32 timeout) {
     }
     return sceMScmTPCGetInt(hc, intr, 0, timeout);
 }
-#else
-INCLUDE_ASM("nonmatchings/mscm", sceMScmTPCExSetCmd);
-#endif
 
 #if FW_VERSION < 201
 s32 sceMScmTPCExSetCmdHelper(SceMScmHC *hc, u8 cmd, s8 *arg, s32 timeout) {
@@ -1929,7 +1892,6 @@ s32 func_00004E68(s32 arg0, s32 arg1) {
 }
 #endif
 
-#if FW_VERSION != 201
 u16 sceMScmHCSetBusyCount(SceMScmHC *hc, u16 count) {
     s32 intr;
     s32 old;
@@ -1940,9 +1902,6 @@ u16 sceMScmHCSetBusyCount(SceMScmHC *hc, u16 count) {
     sceKernelCpuResumeIntr(intr);
     return old;
 }
-#else
-INCLUDE_ASM("nonmatchings/mscm", sceMScmHCSetBusyCount);
-#endif
 
 #if FW_VERSION >= 250
 INCLUDE_ASM("nonmatchings/mscm", sceMScmSendTPCDMA);
@@ -2441,7 +2400,7 @@ INCLUDE_ASM("nonmatchings/mscm", func_00006360);
 INCLUDE_ASM("nonmatchings/mscm", func_000063C8);
 #endif
 
-#if FW_VERSION < 201
+#if FW_VERSION < 250
 s32 func_00005270(s32 slot, u32 flags) {
     SceMScmHCReg *reg;
     s32 intr;
@@ -2457,10 +2416,6 @@ s32 func_00005270(s32 slot, u32 flags) {
     sceKernelCpuResumeIntr(intr);
     return 0;
 }
-#endif
-
-#if FW_VERSION == 201
-INCLUDE_ASM("nonmatchings/mscm", func_00005270);
 #endif
 
 #if FW_VERSION < 282
@@ -2700,17 +2655,11 @@ INCLUDE_ASM("nonmatchings/mscm", func_000057F8);
 INCLUDE_ASM("nonmatchings/mscm", _sceMScmIomanDevctl);
 #endif
 
-#if FW_VERSION == 201
-INCLUDE_ASM("nonmatchings/mscm", func_000059CC);
-#endif
-
-#if FW_VERSION < 201
+#if FW_VERSION < 250
 s32 func_000059CC(void) {
     return 0x80020325;
 }
-#endif
 
-#if FW_VERSION < 250
 s32 func_000059D8(void) {
     return 0;
 }
@@ -2744,11 +2693,7 @@ INCLUDE_ASM("nonmatchings/mscm", func_00005EE4);
 INCLUDE_ASM("nonmatchings/mscm", func_00005A44_v100);
 #endif
 
-#if FW_VERSION == 201
-INCLUDE_ASM("nonmatchings/mscm", func_00005AA8);
-#endif
-
-#if FW_VERSION < 201
+#if FW_VERSION < 250
 s32 func_00005AA8(SceMScmHC *hc, s32 mode) {
     s32 var_v0;
 
@@ -2803,11 +2748,9 @@ s32 func_00005AD0(s32 slot, u32 mode) {
 
 #if FW_VERSION == 201
 INCLUDE_ASM("nonmatchings/mscm", func_00005AD0);
-
-INCLUDE_ASM("nonmatchings/mscm", func_00005B3C);
 #endif
 
-#if FW_VERSION < 201
+#if FW_VERSION < 250
 s32 func_00005B3C(SceMScmHC *hc, s32 *out) {
     s32 var_v0;
 
@@ -2833,13 +2776,7 @@ s32 func_00005B3C(SceMScmHC *hc, s32 *out) {
 
 #if FW_VERSION < 250
 INCLUDE_ASM("nonmatchings/mscm", func_00005B64);
-#endif
 
-#if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/mscm", sceMScmSetPullDownRegByDesc);
-#endif
-
-#if FW_VERSION < 201
 s32 sceMScmSetPullDownRegByDesc(SceMScmHC *hc, s32 on) {
     s32 var_v0;
 
@@ -2849,6 +2786,10 @@ s32 sceMScmSetPullDownRegByDesc(SceMScmHC *hc, s32 on) {
     }
     return var_v0;
 }
+#endif
+
+#if FW_VERSION >= 250 && FW_VERSION < 282
+INCLUDE_ASM("nonmatchings/mscm", sceMScmSetPullDownRegByDesc);
 #endif
 
 #if FW_VERSION < 201 || (FW_VERSION >= 250 && FW_VERSION < 282)
@@ -2872,7 +2813,7 @@ s32 sceMScmSetPullDownReg(s32 slot, s32 on) {
 INCLUDE_ASM("nonmatchings/mscm", sceMScmSetPullDownReg);
 #endif
 
-#if FW_VERSION < 201 || (FW_VERSION >= 250 && FW_VERSION < 282)
+#if FW_VERSION < 282
 s32 func_00005C58(s32 slot) {
     if (slot != 0) {
         return 0x80220081;
@@ -2880,10 +2821,6 @@ s32 func_00005C58(s32 slot) {
     sceSysregMsifAcquireConnectIntr(slot, 3);
     return 0;
 }
-#endif
-
-#if FW_VERSION == 201
-INCLUDE_ASM("nonmatchings/mscm", func_00005C58);
 #endif
 
 #if FW_VERSION < 201

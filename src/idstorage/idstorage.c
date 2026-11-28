@@ -1,3 +1,4 @@
+/* cflags[201,250,260]: -O2 -frename-registers */
 /* compiler[271]: 1.9.2 */
 /* cflags[271]: -O2 -mext */
 /* compiler[282,300,301,302,303,310,311,330,340,350,351,352]: 1.9.2 */
@@ -70,7 +71,7 @@ INCLUDE_RODATA("nonmatchings/idstorage", D_0000217C);
 
 INCLUDE_ASM("nonmatchings/idstorage", sceIdStorageInit);
 
-#if FW_VERSION < 201
+#if FW_VERSION < 271
 s32 _sceIdStorageSysEventHandler(s32 id, char *name, void *param, s32 *res) {
     if (id == 256) {
         if (sceIdStorageIsDirty()) {
@@ -83,7 +84,7 @@ s32 _sceIdStorageSysEventHandler(s32 id, char *name, void *param, s32 *res) {
 INCLUDE_ASM("nonmatchings/idstorage", _sceIdStorageSysEventHandler);
 #endif
 
-#if FW_VERSION < 201
+#if FW_VERSION < 271
 s32 sceIdStorageIsDirty(void) {
     s32 i;
 
@@ -103,7 +104,7 @@ INCLUDE_ASM("nonmatchings/idstorage", sceIdStorageIsDirty);
 
 INCLUDE_ASM("nonmatchings/idstorage", sceIdStorageFormat);
 
-#if FW_VERSION < 201
+#if FW_VERSION < 271
 s32 sceIdStorageUnformat(void) {
     s32 ret;
     u32 i = 0;
@@ -131,7 +132,7 @@ INCLUDE_ASM("nonmatchings/idstorage", sceIdStorageWriteLeaf);
 
 INCLUDE_ASM("nonmatchings/idstorage", sceIdStorageFlush);
 
-#if FW_VERSION < 201
+#if FW_VERSION < 271
 s32 sceIdStorageGetFreeLeaves(void) {
     s32 intr;
     s32 i;
@@ -171,9 +172,7 @@ s32 module_start(void) {
     return 0;
 }
 
-#if FW_VERSION >= 201
-INCLUDE_ASM("nonmatchings/idstorage", module_reboot_before);
-#else
+#if FW_VERSION < 271
 s32 module_reboot_before(void) {
     sceIdStorageFlush();
     sceKernelUnregisterSysEventHandler(&D_000021F0);
@@ -181,11 +180,11 @@ s32 module_reboot_before(void) {
     sceKernelDeleteFpl(D_00006630.fpl);
     return 0;
 }
+#else
+INCLUDE_ASM("nonmatchings/idstorage", module_reboot_before);
 #endif
 
-#if FW_VERSION >= 201
-INCLUDE_ASM("nonmatchings/idstorage", sceIdStorageEnd);
-#else
+#if FW_VERSION < 271
 s32 sceIdStorageEnd(void) {
     sceIdStorageFlush();
     sceKernelUnregisterSysEventHandler(&D_000021F0);
@@ -193,6 +192,8 @@ s32 sceIdStorageEnd(void) {
     sceKernelDeleteFpl(D_00006630.fpl);
     return 0;
 }
+#else
+INCLUDE_ASM("nonmatchings/idstorage", sceIdStorageEnd);
 #endif
 
 s32 sceIdStorageSuspend(void) {
@@ -208,21 +209,23 @@ s32 sceIdStorageGetLeafSize(void) {
     return 0x200;
 }
 
-#if FW_VERSION >= 201
-INCLUDE_ASM("nonmatchings/idstorage", sceIdStorageIsFormatted);
-#else
+#if FW_VERSION < 271
 u8 sceIdStorageIsFormatted(void) {
     return D_00006644;
 }
+#else
+INCLUDE_ASM("nonmatchings/idstorage", sceIdStorageIsFormatted);
 #endif
 
-#if FW_VERSION >= 201
-INCLUDE_ASM("nonmatchings/idstorage", sceIdStorageIsReadOnly);
-#else
+#if FW_VERSION < 271
 u8 sceIdStorageIsReadOnly(void) {
     return D_00006645;
 }
+#else
+INCLUDE_ASM("nonmatchings/idstorage", sceIdStorageIsReadOnly);
+#endif
 
+#if FW_VERSION < 271
 s32 _sceIdStorageLockMutex(void) {
     s32 tid;
     s32 ret;
@@ -243,13 +246,13 @@ s32 _sceIdStorageLockMutex(void) {
 }
 #endif
 
-#if FW_VERSION >= 201 && FW_VERSION < 300
+#if FW_VERSION >= 271 && FW_VERSION < 300
 INCLUDE_ASM("nonmatchings/idstorage", _sceIdStorageLockMutex);
 #endif
 
 INCLUDE_ASM("nonmatchings/idstorage", func_00001CA0);
 
-#if FW_VERSION < 201
+#if FW_VERSION < 271
 s32 _sceIdStorageFindKeyPos(u16 id) {
     s32 i;
     s32 pos = -1;

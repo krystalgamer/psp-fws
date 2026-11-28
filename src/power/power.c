@@ -733,13 +733,7 @@ s32 scePowerCancelRequest(void) {
     sceKernelCpuResumeIntr(intr);
     return request;
 }
-#endif
 
-#if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/power", scePowerRequestStandby);
-#endif
-
-#if FW_VERSION < 201
 s32 scePowerRequestStandby(void) {
     u32 temp_s0;
 
@@ -748,13 +742,7 @@ s32 scePowerRequestStandby(void) {
     setK1(temp_s0);
     return 0;
 }
-#endif
 
-#if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/power", scePowerRequestSuspend);
-#endif
-
-#if FW_VERSION < 201
 s32 scePowerRequestSuspend(void) {
     u32 temp_s0;
 
@@ -763,13 +751,7 @@ s32 scePowerRequestSuspend(void) {
     setK1(temp_s0);
     return 0;
 }
-#endif
 
-#if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/power", scePowerRequestSuspendTouchAndGo);
-#endif
-
-#if FW_VERSION < 201
 s32 scePowerRequestSuspendTouchAndGo(void) {
     u32 temp_s0;
 
@@ -848,11 +830,7 @@ s32 _scePowerUnlock(s32 lockType, s32 isUserLock) {
 }
 #endif
 
-#if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/power", _scePowerPowerSwCallback);
-#endif
-
-#if FW_VERSION < 201
+#if FW_VERSION < 282
 void _scePowerPowerSwCallback(s32 arg0) {
     s32 var_a0;
     s32 var_a1;
@@ -870,9 +848,7 @@ void _scePowerPowerSwCallback(s32 arg0) {
     }
     _scePowerNotifyCallback(var_a0, var_a1, 0);
 }
-#endif
-
-#if FW_VERSION >= 282
+#else
 void scePower_driver_CA3D34C1(s32 arg0) {
     func_00002880(arg0, 0);
 }

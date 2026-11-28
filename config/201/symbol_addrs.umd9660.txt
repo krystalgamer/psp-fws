@@ -184,3 +184,4 @@ func_000053F0 = 0x00004D60; // type:func rom:0x4DE0
 func_00005988 = 0x00004DA8; // type:func rom:0x4E28
 // shared names (tools/add_version.py) end
 func_00004114 = 0x00003914; // type:func
+g_umd9660DvdDirBuf = 0x00006E60;

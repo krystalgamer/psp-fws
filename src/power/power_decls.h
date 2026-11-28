@@ -295,7 +295,7 @@ s32 _scePowerLock(s32 lockType, s32 isUserLock);
 void _scePowerLowBatteryCallback(s32 enable, void *argp);
 void _scePowerNotifyCallback(s32 clear, s32 set, s32 oneOff);
 s32 _scePowerOffThread(SceSize args, void *argp);
-void _scePowerPowerSwCallback(s32 enable);
+void _scePowerPowerSwCallback(s32 arg0);
 s32 _scePowerUnlock(s32 lockType, s32 isUserLock);
 s32 _scePowerVblankInterrupt(s32 subIntr, void *arg);
 s32 func_000012B4(s32, s32);
