@@ -24,8 +24,7 @@ s32 udp4_realinput(struct sockaddr_in *src, struct sockaddr_in *dst, struct mbuf
     dst4 = &dst->sin_addr;
     dport = &dst->sin_port;
 
-    if (IN_MULTICAST(dst4->s_addr) ||
-        in_broadcast(*dst4, m->m_pkthdr.rcvif)) {
+    if (IN_MULTICAST(dst4->s_addr) || in_broadcast(*dst4, m->m_pkthdr.rcvif)) {
         struct inpcb *last;
 
         for (inp = udbtable.inpt_queue.cqh_first;
@@ -69,7 +68,69 @@ bad:
 }
 #endif
 
-#if FW_VERSION >= 151 && FW_VERSION < 282
+#if FW_VERSION >= 151 && FW_VERSION < 201
+s32 udp4_realinput(struct sockaddr_in *src, struct sockaddr_in *dst, struct mbuf *m, s32 off) {
+    u16 *sport, *dport;
+    s32 rcvcnt;
+    struct in_addr *src4, *dst4;
+    struct inpcb *inp;
+
+    rcvcnt = 0;
+    off += sizeof(struct udphdr);
+
+    if (src->sin_family != AF_INET || dst->sin_family != AF_INET)
+        goto bad;
+
+    src4 = &src->sin_addr;
+    sport = &src->sin_port;
+    dst4 = &dst->sin_addr;
+    dport = &dst->sin_port;
+
+    if (IN_MULTICAST(dst4->s_addr) || func_00012730(*dst4, m->m_pkthdr.rcvif)) {
+        struct inpcb *last;
+
+        for (inp = udbtable.inpt_queue.cqh_first;
+             inp != (struct inpcb *)&udbtable.inpt_queue;
+             inp = inp->inp_queue.cqe_next) {
+            if (inp->inp_lport != *dport)
+                continue;
+            if (inp->inp_laddr.s_addr != __builtin_allegrex_wsbw(0)) {
+                if (inp->inp_laddr.s_addr != dst4->s_addr)
+                    continue;
+            }
+            if (inp->inp_faddr.s_addr != __builtin_allegrex_wsbw(0)) {
+                if (inp->inp_faddr.s_addr != src4->s_addr ||
+                    inp->inp_fport != *sport)
+                    continue;
+            }
+
+            last = inp;
+            udp4_sendup(m, off, (struct sockaddr *)src, inp->inp_socket);
+            rcvcnt++;
+
+            if ((inp->inp_socket->so_options & (0x200 | 0x4)) == 0)
+                break;
+        }
+    } else {
+        inp = in_pcblookup_connect(&udbtable, *src4, *sport, *dst4, *dport);
+        if (inp == 0) {
+            ++udp_stat.udps_pcbhashmiss;
+            inp = in_pcblookup_bind(&udbtable, *dst4, *dport);
+            if (inp == 0) {
+                return rcvcnt;
+            }
+        }
+
+        udp4_sendup(m, off, (struct sockaddr *)src, inp->inp_socket);
+        rcvcnt++;
+    }
+
+bad:
+    return rcvcnt;
+}
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_inet_udp", udp4_realinput);
 #endif
 
