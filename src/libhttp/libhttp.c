@@ -1730,7 +1730,37 @@ INCLUDE_ASM("nonmatchings/libhttp", CreateConnectionWithUrl);
 
 INCLUDE_ASM("nonmatchings/libhttp", DeleteHttpHeader);
 
-INCLUDE_ASM("nonmatchings/libhttp", func_00006EA4);
+void func_00006EA4(const char *key, const char *value) {
+    SceHttpMd5Entry *e;
+    SceHttpMd5Entry *entry;
+    char *copy = NULL;
+
+    func_00003D28(key, &entry);
+    if (entry == NULL) {
+        func_00003E34(key, &entry);
+        e = entry;
+        if (e != NULL) {
+            copy = _sceHttpMallocInternal(func_0000BE38(value) + 1);
+            if (copy != NULL) {
+                func_0000C0DC(copy, value);
+                entry->value = copy;
+                func_00003EEC(entry);
+                return;
+            }
+        }
+        if (entry != NULL) {
+            if (entry->key != NULL) {
+                _sceHttpFreeInternal(entry->key);
+            }
+            _sceHttpFreeInternal(entry);
+        }
+        if (copy != NULL) {
+            _sceHttpFreeInternal(copy);
+        }
+    } else {
+        func_000073F4(entry, value);
+    }
+}
 #endif
 
 #if FW_VERSION >= 102 && FW_VERSION < 150
