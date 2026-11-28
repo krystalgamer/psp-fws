@@ -559,3 +559,6 @@ syn_cache_timer = 0x0001FA38; // type:func
 tcp_init = 0x000225DC; // type:func
 syn_cache_init = 0x00021458; // type:func
 icmp_mtudisc_callback_register = 0x00019AA0; // type:func
+udp_output = 0x0001BC98; // type:func
+udpcksum = 0x0002C314; // rom:0x2C3B4
+udp_stat = 0x0002DC30;

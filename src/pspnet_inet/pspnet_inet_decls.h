@@ -1256,6 +1256,58 @@ struct tcp_ctlvar {
     s32 num;
 };
 
+/* struct ipovly (NetBSD 1.5 ip_var.h, packed) */
+struct ipovly {
+    u8 ih_x1[9];                        /* 0x00 */
+    u8 ih_pr;                           /* 0x09 */
+    u16 ih_len;                         /* 0x0A */
+    struct in_addr ih_src;              /* 0x0C */
+    struct in_addr ih_dst;              /* 0x10 */
+} __attribute__((packed));
+
+/* struct udpiphdr (NetBSD 1.5 udp_var.h, packed) */
+struct udpiphdr {
+    struct ipovly ui_i;                 /* 0x00 */
+    struct udphdr ui_u;                 /* 0x14 */
+} __attribute__((packed));
+#define ui_x1 ui_i.ih_x1
+#define ui_pr ui_i.ih_pr
+#define ui_len ui_i.ih_len
+#define ui_src ui_i.ih_src
+#define ui_dst ui_i.ih_dst
+#define ui_sport ui_u.uh_sport
+#define ui_dport ui_u.uh_dport
+#define ui_ulen ui_u.uh_ulen
+#define ui_sum ui_u.uh_sum
+
+/* struct udpstat (NetBSD 1.5, u_quad_t counters) */
+struct udpstat {
+    u64 udps_ipackets;                  /* 0x00 */
+    u64 udps_hdrops;                    /* 0x08 */
+    u64 udps_badsum;                    /* 0x10 */
+    u64 udps_badlen;                    /* 0x18 */
+    u64 udps_noport;                    /* 0x20 */
+    u64 udps_noportbcast;               /* 0x28 */
+    u64 udps_fullsock;                  /* 0x30 */
+    u64 udps_pcbhashmiss;               /* 0x38 */
+    u64 udps_opackets;                  /* 0x40 */
+};
+
+/* M_LEADINGSPACE / M_PREPEND (NetBSD 1.5 mbuf.h; SCE: no writable-cluster check) */
+#define M_LEADINGSPACE(m) \
+    ((m)->m_flags & M_EXT ? 0 : \
+     (m)->m_flags & M_PKTHDR ? (m)->m_data - (u8 *)&(m)->m_ext : \
+     (m)->m_data - (u8 *)&(m)->m_pkthdr)
+#define M_PREPEND(m, plen, how) do { \
+    if (M_LEADINGSPACE(m) >= (plen)) { \
+        (m)->m_data -= (plen); \
+        (m)->m_len += (plen); \
+    } else \
+        (m) = sceNetMPrepend((m), (plen), (how)); \
+    if ((m) && (m)->m_flags & M_PKTHDR) \
+        (m)->m_pkthdr.len += (plen); \
+} while (0)
+
 typedef void (*SceNetInetHook)(void *a, u16 b, void *c);
 
 struct SceNetInetKeyNode {
@@ -1507,7 +1559,6 @@ extern s32 D_0002C234;
 extern s32 D_0002C270; /* icmpreturndatabytes */
 extern s32 D_0002C30C;
 extern s32 D_0002C310;
-extern s32 D_0002C314;
 extern s32 D_0002C318;
 extern s32 D_0002C31C;
 extern s32 D_0002C320;
@@ -1551,7 +1602,6 @@ extern struct ipstat D_0002D960; /* ipstat */
 extern struct { struct ipq *lh_first; } D_0002DA48; /* ipq */
 extern u8 D_0002DA50[0x170]; /* icmpstat */
 extern M2C_UNK D_0002DBC8;
-extern s32 D_0002DC30;
 extern struct inpcbtable D_0002DC78;
 extern struct SceTailqHead D_0002DC98[13];
 extern s32 D_0002DD04;
@@ -1649,6 +1699,8 @@ extern struct tcpstat tcp_stat;
 extern s32 tcp_syn_cache_interval;
 extern s32 tcp_totbackoff; /* tcp_totbackoff */
 extern struct inpcbtable udbtable;
+extern struct udpstat udp_stat; /* udpstat */
+extern s32 udpcksum; /* udpcksum */
 extern struct in_addr zeroin_addr; /* zeroin_addr */
 
 void _sce_pspnet_callout_init(void *c);
@@ -1923,6 +1975,7 @@ struct mbuf *sceNetMFree(struct mbuf *m);
 void sceNetMFreem(struct mbuf *m);
 struct mbuf *sceNetMGet(s32 how, s32 type);
 struct mbuf *sceNetMGetclr(s32 how, s32 type);
+struct mbuf *sceNetMPrepend(struct mbuf *m, s32 plen, s32 how);
 void *sceNetMallocInternal(u32 size);
 M2C_UNK sceNetMemset(M2C_UNK *, M2C_UNK, M2C_UNK);
 u32 sceNetRand(void);
