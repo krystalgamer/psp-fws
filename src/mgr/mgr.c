@@ -2782,7 +2782,57 @@ fail:
     return ret;
 }
 #else
-INCLUDE_ASM("nonmatchings/mgr", func_00007364);
+s32 func_00007364(s32 arg0, u64 *id, s32 arg2) {
+    s32 fd;
+    u64 v8;
+    u64 v10;
+    u64 v18;
+    u64 rnd;
+    u64 v28;
+    u64 v30;
+    s32 ret;
+    s32 mac;
+
+    ret = func_00006678(arg0, &fd, 3, 0);
+    if (ret < 0) {
+        return ret;
+    }
+    ret = func_000077A0(fd, id, &v8);
+    if (ret < 0) {
+        goto fail;
+    }
+    ret = sceMgrGenerateMAC1d(&v10, &v18, arg2, id, &v8);
+    mac = ret;
+    if (ret < 0) {
+        goto fail;
+    }
+    ret = sceMgrRandom((s32)&rnd, arg2);
+    if (ret < 0) {
+        goto fail;
+    }
+    ret = func_00007844(fd, &v18, &rnd, &v10, mac);
+    if (ret < 0) {
+        goto fail;
+    }
+    ret = func_000078F8(fd, &v28, &v30);
+    if (ret < 0) {
+        goto fail;
+    }
+    ret = func_0000798C(fd);
+    if (ret < 0) {
+        goto fail;
+    }
+    func_0000684C(arg0);
+    func_000067CC(arg0, 0);
+    return sceMgrStartSession((s32)&v28, (s32)&v8, (s32)&v18, (s32)&v30, (s32)&rnd);
+fail:
+    func_0000684C(arg0);
+    func_000067CC(arg0, 0);
+    if (ret == 0x80504000) {
+        ret = 0x80503002;
+    }
+    return ret;
+}
 #endif
 
 INCLUDE_ASM("nonmatchings/mgr", sceMgr_driver_D3A061BE);

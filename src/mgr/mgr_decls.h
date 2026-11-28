@@ -239,6 +239,7 @@ s32 func_0000341C(u64 *dst, u64 *src, u32 *iv, u32 size, s32 keyReg, u32 *key, s
 s32 func_000038D0(u32 *arg0, u32 *arg1);
 s32 func_00003BFC(s32 arg0, MgrId16 *id, u8 *ekb, MgrId16 *key, u8 *data);
 void func_00003E08(s32 arg0);
+s32 func_00004180(MgrMsInfo *info, s32 *out);
 s32 func_00004358(MgrMsInfo *info);
 s32 func_0000439C(u32 *a, u32 *b);
 void func_00004410(s32 arg0);
@@ -292,6 +293,7 @@ s32 func_0000798C(s32 fd);
 s32 func_000079B0(s32 fd);
 s32 func_00007AD8(s32 fd);
 s32 func_00007BAC(s32 fd, s32 *blks, u8 *buf);
+s32 func_00007F24(s32 fd, s32 *blks, s32 pos, s32 valid, u8 *buf);
 s32 func_00008204(s32 fd, s32 blk);
 s32 func_00008274(s32 fd, s32 reg);
 s32 func_00008300(s32 fd, s32 reg);
