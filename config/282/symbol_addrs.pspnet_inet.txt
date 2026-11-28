@@ -382,3 +382,4 @@ tcp_backoff = 0x0002C368; // rom:0x2C408
 syn_cache_get = 0x0001FFF0; // type:func
 syn_cache_add = 0x00020BB8; // type:func
 syn_cache_respond = 0x00021070; // type:func
+tcp_delacks = 0x0002DF54;

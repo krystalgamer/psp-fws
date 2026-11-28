@@ -242,7 +242,7 @@ void tcp_init(void) {
     sceNetMemset(&tcp_stat, 0, sizeof(tcp_stat));
     func_000244B0();
     in_pcbinit(&tcbtable, D_0002C354, D_0002C354);
-    D_0002DF54 = NULL;
+    tcp_delacks = NULL;
     sceNetIfhandle_lib_5FB31C72(&max_linkhdr, &max_protohdr, NULL, NULL);
     if (max_protohdr < (s32)(sizeof(struct ip) + sizeof(struct tcphdr)))
         max_protohdr = sizeof(struct ip) + sizeof(struct tcphdr);
