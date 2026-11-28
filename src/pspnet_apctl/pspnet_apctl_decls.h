@@ -204,6 +204,28 @@ typedef struct {
 } SceNetApctlScanParam;
 typedef char chk_SceNetApctlScanParam[(sizeof(SceNetApctlScanParam) == 0x4C) ? 1 : -1];
 
+typedef struct {
+    u8 unk0[0x3DC];
+    u32 unk3DC;
+    u8 unk3E0[8];
+    u32 unk3E8;
+} SceNetDhcpLease;
+
+/* DHCP client state (1.00: D_00008B38) */
+typedef struct {
+    u8 unk0[0x10];
+    s32 bpf;                    /* 0x010 */
+    u8 unk14[0xBC6];
+    u8 pkt[0x24E];              /* 0xBDA outgoing frame */
+    s32 pktLen;                 /* 0xE28 */
+    u8 unkE2C[0x158];
+    SceNetDhcpLease *lease;     /* 0xF84 */
+    u8 unkF88[0x24];
+    s32 state;                  /* 0xFAC */
+    u8 unkFB0[0x438];
+} SceNetDhcpCtx;
+typedef char chk_SceNetDhcpCtx[(sizeof(SceNetDhcpCtx) == 0x13E8) ? 1 : -1];
+
 struct Unk_D_00013F20 {
     u8 pad0[0x4];
     s32 unk4;
@@ -371,11 +393,14 @@ static __inline s32 apctlResetDns(void) {
 }
 
 extern s32 (*D_00008120[5])(SceNetApctlCtx *ctx, s32 prev, s32 *state, s32 *event);
+extern s32 D_00008134;
+extern s32 D_00008154[];
 extern s32 D_00008220;
 extern s32 D_00008234; /* D_00011DD4.state (prx reloc target) */
 extern u32 D_00008240;
 extern SceNetApctlHandlerEntry D_00008B1C[2];
-extern s32 D_00008B34;
+extern SceNetApctlCtx *D_00008B34;
+extern SceNetDhcpCtx D_00008B38;
 extern char D_00010A8C[]; /* "wlan" */
 extern SceNetApctlCtx D_00011DD4;
 extern s32 D_00011DE4;
@@ -430,7 +455,7 @@ s32 func_000016E0(struct Unk_func_000016E0_0 *arg0, s32 arg1);
 s32 func_00001710(SceSize args, void *argp);
 s32 func_00001940(SceNetApctlCtx *ctx);
 s32 func_00001A68(SceNetApctlCtx *ctx);
-s32 func_00001BB0(s32 arg0);
+s32 func_00001BB0(SceNetApctlCtx *ctx);
 s32 func_00001BC0(void);
 s32 func_00001C54(SceNetApctlCtx *ctx);
 void func_00001D84(SceNetApctlCtx *ctx);
@@ -443,17 +468,18 @@ s32 func_0000228C(void);
 void func_0000235C(s32 arg0, s32 arg1);
 s32 func_00002388(s32 index, s32 code, void *info);
 s32 func_000023BC(SceNetApctlCtx *ctx, u32 mask, u32 *bits, s32 wait);
-s32 func_00002480(SceNetApctlCtx *ctx);
+s32 func_00002480();
 s32 func_00002514(s32 arg0);
 s32 func_000038E4(void);
 void func_00003B30(s32 arg0);
 s32 func_00003C64(void);
-void func_00003E70();
-void func_00003EF0();
+void func_00003E70(s32 event, s32 arg);
+void func_00003EF0(s32 event, s32 arg);
 s32 func_00004424(s32 arg0);
 s32 func_000051A0(const char *ifname, void *func, s32 a2, s32 prio, s32 a4, SceNetApctlIpParam *param);
 void func_00005290(void *arg0);
 s32 func_00005634();
+s32 func_00005678(SceNetDhcpCtx *dc, s32 type);
 s32 func_00006304(s32 arg0);
 s32 func_00006A14(const char *ifname, void *func, s32 a2, s32 prio, s32 a4, SceNetApctlIpParam *param);
 void func_000070C0(s32 *arg0);

@@ -615,7 +615,7 @@ s32 func_00000B68(s32 stackSize, s32 prio) {
     SceNetApctlCtx *ctx = &D_00011DD4;
     s32 ret;
 
-    ret = func_00001BB0((s32)ctx);
+    ret = func_00001BB0(ctx);
     if (ret < 0) {
         goto end;
     }

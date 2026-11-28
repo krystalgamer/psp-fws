@@ -569,8 +569,8 @@ INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00003358);
 #endif
 
 #if FW_VERSION < 250
-s32 func_00001BB0(s32 arg0) {
-    D_00008B34 = arg0;
+s32 func_00001BB0(SceNetApctlCtx *ctx) {
+    D_00008B34 = ctx;
     return 0;
 }
 #endif
@@ -736,9 +736,50 @@ INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00003DA8);
 INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00003DC4);
 #endif
 
+#if FW_VERSION < 250
+void func_00003E70(s32 event, s32 arg) {
+    switch (event) {
+    case 0:
+        if (D_00008B34->state == 3) {
+            sceKernelSetEventFlag(D_00008B34->evf, 0x10);
+        }
+        break;
+    case 1:
+    case 2:
+    case 3:
+    case 5:
+        break;
+    case 4:
+        D_00008B34->error = arg;
+        sceKernelSetEventFlag(D_00008B34->evf, 8);
+        break;
+    }
+}
+#else
 INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00003E70);
+#endif
 
+#if FW_VERSION < 250
+void func_00003EF0(s32 event, s32 arg) {
+    switch (event) {
+    case 1:
+        if (D_00008B34->state == 3) {
+            sceKernelSetEventFlag(D_00008B34->evf, 0x10);
+        }
+        break;
+    case 0:
+    case 2:
+    case 4:
+        break;
+    case 3:
+        D_00008B34->error = arg;
+        sceKernelSetEventFlag(D_00008B34->evf, 8);
+        break;
+    }
+}
+#else
 INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00003EF0);
+#endif
 
 #if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_000021B8);
@@ -833,9 +874,30 @@ INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_000051E8);
 #endif
 
 #if FW_VERSION < 250
-INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00003908);
+s32 func_00003908(u32 *out) {
+    SceNetDhcpCtx *dc = &D_00008B38;
 
-INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00003978);
+    if (out == NULL) {
+        return 0x80410584;
+    }
+    if (D_00008134 < 0) {
+        return 0x80410581;
+    }
+    out[0] = D_00008154[dc->state];
+    if (dc->lease != NULL) {
+        out[1] = dc->lease->unk3DC;
+        if (dc->lease->unk3E8 != 0) {
+            out[2] = dc->lease->unk3E8;
+        }
+    }
+    return 0;
+}
+
+s32 func_00003978(void) {
+    u32 unused[4];
+
+    return 0;
+}
 #endif
 
 #if FW_VERSION >= 151 && FW_VERSION < 282
@@ -852,7 +914,20 @@ INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_0000570C);
 INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_000057B4);
 #endif
 
+#if FW_VERSION < 151
+s32 func_0000585C(SceNetDhcpCtx *dc) {
+    s32 ret;
+
+    ret = func_00005678(dc, 3);
+    if (ret < 0) {
+        return ret;
+    }
+    ret = sceNetBpfWrite(dc->bpf, dc->pkt, dc->pktLen);
+    return (ret < dc->pktLen) ? 0x80410582 : 3;
+}
+#else
 INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_0000585C);
+#endif
 
 #if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00005394);
