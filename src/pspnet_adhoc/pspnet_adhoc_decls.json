@@ -111,6 +111,7 @@
   "ptpSendCtl": "void ptpSendCtl(SceNetAdhocPtpPcb *pcb, u8 type);",
   "sceKernelCheckThreadStack": "s32 sceKernelCheckThreadStack(void);",
   "sceKernelSignalSema": "s32 sceKernelSignalSema(s32 sema, s32 n);",
+  "sceNetAdhocAuth_lib_AAB06250": "s32 sceNetAdhocAuth_lib_AAB06250(void *buf, s32 len);",
   "sceNetAdhocGameModeCreateMaster": "s32 sceNetAdhocGameModeCreateMaster(void *ptr, s32 size);",
   "sceNetAdhocGameModeCreateReplica": "s32 sceNetAdhocGameModeCreateReplica(const SceNetEtherAddr *addr, void *ptr, s32 size);",
   "sceNetAdhocGameModeDeleteMaster": "s32 sceNetAdhocGameModeDeleteMaster(void);",
@@ -154,7 +155,7 @@
  "types": {
   "SceNetAdhocDesc": "/* socket descriptor (0x2C), one per PDP/PTP id */\ntypedef struct SceNetAdhocDesc {\n    struct SceNetAdhocDesc *next;   /* 0x00 TAILQ entry */\n    struct SceNetAdhocDesc **prev;  /* 0x04 */\n    s32 id;                         /* 0x08 */\n    s32 flags;                          /* 0x0C 1: deleted, 0x10..0x200: socket alert bits */\n    u8 type;                        /* 0x10 SCE_NET_ADHOC_DESC_* */\n    u8 pad11[3];\n    void *pcb;                      /* 0x14 */\n    void *sndchan;                  /* 0x18 wait channel for send events */\n    void *rcvchan;                  /* 0x1C wait channel for recv events */\n    void *selchan;                  /* 0x20 wait channel for other events */\n    SceNetAdhocWaiter *waiters;     /* 0x24 */\n    struct SceNetAdhocDesc *tnext;  /* 0x28 next desc of the same waiting thread */\n} SceNetAdhocDesc;\ntypedef char chk_SceNetAdhocDesc[(sizeof(SceNetAdhocDesc) == 0x2C) ? 1 : -1];",
   "SceNetAdhocDescList": "typedef struct {\n    SceNetAdhocDesc *first;\n    SceNetAdhocDesc **last;\n} SceNetAdhocDescList;",
-  "SceNetAdhocGameMode": "/* game-mode master/replica entry (0x1C) */\ntypedef struct SceNetAdhocGameMode {\n    struct SceNetAdhocGameMode *next;   /* 0x00 TAILQ */\n    struct SceNetAdhocGameMode **prev;  /* 0x04 */\n    s32 id;                             /* 0x08 */\n    SceNetEtherAddr addr;               /* 0x0C */\n    void *ptr;                          /* 0x14 */\n    s32 size;                           /* 0x18 */\n} SceNetAdhocGameMode;",
+  "SceNetAdhocGameMode": "/* game-mode master/replica entry (1.00: 0x1C) */\ntypedef struct SceNetAdhocGameMode {\n    struct SceNetAdhocGameMode *next;   /* 0x00 TAILQ */\n    struct SceNetAdhocGameMode **prev;  /* 0x04 */\n    s32 id;                             /* 0x08 */\n    SceNetEtherAddr addr;               /* 0x0C */\n    void *ptr;                          /* 0x14 */\n    s32 size;                           /* 0x18 */\n#if FW_VERSION >= 150\n    void *buf;                          /* 0x1C signed copy */\n    s32 buflen;                         /* 0x20 */\n#endif\n} SceNetAdhocGameMode;",
   "SceNetAdhocGameModeList": "typedef struct {\n    SceNetAdhocGameMode *first;\n    SceNetAdhocGameMode **last;\n} SceNetAdhocGameModeList;",
   "SceNetAdhocGameModeOptData": "typedef struct {\n    u32 size;\n    u32 flag;\n} SceNetAdhocGameModeOptData;",
   "SceNetAdhocPdpList": "typedef struct {\n    SceNetAdhocPdpPcb *first;\n    SceNetAdhocPdpPcb **last;\n} SceNetAdhocPdpList;",

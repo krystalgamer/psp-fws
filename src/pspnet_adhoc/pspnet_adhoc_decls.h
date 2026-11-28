@@ -33,7 +33,7 @@ typedef struct {
     u8 data[6];
 } SceNetEtherAddr;
 
-/* game-mode master/replica entry (0x1C) */
+/* game-mode master/replica entry (1.00: 0x1C) */
 typedef struct SceNetAdhocGameMode {
     struct SceNetAdhocGameMode *next;   /* 0x00 TAILQ */
     struct SceNetAdhocGameMode **prev;  /* 0x04 */
@@ -41,6 +41,10 @@ typedef struct SceNetAdhocGameMode {
     SceNetEtherAddr addr;               /* 0x0C */
     void *ptr;                          /* 0x14 */
     s32 size;                           /* 0x18 */
+#if FW_VERSION >= 150
+    void *buf;                          /* 0x1C signed copy */
+    s32 buflen;                         /* 0x20 */
+#endif
 } SceNetAdhocGameMode;
 
 typedef struct {
@@ -426,6 +430,7 @@ s32 module_stop(void);
 void ptpSendCtl(SceNetAdhocPtpPcb *pcb, u8 type);
 s32 sceKernelCheckThreadStack(void);
 s32 sceKernelSignalSema(s32 sema, s32 n);
+s32 sceNetAdhocAuth_lib_AAB06250(void *buf, s32 len);
 s32 sceNetAdhocGameModeCreateMaster(void *ptr, s32 size);
 s32 sceNetAdhocGameModeCreateReplica(const SceNetEtherAddr *addr, void *ptr, s32 size);
 s32 sceNetAdhocGameModeDeleteMaster(void);

@@ -3459,9 +3459,7 @@ end:
 
 #if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", sceNetAdhocGameModeCreateReplica);
-#endif
-
-#if FW_VERSION < 150
+#else
 s32 sceNetAdhocGameModeUpdateMaster(void) {
     s32 s;
     s32 ret;
@@ -3485,16 +3483,24 @@ s32 sceNetAdhocGameModeUpdateMaster(void) {
         ret = 0x8041071C;
         goto end;
     }
+#if FW_VERSION >= 150
+    func_00006E58(gm->buf, gm->ptr, gm->size);
+    ret = sceNetAdhocAuth_lib_AAB06250(gm->buf, gm->buflen);
+    if (ret < 0)
+        goto end;
+    ret = sceWlanGPSend(0x10, gm->buf, gm->buflen);
+#else
     ret = sceWlanGPSend(0x10, gm->ptr, gm->size);
+#endif
 end:
     _sce_pspnet_splunlock(s);
     return ret;
 }
-#else
-INCLUDE_ASM("nonmatchings/pspnet_adhoc", sceNetAdhocGameModeUpdateMaster);
 #endif
 
 #if FW_VERSION >= 201
+INCLUDE_ASM("nonmatchings/pspnet_adhoc", sceNetAdhocGameModeUpdateMaster);
+
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", sceNetAdhocGameModeDeleteMaster);
 #endif
 
