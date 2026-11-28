@@ -373,6 +373,13 @@ struct sockaddr_dl {
         } \
     } while (0)
 
+/* receive-window update threshold (2.01+ computes it signed) */
+#if FW_VERSION < 201
+#define ADHOC_RCV_Q(pcb) ((pcb)->rcv.hiwat >> 2)
+#else
+#define ADHOC_RCV_Q(pcb) ((s32)(pcb)->rcv.hiwat / 4)
+#endif
+
 #if FW_VERSION < 150
 #define PTP_SEND_FRAME(pcb, type, seq, m) ptpSendFrame((pcb)->ifp, &(pcb)->laddr, (pcb)->lport, &(pcb)->paddr, (pcb)->pport, type, seq, m)
 #else
@@ -464,7 +471,6 @@ s32 func_000056CC(SceNetAdhocPtpPcb *pcb, const SceNetEtherAddr *saddr, u16 spor
 s32 func_000056E4(SceNetAdhocPtpPcb *pcb, s32 a1);
 void func_00005708(SceNetAdhocPtpPcb *pcb);
 void func_000058B8(struct mbuf *m);
-void func_0000660C(SceNetAdhocPtpPcb *pcb, u8 type);
 void func_000067F8(SceNetAdhocPtpPcb *pcb, s32 rexmt);
 s32 func_00006F68(void);
 s32 func_00007298(s32 id, SceNetAdhocGameModeOptData *opt, s32 internal);

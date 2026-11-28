@@ -67,7 +67,6 @@
   "func_000056E4": "s32 func_000056E4(SceNetAdhocPtpPcb *pcb, s32 a1);",
   "func_00005708": "void func_00005708(SceNetAdhocPtpPcb *pcb);",
   "func_000058B8": "void func_000058B8(struct mbuf *m);",
-  "func_0000660C": "void func_0000660C(SceNetAdhocPtpPcb *pcb, u8 type);",
   "func_000067F8": "void func_000067F8(SceNetAdhocPtpPcb *pcb, s32 rexmt);",
   "func_00006F68": "s32 func_00006F68(void);",
   "func_00007298": "s32 func_00007298(s32 id, SceNetAdhocGameModeOptData *opt, s32 internal);",
@@ -201,6 +200,7 @@
   "zz_ifq_macros": "/* NetBSD 1.5 if.h queue macros */\n#define IF_QFULL(ifq) ((ifq)->ifq_len >= (ifq)->ifq_maxlen)\n#define IF_DROP(ifq) ((ifq)->ifq_drops++)\n#define IF_ENQUEUE(ifq, m) do { \\\n        (m)->m_nextpkt = 0; \\\n        if ((ifq)->ifq_tail == 0) \\\n            (ifq)->ifq_head = m; \\\n        else \\\n            (ifq)->ifq_tail->m_nextpkt = m; \\\n        (ifq)->ifq_tail = m; \\\n        (ifq)->ifq_len++; \\\n    } while (0)\n#define IF_DEQUEUE(ifq, m) do { \\\n        (m) = (ifq)->ifq_head; \\\n        if (m) { \\\n            if (((ifq)->ifq_head = (m)->m_nextpkt) == 0) \\\n                (ifq)->ifq_tail = 0; \\\n            (m)->m_nextpkt = 0; \\\n            (ifq)->ifq_len--; \\\n        } \\\n    } while (0)",
   "zz_memcmp": "#if FW_VERSION < 201\n#define ADHOC_MEMCMP adhocMemcmp\n#else\n#define ADHOC_MEMCMP sceNetMemcmp\n#endif",
   "zz_ptp_macros": "#define PTP_SBWAKEUP(sb) do { \\\n        if ((sb)->flags & 1) { \\\n            (sb)->flags &= ~1; \\\n            _sce_pspnet_wakeup(sb); \\\n        } \\\n        if ((sb)->flags & 2) { \\\n            (sb)->flags &= ~2; \\\n            _sce_pspnet_wakeup(&g_adhocSelChan); \\\n        } \\\n    } while (0)",
+  "zz_rcvq": "/* receive-window update threshold (2.01+ computes it signed) */\n#if FW_VERSION < 201\n#define ADHOC_RCV_Q(pcb) ((pcb)->rcv.hiwat >> 2)\n#else\n#define ADHOC_RCV_Q(pcb) ((s32)(pcb)->rcv.hiwat / 4)\n#endif",
   "zz_sendframe": "#if FW_VERSION < 150\n#define PTP_SEND_FRAME(pcb, type, seq, m) ptpSendFrame((pcb)->ifp, &(pcb)->laddr, (pcb)->lport, &(pcb)->paddr, (pcb)->pport, type, seq, m)\n#else\n#define PTP_SEND_FRAME(pcb, type, seq, m) ptpSendFrameL(&(pcb)->laddr, (pcb)->lport, &(pcb)->paddr, (pcb)->pport, type, seq, m)\n#endif"
  },
  "vars": {
