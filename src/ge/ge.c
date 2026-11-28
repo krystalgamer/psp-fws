@@ -725,14 +725,14 @@ s32 _sceGeQueueEnd(void) {
 }
 #endif
 
-#if FW_VERSION == 150 || (FW_VERSION >= 201 && FW_VERSION < 282)
-INCLUDE_ASM("nonmatchings/ge", _sceGeQueueStatus);
-#endif
-
-#if FW_VERSION >= 151 && FW_VERSION < 201
+#if FW_VERSION >= 151 && FW_VERSION < 282
 s32 _sceGeQueueStatus(void) {
     return (D_00003ABC == 0) ? 0 : -1;
 }
+#endif
+
+#if FW_VERSION == 150
+INCLUDE_ASM("nonmatchings/ge", _sceGeQueueStatus);
 #endif
 
 #if FW_VERSION == 100
