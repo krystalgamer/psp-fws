@@ -293,7 +293,36 @@ INCLUDE_ASM("nonmatchings/fatmsmod", check_reload_status);
 
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00000134);
 
+#if FW_VERSION < 201
+s32 func_00000264(void) {
+    s32 intr;
+    s32 prio;
+
+    intr = sceKernelCpuSuspendIntr();
+    if (D_000193E0 != 0x1001) {
+        sceKernelCpuResumeIntr(intr);
+        return 0x80020001;
+    }
+    D_000193E0 = 0x1000;
+    func_000039E8();
+    sceKernelCpuResumeIntr(intr);
+    func_000052D0();
+    func_00004544(0);
+    prio = sceKernelGetThreadCurrentPriority();
+    sceKernelChangeThreadPriority(0, 4);
+    func_0000465C();
+    sceKernelTerminateThread(D_00019958);
+    sceKernelDeleteThread(D_00019958);
+    func_0000326C();
+    sceKernelTerminateThread(D_00019960);
+    sceKernelDeleteThread(D_00019960);
+    sceKernelChangeThreadPriority(0, prio);
+    free_heap_all();
+    return 0;
+}
+#else
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00000264);
+#endif
 
 #if FW_VERSION >= 151 && FW_VERSION < 260
 void *get_heap(SceUID *heap, SceSize size) {
@@ -2286,7 +2315,7 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_000065E4);
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00006694);
 
 #if FW_VERSION < 282
-s32 func_00004544(void) {
+s32 func_00004544(s32 unit) {
     sceIoClose(D_0002B5CC);
     D_0002B5CC = -1;
     D_00019B00 = 0;

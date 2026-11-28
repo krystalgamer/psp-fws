@@ -433,12 +433,15 @@ struct SceIoDeviceTable {
 
 extern const char D_00014704[]; /* "FATMS" */
 extern const char D_00015B80[]; /* "FATMS" (1.5x) */
+extern s32 D_000193E0; /* driver state: 0x1000 = stopped, 0x1001 = running */
 extern u8 D_000193F8;
 extern u8 D_000193FC;
 extern s32 D_00019500; /* mount count */
 extern s32 D_00019508;
 extern FatmsMountInfo D_0001950C;
 extern FatmsHeapEnt D_00019558[128];
+extern SceUID D_00019958;
+extern SceUID D_00019960;
 extern M2C_UNK D_00019AD4;
 extern s32 D_00019B00;
 extern s8 D_00019B04;
@@ -476,6 +479,7 @@ extern PfGeometry D_0002790C;
 extern PfDirCursor D_00027934;
 extern char D_00027B98[]; /* name being created */
 extern s8 D_00027C98;
+extern char D_00027C99[];
 extern u32 D_00027CC4[1]; /* per drive: first freed cluster hint */
 extern PfDrive *D_00027CC8[1]; /* per drive (index drive - A; one drive in 1.00) */
 extern s8 D_00027DD0[1]; /* per drive: 1 = flush after each operation */
@@ -522,7 +526,7 @@ s32 func_00000020(void);
 void func_00000048(void);
 M2C_UNK func_00000134();
 void func_0000022C(void);
-M2C_UNK func_00000264();
+s32 func_00000264(void);
 void func_000004B8(void);
 M2C_UNK func_00000CE4();
 M2C_UNK func_00000E00();
@@ -558,7 +562,7 @@ s32 func_000039E8(void);
 s32 func_00003A34(s32 unit, s32 stat);
 s32 func_00003A50(s32 unit, s32 arg);
 s32 func_00003CD8(void);
-s32 func_00004544(void);
+s32 func_00004544(s32 unit); /* close the block device */
 s8 *func_000045F4(void);
 s32 func_00004600(void);
 s32 func_0000465C(void);
@@ -568,6 +572,7 @@ void func_000047C8(SceIoIob *iob);
 void func_000047E4(void);
 void func_00004800(void);
 void func_0000481C(void);
+s32 func_000048B8(SceMsStubMsg *msg); /* run one stub request */
 void func_00004950(SceIoIob *iob);
 void func_00004A58(void);
 void func_00004A74(void);
@@ -587,7 +592,7 @@ void func_000053FC(void);
 s32 func_0000565C(void);
 void func_000057CC(s32 arg0);
 s32 func_00005D18(s32 *flag);
-s32 func_00006148(s32, s32, s32);
+s32 func_00006148(char *name, s32 *index, u8 *kind);
 s32 func_0000635C(void);
 s32 func_00006724(void);
 s8 *func_000067D4(void);
@@ -653,7 +658,7 @@ void func_0000B57C(void);
 s32 func_0000B59C(s32, s32, s32);
 s32 func_0000B5CC(void);
 void func_0000B650(void);
-s32 func_0000B71C(s32, s32);
+s32 func_0000B71C(const char *cwd, char *path);
 s32 func_0000B738(s32, s32, s32, s32);
 s32 func_0000B7E4(void *arg0); /* path starts with a separator or drive */
 s32 func_0000B818(char *path); /* normalise a path in place */
@@ -776,6 +781,7 @@ s32 sceIoDevctl(const char *dev, u32 cmd, void *indata, s32 inlen, void *outdata
 s32 sceIoIoctl(SceUID fd, u32 cmd, void *indata, s32 inlen, void *outdata, s32 outlen);
 SceUID sceIoOpen(const char *file, s32 flags, SceMode mode);
 void *sceKernelAllocHeapMemory(SceUID heapid, SceSize size);
+s32 sceKernelChangeThreadPriority(SceUID thid, s32 prio);
 void sceKernelCpuResumeIntr(s32 intr);
 s32 sceKernelCpuSuspendIntr(void);
 SceUID sceKernelCreateEventFlag(const char *name, s32 attr, s32 bits, void *opt);
@@ -785,14 +791,18 @@ s32 sceKernelDeleteEventFlag(SceUID evf);
 M2C_UNK sceKernelDeleteFpl();
 s32 sceKernelDeleteHeap(SceUID heapid);
 s32 sceKernelDeleteMbx(SceUID mbx);
+s32 sceKernelDeleteThread(SceUID thid);
 s32 sceKernelFreeHeapMemory(SceUID heapid, void *block);
 s32 sceKernelGetThreadCurrentPriority(void);
 s32 sceKernelNotifyCallback(SceUID cb, s32 arg);
+s32 sceKernelPowerLockForUser(s32 unk);
+s32 sceKernelPowerUnlockForUser(s32 unk);
 s32 sceKernelReceiveMbx(SceUID mbx, void **msg, u32 *timeout);
 s32 sceKernelResumeDispatchThread(s32 state);
 s32 sceKernelSendMbx(SceUID mbx, void *msg);
 s32 sceKernelSetEventFlag(SceUID evf, u32 bits);
 s32 sceKernelSuspendDispatchThread(void);
+s32 sceKernelTerminateThread(SceUID thid);
 s32 sceKernelWaitEventFlag(SceUID evf, u32 bits, u32 wait, u32 *outBits, u32 *timeout);
 s32 sceRtcGetCurrentClockLocalTime(ScePspDateTime *time);
 s32 sceRtcSetDosTime(ScePspDateTime *date, u32 dosTime);
