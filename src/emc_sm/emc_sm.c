@@ -1,3 +1,4 @@
+/* cflags[201,250,260,271,282,300,301,302,303,310,311,330,340]: -O2 -frename-registers */
 /* cflags[152]: -O2 -frename-registers */
 /* cflags[150]: -O2 -frename-registers */
 /* cflags[100,102,103]: -O2 -frename-registers */
