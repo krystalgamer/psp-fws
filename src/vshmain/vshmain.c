@@ -2785,7 +2785,8 @@ INCLUDE_ASM("nonmatchings/vshmain", _ZN3vsh15RaiseFatalErrorEj);
 #endif
 
 #if FW_VERSION == 100
-void _ZN3vsh15RaiseFatalErrorEj(s32 arg0) {
+void vsh::RaiseFatalError(unsigned int cxxp1) {
+    s32 arg0 = (s32) cxxp1;
     s32 temp_a0;
     s32 temp_v0;
 
@@ -12007,7 +12008,8 @@ INCLUDE_ASM("nonmatchings/vshmain", _ZN11PageManager5ClearEv);
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 350
-void _ZN11PageManager5ClearEv(struct Unk_vsh_7ADF6A69_0 *arg0) {
+void PageManager::Clear() {
+    struct Unk_vsh_7ADF6A69_0 *arg0 = (struct Unk_vsh_7ADF6A69_0 *) this;
     _ZN3paf4View12PageCloseAllEv(arg0->unk4);
     arg0->unk1C = 0;
     func_00023B28((u8 *)arg0 + 0x20);
@@ -12847,7 +12849,7 @@ void _ZN3vsh10FixedAlloc6UnlockEPKc(struct Unk_vsh_6286E89D_0 *arg0) {
 #endif
 
 #if FW_VERSION < 201
-void *_ZN3vsh10FixedAlloc8InstanceEv(void) {
+void * vsh::FixedAlloc::Instance() {
     return D_0001AAC8;
 }
 #endif
@@ -12857,7 +12859,7 @@ INCLUDE_ASM("nonmatchings/vshmain", func_00018170);
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 350
-void *_ZN3vsh10FixedAlloc8InstanceEv(void) {
+void * vsh::FixedAlloc::Instance() {
     return D_00030A0C;
 }
 #endif
