@@ -3500,13 +3500,7 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00006324);
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", ptpSendCtl);
-#endif
 
-#if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00006AF8);
-#endif
-
-#if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", ptpOutput);
 #endif
 
@@ -3568,9 +3562,7 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_000062FC);
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_0000660C);
 
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_000067F8);
-#endif
-
-#if FW_VERSION < 201
+#else
 void func_000069D4(SceNetAdhocPtpPcb *pcb) {
     if ((u32)pcb->state < 2)
         return;
@@ -3589,7 +3581,9 @@ void func_000069D4(SceNetAdhocPtpPcb *pcb) {
         ptpSendCtl(pcb, 2);
         break;
     case 4:
+#if FW_VERSION < 201
         pcb->snd_inflight = 0;
+#endif
         pcb->snd_nxt = pcb->snd_una;
         ptpOutput(pcb, 1);
         g_adhocStat.stat[ADHOC_STAT_PTP_REXMT]++;
@@ -3597,7 +3591,9 @@ void func_000069D4(SceNetAdhocPtpPcb *pcb) {
     }
     _sce_pspnet_callout_reset_usec(&pcb->callout, pcb->rexmt_int, func_000069D4, pcb);
 }
-#else
+#endif
+
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_000069D4);
 #endif
 
