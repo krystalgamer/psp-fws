@@ -254,7 +254,9 @@ struct ifqueue {
 struct ifnet {
     u8 unk0[0x30];
     u16 if_flags;                       /* 0x30 IFF_* */
-    u8 unk32[0xB8 - 0x32];
+    u8 unk32[0x88 - 0x32];
+    u64 if_obytes;                      /* 0x88 */
+    u8 unk90[0xB8 - 0x90];
     void (*if_start)(struct ifnet *ifp); /* 0xB8 */
     u8 unkBC[0xCC - 0xBC];
     struct ifqueue if_snd;              /* 0xCC */
@@ -409,6 +411,8 @@ struct sockaddr_dl {
 #define PTP_SEND_FRAME(pcb, type, seq, m) ptpSendFrameL(&(pcb)->laddr, (pcb)->lport, &(pcb)->paddr, (pcb)->pport, type, seq, m)
 #endif
 
+extern const u8 D_0000789C[2]; /* ethertype 0x88C8 */
+extern const u8 D_000078A0[2];
 extern const SceNetEtherAddr D_000078A4; /* ff:ff:ff:ff:ff:ff */
 extern const SceNetEtherAddr D_000078AC; /* 00:00:00:00:00:00 */
 extern u16 D_000079E4;
@@ -533,7 +537,7 @@ s32 ptpPoll(SceNetAdhocDesc *d, s32 events);
 s32 ptpRecvData(SceNetAdhocDesc *d, void *buf, s32 *len, u32 timeout, s32 nonblock);
 void ptpSendCtl(SceNetAdhocPtpPcb *pcb, u8 type);
 s32 ptpSendData(SceNetAdhocDesc *d, const void *data, s32 *len, u32 timeout, s32 nonblock);
-void ptpSendFrame(struct ifnet *ifp, const SceNetEtherAddr *laddr, u16 lport, const SceNetEtherAddr *paddr, u16 pport, u8 type, u32 seq, struct mbuf *m);
+void ptpSendFrame(struct ifnet *ifp, const SceNetEtherAddr *laddr, u16 lport, const SceNetEtherAddr *paddr, u16 pport, u8 type, u32 seq, struct mbuf *data);
 void ptpSendFrameL(const SceNetEtherAddr *laddr, u16 lport, const SceNetEtherAddr *paddr, u16 pport, u8 type, u32 seq, struct mbuf *m);
 void ptpSetRexmt(SceNetAdhocPtpPcb *pcb, s32 a1, s32 a2);
 s32 ptpSetSockbuf(SceNetAdhocPtpPcb *pcb, s32 sndsize, s32 rcvsize);
