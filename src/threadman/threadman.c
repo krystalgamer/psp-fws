@@ -833,7 +833,53 @@ INCLUDE_ASM("nonmatchings/threadman", func_00000BD8);
 
 INCLUDE_ASM("nonmatchings/threadman", sceKernelRegisterThreadEventHandler);
 
+#if FW_VERSION < 270
+s32 sceKernelReleaseThreadEventHandler(SceUID uid_) {
+    SceSysmemUidCB *cb;
+    SceSysmemUidCB *uid;
+    SceThread *thread = g_threadmanInfo.currentThread;
+    s32 intr;
+    s32 ret;
+    void *ra = getRa();
+    u32 oldK1;
+
+    oldK1 = shiftK1Noreorder();
+    if (sceKernelIsIntrContext()) {
+        setK1(oldK1);
+        return 0x80020064;
+    }
+    if (thread->unk44 != 0) {
+        setK1(oldK1);
+        return 0x80020064;
+    }
+    intr = sceKernelCpuSuspendIntr();
+    if (intr == 0 || g_threadmanInfo.dispatchDisabled != 0) {
+        sceKernelCpuResumeIntr(intr);
+        setK1(oldK1);
+        return 0x800201A7;
+    }
+    if (sceKernelGetUIDcontrolBlockWithType(uid_, g_threadmanInfo.uidThreadEventHandlerType, &uid) != 0) {
+        sceKernelCpuResumeIntr(intr);
+        setK1(oldK1);
+        return 0x800201A0;
+    }
+    cb = uid;
+    if (k1IsUserMode() && !(cb->attr & 0x10)) {
+        sceKernelCpuResumeIntr(intr);
+        setK1(oldK1);
+        return 0x800200D1;
+    }
+    if (g_threadmanInfo.logHandler != NULL) {
+        g_threadmanInfo.logHandler(0x2C, ra, 1, uid_);
+    }
+    ret = sceKernelDeleteUID(uid_);
+    sceKernelCpuResumeIntr(intr);
+    setK1(oldK1);
+    return ret;
+}
+#else
 INCLUDE_ASM("nonmatchings/threadman", sceKernelReleaseThreadEventHandler);
+#endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/threadman", func_00001260);
