@@ -9,6 +9,37 @@ struct D_000079C0_s {
     M2C_UNK * unk4;
 };
 
+typedef struct SceNetAdhocWaiter {
+    u8 pad0[0x20];
+    s32 tid;                        /* 0x20 */
+    u8 pad24[0x28];
+    s32 sema;                       /* 0x4C */
+    u8 pad50[0x10];
+    struct SceNetAdhocWaiter *next; /* 0x60 */
+} SceNetAdhocWaiter;
+
+/* socket descriptor (0x2C), one per PDP/PTP id */
+typedef struct SceNetAdhocDesc {
+    struct SceNetAdhocDesc *next;   /* 0x00 TAILQ entry */
+    struct SceNetAdhocDesc **prev;  /* 0x04 */
+    s32 id;                         /* 0x08 */
+    s32 unkC;
+    u8 type;                        /* 0x10 SCE_NET_ADHOC_DESC_* */
+    u8 pad11[3];
+    void *pcb;                      /* 0x14 */
+    s32 unk18;                      /* 0x18 read-waiter tid */
+    s32 unk1C;                      /* 0x1C write-waiter tid */
+    s32 unk20;                      /* 0x20 except-waiter tid */
+    SceNetAdhocWaiter *waiters;     /* 0x24 */
+    s32 unk28;
+} SceNetAdhocDesc;
+typedef char chk_SceNetAdhocDesc[(sizeof(SceNetAdhocDesc) == 0x2C) ? 1 : -1];
+
+typedef struct {
+    SceNetAdhocDesc *first;
+    SceNetAdhocDesc **last;
+} SceNetAdhocDescList;
+
 struct Unk_func_00000974_temp_a1 {
     u8 pad0[0x10];
     u8 unk10;
@@ -93,17 +124,28 @@ struct Unk_func_00005708_var_s0 {
 };
 
 extern M2C_UNK D_00007450;
+extern SceNetAdhocDescList D_00007998;
+extern s32 D_000079A0;
 extern struct D_000079C0_s D_000079C0;
 extern M2C_UNK D_000079CC;
 extern M2C_UNK D_000079E8;
 extern M2C_UNK D_00007A8C;
 extern M2C_UNK D_00007CC8;
 
+s32 _sce_pspnet_start_of_adhoc_module_in_sched(void *func);
+void _sce_pspnet_stop_of_adhoc_module_in_sched(void);
 void func_00000444(s32 arg0);
 void func_00000490(s32 arg0);
 s32 func_0000092C(void *arg0, s32 arg1);
 s32 func_00000974(void *arg0, s32 arg1);
-s32 func_00000FFC(s32);
+s32 func_00000DD0(void);
+void func_00000E18(void);
+s32 func_00000E44(void);
+SceNetAdhocDesc *func_00000E90(u8 type, s32 id);
+s32 func_00000ED0(u8 type, SceNetAdhocDesc **out);
+void func_00000FFC(SceNetAdhocDesc *d);
+s32 func_00001044(void);
+void func_00001078(SceNetAdhocDesc *d, s32 events);
 s32 func_00002B84(void *arg0, s32 arg1);
 s32 func_00002B90(s32);
 s32 func_00002C00(s32, s32);
@@ -134,10 +176,13 @@ s32 func_00006F68(void);
 s32 func_00007298(s32, s32, s32);
 s32 module_start(void);
 s32 module_stop(void);
+s32 sceKernelSignalSema(s32 sema, s32 n);
 void sceNetAdhocGameModeUpdateReplica(s32 arg0, s32 arg1);
 void sceNetAdhocGameModeUpdateReplicaInternal(s32 arg0, s32 arg1);
 void sceNetAdhoc_lib_62B875A8(void);
 void sceNetAdhoc_lib_F9240FBA(void);
+void sceNetFreeInternal(void *p);
+void *sceNetMallocInternal(u32 size);
 M2C_UNK sceNetMemset(void *, M2C_UNK, M2C_UNK);
 
 #endif
