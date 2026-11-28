@@ -448,7 +448,7 @@ s32 udp_usrreq(struct socket *so, s32 req, struct mbuf *m, struct mbuf *nam, str
         error = 0x5F;
         break;
     case 4:
-        error = func_00013114(inp, nam);
+        error = in_pcbconnect(inp, nam);
         if (error)
             break;
         soisconnected(so);
@@ -484,7 +484,7 @@ s32 udp_usrreq(struct socket *so, s32 req, struct mbuf *m, struct mbuf *nam, str
                     error = 0x7F;
                     goto die;
                 }
-                error = func_00013114(inp, nam);
+                error = in_pcbconnect(inp, nam);
                 if (error) {
                 die:
                     sceNetMFreem(m);
@@ -578,7 +578,7 @@ s32 udp_usrreq(struct socket *so, s32 req, struct mbuf *m, struct mbuf *nam, str
         error = 0x5F;
         break;
     case 4:
-        error = func_00013114(inp, nam);
+        error = in_pcbconnect(inp, nam);
         if (error)
             break;
         soisconnected(so);
@@ -614,7 +614,7 @@ s32 udp_usrreq(struct socket *so, s32 req, struct mbuf *m, struct mbuf *nam, str
                     error = 0x7F;
                     goto die;
                 }
-                error = func_00013114(inp, nam);
+                error = in_pcbconnect(inp, nam);
                 if (error) {
                 die:
                     sceNetMFreem(m);
@@ -1034,7 +1034,7 @@ __inline struct syn_cache *syn_cache_lookup(struct sockaddr *src, struct sockadd
 }
 #endif
 
-#if FW_VERSION < 151
+#if FW_VERSION < 201
 struct socket *syn_cache_get(struct sockaddr *src, struct sockaddr *dst, struct tcphdr *th, u32 hlen, u32 tlen, struct socket *so, struct mbuf *m)
 {
 	struct syn_cache *sc;
@@ -1179,7 +1179,7 @@ abort:
 }
 #endif
 
-#if FW_VERSION >= 151 && FW_VERSION < 282
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_inet_udp", syn_cache_get);
 #endif
 

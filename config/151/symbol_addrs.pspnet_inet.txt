@@ -724,3 +724,4 @@ ether_ipmulticast_min = 0x0002C698; // rom:0x2C718
 ether_ipmulticast_max = 0x0002C6A0; // rom:0x2C720
 inetctlerrmap = 0x0002C9DC; // rom:0x2CA5C
 syn_cache_add = 0x00020788; // type:func
+in_pcbconnect = 0x00013114; // type:func

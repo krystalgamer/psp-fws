@@ -1177,7 +1177,7 @@ s32 tcp_usrreq(struct socket *so, s32 req, struct mbuf *m, struct mbuf *nam, str
                 if (error)
                     break;
             }
-            error = func_00013114(inp, nam);
+            error = in_pcbconnect(inp, nam);
         }
         if (error)
             break;
@@ -1371,7 +1371,7 @@ s32 tcp_usrreq(struct socket *so, s32 req, struct mbuf *m, struct mbuf *nam, str
                 if (error)
                     break;
             }
-            error = func_00013114(inp, nam);
+            error = in_pcbconnect(inp, nam);
         }
         if (error)
             break;

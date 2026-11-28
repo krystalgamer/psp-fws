@@ -202,7 +202,7 @@ noname:
 #endif
 
 #if FW_VERSION >= 151 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet_in_cksum2", func_00013114);
+INCLUDE_ASM("nonmatchings/pspnet_inet_in_cksum2", in_pcbconnect);
 #endif
 
 #if FW_VERSION < 150
