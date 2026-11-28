@@ -582,7 +582,25 @@ s32 module_start(void) {
 INCLUDE_ASM("nonmatchings/ata", func_0000171C);
 #endif
 
-#if FW_VERSION < 201
+#if FW_VERSION < 150
+void func_00001810(void) {
+    SceAtaAhbBlock *b = sceAtaAhbGetAtaBlock();
+    sceAtaAhbSetPioTiming(b->pioMode, b->pioArg);
+    if (b->flags & 0x20) {
+        sceAtaAhbSetMDMATiming(b->pioMode, b->flags & 7);
+    } else if (b->flags & 0x40) {
+        sceAtaAhbSetUDMATiming(b->pioMode, 0);
+    }
+    if (b->pioCtl != 0) {
+        sceAtaAhbSetPioCtl(b->pioCtl, 1, 2);
+    } else {
+        sceAtaAhbSetPioCtl(0, 0, 0);
+    }
+    sceAtaAhbSetAHBCtl(b->ahb0, b->ahb1, b->ahb2);
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/ata", func_00001810);
 #endif
 
@@ -729,23 +747,25 @@ void sceAtaAhbTerm(void) {
 
 #if FW_VERSION < 282
 void sceAtaAhbSetAtaBlock(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5) {
-    M2C_VFIELD(&D_00004280, s32, 0x18) = arg5;
-    M2C_VFIELD(&D_00004280, s32, 4) = arg0;
-    M2C_VFIELD(&D_00004280, s32, 8) = arg1;
-    M2C_VFIELD(&D_00004280, s32, 0xC) = arg2;
-    M2C_VFIELD(&D_00004280, s32, 0x10) = arg3;
-    M2C_VFIELD(&D_00004280, s32, 0x14) = arg4;
+    volatile SceAtaAhbBlock *b = &D_00004280;
+
+    b->ahb2 = arg5;
+    b->pioArg = arg0;
+    b->flags = arg1;
+    b->pioCtl = arg2;
+    b->ahb0 = arg3;
+    b->ahb1 = arg4;
 }
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
-M2C_UNK *func_00002160(void) {
+SceAtaAhbBlock *func_00002160(void) {
     return &D_00004280;
 }
 #endif
 
 #if FW_VERSION < 150
-s32 *sceAtaAhbGetAtaBlock(void) {
+SceAtaAhbBlock *sceAtaAhbGetAtaBlock(void) {
     return &D_00004280;
 }
 #endif
@@ -763,15 +783,17 @@ void func_000022F4(void) {
 }
 
 void sceAtaAhbSetAtaBlock(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5) {
-    D_00004700.unk18 = arg5;
-    D_00004700.unk4 = arg0;
-    D_00004700.unk8 = arg1;
-    D_00004700.unkC = arg2;
-    D_00004700.unk10 = arg3;
-    D_00004700.unk14 = arg4;
+    volatile SceAtaAhbBlock *b = &D_00004700;
+
+    b->ahb2 = arg5;
+    b->pioArg = arg0;
+    b->flags = arg1;
+    b->pioCtl = arg2;
+    b->ahb0 = arg3;
+    b->ahb1 = arg4;
 }
 
-M2C_UNK *sceAtaAhbGetAtaBlock(void) {
+SceAtaAhbBlock *sceAtaAhbGetAtaBlock(void) {
     return &D_00004700;
 }
 #endif
@@ -1084,7 +1106,27 @@ void func_00001F5C(s32 mode) {
 
 INCLUDE_ASM("nonmatchings/ata", sceAtaGetByteLimitCount);
 
+#if FW_VERSION < 150
+s32 sceAtaExecSetFeaturesCmd(SceAtaDrive *drive, u8 feature, s8 a2, s8 a3, s32 a4) {
+    SceAtaCmd c;
+    s32 ret;
+    s32 i;
+    ret = func_00002074(drive, feature, a3, a2, 0, &c, a4);
+    if (ret != 0) {
+        return ret;
+    }
+    func_000020F8(drive, &c, NULL);
+    for (i = 0; i < 20; i++) {
+        ret = sceAtaExecCmd(drive, 0xEF, 1, NULL);
+        if (ret == 0) {
+            return 0;
+        }
+    }
+    return ret;
+}
+#else
 INCLUDE_ASM("nonmatchings/ata", sceAtaExecSetFeaturesCmd);
+#endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/ata", func_0000251C);
@@ -1095,46 +1137,34 @@ INCLUDE_ASM("nonmatchings/ata", func_00002074);
 #endif
 
 #if FW_VERSION == 271
-s32 func_000020F8(void *arg0, void *arg1, s32 arg2) {
+s32 func_000020F8(SceAtaDrive *arg0, SceAtaCmd *arg1, void *arg2) {
     s32 var_v0;
 
     var_v0 = 0x80211008;
     if (((arg0 == NULL) | (arg1 == NULL)) == 0) {
         var_v0 = 0;
-        M2C_FIELD(arg0, void **, 0x18) = arg1;
-        M2C_FIELD(arg1, s32 *, 0xC) = arg2;
+        arg0->cmd = arg1;
+        arg1->buf = arg2;
     }
     return var_v0;
 }
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 271
-s32 func_000020F8(void *arg0, void *arg1, s32 arg2) {
+#if FW_VERSION < 271
+s32 func_000020F8(SceAtaDrive *arg0, SceAtaCmd *arg1, void *arg2) {
     s32 var_v0;
 
     var_v0 = 0x80211008;
     if (((arg0 == NULL) | (arg1 == NULL)) == 0) {
         var_v0 = 0;
-        M2C_FIELD(arg1, s32 *, 0xC) = arg2;
-        M2C_FIELD(arg0, void **, 0x18) = arg1;
+        arg1->buf = arg2;
+        arg0->cmd = arg1;
     }
     return var_v0;
 }
 #endif
 
 #if FW_VERSION < 150
-s32 func_000020F8(void *arg0, void *arg1, s32 arg2) {
-    s32 var_v0;
-
-    var_v0 = 0x80211008;
-    if (((arg0 == NULL) | (arg1 == NULL)) == 0) {
-        var_v0 = 0;
-        M2C_FIELD(arg1, s32 *, 0x10) = arg2;
-        M2C_FIELD(arg0, void **, 0x1C) = arg1;
-    }
-    return var_v0;
-}
-
 INCLUDE_ASM("nonmatchings/ata", func_00002124);
 #endif
 
@@ -1153,15 +1183,112 @@ INCLUDE_ASM("nonmatchings/ata", func_00002A98);
 #if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/ata", sceAtaExecCmd);
 
-INCLUDE_ASM("nonmatchings/ata", sceAtaExecDeviceResetCmd);
+s32 sceAtaExecDeviceResetCmd(SceAtaDrive *drive) {
+    SceAtaCmd c;
+    s32 ret;
+    s32 i;
+    s32 id;
+    sceKernelWaitSema(drive->semaId, 1, NULL);
+    drive->protocol = 1;
+    id = drive->driveId;
+    c.tf.select = id << 4;
+    c.tf.features = 0;
+    ret = func_000020F8(drive, &c, NULL);
+    if (ret == 0) {
+        for (i = 0; i < 20; i++) {
+            ret = sceAtaExecCmd(drive, 8, drive->protocol, NULL);
+            if (ret == 0) {
+                break;
+            }
+        }
+    }
+    sceKernelSignalSema(drive->semaId, 1);
+    return ret;
+}
 
-INCLUDE_ASM("nonmatchings/ata", sceAtaExecPSPResetCmd);
+s32 sceAtaExecPSPResetCmd(SceAtaDrive *drive, u8 features) {
+    SceAtaCmd c;
+    s32 ret;
+    s32 i;
+    s32 id;
+    sceKernelWaitSema(drive->semaId, 1, NULL);
+    drive->protocol = 1;
+    c.tf.features = features;
+    id = drive->driveId;
+    c.tf.select = id << 4;
+    ret = func_000020F8(drive, &c, NULL);
+    if (ret == 0) {
+        for (i = 0; i < 20; i++) {
+            ret = sceAtaExecCmd(drive, 0xF0, drive->protocol, NULL);
+            if (ret == 0) {
+                break;
+            }
+        }
+    }
+    sceKernelSignalSema(drive->semaId, 1);
+    return ret;
+}
 
-INCLUDE_ASM("nonmatchings/ata", sceAtaExecIPDCmd);
+s32 sceAtaExecIPDCmd(SceAtaDrive *drive, u32 cmd, void *buf, u32 arg) {
+    SceAtaCmd c;
+    s32 ret;
+    s32 i;
+    sceKernelWaitSema(drive->semaId, 1, NULL);
+    drive->protocol = 2;
+    drive->byteLimit = 0x2000;
+    ret = func_000020F8(drive, &c, buf);
+    if (ret != 0) {
+        goto end;
+    }
+    for (i = 0; i < 3; i++) {
+        ret = sceAtaExecCmd(drive, cmd, 2, &arg);
+        if (ret == 0 && *(s8 *)buf < 0) {
+            break;
+        }
+    }
+end:
+    sceKernelSignalSema(drive->semaId, 1);
+    return ret;
+}
 
-INCLUDE_ASM("nonmatchings/ata", sceAtaExecIdleStandbyCmd);
+s32 sceAtaExecIdleStandbyCmd(u32 cmd, SceAtaDrive *drive, u8 count) {
+    SceAtaCmd c;
+    s32 ret;
+    sceKernelWaitSema(drive->semaId, 1, NULL);
+    ret = 0x800001FF;
+    if (drive != NULL) {
+        drive->protocol = 1;
+        c.tf.nsector = count;
+        ret = func_000020F8(drive, &c, NULL);
+        if (ret != 0) {
+            goto end;
+        }
+        ret = sceAtaExecCmd(drive, cmd, 1, NULL);
+    }
+end:
+    sceKernelSignalSema(drive->semaId, 1);
+    return ret;
+}
 
-INCLUDE_ASM("nonmatchings/ata", sceAtaExecSeekCmd);
+s32 sceAtaExecSeekCmd(SceAtaDrive *drive, u32 lba, s8 dev) {
+    SceAtaCmd c;
+    s32 ret;
+    s32 i;
+    sceKernelWaitSema(drive->semaId, 1, NULL);
+    c.tf.lcyl = lba >> 8;
+    c.tf.hcyl = lba >> 16;
+    c.tf.select = ((lba >> 24) & 8) | (dev << 4);
+    c.tf.sector = lba;
+    func_000020F8(drive, &c, NULL);
+    for (i = 0; i < 20; i++) {
+        ret = sceAtaExecCmd(drive, 0x70, 1, NULL);
+        if (ret == 0) {
+            break;
+        }
+    }
+    sceKernelSignalSema(drive->semaId, 1);
+    return ret;
+}
 
 INCLUDE_RODATA("nonmatchings/ata", D_00003F30);
 
@@ -1318,16 +1445,92 @@ INCLUDE_ASM("nonmatchings/ata", func_00002E58);
 
 INCLUDE_ASM("nonmatchings/ata", func_00003A4C);
 
-INCLUDE_ASM("nonmatchings/ata", func_00003CBC);
+s32 func_00003CBC(u32 cmd, SceAtaTaskFile *tf) {
+    ATA_SELECT = tf->select;
+    ATA_FEATURES = 0;
+    ATA_NSECTOR = tf->nsector;
+    ATA_SECTOR = 0;
+    ATA_LCYL = 0;
+    ATA_HCYL = 0;
+    if (cmd == 0xE3) {
+        ATA_COMMAND = 0xE3;
+    } else if (cmd == 0xE0) {
+        ATA_COMMAND = 0xE0;
+    } else {
+        return 0x800001FF;
+    }
+    asm volatile("sync");
+    return 0;
+}
 
-INCLUDE_ASM("nonmatchings/ata", func_00003D28);
+s32 func_00003D28(u32 cmd, SceAtaDrive *drive) {
+    s32 id = drive->driveId;
+    ATA_SELECT = id << 4;
+    ATA_FEATURES = 0;
+    ATA_NSECTOR = 0;
+    ATA_SECTOR = 0;
+    ATA_LCYL = 0;
+    ATA_HCYL = 0;
+    if (cmd == 0xA1) {
+        ATA_COMMAND = 0xA1;
+    } else if (cmd == 0xEC) {
+        ATA_COMMAND = 0xEC;
+    }
+    asm volatile("sync");
+    return 0x200;
+}
 
 #if FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/ata", func_00003264);
+s32 func_00003264(void) {
+    s32 ret = sceKernelRegisterIntrHandler(5, 1, func_0000356C, 0, &D_00004140);
+    if (ret < 0) {
+        return ret;
+    }
+    ret = func_000032C8();
+    if (ret != 0) {
+        return ret;
+    }
+    return sceKernelEnableIntr(5);
+}
 
-INCLUDE_ASM("nonmatchings/ata", func_000032C8);
+s32 func_000032C8(void) {
+    s32 ret;
+    ret = sceKernelRegisterSubIntrHandler(5, 1, func_000036FC, NULL);
+    if (ret < 0) {
+        return ret;
+    }
+    ret = sceKernelRegisterSubIntrHandler(5, 2, func_00003704, NULL);
+    if (ret < 0) {
+        return ret;
+    }
+    ret = sceKernelRegisterSubIntrHandler(5, 3, func_0000371C, NULL);
+    if (ret < 0) {
+        return ret;
+    }
+    ret = sceKernelRegisterSubIntrHandler(5, 9, func_00003714, NULL);
+    if (ret < 0) {
+        return ret;
+    }
+    ret = sceKernelRegisterSubIntrHandler(5, 0xA, func_0000370C, NULL);
+    if (ret < 0) {
+        return ret;
+    }
+    sceKernelEnableSubIntr(5, 1);
+    sceKernelEnableSubIntr(5, 2);
+    sceKernelEnableSubIntr(5, 3);
+    sceKernelEnableSubIntr(5, 9);
+    sceKernelEnableSubIntr(5, 0xA);
+    return 0;
+}
 
-INCLUDE_ASM("nonmatchings/ata", func_000033D4);
+s32 func_000033D4(void) {
+    SceUID id = sceKernelCreateEventFlag("SceAhbAta", 0x200, 0xFFFF, NULL);
+    if (id < 0) {
+        return id;
+    }
+    D_000042E0 = id;
+    return 0;
+}
 
 s32 sceAtaAhbGetEventFlag(void) {
     return D_000042E0;
@@ -1337,7 +1540,18 @@ s32 func_0000341C(void) {
     return sceKernelDeleteEventFlag(D_000042E0);
 }
 
-INCLUDE_ASM("nonmatchings/ata", func_00003440);
+s32 func_00003440(u32 no, SceAtaIntrFunc func, void *arg) {
+    s32 intr;
+    if (no - 1 >= 16) {
+        return 0x8021101E;
+    }
+    intr = sceKernelCpuSuspendIntr();
+    D_000042F0.h[no].func = func;
+    D_000042F0.h[no].arg = arg;
+    D_000042F0.h[no].gp = pspGetGp();
+    sceKernelCpuResumeIntr(intr);
+    return 0;
+}
 
 s32 func_000034CC(void) {
     sceKernelDisableSubIntr(5, 1);
