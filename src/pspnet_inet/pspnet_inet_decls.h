@@ -916,7 +916,10 @@ struct tcpcb {
     s16 t_dupacks;              /* 0x1E */
     u16 t_peermss;              /* 0x20 */
     u16 t_ourmss;               /* 0x22 */
-    u16 t_segsz;                /* 0x24 */
+#if FW_VERSION >= 250
+    u16 t_unk24;                /* 0x24 SCE 2.50+: new field, t_segsz..t_flags move up 2 bytes */
+#endif
+    u16 t_segsz;                /* 0x24 (2.50+: 0x26) */
     s8 t_force;                 /* 0x26 */
     u16 t_flags;                /* 0x28 */
     struct mbuf *t_template;    /* 0x2C */
