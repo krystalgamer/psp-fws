@@ -1670,7 +1670,6 @@ extern char D_0002F288[18] __attribute__((aligned(4)));
 extern s32 D_0002F500;
 extern s32 D_0002F50C;
 extern s32 D_0002F510;
-extern u16 D_0002FF70; /* ip_id */
 extern struct route D_0002FF98; /* ipforward_rt */
 extern s32 D_000302E4;
 extern s32 arp_locked; /* arp_locked */
@@ -1686,6 +1685,7 @@ extern s32 igmp_timers_are_running; /* igmp_timers_are_running */
 extern TAILQ_HEAD(, in_ifaddr) in_ifaddrhead; /* in_ifaddr */
 extern u32 in_maxmtu;
 extern s32 inetctlerrmap[]; /* inetctlerrmap */
+extern u16 ip_id_seq; /* ip_id */
 extern s32 ip_mtudisc; /* ip_mtudisc */
 extern s32 ip_nhops; /* ip_nhops */
 extern struct ip_srcrt_s ip_srcrt; /* ip_srcrt */

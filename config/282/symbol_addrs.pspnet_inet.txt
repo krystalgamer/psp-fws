@@ -313,3 +313,4 @@ icmp_mtudisc_callback_register = 0x00019AA0; // type:func
 udp_output = 0x0001BC98; // type:func
 udpcksum = 0x0002C314; // rom:0x2C3B4
 udp_stat = 0x0002DC30;
+rip_output = 0x0001AE68; // type:func

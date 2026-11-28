@@ -4491,7 +4491,7 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_0001B5E8);
 #if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_0001AAFC);
 #else
-s32 func_0001AE68(struct mbuf *m, ...) {
+s32 rip_output(struct mbuf *m, ...) {
     struct inpcb *inp;
     struct ip *ip;
     struct mbuf *opts;
@@ -4530,7 +4530,7 @@ s32 func_0001AE68(struct mbuf *m, ...) {
             return (0x16);
         }
         if (ip->ip_id == 0)
-            ip->ip_id = (u16)__builtin_allegrex_wsbh(D_0002FF70++);
+            ip->ip_id = (u16)__builtin_allegrex_wsbh(ip_id_seq++);
         opts = NULL;
         flags |= 0x2;
         D_0002D960.ips_rawout++;
@@ -4540,7 +4540,7 @@ s32 func_0001AE68(struct mbuf *m, ...) {
 #endif
 
 #if FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_0001AE68);
+INCLUDE_ASM("nonmatchings/pspnet_inet", rip_output);
 #endif
 
 #if FW_VERSION < 250
