@@ -59,9 +59,43 @@ void func_00000518(s32 *arg0) {
 
 INCLUDE_ASM("nonmatchings/msstor_0001BC", func_00000548);
 
-INCLUDE_ASM("nonmatchings/msstor_0001BC", func_00000654);
+s32 func_00000654(SceMSstorDev *dev, s32 on) {
+    u8 param;
+    s32 ret;
 
-INCLUDE_ASM("nonmatchings/msstor_0001BC", func_000006DC);
+    dev->parallel = on;
+    if (on == 0) {
+        param = 0x80;
+    } else if (dev->mediaType2 & 0x40) {
+        param = 0;
+    } else {
+        param = 0x88;
+    }
+    ret = func_00000978(dev, 0x10, 1, &param);
+    if (ret != 0) {
+        return ret;
+    }
+    return func_000016E4(dev, on);
+}
+
+s32 func_000006DC(SceMSstorDev *dev, s32 cmd, u32 addr, u16 count, s32 timeout) {
+    u8 regs[2];
+    s32 ret;
+
+    ret = func_0000083C(dev, 2, 1, regs);
+    if (ret != 0) {
+        return ret;
+    }
+    regs[0] &= 2;
+    if (regs[0] != 0) {
+        timeout += 500;
+    }
+    ret = func_0000172C(dev, cmd, addr, count);
+    if (ret != 0) {
+        return ret;
+    }
+    return func_00000784(dev, timeout, &regs[1]);
+}
 
 INCLUDE_ASM("nonmatchings/msstor_0001BC", func_00000784);
 

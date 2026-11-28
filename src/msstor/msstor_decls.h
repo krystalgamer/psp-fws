@@ -41,7 +41,32 @@ typedef struct {
 } SceMScmCLDMInfo;
 typedef char chk_SceMScmCLDMInfo[(sizeof(SceMScmCLDMInfo) == 0x11C) ? 1 : -1];
 
-typedef struct SceMScmHC SceMScmHC; /* opaque here, see src/mscm */
+/* Memory Stick host controller (MSIF) registers, 0xBD200000 */
+typedef struct {
+    volatile u16 unk0;      /* 0x00: icon/intr control */
+    volatile u16 unk2;      /* 0x02: icon ucode start address */
+    volatile u16 unk4;      /* 0x04: icon status (bit 0: ucode running) */
+    u16 unk6;
+    volatile u16 unk8;      /* 0x08: interrupt cause */
+    u16 unkA;
+    u8 unkC[0x20 - 0xC];
+    volatile u16 unk20;     /* 0x20: icon ucode data port */
+    u8 unk22[0x30 - 0x22];
+    volatile u16 command;   /* 0x30: TPC << 12 | size */
+    u16 unk32;
+    volatile u32 data;      /* 0x34 */
+    volatile u16 status;    /* 0x38 */
+    u16 unk3A;
+    volatile u16 sys;       /* 0x3C */
+    u16 unk3E;
+    volatile u32 unk40;     /* 0x40 */
+} SceMScmHCReg;
+
+typedef struct SceMScmHC SceMScmHC;
+/* mscm host controller (leading field only; see src/mscm) */
+struct SceMScmHC {
+    SceMScmHCReg *reg;      /* 0x00 */
+};
 
 /* class driver (CLD) registration block, copied into D_00006ED8[slot] */
 typedef struct {
@@ -326,11 +351,11 @@ void func_00000518(s32 *arg0);
 #endif
 s32 func_00000548(SceMSstorDev *dev);
 s32 func_00000654(SceMSstorDev *dev, s32 on);
-s32 func_000006DC(SceMSstorDev *dev, u8 cmd, u32 addr, u16 count, s32 timeout);
+s32 func_000006DC(SceMSstorDev *dev, s32 cmd, u32 addr, u16 count, s32 timeout);
 s32 func_00000784(SceMSstorDev *dev, s32 timeout, u8 *intr);
 s32 func_0000083C(SceMSstorDev *dev, s32 addr, s32 size, u8 *buf);
 s32 func_000008B8(SceMSstorDev *dev, u8 cmd, s32 timeout);
-s32 func_000008F0(SceMSstorDev *dev, u32 block, u8 page, u8 cmdParam, u8 *extra, s32 withExtra);
+s32 func_000008F0(SceMSstorDev *dev, u32 block, s32 page, s32 cmdParam, u8 *extra, s32 withExtra);
 s32 func_00000978(SceMSstorDev *dev, s32 addr, s32 size, u8 *buf);
 s32 func_000013E0(SceMSstorDev *dev, u8 *buf);
 s32 func_0000140C(SceMSstorDev *dev, s32 size, u8 *buf);
@@ -342,7 +367,7 @@ s32 func_00001568(SceMSstorDev *dev);
 void func_00001580(s32 arg0);
 s32 func_00001590(SceMSstorDev *dev, s32 cmd);
 s32 func_000016E4(SceMSstorDev *dev, s32 on);
-s32 func_0000172C(SceMSstorDev *dev, u8 cmd, u32 addr, u16 count);
+s32 func_0000172C(SceMSstorDev *dev, s32 cmd, u32 addr, u16 count);
 s32 func_00001794(SceMSstorDev *dev, u8 *intr);
 void func_000017BC(s32 *arg0, s32 arg1);
 void func_000017E8(s32 *arg0, M2C_UNK arg1, M2C_UNK arg2);
