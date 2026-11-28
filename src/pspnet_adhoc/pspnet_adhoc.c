@@ -3123,7 +3123,9 @@ s32 ptpFlushWait(SceNetAdhocDesc *d, u32 timeout, s32 nonblock) {
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/pspnet_adhoc", sceNetAdhoc_lib_62B875A8);
+void sceNetAdhoc_lib_62B875A8(void) {
+    adhocMemset(&g_adhocStat, 0, sizeof(g_adhocStat));
+}
 #endif
 
 #if FW_VERSION < 150
@@ -3140,16 +3142,16 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_0000473C);
 void sceNetAdhoc_lib_62B875A8(void) {
     sceNetMemset(&g_adhocStat, 0, sizeof(g_adhocStat));
 }
-#endif
-
-#if FW_VERSION < 150
+#else
 s32 sceNetAdhoc_lib_2CA12790(SceNetAdhocStat *out) {
     if (out == NULL)
         return 0x80410711;
     *out = g_adhocStat;
     return 0;
 }
-#else
+#endif
+
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", sceNetAdhoc_lib_2CA12790);
 #endif
 
@@ -4034,9 +4036,7 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc", sceNetAdhocGameModeDeleteReplica);
 
 #if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", gameModeCreate);
-#endif
 
-#if FW_VERSION < 150
 s32 gameModeDelete(s32 id) {
     SceNetAdhocGameMode *gm;
 
@@ -4051,13 +4051,12 @@ s32 gameModeDelete(s32 id) {
     else
         g_gameModeList.last = gm->prev;
     *gm->prev = gm->next;
+#if FW_VERSION >= 150
+    sceNetFreeInternal(gm->buf);
+#endif
     sceNetFreeInternal(gm);
     return 0;
 }
-#endif
-
-#if FW_VERSION >= 150 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_adhoc", gameModeDelete);
 #endif
 
 #if FW_VERSION < 150

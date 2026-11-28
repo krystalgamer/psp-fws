@@ -9,6 +9,11 @@ typedef struct {
     u32 flag;
 } SceNetAdhocGameModeOptData;
 
+typedef struct {
+    s32 unk0;
+    s32 unk4;
+} SceNetAdhocPdpRfInfo;
+
 /* 1.50+ PDP statistics counters (0x18) */
 typedef struct {
     u32 stat[6];
@@ -204,7 +209,7 @@ typedef struct SceNetAdhocPtpPcb {
     s32 unk64;
     s32 mss;                            /* 0x68 */
     u32 iss;                            /* 0x6C */
-    u32 unk70;
+    u32 nsent;                          /* 0x70 */
     u32 snd_una;                        /* 0x74 */
     u32 snd_nxt;                        /* 0x78 */
     u32 rcv_nxt;                        /* 0x7C */
@@ -251,6 +256,16 @@ struct ifnet {
 };
 #define IFF_OACTIVE 0x400
 
+struct m_ext {
+    u8 *ext_buf;                /* 0x30 */
+    void (*ext_free)(u8 *buf, u32 size, void *arg); /* 0x34 */
+    void *ext_arg;              /* 0x38 */
+    u32 ext_size;               /* 0x3C */
+    s32 ext_type;               /* 0x40 */
+    struct mbuf *ext_nextref;   /* 0x44 */
+    struct mbuf *ext_prevref;   /* 0x48 */
+};
+
 /* NetBSD 1.5 mbuf as in pspnet (partial) */
 struct mbuf {
     struct mbuf *m_next;        /* 0x00 */
@@ -263,12 +278,39 @@ struct mbuf {
         struct ifnet *rcvif;    /* 0x14 */
         s32 len;                /* 0x18 */
         struct mbuf *aux;       /* 0x1C */
-        u8 unk20[0x10];
+        s16 unk20;              /* 0x20 rf info (adhoc) */
+        s16 unk22;
+        u8 unk24[0xC];
     } m_pkthdr;
-    u8 m_dat[0x100 - 0x30];     /* 0x30 */
+    union {
+        struct m_ext MH_ext;    /* 0x30 (M_EXT) */
+        u8 MH_databuf[0x100 - 0x30];
+    } M_dat;
 };
 #define MT_DATA 1
 #define M_PKTHDR 0x0002
+#define m_ext M_dat.MH_ext
+#define m_dat M_dat.MH_databuf
+#define M_EXT 0x0001
+#define M_CLUSTER 0x0008
+#define MCLBYTES 0x800
+#define MCLINITREFERENCE(m) do { \
+        (m)->m_ext.ext_prevref = (m); \
+        (m)->m_ext.ext_nextref = (m); \
+    } while (0)
+#define MCLGET(m) do { \
+    (m)->m_ext.ext_buf = sceNetMallocInternal(MCLBYTES); \
+    if ((m)->m_ext.ext_buf == NULL) \
+        (m)->m_ext.ext_buf = sceNetMallocInternal(MCLBYTES); \
+    if ((m)->m_ext.ext_buf != NULL) { \
+        (m)->m_data = (m)->m_ext.ext_buf; \
+        (m)->m_flags |= M_EXT | M_CLUSTER; \
+        (m)->m_ext.ext_size = MCLBYTES; \
+        (m)->m_ext.ext_free = NULL; \
+        (m)->m_ext.ext_arg = NULL; \
+        MCLINITREFERENCE(m); \
+    } \
+} while (0)
 
 struct sockaddr_dl {
     u8 sdl_len;
@@ -428,7 +470,7 @@ s32 pdpOutput(SceNetAdhocDesc *d, const SceNetEtherAddr *daddr, u16 dport, const
 s32 pdpPoll(SceNetAdhocDesc *d, s32 events);
 void pdpQentFree(SceNetAdhocPdpQent *e);
 s32 pdpRecvCommon(s32 id, SceNetEtherAddr *addr, u16 *port, void *buf, s32 *len, u32 timeout, s32 nonblock, void *rfinfo);
-s32 pdpRecvWait(SceNetAdhocDesc *d, SceNetEtherAddr *addr, u16 *port, void *buf, s32 *len, u32 timeout, s32 nonblock, void *rfinfo);
+s32 pdpRecvWait(SceNetAdhocDesc *d, SceNetEtherAddr *addr, u16 *port, void *buf, s32 *len, u32 timeout, s32 nonblock, SceNetAdhocPdpRfInfo *rfinfo);
 s32 pdpSetRcvBuf(SceNetAdhocPdpPcb *pcb, s32 size);
 void pdpTerm(void);
 s32 ptpAcceptWait(SceNetAdhocDesc *d, SceNetEtherAddr *addr, u16 *port, u32 timeout, s32 nonblock);
@@ -496,6 +538,7 @@ s32 sceNetGetLocalEtherAddr(SceNetEtherAddr *addr);
 u64 sceNetGetSystemClockUsec(void);
 void sceNetMAdj(struct mbuf *m, s32 len);
 void sceNetMCopydata(struct mbuf *m, s32 off, s32 len, void *cp);
+struct mbuf *sceNetMFree(struct mbuf *m);
 void sceNetMFreem(struct mbuf *m);
 void *sceNetMallocInternal(u32 size);
 void *sceNetMemset(void *s, s32 c, s32 n);
