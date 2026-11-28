@@ -8,6 +8,7 @@
 typedef struct SceNetAdhocGameMode {
     struct SceNetAdhocGameMode *next;   /* 0x00 TAILQ */
     struct SceNetAdhocGameMode **prev;  /* 0x04 */
+    s32 id;                             /* 0x08 */
 } SceNetAdhocGameMode;
 
 typedef struct {
@@ -247,6 +248,7 @@ struct sockaddr_dl {
         } \
     } while (0)
 
+extern s32 D_000073F0;
 extern s32 D_00007400;
 extern s32 D_00007448;
 extern M2C_UNK D_00007450;
@@ -332,6 +334,7 @@ s32 func_000056E4(SceNetAdhocPtpPcb *pcb, s32 a1);
 void func_00005708(SceNetAdhocPtpPcb *pcb);
 void func_0000578C(struct mbuf *m);
 s32 func_00006880(void);
+s32 func_00006BB8(s32 id);
 s32 func_00006C3C(s32, s32, s32);
 void *func_00006D6C(const void *s, s32 c, s32 n);
 void *func_00006DA4(void *dst, const void *src, s32 n);
@@ -347,6 +350,8 @@ s32 func_00007298(s32, s32, s32);
 s32 module_start(void);
 s32 module_stop(void);
 s32 sceKernelSignalSema(s32 sema, s32 n);
+s32 sceNetAdhocGameModeDeleteMaster(void);
+s32 sceNetAdhocGameModeDeleteReplica(s32 id);
 void sceNetAdhocGameModeUpdateReplica(s32 arg0, s32 arg1);
 void sceNetAdhocGameModeUpdateReplicaInternal(s32 arg0, s32 arg1);
 s32 sceNetAdhocGetPdpStat(s32 *buflen, SceNetAdhocPdpStat *buf);

@@ -1297,7 +1297,20 @@ void sceNetAdhocGameModeUpdateReplicaInternal(s32 arg0, s32 arg1) {
 #endif
 
 #if FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/pspnet_adhoc", sceNetAdhocGameModeDeleteMaster);
+s32 sceNetAdhocGameModeDeleteMaster(void) {
+    s32 s;
+    s32 ret;
+
+    s = _sce_pspnet_spllock();
+    ret = 0x80410712;
+    if (D_00007400 != 0) {
+        ret = 0x8041071C;
+        if (D_000073F0 >= 0)
+            ret = func_00006BB8(D_000073F0);
+    }
+    _sce_pspnet_splunlock(s);
+    return ret;
+}
 #endif
 
 #if FW_VERSION >= 282
@@ -1306,7 +1319,23 @@ void sceNetAdhocGameModeUpdateReplicaInternal(s32 arg0, s32 arg1) {
 }
 #endif
 
+#if FW_VERSION < 201
+s32 sceNetAdhocGameModeDeleteReplica(s32 id) {
+    s32 s;
+    s32 ret;
+
+    s = _sce_pspnet_spllock();
+    ret = 0x80410712;
+    if (D_00007400 == 0)
+        goto end;
+    ret = func_00006BB8(id);
+end:
+    _sce_pspnet_splunlock(s);
+    return ret;
+}
+#else
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", sceNetAdhocGameModeDeleteReplica);
+#endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00007018);
@@ -1314,11 +1343,31 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00007018);
 
 #if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00006AB8);
+
+s32 func_00006BB8(s32 id) {
+    SceNetAdhocGameMode *gm;
+
+    for (gm = D_000079C0.first; gm != NULL; gm = gm->next) {
+        if (gm->id == id)
+            break;
+    }
+    if (gm == NULL)
+        return 0x8041071C;
+    if (gm->next != NULL)
+        gm->next->prev = gm->prev;
+    else
+        D_000079C0.last = gm->prev;
+    *gm->prev = gm->next;
+    sceNetFreeInternal(gm);
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 282
+INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00006BB8);
 #endif
 
 #if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00006BB8);
-
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00006C3C);
 #endif
 

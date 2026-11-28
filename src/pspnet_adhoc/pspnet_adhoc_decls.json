@@ -67,6 +67,7 @@
   "func_00005708": "void func_00005708(SceNetAdhocPtpPcb *pcb);",
   "func_0000578C": "void func_0000578C(struct mbuf *m);",
   "func_00006880": "s32 func_00006880(void);",
+  "func_00006BB8": "s32 func_00006BB8(s32 id);",
   "func_00006C3C": "s32 func_00006C3C(s32, s32, s32);",
   "func_00006D6C": "void *func_00006D6C(const void *s, s32 c, s32 n);",
   "func_00006DA4": "void *func_00006DA4(void *dst, const void *src, s32 n);",
@@ -82,6 +83,8 @@
   "module_start": "s32 module_start(void);",
   "module_stop": "s32 module_stop(void);",
   "sceKernelSignalSema": "s32 sceKernelSignalSema(s32 sema, s32 n);",
+  "sceNetAdhocGameModeDeleteMaster": "s32 sceNetAdhocGameModeDeleteMaster(void);",
+  "sceNetAdhocGameModeDeleteReplica": "s32 sceNetAdhocGameModeDeleteReplica(s32 id);",
   "sceNetAdhocGameModeUpdateReplica": "void sceNetAdhocGameModeUpdateReplica(s32 arg0, s32 arg1);",
   "sceNetAdhocGameModeUpdateReplicaInternal": "void sceNetAdhocGameModeUpdateReplicaInternal(s32 arg0, s32 arg1);",
   "sceNetAdhocGetPdpStat": "s32 sceNetAdhocGetPdpStat(s32 *buflen, SceNetAdhocPdpStat *buf);",
@@ -102,7 +105,7 @@
  "types": {
   "SceNetAdhocDesc": "/* socket descriptor (0x2C), one per PDP/PTP id */\ntypedef struct SceNetAdhocDesc {\n    struct SceNetAdhocDesc *next;   /* 0x00 TAILQ entry */\n    struct SceNetAdhocDesc **prev;  /* 0x04 */\n    s32 id;                         /* 0x08 */\n    s32 unkC;\n    u8 type;                        /* 0x10 SCE_NET_ADHOC_DESC_* */\n    u8 pad11[3];\n    void *pcb;                      /* 0x14 */\n    s32 unk18;                      /* 0x18 read-waiter tid */\n    s32 unk1C;                      /* 0x1C write-waiter tid */\n    s32 unk20;                      /* 0x20 except-waiter tid */\n    SceNetAdhocWaiter *waiters;     /* 0x24 */\n    s32 unk28;\n} SceNetAdhocDesc;\ntypedef char chk_SceNetAdhocDesc[(sizeof(SceNetAdhocDesc) == 0x2C) ? 1 : -1];",
   "SceNetAdhocDescList": "typedef struct {\n    SceNetAdhocDesc *first;\n    SceNetAdhocDesc **last;\n} SceNetAdhocDescList;",
-  "SceNetAdhocGameMode": "/* game-mode master/replica entry (partial) */\ntypedef struct SceNetAdhocGameMode {\n    struct SceNetAdhocGameMode *next;   /* 0x00 TAILQ */\n    struct SceNetAdhocGameMode **prev;  /* 0x04 */\n} SceNetAdhocGameMode;",
+  "SceNetAdhocGameMode": "/* game-mode master/replica entry (partial) */\ntypedef struct SceNetAdhocGameMode {\n    struct SceNetAdhocGameMode *next;   /* 0x00 TAILQ */\n    struct SceNetAdhocGameMode **prev;  /* 0x04 */\n    s32 id;                             /* 0x08 */\n} SceNetAdhocGameMode;",
   "SceNetAdhocGameModeList": "typedef struct {\n    SceNetAdhocGameMode *first;\n    SceNetAdhocGameMode **last;\n} SceNetAdhocGameModeList;",
   "SceNetAdhocPdpList": "typedef struct {\n    SceNetAdhocPdpPcb *first;\n    SceNetAdhocPdpPcb **last;\n} SceNetAdhocPdpList;",
   "SceNetAdhocPdpPcb": "/* PDP control block (1.00: 0x38, 1.50+: 0x34; offsets in comments are 1.00) */\ntypedef struct SceNetAdhocPdpPcb {\n    struct SceNetAdhocPdpPcb *next;     /* 0x00 TAILQ on the PDP list */\n    struct SceNetAdhocPdpPcb **prev;    /* 0x04 */\n#if FW_VERSION < 150\n    struct ifnet *ifp;                  /* 0x08 (1.50+: looked up from laddr) */\n#endif\n    SceNetEtherAddr laddr;              /* 0x0C */\n    u16 lport;                          /* 0x12 */\n    struct mbuf *rcvq_first;            /* 0x14 */\n    struct mbuf *rcvq_last;             /* 0x18 */\n    s32 rcvcc;                          /* 0x1C */\n    s32 rcvbufsize;                     /* 0x20 */\n    s32 unk24;\n    u32 flags;                          /* 0x28 */\n    SceNetAdhocDesc *desc;              /* 0x2C */\n    SceNetAdhocPdpQent *qfirst;         /* 0x30 */\n    SceNetAdhocPdpQent **qlast;         /* 0x34 */\n} SceNetAdhocPdpPcb;\ntypedef char chk_SceNetAdhocPdpPcb[(sizeof(SceNetAdhocPdpPcb) == ((FW_VERSION < 150) ? 0x38 : 0x34)) ? 1 : -1];",
@@ -125,6 +128,7 @@
   "zz_ptp_macros": "#define PTP_SBWAKEUP(sb) do { \\\n        if ((sb)->flags & 1) { \\\n            (sb)->flags &= ~1; \\\n            _sce_pspnet_wakeup(sb); \\\n        } \\\n        if ((sb)->flags & 2) { \\\n            (sb)->flags &= ~2; \\\n            _sce_pspnet_wakeup(&D_00007448); \\\n        } \\\n    } while (0)"
  },
  "vars": {
+  "D_000073F0": "extern s32 D_000073F0;",
   "D_00007400": "extern s32 D_00007400;",
   "D_00007448": "extern s32 D_00007448;",
   "D_00007450": "extern M2C_UNK D_00007450;",
