@@ -887,7 +887,43 @@ end:
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", sceNetAdhocPtpClose);
 #endif
 
+#if FW_VERSION < 201
+s32 func_00003A68(const SceNetEtherAddr *saddr, u16 sport, s32 sndbuf, s32 rcvbuf, u32 rexmt_int, s32 rexmt_cnt, SceNetAdhocDesc **out) {
+    s32 id;
+    s32 ret;
+    SceNetAdhocDesc *d;
+
+    id = func_00000E44();
+    if (id < 0)
+        return 0x8041070F;
+    ret = func_00000ED0(2, &d);
+    if (ret < 0)
+        return ret;
+    ret = func_0000548C(d);
+    if (ret < 0)
+        goto err1;
+    ret = func_00005544(d->pcb, sndbuf, rcvbuf);
+    if (ret < 0)
+        goto err2;
+    ret = func_00004918(d->pcb, saddr, sport);
+    if (ret < 0)
+        goto err3;
+    func_00005560(d->pcb, rexmt_int, rexmt_cnt);
+    d->id = id;
+    *out = d;
+    return 0;
+
+err3:
+    func_00004B30(d->pcb);
+err2:
+    func_00004AE4(d);
+err1:
+    func_00000FFC(d);
+    return ret;
+}
+#else
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00003A68);
+#endif
 
 #if FW_VERSION < 282
 void func_000039FC(SceNetAdhocDesc *d) {
@@ -1132,8 +1168,8 @@ s32 func_00005544(SceNetAdhocPtpPcb *pcb, s32 sndsize, s32 rcvsize) {
 }
 
 void func_00005560(SceNetAdhocPtpPcb *pcb, s32 a1, s32 a2) {
-    pcb->unkAC = a1;
-    pcb->unkB0 = a2;
+    pcb->rexmt_int = a1;
+    pcb->rexmt_cnt = a2;
 }
 #endif
 
@@ -1289,8 +1325,8 @@ s32 func_00005594(SceNetAdhocPtpPcb *pcb, s32 sndsize, s32 rcvsize) {
 }
 
 void func_000055B0(SceNetAdhocPtpPcb *pcb, s32 a1, s32 a2) {
-    pcb->unkAC = a1;
-    pcb->unkB0 = a2;
+    pcb->rexmt_int = a1;
+    pcb->rexmt_cnt = a2;
 }
 
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_000055BC);
