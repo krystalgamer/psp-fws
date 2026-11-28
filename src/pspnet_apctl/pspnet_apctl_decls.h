@@ -284,7 +284,9 @@ typedef struct {
     SceUID sema;                /* 0xFA4 */
     SceUID thid;                /* 0xFA8 */
     s32 state;                  /* 0xFAC */
-    u8 unkFB0[0x42C];
+    u8 unkFB0[0x418];
+    u8 arpAddr[6];              /* 0x13C8 */
+    u8 arpHw[0xE];              /* 0x13CE */
     void (*callback)(s32 event, s32 arg); /* 0x13DC */
     s32 unk13E0;
     s32 sock;                   /* 0x13E4 */
@@ -587,6 +589,7 @@ void func_00003EF0();
 s32 func_0000407C(const char *ifname, SceNetDhcpLease *l);
 u32 func_00004270(SceNetInAddrPacked *addr);
 s32 func_00004424(const char *ifname);
+s32 func_00004704(s32 sock, u32 *dst, void *buf);
 s32 func_0000487C(SceNetDhcpCtx *dc, s32 *n, s32 arg);
 s32 func_00004EBC(s8 *opt, SceNetDhcpLease *l);
 s32 func_00004FC4(s8 *opt, SceNetDhcpLease *l);
@@ -595,9 +598,11 @@ s32 func_000051A0(const char *ifname, void *func, s32 a2, s32 prio, s32 a4, SceN
 void func_00005290(void *arg0);
 void func_00005634(void);
 s32 func_00005678(SceNetDhcpCtx *dc, s32 type);
-s32 func_00005D14(SceNetDhcpCtx *dc, s32 state, s32 arg);
+void func_00005D14(SceNetDhcpCtx *dc, s32 state, s32 err);
 u16 func_00005E00(void *pseudo, void *data, s32 len);
 u16 func_00005E90(u16 *p, s32 nwords);
+s32 func_00006050(s32 sock);
+s32 func_000060AC(SceNetDhcpCtx *dc);
 s32 func_00006304(s32 arg0);
 s32 func_0000643C(SceNetDhcpCtx *dc);
 s32 func_00006A14(const char *ifname, void *func, s32 a2, s32 prio, s32 a4, SceNetApctlIpParam *param);

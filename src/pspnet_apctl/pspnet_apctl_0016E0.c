@@ -1101,7 +1101,50 @@ INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00005984);
 INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00005B6C);
 #endif
 
+#if FW_VERSION < 250
+void func_00005D14(SceNetDhcpCtx *dc, s32 state, s32 err) {
+    s32 sock;
+
+    switch (state) {
+    case 0:
+    case 1:
+    case 2:
+    case 3:
+    case 7:
+        break;
+    case 4:
+    case 5:
+    case 6:
+        if (func_000060AC(dc) < 0) {
+            break;
+        }
+        sock = func_00006050(dc->sock);
+        dc->sock = sock;
+        if (sock < 0) {
+            break;
+        }
+        func_00004704(sock, &dc->lease->unk3E8, dc->unkE54);
+        sceKernelDelayThread(100000);
+        if (dc->sock >= 0) {
+            sceNetInetClose(dc->sock);
+            dc->sock = -1;
+        }
+        break;
+    }
+    sceNetConfigDelArp(dc->arpAddr, dc->arpHw);
+    func_00004424(dc->ifname);
+    if (dc->callback != NULL) {
+        if (err == 0) {
+            dc->callback(1, 0);
+        } else {
+            dc->callback(4, err);
+        }
+    }
+    sceKernelExitThread(0);
+}
+#else
 INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00005D14);
+#endif
 
 INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00005E00);
 
