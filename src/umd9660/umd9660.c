@@ -214,7 +214,33 @@ INCLUDE_ASM("nonmatchings/umd9660", func_000007CC);
 INCLUDE_ASM("nonmatchings/umd9660", func_00000780);
 #endif
 
-#if FW_VERSION < 201
+#if FW_VERSION < 150
+s32 umd9660_devctl(SceIoIob *iob, const char *name, s32 cmd, void *indata, SceSize inlen, void *outdata, SceSize outlen) {
+    SceUmd9660Drive *drive;
+    char devname[0x20];
+    s32 ret;
+    s32 res;
+    UMD9660_ASSERT(iob != NULL, D_00005A70, D_00005AFC, "umd9660_devctl", UMD9660_V(0x49E, 0x4AB, 0x4B8, 0x44C, 0x44D));
+    drive = sceUmd9660GetDrive(iob->i_unit);
+    res = 0x80010016;
+    ret = 0x80010013;
+    if (drive == NULL) {
+        goto end;
+    }
+    memset(devname, 0, sizeof(devname));
+    if (iob == NULL || iob->i_unit < 0 || iob->i_unit >= 3 || cmd < 1) {
+        goto out;
+    }
+    sprintf(devname, "%s%01d:/MASTER", D_00005AF0, iob->i_unit);
+    res = umd9660_exec_devctl(iob, devname, cmd, indata, inlen, outdata, outlen);
+out:
+    ret = res;
+end:
+    return ret;
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/umd9660", umd9660_devctl);
 #endif
 

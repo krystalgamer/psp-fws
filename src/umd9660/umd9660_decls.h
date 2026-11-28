@@ -411,6 +411,7 @@ M2C_UNK sceUmdUnRegisterGetUMDInfoCallBack();
 s32 sprintf(char *buf, const char *fmt, ...);
 SceSize strlen(const char *s);
 s32 strncmp(const char *a, const char *b, SceSize n);
+s32 umd9660_exec_devctl(SceIoIob *iob, const char *name, s32 cmd, void *indata, SceSize inlen, void *outdata, SceSize outlen);
 s32 umd9660_release_devfd(SceIoIob *iob);
 SceOff umd9660_set_lseek(SceUmd9660File *file, SceOff ofs, s32 whence);
 

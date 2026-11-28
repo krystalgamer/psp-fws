@@ -162,6 +162,7 @@
   "sprintf": "s32 sprintf(char *buf, const char *fmt, ...);",
   "strlen": "SceSize strlen(const char *s);",
   "strncmp": "s32 strncmp(const char *a, const char *b, SceSize n);",
+  "umd9660_exec_devctl": "s32 umd9660_exec_devctl(SceIoIob *iob, const char *name, s32 cmd, void *indata, SceSize inlen, void *outdata, SceSize outlen);",
   "umd9660_release_devfd": "s32 umd9660_release_devfd(SceIoIob *iob);",
   "umd9660_set_lseek": "SceOff umd9660_set_lseek(SceUmd9660File *file, SceOff ofs, s32 whence);"
  },
