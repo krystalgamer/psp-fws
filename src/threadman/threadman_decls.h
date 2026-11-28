@@ -68,175 +68,6 @@ typedef struct SceMsgPipe {
     s32 unk4; /* 0x04: cleared when the last waiting thread leaves */
 } SceMsgPipe;
 
-/* saved state of the syscall the thread is in (partial) */
-typedef struct SceThreadSyscallFrame {
-    u8 unk0[0xC];
-    void *ra; /* 0x0C: user return address */
-    u8 unk10[0x18 - 0x10];
-    s32 unk18; /* 0x18 */
-} SceThreadSyscallFrame;
-
-/* "Thread" uid type data, 0x10C bytes (1.00) */
-typedef struct SceThread {
-    struct SceThread *next; /* 0x00 */
-    struct SceThread *prev; /* 0x04 */
-    SceUID uid; /* 0x08 */
-    s32 status; /* 0x0C */
-    s32 currentPriority; /* 0x10 */
-    s32 wakeupCount; /* 0x14 */
-    s32 exitStatus; /* 0x18 */
-    s32 waitType; /* 0x1C */
-    SceSysmemUidCB *waitObj; /* 0x20 */
-    s32 waitArg0; /* 0x24: e.g. the count a sema waiter needs */
-    u8 unk28[0x38 - 0x28];
-    s32 unk38; /* 0x38 */
-    s32 unk3C; /* 0x3C */
-    s32 waitRet; /* 0x40 */
-    u8 unk44[0x60 - 0x44];
-    s32 initPriority; /* 0x60 */
-    u8 unk64[0x6C - 0x64];
-    void *entry; /* 0x6C */
-    void *stack; /* 0x70 */
-    s32 stackSize; /* 0x74 */
-    u8 unk78[0x7C - 0x78];
-    void *kStack; /* 0x7C */
-    s32 kStackSize; /* 0x80 */
-    u8 unk84[0x88 - 0x84];
-    void *gpReg; /* 0x88 */
-    u8 unk8C[0xD0 - 0x8C];
-    u32 attr; /* 0xD0 */
-    u8 unkD4[0xE4 - 0xD4];
-    s32 *preemptCount; /* 0xE4: &intrPreemptCount or &threadPreemptCount */
-    s32 intrPreemptCount; /* 0xE8 */
-    s32 threadPreemptCount; /* 0xEC */
-    s32 releaseCount; /* 0xF0 */
-    u8 unkF4[0x100 - 0xF4];
-    SceThreadSyscallFrame *unk100; /* 0x100 */
-    u8 unk104[0x10C - 0x104];
-} SceThread;
-
-struct SceThread;
-
-/* circular list head; a thread links in through its first two words */
-typedef struct SceThreadQueue {
-    struct SceThread *next;
-    struct SceThread *prev;
-} SceThreadQueue;
-
-/* common data of every waitable object ("WaitQ" uid type, 0x14 bytes) */
-typedef struct SceWaitQ {
-    u32 attr; /* 0x00 */
-    s32 unk4; /* 0x04 */
-    s32 numWaitThreads; /* 0x08 */
-    SceThreadQueue waitQueue; /* 0x0C */
-} SceWaitQ;
-
-enum SceThreadStatus {
-    THREAD_RUNNING = 1,
-    THREAD_READY = 2,
-    THREAD_WAITING = 4,
-    THREAD_SUSPEND = 8,
-    THREAD_WAITING_SUSPEND = 0xC,
-    THREAD_STOPPED = 0x10,
-    THREAD_KILLED = 0x20
-};
-
-typedef s32 (*SceThreadmanLogHandler)(s32 id, void *ra, s32 nargs, ...);
-
-#if FW_VERSION == 100
-#define THREADMAN_LOG_OFF 0x6F0
-#elif FW_VERSION == 102 || FW_VERSION == 103
-#define THREADMAN_LOG_OFF 0x6F4 /* pre-release 1.02/1.03 */
-#elif FW_VERSION < 152
-#define THREADMAN_LOG_OFF 0x738
-#elif FW_VERSION < 201
-#define THREADMAN_LOG_OFF 0x73C
-#elif FW_VERSION < 270
-#define THREADMAN_LOG_OFF 0x740
-#elif FW_VERSION < 282
-#define THREADMAN_LOG_OFF 0x748
-#elif FW_VERSION < 330
-#define THREADMAN_LOG_OFF 0x74C
-#else
-#define THREADMAN_LOG_OFF 0x770
-#endif
-
-#if FW_VERSION < 282
-#define THREADMAN_UID_OFF 0x63C
-#else
-#define THREADMAN_UID_OFF 0x640
-#endif
-#if FW_VERSION < 270
-#define THREADMAN_NUM_UID 14
-#else
-#define THREADMAN_NUM_UID 15
-#endif
-
-/* the thread manager state (1.00: 0x6F4 bytes at 0x15518) */
-typedef struct SceThreadmanInfo {
-    SceThread *currentThread; /* 0x000 */
-    SceThread *nextThread; /* 0x004 */
-    u32 readyPriorityMask[4]; /* 0x008: bit n set = readyQueue[n] not empty */
-    SceThreadQueue readyQueue[128]; /* 0x018 */
-    s32 dispatchDisabled; /* 0x418 */
-#if FW_VERSION < 150
-    u8 unk41C[0x430 - 0x41C];
-    u32 unk430; /* 0x430: system time low word at last update */
-    u32 unk434; /* 0x434: system time high word */
-    u8 unk438[0x5EC - 0x438];
-    SceThreadQueue suspendedThreads; /* 0x5EC */
-    u8 unk5F4[0x5FC - 0x5F4];
-    SceSysmemUidCB *uidWaitQType; /* 0x5FC */
-    SceSysmemUidCB *uidThreadType; /* 0x600 */
-    SceSysmemUidCB *uidSemaType; /* 0x604 */
-    SceSysmemUidCB *uidEventFlagType; /* 0x608 */
-    SceSysmemUidCB *uidMbxType; /* 0x60C */
-    SceSysmemUidCB *uidMsgPipeType; /* 0x610 */
-    SceSysmemUidCB *uidVplType; /* 0x614 */
-    SceSysmemUidCB *uidFplType; /* 0x618 */
-    SceSysmemUidCB *uidThreadEventHandlerType; /* 0x61C */
-    SceSysmemUidCB *uidCallbackType; /* 0x620 */
-    SceSysmemUidCB *uidTimerType; /* 0x624 */
-    SceSysmemUidCB *uidDelayType; /* 0x628 */
-    SceSysmemUidCB *uidAlarmType; /* 0x62C */
-    SceSysmemUidCB *uidVTimerType; /* 0x630 */
-    s32 heapId; /* 0x634 */
-    s32 systemStatusFlag; /* 0x638 */
-    u8 unk63C[0x660 - 0x63C];
-    union {
-        u32 size;
-        SceKernelSemaInfo sema;
-        SceKernelEventFlagInfo eventFlag;
-        u8 buf[0x84];
-    } tmpInfo; /* 0x660: refer-status scratch buffer */
-    u8 unk6E4[THREADMAN_LOG_OFF - 0x6E4];
-#elif FW_VERSION < 330
-    /* 1.50-3.20: same uid type block as 1.00 (Mutex added in 2.70) */
-    u8 unk41C[THREADMAN_UID_OFF - 0x41C];
-    SceSysmemUidCB *uidWaitQType;
-    SceSysmemUidCB *uidThreadType;
-    SceSysmemUidCB *uidSemaType;
-    SceSysmemUidCB *uidEventFlagType;
-#if FW_VERSION >= 270
-    SceSysmemUidCB *uidMutexType;
-#endif
-    SceSysmemUidCB *uidMbxType;
-    SceSysmemUidCB *uidMsgPipeType;
-    SceSysmemUidCB *uidVplType;
-    SceSysmemUidCB *uidFplType;
-    SceSysmemUidCB *uidThreadEventHandlerType;
-    SceSysmemUidCB *uidCallbackType;
-    SceSysmemUidCB *uidTimerType;
-    SceSysmemUidCB *uidDelayType;
-    SceSysmemUidCB *uidAlarmType;
-    SceSysmemUidCB *uidVTimerType;
-    u8 unkUidEnd[THREADMAN_LOG_OFF - THREADMAN_UID_OFF - THREADMAN_NUM_UID * 4];
-#else
-    u8 unk41C[THREADMAN_LOG_OFF - 0x41C];
-#endif
-    SceThreadmanLogHandler logHandler; /* 0x6F0 (1.00) */
-} SceThreadmanInfo;
-
 struct Unk_func_00000448_temp_s0 {
     struct Unk_func_00000448_temp_s0 *unk0;
     u8 pad4[0x3C];
@@ -403,6 +234,184 @@ struct Unk_func_000127F8_var_s0 {
     u32 unkC;
 };
 
+struct SceThread;
+
+/* circular list head; a thread links in through its first two words */
+typedef struct SceThreadQueue {
+    struct SceThread *next;
+    struct SceThread *prev;
+} SceThreadQueue;
+
+/* common data of every waitable object ("WaitQ" uid type, 0x14 bytes) */
+typedef struct SceWaitQ {
+    u32 attr; /* 0x00 */
+    s32 unk4; /* 0x04 */
+    s32 numWaitThreads; /* 0x08 */
+    SceThreadQueue waitQueue; /* 0x0C */
+} SceWaitQ;
+
+enum SceThreadStatus {
+    THREAD_RUNNING = 1,
+    THREAD_READY = 2,
+    THREAD_WAITING = 4,
+    THREAD_SUSPEND = 8,
+    THREAD_WAITING_SUSPEND = 0xC,
+    THREAD_STOPPED = 0x10,
+    THREAD_KILLED = 0x20
+};
+
+/* saved state of the syscall the thread is in (partial) */
+typedef struct SceThreadSyscallFrame {
+    u8 unk0[0xC];
+    void *ra; /* 0x0C: user return address */
+    u8 unk10[0x18 - 0x10];
+    s32 unk18; /* 0x18 */
+} SceThreadSyscallFrame;
+
+/* "Thread" uid type data, 0x10C bytes (1.00) */
+typedef struct SceThread {
+    struct SceThread *next; /* 0x00 */
+    struct SceThread *prev; /* 0x04 */
+    SceUID uid; /* 0x08 */
+    s32 status; /* 0x0C */
+    s32 currentPriority; /* 0x10 */
+    s32 wakeupCount; /* 0x14 */
+    s32 exitStatus; /* 0x18 */
+    s32 waitType; /* 0x1C */
+    SceSysmemUidCB *waitObj; /* 0x20 */
+    s32 waitArg0; /* 0x24: e.g. the count a sema waiter needs */
+    u8 unk28[0x38 - 0x28];
+    s32 unk38; /* 0x38 */
+    s32 *unk3C; /* 0x3C: where the remaining timeout is written back */
+    s32 waitRet; /* 0x40 */
+    u8 unk44[0x4C - 0x44];
+    SceThreadQueue callbacks; /* 0x4C: callbacks owned by the thread */
+    u8 unk54[0x58 - 0x54];
+    s32 unk58; /* 0x58 */
+    u8 unk5C[0x60 - 0x5C];
+    s32 initPriority; /* 0x60 */
+    u8 unk64[0x6C - 0x64];
+    void *entry; /* 0x6C */
+    void *stack; /* 0x70 */
+    s32 stackSize; /* 0x74 */
+    u8 unk78[0x7C - 0x78];
+    void *kStack; /* 0x7C */
+    s32 kStackSize; /* 0x80 */
+    u8 unk84[0x88 - 0x84];
+    void *gpReg; /* 0x88 */
+    u8 unk8C[0xD0 - 0x8C];
+    u32 attr; /* 0xD0 */
+    u8 unkD4[0xE4 - 0xD4];
+    s32 *preemptCount; /* 0xE4: &intrPreemptCount or &threadPreemptCount */
+    s32 intrPreemptCount; /* 0xE8 */
+    s32 threadPreemptCount; /* 0xEC */
+    s32 releaseCount; /* 0xF0 */
+    u8 unkF4[0xF8 - 0xF4];
+    void *callbackContext; /* 0xF8: saved context to return to after a callback */
+    u8 unkFC[0x100 - 0xFC];
+    SceThreadSyscallFrame *unk100; /* 0x100 */
+    u8 unk104[0x10C - 0x104];
+} SceThread;
+
+typedef s32 (*SceThreadmanLogHandler)(s32 id, void *ra, s32 nargs, ...);
+
+#if FW_VERSION == 100
+#define THREADMAN_LOG_OFF 0x6F0
+#elif FW_VERSION == 102 || FW_VERSION == 103
+#define THREADMAN_LOG_OFF 0x6F4 /* pre-release 1.02/1.03 */
+#elif FW_VERSION < 152
+#define THREADMAN_LOG_OFF 0x738
+#elif FW_VERSION < 201
+#define THREADMAN_LOG_OFF 0x73C
+#elif FW_VERSION < 270
+#define THREADMAN_LOG_OFF 0x740
+#elif FW_VERSION < 282
+#define THREADMAN_LOG_OFF 0x748
+#elif FW_VERSION < 330
+#define THREADMAN_LOG_OFF 0x74C
+#else
+#define THREADMAN_LOG_OFF 0x770
+#endif
+
+#if FW_VERSION < 282
+#define THREADMAN_UID_OFF 0x63C
+#else
+#define THREADMAN_UID_OFF 0x640
+#endif
+#if FW_VERSION < 270
+#define THREADMAN_NUM_UID 14
+#else
+#define THREADMAN_NUM_UID 15
+#endif
+
+/* the thread manager state (1.00: 0x6F4 bytes at 0x15518) */
+typedef struct SceThreadmanInfo {
+    SceThread *currentThread; /* 0x000 */
+    SceThread *nextThread; /* 0x004 */
+    u32 readyPriorityMask[4]; /* 0x008: bit n set = readyQueue[n] not empty */
+    SceThreadQueue readyQueue[128]; /* 0x018 */
+    s32 dispatchDisabled; /* 0x418 */
+#if FW_VERSION < 150
+    u8 unk41C[0x430 - 0x41C];
+    u32 unk430; /* 0x430: system time low word at last update */
+    u32 unk434; /* 0x434: system time high word */
+    u32 unk438; /* 0x438: next timer event (low word) */
+    u8 unk43C[0x5EC - 0x43C];
+    SceThreadQueue suspendedThreads; /* 0x5EC */
+    u8 unk5F4[0x5FC - 0x5F4];
+    SceSysmemUidCB *uidWaitQType; /* 0x5FC */
+    SceSysmemUidCB *uidThreadType; /* 0x600 */
+    SceSysmemUidCB *uidSemaType; /* 0x604 */
+    SceSysmemUidCB *uidEventFlagType; /* 0x608 */
+    SceSysmemUidCB *uidMbxType; /* 0x60C */
+    SceSysmemUidCB *uidMsgPipeType; /* 0x610 */
+    SceSysmemUidCB *uidVplType; /* 0x614 */
+    SceSysmemUidCB *uidFplType; /* 0x618 */
+    SceSysmemUidCB *uidThreadEventHandlerType; /* 0x61C */
+    SceSysmemUidCB *uidCallbackType; /* 0x620 */
+    SceSysmemUidCB *uidTimerType; /* 0x624 */
+    SceSysmemUidCB *uidDelayType; /* 0x628 */
+    SceSysmemUidCB *uidAlarmType; /* 0x62C */
+    SceSysmemUidCB *uidVTimerType; /* 0x630 */
+    s32 heapId; /* 0x634 */
+    s32 systemStatusFlag; /* 0x638 */
+    u8 unk63C[0x660 - 0x63C];
+    union {
+        u32 size;
+        SceKernelSemaInfo sema;
+        SceKernelEventFlagInfo eventFlag;
+        u8 buf[0x84];
+    } tmpInfo; /* 0x660: refer-status scratch buffer */
+    u8 unk6E4[0x6E8 - 0x6E4];
+    s32 unk6E8; /* 0x6E8: system timer interrupt number */
+    u8 unk6EC[THREADMAN_LOG_OFF - 0x6EC];
+#elif FW_VERSION < 330
+    /* 1.50-3.20: same uid type block as 1.00 (Mutex added in 2.70) */
+    u8 unk41C[THREADMAN_UID_OFF - 0x41C];
+    SceSysmemUidCB *uidWaitQType;
+    SceSysmemUidCB *uidThreadType;
+    SceSysmemUidCB *uidSemaType;
+    SceSysmemUidCB *uidEventFlagType;
+#if FW_VERSION >= 270
+    SceSysmemUidCB *uidMutexType;
+#endif
+    SceSysmemUidCB *uidMbxType;
+    SceSysmemUidCB *uidMsgPipeType;
+    SceSysmemUidCB *uidVplType;
+    SceSysmemUidCB *uidFplType;
+    SceSysmemUidCB *uidThreadEventHandlerType;
+    SceSysmemUidCB *uidCallbackType;
+    SceSysmemUidCB *uidTimerType;
+    SceSysmemUidCB *uidDelayType;
+    SceSysmemUidCB *uidAlarmType;
+    SceSysmemUidCB *uidVTimerType;
+    u8 unkUidEnd[THREADMAN_LOG_OFF - THREADMAN_UID_OFF - THREADMAN_NUM_UID * 4];
+#else
+    u8 unk41C[THREADMAN_LOG_OFF - 0x41C];
+#endif
+    SceThreadmanLogHandler logHandler; /* 0x6F0 (1.00) */
+} SceThreadmanInfo;
+
 extern char D_00014928[];
 extern char D_00014948[];
 extern char D_00014CB0[];
@@ -440,6 +449,7 @@ extern SceSysmemUidLookupFunc D_000154E0[];
 extern s32 D_000154E8;
 extern SceSysmemUidLookupFunc D_000154F8[];
 extern s32 D_00015500;
+extern u32 D_00015510;
 extern void *D_00015518;
 extern s32 D_0001551C;
 extern s32 D_00015578;
@@ -499,7 +509,7 @@ s32 func_00000268(SceThread *thread);
 s32 func_000003F0(SceSysmemUidCB *cb, s32 waitRet);
 s32 func_00000448(s32 arg0, s32 arg1);
 void func_000004CC(struct Unk_func_000004CC_0 *arg0);
-void func_00000524(s32 arg0);
+s32 func_00000524(SceSysmemUidCB *cb);
 void func_00000534(s32 arg0);
 s32 func_00000544(void *arg0, void *arg1);
 s32 func_00000554(void);
@@ -580,14 +590,17 @@ void sceKernelCpuResumeIntr(s32);
 s32 sceKernelCpuSuspendIntr(void);
 s32 sceKernelCreateUIDtype(const char *name, s32 size, SceSysmemUidLookupFunc *funcTable, SceSysmemUidLookupFunc *metaFuncTable, SceSysmemUidCB **uidTypeOut);
 s32 sceKernelCreateUIDtypeInherit(const char *parentName, const char *name, s32 size, SceSysmemUidLookupFunc *funcTable, SceSysmemUidLookupFunc *metaFuncTable, SceSysmemUidCB **uidTypeOut);
+s32 sceKernelDeleteHeap(SceUID heapId);
 s32 sceKernelExitDeleteThread(s32);
 s32 sceKernelExitThread(s32);
-M2C_UNK sceKernelFreePartitionMemory(s32, u8);
+s32 sceKernelFreeHeapMemory(SceUID heapId, void *block);
+s32 sceKernelFreePartitionMemory(); /* (SceUID blockId); one 2.x draft passes two */
 void sceKernelGetKTLS(s32 arg0);
 s32 sceKernelGetSystemStatusFlag(void);
 s32 sceKernelGetThreadKTLS(s32, s32, s32);
 s32 sceKernelIsIntrContext(void);
 void * sceKernelMemset(void *, s32, u32);
+s32 sceKernelQueryMemoryInfo(u32 address, s32 *partitionId, SceUID *memoryBlockId);
 s32 sceKernelRegisterDeadThreadHandler(s32 arg0);
 M2C_UNK sceKernelReleaseExceptionHandler(M2C_UNK, M2C_UNK *);
 M2C_UNK sceKernelReleaseIntrHandler(s32);
