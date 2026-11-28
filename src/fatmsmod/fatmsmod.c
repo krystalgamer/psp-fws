@@ -3290,9 +3290,34 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_00010848);
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00010A30);
 #endif
 
-#if FW_VERSION < 271
-INCLUDE_ASM("nonmatchings/fatmsmod", func_00007814);
+#if FW_VERSION < 201
+s32 func_00007814(PfDirCursor *cur) {
+    u8 buf[16];
+    u8 saved;
 
+    saved = cur->de.ctimeTenth;
+    cur->de.ctimeTenth = 0;
+    if (func_00007C30(1, cur->index << 5, 0x20, cur, cur->unk38, buf) == -1) {
+        cur->de.ctimeTenth = saved;
+        func_0000793C(&D_0001BCE8, 0, 0x214);
+        D_00019E08 = D_00019E04;
+        return -1;
+    }
+    if (cur->unk44 == D_0001BCE8.unk0) {
+        func_0000BC84();
+    } else {
+        func_0000BC38(cur->unk44, cur->path);
+    }
+    cur->de.ctimeTenth = saved;
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 271
+INCLUDE_ASM("nonmatchings/fatmsmod", func_00007814);
+#endif
+
+#if FW_VERSION < 271
 INCLUDE_ASM("nonmatchings/fatmsmod", func_000078D8);
 
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00007A88);
@@ -4789,7 +4814,34 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_00018074);
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00017F20);
 #endif
 
+#if FW_VERSION < 271
+s32 func_0001815C(s8 drive, PfVolLabel *label) {
+    FatDirEnt *de;
+    u32 pos;
+
+    func_0000A128();
+    if (func_00018570(drive) == -1) {
+        return -1;
+    }
+    if (func_0000D950(&de, &pos) == -1) {
+        func_0000B5CC();
+        return -1;
+    }
+    func_00007718(label, de, 11);
+    if (label->name[0] == 5) {
+        label->name[0] = 0xE5;
+    }
+    label->attr = de->attr;
+    label->date = (s16)de->wdate;
+    label->time = (s16)de->wtime;
+    if (func_0000B5CC() == -1) {
+        return -1;
+    }
+    return 0;
+}
+#else
 INCLUDE_ASM("nonmatchings/fatmsmod", func_0001815C);
+#endif
 
 #if FW_VERSION == 271
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00018228);
@@ -5051,7 +5103,35 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_00010BBC);
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00010C6C);
 #endif
 
-#if FW_VERSION < 271
+#if FW_VERSION < 201
+s32 func_0000F7D8(PfFile *fp) {
+    s32 err;
+
+    if (func_0000ABF8(fp) == -1) {
+        return -1;
+    }
+    func_00009DC0();
+    D_00027DD4 = D_00027934.unk58;
+    D_00027800 = &D_00027934;
+    if (fp->flags & 1) {
+        func_00007814((PfDirCursor *)fp);
+    }
+    err = func_00009BF0();
+    err |= func_00009DC0();
+    fp->unk54 = 0;
+    fp->drive = 0;
+    fp->flags = 0;
+    if (err != 0) {
+        D_00019E08 = D_00019E04;
+        func_0000B5CC();
+        return -1;
+    }
+    func_0000B5CC();
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 271
 INCLUDE_ASM("nonmatchings/fatmsmod", func_0000F7D8);
 #endif
 

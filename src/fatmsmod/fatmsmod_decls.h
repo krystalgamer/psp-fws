@@ -89,7 +89,7 @@ typedef struct {
 #if FW_VERSION < 201
     u8 pad5C[0x100];
     char path[0x104]; /* 0x15C */
-    s8 drive; /* 0x260 */
+    s8 index; /* 0x260, entry index within its sector */
     u8 pad261[3];
 #endif
 } PfDirCursor;
@@ -148,10 +148,11 @@ typedef struct {
     s32 unk4C;
     s32 unk50; /* 0x50 (2.01+: 0x60) */
     u8 unk54;
+    s8 drive; /* 0x55 */
 #if FW_VERSION >= 201
-    u8 pad55[0x700 - 0x65];
+    u8 pad56[0x700 - 0x66];
 #else
-    u8 pad55[0x264 - 0x55];
+    u8 pad56[0x264 - 0x56];
 #endif
 } PfFile;
 
@@ -198,6 +199,14 @@ typedef struct {
     u16 pad1A;
     u8 pad1C[4];
 } PfStat;
+
+/* Volume label as returned by func_0001815C. */
+typedef struct {
+    char name[11]; /* 0x0 */
+    u8 attr; /* 0xB */
+    s32 date; /* 0xC */
+    s32 time; /* 0x10 */
+} PfVolLabel;
 
 /* PrFILE volume / drive record (partial; D_000276E4 points at the current one). */
 typedef struct {
@@ -590,7 +599,7 @@ s32 func_000075CC(); /* FcpSendMsg wrapper; 1.50+ take one more argument */
 s32 func_0000764C(void);
 s32 func_000076F4(s32, s32);
 void *func_00007718(void *dst0, const void *src0, u32 length);
-void func_00007814(PfDirCursor *cur);
+s32 func_00007814(PfDirCursor *cur);
 void *func_0000793C(void *s, s32 c, u32 n);
 s32 func_00007968(const void *s1, const void *s2, u32 n);
 s32 func_000079A8(s8 *arg0);
@@ -601,6 +610,7 @@ s32 func_00007A5C(const char *s1, const char *s2);
 char *func_00007AB4(char *dst, const char *src, u32 n);
 s32 func_00007BB0(s32 arg0);
 u32 func_00007BD4(u32 sector);
+s32 func_00007C30(s32 write, u32 off, u32 size, void *data, u32 sector, void *buf); /* read/write bytes of a directory sector */
 s32 func_00008274(s32, s32, s32, s32);
 s32 func_00008314(u32 cl, u32 *off, u32 *sector); /* locate the FAT entry and load its sector */
 s32 func_000085D4(u32 sector, u8 **buf);
@@ -627,6 +637,7 @@ s32 func_0000A714(s32 a0, s32 a1, s32 n);
 s32 func_0000A744(s32 a0, s32 a1, s32 a2); /* driver write (buf, sector, count) */
 s32 func_0000A7C0(const u8 *s);
 s32 func_0000A8F8(s32);
+s32 func_0000ABF8(PfFile *fp);
 s32 func_0000ACF8(void);
 s32 func_0000AE30(void);
 s32 func_0000B1D8(s32, s32);
@@ -659,6 +670,7 @@ s32 func_0000C7E8(s8 drive, u32 mode);
 s32 func_0000CC88(void);
 s32 func_0000D440(s32, s32);
 void func_0000D70C(s32 arg0, s32 arg1, s8 arg2, s8 arg3);
+s32 func_0000D950(FatDirEnt **de, u32 *pos); /* find the volume-label entry */
 s32 func_0000DA6C(s32, s32, s32, s32);
 void func_0000DBD4(s32 arg0, s32 arg1, s8 arg2, s32 arg3);
 s32 func_0000DCF4(s32);
@@ -672,6 +684,7 @@ s32 func_0000E3CC(void *arg0, u32 arg1);
 s32 func_0000E3D8(struct Unk_func_0000E3D8_0 *arg0, u32 arg1);
 s32 func_0000E5E8(void);
 s32 func_0000E5F8(s32);
+s32 func_0000F7D8(PfFile *fp);
 s32 func_0000F8A4(PfFile *fp);
 s32 func_0000F8F8(PfFile *fp);
 void func_0000FD04(PfFile *fp);
@@ -719,6 +732,7 @@ s32 func_000166C4(s32, s32);
 void func_0001675C(s32 arg0, s32 arg1);
 s32 func_00017164(s32, s32);
 s32 func_00017A14(s32, s32);
+s32 func_0001815C(s8 drive, PfVolLabel *label);
 void func_000183CC(s32 arg0, s32 arg1);
 s32 func_00018520(s32, s32);
 s32 func_00018570(s8 drive);
