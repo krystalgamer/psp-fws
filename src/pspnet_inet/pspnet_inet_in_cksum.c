@@ -1329,7 +1329,45 @@ INCLUDE_ASM("nonmatchings/pspnet_inet_in_cksum", ip_setmoptions);
 INCLUDE_ASM("nonmatchings/pspnet_inet_in_cksum", func_00017DA0);
 #endif
 
+#if FW_VERSION < 201
+s32 ip_getmoptions(s32 optname, struct ip_moptions *imo, struct mbuf **mp) {
+    u8 *ttl;
+    u8 *loop;
+    struct in_addr *addr;
+    struct in_ifaddr *ia;
+
+    *mp = sceNetMGet(0, 4);
+    if (*mp == NULL)
+        return (0x69);
+
+    switch (optname) {
+    case 9:
+        addr = mtod(*mp, struct in_addr *);
+        (*mp)->m_len = sizeof(struct in_addr);
+        if (imo == NULL || imo->imo_multicast_ifp == NULL)
+            *addr = zeroin_addr;
+        else {
+            IFP_TO_IA(imo->imo_multicast_ifp, ia);
+            *addr = ia ? ia->ia_addr.sin_addr : zeroin_addr;
+        }
+        return (0);
+    case 10:
+        ttl = mtod(*mp, u8 *);
+        (*mp)->m_len = 1;
+        *ttl = imo ? imo->imo_multicast_ttl : 1;
+        return (0);
+    case 11:
+        loop = mtod(*mp, u8 *);
+        (*mp)->m_len = 1;
+        *loop = imo ? imo->imo_multicast_loop : 1;
+        return (0);
+    default:
+        return (0x5F);
+    }
+}
+#else
 INCLUDE_ASM("nonmatchings/pspnet_inet_in_cksum", ip_getmoptions);
+#endif
 
 INCLUDE_ASM("nonmatchings/pspnet_inet_in_cksum", func_00018478);
 
