@@ -251,6 +251,8 @@ typedef struct SceTimer {
 typedef struct SceVTimer {
     s32 active; /* 0x00 */
     SceKernelSysClock base; /* 0x04: system time when started */
+    u8 unkC[0x18 - 0xC];
+    void *handler; /* 0x18 */
 } SceVTimer;
 
 enum SceThreadStatus {
@@ -601,7 +603,13 @@ typedef struct SceThreadmanInfo {
 #if FW_VERSION < 282
     u8 unkTmpEnd[THREADMAN_TIMERINTR_OFF - THREADMAN_UID_OFF - THREADMAN_NUM_UID * 4 - 0x2C - 0x84];
     s32 unk6E8; /* system timer interrupt number (0x6E8 in 1.00) */
+#if FW_VERSION >= 152
+    u8 unkTimerEnd[8];
+    SceTimer *timerCursor; /* 1.52+: next timer of the expiry walk, kept valid by cancels */
+    u8 unkTimerEnd2[THREADMAN_LOG_OFF - THREADMAN_TIMERINTR_OFF - 0x10];
+#else
     u8 unkTimerEnd[THREADMAN_LOG_OFF - THREADMAN_TIMERINTR_OFF - 4];
+#endif
 #else
     u8 unkTmpEnd[THREADMAN_LOG_OFF - THREADMAN_UID_OFF - THREADMAN_NUM_UID * 4 - 0x2C - 0x84];
 #endif
