@@ -182,7 +182,28 @@ INCLUDE_ASM("nonmatchings/pspnet_inet_rtsub", func_0000DF08);
 
 INCLUDE_ASM("nonmatchings/pspnet_inet_rtsub", func_0000E0EC);
 
+#if FW_VERSION < 201
+void rt_missmsg(s32 type, struct rt_addrinfo *rtinfo, s32 flags, s32 error)
+{
+	struct rt_msghdr rtm;
+	struct mbuf *m;
+	struct sockaddr *sa = rtinfo->rti_info[RTAX_DST];
+
+	if (route_cb.any_count == 0)
+		return;
+	func_0002C94C(&rtm, 0, sizeof(rtm));
+	rtm.rtm_flags = RTF_DONE | flags;
+	rtm.rtm_errno = error;
+	m = func_0000E5A4(type, rtinfo, (char *)&rtm, sizeof(rtm));
+	if (m == 0)
+		return;
+	mtod(m, struct rt_msghdr *)->rtm_addrs = rtinfo->rti_addrs;
+	route_proto.sp_protocol = sa ? sa->sa_family : 0;
+	func_0000EE68(m, &route_proto, &route_src, &route_dst);
+}
+#else
 INCLUDE_ASM("nonmatchings/pspnet_inet_rtsub", rt_missmsg);
+#endif
 
 INCLUDE_ASM("nonmatchings/pspnet_inet_rtsub", func_0000E3F0);
 

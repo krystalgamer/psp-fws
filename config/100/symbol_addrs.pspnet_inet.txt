@@ -597,3 +597,7 @@ syn_cache_reset = 0x00021D08; // type:func
 syn_cache_unreach = 0x00021FCC; // type:func
 syn_cache_get = 0x000215D8; // type:func
 syn_cache_add = 0x000222B0; // type:func
+route_cb = 0x0002F3BC; // size:0x14
+route_proto = 0x0002E4D4; // rom:0x2E554
+route_src = 0x0002E4C4; // rom:0x2E544
+route_dst = 0x0002E4B4; // rom:0x2E534

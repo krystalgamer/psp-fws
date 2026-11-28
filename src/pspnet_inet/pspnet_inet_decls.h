@@ -682,7 +682,7 @@ struct ifaddr {
     struct sockaddr *ifa_netmask;       /* 0x08 */
     struct ifnet *ifa_ifp;              /* 0x0C */
     TAILQ_ENTRY(ifaddr) ifa_list;       /* 0x10 */
-    u8 ifa_data[0x10];                  /* 0x18 struct ifaddr_data (u_quad_t in/out bytes) */
+    struct { u64 ifad_inbytes; u64 ifad_outbytes; } ifa_data; /* 0x18 */
     void (*ifa_rtrequest)(s32 cmd, struct rtentry *rt, struct sockaddr *sa); /* 0x28 */
     u32 ifa_flags;                      /* 0x2C */
     s32 ifa_refcnt;                     /* 0x30 */
@@ -753,6 +753,30 @@ struct rt_addrinfo {
     s32 rti_addrs;                      /* 0x00 */
     struct sockaddr *rti_info[RTAX_MAX]; /* 0x04 */
 };
+/* struct rt_msghdr (route.h), route_cb (rtsock.c) */
+struct rt_msghdr {
+    u16 rtm_msglen;
+    u8 rtm_version;
+    u8 rtm_type;
+    u16 rtm_index;
+    s32 rtm_flags;
+    s32 rtm_addrs;
+    s32 rtm_pid;
+    s32 rtm_seq;
+    s32 rtm_errno;
+    s32 rtm_use;
+    u32 rtm_inits;
+    struct rt_metrics rtm_rmx;
+};
+struct route_cb {
+    s32 ip_count;
+    s32 ip6_count;
+    s32 ns_count;
+    s32 iso_count;
+    s32 any_count;
+};
+#define RTF_DONE 0x40
+#define RTAX_DST 0
 
 /* struct arphdr (if_arp.h), byte-aligned */
 struct arphdr {
@@ -1956,6 +1980,10 @@ extern s32 rip_recvspace;
 extern s32 rip_sendspace;
 extern char *rn_ones; /* rn_ones */
 extern char *rn_zeros; /* rn_zeros */
+extern struct route_cb route_cb;
+extern struct sockaddr route_dst;
+extern struct sockproto route_proto;
+extern struct sockaddr route_src;
 extern struct rtstat rt_stat; /* rtstat */
 extern struct radix_node_head *rt_tables[32]; /* rt_tables */
 extern s32 rttrash; /* rttrash */
@@ -2120,10 +2148,12 @@ void func_0000DDCC(s32 arg0, struct Unk_func_0000DDCC_1 *arg1, struct Unk_func_0
 s32 func_0000E3F0(s32);
 s32 func_0000E448(s32, s32);
 s32 func_0000E4E4(s32, s32);
+struct mbuf *func_0000E5A4(s32 type, struct rt_addrinfo *rtinfo, char *data, s32 datalen);
 void func_0000ED48(void *arg0);
 void func_0000ED94(void *arg0);
 void func_0000EDB8(struct Unk_func_0000EDB8_0 *arg0);
 void func_0000EE04(struct Unk_func_0000EE04_0 *arg0);
+void func_0000EE68(struct mbuf *m0, ...);
 void func_0000F1F8(void);
 s32 func_0000F204(void);
 void func_0000F268(void);
