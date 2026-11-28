@@ -1530,7 +1530,49 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00005FF8);
 
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00006340);
 
-INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_0000648C);
+void func_0000648C(SceNetAdhocPtpPcb *pcb, s32 rexmt) {
+    struct mbuf *m;
+    u32 seq;
+    s32 n;
+
+    n = 0;
+    m = pcb->snd.first;
+    seq = pcb->snd_una;
+    if (m == NULL)
+        goto out;
+    for (; seq != pcb->snd_nxt; seq++) {
+        m = m->m_nextpkt;
+        if (m == NULL)
+            goto out;
+    }
+    while (m != NULL) {
+        if (pcb->snd_wnd - pcb->snd_inflight < m->m_pkthdr.len) {
+            if (n != 0)
+                goto out;
+            if (rexmt != 0) {
+                func_00005FF8(pcb->ifp, &pcb->laddr, pcb->lport, &pcb->paddr, pcb->pport, 4, pcb->snd_una - 1, NULL);
+                D_00007450.stat[10]++;
+                goto out;
+            }
+            if (pcb->callout.c_flags & CALLOUT_PENDING)
+                goto out;
+            D_00007450.stat[11]++;
+            pcb->rexmt_left = pcb->rexmt_cnt;
+            _sce_pspnet_callout_reset_usec(&pcb->callout, pcb->rexmt_int, func_000069D4, pcb);
+            goto out;
+        }
+        func_00005FF8(pcb->ifp, &pcb->laddr, pcb->lport, &pcb->paddr, pcb->pport, 4, pcb->snd_nxt, m);
+        n++;
+        pcb->snd_nxt++;
+        pcb->snd_inflight += m->m_pkthdr.len;
+        m = m->m_next;
+    }
+out:
+    if (rexmt == 0 && n > 0) {
+        pcb->rexmt_left = pcb->rexmt_cnt;
+        _sce_pspnet_callout_reset_usec(&pcb->callout, pcb->rexmt_int, func_000069D4, pcb);
+    }
+}
 #endif
 
 #if FW_VERSION >= 282
