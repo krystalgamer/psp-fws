@@ -219,8 +219,9 @@ typedef struct {
     u8 unk0[0xD];
     SceNetInAddrPacked yiaddr;  /* 0x00D */
     u8 unk11[0x3CB];
-    u32 unk3DC;
-    u8 unk3E0[8];
+    u32 unk3DC;                 /* 0x3DC option 51 lease time */
+    u32 unk3E0;                 /* 0x3E0 option 58 T1 */
+    u32 unk3E4;                 /* 0x3E4 option 59 T2 */
     u32 unk3E8;
     u32 netmask;                /* 0x3EC */
     u32 broadcast;              /* 0x3F0 */
@@ -231,7 +232,10 @@ typedef struct {
     char ifname[0x10];          /* 0x000 */
     s32 bpf;                    /* 0x010 */
     s32 arpBpf;                 /* 0x014 */
-    u8 unk18[0xBC2];
+    u8 unk18[0x5E0];
+    u8 unk5F8[0x5DC];           /* 0x5F8 receive buffer */
+    s32 unkBD4;                 /* 0xBD4 */
+    u8 unkBD8[2];
     u8 pkt[0x24E];              /* 0xBDA outgoing frame */
     s32 pktLen;                 /* 0xE28 */
     u8 unkE2C[0x24];
@@ -259,9 +263,34 @@ typedef struct {
 } SceNetDhcpCtx;
 typedef char chk_SceNetDhcpCtx[(sizeof(SceNetDhcpCtx) == 0x13E8) ? 1 : -1];
 
+typedef struct {
+    void *iov_base;
+    u32 iov_len;
+} SceNetIovec;
+
+typedef struct {
+    void *msg_name;
+    u32 msg_namelen;
+    SceNetIovec *msg_iov;
+    s32 msg_iovlen;
+    void *msg_control;
+    u32 msg_controllen;
+    s32 msg_flags;
+} SceNetMsghdr;
+
+typedef struct {
+    u8 sin_len;
+    u8 sin_family;
+    u16 sin_port;
+    u32 sin_addr;
+    u8 sin_zero[8];
+} SceNetSockaddrIn;
+
+/* PPPoE client state (1.00: pointed to by D_00013F20) */
 struct Unk_D_00013F20 {
-    u8 pad0[0x4];
-    s32 unk4;
+    s32 sock;                   /* 0x0 */
+    SceUID sema;                /* 0x4 */
+    SceUID thid;                /* 0x8 */
 };
 
 struct Unk_func_000016E0_0 {
@@ -512,6 +541,7 @@ void func_00003EF0();
 s32 func_0000407C(const char *ifname, SceNetDhcpLease *l);
 u32 func_00004270(SceNetInAddrPacked *addr);
 s32 func_00004424(const char *ifname);
+s32 func_0000487C(SceNetDhcpCtx *dc, s32 *n, s32 arg);
 s32 func_000051A0(const char *ifname, void *func, s32 a2, s32 prio, s32 a4, SceNetApctlIpParam *param);
 void func_00005290(void *arg0);
 void func_00005634(void);

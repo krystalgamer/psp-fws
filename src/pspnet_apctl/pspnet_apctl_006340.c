@@ -1,3 +1,4 @@
+/* cflags[100,102,103]: -O2 -frename-registers */
 /* cflags: -Os -frename-registers */
 #include "common.h"
 #include "pspnet_apctl_decls.h"
@@ -192,13 +193,10 @@ INCLUDE_ASM("nonmatchings/pspnet_apctl_006340", func_000070FC);
 
 #if FW_VERSION < 282
 s32 func_00007324(void) {
-    s32 var_v0;
-
-    var_v0 = 0x8041030B;
-    if (D_00013F20 != NULL) {
-        var_v0 = sceKernelSignalSema(D_00013F20->unk4, 1);
+    if (D_00013F20 == NULL) {
+        return 0x8041030B;
     }
-    return var_v0;
+    return sceKernelSignalSema(D_00013F20->sema, 1);
 }
 #else
 INCLUDE_ASM("nonmatchings/pspnet_apctl_006340", func_000085A8);
@@ -212,7 +210,7 @@ s32 func_00008E00(void) {
 
     var_v0 = 0x8041030B;
     if (D_00013F20 != NULL) {
-        var_v0 = sceKernelSignalSema(D_00013F20->unk4, 1);
+        var_v0 = sceKernelSignalSema(D_00013F20->sema, 1);
     }
     return var_v0;
 }
