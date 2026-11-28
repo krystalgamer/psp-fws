@@ -650,7 +650,7 @@ s32 func_000044C8(struct socket *so, u32 cmd, void *data) {
         return _sce_pspnet_ifioctl(so, cmd, data, 1);
     }
     if (((cmd >> 8) & 0xFF) == 'r') {
-        return func_0000D128(cmd, data);
+        return rtioctl(cmd, data);
     }
     return so->so_proto->pr_usrreq(so, PRU_CONTROL, (struct mbuf *)cmd, (struct mbuf *)data, NULL);
 }

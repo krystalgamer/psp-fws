@@ -564,3 +564,4 @@ rip_input = 0x0001B5E8; // type:func
 ip_protox = 0x0002F548;
 inetsw = 0x0002E5FC; // rom:0x2E67C
 rt_stat = 0x0002F3AC;
+rtioctl = 0x0000D128; // type:func

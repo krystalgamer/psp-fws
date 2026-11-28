@@ -1333,6 +1333,7 @@ struct rtstat {
     u16 rts_unreach;                    /* 0x6 */
     u16 rts_wildcard;                   /* 0x8 */
 };
+#define ROUNDUP(a) ((a) > 0 ? (1 + (((a) - 1) | (sizeof(long) - 1))) : sizeof(long))
 
 struct SceTailqHead {
     void *tqh_first;
@@ -1850,7 +1851,6 @@ struct radix_node *func_0000A144(void *v_arg, struct radix_node_head *head);
 struct radix_node *func_0000A61C(void *n_arg, s32 search, s32 skip);
 s32 func_0000C998(s32, s32, s32);
 void func_0000CE98(void *arg);
-s32 func_0000D128(u32 cmd, void *data);
 s32 func_0000D1F4(void);
 void func_0000D25C(s32 *arg0, s32 arg1);
 s32 func_0000D264(void *arg0, s32 arg1);
@@ -2027,6 +2027,7 @@ void rt_xaddrs(u8 *cp, u8 *cplim, struct rt_addrinfo *rtinfo);
 void rtalloc(struct route *ro);
 struct rtentry *rtalloc1(struct sockaddr *dst, s32 report);
 void rtfree(struct rtentry *rt);
+s32 rtioctl(u32 cmd, void *data);
 s32 rtrequest(s32 req, struct sockaddr *dst, struct sockaddr *gateway, struct sockaddr *netmask, s32 flags, struct rtentry **ret_nrt);
 void save_rte(u8 *option, struct in_addr dst);
 s32 sb_lock(struct sockbuf *sb);
