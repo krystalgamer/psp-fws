@@ -260,7 +260,63 @@ INCLUDE_ASM("nonmatchings/pspnet_inet_rtsub", func_0000E448);
 INCLUDE_ASM("nonmatchings/pspnet_inet_rtsub", func_0000E4E4);
 #endif
 
-INCLUDE_ASM("nonmatchings/pspnet_inet_rtsub", func_0000E5A4);
+struct mbuf *func_0000E5A4(s32 type, struct rt_addrinfo *rtinfo, char *data, s32 datalen)
+{
+	struct rt_msghdr *rtm;
+	struct mbuf *m;
+	int i;
+	struct sockaddr *sa;
+	int len, dlen;
+
+	m = sceNetMGethdr(M_DONTWAIT, MT_DATA);
+	if (m == 0)
+		return (m);
+	switch (type) {
+
+	case RTM_DELADDR:
+	case RTM_NEWADDR:
+		len = sizeof(struct ifa_msghdr);
+		break;
+
+	case RTM_IFINFO:
+		len = sizeof(struct if_msghdr);
+		break;
+
+	case RTM_IFANNOUNCE:
+		len = sizeof(struct if_announcemsghdr);
+		break;
+
+	default:
+		len = sizeof(struct rt_msghdr);
+	}
+	if (len > MHLEN) {
+		m->m_next = sceNetMGet(M_DONTWAIT, MT_DATA);
+		if (m->m_next == NULL) {
+			sceNetMFreem(m);
+			return (NULL);
+		}
+		m->m_pkthdr.len = len;
+		m->m_len = MHLEN;
+		m->m_next->m_len = len - MHLEN;
+	} else {
+		m->m_pkthdr.len = m->m_len = len;
+	}
+	m->m_pkthdr.rcvif = 0;
+	sceNetMCopyback(m, 0, datalen, data);
+	rtm = mtod(m, struct rt_msghdr *);
+	for (i = 0; i < RTAX_MAX; i++) {
+		if ((sa = rtinfo->rti_info[i]) == NULL)
+			continue;
+		rtinfo->rti_addrs |= (1 << i);
+		dlen = ROUNDUP(sa->sa_len);
+		sceNetMCopyback(m, len, dlen, (char *)sa);
+		len += dlen;
+	}
+	rtm->rtm_msglen = len;
+	rtm->rtm_version = RTM_VERSION;
+	rtm->rtm_type = type;
+	return (m);
+}
 
 INCLUDE_ASM("nonmatchings/pspnet_inet_rtsub", func_0000E704);
 

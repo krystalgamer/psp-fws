@@ -764,6 +764,20 @@ struct rt_addrinfo {
     struct sockaddr *rti_info[RTAX_MAX]; /* 0x04 */
 };
 /* struct rt_msghdr (route.h), route_cb (rtsock.c) */
+#define RTM_NEWADDR 0xc
+#define RTM_DELADDR 0xd
+#define RTM_VERSION 3
+#define ROUNDUP(a) \
+	((a) > 0 ? (1 + (((a) - 1) | (sizeof(long) - 1))) : sizeof(long))
+struct ifa_msghdr {
+    u16 ifam_msglen;
+    u8 ifam_version;
+    u8 ifam_type;
+    s32 ifam_addrs;
+    s32 ifam_flags;
+    u16 ifam_index;
+    s32 ifam_metric;
+};
 struct if_announcemsghdr {
     u16 ifan_msglen;
     u8 ifan_version;
@@ -2407,12 +2421,14 @@ s32 sceNetInetTerm(void);
 char *sceNetInet_lib_2595064C(struct in_addr in);
 struct ifqueue *sceNetInet_lib_D7928A6D(void);
 void sceNetMAdj(struct mbuf *mp, s32 req_len);
+void sceNetMCopyback(struct mbuf *m0, s32 off, s32 len, char *cp);
 s32 sceNetMCopydata(struct mbuf *m, s32 off, s32 len, void *cp);
 struct mbuf *sceNetMCopym(struct mbuf *m, s32 off, s32 len, s32 wait);
 struct mbuf *sceNetMFree(struct mbuf *m);
 void sceNetMFreem(struct mbuf *m);
 struct mbuf *sceNetMGet(s32 how, s32 type);
 struct mbuf *sceNetMGetclr(s32 how, s32 type);
+struct mbuf *sceNetMGethdr(s32 how, s32 type);
 struct mbuf *sceNetMPrepend(struct mbuf *m, s32 plen, s32 how);
 struct mbuf *sceNetMPullup(struct mbuf *n, s32 len);
 void *sceNetMallocInternal(u32 size);
