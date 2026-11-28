@@ -16,6 +16,7 @@
   "func_00002238": "s32 func_00002238(SceSize args, void *argp);",
   "func_0000254C": "s32 func_0000254C(s32 (*arg0)(s32, s32, s32, s32, s32), s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5);",
   "func_000029F8": "s32 func_000029F8(SceMScmHC *hc, s32 timeout);",
+  "func_00002FE0": "s32 func_00002FE0(SceMScmHC *hc, s32 timeout);",
   "func_00002FF0": "s32 func_00002FF0(s32 a0, s32 a1, s32 a2, u32 *arg);",
   "func_00003E58": "s32 func_00003E58(SceMScmHC *hc, s32 *out);",
   "func_00003EB0": "s32 func_00003EB0(SceMScmHC *hc, s32 mode);",

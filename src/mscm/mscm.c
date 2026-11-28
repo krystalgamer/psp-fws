@@ -739,7 +739,6 @@ INCLUDE_ASM("nonmatchings/mscm", func_0000179C);
 INCLUDE_ASM("nonmatchings/mscm", func_00001B88);
 #endif
 
-
 #if FW_VERSION < 150
 s32 func_000018B8(s32 slot) {
     s32 st;
@@ -957,7 +956,33 @@ s32 sceMScmReadMSReg(SceMScmHC *hc, s32 addr, s32 size, u8 *buf, s32 force, s32 
     }
     return sceMScmReadMSRegHelper(hc, buf, size, timeout);
 }
-#else
+#endif
+
+#if FW_VERSION >= 282
+s32 sceMScmReadMSReg(SceMScmHC *hc, s32 addr, s32 size, u8 *buf, s32 force, s32 timeout) {
+    SceMScmHC *h;
+    u8 adr[4];
+    s32 ret;
+
+    timeout = func_00002FE0(hc, timeout);
+    h = hc->hc;
+    if (force == 1 || h->readAddr != addr || h->readSize != size) {
+        h->readAddr = addr;
+        adr[0] = addr;
+        h->readSize = size;
+        adr[1] = size;
+        adr[2] = h->writeAddr;
+        adr[3] = h->writeSize;
+        ret = sceMScmTPCSetRWRegAdrs(hc, adr, timeout);
+        if (ret < 0) {
+            return ret;
+        }
+    }
+    return sceMScmReadMSRegHelper(hc, buf, size, timeout);
+}
+#endif
+
+#if FW_VERSION == 201
 INCLUDE_ASM("nonmatchings/mscm", sceMScmReadMSReg);
 #endif
 
@@ -1005,7 +1030,53 @@ s32 sceMScmWriteMSReg(SceMScmHC *hc, s32 addr, s32 size, u8 *buf, s32 force, s32
     }
     return 0;
 }
-#else
+#endif
+
+#if FW_VERSION >= 282
+s32 sceMScmWriteMSReg(SceMScmHC *hc, s32 addr, s32 size, u8 *buf, s32 force, s32 timeout) {
+    SceMScmHC *h;
+    u8 adr[4];
+    u8 st[4];
+    u16 saved;
+    s32 busy;
+    s32 ret;
+
+    saved = 0;
+    timeout = func_00002FE0(hc, timeout);
+    h = hc->hc;
+    if (force == 1 || h->writeAddr != addr || h->writeSize != size) {
+        adr[0] = h->readAddr;
+        adr[1] = h->readSize;
+        h->writeAddr = addr;
+        adr[2] = addr;
+        h->writeSize = size;
+        adr[3] = size;
+        ret = sceMScmTPCSetRWRegAdrs(hc, adr, timeout);
+        if (ret < 0) {
+            return ret;
+        }
+    }
+    ret = sceMScmReadMSReg(hc, 2, 3, st, 1, -1);
+    if (ret < 0) {
+        return ret;
+    }
+    busy = 0;
+    if ((st[0] & 2) && st[2] != 1) {
+        saved = sceMScmHCSetBusyCount(hc, 0);
+        busy = 1;
+    }
+    ret = sceMScmWriteMSRegHelper(hc, buf, size, timeout);
+    if (ret < 0) {
+        return ret;
+    }
+    if (busy) {
+        sceMScmHCSetBusyCount(hc, saved);
+    }
+    return 0;
+}
+#endif
+
+#if FW_VERSION == 201
 INCLUDE_ASM("nonmatchings/mscm", sceMScmWriteMSReg);
 #endif
 
@@ -1484,7 +1555,7 @@ s32 sceMScm_driver_D6DB3199(SceMScmHC *hc, s32 *arg1, s32 *arg2, s32 *arg3) {
 }
 #endif
 
-#if FW_VERSION < 201 || (FW_VERSION >= 250 && FW_VERSION < 271)
+#if FW_VERSION < 201 || (FW_VERSION >= 250 && FW_VERSION < 271) || FW_VERSION >= 282
 s32 func_00004430(SceMScmHC *hc, s32 mode) {
     s32 intr;
     s32 ret;
@@ -1856,7 +1927,7 @@ s32 func_00004E68(s32 arg0, s32 arg1) {
 }
 #endif
 
-#if FW_VERSION < 201 || (FW_VERSION >= 250 && FW_VERSION < 271)
+#if FW_VERSION < 201 || (FW_VERSION >= 250 && FW_VERSION < 271) || FW_VERSION >= 282
 u16 sceMScmHCSetBusyCount(SceMScmHC *hc, u16 count) {
     s32 intr;
     s32 old;
@@ -2453,7 +2524,20 @@ s32 func_00006704(SceMScmHC *hc, s32 arg1) {
 
 INCLUDE_ASM("nonmatchings/mscm", sceMScmSetPullDownRegByDesc);
 
-INCLUDE_ASM("nonmatchings/mscm", sceMScmSetPullDownReg);
+s32 sceMScmSetPullDownReg(s32 slot, s32 on) {
+    s32 ret;
+
+    ret = 0x80220081;
+    if (slot == 0) {
+        if (on != 0) {
+            sceSysreg_driver_55B18B84(slot);
+        } else {
+            sceSysreg_driver_2112E686(slot);
+        }
+        ret = 0;
+    }
+    return ret;
+}
 
 INCLUDE_ASM("nonmatchings/mscm", func_000067CC);
 
@@ -2461,7 +2545,17 @@ INCLUDE_ASM("nonmatchings/mscm", func_00006800);
 
 INCLUDE_ASM("nonmatchings/mscm", func_00006854);
 
-INCLUDE_ASM("nonmatchings/mscm", sceMScmSetSlotPower);
+s32 sceMScmSetSlotPower(SceMScmHC *hc, s32 on) {
+    switch (hc->index) {
+    case 0:
+        sceSysconCtrlMsPower(on != 1);
+        return 0;
+    case 1:
+        sceSysconCtrlWlanPower(on != 1);
+        return 0;
+    }
+    return 0x80220081;
+}
 
 INCLUDE_ASM("nonmatchings/mscm", func_00006908);
 
