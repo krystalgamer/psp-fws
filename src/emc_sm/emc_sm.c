@@ -76,7 +76,7 @@ INCLUDE_ASM("nonmatchings/emc_sm", sceNandInit);
 
 #if FW_VERSION < 201
 s32 nandIsReady(void) {
-    return *(u32 *)0xBD101004 & 1;
+    return *(u32 *)0xBD101004 & 1; /* not volatile: matches */
 }
 #endif
 
@@ -202,15 +202,15 @@ s32 sceNandReadId(u8 *buf, s32 len) {
     s32 i;
     u8 v;
 
-    *(volatile u32 *)0xBD101008 = 0x90;
-    *(volatile u32 *)0xBD10100C = 0;
+    NAND_CMD = 0x90;
+    NAND_ADDR = 0;
     for (i = 0; i < len; i++) {
-        v = *(volatile u32 *)0xBD101300;
+        v = NAND_DATA;
         if (buf != NULL) {
             buf[i] = v;
         }
     }
-    *(volatile u32 *)0xBD101014 = 1;
+    NAND_RESET = 1;
     return 0;
 }
 #else
@@ -401,14 +401,14 @@ INCLUDE_ASM("nonmatchings/emc_sm", sceNandResume);
 
 #if FW_VERSION == 100
 s32 sceNandSetWriteProtect(s32 protect) {
-    u32 v = *(volatile u32 *)0xBD101004;
+    u32 v = NAND_STATUS;
     s32 old = __builtin_allegrex_ext(v ^ 0x80, 7, 1);
     if (protect) {
         v &= ~0x80;
     } else {
         v |= 0x80;
     }
-    *(volatile u32 *)0xBD101004 = v;
+    NAND_STATUS = v;
     return old;
 }
 #endif
@@ -416,9 +416,9 @@ s32 sceNandSetWriteProtect(s32 protect) {
 #if FW_VERSION < 201
 s32 sceNandReadStatus(void) {
     u32 v;
-    *(volatile u32 *)0xBD101008 = 0x70;
-    v = *(volatile u32 *)0xBD101300;
-    *(volatile u32 *)0xBD101014 = 1;
+    NAND_CMD = 0x70;
+    v = NAND_DATA;
+    NAND_RESET = 1;
     return v & 0xFF;
 }
 #else
