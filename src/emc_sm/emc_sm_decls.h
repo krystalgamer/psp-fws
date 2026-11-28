@@ -20,7 +20,7 @@
 #define NAND_DMA_SPARE ((volatile u32 *)0xBFF00900) /* 3 words */
 
 /* sceKernelSm1ReferOperations() result; only the 0xC entry is used here */
-typedef struct {
+typedef struct SceKernelSm1Ops {
     void *unk0;
     void *unk4;
     void *unk8;
@@ -54,10 +54,21 @@ typedef struct {
 } SceNandState;
 typedef char chk_SceNandState[(sizeof(SceNandState) == 0x28) ? 1 : -1];
 #else
+/* 1.02+: the sm1 operations pointer is kept, busClockOn = clock enabled by sceNandLock */
 typedef struct {
     SceUID semaId;   /* 0x00 */
     SceUID evFlagId; /* 0x04 */
-    u8 unk8[0x2C];
+    s32 busClockOn;  /* 0x08 */
+    struct SceKernelSm1Ops *ops; /* 0x0C */
+    s32 state;       /* 0x10 */
+    s32 error;       /* 0x14 */
+    s32 count;       /* 0x18 */
+    u32 ppn;         /* 0x1C */
+    void *user;      /* 0x20 */
+    void *spare;     /* 0x24 */
+    s32 mode;        /* 0x28 */
+    s32 unk2C;
+    s32 unk30;
 } SceNandState;
 #endif
 
@@ -109,6 +120,7 @@ extern u8 D_00002C90[0x200];
 extern SceNandSpareExtra D_00002DB4;
 extern SceNandSpare D_00002E90;
 extern SceNandInfo D_00002FD0;
+extern SceNandInfo D_00002FF0;
 
 s32 Kprintf(const char *fmt, ...);
 s32 func_0000014C(void);

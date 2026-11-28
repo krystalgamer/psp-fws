@@ -309,9 +309,7 @@ s32 sceNandReadPages(u32 ppn, void *user, void *spare, u32 len) {
 INCLUDE_ASM("nonmatchings/emc_sm", sceNandReadPages);
 #endif
 
-#if FW_VERSION >= 102
-INCLUDE_ASM("nonmatchings/emc_sm", sceNandWritePages);
-#else
+#if FW_VERSION < 201
 s32 sceNandWritePages(u32 ppn, void *user, void *spare, u32 len) {
     s32 mode;
 
@@ -321,6 +319,8 @@ s32 sceNandWritePages(u32 ppn, void *user, void *spare, u32 len) {
     }
     return sceNandWriteAccess(ppn, user, spare, len, mode);
 }
+#else
+INCLUDE_ASM("nonmatchings/emc_sm", sceNandWritePages);
 #endif
 
 s32 sceNandReadPagesRawExtra(u32 ppn, void *user, void *spare, u32 len) {
@@ -437,7 +437,7 @@ s32 sceNandVerifyBlockWithRetry(u32 ppn, void *user, void *spare) {
 INCLUDE_ASM("nonmatchings/emc_sm", sceNandVerifyBlockWithRetry);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 201
 s32 sceNandEraseBlockWithRetry(u32 ppn) {
     s32 i;
     s32 ret;
@@ -630,7 +630,7 @@ s32 sceNandGetTotalBlocks(void) {
 }
 #endif
 
-#if FW_VERSION >= 102
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/emc_sm", sceNandWriteBlock);
 #else
 s32 sceNandWriteBlock(u32 ppn, void *user, void *spare) {
