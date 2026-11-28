@@ -278,13 +278,18 @@ typedef struct {
     char ifname[0x10];          /* 0x000 */
     s32 bpf;                    /* 0x010 */
     s32 arpBpf;                 /* 0x014 */
-    u8 unk18[0x5E0];
-    u8 unk5F8[0x5DC];           /* 0x5F8 receive buffer */
+    u8 rxBuf[0x5DC];            /* 0x018 BPF read buffer */
+    s32 rxLen;                  /* 0x5F4 */
+    u8 unk5F8[0x5DC];           /* 0x5F8 ARP BPF read buffer */
     s32 unkBD4;                 /* 0xBD4 */
     u8 unkBD8[2];
     u8 pkt[0x24E];              /* 0xBDA outgoing frame */
     s32 pktLen;                 /* 0xE28 */
-    u8 unkE2C[0x24];
+    u8 *rxEther;                /* 0xE2C */
+    u8 *rxIp;                   /* 0xE30 */
+    SceNetDhcpUdpHdr *rxUdp;    /* 0xE34 */
+    u8 *rxBootp;                /* 0xE38 */
+    u8 unkE3C[0x14];
     SceNetDhcpUdpHdr *udp;      /* 0xE50 */
     u8 *unkE54;                 /* 0xE54 */
     struct {
@@ -298,9 +303,13 @@ typedef struct {
     u8 hwaddr[6];               /* 0xE66 own MAC */
     u8 unkE6C[0x118];
     SceNetDhcpLease *lease;     /* 0xF84 */
-    u8 unkF88[0xC];
+    s32 timeout;                /* 0xF88 */
+    s32 initInterval;           /* 0xF8C */
+    s32 maxInterval;            /* 0xF90 */
     s32 startTime;              /* 0xF94 */
-    u8 unkF98[0xC];
+    s32 unkF98;
+    s32 interval;               /* 0xF9C */
+    s32 unkFA0;
     SceUID sema;                /* 0xFA4 */
     SceUID thid;                /* 0xFA8 */
     s32 state;                  /* 0xFAC */
@@ -308,7 +317,7 @@ typedef struct {
     u32 curDns1;                /* 0xFB8 */
     u32 curDns2;                /* 0xFBC */
     u32 curRoute;               /* 0xFC0 */
-    u8 unkFC4[0x404];
+    SceNetDhcpLease offer;      /* 0xFC4 */
     u8 arpAddr[6];              /* 0x13C8 */
     u8 arpHw[0xE];              /* 0x13CE */
     void (*callback)(s32 event, s32 arg); /* 0x13DC */
@@ -627,6 +636,7 @@ s32 func_000038E4(void);
 s32 func_000038EC(SceNetApctlCtx *ctx, SceNetInAddrPacked *ip, SceNetInAddrPacked *bcast, SceNetInAddrPacked *mask, SceNetInAddrPacked *route, SceNetInAddrPacked *dns1, SceNetInAddrPacked *dns2);
 s32 func_00003908(u32 *out);
 s32 func_00003978(void);
+s32 func_00003AA8(SceNetDhcpCtx *dc);
 void func_00003B30(s32 arg0);
 void func_00003B50(s32 arg0);
 s32 func_00003C64(void);
@@ -638,6 +648,7 @@ s32 func_00004424(const char *ifname);
 s32 func_00004704(s32 sock, u32 *dst, void *buf);
 s32 func_000047D8(SceNetDhcpCtx *dc);
 s32 func_0000487C(SceNetDhcpCtx *dc, void *spa, void *tpa);
+s32 func_00004AEC(void *bootp, s32 len, SceNetDhcpLease *l);
 s32 func_00004CDC(s8 *opt, SceNetDhcpLease *l);
 s32 func_00004DE0(s8 *opt, SceNetDhcpLease *l);
 s32 func_00004E50(s8 *opt, SceNetDhcpLease *l);
@@ -645,7 +656,7 @@ s32 func_00004EBC(s8 *opt, SceNetDhcpLease *l);
 s32 func_00004FC4(s8 *opt, SceNetDhcpLease *l);
 s32 func_00005064(s8 *opt, SceNetDhcpLease *l);
 s32 func_000051A0(const char *ifname, void *func, s32 a2, s32 prio, s32 a4, SceNetApctlIpParam *param);
-void func_00005290(void *arg0);
+void func_00005290(void *l);
 s32 func_00005434(SceNetDhcpCtx *dc, s32 type);
 void func_00005634(void);
 s32 func_00005678(SceNetDhcpCtx *dc, s32 type);
@@ -657,7 +668,9 @@ s32 func_00006050(s32 sock);
 s32 func_00006088(s32 sock, u32 *dst, void *buf);
 s32 func_000060AC(SceNetDhcpCtx *dc);
 s32 func_00006304(s32 arg0);
+s32 func_00006414(SceNetDhcpCtx *dc, void *tpa);
 s32 func_0000643C(SceNetDhcpCtx *dc);
+s32 func_00006870(void *pkt, s32 len);
 s32 func_000068D4(s8 *opt, SceNetDhcpLease *l);
 s32 func_00006948(s8 *opt, SceNetDhcpLease *l);
 s32 func_00006A14(const char *ifname, void *func, s32 a2, s32 prio, s32 a4, SceNetApctlIpParam *param);
