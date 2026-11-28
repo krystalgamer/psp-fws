@@ -583,3 +583,5 @@ rtredirect = 0x0000BB7C; // type:func
 rt_timer_queue_destroy = 0x0000CC00; // type:func
 rt_timer_timer = 0x0000CE98; // type:func
 rtinit = 0x0000C998; // type:func
+sbinsertoob = 0x00004A68; // type:func
+sbcompress = 0x00004E28; // type:func

@@ -819,11 +819,43 @@ void func_00004A3C(struct sockbuf *sb) {
     sb->sb_hiwat = sb->sb_mbmax = 0;
 }
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_00004A68);
+#if FW_VERSION < 271
+void sbinsertoob(struct sockbuf *sb, struct mbuf *m0) {
+    struct mbuf *m, **mp;
+
+    if (m0 == NULL) {
+        return;
+    }
+    for (mp = &sb->sb_mb; (m = *mp) != NULL; mp = &((*mp)->m_nextpkt)) {
+    again:
+        switch (m->m_type) {
+        case MT_OOBDATA:
+            continue;
+        case MT_CONTROL:
+            if ((m = m->m_next) != NULL) {
+                goto again;
+            }
+        }
+        break;
+    }
+    sballoc(sb, m0);
+    m0->m_nextpkt = *mp;
+    *mp = m0;
+    m = m0->m_next;
+    m0->m_next = NULL;
+    if (m && (m0->m_flags & M_EOR)) {
+        m0->m_flags &= ~M_EOR;
+        m->m_flags |= M_EOR;
+    }
+    sbcompress(sb, m, m0);
+}
+#else
+INCLUDE_ASM("nonmatchings/pspnet_inet", sbinsertoob);
+#endif
 
 INCLUDE_ASM("nonmatchings/pspnet_inet", sbappendaddr);
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_00004E28);
+INCLUDE_ASM("nonmatchings/pspnet_inet", sbcompress);
 
 void sbflush(struct sockbuf *sb) {
     while (sb->sb_mbcnt != 0) {
@@ -831,9 +863,57 @@ void sbflush(struct sockbuf *sb) {
     }
 }
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", sbdrop);
+#if FW_VERSION < 201
+void sbdrop(struct sockbuf *sb, s32 len) {
+    struct mbuf *m, *mn;
+    struct mbuf *next;
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", sbdroprecord);
+    next = (m = sb->sb_mb) ? m->m_nextpkt : 0;
+    while (len > 0) {
+        if (m == 0) {
+            m = next;
+            next = m->m_nextpkt;
+            continue;
+        }
+        if (m->m_len > len) {
+            m->m_len -= len;
+            m->m_data += len;
+            sb->sb_cc -= len;
+            break;
+        }
+        len -= m->m_len;
+        sbfree(sb, m);
+        MFREE(m, mn);
+        m = mn;
+    }
+    while (m && m->m_len == 0) {
+        sbfree(sb, m);
+        MFREE(m, mn);
+        m = mn;
+    }
+    if (m) {
+        sb->sb_mb = m;
+        m->m_nextpkt = next;
+    } else {
+        sb->sb_mb = next;
+    }
+}
+#else
+INCLUDE_ASM("nonmatchings/pspnet_inet", sbdrop);
+#endif
+
+void sbdroprecord(struct sockbuf *sb) {
+    struct mbuf *m, *mn;
+
+    m = sb->sb_mb;
+    if (m) {
+        sb->sb_mb = m->m_nextpkt;
+        do {
+            sbfree(sb, m);
+            MFREE(m, mn);
+        } while ((m = mn) != NULL);
+    }
+}
 
 #if FW_VERSION < 201
 struct mbuf *sbcreatecontrol(void *p, s32 size, s32 type, s32 level) {

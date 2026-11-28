@@ -33,11 +33,11 @@ struct selinfo {
 
 /* struct sockbuf (0x28) */
 struct sockbuf {
-    u32 sb_cc;              /* 0x00 actual chars in buffer */
-    u32 sb_hiwat;           /* 0x04 max actual char count */
-    u32 sb_mbcnt;           /* 0x08 chars of mbufs used */
-    u32 sb_mbmax;           /* 0x0C max chars of mbufs to use */
-    s32 sb_lowat;           /* 0x10 low water mark */
+    unsigned long sb_cc;             /* 0x00 actual chars in buffer */
+    unsigned long sb_hiwat;          /* 0x04 max actual char count */
+    unsigned long sb_mbcnt;          /* 0x08 chars of mbufs used */
+    unsigned long sb_mbmax;          /* 0x0C max chars of mbufs to use */
+    long sb_lowat;          /* 0x10 low water mark */
     struct mbuf *sb_mb;     /* 0x14 the mbuf chain */
     struct selinfo sb_sel;  /* 0x18 process selecting read/write */
     s16 sb_flags;           /* 0x20 SB_* */
@@ -1813,8 +1813,6 @@ void func_000044AC(struct socket *so);
 void func_000046A8(struct socket *so);
 void func_000047DC(struct socket *head, struct socket *so, s32 q);
 void func_00004A3C(struct sockbuf *sb);
-void func_00004A68(struct sockbuf *sb, struct mbuf *m0);
-void func_00004E28(struct sockbuf *sb, struct mbuf *m, struct mbuf *n);
 void func_00005778(struct socket *so);
 void func_0000588C(struct socket *so);
 void func_000058CC(struct socket *so);
@@ -2052,10 +2050,12 @@ void save_rte(u8 *option, struct in_addr dst);
 s32 sb_lock(struct sockbuf *sb);
 void sbappend(struct sockbuf *sb, struct mbuf *m);
 s32 sbappendaddr(struct sockbuf *sb, struct sockaddr *asa, struct mbuf *m0, struct mbuf *control);
+void sbcompress(struct sockbuf *sb, struct mbuf *m, struct mbuf *n);
 struct mbuf *sbcreatecontrol(void *p, s32 size, s32 type, s32 level);
 void sbdrop(struct sockbuf *sb, s32 len);
 void sbdroprecord(struct sockbuf *sb);
 void sbflush(struct sockbuf *sb);
+void sbinsertoob(struct sockbuf *sb, struct mbuf *m0);
 s32 sbreserve(struct sockbuf *sb, u32 cc);
 s32 sceKernelGetThreadId(void);
 s32 sceKernelSignalSema(u32, s32);
