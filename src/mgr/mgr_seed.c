@@ -585,7 +585,49 @@ INCLUDE_ASM("nonmatchings/mgr_seed", func_000042E4);
 #endif
 
 #if FW_VERSION < 250
-INCLUDE_ASM("nonmatchings/mgr_seed", func_00003BFC);
+s32 func_00003BFC(s32 arg0, MgrId16 *id, u8 *ekb, MgrId16 *key, u32 *mac) {
+    u32 tmp[4];
+    u32 zero[4];
+    u32 *cmds = (u32 *)func_00001394();
+    u8 *p = ekb + 4;
+    u32 n1 = (ekb[4] << 24) | (p[1] << 16) | (p[2] << 8) | p[3];
+    u32 n0 = (ekb[0] << 24) | (ekb[1] << 16) | (ekb[2] << 8) | ekb[3];
+    s32 keyReg = func_00002788(1);
+    s32 ret;
+
+    ret = func_0000439C((u32 *)id, cmds);
+    if (ret < 0) {
+        return ret;
+    }
+    ret = func_000013B8((s32)tmp, n1);
+    if (ret < 0) {
+        return ret;
+    }
+    ret = func_00000424(arg0, keyReg, -1);
+    if (ret < 0) {
+        return ret;
+    }
+    ret = func_00003E08(tmp);
+    if (ret < 0) {
+        return ret;
+    }
+    ret = func_00004460((u32 *)(ekb + 0x10), n0);
+    if (ret < 0) {
+        return ret;
+    }
+    if (mac[0] != 0 || mac[1] != 0) {
+        ret = func_000044DC(mac, ((u32 *)ekb)[2]);
+        if (ret < 0) {
+            zero[0] = 0;
+            func_000024A4(arg0, zero);
+            return ret;
+        }
+    }
+    if (mac[0] != 0 || mac[1] != 0) {
+        func_000024A4(arg0, ekb + 8);
+    }
+    return ret;
+}
 #endif
 
 #if FW_VERSION >= 340
@@ -1409,7 +1451,34 @@ s32 func_000069E0(s32 arg0, s32 arg1) {
 }
 #endif
 
-INCLUDE_ASM("nonmatchings/mgr_seed", func_00006A20);
+s32 func_00006A20(s32 fd, s32 blk, u8 *cmd) {
+    s32 args[8];
+    s32 i;
+    s32 ret;
+
+    if (blk < 2) {
+        return 0;
+    }
+    args[0] = blk;
+    for (i = 0; (ret = sceIoIoctl(fd, 0x211D01F, args, 0x20, NULL, 0)) < 0; i++) {
+        if (i >= 8 || !func_000059BC(ret)) {
+            goto end;
+        }
+    }
+    if (cmd != NULL) {
+        args[1] = 0;
+        args[2] = 1;
+        args[4] = (s32)cmd;
+        args[6] = 1;
+        for (i = 0; (ret = sceIoIoctl(fd, 0x211D01E, args, 0x20, NULL, 0)) < 0; i++) {
+            if (i >= 8 || !func_000059BC(ret)) {
+                goto end;
+            }
+        }
+    }
+end:
+    return func_00005834(ret);
+}
 
 INCLUDE_ASM("nonmatchings/mgr_seed", func_00006B3C);
 

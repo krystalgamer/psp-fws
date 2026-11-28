@@ -36,6 +36,12 @@ typedef struct {
 } MgrId16;
 
 typedef struct {
+    MgrId16 key;
+    u64 a;
+    u64 b;
+} MgrEkbMacBuf;
+
+typedef struct {
     s8 *slot;
     u8 type;
     u8 flags;
@@ -232,10 +238,11 @@ s32 func_00002788(s32 type);
 s32 func_000027E0(void);
 void func_000027EC(void);
 s32 func_00002934(u64 *out, u64 *seed);
-s32 func_00002F84(s32, s32, s32, s32, s32);
+s32 func_00002F84(u32 *mac, void *src, u32 *iv, u32 size, s32 keyReg);
 s32 func_0000310C(u64 *dst, u64 *src, s32 count, u32 cmd);
 s32 func_000031C8(u32 *dst, u64 *src, s32 count, u32 cmd);
 s32 func_0000341C(u64 *dst, u64 *src, u32 *iv, u32 size, s32 keyReg, u32 *key, s32 op);
+s32 func_00003578(u8 *mac, MgrId16 *key, u64 *a, u64 *b, u8 *ekb);
 s32 func_000038D0(u32 *arg0, u32 *arg1);
 s32 func_00003BFC(s32 arg0, MgrId16 *id, u8 *ekb, MgrId16 *key, u32 *mac);
 s32 func_00003E08(u32 *key);
