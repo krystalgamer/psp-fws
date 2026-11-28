@@ -786,7 +786,7 @@ s32 sceHttpDeleteRequest(s32 arg0);
 int sceHttpDeleteTemplate(int tmpl_id);
 s32 sceHttpEnd(void);
 int sceHttpGetStatusCode(int request_id, int *status_code);
-s32 sceHttpInit(u32 arg0);
+int sceHttpInit(SceSize pool_size);
 s32 sceHttpInitCache(u32 arg0);
 int sceHttpSetMallocFunction(SceHttpMallocFunction malloc_func, SceHttpFreeFunction free_func, SceHttpReallocFunction reallc_func);
 M2C_UNK sceHttpStorageClose();

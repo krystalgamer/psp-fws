@@ -182,7 +182,7 @@
   "sceHttpDeleteTemplate": "int sceHttpDeleteTemplate(int tmpl_id);",
   "sceHttpEnd": "s32 sceHttpEnd(void);",
   "sceHttpGetStatusCode": "int sceHttpGetStatusCode(int request_id, int *status_code);",
-  "sceHttpInit": "s32 sceHttpInit(u32 arg0);",
+  "sceHttpInit": "int sceHttpInit(SceSize pool_size);",
   "sceHttpInitCache": "s32 sceHttpInitCache(u32 arg0);",
   "sceHttpSetMallocFunction": "int sceHttpSetMallocFunction(SceHttpMallocFunction malloc_func, SceHttpFreeFunction free_func, SceHttpReallocFunction reallc_func);",
   "sceHttpStorageClose": "M2C_UNK sceHttpStorageClose();",

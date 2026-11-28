@@ -7,7 +7,42 @@
 #include "common.h"
 #include "libhttp_decls.h"
 
-#if FW_VERSION < 150
+#if FW_VERSION == 100
+int sceHttpInit(SceSize pool_size) {
+    int ret = 0x80431020;
+    int i;
+
+    if (D_0000DCCC.inited == 1) {
+        goto fail;
+    }
+    if (pool_size != 0) {
+        ret = sceKernelCreateVpl("libhttp_pool", 2, 0, pool_size, NULL);
+        if (ret < 0) {
+            goto fail;
+        }
+        D_0000DCCC.vpl = ret;
+        for (i = 0; i < 16; i++) {
+        }
+    }
+    func_0000BBCC(&D_0000DD2C, 0, sizeof(SceHttpTmpl));
+    func_0000BBCC(&D_0000DDB0, 0, sizeof(SceHttpConn));
+    func_0000BBCC(&D_0000DF18, 0, sizeof(SceHttpReq));
+    D_0000DDB0.id = 0x1000000;
+    D_0000DF18.id = 0x2000000;
+    D_0000DCCC.inited = 1;
+    D_0000DD2C.id = 0;
+    return 0;
+
+fail:
+    if (D_0000DCCC.vpl != 0) {
+        sceKernelDeleteVpl(D_0000DCCC.vpl);
+        D_0000DCCC.vpl = 0;
+    }
+    return ret;
+}
+#endif
+
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/libhttp", sceHttpInit);
 #endif
 
