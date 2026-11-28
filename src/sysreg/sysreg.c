@@ -1,3 +1,4 @@
+/* cflags[100-152]: -O2 -frename-registers -fno-merge-constants */
 /* cflags: -O2 -frename-registers */
 #include "common.h"
 #include "sysreg_decls.h"
@@ -54,7 +55,26 @@ INCLUDE_ASM("nonmatchings/sysreg", sceSysregSetAwEdramSize);
 
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregGetTachyonVersion);
 
+#if FW_VERSION < 271
+s32 sceSysregVblankIRQPolar(s32 on) {
+    s32 intr;
+    u32 v;
+    s32 old;
+    intr = sceKernelCpuSuspendIntr();
+    v = *(volatile u32 *)0xBC10003C;
+    old = v & 1;
+    if (on) {
+        v |= 1;
+    } else {
+        v &= ~1;
+    }
+    *(volatile u32 *)0xBC10003C = v;
+    sceKernelCpuResumeIntrWithSync(intr);
+    return old;
+}
+#else
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregVblankIRQPolar);
+#endif
 
 #if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregGenerateVblankIRQ);
@@ -271,7 +291,15 @@ INCLUDE_ASM("nonmatchings/sysreg", sceSysregPllGetBaseFrequency);
 INCLUDE_RODATA("nonmatchings/sysreg", D_00002B04);
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION < 201
+float sceSysregPllUpdateFrequency(void) {
+    u32 sel = *(volatile u32 *)0xBC100068 & 0xF;
+    u32 mul = __builtin_allegrex_ext(*(volatile u32 *)0xBC1000FC, 8, 8);
+    return D_00002610 = (s32)mul * 37.0f * D_00002B04[sel];
+}
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregPllUpdateFrequency);
 #endif
 
@@ -279,7 +307,13 @@ INCLUDE_ASM("nonmatchings/sysreg", sceSysregPllUpdateFrequency);
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregPllSetOutSelect);
 #endif
 
-#if FW_VERSION != 271
+#if FW_VERSION < 201
+float sceSysregPllGetBaseFrequency(void) {
+    return 37.0f;
+}
+#endif
+
+#if (FW_VERSION >= 201 && FW_VERSION < 271) || FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregPllGetBaseFrequency);
 #endif
 
@@ -1217,7 +1251,23 @@ s32 sceSysregInterruptToOther(void) {
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregInterruptToOther);
 #endif
 
+#if FW_VERSION < 152
+s32 sceSysregSemaTryLock(void) {
+    s32 cpu;
+    s32 ret;
+    asm volatile("sync");
+    asm volatile("mfc0 %0, $22" : "=r"(cpu));
+    cpu++;
+    *(u32 *)0xBC100048 = cpu;
+    ret = -1;
+    if ((*(volatile u32 *)0xBC100048 & 3) == cpu) {
+        ret = 0;
+    }
+    return ret;
+}
+#else
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregSemaTryLock);
+#endif
 
 #if FW_VERSION < 310
 void sceSysregSemaUnlock(void) {
@@ -1272,9 +1322,31 @@ s32 sceSysregIntrEnd(void) {
     return 0;
 }
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregEnableIntr);
+s32 sceSysregEnableIntr(u32 intno) {
+    s32 intr;
+    s32 old;
+    if (intno < 32) {
+        intr = sceKernelCpuSuspendIntr();
+        old = (D_00002614 >> intno) & 1;
+        D_00002614 |= 1 << intno;
+        sceKernelCpuResumeIntr(intr);
+        return old;
+    }
+    return 0x80000102;
+}
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregDisableIntr);
+s32 sceSysregDisableIntr(u32 intno) {
+    s32 intr;
+    s32 old;
+    if (intno < 32) {
+        intr = sceKernelCpuSuspendIntr();
+        old = (D_00002614 >> intno) & 1;
+        D_00002614 &= ~(1 << intno);
+        sceKernelCpuResumeIntr(intr);
+        return old;
+    }
+    return 0x80000102;
+}
 
 #if FW_VERSION >= 310
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregAcquireIntr);
@@ -1320,11 +1392,38 @@ s32 func_00001B44(s32 arg0, s32 bit, s32 val) {
     return 0;
 }
 
+#if FW_VERSION < 310
+s32 func_00001B60(s32 arg0, s32 bit) {
+    s32 cpu;
+    asm volatile("mfc0 %0, $22" : "=r"(cpu));
+    return (((volatile u32 *)0xBFC00400)[cpu] >> bit) & 1;
+}
+#else
 INCLUDE_ASM("nonmatchings/sysreg", func_00001B60);
+#endif
 
+#if FW_VERSION < 271
+s32 sceClkcSetCpuGear(s32 num, s32 den) {
+    if (num >= 0x200 || den >= 0x200 || den < num) {
+        return 0x800001FE;
+    }
+    *(volatile u32 *)0xBC200000 = ((num & 0x1FF) << 16) | (den & 0x1FF);
+    asm volatile("sync");
+    return 0;
+}
+#else
 INCLUDE_ASM("nonmatchings/sysreg", sceClkcSetCpuGear);
+#endif
 
-INCLUDE_ASM("nonmatchings/sysreg", sceClkcGetCpuGear);
+s32 sceClkcGetCpuGear(s32 *num, s32 *den) {
+    if (num != NULL) {
+        *num = __builtin_allegrex_ext(*(volatile u32 *)0xBC200000, 16, 9);
+    }
+    if (den != NULL) {
+        *den = *(volatile u32 *)0xBC200000 & 0x1FF;
+    }
+    return 0;
+}
 
 INCLUDE_ASM("nonmatchings/sysreg", sceClkcSetBusGear);
 

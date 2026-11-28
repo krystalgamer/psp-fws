@@ -7,6 +7,7 @@
 extern s32 D_000025C0;
 extern float D_00002610;
 extern u32 D_00002614;
+extern const float D_00002B04[];
 extern M2C_UNK D_00002BD0;
 extern M2C_UNK func_00001814;
 
@@ -23,6 +24,7 @@ s32 func_00001AE8(s32 arg0, s32 bit);
 s32 func_00001AF8(u32 mask, s32 on);
 s32 func_00001B0C(s32 arg0, s32 bit, s32 *old);
 s32 func_00001B44(s32 arg0, s32 bit, s32 val);
+s32 func_00001B60(s32 arg0, s32 bit);
 s32 func_00001BF4(u32 mask, s32 on);
 s32 module_reboot_before(void);
 s32 module_start(void);
@@ -46,7 +48,7 @@ s32 sceSysregKeyIoDisable(void);
 s32 sceSysregKeyIoEnable(void);
 float sceSysregPllGetBaseFrequency(void);
 float sceSysregPllGetFrequency(void);
-s32 sceSysregPllUpdateFrequency(void);
+float sceSysregPllUpdateFrequency(void);
 s32 sceSysregUsbAcquireIntr(s32 arg0);
 
 #endif
