@@ -252,7 +252,8 @@ typedef struct {
     SceUID sema3C;              /* 0x3C */
     SceWlanMlmeBuf *buf;        /* 0x40 */
     SceWlanMac *mac;            /* 0x44 */
-    u8 unk48[0x50 - 0x48];
+    u32 unk48;                  /* 0x48 */
+    u32 unk4C;                  /* 0x4C */
     void *unk50;                /* 0x50 */
     void *unk54;                /* 0x54 */
     u8 unk58[0x78 - 0x58];
@@ -744,6 +745,7 @@ s32 func_00009160(struct Unk_func_00009160_0 *arg0, s32 arg1, u8 *arg2);
 s32 func_000091D4(s32, s32);
 s32 func_00009500(SceWlanBus *bus, s32 ms);
 s32 func_00009810(void);
+s32 func_00009900(SceWlanMac *mac, u32 dst, u32 src, u32 ctrl, u32 attr, s32 len);
 s32 func_00009FA8(SceWlanMac *mac, s32 cmd, u16 len, void *buf);
 s32 func_0000A4C8(s32 arg0, void *arg1, s32 arg2);
 void func_0000AB18(struct Unk_func_00008470_1 *arg0);
@@ -802,7 +804,12 @@ s32 sceKernelDeleteEventFlag(u32);
 s32 sceKernelDeleteMbx(u32);
 s32 sceKernelDeleteSema(u32);
 s32 sceKernelDeleteVpl(u32);
+s32 sceKernelDmaOpAlloc(void);
+s32 sceKernelDmaOpAssign(s32 op, s32 a, s32 b, u32 attr, s32 c);
+s32 sceKernelDmaOpEnQueue(s32 op);
 M2C_UNK sceKernelDmaOpFree(s32);
+s32 sceKernelDmaOpSetCallback(s32 op, void *cb, void *arg);
+s32 sceKernelDmaOpSetupNormal(s32 op, u32 attr, u32 dst, u32 src, u32 ctrl);
 s32 sceKernelFreeVpl(u32, void *);
 u32 sceKernelGetSystemTimeLow(void);
 s32 sceKernelPollEventFlag(s32, u32, s32, void *);
