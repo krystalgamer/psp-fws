@@ -205,18 +205,26 @@ typedef struct {
 typedef char chk_SceNetApctlScanParam[(sizeof(SceNetApctlScanParam) == 0x4C) ? 1 : -1];
 
 typedef struct {
-    u8 unk0[0x3DC];
-    u32 unk3DC;
-    u8 unk3E0[8];
-    u32 unk3E8;
-} SceNetDhcpLease;
-
-typedef struct {
     u16 sport;
     u16 dport;
     u16 len;
     u16 sum;
 } __attribute__((packed)) SceNetDhcpUdpHdr;
+
+typedef struct {
+    u32 s_addr;
+} __attribute__((packed)) SceNetInAddrPacked;
+
+typedef struct {
+    u8 unk0[0xD];
+    SceNetInAddrPacked yiaddr;  /* 0x00D */
+    u8 unk11[0x3CB];
+    u32 unk3DC;
+    u8 unk3E0[8];
+    u32 unk3E8;
+    u32 netmask;                /* 0x3EC */
+    u32 broadcast;              /* 0x3F0 */
+} SceNetDhcpLease;
 
 /* DHCP client state (1.00: D_00008B38) */
 typedef struct {
@@ -501,6 +509,8 @@ void func_00003B30(s32 arg0);
 s32 func_00003C64(void);
 void func_00003E70();
 void func_00003EF0();
+s32 func_0000407C(const char *ifname, SceNetDhcpLease *l);
+u32 func_00004270(SceNetInAddrPacked *addr);
 s32 func_00004424(const char *ifname);
 s32 func_000051A0(const char *ifname, void *func, s32 a2, s32 prio, s32 a4, SceNetApctlIpParam *param);
 void func_00005290(void *arg0);

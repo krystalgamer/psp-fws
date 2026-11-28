@@ -1058,7 +1058,17 @@ INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00004190);
 #endif
 
 #if FW_VERSION < 151
-INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00004270);
+u32 func_00004270(SceNetInAddrPacked *addr) {
+    u32 a = addr->s_addr;
+
+    if ((a & 0x80000000) == 0) {
+        return __builtin_allegrex_wsbw(0xFF000000);
+    }
+    if ((a & 0xC0000000) == 0x80000000) {
+        return __builtin_allegrex_wsbw(0xFFFF0000);
+    }
+    return __builtin_allegrex_wsbw(0xFFFFFF00);
+}
 
 INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_000042D0);
 #endif
