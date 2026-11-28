@@ -65,9 +65,9 @@ typedef struct {
     u8 unk5;
 } MgrMsRegParam;
 
-typedef struct {
-    u32 w0;
-    u32 w1;
+typedef union {
+    u64 v;
+    u32 w[2];
 } MgrSeed;
 
 struct Unk_func_000018F4_4 {

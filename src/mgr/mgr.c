@@ -519,9 +519,30 @@ s32 func_00000DBC(s32 id, void *buf, s32 size) {
     return sceKernelExtendKernelStack(0x5000, func_00000C00, args);
 }
 
-INCLUDE_ASM("nonmatchings/mgr", func_00000DFC);
+void func_00000DFC(MgrSeed *out) {
+    u32 clk;
+    u32 t[2];
+    MgrSeed *seed = &g_mgrSeed;
 
-INCLUDE_ASM("nonmatchings/mgr", func_00000EC0);
+    if ((seed->w[0] | seed->w[1]) == 0) {
+        func_00000DBC(0x2C, seed, 8);
+        clk = sceKernelGetCpuClockCounter();
+        seed->w[0] ^= clk;
+        seed->w[1] ^= ~clk;
+        sceKernelGetSystemTime(t);
+        seed->w[0] ^= t[1];
+        seed->w[1] ^= t[0];
+    }
+    if (out != NULL) {
+        out->v = g_mgrSeed.v;
+    }
+}
+
+void func_00000EC0(MgrSeed *seed) {
+    if (seed != NULL) {
+        g_mgrSeed.v = seed->v;
+    }
+}
 
 INCLUDE_RODATA("nonmatchings/mgr", D_0000AE68);
 
