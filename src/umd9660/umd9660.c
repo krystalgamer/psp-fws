@@ -1562,7 +1562,7 @@ INCLUDE_ASM("nonmatchings/umd9660", func_00003ED0);
 INCLUDE_ASM("nonmatchings/umd9660", func_000049A8);
 #endif
 
-#if FW_VERSION < 103 || (FW_VERSION >= 150 && FW_VERSION < 201)
+#if FW_VERSION < 201
 s32 func_00003F3C(SceUmd9660Drive *drive, s32 arg1, void *buf) {
     if (drive == NULL || buf == NULL) {
         return 0x80010016;
@@ -1571,7 +1571,7 @@ s32 func_00003F3C(SceUmd9660Drive *drive, s32 arg1, void *buf) {
 }
 #endif
 
-#if FW_VERSION == 103 || (FW_VERSION >= 201 && FW_VERSION < 350)
+#if FW_VERSION >= 201 && FW_VERSION < 350
 INCLUDE_ASM("nonmatchings/umd9660", func_00003F3C);
 #endif
 
