@@ -342,3 +342,7 @@ ip_mloopback = 0x00018478; // type:func
 looutput = 0x0000F2D4; // type:func
 ip_insertoptions = 0x000175DC; // type:func
 icmp_mtudisc = 0x000197D4; // type:func
+tcp_syn_cache = 0x0002CFF8;
+tcp_syn_cache_timeq = 0x0002DC98;
+syn_cache_count = 0x0002DD04;
+tcp_syn_cache_size = 0x0002C1D4; // rom:0x2C274

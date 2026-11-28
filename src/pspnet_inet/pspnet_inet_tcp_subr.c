@@ -135,7 +135,7 @@ struct tcpcb *tcp_newtcpcb(s32 family, void *aux) {
     tp->t_peermss = tcp_mssdflt;
     tp->t_ourmss = tcp_mssdflt;
     tp->t_segsz = tcp_mssdflt;
-    tp->t_sc = NULL;
+    LIST_INIT(&tp->t_sc);
     tp->t_flags = 0;
     if (D_0002E900 && D_0002E908) {
         tp->t_flags |= 0x20; /* TF_REQ_SCALE */

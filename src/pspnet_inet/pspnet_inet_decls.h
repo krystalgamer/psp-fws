@@ -855,7 +855,7 @@ struct tcpcb {
     u32 last_ack_sent;          /* 0xA4 */
     void *timeq;                /* 0xA8 LIST_HEAD */
     s32 t_mtudisc;              /* 0xAC */
-    void *t_sc;                 /* 0xB0 LIST_HEAD */
+    struct { struct syn_cache *lh_first; } t_sc; /* 0xB0 */
 };
 typedef char chk_tcpcb[(sizeof(struct tcpcb) == 0xB4) ? 1 : -1];
 #define TCPS_CLOSED 0
@@ -1033,6 +1033,87 @@ struct inpcbtable {
     if ((elm)->field.le_next != NULL) \
         (elm)->field.le_next->field.le_prev = (elm)->field.le_prev; \
     *(elm)->field.le_prev = (elm)->field.le_next; \
+} while (0)
+#define LIST_INIT(head) do { (head)->lh_first = NULL; } while (0)
+#define LIST_FIRST(head) ((head)->lh_first)
+#define LIST_NEXT(elm, field) ((elm)->field.le_next)
+#define TAILQ_INIT(head) do { \
+    (head)->tqh_first = NULL; \
+    (head)->tqh_last = &(head)->tqh_first; \
+} while (0)
+#define TAILQ_FIRST(head) ((head)->tqh_first)
+#define TAILQ_NEXT(elm, field) ((elm)->field.tqe_next)
+#define TAILQ_INSERT_TAIL(head, elm, field) do { \
+    (elm)->field.tqe_next = NULL; \
+    (elm)->field.tqe_prev = (head)->tqh_last; \
+    *(head)->tqh_last = (elm); \
+    (head)->tqh_last = &(elm)->field.tqe_next; \
+} while (0)
+#define TAILQ_REMOVE(head, elm, field) do { \
+    if (((elm)->field.tqe_next) != NULL) \
+        (elm)->field.tqe_next->field.tqe_prev = (elm)->field.tqe_prev; \
+    else \
+        (head)->tqh_last = (elm)->field.tqe_prev; \
+    *(elm)->field.tqe_prev = (elm)->field.tqe_next; \
+} while (0)
+
+/* struct syn_cache (NetBSD-current tcp_var.h, late 2000; no INET6) */
+struct syn_cache {
+    struct { struct syn_cache *le_next; struct syn_cache **le_prev; } sc_bucketq; /* 0x00 */
+    TAILQ_ENTRY(syn_cache) sc_timeq;    /* 0x08 */
+    struct route sc_route4;             /* 0x10 */
+    s32 sc_win;                         /* 0x24 */
+    s32 sc_bucketidx;                   /* 0x28 */
+    u32 sc_hash;                        /* 0x2C */
+    u32 sc_timestamp;                   /* 0x30 */
+    struct sockaddr_in sc_src;          /* 0x34 */
+    struct sockaddr_in sc_dst;          /* 0x44 */
+    u32 sc_irs;                         /* 0x54 */
+    u32 sc_iss;                         /* 0x58 */
+    u32 sc_rexmt;                       /* 0x5C */
+    u32 sc_rxtcur;                      /* 0x60 */
+    u32 sc_rxttot;                      /* 0x64 */
+    u16 sc_rxtshift;                    /* 0x68 */
+    u16 sc_flags;                       /* 0x6A */
+    struct mbuf *sc_ipopts;             /* 0x6C */
+    u16 sc_peermaxseg;                  /* 0x70 */
+    u16 sc_ourmaxseg;                   /* 0x72 */
+    u8 sc_request_r_scale_s;            /* 0x74 sc_request_r_scale:4, sc_requested_s_scale:4 */
+    struct tcpcb *sc_tp;                /* 0x78 */
+    struct { struct syn_cache *le_next; struct syn_cache **le_prev; } sc_tpq; /* 0x7C */
+};
+typedef char chk_syn_cache[(sizeof(struct syn_cache) == 0x84) ? 1 : -1];
+struct syn_cache_head {
+    struct { struct syn_cache *lh_first; } sch_bucket; /* 0x0 */
+    u16 sch_length;                     /* 0x4 */
+};
+TAILQ_HEAD(syn_cache_timeq_head, syn_cache);
+#define TCPTV_SRTTDFLT 6
+#define TCPTV_MIN 2
+#define TCPTV_REXMTMAX 128
+#define TCPTV_KEEP_INIT 150
+#define PRT_SLOW_ARM(t, nticks) ((t) = pfslowtimo_now + (nticks))
+#define PRT_SLOW_ISEXPIRED(t) ((t) != 0 && pfslowtimo_now >= (t))
+#define SYN_CACHE_TIMER_ARM(sc) do { \
+    TCPT_RANGESET((sc)->sc_rxtcur, \
+        TCPTV_SRTTDFLT * tcp_backoff[(sc)->sc_rxtshift], TCPTV_MIN, \
+        TCPTV_REXMTMAX); \
+    PRT_SLOW_ARM((sc)->sc_rexmt, (sc)->sc_rxtcur); \
+} while (0)
+#define SYN_CACHE_RM(sc) do { \
+    LIST_REMOVE((sc), sc_bucketq); \
+    (sc)->sc_tp = NULL; \
+    LIST_REMOVE((sc), sc_tpq); \
+    tcp_syn_cache[(sc)->sc_bucketidx].sch_length--; \
+    TAILQ_REMOVE(&tcp_syn_cache_timeq[(sc)->sc_rxtshift], (sc), sc_timeq); \
+    syn_cache_count--; \
+} while (0)
+#define SYN_CACHE_PUT(sc) do { \
+    if ((sc)->sc_ipopts) \
+        (void)sceNetMFree((sc)->sc_ipopts); \
+    if ((sc)->sc_route4.ro_rt != NULL) \
+        RTFREE((sc)->sc_route4.ro_rt); \
+    sceNetFreeInternal(sc); \
 } while (0)
 #define IN_MULTICAST(a) (((u32)(a) & __builtin_allegrex_wsbw(0xF0000000)) == __builtin_allegrex_wsbw(0xE0000000))
 #define RTFREE(rt) do { \
@@ -1638,7 +1719,6 @@ extern s32 D_0002C01C;
 extern s32 D_0002C020;
 extern s32 D_0002C02C;
 extern s32 D_0002C030;
-extern s32 D_0002C1D4;
 extern s32 D_0002C1D8;
 extern s32 D_0002C1DC;
 extern s32 D_0002C1E4;
@@ -1683,15 +1763,12 @@ extern s32 D_0002CEC0;
 extern s32 D_0002CF00;
 extern s32 D_0002CF0C;
 extern s32 D_0002CF10;
-extern struct SceTailqHead D_0002CFF8[];
 extern s32 D_0002D944; /* ipq_locked */
 extern struct ipstat D_0002D960; /* ipstat */
 extern struct { struct ipq *lh_first; } D_0002DA48; /* ipq */
 extern u8 D_0002DA50[0x170]; /* icmpstat */
 extern M2C_UNK D_0002DBC8;
 extern struct inpcbtable D_0002DC78;
-extern struct SceTailqHead D_0002DC98[13];
-extern s32 D_0002DD04;
 extern struct route D_0002E19C;
 extern s32 D_0002E5EC;
 extern s32 D_0002E5F0;
@@ -1778,6 +1855,7 @@ extern struct radix_node_head *rt_tables[32]; /* rt_tables */
 extern s32 rttrash; /* rttrash */
 extern struct soqhead so_list;
 extern s32 somaxconn; /* somaxconn */
+extern s32 syn_cache_count;
 extern s32 syn_cache_last;
 extern s32 tcbhashsize; /* tcbhashsize */
 extern struct inpcbtable tcbtable;
@@ -1802,7 +1880,10 @@ extern u32 tcp_now; /* tcp_now */
 extern u32 tcp_recvspace; /* tcp_recvspace */
 extern u32 tcp_sendspace; /* tcp_sendspace */
 extern struct tcpstat tcp_stat;
+extern struct syn_cache_head tcp_syn_cache[];
 extern s32 tcp_syn_cache_interval;
+extern s32 tcp_syn_cache_size;
+extern struct syn_cache_timeq_head tcp_syn_cache_timeq[13];
 extern s32 tcp_totbackoff; /* tcp_totbackoff */
 extern struct inpcbtable udbtable;
 extern s32 udp_recvspace;
@@ -2212,6 +2293,7 @@ void sppp_pap_tld(struct sppp *sp);
 void sppp_to_event(const struct cp *cp, struct sppp *sp);
 void syn_cache_cleanup(struct tcpcb *tp);
 void syn_cache_init(void);
+s32 syn_cache_respond(struct syn_cache *sc, struct mbuf *m);
 void syn_cache_timer(void);
 s32 sysctl_int(void *oldp, u32 *oldlenp, void *newp, u32 newlen, s32 *valp);
 s32 sysctl_rdint(void *oldp, u32 *oldlenp, void *newp, s32 val);
