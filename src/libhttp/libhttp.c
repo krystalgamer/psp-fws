@@ -224,7 +224,7 @@ int sceHttpDeleteConnection(int connection_id) {
                     }
                     func_00005798(&con->tmpl);
                     func_00006380(con);
-                    _sceHttpFreeInternal(con->unk138);
+                    _sceHttpFreeInternal(con->recv_buf);
                     p = con->redirect_list;
                     _sceHttpFreeInternal(con);
                 }
@@ -1518,9 +1518,43 @@ INCLUDE_ASM("nonmatchings/libhttp", func_000062E8);
 
 #if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/libhttp", func_000060F8);
+#endif
 
+#if FW_VERSION < 103
+void func_00006380(SceHttpConn *con) {
+    SceHttpReq *req;
+    int intr;
+
+    intr = sceKernelSuspendDispatchThread();
+    con->status = 6;
+    if (con->pipeline_counter >= 2) {
+        GetHttpReq(con->pipeline_current_id, &req);
+        while (req != NULL) {
+            req->unk24 = 0;
+            req->reference_counter--;
+            req->status = 7;
+            GetHttpReq(req->pipeline_next, &req);
+        }
+    }
+    sceKernelResumeDispatchThread(intr);
+    if (con->protocol == 1) {
+        func_000097A4(con);
+    }
+    sceNetInetClose(con->sock_id);
+    func_0000BBCC(con->recv_buf, 0, con->recv_buf_size);
+    con->unk140 = 0;
+    con->unk144 = 0;
+    con->unk148 = 0;
+    con->pipeline_counter = 0;
+    con->status = 0;
+}
+#endif
+
+#if FW_VERSION == 103
 INCLUDE_ASM("nonmatchings/libhttp", func_00006380);
+#endif
 
+#if FW_VERSION < 150
 void func_0000646C(void *arg0, void *arg1, u32 arg2, s32 arg3) {
     if (M2C_FIELD(arg0, s32 *, 4) != 1) {
         sceNetInetSend(M2C_FIELD(arg0, s32 *, 0x24), arg1, arg2, arg3);
@@ -2582,7 +2616,7 @@ INCLUDE_ASM("nonmatchings/libhttp", func_000097A4);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 201
-void func_000097A4(void *arg0) {
+void func_000097A4(SceHttpConn *arg0) {
     s32 temp_v1;
     s32 temp_v1_2;
 
@@ -2604,7 +2638,7 @@ void func_000097A4(void *arg0) {
 #endif
 
 #if FW_VERSION < 150
-void func_000097A4(void *arg0) {
+void func_000097A4(SceHttpConn *arg0) {
     s32 temp_v1;
     s32 temp_v1_2;
 

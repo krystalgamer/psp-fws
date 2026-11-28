@@ -384,7 +384,9 @@ typedef struct SceHttpConn {
     s32 id;                 /* 0x00 */
     s32 protocol;           /* 0x04 */
     s32 reference_counter;  /* 0x08 */
-    u8 unk0C[0x1C - 0x0C];
+    s32 pipeline_counter;   /* 0x0C */
+    s32 pipeline_current_id; /* 0x10 */
+    u8 unk14[0x1C - 0x14];
     s32 resolver_id;        /* 0x1C */
     s32 network_errno;      /* 0x20 */
     s32 sock_id;            /* 0x24 */
@@ -396,8 +398,11 @@ typedef struct SceHttpConn {
     u8 unk34[(FW_VERSION == 103) ? 0xA4 - 0x30 : 0xA4 - 0x34];
     SceHttpTmpl tmpl;       /* 0xA4 */
     u8 unk128[0x138 - 0x128];
-    void *unk138;           /* 0x138 */
-    u8 unk13C[0x14C - 0x13C];
+    void *recv_buf;         /* 0x138 */
+    u32 recv_buf_size;      /* 0x13C */
+    u32 unk140;
+    u32 unk144;
+    u32 unk148;
     struct SceHttpConn *redirect_list; /* 0x14C */
     struct SceHttpConn *next; /* 0x150 */
     struct SceHttpConn *pre;  /* 0x154 */
@@ -420,7 +425,9 @@ typedef struct SceHttpReq {
     u8 unk14[0x18 - 0x14];
     s32 reference_counter;  /* 0x18 */
     s32 network_errno;      /* 0x1C */
-    u8 unk20[0x2C - 0x20];
+    s32 pipeline_next;      /* 0x20 */
+    s32 unk24;              /* 0x24 */
+    s32 unk28;
     s32 status;             /* 0x2C */
     u8 unk30[0x34 - 0x30];
     u32 res_header_size;    /* 0x34 */
@@ -611,7 +618,7 @@ void func_00008AB8(void *arg0, void *arg1, u32 arg2, s32 arg3);
 void func_00008F68(void *arg0, void *arg1, u32 arg2, s32 arg3);
 int func_000092D4(unsigned char *buf, u32 size, unsigned char *hostname, unsigned char *path);
 s32 func_00009300(s32);
-void func_000097A4(void *arg0);
+void func_000097A4(SceHttpConn *con);
 s32 func_000098F0(void);
 int func_0000992C(int connection_id, int method, const unsigned char *path, SceULong64 content_length);
 void func_00009A38(void);
