@@ -255,39 +255,10 @@ void func_000430A4(void) {
 }
 #endif
 
-#if FW_VERSION == 150
-INCLUDE_ASM("nonmatchings/music_plugin_00041D54", func_000430C4);
-#endif
-
-#if FW_VERSION < 150
-void func_000430C4(s32 **arg0) {
-    *arg0 = &D_0005FAC0;
-}
-#endif
-
-#if FW_VERSION == 152
-void func_000430C4(s32 **arg0) {
-    *arg0 = &D_0005FAC0;
-}
-#endif
-
-#if FW_VERSION == 150
-INCLUDE_ASM("nonmatchings/music_plugin_00041D54", func_000430D4);
-#endif
-
-#if FW_VERSION < 150
-void func_000430D4(s32 **arg0) {
-    *arg0 = &D_0005FAC0;
-}
-#endif
-
-#if FW_VERSION == 152
-void func_000430D4(s32 **arg0) {
-    *arg0 = &D_0005FAC0;
-}
-#endif
-
 #if FW_VERSION < 201
+Class_0005FAC0::Class_0005FAC0() {
+}
+
 Class_0005FAC0::~Class_0005FAC0() {
 }
 #endif
@@ -986,39 +957,10 @@ s32 func_0004C3D4(void) {
 }
 #endif
 
-#if FW_VERSION == 150
-INCLUDE_ASM("nonmatchings/music_plugin_00041D54", func_00048C38);
-#endif
-
-#if FW_VERSION < 150
-void func_00048C38(s32 **arg0) {
-    *arg0 = &D_0005FDD0;
-}
-#endif
-
-#if FW_VERSION == 152
-void func_00048C38(s32 **arg0) {
-    *arg0 = &D_0005FDD0;
-}
-#endif
-
-#if FW_VERSION == 150
-INCLUDE_ASM("nonmatchings/music_plugin_00041D54", func_00048C48);
-#endif
-
-#if FW_VERSION < 150
-void func_00048C48(s32 **arg0) {
-    *arg0 = &D_0005FDD0;
-}
-#endif
-
-#if FW_VERSION == 152
-void func_00048C48(s32 **arg0) {
-    *arg0 = &D_0005FDD0;
-}
-#endif
-
 #if FW_VERSION < 201
+Class_0005FDD0::Class_0005FDD0() {
+}
+
 Class_0005FDD0::~Class_0005FDD0() {
 }
 

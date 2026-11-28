@@ -3432,13 +3432,7 @@ INCLUDE_ASM("nonmatchings/music_plugin", func_00007B28);
 INCLUDE_ASM("nonmatchings/music_plugin", func_000191B4);
 #endif
 
-#if FW_VERSION < 150
-void func_000191B4(s32 **arg0) {
-    *arg0 = &D_0005CE78;
-}
-#endif
-
-#if FW_VERSION == 152
+#if FW_VERSION < 150 || FW_VERSION == 152
 void func_000191B4(s32 **arg0) {
     *arg0 = &D_0005CE78;
 }

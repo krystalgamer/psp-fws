@@ -284,39 +284,10 @@ void func_0004BF5C(void) {
 INCLUDE_ASM("nonmatchings/music_plugin_0004B204", func_0004BF64);
 #endif
 
-#if FW_VERSION == 150 || (FW_VERSION >= 201 && FW_VERSION < 260)
-INCLUDE_ASM("nonmatchings/music_plugin_0004B204", func_0004C168);
-#endif
-
-#if FW_VERSION < 150
-void func_0004C168(s32 **arg0) {
-    *arg0 = &D_00060900;
-}
-#endif
-
-#if FW_VERSION == 152
-void func_0004C168(s32 **arg0) {
-    *arg0 = &D_00060900;
-}
-#endif
-
-#if FW_VERSION == 150 || (FW_VERSION >= 201 && FW_VERSION < 260)
-INCLUDE_ASM("nonmatchings/music_plugin_0004B204", func_0004C178);
-#endif
-
-#if FW_VERSION < 150
-void func_0004C178(s32 **arg0) {
-    *arg0 = &D_00060900;
-}
-#endif
-
-#if FW_VERSION == 152
-void func_0004C178(s32 **arg0) {
-    *arg0 = &D_00060900;
-}
-#endif
-
 #if FW_VERSION < 260
+Class_00060900::Class_00060900() {
+}
+
 Class_00060900::~Class_00060900() {
 }
 #endif

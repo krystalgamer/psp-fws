@@ -95,6 +95,7 @@ public:
 /* vtable _ZTV14Class_0005E708 is data (vptr = label - 8 + 8) */
 class Class_0005E708 {
 public:
+    Class_0005E708();
     virtual ~Class_0005E708();
 };
 #endif
@@ -175,6 +176,7 @@ public:
 /* vtable _ZTV14Class_0005F848 is data (vptr = label - 8 + 8) */
 class Class_0005F848 {
 public:
+    Class_0005F848();
     virtual ~Class_0005F848();
 };
 #endif
@@ -183,6 +185,7 @@ public:
 /* vtable _ZTV14Class_0005FAC0 is data (vptr = label - 8 + 8) */
 class Class_0005FAC0 {
 public:
+    Class_0005FAC0();
     virtual ~Class_0005FAC0();
 };
 #endif
@@ -207,6 +210,7 @@ public:
 /* vtable _ZTV14Class_0005FDD0 is data (vptr = label - 8 + 8) */
 class Class_0005FDD0 {
 public:
+    Class_0005FDD0();
     virtual ~Class_0005FDD0();
 };
 #endif
@@ -255,6 +259,7 @@ public:
 /* vtable _ZTV14Class_00060900 is data (vptr = label - 8 + 8) */
 class Class_00060900 {
 public:
+    Class_00060900();
     virtual ~Class_00060900();
 };
 #endif
@@ -263,6 +268,7 @@ public:
 /* vtable _ZTV14Class_00060B30 is data (vptr = label - 8 + 8) */
 class Class_00060B30 {
 public:
+    Class_00060B30();
     virtual ~Class_00060B30();
 };
 #endif
@@ -279,6 +285,7 @@ public:
 /* vtable _ZTV14Class_00060D20 is data (vptr = label - 8 + 8) */
 class Class_00060D20 {
 public:
+    Class_00060D20();
     virtual ~Class_00060D20();
 };
 #endif
@@ -287,6 +294,7 @@ public:
 /* vtable _ZTV14Class_00060D58 is data (vptr = label - 8 + 8) */
 class Class_00060D58 {
 public:
+    Class_00060D58();
     virtual ~Class_00060D58();
 };
 #endif
@@ -295,6 +303,7 @@ public:
 /* vtable _ZTV14Class_00060D70 is data (vptr = label - 8 + 8) */
 class Class_00060D70 {
 public:
+    Class_00060D70();
     virtual ~Class_00060D70();
 };
 #endif
@@ -303,6 +312,7 @@ public:
 /* vtable _ZTV14Class_00060D88 is data (vptr = label - 8 + 8) */
 class Class_00060D88 {
 public:
+    Class_00060D88();
     virtual ~Class_00060D88();
 };
 #endif
@@ -343,6 +353,7 @@ public:
 /* vtable _ZTV14Class_00061168 is data (vptr = label - 8 + 8) */
 class Class_00061168 {
 public:
+    Class_00061168();
     virtual ~Class_00061168();
 };
 #endif
@@ -359,6 +370,7 @@ public:
 /* vtable _ZTV14Class_00061208 is data (vptr = label - 8 + 8) */
 class Class_00061208 {
 public:
+    Class_00061208();
     virtual ~Class_00061208();
 };
 #endif
@@ -367,6 +379,7 @@ public:
 /* vtable _ZTV14Class_00061220 is data (vptr = label - 8 + 8) */
 class Class_00061220 {
 public:
+    Class_00061220();
     virtual ~Class_00061220();
 };
 #endif
@@ -479,6 +492,7 @@ public:
 /* vtable _ZTV14Class_00088640 (vptr D_00088640) */
 class Class_00088640 {
 public:
+    Class_00088640();
     virtual ~Class_00088640();
 };
 #endif
@@ -495,6 +509,7 @@ public:
 /* vtable _ZTV14Class_00088838 is data (vptr = label - 8 + 8) */
 class Class_00088838 {
 public:
+    Class_00088838();
     virtual ~Class_00088838();
 };
 #endif
@@ -503,6 +518,7 @@ public:
 /* vtable _ZTV14Class_00088870 (vptr D_00088870) */
 class Class_00088870 {
 public:
+    Class_00088870();
     virtual ~Class_00088870();
 };
 #endif
@@ -511,6 +527,7 @@ public:
 /* vtable _ZTV14Class_00088888 (vptr D_00088888) */
 class Class_00088888 {
 public:
+    Class_00088888();
     virtual ~Class_00088888();
 };
 #endif
@@ -551,6 +568,7 @@ public:
 /* vtable _ZTV14Class_0008BBC8 (vptr D_0008BBC8) */
 class Class_0008BBC8 {
 public:
+    Class_0008BBC8();
     virtual ~Class_0008BBC8();
 };
 #endif
@@ -983,6 +1001,7 @@ public:
 /* vtable _ZTV14Class_00090590 (vptr D_00090590) */
 class Class_00090590 {
 public:
+    Class_00090590();
     virtual ~Class_00090590();
 };
 #endif
@@ -991,6 +1010,7 @@ public:
 /* vtable _ZTV14Class_00091740 (vptr D_00091740) */
 class Class_00091740 {
 public:
+    Class_00091740();
     virtual ~Class_00091740();
 };
 #endif
@@ -1278,6 +1298,8 @@ s32 _ZN14Class_0005E538D2Ev(s32);
 void _ZN14Class_0005E670D0Ev(s32 **arg0);
 void _ZN14Class_0005E670D1Ev(s32 **arg0);
 void _ZN14Class_0005E670D2Ev(s32 **arg0);
+void _ZN14Class_0005E708C1Ev(s32 **arg0);
+void _ZN14Class_0005E708C2Ev(s32 **arg0);
 void _ZN14Class_0005E708D0Ev(s32 **arg0);
 void _ZN14Class_0005E708D1Ev(s32 **arg0);
 void _ZN14Class_0005E708D2Ev(s32 **arg0);
@@ -1308,9 +1330,12 @@ void _ZN14Class_0005F7C8D2Ev(s32 **arg0);
 void _ZN14Class_0005F800D0Ev(s32 **arg0);
 void _ZN14Class_0005F800D1Ev(s32 **arg0);
 s32 _ZN14Class_0005F800D2Ev(s32);
+void _ZN14Class_0005F848C2Ev(s32 **arg0);
 void _ZN14Class_0005F848D0Ev(s32 **arg0);
 void _ZN14Class_0005F848D1Ev(s32 **arg0);
 void _ZN14Class_0005F848D2Ev(s32 **arg0);
+void _ZN14Class_0005FAC0C1Ev(s32 **arg0);
+void _ZN14Class_0005FAC0C2Ev(s32 **arg0);
 void _ZN14Class_0005FAC0D0Ev(s32 **arg0);
 void _ZN14Class_0005FAC0D1Ev(s32 **arg0);
 void _ZN14Class_0005FAC0D2Ev(s32 **arg0);
@@ -1320,6 +1345,8 @@ void _ZN14Class_0005FC88D2Ev(s32 **arg0);
 void _ZN14Class_0005FD70D0Ev(s32 **arg0);
 void _ZN14Class_0005FD70D1Ev(s32 **arg0);
 void _ZN14Class_0005FD70D2Ev(s32 **arg0);
+void _ZN14Class_0005FDD0C1Ev(s32 **arg0);
+void _ZN14Class_0005FDD0C2Ev(s32 **arg0);
 void _ZN14Class_0005FDD0D0Ev(s32 **arg0);
 void _ZN14Class_0005FDD0D1Ev(s32 **arg0);
 void _ZN14Class_0005FDD0D2Ev(s32 **arg0);
@@ -1338,24 +1365,36 @@ void _ZN14Class_00060578D2Ev(s32 **arg0);
 void _ZN14Class_00060588D0Ev(s32 **arg0);
 void _ZN14Class_00060588D1Ev(s32 **arg0);
 void _ZN14Class_00060588D2Ev(s32 **arg0);
+void _ZN14Class_00060900C1Ev(s32 **arg0);
+void _ZN14Class_00060900C2Ev(s32 **arg0);
 void _ZN14Class_00060900D0Ev(s32 **arg0);
 void _ZN14Class_00060900D1Ev(s32 **arg0);
 void _ZN14Class_00060900D2Ev(s32 **arg0);
+void _ZN14Class_00060B30C1Ev(s32 **arg0);
+void _ZN14Class_00060B30C2Ev(s32 **arg0);
 void _ZN14Class_00060B30D0Ev(s32 **arg0);
 void _ZN14Class_00060B30D1Ev(s32 **arg0);
 void _ZN14Class_00060B30D2Ev(s32 **arg0);
 void _ZN14Class_00060C38D0Ev(s32 **arg0);
 void _ZN14Class_00060C38D1Ev(s32 **arg0);
 void _ZN14Class_00060C38D2Ev(s32 **arg0);
+void _ZN14Class_00060D20C1Ev(s32 **arg0);
+void _ZN14Class_00060D20C2Ev(s32 **arg0);
 void _ZN14Class_00060D20D0Ev(s32 **arg0);
 void _ZN14Class_00060D20D1Ev(s32 **arg0);
 void _ZN14Class_00060D20D2Ev(s32 **arg0);
+void _ZN14Class_00060D58C1Ev(s32 **arg0);
+void _ZN14Class_00060D58C2Ev(s32 **arg0);
 void _ZN14Class_00060D58D0Ev(s32 **arg0);
 void _ZN14Class_00060D58D1Ev(s32 **arg0);
 void _ZN14Class_00060D58D2Ev(s32 **arg0);
+void _ZN14Class_00060D70C1Ev(s32 **arg0);
+void _ZN14Class_00060D70C2Ev(s32 **arg0);
 void _ZN14Class_00060D70D0Ev(s32 **arg0);
 void _ZN14Class_00060D70D1Ev(s32 **arg0);
 void _ZN14Class_00060D70D2Ev(s32 **arg0);
+void _ZN14Class_00060D88C1Ev(s32 **arg0);
+void _ZN14Class_00060D88C2Ev(s32 **arg0);
 void _ZN14Class_00060D88D0Ev(s32 **arg0);
 void _ZN14Class_00060D88D1Ev(s32 **arg0);
 void _ZN14Class_00060D88D2Ev(s32 **arg0);
@@ -1371,15 +1410,21 @@ void _ZN14Class_00061148D2Ev(s32 **arg0);
 void _ZN14Class_00061158D0Ev(s32 **arg0);
 void _ZN14Class_00061158D1Ev(s32 **arg0);
 void _ZN14Class_00061158D2Ev(s32 **arg0);
+void _ZN14Class_00061168C1Ev(s32 **arg0);
+void _ZN14Class_00061168C2Ev(s32 **arg0);
 void _ZN14Class_00061168D0Ev(s32 **arg0);
 void _ZN14Class_00061168D1Ev(s32 **arg0);
 void _ZN14Class_00061168D2Ev(s32 **arg0);
 void _ZN14Class_00061188D0Ev(s32 **arg0);
 void _ZN14Class_00061188D1Ev(s32 **arg0);
 void _ZN14Class_00061188D2Ev(s32 **arg0);
+void _ZN14Class_00061208C1Ev(s32 **arg0);
+void _ZN14Class_00061208C2Ev(s32 **arg0);
 void _ZN14Class_00061208D0Ev(s32 **arg0);
 void _ZN14Class_00061208D1Ev(s32 **arg0);
 void _ZN14Class_00061208D2Ev(s32 **arg0);
+void _ZN14Class_00061220C1Ev(s32 **arg0);
+void _ZN14Class_00061220C2Ev(s32 **arg0);
 void _ZN14Class_00061220D0Ev(s32 **arg0);
 void _ZN14Class_00061220D1Ev(s32 **arg0);
 void _ZN14Class_00061220D2Ev(s32 **arg0);
@@ -1399,6 +1444,7 @@ s32 _ZN14Class_0008C038D2Ev(s32);
 s32 _ZN14Class_0008C158D2Ev(s32);
 s32 _ZN14Class_0008C168D2Ev(s32);
 s32 _ZN14Class_0008D218D2Ev(s32);
+s32 _ZN14Class_00090590C2Ev(void);
 s32 _ZN3paf4View4FindEPKc(M2C_UNK *);
 M2C_UNK _ZN3paf4View6UnloadEPS0_PFvPKcE(s32, M2C_UNK);
 M2C_UNK _ZN3paf4View8PageOpenEPKcii(s32, M2C_UNK *, M2C_UNK, M2C_UNK);
