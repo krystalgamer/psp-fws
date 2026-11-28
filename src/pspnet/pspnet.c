@@ -45,7 +45,20 @@ end:
 #endif
 
 #if FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/pspnet", sceNetConfig80211LeaveRequest);
+s32 sceNetConfig80211LeaveRequest(const char *name, s32 *out) {
+    struct SceNetIfreq1 req;
+    s32 ret;
+
+    sceNetMemset(&req, 0, sizeof(req));
+    sceNetStrncpy(req.ifr_name, name, IFNAMSIZ);
+    ret = _sce_pspnet_ifioctl(NULL, 0xC01469D8, &req, 1);
+    D_0000AF10 = 0;
+    if (ret != 0)
+        goto end;
+    *out = req.args[0];
+end:
+    return ret;
+}
 #endif
 
 #if FW_VERSION < 201
@@ -412,7 +425,7 @@ end:
 }
 #endif
 
-#if FW_VERSION >= 201 && FW_VERSION < 271
+#if (FW_VERSION >= 201 && FW_VERSION < 271) || FW_VERSION >= 282
 s32 sceNetConfigDownInterface(const char *name) {
     struct ifreq ifr;
     s32 ret;
@@ -429,7 +442,7 @@ end:
 }
 #endif
 
-#if FW_VERSION >= 271
+#if FW_VERSION == 271
 INCLUDE_ASM("nonmatchings/pspnet", sceNetConfigDownInterface);
 #endif
 
@@ -705,7 +718,18 @@ s32 sceNetTerm(void) {
 #endif
 
 #if FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/pspnet", sceNetTerm);
+s32 sceNetTerm(void) {
+    if (sceKernelCheckThreadStack() < 0x3F0)
+        return 0x80410005;
+    func_00001E74();
+    func_0000260C();
+    func_00003380();
+    func_000037E4();
+    callout_shutdown();
+    func_000076B8();
+    sceWlanDrv_lib_8D5F551B(0x10000);
+    return 0;
+}
 #endif
 
 #if FW_VERSION == 271
@@ -1741,7 +1765,59 @@ out:
 }
 #endif
 
-#if FW_VERSION >= 271
+#if FW_VERSION >= 282
+s32 _sce_pspnet_tsleep_usec(void *ident, u32 usec) {
+    struct SceNetThreadInfo *ti;
+    struct slpque *qp;
+    s32 error;
+    s32 relock;
+
+    relock = 0;
+    error = 0;
+    ti = _sce_pspnet_get_threadinfo(sceKernelGetThreadId());
+    sceKernelWaitSema(D_0000A874, 1, NULL);
+    if (D_0000AF6C > 0)
+        D_0000AF5C(ti);
+    if (ti->ti_flags & TI_ABORTED) {
+        ti->ti_flags &= ~TI_ABORTED;
+        error = 4;
+        goto out;
+    }
+    qp = &D_0000AF70[LOOKUP(ident)];
+    ti->ti_wchan = ident;
+    TAILQ_INSERT_TAIL(qp, ti, ti_slplink);
+    sceKernelSignalSema(D_0000A874, 1);
+    if (usec != 0)
+        _sce_pspnet_callout_reset_usec(&ti->ti_callout, usec, (void (*)(void *))func_00003400, ti);
+    if (_sce_pspnet_spllock_owner() == sceKernelGetThreadId()) {
+        relock = 1;
+        _sce_pspnet_splunlock(1);
+    }
+    sceKernelWaitSema(ti->ti_sema, 1, NULL);
+    if (relock)
+        _sce_pspnet_spllock();
+    if (usec != 0)
+        _sce_pspnet_callout_stop(&ti->ti_callout);
+    sceKernelWaitSema(D_0000A874, 1, NULL);
+    TAILQ_REMOVE(qp, ti, ti_slplink);
+    ti->ti_slplink.tqe_next = NULL;
+    ti->ti_slplink.tqe_prev = NULL;
+    if (ti->ti_flags & TI_TIMEDOUT) {
+        ti->ti_flags &= ~TI_TIMEDOUT;
+        error = 11;
+        goto out;
+    }
+    if (ti->ti_flags & TI_ABORTED) {
+        ti->ti_flags &= ~TI_ABORTED;
+        error = 4;
+    }
+out:
+    sceKernelSignalSema(D_0000A874, 1);
+    return error;
+}
+#endif
+
+#if FW_VERSION == 271
 INCLUDE_ASM("nonmatchings/pspnet", _sce_pspnet_tsleep_usec);
 #endif
 
@@ -1810,7 +1886,24 @@ s32 slpque_init(void) {
         return 0;
     return ret;
 }
-#else
+#endif
+
+#if FW_VERSION >= 282
+s32 slpque_init(void) {
+    s32 i;
+    s32 ret;
+
+    for (i = 0; i < 128; i++)
+        TAILQ_INIT(&D_0000AF70[i]);
+    ret = sceKernelCreateSema("SceNetSlpque", 0, 1, 1, NULL);
+    D_0000A874 = ret;
+    if (ret >= 0)
+        return 0;
+    return ret;
+}
+#endif
+
+#if FW_VERSION == 271
 INCLUDE_ASM("nonmatchings/pspnet", slpque_init);
 #endif
 
@@ -1892,7 +1985,26 @@ void _sce_pspnet_wakeup(void *ident) {
     }
     sceKernelSignalSema(D_0000A874, 1);
 }
-#else
+#endif
+
+#if FW_VERSION >= 282
+void _sce_pspnet_wakeup(void *ident) {
+    struct slpque *qp;
+    struct SceNetThreadInfo *ti;
+
+    sceKernelWaitSema(D_0000A874, 1, NULL);
+    qp = &D_0000AF70[LOOKUP(ident)];
+    for (ti = TAILQ_FIRST(qp); ti != NULL; ti = TAILQ_NEXT(ti, ti_slplink)) {
+        if (ti->ti_wchan == ident) {
+            ti->ti_wchan = NULL;
+            sceKernelSignalSema(ti->ti_sema, 1);
+        }
+    }
+    sceKernelSignalSema(D_0000A874, 1);
+}
+#endif
+
+#if FW_VERSION == 271
 INCLUDE_ASM("nonmatchings/pspnet", _sce_pspnet_wakeup);
 #endif
 
@@ -1911,7 +2023,26 @@ void _sce_pspnet_tiwakeup(SceUID thid, void *ident) {
     }
     sceKernelSignalSema(D_0000A874, 1);
 }
-#else
+#endif
+
+#if FW_VERSION >= 282
+void _sce_pspnet_tiwakeup(SceUID thid, void *ident) {
+    struct slpque *qp;
+    struct SceNetThreadInfo *ti;
+
+    sceKernelWaitSema(D_0000A874, 1, NULL);
+    qp = &D_0000AF70[LOOKUP(ident)];
+    for (ti = TAILQ_FIRST(qp); ti != NULL; ti = TAILQ_NEXT(ti, ti_slplink)) {
+        if ((thid < 0 || thid == ti->ti_thid) && ti->ti_wchan == ident) {
+            ti->ti_wchan = NULL;
+            sceKernelSignalSema(ti->ti_sema, 1);
+        }
+    }
+    sceKernelSignalSema(D_0000A874, 1);
+}
+#endif
+
+#if FW_VERSION == 271
 INCLUDE_ASM("nonmatchings/pspnet", _sce_pspnet_tiwakeup);
 #endif
 
@@ -1992,7 +2123,13 @@ s32 spl_init(void) {
     return 0;
 }
 #else
-INCLUDE_ASM("nonmatchings/pspnet", spl_init);
+s32 spl_init(void) {
+    D_0000A878 = sceKernelCreateSema("SceNetSpl", 0, 1, 1, NULL);
+    if (D_0000A878 < 0)
+        return D_0000A878;
+    D_0000B370 = -1;
+    return 0;
+}
 #endif
 
 #if FW_VERSION < 282
@@ -2050,7 +2187,26 @@ out:
 #endif
 
 #if FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/pspnet", _sce_pspnet_spllock);
+s32 _sce_pspnet_spllock(void) {
+    s32 thid;
+    s32 ret;
+
+    thid = sceKernelGetThreadId();
+    if (thid < 0) {
+        ret = thid;
+        goto out;
+    }
+    ret = 0;
+    if (thid == D_0000B370)
+        goto out;
+    ret = sceKernelWaitSema(D_0000A878, 1, NULL);
+    if (ret < 0)
+        goto out;
+    D_0000B370 = thid;
+    ret = 1;
+out:
+    return ret;
+}
 #endif
 
 #if FW_VERSION < 201
@@ -2557,7 +2713,7 @@ void bpf_mtap(void *arg, struct mbuf *m) {
     _sce_pspnet_splunlock(s);
 }
 
-#if FW_VERSION < 271
+#if FW_VERSION != 271
 void bpfattach(struct bpf_if **driverp, struct ifnet *ifp, u32 dlt, u32 hdrlen) {
     struct bpf_if *bp;
 
@@ -2633,7 +2789,7 @@ u8 *bpf_mcpy(u8 *arg0, void *arg1, u32 arg2) {
 }
 #endif
 
-#if FW_VERSION < 271
+#if FW_VERSION != 271
 void catchpacket(struct bpf_d *d, u8 *pkt, u32 pktlen, u32 snaplen, u8 *(*cpfn)()) {
     struct bpf_hdr *hp;
     s32 totlen, curlen;
@@ -3138,7 +3294,20 @@ void _sce_pspnet_if_down(struct ifnet *ifp) {
     if (D_0000B3AC > 0)
         D_0000B394(ifp);
 }
-#else
+#endif
+
+#if FW_VERSION >= 282
+void _sce_pspnet_if_down(struct ifnet *ifp) {
+    ifp->if_flags &= ~IFF_UP;
+    if (D_0000B3AC > 0)
+        D_0000B390(ifp);
+    func_00005744(&ifp->if_snd);
+    if (D_0000B3AC > 0)
+        D_0000B394(ifp);
+}
+#endif
+
+#if FW_VERSION == 271
 INCLUDE_ASM("nonmatchings/pspnet", _sce_pspnet_if_down);
 #endif
 
