@@ -326,7 +326,61 @@ INCLUDE_ASM("nonmatchings/mscm", sceMScmRegisterCLD);
 
 INCLUDE_ASM("nonmatchings/mscm", sceMScmUnRegisterCLD);
 
+#if FW_VERSION < 150
+s32 sceMScmDetachCLD(s32 slot, SceMScmCLD *cld) {
+    SceMScmSlotCB *cb;
+    s32 buf[4];
+    s32 (*stop)(s32, s32, s32);
+
+    cb = &D_00006ED8[slot];
+    if (cb->attached == 0) {
+        return 0xC0220000;
+    }
+    if (strncmp(cb->drv.name, cld->name, 0xFF) != 0) {
+        return 0x80220081;
+    }
+    func_00002194(cb->drv.cmd, (s32)&D_00006F14[slot], 4, (s32)buf, 0, cb->drv.cmdArg);
+    stop = cb->cldm->info.unk110;
+    if (stop != NULL) {
+        stop(0, 0, 0);
+    }
+    memset(cb, 0, sizeof(SceMScmSlotCB));
+    D_00006B40[slot] = 0;
+    D_00006ED4[slot] = 1;
+    sceKernelSetEventFlag(D_00006B48[slot], 0x40000000);
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 201
+s32 sceMScmDetachCLD(s32 slot, SceMScmCLD *cld) {
+    SceMScmSlotCB *cb;
+    s32 buf[4];
+    s32 (*stop)(s32, s32, s32);
+
+    cb = &D_00006ED8[slot];
+    if (cb->attached == 0) {
+        return 0xC0220000;
+    }
+    if (strncmp(cb->drv.name, cld->name, 0xFF) != 0) {
+        return 0x80220081;
+    }
+    func_00002194(cb->drv.cmd, (s32)&D_00006F14[slot], 4, (s32)buf, 0, cb->drv.cmdArg);
+    stop = cb->cldm->info.unk110;
+    if (stop != NULL) {
+        stop(0, 0, 0);
+    }
+    memset(cb, 0, sizeof(SceMScmSlotCB));
+    D_00006F90[slot] = 0;
+    D_00007334[slot] = 1;
+    sceKernelSetEventFlag(D_00006B48[slot], 0x40000000);
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/mscm", sceMScmDetachCLD);
+#endif
 
 INCLUDE_ASM("nonmatchings/mscm", sceMScmRegisterCLDM);
 
@@ -366,7 +420,61 @@ INCLUDE_ASM("nonmatchings/mscm", func_00001804);
 INCLUDE_RODATA("nonmatchings/mscm", D_000070F8);
 #endif
 
-#if FW_VERSION < 250
+#if FW_VERSION < 201
+static const char cldmFile[] = "cldm.c";
+static const char cldmAssertFmt[] = "Assertion failed at %s:%s:%04d\n";
+
+s32 func_00001478(s32 slot, s32 n, SceMScmCLDMInfo **out) {
+    s32 ret;
+    s32 sum;
+    s32 i;
+    s32 j;
+    s32 k;
+    s32 ok;
+    SceMScmCLDM *p;
+
+    ret = 0;
+    if (out == NULL || slot != 0) {
+        return 0x80220081;
+    }
+    sceKernelWaitSema(D_00006ECC[slot], 1, 0);
+    for (i = 0, sum = 0; i < 3; i++) {
+        if (n < sum + D_00006F00[slot * 3 + i]) {
+            break;
+        }
+        sum += D_00006F00[slot * 3 + i];
+    }
+    if (i >= 3) {
+        ret = 0x80220084;
+        goto end;
+    }
+    j = i;
+    k = n - sum;
+    p = D_00006B54[slot][j].next;
+    for (i = 0; i < k; i++) {
+        p = p->next;
+        if (p == NULL) {
+            ret = 0xC0220000;
+            goto end;
+        }
+        if (&D_00006B54[slot][j] == p) {
+            ret = 0x80220084;
+            goto end;
+        }
+    }
+    ok = (p != NULL);
+    if (!ok) {
+        Kprintf(cldmAssertFmt, cldmFile, "_sceMScmGetCLDMHelper", 0x14E);
+        sceKernelAssert(ok, 0);
+    }
+    *out = &p->info;
+end:
+    sceKernelSignalSema(D_00006ECC[slot], 1);
+    return ret;
+}
+#endif
+
+#if FW_VERSION == 201
 INCLUDE_ASM("nonmatchings/mscm", func_00001478);
 #endif
 
@@ -395,7 +503,47 @@ s32 sceMScmGetCLDM(s32 slot, s32 n, SceMScmCLDMInfo *out) {
 INCLUDE_ASM("nonmatchings/mscm", sceMScmGetCLDM);
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION == 100
+s32 sceMScmQueryMSCMStatus(s32 slot, s32 *out) {
+    s32 st;
+    s32 ret;
+
+    ret = 0x80220083;
+    if (D_00006F14[slot].inService != 0) {
+        switch (D_00006ED4[slot]) {
+        case 0:
+            ret = 0;
+            *out = 0;
+            break;
+        case 4:
+            ret = 0;
+            *out = 3;
+            break;
+        case 5:
+            ret = 0;
+            *out = 4;
+            break;
+        case 1:
+        case 2:
+        case 3:
+            func_00005C8C(slot, &st);
+            if (st != 0) {
+                *out = 2;
+            } else {
+                *out = 1;
+            }
+            ret = 0;
+            break;
+        default:
+            ret = 0xC0220000;
+            break;
+        }
+    }
+    return ret;
+}
+#endif
+
+#if FW_VERSION >= 102 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/mscm", sceMScmQueryMSCMStatus);
 #endif
 

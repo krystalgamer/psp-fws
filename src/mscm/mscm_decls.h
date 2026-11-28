@@ -29,7 +29,7 @@ typedef struct {
     u32 unk4;
     void *unk8;                 /* VPL block */
     u8 unkC[0x110 - 0xC];
-    void *unk110;               /* VPL block */
+    void *unk110;               /* VPL block; called as s32 (*)(s32, s32, s32) on detach */
     u32 unk114;
     u32 unk118;
 } SceMScmCLDMInfo;
@@ -106,10 +106,10 @@ typedef char chk_SceMScmHC[(sizeof(SceMScmHC) == 0x284) ? 1 : -1];
 /* class driver (CLD) registration block, copied into D_00006ED8[slot] */
 typedef struct {
     char *name;                                  /* 0x00 */
-    u32 unk4;
+    s32 (*cmd)(s32, s32, s32, s32, s32);         /* 0x04: driver command entry (4 = detach), run via func_00002194 */
     s32 (*intrCb)(SceMScmHC *hc, void *arg);     /* 0x08: called from the MSIF irq handler */
     s32 (*insertCb)(SceMScmHC *hc, void *arg);   /* 0x0C: called from the GPIO (insert/eject) handler */
-    u32 unk10;
+    s32 cmdArg;             /* 0x10 */
     void *intrArg;          /* 0x14 */
     void *insertArg;        /* 0x18 */
     u32 unk1C;
@@ -161,6 +161,7 @@ extern u8 D_000069A0[]; /* SceSysEventHandler */
 extern SceMScmBitMap D_000069F8[13];
 extern u8 D_00006B10[];
 extern u8 D_00006B24[];
+extern s32 D_00006B40[1];
 extern SceUID D_00006B48[1];
 extern SceUID D_00006B4C[1];
 extern SceUID D_00006B50; /* "SceMScm" VPL */
@@ -175,10 +176,12 @@ extern s32 D_00006F0C;
 extern SceUID D_00006F10; /* main thread */
 extern SceMScmHC D_00006F14[1];
 extern s32 D_00006F20;
+extern s32 D_00006F90[1];
 extern char D_00007120[]; /* "SceMScm" */
 extern SceKernelSysClock D_00007190; /* sysclock ticks per usec */
 extern s32 D_00007218;
 extern char D_00007300[]; /* "Assertion failed at %s:%s:%04d\n" (mscm_ioman.c) */
+extern s32 D_00007334[1];
 extern s32 D_00007800;
 extern s32 D_00007880;
 extern s32 D_00007AF4;
