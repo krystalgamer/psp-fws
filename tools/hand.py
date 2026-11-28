@@ -147,11 +147,17 @@ def one(a, cfile, decls):
         import structify
         structify.SRC[a.module] = sd
         structify.write_decls(a.module, store)
-    # the function's own prototype follows its definition (a stale m2c guess would conflict)
+    # the function's own prototype follows its definition (a stale m2c guess would conflict), except a
+    # deliberately unprototyped `T name();` and one given in --decls (both are the user's choice)
     store_p = sd / f"{a.module}_decls.json"
     store = json.loads(store_p.read_text())
     sig = re.match(r"^(?!static)([^\n;#{]*?\b" + re.escape(name) + r"\([^;{}]*\))\s*\{", body, re.M)
-    if sig and name in store["funcs"] and store["funcs"][name] != " ".join(sig[1].split()) + ";":
+    old_p = store["funcs"].get(name, "")
+    given = bool(decls) and re.search(rf"\b{re.escape(name)}\s*\(", re.sub(r"/\*.*?\*/|//[^\n]*", "",
+                                                                         Path(decls).read_text(), flags=re.S))
+    unproto = re.search(rf"\b{re.escape(name)}\s*\(\s*\)\s*;", old_p)
+    if sig and name in store["funcs"] and old_p != " ".join(sig[1].split()) + ";" and not unproto and not given:
+        print(f"{name}: prototype `{old_p}` replaced by `{' '.join(sig[1].split())};` (from the definition)")
         store["funcs"][name] = " ".join(sig[1].split()) + ";"
         import structify
         structify.SRC[a.module] = sd
