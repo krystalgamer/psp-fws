@@ -487,7 +487,8 @@
   "Unk_func_000289B0_0": "struct Unk_func_000289B0_0 {\n    u8 pad0[0x254];\n    s32 unk254;\n};",
   "Unk_func_0002A244_0": "struct Unk_func_0002A244_0 {\n    u8 pad0[0x4BC];\n    s32 unk4BC;\n};",
   "hand_func_00012EC0": "struct inpcb *in_pcblookup_port(struct inpcbtable *table, struct in_addr laddr, u32 lport_arg, s32 lookup_wildcard);",
-  "hand_func_0001384C": "struct inpcb *in_pcblookup_port(struct inpcbtable *table, struct in_addr laddr, u32 lport_arg, s32 lookup_wildcard);"
+  "hand_func_0001384C": "struct inpcb *in_pcblookup_port(struct inpcbtable *table, struct in_addr laddr, u32 lport_arg, s32 lookup_wildcard);",
+  "hand_func_0001794C": "struct in_multi *func_00012108(struct in_addr *ap, struct ifnet *ifp);"
  },
  "vars": {
   "D_0002BB24": "extern void (*const D_0002BB24)(struct sppp *sp); /* lcp.Close (split rodata label) */",

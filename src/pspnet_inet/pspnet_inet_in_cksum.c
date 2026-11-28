@@ -1382,7 +1382,162 @@ bad:
 INCLUDE_ASM("nonmatchings/pspnet_inet_in_cksum", ip_pcbopts);
 #endif
 
-#if FW_VERSION >= 151 && FW_VERSION < 282
+#if FW_VERSION >= 151 && FW_VERSION < 201
+s32 func_0001794C(s32 optname, struct ip_moptions **imop, struct mbuf *m) {
+    s32 error = 0;
+    u8 loop;
+    s32 i;
+    struct in_addr addr;
+    struct ip_mreq *mreq;
+    struct ifnet *ifp;
+    struct ip_moptions *imo = *imop;
+    struct route ro;
+    struct sockaddr_in *dst;
+
+    if (imo == NULL) {
+        imo = (struct ip_moptions *)sceNetMallocInternal(sizeof(*imo));
+        if (imo == NULL)
+            return (0x69);
+        *imop = imo;
+        imo->imo_multicast_ifp = NULL;
+        imo->imo_multicast_ttl = 1;
+        imo->imo_multicast_loop = 1;
+        imo->imo_num_memberships = 0;
+    }
+
+    switch (optname) {
+    case 9:
+        if (m == NULL || m->m_len != sizeof(struct in_addr)) {
+            error = 0x16;
+            break;
+        }
+        addr = *(mtod(m, struct in_addr *));
+        if (addr.s_addr == __builtin_allegrex_wsbw(0)) {
+            imo->imo_multicast_ifp = NULL;
+            break;
+        }
+        INADDR_TO_IFP(addr, ifp);
+        if (ifp == NULL || (ifp->if_flags & IFF_MULTICAST) == 0) {
+            error = 0x7D;
+            break;
+        }
+        imo->imo_multicast_ifp = ifp;
+        break;
+    case 10:
+        if (m == NULL || m->m_len != 1) {
+            error = 0x16;
+            break;
+        }
+        imo->imo_multicast_ttl = *(mtod(m, u8 *));
+        break;
+    case 11:
+        if (m == NULL || m->m_len != 1 ||
+            (loop = *(mtod(m, u8 *))) > 1) {
+            error = 0x16;
+            break;
+        }
+        imo->imo_multicast_loop = loop;
+        break;
+    case 12:
+        if (m == NULL || m->m_len != sizeof(struct ip_mreq)) {
+            error = 0x16;
+            break;
+        }
+        mreq = mtod(m, struct ip_mreq *);
+        if (!IN_MULTICAST(mreq->imr_multiaddr.s_addr)) {
+            error = 0x16;
+            break;
+        }
+        if (mreq->imr_interface.s_addr == __builtin_allegrex_wsbw(0)) {
+            __builtin_memset((char *)&ro, 0, sizeof(ro));
+            ro.ro_rt = NULL;
+            dst = (struct sockaddr_in *)&ro.ro_dst;
+            dst->sin_len = sizeof(*dst);
+            dst->sin_family = AF_INET;
+            dst->sin_addr = mreq->imr_multiaddr;
+            rtalloc(&ro);
+            if (ro.ro_rt == NULL) {
+                error = 0x7D;
+                break;
+            }
+            ifp = ro.ro_rt->rt_ifp;
+            rtfree(ro.ro_rt);
+        } else {
+            INADDR_TO_IFP(mreq->imr_interface, ifp);
+        }
+        if (ifp == NULL || (ifp->if_flags & IFF_MULTICAST) == 0) {
+            error = 0x7D;
+            break;
+        }
+        for (i = 0; i < imo->imo_num_memberships; ++i) {
+            if (imo->imo_membership[i]->inm_ifp == ifp &&
+                imo->imo_membership[i]->inm_addr.s_addr == mreq->imr_multiaddr.s_addr)
+                break;
+        }
+        if (i < imo->imo_num_memberships) {
+            error = 0x70;
+            break;
+        }
+        if (i == 20) {
+            error = 0x81;
+            break;
+        }
+        if ((imo->imo_membership[i] = func_00012108(&mreq->imr_multiaddr, ifp)) == NULL) {
+            error = 0x69;
+            break;
+        }
+        ++imo->imo_num_memberships;
+        break;
+    case 13:
+        if (m == NULL || m->m_len != sizeof(struct ip_mreq)) {
+            error = 0x16;
+            break;
+        }
+        mreq = mtod(m, struct ip_mreq *);
+        if (!IN_MULTICAST(mreq->imr_multiaddr.s_addr)) {
+            error = 0x16;
+            break;
+        }
+        if (mreq->imr_interface.s_addr == __builtin_allegrex_wsbw(0))
+            ifp = NULL;
+        else {
+            INADDR_TO_IFP(mreq->imr_interface, ifp);
+            if (ifp == NULL) {
+                error = 0x7D;
+                break;
+            }
+        }
+        for (i = 0; i < imo->imo_num_memberships; ++i) {
+            if ((ifp == NULL || imo->imo_membership[i]->inm_ifp == ifp) &&
+                imo->imo_membership[i]->inm_addr.s_addr == mreq->imr_multiaddr.s_addr)
+                break;
+        }
+        if (i == imo->imo_num_memberships) {
+            error = 0x7D;
+            break;
+        }
+        in_delmulti(imo->imo_membership[i]);
+        for (++i; i < imo->imo_num_memberships; ++i)
+            imo->imo_membership[i - 1] = imo->imo_membership[i];
+        --imo->imo_num_memberships;
+        break;
+    default:
+        error = 0x5F;
+        break;
+    }
+
+    if (imo->imo_multicast_ifp == NULL &&
+        imo->imo_multicast_ttl == 1 &&
+        imo->imo_multicast_loop == 1 &&
+        imo->imo_num_memberships == 0) {
+        sceNetFreeInternal(*imop);
+        *imop = NULL;
+    }
+    return (error);
+}
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_inet_in_cksum", func_0001794C);
 #endif
 

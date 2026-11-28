@@ -1617,6 +1617,8 @@ struct inpcb *in_pcblookup_port(struct inpcbtable *table, struct in_addr laddr, 
 
 struct inpcb *in_pcblookup_port(struct inpcbtable *table, struct in_addr laddr, u32 lport_arg, s32 lookup_wildcard);
 
+struct in_multi *func_00012108(struct in_addr *ap, struct ifnet *ifp);
+
 extern void (*const D_0002BB24)(struct sppp *sp); /* lcp.Close (split rodata label) */
 extern void (*const D_0002BBCC)(struct sppp *sp); /* pap.scr (split rodata label) */
 extern s32 D_0002BEC0;
