@@ -130,7 +130,44 @@ INCLUDE_ASM("nonmatchings/wlan", sceWlanDevInit);
 INCLUDE_ASM("nonmatchings/wlan", func_000003C0);
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION < 150
+s32 func_00000330(SceWlanSoftc *sc) {
+    SceWlanMac *mac;
+    SceWlanQEnt *e;
+    u8 *buf;
+    s32 i;
+
+    if ((sc->flags & 1) || (sc->flags & 8)) {
+        func_00002818(sc);
+        memset(sc->unk008, 0, sizeof(sc->unk008));
+        sc->flags &= ~1;
+        sc->flags &= ~8;
+        sc->unk254 = 0;
+        sc->unk256 = 0;
+    }
+    if (sc->flags & 0x800) {
+        mac = sc->mac;
+        for (i = 0; i < mac->nAddrs; i++) {
+            buf = (u8 *)mac->bss[i];
+            sceKernelWaitSema(sc->poolSema, 1, NULL);
+            e = &sc->pool[(buf - (u8 *)&sc->pool[sc->poolCount]) / sc->poolStride];
+            if (e->buf == buf) {
+                e->inUse = 0;
+                sc->poolNext = e;
+            }
+            sceKernelSignalSema(sc->poolSema, 1);
+        }
+        func_000067B8(sc, mac->bss);
+        sc->flags &= ~0x800;
+        if (mac->gameStop != NULL)
+            mac->gameStop(mac, 1);
+        sc->flags &= ~0x100;
+    }
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/wlan", func_00000330);
 #endif
 
