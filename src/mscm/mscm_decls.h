@@ -23,6 +23,27 @@ typedef struct {
     u32 to;
 } SceMScmBitMap;
 
+/* registered CLDM description (copied out by sceMScmGetCLDM) */
+typedef struct {
+    u32 unk0;
+    u32 unk4;
+    void *unk8;                 /* VPL block */
+    u8 unkC[0x110 - 0xC];
+    void *unk110;               /* VPL block */
+    u32 unk114;
+    u32 unk118;
+} SceMScmCLDMInfo;
+typedef char chk_SceMScmCLDMInfo[(sizeof(SceMScmCLDMInfo) == 0x11C) ? 1 : -1];
+
+/* CLDM list node; D_00006B54[slot][3] are the list heads */
+typedef struct SceMScmCLDM {
+    struct SceMScmCLDM *next;   /* 0x00 */
+    struct SceMScmCLDM *prev;   /* 0x04 */
+    SceMScmCLDMInfo info;       /* 0x08 */
+    s32 unk124;
+} SceMScmCLDM;
+typedef char chk_SceMScmCLDM[(sizeof(SceMScmCLDM) == 0x128) ? 1 : -1];
+
 /* Memory Stick host controller (MSIF) registers, 0xBD200000 */
 typedef struct {
     volatile u16 unk0;      /* 0x00: icon/intr control */
@@ -82,9 +103,9 @@ typedef char chk_SceMScmHC[(sizeof(SceMScmHC) == 0x27C) ? 1 : -1];
 typedef char chk_SceMScmHC[(sizeof(SceMScmHC) == 0x284) ? 1 : -1];
 #endif
 
-/* per-slot driver callbacks (D_00006ED8[slot]) */
+/* class driver (CLD) registration block, copied into D_00006ED8[slot] */
 typedef struct {
-    u32 unk0;
+    char *name;                                  /* 0x00 */
     u32 unk4;
     s32 (*intrCb)(SceMScmHC *hc, void *arg);     /* 0x08: called from the MSIF irq handler */
     s32 (*insertCb)(SceMScmHC *hc, void *arg);   /* 0x0C: called from the GPIO (insert/eject) handler */
@@ -92,8 +113,13 @@ typedef struct {
     void *intrArg;          /* 0x14 */
     void *insertArg;        /* 0x18 */
     u32 unk1C;
-    u32 unk20;
-    void *cld;              /* 0x24: attached class driver (NULL: none); a pointer, not an int (alias set) */
+} SceMScmCLD;
+
+/* per-slot attached class driver (D_00006ED8[slot]) */
+typedef struct {
+    SceMScmCLD drv;         /* 0x00 */
+    SceMScmCLDM *cldm;      /* 0x20 */
+    unsigned long attached; /* 0x24: not int/s32 (alias set; see the irq handler) */
 } SceMScmSlotCB;
 typedef char chk_SceMScmSlotCB[(sizeof(SceMScmSlotCB) == 0x28) ? 1 : -1];
 
@@ -131,15 +157,25 @@ static inline void hcAnd16(volatile u16 *p, u16 v) {
 }
 
 extern char D_00006950[]; /* "mscm_ioman.c" */
+extern u8 D_000069A0[]; /* SceSysEventHandler */
 extern SceMScmBitMap D_000069F8[13];
 extern u8 D_00006B10[];
 extern u8 D_00006B24[];
 extern SceUID D_00006B48[1];
 extern SceUID D_00006B4C[1];
+extern SceUID D_00006B50; /* "SceMScm" VPL */
+extern SceMScmCLDM D_00006B54[1][3];
+extern SceUID D_00006ECC[1]; /* "SceMScmCLDMList" sema */
+extern SceUID D_00006ED0; /* media thread */
+extern s32 D_00006ED4[1]; /* MSCM status per slot */
 extern SceMScmSlotCB D_00006ED8[1];
+extern void *D_00006EFC;
+extern s32 D_00006F00[3];
 extern s32 D_00006F0C;
+extern SceUID D_00006F10; /* main thread */
 extern SceMScmHC D_00006F14[1];
 extern s32 D_00006F20;
+extern char D_00007120[]; /* "SceMScm" */
 extern SceKernelSysClock D_00007190; /* sysclock ticks per usec */
 extern s32 D_00007218;
 extern char D_00007300[]; /* "Assertion failed at %s:%s:%04d\n" (mscm_ioman.c) */
@@ -154,7 +190,10 @@ s32 func_000000AC(s32 slot);
 s32 func_000001E4(SceMScmHC *hc);
 void func_00000930(s32 arg0);
 s32 func_00000C1C(SceMScmHC *hc);
+s32 func_00001478(s32 slot, s32 n, SceMScmCLDMInfo **out);
+s32 func_0000179C(SceSize args, void *argp);
 s32 func_00002194(s32 (*arg0)(s32, s32, s32, s32, s32), s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5);
+s32 func_00002238(SceSize args, void *argp);
 s32 func_0000254C(s32 (*arg0)(s32, s32, s32, s32, s32), s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5);
 s32 func_000029F8(SceMScmHC *hc, s32 timeout);
 s32 func_00002FF0(s32 a0, s32 a1, s32 a2, u32 *arg);
@@ -172,6 +211,7 @@ u32 func_00004E50(u32 bits);
 s32 func_00004E68(s32 arg0, s32 arg1);
 u32 func_00004E94(s32 index);
 s32 func_00004F60(s32 slot);
+s32 func_00005094(s32 slot, u32 mask, s32 enable);
 u32 func_0000514C(s32 index);
 s32 func_00005174(SceMScmHC *hc, u32 flags, s32 on);
 s32 func_00005270(s32 slot, u32 flags);
@@ -210,6 +250,8 @@ u32 sceKernelGetSystemTimeLow(void);
 s32 sceKernelGetThreadCurrentPriority(void);
 M2C_UNK sceKernelReleaseIntrHandler(M2C_UNK);
 s32 sceMScmClearALEvents(SceMScmHC *hc);
+s32 sceMScmGetCLDM(s32 slot, s32 n, SceMScmCLDMInfo *out);
+s32 sceMScmGetRegisteredCLDMCount(s32 slot);
 s32 sceMScmGetSlotPower(SceMScmHC *hc, s32 *out);
 s32 sceMScmGetSlotState(SceMScmHC *hc, s32 *out);
 s32 sceMScmHCLastStatus(SceMScmHC *hc);
@@ -221,6 +263,7 @@ s32 sceMScmIconStopUcode(SceMScmHC *hc);
 s32 sceMScmReadDataPIO(SceMScmHC *hc, u8 *buf, s32 size, s32 timeout);
 s32 sceMScmReadMSReg(SceMScmHC *hc, s32 addr, s32 size, u8 *buf, s32 force, s32 timeout);
 s32 sceMScmReadMSRegHelper(SceMScmHC *hc, u8 *buf, s32 size, s32 timeout);
+s32 sceMScmRegisterCLD(s32 slot, SceMScmCLD *cld);
 s32 sceMScmResetHC(SceMScmHC *hc, u32 mode);
 s32 sceMScmSendTPC(SceMScmHC *hc, u8 tpc, s32 size, s32 timeout);
 s32 sceMScmSendTPCDMA(SceMScmHC *hc, u8 dmaCh, s32 a2, s32 a3);
@@ -237,6 +280,7 @@ s32 sceMScmTPCSetCmd(SceMScmHC *hc, u8 cmd, u8 *intr, s32 timeout);
 s32 sceMScmTPCSetCmdHelper(SceMScmHC *hc, u8 cmd, s32 timeout);
 s32 sceMScmTPCSetRWRegAdrs(SceMScmHC *hc, u8 *adr, s32 timeout);
 s32 sceMScmTPCWriteShortData(SceMScmHC *hc, u8 *buf, s32 size, s32 timeout);
+s32 sceMScmUnRegisterCLD(s32 slot, SceMScmCLD *cld);
 s32 sceMScmWaitAndEndDMA(SceMScmHC *hc, s32 a1, s32 a2);
 s32 sceMScmWaitHCIntr(SceMScmHC *hc, u32 *pattern, s32 timeout);
 s32 sceMScmWriteDataPIO(SceMScmHC *hc, u8 *buf, s32 size, s32 timeout);
