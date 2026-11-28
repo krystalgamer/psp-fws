@@ -145,7 +145,8 @@ INCLUDE_ASM("nonmatchings/common_gui_0008C8", sceVshCommonGui_FE305D6D);
 #endif
 
 #if FW_VERSION < 350
-void _ZN3vsh13MessageDialog10HideDeleteEv(s32 *arg0) {
+void vsh::MessageDialog::HideDelete() {
+    s32 *arg0 = (s32 *) this;
     _ZN3paf10MessageBox10HideDeleteEv(*arg0);
 }
 #endif
@@ -175,7 +176,8 @@ void sceVshCommonGui_9F196654(s32 *arg0) {
 #endif
 
 #if FW_VERSION < 350
-s32 _ZN3vsh13MessageDialog12GetBasePlaneEv(void **arg0) {
+s32 vsh::MessageDialog::GetBasePlane() {
+    void **arg0 = (void **) this;
     s32 var_v0;
     struct Unk_sceVshCommonGui_ACFE7BE7_temp_a0 *temp_a0;
 

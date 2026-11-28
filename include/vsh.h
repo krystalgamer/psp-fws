@@ -15,6 +15,8 @@ public:
     static void Show();
     static void Hide();
     static void Close(paf::View *view, const char *page, const char *name);
+    void UpdateItems();
+    s32 IsOpen();
 };
 
 } // namespace vsh

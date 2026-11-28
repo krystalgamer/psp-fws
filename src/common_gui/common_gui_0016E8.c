@@ -213,7 +213,7 @@ INCLUDE_ASM("nonmatchings/common_gui_0016E8", _ZN3vsh10OptionMenu11UpdateItemsEv
 #endif
 
 #if FW_VERSION >= 300 && FW_VERSION < 350
-void _ZN3vsh10OptionMenu11UpdateItemsEv(void) {
+void vsh::OptionMenu::UpdateItems() {
     if (D_00003B00 == 0) {
 
     } else {
@@ -228,7 +228,7 @@ void _ZN3vsh10OptionMenu11UpdateItemsEv(void) {
 #endif
 
 #if FW_VERSION < 350
-s32 _ZN3vsh10OptionMenu6IsOpenEv(void) {
+s32 vsh::OptionMenu::IsOpen() {
     return D_00003934 != 0;
 }
 #endif
