@@ -786,11 +786,65 @@ void func_00002E48(SceNetAdhocPdpQent *e) {
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00002E48);
 #endif
 
+#if FW_VERSION < 201
+s32 sceNetAdhocPtpOpen(const SceNetEtherAddr *saddr, u16 sport, const SceNetEtherAddr *daddr, u16 dport, s32 bufsize, u32 rexmt_int, s32 rexmt_cnt, s32 flag) {
+    s32 s;
+    s32 ret;
+    SceNetAdhocDesc *d;
+
+    if (saddr == NULL || daddr == NULL)
+        return 0x80410711;
+    ret = 0x80410712;
+    s = _sce_pspnet_spllock();
+    if (D_00007400 == 0)
+        goto end;
+    ret = func_00003A68(saddr, sport, bufsize, bufsize, rexmt_int, rexmt_cnt, &d);
+    if (ret < 0)
+        goto end;
+    ret = func_0000556C(d->pcb, daddr, dport);
+    if (ret < 0) {
+        func_000039FC(d);
+        goto end;
+    }
+    ret = d->id;
+end:
+    _sce_pspnet_splunlock(s);
+    return ret;
+}
+#else
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", sceNetAdhocPtpOpen);
+#endif
 
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", sceNetAdhocPtpConnect);
 
+#if FW_VERSION < 201
+s32 sceNetAdhocPtpListen(const SceNetEtherAddr *saddr, u16 sport, s32 bufsize, u32 rexmt_int, s32 rexmt_cnt, s32 backlog, s32 flag) {
+    s32 s;
+    s32 ret;
+    SceNetAdhocDesc *d;
+
+    if (saddr == NULL)
+        return 0x80410711;
+    ret = 0x80410712;
+    s = _sce_pspnet_spllock();
+    if (D_00007400 == 0)
+        goto end;
+    ret = func_00003A68(saddr, sport, bufsize, bufsize, rexmt_int, rexmt_cnt, &d);
+    if (ret < 0)
+        goto end;
+    ret = func_000056B0(d->pcb, backlog);
+    if (ret < 0) {
+        func_000039FC(d);
+        goto end;
+    }
+    ret = d->id;
+end:
+    _sce_pspnet_splunlock(s);
+    return ret;
+}
+#else
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", sceNetAdhocPtpListen);
+#endif
 
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", sceNetAdhocPtpAccept);
 
