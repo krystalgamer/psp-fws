@@ -511,7 +511,47 @@ s32 sceMScmWaitHCIntr(SceMScmHC *hc, u32 *pattern, s32 timeout) {
     }
     return ret;
 }
-#else
+#endif
+
+#if FW_VERSION == 152
+s32 sceMScmWaitHCIntr(SceMScmHC *hc, u32 *pattern, s32 timeout) {
+    s32 index = hc->index;
+    u32 outBits;
+    unsigned long tmo; /* a different alias set from *pattern (keeps the load order) */
+    SceMScmHC *h;
+    SceUID evf;
+    u32 bits;
+    u32 old;
+    s32 res;
+    s32 ret;
+    u32 m;
+
+    sceKernelGetSystemTimeLow();
+    tmo = func_000029F8(hc, timeout);
+    h = &D_00006F14[index];
+    evf = h->evf;
+    bits = func_00004E50(*pattern);
+    if (bits == 0) {
+        bits = 0x7FF0;
+    }
+    res = sceKernelWaitEventFlag(evf, bits, 1, &outBits, &tmo);
+    old = *pattern;
+    *pattern = h->intrStatus;
+    if (res == 0) {
+        return 0;
+    }
+    m = func_0000514C(index);
+    sceMScmClearALEvents(hc);
+    m &= old;
+    ret = 0x80220087;
+    if (m != 0) {
+        ret = 0;
+    }
+    return ret;
+}
+#endif
+
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/mscm", sceMScmWaitHCIntr);
 #endif
 
@@ -949,7 +989,49 @@ u32 func_00004E50(u32 bits) {
 INCLUDE_ASM("nonmatchings/mscm", func_00004E50);
 #endif
 
-#if FW_VERSION >= 152 && FW_VERSION < 250
+#if FW_VERSION == 152
+u32 func_0000514C(s32 index) {
+    SceMScmHCReg *reg = D_00006F14[index].reg;
+    u32 ret;
+    u32 v;
+
+    ret = (reg->unk0 & 4) ? 0x10 : 0x1;
+    v = reg->unk8;
+    if (v & 0x200) {
+        ret |= 0x400;
+    }
+    if (v & 0x100) {
+        ret |= 0x200;
+    }
+    if (v & 0x80) {
+        ret |= 0x100;
+    }
+    if (v & 0x40) {
+        ret |= 0x80;
+    }
+    if (v & 0x20) {
+        ret |= 0x40;
+    }
+    if (v & 0x10) {
+        ret |= 0x20;
+    }
+    if (!(reg->unk0 & 1)) {
+        v = reg->status;
+        if (v & 0x4000) {
+            ret |= 8;
+        }
+        if (v & 0x1000) {
+            ret |= 2;
+        }
+        if (v & 0x2000) {
+            ret |= 4;
+        }
+    }
+    return ret;
+}
+#endif
+
+#if FW_VERSION == 201
 INCLUDE_ASM("nonmatchings/mscm", func_0000514C);
 #endif
 

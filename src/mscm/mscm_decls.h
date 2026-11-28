@@ -135,6 +135,7 @@ u32 func_00004E50(u32 bits);
 s32 func_00004E68(s32 arg0, s32 arg1);
 u32 func_00004E94(s32 index);
 s32 func_00004F60(s32 slot);
+u32 func_0000514C(s32 index);
 s32 func_00005174(SceMScmHC *hc, u32 flags, s32 on);
 s32 func_00005270(s32 slot, u32 flags);
 s32 func_000052F4(void);
