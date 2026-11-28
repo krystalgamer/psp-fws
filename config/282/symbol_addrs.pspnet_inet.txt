@@ -390,3 +390,4 @@ tcp_totbackoff = 0x0002C39C; // rom:0x2C43C
 tcp_compat_42 = 0x0002C5D0;
 tcp_mss_from_peer = 0x000235D0; // type:func
 tcp_timers = 0x00023F70; // type:func
+sce_alignbytes = 0x00005B8C; // type:func

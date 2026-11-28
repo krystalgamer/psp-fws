@@ -21,7 +21,7 @@ INCLUDE_ASM("nonmatchings/pspnet_inet_api", sceNetInetSocket);
 #endif
 
 #if FW_VERSION >= 282
-s32 func_00005B8C(void) {
+s32 sce_alignbytes(void) {
     return 3;
 }
 
