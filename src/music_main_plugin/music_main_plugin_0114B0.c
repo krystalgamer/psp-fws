@@ -142,13 +142,9 @@ s32 func_00011AFC(s32 arg0) {
     return (temp_v0 == 0) ? 0 : (temp_v0 + 1);
 }
 
-#if FW_VERSION != 300
-INCLUDE_ASM("nonmatchings/music_main_plugin_0114B0", func_00011B24);
-#else
 s32 func_00011B24(s32 arg0, s32 arg1) {
     return sce_paf_private_strcasecmp(func_00011AFC(arg0), arg1) == 0;
 }
-#endif
 
 #if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/music_main_plugin_0114B0", func_00011B58);

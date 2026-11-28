@@ -784,23 +784,11 @@ void func_00035964(M2C_UNK **arg0) {
 void func_00039DF4(void *arg0, s32 arg1) {
     func_0006A6C8(M2C_FIELD(arg0, s32 *, 0x330), arg1);
 }
-#endif
 
-#if FW_VERSION >= 301 && FW_VERSION < 330
-INCLUDE_ASM("nonmatchings/music_main_plugin_02EE90", func_00039E10);
-#endif
-
-#if FW_VERSION == 300
 void func_00039E10(void *arg0) {
     func_0006AFCC(M2C_FIELD(arg0, s32 *, 0x330));
 }
-#endif
 
-#if FW_VERSION >= 301 && FW_VERSION < 330
-INCLUDE_ASM("nonmatchings/music_main_plugin_02EE90", func_00039E2C);
-#endif
-
-#if FW_VERSION == 300
 void func_00039E2C(void *arg0) {
     void *temp_v0;
 
@@ -809,9 +797,7 @@ void func_00039E2C(void *arg0) {
     M2C_FIELD(temp_v0, s32 *, 4) = 0x1000;
     M2C_FIELD(temp_v0, s32 *, 8) = 0xAC44;
 }
-#endif
 
-#if FW_VERSION >= 300 && FW_VERSION < 330
 INCLUDE_ASM("nonmatchings/music_main_plugin_02EE90", func_00039E64);
 
 s32 func_00039EC0(void) {
