@@ -158,11 +158,37 @@ INCLUDE_ASM("nonmatchings/pspnet_apctl_009850", func_0000A418);
 #endif
 
 #if FW_VERSION < 250
-INCLUDE_ASM("nonmatchings/pspnet_apctl_009850", func_00007594);
+void func_00007594(void *dst, s32 n) {
+    u8 *p = dst;
+
+    if (p == NULL) {
+        return;
+    }
+    while (n > 0) {
+        n--;
+        *p++ = 0;
+    }
+}
 
 INCLUDE_ASM("nonmatchings/pspnet_apctl_009850", func_000075BC);
 
-INCLUDE_ASM("nonmatchings/pspnet_apctl_009850", func_0000766C);
+char *func_0000766C(const char *s, s32 c) {
+    const char *p = s;
+    char ch = c;
+
+    if (s == NULL) {
+        return NULL;
+    }
+    while (*p++ != '\0') {
+    }
+    p--;
+    do {
+        if (*p == ch) {
+            return (char *)p;
+        }
+    } while (s < p--);
+    return NULL;
+}
 #endif
 
 #if FW_VERSION >= 151 && FW_VERSION < 250
@@ -174,19 +200,50 @@ INCLUDE_ASM("nonmatchings/pspnet_apctl_009850", func_000076B4);
 #endif
 
 #if FW_VERSION < 250
-INCLUDE_ASM("nonmatchings/pspnet_apctl_009850", func_0000774C);
+char *func_0000774C(char *dst, const char *src, s32 n) {
+    u8 *d = (u8 *)dst;
+    s32 i;
+    u8 c;
 
-INCLUDE_ASM("nonmatchings/pspnet_apctl_009850", func_000077C8);
+    if (dst == NULL || src == NULL) {
+        return NULL;
+    }
+    for (i = 0; i < n; i++) {
+        c = *(const u8 *)src++;
+        *d++ = c;
+        if (c == '\0') {
+            for (i++; i < n; i++) {
+                *d++ = '\0';
+            }
+            return dst;
+        }
+    }
+    return dst;
+}
 
-u8 *func_000077F8(u8 *arg0, u8 *arg1) {
-    u8 *var_a1;
+char *func_000077C8(const char *s, s32 c) {
+    char ch = c;
+
+    if (s == NULL) {
+        return NULL;
+    }
+    do {
+        if (*s == ch) {
+            return (char *)s;
+        }
+    } while (*s++ != '\0');
+    return NULL;
+}
+
+char *func_000077F8(char *arg0, const char *arg1) {
+    const u8 *var_a1;
     u8 *var_a2;
-    u8 *var_v0;
+    char *var_v0;
     u8 temp_a3;
 
-    var_a1 = arg1;
+    var_a1 = (const u8 *)arg1;
     var_v0 = NULL;
-    var_a2 = arg0;
+    var_a2 = (u8 *)arg0;
     if (((arg0 == NULL) | (var_a1 == NULL)) == 0) {
         do {
             temp_a3 = *var_a1;
@@ -199,7 +256,17 @@ u8 *func_000077F8(u8 *arg0, u8 *arg1) {
     return var_v0;
 }
 
-INCLUDE_ASM("nonmatchings/pspnet_apctl_009850", func_00007830);
+s32 func_00007830(const char *s) {
+    s32 n = 0;
+
+    if (s == NULL) {
+        return 0;
+    }
+    while (*s++ != '\0') {
+        n++;
+    }
+    return n;
+}
 #endif
 
 #if FW_VERSION >= 282
