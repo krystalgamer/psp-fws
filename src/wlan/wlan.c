@@ -2487,7 +2487,43 @@ s32 func_000067D4(SceWlanMac *mac) {
 INCLUDE_ASM("nonmatchings/wlan", func_000067D4);
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION < 150
+s32 func_000068B4(SceWlanMac *mac, u32 mode) {
+    s32 intr = sceKernelCpuSuspendIntr();
+    SceWlanBus *bus = &mac->bus;
+
+    if (mode & 4) {
+        mac->flags &= ~4;
+        mac->flags &= ~8;
+        mac->flags |= 0x10;
+        *bus->reg1C &= ~0x10000;
+        *bus->reg |= 0x2000;
+        *bus->reg &= ~0x20;
+    } else {
+        mac->flags &= ~0x10;
+        if (mode & 1) {
+            mac->flags |= 4;
+            *bus->reg1C |= 0x10020;
+        } else {
+            mac->flags &= ~4;
+            *bus->reg1C |= 0x10000;
+            *bus->reg1C &= ~0x20;
+        }
+        if (mode & 2) {
+            mac->flags |= 8;
+            *bus->reg1C |= 0x10400;
+        } else {
+            mac->flags &= ~8;
+            *bus->reg1C |= 0x10000;
+            *bus->reg1C &= ~0x400;
+        }
+    }
+    sceKernelCpuResumeIntrWithSync(intr);
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/wlan", func_000068B4);
 #endif
 
