@@ -157,123 +157,43 @@ INCLUDE_ASM("nonmatchings/video_main_plugin_038D9C", func_0003CE74);
 INCLUDE_ASM("nonmatchings/video_main_plugin_038D9C", func_0003D034);
 
 INCLUDE_ASM("nonmatchings/video_main_plugin_038D9C", func_0003D174);
-#endif
 
-#if FW_VERSION >= 350
 void func_0003D310(u32 arg0) {
     _Z11PSJS_Mallocj(arg0);
 }
-#endif
 
-#if FW_VERSION >= 282 && FW_VERSION < 350
-void func_0003D310(u32 arg0) {
-    _Z11PSJS_Mallocj(arg0);
-}
-#endif
-
-#if FW_VERSION >= 350
 void func_0003D32C(void* arg0) {
     _Z9PSJS_FreePv(arg0);
 }
-#endif
 
-#if FW_VERSION >= 282 && FW_VERSION < 350
-void func_0003D32C(void* arg0) {
-    _Z9PSJS_FreePv(arg0);
-}
-#endif
-
-#if FW_VERSION >= 350
 void func_0003D348(u32 arg0) {
     _Z11PSJS_Mallocj(arg0);
 }
-#endif
 
-#if FW_VERSION >= 282 && FW_VERSION < 350
-void func_0003D348(u32 arg0) {
-    _Z11PSJS_Mallocj(arg0);
-}
-#endif
-
-#if FW_VERSION >= 350
 void func_0003D364(void* arg0) {
     _Z9PSJS_FreePv(arg0);
 }
-#endif
 
-#if FW_VERSION >= 282 && FW_VERSION < 350
-void func_0003D364(void* arg0) {
-    _Z9PSJS_FreePv(arg0);
-}
-#endif
-
-#if FW_VERSION >= 350
 void func_0003D380(u32 arg0) {
     _Z11PSJS_Mallocj(arg0);
 }
-#endif
 
-#if FW_VERSION >= 282 && FW_VERSION < 350
-void func_0003D380(u32 arg0) {
-    _Z11PSJS_Mallocj(arg0);
-}
-#endif
-
-#if FW_VERSION >= 350
 void func_0003D39C(void* arg0) {
     _Z9PSJS_FreePv(arg0);
 }
-#endif
 
-#if FW_VERSION >= 282 && FW_VERSION < 350
-void func_0003D39C(void* arg0) {
-    _Z9PSJS_FreePv(arg0);
-}
-#endif
-
-#if FW_VERSION >= 350
 void func_0003D3B8(u32 arg0) {
     _Z11PSJS_Mallocj(arg0);
 }
-#endif
 
-#if FW_VERSION >= 282 && FW_VERSION < 350
-void func_0003D3B8(u32 arg0) {
-    _Z11PSJS_Mallocj(arg0);
-}
-#endif
-
-#if FW_VERSION >= 350
 void func_0003D3D4(void* arg0) {
     _Z9PSJS_FreePv(arg0);
 }
-#endif
 
-#if FW_VERSION >= 282 && FW_VERSION < 350
-void func_0003D3D4(void* arg0) {
-    _Z9PSJS_FreePv(arg0);
-}
-#endif
-
-#if FW_VERSION >= 350
 void func_0003D3F0(u32 arg0) {
     _Z11PSJS_Mallocj(arg0);
 }
-#endif
 
-#if FW_VERSION >= 282 && FW_VERSION < 350
-void func_0003D3F0(u32 arg0) {
-    _Z11PSJS_Mallocj(arg0);
-}
-#endif
-
-#if FW_VERSION >= 350
-void func_0003D40C(void* arg0) {
-    _Z9PSJS_FreePv(arg0);
-}
-#endif
-
-#if FW_VERSION >= 282 && FW_VERSION < 350
 void func_0003D40C(void* arg0) {
     _Z9PSJS_FreePv(arg0);
 }
