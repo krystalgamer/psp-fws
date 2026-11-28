@@ -593,6 +593,7 @@ extern s32 D_0001B0E0;
 SceSize BuildHttpHeader(SceHttpReq *req, char *header, unsigned short calc_only);
 int CloneHeader(SceHttpReq *req);
 int CopyHttpHeaderList(_SceHttpReqHeaderList **out, const _SceHttpReqHeaderList *src);
+int CreateConnection(int template_id, unsigned char *server_name, unsigned char *scheme, unsigned char *username, unsigned char *password, unsigned short port, int keepalive, int option, SceHttpReq *req);
 s32 CreateConnectionWithUrl(s32, s32, s32, s32, s32);
 int CreateHttpExtraHeader(_SceHttpReqHeaderList **out, const SceUChar8 *name, const SceUChar8 *value);
 int CreateRequest(int connection_id, int method, const unsigned char *path, const unsigned char *query, const unsigned char *fragment, SceULong64 content_length, const unsigned char *username, const unsigned char *password, const unsigned char *hostname);
@@ -764,6 +765,7 @@ int sceKernelUtilsMd5BlockInit(); /* unprototyped: 1.50 C calls it without the p
 int sceKernelUtilsMd5BlockResult(); /* unprototyped: 1.50 C calls it without the pass-through args */
 int sceKernelUtilsMd5BlockUpdate(); /* unprototyped: 1.50 C calls it without the pass-through args */
 M2C_UNK sceKernelUtilsMd5Digest();
+int sceNetApctlGetInfo(int code, union SceNetApctlInfo *info);
 M2C_UNK sceNetInetInetPton();
 s32 sceNetInetRecv(s32, void *, u32, s32);
 s32 sceNetInetSend(s32, void *, u32, s32);

@@ -176,7 +176,43 @@ INCLUDE_ASM("nonmatchings/libhttp", sceHttpSetProxy);
 
 INCLUDE_ASM("nonmatchings/libhttp", sceHttpGetProxy);
 
-INCLUDE_ASM("nonmatchings/libhttp", GetProxyInfoFromSystem);
+int GetProxyInfoFromSystem(SceHttpTmpl *tmpl) {
+    union SceNetApctlInfo info;
+    int ret;
+
+    ret = sceNetApctlGetInfo(13, &info);
+    if (ret < 0) {
+        goto end;
+    }
+    if (info.http_proxy_flag != 1) {
+        tmpl->proxy_status = 0;
+        goto end;
+    }
+    tmpl->proxy_status = info.http_proxy_flag;
+    ret = sceNetApctlGetInfo(15, &info);
+    if (ret < 0) {
+        goto end;
+    }
+    tmpl->proxy_port = info.http_proxy_port;
+    ret = sceNetApctlGetInfo(14, &info);
+    if (ret < 0) {
+        goto end;
+    }
+    if (tmpl->proxy_host != NULL) {
+        if (func_0000BC98(tmpl->proxy_host, info.http_proxy_server) == 0) {
+            goto end;
+        }
+        _sceHttpFreeInternal(tmpl->proxy_host);
+    }
+    tmpl->proxy_host = _sceHttpMallocInternal(func_0000BE38(info.http_proxy_server) + 1);
+    if (tmpl->proxy_host == NULL) {
+        ret = 0x80431022;
+        goto end;
+    }
+    func_0000C0DC(tmpl->proxy_host, info.http_proxy_server);
+end:
+    return ret;
+}
 
 INCLUDE_ASM("nonmatchings/libhttp", CreateConnection);
 #endif
