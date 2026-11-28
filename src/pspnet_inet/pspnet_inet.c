@@ -4438,7 +4438,7 @@ s32 func_00019A98(void) {
 }
 #endif
 
-void func_00019AA0(void *key) {
+void icmp_mtudisc_callback_register(void *key) {
     struct SceNetInetKeyNode *p;
     for (p = D_0002C5B8.lh_first; p != NULL; p = p->next) {
         if (p->key == key) {
@@ -5088,7 +5088,7 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_00020BB8);
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00021070);
 #endif
 
-void func_00021458(void) {
+void syn_cache_init(void) {
     s32 i;
     D_0002DD04 = 0;
     for (i = 0; i < D_0002C1D4; i++) {

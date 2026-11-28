@@ -10,7 +10,42 @@ INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", func_000223CC);
 INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", func_00022450);
 #endif
 
-INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", func_000225DC);
+#if FW_VERSION < 201
+void tcp_init(void) {
+    s32 max_linkhdr;
+    s32 max_protohdr;
+
+    D_0002E8E4 = 3;
+    D_0002E8F4 = 4;
+    D_0002E8F8 = 0x200;
+    D_0002E8FC = 3;
+    D_000302E4 = 0;
+    D_0002EC10 = 0;
+    D_0002E900 = 1;
+    D_0002E904 = 1;
+    D_0002E908 = 1;
+    D_0002E90C = 1;
+    D_0002E910 = 1;
+    D_0002EC14 = 0;
+    D_0002EC18 = 0;
+    tcp_mss_ifmtu = 0;
+    tcp_compat_42 = 0;
+    tcp_iss_seq = 0;
+    tcp_now = 0;
+    func_0002C94C(&tcp_stat, 0, sizeof(tcp_stat));
+    tcp_timer_init();
+    in_pcbinit(&tcbtable, tcbhashsize, tcbhashsize);
+    tcp_delacks = NULL;
+    sceNetIfhandle_lib_5FB31C72(&max_linkhdr, &max_protohdr, NULL, NULL);
+    if (max_protohdr < (s32)(sizeof(struct ip) + sizeof(struct tcphdr)))
+        max_protohdr = sizeof(struct ip) + sizeof(struct tcphdr);
+    sceNetIfhandle_lib_62B20015(max_linkhdr, max_protohdr, 0, 0);
+    icmp_mtudisc_callback_register((void *)tcp_mtudisc_callback);
+    syn_cache_init();
+}
+#else
+INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", tcp_init);
+#endif
 
 #if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", tcp_template);
@@ -698,11 +733,11 @@ void tcp_canceltimers(u8 *arg0) {
 }
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", func_00025E94);
+INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", tcp_timer_init);
 #endif
 
 #if FW_VERSION < 201
-void func_00025E94(void) {
+void tcp_timer_init(void) {
     tcp_keepidle = 0x3840;
     tcp_totbackoff = 0x1FF;
     tcp_keepintvl = 0x96;

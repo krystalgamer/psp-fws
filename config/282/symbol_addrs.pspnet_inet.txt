@@ -307,3 +307,6 @@ tcp_now = 0x0002DD2C;
 syn_cache_last = 0x0002C5D8;
 tcp_syn_cache_interval = 0x0002C1E0; // rom:0x2C280
 syn_cache_timer = 0x0001FA38; // type:func
+tcp_init = 0x000225DC; // type:func
+syn_cache_init = 0x00021458; // type:func
+icmp_mtudisc_callback_register = 0x00019AA0; // type:func
