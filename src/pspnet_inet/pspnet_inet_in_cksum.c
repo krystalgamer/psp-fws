@@ -1748,6 +1748,10 @@ s32 icmp_sysctl(s32 *name, u32 namelen, void *oldp, u32 *oldlenp, void *newp, u3
 
 INCLUDE_ASM("nonmatchings/pspnet_inet_in_cksum", func_000197D4);
 
+#if FW_VERSION < 151
+INCLUDE_ASM("nonmatchings/pspnet_inet_in_cksum", ip_next_mtu);
+#endif
+
 #if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_inet_in_cksum", func_0001A410);
 #endif

@@ -76,3 +76,4 @@ func_0002D5C4 = 0x0002D5C4; // type:func
 func_0002D5EC = 0x0002D5EC; // type:func
 func_0002D6AC = 0x0002D6AC; // type:func
 func_0002D6CC = 0x0002D6CC; // type:func
+ip_next_mtu = 0x0001A398; // type:func
