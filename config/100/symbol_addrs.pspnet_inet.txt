@@ -574,3 +574,4 @@ rn_ones = 0x0002EB80;
 addmask_key = 0x0002EB78;
 mask_rnhead = 0x0002F2F4;
 ip_setmoptions = 0x00018480; // type:func
+in_ifaddrhashtbl = 0x0002FF74;

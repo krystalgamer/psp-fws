@@ -1362,6 +1362,22 @@ struct SceNetInetTcpcbstat {
     s32 t_state;                        /* 0x18 */
 };
 
+struct ip_mreq {
+    struct in_addr imr_multiaddr;       /* 0x0 */
+    struct in_addr imr_interface;       /* 0x4 */
+};
+/* SCE INADDR_TO_IA: in_ifaddrhashtbl[addr % 509], skipping interfaces that are down */
+#define INADDR_TO_IA(addr, ia) { \
+    for (ia = in_ifaddrhashtbl[(u32)(addr).s_addr % 509]; ia != NULL; ia = ia->ia_hash.le_next) \
+        if (ia->ia_addr.sin_addr.s_addr == (addr).s_addr && (ia->ia_ifp->if_flags & IFF_UP)) \
+            break; \
+}
+#define INADDR_TO_IFP(addr, ifp) { \
+    struct in_ifaddr *ia; \
+    INADDR_TO_IA(addr, ia); \
+    (ifp) = (ia == NULL) ? NULL : ia->ia_ifp; \
+}
+
 struct SceTailqHead {
     void *tqh_first;
     void **tqh_last;
@@ -1718,6 +1734,7 @@ extern u8 ether_ipmulticast_max[6]; /* ether_ipmulticast_max */
 extern u8 ether_ipmulticast_min[6]; /* ether_ipmulticast_min */
 extern struct igmpstat igmp_stat; /* igmpstat */
 extern s32 igmp_timers_are_running; /* igmp_timers_are_running */
+extern struct in_ifaddr **in_ifaddrhashtbl; /* in_ifaddrhashtbl */
 extern TAILQ_HEAD(, in_ifaddr) in_ifaddrhead; /* in_ifaddr */
 extern u32 in_maxmtu;
 extern TAILQ_HEAD(, in_ifaddr) in_mk; /* in_mk */
