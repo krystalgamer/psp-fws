@@ -1285,9 +1285,25 @@ INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_A41929DA);
 
 #if FW_VERSION < 310
 INCLUDE_ASM("nonmatchings/sysreg", func_00001814);
-#endif
 
+s32 sceSysregRequestIntr(u32 cpu, u32 intno) {
+    s32 cur;
+    if (intno >= 32 || cpu >= 2) {
+        return 0x80000102;
+    }
+    while (sceSysregSemaTryLock() < 0) {
+    }
+    ((volatile u32 *)0xBFC00400)[cpu] |= 1 << intno;
+    sceSysregSemaUnlock();
+    asm volatile("mfc0 %0, $22" : "=r"(cur));
+    if (cpu != cur) {
+        sceSysregInterruptToOther();
+    }
+    return 0;
+}
+#else
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregRequestIntr);
+#endif
 
 #if FW_VERSION == 271
 INCLUDE_RODATA("nonmatchings/sysreg", D_00002B04);
@@ -1327,8 +1343,8 @@ s32 sceSysregEnableIntr(u32 intno) {
     s32 old;
     if (intno < 32) {
         intr = sceKernelCpuSuspendIntr();
-        old = (D_00002614 >> intno) & 1;
-        D_00002614 |= 1 << intno;
+        old = (D_00002614.enabled >> intno) & 1;
+        D_00002614.enabled |= 1 << intno;
         sceKernelCpuResumeIntr(intr);
         return old;
     }
@@ -1340,8 +1356,8 @@ s32 sceSysregDisableIntr(u32 intno) {
     s32 old;
     if (intno < 32) {
         intr = sceKernelCpuSuspendIntr();
-        old = (D_00002614 >> intno) & 1;
-        D_00002614 &= ~(1 << intno);
+        old = (D_00002614.enabled >> intno) & 1;
+        D_00002614.enabled &= ~(1 << intno);
         sceKernelCpuResumeIntr(intr);
         return old;
     }
@@ -1369,26 +1385,26 @@ INCLUDE_ASM("nonmatchings/sysreg", func_00001AE8_v310);
 #endif
 
 s32 func_00001AC8(s32 arg0, s32 bit) {
-    D_00002614 |= 1 << bit;
+    D_00002614.enabled |= 1 << bit;
     return 0;
 }
 
 s32 func_00001AE8(s32 arg0, s32 bit) {
-    D_00002614 &= ~(1 << bit);
+    D_00002614.enabled &= ~(1 << bit);
     return 0;
 }
 
 s32 func_00001B0C(s32 arg0, s32 bit, s32 *old) {
     u32 m = ~(1 << bit);
     if (old != NULL) {
-        *old = (D_00002614 >> bit) & 1;
+        *old = (D_00002614.enabled >> bit) & 1;
     }
-    D_00002614 &= m;
+    D_00002614.enabled &= m;
     return 0;
 }
 
 s32 func_00001B44(s32 arg0, s32 bit, s32 val) {
-    D_00002614 |= val << bit;
+    D_00002614.enabled |= val << bit;
     return 0;
 }
 

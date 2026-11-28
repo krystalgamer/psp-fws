@@ -7,6 +7,7 @@
   "func_00000B64": "s32 func_00000B64(u32 mask, s32 on);",
   "func_00000C58": "s32 func_00000C58(u32 mask, s32 on);",
   "func_00001104": "s32 func_00001104(u32 mask, s32 on);",
+  "func_00001814": "s32 func_00001814(s32 intno, s32 unk, void *arg);",
   "func_00001A68": "s32 func_00001A68(u32 bit, s32 on);",
   "func_00001AC8": "s32 func_00001AC8(s32 arg0, s32 bit);",
   "func_00001AE8": "s32 func_00001AE8(s32 arg0, s32 bit);",
@@ -21,11 +22,12 @@
   "sceClkcGetCpuFrequency": "float sceClkcGetCpuFrequency(void);",
   "sceClkcSetBusFrequency": "s32 sceClkcSetBusFrequency(float freq);",
   "sceClkcSetCpuFrequency": "s32 sceClkcSetCpuFrequency(float freq);",
+  "sceKernelCallSubIntrHandler": "s32 sceKernelCallSubIntrHandler(s32 intrNum, s32 subIntrNum, s32 arg2, void *arg3);",
   "sceKernelCpuResumeIntr": "void sceKernelCpuResumeIntr(s32);",
   "sceKernelCpuResumeIntrWithSync": "void sceKernelCpuResumeIntrWithSync(s32);",
   "sceKernelCpuSuspendIntr": "s32 sceKernelCpuSuspendIntr(void);",
   "sceKernelEnableIntr": "M2C_UNK sceKernelEnableIntr(M2C_UNK);",
-  "sceKernelRegisterIntrHandler": "M2C_UNK sceKernelRegisterIntrHandler(M2C_UNK, M2C_UNK, M2C_UNK *, M2C_UNK, M2C_UNK *);",
+  "sceKernelRegisterIntrHandler": "s32 sceKernelRegisterIntrHandler(s32 intno, s32 no, void *handler, s32 arg3, void *opt);",
   "sceKernelRegisterSysEventHandler": "M2C_UNK sceKernelRegisterSysEventHandler(M2C_UNK *);",
   "sceKernelReleaseIntrHandler": "M2C_UNK sceKernelReleaseIntrHandler(M2C_UNK);",
   "sceKernelUnregisterSysEventHandler": "M2C_UNK sceKernelUnregisterSysEventHandler(M2C_UNK *);",
@@ -44,12 +46,14 @@
   "sceSysregPllUpdateFrequency": "float sceSysregPllUpdateFrequency(void);",
   "sceSysregUsbAcquireIntr": "s32 sceSysregUsbAcquireIntr(s32 arg0);"
  },
+ "types": {
+  "SceSysregIntrState": "typedef struct {\n    u32 enabled; /* sysreg software interrupt enable mask */\n    u32 next;    /* round-robin start bit for the dispatcher */\n} SceSysregIntrState;\ntypedef char chk_SceSysregIntrState[(sizeof(SceSysregIntrState) == 8) ? 1 : -1];"
+ },
  "vars": {
   "D_000025C0": "extern s32 D_000025C0;",
   "D_00002610": "extern float D_00002610;",
-  "D_00002614": "extern u32 D_00002614;",
+  "D_00002614": "extern SceSysregIntrState D_00002614;",
   "D_00002B04": "extern const float D_00002B04[];",
-  "D_00002BD0": "extern M2C_UNK D_00002BD0;",
-  "func_00001814": "extern M2C_UNK func_00001814;"
+  "D_00002BD0": "extern M2C_UNK D_00002BD0;"
  }
 }

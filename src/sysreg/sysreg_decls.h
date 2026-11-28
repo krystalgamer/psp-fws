@@ -4,12 +4,17 @@
 #include "common.h"
 #include "m2c_macros.h"
 
+typedef struct {
+    u32 enabled; /* sysreg software interrupt enable mask */
+    u32 next;    /* round-robin start bit for the dispatcher */
+} SceSysregIntrState;
+typedef char chk_SceSysregIntrState[(sizeof(SceSysregIntrState) == 8) ? 1 : -1];
+
 extern s32 D_000025C0;
 extern float D_00002610;
-extern u32 D_00002614;
+extern SceSysregIntrState D_00002614;
 extern const float D_00002B04[];
 extern M2C_UNK D_00002BD0;
-extern M2C_UNK func_00001814;
 
 s32 func_000000B4(void);
 s32 func_000000BC(void);
@@ -18,6 +23,7 @@ s32 func_00000588(u32 mask, s32 on);
 s32 func_00000B64(u32 mask, s32 on);
 s32 func_00000C58(u32 mask, s32 on);
 s32 func_00001104(u32 mask, s32 on);
+s32 func_00001814(s32 intno, s32 unk, void *arg);
 s32 func_00001A68(u32 bit, s32 on);
 s32 func_00001AC8(s32 arg0, s32 bit);
 s32 func_00001AE8(s32 arg0, s32 bit);
@@ -32,11 +38,12 @@ float sceClkcGetBusFrequency(void);
 float sceClkcGetCpuFrequency(void);
 s32 sceClkcSetBusFrequency(float freq);
 s32 sceClkcSetCpuFrequency(float freq);
+s32 sceKernelCallSubIntrHandler(s32 intrNum, s32 subIntrNum, s32 arg2, void *arg3);
 void sceKernelCpuResumeIntr(s32);
 void sceKernelCpuResumeIntrWithSync(s32);
 s32 sceKernelCpuSuspendIntr(void);
 M2C_UNK sceKernelEnableIntr(M2C_UNK);
-M2C_UNK sceKernelRegisterIntrHandler(M2C_UNK, M2C_UNK, M2C_UNK *, M2C_UNK, M2C_UNK *);
+s32 sceKernelRegisterIntrHandler(s32 intno, s32 no, void *handler, s32 arg3, void *opt);
 M2C_UNK sceKernelRegisterSysEventHandler(M2C_UNK *);
 M2C_UNK sceKernelReleaseIntrHandler(M2C_UNK);
 M2C_UNK sceKernelUnregisterSysEventHandler(M2C_UNK *);
