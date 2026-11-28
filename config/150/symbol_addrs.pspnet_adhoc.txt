@@ -157,3 +157,4 @@ ptpSendCtl = 0x0000667C; // type:func
 gameModeCreate = 0x00007018; // type:func
 g_adhocStat = 0x00007AA8;
 ptpOutput = 0x00006878; // type:func
+g_pdpStat = 0x00007A8C;

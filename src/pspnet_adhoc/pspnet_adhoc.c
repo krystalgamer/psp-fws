@@ -1091,18 +1091,13 @@ s32 sceNetAdhocPdpRecvWithRfInfo(s32 id, SceNetEtherAddr *addr, u16 *port, void 
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
 void sceNetAdhoc_lib_F9240FBA(void) {
-    sceNetMemset(&D_00007A8C, 0, 0x18);
+    sceNetMemset(&g_pdpStat, 0, sizeof(g_pdpStat));
 }
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 201
 void sceNetAdhoc_lib_F9240FBA(void) {
-    M2C_VFIELD(&D_00007A8C, s32, 0) = 0;
-    M2C_VFIELD(&D_00007A8C, s32, 0x14) = 0;
-    M2C_VFIELD(&D_00007A8C, s32, 4) = 0;
-    M2C_VFIELD(&D_00007A8C, s32, 8) = 0;
-    M2C_VFIELD(&D_00007A8C, s32, 0xC) = 0;
-    M2C_VFIELD(&D_00007A8C, s32, 0x10) = 0;
+    __builtin_memset(&g_pdpStat, 0, sizeof(g_pdpStat));
 }
 #endif
 
@@ -1285,7 +1280,7 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00002108);
 
 #if FW_VERSION >= 282
 void sceNetAdhoc_lib_F9240FBA(void) {
-    sceNetMemset(&D_000079CC, 0, 0x18);
+    sceNetMemset(&g_pdpStat, 0, sizeof(g_pdpStat));
 }
 
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", sceNetAdhoc_lib_1059683E);

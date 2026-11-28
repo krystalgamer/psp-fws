@@ -9,6 +9,11 @@ typedef struct {
     u32 flag;
 } SceNetAdhocGameModeOptData;
 
+/* 1.50+ PDP statistics counters (0x18) */
+typedef struct {
+    u32 stat[6];
+} SceNetAdhocPdpStatCnt;
+
 typedef struct {
     s32 id;
     s32 events;
@@ -312,9 +317,7 @@ struct sockaddr_dl {
 
 extern const SceNetEtherAddr D_000078A4; /* ff:ff:ff:ff:ff:ff */
 extern const SceNetEtherAddr D_000078AC; /* 00:00:00:00:00:00 */
-extern M2C_UNK D_000079CC;
 extern u16 D_000079E4;
-extern M2C_UNK D_00007A8C;
 extern SceNetAdhocDescList g_adhocDescList;
 extern s32 g_adhocInit;
 extern struct ifqueue g_adhocIntrq;
@@ -325,6 +328,7 @@ extern SceNetAdhocGameModeList g_gameModeList;
 extern s32 g_gameModeMasterId;
 extern u16 g_pdpLastPort;
 extern SceNetAdhocPdpList g_pdpList;
+extern SceNetAdhocPdpStatCnt g_pdpStat;
 extern u32 g_ptpIss;
 extern u16 g_ptpLastPort;
 extern SceNetAdhocPtpList g_ptpList;

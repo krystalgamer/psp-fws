@@ -171,6 +171,7 @@
   "SceNetAdhocPdpPcb": "/* PDP control block (1.00: 0x38, 1.50+: 0x34; offsets in comments are 1.00) */\ntypedef struct SceNetAdhocPdpPcb {\n    struct SceNetAdhocPdpPcb *next;     /* 0x00 TAILQ on the PDP list */\n    struct SceNetAdhocPdpPcb **prev;    /* 0x04 */\n#if FW_VERSION < 150\n    struct ifnet *ifp;                  /* 0x08 (1.50+: looked up from laddr) */\n#endif\n    SceNetEtherAddr laddr;              /* 0x0C */\n    u16 lport;                          /* 0x12 */\n    struct mbuf *rcvq_first;            /* 0x14 */\n    struct mbuf *rcvq_last;             /* 0x18 */\n    s32 rcvcc;                          /* 0x1C */\n    s32 rcvbufsize;                     /* 0x20 */\n    s32 unk24;\n    u32 flags;                          /* 0x28 */\n    SceNetAdhocDesc *desc;              /* 0x2C */\n    SceNetAdhocPdpQent *qfirst;         /* 0x30 */\n    SceNetAdhocPdpQent **qlast;         /* 0x34 */\n} SceNetAdhocPdpPcb;\ntypedef char chk_SceNetAdhocPdpPcb[(sizeof(SceNetAdhocPdpPcb) == ((FW_VERSION < 150) ? 0x38 : 0x34)) ? 1 : -1];",
   "SceNetAdhocPdpQent": "/* queued PDP send entry (callout-driven) */\ntypedef struct SceNetAdhocPdpQent {\n    struct SceNetAdhocPdpQent *next;    /* 0x00 */\n    struct SceNetAdhocPdpQent **prev;   /* 0x04 */\n    s32 unk8;\n    struct mbuf *m;                     /* 0x0C */\n    u8 callout[0x34 - 0x10];            /* 0x10 */\n    struct SceNetAdhocPdpPcb *pcb;      /* 0x34 */\n} SceNetAdhocPdpQent;",
   "SceNetAdhocPdpStat": "typedef struct SceNetAdhocPdpStat {\n    struct SceNetAdhocPdpStat *next;    /* 0x00 */\n    s32 id;                             /* 0x04 */\n    SceNetEtherAddr laddr;              /* 0x08 */\n    u16 lport;                          /* 0x0E */\n    u32 rcv_sb_cc;                      /* 0x10 */\n} SceNetAdhocPdpStat;",
+  "SceNetAdhocPdpStatCnt": "/* 1.50+ PDP statistics counters (0x18) */\ntypedef struct {\n    u32 stat[6];\n} SceNetAdhocPdpStatCnt;",
   "SceNetAdhocPollEnt": "typedef struct {\n    SceNetAdhocDesc *d;\n    SceNetAdhocPollSd *sd;\n} SceNetAdhocPollEnt;",
   "SceNetAdhocPollSd": "typedef struct {\n    s32 id;\n    s32 events;\n    s32 revents;\n} SceNetAdhocPollSd;",
   "SceNetAdhocPtpList": "typedef struct {\n    SceNetAdhocPtpPcb *first;\n    SceNetAdhocPtpPcb **last;\n} SceNetAdhocPtpList;",
@@ -191,9 +192,7 @@
  "vars": {
   "D_000078A4": "extern const SceNetEtherAddr D_000078A4; /* ff:ff:ff:ff:ff:ff */",
   "D_000078AC": "extern const SceNetEtherAddr D_000078AC; /* 00:00:00:00:00:00 */",
-  "D_000079CC": "extern M2C_UNK D_000079CC;",
   "D_000079E4": "extern u16 D_000079E4;",
-  "D_00007A8C": "extern M2C_UNK D_00007A8C;",
   "g_adhocDescList": "extern SceNetAdhocDescList g_adhocDescList;",
   "g_adhocInit": "extern s32 g_adhocInit;",
   "g_adhocIntrq": "extern struct ifqueue g_adhocIntrq;",
@@ -204,6 +203,7 @@
   "g_gameModeMasterId": "extern s32 g_gameModeMasterId;",
   "g_pdpLastPort": "extern u16 g_pdpLastPort;",
   "g_pdpList": "extern SceNetAdhocPdpList g_pdpList;",
+  "g_pdpStat": "extern SceNetAdhocPdpStatCnt g_pdpStat;",
   "g_ptpIss": "extern u32 g_ptpIss;",
   "g_ptpLastPort": "extern u16 g_ptpLastPort;",
   "g_ptpList": "extern SceNetAdhocPtpList g_ptpList;"

@@ -82,3 +82,4 @@ g_gameModeList = 0x000079C0;
 g_adhocIntrq = 0x00007984;
 g_adhocSelChan = 0x000079C8;
 g_adhocStat = 0x000079E8;
+g_pdpStat = 0x000079CC;
