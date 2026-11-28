@@ -230,13 +230,13 @@ s32 scePowerWlanDeactivate(void) {
 
 #if FW_VERSION >= 102 && FW_VERSION < 150
 u8 scePowerGetWlanActivity(void) {
-    return D_00004244;
+    return g_Power.wlanActivity;
 }
 #endif
 
 #if FW_VERSION == 103
 u8 scePowerGetLedOffTiming(void) {
-    return D_000045C7;
+    return g_Power.ledOffTiming;
 }
 
 INCLUDE_ASM("nonmatchings/power", func_00000590);
