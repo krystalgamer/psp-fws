@@ -722,8 +722,8 @@ struct rtentry *in_pcbrtentry(struct inpcb *inp) {
 #if FW_VERSION < 201
 void func_00014588(void) {
     tcp_syn_cache_size = 0x125;
-    D_0002E798 = 0x280F;
-    D_0002E79C = 0x69;
+    tcp_syn_cache_limit = 0x280F;
+    tcp_syn_bucket_limit = 0x69;
     func_0002C94C(tcp_syn_cache, 0, 0x928);
     tcp_syn_cache_interval = 1;
     D_0002E7A4 = 100;

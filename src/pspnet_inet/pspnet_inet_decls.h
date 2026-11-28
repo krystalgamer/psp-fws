@@ -1088,6 +1088,15 @@ struct syn_cache_head {
     u16 sch_length;                     /* 0x4 */
 };
 TAILQ_HEAD(syn_cache_timeq_head, syn_cache);
+#define SYN_HASH(sa, sp, dp) \
+    ((((sa)->s_addr^syn_hash1)*(((((u32)(dp))<<16) + \
+                     ((u32)(sp)))^syn_hash2)))
+#define SYN_HASHALL(hash, src, dst) \
+do { \
+    hash = SYN_HASH(&((struct sockaddr_in *)(src))->sin_addr, \
+        ((struct sockaddr_in *)(src))->sin_port, \
+        ((struct sockaddr_in *)(dst))->sin_port); \
+} while (0)
 #define TCPTV_SRTTDFLT 6
 #define TCPTV_MIN 2
 #define TCPTV_REXMTMAX 128
@@ -1774,8 +1783,6 @@ extern s32 D_0002E5EC;
 extern s32 D_0002E5F0;
 extern s32 D_0002E5F4; /* lowportmin */
 extern s32 D_0002E5F8; /* lowportmax */
-extern s32 D_0002E798;
-extern s32 D_0002E79C;
 extern s32 D_0002E7A4;
 extern s32 D_0002E7B0; /* ip_defttl */
 extern struct sockaddr_in D_0002E834 __attribute__((aligned(4)));
@@ -1857,6 +1864,8 @@ extern struct soqhead so_list;
 extern s32 somaxconn; /* somaxconn */
 extern s32 syn_cache_count;
 extern s32 syn_cache_last;
+extern u32 syn_hash1;
+extern u32 syn_hash2;
 extern s32 tcbhashsize; /* tcbhashsize */
 extern struct inpcbtable tcbtable;
 extern s32 tcp_ack_on_push;
@@ -1880,8 +1889,10 @@ extern u32 tcp_now; /* tcp_now */
 extern u32 tcp_recvspace; /* tcp_recvspace */
 extern u32 tcp_sendspace; /* tcp_sendspace */
 extern struct tcpstat tcp_stat;
+extern s32 tcp_syn_bucket_limit;
 extern struct syn_cache_head tcp_syn_cache[];
 extern s32 tcp_syn_cache_interval;
+extern u32 tcp_syn_cache_limit;
 extern s32 tcp_syn_cache_size;
 extern struct syn_cache_timeq_head tcp_syn_cache_timeq[13];
 extern s32 tcp_totbackoff; /* tcp_totbackoff */
@@ -2293,6 +2304,7 @@ void sppp_pap_tld(struct sppp *sp);
 void sppp_to_event(const struct cp *cp, struct sppp *sp);
 void syn_cache_cleanup(struct tcpcb *tp);
 void syn_cache_init(void);
+void syn_cache_insert(struct syn_cache *sc, struct tcpcb *tp);
 s32 syn_cache_respond(struct syn_cache *sc, struct mbuf *m);
 void syn_cache_timer(void);
 s32 sysctl_int(void *oldp, u32 *oldlenp, void *newp, u32 newlen, s32 *valp);

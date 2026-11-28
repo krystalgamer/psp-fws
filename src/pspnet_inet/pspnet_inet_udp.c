@@ -750,7 +750,64 @@ INCLUDE_ASM("nonmatchings/pspnet_inet_udp", func_0001F178);
 #if FW_VERSION < 151
 INCLUDE_ASM("nonmatchings/pspnet_inet_udp", func_00020A20);
 
-INCLUDE_ASM("nonmatchings/pspnet_inet_udp", func_00020B74);
+void syn_cache_insert(struct syn_cache *sc, struct tcpcb *tp)
+{
+	struct syn_cache_head *scp;
+	struct syn_cache *sc2;
+	int s, i;
+
+	if (syn_cache_count == 0) {
+		struct timeval tv;
+		_sce_pspnet_microtime(&tv);
+		syn_hash1 = sceNetRand() ^ (u32)&sc;
+		syn_hash2 = sceNetRand() ^ tv.tv_usec;
+	}
+
+	SYN_HASHALL(sc->sc_hash, &sc->sc_src, &sc->sc_dst);
+	sc->sc_bucketidx = sc->sc_hash % tcp_syn_cache_size;
+	scp = &tcp_syn_cache[sc->sc_bucketidx];
+
+	s = _sce_pspnet_spllock();
+	if (scp->sch_length >= tcp_syn_bucket_limit) {
+		tcp_stat.tcps_sc_bucketoverflow++;
+		for (i = TCP_MAXRXTSHIFT; i >= 0; i--) {
+			for (sc2 = TAILQ_FIRST(&tcp_syn_cache_timeq[i]);
+			     sc2 != NULL;
+			     sc2 = TAILQ_NEXT(sc2, sc_timeq)) {
+				if (sc2->sc_bucketidx == sc->sc_bucketidx) {
+					SYN_CACHE_RM(sc2);
+					SYN_CACHE_PUT(sc2);
+					goto insert;
+				}
+			}
+		}
+	} else if (syn_cache_count >= tcp_syn_cache_limit) {
+		tcp_stat.tcps_sc_overflowed++;
+		for (i = TCP_MAXRXTSHIFT; i >= 0; i--) {
+			sc2 = TAILQ_FIRST(&tcp_syn_cache_timeq[i]);
+			if (sc2 == NULL)
+				continue;
+			SYN_CACHE_RM(sc2);
+			SYN_CACHE_PUT(sc2);
+			goto insert;
+		}
+	}
+
+ insert:
+	sc->sc_rxttot = 0;
+	sc->sc_rxtshift = 0;
+	SYN_CACHE_TIMER_ARM(sc);
+	TAILQ_INSERT_TAIL(&tcp_syn_cache_timeq[sc->sc_rxtshift], sc, sc_timeq);
+
+	LIST_INSERT_HEAD(&tp->t_sc, sc, sc_tpq);
+
+	LIST_INSERT_HEAD(&scp->sch_bucket, sc, sc_bucketq);
+	scp->sch_length++;
+	syn_cache_count++;
+
+	tcp_stat.tcps_sc_added++;
+	_sce_pspnet_splunlock(s);
+}
 #endif
 
 #if FW_VERSION >= 282
