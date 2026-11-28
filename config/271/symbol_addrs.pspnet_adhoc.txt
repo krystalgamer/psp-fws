@@ -110,7 +110,7 @@ ptpSendCtl = 0x0000660C; // type:func rom:0x66AC
 func_00006AF8 = 0x000067F8; // type:func rom:0x6898
 func_00006B1C = 0x00006AA0; // type:func rom:0x6B40
 func_00006880 = 0x00006F68; // type:func rom:0x7008
-func_00007018 = 0x000070E8; // type:func rom:0x7188
+gameModeCreate = 0x000070E8; // type:func rom:0x7188
 func_00006BB8 = 0x00007204; // type:func rom:0x72A4
 func_00006C3C = 0x00007298; // type:func rom:0x7338
 // shared names (tools/add_version.py) end

@@ -3397,7 +3397,7 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00006B1C);
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00006AA0);
 #endif
 
-#if FW_VERSION < 150
+#if FW_VERSION < 201
 s32 sceNetAdhocGameModeCreateMaster(void *ptr, s32 size) {
     s32 s;
     s32 ret;
@@ -3405,6 +3405,10 @@ s32 sceNetAdhocGameModeCreateMaster(void *ptr, s32 size) {
 
     if (ptr == NULL)
         return 0x80410711;
+#if FW_VERSION >= 150
+    if ((u32)(size - 1) >= 0x400)
+        return 0x80410705;
+#endif
     ret = 0x80410712;
     s = _sce_pspnet_spllock();
     if (g_adhocInit == 0)
@@ -3415,7 +3419,7 @@ s32 sceNetAdhocGameModeCreateMaster(void *ptr, s32 size) {
     ret = sceNetGetLocalEtherAddr(&addr);
     if (ret < 0)
         goto end;
-    ret = func_00006AB8(&addr, ptr, size);
+    ret = gameModeCreate(&addr, ptr, size);
     if (ret < 0)
         goto end;
     g_gameModeMasterId = ret;
@@ -3426,7 +3430,34 @@ end:
 }
 #else
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", sceNetAdhocGameModeCreateMaster);
+#endif
 
+#if FW_VERSION >= 150 && FW_VERSION < 201
+s32 sceNetAdhocGameModeCreateReplica(const SceNetEtherAddr *addr, void *ptr, s32 size) {
+    s32 s;
+    s32 ret;
+
+    if (addr == NULL || ptr == NULL)
+        return 0x80410711;
+#if FW_VERSION >= 150
+    if ((u32)(size - 1) >= 0x400)
+        return 0x80410705;
+#endif
+    ret = 0x80410712;
+    s = _sce_pspnet_spllock();
+    if (g_adhocInit == 0)
+        goto end;
+    ret = 0x8041071B;
+    if (sceWlanDevIsGameMode() == 0)
+        goto end;
+    ret = gameModeCreate(addr, ptr, size);
+end:
+    _sce_pspnet_splunlock(s);
+    return ret;
+}
+#endif
+
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", sceNetAdhocGameModeCreateReplica);
 #endif
 
@@ -3501,6 +3532,10 @@ s32 sceNetAdhocGameModeCreateReplica(const SceNetEtherAddr *addr, void *ptr, s32
 
     if (addr == NULL || ptr == NULL)
         return 0x80410711;
+#if FW_VERSION >= 150
+    if ((u32)(size - 1) >= 0x400)
+        return 0x80410705;
+#endif
     ret = 0x80410712;
     s = _sce_pspnet_spllock();
     if (g_adhocInit == 0)
@@ -3508,7 +3543,7 @@ s32 sceNetAdhocGameModeCreateReplica(const SceNetEtherAddr *addr, void *ptr, s32
     ret = 0x8041071B;
     if (sceWlanDevIsGameMode() == 0)
         goto end;
-    ret = func_00006AB8(addr, ptr, size);
+    ret = gameModeCreate(addr, ptr, size);
 end:
     _sce_pspnet_splunlock(s);
     return ret;
@@ -3570,13 +3605,11 @@ end:
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", sceNetAdhocGameModeDeleteReplica);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00007018);
+#if FW_VERSION < 282
+INCLUDE_ASM("nonmatchings/pspnet_adhoc", gameModeCreate);
 #endif
 
 #if FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00006AB8);
-
 s32 func_00006BB8(s32 id) {
     SceNetAdhocGameMode *gm;
 

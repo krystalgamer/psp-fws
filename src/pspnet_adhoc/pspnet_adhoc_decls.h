@@ -407,7 +407,6 @@ void func_00005FF8(struct ifnet *ifp, const SceNetEtherAddr *laddr, u16 lport, c
 void func_0000648C(SceNetAdhocPtpPcb *pcb, s32 rexmt);
 s32 func_00006880(void);
 void func_000069D4(SceNetAdhocPtpPcb *pcb);
-s32 func_00006AB8(const SceNetEtherAddr *addr, void *ptr, s32 size);
 s32 func_00006BB8(s32 id);
 s32 func_00006C3C(s32 id, SceNetAdhocGameModeOptData *opt, s32 internal);
 void *func_00006D6C(const void *s, s32 c, s32 n);
@@ -421,6 +420,7 @@ void func_00006F1C(void *s, s32 n);
 s32 func_00006F68(void);
 void func_00006F80(void);
 s32 func_00007298(s32 id, SceNetAdhocGameModeOptData *opt, s32 internal);
+s32 gameModeCreate(const SceNetEtherAddr *addr, void *ptr, s32 size);
 s32 module_start(void);
 s32 module_stop(void);
 void ptpSendCtl(SceNetAdhocPtpPcb *pcb, u8 type);
