@@ -461,8 +461,8 @@ s32 sceNetAdhocGameModeCreateReplica(const SceNetEtherAddr *addr, void *ptr, s32
 s32 sceNetAdhocGameModeDeleteMaster(void);
 s32 sceNetAdhocGameModeDeleteReplica(s32 id);
 s32 sceNetAdhocGameModeUpdateMaster(void);
-void sceNetAdhocGameModeUpdateReplica(s32 id, SceNetAdhocGameModeOptData *opt);
-void sceNetAdhocGameModeUpdateReplicaInternal(s32 id, SceNetAdhocGameModeOptData *opt);
+s32 sceNetAdhocGameModeUpdateReplica(s32 id, SceNetAdhocGameModeOptData *opt);
+s32 sceNetAdhocGameModeUpdateReplicaInternal(s32 id, SceNetAdhocGameModeOptData *opt);
 s32 sceNetAdhocGetPdpStat(s32 *buflen, SceNetAdhocPdpStat *buf);
 s32 sceNetAdhocGetPtpStat(s32 *buflen, SceNetAdhocPtpStat *buf);
 s32 sceNetAdhocGetSocketAlert(s32 id, s32 *flag);

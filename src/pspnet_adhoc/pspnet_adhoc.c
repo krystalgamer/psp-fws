@@ -3814,17 +3814,29 @@ end:
 }
 #endif
 
+#if FW_VERSION >= 201 && FW_VERSION < 282
+s32 sceNetAdhocGameModeUpdateReplica(s32 id, SceNetAdhocGameModeOptData *opt) {
 #if FW_VERSION >= 201
+    if (sceKernelCheckThreadStack() < 0x7F0)
+        return 0x80410005;
+#endif
+    return gameModeUpdateReplica(id, opt, 0);
+}
+#endif
+
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", sceNetAdhocGameModeUpdateReplica);
-#else
-void sceNetAdhocGameModeUpdateReplica(s32 arg0, SceNetAdhocGameModeOptData *arg1) {
-    gameModeUpdateReplica(arg0, arg1, 0);
+#endif
+
+#if FW_VERSION < 201
+s32 sceNetAdhocGameModeUpdateReplica(s32 id, SceNetAdhocGameModeOptData *opt) {
+    return gameModeUpdateReplica(id, opt, 0);
 }
 #endif
 
 #if FW_VERSION < 282
-void sceNetAdhocGameModeUpdateReplicaInternal(s32 arg0, SceNetAdhocGameModeOptData *arg1) {
-    gameModeUpdateReplica(arg0, arg1, 1);
+s32 sceNetAdhocGameModeUpdateReplicaInternal(s32 id, SceNetAdhocGameModeOptData *opt) {
+    return gameModeUpdateReplica(id, opt, 1);
 }
 #endif
 
@@ -3846,8 +3858,8 @@ s32 sceNetAdhocGameModeDeleteMaster(void) {
 #endif
 
 #if FW_VERSION >= 282
-void sceNetAdhocGameModeUpdateReplicaInternal(s32 arg0, SceNetAdhocGameModeOptData *arg1) {
-    func_00007298(arg0, arg1, 1);
+s32 sceNetAdhocGameModeUpdateReplicaInternal(s32 id, SceNetAdhocGameModeOptData *opt) {
+    return func_00007298(id, opt, 1);
 }
 #endif
 
