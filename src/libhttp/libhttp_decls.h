@@ -341,6 +341,105 @@ struct _SceHttpConnection {
     struct _SceHttpConnection *pre;
 } /* size 0x130 */;
 
+/* 1.00-1.03 template (sceHttpCreateTemplate); offsets from the 1.00 asm.
+ * Embedded in SceHttpConn (+0xA4) and SceHttpReq (+0x84/+0x88). */
+typedef struct SceHttpTmpl {
+    s32 id;                 /* 0x00 template_id (ids 0x00xxxxxx) */
+    s32 http_ver;           /* 0x04 */
+    s32 reference_counter;  /* 0x08 */
+    s32 use_netcnf;         /* 0x0C */
+    s32 proxy_status;       /* 0x10 */
+    u32 resolver_timeo;     /* 0x14 */
+    u32 connect_timeo;      /* 0x18 */
+    u32 receive_timeo;      /* 0x1C */
+    u32 send_timeo;         /* 0x20 */
+    u32 unk24;              /* 0x24 */
+    u32 unk28;              /* 0x28 */
+    u32 unk2C;              /* 0x2C */
+    char *proxy_host;       /* 0x30 */
+    char *str34;            /* 0x34 */
+    char *str38;            /* 0x38 */
+    s32 keep_alive;         /* 0x3C */
+    s32 redirect;           /* 0x40 */
+    s32 cache;              /* 0x44 */
+    s32 cookie;             /* 0x48 */
+    s32 auth;               /* 0x4C */
+    s32 unk50;              /* 0x50 */
+    s32 proxy_mode;         /* 0x54 */
+    void *unk58;            /* 0x58 */
+    void *unk5C;            /* 0x5C */
+    void *password_cb;      /* 0x60 sceHttpSetAuthInfoCB */
+    _SceHttpReqHeaderList *header_list; /* 0x64 */
+    void *unk68;            /* 0x68 */
+    void *unk6C;            /* 0x6C */
+    struct SceHttpTmpl *next; /* 0x70 */
+    struct SceHttpTmpl *pre;  /* 0x74 */
+    u16 proxy_port;         /* 0x78 */
+    u8 unk7A[0x84 - 0x7A];
+} SceHttpTmpl;
+typedef char chk_SceHttpTmpl[(sizeof(SceHttpTmpl) == 0x84) ? 1 : -1];
+
+/* 1.00-1.03 connection (ids 0x01xxxxxx) */
+typedef struct SceHttpConn {
+    s32 id;                 /* 0x00 */
+    s32 protocol;           /* 0x04 */
+    s32 reference_counter;  /* 0x08 */
+    u8 unk0C[0x24 - 0x0C];
+    s32 sock_id;            /* 0x24 */
+    u8 unk28[0xA4 - 0x28];
+    SceHttpTmpl tmpl;       /* 0xA4 */
+    u8 unk128[0x150 - 0x128];
+    struct SceHttpConn *next; /* 0x150 */
+    struct SceHttpConn *pre;  /* 0x154 */
+    u8 unk158[0x164 - 0x158];
+} SceHttpConn;
+typedef char chk_SceHttpConn[(sizeof(SceHttpConn) == 0x164) ? 1 : -1];
+
+/* 1.00-1.03 request (ids 0x02xxxxxx); 1.02/1.03 grew by 0x18 */
+#if FW_VERSION < 102
+#define HTTP_REQ_V(a, b) (a)
+#else
+#define HTTP_REQ_V(a, b) (b)
+#endif
+typedef struct SceHttpReq {
+    u8 unk00[0x10];
+    s32 id;                 /* 0x10 */
+    u8 unk14[0x18 - 0x14];
+    s32 reference_counter;  /* 0x18 */
+    u8 unk1C[0x2C - 0x1C];
+    s32 status;             /* 0x2C */
+    u8 unk30[HTTP_REQ_V(0x84, 0x88) - 0x30];
+    SceHttpTmpl tmpl;       /* 0x84 (1.02: 0x88) */
+    u8 unk108[HTTP_REQ_V(0x124, 0x130) - HTTP_REQ_V(0x108, 0x10C)];
+    s32 response_code;      /* 0x124 (1.02: 0x130) */
+    u8 unk128[HTTP_REQ_V(0x178, 0x190) - HTTP_REQ_V(0x128, 0x134)];
+    struct SceHttpReq *next; /* 0x178 (1.02: 0x190) */
+    struct SceHttpReq *pre;  /* 0x17C (1.02: 0x194) */
+    u8 unk180[HTTP_REQ_V(0x188, 0x1A0) - HTTP_REQ_V(0x180, 0x198)];
+} SceHttpReq;
+typedef char chk_SceHttpReq[(sizeof(SceHttpReq) == HTTP_REQ_V(0x188, 0x1A0)) ? 1 : -1];
+
+typedef void *(*SceHttpMallocFunction100)(SceSize size);
+typedef void (*SceHttpFreeFunction100)(void *ptr);
+typedef void *(*SceHttpReallocFunction100)(void *ptr, SceSize size);
+/* sceHttpSetMallocFunction (0xDCC0 in 1.00) */
+typedef struct {
+    SceHttpMallocFunction100 malloc_func;
+    SceHttpFreeFunction100 free_func;
+    SceHttpReallocFunction100 realloc_func;
+} SceHttpMallocFuncs;
+/* library state (0xDCCC in 1.00) */
+typedef struct {
+    s32 inited;             /* 0x00 sceHttpInit */
+    SceUID vpl;             /* 0x04 libhttp_pool */
+    s32 cache_inited;       /* 0x08 sceHttpInitCache */
+    s32 unk0C;
+    u32 cache_size;         /* 0x10 */
+    s32 unk14;
+    void *cache_list;       /* 0x18 */
+    u8 unk1C[0x5C - 0x1C];
+} SceHttpGlobals;
+
 struct Unk_func_00005CD0_var_a0 {
     u8 pad0[0x7C];
     void *unk7C;
@@ -369,8 +468,13 @@ extern s32 D_0000DC28;
 extern s32 D_0000DC2C;
 extern s32 D_0000DC30;
 extern s32 D_0000DC35;
-extern s32 D_0000DCCC;
+extern SceHttpMallocFuncs D_0000DCC0;
+extern SceHttpGlobals D_0000DCCC;
 extern void *D_0000DCE4;
+extern s32 D_0000DD28;
+extern SceHttpTmpl D_0000DD2C;
+extern SceHttpConn D_0000DDB0;
+extern SceHttpReq D_0000DF18;
 extern s32 D_0000E0A0;
 extern s32 D_0000F0F0;
 extern s32 D_0000F0F4;

@@ -90,14 +90,14 @@ s32 sceHttpEnd(void) {
     s32 var_a0;
 
     var_a0 = 0x80431001;
-    if (M2C_FIELD(&D_0000DCCC, s32 *, 0) == 1) {
+    if (D_0000DCCC.inited == 1) {
         func_00009A38();
         func_000042D4();
-        if (M2C_FIELD(&D_0000DCCC, s32 *, 4) != 0) {
-            sceKernelDeleteVpl(M2C_FIELD(&D_0000DCCC, s32 *, 4));
-            M2C_FIELD(&D_0000DCCC, s32 *, 4) = 0;
+        if (D_0000DCCC.vpl != 0) {
+            sceKernelDeleteVpl(D_0000DCCC.vpl);
+            D_0000DCCC.vpl = 0;
         }
-        M2C_FIELD(&D_0000DCCC, s32 *, 0) = 0;
+        D_0000DCCC.inited = 0;
         var_a0 = 0;
     }
     return var_a0;
@@ -142,15 +142,9 @@ INCLUDE_ASM("nonmatchings/libhttp", sceHttpDeleteTemplate);
 INCLUDE_ASM("nonmatchings/libhttp", sceHttpCreateConnection);
 #endif
 
-#if FW_VERSION == 103
-INCLUDE_ASM("nonmatchings/libhttp", sceHttpSetProxy);
-#endif
-
-#if FW_VERSION < 103
-INCLUDE_ASM("nonmatchings/libhttp", sceHttpSetProxy);
-#endif
-
 #if FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/libhttp", sceHttpSetProxy);
+
 INCLUDE_ASM("nonmatchings/libhttp", sceHttpGetProxy);
 
 INCLUDE_ASM("nonmatchings/libhttp", GetProxyInfoFromSystem);
@@ -176,13 +170,7 @@ INCLUDE_ASM("nonmatchings/libhttp", sceHttpCreateRequest);
 
 #if FW_VERSION < 150 || FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/libhttp", sceHttpCreateRequestWithURL);
-#endif
 
-#if FW_VERSION >= 102 && FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/libhttp", sceHttpDeleteRequest);
-#endif
-
-#if FW_VERSION == 100 || FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/libhttp", sceHttpDeleteRequest);
 #endif
 
@@ -265,7 +253,7 @@ s32 sceHttpGetStatusCode(s32 arg0, s32 *arg1) {
     s32 temp_v0;
     s32 var_a0;
 
-    if (D_0000DCCC != 1) {
+    if (D_0000DCCC.inited != 1) {
         var_a0 = 0x80431001;
     } else {
         temp_v0 = GetHttpReq(arg0, &sp0);
@@ -298,17 +286,9 @@ INCLUDE_ASM("nonmatchings/libhttp", sceHttpGetNetworkErrno);
 
 #if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/libhttp", sceHttpGetAllHeader);
-#endif
 
-#if FW_VERSION == 103
 INCLUDE_ASM("nonmatchings/libhttp", sceHttpReadData);
-#endif
 
-#if FW_VERSION == 102
-INCLUDE_ASM("nonmatchings/libhttp", sceHttpReadData);
-#endif
-
-#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/libhttp", sceHttpSetAuthInfoCB);
 
 INCLUDE_ASM("nonmatchings/libhttp", sceHttpAddExtraHeader);
@@ -616,9 +596,30 @@ u32 func_00005DE0(u32 arg0) {
     return var_s1;
 }
 
-INCLUDE_ASM("nonmatchings/libhttp", _sceHttpMallocInternal);
+void *_sceHttpMallocInternal(SceSize size) {
+    void *ptr;
 
-INCLUDE_ASM("nonmatchings/libhttp", _sceHttpFreeInternal);
+    if (D_0000DCC0.malloc_func == NULL) {
+        if (sceKernelTryAllocateVpl(D_0000DCCC.vpl, size, &ptr) < 0) {
+            ptr = NULL;
+        }
+    } else {
+        ptr = D_0000DCC0.malloc_func(size);
+    }
+    if (ptr != NULL) {
+        D_0000DD28++;
+    }
+    return ptr;
+}
+
+void _sceHttpFreeInternal(void *ptr) {
+    if (D_0000DCC0.free_func == NULL) {
+        sceKernelFreeVpl(D_0000DCCC.vpl, ptr);
+    } else {
+        D_0000DCC0.free_func(ptr);
+    }
+    D_0000DD28--;
+}
 
 INCLUDE_ASM("nonmatchings/libhttp", sceHttpSetMallocFunction);
 
@@ -724,15 +725,22 @@ s32 sceHttpInitCache(u32 arg0) {
     s32 var_v0;
 
     var_v0 = 0x80431020;
-    if (M2C_VFIELD(&D_0000DCCC, s32, 8) != 1) {
-        M2C_VFIELD(&D_0000DCCC, u32, 0x10) = arg0;
+    if (D_0000DCCC.cache_inited != 1) {
+        D_0000DCCC.cache_inited = 1;
+        D_0000DCCC.cache_size = arg0;
         var_v0 = 0;
-        M2C_VFIELD(&D_0000DCCC, s32, 8) = 1;
     }
     return var_v0;
 }
 
-INCLUDE_ASM("nonmatchings/libhttp", _sceHttpReallocInternal);
+void *_sceHttpReallocInternal(void *ptr, SceSize size) {
+    void *ret = NULL;
+
+    if (D_0000DCC0.realloc_func != NULL) {
+        ret = D_0000DCC0.realloc_func(ptr, size);
+    }
+    return ret;
+}
 
 INCLUDE_ASM("nonmatchings/libhttp", __HttpI64toa);
 #endif
@@ -1508,11 +1516,7 @@ INCLUDE_ASM("nonmatchings/libhttp", sceHttpsInit);
 INCLUDE_RODATA("nonmatchings/libhttp", D_0000DAEC);
 #endif
 
-#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/libhttp", sceHttpsInitWithPath);
-#else
-INCLUDE_ASM("nonmatchings/libhttp", sceHttpsInitWithPath);
-#endif
 
 INCLUDE_ASM("nonmatchings/libhttp", sceHttpsLoadDefaultCert);
 
