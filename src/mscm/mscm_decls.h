@@ -46,7 +46,10 @@ typedef struct SceMScmHC {
     u32 intrStatus;         /* 0x14 */
     s32 lastStatus;         /* 0x18 */
     s32 unk1C;
-    s32 unk20[4];           /* 0x20: initialised to -1 */
+    s32 readAddr;           /* 0x20: cached MS register window (-1 = unknown) */
+    s32 readSize;           /* 0x24 */
+    s32 writeAddr;          /* 0x28 */
+    s32 writeSize;          /* 0x2C */
     SceUID evf;             /* 0x30: "SceMScmAl" */
     u8 unk34[0x27C - 0x34];
 #if FW_VERSION >= 150
@@ -57,7 +60,10 @@ typedef struct SceMScmHC {
     s32 unk10;
     s32 lastStatus;         /* 0x14 */
     s32 unk18;
-    s32 unk1C[4];
+    s32 readAddr;
+    s32 readSize;
+    s32 writeAddr;
+    s32 writeSize;
     SceUID evf;             /* 0x2C */
 #endif
 } SceMScmHC;
@@ -180,6 +186,9 @@ s32 sceMScmIconLoadUcode(SceMScmHC *hc, u32 addr, u16 *code, s32 count);
 void sceMScmIconResetIcon(SceMScmHC *hc);
 s32 sceMScmIconStartUcode(SceMScmHC *hc, u32 addr);
 s32 sceMScmIconStopUcode(SceMScmHC *hc);
+s32 sceMScmReadDataPIO(SceMScmHC *hc, u8 *buf, s32 size, s32 timeout);
+s32 sceMScmReadMSReg(SceMScmHC *hc, s32 addr, s32 size, u8 *buf, s32 force, s32 timeout);
+s32 sceMScmReadMSRegHelper(SceMScmHC *hc, u8 *buf, s32 size, s32 timeout);
 s32 sceMScmResetHC(SceMScmHC *hc, s32 mode);
 s32 sceMScmSendTPC(SceMScmHC *hc, u8 tpc, s32 size, s32 timeout);
 s32 sceMScmSendTPCDMA(SceMScmHC *hc, u8 dmaCh, s32 a2, s32 a3);
@@ -187,10 +196,20 @@ s32 sceMScmSetHCTransferMode(SceMScmHC *hc, s32 a, s32 b, s32 c);
 s32 sceMScmSetPullDownReg(s32 slot, s32 on);
 s32 sceMScmSetPullDownRegByDesc(SceMScmHC *hc, s32 on);
 s32 sceMScmSetSlotPower(SceMScmHC *hc, s32 on);
+s32 sceMScmTPCExSetCmd(SceMScmHC *hc, u8 cmd, s8 *arg, u8 *intr, s32 timeout);
+s32 sceMScmTPCExSetCmdHelper(SceMScmHC *hc, u8 cmd, s8 *arg, s32 timeout);
+s32 sceMScmTPCGetInt(SceMScmHC *hc, u8 *intr, s32 mode, s32 timeout);
+s32 sceMScmTPCGetIntHelper(SceMScmHC *hc, u8 *intr, s32 timeout);
+s32 sceMScmTPCReadShortData(SceMScmHC *hc, u8 *buf, s32 size, s32 timeout);
+s32 sceMScmTPCSetCmd(SceMScmHC *hc, u8 cmd, u8 *intr, s32 timeout);
 s32 sceMScmTPCSetCmdHelper(SceMScmHC *hc, u8 cmd, s32 timeout);
+s32 sceMScmTPCSetRWRegAdrs(SceMScmHC *hc, u8 *adr, s32 timeout);
+s32 sceMScmTPCWriteShortData(SceMScmHC *hc, u8 *buf, s32 size, s32 timeout);
 s32 sceMScmWaitAndEndDMA(SceMScmHC *hc, s32 a1, s32 a2);
 s32 sceMScmWaitHCIntr(SceMScmHC *hc, u32 *pattern, s32 timeout);
-s32 sceMScmWriteDataPIO(SceMScmHC *hc, void *buf, s32 size, s32 timeout);
+s32 sceMScmWriteDataPIO(SceMScmHC *hc, u8 *buf, s32 size, s32 timeout);
+s32 sceMScmWriteMSReg(SceMScmHC *hc, s32 addr, s32 size, u8 *buf, s32 force, s32 timeout);
+s32 sceMScmWriteMSRegHelper(SceMScmHC *hc, u8 *buf, s32 size, s32 timeout);
 s32 sceMScm_driver_D6DB3199(SceMScmHC *hc, s32 *arg1, s32 *arg2, s32 *arg3);
 M2C_UNK sceSysregMsifIoDisable(s32);
 M2C_UNK sceSysregMsifIoEnable(s32);
