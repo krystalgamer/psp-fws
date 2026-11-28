@@ -2729,7 +2729,61 @@ INCLUDE_ASM("nonmatchings/mgr", sceMgrMSMount);
 
 INCLUDE_ASM("nonmatchings/mgr", sceMgrMSAuth);
 
+#if FW_VERSION < 340
+s32 func_00007364(s32 arg0, u64 *id, s32 arg2) {
+    s32 fd;
+    u64 v8;
+    u64 v10;
+    u64 v18;
+    u64 rnd;
+    u64 v28;
+    u64 v30;
+    s32 ret;
+    s32 mac;
+
+    ret = func_00006678(arg0, &fd, 3, 0);
+    if (ret < 0) {
+        return ret;
+    }
+    ret = func_000077A0(fd, id, &v8);
+    if (ret < 0) {
+        goto fail;
+    }
+    ret = sceMgrGenerateMAC1d(&v10, &v18, arg2, id, &v8);
+    mac = ret;
+    if (ret < 0) {
+        goto fail;
+    }
+    ret = sceMgrRandom((s32)&rnd, arg2);
+    if (ret < 0) {
+        goto fail;
+    }
+    ret = func_00007844(fd, &v18, &rnd, &v10, mac);
+    if (ret < 0) {
+        goto fail;
+    }
+    ret = func_000078F8(fd, &v28, &v30);
+    if (ret < 0) {
+        goto fail;
+    }
+    ret = func_00006100(fd);
+    if (ret < 0) {
+        goto fail;
+    }
+    func_0000684C(arg0);
+    func_000067CC(arg0, 0);
+    return sceMgrStartSession((s32)&v28, (s32)&v8, (s32)&v18, (s32)&v30, (s32)&rnd);
+fail:
+    func_0000684C(arg0);
+    func_000067CC(arg0, 0);
+    if (ret == 0x80504000) {
+        ret = 0x80503002;
+    }
+    return ret;
+}
+#else
 INCLUDE_ASM("nonmatchings/mgr", func_00007364);
+#endif
 
 INCLUDE_ASM("nonmatchings/mgr", sceMgr_driver_D3A061BE);
 
@@ -2909,12 +2963,12 @@ s32 func_000078F8(s32 fd, u64 *a, u64 *b) {
 }
 
 #if FW_VERSION < 340
-void func_00006100(s32 arg0) {
-    func_000065FC(arg0, (s32) &D_0000AFCC, 4);
+s32 func_00006100(s32 fd) {
+    return func_000065FC(fd, (u8 *)&D_0000AFCC, 4);
 }
 #else
-void func_0000798C(s32 arg0) {
-    func_000065FC(arg0, (s32) &D_0000AFCC, 4);
+s32 func_0000798C(s32 fd) {
+    return func_000065FC(fd, (u8 *)&D_0000AFCC, 4);
 }
 #endif
 
@@ -3068,7 +3122,26 @@ INCLUDE_ASM("nonmatchings/mgr", func_000080F8);
 
 INCLUDE_ASM("nonmatchings/mgr", func_00008204);
 
-INCLUDE_ASM("nonmatchings/mgr", func_00008374);
+s32 func_00008374(s32 fd, s32 blk, s32 page, s32 count) {
+    u8 extra[16];
+    s32 i;
+    s32 ret;
+
+    for (i = 0; i < count; i++) {
+        ret = func_00006D70(fd, blk, page, extra);
+        if (ret < 0) {
+            return ret;
+        }
+        if (page == 0 && count == 1) {
+            extra[0] |= 0x80;
+        }
+        if (((extra[0] << 24) | (extra[1] << 16) | (extra[2] << 8) | extra[3]) != 0xF8FFFFFF) {
+            return 0x80504003;
+        }
+        page++;
+    }
+    return 0;
+}
 
 s32 func_00008460(s32 arg0, s32 arg1, s32 start, s32 step) {
     s32 n = D_0000B00C;
