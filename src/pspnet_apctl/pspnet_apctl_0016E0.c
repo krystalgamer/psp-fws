@@ -2071,7 +2071,63 @@ INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00003C00);
 #endif
 
 #if FW_VERSION < 151
-INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00003AA8);
+s32 func_00003AA8(SceNetDhcpCtx *dc) {
+    struct {
+        u32 src;
+        u32 dst;
+        u8 zero;
+        u8 proto;
+        u16 len;
+    } ph;
+    SceNetDhcpFrame *rx = &dc->rx;
+    SceNetDhcpFrame *tx = &dc->tx;
+    u16 ipsum;
+    u16 udpsum;
+    s8 *opt;
+
+    ipsum = ((SceNetDhcpIpHdr *)rx->ip)->sum;
+    ((SceNetDhcpIpHdr *)rx->ip)->sum = 0;
+    udpsum = rx->udp->sum;
+    rx->udp->sum = 0;
+    ph.zero = 0;
+    ph.proto = 17;
+    ph.src = ((SceNetDhcpIpHdr *)rx->ip)->src;
+    ph.dst = ((SceNetDhcpIpHdr *)rx->ip)->dst;
+    ph.len = rx->udp->len;
+    if ((u16)__builtin_allegrex_wsbh(((SceNetDhcpIpHdr *)rx->ip)->len) < 0x10C) {
+        goto fail;
+    }
+    if ((u16)__builtin_allegrex_wsbh(rx->udp->len) < 0xF8) {
+        goto fail;
+    }
+    if (ipsum != func_00005E90((u16 *)rx->ip, (rx->ip[0] & 0xF) * 2)) {
+        goto fail;
+    }
+    if (rx->udp->sum != 0) {
+        if (udpsum != func_00005E00(&ph, rx->udp, (u16)__builtin_allegrex_wsbh(ph.len))) {
+            goto fail;
+        }
+    }
+    if (rx->bootp[0] != 2) {
+        goto fail;
+    }
+    if (*(u32 *)(rx->bootp + 4) != *(u32 *)(tx->bootp + 4)) {
+        goto fail;
+    }
+    if (func_00007490(rx->bootp + 0xEC, D_00010ADC, 4) != 0) {
+        goto fail;
+    }
+    opt = func_00006FC8(rx->bootp, (u16)__builtin_allegrex_wsbh(rx->udp->len) - 8, 53);
+    if (opt == NULL) {
+        goto fail;
+    }
+    if (opt[2] != 2) {
+        goto fail;
+    }
+    return 0;
+fail:
+    return 0x80410501;
+}
 
 s32 func_00003CD0(SceNetDhcpCtx *dc) {
     struct {
