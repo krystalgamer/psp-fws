@@ -585,6 +585,7 @@ s32 func_000050DC(s32);
 void func_000050F4(void *arg0);
 s32 func_00005748(s32);
 s32 func_00005778(s32 arg0);
+void func_00005798(SceHttpTmpl *tmpl);
 s32 func_000057E4(s32);
 s32 func_000057F8(s32);
 s32 func_0000584C(s32);
@@ -680,7 +681,7 @@ int sceHttpCreateRequest(int connection_id, int method, const unsigned char *pat
 s32 sceHttpCreateTemplate(void *arg0, s32 arg1, s32 arg2);
 s32 sceHttpDeleteConnection(s32 arg0);
 s32 sceHttpDeleteRequest(s32 arg0);
-s32 sceHttpDeleteTemplate(s32 arg0);
+int sceHttpDeleteTemplate(int tmpl_id);
 s32 sceHttpEnd(void);
 int sceHttpGetStatusCode(int request_id, int *status_code);
 s32 sceHttpInit(u32 arg0);

@@ -126,9 +126,48 @@ INCLUDE_ASM("nonmatchings/libhttp", sceHttpSendRequest);
 
 #if FW_VERSION < 150 || FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/libhttp", sceHttpCreateTemplate);
+#endif
 
+#if FW_VERSION < 150
+int sceHttpDeleteTemplate(int tmpl_id) {
+    SceHttpTmpl *tmpl;
+    int ret = 0x80431001;
+    int intr;
+
+    if (D_0000DCCC.inited == 1) {
+        ret = 0x80431100;
+        if (tmpl_id != 0) {
+            intr = sceKernelSuspendDispatchThread();
+            ret = GetHttpTmpl(tmpl_id, &tmpl);
+            if (tmpl == NULL) {
+                ret = 0x80431100;
+            } else if (tmpl->reference_counter != 1) {
+                tmpl->reference_counter--;
+                ret = 0x80431067;
+            } else {
+                if (tmpl->pre != NULL) {
+                    tmpl->pre->next = tmpl->next;
+                }
+                if (tmpl->next != NULL) {
+                    tmpl->next->pre = tmpl->pre;
+                }
+            }
+            sceKernelResumeDispatchThread(intr);
+            if (ret >= 0) {
+                func_00005798(tmpl);
+                _sceHttpFreeInternal(tmpl);
+            }
+        }
+    }
+    return ret;
+}
+#endif
+
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/libhttp", sceHttpDeleteTemplate);
+#endif
 
+#if FW_VERSION < 150 || FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/libhttp", sceHttpCreateConnection);
 #endif
 
@@ -1319,7 +1358,24 @@ void FreeHttpHederList(_SceHttpReqHeaderList *list) {
     }
 }
 
-INCLUDE_ASM("nonmatchings/libhttp", func_00005798);
+void func_00005798(SceHttpTmpl *tmpl) {
+    if (tmpl->header_list != NULL) {
+        FreeHttpHederList(tmpl->header_list);
+        tmpl->header_list = NULL;
+    }
+    if (tmpl->proxy_host != NULL) {
+        _sceHttpFreeInternal(tmpl->proxy_host);
+        tmpl->proxy_host = NULL;
+    }
+    if (tmpl->str34 != NULL) {
+        _sceHttpFreeInternal(tmpl->str34);
+        tmpl->str34 = NULL;
+    }
+    if (tmpl->str38 != NULL) {
+        _sceHttpFreeInternal(tmpl->str38);
+        tmpl->str38 = NULL;
+    }
+}
 
 INCLUDE_ASM("nonmatchings/libhttp", BuildHttpHeader);
 
