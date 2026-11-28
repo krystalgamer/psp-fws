@@ -808,13 +808,169 @@ INCLUDE_ASM("nonmatchings/msstor_0015A0", func_000057A4);
 
 INCLUDE_ASM("nonmatchings/msstor_0015A0", func_00005938);
 
+#if FW_VERSION < 150
+s32 func_00005AD4(SceIoIob *iob, s32 cmd, void *in, SceSize inlen, void *out, SceSize outlen) {
+    SceMSstorIoCtx *ctx;
+    u32 timeout;
+    u32 *pt;
+    s32 ret;
+
+    ctx = iob->i_private;
+    timeout = ctx->lockTimeout;
+    pt = &timeout;
+    if (timeout == 0) {
+        pt = NULL;
+    }
+    sceKernelSetEventFlag(ctx->evf, 1);
+    if (((cmd >> 15) & 1) && k1IsUserMode()) {
+        return 0x80220188;
+    }
+    switch (cmd) {
+    case 0x0210D016:
+        return sceKernelPollSema(ctx->sema, 1);
+    case 0x0210D017:
+        return sceKernelSignalSema(ctx->sema, 1);
+    }
+    sceKernelPowerLockForUser(0);
+    if (cmd == 0x02125006) {
+        ret = sceKernelWaitSema(ctx->sema, 1, pt);
+        if (ret == 0) {
+            if (outlen != 4 || out == NULL || (k1IsUserMode() && (s32)((u32)out | ((u32)out + 4)) < 0)) {
+                ret = 0x80220183;
+            } else {
+                ret = 0;
+                *(s32 *)out = func_00000288();
+            }
+            sceKernelSignalSema(ctx->sema, 1);
+        }
+    } else {
+        ret = func_00005738(iob, cmd, in, inlen, out, outlen);
+    }
+    sceKernelPowerUnlockForUser(0);
+    return ret;
+}
+#else
 INCLUDE_ASM("nonmatchings/msstor_0015A0", func_00005AD4);
+#endif
 
 INCLUDE_ASM("nonmatchings/msstor_0015A0", func_00005D18);
 
-#if FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/msstor_0015A0", func_00005738);
+#if FW_VERSION < 152
+s32 func_00005738(SceIoIob *iob, s32 cmd, void *in, SceSize inlen, void *out, SceSize outlen) {
+    SceMSstorIoCtx *ctx;
+    SceMSstorDev *dev;
+    u32 timeout;
+    u32 *pt;
+    s32 ret;
 
+    ret = 0;
+    ctx = iob->i_private;
+    switch (cmd) {
+    case 0x0211D018:
+        return func_00006C70(iob, cmd, in, inlen, out, outlen, 0);
+    case 0x0211D019:
+        return func_00006C70(iob, cmd, in, inlen, out, outlen, 1);
+    case 0x0211D817:
+        return func_00006EBC(iob, cmd, in, inlen, out, outlen);
+    case 0x02125008:
+        return func_00006DFC(iob, cmd, in, inlen, out, outlen);
+    case 0x02125009:
+        return func_00006E60(iob, cmd, in, inlen, out, outlen);
+    case 0x02125001:
+        if (outlen < 4 || out == NULL || (k1IsUserMode() && (s32)((u32)out | ((u32)out + 4)) < 0)) {
+            ret = 0x80220183;
+        } else {
+            *(s32 *)out = 1;
+        }
+        return ret;
+    case 0x02125007:
+        if (outlen < 4 || out == NULL || (k1IsUserMode() && (s32)((u32)out | ((u32)out + 4)) < 0)) {
+            ret = 0x80220183;
+        } else {
+            *(s32 *)out = 0x200;
+        }
+        return ret;
+    case 0x02105002:
+    case 0x02105003:
+    case 0x02105004:
+    case 0x02105005:
+        return 0x80220183;
+    }
+    timeout = ctx->lockTimeout;
+    pt = &timeout;
+    if (timeout == 0) {
+        pt = NULL;
+    }
+    ret = sceKernelWaitSema(ctx->sema, 1, pt);
+    if (ret != 0) {
+        return ret;
+    }
+    sceLedSetMode(0, 2, &D_00008954);
+    switch (cmd) {
+    case 0x0211D01A:
+        ret = func_0000700C(1, iob, cmd, in, inlen, out, outlen);
+        break;
+    case 0x0211D01B:
+        ret = func_0000700C(2, iob, cmd, in, inlen, out, outlen);
+        break;
+    case 0x0211D01C:
+        ret = func_00007108(1, iob, cmd, in, inlen, out, outlen);
+        break;
+    case 0x0211D01D:
+        ret = func_00007108(2, iob, cmd, in, inlen, out, outlen);
+        break;
+    case 0x0211D01E:
+        ret = func_00007108(3, iob, cmd, in, inlen, out, outlen);
+        break;
+    case 0x0211D01F:
+        ret = func_00006A68(iob, cmd, in, inlen, out, outlen);
+        break;
+    case 0x0212D021:
+        ret = func_00006F10(iob, cmd, in, inlen, out, outlen);
+        break;
+    case 0x0213D020:
+        ret = func_00006AC8(iob, cmd, in, inlen, out, outlen);
+        break;
+    case 0x02125803:
+        if (out == NULL || outlen < 0x60 || (k1IsUserMode() && (s32)((u32)out | ((u32)out + 0x60)) < 0)) {
+            ret = 0x80220183;
+        }
+        dev = ctx->dev;
+        if (dev->mediaType2 & 0x40) {
+            __builtin_memcpy(out, &dev->boot[0], 0x60);
+        } else {
+            __builtin_memcpy(out, &dev->boot[0x1A0], 0x60);
+        }
+        break;
+    case 0x0211D015:
+        if (inlen < 4 || in == NULL) {
+            ret = 0x80220183;
+        } else {
+            ctx->lockTimeout = *(u32 *)in;
+        }
+        break;
+    case 0x0212D014:
+        if (outlen < 4 || out == NULL) {
+            ret = 0x80220183;
+        } else {
+            *(u32 *)out = ctx->lockTimeout;
+        }
+        break;
+    default:
+        ret = 0x80220183;
+        break;
+    }
+    sceLedSetMode(0, 2, &D_00008968);
+    sceKernelSignalSema(ctx->sema, 1);
+    return func_00007850(ret);
+}
+#endif
+
+#if FW_VERSION == 152
+INCLUDE_ASM("nonmatchings/msstor_0015A0", func_00005738);
+#endif
+
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/msstor_0015A0", func_00005D0C);
 #else
 INCLUDE_ASM("nonmatchings/msstor_0015A0", func_00005ED0);
