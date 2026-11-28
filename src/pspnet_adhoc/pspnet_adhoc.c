@@ -583,11 +583,11 @@ s32 adhocDescAllocId(void) {
 }
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00000FB4);
+INCLUDE_ASM("nonmatchings/pspnet_adhoc", adhocDescAlloc);
 #endif
 
 #if FW_VERSION < 201
-s32 func_00000ED0(u8 type, SceNetAdhocDesc **out) {
+s32 adhocDescAlloc(u8 type, SceNetAdhocDesc **out) {
     SceNetAdhocDesc *d;
 
     d = sceNetMallocInternal(sizeof(SceNetAdhocDesc));
@@ -606,7 +606,7 @@ s32 func_00000ED0(u8 type, SceNetAdhocDesc **out) {
 #endif
 
 #if FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00000F60);
+INCLUDE_ASM("nonmatchings/pspnet_adhoc", adhocDescAlloc);
 #endif
 
 void adhocDescFree(SceNetAdhocDesc *d) {
@@ -1396,7 +1396,7 @@ void pdpTerm(void) {
 }
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00002B7C);
+INCLUDE_ASM("nonmatchings/pspnet_adhoc", pdpAttach);
 #endif
 
 #if FW_VERSION < 201
@@ -1424,7 +1424,7 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc", pdpBind);
 #endif
 
 #if FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00002A6C);
+INCLUDE_ASM("nonmatchings/pspnet_adhoc", pdpAttach);
 
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00002AFC);
 #endif
@@ -2857,7 +2857,7 @@ s32 ptpCreate(const SceNetEtherAddr *saddr, u16 sport, s32 sndbuf, s32 rcvbuf, u
     id = adhocDescAllocId();
     if (id < 0)
         return 0x8041070F;
-    ret = func_00000ED0(2, &d);
+    ret = adhocDescAlloc(2, &d);
     if (ret < 0)
         return ret;
     ret = ptpAttach(d);
@@ -2893,7 +2893,7 @@ s32 func_00003A68(const SceNetEtherAddr *saddr, u16 sport, const SceNetEtherAddr
     id = adhocDescAllocId();
     if (id < 0)
         return 0x8041070F;
-    ret = func_00000FB4(2, &d);
+    ret = adhocDescAlloc(2, &d);
     if (ret < 0)
         return ret;
     ret = ptpAttach(d);
@@ -2929,7 +2929,7 @@ s32 func_00003A68(const SceNetEtherAddr *saddr, u16 sport, const SceNetEtherAddr
     id = adhocDescAllocId();
     if (id < 0)
         return 0x8041070F;
-    ret = func_00000F60(2, &d);
+    ret = adhocDescAlloc(2, &d);
     if (ret < 0)
         return ret;
     ret = ptpAttach(d);
