@@ -349,7 +349,7 @@ void func_0000E0EC(s32 cmd, struct ifaddr *ifa, s32 error, struct rtentry *rt)
 	if (route_cb.any_count == 0)
 		return;
 	for (pass = 1; pass < 3; pass++) {
-		__builtin_memset(&info, 0, sizeof(info));
+		bzero_i(&info, sizeof(info));
 		if ((cmd == RTM_ADD && pass == 1) ||
 		    (cmd == RTM_DELETE && pass == 2)) {
 			struct ifa_msghdr ifam;
@@ -359,7 +359,7 @@ void func_0000E0EC(s32 cmd, struct ifaddr *ifa, s32 error, struct rtentry *rt)
 			info.rti_info[RTAX_IFP] = ifp->if_addrlist.tqh_first->ifa_addr;
 			info.rti_info[RTAX_NETMASK] = ifa->ifa_netmask;
 			info.rti_info[RTAX_BRD] = ifa->ifa_dstaddr;
-			__builtin_memset(&ifam, 0, sizeof(ifam));
+			bzero_i(&ifam, sizeof(ifam));
 			ifam.ifam_index = ifp->if_index;
 			ifam.ifam_metric = ifa->ifa_metric;
 			ifam.ifam_flags = ifa->ifa_flags;
@@ -427,7 +427,7 @@ void func_0000E3F0(struct ifnet *ifp)
 
 	if (route_cb.any_count == 0)
 		return;
-	__builtin_memset(&info, 0, sizeof(info));
+	bzero_i(&info, sizeof(info));
 	bzero(&ifm, sizeof(ifm));
 	ifm.ifm_index = ifp->if_index;
 	ifm.ifm_flags = ifp->if_flags;
@@ -452,8 +452,8 @@ void func_0000E448(struct ifnet *ifp, s32 what)
 
 	if (route_cb.any_count == 0)
 		return;
-	__builtin_memset(&info, 0, sizeof(info));
-	__builtin_memset(&ifan, 0, sizeof(ifan));
+	bzero_i(&info, sizeof(info));
+	bzero_i(&ifan, sizeof(ifan));
 	ifan.ifan_index = ifp->if_index;
 	func_0002CC40((u8 *)ifan.ifan_name, (u8 *)ifp->if_xname);
 	ifan.ifan_what = what;
@@ -543,7 +543,7 @@ s32 func_0000E928(struct radix_node *rn, void *v)
 
 	if (w->w_op == NET_RT_FLAGS && !(rt->rt_flags & w->w_arg))
 		return 0;
-	__builtin_memset(&info, 0, sizeof(info));
+	bzero_i(&info, sizeof(info));
 	info.rti_info[RTAX_DST] = rt_key(rt);
 	info.rti_info[RTAX_GATEWAY] = rt->rt_gateway;
 	info.rti_info[RTAX_NETMASK] = rt_mask(rt);

@@ -1678,6 +1678,12 @@ typedef u32 tcp_seq;
 #else
 #define bzero(p, n) func_0002C94C((p), 0, (n))
 #endif
+/* SCE 1.x bzero expands small constant sizes inline; 2.x always calls sceNetBzero */
+#if FW_VERSION >= 201
+#define bzero_i(p, n) sceNetBzero((p), (n))
+#else
+#define bzero_i(p, n) __builtin_memset((p), 0, (n))
+#endif
 
 struct SceTailqHead {
     void *tqh_first;
