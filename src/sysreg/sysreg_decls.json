@@ -3,13 +3,18 @@
   "func_000000B4": "s32 func_000000B4(void);",
   "func_000000BC": "s32 func_000000BC(void);",
   "func_000000C4": "s32 func_000000C4(void);",
-  "func_00001A68": "s32 func_00001A68(s32, s32);",
   "module_reboot_before": "s32 module_reboot_before(void);",
   "module_start": "s32 module_start(void);",
+  "sceClkcGetBusFrequency": "float sceClkcGetBusFrequency(void);",
+  "sceClkcGetCpuFrequency": "float sceClkcGetCpuFrequency(void);",
+  "sceClkcSetBusFrequency": "s32 sceClkcSetBusFrequency(float freq);",
+  "sceClkcSetCpuFrequency": "s32 sceClkcSetCpuFrequency(float freq);",
+  "sceKernelCallSubIntrHandler": "s32 sceKernelCallSubIntrHandler(s32 intrNum, s32 subIntrNum, s32 arg2, void *arg3);",
+  "sceKernelCpuResumeIntr": "void sceKernelCpuResumeIntr(s32);",
   "sceKernelCpuResumeIntrWithSync": "void sceKernelCpuResumeIntrWithSync(s32);",
   "sceKernelCpuSuspendIntr": "s32 sceKernelCpuSuspendIntr(void);",
   "sceKernelEnableIntr": "M2C_UNK sceKernelEnableIntr(M2C_UNK);",
-  "sceKernelRegisterIntrHandler": "M2C_UNK sceKernelRegisterIntrHandler(M2C_UNK, M2C_UNK, M2C_UNK *, M2C_UNK, M2C_UNK *);",
+  "sceKernelRegisterIntrHandler": "s32 sceKernelRegisterIntrHandler(s32 intno, s32 no, void *handler, s32 arg3, void *opt);",
   "sceKernelRegisterSysEventHandler": "M2C_UNK sceKernelRegisterSysEventHandler(M2C_UNK *);",
   "sceKernelReleaseIntrHandler": "M2C_UNK sceKernelReleaseIntrHandler(M2C_UNK);",
   "sceKernelUnregisterSysEventHandler": "M2C_UNK sceKernelUnregisterSysEventHandler(M2C_UNK *);",
@@ -23,12 +28,32 @@
   "sceSysregKeyClkEnable": "s32 sceSysregKeyClkEnable(void);",
   "sceSysregKeyIoDisable": "s32 sceSysregKeyIoDisable(void);",
   "sceSysregKeyIoEnable": "s32 sceSysregKeyIoEnable(void);",
-  "sceSysregPllUpdateFrequency": "s32 sceSysregPllUpdateFrequency(void);",
-  "sceSysregUsbAcquireIntr": "s32 sceSysregUsbAcquireIntr(s32 arg0);"
+  "sceSysregPllGetBaseFrequency": "float sceSysregPllGetBaseFrequency(void);",
+  "sceSysregPllGetFrequency": "float sceSysregPllGetFrequency(void);",
+  "sceSysregPllUpdateFrequency": "float sceSysregPllUpdateFrequency(void);",
+  "sceSysregUsbAcquireIntr": "s32 sceSysregUsbAcquireIntr(s32 arg0);",
+  "sysregIntrHandler": "s32 sysregIntrHandler(s32 intno, s32 unk, void *arg);",
+  "sysregSetBusClkBit": "s32 sysregSetBusClkBit(u32 mask, s32 on);",
+  "sysregSetClk1Bit": "s32 sysregSetClk1Bit(u32 mask, s32 on);",
+  "sysregSetClk2Bit": "s32 sysregSetClk2Bit(u32 mask, s32 on);",
+  "sysregSetGpioIoBit": "s32 sysregSetGpioIoBit(u32 bit, s32 on);",
+  "sysregSetIoBit": "s32 sysregSetIoBit(u32 mask, s32 on);",
+  "sysregSetResetBit": "s32 sysregSetResetBit(u32 mask, s32 on);",
+  "sysregSetUnk74Bit": "s32 sysregSetUnk74Bit(u32 mask, s32 on);",
+  "sysregSubIntrDisable": "s32 sysregSubIntrDisable(s32 arg0, s32 bit);",
+  "sysregSubIntrEnable": "s32 sysregSubIntrEnable(s32 arg0, s32 bit);",
+  "sysregSubIntrIsOccured": "s32 sysregSubIntrIsOccured(s32 arg0, s32 bit);",
+  "sysregSubIntrResume": "s32 sysregSubIntrResume(s32 arg0, s32 bit, s32 val);",
+  "sysregSubIntrSuspend": "s32 sysregSubIntrSuspend(s32 arg0, s32 bit, s32 *old);"
+ },
+ "types": {
+  "SceSysregIntrState": "typedef struct {\n    u32 enabled; /* sysreg software interrupt enable mask */\n    u32 next;    /* round-robin start bit for the dispatcher */\n} SceSysregIntrState;\ntypedef char chk_SceSysregIntrState[(sizeof(SceSysregIntrState) == 8) ? 1 : -1];"
  },
  "vars": {
   "D_000025C0": "extern s32 D_000025C0;",
+  "D_00002B04": "extern const float D_00002B04[];",
   "D_00002BD0": "extern M2C_UNK D_00002BD0;",
-  "func_00001814": "extern M2C_UNK func_00001814;"
+  "g_pllFrequency": "extern float g_pllFrequency;",
+  "g_sysregIntr": "extern SceSysregIntrState g_sysregIntr;"
  }
 }

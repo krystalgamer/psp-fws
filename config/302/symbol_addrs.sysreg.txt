@@ -191,3 +191,11 @@ D_000025B0 = 0x000025B8; // rom:0x2658
 D_000025B4 = 0x000025BC; // rom:0x265C
 D_00002520_v302 = 0x00002520; // rom:0x25C0
 // shared names (tools/add_version.py) end
+sysregIntrHandler = 0x00001814; // type:func
+sysregSubIntrEnable = 0x00001AC8; // type:func
+sysregSubIntrDisable = 0x00001AE8; // type:func
+sysregSubIntrSuspend = 0x00001B0C; // type:func
+sysregSubIntrResume = 0x00001B44; // type:func
+sysregSubIntrIsOccured = 0x00001B60; // type:func
+g_sysregIntr = 0x00002614;
+g_pllFrequency = 0x00002610;
