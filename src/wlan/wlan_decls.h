@@ -159,6 +159,31 @@ typedef struct {
     u8 unk4F;
 } SceWlanScanInfo;
 
+/* WEP-style key slot */
+typedef struct {
+    u32 type;                   /* 0x00 index into the key length table */
+    u8 data[0x10];              /* 0x04 */
+} SceWlanKey;
+
+/* key setup request from the caller (func_00005FA8) */
+typedef struct {
+    u32 unk0;
+    u32 mode;                   /* 0x04 0: off, 1: set keys, 2: no-op */
+    u32 index;                  /* 0x08 */
+    SceWlanKey keys[4];         /* 0x0C */
+} SceWlanKeyReq;
+
+/* HAL command 0xE block (0x58 bytes) */
+typedef struct {
+    u32 mode;                   /* 0x00 */
+    u32 index;                  /* 0x04 */
+    SceWlanKey keys[4];         /* 0x08 */
+} SceWlanKeyCmd;
+
+typedef struct {
+    u32 v[4];
+} SceWlanU32x4;
+
 typedef struct SceWlanSoftc SceWlanSoftc;
 typedef struct SceWlanMac SceWlanMac;
 
@@ -592,11 +617,13 @@ struct Unk_sceWlanDrv_driver_C9A8CAB7_temp_s0 {
 };
 
 extern u8 D_0001373C[];
+extern u32 D_0001378C[];
 extern SceWlanChipOps D_0001379C;
 extern s32 (*D_000137D0[0x50])(SceWlanMac *, u8 *, s32, s32);
 extern const u32 D_00018A00[15];
 extern const u16 D_00018A3C[6];
 extern const u8 D_00018A48[][14];
+extern const SceWlanU32x4 D_00018CF0;
 extern char D_00018DE4[];
 extern const SceWlanKeyVal D_000190C4[5];
 #if FW_VERSION < 201
