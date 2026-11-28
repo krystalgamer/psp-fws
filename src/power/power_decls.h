@@ -89,8 +89,8 @@ typedef struct {
     u16 unk3A; /* 0x3A */
     s32 geEdramRefreshMode; /* 0x3C */
     s32 oldGeEdramRefreshMode; /* 0x40 */
-#elif FW_VERSION == 102 || FW_VERSION == 103
-    /* 1.02/1.03 layout, 0x50 bytes */
+#elif FW_VERSION == 102 || FW_VERSION == 103 || (FW_VERSION >= 150 && FW_VERSION < 201)
+    /* 1.02-2.00 layout, 0x50 bytes */
     s32 pllOutSelect; /* 0x4 */
     s32 pllClockFrequencyInt; /* 0x8 */
     s32 cpuClockFrequencyInt; /* 0xC */
