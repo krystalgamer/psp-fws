@@ -39,7 +39,7 @@ typedef struct SceSysEventHandler {
     s32 reserved[9];
 } SceSysEventHandler;
 
-/* driver state (D_00002970); the interrupt handler func_00000160 runs the page transfers */
+/* driver state (g_nand); the interrupt handler nandIntrHandler runs the page transfers */
 #if FW_VERSION == 100
 typedef struct {
     SceUID semaId;   /* 0x00 */
@@ -73,7 +73,7 @@ typedef struct {
 } SceNandState;
 #endif
 
-/* NAND chip geometry (D_00002FD0); filled by sceNandDetectChip */
+/* NAND chip geometry (g_nandInfo); filled by sceNandDetectChip */
 typedef struct {
     s32 pageSize;      /* 0x0 */
     s32 pagesPerBlock; /* 0x4 */
@@ -112,30 +112,29 @@ typedef char chk_SceNandSpare[(sizeof(SceNandSpare) == 0x10) ? 1 : -1];
 
 extern char D_000026F0[];
 extern const SceNandChipEntry D_00002860[17];
-extern SceSysEventHandler D_00002930;
-extern SceNandState D_00002970;
-extern u8 D_000029A8[0x200];
-extern SceNandSpareExtra D_00002BA8;
-extern u8 D_00002BB4[0x200];
-extern u8 D_00002C90[0x200];
-extern SceNandSpareExtra D_00002DB4;
-extern SceNandSpare D_00002E90;
-extern SceNandInfo D_00002FD0;
 extern SceNandInfo D_00002FF0;
+extern SceNandSpare g_bbmSpare;
+extern u8 g_bbmUser[0x200];
+extern SceNandSpareExtra g_markSpare;
+extern u8 g_markUser[0x200];
+extern SceNandState g_nand;
+extern SceNandInfo g_nandInfo;
+extern SceSysEventHandler g_nandSysEv;
+extern SceNandSpareExtra g_verifySpare;
+extern u8 g_verifyUser[0x200];
 
 s32 Kprintf(const char *fmt, ...);
-s32 func_0000014C(void);
-s32 func_00000160(void);
-s32 func_00000F18(s32 arg0);
-s32 func_00000F58(s32 mode, void *user, void *spare);
-s32 func_00000FD4(s32 ev);
-s32 func_00001180(s32 mode, u32 ppn, void *user, void *spare);
-s32 func_0000135C(void);
-s32 func_0000214C(u8 *buf, u32 ecc, s32 correct);
 s32 memcmp(const void *a, const void *b, u32 n);
 void *memset(void *s, s32 c, u32 n);
 s32 module_reboot_before(void);
 s32 module_start(void);
+s32 nandCorrectEcc(u8 *buf, u32 ecc, s32 correct);
+s32 nandDmaReadPage(s32 mode, void *user, void *spare);
+s32 nandDmaWritePage(s32 mode, u32 ppn, void *user, void *spare);
+s32 nandIntrHandler(void);
+s32 nandIsReady(void);
+s32 nandSysEventHandler(s32 ev);
+s32 nandWaitReady(void);
 void sceKernelCpuResumeIntrWithSync(s32 intr);
 s32 sceKernelCpuSuspendIntr(void);
 SceUID sceKernelCreateEventFlag(const char *name, u32 attr, u32 bits, void *opt);

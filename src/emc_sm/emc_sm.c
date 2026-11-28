@@ -7,7 +7,7 @@
 #if FW_VERSION == 271
 INCLUDE_ASM("nonmatchings/emc_sm", sceNandInit);
 
-INCLUDE_ASM("nonmatchings/emc_sm", func_0000014C);
+INCLUDE_ASM("nonmatchings/emc_sm", nandIsReady);
 #endif
 
 #if FW_VERSION < 282
@@ -18,22 +18,22 @@ INCLUDE_RODATA("nonmatchings/emc_sm", D_000026F0);
 s32 sceNandInit(void) {
     SceKernelSm1Ops *ops;
 
-    __builtin_memset(&D_00002970, 0, sizeof(D_00002970));
+    __builtin_memset(&g_nand, 0, sizeof(g_nand));
     sceSysregEmcsmBusClockEnable();
     sceSysregEmcsmIoEnable();
-    D_00002970.semaId = sceKernelCreateSema(D_000026F0, 1, 1, 1, NULL);
-    D_00002970.evFlagId = sceKernelCreateEventFlag(D_000026F0, 1, 0, NULL);
+    g_nand.semaId = sceKernelCreateSema(D_000026F0, 1, 1, 1, NULL);
+    g_nand.evFlagId = sceKernelCreateEventFlag(D_000026F0, 1, 0, NULL);
     ops = sceKernelSm1ReferOperations();
-    D_00002970.busClockOn = 0;
+    g_nand.busClockOn = 0;
     if (ops != NULL && ops->isBusClockOn() != 0) {
-        D_00002970.busClockOn = 1;
+        g_nand.busClockOn = 1;
     }
     NAND_INTR = 0x303;
-    sceKernelRegisterIntrHandler(0x14, 1, func_00000160, NULL, NULL);
+    sceKernelRegisterIntrHandler(0x14, 1, nandIntrHandler, NULL, NULL);
     sceKernelEnableIntr(0x14);
-    sceKernelRegisterSysEventHandler(&D_00002930);
+    sceKernelRegisterSysEventHandler(&g_nandSysEv);
     sceNandLock(0);
-    if (!func_0000014C()) {
+    if (!nandIsReady()) {
         Kprintf("NAND device busy!!\n");
     } else {
         sceNandReset(NULL);
@@ -46,20 +46,20 @@ s32 sceNandInit(void) {
 
 #if FW_VERSION >= 102 && FW_VERSION < 201
 s32 sceNandInit(void) {
-    __builtin_memset(&D_00002970, 0, sizeof(D_00002970));
+    __builtin_memset(&g_nand, 0, sizeof(g_nand));
     sceSysregEmcsmBusClockEnable();
     sceSysregEmcsmIoEnable();
-    D_00002970.semaId = sceKernelCreateSema(D_000026F0, 1, 1, 1, NULL);
-    D_00002970.evFlagId = sceKernelCreateEventFlag(D_000026F0, 1, 0, NULL);
-    D_00002970.ops = sceKernelSm1ReferOperations();
-    D_00002970.busClockOn = 0;
+    g_nand.semaId = sceKernelCreateSema(D_000026F0, 1, 1, 1, NULL);
+    g_nand.evFlagId = sceKernelCreateEventFlag(D_000026F0, 1, 0, NULL);
+    g_nand.ops = sceKernelSm1ReferOperations();
+    g_nand.busClockOn = 0;
     NAND_INTR = 0x303;
     NAND_TIMING = 0x0B040205;
-    sceKernelRegisterIntrHandler(0x14, 1, func_00000160, NULL, NULL);
+    sceKernelRegisterIntrHandler(0x14, 1, nandIntrHandler, NULL, NULL);
     sceKernelEnableIntr(0x14);
-    sceKernelRegisterSysEventHandler(&D_00002930);
+    sceKernelRegisterSysEventHandler(&g_nandSysEv);
     sceNandLock(0);
-    if (!func_0000014C()) {
+    if (!nandIsReady()) {
         Kprintf("NAND device busy!!\n");
     } else {
         sceNandReset(NULL);
@@ -75,17 +75,17 @@ INCLUDE_ASM("nonmatchings/emc_sm", sceNandInit);
 #endif
 
 #if FW_VERSION < 201
-s32 func_0000014C(void) {
+s32 nandIsReady(void) {
     return *(u32 *)0xBD101004 & 1;
 }
 #endif
 
 #if (FW_VERSION >= 201 && FW_VERSION < 271) || FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/emc_sm", func_0000014C);
+INCLUDE_ASM("nonmatchings/emc_sm", nandIsReady);
 #endif
 
 #if FW_VERSION < 271
-INCLUDE_ASM("nonmatchings/emc_sm", func_00000160);
+INCLUDE_ASM("nonmatchings/emc_sm", nandIntrHandler);
 #endif
 
 #if FW_VERSION >= 282
@@ -106,8 +106,8 @@ s32 sceNandSetWriteProtect(s32 protect) {
         NAND_STATUS = v | 0x80;
         while (!(NAND_STATUS & 0x80)) {
         }
-        D_00002970.wpReleased = 1;
-        D_00002970.wpReleaseTime = sceKernelGetSystemTimeLow();
+        g_nand.wpReleased = 1;
+        g_nand.wpReleaseTime = sceKernelGetSystemTimeLow();
     }
     return old;
 }
@@ -119,11 +119,11 @@ INCLUDE_ASM("nonmatchings/emc_sm", sceNandSetWriteProtect);
 
 #if FW_VERSION == 100
 s32 sceNandLock(s32 writeMode) {
-    s32 ret = sceKernelWaitSema(D_00002970.semaId, 1, NULL);
+    s32 ret = sceKernelWaitSema(g_nand.semaId, 1, NULL);
     if (ret < 0) {
         return ret;
     }
-    if (D_00002970.busClockOn == 0) {
+    if (g_nand.busClockOn == 0) {
         sceSysregEmcsmBusClockEnable();
     }
     if (writeMode) {
@@ -137,12 +137,12 @@ s32 sceNandLock(s32 writeMode) {
 
 #if FW_VERSION >= 102 && FW_VERSION < 201
 s32 sceNandLock(s32 writeMode) {
-    s32 ret = sceKernelWaitSema(D_00002970.semaId, 1, NULL);
+    s32 ret = sceKernelWaitSema(g_nand.semaId, 1, NULL);
     if (ret < 0) {
         return ret;
     }
-    if (D_00002970.busClockOn == 0) {
-        D_00002970.busClockOn = 1;
+    if (g_nand.busClockOn == 0) {
+        g_nand.busClockOn = 1;
         sceSysregEmcsmBusClockEnable();
     }
     if (writeMode) {
@@ -161,11 +161,11 @@ INCLUDE_ASM("nonmatchings/emc_sm", sceNandLock);
 #if FW_VERSION >= 102 && FW_VERSION < 300
 void sceNandUnlock(void) {
     sceNandSetWriteProtect(1);
-    if (D_00002970.ops == NULL || D_00002970.ops->isBusClockOn() == 0) {
-        D_00002970.busClockOn = 0;
+    if (g_nand.ops == NULL || g_nand.ops->isBusClockOn() == 0) {
+        g_nand.busClockOn = 0;
         sceSysregEmcsmBusClockDisable();
     }
-    sceKernelSignalSema(D_00002970.semaId, 1);
+    sceKernelSignalSema(g_nand.semaId, 1);
 }
 #else
 INCLUDE_ASM("nonmatchings/emc_sm", sceNandUnlock);
@@ -178,7 +178,7 @@ s32 sceNandReset(u8 *status) {
 
     NAND_INTR &= ~1;
     NAND_CMD = 0xFF;
-    ret = func_0000135C();
+    ret = nandWaitReady();
     if (ret >= 0) {
         NAND_CMD = 0x70;
         ret = 0;
@@ -226,7 +226,7 @@ s32 sceNandEraseBlock(u32 ppn) {
     s32 ret;
     u8 st;
 
-    ret = func_0000135C();
+    ret = nandWaitReady();
     if (ret < 0) {
         return ret;
     }
@@ -234,7 +234,7 @@ s32 sceNandEraseBlock(u32 ppn) {
     NAND_ADDR = ppn << 10;
     NAND_INTR &= ~1;
     NAND_CMD = 0xD0;
-    ret = func_0000135C();
+    ret = nandWaitReady();
     if (ret < 0) {
         return ret;
     }
@@ -256,13 +256,13 @@ s32 sceNandEraseBlock(u32 ppn) {
     s32 ret;
     u8 st;
 
-    ret = func_0000135C();
+    ret = nandWaitReady();
     if (ret < 0) {
         return ret;
     }
-    if (D_00002970.wpReleased) {
-        D_00002970.wpReleased = 0;
-        if (sceKernelGetSystemTimeLow() - D_00002970.wpReleaseTime < 10) {
+    if (g_nand.wpReleased) {
+        g_nand.wpReleased = 0;
+        if (sceKernelGetSystemTimeLow() - g_nand.wpReleaseTime < 10) {
             sceKernelDelayThread(10);
         }
     }
@@ -270,7 +270,7 @@ s32 sceNandEraseBlock(u32 ppn) {
     NAND_ADDR = ppn << 10;
     NAND_INTR &= ~1;
     NAND_CMD = 0xD0;
-    ret = func_0000135C();
+    ret = nandWaitReady();
     if (ret < 0) {
         return ret;
     }
@@ -308,7 +308,7 @@ s32 sceNandReadExtraOnly(u32 ppn, void *spare, s32 len) {
     }
     ret = 0;
     for (i = 0; i < len; i++) {
-        ret = func_0000135C();
+        ret = nandWaitReady();
         if (ret < 0) {
             break;
         }
@@ -343,9 +343,9 @@ INCLUDE_ASM("nonmatchings/emc_sm", module_reboot_before);
 #else
 s32 module_reboot_before(void) {
     sceNandLock(0);
-    sceKernelUnregisterSysEventHandler(&D_00002930);
-    sceKernelDeleteSema(D_00002970.semaId);
-    sceKernelDeleteEventFlag(D_00002970.evFlagId);
+    sceKernelUnregisterSysEventHandler(&g_nandSysEv);
+    sceKernelDeleteSema(g_nand.semaId);
+    sceKernelDeleteEventFlag(g_nand.evFlagId);
     sceKernelReleaseIntrHandler(0x14);
     return 0;
 }
@@ -356,9 +356,9 @@ INCLUDE_ASM("nonmatchings/emc_sm", sceNandEnd);
 #else
 s32 sceNandEnd(void) {
     sceNandLock(0);
-    sceKernelUnregisterSysEventHandler(&D_00002930);
-    sceKernelDeleteSema(D_00002970.semaId);
-    sceKernelDeleteEventFlag(D_00002970.evFlagId);
+    sceKernelUnregisterSysEventHandler(&g_nandSysEv);
+    sceKernelDeleteSema(g_nand.semaId);
+    sceKernelDeleteEventFlag(g_nand.evFlagId);
     sceKernelReleaseIntrHandler(0x14);
     return 0;
 }
@@ -385,11 +385,11 @@ s32 sceNandResume(void) {
     NAND_INTR = 0x303;
     NAND_TIMING = 0x0B040205;
     sceNandSetWriteProtect(0);
-    if (D_00002970.ops == NULL || D_00002970.ops->isBusClockOn() == 0) {
-        D_00002970.busClockOn = 0;
+    if (g_nand.ops == NULL || g_nand.ops->isBusClockOn() == 0) {
+        g_nand.busClockOn = 0;
         sceSysregEmcsmBusClockDisable();
     } else {
-        D_00002970.busClockOn = 1;
+        g_nand.busClockOn = 1;
     }
     return 0;
 }
@@ -480,7 +480,7 @@ s32 sceNandWritePagesRawAll(u32 ppn, void *user, void *spare, u32 len) {
 }
 
 #if FW_VERSION >= 102 && FW_VERSION < 201
-s32 func_00000FD4(s32 ev) {
+s32 nandSysEventHandler(s32 ev) {
     switch (ev) {
     case 0x4004:
         break;
@@ -490,11 +490,11 @@ s32 func_00000FD4(s32 ev) {
         NAND_INTR = 0x303;
         NAND_TIMING = 0x0B040205;
         sceNandSetWriteProtect(0);
-        if (D_00002970.ops == NULL || D_00002970.ops->isBusClockOn() == 0) {
-            D_00002970.busClockOn = 0;
+        if (g_nand.ops == NULL || g_nand.ops->isBusClockOn() == 0) {
+            g_nand.busClockOn = 0;
             sceSysregEmcsmBusClockDisable();
         } else {
-            D_00002970.busClockOn = 1;
+            g_nand.busClockOn = 1;
         }
         break;
     }
@@ -503,14 +503,14 @@ s32 func_00000FD4(s32 ev) {
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/emc_sm", func_00000FD4);
+INCLUDE_ASM("nonmatchings/emc_sm", nandSysEventHandler);
 
-INCLUDE_ASM("nonmatchings/emc_sm", func_00001044);
+INCLUDE_ASM("nonmatchings/emc_sm", nandDmaReadPage);
 #endif
 
 #if FW_VERSION == 100
-s32 func_00000F18(s32 arg0) {
-    switch (arg0) {                                 /* irregular */
+s32 nandSysEventHandler(s32 ev) {
+    switch (ev) {
     case 0x4004:
         break;
     case 0x10004:
@@ -522,24 +522,24 @@ s32 func_00000F18(s32 arg0) {
 #endif
 
 #if FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/emc_sm", func_00000F58);
+INCLUDE_ASM("nonmatchings/emc_sm", nandDmaReadPage);
 #endif
 
 #if FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/emc_sm", func_00000F40);
+INCLUDE_ASM("nonmatchings/emc_sm", nandSysEventHandler);
 #endif
 
 #if FW_VERSION >= 300
-INCLUDE_ASM("nonmatchings/emc_sm", func_00000FE0);
+INCLUDE_ASM("nonmatchings/emc_sm", nandDmaReadPage);
 #endif
 
 #if FW_VERSION == 282
-INCLUDE_ASM("nonmatchings/emc_sm", func_00000FEC);
+INCLUDE_ASM("nonmatchings/emc_sm", nandDmaReadPage);
 #endif
 
-INCLUDE_ASM("nonmatchings/emc_sm", func_00001180);
+INCLUDE_ASM("nonmatchings/emc_sm", nandDmaWritePage);
 
-INCLUDE_ASM("nonmatchings/emc_sm", func_0000135C);
+INCLUDE_ASM("nonmatchings/emc_sm", nandWaitReady);
 
 INCLUDE_ASM("nonmatchings/emc_sm", sceNandDetectChip);
 
@@ -551,7 +551,7 @@ s32 sceNandReadBlockWithRetry(u32 ppn, void *user, void *spare) {
     s32 ret;
 
     for (i = 0; i < 4; i++) {
-        ret = sceNandReadPages(ppn, user, spare, D_00002FD0.pagesPerBlock);
+        ret = sceNandReadPages(ppn, user, spare, g_nandInfo.pagesPerBlock);
         if (ret >= 0) {
             break;
         }
@@ -571,19 +571,19 @@ s32 sceNandVerifyBlockWithRetry(u32 ppn, void *user, void *spare) {
     s32 retry;
     s32 ret;
 
-    for (i = 0; i < D_00002FD0.pagesPerBlock; i++) {
+    for (i = 0; i < g_nandInfo.pagesPerBlock; i++) {
         retry = 0;
         do {
-            ret = sceNandReadPages(ppn + i, D_000029A8, &D_00002BA8, 1);
+            ret = sceNandReadPages(ppn + i, g_verifyUser, &g_verifySpare, 1);
             if (ret < 0) {
                 if (++retry >= 4) {
                     return ret;
                 }
             }
-            if (user != NULL && memcmp(D_000029A8, (u8 *)user + D_00002FD0.pageSize * i, D_00002FD0.pageSize) != 0) {
+            if (user != NULL && memcmp(g_verifyUser, (u8 *)user + g_nandInfo.pageSize * i, g_nandInfo.pageSize) != 0) {
                 return 0x80230006;
             }
-            if (spare != NULL && memcmp(&D_00002BA8, (u8 *)spare + i * 12, 8) != 0) {
+            if (spare != NULL && memcmp(&g_verifySpare, (u8 *)spare + i * 12, 8) != 0) {
                 return 0x80230006;
             }
         } while (ret < 0);
@@ -599,7 +599,7 @@ s32 sceNandEraseBlockWithRetry(u32 ppn) {
     s32 i;
     s32 ret;
 
-    if (ppn % D_00002FD0.pagesPerBlock != 0) {
+    if (ppn % g_nandInfo.pagesPerBlock != 0) {
         return 0x80230008;
     }
     for (i = 0; i < 4; i++) {
@@ -621,16 +621,16 @@ s32 sceNandDoMarkAsBadBlock(u32 ppn) {
     s32 i;
     s32 retry;
 
-    if (ppn % D_00002FD0.pagesPerBlock != 0) {
+    if (ppn % g_nandInfo.pagesPerBlock != 0) {
         return 0x80230008;
     }
-    memset(D_00002BB4, 0, 0x200);
-    memset(&D_00002DB4, 0xFF, sizeof(D_00002DB4));
-    D_00002DB4.blockStat = 0xF0;
+    memset(g_markUser, 0, 0x200);
+    memset(&g_markSpare, 0xFF, sizeof(g_markSpare));
+    g_markSpare.blockStat = 0xF0;
     retry = 0;
-    for (i = 0; i < D_00002FD0.pagesPerBlock; i++) {
+    for (i = 0; i < g_nandInfo.pagesPerBlock; i++) {
         do {
-            if (sceNandWritePages(ppn + i, D_00002BB4, &D_00002DB4, 1) >= 0) {
+            if (sceNandWritePages(ppn + i, g_markUser, &g_markSpare, 1) >= 0) {
                 break;
             }
             retry++;
@@ -650,8 +650,8 @@ s32 sceNandCountChipMakersBBM(void) {
     s32 count = 0;
     s32 ret;
 
-    for (i = 0; i < D_00002FD0.totalBlocks; i++) {
-        ret = sceNandDetectChipMakersBBM(i * D_00002FD0.pagesPerBlock);
+    for (i = 0; i < g_nandInfo.totalBlocks; i++) {
+        ret = sceNandDetectChipMakersBBM(i * g_nandInfo.pagesPerBlock);
         if (ret == 1) {
             count++;
         }
@@ -670,10 +670,10 @@ s32 sceNandDetectChipMakersBBM(u32 ppn) {
     s32 i;
     s32 ret;
     s32 bad = 0;
-    SceNandSpare *sp = &D_00002E90;
+    SceNandSpare *sp = &g_bbmSpare;
 
     for (i = 0; i < 4; i++) {
-        ret = sceNandReadPagesRawAll(ppn, D_00002C90, &D_00002E90, 1);
+        ret = sceNandReadPagesRawAll(ppn, g_bbmUser, &g_bbmSpare, 1);
         if (ret >= 0) {
             if (sp->extra.blockStat != 0xFF) {
                 bad = 1;
@@ -693,8 +693,8 @@ s32 sceNandEraseAllBlock(void) {
     s32 count = 0;
     s32 ret;
 
-    for (i = 0; i < D_00002FD0.totalBlocks; i++) {
-        ret = sceNandEraseBlockWithRetry(i * D_00002FD0.pagesPerBlock);
+    for (i = 0; i < g_nandInfo.totalBlocks; i++) {
+        ret = sceNandEraseBlockWithRetry(i * g_nandInfo.pagesPerBlock);
         if (ret < 0) {
             count++;
         }
@@ -717,18 +717,18 @@ s32 sceNandTestBlock(u32 ppn) {
     s32 j;
     s32 ret;
 
-    if (ppn % D_00002FD0.pagesPerBlock != 0) {
+    if (ppn % g_nandInfo.pagesPerBlock != 0) {
         return 0x80230008;
     }
     ret = sceNandEraseBlockWithRetry(ppn);
     if (ret < 0) {
         return ret;
     }
-    ret = sceNandReadPagesRawAll(ppn, user, spare, D_00002FD0.pagesPerBlock);
+    ret = sceNandReadPagesRawAll(ppn, user, spare, g_nandInfo.pagesPerBlock);
     if (ret < 0) {
         return ret;
     }
-    for (i = 0; i < D_00002FD0.pagesPerBlock; i++) {
+    for (i = 0; i < g_nandInfo.pagesPerBlock; i++) {
         for (j = 0; j < 0x200; j += 4) {
             if (*(u32 *)&user[i][j] != 0xFFFFFFFF) {
                 return 0x80230004;
@@ -767,7 +767,7 @@ INCLUDE_ASM("nonmatchings/emc_sm", sceNandGetPageSize);
 
 #if FW_VERSION < 201
 s32 sceNandGetPageSize(void) {
-    return D_00002FD0.pageSize;
+    return g_nandInfo.pageSize;
 }
 #else
 INCLUDE_ASM("nonmatchings/emc_sm", sceNandGetPagesPerBlock);
@@ -775,7 +775,7 @@ INCLUDE_ASM("nonmatchings/emc_sm", sceNandGetPagesPerBlock);
 
 #if FW_VERSION < 201
 s32 sceNandGetPagesPerBlock(void) {
-    return D_00002FD0.pagesPerBlock;
+    return g_nandInfo.pagesPerBlock;
 }
 #else
 INCLUDE_ASM("nonmatchings/emc_sm", sceNandGetTotalBlocks);
@@ -783,7 +783,7 @@ INCLUDE_ASM("nonmatchings/emc_sm", sceNandGetTotalBlocks);
 
 #if FW_VERSION < 201
 s32 sceNandGetTotalBlocks(void) {
-    return D_00002FD0.totalBlocks;
+    return g_nandInfo.totalBlocks;
 }
 #else
 INCLUDE_ASM("nonmatchings/emc_sm", sceNandWriteBlock);
@@ -795,7 +795,7 @@ s32 sceNandWriteBlock(u32 ppn, void *user, void *spare) {
     if (ret < 0) {
         return ret;
     }
-    ret = sceNandWritePages(ppn, user, spare, D_00002FD0.pagesPerBlock);
+    ret = sceNandWritePages(ppn, user, spare, g_nandInfo.pagesPerBlock);
     if (ret >= 0) {
         return 0;
     }
@@ -806,14 +806,14 @@ s32 sceNandWriteBlock(u32 ppn, void *user, void *spare) {
 INCLUDE_ASM("nonmatchings/emc_sm", sceNandCalcEcc);
 
 s32 sceNandVerifyEcc(u8 *buf, u32 ecc) {
-    return func_0000214C(buf, ecc, 0);
+    return nandCorrectEcc(buf, ecc, 0);
 }
 
 s32 sceNandCollectEcc(u8 *buf, u32 ecc) {
-    return func_0000214C(buf, ecc, 1);
+    return nandCorrectEcc(buf, ecc, 1);
 }
 
-INCLUDE_ASM("nonmatchings/emc_sm", func_0000214C);
+INCLUDE_ASM("nonmatchings/emc_sm", nandCorrectEcc);
 
 #if FW_VERSION >= 300
 INCLUDE_RODATA("nonmatchings/emc_sm", D_00002980);
