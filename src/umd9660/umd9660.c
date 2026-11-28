@@ -2094,7 +2094,31 @@ INCLUDE_ASM("nonmatchings/umd9660", func_000042C0);
 INCLUDE_ASM("nonmatchings/umd9660", func_00003E00);
 #endif
 
-#if FW_VERSION < 201 || FW_VERSION >= 282
+#if FW_VERSION == 100
+s32 func_000043DC(void) {
+    s32 ret;
+    ret = sceKernelCreateHeap(1, 0x4000, 1, "SceUmd9660Dvd");
+    if (ret < 0) {
+        return ret;
+    }
+    D_00008310 = ret;
+    g_umd9660DvdSectorBuf = sceKernelAllocHeapMemory(D_00008310, 0x800);
+    if (g_umd9660DvdSectorBuf == NULL) {
+        g_umd9660DvdSectorBuf = NULL;
+        return 0x8001000C;
+    }
+    g_umd9660DvdDirBuf = sceKernelAllocHeapMemory(D_00008310, 0x800);
+    if (g_umd9660DvdDirBuf == NULL) {
+        g_umd9660DvdSectorBuf = NULL;
+        g_umd9660DvdDirBuf = NULL;
+        sceKernelFreeHeapMemory(D_00008310, g_umd9660DvdDirBuf);
+        return 0x8001000C;
+    }
+    return 0;
+}
+#endif
+
+#if (FW_VERSION >= 102 && FW_VERSION < 201) || FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/umd9660", func_000043DC);
 #endif
 
@@ -2294,7 +2318,33 @@ INCLUDE_ASM("nonmatchings/umd9660", func_00004FBC);
 #endif
 
 #if FW_VERSION == 100 || (FW_VERSION >= 150 && FW_VERSION < 201)
-INCLUDE_ASM("nonmatchings/umd9660", sceUmd9660_driver_DB1AC979);
+s32 sceUmd9660_driver_DB1AC979(SceUmd9660Drive *drive) {
+    SceUmdDrive *umd = drive->umdDrive;
+    SceUmdCdSpeedCmd cmd;
+    SceUID alarm;
+    s32 ret;
+    if (drive == NULL) {
+        return 0x80010016;
+    }
+    cmd.unk1 = 1;
+    cmd.unk0 = 0;
+    cmd.readSpeed = 0x32C8;
+    cmd.writeSpeed = 0x32C8;
+    alarm = sceUmdManSetAlarm(60000000);
+    for (;;) {
+        ret = sceUmdExecSetCDSpeedCmd(umd, &cmd);
+        if (ret == 0) {
+            break;
+        }
+        sceUmdExecReqSenseCmd(umd, umd->sense, 0x12);
+        if (sceUmdManGetCommandTimerFlag() == 1) {
+            ret = 0x8001006E;
+            break;
+        }
+    }
+    sceUmdManCancelAlarm(alarm);
+    return ret;
+}
 #endif
 
 #if FW_VERSION == 100

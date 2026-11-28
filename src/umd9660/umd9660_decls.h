@@ -120,6 +120,14 @@ typedef struct {
     u16 count; /* 0x8 */
 } SceUmd9660PrefetchArg;
 
+/* sceUmdExecSetCDSpeedCmd parameter */
+typedef struct {
+    u8 unk0; /* 0x0 */
+    u8 unk1; /* 0x1 */
+    u16 readSpeed; /* 0x2 */
+    u16 writeSpeed; /* 0x4 */
+} SceUmdCdSpeedCmd;
+
 /* sceUmdExecClearCacheInfoCmd parameter */
 typedef struct {
     u16 unk0; /* 0x0 */
@@ -412,6 +420,7 @@ s32 sceBLKRegister(const char *name, s32 type, s32 unit, void *data, SceUmd9660B
 s32 sceBLKUnRegister(const char *name, s32 unit);
 M2C_UNK sceIoAddDrv(M2C_UNK *);
 s32 sceIoDevctl(const char *name, s32 cmd, void *indata, SceSize inlen, void *outdata, SceSize outlen);
+void *sceKernelAllocHeapMemory(SceUID heap, SceSize size);
 void sceKernelAssert(s32 ok, s32 lvl);
 void sceKernelCpuResumeIntr(s32);
 s32 sceKernelCpuSuspendIntr(void);
@@ -445,11 +454,14 @@ s32 sceUmdExecPrefetch10Cmd(SceUmdDrive *umd, SceUmdPrefetchCmd *cmd);
 s32 sceUmdExecReportCacheCmd(SceUmdDrive *umd, SceUmdReportCacheCmd *cmd, void *buf);
 s32 sceUmdExecReqSenseCmd(SceUmdDrive *umd, void *buf, SceSize size);
 s32 sceUmdExecSeekCmd(SceUmdDrive *umd, u32 lbn, s32 arg2);
+s32 sceUmdExecSetCDSpeedCmd(SceUmdDrive *umd, SceUmdCdSpeedCmd *cmd);
 s32 sceUmdExecSetLockLengthCmd(SceUmdDrive *umd, u32 len);
 s32 sceUmdIsUMD(void);
+s32 sceUmdManCancelAlarm(SceUID id);
 s32 sceUmdManChangePowerMode(SceUmdDrive *umd, s32 mode);
 s32 sceUmdManCheckDeviceReady(SceUmdDrive *umd);
 s32 sceUmdManDVDDriveStart(void);
+s32 sceUmdManGetCommandTimerFlag(void);
 s32 sceUmdManGetDiscInfo(SceUmdDiscInfo *info);
 s32 sceUmdManGetDiscInfo4VSH(SceUmdDiscInfo *info);
 s32 sceUmdManGetInquiry(SceUmdDrive *umd, s32 size, void *buf);
@@ -457,6 +469,7 @@ s32 sceUmdManGetIntrStateFlag();
 s32 sceUmdManGetPowerStat(s32 driveId);
 SceUmdDrive *sceUmdManGetUmdDrive(s32 driveId);
 s32 sceUmdManIsDvdDrive();
+SceUID sceUmdManSetAlarm(u32 usec);
 s32 sceUmdManSetCachedRead();
 s32 sceUmdManSetDisableReadAhead();
 s32 sceUmdManSetEnableReadAhead();
