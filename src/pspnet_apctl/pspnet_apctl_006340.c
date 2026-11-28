@@ -29,11 +29,11 @@ INCLUDE_ASM("nonmatchings/pspnet_apctl_006340", func_00006414);
 #endif
 
 #if FW_VERSION >= 250 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_apctl_006340", func_00005F58);
+INCLUDE_ASM("nonmatchings/pspnet_apctl_006340", func_000045B8);
 
 INCLUDE_ASM("nonmatchings/pspnet_apctl_006340", func_00006088);
 
-INCLUDE_ASM("nonmatchings/pspnet_apctl_006340", func_00006168);
+INCLUDE_ASM("nonmatchings/pspnet_apctl_006340", func_000047D8);
 #endif
 
 #if FW_VERSION < 250
