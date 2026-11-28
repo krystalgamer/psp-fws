@@ -34,7 +34,7 @@ typedef struct {
     u32 flags;                          /* 0x14 1: wakeup sb, 2: wakeup select */
 } SceNetAdhocPtpSockbuf;
 
-/* pspnet SceNetThreadInfo as seen by pspnet_adhoc (1.00: 0x64, 1.50+: no sleepcnt) */
+/* pspnet SceNetThreadInfo as seen by pspnet_adhoc (1.00: 0x64, 1.50: 0x60 (no sleepcnt), 2.60+: 0x5C (no descs chain)) */
 typedef struct SceNetAdhocWaiter {
     u8 unk0[0x20];
     void *wchan;                        /* 0x20 */
@@ -46,10 +46,15 @@ typedef struct SceNetAdhocWaiter {
     u8 unk52[2];
 #endif
     u32 unk54;
+#if FW_VERSION < 260
     struct SceNetAdhocDesc *descs;      /* 0x58 descriptors this thread waits in (linked by desc->tnext) */
     u32 unk5C;
+#else
+    u32 unk58;
+#endif
     struct SceNetAdhocWaiter *next;     /* 0x60 next waiter of the same descriptor */
 } SceNetAdhocWaiter;
+typedef char chk_SceNetAdhocWaiter[(sizeof(SceNetAdhocWaiter) == ((FW_VERSION < 150) ? 0x64 : (FW_VERSION < 260) ? 0x60 : 0x5C)) ? 1 : -1];
 
 /* socket descriptor (0x2C), one per PDP/PTP id */
 typedef struct SceNetAdhocDesc {

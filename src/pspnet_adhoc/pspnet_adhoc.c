@@ -412,7 +412,6 @@ s32 func_00001044(void) {
     return 0;
 }
 
-#if FW_VERSION < 150
 void func_00001078(SceNetAdhocDesc *d, s32 events) {
     SceNetAdhocWaiter *w;
 
@@ -427,9 +426,6 @@ void func_00001078(SceNetAdhocDesc *d, s32 events) {
         }
     }
 }
-#else
-INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00001078);
-#endif
 
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", sceNetAdhocPdpCreate);
 
