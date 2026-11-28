@@ -8,11 +8,22 @@ INCLUDE_ASM("nonmatchings/msstor_0015A0", func_000015A0);
 INCLUDE_ASM("nonmatchings/msstor_0015A0", func_00001660);
 #endif
 
+#if FW_VERSION < 150
+s32 func_000016E4(SceMSstorDev *dev, s32 on) {
+    if (on != 0) {
+        return sceMScmSetHCTransferMode(dev->hc, 2, 2, 3);
+    }
+    return sceMScmSetHCTransferMode(dev->hc, 1, 1, 2);
+}
+#else
 INCLUDE_ASM("nonmatchings/msstor_0015A0", func_000016E4);
+#endif
 
 INCLUDE_ASM("nonmatchings/msstor_0015A0", func_0000172C);
 
-INCLUDE_ASM("nonmatchings/msstor_0015A0", func_00001794);
+s32 func_00001794(SceMSstorDev *dev, u8 *intr) {
+    return func_000077C4(sceMScmTPCGetIntHelper(dev->hc, intr, -1));
+}
 
 #if FW_VERSION < 201
 s32 func_000013E0(SceMSstorDev *dev, u8 *buf) {
@@ -37,7 +48,9 @@ s32 func_00001534(SceMSstorDev *dev, s32 size, u8 *buf) {
     return func_000077C4(sceMScmTPCReadShortData(dev->hc, buf, size, -1));
 }
 
-INCLUDE_ASM("nonmatchings/msstor_0015A0", func_00001568);
+s32 func_00001568(SceMSstorDev *dev) {
+    return func_000077C4(sceMScmResetHC(dev->hc, 2));
+}
 
 s32 func_00001590(SceMSstorDev *dev, s32 cmd) {
     return func_000077C4(sceMScmTPCSetCmdHelper(dev->hc, cmd & 0xFF, -1));
@@ -68,7 +81,19 @@ void func_000018AC(s32 *arg0, s32 arg1) {
 }
 #endif
 
-INCLUDE_ASM("nonmatchings/msstor_0015A0", func_000018D8);
+s32 func_000018D8(SceMSstorDev *dev, s32 readAddr, s32 readSize, s32 writeAddr, s32 writeSize) {
+    u8 adr[8];
+
+    adr[0] = readAddr;
+    adr[1] = readSize;
+    adr[2] = writeAddr;
+    adr[3] = writeSize;
+    adr[4] = 0;
+    adr[5] = 0;
+    adr[6] = 0;
+    adr[7] = 0;
+    return func_000077C4(sceMScmTPCSetRWRegAdrs(dev->hc, adr, -1));
+}
 
 #if FW_VERSION >= 102 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/msstor_0015A0", func_00001550);
@@ -130,8 +155,8 @@ INCLUDE_ASM("nonmatchings/msstor_0015A0", func_00001F78);
 
 INCLUDE_ASM("nonmatchings/msstor_0015A0", func_0000263C);
 
-void func_000026A8(s32 arg0) {
-    func_000008B8(arg0, 0xC3, 1);
+s32 func_000026A8(SceMSstorDev *dev) {
+    return func_000008B8(dev, 0xC3, 1);
 }
 
 INCLUDE_ASM("nonmatchings/msstor_0015A0", func_000026C8);
@@ -206,12 +231,12 @@ INCLUDE_ASM("nonmatchings/msstor_0015A0", func_00003CA4);
 INCLUDE_ASM("nonmatchings/msstor_0015A0", func_00003E20);
 
 #if FW_VERSION < 201
-void func_00003C2C(s32 arg0) {
-    func_000008B8(arg0, 0x5A, 1);
+s32 func_00003C2C(SceMSstorDev *dev) {
+    return func_000008B8(dev, 0x5A, 1);
 }
 
-void func_00003C4C(s32 arg0) {
-    func_000008B8(arg0, 0xCC, 5);
+s32 func_00003C4C(SceMSstorDev *dev) {
+    return func_000008B8(dev, 0xCC, 5);
 }
 #else
 void func_00003E88(s32 arg0) {

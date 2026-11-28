@@ -65,9 +65,28 @@ INCLUDE_ASM("nonmatchings/msstor_0001BC", func_000006DC);
 
 INCLUDE_ASM("nonmatchings/msstor_0001BC", func_00000784);
 
-INCLUDE_ASM("nonmatchings/msstor_0001BC", func_0000083C);
+#if FW_VERSION < 201
+s32 func_0000083C(SceMSstorDev *dev, s32 addr, s32 size, u8 *buf) {
+    s32 ret;
 
-INCLUDE_ASM("nonmatchings/msstor_0001BC", func_000008B8);
+    if ((u32)(size - 1) >= 0x100) {
+        return -1;
+    }
+    ret = func_000018D8(dev, addr, size, 0x10, 0xF);
+    if (ret != 0) {
+        return ret;
+    }
+    return func_0000181C(dev, size, buf);
+}
+#else
+INCLUDE_ASM("nonmatchings/msstor_0001BC", func_0000083C);
+#endif
+
+s32 func_000008B8(SceMSstorDev *dev, u8 cmd, s32 timeout) {
+    u8 intr;
+
+    return func_000077C4(sceMScmTPCSetCmd(dev->hc, cmd, &intr, timeout * 1000));
+}
 
 INCLUDE_ASM("nonmatchings/msstor_0001BC", func_000008F0);
 
@@ -91,7 +110,9 @@ INCLUDE_ASM("nonmatchings/msstor_0001BC", func_00001288);
 
 INCLUDE_ASM("nonmatchings/msstor_0001BC", func_00001400);
 
-INCLUDE_ASM("nonmatchings/msstor_0001BC", func_00001474);
+s32 func_00001474(SceMSstorDev *dev) {
+    return func_000006DC(dev, 0x11, 0, 0, 1000);
+}
 
 INCLUDE_ASM("nonmatchings/msstor_0001BC", func_0000149C);
 

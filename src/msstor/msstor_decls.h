@@ -295,6 +295,11 @@ extern struct D_00009B54_s D_00009B54;
 
 s32 Kprintf(const char *fmt, ...);
 s32 bzero(void *p, s32 n);
+s32 func_00000000(s32 arg);
+s32 func_00000060(SceMSstorDev *dev);
+s32 func_0000009C(void);
+s32 func_00000134(s32 lba, s32 count, void *buf);
+s32 func_0000017C(s32 lba, s32 count, void *buf);
 #if FW_VERSION < 201
 s32 func_000001BC(s32 lba, s32 count, void *buf);
 #else
@@ -319,15 +324,26 @@ s32 func_00000518(SceMSstorDev *dev, s32 arg1);
 #else
 void func_00000518(s32 *arg0);
 #endif
-s32 func_000008B8(s32, s32, s32);
+s32 func_00000548(SceMSstorDev *dev);
+s32 func_00000654(SceMSstorDev *dev, s32 on);
+s32 func_000006DC(SceMSstorDev *dev, u8 cmd, u32 addr, u16 count, s32 timeout);
+s32 func_00000784(SceMSstorDev *dev, s32 timeout, u8 *intr);
+s32 func_0000083C(SceMSstorDev *dev, s32 addr, s32 size, u8 *buf);
+s32 func_000008B8(SceMSstorDev *dev, u8 cmd, s32 timeout);
+s32 func_000008F0(SceMSstorDev *dev, u32 block, u8 page, u8 cmdParam, u8 *extra, s32 withExtra);
+s32 func_00000978(SceMSstorDev *dev, s32 addr, s32 size, u8 *buf);
 s32 func_000013E0(SceMSstorDev *dev, u8 *buf);
 s32 func_0000140C(SceMSstorDev *dev, s32 size, u8 *buf);
+s32 func_00001474(SceMSstorDev *dev);
 s32 func_00001534(SceMSstorDev *dev, s32 size, u8 *buf);
 s32 func_00001558(struct Unk_func_00001558_0 *arg0);
 void func_00001560(s32 arg0);
 s32 func_00001568(SceMSstorDev *dev);
 void func_00001580(s32 arg0);
 s32 func_00001590(SceMSstorDev *dev, s32 cmd);
+s32 func_000016E4(SceMSstorDev *dev, s32 on);
+s32 func_0000172C(SceMSstorDev *dev, u8 cmd, u32 addr, u16 count);
+s32 func_00001794(SceMSstorDev *dev, u8 *intr);
 void func_000017BC(s32 *arg0, s32 arg1);
 void func_000017E8(s32 *arg0, M2C_UNK arg1, M2C_UNK arg2);
 s32 func_00001808(SceMSstorDev *dev, u8 *buf);
@@ -340,7 +356,9 @@ s32 func_00001834(SceMSstorDev *dev, s32 size, u8 *buf);
 void func_00001850(s32 *arg0, M2C_UNK arg1, M2C_UNK arg2);
 void func_00001884(s32 *arg0);
 void func_000018AC(s32 *arg0, s32 arg1);
+s32 func_000018D8(SceMSstorDev *dev, s32 readAddr, s32 readSize, s32 writeAddr, s32 writeSize);
 s32 func_00001958(SceMSstorDev *dev, s32 size, u8 *buf);
+s32 func_000019C8(SceMSstorDev *dev, s32 timeout, s32 mode);
 void func_00001B28(s32 *arg0, s32 arg1);
 void func_00001B54(s32 *arg0, M2C_UNK arg1, M2C_UNK arg2);
 #if FW_VERSION < 201
@@ -349,10 +367,10 @@ s32 func_00001B88(SceMSstorDev *dev, s32 size, u8 *buf);
 void func_00001B88(s32 *arg0, s32 arg1, s32 arg2);
 #endif
 void func_00001BBC(s32 *arg0, M2C_UNK arg1, M2C_UNK arg2);
-void func_000026A8(s32 arg0);
+s32 func_000026A8(SceMSstorDev *dev);
 s32 func_000034CC(void *arg0, s32 arg1, s32 *arg2);
-void func_00003C2C(s32 arg0);
-void func_00003C4C(s32 arg0);
+s32 func_00003C2C(SceMSstorDev *dev);
+s32 func_00003C4C(SceMSstorDev *dev);
 void func_00003E88(s32 arg0);
 void func_00003EA8(s32 arg0);
 s32 func_00004514(void);
