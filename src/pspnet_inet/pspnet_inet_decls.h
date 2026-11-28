@@ -2262,7 +2262,7 @@ s32 func_0000DF08(s32 type, struct rt_addrinfo *rtinfo, char *cp, struct walkarg
 void func_0000E0EC(s32 cmd, struct ifaddr *ifa, s32 error, struct rtentry *rt);
 void func_0000E3F0(struct ifnet *ifp);
 void func_0000E448(struct ifnet *ifp, s32 what);
-s32 func_0000E4E4(s32, s32);
+void func_0000E4E4(struct ifnet *ifp, s32 what);
 struct mbuf *func_0000E5A4(s32 type, struct rt_addrinfo *rtinfo, char *data, s32 datalen);
 s32 func_0000E928(struct radix_node *rn, void *v);
 void func_0000ED48(void *arg0);

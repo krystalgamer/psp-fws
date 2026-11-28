@@ -476,7 +476,25 @@ void func_0000E448(struct ifnet *ifp, s32 what)
 #endif
 
 #if FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/pspnet_inet_rtsub", func_0000E4E4);
+void func_0000E4E4(struct ifnet *ifp, s32 what)
+{
+	struct if_announcemsghdr ifan;
+	struct mbuf *m;
+	struct rt_addrinfo info;
+
+	if (route_cb.any_count == 0)
+		return;
+	bzero_i(&info, sizeof(info));
+	bzero_i(&ifan, sizeof(ifan));
+	ifan.ifan_index = ifp->if_index;
+	sceNetStrcpy((u8 *)ifan.ifan_name, (u8 *)ifp->if_xname);
+	ifan.ifan_what = what;
+	m = func_0000E5A4(RTM_IFANNOUNCE, &info, (char *)&ifan, sizeof(ifan));
+	if (m == 0)
+		return;
+	route_proto.sp_protocol = 0;
+	func_0000EE68(m, &route_proto, &route_src, &route_dst);
+}
 #endif
 
 struct mbuf *func_0000E5A4(s32 type, struct rt_addrinfo *rtinfo, char *data, s32 datalen)
