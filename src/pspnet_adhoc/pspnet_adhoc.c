@@ -162,7 +162,7 @@ s32 func_0000092C(void *arg0, s32 arg1) {
             switch (temp_v1) {                      /* irregular */
             case 2:
                 temp_s0 = M2C_FIELD(var_s1, void **, 4);
-                M2C_FIELD(temp_s0, s32 *, 8) = func_000050F8((s32) temp_a1, M2C_FIELD(temp_s0, s32 *, 4));
+                M2C_FIELD(temp_s0, s32 *, 8) = func_000050F8(temp_a1, M2C_FIELD(temp_s0, s32 *, 4));
                 break;
             case 1:
                 temp_s0_2 = M2C_FIELD(var_s1, void **, 4);
@@ -1080,10 +1080,65 @@ void func_00004E60(SceNetAdhocPtpPcb *pcb) {
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00004E60);
 #endif
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00004F50);
+#if FW_VERSION < 150
+void func_00004F50(SceNetAdhocPtpPcb *pcb) {
+    _sce_pspnet_callout_stop(pcb->callout);
+    if (pcb->desc->flags & 0x6000)
+        func_00006340(pcb, 7);
+    pcb->desc->flags = (pcb->desc->flags & ~0x3000) | 0x8000;
+    pcb->state = 0;
+    if (pcb->parent != NULL) {
+        PTP_SBWAKEUP(&pcb->parent->rcv);
+        PTP_SBWAKEUP(&pcb->parent->snd);
+    } else {
+        PTP_SBWAKEUP(&pcb->rcv);
+        PTP_SBWAKEUP(&pcb->snd);
+    }
+}
+#endif
 
-INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_000050F8);
+#if FW_VERSION >= 150 && FW_VERSION < 282
+INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00004F50);
+#endif
+
+#if FW_VERSION < 282
+s32 func_000050F8(SceNetAdhocDesc *d, s32 events) {
+    SceNetAdhocPtpPcb *pcb;
+    SceNetAdhocPtpPcb *c;
+    s32 ret;
+
+    ret = 0;
+    pcb = d->pcb;
+    if ((events & 2) && pcb->rcv.cc >= pcb->rcv.lowat)
+        ret = 2;
+    if ((events & 1) && pcb->snd.hiwat - pcb->snd.cc >= pcb->snd.lowat)
+        ret |= 1;
+    if ((events & 4) && (d->flags & 0x4000))
+        ret |= 4;
+    if ((events & 8) && (d->flags & 0x1000)) {
+        for (c = pcb->cfirst; c != NULL; c = c->cnext) {
+            if (c->desc->flags & 0x4000) {
+                ret |= 8;
+                break;
+            }
+        }
+    }
+    if ((events & 0x10) && pcb->snd.cc == 0)
+        ret |= 0x10;
+    if (ret == 0) {
+        if (events & 2)
+            pcb->rcv.flags |= 2;
+        if (events & 1)
+            pcb->snd.flags |= 2;
+        if (events & 4)
+            pcb->rcv.flags |= 2;
+        if (events & 8)
+            pcb->rcv.flags |= 2;
+        if (events & 0x10)
+            pcb->snd.flags |= 2;
+    }
+    return ret;
+}
 #else
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00004BD8);
 

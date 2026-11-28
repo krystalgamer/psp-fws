@@ -22,9 +22,9 @@ typedef struct SceNetAdhocPdpQent {
 typedef struct {
     struct mbuf *first;                 /* 0x00 m_nextpkt chain */
     struct mbuf *last;                  /* 0x04 */
-    s32 cc;                             /* 0x08 */
-    s32 hiwat;                          /* 0x0C */
-    s32 lowat;                          /* 0x10 */
+    u32 cc;                             /* 0x08 */
+    u32 hiwat;                          /* 0x0C */
+    u32 lowat;                          /* 0x10 */
     u32 flags;                          /* 0x14 1: wakeup sb, 2: wakeup select */
 } SceNetAdhocPtpSockbuf;
 
@@ -153,6 +153,18 @@ typedef struct {
     SceNetAdhocPtpPcb *first;
     SceNetAdhocPtpPcb **last;
 } SceNetAdhocPtpList;
+
+typedef struct SceNetAdhocPtpStat {
+    struct SceNetAdhocPtpStat *next;    /* 0x00 */
+    s32 id;                             /* 0x04 */
+    SceNetEtherAddr laddr;              /* 0x08 */
+    SceNetEtherAddr paddr;              /* 0x0E */
+    u16 lport;                          /* 0x14 */
+    u16 pport;                          /* 0x16 */
+    u32 snd_sb_cc;                      /* 0x18 */
+    u32 rcv_sb_cc;                      /* 0x1C */
+    s32 state;                          /* 0x20 */
+} SceNetAdhocPtpStat;
 
 struct Unk_func_00000974_temp_a1 {
     u8 pad0[0x10];
@@ -332,9 +344,9 @@ void func_00004AE4(SceNetAdhocDesc *d);
 void func_00004B30(SceNetAdhocPtpPcb *pcb);
 void func_00004E60(SceNetAdhocPtpPcb *pcb);
 s32 func_00004E98(SceNetAdhocPtpPcb *pcb);
-s32 func_00004F50(SceNetAdhocPtpPcb *pcb);
+void func_00004F50(SceNetAdhocPtpPcb *pcb);
 s32 func_00005024(s32, s32);
-s32 func_000050F8(s32, s32);
+s32 func_000050F8(SceNetAdhocDesc *d, s32 events);
 s32 func_000052D4(void);
 SceNetAdhocPtpPcb *func_0000532C(const SceNetEtherAddr *laddr, u16 lport, const SceNetEtherAddr *paddr, u16 pport);
 s32 func_0000548C(SceNetAdhocDesc *d);
@@ -377,6 +389,7 @@ s32 sceNetAdhocGameModeUpdateMaster(void);
 void sceNetAdhocGameModeUpdateReplica(s32 id, SceNetAdhocGameModeOptData *opt);
 void sceNetAdhocGameModeUpdateReplicaInternal(s32 id, SceNetAdhocGameModeOptData *opt);
 s32 sceNetAdhocGetPdpStat(s32 *buflen, SceNetAdhocPdpStat *buf);
+s32 sceNetAdhocGetPtpStat(s32 *buflen, SceNetAdhocPtpStat *buf);
 s32 sceNetAdhocGetSocketAlert(s32 id, s32 *flag);
 s32 sceNetAdhocInit(void);
 s32 sceNetAdhocPdpDelete(s32 id, s32 flag);
