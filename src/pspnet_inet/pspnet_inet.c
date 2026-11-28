@@ -2,11 +2,7 @@
 #include "common.h"
 #include "pspnet_inet_decls.h"
 
-#if FW_VERSION == 103
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_00000000);
-#endif
-
-#if FW_VERSION < 103 || (FW_VERSION >= 150 && FW_VERSION < 201)
+#if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/pspnet_inet", sceNetInetInit);
 #endif
 

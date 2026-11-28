@@ -704,3 +704,10 @@ udp_input = 0x0001C30C; // type:func
 in4_cksum = 0x00012D84; // type:func
 icmp_error = 0x00018E1C; // type:func
 rip_input = 0x0001B5E8; // type:func
+
+// NID-derived names
+sceNetInetInit = 0x00000000; // type:func
+_sce_pspnet_set_thread_errno = 0x0002D5C4; // type:func
+_sce_pspnet_ifunit = 0x0002D5EC; // type:func
+_sce_pspnet_start_of_inet_module_in_netintr = 0x0002D6AC; // type:func
+_sce_pspnet_start_of_inet_module_in_ifhandle_ether = 0x0002D6CC; // type:func

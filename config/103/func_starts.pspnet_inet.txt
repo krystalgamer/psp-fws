@@ -1,5 +1,5 @@
 // function starts pinned by tools/split_tu.py
-func_00000000 = 0x00000000; // type:func
+sceNetInetInit = 0x00000000; // type:func
 func_00001584 = 0x00001584; // type:func
 func_00001D50 = 0x00001D50; // type:func
 func_00001D78 = 0x00001D78; // type:func

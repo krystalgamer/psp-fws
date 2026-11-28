@@ -82,6 +82,14 @@ def main():
                 t = symfs[v].read_text()
                 t = re.sub(rf"^{real} = 0x{auto[5:]};[^\n]*\n", "", t, flags=re.M)
                 symfs[v].write_text(t)
+    # split pins (func_starts) name the functions too: rename them along with the entries
+    pins = {v: ROOT / "config" / v / f"func_starts.{a.module}.txt" for v in sym0}
+    pin0 = {v: f.read_text() for v, f in pins.items() if f.exists()}
+    if changed and not a.dry_run:
+        for v, t in pin0.items():
+            for auto, real in new.get(fw(v), {}).items():
+                t = re.sub(rf"^{auto}(\s*=)", rf"{real}\1", t, flags=re.M)
+            pins[v].write_text(t)
     if a.dry_run or not changed:
         for p, t in srcs.items():
             p.write_text(t)
@@ -97,6 +105,8 @@ def main():
             p.write_text(t)
         for v, t in sym0.items():
             symfs[v].write_text(t)
+        for v, t in pin0.items():
+            pins[v].write_text(t)
         subprocess.run(["tools/regress.sh", "--shared", f"{vers[0]}:{a.module}"], cwd=ROOT, capture_output=True)
         print(f"{a.vers}:{a.module}: FAILED, restored: {bad[:2]}")
         sys.exit(1)
