@@ -1583,8 +1583,6 @@ extern s32 D_0002C228;
 extern s32 D_0002C22C;
 extern s32 D_0002C234;
 extern s32 D_0002C270; /* icmpreturndatabytes */
-extern s32 D_0002C30C;
-extern s32 D_0002C310;
 extern s32 D_0002C318;
 extern s32 D_0002C31C;
 extern s32 D_0002C320;
@@ -1701,6 +1699,8 @@ extern u32 raw_recvspace; /* raw_recvspace */
 extern u32 raw_sendspace; /* raw_sendspace */
 extern struct { struct rawcb *lh_first; } rawcb; /* rawcb */
 extern struct inpcbtable rawcbtable;
+extern s32 rip_recvspace;
+extern s32 rip_sendspace;
 extern struct radix_node_head *rt_tables[32]; /* rt_tables */
 extern s32 rttrash; /* rttrash */
 extern struct soqhead so_list;

@@ -4633,7 +4633,7 @@ __inline void rip_disconnect(struct inpcb *inp) {
     inp->inp_faddr = zeroin_addr;
 }
 
-s32 func_0001B1B0(struct socket *so, s32 req, struct mbuf *m, struct mbuf *nam, struct mbuf *control) {
+s32 rip_usrreq(struct socket *so, s32 req, struct mbuf *m, struct mbuf *nam, struct mbuf *control) {
     struct inpcb *inp;
     s32 s;
     s32 error = 0;
@@ -4658,7 +4658,7 @@ s32 func_0001B1B0(struct socket *so, s32 req, struct mbuf *m, struct mbuf *nam, 
             break;
         }
         if (so->so_snd.sb_hiwat == 0 || so->so_rcv.sb_hiwat == 0) {
-            error = soreserve(so, D_0002C30C, D_0002C310);
+            error = soreserve(so, rip_sendspace, rip_recvspace);
             if (error)
                 break;
         }
@@ -4753,12 +4753,12 @@ release:
     return (error);
 }
 #else
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_0001B1B0);
+INCLUDE_ASM("nonmatchings/pspnet_inet", rip_usrreq);
 #endif
 
 void rip_init(void) {
-    D_0002C30C = 0x2000;
-    D_0002C310 = 0x2000;
+    rip_sendspace = 0x2000;
+    rip_recvspace = 0x2000;
     in_pcbinit(&rawcbtable, 1, 1);
 }
 
