@@ -438,3 +438,6 @@ _ZN14Class_0005D948D1Ev = 0x00050184; // type:func
 _ZN14Class_0005D948D0Ev = 0x00050194; // type:func
 _ZN14Class_0005D8A0C2Ev = 0x0004F7FC; // type:func
 _ZN14Class_0005D8A0C1Ev = 0x0004F80C; // type:func
+_ZN14Class_0005BD70D2Ev = 0x000349B0; // type:func
+_ZN14Class_0005BD70D1Ev = 0x000349D8; // type:func
+_ZN14Class_0005BD70D0Ev = 0x00034A00; // type:func

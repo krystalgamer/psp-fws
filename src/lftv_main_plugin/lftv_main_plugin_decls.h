@@ -262,6 +262,16 @@ public:
 #endif
 
 #ifdef __cplusplus
+/* vtable _ZTV14Class_0005BD70 is data (vptr = label - 8 + 8) */
+class Class_0005BD70 {
+public:
+    u8 pad4[0x20];
+    s32 unk24;
+    virtual ~Class_0005BD70();
+};
+#endif
+
+#ifdef __cplusplus
 /* vtable _ZTV14Class_0005C018 is data (vptr = label - 8 + 8) */
 class Class_0005C018 : public paf::PhWidget {
 public:
@@ -1974,6 +1984,9 @@ s32 _ZN14Class_0005B860D2Ev(s32);
 void _ZN14Class_0005B8C0D0Ev(M2C_UNK **arg0);
 void _ZN14Class_0005B8C0D1Ev(M2C_UNK **arg0);
 void _ZN14Class_0005B8C0D2Ev(M2C_UNK **arg0);
+void _ZN14Class_0005BD70D0Ev(struct Unk_func_00034A00_0 *arg0);
+void _ZN14Class_0005BD70D1Ev(struct Unk_func_000349D8_0 *arg0);
+void _ZN14Class_0005BD70D2Ev(struct Unk_func_000349B0_0 *arg0);
 void _ZN14Class_0005D8A0C1Ev(M2C_UNK **arg0);
 void _ZN14Class_0005D8A0C2Ev(M2C_UNK **arg0);
 void _ZN14Class_0005D948D2Ev(void *self);

@@ -2827,33 +2827,15 @@ INCLUDE_ASM("nonmatchings/lftv_main_plugin_02433C", func_000349B0);
 #endif
 
 #if FW_VERSION == 282
-void func_000349B0(struct Unk_func_000349B0_0 *arg0) {
-    arg0->unk0 = &D_0005BD70;
-    sceKernelDeleteSema(arg0->unk24);
+Class_0005BD70::~Class_0005BD70() {
+    sceKernelDeleteSema(this->unk24);
 }
 #endif
 
 #if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/lftv_main_plugin_02433C", func_000349D8);
-#endif
 
-#if FW_VERSION == 282
-void func_000349D8(struct Unk_func_000349D8_0 *arg0) {
-    arg0->unk0 = &D_0005BD70;
-    sceKernelDeleteSema(arg0->unk24);
-}
-#endif
-
-#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/lftv_main_plugin_02433C", func_00034A00);
-#endif
-
-#if FW_VERSION == 282
-void func_00034A00(struct Unk_func_00034A00_0 *arg0) {
-    arg0->unk0 = &D_0005BD70;
-    sceKernelDeleteSema(arg0->unk24);
-    _ZdlPv(arg0);
-}
 #endif
 
 INCLUDE_RODATA("nonmatchings/lftv_main_plugin_02433C", D_0005BB40);
