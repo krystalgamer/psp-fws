@@ -285,3 +285,5 @@ wakeFirstWaitThread = 0x00000480; // type:func
 mbxAddMessage = 0x00006ADC; // type:func
 threadReturnStub = 0x000136F4; // type:func
 setAlarm = 0x0000E094; // type:func
+deleteUIDDeferred = 0x0000F0DC; // type:func
+timerUpdate = 0x0000B304; // type:func

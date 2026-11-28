@@ -4398,8 +4398,6 @@ INCLUDE_ASM("nonmatchings/threadman", func_0000A918);
 INCLUDE_ASM("nonmatchings/threadman", func_0000AB2C);
 
 INCLUDE_ASM("nonmatchings/threadman", func_0000AE84);
-
-INCLUDE_ASM("nonmatchings/threadman", func_0000AF20);
 #endif
 
 #if FW_VERSION < 201
@@ -4441,8 +4439,10 @@ void func_0000B258(SceTimer *timer) {
     t->prev = timer;
     timer->prev->next = timer;
 }
+#endif
 
-INCLUDE_ASM("nonmatchings/threadman", func_0000B304);
+#if FW_VERSION < 282
+INCLUDE_ASM("nonmatchings/threadman", timerUpdate);
 #endif
 
 #if FW_VERSION < 270
@@ -4577,14 +4577,74 @@ INCLUDE_ASM("nonmatchings/threadman", func_0000BF7C);
 
 INCLUDE_ASM("nonmatchings/threadman", func_0000C250);
 
-INCLUDE_ASM("nonmatchings/threadman", func_0000C2EC);
+INCLUDE_ASM("nonmatchings/threadman", timerUpdate);
 
 INCLUDE_ASM("nonmatchings/threadman", sceKernelUSec2SysClock);
 
 INCLUDE_ASM("nonmatchings/threadman", func_0000C46C);
 #endif
 
+#if FW_VERSION < 152
+s32 sceKernelCancelAlarm(SceUID alarmid) {
+    SceSysmemUidCB *cb;
+    SceSysmemUidCB *uid;
+    SceTimer *timer;
+    s32 ret;
+    s32 ok;
+    s32 intr;
+    void *ra = getRa();
+    u32 oldK1 = shiftK1Noreorder();
+
+    if (g_threadmanInfo.unk440 == alarmid) {
+        setK1(oldK1);
+        return 0x8002019F;
+    }
+    intr = sceKernelCpuSuspendIntr();
+    if (sceKernelGetUIDcontrolBlockWithType(alarmid, g_threadmanInfo.uidAlarmType, &uid) != 0) {
+        sceKernelCpuResumeIntr(intr);
+        setK1(oldK1);
+        return 0x8002019F;
+    }
+    cb = uid;
+    if (k1IsUserMode() && !(cb->attr & 0x10)) {
+        sceKernelCpuResumeIntr(intr);
+        setK1(oldK1);
+        return 0x800200D1;
+    }
+    if (g_threadmanInfo.logHandler != NULL) {
+        g_threadmanInfo.logHandler(0x72, ra, 1, alarmid);
+    }
+    cb = uid;
+    timer = UID_CB_TO_DATA(cb, g_threadmanInfo.uidTimerType, SceTimer);
+    if (timer->unk10 != 0) {
+        sceKernelCpuResumeIntr(intr);
+        setK1(oldK1);
+        return 0x8002019F;
+    }
+    timer->next->prev = timer->prev;
+    timer->prev->next = timer->next;
+    timer->prev = timer;
+    timer->next = timer;
+    if (sceKernelIsIntrContext()) {
+        timer->unk10 = 1;
+        ret = deleteUIDDeferred(alarmid);
+    } else {
+        ret = sceKernelDeleteUID(alarmid);
+        ok = ret == 0;
+        THREADMAN_ASSERT(ok, D_00014F74, D_00014F2C, "sceKernelCancelAlarm", FW_VERSION < 150 ? 0x366 : 0x372);
+    }
+    if (ret == 0) {
+        timerUpdate();
+    }
+    sceKernelCpuResumeIntr(intr);
+    setK1(oldK1);
+    return ret;
+}
+#endif
+
+#if FW_VERSION >= 152
 INCLUDE_ASM("nonmatchings/threadman", sceKernelCancelAlarm);
+#endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/threadman", func_0000C048);
@@ -4611,7 +4671,7 @@ s32 func_0000BDC8(u32 *clock, void *handler, void *arg) {
     delay[0] = handler;
     delay[1] = arg;
     func_0000B258(timer);
-    func_0000B304();
+    timerUpdate();
     return cb->uid;
 }
 
@@ -4647,7 +4707,7 @@ void func_0000C048(SceSysmemUidCB *cb) {
         node->prev->next = node;
     } else {
         node->currentPriority = 1;
-        func_0000EF10(cb->uid);
+        deleteUIDDeferred(cb->uid);
     }
 }
 #endif
@@ -5084,7 +5144,7 @@ INCLUDE_ASM("nonmatchings/threadman", func_0000EFD8);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/threadman", func_0000F0DC);
+INCLUDE_ASM("nonmatchings/threadman", deleteUIDDeferred);
 
 void func_0000F034(SceThread *thread) {
     u32 prio = thread->currentPriority;
@@ -5127,7 +5187,7 @@ INCLUDE_ASM("nonmatchings/threadman", func_0000EE28);
 #if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/threadman", func_0000EE44);
 
-INCLUDE_ASM("nonmatchings/threadman", func_0000EF10);
+INCLUDE_ASM("nonmatchings/threadman", deleteUIDDeferred);
 
 INCLUDE_ASM("nonmatchings/threadman", func_0000F034);
 
@@ -5156,7 +5216,7 @@ s32 func_0000FD6C(void) {
 
 INCLUDE_ASM("nonmatchings/threadman", func_0000FD74);
 
-INCLUDE_ASM("nonmatchings/threadman", func_0000FE78);
+INCLUDE_ASM("nonmatchings/threadman", deleteUIDDeferred);
 
 INCLUDE_ASM("nonmatchings/threadman", func_0000FF9C);
 
@@ -5656,7 +5716,7 @@ INCLUDE_ASM("nonmatchings/threadman", func_0001335C);
 #if FW_VERSION == 100
 INCLUDE_ASM("nonmatchings/threadman", func_0000EE3C);
 
-INCLUDE_ASM("nonmatchings/threadman", func_0000EF10);
+INCLUDE_ASM("nonmatchings/threadman", deleteUIDDeferred);
 
 void func_0000F034(SceThread *thread) {
     u32 prio = thread->currentPriority;

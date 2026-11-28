@@ -210,3 +210,5 @@ func_000153A8 = 0x00013288; // type:func rom:0x13308
 wakeFirstWaitThread = 0x00000308; // type:func
 mbxAddMessage = 0x00005D40; // type:func
 setAlarm = 0x0000B8BC; // type:func
+deleteUIDDeferred = 0x0000EF10; // type:func
+timerUpdate = 0x0000B304; // type:func

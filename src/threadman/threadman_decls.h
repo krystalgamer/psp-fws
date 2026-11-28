@@ -244,6 +244,7 @@ typedef struct SceTimer {
     struct SceTimer *next; /* 0x00 */
     struct SceTimer *prev; /* 0x04 */
     SceKernelSysClock time; /* 0x08: expiry time */
+    s32 unk10; /* 0x10: firing; set when cancelled from an interrupt */
 } SceTimer;
 
 /* "VTimer" uid type data (partial) */
@@ -500,7 +501,9 @@ typedef struct SceThreadmanInfo {
     u32 unk430; /* 0x430: system time low word at last update */
     u32 unk434; /* 0x434: system time high word */
     u32 unk438; /* 0x438: next timer event (low word) */
-    u8 unk43C[0x584 - 0x43C];
+    u8 unk43C[0x440 - 0x43C];
+    SceUID unk440; /* 0x440: the alarm whose handler is running */
+    u8 unk444[0x584 - 0x444];
     SceThread *idleThread; /* 0x584 */
     u8 unk588[0x5B8 - 0x588];
     s32 unk5B8; /* 0x5B8: number of free Delay uids in unk5C4 */
@@ -554,7 +557,9 @@ typedef struct SceThreadmanInfo {
     u32 unk430; /* 0x430 */
     u32 unk434; /* 0x434 */
     u32 unk438; /* 0x438 */
-    u8 unk43C[0x5F8 - 0x43C];
+    u8 unk43C[0x440 - 0x43C];
+    SceUID unk440; /* 0x440: the alarm whose handler is running */
+    u8 unk444[0x5F8 - 0x444];
     s32 unk5B8; /* 0x5F8 (0x5B8 in 1.00) */
     SceThreadQueue timers; /* 0x5FC */
     SceThreadQueue unk5C4; /* 0x604 */
