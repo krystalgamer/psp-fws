@@ -1424,18 +1424,17 @@ INCLUDE_ASM("nonmatchings/savedata_plugin_00CE3C", func_0000FA70);
 
 INCLUDE_ASM("nonmatchings/savedata_plugin_00CE3C", func_0000FB1C);
 
+#if FW_VERSION >= 282
+Class_000226A0::Class_000226A0(s32 arg1) {
+    this->unk4 = arg1;
+    func_0000FBF8((s32) this);
+}
+#else
 INCLUDE_ASM("nonmatchings/savedata_plugin_00CE3C", func_0000FB58);
 
-#if FW_VERSION < 282
 void func_0000D284(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, M2C_UNK **, 0) = &D_000226A0;
     M2C_FIELD(arg0, s32 *, 4) = arg1;
-    func_0000FBF8((s32) arg0);
-}
-#else
-void func_0000FB84(struct Unk_func_0000FB84_0 *arg0, s32 arg1) {
-    arg0->unk0 = &D_000226A0;
-    arg0->unk4 = arg1;
     func_0000FBF8((s32) arg0);
 }
 #endif

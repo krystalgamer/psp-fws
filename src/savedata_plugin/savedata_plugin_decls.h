@@ -50,6 +50,8 @@ public:
 /* vtable _ZTV14Class_000226A0 is data (vptr = label - 8 + 8) */
 class Class_000226A0 {
 public:
+    s32 unk4;
+    Class_000226A0(s32 arg1);
     virtual ~Class_000226A0();
 };
 #endif
@@ -699,6 +701,8 @@ extern M2C_UNK func_0000E950;
 
 s32 Job_Start(M2C_UNK, M2C_UNK *, void *, M2C_UNK, M2C_UNK, M2C_UNK *);
 s32 Job_isCanceled(s32);
+void _ZN14Class_000226A0C1Ei(struct Unk_func_0000FB84_0 *arg0, s32 arg1);
+s32 _ZN14Class_000226A0C2Ei(s32, s32);
 M2C_UNK _ZN3paf12FormatStringEPKwS1_S1_S1_S1_S1_S1_S1_S1_S1_(M2C_UNK *, s32, M2C_UNK, M2C_UNK, M2C_UNK, M2C_UNK, M2C_UNK, M2C_UNK, s32, s32, s32);
 M2C_UNK _ZN3paf4View12PageActivateEPKc(s32);
 M2C_UNK _ZN3paf4View12PageCloseAllEv(s32);

@@ -1658,14 +1658,14 @@ void func_00005CBC(M2C_UNK **arg0) {
 
 #if FW_VERSION >= 282
 void func_00005CE4(struct Unk_func_00005CE4_0 *arg0, s32 arg1) {
-    func_0000FB58(arg0, arg1);
+    _ZN14Class_000226A0C2Ei(arg0, arg1);
     arg0->unk1C = 1;
     arg0->unk0 = &D_00021E38;
     arg0->unk18 = 0;
 }
 
 void func_00005D20(struct Unk_func_00005D20_0 *arg0, s32 arg1) {
-    func_0000FB58(arg0, arg1);
+    _ZN14Class_000226A0C2Ei(arg0, arg1);
     arg0->unk1C = 1;
     arg0->unk0 = &D_00021E38;
     arg0->unk18 = 0;
