@@ -138,3 +138,4 @@ func_00005804 = 0x0000504C; // type:func
 func_00005A44 = 0x00005224; // type:func
 func_00005A44_v100 = 0x00005A44; // type:func
 // shared names (tools/add_version.py) end
+_sceMScmReinitializeHC = 0x00000124; // type:func

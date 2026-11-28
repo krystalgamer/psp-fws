@@ -1,8 +1,8 @@
 {
  "funcs": {
+  "_sceMScmReinitializeHC": "s32 _sceMScmReinitializeHC(s32 slot);",
   "func_00000000": "s32 func_00000000(s32 slot);",
   "func_000000AC": "s32 func_000000AC(s32 slot);",
-  "func_00000124": "s32 func_00000124(s32 slot);",
   "func_000001E4": "s32 func_000001E4(SceMScmHC *hc);",
   "func_00000930": "void func_00000930(s32 arg0);",
   "func_00000C1C": "s32 func_00000C1C(SceMScmHC *hc);",

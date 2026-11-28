@@ -111,9 +111,9 @@ extern s32 D_00007800;
 extern s32 D_00007880;
 extern s32 D_00007AF4;
 
+s32 _sceMScmReinitializeHC(s32 slot);
 s32 func_00000000(s32 slot);
 s32 func_000000AC(s32 slot);
-s32 func_00000124(s32 slot);
 s32 func_000001E4(SceMScmHC *hc);
 void func_00000930(s32 arg0);
 s32 func_00000C1C(SceMScmHC *hc);

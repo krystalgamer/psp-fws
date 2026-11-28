@@ -155,7 +155,7 @@ INCLUDE_ASM("nonmatchings/mscm", func_00000240);
 INCLUDE_RODATA("nonmatchings/mscm", D_00007120);
 
 #if FW_VERSION == 100
-s32 func_00000124(s32 slot) {
+s32 _sceMScmReinitializeHC(s32 slot) {
     SceMScmHC *hc = &D_00006F14[0];
     s32 ok = (hc != NULL);
     s32 ret;
@@ -180,7 +180,7 @@ s32 func_00000124(s32 slot) {
 #endif
 
 #if FW_VERSION >= 102 && FW_VERSION < 201
-s32 func_00000124(s32 slot) {
+s32 _sceMScmReinitializeHC(s32 slot) {
     SceMScmHC *hc = &D_00006F14[0];
     s32 ok = (hc != NULL);
     s32 ret;
