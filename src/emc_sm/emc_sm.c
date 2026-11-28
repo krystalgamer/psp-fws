@@ -12,7 +12,9 @@ INCLUDE_ASM("nonmatchings/emc_sm", sceNandInit);
 #endif
 
 #if FW_VERSION == 271
-INCLUDE_ASM("nonmatchings/emc_sm", nandIsReady);
+s32 nandIsReady(void) {
+    return *(u32 *)0xBD101004 & 1; /* not volatile: matches */
+}
 #endif
 
 #if FW_VERSION < 282
