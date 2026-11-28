@@ -610,6 +610,7 @@ s32 func_00002388(s32 index, s32 code, void *info);
 s32 func_000023BC(SceNetApctlCtx *ctx, u32 mask, u32 *bits, s32 wait);
 s32 func_00002480();
 s32 func_00002514(s32 arg0);
+s32 func_0000251C(s32 arg0);
 s32 func_000038E4(void);
 void func_00003B30(s32 arg0);
 s32 func_00003C64(void);

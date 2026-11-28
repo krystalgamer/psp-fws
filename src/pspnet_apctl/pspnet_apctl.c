@@ -265,7 +265,16 @@ INCLUDE_ASM("nonmatchings/pspnet_apctl", sceNetApctlAddInternal03Handler);
 INCLUDE_ASM("nonmatchings/pspnet_apctl", sceNetApctlDelInternal03Handler);
 #endif
 
-#if (FW_VERSION >= 260 && FW_VERSION < 282) || FW_VERSION >= 300
+#if FW_VERSION >= 260 && FW_VERSION < 282
+s32 sceNetApctl_lib_C519EDCD(s32 arg0) {
+    if (sceKernelCheckThreadStack() < 0x13F0) {
+        return 0x80410005;
+    }
+    return func_0000251C(arg0);
+}
+#endif
+
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/pspnet_apctl", sceNetApctl_lib_C519EDCD);
 #endif
 
