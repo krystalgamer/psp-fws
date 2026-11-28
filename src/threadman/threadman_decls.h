@@ -31,6 +31,10 @@ typedef struct SceSysmemUidCB {
 /* user-visible status structs (uOFW threadman_kernel.h) */
 typedef struct {
     SceSize size;
+} SceKernelSystemStatus; /* 0x1C bytes, partial */
+
+typedef struct {
+    SceSize size;
     char name[32];
     u32 attr;
     s32 initCount;
@@ -257,6 +261,9 @@ typedef struct SceThreadCbObj {
     s32 unk8; /* 0x08 */
     s32 unkC; /* 0x0C: use count */
     s32 unk10; /* 0x10: deleted, release when unused */
+    s32 unk14; /* 0x14 */
+    s32 notifyCount; /* 0x18 (Callback) */
+    s32 notifyArg; /* 0x1C (Callback) */
 } SceThreadCbObj;
 
 enum SceThreadStatus {
