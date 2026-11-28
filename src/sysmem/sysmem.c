@@ -1764,16 +1764,10 @@ void sceKernelMemoryShrinkSize(void) {
 
 #if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/sysmem", sceKernelMemoryOpenSize);
-#endif
 
-#if (FW_VERSION >= 201 && FW_VERSION < 270) || FW_VERSION >= 282
 void sceKernelMemoryCloseSize(s32 arg0) {
     *(s32 *)0xBC100040 = (*(s32 *)0xBC100040 & ~3) | (arg0 & 3);
 }
-#endif
-
-#if FW_VERSION >= 270 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/sysmem", sceKernelMemoryCloseSize);
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 280
@@ -2233,7 +2227,7 @@ s32 sceKernelDeleteUID(SceUID id) {
 INCLUDE_ASM("nonmatchings/sysmem", sceKernelSearchUIDbyName);
 #endif
 
-#if FW_VERSION < 270 || (FW_VERSION >= 282 && FW_VERSION < 350)
+#if FW_VERSION < 350
 s32 sceKernelGetUIDcontrolBlock(SceUID id, SceSysmemUidCB **uidOut) {
     SceSysmemUidCB *uid;
     if (id == 0 || (id & 0x80000001) != 1) {
@@ -2255,7 +2249,7 @@ s32 suspendIntr(void);
 void resumeIntr(s32);
 #endif
 
-#if FW_VERSION < 270 || (FW_VERSION >= 282 && FW_VERSION < 350)
+#if FW_VERSION < 350
 s32 sceKernelGetUIDcontrolBlockWithType(SceUID id, SceSysmemUidCB *type, SceSysmemUidCB **outUid) {
     s32 oldIntr = suspendIntr();
     SceSysmemUidCB *uid;
