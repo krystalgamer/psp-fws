@@ -1627,7 +1627,18 @@ s32 func_00002B98(s32 a0, s32 a1) {
     return msg.ret;
 }
 
-INCLUDE_ASM("nonmatchings/fatmsmod", func_00003A74);
+s32 func_00003A74(s32 a0, s32 a1, s32 a2) {
+    SceMsStubMsg msg;
+
+    msg.cmd = 0x18;
+    msg.p2 = a0;
+    msg.p0 = a1;
+    msg.p7 = a2;
+    if (FcpSendMsg(&msg) == -1) {
+        return -1;
+    }
+    return msg.ret;
+}
 #endif
 
 #if FW_VERSION >= 282

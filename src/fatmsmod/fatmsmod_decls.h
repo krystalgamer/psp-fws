@@ -475,6 +475,7 @@ extern s32 D_00027908;
 extern PfGeometry D_0002790C;
 extern PfDirCursor D_00027934;
 extern char D_00027B98[]; /* name being created */
+extern s8 D_00027C98;
 extern u32 D_00027CC4[1]; /* per drive: first freed cluster hint */
 extern PfDrive *D_00027CC8[1]; /* per drive (index drive - A; one drive in 1.00) */
 extern s8 D_00027DD0[1]; /* per drive: 1 = flush after each operation */
@@ -556,6 +557,7 @@ void func_00003940(s32 arg0);
 s32 func_000039E8(void);
 s32 func_00003A34(s32 unit, s32 stat);
 s32 func_00003A50(s32 unit, s32 arg);
+s32 func_00003A74(); /* stub cmd 0x18 (1.50+) */
 s32 func_00003CD8(void);
 s32 func_00004544(void);
 s8 *func_000045F4(void);
