@@ -380,8 +380,8 @@ typedef struct SceHttpTmpl {
     u32 unk28;              /* 0x28 (6) */
     u32 unk2C;              /* 0x2C (6) */
     char *proxy_host;       /* 0x30 */
-    char *str34;            /* 0x34 */
-    char *str38;            /* 0x38 */
+    char *username;         /* 0x34 */
+    char *password;         /* 0x38 */
     s32 keep_alive;         /* 0x3C */
     s32 redirect;           /* 0x40 */
     s32 cache;              /* 0x44 */
@@ -423,11 +423,7 @@ typedef struct SceHttpConn {
     u8 unk3C[(FW_VERSION == 103) ? 0xA4 - 0x38 : 0xA4 - 0x3C];
     SceHttpTmpl tmpl;       /* 0xA4 */
     u8 unk128[0x138 - 0x128];
-    void *recv_buf;         /* 0x138 */
-    u32 recv_buf_size;      /* 0x13C */
-    u32 unk140;
-    u32 unk144;
-    u32 unk148;
+    struct _SceHttpRecvBuf recv_buf; /* 0x138 (devkit layout) */
     struct SceHttpConn *redirect_list; /* 0x14C */
     struct SceHttpConn *next; /* 0x150 */
     struct SceHttpConn *pre;  /* 0x154 */
@@ -621,6 +617,7 @@ extern s32 D_0001B0E0;
 SceSize BuildHttpHeader(SceHttpReq *req, char *header, unsigned short calc_only);
 int CloneHeader(SceHttpReq *req);
 int CopyHttpHeaderList(_SceHttpReqHeaderList **out, const _SceHttpReqHeaderList *src);
+int CopyHttpTmpl(const SceHttpTmpl *src, SceHttpTmpl *dst);
 int CreateConnection(int template_id, unsigned char *server_name, unsigned char *scheme, unsigned char *username, unsigned char *password, unsigned short port, int keepalive, int option, SceHttpReq *req);
 s32 CreateConnectionWithUrl(s32, s32, s32, s32, s32);
 int CreateHttpExtraHeader(_SceHttpReqHeaderList **out, const SceUChar8 *name, const SceUChar8 *value);

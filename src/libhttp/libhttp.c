@@ -530,7 +530,85 @@ int GetProxyInfoFromSystem(SceHttpTmpl *tmpl) {
 end:
     return ret;
 }
+#endif
 
+#if FW_VERSION == 100
+int CreateConnection(int template_id, unsigned char *server_name, unsigned char *scheme, unsigned char *username, unsigned char *password, unsigned short port, int keepalive, int option, SceHttpReq *req) {
+    SceHttpTmpl *tmpl;
+    SceHttpConn *con;
+    struct _SceHttpRecvBuf *rb;
+    int ret;
+    int intr;
+
+    ret = SchemeToProtocol(scheme);
+    if (ret < 0) {
+        return ret;
+    }
+    con = _sceHttpMallocInternal(sizeof(SceHttpConn));
+    if (con == NULL) {
+        goto nomem;
+    }
+    func_0000BBCC(con, 0, sizeof(SceHttpConn));
+    rb = &con->recv_buf;
+    rb->byte_array = _sceHttpMallocInternal(1500);
+    if (rb->byte_array == NULL) {
+    nomem:
+        ret = 0x80431022;
+        goto fail;
+    }
+    rb->size = 1500;
+    func_0000BBCC(rb->byte_array, 0, con->recv_buf.size);
+    con->hostname = server_name;
+    con->port = port;
+    con->protocol = ret;
+    con->status = 0;
+    if (option == 100) {
+        if (req->connection->redirect_list != NULL) {
+            con->redirect_list = req->connection->redirect_list;
+        }
+        req->connection->redirect_list = con;
+        req->redirect_con = con;
+        ret = CopyHttpTmpl(&req->connection->tmpl, &con->tmpl);
+    } else {
+        intr = sceKernelSuspendDispatchThread();
+        ret = GetHttpTmpl(template_id, &tmpl);
+        if (tmpl != NULL) {
+            ret = CopyHttpTmpl(tmpl, &con->tmpl);
+            tmpl->reference_counter--;
+        }
+        sceKernelResumeDispatchThread(intr);
+    }
+    if (ret < 0) {
+        goto fail;
+    }
+    if (username != NULL || password != NULL) {
+        if (con->tmpl.username != NULL) {
+            _sceHttpFreeInternal(con->tmpl.username);
+        }
+        if (con->tmpl.password != NULL) {
+            _sceHttpFreeInternal(con->tmpl.password);
+        }
+        con->tmpl.username = (char *)username;
+        con->tmpl.password = (char *)password;
+    }
+    con->tmpl.keep_alive = keepalive;
+    ret = InsertNewHttpConnection(con);
+    if (ret >= 0) {
+        return ret;
+    }
+
+fail:
+    if (con != NULL) {
+        if (con->recv_buf.byte_array != NULL) {
+            _sceHttpFreeInternal(con->recv_buf.byte_array);
+        }
+        _sceHttpFreeInternal(con);
+    }
+    return ret;
+}
+#endif
+
+#if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/libhttp", CreateConnection);
 #endif
 
@@ -577,7 +655,7 @@ int sceHttpDeleteConnection(int connection_id) {
                     }
                     func_00005798(&con->tmpl);
                     func_00006380(con);
-                    _sceHttpFreeInternal(con->recv_buf);
+                    _sceHttpFreeInternal(con->recv_buf.byte_array);
                     p = con->redirect_list;
                     _sceHttpFreeInternal(con);
                 }
@@ -2193,13 +2271,13 @@ void func_00005798(SceHttpTmpl *tmpl) {
         _sceHttpFreeInternal(tmpl->proxy_host);
         tmpl->proxy_host = NULL;
     }
-    if (tmpl->str34 != NULL) {
-        _sceHttpFreeInternal(tmpl->str34);
-        tmpl->str34 = NULL;
+    if (tmpl->username != NULL) {
+        _sceHttpFreeInternal(tmpl->username);
+        tmpl->username = NULL;
     }
-    if (tmpl->str38 != NULL) {
-        _sceHttpFreeInternal(tmpl->str38);
-        tmpl->str38 = NULL;
+    if (tmpl->password != NULL) {
+        _sceHttpFreeInternal(tmpl->password);
+        tmpl->password = NULL;
     }
 }
 
@@ -2301,10 +2379,10 @@ void func_00006380(SceHttpConn *con) {
         func_000097A4(con);
     }
     sceNetInetClose(con->sock_id);
-    func_0000BBCC(con->recv_buf, 0, con->recv_buf_size);
-    con->unk140 = 0;
-    con->unk144 = 0;
-    con->unk148 = 0;
+    func_0000BBCC(con->recv_buf.byte_array, 0, con->recv_buf.size);
+    con->recv_buf.current = 0;
+    con->recv_buf.data_tail = 0;
+    con->recv_buf.exhaust = 0;
     con->pipeline_counter = 0;
     con->status = 0;
 }
