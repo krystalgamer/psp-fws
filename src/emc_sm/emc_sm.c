@@ -90,11 +90,41 @@ s32 sceNandLock(s32 writeMode) {
 }
 #endif
 
-#if FW_VERSION >= 102
+#if FW_VERSION >= 102 && FW_VERSION < 201
+s32 sceNandLock(s32 writeMode) {
+    s32 ret = sceKernelWaitSema(D_00002970.semaId, 1, NULL);
+    if (ret < 0) {
+        return ret;
+    }
+    if (D_00002970.busClockOn == 0) {
+        D_00002970.busClockOn = 1;
+        sceSysregEmcsmBusClockEnable();
+    }
+    if (writeMode) {
+        sceNandSetWriteProtect(0);
+    } else {
+        sceNandSetWriteProtect(1);
+    }
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/emc_sm", sceNandLock);
 #endif
 
+#if FW_VERSION >= 102 && FW_VERSION < 300
+void sceNandUnlock(void) {
+    sceNandSetWriteProtect(1);
+    if (D_00002970.ops == NULL || D_00002970.ops->isBusClockOn() == 0) {
+        D_00002970.busClockOn = 0;
+        sceSysregEmcsmBusClockDisable();
+    }
+    sceKernelSignalSema(D_00002970.semaId, 1);
+}
+#else
 INCLUDE_ASM("nonmatchings/emc_sm", sceNandUnlock);
+#endif
 
 #if FW_VERSION < 201
 s32 sceNandReset(u8 *status) {
@@ -628,11 +658,11 @@ INCLUDE_ASM("nonmatchings/emc_sm", sceNandGetTotalBlocks);
 s32 sceNandGetTotalBlocks(void) {
     return D_00002FD0.totalBlocks;
 }
+#else
+INCLUDE_ASM("nonmatchings/emc_sm", sceNandWriteBlock);
 #endif
 
-#if FW_VERSION >= 201
-INCLUDE_ASM("nonmatchings/emc_sm", sceNandWriteBlock);
-#else
+#if FW_VERSION < 201
 s32 sceNandWriteBlock(u32 ppn, void *user, void *spare) {
     s32 ret = sceNandEraseBlockWithRetry(ppn);
     if (ret < 0) {
