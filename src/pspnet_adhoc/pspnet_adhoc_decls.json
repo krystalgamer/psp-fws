@@ -143,6 +143,7 @@
   "sceNetAdhocPtpSend": "s32 sceNetAdhocPtpSend(s32 id, const void *data, s32 *len, u32 timeout, s32 nonblock);",
   "sceNetAdhocSetSocketAlert": "s32 sceNetAdhocSetSocketAlert(s32 id, s32 flag);",
   "sceNetAdhocTerm": "s32 sceNetAdhocTerm(void);",
+  "sceNetAdhoc_lib_1059683E": "s32 sceNetAdhoc_lib_1059683E(SceNetAdhocPdpStatCnt *out);",
   "sceNetAdhoc_lib_2CA12790": "s32 sceNetAdhoc_lib_2CA12790(SceNetAdhocStat *out);",
   "sceNetAdhoc_lib_62B875A8": "void sceNetAdhoc_lib_62B875A8(void);",
   "sceNetAdhoc_lib_F9240FBA": "void sceNetAdhoc_lib_F9240FBA(void);",

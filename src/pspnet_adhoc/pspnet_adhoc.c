@@ -1100,7 +1100,16 @@ void sceNetAdhoc_lib_F9240FBA(void) {
 #endif
 
 #if FW_VERSION >= 150
-INCLUDE_ASM("nonmatchings/pspnet_adhoc", sceNetAdhoc_lib_1059683E);
+s32 sceNetAdhoc_lib_1059683E(SceNetAdhocPdpStatCnt *out) {
+    if (out == NULL)
+        return 0x80410711;
+#if FW_VERSION >= 201
+    sceNetMemcpy(out, &g_pdpStat, sizeof(g_pdpStat));
+#else
+    *out = g_pdpStat;
+#endif
+    return 0;
+}
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 260
@@ -3883,7 +3892,30 @@ void ptpTimer(SceNetAdhocPtpPcb *pcb) {
 }
 #endif
 
-#if FW_VERSION >= 150
+#if FW_VERSION >= 150 && FW_VERSION < 300
+void ptpKeepAlive(SceNetAdhocPtpPcb *pcb) {
+    struct mbuf *m;
+    u64 now;
+    u32 *st;
+
+    if (pcb->state != 4)
+        return;
+    m = pcb->snd.first;
+    if (m != NULL) {
+        now = ADHOC_CLOCK();
+        st = (u32 *)&m->m_pkthdr.unk20;
+        if (*(u64 *)&st[2] != 0) {
+            if (now - *(u64 *)&st[2] > pcb->rexmt_int * (pcb->rexmt_cnt + 1)) {
+                ptpDrop(pcb);
+                return;
+            }
+        }
+    }
+    _sce_pspnet_callout_reset_usec(&pcb->callout2, pcb->rexmt_int, ptpKeepAlive, pcb);
+}
+#endif
+
+#if FW_VERSION >= 300
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", ptpKeepAlive);
 #endif
 

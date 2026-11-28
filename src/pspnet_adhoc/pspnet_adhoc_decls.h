@@ -567,6 +567,7 @@ s32 sceNetAdhocPtpRecv(s32 id, void *buf, s32 *len, u32 timeout, s32 nonblock);
 s32 sceNetAdhocPtpSend(s32 id, const void *data, s32 *len, u32 timeout, s32 nonblock);
 s32 sceNetAdhocSetSocketAlert(s32 id, s32 flag);
 s32 sceNetAdhocTerm(void);
+s32 sceNetAdhoc_lib_1059683E(SceNetAdhocPdpStatCnt *out);
 s32 sceNetAdhoc_lib_2CA12790(SceNetAdhocStat *out);
 void sceNetAdhoc_lib_62B875A8(void);
 void sceNetAdhoc_lib_F9240FBA(void);
