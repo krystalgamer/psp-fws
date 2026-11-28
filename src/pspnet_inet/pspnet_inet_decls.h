@@ -1707,14 +1707,11 @@ extern struct sockaddr_in D_0002E854 __attribute__((aligned(4)));
 extern u32 D_0002E864[]; /* mtu_table (icmp_mtudisc) */
 extern s32 D_0002E8D8;
 extern s32 D_0002E8E4;
-extern s32 D_0002E8F4;
-extern s32 D_0002E8F8; /* tcp_mssdflt */
 extern s32 D_0002E8FC; /* tcp_rttdflt */
 extern s32 D_0002E900; /* tcp_do_rfc1323 */
 extern s32 D_0002E904; /* tcp_do_sack */
 extern s32 D_0002E908; /* tcp_do_win_scale */
 extern s32 D_0002E90C; /* tcp_do_timestamps */
-extern s32 D_0002E910; /* tcp_init_win */
 extern s8 D_0002EAB0[];
 extern s32 D_0002EAB1;
 extern s32 D_0002EB40;
@@ -1726,9 +1723,6 @@ extern s32 D_0002EB8C;
 extern s32 D_0002EB90;
 extern s32 D_0002EB94;
 extern char D_0002EBB0[16]; /* inet_ntoa buf */
-extern s32 D_0002EC10;
-extern s32 D_0002EC14;
-extern s32 D_0002EC18;
 extern char D_0002F288[18] __attribute__((aligned(4)));
 extern s32 D_0002F2F8;
 extern struct { s32 w[6]; } D_0002F3B8;
@@ -1787,10 +1781,15 @@ extern s32 somaxconn; /* somaxconn */
 extern s32 syn_cache_last;
 extern s32 tcbhashsize; /* tcbhashsize */
 extern struct inpcbtable tcbtable;
+extern s32 tcp_ack_on_push;
 extern s32 tcp_backoff[]; /* tcp_backoff */
 extern s32 tcp_compat_42; /* tcp_compat_42 */
 extern struct tcp_ctlvar tcp_ctlvars[]; /* tcp_ctlvars */
+extern s32 tcp_cwm;
+extern s32 tcp_cwm_burstsize;
 extern struct tcpcb *tcp_delacks; /* tcp_delacks */
+extern s32 tcp_do_newreno;
+extern s32 tcp_init_win; /* tcp_init_win */
 extern u32 tcp_iss_seq; /* tcp_iss_seq */
 extern s32 tcp_keepcnt;
 extern s32 tcp_keepidle; /* tcp_keepidle */
@@ -1798,6 +1797,7 @@ extern s32 tcp_keepintvl; /* tcp_keepintvl */
 extern s32 tcp_maxidle;
 extern s32 tcp_maxpersistidle; /* tcp_maxpersistidle */
 extern s32 tcp_mss_ifmtu;
+extern s32 tcp_mssdflt; /* tcp_mssdflt */
 extern u32 tcp_now; /* tcp_now */
 extern u32 tcp_recvspace; /* tcp_recvspace */
 extern u32 tcp_sendspace; /* tcp_sendspace */
@@ -1957,7 +1957,6 @@ s32 func_000232C0(struct Unk_func_000232C0_0 *arg0);
 s32 func_00023828(struct Unk_func_00023828_0 *arg0);
 void func_00023AB8(struct Unk_func_00023AB8_0 *arg0);
 void func_000244B0(void);
-void func_0002544C(void *arg0);
 void func_00025638(struct sppp *sp, u16 proto, u8 type, u8 ident, u16 len, void *data);
 void func_00026FF4(const struct cp *cp, struct sppp *sp, u32 type, u32 id, ...);
 s32 func_00027830(struct Unk_func_00027830_0 *arg0);
@@ -2237,6 +2236,7 @@ void tcp_notify(struct inpcb *inp, s32 error);
 s32 tcp_optlen(void *tp);
 s32 tcp_output(struct tcpcb *tp);
 void tcp_pulloutofband(struct socket *so, struct tcphdr *th, struct mbuf *m, s32 off);
+void tcp_quench(struct inpcb *inp, s32 errno);
 s32 tcp_respond(struct tcpcb *tp, struct mbuf *template, struct mbuf *m, struct tcphdr *th0, u32 ack, u32 seq, s32 flags);
 void tcp_rmx_rtt(struct tcpcb *tp);
 void tcp_setpersist(struct tcpcb *tp);
