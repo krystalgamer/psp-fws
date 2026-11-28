@@ -3818,7 +3818,57 @@ INCLUDE_ASM("nonmatchings/threadman", sceKernelAllocateFpl);
 
 INCLUDE_ASM("nonmatchings/threadman", sceKernelAllocateFplCB);
 
+#if FW_VERSION < 150
+s32 sceKernelTryAllocateFpl(SceUID fplid, void **data) {
+    SceSysmemUidCB *cb;
+    SceSysmemUidCB *uid;
+    SceFpl *fpl;
+    s32 block;
+    s32 ret;
+    void *ra = getRa();
+    u32 oldK1 = shiftK1Noreorder();
+    s32 intr = sceKernelCpuSuspendIntr();
+
+    sceKernelIsIntrContext();
+    block = k1IsUserMode() && (s32)((u32)data | ((u32)data + 4)) < 0;
+    if (block) {
+        sceKernelCpuResumeIntr(intr);
+        setK1(oldK1);
+        return 0x800200D3;
+    }
+    if (sceKernelGetUIDcontrolBlockWithType(fplid, g_threadmanInfo.uidFplType, &uid) != 0) {
+        sceKernelCpuResumeIntr(intr);
+        setK1(oldK1);
+        return 0x8002019D;
+    }
+    cb = uid;
+    ret = 0x800200D1;
+    if (k1IsUserMode() && !(cb->attr & 2)) {
+        sceKernelCpuResumeIntr(intr);
+        setK1(oldK1);
+        return ret;
+    }
+    fpl = UID_CB_TO_DATA(cb, g_threadmanInfo.uidFplType, SceFpl);
+    if (fpl->freeList == NULL) {
+        if (g_threadmanInfo.logHandler != NULL) {
+            g_threadmanInfo.logHandler(0x65, ra, 2, fplid, 0);
+        }
+        sceKernelCpuResumeIntr(intr);
+        setK1(oldK1);
+        return 0x80020190;
+    }
+    block = func_0000BBD0((s32 *)fpl);
+    *data = fpl->pool + fpl->blockStride * block;
+    if (g_threadmanInfo.logHandler != NULL) {
+        g_threadmanInfo.logHandler(0x65, ra, 2, fplid, block);
+    }
+    sceKernelCpuResumeIntr(intr);
+    setK1(oldK1);
+    return 0;
+}
+#else
 INCLUDE_ASM("nonmatchings/threadman", sceKernelTryAllocateFpl);
+#endif
 
 INCLUDE_ASM("nonmatchings/threadman", sceKernelFreeFpl);
 

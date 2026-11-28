@@ -28,105 +28,13 @@ typedef struct SceSysmemUidCB {
 
 #define UID_CB_TO_DATA(cb, type, T) ((T *)((u8 *)(cb) + (type)->size * 4))
 
-/* user-visible status structs (uOFW threadman_kernel.h) */
-typedef struct {
-    SceSize size;
-    u32 status;
-    u32 idleClocksLow;
-    u32 idleClocksHi;
-    u32 comesOutOfIdleCount;
-    u32 threadSwitchCount;
-    u32 vfpuSwitchCount;
-} SceKernelSystemStatus;
-
-typedef struct {
-    SceSize size;
-    char name[32];
-    u32 attr;
-    s32 initCount;
-    s32 currentCount;
-    s32 maxCount;
-    s32 numWaitThreads;
-} SceKernelSemaInfo;
-
-typedef struct {
-    SceSize size;
-    char name[32];
-    u32 attr;
-    u32 initPattern;
-    u32 currentPattern;
-    s32 numWaitThreads;
-} SceKernelEventFlagInfo;
-
-/* "Semaphore" uid type data */
-typedef struct SceSema {
-    s32 unk0;
-    s32 currentCount; /* 0x04 */
-    s32 maxCount; /* 0x08 */
-    s32 initCount; /* 0x0C */
-} SceSema;
-
-/* "EventFlag" uid type data (partial) */
-typedef struct SceEventFlag {
-    u32 unk0; /* 0x00 */
-    u32 currentPattern; /* 0x04 */
-    u32 initPattern; /* 0x08 */
-} SceEventFlag;
-
-typedef struct {
-    SceSize size;
-    char name[32];
-    u32 attr;
-    s32 blockSize;
-    s32 numBlocks;
-    s32 freeBlocks;
-    s32 numWaitThreads;
-} SceKernelFplInfo;
-
-typedef struct {
-    SceSize size;
-    char name[32];
-    u32 attr;
-    s32 poolSize;
-    s32 freeSize;
-    s32 numWaitThreads;
-} SceKernelVplInfo;
-
-typedef struct {
-    SceSize size;
-    char name[32];
-    u32 attr;
-    s32 numWaitThreads;
-    s32 numMessages;
-    void *firstMessage;
-} SceKernelMbxInfo;
-
-/* "Fpl" uid type data (partial) */
-typedef struct SceFpl {
-    u8 unk0[0x10];
-    s32 freeBlocks; /* 0x10 */
-    s32 blockSize; /* 0x14 */
-    s32 numBlocks; /* 0x18 */
-} SceFpl;
-
-/* "Vpl" uid type data (partial) */
-typedef struct SceVpl {
-    u32 unk0;
-    SceUID heapId; /* 0x04 */
-    s32 poolSize; /* 0x08 */
-} SceVpl;
-
-/* "Mbx" uid type data (partial) */
-typedef struct SceMbx {
-    u32 unk0;
-    s32 numMessages; /* 0x04 */
-    void **lastMessage; /* 0x08: messages form a ring; lastMessage[0] is the first */
-} SceMbx;
-
 /* "MsgPipe" uid type data (partial) */
 typedef struct SceMsgPipe {
     s32 unk0;
-    s32 unk4; /* 0x04: cleared when the last waiting thread leaves */
+    s32 unk4; /* 0x04: who waits: 1 = senders, 2 = receivers, 0 = nobody */
+    u8 unk8[0x14 - 0x8];
+    s32 bufSize; /* 0x14 */
+    s32 usedSize; /* 0x18 */
 } SceMsgPipe;
 
 struct Unk_func_00000448_temp_s0 {
@@ -321,6 +229,9 @@ typedef struct SceThreadCbObj {
     struct SceThread *thread; /* 0x14: owner (Callback) */
     s32 notifyCount; /* 0x18 (Callback) */
     s32 notifyArg; /* 0x1C (Callback) */
+    s32 unk20; /* 0x20 */
+    void *callback; /* 0x24 (Callback) */
+    void *common; /* 0x28 (Callback) */
 } SceThreadCbObj;
 
 typedef struct {
@@ -350,6 +261,139 @@ enum SceThreadStatus {
     THREAD_STOPPED = 0x10,
     THREAD_KILLED = 0x20
 };
+
+/* user-visible status structs (uOFW threadman_kernel.h) */
+typedef struct {
+    SceSize size;
+    u32 status;
+    u32 idleClocksLow;
+    u32 idleClocksHi;
+    u32 comesOutOfIdleCount;
+    u32 threadSwitchCount;
+    u32 vfpuSwitchCount;
+} SceKernelSystemStatus;
+
+typedef struct {
+    SceSize size;
+    char name[32];
+    u32 attr;
+    s32 initCount;
+    s32 currentCount;
+    s32 maxCount;
+    s32 numWaitThreads;
+} SceKernelSemaInfo;
+
+typedef struct {
+    SceSize size;
+    char name[32];
+    u32 attr;
+    u32 initPattern;
+    u32 currentPattern;
+    s32 numWaitThreads;
+} SceKernelEventFlagInfo;
+
+/* "Semaphore" uid type data */
+typedef struct SceSema {
+    s32 unk0;
+    s32 currentCount; /* 0x04 */
+    s32 maxCount; /* 0x08 */
+    s32 initCount; /* 0x0C */
+} SceSema;
+
+/* "EventFlag" uid type data (partial) */
+typedef struct SceEventFlag {
+    u32 unk0; /* 0x00 */
+    u32 currentPattern; /* 0x04 */
+    u32 initPattern; /* 0x08 */
+} SceEventFlag;
+
+typedef struct {
+    SceSize size;
+    char name[32];
+    u32 attr;
+    s32 blockSize;
+    s32 numBlocks;
+    s32 freeBlocks;
+    s32 numWaitThreads;
+} SceKernelFplInfo;
+
+typedef struct {
+    SceSize size;
+    char name[32];
+    u32 attr;
+    s32 poolSize;
+    s32 freeSize;
+    s32 numWaitThreads;
+} SceKernelVplInfo;
+
+typedef struct {
+    SceSize size;
+    char name[32];
+    u32 attr;
+    s32 numWaitThreads;
+    s32 numMessages;
+    void *firstMessage;
+} SceKernelMbxInfo;
+
+typedef struct {
+    SceSize size;
+    char name[32];
+    SceUID threadId;
+    void *callback;
+    void *common;
+    s32 notifyCount;
+    s32 notifyArg;
+} SceKernelCallbackInfo;
+
+typedef struct {
+    SceSize size;
+    SceKernelSysClock schedule;
+    void *handler;
+    void *common;
+} SceKernelAlarmInfo;
+
+typedef struct {
+    SceSize size;
+    char name[32];
+    u32 attr;
+    s32 bufSize;
+    s32 freeSize;
+    s32 numSendWaitThreads;
+    s32 numReceiveWaitThreads;
+} SceKernelMppInfo;
+
+/* "Alarm" uid type data (partial) */
+typedef struct SceAlarm {
+    u32 unk0;
+    void *handler; /* 0x04 */
+    void *common; /* 0x08 */
+} SceAlarm;
+
+/* "Fpl" uid type data (partial) */
+typedef struct SceFpl {
+    u32 unk0;
+    u8 *pool; /* 0x04 */
+    void **freeList; /* 0x08: last free block of a ring */
+    u8 *unkC; /* 0x0C */
+    s32 freeBlocks; /* 0x10 */
+    s32 blockSize; /* 0x14 */
+    s32 numBlocks; /* 0x18 */
+    s32 blockStride; /* 0x1C */
+} SceFpl;
+
+/* "Vpl" uid type data (partial) */
+typedef struct SceVpl {
+    u32 unk0;
+    SceUID heapId; /* 0x04 */
+    s32 poolSize; /* 0x08 */
+} SceVpl;
+
+/* "Mbx" uid type data (partial) */
+typedef struct SceMbx {
+    u32 unk0;
+    s32 numMessages; /* 0x04 */
+    void **lastMessage; /* 0x08: messages form a ring; lastMessage[0] is the first */
+} SceMbx;
 
 /* saved state of the syscall the thread is in (partial) */
 typedef struct SceThreadSyscallFrame {
@@ -493,6 +537,9 @@ typedef struct SceThreadmanInfo {
         SceKernelFplInfo fpl;
         SceKernelVplInfo vpl;
         SceKernelMbxInfo mbx;
+        SceKernelCallbackInfo callback;
+        SceKernelAlarmInfo alarm;
+        SceKernelMppInfo msgPipe;
         u8 buf[0x84];
     } tmpInfo; /* 0x660: refer-status scratch buffer */
     u8 unk6E4[0x6E8 - 0x6E4];
@@ -540,6 +587,9 @@ typedef struct SceThreadmanInfo {
         SceKernelFplInfo fpl;
         SceKernelVplInfo vpl;
         SceKernelMbxInfo mbx;
+        SceKernelCallbackInfo callback;
+        SceKernelAlarmInfo alarm;
+        SceKernelMppInfo msgPipe;
         u8 buf[0x84];
     } tmpInfo; /* refer-status scratch buffer (0x660 in 1.00) */
 #if FW_VERSION < 282
@@ -697,6 +747,7 @@ s32 func_000087C0(void *arg0);
 s32 func_00009874(void *arg0);
 s32 func_00009B94(struct Unk_func_00009B94_0 *arg0);
 s32 func_00009BBC(s32 arg0, struct Unk_func_00009BBC_1 *arg1, s32 arg2, s32 arg3);
+void func_0000A818(SceFpl *fpl, s32 block);
 s32 func_0000A8A8(void *arg0);
 s32 func_0000ABD8(struct Unk_func_0000ABD8_0 *arg0);
 u64 func_0000B490(void);
