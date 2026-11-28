@@ -909,7 +909,6 @@ __inline struct syn_cache *syn_cache_lookup(struct sockaddr *src, struct sockadd
 #if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_inet_udp", syn_cache_get);
 
-#if FW_VERSION < 201
 void syn_cache_reset(struct sockaddr *src, struct sockaddr *dst, struct tcphdr *th)
 {
 	struct syn_cache *sc;
@@ -958,11 +957,6 @@ void syn_cache_unreach(struct sockaddr *src, struct sockaddr *dst, struct tcphdr
 	tcp_stat.tcps_sc_unreach++;
 	SYN_CACHE_PUT(sc);
 }
-#else
-INCLUDE_ASM("nonmatchings/pspnet_inet_udp", syn_cache_reset);
-
-INCLUDE_ASM("nonmatchings/pspnet_inet_udp", syn_cache_unreach);
-#endif
 
 INCLUDE_ASM("nonmatchings/pspnet_inet_udp", syn_cache_add);
 #endif
