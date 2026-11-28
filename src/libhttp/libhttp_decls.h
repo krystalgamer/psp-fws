@@ -350,6 +350,20 @@ typedef struct {
     u8 buf[64];
 } SceKernelUtilsMd5Context;
 
+/* sceUriParse output as used by 1.00 libhttp (layout from sceHttpCreateRequestWithURL) */
+typedef struct {
+    s32 opaque;
+    char *scheme;
+    char *username;     /* 0x08 */
+    char *password;     /* 0x0C */
+    char *hostname;     /* 0x10 */
+    char *path;         /* 0x14 */
+    char *query;        /* 0x18 */
+    char *fragment;     /* 0x1C */
+    u16 port;           /* 0x20 */
+    u8 reserved[0x2C - 0x22];
+} SceUriElement100;
+
 /* 1.00-1.03 template (sceHttpCreateTemplate); offsets from the 1.00 asm.
  * Embedded in SceHttpConn (+0xA4) and SceHttpReq (+0x84/+0x88). */
 typedef struct SceHttpTmpl {
@@ -774,5 +788,6 @@ M2C_UNK sceRtcFormatRFC2822();
 M2C_UNK sceRtcGetCurrentTick();
 M2C_UNK sceRtcParseDateTime();
 M2C_UNK sceRtcTickAddSeconds();
+int sceUriParse(SceUriElement100 *out, const unsigned char *src, void *pool, SceSize *required, SceSize capacity);
 
 #endif
