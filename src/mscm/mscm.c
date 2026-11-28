@@ -249,11 +249,11 @@ s32 sceMScmStopModule(SceSize args, void *argp) {
             list = &D_00006B54[i][j];
             /* the original reads p->next before p is set (p == NULL on the first list) */
             while (list != p->next) {
-                if (p->info.entry != 0) {
-                    sceKernelFreeVpl(D_00006B50, (void *)p->info.entry);
+                if (p->info.args != 0) {
+                    sceKernelFreeVpl(D_00006B50, (void *)p->info.args);
                 }
-                if (p->info.unk8 != NULL) {
-                    sceKernelFreeVpl(D_00006B50, p->info.unk8);
+                if (p->info.path != NULL) {
+                    sceKernelFreeVpl(D_00006B50, p->info.path);
                 }
                 p->next->prev = p->prev;
                 p->prev->next = p->next;
@@ -302,11 +302,11 @@ s32 sceMScmStopModule(SceSize args, void *argp) {
             list = &D_00006B54[i][j];
             /* the original reads p->next before p is set (p == NULL on the first list) */
             while (list != p->next) {
-                if (p->info.entry != 0) {
-                    sceKernelFreeVpl(D_00006B50, (void *)p->info.entry);
+                if (p->info.args != 0) {
+                    sceKernelFreeVpl(D_00006B50, (void *)p->info.args);
                 }
-                if (p->info.unk8 != NULL) {
-                    sceKernelFreeVpl(D_00006B50, p->info.unk8);
+                if (p->info.path != NULL) {
+                    sceKernelFreeVpl(D_00006B50, p->info.path);
                 }
                 p->next->prev = p->prev;
                 p->prev->next = p->next;
@@ -448,7 +448,7 @@ s32 sceMScmDetachCLD(s32 slot, SceMScmCLD *cld) {
         return 0x80220081;
     }
     func_00002194(cb->drv.cmd, (s32)&D_00006F14[slot], 4, (s32)buf, 0, cb->drv.cmdArg);
-    stop = (s32 (*)(s32, s32, s32))cb->cldm->info.entry;
+    stop = (s32 (*)(s32, s32, s32))cb->cldm->unload;
     if (stop != NULL) {
         stop(0, 0, 0);
     }
@@ -474,7 +474,7 @@ s32 sceMScmDetachCLD(s32 slot, SceMScmCLD *cld) {
         return 0x80220081;
     }
     func_00002194(cb->drv.cmd, (s32)&D_00006F14[slot], 4, (s32)buf, 0, cb->drv.cmdArg);
-    stop = (s32 (*)(s32, s32, s32))cb->cldm->info.entry;
+    stop = (s32 (*)(s32, s32, s32))cb->cldm->unload;
     if (stop != NULL) {
         stop(0, 0, 0);
     }
@@ -755,7 +755,7 @@ s32 func_000018B8(s32 slot) {
     func_00002194(cmd, (s32)&D_00006F14[slot], 3, (s32)buf, 0, cb->drv.cmdArg);
     cb->attached = 0;
     func_00002194(cmd, (s32)&D_00006F14[slot], 4, (s32)buf, 0, cb->drv.cmdArg);
-    entry = (u32)cb->cldm->info.entry;
+    entry = (u32)cb->cldm->unload;
     if (entry != 0) {
         ((s32 (*)(s32, s32, s32))entry)(0, 0, 0);
     }

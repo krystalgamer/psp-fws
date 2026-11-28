@@ -27,11 +27,12 @@ typedef struct {
 typedef struct {
     u32 unk0;
     u32 unk4;
-    void *unk8;                 /* VPL block */
-    u8 unkC[0x110 - 0xC];
-    u32 entry;                  /* 0x110: VPL block holding the CLDM's stop entry, called as s32 (*)(s32, s32, s32) on detach */
-    u32 unk114;
-    u32 unk118;
+    char *path;                 /* 0x08: module file (VPL copy); NULL = already resident */
+    s32 nIds;                   /* 0x0C */
+    u8 unk10[0x110 - 0x10];     /* 0x10: media ids {a, b, c, d} x 16 (-1 = any) */
+    u32 args;                   /* 0x110: argument string (VPL copy) for load(); an integer, not a pointer */
+    s32 (*load)(SceSize argLen, void *args, s32 unk);   /* 0x114 */
+    u32 unload;                 /* 0x118: s32 (*)(s32, s32, s32), an integer (branch prediction) */
 } SceMScmCLDMInfo;
 typedef char chk_SceMScmCLDMInfo[(sizeof(SceMScmCLDMInfo) == 0x11C) ? 1 : -1];
 
@@ -118,7 +119,7 @@ typedef struct {
 /* per-slot attached class driver (D_00006ED8[slot]) */
 typedef struct {
     SceMScmCLD drv;         /* 0x00 */
-    SceMScmCLDM *cldm;      /* 0x20 */
+    SceMScmCLDMInfo *cldm;  /* 0x20: the loaded CLDM */
     unsigned long attached; /* 0x24: not int/s32 (alias set; see the irq handler) */
 } SceMScmSlotCB;
 typedef char chk_SceMScmSlotCB[(sizeof(SceMScmSlotCB) == 0x28) ? 1 : -1];
