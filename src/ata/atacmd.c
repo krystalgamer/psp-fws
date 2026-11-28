@@ -30,7 +30,27 @@ INCLUDE_ASM("nonmatchings/atacmd", sceAtaExecSetFeaturesCmd);
 INCLUDE_ASM("nonmatchings/atacmd", func_0000251C);
 #endif
 
-#if FW_VERSION < 201
+#if FW_VERSION < 150
+s32 func_00002074(SceAtaDrive *drive, u8 features, s8 dev, s32 a3, u32 a4, SceAtaCmd *cmd, s32 a6) {
+    s32 ret;
+    if (drive == NULL || cmd == NULL) {
+        return 0x800001FF;
+    }
+    drive->protocol = 1;
+    cmd->unk8 = a4;
+    *(u32 *)&cmd->buf = 0;
+    cmd->unkC = 0;
+    cmd->tf.features = features;
+    ret = func_00003680(drive, cmd->tf.features, dev, a3, cmd, a6);
+    if (ret != 0) {
+        return ret;
+    }
+    cmd->tf.command = 0xEF;
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/atacmd", func_00002074);
 #endif
 

@@ -40,7 +40,7 @@ typedef struct {
     SceUID semaId;            /* 0x10 */
     SceUID evfId;             /* 0x14 */
 #else
-    s32 unk10;                /* 0x10 (1.50: -1 at init; sema or event flag) */
+    SceUID semaId;            /* 0x10: still set to -1 but unused: 1.50+ make no sema/event flag calls; evfId is the removed word */
 #endif
     u32 byteLimit;            /* 0x18 (1.50: 0x14) */
     /* the two command pointers are void * like SceAtaCmd.buf: storing buf must
