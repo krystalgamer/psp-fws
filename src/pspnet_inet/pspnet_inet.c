@@ -2753,7 +2753,7 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_00010B84);
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00010C08);
 #endif
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_00011678);
+INCLUDE_ASM("nonmatchings/pspnet_inet", in_purgeaddr);
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00011968);
@@ -3129,7 +3129,22 @@ s32 in_broadcast(struct in_addr in, struct ifnet *ifp) {
 #undef ia
 }
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_00012CD8);
+void in_purgemkludge(struct ifnet *ifp) {
+    struct in_ifaddr *ia;
+
+    for (ia = in_mk.tqh_first; ia != NULL; ia = ia->ia_list.tqe_next) {
+        if (ia->ia_ifp != ifp)
+            continue;
+        if (ia->ia_list.tqe_next != NULL)
+            ia->ia_list.tqe_next->ia_list.tqe_prev = ia->ia_list.tqe_prev;
+        else
+            in_mk.tqh_last = ia->ia_list.tqe_prev;
+        *ia->ia_list.tqe_prev = ia->ia_list.tqe_next;
+        if (--ia->ia_ifa.ifa_refcnt == 0)
+            _sce_pspnet_ifafree(&ia->ia_ifa);
+        break;
+    }
+}
 #endif
 
 #if FW_VERSION >= 282
@@ -3140,8 +3155,8 @@ void func_00012CDC(void) {
     D_0002C01C = 1;
     D_0002C020 = 1;
     in_maxmtu = 0;
-    D_0002C024.tqh_first = NULL;
-    D_0002C024.tqh_last = &D_0002C024.tqh_first;
+    in_mk.tqh_first = NULL;
+    in_mk.tqh_last = &in_mk.tqh_first;
 }
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
@@ -3324,7 +3339,33 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_00013338);
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_0001358C);
 #endif
 
-INCLUDE_ASM("nonmatchings/pspnet_inet", in_pcbpurgeif);
+void in_pcbpurgeif(struct inpcbtable *table, struct ifnet *ifp) {
+    struct inpcb *inp, *ninp;
+    struct ip_moptions *imo;
+    s32 i, gap;
+
+    for (inp = table->inpt_queue.cqh_first;
+         inp != (void *)&table->inpt_queue;
+         inp = ninp) {
+        ninp = inp->inp_queue.cqe_next;
+        if (inp->inp_route.ro_rt != NULL &&
+            inp->inp_route.ro_rt->rt_ifp == ifp)
+            in_rtchange(inp, 0);
+        imo = inp->inp_moptions;
+        if (imo != NULL) {
+            if (imo->imo_multicast_ifp == ifp)
+                imo->imo_multicast_ifp = NULL;
+            for (i = 0, gap = 0; i < imo->imo_num_memberships; i++) {
+                if (imo->imo_membership[i]->inm_ifp == ifp) {
+                    in_delmulti(imo->imo_membership[i]);
+                    gap++;
+                } else if (gap != 0)
+                    imo->imo_membership[i - gap] = imo->imo_membership[i];
+            }
+            imo->imo_num_memberships -= gap;
+        }
+    }
+}
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_inet", in_rtchange);

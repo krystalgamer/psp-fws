@@ -320,3 +320,5 @@ rip_recvspace = 0x0002C310; // rom:0x2C3B0
 udp_usrreq = 0x0001BEDC; // type:func
 udp_sendspace = 0x0002C31C; // rom:0x2C3BC
 udp_recvspace = 0x0002C320; // rom:0x2C3C0
+in_mk = 0x0002C024; // rom:0x2C0C4
+in_purgeaddr = 0x00011678; // type:func

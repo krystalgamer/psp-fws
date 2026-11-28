@@ -1570,7 +1570,6 @@ extern s32 D_0002BEC0;
 extern struct ifqueue D_0002BF8C;
 extern s32 D_0002C01C;
 extern s32 D_0002C020;
-extern struct SceTailqHead D_0002C024;
 extern s32 D_0002C02C;
 extern s32 D_0002C030;
 extern s32 D_0002C1D4;
@@ -1680,6 +1679,7 @@ extern struct igmpstat igmp_stat; /* igmpstat */
 extern s32 igmp_timers_are_running; /* igmp_timers_are_running */
 extern TAILQ_HEAD(, in_ifaddr) in_ifaddrhead; /* in_ifaddr */
 extern u32 in_maxmtu;
+extern TAILQ_HEAD(, in_ifaddr) in_mk; /* in_mk */
 extern s32 inetctlerrmap[]; /* inetctlerrmap */
 extern struct protosw inetsw[]; /* inetsw */
 extern u16 ip_id_seq; /* ip_id */
