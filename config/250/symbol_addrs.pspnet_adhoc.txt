@@ -146,3 +146,4 @@ ptpOutput = 0x00006AF8; // type:func
 pdpInput = 0x00002404; // type:func
 ptpInput = 0x00005B98; // type:func
 adhocEtherInput = 0x0000036C; // type:func
+ptpFlushWait = 0x000049E4; // type:func

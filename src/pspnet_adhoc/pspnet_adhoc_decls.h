@@ -282,6 +282,12 @@ struct sockaddr_dl {
 };
 #define LLADDR(s) ((u8 *)((s)->sdl_data + (s)->sdl_nlen))
 
+#if FW_VERSION < 150
+#define ADHOC_CLOCK() sceNetGetSystemClockUsec()
+#else
+#define ADHOC_CLOCK() sceKernelGetSystemTimeWide()
+#endif
+
 /* NetBSD 1.5 if.h queue macros */
 #define IF_QFULL(ifq) ((ifq)->ifq_len >= (ifq)->ifq_maxlen)
 #define IF_DROP(ifq) ((ifq)->ifq_drops++)
@@ -390,7 +396,6 @@ void func_00003BB0(SceNetAdhocDesc *d);
 s32 func_00003BE8(SceNetAdhocDesc *d, u32 timeout, s32 nonblock);
 s32 func_00003D9C(SceNetAdhocDesc *d, SceNetEtherAddr *addr, u16 *port, u32 timeout, s32 nonblock);
 s32 func_0000473C(SceNetAdhocDesc *d, u32 timeout, s32 nonblock);
-s32 func_000049E4(SceNetAdhocDesc *d, u32 timeout, s32 nonblock);
 s32 func_00004A40(SceNetAdhocDesc *d);
 s32 func_00004E98(SceNetAdhocPtpPcb *pcb);
 s32 func_00005024(SceNetAdhocDesc *d, s32 events);
@@ -455,6 +460,7 @@ void ptpSocketDestroy(SceNetAdhocDesc *d);
 void ptpTerm(void);
 void ptpTimer(SceNetAdhocPtpPcb *pcb);
 s32 sceKernelCheckThreadStack(void);
+u64 sceKernelGetSystemTimeWide(void);
 s32 sceKernelSignalSema(s32 sema, s32 n);
 s32 sceNetAdhocAuth_lib_AAB06250(void *buf, s32 len);
 s32 sceNetAdhocGameModeCreateMaster(void *ptr, s32 size);

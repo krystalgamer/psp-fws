@@ -2585,7 +2585,7 @@ s32 sceNetAdhocPtpFlush(s32 id, u32 timeout, s32 nonblock) {
     ti->next = pw;
     d->tnext = pd;
     d->waiters = ti;
-    ret = func_000049E4(d, timeout, nonblock);
+    ret = ptpFlushWait(d, timeout, nonblock);
     if (ti->descs == d) {
         ti->descs = d->tnext;
     } else {
@@ -2649,7 +2649,7 @@ s32 sceNetAdhocPtpFlush(s32 id, u32 timeout, s32 nonblock) {
     }
     ti->next = d->waiters;
     d->waiters = ti;
-    ret = func_000049E4(d, timeout, nonblock);
+    ret = ptpFlushWait(d, timeout, nonblock);
     if (d->waiters == ti) {
         d->waiters = ti->next;
     } else {
@@ -2968,10 +2968,10 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc", ptpSendData);
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", ptpRecvData);
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_000049E4);
+INCLUDE_ASM("nonmatchings/pspnet_adhoc", ptpFlushWait);
 #endif
 
-#if FW_VERSION < 150
+#if FW_VERSION < 201
 s32 ptpFlushWait(SceNetAdhocDesc *d, u32 timeout, s32 nonblock) {
     SceNetAdhocPtpPcb *pcb;
     u64 start;
@@ -2991,8 +2991,8 @@ s32 ptpFlushWait(SceNetAdhocDesc *d, u32 timeout, s32 nonblock) {
         tmo = 0;
         if (timeout != 0) {
             if (start == 0)
-                start = sceNetGetSystemClockUsec();
-            now = sceNetGetSystemClockUsec();
+                start = ADHOC_CLOCK();
+            now = ADHOC_CLOCK();
             if (now - start >= timeout)
                 return 0x80410715;
             tmo = timeout - ((u32)now - (u32)start);
@@ -3029,8 +3029,6 @@ s32 ptpFlushWait(SceNetAdhocDesc *d, u32 timeout, s32 nonblock) {
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/pspnet_adhoc", ptpFlushWait);
-
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", sceNetAdhoc_lib_62B875A8);
 #endif
 
