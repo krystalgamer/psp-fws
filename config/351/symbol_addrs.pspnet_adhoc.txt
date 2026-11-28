@@ -138,7 +138,7 @@ func_00006F68 = 0x00006F90; // type:func rom:0x7030
 gameModeTerm = 0x00006FA8; // type:func rom:0x7048
 func_000070E8 = 0x00007110; // type:func rom:0x71B0
 gameModeDelete = 0x0000722C; // type:func rom:0x72CC
-func_00007298 = 0x000072C0; // type:func rom:0x7360
+gameModeUpdateReplica = 0x000072C0; // type:func rom:0x7360
 D_000079A4_v351 = 0x000079A4; // rom:0x7A44
 D_000079A8_v351 = 0x000079A8;
 // shared names (tools/add_version.py) end

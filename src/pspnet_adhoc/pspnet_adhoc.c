@@ -4241,7 +4241,7 @@ s32 sceNetAdhocGameModeUpdateReplica(s32 id, SceNetAdhocGameModeOptData *opt) {
 s32 sceNetAdhocGameModeUpdateReplica(s32 id, SceNetAdhocGameModeOptData *opt) {
     if (sceKernelCheckThreadStack() < 0x7F0)
         return 0x80410005;
-    return func_00007298(id, opt, 0);
+    return gameModeUpdateReplica(id, opt, 0);
 }
 #endif
 
@@ -4276,7 +4276,7 @@ s32 sceNetAdhocGameModeDeleteMaster(void) {
 
 #if FW_VERSION >= 282
 s32 sceNetAdhocGameModeUpdateReplicaInternal(s32 id, SceNetAdhocGameModeOptData *opt) {
-    return func_00007298(id, opt, 1);
+    return gameModeUpdateReplica(id, opt, 1);
 }
 #endif
 
@@ -4538,5 +4538,82 @@ s32 gameModeDelete(s32 id) {
     return 0;
 }
 
-INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00007298);
+s32 gameModeUpdateReplica(s32 id, SceNetAdhocGameModeOptData *opt, s32 internal) {
+    s32 s;
+    s32 ret;
+    SceNetAdhocGameMode *gm;
+    SceNetAdhocGameModeOptData tmp;
+#if FW_VERSION < 150
+    SceNetAdhocGameModeOptData *info;
+
+    info = NULL;
+#endif
+    s = _sce_pspnet_spllock();
+#if FW_VERSION >= 201
+    if (s < 0)
+        return s;
+#endif
+    ret = 0x80410712;
+    if (g_adhocInit == 0)
+        goto end;
+    ret = 0x8041071B;
+    if (sceWlanDevIsGameMode() == 0)
+        goto end;
+    for (gm = g_gameModeList.first; gm != NULL; gm = gm->next) {
+        if (gm->id == id)
+            break;
+    }
+    if (gm == NULL) {
+        ret = 0x8041071C;
+        goto end;
+    }
+#if FW_VERSION >= 150
+    tmp.size = sizeof(tmp);
+#if FW_VERSION >= 201
+    tmp.flag = 0;
+    tmp.last_recv = 0;
+#endif
+    ret = sceWlanGPRecv(id, gm->buf, gm->buflen, &tmp);
+    if (ret < 0)
+        goto end;
+    if (tmp.flag & 1) {
+        ret = sceNetAdhocAuth_lib_015A8A64(gm->buf, gm->buflen);
+        if (ret < 0)
+            goto end;
+        ADHOC_MEMCPY(gm->ptr, gm->buf, gm->size);
+    }
+#if FW_VERSION >= 201
+    if (opt == NULL)
+        goto end;
+    if (opt->size >= 16)
+        opt->last_recv = tmp.last_recv;
+    if (opt->size >= 8) {
+        opt->flag = tmp.flag;
+        if (internal == 0)
+            opt->flag = tmp.flag & 0xFFFF;
+    }
+    goto end;
+#else
+    if (opt == NULL)
+        goto end;
+    if (opt->size >= sizeof(tmp))
+        opt->flag = tmp.flag;
+#endif
+#else
+    if (opt != NULL) {
+        tmp.size = sizeof(tmp);
+        info = &tmp;
+    }
+    ret = sceWlanGPRecv(id, gm->ptr, gm->size, info);
+    if (opt == NULL)
+        goto end;
+    if (opt->size >= sizeof(tmp))
+        opt->flag = info->flag;
+#endif
+    if (internal == 0)
+        opt->flag = (u16)opt->flag;
+end:
+    _sce_pspnet_splunlock(s);
+    return ret;
+}
 #endif
