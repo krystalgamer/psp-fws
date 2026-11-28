@@ -143,3 +143,5 @@ D_000079B0_v250 = 0x000079B0; // rom:0x7A30
 g_adhocInit = 0x00007C60;
 g_adhocStat = 0x00007CC8;
 ptpOutput = 0x00006AF8; // type:func
+pdpInput = 0x00002404; // type:func
+ptpInput = 0x00005B98; // type:func
