@@ -3359,14 +3359,6 @@ SceNetAdhocPtpPcb *ptpLookup(const SceNetEtherAddr *laddr, u16 lport, const SceN
     return p;
 }
 
-#if FW_VERSION >= 150 && FW_VERSION < 201
-void ptpClearAddr(SceNetAdhocPtpPcb *pcb) {
-    __builtin_memset(&pcb->laddr, 0, sizeof(pcb->laddr));
-    __builtin_memset(&pcb->paddr, 0, sizeof(pcb->paddr));
-    pcb->lport = 0;
-}
-#endif
-
 #if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_000056CC);
 #endif
@@ -3394,7 +3386,9 @@ s32 ptpAttach(SceNetAdhocDesc *d) {
     d->pcb = pcb;
     return 0;
 }
+#endif
 
+#if FW_VERSION < 201
 void ptpClearAddr(SceNetAdhocPtpPcb *pcb) {
     __builtin_memset(&pcb->laddr, 0, sizeof(pcb->laddr));
     __builtin_memset(&pcb->paddr, 0, sizeof(pcb->paddr));
@@ -3683,7 +3677,9 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc", ptpSendFrameL);
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", ptpSendCtl);
+#endif
 
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", ptpOutput);
 #endif
 
@@ -3691,11 +3687,16 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc", ptpOutput);
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", ptpSendFrame);
 
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", ptpSendCtl);
+#endif
 
+#if FW_VERSION < 201
 void ptpOutput(SceNetAdhocPtpPcb *pcb, s32 rexmt) {
     struct mbuf *m;
     u32 seq;
     s32 n;
+#if FW_VERSION >= 150
+    u32 *st;
+#endif
 
     n = 0;
     m = pcb->snd.first;
@@ -3712,7 +3713,7 @@ void ptpOutput(SceNetAdhocPtpPcb *pcb, s32 rexmt) {
             if (n != 0)
                 goto out;
             if (rexmt != 0) {
-                ptpSendFrame(pcb->ifp, &pcb->laddr, pcb->lport, &pcb->paddr, pcb->pport, 4, pcb->snd_una - 1, NULL);
+                PTP_SEND_FRAME(pcb, 4, pcb->snd_una - 1, NULL);
                 g_adhocStat.stat[ADHOC_STAT_PTP_PROBE]++;
                 goto out;
             }
@@ -3723,10 +3724,20 @@ void ptpOutput(SceNetAdhocPtpPcb *pcb, s32 rexmt) {
             _sce_pspnet_callout_reset_usec(&pcb->callout, pcb->rexmt_int, ptpTimer, pcb);
             goto out;
         }
-        ptpSendFrame(pcb->ifp, &pcb->laddr, pcb->lport, &pcb->paddr, pcb->pport, 4, pcb->snd_nxt, m);
+#if FW_VERSION >= 150
+        st = (u32 *)&m->m_pkthdr.unk20; /* rf info block; st[2..3] = u64 first-send time */
+#endif
+        PTP_SEND_FRAME(pcb, 4, pcb->snd_nxt, m);
         n++;
+#if FW_VERSION >= 150
+        if (*(u64 *)&st[2] == 0)
+            *(u64 *)&st[2] = ADHOC_CLOCK();
+#endif
         pcb->snd_nxt++;
         pcb->snd_inflight += m->m_pkthdr.len;
+#if FW_VERSION >= 150
+        g_adhocStat.stat[ADHOC_STAT_PTP_SENT]++;
+#endif
         m = m->m_next;
     }
 out:
