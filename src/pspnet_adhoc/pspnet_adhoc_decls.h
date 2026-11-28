@@ -424,6 +424,8 @@ s32 func_000056E4(SceNetAdhocPtpPcb *pcb, s32 a1);
 void func_00005708(SceNetAdhocPtpPcb *pcb);
 void func_0000578C(struct mbuf *m);
 void func_00005FF8(struct ifnet *ifp, const SceNetEtherAddr *laddr, u16 lport, const SceNetEtherAddr *paddr, u16 pport, u8 type, u32 seq, struct mbuf *m);
+void func_0000660C(SceNetAdhocPtpPcb *pcb, u8 type);
+void func_000067F8(SceNetAdhocPtpPcb *pcb, s32 rexmt);
 s32 func_00006880(void);
 void func_000069D4(SceNetAdhocPtpPcb *pcb);
 s32 func_00006BB8(s32 id);
