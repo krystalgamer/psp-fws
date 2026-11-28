@@ -209,3 +209,5 @@ D_00008264_v152 = 0x00008264; // rom:0x82E4
 // shared names (tools/add_version.py) end
 D_00008954 = 0x00008C04; // rom:0x8C84
 D_00008968 = 0x00008C18; // rom:0x8C98
+D_0000890C = 0x00008BBC; // rom:0x8C3C
+D_00008920 = 0x00008BD0; // rom:0x8C50

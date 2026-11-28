@@ -398,12 +398,12 @@ INCLUDE_RODATA("nonmatchings/msstor_0015A0", D_00009264);
 
 INCLUDE_RODATA("nonmatchings/msstor_0015A0", D_00009270);
 
-#if FW_VERSION == 100
+#if FW_VERSION < 201
 s32 func_00004588(SceMScmHC *hc, s32 cmd, unsigned long *result, s32 arg3, SceMSstorDev *dev) {
     MSSTOR_ASSERT(dev == &D_00008AA4, 0xF9);
     switch (cmd) {
     case 0:
-        sceKernelPowerLock(0);
+        MSSTOR_POWER_LOCK(0);
         sceLedSetMode(0, 2, &D_00008954);
         dev->hc = hc;
         if (func_00000548(dev) == 0) {
@@ -412,11 +412,11 @@ s32 func_00004588(SceMScmHC *hc, s32 cmd, unsigned long *result, s32 arg3, SceMS
             *result = 1;
         }
         sceLedSetMode(0, 2, &D_00008968);
-        sceKernelPowerUnlock(0);
+        MSSTOR_POWER_UNLOCK(0);
         break;
     case 1:
         MSSTOR_ASSERT(dev->hc != NULL, 0x10D);
-        sceKernelPowerLock(0);
+        MSSTOR_POWER_LOCK(0);
         sceLedSetMode(0, 2, &D_00008954);
         D_00008934.sema = sceKernelCreateSema("SceMSstorIolock", 1, 1, 1, NULL);
         sceKernelWaitSema(D_00008934.sema, 1, NULL);
@@ -426,14 +426,14 @@ s32 func_00004588(SceMScmHC *hc, s32 cmd, unsigned long *result, s32 arg3, SceMS
             sceKernelDeleteSema(D_00008934.sema);
             D_00008934.sema = 0;
             sceLedSetMode(0, 2, &D_00008968);
-            sceKernelPowerUnlock(0);
+            MSSTOR_POWER_UNLOCK(0);
             break;
         }
         sceKernelSignalSema(D_00008934.sema, 1);
         sceKernelDeleteSema(D_00008934.sema);
         D_00008934.sema = 0;
         sceLedSetMode(0, 2, &D_00008968);
-        sceKernelPowerUnlock(0);
+        MSSTOR_POWER_UNLOCK(0);
         if (sceIoAddDrv(&D_0000890C) < 0) {
             *result = 1;
         } else if (sceIoAddDrv(&D_00008920) < 0) {
@@ -464,10 +464,6 @@ s32 func_00004588(SceMScmHC *hc, s32 cmd, unsigned long *result, s32 arg3, SceMS
 }
 #endif
 
-#if FW_VERSION < 201 && FW_VERSION != 100
-INCLUDE_ASM("nonmatchings/msstor_0015A0", func_00004588);
-#endif
-
 #if FW_VERSION < 201
 
 s32 module_reboot_before(void) {
@@ -479,24 +475,8 @@ s32 module_reboot_before(void) {
 }
 #endif
 
-#if FW_VERSION != 100
+#if FW_VERSION >= 201
 INCLUDE_RODATA("nonmatchings/msstor_0015A0", D_00009284);
-#endif
-
-#if FW_VERSION == 103
-INCLUDE_RODATA("nonmatchings/msstor_0015A0", D_00008368);
-#endif
-
-#if FW_VERSION == 102
-INCLUDE_RODATA("nonmatchings/msstor_0015A0", D_000082D8);
-#endif
-
-#if FW_VERSION == 152
-INCLUDE_RODATA("nonmatchings/msstor_0015A0", D_000084F8);
-#endif
-
-#if FW_VERSION == 150
-INCLUDE_RODATA("nonmatchings/msstor_0015A0", D_00008508);
 #endif
 
 
@@ -506,7 +486,7 @@ s32 func_000048A8(SceIoDeviceEntry *de) {
 
     D_00008934.hc = D_00008AA4.hc;
     D_00008934.dev = &D_00008AA4;
-#if FW_VERSION == 100
+#if FW_VERSION < 201
     D_00008934.sema = sceKernelCreateSema("SceMSstorIolock", 1, 1, 1, NULL);
 #else
     D_00008934.sema = sceKernelCreateSema(D_00009284, 1, 1, 1, NULL);

@@ -28,6 +28,15 @@ struct D_00009B54_s {
     } \
 }
 
+/* the CLD callback locks power with the user-level API in 1.02/1.03 only */
+#if FW_VERSION == 102 || FW_VERSION == 103
+#define MSSTOR_POWER_LOCK sceKernelPowerLockForUser
+#define MSSTOR_POWER_UNLOCK sceKernelPowerUnlockForUser
+#else
+#define MSSTOR_POWER_LOCK sceKernelPowerLock
+#define MSSTOR_POWER_UNLOCK sceKernelPowerUnlock
+#endif
+
 typedef int SceMode;
 typedef s64 SceOff;
 typedef s32 SceSSize;
