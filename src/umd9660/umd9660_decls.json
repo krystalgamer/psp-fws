@@ -21,7 +21,7 @@
   "func_00001E24": "s32 func_00001E24(void);",
   "func_00001E30": "SceOff func_00001E30(SceUmd9660File *file, SceOff ofs, s32 whence);",
   "func_000022E8": "void func_000022E8(void);",
-  "func_000023E4": "s32 func_000023E4();",
+  "func_000023E4": "s32 func_000023E4(s32 *arg0, void *arg1, s32 *unit, s32 arg3);",
   "func_00002694": "s32 func_00002694(void);",
   "func_000026E4": "SceUmd9660Mgr *func_000026E4(void);",
   "func_00002910": "SceUmd9660File *func_00002910(SceIoIob *iob);",

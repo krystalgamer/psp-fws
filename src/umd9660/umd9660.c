@@ -740,9 +740,123 @@ INCLUDE_RODATA("nonmatchings/umd9660", D_0000557C);
 INCLUDE_ASM("nonmatchings/umd9660", func_000023E0);
 #endif
 
-#if FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/umd9660", func_000023E4);
+#if FW_VERSION == 100
+s32 func_000023E4(s32 *arg0, void *arg1, s32 *unit, s32 arg3) {
+    SceUmd9660Mgr *mgr = func_000026E4();
+    SceUmd9660Drive *drive;
+    SceUmdDrive *umd;
+    char name[0x20];
+    u8 buf[0x20];
+    s32 mode;
+    s32 ret;
+    if ((u32)*unit >= 2) {
+        return 0x80010013;
+    }
+    mode = 2;
+    if (arg0 != NULL) {
+        mode = *arg0;
+    }
+    if (sceKernelDipswAll() & 0x10000) {
+        ret = sceUmdManDVDDriveStart();
+        if (ret != 0) {
+            if (ret == 0x802110A0 || ret == 0x802110A1) {
+                ret = 0x80210003;
+            }
+            return ret;
+        }
+        do {
+            ret = sceUmdManSyncState();
+            if (ret == 0) {
+                break;
+            }
+            if (ret != 0x80211014) {
+                return ret;
+            }
+        } while (1);
+        drive = sceUmd9660GetDrive(0);
+        umd = sceUmdManGetUmdDrive(0);
+        if (umd == NULL) {
+            return 0x80010013;
+        }
+        drive->umdDrive = umd;
+        if (func_000037AC(drive) == 0x10) {
+            memset(name, 0, sizeof(name));
+            sprintf(name, "%s%1d:", D_00005B30, 0);
+            ret = sceUmd9660ReadPvd4DVD(name, buf);
+            if (ret != 0) {
+                return ret;
+            }
+            ret = sceUmd9660ReadRootDir4DVD(name, buf);
+            if (ret != 0) {
+                return ret;
+            }
+        }
+        umd->unk28 = 0;
+    } else {
+        if (mode != 2) {
+            ret = sceUmdManUMDDrivePreStart();
+            if (ret != 0) {
+                if (ret == 0x802110A0 || ret == 0x802110A1) {
+                    ret = 0x80210003;
+                }
+                return ret;
+            }
+            drive = sceUmd9660GetDrive(0);
+            umd = sceUmdManGetUmdDrive(0);
+            if (umd == NULL) {
+                return 0x80010013;
+            }
+            drive->umdDrive = umd;
+            return 0;
+        }
+        ret = sceUmdManUMDDriveStart();
+        if (ret != 0) {
+            return ret;
+        }
+        drive = sceUmd9660GetDrive(0);
+        umd = sceUmdManGetUmdDrive(0);
+        if (umd == NULL) {
+            return 0x80010013;
+        }
+        drive->umdDrive = umd;
+        if (func_000037AC(drive) == 0x10) {
+            mgr->unkC = 1;
+            do {
+                ret = sceUmdManSyncState();
+                if (ret == 0) {
+                    break;
+                }
+                if (ret != 0x80211014) {
+                    return ret;
+                }
+            } while (1);
+        } else {
+            mgr->unkC = 0;
+        }
+        sceAtaExecSetFeaturesCmd(umd->ataDrive, 3, 1, umd->ataDrive->driveId, 0);
+        sceAtaExecSetFeaturesCmd(umd->ataDrive, 3, 8, umd->ataDrive->driveId, 0);
+        umd->unk28 = 0;
+    }
+    umd->unk2C = 0;
+    umd->unk30 = 0;
+    umd->unk34 = 0;
+    umd->unk38 = 0;
+    umd->unk3C = 0;
+    ret = func_0000438C(umd);
+    if (ret != 0) {
+        return ret;
+    }
+    drive->unk830[2]++;
+    drive->umdDrive = umd;
+    return 0;
+}
+#endif
 
+#if FW_VERSION >= 102 && FW_VERSION < 150
+INCLUDE_ASM("nonmatchings/umd9660", func_000023E4);
+#endif
+
+#if FW_VERSION < 150
 s32 func_00002694(void) {
     s32 ret;
     for (;;) {
@@ -1817,7 +1931,7 @@ s32 sceUmd9660ReadRootDir4DVD(const char *name, SceUmdLbnParam *param) {
 }
 #endif
 
-#if FW_VERSION >= 152 && FW_VERSION < 201
+#if FW_VERSION == 152
 INCLUDE_ASM("nonmatchings/umd9660", sceUmd9660ReadRootDir4DVD);
 #endif
 
