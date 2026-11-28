@@ -2501,18 +2501,137 @@ INCLUDE_ASM("nonmatchings/mgr", func_000053B0);
 INCLUDE_ASM("nonmatchings/mgr", func_00006BF0);
 #endif
 
-INCLUDE_ASM("nonmatchings/mgr", func_00006C40);
+s32 func_00006C40(s32 fd, s32 arg1, s32 arg2, s32 arg3, u8 *buf) {
+    s32 args[8];
+    u8 tmp[16];
+    s32 i;
+    s32 ret;
 
-INCLUDE_ASM("nonmatchings/mgr", func_00006D70);
+    if (buf == NULL) {
+        buf = tmp;
+    }
+    i = 0;
+    args[2] = 1;
+    args[5] = 0x200;
+    args[0] = arg1;
+    args[1] = arg2;
+    args[3] = arg3;
+    args[6] = 4;
+    args[4] = (s32)buf;
+    while ((ret = sceIoIoctl(fd, 0x211D01A, args, 0x20, NULL, 0)) < 0) {
+        if (i >= 8) {
+            goto fail;
+        }
+        i++;
+        if (!func_000059BC(ret)) {
+fail:
+            if (ret == 0x8022008C) {
+                goto bad;
+            }
+            return func_00005834(ret);
+        }
+    }
+    return 0;
+bad:
+    buf[0] &= 0x7F;
+    tmp[0] = 0x7F;
+    args[4] = (s32)tmp;
+    args[6] = 1;
+    args[1] = 0;
+    sceIoIoctl(fd, 0x211D01E, args, 0x20, NULL, 0);
+    return 0x80505003;
+}
 
-INCLUDE_ASM("nonmatchings/mgr", func_00006EAC);
+s32 func_00006D70(s32 fd, s32 arg1, s32 arg2, u8 *buf) {
+    s32 args[8];
+    u8 tmp[16];
+    s32 i;
+    s32 ret;
+
+    i = 0;
+    memset(args, 0, 0x20);
+    args[2] = 1;
+    args[0] = arg1;
+    args[1] = arg2;
+    args[6] = 4;
+    args[4] = (s32)buf;
+    while ((ret = sceIoIoctl(fd, 0x211D01C, args, 0x20, NULL, 0)) < 0) {
+        if (i >= 8) {
+            goto fail;
+        }
+        i++;
+        if (!func_000059BC(ret)) {
+fail:
+            if (ret == 0x8022008C) {
+                goto bad;
+            }
+            return func_00005834(ret);
+        }
+    }
+    return 0;
+bad:
+    buf[0] &= 0x7F;
+    tmp[0] = 0x7F;
+    args[4] = (s32)tmp;
+    args[6] = 1;
+    args[1] = 0;
+    sceIoIoctl(fd, 0x211D01E, args, 0x20, NULL, 0);
+    return 0x80505003;
+}
+
+s32 func_00006EAC(s32 fd, s32 arg1, s32 arg2, s32 arg3, u8 *buf) {
+    s32 args[8];
+    s32 i;
+    s32 ret;
+
+    if (arg1 < 2) {
+        return 0x80501000;
+    }
+    if (buf == NULL) {
+        buf = (u8 *)&D_0000AFB8;
+    }
+    args[2] = 1;
+    args[5] = 0x200;
+    args[0] = arg1;
+    args[1] = arg2;
+    args[3] = arg3;
+    args[4] = (s32)buf;
+    args[6] = 4;
+    for (i = 0; (ret = sceIoIoctl(fd, 0x211D01B, args, 0x20, NULL, 0)) < 0; i++) {
+        if (i >= 8 || !func_000059BC(ret)) {
+            return func_00005834(ret);
+        }
+    }
+    return 0;
+}
 
 #if FW_VERSION >= 152 && FW_VERSION < 340
 INCLUDE_ASM("nonmatchings/mgr", func_000056C4);
 #endif
 
 #if FW_VERSION < 152
-INCLUDE_ASM("nonmatchings/mgr", func_00005768);
+s32 func_00005768(s32 fd, s32 arg1, s32 arg2, s32 arg3) {
+    s32 args[8];
+    u8 b;
+    s32 i;
+    s32 ret;
+
+    if (arg1 < 2) {
+        return 0x80501000;
+    }
+    b = arg3;
+    args[0] = arg1;
+    args[1] = arg2;
+    args[2] = 1;
+    args[4] = (s32)&b;
+    args[6] = 1;
+    for (i = 0; (ret = sceIoIoctl(fd, 0x211D01E, args, 0x20, NULL, 0)) < 0; i++) {
+        if (i >= 8 || !func_000059BC(ret)) {
+            return func_00005834(ret);
+        }
+    }
+    return 0;
+}
 #endif
 
 #if FW_VERSION >= 340
