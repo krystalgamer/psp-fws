@@ -119,9 +119,9 @@ typedef struct {
     SceUID sema;            /* 0x00: "SceMSstorIolock" */
     SceMScmHC *hc;          /* 0x04 */
     SceMSstorDev *dev;      /* 0x08 */
-    s32 unkC;
+    s32 retry;              /* 0x0C: I/O retry count (open flags bits 16-19) */
     s32 openCount;          /* 0x10 */
-    s32 unk14;
+    u32 lockTimeout;        /* 0x14: sema wait timeout, 0 = forever */
     SceUID thread;          /* 0x18: "SceMSstorSleep" */
     SceUID evf;             /* 0x1C: "SceMSstorSleeper" */
 } SceMSstorIoCtx;
@@ -295,6 +295,8 @@ extern SceMSstorIoCtx D_00008934;
 #else
 extern s32 D_00008934;
 #endif
+extern s32 D_00008954[5];
+extern s32 D_00008968[5];
 extern SceMSstorDev D_00008AA4;
 extern char D_00009248[];
 extern char D_00009250[];
@@ -394,6 +396,7 @@ void func_00001B88(s32 *arg0, s32 arg1, s32 arg2);
 void func_00001BBC(s32 *arg0, M2C_UNK arg1, M2C_UNK arg2);
 s32 func_000026A8(SceMSstorDev *dev);
 s32 func_0000299C(SceMSstorDev *dev, s32 arg1, void *arg2);
+u32 func_00003298(SceMSstorDev *dev);
 s32 func_000034CC(void *arg0, s32 arg1, s32 *arg2);
 s32 func_00003C2C(SceMSstorDev *dev);
 s32 func_00003C4C(SceMSstorDev *dev);
@@ -455,7 +458,9 @@ s32 sceKernelDeleteSema(s32);
 s32 sceKernelFreeFpl(SceUID fpl, void *data);
 s32 sceKernelPollSema(SceUID sema, s32 n);
 s32 sceKernelPowerLock(s32 type);
+s32 sceKernelPowerLockForUser(s32 type);
 s32 sceKernelPowerUnlock(s32 type);
+s32 sceKernelPowerUnlockForUser(s32 type);
 s32 sceKernelSetEventFlag(s32, u32);
 s32 sceKernelSignalSema(s32, s32);
 s32 sceKernelStartThread(s32, u32, void *);
