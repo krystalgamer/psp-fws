@@ -370,25 +370,25 @@ typedef struct SceHttpTmpl {
     s32 id;                 /* 0x00 template_id (ids 0x00xxxxxx) */
     s32 http_ver;           /* 0x04 */
     s32 reference_counter;  /* 0x08 */
-    s32 use_netcnf;         /* 0x0C */
+    s32 resolver_retry;     /* 0x0C (10) */
     s32 proxy_status;       /* 0x10 */
     u32 resolver_timeo;     /* 0x14 */
     u32 connect_timeo;      /* 0x18 */
     u32 receive_timeo;      /* 0x1C */
     u32 send_timeo;         /* 0x20 */
-    u32 unk24;              /* 0x24 */
-    u32 unk28;              /* 0x28 */
-    u32 unk2C;              /* 0x2C */
+    u32 unk24;              /* 0x24 (1500) */
+    u32 unk28;              /* 0x28 (6) */
+    u32 unk2C;              /* 0x2C (6) */
     char *proxy_host;       /* 0x30 */
-    char *str34;            /* 0x34 */
-    char *str38;            /* 0x38 */
+    char *username;         /* 0x34 */
+    char *password;         /* 0x38 */
     s32 keep_alive;         /* 0x3C */
     s32 redirect;           /* 0x40 */
     s32 cache;              /* 0x44 */
     s32 cookie;             /* 0x48 */
     s32 auth;               /* 0x4C */
-    s32 unk50;              /* 0x50 */
-    s32 proxy_mode;         /* 0x54 */
+    s32 header_lock;        /* 0x50 header list busy */
+    s32 use_netcnf;         /* 0x54 sceHttpCreateTemplate netcnf; 1 = SCE_HTTP_PROXY_AUTO */
     void *unk58;            /* 0x58 */
     void *unk5C;            /* 0x5C */
     void *password_cb;      /* 0x60 sceHttpSetAuthInfoCB */
@@ -418,18 +418,17 @@ typedef struct SceHttpConn {
 #endif
     s32 status;             /* 0x2C (1.03: 0x28) */
     unsigned char *hostname; /* 0x30 (1.03: 0x2C) */
-    u8 unk34[(FW_VERSION == 103) ? 0xA4 - 0x30 : 0xA4 - 0x34];
+    s32 unk34;
+    s32 resolved;           /* 0x38 (1.00) cleared by sceHttpSetProxy */
+    u8 unk3C[(FW_VERSION == 103) ? 0xA4 - 0x38 : 0xA4 - 0x3C];
     SceHttpTmpl tmpl;       /* 0xA4 */
-    u8 unk128[0x138 - 0x128];
-    void *recv_buf;         /* 0x138 */
-    u32 recv_buf_size;      /* 0x13C */
-    u32 unk140;
-    u32 unk144;
-    u32 unk148;
+    struct SceNetInetSockaddrIn sin; /* 0x128 */
+    struct _SceHttpRecvBuf recv_buf; /* 0x138 (devkit layout) */
     struct SceHttpConn *redirect_list; /* 0x14C */
     struct SceHttpConn *next; /* 0x150 */
     struct SceHttpConn *pre;  /* 0x154 */
-    u8 unk158[0x164 - 0x158];
+    u16 port;               /* 0x158 */
+    u8 unk15A[0x164 - 0x15A];
 } SceHttpConn;
 typedef char chk_SceHttpConn[(sizeof(SceHttpConn) == 0x164) ? 1 : -1];
 
@@ -441,9 +440,9 @@ typedef struct SceHttpMd5Entry {
     u8 digest[16];          /* 0x10 sceKernelUtilsMd5Digest(key) */
     char *key;              /* 0x20 */
     char *value;            /* 0x24 */
-    s32 unk28;
+    struct SceHttpCacheEntry *cache; /* 0x28 */
     s32 status;             /* 0x2C */
-    s32 unk30;
+    void *unk30;            /* 0x30 freed */
     struct SceHttpMd5Entry *next; /* 0x34 */
     u8 unk38[0x40 - 0x38];
 } SceHttpMd5Entry;
@@ -459,9 +458,10 @@ typedef char chk_SceHttpMd5Entry[(sizeof(SceHttpMd5Entry) == 0x40) ? 1 : -1];
 #define HTTP_REQ_V(a, b, c) (c)
 #endif
 typedef struct SceHttpReq {
-    u8 unk00[0x10];
+    u8 unk00[0x08];
+    SceUInt64 total_body_recv; /* 0x08 */
     s32 id;                 /* 0x10 */
-    u8 unk14[0x18 - 0x14];
+    s32 unk14;              /* 0x14 (2: skip body drain) */
     s32 reference_counter;  /* 0x18 */
     s32 network_errno;      /* 0x1C */
     s32 pipeline_next;      /* 0x20 */
@@ -470,9 +470,16 @@ typedef struct SceHttpReq {
     s32 status;             /* 0x2C */
     u8 unk30[0x34 - 0x30];
     u32 res_header_size;    /* 0x34 */
-    u8 unk38[HTTP_REQ_V(0x68, 0x6C, 0x70) - 0x38];
-    unsigned char *unk68;   /* 0x68 (1.02: 0x6C, 1.03: 0x70) */
-    u8 unk6C[HTTP_REQ_V(0x74, 0x78, 0x7C) - HTTP_REQ_V(0x6C, 0x70, 0x74)];
+    u8 unk38[0x44 - 0x38];
+    s32 unk44;              /* 0x44 */
+    u8 unk48[HTTP_REQ_V(0x58, 0x5C, 0x5C) - 0x48];
+    s32 from_cache;         /* 0x58 (1.02/1.03: 0x5C) */
+    u8 unk5C[HTTP_REQ_V(0x5C, 0x60, 0x64) - HTTP_REQ_V(0x5C, 0x60, 0x60)];
+    char *cache_key;        /* 0x5C (1.02: 0x60, 1.03: 0x64) */
+    u8 unk60[HTTP_REQ_V(0x68, 0x6C, 0x70) - HTTP_REQ_V(0x60, 0x64, 0x68)];
+    unsigned char *path;    /* 0x68 (1.02: 0x6C, 1.03: 0x70) */
+    unsigned char *query;   /* 0x6C */
+    unsigned char *fragment; /* 0x70 */
     unsigned char *res_header_buf; /* 0x74 (1.02: 0x78, 1.03: 0x7C) */
     u8 unk78[HTTP_REQ_V(0x7C, 0x80, 0x84) - HTTP_REQ_V(0x78, 0x7C, 0x80)];
     unsigned char *header_clone_buf; /* 0x7C (1.02: 0x80, 1.03: 0x84) */
@@ -486,7 +493,8 @@ typedef struct SceHttpReq {
     u8 unk128[HTTP_REQ_V(0x168, 0x180, 0x180) - HTTP_REQ_V(0x128, 0x134, 0x138)];
     SceHttpConn *connection; /* 0x168 (1.02/1.03: 0x180) */
     SceHttpConn *redirect_con; /* 0x16C (1.02/1.03: 0x184) */
-    u8 unk170[HTTP_REQ_V(0x178, 0x190, 0x190) - HTTP_REQ_V(0x170, 0x188, 0x188)];
+    struct SceHttpCacheEntry *cache_entry; /* 0x170 (1.02/1.03: 0x188) */
+    struct SceHttpMd5Entry *cache_md5; /* 0x174 (1.02/1.03: 0x18C) */
     struct SceHttpReq *next; /* 0x178 (1.02: 0x190) */
     struct SceHttpReq *pre;  /* 0x17C (1.02: 0x194) */
     u8 unk180[HTTP_REQ_V(0x188, 0x1A0, 0x1A0) - HTTP_REQ_V(0x180, 0x198, 0x198)];
@@ -503,19 +511,21 @@ typedef struct {
     SceHttpReallocFunction100 realloc_func;
 } SceHttpMallocFuncs;
 typedef struct SceHttpCacheEntry {
-    u8 unk00[0x08];
-    u32 size08;             /* 0x08 */
-    u32 size0C;             /* 0x0C */
+    u64 tick;               /* 0x00 sceRtcGetCurrentTick */
+    u32 size08;             /* 0x08 body size */
+    u32 size0C;             /* 0x0C header size */
     u32 size10;             /* 0x10 */
-    u8 unk14[0x18 - 0x14];
-    void *buf18;            /* 0x18 */
-    void *buf1C;            /* 0x1C */
+    s32 unk14;
+    void *buf18;            /* 0x18 header copy */
+    void *buf1C;            /* 0x1C body */
     void *buf20;            /* 0x20 */
     s32 reference_counter;  /* 0x24 */
     s32 status;             /* 0x28 */
     struct SceHttpCacheEntry *next; /* 0x2C */
     struct SceHttpCacheEntry *prev; /* 0x30 */
+    u8 unk34[0x40 - 0x34];
 } SceHttpCacheEntry;
+typedef char chk_SceHttpCacheEntry[(sizeof(SceHttpCacheEntry) == 0x40) ? 1 : -1];
 /* library state (0xDCCC in 1.00) */
 typedef struct {
     s32 inited;             /* 0x00 sceHttpInit */
@@ -606,9 +616,11 @@ extern s32 D_0001B0E0;
 
 SceSize BuildHttpHeader(SceHttpReq *req, char *header, unsigned short calc_only);
 int CloneHeader(SceHttpReq *req);
+int ConnectNonblock(int sock_id, const struct SceNetInetSockaddrIn *sin_addr, int usec);
 int CopyHttpHeaderList(_SceHttpReqHeaderList **out, const _SceHttpReqHeaderList *src);
+int CopyHttpTmpl(const SceHttpTmpl *src, SceHttpTmpl *dst);
 int CreateConnection(int template_id, unsigned char *server_name, unsigned char *scheme, unsigned char *username, unsigned char *password, unsigned short port, int keepalive, int option, SceHttpReq *req);
-s32 CreateConnectionWithUrl(s32, s32, s32, s32, s32);
+int CreateConnectionWithUrl(int template_id, const unsigned char *uri, int keepalive, int option, SceHttpReq *req);
 int CreateHttpExtraHeader(_SceHttpReqHeaderList **out, const SceUChar8 *name, const SceUChar8 *value);
 int CreateRequest(int connection_id, int method, const unsigned char *path, const unsigned char *query, const unsigned char *fragment, SceULong64 content_length, const unsigned char *username, const unsigned char *password, const unsigned char *hostname);
 int DeleteHttpHeader(_SceHttpReqHeaderList **header_list, const SceUChar8 *name);
@@ -638,13 +650,17 @@ void _sceHttpFreeInternal(void *ptr);
 void *_sceHttpMallocInternal(SceSize size);
 void *_sceHttpReallocInternal(void *ptr, SceSize size);
 int _try_build_header(SceUChar8 **out, SceHttpReq *request);
+int _try_connect(SceHttpConn *con);
+int _try_resolve_hostname(SceHttpConn *connection);
 s32 func_000031DC(SceHttpReq *arg0);
 int func_0000325C(SceHttpReq *req);
 s32 func_000032B0(SceHttpReq *req);
 int func_00003614(SceHttpReq *req);
-s32 func_00003668(SceHttpReq *req);
+void func_00003668(SceHttpReq *req);
 int func_00003830(SceHttpCacheEntry *entry);
+void func_000038CC(SceHttpReq *req);
 int func_00003A24(SceHttpCacheEntry *entry);
+int func_00003AA8(SceHttpReq *req);
 void func_00003C04(void *arg0);
 s32 func_00003C90(void *arg0);
 void func_00003CEC(void *arg0);
@@ -652,7 +668,8 @@ void func_00003D08(void *arg0);
 void func_00003D28(const char *key, SceHttpMd5Entry **out);
 void func_00003E34(const char *key, SceHttpMd5Entry **out);
 void func_00003EEC(SceHttpMd5Entry *entry);
-s32 func_000042D4(void);
+char *func_000041A8(SceHttpReq *req);
+void func_000042D4(void);
 s32 func_000043A0(SceHttpReq *req);
 int func_00004A6C(SceHttpReq *request);
 s32 func_00005004(s32, s32, s32);
@@ -669,6 +686,7 @@ void func_00005CD0(void *arg0, void *arg1);
 s32 func_00005D20(s32);
 u32 func_00005DE0(u32 size);
 s32 func_00005EF4(s32);
+int func_000060F8(SceHttpReq *req, void *buf, SceSize len, int flags);
 void func_00006380(SceHttpConn *con);
 s32 func_00006388(s32);
 void func_0000646C(void *arg0, void *arg1, u32 arg2, s32 arg3);
@@ -683,6 +701,8 @@ s32 func_00008510(void);
 void func_00008AB8(void *arg0, void *arg1, u32 arg2, s32 arg3);
 void func_00008EBC(const u8 *digest, char *out);
 void func_00008F68(void *arg0, void *arg1, u32 arg2, s32 arg3);
+int func_00008FB4(void **list, unsigned char *host);
+int func_0000907C(char *buf, void *list, unsigned char *path, SceSize *size, SceSize capacity);
 int func_000092D4(unsigned char *buf, u32 size, unsigned char *hostname, unsigned char *path);
 s32 func_00009300(s32);
 void func_000097A4(SceHttpConn *con);
@@ -705,6 +725,7 @@ void func_0000AAAC(void *arg0);
 s32 func_0000AE54(s32);
 s32 func_0000AF34(void);
 s32 func_0000B2C0(s32);
+int func_0000B2D4(SceHttpConn *con);
 s32 func_0000B484(s32, s32, s32);
 void func_0000B560(void *arg0, void *arg1);
 s32 func_0000B598(void *arg0);
@@ -755,16 +776,18 @@ void func_00015A10(s32 arg0);
 void func_00015A40(void);
 s32 module_start(void);
 s32 module_stop(void);
-int sceHttpCreateConnection(int template_id, const unsigned char *server_name, unsigned char *scheme, short unsigned int port, int keepalive);
+int sceHttpAddExtraHeader(int id, const SceUChar8 *name, const SceUChar8 *value, int mode);
+int sceHttpCreateConnection(int template_id, const unsigned char *server_name, unsigned char *scheme, unsigned short port, int keepalive);
 s32 sceHttpCreateConnectionWithURL(s32 arg0, void *arg1, s32 arg2);
 int sceHttpCreateRequest(int connection_id, int method, const unsigned char *path, SceULong64 content_length);
-s32 sceHttpCreateTemplate(void *arg0, s32 arg1, s32 arg2);
+int sceHttpCreateTemplate(const unsigned char *user_agent, int http_ver, int netcnf);
 int sceHttpDeleteConnection(int connection_id);
+int sceHttpDeleteHeader(int id, const SceUChar8 *name);
 s32 sceHttpDeleteRequest(s32 arg0);
 int sceHttpDeleteTemplate(int tmpl_id);
 s32 sceHttpEnd(void);
 int sceHttpGetStatusCode(int request_id, int *status_code);
-s32 sceHttpInit(u32 arg0);
+int sceHttpInit(SceSize pool_size);
 s32 sceHttpInitCache(u32 arg0);
 int sceHttpSetMallocFunction(SceHttpMallocFunction malloc_func, SceHttpFreeFunction free_func, SceHttpReallocFunction reallc_func);
 M2C_UNK sceHttpStorageClose();
@@ -780,14 +803,18 @@ int sceKernelUtilsMd5BlockResult(); /* unprototyped: 1.50 C calls it without the
 int sceKernelUtilsMd5BlockUpdate(); /* unprototyped: 1.50 C calls it without the pass-through args */
 M2C_UNK sceKernelUtilsMd5Digest();
 int sceNetApctlGetInfo(int code, union SceNetApctlInfo *info);
-M2C_UNK sceNetInetInetPton();
+int sceNetInetInetPton(); /* (int af, const char *src, void *dst); unprototyped for other versions */
 s32 sceNetInetRecv(s32, void *, u32, s32);
 s32 sceNetInetSend(s32, void *, u32, s32);
 M2C_UNK sceNetMemset(s32 *, M2C_UNK, M2C_UNK);
+int sceNetResolverCreate(int *rid, void *buf, SceSize buflen);
+int sceNetResolverDelete(int rid);
+int sceNetResolverStartNtoA(int rid, const char *hostname, struct SceNetInetInAddr *addr, unsigned int timeout, int retry);
 M2C_UNK sceRtcFormatRFC2822();
-M2C_UNK sceRtcGetCurrentTick();
+int sceRtcGetCurrentTick(); /* (u64 *tick); unprototyped for other versions' C */
 M2C_UNK sceRtcParseDateTime();
 M2C_UNK sceRtcTickAddSeconds();
+int sceUriBuild(char *out, SceSize *required, SceSize capacity, SceUriElement100 *elem, u32 option);
 int sceUriParse(SceUriElement100 *out, const unsigned char *src, void *pool, SceSize *required, SceSize capacity);
 
 #endif
