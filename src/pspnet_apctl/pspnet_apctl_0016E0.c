@@ -458,12 +458,14 @@ s32 func_00001780(SceNetApctlCtx *ctx, s32 prev, s32 *state, s32 *event) {
     }
     return 0;
 }
+#endif
 
+#if FW_VERSION < 250
 s32 func_00001858(SceNetApctlCtx *ctx, s32 prev, s32 *state, s32 *event) {
     u32 bits;
 
     bits = 0;
-    func_000023BC(ctx, -1, &bits, 1);
+    func_000023BC(ctx, APCTL_WAIT_GOTIP, &bits, 1);
     if (bits & 2) {
         *event = 5;
     } else if (bits & 8) {
@@ -482,13 +484,7 @@ s32 func_00001858(SceNetApctlCtx *ctx, s32 prev, s32 *state, s32 *event) {
     ctx->idle = 1;
     return 0;
 }
-#endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 250
-INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00001858);
-#endif
-
-#if FW_VERSION < 150
 s32 func_00001940(SceNetApctlCtx *ctx) {
     s32 ret;
 
@@ -509,7 +505,7 @@ s32 func_00001940(SceNetApctlCtx *ctx) {
             goto fail;
         }
         bits = 0;
-        ret = func_000023BC(ctx, -1, &bits, 1);
+        ret = func_000023BC(ctx, APCTL_WAIT_IP, &bits, 1);
         if (bits & 0xA) {
             if (bits & 2) {
                 ret = 0x80410A83;
@@ -527,11 +523,11 @@ fail:
 }
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 260
+#if FW_VERSION == 250
 INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00001940);
 #endif
 
-#if FW_VERSION < 150
+#if FW_VERSION < 250
 s32 func_00001A68(SceNetApctlCtx *ctx) {
     s32 ret;
 
@@ -554,7 +550,7 @@ s32 func_00001A68(SceNetApctlCtx *ctx) {
             goto fail;
         }
         bits = 0;
-        ret = func_000023BC(ctx, -1, &bits, 1);
+        ret = func_000023BC(ctx, APCTL_WAIT_IP, &bits, 1);
         if (bits & 0xA) {
             if (bits & 2) {
                 ret = 0x80410A83;
@@ -573,7 +569,7 @@ fail:
 }
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 260
+#if FW_VERSION == 250
 INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00001A68);
 #endif
 
