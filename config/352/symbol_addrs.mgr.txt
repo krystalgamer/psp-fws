@@ -136,3 +136,8 @@ sceKernelPowerUnlock = 0x0000A808; // type:func
 sceKernelPowerLock = 0x0000A810; // type:func
 // shared names (tools/add_version.py) begin
 // shared names (tools/add_version.py) end
+g_mgrCtrl = 0x0000B690;
+g_mgrMsCtrl = 0x0000AFF8; // rom:0xB098
+g_mgrSeed = 0x0000B6C0;
+g_mgrLeafSize = 0x0000B6A8;
+g_mgrIb2Ctrl = 0x0000B708;
