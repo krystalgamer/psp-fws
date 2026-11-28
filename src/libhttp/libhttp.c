@@ -672,9 +672,43 @@ INCLUDE_ASM("nonmatchings/libhttp", sceHttpDeleteConnection);
 INCLUDE_ASM("nonmatchings/libhttp", sceHttpCreateRequest);
 #endif
 
-#if FW_VERSION < 150 || FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/libhttp", sceHttpCreateRequestWithURL);
+#if FW_VERSION < 150
+int sceHttpCreateRequestWithURL(int connection_id, int method, const unsigned char *url, SceULong64 content_length) {
+    SceSize size = 0;
+    SceUriElement100 elem = {0};
+    void *buf;
+    int ret = 0x80431001;
 
+    if (D_0000DCCC.inited != 1) {
+        goto end;
+    }
+    ret = sceUriParse(NULL, url, NULL, &size, 0);
+    if (ret < 0) {
+        goto end;
+    }
+    buf = _sceHttpMallocInternal(size);
+    if (buf == NULL) {
+        ret = 0x80431022;
+        goto fail;
+    }
+    sceUriParse(&elem, url, buf, NULL, size);
+    ret = CreateRequest(connection_id, method, (unsigned char *)elem.path, (unsigned char *)elem.query,
+                        (unsigned char *)elem.fragment, content_length, (unsigned char *)elem.username,
+                        (unsigned char *)elem.password, (unsigned char *)elem.hostname);
+fail:
+    if (buf != NULL) {
+        _sceHttpFreeInternal(buf);
+    }
+end:
+    return ret;
+}
+#endif
+
+#if FW_VERSION >= 282
+INCLUDE_ASM("nonmatchings/libhttp", sceHttpCreateRequestWithURL);
+#endif
+
+#if FW_VERSION < 150 || FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/libhttp", sceHttpDeleteRequest);
 #endif
 
