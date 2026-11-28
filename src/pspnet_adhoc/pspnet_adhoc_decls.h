@@ -48,7 +48,10 @@ typedef char chk_SceNetAdhocStat[(sizeof(SceNetAdhocStat) == ((FW_VERSION < 150)
 #define ADHOC_STAT_PTP_PROBE 10
 #define ADHOC_STAT_PTP_WNDWAIT 11
 #else
+#define ADHOC_STAT_PTP_SENT 12
 #define ADHOC_STAT_PTP_REXMT 28
+#define ADHOC_STAT_PTP_PROBE 29
+#define ADHOC_STAT_PTP_WNDWAIT 30
 #endif
 
 typedef struct {
@@ -280,7 +283,8 @@ struct mbuf {
         struct mbuf *aux;       /* 0x1C */
         s16 unk20;              /* 0x20 rf info (adhoc) */
         s16 unk22;
-        u8 unk24[0xC];
+        u32 unk24;
+        u32 sendtime[2];        /* 0x28 1.50+: u64 first-send time */
     } m_pkthdr;
     union {
         struct m_ext MH_ext;    /* 0x30 (M_EXT) */
@@ -368,6 +372,12 @@ struct sockaddr_dl {
             _sce_pspnet_wakeup(&g_adhocSelChan); \
         } \
     } while (0)
+
+#if FW_VERSION < 150
+#define PTP_SEND_FRAME(pcb, type, seq, m) ptpSendFrame((pcb)->ifp, &(pcb)->laddr, (pcb)->lport, &(pcb)->paddr, (pcb)->pport, type, seq, m)
+#else
+#define PTP_SEND_FRAME(pcb, type, seq, m) ptpSendFrameL(&(pcb)->laddr, (pcb)->lport, &(pcb)->paddr, (pcb)->pport, type, seq, m)
+#endif
 
 extern const SceNetEtherAddr D_000078A4; /* ff:ff:ff:ff:ff:ff */
 extern const SceNetEtherAddr D_000078AC; /* 00:00:00:00:00:00 */
@@ -503,6 +513,7 @@ s32 ptpRecvData(SceNetAdhocDesc *d, void *buf, s32 *len, u32 timeout, s32 nonblo
 void ptpSendCtl(SceNetAdhocPtpPcb *pcb, u8 type);
 s32 ptpSendData(SceNetAdhocDesc *d, const void *data, s32 *len, u32 timeout, s32 nonblock);
 void ptpSendFrame(struct ifnet *ifp, const SceNetEtherAddr *laddr, u16 lport, const SceNetEtherAddr *paddr, u16 pport, u8 type, u32 seq, struct mbuf *m);
+void ptpSendFrameL(const SceNetEtherAddr *laddr, u16 lport, const SceNetEtherAddr *paddr, u16 pport, u8 type, u32 seq, struct mbuf *m);
 void ptpSetRexmt(SceNetAdhocPtpPcb *pcb, s32 a1, s32 a2);
 s32 ptpSetSockbuf(SceNetAdhocPtpPcb *pcb, s32 sndsize, s32 rcvsize);
 void ptpSocketDestroy(SceNetAdhocDesc *d);

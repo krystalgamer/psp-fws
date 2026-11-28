@@ -3678,7 +3678,7 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_000065F8);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00006324);
+INCLUDE_ASM("nonmatchings/pspnet_adhoc", ptpSendFrameL);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
