@@ -1,3 +1,4 @@
+/* cflags[201,250,260]: -Os */
 /* cflags[201]: -Os */
 /* compiler[280]: 1.9.2 */
 /* cflags[280]: -O2 -mext */
