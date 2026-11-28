@@ -916,7 +916,10 @@ struct tcpcb {
     s16 t_dupacks;              /* 0x1E */
     u16 t_peermss;              /* 0x20 */
     u16 t_ourmss;               /* 0x22 */
-    u16 t_segsz;                /* 0x24 */
+#if FW_VERSION >= 250
+    u16 t_unk24;                /* 0x24 SCE 2.50+: new field, t_segsz..t_flags move up 2 bytes */
+#endif
+    u16 t_segsz;                /* 0x24 (2.50+: 0x26) */
     s8 t_force;                 /* 0x26 */
     u16 t_flags;                /* 0x28 */
     struct mbuf *t_template;    /* 0x2C */
@@ -1672,6 +1675,19 @@ typedef u32 tcp_seq;
 #define EISCONN 0x7F
 #define ENOTCONN 0x80
 
+/* bzero: a local memset in 1.x, sceNetBzero from 2.01 */
+#if FW_VERSION >= 201
+#define bzero(p, n) sceNetBzero((p), (n))
+#else
+#define bzero(p, n) func_0002C94C((p), 0, (n))
+#endif
+/* SCE 1.x bzero expands small constant sizes inline; 2.x always calls sceNetBzero */
+#if FW_VERSION >= 201
+#define bzero_i(p, n) sceNetBzero((p), (n))
+#else
+#define bzero_i(p, n) __builtin_memset((p), 0, (n))
+#endif
+
 struct SceTailqHead {
     void *tqh_first;
     void **tqh_last;
@@ -1913,6 +1929,14 @@ struct inpcb *in_pcblookup_port(struct inpcbtable *table, struct in_addr laddr, 
 
 struct in_multi *func_00012108(struct in_addr *ap, struct ifnet *ifp);
 
+struct mbuf *func_00022714(struct tcpcb *tp);
+
+struct mbuf *func_00022714(struct tcpcb *tp);
+
+struct mbuf *func_00022714(struct tcpcb *tp);
+
+struct mbuf *func_00022714(struct tcpcb *tp);
+
 extern void (*const D_0002BB24)(struct sppp *sp); /* lcp.Close (split rodata label) */
 extern void (*const D_0002BBCC)(struct sppp *sp); /* pap.scr (split rodata label) */
 extern s32 D_0002BEC0;
@@ -1921,17 +1945,30 @@ extern s32 D_0002C01C;
 extern s32 D_0002C020;
 extern s32 D_0002C02C;
 extern s32 D_0002C030;
+extern s32 D_0002C034;
+extern s32 D_0002C038;
 extern s32 D_0002C1D8;
 extern s32 D_0002C1DC;
 extern s32 D_0002C1E4;
 extern s32 D_0002C1E8; /* icmperrppslim */
+extern s32 D_0002C1F0;
 extern s32 D_0002C208; /* ip_maxfragpackets */
+extern s32 D_0002C21C[];
 extern s32 D_0002C228;
 extern s32 D_0002C22C;
 extern s32 D_0002C234;
 extern s32 D_0002C240;
 extern s32 D_0002C270; /* icmpreturndatabytes */
 extern s32 D_0002C318;
+extern s32 D_0002C324;
+extern s32 D_0002C334;
+extern s32 D_0002C338;
+extern s32 D_0002C33C;
+extern s32 D_0002C340;
+extern s32 D_0002C344;
+extern s32 D_0002C348;
+extern s32 D_0002C34C;
+extern s32 D_0002C354;
 extern s32 D_0002C358;
 extern s32 D_0002C364;
 extern s32 D_0002C368;
@@ -1943,6 +1980,14 @@ extern s32 D_0002C394;
 extern s32 D_0002C398;
 extern s32 D_0002C39C;
 extern s32 D_0002C3A4;
+extern s32 D_0002C404;
+extern s32 D_0002C414;
+extern s32 D_0002C41C;
+extern s32 D_0002C420;
+extern s32 D_0002C424;
+extern s32 D_0002C428;
+extern s32 D_0002C42C;
+extern s32 D_0002C434;
 extern s32 D_0002C4F0;
 extern s32 D_0002C4F4;
 extern s32 D_0002C504;
@@ -1954,17 +1999,26 @@ extern s32 D_0002C538;
 extern s32 D_0002C53C;
 extern s32 D_0002C540;
 extern s32 D_0002C544;
+extern char D_0002C560[16];
 extern s32 D_0002C57C; /* ip_nfragpackets */
 extern s32 D_0002C588;
 extern s32 D_0002C58C;
 extern s32 D_0002C590;
 extern s32 D_0002C594;
+extern char D_0002C5B0[16];
 extern s32 D_0002C5B4; /* icmpmaskrepl */
 extern struct { struct SceNetInetKeyNode *lh_first; } D_0002C5B8;
+extern s32 D_0002C5C0;
+extern s32 D_0002C5C4;
+extern s32 D_0002C5C8;
+extern s32 D_0002C5CC;
+extern s32 D_0002C5D0;
 extern u8 D_0002C5DC[];
 extern s32 D_0002C610;
 extern s32 D_0002C614_v201;
 extern s32 D_0002C618;
+extern s32 D_0002C6A0;
+extern s32 D_0002C6A8;
 extern u8 D_0002CC50[]; /* pffasttimo_ch */
 extern u8 D_0002CC74[]; /* pfslowtimo_ch */
 extern struct { struct rttimer_queue *lh_first; } D_0002CCB4; /* rttimer_queue_head */
@@ -1982,7 +2036,10 @@ extern struct { struct ipq *lh_first; } D_0002DA48; /* ipq */
 extern u8 D_0002DA50[0x170]; /* icmpstat */
 extern M2C_UNK D_0002DBC8;
 extern struct inpcbtable D_0002DC78;
+extern s32 D_0002DC94;
 extern s32 D_0002DCE4;
+extern s32 D_0002DD74;
+extern struct tcpcb *D_0002DF54;
 extern struct route D_0002E19C;
 extern s32 D_0002E5EC;
 extern s32 D_0002E5F0;
@@ -2232,7 +2289,7 @@ s32 func_0000DF08(s32 type, struct rt_addrinfo *rtinfo, char *cp, struct walkarg
 void func_0000E0EC(s32 cmd, struct ifaddr *ifa, s32 error, struct rtentry *rt);
 void func_0000E3F0(struct ifnet *ifp);
 void func_0000E448(struct ifnet *ifp, s32 what);
-s32 func_0000E4E4(s32, s32);
+void func_0000E4E4(struct ifnet *ifp, s32 what);
 struct mbuf *func_0000E5A4(s32 type, struct rt_addrinfo *rtinfo, char *data, s32 datalen);
 s32 func_0000E928(struct radix_node *rn, void *v);
 void func_0000ED48(void *arg0);
@@ -2253,11 +2310,17 @@ void func_00010528(struct mbuf *m);
 s32 func_000106E0(void);
 s32 func_00010700(void);
 s32 func_00010874(struct socket *so, s32 cmd, void *data, struct ifnet *ifp);
+s32 func_00010C08(struct socket *so, s32 cmd, void *data, struct ifnet *ifp);
 s32 func_00010D50(struct socket *so, s32 cmd, void *data, struct ifnet *ifp);
 s32 func_000123FC(struct in_addr in);
 s32 func_00013114(void *v, struct mbuf *nam);
+s32 func_00013338(void *v, struct mbuf *nam);
+s32 func_0001358C(void *v, struct mbuf *nam);
+void func_000141EC(struct inpcb *inp, struct mbuf *nam);
+void func_00014258(struct inpcb *inp, struct mbuf *nam);
 void func_00014260(struct inpcb *inp, struct mbuf *nam);
 void func_000142CC(struct inpcb *inp, struct mbuf *nam);
+void func_00014480(struct inpcb *inp);
 s32 func_00019A98(void);
 void func_00019C00(struct rtentry *rt);
 s32 func_0001A410(void);
@@ -2270,6 +2333,8 @@ void func_0001F088(struct tcpcb *tp, u8 *cp, s32 cnt, struct tcphdr *th, struct 
 s32 func_000232C0(struct Unk_func_000232C0_0 *arg0);
 s32 func_00023828(struct Unk_func_00023828_0 *arg0);
 void func_00023AB8(struct Unk_func_00023AB8_0 *arg0);
+void func_00023AD4(struct in_addr addr);
+u32 func_00023D1C(void *m, u32 len, u32 addin);
 void func_000244B0(void);
 void func_00025638(struct sppp *sp, u16 proto, u8 type, u8 ident, u16 len, void *data);
 void func_00026FF4(const struct cp *cp, struct sppp *sp, u32 type, u32 id, ...);
@@ -2432,7 +2497,8 @@ s32 sbreserve(struct sockbuf *sb, u32 cc);
 s32 sceKernelGetThreadId(void);
 s32 sceKernelSignalSema(u32, s32);
 s32 sceNetBcmp(const void *b1, const void *b2, u32 len);
-M2C_UNK sceNetBcopy(u8 *, s32, u8);
+void sceNetBcopy(const void *src, void *dst, s32 len);
+void sceNetBzero(void *p, u32 n);
 s32 sceNetConfigAddArp(s32, s32);
 s32 sceNetConfigDelArp(s32, s32);
 s32 sceNetConfigDelDefaultRoute(void);
@@ -2477,8 +2543,10 @@ struct mbuf *sceNetMPrepend(struct mbuf *m, s32 plen, s32 how);
 struct mbuf *sceNetMPullup(struct mbuf *n, s32 len);
 void *sceNetMallocInternal(u32 size);
 u8 *sceNetMemcpy(u8 *dst, const u8 *src, s32 n);
+void *sceNetMemmove(void *dst, const void *src, s32 n);
 M2C_UNK sceNetMemset(M2C_UNK *, M2C_UNK, M2C_UNK);
 u32 sceNetRand(void);
+u8 *sceNetStrcpy(u8 *arg0, u8 *arg1);
 s32 sce_alignbytes(void);
 s32 soabort(struct socket *so);
 s32 soaccept(struct socket *so, struct mbuf *nam);

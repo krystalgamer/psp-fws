@@ -63,7 +63,7 @@ void tcp_segsize(struct tcpcb *tp, int *txsegsizep, int *rxsegsizep)
 }
 #endif
 
-#if FW_VERSION >= 151 && FW_VERSION < 250
+#if FW_VERSION >= 151 && FW_VERSION < 260
 void tcp_segsize(struct tcpcb *tp, int *txsegsizep, int *rxsegsizep)
 {
 	struct inpcb *inp = tp->t_inpcb;
@@ -120,12 +120,29 @@ void tcp_segsize(struct tcpcb *tp, int *txsegsizep, int *rxsegsizep)
 }
 #endif
 
-#if FW_VERSION >= 250 && FW_VERSION < 282
+#if FW_VERSION >= 260 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", tcp_segsize);
 #endif
 
 #if FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", func_000223CC);
+void tcp_setpersist(struct tcpcb *tp) {
+    s32 t = ((tp->t_srtt >> 2) + tp->t_rttvar) >> (1 + 2);
+    s32 nticks;
+
+    if (t < tp->t_rttmin) {
+        t = tp->t_rttmin;
+    }
+    nticks = t * tcp_backoff[tp->t_rxtshift];
+    if (nticks < TCPTV_PERSMIN) {
+        nticks = TCPTV_PERSMIN;
+    } else if (nticks > TCPTV_PERSMAX) {
+        nticks = TCPTV_PERSMAX;
+    }
+    tp->t_timer[TCPT_PERSIST] = pfslowtimo_now + nticks;
+    if (tp->t_rxtshift < TCP_MAXRXTSHIFT) {
+        tp->t_rxtshift++;
+    }
+}
 
 INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", func_00022450);
 #endif
@@ -200,8 +217,74 @@ void tcp_init(void) {
 }
 #endif
 
-#if FW_VERSION >= 250
-INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", tcp_init);
+#if FW_VERSION >= 282
+void tcp_init(void) {
+    s32 max_linkhdr;
+    s32 max_protohdr;
+
+    D_0002C324 = 3;
+    D_0002C334 = 4;
+    tcp_mssdflt = 0x200;
+    D_0002C33C = 3;
+    D_0002DC94 = 0;
+    D_0002C5C0 = 0;
+    D_0002C340 = 1;
+    D_0002C344 = 1;
+    D_0002C348 = 1;
+    D_0002C34C = 1;
+    tcp_init_win = 1;
+    D_0002C5C4 = 0;
+    D_0002C5C8 = 0;
+    D_0002C5CC = 0;
+    tcp_compat_42 = 0;
+    tcp_iss_seq = 0;
+    tcp_now = 0;
+    sceNetMemset(&tcp_stat, 0, sizeof(tcp_stat));
+    func_000244B0();
+    in_pcbinit(&tcbtable, D_0002C354, D_0002C354);
+    tcp_delacks = NULL;
+    sceNetIfhandle_lib_5FB31C72(&max_linkhdr, &max_protohdr, NULL, NULL);
+    if (max_protohdr < (s32)(sizeof(struct ip) + sizeof(struct tcphdr)))
+        max_protohdr = sizeof(struct ip) + sizeof(struct tcphdr);
+    sceNetIfhandle_lib_62B20015(max_linkhdr, max_protohdr, 0, 0);
+    icmp_mtudisc_callback_register((void *)tcp_mtudisc_callback);
+    syn_cache_init();
+}
+#endif
+
+#if FW_VERSION >= 250 && FW_VERSION < 282
+void tcp_init(void) {
+    s32 max_linkhdr;
+    s32 max_protohdr;
+
+    D_0002C404 = 3;
+    D_0002C414 = 4;
+    tcp_mssdflt = 0x200;
+    D_0002C41C = 3;
+    D_0002DD74 = 0;
+    D_0002C6A0 = 0;
+    D_0002C420 = 1;
+    D_0002C424 = 1;
+    D_0002C428 = 1;
+    D_0002C42C = 1;
+    tcp_init_win = 1;
+    D_0002C614_v201 = 0;
+    D_0002C6A8 = 0;
+    tcp_mss_ifmtu = 0;
+    tcp_compat_42 = 0;
+    tcp_iss_seq = 0;
+    tcp_now = 0;
+    sceNetMemset(&tcp_stat, 0, sizeof(tcp_stat));
+    tcp_timer_init();
+    in_pcbinit(&tcbtable, D_0002C434, D_0002C434);
+    tcp_delacks = NULL;
+    sceNetIfhandle_lib_5FB31C72(&max_linkhdr, &max_protohdr, NULL, NULL);
+    if (max_protohdr < (s32)(sizeof(struct ip) + sizeof(struct tcphdr)))
+        max_protohdr = sizeof(struct ip) + sizeof(struct tcphdr);
+    sceNetIfhandle_lib_62B20015(max_linkhdr, max_protohdr, 0, 0);
+    icmp_mtudisc_callback_register((void *)tcp_mtudisc_callback);
+    syn_cache_init();
+}
 #endif
 
 #if FW_VERSION < 282
@@ -377,15 +460,11 @@ s32 tcp_freeq(struct tcpcb *tp) {
 INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", func_00022F68);
 #endif
 
-#if FW_VERSION >= 250 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", tcp_mss_from_peer);
-#endif
-
 #if FW_VERSION < 151
 INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", func_00024C00);
 #endif
 
-#if FW_VERSION < 250
+#if FW_VERSION < 282
 void tcp_mss_from_peer(struct tcpcb *tp, s32 offer) {
     struct socket *so;
     struct rtentry *rt;
@@ -427,9 +506,7 @@ void tcp_mss_from_peer(struct tcpcb *tp, s32 offer) {
         tp->snd_ssthresh = max(2 * mss, rt->rt_rmx.rmx_ssthresh);
     }
 }
-#endif
-
-#if FW_VERSION >= 282
+#else
 s32 func_000232C0(struct Unk_func_000232C0_0 *arg0) {
     s32 var_v0;
     struct Unk_func_000232C0_temp_v1 *temp_v1;
@@ -461,7 +538,47 @@ s32 func_000232C0(struct Unk_func_000232C0_0 *arg0) {
 
 INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", func_00023344);
 
-INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", func_000235D0);
+void tcp_mss_from_peer(struct tcpcb *tp, s32 offer) {
+    struct socket *so;
+    struct rtentry *rt;
+    u32 bufsize;
+    s32 mss;
+
+    so = NULL;
+    rt = NULL;
+    if (tp->t_inpcb) {
+        so = tp->t_inpcb->inp_socket;
+        rt = in_pcbrtentry(tp->t_inpcb);
+    }
+    mss = tcp_mssdflt;
+    if (offer) {
+        mss = offer;
+    }
+    mss = max(mss, 32);
+    tp->t_peermss = mss;
+    mss -= func_00023828(tp);
+    if (tp->t_inpcb) {
+        mss -= ip_optlen(tp->t_inpcb);
+    }
+    if (rt != NULL && rt->rt_rmx.rmx_sendpipe != 0) {
+        bufsize = rt->rt_rmx.rmx_sendpipe;
+    } else {
+        bufsize = so->so_snd.sb_hiwat;
+    }
+    if (bufsize < mss) {
+        mss = bufsize;
+    } else {
+        bufsize = roundup(bufsize, mss);
+        if (bufsize > 0x40000) {
+            bufsize = 0x40000;
+        }
+        (void)sbreserve(&so->so_snd, bufsize);
+    }
+    tp->t_segsz = mss;
+    if (rt != NULL && rt->rt_rmx.rmx_ssthresh) {
+        tp->snd_ssthresh = max(2 * mss, rt->rt_rmx.rmx_ssthresh);
+    }
+}
 #endif
 
 void tcp_rmx_rtt(struct tcpcb *tp) {
@@ -508,7 +625,8 @@ s32 tcp_optlen(void *arg0) {
 s32 func_00023828(struct Unk_func_00023828_0 *arg0) {
     return (((arg0->unk2A & 0x188) ^ 0x180) != 0) ? 0 : 0xC;
 }
-#else
+#endif
+
 struct tcpcb *tcp_drop(struct tcpcb *tp, s32 errno) {
     struct socket *so;
 
@@ -530,11 +648,6 @@ struct tcpcb *tcp_drop(struct tcpcb *tp, s32 errno) {
     so->so_error = errno;
     return tcp_close(tp);
 }
-#endif
-
-#if FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", tcp_drop);
-#endif
 
 INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", tcp_drain);
 
@@ -555,7 +668,7 @@ void tcp_notify(struct inpcb *inp, s32 error) {
     sowwakeup(so);
 }
 
-#if FW_VERSION < 250
+#if FW_VERSION < 282
 void tcp_quench(struct inpcb *inp, s32 errno)
 {
 	struct tcpcb *tp = (struct tcpcb *)inp->inp_ppcb;
@@ -563,13 +676,7 @@ void tcp_quench(struct inpcb *inp, s32 errno)
 	if (tp)
 		tp->snd_cwnd = tp->t_segsz;
 }
-#endif
 
-#if FW_VERSION >= 250 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", tcp_quench);
-#endif
-
-#if FW_VERSION < 282
 void tcp_mtudisc_callback(struct in_addr addr) {
     in_pcbnotifyall(&tcbtable, addr, 0x7A, tcp_mtudisc);
 }
@@ -635,12 +742,34 @@ void func_00023AB8(struct Unk_func_00023AB8_0 *arg0) {
     }
 }
 
-INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", func_00023AD4);
+void tcp_mtudisc_callback(struct in_addr addr) {
+    in_pcbnotifyall(&tcbtable, addr, 0x7A, tcp_mtudisc);
+}
 
-INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", tcp_mtudisc);
+void tcp_mtudisc(struct inpcb *inp, s32 errno) {
+    struct tcpcb *tp = (struct tcpcb *)inp->inp_ppcb;
+    struct rtentry *rt = in_pcbrtentry(inp);
+
+    if (tp != 0) {
+        if (rt != 0) {
+            if ((rt->rt_flags & RTF_HOST) == 0) {
+                in_rtchange(inp, errno);
+                if ((rt = in_pcbrtentry(inp)) == 0) {
+                    return;
+                }
+            }
+            if (rt->rt_rmx.rmx_mtu != 0) {
+                tp->snd_cwnd = TCP_INITIAL_WINDOW(tcp_init_win, rt->rt_rmx.rmx_mtu);
+            }
+        }
+        tp->snd_nxt = tp->snd_una;
+        tcp_output(tp);
+    }
+}
 
 INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", func_00023BD8);
-#else
+#endif
+
 void tcp_established(struct tcpcb *tp) {
     struct socket *so;
     struct rtentry *rt;
@@ -667,11 +796,6 @@ void tcp_established(struct tcpcb *tp) {
         (void)sbreserve(&so->so_rcv, bufsize);
     }
 }
-#endif
-
-#if FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", tcp_established);
-#endif
 
 #if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", func_00023D1C);
@@ -749,7 +873,7 @@ done:
     _sce_pspnet_splunlock(s);
 }
 
-#if FW_VERSION < 250
+#if FW_VERSION < 282
 struct tcpcb *tcp_timers(struct tcpcb *tp, s32 timer) {
     s16 rto;
 
@@ -851,17 +975,110 @@ struct tcpcb *tcp_timers(struct tcpcb *tp, s32 timer) {
     }
     return (tp);
 }
+#else
+struct tcpcb *tcp_timers(struct tcpcb *tp, s32 timer) {
+    s16 rto;
+
+    switch (timer) {
+    case 3:
+        if (tp->t_state != 10 &&
+            ((tcp_maxidle == 0) || (tp->t_idle <= tcp_maxidle)))
+            tp->t_timer[3] = pfslowtimo_now + tcp_keepintvl;
+        else
+            tp = tcp_close(tp);
+        break;
+
+    case 0:
+        if (++tp->t_rxtshift > 12) {
+            tp->t_rxtshift = 12;
+            tcp_stat.tcps_timeoutdrop++;
+            tp = tcp_drop(tp, tp->t_softerror ? tp->t_softerror : 0x74);
+            break;
+        }
+        tcp_stat.tcps_rexmttimeo++;
+        rto = ((tp->t_srtt >> 3) + tp->t_rttvar) >> 2;
+        if (rto < tp->t_rttmin)
+            rto = tp->t_rttmin;
+        TCPT_RANGESET(tp->t_rxtcur, rto * tcp_backoff[tp->t_rxtshift], tp->t_rttmin, 128);
+        tp->t_timer[0] = pfslowtimo_now + tp->t_rxtcur;
+        if (ip_mtudisc && tp->t_rxtshift > 12 / 6) {
+            tcp_stat.tcps_pmtublackhole++;
+            if (tp->t_inpcb)
+                tp->t_mtudisc = 0;
+        }
+        if (tp->t_rxtshift > 12 / 4) {
+            if (tp->t_inpcb)
+                func_00014480(tp->t_inpcb);
+            tp->t_rttvar += (tp->t_srtt >> 3);
+            tp->t_srtt = 0;
+        }
+        tp->snd_nxt = tp->snd_una;
+        tp->t_rtt = 0;
+        if (tp->t_state == 2)
+            tp->t_flags |= 0x400;
+        {
+            u32 win = min(tp->snd_wnd, tp->snd_cwnd) / 2 / tp->t_segsz;
+            if (win < 2)
+                win = 2;
+            tp->snd_cwnd = tp->t_segsz;
+            tp->snd_ssthresh = win * tp->t_segsz;
+            tp->t_dupacks = 0;
+        }
+        (void)tcp_output(tp);
+        break;
+
+    case 1:
+        rto = ((tp->t_srtt >> 3) + tp->t_rttvar) >> 2;
+        if (rto < tp->t_rttmin)
+            rto = tp->t_rttmin;
+        if (tp->t_rxtshift == 12 &&
+            (tp->t_idle >= tcp_maxpersistidle ||
+             tp->t_idle >= rto * tcp_totbackoff)) {
+            tcp_stat.tcps_persistdrops++;
+            tp = tcp_drop(tp, 0x74);
+            break;
+        }
+        tcp_stat.tcps_persisttimeo++;
+        tcp_setpersist(tp);
+        tp->t_force = 1;
+        (void)tcp_output(tp);
+        tp->t_force = 0;
+        break;
+
+    case 2: {
+        struct socket *so = NULL;
+
+        tcp_stat.tcps_keeptimeo++;
+        if (TCPS_HAVEESTABLISHED(tp->t_state) == 0)
+            goto dropit;
+        if (tp->t_inpcb)
+            so = tp->t_inpcb->inp_socket;
+        if (so->so_options & 0x8 && tp->t_state <= 5) {
+            if ((tcp_maxidle > 0) &&
+                (tp->t_idle >= tcp_keepidle + tcp_maxidle))
+                goto dropit;
+            tcp_stat.tcps_keepprobe++;
+            if (tcp_compat_42) {
+                (void)tcp_respond(tp, tp->t_template, (struct mbuf *)NULL, NULL,
+                                    tp->rcv_nxt - 1, tp->snd_una - 1, 0);
+            } else {
+                (void)tcp_respond(tp, tp->t_template, (struct mbuf *)NULL, NULL,
+                                    tp->rcv_nxt, tp->snd_una - 1, 0);
+            }
+            tp->t_timer[2] = pfslowtimo_now + tcp_keepintvl;
+        } else
+            tp->t_timer[2] = pfslowtimo_now + tcp_keepidle;
+        break;
+    }
+    dropit:
+        tcp_stat.tcps_keepdrops++;
+        tp = tcp_drop(tp, 0x74);
+        break;
+    }
+    return (tp);
+}
 #endif
 
-#if FW_VERSION >= 250 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", tcp_timers);
-#endif
-
-#if FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", func_00023F70);
-#endif
-
-#if FW_VERSION < 250
 void tcp_fasttimo(void) {
     s32 s = _sce_pspnet_spllock();
     struct tcpcb *tp, *next;
@@ -872,9 +1089,6 @@ void tcp_fasttimo(void) {
     }
     _sce_pspnet_splunlock(s);
 }
-#else
-INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", tcp_fasttimo);
-#endif
 
 void tcp_canceltimers(u8 *arg0) {
     s32 i;
@@ -896,11 +1110,11 @@ void tcp_timer_init(void) {
 }
 #else
 void func_000244B0(void) {
-    D_0002C358 = 0x3840;
-    D_0002C39C = 0x1FF;
+    tcp_keepidle = 0x3840;
+    tcp_totbackoff = 0x1FF;
     tcp_keepintvl = 0x96;
     tcp_keepcnt = 8;
-    D_0002C364 = 0x3840;
+    tcp_maxpersistidle = 0x3840;
     tcp_maxidle = 0;
     syn_cache_last = 0;
 }
@@ -1294,7 +1508,7 @@ release:
 }
 #endif
 
-#if FW_VERSION == 201
+#if FW_VERSION >= 201 && FW_VERSION < 271
 s32 tcp_usrreq(struct socket *so, s32 req, struct mbuf *m, struct mbuf *nam, struct mbuf *control) {
     struct inpcb *inp;
     struct tcpcb *tp = NULL;
@@ -1488,8 +1702,392 @@ release:
 }
 #endif
 
-#if FW_VERSION >= 250
-INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", tcp_usrreq);
+#if FW_VERSION >= 282
+s32 tcp_usrreq(struct socket *so, s32 req, struct mbuf *m, struct mbuf *nam, struct mbuf *control) {
+    struct inpcb *inp;
+    struct tcpcb *tp = NULL;
+    s32 s;
+    s32 error = 0;
+    s32 family;
+
+    family = so->so_proto->pr_domain->dom_family;
+    if (req == 11) {
+        switch (family) {
+        case AF_INET:
+            return (func_00010C08(so, (s32)m, (void *)nam, (struct ifnet *)control));
+        default:
+            return 0x6A;
+        }
+    }
+    if (req == 22) {
+        switch (family) {
+        case AF_INET:
+            in_purgeif((struct ifnet *)control);
+            in_pcbpurgeif(&tcbtable, (struct ifnet *)control);
+            break;
+        default:
+            return (0x6A);
+        }
+        return (0);
+    }
+    s = _sce_pspnet_spllock();
+    switch (family) {
+    case AF_INET:
+        inp = (struct inpcb *)so->so_pcb;
+        break;
+    default:
+        _sce_pspnet_splunlock(s);
+        return 0x6A;
+    }
+    if (inp == 0 && req != 0) {
+        error = 0x16;
+        goto release;
+    }
+    if (inp)
+        tp = (struct tcpcb *)inp->inp_ppcb;
+
+    switch (req) {
+    case 0:
+        if (inp != 0) {
+            error = 0x7F;
+            break;
+        }
+        error = tcp_attach(so);
+        if (error)
+            break;
+        if ((so->so_options & 0x80) && so->so_linger == 0)
+            so->so_linger = 120;
+        break;
+    case 1:
+        tp = tcp_disconnect(tp);
+        break;
+    case 2:
+        switch (family) {
+        case AF_INET:
+            error = in_pcbbind(inp, nam);
+            break;
+        }
+        break;
+    case 3:
+        if (inp && inp->inp_lport == 0) {
+            error = in_pcbbind(inp, (struct mbuf *)0);
+            if (error)
+                break;
+        }
+        tp->t_state = 1;
+        break;
+    case 4:
+        if (inp) {
+            if (inp->inp_lport == 0) {
+                error = in_pcbbind(inp, (struct mbuf *)0);
+                if (error)
+                    break;
+            }
+            error = func_0001358C(inp, nam);
+        }
+        if (error)
+            break;
+        tp->t_template = func_00022714(tp);
+        if (tp->t_template == 0) {
+            if (inp)
+                in_pcbdisconnect(inp);
+            error = 0x69;
+            break;
+        }
+        while (tp->request_r_scale < 14 &&
+               (0xFFFF << tp->request_r_scale) < so->so_rcv.sb_hiwat)
+            tp->request_r_scale++;
+        func_00005778(so);
+        tcp_stat.tcps_connattempt++;
+        tp->t_state = 2;
+        tp->t_timer[2] = pfslowtimo_now + 150;
+        tp->iss = func_00023D1C(tp, sizeof(struct tcpcb), 0);
+        tp->snd_una = tp->snd_nxt = tp->snd_max = tp->snd_up = tp->snd_recover = tp->iss;
+        error = tcp_output(tp);
+        break;
+    case 17:
+        error = 0x5F;
+        break;
+    case 6:
+        tp = tcp_disconnect(tp);
+        break;
+    case 5:
+        if (inp)
+            func_00014258(inp, nam);
+        break;
+    case 7:
+        func_0000588C(so);
+        tp = tcp_usrclosed(tp);
+        if (tp)
+            error = tcp_output(tp);
+        break;
+    case 8:
+        (void)tcp_output(tp);
+        break;
+    case 9:
+        if (control && control->m_len) {
+            sceNetMFreem(control);
+            sceNetMFreem(m);
+            error = 0x16;
+            break;
+        }
+        sbappend(&so->so_snd, m);
+        error = tcp_output(tp);
+        break;
+    case 10:
+        tp = tcp_drop(tp, 0x71);
+        break;
+    case 12:
+        _sce_pspnet_splunlock(s);
+        return (0);
+    case 13:
+        if (control && control->m_len) {
+            sceNetMFreem(control);
+            sceNetMFreem(m);
+            error = 0x16;
+            break;
+        }
+        if ((so->so_oobmark == 0 &&
+             (so->so_state & SS_RCVATMARK) == 0) ||
+            so->so_options & 0x100 ||
+            tp->t_oobflags & 0x2) {
+            error = 0x16;
+            break;
+        }
+        if ((tp->t_oobflags & 0x1) == 0) {
+            error = 0xB;
+            break;
+        }
+        m->m_len = 1;
+        *mtod(m, char *) = tp->t_iobc;
+        if (((s32)nam & 0x2) == 0)
+            tp->t_oobflags ^= (0x1 | 0x2);
+        break;
+    case 14:
+        if (sbspace(&so->so_snd) < -512) {
+            sceNetMFreem(m);
+            error = 0x69;
+            break;
+        }
+        sbappend(&so->so_snd, m);
+        tp->snd_up = tp->snd_una + so->so_snd.sb_cc;
+        tp->t_force = 1;
+        error = tcp_output(tp);
+        tp->t_force = 0;
+        break;
+    case 15:
+        if (inp)
+            func_000141EC(inp, nam);
+        break;
+    case 16:
+        if (inp)
+            func_00014258(inp, nam);
+        break;
+    case 19:
+        tp = tcp_timers(tp, (s32)nam);
+        break;
+    default:
+        break;
+    }
+
+release:
+    _sce_pspnet_splunlock(s);
+    return (error);
+}
+#endif
+
+#if FW_VERSION == 271
+s32 tcp_usrreq(struct socket *so, s32 req, struct mbuf *m, struct mbuf *nam, struct mbuf *control) {
+    struct inpcb *inp;
+    struct tcpcb *tp = NULL;
+    s32 s;
+    s32 error = 0;
+    s32 family;
+
+    family = so->so_proto->pr_domain->dom_family;
+    if (req == 11) {
+        switch (family) {
+        case AF_INET:
+            return (func_00010D50(so, (s32)m, (void *)nam, (struct ifnet *)control));
+        default:
+            return 0x6A;
+        }
+    }
+    if (req == 22) {
+        switch (family) {
+        case AF_INET:
+            in_purgeif((struct ifnet *)control);
+            in_pcbpurgeif(&tcbtable, (struct ifnet *)control);
+            break;
+        default:
+            return (0x6A);
+        }
+        return (0);
+    }
+    s = _sce_pspnet_spllock();
+    switch (family) {
+    case AF_INET:
+        inp = (struct inpcb *)so->so_pcb;
+        break;
+    default:
+        _sce_pspnet_splunlock(s);
+        return 0x6A;
+    }
+    if (inp == 0 && req != 0) {
+        error = 0x16;
+        goto release;
+    }
+    if (inp)
+        tp = (struct tcpcb *)inp->inp_ppcb;
+
+    switch (req) {
+    case 0:
+        if (inp != 0) {
+            error = 0x7F;
+            break;
+        }
+        error = tcp_attach(so);
+        if (error)
+            break;
+        if ((so->so_options & 0x80) && so->so_linger == 0)
+            so->so_linger = 120;
+        break;
+    case 1:
+        tp = tcp_disconnect(tp);
+        break;
+    case 2:
+        switch (family) {
+        case AF_INET:
+            error = in_pcbbind(inp, nam);
+            break;
+        }
+        break;
+    case 3:
+        if (inp && inp->inp_lport == 0) {
+            error = in_pcbbind(inp, (struct mbuf *)0);
+            if (error)
+                break;
+        }
+        tp->t_state = 1;
+        break;
+    case 4:
+        if (inp) {
+            if (inp->inp_lport == 0) {
+                error = in_pcbbind(inp, (struct mbuf *)0);
+                if (error)
+                    break;
+            }
+            error = in_pcbconnect(inp, nam);
+        }
+        if (error)
+            break;
+        tp->t_template = tcp_template(tp);
+        if (tp->t_template == 0) {
+            if (inp)
+                in_pcbdisconnect(inp);
+            error = 0x69;
+            break;
+        }
+        while (tp->request_r_scale < 14 &&
+               (0xFFFF << tp->request_r_scale) < so->so_rcv.sb_hiwat)
+            tp->request_r_scale++;
+        soisconnecting(so);
+        tcp_stat.tcps_connattempt++;
+        tp->t_state = 2;
+        tp->t_timer[2] = pfslowtimo_now + 150;
+        tp->iss = func_00023D1C(tp, sizeof(struct tcpcb), 0);
+        tp->snd_una = tp->snd_nxt = tp->snd_max = tp->snd_up = tp->snd_recover = tp->iss;
+        error = tcp_output(tp);
+        break;
+    case 17:
+        error = 0x5F;
+        break;
+    case 6:
+        tp = tcp_disconnect(tp);
+        break;
+    case 5:
+        if (inp)
+            func_000142CC(inp, nam);
+        break;
+    case 7:
+        socantsendmore(so);
+        tp = tcp_usrclosed(tp);
+        if (tp)
+            error = tcp_output(tp);
+        break;
+    case 8:
+        (void)tcp_output(tp);
+        break;
+    case 9:
+        if (control && control->m_len) {
+            sceNetMFreem(control);
+            sceNetMFreem(m);
+            error = 0x16;
+            break;
+        }
+        sbappend(&so->so_snd, m);
+        error = tcp_output(tp);
+        break;
+    case 10:
+        tp = tcp_drop(tp, 0x71);
+        break;
+    case 12:
+        _sce_pspnet_splunlock(s);
+        return (0);
+    case 13:
+        if (control && control->m_len) {
+            sceNetMFreem(control);
+            sceNetMFreem(m);
+            error = 0x16;
+            break;
+        }
+        if ((so->so_oobmark == 0 &&
+             (so->so_state & SS_RCVATMARK) == 0) ||
+            so->so_options & 0x100 ||
+            tp->t_oobflags & 0x2) {
+            error = 0x16;
+            break;
+        }
+        if ((tp->t_oobflags & 0x1) == 0) {
+            error = 0xB;
+            break;
+        }
+        m->m_len = 1;
+        *mtod(m, char *) = tp->t_iobc;
+        if (((s32)nam & 0x2) == 0)
+            tp->t_oobflags ^= (0x1 | 0x2);
+        break;
+    case 14:
+        if (sbspace(&so->so_snd) < -512) {
+            sceNetMFreem(m);
+            error = 0x69;
+            break;
+        }
+        sbappend(&so->so_snd, m);
+        tp->snd_up = tp->snd_una + so->so_snd.sb_cc;
+        tp->t_force = 1;
+        error = tcp_output(tp);
+        tp->t_force = 0;
+        break;
+    case 15:
+        if (inp)
+            func_00014260(inp, nam);
+        break;
+    case 16:
+        if (inp)
+            func_000142CC(inp, nam);
+        break;
+    case 19:
+        tp = tcp_timers(tp, (s32)nam);
+        break;
+    default:
+        break;
+    }
+
+release:
+    _sce_pspnet_splunlock(s);
+    return (error);
+}
 #endif
 
 #if FW_VERSION >= 250 && FW_VERSION < 282
@@ -1589,7 +2187,6 @@ s32 tcp_ctloutput(s32 op, struct socket *so, s32 level, s32 optname, struct mbuf
 INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", func_000249FC);
 #endif
 
-#if FW_VERSION < 271
 s32 tcp_attach(struct socket *so) {
     struct tcpcb *tp;
     struct inpcb *inp;
@@ -1623,9 +2220,6 @@ s32 tcp_attach(struct socket *so) {
     tp->t_state = 0;
     return (0);
 }
-#else
-INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", tcp_attach);
-#endif
 
 struct tcpcb *tcp_disconnect(struct tcpcb *tp) {
     struct socket *so;
@@ -1881,8 +2475,19 @@ void func_000277E0(struct sppp *sp) {
     }
 }
 
-#if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", func_00029330);
+#if FW_VERSION >= 151 && FW_VERSION < 282
+s32 func_00029330(void *arg0) {
+    s32 temp_a0;
+    s32 var_s1;
+
+    var_s1 = 0;
+    temp_a0 = _sce_pspnet_spllock();
+    if (M2C_FIELD(arg0, s32 *, 0x130) == 0) {
+        var_s1 = M2C_FIELD(arg0, s32 *, 0xD4) == 0;
+    }
+    _sce_pspnet_splunlock(temp_a0);
+    return var_s1;
+}
 #endif
 
 #if FW_VERSION < 151
@@ -1900,36 +2505,13 @@ s32 func_00029330(void *arg0) {
 }
 #endif
 
-#if FW_VERSION >= 151 && FW_VERSION < 201
-s32 func_00029330(void *arg0) {
-    s32 temp_a0;
-    s32 var_s1;
-
-    var_s1 = 0;
-    temp_a0 = _sce_pspnet_spllock();
-    if (M2C_FIELD(arg0, s32 *, 0x130) == 0) {
-        var_s1 = M2C_FIELD(arg0, s32 *, 0xD4) == 0;
-    }
-    _sce_pspnet_splunlock(temp_a0);
-    return var_s1;
-}
-#endif
-
 #if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", func_00029384);
-#endif
 
-#if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", func_00027C20);
-#endif
-
-#if FW_VERSION < 201
 void func_00027C20(void) {
 
 }
-#endif
-
-#if FW_VERSION >= 282
+#else
 s32 func_00027830(struct Unk_func_00027830_0 *arg0) {
     s32 temp_a0;
     s32 var_s1;
@@ -1969,7 +2551,6 @@ void sppp_lcp_up(struct sppp *sp) {
     }
 }
 
-#if FW_VERSION < 271
 void sppp_lcp_down(struct sppp *sp) {
     const struct cp *cp = &lcp;
 
@@ -2000,11 +2581,7 @@ void sppp_lcp_down(struct sppp *sp) {
     }
     ((struct ifnet *)sp)->if_flags &= ~0x40; /* IFF_RUNNING */
 }
-#else
-INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", sppp_lcp_down);
-#endif
 
-#if FW_VERSION < 271
 void sppp_lcp_open(struct sppp *sp) {
     const struct cp *cp = &lcp;
 
@@ -2033,9 +2610,6 @@ void sppp_lcp_open(struct sppp *sp) {
         break;
     }
 }
-#else
-INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", sppp_lcp_open);
-#endif
 
 void sppp_lcp_close(struct sppp *sp) {
     const struct cp *cp = &lcp;
@@ -2072,7 +2646,6 @@ void sppp_lcp_TO(void *arg0) {
     sppp_to_event(&lcp, arg0);
 }
 
-#if FW_VERSION < 271
 void sppp_lcp_RCN_rej(struct sppp *sp, u8 *h, s32 len) {
     u8 *buf, *p;
 
@@ -2095,9 +2668,6 @@ void sppp_lcp_RCN_rej(struct sppp *sp, u8 *h, s32 len) {
     }
     sceNetFreeInternal(buf);
 }
-#else
-INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", sppp_lcp_RCN_rej);
-#endif
 
 void sppp_lcp_tld(struct sppp *sp) {
     s32 i;
@@ -2270,7 +2840,6 @@ void sppp_ipcp_TO(void *arg0) {
     sppp_to_event(&ipcp, arg0);
 }
 
-#if FW_VERSION < 271
 void sppp_ipcp_RCN_rej(struct sppp *sp, u8 *h, s32 len) {
     u8 *p;
 
@@ -2290,9 +2859,6 @@ void sppp_ipcp_RCN_rej(struct sppp *sp, u8 *h, s32 len) {
         }
     }
 }
-#else
-INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", sppp_ipcp_RCN_rej);
-#endif
 
 void sppp_ipcp_tlu(struct sppp *sp) {
     struct ifnet *ifp = (struct ifnet *)sp;
@@ -2308,37 +2874,23 @@ void sppp_ipcp_tlu(struct sppp *sp) {
     }
 }
 
-#if FW_VERSION >= 201
-INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", func_00028758);
-#else
 void func_00028758(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x270) = (s32) (M2C_FIELD(arg0, s32 *, 0x270) & ~0x10);
 }
-#endif
 
-#if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", func_00028768);
-#endif
-
-#if FW_VERSION < 201
+#if FW_VERSION < 282
 void func_00028768(struct Unk_func_00028768_0 *arg0) {
     arg0->unk254 |= 2;
 }
-#endif
-
-#if FW_VERSION >= 282
+#else
 void func_00028768(struct Unk_func_00028768_0 *arg0) {
     arg0->unk254 = (s32) (arg0->unk254 | 2);
 }
 #endif
 
-#if FW_VERSION >= 201
-INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", func_00028778);
-#else
 void func_00028778(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x254) = (s32) (M2C_FIELD(arg0, s32 *, 0x254) & ~2);
 }
-#endif
 
 #if FW_VERSION == 103
 INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", func_0002A2DC);
@@ -2358,11 +2910,7 @@ void sppp_pap_open(struct sppp *sp) {
 INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", sppp_pap_open);
 #endif
 
-#if FW_VERSION == 103 || FW_VERSION >= 201
-INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", func_000287F4);
-#endif
-
-#if FW_VERSION >= 150 && FW_VERSION < 201
+#if FW_VERSION >= 103
 void func_000287F4(void *arg0) {
     if (M2C_FIELD(arg0, s32 *, 0x188) != 2) {
         sppp_cp_change_state(&pap, arg0, STATE_CLOSED);
@@ -2370,9 +2918,7 @@ void func_000287F4(void *arg0) {
     _sce_pspnet_callout_stop(arg0 + 0x1FC);
     M2C_FIELD(arg0, s32 *, 0x254) = (s32) (M2C_FIELD(arg0, s32 *, 0x254) & ~4);
 }
-#endif
-
-#if FW_VERSION < 103
+#else
 void func_000287F4(void *arg0) {
     if (M2C_FIELD(arg0, s32 *, 0x188) != 2) {
         sppp_cp_change_state(&pap, arg0, STATE_CLOSED);
@@ -2380,47 +2926,31 @@ void func_000287F4(void *arg0) {
 }
 #endif
 
-#if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", func_0002884C);
-#endif
-
-#if FW_VERSION < 201
+#if FW_VERSION < 282
 void func_0002884C(void) {
 
 }
-#endif
-
-#if FW_VERSION >= 282
+#else
 void func_0002884C(void) {
 }
 #endif
 
 INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", sppp_pap_TO);
 
-#if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", func_000288E4);
-#endif
-
-#if FW_VERSION < 201
+#if FW_VERSION < 282
 void func_000288E4(void) {
 
 }
-#endif
-
-#if FW_VERSION >= 282
+#else
 void func_000288E4(void) {
 }
 #endif
 
-#if FW_VERSION < 271
 void sppp_pap_tld(struct sppp *sp) {
     _sce_pspnet_callout_stop(sp->ch[IDX_PAP]);
     sp->lcp_protos &= ~(1 << IDX_PAP);
     D_0002BB24(sp);
 }
-#else
-INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", sppp_pap_tld);
-#endif
 
 void sppp_pap_scr(struct sppp *sp) {
     u8 idlen, pwdlen;
@@ -2439,21 +2969,11 @@ INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", func_0002A50C);
 INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", func_0002A51C);
 #endif
 
-#if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", func_0002A538);
-#endif
-
-#if FW_VERSION >= 150 && FW_VERSION < 201
+#if FW_VERSION >= 150 && FW_VERSION < 282
 void func_0002A538(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x254) = (s32) (M2C_FIELD(arg0, s32 *, 0x254) | 8);
 }
-#endif
 
-#if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", func_0002A548);
-#endif
-
-#if FW_VERSION >= 150 && FW_VERSION < 201
 void func_0002A548(void *arg0) {
     if (M2C_FIELD(arg0, s32 *, 0x18C) != 2) {
         sppp_cp_change_state(&chap, arg0, STATE_CLOSED);
@@ -2463,22 +2983,22 @@ void func_0002A548(void *arg0) {
 }
 #endif
 
-#if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", func_0002A4DC);
-#endif
-
-#if FW_VERSION < 201
+#if FW_VERSION < 282
 void func_0002A4DC(void) {
 
 }
-#endif
-
-#if FW_VERSION >= 282
+#else
 void func_000289B0(struct Unk_func_000289B0_0 *arg0) {
     arg0->unk254 = (s32) (arg0->unk254 | 8);
 }
 
-INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", func_000289C0);
+void func_000289C0(void *arg0) {
+    if (M2C_FIELD(arg0, s32 *, 0x18C) != 2) {
+        sppp_cp_change_state(&chap, arg0, STATE_CLOSED);
+    }
+    _sce_pspnet_callout_stop(arg0 + 0x220);
+    M2C_FIELD(arg0, s32 *, 0x254) = (s32) (M2C_FIELD(arg0, s32 *, 0x254) & ~8);
+}
 #endif
 
 #if FW_VERSION < 103
@@ -2500,42 +3020,26 @@ void func_00028A18(void) {
 
 INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", func_00028A20);
 
-#if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", func_0002A62C);
-#endif
-
-#if FW_VERSION < 201
+#if FW_VERSION < 282
 void func_0002A62C(void) {
 
 }
-#endif
-
-#if FW_VERSION >= 282
+#else
 void func_00028B30(void) {
 }
 #endif
 
-#if FW_VERSION < 271
 void func_00028B38(struct sppp *sp) {
     _sce_pspnet_callout_stop(sp->ch[IDX_CHAP]);
     sp->lcp_protos &= ~(1 << IDX_CHAP);
     D_0002BB24(sp);
 }
-#else
-INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", func_00028B38);
-#endif
 
-#if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", func_0002A67C);
-#endif
-
-#if FW_VERSION < 201
+#if FW_VERSION < 282
 void func_0002A67C(void) {
 
 }
-#endif
-
-#if FW_VERSION >= 282
+#else
 void func_00028B7C(void) {
 }
 #endif
@@ -2643,11 +3147,7 @@ INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", func_00029F28);
 INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", func_0002BD24);
 #endif
 
-#if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", func_0002BDB4);
-#endif
-
-#if FW_VERSION < 201
+#if FW_VERSION < 282
 void func_0002BDB4(void *arg0) {
     if (M2C_FIELD(arg0, s32 *, 0x4BC) < 3) {
 
@@ -2656,9 +3156,7 @@ void func_0002BDB4(void *arg0) {
         _sce_pspnet_callout_reset(arg0 + 0x4D8, 2, &func_00029280, arg0);
     }
 }
-#endif
 
-#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", func_0002BE00);
 #else
 INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", func_00029AC0);

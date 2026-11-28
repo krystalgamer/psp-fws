@@ -21,7 +21,7 @@ INCLUDE_ASM("nonmatchings/pspnet_inet_api", sceNetInetSocket);
 #endif
 
 #if FW_VERSION >= 282
-s32 func_00005B8C(void) {
+s32 sce_alignbytes(void) {
     return 3;
 }
 
@@ -173,34 +173,48 @@ s32 sockargs(struct mbuf **mp, const void *buf, u32 buflen, s32 type) {
     return 0;
 }
 #else
-INCLUDE_ASM("nonmatchings/pspnet_inet_api", sockargs);
+s32 sockargs(struct mbuf **mp, const void *buf, u32 buflen, s32 type) {
+    struct sockaddr *sa;
+    struct mbuf *m;
+
+    if (type == MT_SONAME && buflen > 255) {
+        return 22; /* EINVAL */
+    }
+    m = sceNetMGet(M_WAITOK, type);
+    if (m == NULL) {
+        return 12; /* ENOMEM */
+    }
+    if (buflen > MLEN) {
+        MEXTMALLOC(m, buflen, M_WAITOK);
+        if ((m->m_flags & M_EXT) == 0) {
+            sceNetMFree(m);
+            return 12;
+        }
+    }
+    m->m_len = buflen;
+    sceNetBcopy(buf, mtod(m, u8 *), buflen);
+    *mp = m;
+    if (type == MT_SONAME) {
+        sa = mtod(m, struct sockaddr *);
+        sa->sa_len = buflen;
+    }
+    return 0;
+}
 #endif
 
 INCLUDE_ASM("nonmatchings/pspnet_inet_api", sceNetInetSelect);
 
 INCLUDE_ASM("nonmatchings/pspnet_inet_api", func_00007914);
 
-#if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet_api", func_000076C4);
-#endif
-
-#if FW_VERSION < 201
+#if FW_VERSION < 282
 void func_000076C4(s32 arg0, s32 arg1, s32 arg2) {
     func_00008704(arg0, arg1, arg2, 0);
 }
-#endif
 
-#if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet_api", func_000076E0);
-#endif
-
-#if FW_VERSION < 201
 void func_000076E0(s32 arg0, s32 arg1, s32 arg2) {
     func_00008704(arg0, arg1, arg2, 1);
 }
-#endif
-
-#if FW_VERSION >= 282
+#else
 void func_00007A88(s32 arg0, s32 arg1, s32 arg2) {
     func_00008704(arg0, arg1, arg2, 0);
 }
@@ -529,7 +543,24 @@ s32 sysctl_rdstruct(void *oldp, u32 *oldlenp, void *newp, const void *sp, u32 le
     return 0;
 }
 #else
-INCLUDE_ASM("nonmatchings/pspnet_inet_api", sysctl_rdstruct);
+s32 sysctl_rdstruct(void *oldp, u32 *oldlenp, void *newp, const void *sp, u32 len) {
+    if (newp != NULL) {
+        return 1;
+    }
+    if (oldlenp == NULL) {
+        return 0;
+    }
+    if (oldp != NULL) {
+        if (*oldlenp < len) {
+            return 12;
+        }
+        *oldlenp = len;
+        sceNetBcopy(sp, oldp, len);
+        return 0;
+    }
+    *oldlenp = len;
+    return 0;
+}
 #endif
 
 char *intoa(u32 addr) {
@@ -688,27 +719,15 @@ struct ifaddr *ifa_ifwithdstaddr(struct sockaddr *addr) {
 
 INCLUDE_ASM("nonmatchings/pspnet_inet_api", ifa_ifwithladdr);
 
-#if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet_api", func_000093F0);
-#endif
-
-#if FW_VERSION < 201
+#if FW_VERSION < 282
 void func_000093F0(s32 arg0) {
     func_0000E448(arg0, 0);
 }
-#endif
 
-#if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet_api", func_0000940C);
-#endif
-
-#if FW_VERSION < 201
 void func_0000940C(s32 arg0) {
     rtinit(arg0, 2, 0);
 }
-#endif
-
-#if FW_VERSION >= 282
+#else
 void func_00009570(s32 arg0) {
     func_0000E4E4(arg0, 0);
 }
@@ -733,7 +752,19 @@ void func_000095AC(struct ifnet *ifp, s32 family) {
     }
 }
 #else
-INCLUDE_ASM("nonmatchings/pspnet_inet_api", func_000095AC);
+void func_000095AC(struct ifnet *ifp, s32 family) {
+    struct socket so;
+    struct domain *dp;
+    struct protosw *pr;
+
+    sceNetMemset(&so, 0, sizeof(so));
+    dp = pffinddomain(family);
+    for (pr = dp->dom_protosw; pr < dp->dom_protoswNPROTOSW; pr++) {
+        so.so_proto = pr;
+        if (pr->pr_usrreq != NULL)
+            (void)(*pr->pr_usrreq)(&so, 22, NULL, NULL, (struct mbuf *)ifp);
+    }
+}
 #endif
 
 void func_00009650(struct ifnet *ifp) {
@@ -747,21 +778,11 @@ void func_00009650(struct ifnet *ifp) {
     }
 }
 
-#if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet_api", func_00009548);
-#endif
-
-#if FW_VERSION < 201
+#if FW_VERSION < 282
 void func_00009548(s32 arg0) {
     func_0000E448(arg0, 1);
 }
-#endif
 
-#if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet_api", func_00009564);
-#endif
-
-#if FW_VERSION < 201
 void func_00009564(void *arg0) {
     void *var_s0;
 
@@ -773,39 +794,19 @@ void func_00009564(void *arg0) {
         } while (var_s0 != NULL);
     }
 }
-#endif
 
-#if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet_api", func_000095A4);
-#endif
-
-#if FW_VERSION < 201
 void func_000095A4(s32 arg0) {
     func_0000E3F0(arg0);
 }
-#endif
 
-#if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet_api", func_000095C0);
-#endif
-
-#if FW_VERSION < 201
 void func_000095C0(s32 arg0) {
     func_0000E3F0(arg0);
 }
-#endif
 
-#if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet_api", func_000095DC);
-#endif
-
-#if FW_VERSION < 201
 s32 func_000095DC(void) {
     return 0;
 }
-#endif
-
-#if FW_VERSION >= 282
+#else
 void func_000096C8(s32 arg0) {
     func_0000E4E4(arg0, 1);
 }
@@ -847,27 +848,15 @@ s32 func_00009788(struct socket *so, s32 cmd, void *data, void *ifp) {
     return so->so_proto->pr_usrreq(so, PRU_CONTROL, (struct mbuf *)cmd, (struct mbuf *)data, (struct mbuf *)ifp);
 }
 
-#if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet_api", func_0000963C);
-#endif
-
-#if FW_VERSION < 201
+#if FW_VERSION < 282
 void func_0000963C(void) {
     _sce_pspnet_start_of_inet_module_in_if_core(&link_rtrequest, func_000097BC, func_000093F0, func_0000940C, &func_000095AC, &func_00009650, func_00009548, func_00009564, func_000095A4, func_000095C0, func_000095DC, &func_00009764, &func_00009788);
 }
-#endif
 
-#if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet_api", func_000096D0);
-#endif
-
-#if FW_VERSION < 201
 s32 func_000096D0(void) {
     return _sce_pspnet_stop_of_inet_module_in_if_core();
 }
-#endif
-
-#if FW_VERSION >= 282
+#else
 void func_000097BC(void) {
     _sce_pspnet_start_of_inet_module_in_if_core(&link_rtrequest, func_0000993C, func_00009570, func_0000958C, &func_000095AC, &func_00009650, func_000096C8, func_000096E4, func_00009724, func_00009740, func_0000975C, &func_00009764, &func_00009788);
 }
@@ -895,17 +884,11 @@ void link_rtrequest(s32 cmd, struct rtentry *rt, struct sockaddr *sa) {
     }
 }
 
-#if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet_api", func_000097BC);
-#endif
-
-#if FW_VERSION < 201
+#if FW_VERSION < 282
 void func_000097BC(void) {
 
 }
-#endif
-
-#if FW_VERSION >= 282
+#else
 void func_0000993C(void) {
 }
 #endif
@@ -945,45 +928,23 @@ void func_00009A14(void *arg0, void *arg1, u16 arg2, void *arg3) {
 
 INCLUDE_ASM("nonmatchings/pspnet_inet_api", func_00009A58);
 
-#if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet_api", func_00009968);
-#endif
-
-#if FW_VERSION < 201
+#if FW_VERSION < 282
 s32 func_00009968(s32 arg0) {
     D_0002C51C = (SceNetInetHook)arg0;
     D_0002C520 = 1;
     return 0;
 }
-#endif
 
-#if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet_api", func_00009984);
-#endif
-
-#if FW_VERSION < 201
 s32 func_00009984(void) {
     D_0002C520 = 0;
     D_0002C51C = 0;
     return 0;
 }
-#endif
 
-#if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet_api", func_0000999C);
-#endif
-
-#if FW_VERSION < 201
 void func_0000999C(void) {
     _sce_pspnet_start_of_inet_module_in_if_ethersubr_core(&func_00009B84, &func_00009A14, &func_00009A58, &ether_multiaddr);
 }
-#endif
 
-#if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet_api", func_000099D4);
-#endif
-
-#if FW_VERSION < 201
 s32 func_000099D4(void) {
     return _sce_pspnet_stop_of_inet_module_in_if_ethersubr_core();
 }

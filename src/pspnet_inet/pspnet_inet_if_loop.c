@@ -53,9 +53,7 @@ void loopattach(void) {
     ifp->if_addrlen = 0; //P
     _sce_pspnet_if_attach(ifp);
 }
-#endif
-
-#if FW_VERSION >= 201 && FW_VERSION < 282
+#else
 void loopattach(void) {
     struct ifnet *ifp = &loif;
 
@@ -70,10 +68,6 @@ void loopattach(void) {
     ifp->if_addrlen = 0; //P
     _sce_pspnet_if_attach(ifp);
 }
-#endif
-
-#if FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/pspnet_inet_if_loop", loopattach);
 #endif
 
 void lortrequest(s32 cmd, struct rtentry *rt) {
@@ -112,17 +106,11 @@ void arp_drain(void) {
     arp_unlock();
 }
 
-#if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet_if_loop", func_000106E0);
-#endif
-
-#if FW_VERSION < 201
+#if FW_VERSION < 282
 s32 func_000106E0(void) {
     return 0x5F;
 }
-#endif
 
-#if FW_VERSION < 282
 void arp_ifinit(struct ifnet *ifp, struct ifaddr *ifa) {
     struct in_addr *ip;
 
@@ -138,7 +126,16 @@ s32 func_00010700(void) {
     return 0x5F;
 }
 
-INCLUDE_ASM("nonmatchings/pspnet_inet_if_loop", func_00010708);
+void arp_ifinit(struct ifnet *ifp, struct ifaddr *ifa) {
+    struct in_addr *ip;
+
+    ip = &((struct in_ifaddr *)ifa)->ia_addr.sin_addr;
+    if (ip->s_addr != __builtin_allegrex_wsbw(0)) {
+        func_0000FA70(ifp, ip, ip, LLADDR(ifp->if_sadl));
+    }
+    ifa->ifa_rtrequest = func_0000F730;
+    ifa->ifa_flags |= RTF_CLONING;
+}
 #endif
 
 #if FW_VERSION < 250
@@ -221,7 +218,6 @@ INCLUDE_ASM("nonmatchings/pspnet_inet_if_loop", func_0001184C);
 INCLUDE_ASM("nonmatchings/pspnet_inet_if_loop", func_00011820);
 #endif
 
-#if FW_VERSION < 271
 void func_00011D04(u8 *arg0, u8 *arg1) {
     if (*(s32 *)(arg1 + 0x2C) & 1) {
         if (*(u16 *)(arg0 + 0x30) & 0x18) {
@@ -232,9 +228,6 @@ void func_00011D04(u8 *arg0, u8 *arg1) {
         *(s32 *)(arg1 + 0x2C) &= ~1;
     }
 }
-#else
-INCLUDE_ASM("nonmatchings/pspnet_inet_if_loop", func_00011D04);
-#endif
 
 #if FW_VERSION >= 151 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_inet_if_loop", func_000119FC);
@@ -492,7 +485,24 @@ void in_socktrim(struct sockaddr_in *ap) {
 #endif
 
 #if FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/pspnet_inet_if_loop", func_00012758);
+s32 func_00012758(struct in_addr in) {
+    struct in_ifaddr *ia;
+
+    if (D_0002C01C) {
+        for (ia = in_ifaddrhead.tqh_first; ia != 0; ia = ia->ia_list.tqe_next) {
+            if ((in.s_addr & ia->ia_netmask) == ia->ia_net) {
+                return 1;
+            }
+        }
+    } else {
+        for (ia = in_ifaddrhead.tqh_first; ia != 0; ia = ia->ia_list.tqe_next) {
+            if ((in.s_addr & ia->ia_subnetmask) == ia->ia_subnet) {
+                return 1;
+            }
+        }
+    }
+    return 0;
+}
 
 INCLUDE_ASM("nonmatchings/pspnet_inet_if_loop", func_000127EC);
 #endif
@@ -508,8 +518,22 @@ char *func_00012550(struct in_addr ina) {
 }
 #endif
 
-#if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet_if_loop", func_00012550);
+#if FW_VERSION >= 201 && FW_VERSION < 271
+char *func_00012550(struct in_addr ina) {
+    ina.s_addr = __builtin_allegrex_wsbw(ina.s_addr);
+    sceNetSprintf(D_0002C5B0, "%d.%d.%d.%d", ina.s_addr >> 24, (ina.s_addr >> 16) & 0xff,
+                  (ina.s_addr >> 8) & 0xff, ina.s_addr & 0xff);
+    return D_0002C5B0;
+}
+#endif
+
+#if FW_VERSION == 271
+char *func_00012550(struct in_addr ina) {
+    ina.s_addr = __builtin_allegrex_wsbw(ina.s_addr);
+    sceNetSprintf(D_0002C560, "%d.%d.%d.%d", ina.s_addr >> 24, (ina.s_addr >> 16) & 0xff,
+                  (ina.s_addr >> 8) & 0xff, ina.s_addr & 0xff);
+    return D_0002C560;
+}
 #endif
 
 #if FW_VERSION < 151
@@ -522,7 +546,12 @@ char *inet_ntoa(struct in_addr ina) {
 #endif
 
 #if FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/pspnet_inet_if_loop", func_000128AC);
+char *func_000128AC(struct in_addr ina) {
+    ina.s_addr = __builtin_allegrex_wsbw(ina.s_addr);
+    sceNetSprintf(D_0002C560, "%d.%d.%d.%d", ina.s_addr >> 24, (ina.s_addr >> 16) & 0xff,
+                  (ina.s_addr >> 8) & 0xff, ina.s_addr & 0xff);
+    return D_0002C560;
+}
 #endif
 
 void in_setmaxmtu(void) {
