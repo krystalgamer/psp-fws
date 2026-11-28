@@ -256,7 +256,7 @@ char *func_000077F8(char *arg0, const char *arg1) {
     return var_v0;
 }
 
-s32 func_00007830(const char *s) {
+u32 func_00007830(const char *s) {
     s32 n = 0;
 
     if (s == NULL) {

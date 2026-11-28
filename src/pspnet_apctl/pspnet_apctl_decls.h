@@ -322,9 +322,14 @@ typedef struct {
         u8 proto;
         u16 len;
     } pseudo;                   /* 0xE58 UDP pseudo header */
-    u8 unkE64[2];
+    u8 htype;                   /* 0xE64 */
+    u8 hlen;                    /* 0xE65 */
     u8 hwaddr[6];               /* 0xE66 own MAC */
-    u8 unkE6C[0x118];
+    u8 unkE6C[0xC];
+    u8 paramReq[6];             /* 0xE78 option 55: count + codes */
+    u8 unkE7E[0xFA];
+    u8 *clientId;               /* 0xF78 -> cid */
+    u8 unkF7C[8];
     SceNetDhcpLease *lease;     /* 0xF84 */
     SceNetDhcpTime timeout;                /* 0xF88 */
     SceNetDhcpTime initInterval;           /* 0xF8C */
@@ -343,7 +348,11 @@ typedef struct {
     u32 curRoute;               /* 0xFC0 */
     SceNetDhcpLease offer;      /* 0xFC4 */
     u8 arpAddr[6];              /* 0x13C8 server/router MAC */
-    u16 arpHw[7];               /* 0x13CE server/router IP */
+    u16 arpHw[2];               /* 0x13CE server/router IP */
+    u8 unk13D2[2];
+    u8 cid[2];                  /* 0x13D4 client id: htype, hlen */
+    u8 unk13D6[2];
+    u8 *cidHw;                  /* 0x13D8 -> hwaddr */
     void (*callback)(s32 event, s32 arg); /* 0x13DC */
     SceNetApctlIpParam *param;  /* 0x13E0 */
     s32 sock;                   /* 0x13E4 */
@@ -561,6 +570,7 @@ extern s32 (*D_00008138[7])(SceNetDhcpCtx *dc, s32 prev);
 extern s32 D_00008154[];
 extern s32 (*D_00008180[5])(SceNetApctlCtx *ctx, s32 prev, s32 *state, s32 *event);
 extern s32 (*D_00008198[7])(SceNetDhcpCtx *dc, s32 prev); /* 1.50 name of D_00008138 */
+extern u32 D_000081C8[2]; /* struct bpf_program for the DHCP filter */
 extern u32 D_000081FC; /* ARP BPF filter: target IP constant */
 extern u32 D_00008210[2]; /* struct bpf_program for the ARP filter */
 extern s32 D_00008220;
@@ -723,7 +733,7 @@ char *func_0000774C(char *dst, const char *src, s32 n);
 char *func_000077C8(const char *s, s32 c);
 s32 func_000077D8(SceNetDhcpCtx *dc);
 char *func_000077F8(char *dst, const char *src);
-s32 func_00007830(const char *s);
+u32 func_00007830(const char *s);
 s32 func_00008BB0(s32, s32, s32, s32, s32, s32, s32, s32);
 s32 func_00008E00(void);
 s32 func_00008E34(void);
