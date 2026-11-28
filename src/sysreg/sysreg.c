@@ -321,12 +321,15 @@ INCLUDE_RODATA("nonmatchings/sysreg", D_00002520);
 #if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregPllGetBaseFrequency);
 #else
-INCLUDE_RODATA("nonmatchings/sysreg", D_00002B04);
+const float g_pllRatio[16] = {
+    1.0f / 9, 4.0f / 9, 4.0f / 7, 2.0f / 3, 4.0f / 5, 1.0f, 0.0f, 0.0f,
+    1.0f / 18, 2.0f / 9, 2.0f / 7, 1.0f / 3, 2.0f / 5, 1.0f / 2, 0.0f, 0.0f,
+};
 
 float sceSysregPllUpdateFrequency(void) {
     u32 sel = *(volatile u32 *)0xBC100068 & 0xF;
     u32 mul = __builtin_allegrex_ext(*(volatile u32 *)0xBC1000FC, 8, 8);
-    return g_pllFrequency = (s32)mul * 37.0f * D_00002B04[sel];
+    return g_pllFrequency = (s32)mul * 37.0f * g_pllRatio[sel];
 }
 #endif
 

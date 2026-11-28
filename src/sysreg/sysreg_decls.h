@@ -14,6 +14,7 @@ extern s32 D_000025C0;
 extern const float D_00002B04[];
 extern M2C_UNK D_00002BD0;
 extern float g_pllFrequency;
+extern const float g_pllRatio[16];
 extern SceSysregIntrState g_sysregIntr;
 
 s32 func_000000B4(void);

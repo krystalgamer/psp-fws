@@ -54,6 +54,7 @@
   "D_00002B04": "extern const float D_00002B04[];",
   "D_00002BD0": "extern M2C_UNK D_00002BD0;",
   "g_pllFrequency": "extern float g_pllFrequency;",
+  "g_pllRatio": "extern const float g_pllRatio[16];",
   "g_sysregIntr": "extern SceSysregIntrState g_sysregIntr;"
  }
 }
