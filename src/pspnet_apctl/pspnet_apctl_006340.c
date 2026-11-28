@@ -22,7 +22,19 @@ INCLUDE_ASM("nonmatchings/pspnet_apctl_006340", func_000045B8);
 
 INCLUDE_ASM("nonmatchings/pspnet_apctl_006340", func_00004704);
 
-INCLUDE_ASM("nonmatchings/pspnet_apctl_006340", func_000047D8);
+s32 func_000047D8(SceNetDhcpCtx *dc) {
+    s32 now;
+
+    now = sceNetGetSystemClockSec();
+    if (now == -1) {
+        return 0x80410586;
+    }
+    *(u16 *)(dc->unkE54 + 8) = __builtin_allegrex_wsbh((u16)(now - dc->startTime));
+    dc->udp->sum = 0;
+    dc->udp->sum = func_00005E00(&dc->pseudo, dc->udp, (u16)__builtin_allegrex_wsbh(dc->pseudo.len));
+    sceNetBpfWrite(dc->bpf, dc->pkt, dc->pktLen);
+    return 0;
+}
 #endif
 
 #if FW_VERSION >= 151 && FW_VERSION < 282
@@ -95,7 +107,20 @@ INCLUDE_ASM("nonmatchings/pspnet_apctl_006340", func_00006F34);
 
 INCLUDE_ASM("nonmatchings/pspnet_apctl_006340", func_00006FC8);
 
+#if FW_VERSION < 150
+void func_0000708C(const u8 *src, u8 *dst, s32 n) {
+    s32 i;
+
+    for (i = 0; i < n; i++) {
+        if (src[i] != 0) {
+            *dst++ = src[i];
+        }
+    }
+    *dst = 0;
+}
+#else
 INCLUDE_ASM("nonmatchings/pspnet_apctl_006340", func_0000708C);
+#endif
 
 #if FW_VERSION >= 102 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_apctl_006340", func_00005290);
@@ -216,7 +241,23 @@ s32 func_00008E00(void) {
 }
 #endif
 
+#if FW_VERSION < 150
+s32 func_00008E34(void) {
+    if (D_00013F20 == NULL) {
+        return 0x8041030B;
+    }
+    sceKernelWaitThreadEnd(D_00013F20->thid, NULL);
+    sceNetFreeThreadinfo(D_00013F20->thid);
+    sceKernelDeleteThread(D_00013F20->thid);
+    sceKernelDeleteSema(D_00013F20->sema);
+    sceNetInetClose(D_00013F20->sock);
+    _sce_pspnet_pppoe_term();
+    D_00013F20 = NULL;
+    return 0;
+}
+#else
 INCLUDE_ASM("nonmatchings/pspnet_apctl_006340", func_00008E34);
+#endif
 
 #if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_apctl_006340", func_000089C8);
