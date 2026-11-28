@@ -4246,7 +4246,7 @@ INCLUDE_ASM("nonmatchings/libhttp", func_00007D38);
 
 INCLUDE_ASM("nonmatchings/libhttp", func_00007DC4);
 
-void func_00007ED0(const char *key, SceHttpMd5Entry **out) {
+void func_00003E34(const char *key, SceHttpMd5Entry **out) {
     char *copy;
     SceHttpMd5Entry *entry;
 
@@ -4417,7 +4417,7 @@ INCLUDE_ASM("nonmatchings/libhttp", func_0000EDEC);
 #if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/libhttp", func_00008E24);
 
-int func_00008E84(SceHttpTmpl *tmpl) {
+int GetProxyInfoFromSystem(SceHttpTmpl *tmpl) {
     union SceNetApctlInfo info;
     int ret;
 
@@ -4621,7 +4621,7 @@ void func_0000AAAC(void *arg0) {
 
     temp_v1 = M2C_FIELD(arg0, s32 *, 0x64);
     if (temp_v1 != 0) {
-        func_0000C1F0(temp_v1);
+        FreeHttpHederList(temp_v1);
         M2C_FIELD(arg0, s32 *, 0x64) = 0;
     }
     temp_v1_2 = M2C_FIELD(arg0, s32 *, 0x30);
@@ -4707,7 +4707,7 @@ INCLUDE_ASM("nonmatchings/libhttp", func_0000B0E8);
 
 INCLUDE_ASM("nonmatchings/libhttp", func_0000B28C);
 
-SceUInt64 func_0000B428(const char *str) {
+SceUInt64 _HttpAtoi64(const char *str) {
     SceUInt64 ret = 0;
 
     if (str != NULL) {
@@ -4749,7 +4749,7 @@ void func_0000B560(void *arg0, void *arg1) {
     }
 }
 
-int func_0000B590(int id) {
+int HttpWhichId(int id) {
     int tmp;
     int ret;
 
@@ -4783,9 +4783,9 @@ INCLUDE_ASM("nonmatchings/libhttp", func_00011A54);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 201
-void func_0000B5DC(char **pStr, const SceUInt64 val) {
+void __HttpI64toa(char **pStr, const SceUInt64 val) {
     if (val != 0) {
-        func_0000B5DC(pStr, val / 10);
+        __HttpI64toa(pStr, val / 10);
         **pStr = val % 10 + '0';
         (*pStr)++;
     }
@@ -5004,7 +5004,7 @@ INCLUDE_RODATA("nonmatchings/libhttp", D_0000EE28);
 
 INCLUDE_ASM("nonmatchings/libhttp", func_0000BF98);
 
-int func_0000C088(_SceHttpReqHeaderList **out, const SceUChar8 *name, const SceUChar8 *value) {
+int CreateHttpExtraHeader(_SceHttpReqHeaderList **out, const SceUChar8 *name, const SceUChar8 *value) {
     _SceHttpReqHeaderList *h;
     int ret = 0x804311FE;
     SceSize len;
@@ -5055,7 +5055,7 @@ out:
     return ret;
 }
 
-void func_0000C1F0(_SceHttpReqHeaderList *list) {
+void FreeHttpHederList(_SceHttpReqHeaderList *list) {
     _SceHttpReqHeaderList *next;
 
     while (list != NULL) {
