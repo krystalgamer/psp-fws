@@ -266,7 +266,7 @@ void _ZN14Class_0009C078D0Ev(M2C_UNK **arg0) {
 #if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/music_main_plugin_01E1E0", func_0002203C);
 #else
-s32 func_0002203C(struct Unk_func_0002203C_0 *arg0, s32 arg1) {
+s32 func_0002203C(Class_0009C078 *arg0, s32 arg1) {
     s32 temp_v0;
     s32 var_v1;
 

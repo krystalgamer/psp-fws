@@ -461,7 +461,7 @@ INCLUDE_ASM("nonmatchings/music_main_plugin_083810", func_0008706C);
 #endif
 
 #if FW_VERSION >= 282
-s32 func_000870A4(struct Unk_func_000870A4_0 *arg0) {
+s32 func_000870A4(Class_000A20B8 *arg0) {
     return arg0->unk1C + 0x14;
 }
 

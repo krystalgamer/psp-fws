@@ -224,7 +224,7 @@ INCLUDE_ASM("nonmatchings/music_main_plugin_019E80", func_0001C50C);
 
 INCLUDE_ASM("nonmatchings/music_main_plugin_019E80", func_0001C52C);
 
-s32 func_00019788(struct Unk_func_00019788_0 *arg0) {
+s32 func_00019788(Class_0009BCC8 *arg0) {
     return arg0->unkC;
 }
 

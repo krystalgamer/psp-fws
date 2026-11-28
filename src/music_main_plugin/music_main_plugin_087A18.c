@@ -47,7 +47,7 @@ void func_00087C7C(M2C_UNK **arg0) {
 Class_000A2160::~Class_000A2160() {
 }
 
-s32 func_00087D3C(struct Unk_func_00087D3C_0 *arg0) {
+s32 func_00087D3C(Class_000A2160 *arg0) {
     return arg0->unk10;
 }
 
@@ -120,7 +120,7 @@ INCLUDE_ASM("nonmatchings/music_main_plugin_087A18", func_000881D4);
 Class_000A21B8::~Class_000A21B8() {
 }
 
-s32 func_000882A8(struct Unk_func_000882A8_0 *arg0) {
+s32 func_000882A8(Class_000A21B8 *arg0) {
     return arg0->unk20;
 }
 
@@ -314,7 +314,7 @@ void func_00089088(M2C_UNK **arg0) {
 Class_000A2270::~Class_000A2270() {
 }
 
-s32 func_00089148(struct Unk_func_00089148_0 *arg0) {
+s32 func_00089148(Class_000A2270 *arg0) {
     return arg0->unk10;
 }
 
@@ -341,7 +341,7 @@ void func_00089310(M2C_UNK **arg0) {
 Class_000A22A0::~Class_000A22A0() {
 }
 
-s32 func_000893D0(struct Unk_func_000893D0_0 *arg0) {
+s32 func_000893D0(Class_000A22A0 *arg0) {
     return arg0->unk10;
 }
 
@@ -368,7 +368,7 @@ void func_00089598(M2C_UNK **arg0) {
 Class_000A22D0::~Class_000A22D0() {
 }
 
-s32 func_00089658(struct Unk_func_00089658_0 *arg0) {
+s32 func_00089658(Class_000A22D0 *arg0) {
     return arg0->unk10;
 }
 
