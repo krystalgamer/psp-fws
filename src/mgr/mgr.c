@@ -881,8 +881,8 @@ INCLUDE_ASM("nonmatchings/mgr", func_00001D9C);
 #endif
 
 #if FW_VERSION < 250
-void func_00001CB4(s32 arg0, s32 arg1, s32 arg2) {
-    func_00001BE8(arg0, arg1, arg2);
+s32 func_00001CB4(u32 *dst, u32 *src, u32 size) {
+    return func_00001BE8(dst, src, size);
 }
 #endif
 
@@ -901,23 +901,99 @@ s32 func_00001D2C(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
 INCLUDE_ASM("nonmatchings/mgr", func_00001D88);
 #endif
 
+#if FW_VERSION < 250
+s32 func_00001E3C(u32 mode, u32 *dst, u32 *src, u32 size, u32 *key, u32 *iv, s32 keyReg) {
+    s32 ret;
+
+    if (size == 0) {
+        return 0;
+    }
+    if (size & 3) {
+        return 0x80501002;
+    }
+    if (((u32)dst | (u32)src | (u32)key | (u32)iv) & 3) {
+        return 0x80501003;
+    }
+    if (dst == NULL || src == NULL) {
+        return 0x80501000;
+    }
+    ret = sceMgrLock();
+    if (ret != 0) {
+        return ret;
+    }
+    func_00001AAC();
+    if (keyReg >= 0) {
+        ret = func_00000424(keyReg, -1, -1);
+        if (ret < 0) {
+            goto end;
+        }
+    }
+    if (key != NULL) {
+        func_000002A4(key);
+    }
+    if (iv != NULL) {
+        func_000002C8(iv);
+    }
+    func_00001BD8(mode, size);
+    ret = func_00001CB4(dst, src, size);
+    func_00001B90();
+end:
+    sceMgrUnLock();
+    return ret;
+}
+#else
 INCLUDE_ASM("nonmatchings/mgr", func_00001E3C);
+#endif
 
 #if FW_VERSION >= 250 && FW_VERSION < 340
 INCLUDE_ASM("nonmatchings/mgr", func_00001F94);
 #endif
 
 #if FW_VERSION < 250
-INCLUDE_ASM("nonmatchings/mgr", func_00001E14);
+s32 func_00001E14(u32 mode, u32 cmd, u32 *dst, u32 *src, u32 size, u32 *key, u32 *iv) {
+    s32 ret;
+
+    if (size == 0) {
+        return 0;
+    }
+    if (size & 3) {
+        return 0x80501002;
+    }
+    if (((u32)dst | (u32)src | (u32)key | (u32)iv) & 3) {
+        return 0x80501003;
+    }
+    if (dst == NULL || src == NULL || key == NULL) {
+        return 0x80501000;
+    }
+    ret = sceMgrLock();
+    if (ret != 0) {
+        return ret;
+    }
+    func_00001AAC();
+    func_00000378(key);
+    func_0000027C(cmd);
+    if (iv != NULL) {
+        func_00000334(iv);
+    }
+    func_00001BD8(mode, size);
+    ret = func_00001CB4(dst, src, size);
+    func_00001B90();
+    sceMgrUnLock();
+    return ret;
+}
 #endif
 
 #if FW_VERSION >= 340
 INCLUDE_ASM("nonmatchings/mgr", func_00001F80);
 #endif
 
-INCLUDE_ASM("nonmatchings/mgr", sceMgrDESDecrypt);
+s32 sceMgrDESDecrypt(u32 *dst, u32 *src, u32 size, u32 *key, u32 *iv) {
+    return func_00001E3C((iv != NULL) ? 0x20 : 0x10, dst, src, size, key, iv, -1);
+}
 
-INCLUDE_ASM("nonmatchings/mgr", sceMgrDESEncrypt);
+s32 sceMgrDESEncrypt(u32 *dst, u32 *src, u32 size, u32 *key, u32 *iv) {
+    return func_00001E3C(1 | ((iv != NULL) ? 0x20 : 0x10), dst, src, size, key, iv, -1);
+}
 
 s32 sceMgrDESDecryptBlock(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     s32 var_v0;
@@ -945,9 +1021,21 @@ s32 sceMgrDESEncryptBlock(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     return var_v0;
 }
 
+#if FW_VERSION < 201
+s32 sceMgrAESDecrypt(u32 *dst, u32 *src, u32 size, u32 *key, u32 *iv) {
+    return func_00001E14(0x1000 | ((iv != NULL) ? 0x20 : 0x10), 0x8001, dst, src, size, key, iv);
+}
+#else
 INCLUDE_ASM("nonmatchings/mgr", sceMgrAESDecrypt);
+#endif
 
+#if FW_VERSION < 250
+s32 sceMgrAESEncrypt(u32 *dst, u32 *src, u32 size, u32 *key, u32 *iv) {
+    return func_00001E14(0x1001 | ((iv != NULL) ? 0x20 : 0x10), 0x8001, dst, src, size, key, iv);
+}
+#else
 INCLUDE_ASM("nonmatchings/mgr", sceMgrAESEncrypt);
+#endif
 
 INCLUDE_ASM("nonmatchings/mgr", func_000023F4);
 
