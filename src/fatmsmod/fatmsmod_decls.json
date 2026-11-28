@@ -141,6 +141,7 @@
   "func_0000A744": "s32 func_0000A744(s32 a0, s32 a1, s32 a2); /* driver write (buf, sector, count) */",
   "func_0000A7C0": "s32 func_0000A7C0(const u8 *s);",
   "func_0000A8F8": "s32 func_0000A8F8(s32);",
+  "func_0000AAC4": "s32 func_0000AAC4(void);",
   "func_0000ABF8": "s32 func_0000ABF8(PfFile *fp);",
   "func_0000ACF8": "s32 func_0000ACF8(void);",
   "func_0000AD4C": "s32 func_0000AD4C(void);",

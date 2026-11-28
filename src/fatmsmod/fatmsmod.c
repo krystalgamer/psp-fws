@@ -3768,9 +3768,21 @@ INCLUDE_ASM("nonmatchings/fatmsmod", func_00011A58);
 
 #if FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/fatmsmod", func_0000A99C);
+
+s32 func_0000AAC4(void) {
+    D_00027800 = &D_00027934;
+    D_00027DD4 = D_00027934.unk58;
+    if (D_00019E0C != (s8)D_000193F8) {
+        if (func_00009FF4() == -1) {
+            D_00019E08 = D_00019E04;
+            return -1;
+        }
+    }
+    return 0;
+}
 #endif
 
-#if FW_VERSION < 271
+#if FW_VERSION >= 201 && FW_VERSION < 271
 INCLUDE_ASM("nonmatchings/fatmsmod", func_0000AAC4);
 #endif
 

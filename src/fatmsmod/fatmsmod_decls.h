@@ -644,6 +644,7 @@ s32 func_0000A714(s32 a0, s32 a1, s32 n);
 s32 func_0000A744(s32 a0, s32 a1, s32 a2); /* driver write (buf, sector, count) */
 s32 func_0000A7C0(const u8 *s);
 s32 func_0000A8F8(s32);
+s32 func_0000AAC4(void);
 s32 func_0000ABF8(PfFile *fp);
 s32 func_0000ACF8(void);
 s32 func_0000AD4C(void);
