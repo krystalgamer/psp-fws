@@ -858,13 +858,7 @@ void func_00024268(s32 arg0, s32 arg1, s32 arg2) {
 INCLUDE_ASM("nonmatchings/video_plugin_000214F0", func_00021598);
 #endif
 
-#if FW_VERSION < 201
-void func_00021598(s32 **arg0) {
-    *arg0 = &D_00043510;
-}
-#endif
-
-#if FW_VERSION == 260
+#if FW_VERSION < 201 || FW_VERSION == 260
 void func_00021598(s32 **arg0) {
     *arg0 = &D_00043510;
 }
@@ -874,14 +868,7 @@ void func_00021598(s32 **arg0) {
 INCLUDE_ASM("nonmatchings/video_plugin_000214F0", func_000215A8);
 #endif
 
-#if FW_VERSION < 201
-void func_000215A8(s32 **arg0) {
-    *arg0 = &D_00043510;
-    _ZdlPv(arg0);
-}
-#endif
-
-#if FW_VERSION == 260
+#if FW_VERSION < 201 || FW_VERSION == 260
 void func_000215A8(s32 **arg0) {
     *arg0 = &D_00043510;
     _ZdlPv(arg0);
@@ -3064,13 +3051,7 @@ INCLUDE_ASM("nonmatchings/video_plugin_000214F0", func_00024F20);
 INCLUDE_ASM("nonmatchings/video_plugin_000214F0", func_00024F68);
 #endif
 
-#if FW_VERSION < 201
-void func_00024F68(s32 **arg0) {
-    *arg0 = &D_000437B8;
-}
-#endif
-
-#if FW_VERSION == 260
+#if FW_VERSION < 201 || FW_VERSION == 260
 void func_00024F68(s32 **arg0) {
     *arg0 = &D_000437B8;
 }
@@ -3080,14 +3061,7 @@ void func_00024F68(s32 **arg0) {
 INCLUDE_ASM("nonmatchings/video_plugin_000214F0", func_00024F78);
 #endif
 
-#if FW_VERSION < 201
-void func_00024F78(s32 **arg0) {
-    *arg0 = &D_000437B8;
-    _ZdlPv(arg0);
-}
-#endif
-
-#if FW_VERSION == 260
+#if FW_VERSION < 201 || FW_VERSION == 260
 void func_00024F78(s32 **arg0) {
     *arg0 = &D_000437B8;
     _ZdlPv(arg0);
@@ -4958,13 +4932,7 @@ INCLUDE_ASM("nonmatchings/video_plugin_000214F0", func_0002A43C);
 INCLUDE_ASM("nonmatchings/video_plugin_000214F0", func_0002A65C);
 #endif
 
-#if FW_VERSION < 201
-void func_0002A65C(s32 **arg0) {
-    *arg0 = &D_00043F70;
-}
-#endif
-
-#if FW_VERSION == 260
+#if FW_VERSION < 201 || FW_VERSION == 260
 void func_0002A65C(s32 **arg0) {
     *arg0 = &D_00043F70;
 }
@@ -4996,13 +4964,7 @@ INCLUDE_ASM("nonmatchings/video_plugin_000214F0", func_0002A964);
 INCLUDE_ASM("nonmatchings/video_plugin_000214F0", func_0002A97C);
 #endif
 
-#if FW_VERSION < 201
-void func_0002A97C(s32 **arg0) {
-    *arg0 = &D_00043F60;
-}
-#endif
-
-#if FW_VERSION == 260
+#if FW_VERSION < 201 || FW_VERSION == 260
 void func_0002A97C(s32 **arg0) {
     *arg0 = &D_00043F60;
 }
@@ -5016,13 +4978,7 @@ INCLUDE_ASM("nonmatchings/video_plugin_000214F0", func_0002A98C);
 INCLUDE_ASM("nonmatchings/video_plugin_000214F0", func_0002A9A4);
 #endif
 
-#if FW_VERSION < 201
-void func_0002A9A4(s32 **arg0) {
-    *arg0 = &D_00043F50;
-}
-#endif
-
-#if FW_VERSION == 260
+#if FW_VERSION < 201 || FW_VERSION == 260
 void func_0002A9A4(s32 **arg0) {
     *arg0 = &D_00043F50;
 }
@@ -5036,13 +4992,7 @@ INCLUDE_ASM("nonmatchings/video_plugin_000214F0", func_0002A9B4);
 INCLUDE_ASM("nonmatchings/video_plugin_000214F0", func_0002A9CC);
 #endif
 
-#if FW_VERSION < 201
-void func_0002A9CC(s32 **arg0) {
-    *arg0 = &D_00043F40;
-}
-#endif
-
-#if FW_VERSION == 260
+#if FW_VERSION < 201 || FW_VERSION == 260
 void func_0002A9CC(s32 **arg0) {
     *arg0 = &D_00043F40;
 }
@@ -5084,13 +5034,7 @@ INCLUDE_ASM("nonmatchings/video_plugin_000214F0", func_0002AC68);
 INCLUDE_ASM("nonmatchings/video_plugin_000214F0", func_0002ACEC);
 #endif
 
-#if FW_VERSION < 201
-void func_0002ACEC(s32 **arg0) {
-    *arg0 = &D_00043F30;
-}
-#endif
-
-#if FW_VERSION == 260
+#if FW_VERSION < 201 || FW_VERSION == 260
 void func_0002ACEC(s32 **arg0) {
     *arg0 = &D_00043F30;
 }
@@ -5108,13 +5052,7 @@ INCLUDE_ASM("nonmatchings/video_plugin_000214F0", func_0002AE50);
 INCLUDE_ASM("nonmatchings/video_plugin_000214F0", func_0002AF20);
 #endif
 
-#if FW_VERSION < 201
-void func_0002AF20(s32 **arg0) {
-    *arg0 = &D_00043F20;
-}
-#endif
-
-#if FW_VERSION == 260
+#if FW_VERSION < 201 || FW_VERSION == 260
 void func_0002AF20(s32 **arg0) {
     *arg0 = &D_00043F20;
 }
@@ -5156,14 +5094,7 @@ INCLUDE_ASM("nonmatchings/video_plugin_000214F0", func_0002B02C);
 INCLUDE_ASM("nonmatchings/video_plugin_000214F0", func_0002B074);
 #endif
 
-#if FW_VERSION < 201
-void func_0002B074(s32 **arg0) {
-    *arg0 = &D_00043F70;
-    _ZdlPv(arg0);
-}
-#endif
-
-#if FW_VERSION == 260
+#if FW_VERSION < 201 || FW_VERSION == 260
 void func_0002B074(s32 **arg0) {
     *arg0 = &D_00043F70;
     _ZdlPv(arg0);
@@ -5174,14 +5105,7 @@ void func_0002B074(s32 **arg0) {
 INCLUDE_ASM("nonmatchings/video_plugin_000214F0", func_0002B09C);
 #endif
 
-#if FW_VERSION < 201
-void func_0002B09C(s32 **arg0) {
-    *arg0 = &D_00043F60;
-    _ZdlPv(arg0);
-}
-#endif
-
-#if FW_VERSION == 260
+#if FW_VERSION < 201 || FW_VERSION == 260
 void func_0002B09C(s32 **arg0) {
     *arg0 = &D_00043F60;
     _ZdlPv(arg0);
@@ -5192,14 +5116,7 @@ void func_0002B09C(s32 **arg0) {
 INCLUDE_ASM("nonmatchings/video_plugin_000214F0", func_0002B0C4);
 #endif
 
-#if FW_VERSION < 201
-void func_0002B0C4(s32 **arg0) {
-    *arg0 = &D_00043F50;
-    _ZdlPv(arg0);
-}
-#endif
-
-#if FW_VERSION == 260
+#if FW_VERSION < 201 || FW_VERSION == 260
 void func_0002B0C4(s32 **arg0) {
     *arg0 = &D_00043F50;
     _ZdlPv(arg0);
@@ -5210,14 +5127,7 @@ void func_0002B0C4(s32 **arg0) {
 INCLUDE_ASM("nonmatchings/video_plugin_000214F0", func_0002B0EC);
 #endif
 
-#if FW_VERSION < 201
-void func_0002B0EC(s32 **arg0) {
-    *arg0 = &D_00043F40;
-    _ZdlPv(arg0);
-}
-#endif
-
-#if FW_VERSION == 260
+#if FW_VERSION < 201 || FW_VERSION == 260
 void func_0002B0EC(s32 **arg0) {
     *arg0 = &D_00043F40;
     _ZdlPv(arg0);
@@ -5228,14 +5138,7 @@ void func_0002B0EC(s32 **arg0) {
 INCLUDE_ASM("nonmatchings/video_plugin_000214F0", func_0002B114);
 #endif
 
-#if FW_VERSION < 201
-void func_0002B114(s32 **arg0) {
-    *arg0 = &D_00043F30;
-    _ZdlPv(arg0);
-}
-#endif
-
-#if FW_VERSION == 260
+#if FW_VERSION < 201 || FW_VERSION == 260
 void func_0002B114(s32 **arg0) {
     *arg0 = &D_00043F30;
     _ZdlPv(arg0);
@@ -5246,14 +5149,7 @@ void func_0002B114(s32 **arg0) {
 INCLUDE_ASM("nonmatchings/video_plugin_000214F0", func_0002B13C);
 #endif
 
-#if FW_VERSION < 201
-void func_0002B13C(s32 **arg0) {
-    *arg0 = &D_00043F20;
-    _ZdlPv(arg0);
-}
-#endif
-
-#if FW_VERSION == 260
+#if FW_VERSION < 201 || FW_VERSION == 260
 void func_0002B13C(s32 **arg0) {
     *arg0 = &D_00043F20;
     _ZdlPv(arg0);
@@ -6149,13 +6045,7 @@ void func_0002D48C(void *arg0) {
 INCLUDE_ASM("nonmatchings/video_plugin_000214F0", func_0002D4A4);
 #endif
 
-#if FW_VERSION < 201
-void func_0002D4A4(s32 **arg0) {
-    *arg0 = &D_000442F0;
-}
-#endif
-
-#if FW_VERSION == 260
+#if FW_VERSION < 201 || FW_VERSION == 260
 void func_0002D4A4(s32 **arg0) {
     *arg0 = &D_000442F0;
 }
@@ -6165,14 +6055,7 @@ void func_0002D4A4(s32 **arg0) {
 INCLUDE_ASM("nonmatchings/video_plugin_000214F0", func_0002D4B4);
 #endif
 
-#if FW_VERSION < 201
-void func_0002D4B4(s32 **arg0) {
-    *arg0 = &D_000442F0;
-    _ZdlPv(arg0);
-}
-#endif
-
-#if FW_VERSION == 260
+#if FW_VERSION < 201 || FW_VERSION == 260
 void func_0002D4B4(s32 **arg0) {
     *arg0 = &D_000442F0;
     _ZdlPv(arg0);
@@ -6314,13 +6197,7 @@ void func_0002DF04(void *arg0) {
 INCLUDE_ASM("nonmatchings/video_plugin_000214F0", func_0002DF1C);
 #endif
 
-#if FW_VERSION < 201
-void func_0002DF1C(s32 **arg0) {
-    *arg0 = &D_00044588;
-}
-#endif
-
-#if FW_VERSION == 260
+#if FW_VERSION < 201 || FW_VERSION == 260
 void func_0002DF1C(s32 **arg0) {
     *arg0 = &D_00044588;
 }
@@ -6330,14 +6207,7 @@ void func_0002DF1C(s32 **arg0) {
 INCLUDE_ASM("nonmatchings/video_plugin_000214F0", func_0002DF2C);
 #endif
 
-#if FW_VERSION < 201
-void func_0002DF2C(s32 **arg0) {
-    *arg0 = &D_00044588;
-    _ZdlPv(arg0);
-}
-#endif
-
-#if FW_VERSION == 260
+#if FW_VERSION < 201 || FW_VERSION == 260
 void func_0002DF2C(s32 **arg0) {
     *arg0 = &D_00044588;
     _ZdlPv(arg0);
@@ -7144,26 +7014,11 @@ INCLUDE_ASM("nonmatchings/video_plugin_000214F0", func_00035050);
 INCLUDE_ASM("nonmatchings/video_plugin_000214F0", func_00031E38);
 #endif
 
-#if FW_VERSION < 152
+#if FW_VERSION < 201
 void func_00031E7C(s32 **arg0) {
     *arg0 = &D_00044830;
 }
-#endif
 
-#if FW_VERSION == 152
-void func_00031E7C(s32 **arg0) {
-    *arg0 = &D_00044830;
-}
-#endif
-
-#if FW_VERSION < 152
-void func_00031E8C(s32 **arg0) {
-    *arg0 = &D_00044830;
-    _ZdlPv(arg0);
-}
-#endif
-
-#if FW_VERSION == 152
 void func_00031E8C(s32 **arg0) {
     *arg0 = &D_00044830;
     _ZdlPv(arg0);
@@ -7174,13 +7029,7 @@ void func_00031E8C(s32 **arg0) {
 INCLUDE_ASM("nonmatchings/video_plugin_000214F0", func_00031EB4);
 #endif
 
-#if FW_VERSION < 201
-void func_00031EB4(s32 **arg0) {
-    *arg0 = &D_00044818;
-}
-#endif
-
-#if FW_VERSION == 260
+#if FW_VERSION < 201 || FW_VERSION == 260
 void func_00031EB4(s32 **arg0) {
     *arg0 = &D_00044818;
 }
@@ -7190,14 +7039,7 @@ void func_00031EB4(s32 **arg0) {
 INCLUDE_ASM("nonmatchings/video_plugin_000214F0", func_00031EC4);
 #endif
 
-#if FW_VERSION < 201
-void func_00031EC4(s32 **arg0) {
-    *arg0 = &D_00044818;
-    _ZdlPv(arg0);
-}
-#endif
-
-#if FW_VERSION == 260
+#if FW_VERSION < 201 || FW_VERSION == 260
 void func_00031EC4(s32 **arg0) {
     *arg0 = &D_00044818;
     _ZdlPv(arg0);
@@ -7215,8 +7057,16 @@ void func_00031EEC(void *arg0) {
 }
 #endif
 
-#if FW_VERSION < 271
+#if FW_VERSION >= 103 && FW_VERSION < 271
 INCLUDE_ASM("nonmatchings/video_plugin_000214F0", func_00031F08);
+#endif
+
+#if FW_VERSION == 100
+void func_00031F08(void *arg0) {
+    M2C_FIELD(arg0, M2C_UNK **, 0) = &D_00044780;
+    M2C_FIELD(arg0, s32 **, 8) = &D_00044830;
+    _ZdlPv(arg0);
+}
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 260
@@ -7892,15 +7742,7 @@ void func_000345A4(s32 **arg0) {
 }
 #endif
 
-#if FW_VERSION == 150
-void func_000345A4(s32 **arg0) {
-    *arg0 = &D_00044D80;
-    D_00046370 = 0;
-    _ZN14Class_00042AE0D2Ev((s32) arg0);
-}
-#endif
-
-#if FW_VERSION < 150
+#if FW_VERSION < 152
 void func_000345A4(s32 **arg0) {
     *arg0 = &D_00044D80;
     D_00046370 = 0;
@@ -7921,16 +7763,7 @@ void func_000345D0(s32 **arg0) {
 }
 #endif
 
-#if FW_VERSION == 150
-void func_000345D0(s32 **arg0) {
-    *arg0 = &D_00044D80;
-    D_00046370 = 0;
-    _ZN14Class_00042AE0D2Ev((s32) arg0);
-    _ZdlPv(arg0);
-}
-#endif
-
-#if FW_VERSION < 150
+#if FW_VERSION < 152
 void func_000345D0(s32 **arg0) {
     *arg0 = &D_00044D80;
     D_00046370 = 0;
@@ -8162,15 +7995,7 @@ void func_00034D2C(s32 **arg0) {
 }
 #endif
 
-#if FW_VERSION == 150
-void func_00034D2C(s32 **arg0) {
-    *arg0 = &D_00044E20;
-    D_00046378 = 0;
-    _ZN14Class_00042AE0D2Ev((s32) arg0);
-}
-#endif
-
-#if FW_VERSION < 150
+#if FW_VERSION < 152
 void func_00034D2C(s32 **arg0) {
     *arg0 = &D_00044E20;
     D_00046378 = 0;
@@ -8191,16 +8016,7 @@ void func_00034D58(s32 **arg0) {
 }
 #endif
 
-#if FW_VERSION == 150
-void func_00034D58(s32 **arg0) {
-    *arg0 = &D_00044E20;
-    D_00046378 = 0;
-    _ZN14Class_00042AE0D2Ev((s32) arg0);
-    _ZdlPv(arg0);
-}
-#endif
-
-#if FW_VERSION < 150
+#if FW_VERSION < 152
 void func_00034D58(s32 **arg0) {
     *arg0 = &D_00044E20;
     D_00046378 = 0;
@@ -8321,15 +8137,7 @@ void func_0003513C(s32 **arg0) {
 }
 #endif
 
-#if FW_VERSION == 150
-void func_0003513C(s32 **arg0) {
-    *arg0 = &D_00044E58;
-    D_0004637C = 0;
-    _ZN14Class_00042AE0D2Ev((s32) arg0);
-}
-#endif
-
-#if FW_VERSION < 150
+#if FW_VERSION < 152
 void func_0003513C(s32 **arg0) {
     *arg0 = &D_00044E58;
     D_0004637C = 0;
@@ -8350,16 +8158,7 @@ void func_00035168(s32 **arg0) {
 }
 #endif
 
-#if FW_VERSION == 150
-void func_00035168(s32 **arg0) {
-    *arg0 = &D_00044E58;
-    D_0004637C = 0;
-    _ZN14Class_00042AE0D2Ev((s32) arg0);
-    _ZdlPv(arg0);
-}
-#endif
-
-#if FW_VERSION < 150
+#if FW_VERSION < 152
 void func_00035168(s32 **arg0) {
     *arg0 = &D_00044E58;
     D_0004637C = 0;

@@ -1205,6 +1205,7 @@ void func_00031E8C(s32 **arg0);
 void func_00031EB4(s32 **arg0);
 void func_00031EC4(s32 **arg0);
 void func_00031EEC(void *arg0);
+void func_00031F08(void *arg0);
 void func_00031F3C(void *arg0, s32 arg1);
 void func_00031F64(s32 arg0);
 void func_00031F80(s32 arg0);
