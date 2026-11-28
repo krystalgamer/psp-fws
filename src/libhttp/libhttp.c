@@ -2806,7 +2806,37 @@ INCLUDE_ASM("nonmatchings/libhttp", func_00009040);
 INCLUDE_ASM("nonmatchings/libhttp", func_000092A4);
 #endif
 
-#if FW_VERSION < 201
+#if FW_VERSION < 150
+int sceHttpsEnd(void) {
+    int i;
+    int ret = 0x80431001;
+
+    if (D_0000E0A4 == 1) {
+        if (D_0000E0AC != NULL) {
+            for (i = 0; i < D_0000E0A8; i++) {
+                if (D_0000E0AC[i] != NULL) {
+                    SSLCERT_free(D_0000E0AC[i]);
+                }
+            }
+            _sceHttpFreeInternal(D_0000E0AC);
+            D_0000E0AC = NULL;
+        }
+        if (D_0000E0B0 != NULL) {
+            SSLCERT_free(D_0000E0B0);
+            D_0000E0B0 = NULL;
+        }
+        if (D_0000E0B4 != NULL) {
+            EVP_PKEY_free(D_0000E0B4);
+            D_0000E0B4 = NULL;
+        }
+        D_0000E0A4 = 0;
+        ret = 0;
+    }
+    return ret;
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/libhttp", sceHttpsEnd);
 #endif
 

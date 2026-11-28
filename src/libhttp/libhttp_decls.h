@@ -563,6 +563,11 @@ extern SceHttpTmpl D_0000DD2C;
 extern SceHttpConn D_0000DDB0;
 extern SceHttpReq D_0000DF18;
 extern SceHttpsUnkGroup *D_0000E0A0;
+extern s32 D_0000E0A4; /* sceHttpsInit done */
+extern s32 D_0000E0A8; /* number of root certs */
+extern void **D_0000E0AC; /* root cert array (SSLCERT) */
+extern void *D_0000E0B0; /* client cert (SSLCERT) */
+extern void *D_0000E0B4; /* client private key (EVP_PKEY) */
 extern SceHttpReq D_0000E7D8;
 extern s32 D_0000F0F0;
 extern s32 D_0000F0F4;
@@ -592,6 +597,7 @@ s32 CreateConnectionWithUrl(s32, s32, s32, s32, s32);
 int CreateHttpExtraHeader(_SceHttpReqHeaderList **out, const SceUChar8 *name, const SceUChar8 *value);
 int CreateRequest(int connection_id, int method, const unsigned char *path, const unsigned char *query, const unsigned char *fragment, SceULong64 content_length, const unsigned char *username, const unsigned char *password, const unsigned char *hostname);
 int DeleteHttpHeader(_SceHttpReqHeaderList **header_list, const SceUChar8 *name);
+void EVP_PKEY_free(void *pkey);
 void FreeHttpHederList(_SceHttpReqHeaderList *list);
 int GetHttpConnection(int target_id, SceHttpConn **dst);
 int GetHttpReq(int target_id, SceHttpReq **dst);
@@ -601,6 +607,7 @@ int InsertNewHttpConnection(SceHttpConn *new_connection);
 int InsertNewHttpReq(SceHttpReq *new_request);
 int InsertNewHttpTmpl(SceHttpTmpl *new_template);
 int RecvResponseHeader(SceHttpReq *request);
+void SSLCERT_free(void *cert);
 M2C_UNK SSL_CTX_free(s32);
 M2C_UNK SSL_clear(s32);
 M2C_UNK SSL_free(s32);
