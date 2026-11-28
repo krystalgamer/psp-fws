@@ -57,14 +57,21 @@ end:
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", sceNetAdhocInit);
 #endif
 
-#if FW_VERSION < 201
 s32 sceNetAdhocTerm(void) {
     s32 s;
     s32 ret;
     struct mbuf *m;
 
     ret = 0;
+#if FW_VERSION >= 201
+    if (sceKernelCheckThreadStack() < 0x7E0)
+        return 0x80410005;
     s = _sce_pspnet_spllock();
+    if (s < 0)
+        return s;
+#else
+    s = _sce_pspnet_spllock();
+#endif
     if (g_adhocInit == 0)
         goto end;
     if (func_00001044() != 0) {
@@ -86,9 +93,6 @@ end:
     _sce_pspnet_splunlock(s);
     return ret;
 }
-#else
-INCLUDE_ASM("nonmatchings/pspnet_adhoc", sceNetAdhocTerm);
-#endif
 
 #if FW_VERSION < 201
 void func_00000270(void) {
