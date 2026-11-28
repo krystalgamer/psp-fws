@@ -375,6 +375,7 @@
   "sceNetMemmove": "void *sceNetMemmove(void *dst, const void *src, s32 n);",
   "sceNetMemset": "M2C_UNK sceNetMemset(M2C_UNK *, M2C_UNK, M2C_UNK);",
   "sceNetRand": "u32 sceNetRand(void);",
+  "sceNetStrcpy": "u8 *sceNetStrcpy(u8 *arg0, u8 *arg1);",
   "sce_alignbytes": "s32 sce_alignbytes(void);",
   "soabort": "s32 soabort(struct socket *so);",
   "soaccept": "s32 soaccept(struct socket *so, struct mbuf *nam);",

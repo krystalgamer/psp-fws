@@ -337,7 +337,6 @@ again:
 INCLUDE_ASM("nonmatchings/pspnet_inet_rtsub", func_0000DF08);
 #endif
 
-#if FW_VERSION < 201
 void func_0000E0EC(s32 cmd, struct ifaddr *ifa, s32 error, struct rtentry *rt)
 {
 	struct rt_addrinfo info;
@@ -391,11 +390,7 @@ void func_0000E0EC(s32 cmd, struct ifaddr *ifa, s32 error, struct rtentry *rt)
 		func_0000EE68(m, &route_proto, &route_src, &route_dst);
 	}
 }
-#else
-INCLUDE_ASM("nonmatchings/pspnet_inet_rtsub", func_0000E0EC);
-#endif
 
-#if FW_VERSION < 201
 void rt_missmsg(s32 type, struct rt_addrinfo *rtinfo, s32 flags, s32 error)
 {
 	struct rt_msghdr rtm;
@@ -414,11 +409,7 @@ void rt_missmsg(s32 type, struct rt_addrinfo *rtinfo, s32 flags, s32 error)
 	route_proto.sp_protocol = sa ? sa->sa_family : 0;
 	func_0000EE68(m, &route_proto, &route_src, &route_dst);
 }
-#else
-INCLUDE_ASM("nonmatchings/pspnet_inet_rtsub", rt_missmsg);
-#endif
 
-#if FW_VERSION < 201
 void func_0000E3F0(struct ifnet *ifp)
 {
 	struct if_msghdr ifm;
@@ -439,9 +430,6 @@ void func_0000E3F0(struct ifnet *ifp)
 	route_proto.sp_protocol = 0;
 	func_0000EE68(m, &route_proto, &route_src, &route_dst);
 }
-#else
-INCLUDE_ASM("nonmatchings/pspnet_inet_rtsub", func_0000E3F0);
-#endif
 
 #if FW_VERSION < 201
 void func_0000E448(struct ifnet *ifp, s32 what)
@@ -466,7 +454,25 @@ void func_0000E448(struct ifnet *ifp, s32 what)
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet_rtsub", func_0000E448);
+void func_0000E448(struct ifnet *ifp, s32 what)
+{
+	struct if_announcemsghdr ifan;
+	struct mbuf *m;
+	struct rt_addrinfo info;
+
+	if (route_cb.any_count == 0)
+		return;
+	bzero_i(&info, sizeof(info));
+	bzero_i(&ifan, sizeof(ifan));
+	ifan.ifan_index = ifp->if_index;
+	sceNetStrcpy((u8 *)ifan.ifan_name, (u8 *)ifp->if_xname);
+	ifan.ifan_what = what;
+	m = func_0000E5A4(RTM_IFANNOUNCE, &info, (char *)&ifan, sizeof(ifan));
+	if (m == 0)
+		return;
+	route_proto.sp_protocol = 0;
+	func_0000EE68(m, &route_proto, &route_src, &route_dst);
+}
 #endif
 
 #if FW_VERSION >= 282
@@ -571,7 +577,42 @@ s32 func_0000E928(struct radix_node *rn, void *v)
 	return (error);
 }
 #else
-INCLUDE_ASM("nonmatchings/pspnet_inet_rtsub", func_0000E928);
+s32 func_0000E928(struct radix_node *rn, void *v)
+{
+	struct walkarg *w = v;
+	struct rtentry *rt = (struct rtentry *)rn;
+	int error = 0, size;
+	struct rt_addrinfo info;
+
+	if (w->w_op == NET_RT_FLAGS && !(rt->rt_flags & w->w_arg))
+		return 0;
+	bzero_i(&info, sizeof(info));
+	info.rti_info[RTAX_DST] = rt_key(rt);
+	info.rti_info[RTAX_GATEWAY] = rt->rt_gateway;
+	info.rti_info[RTAX_NETMASK] = rt_mask(rt);
+	info.rti_info[RTAX_GENMASK] = rt->rt_genmask;
+	if (rt->rt_ifp) {
+		info.rti_info[RTAX_IFP] = rt->rt_ifp->if_addrlist.tqh_first->ifa_addr;
+		info.rti_info[RTAX_IFA] = rt->rt_ifa->ifa_addr;
+		if (rt->rt_ifp->if_flags & IFF_POINTOPOINT)
+			info.rti_info[RTAX_BRD] = rt->rt_ifa->ifa_dstaddr;
+	}
+	if ((error = func_0000DF08(RTM_GET, &info, 0, w, &size)))
+		return (error);
+	if (w->w_where && w->w_tmem && w->w_needed <= 0) {
+		struct rt_msghdr *rtm = (struct rt_msghdr *)w->w_tmem;
+
+		rtm->rtm_flags = rt->rt_flags;
+		rtm->rtm_use = rt->rt_use;
+		rtm->rtm_rmx = rt->rt_rmx;
+		rtm->rtm_index = rt->rt_ifp->if_index;
+		rtm->rtm_errno = rtm->rtm_pid = rtm->rtm_seq = 0;
+		rtm->rtm_addrs = info.rti_addrs;
+		sceNetBcopy(rtm, w->w_where, size);
+		w->w_where += size;
+	}
+	return (error);
+}
 #endif
 
 INCLUDE_ASM("nonmatchings/pspnet_inet_rtsub", func_0000EACC);
@@ -869,6 +910,7 @@ release:
 INCLUDE_ASM("nonmatchings/pspnet_inet_rtsub", func_0000F040);
 
 #if FW_VERSION < 282
+
 INCLUDE_ASM("nonmatchings/pspnet_inet_rtsub", func_0000F1F8);
 
 INCLUDE_ASM("nonmatchings/pspnet_inet_rtsub", func_0000F204);
@@ -876,6 +918,7 @@ INCLUDE_ASM("nonmatchings/pspnet_inet_rtsub", func_0000F204);
 INCLUDE_ASM("nonmatchings/pspnet_inet_rtsub", raw_setsockaddr);
 
 INCLUDE_ASM("nonmatchings/pspnet_inet_rtsub", raw_setpeeraddr);
+
 #endif
 #endif
 

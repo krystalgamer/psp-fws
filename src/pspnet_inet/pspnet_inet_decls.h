@@ -2517,6 +2517,7 @@ u8 *sceNetMemcpy(u8 *dst, const u8 *src, s32 n);
 void *sceNetMemmove(void *dst, const void *src, s32 n);
 M2C_UNK sceNetMemset(M2C_UNK *, M2C_UNK, M2C_UNK);
 u32 sceNetRand(void);
+u8 *sceNetStrcpy(u8 *arg0, u8 *arg1);
 s32 sce_alignbytes(void);
 s32 soabort(struct socket *so);
 s32 soaccept(struct socket *so, struct mbuf *nam);
