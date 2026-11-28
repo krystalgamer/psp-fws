@@ -767,7 +767,44 @@ INCLUDE_ASM("nonmatchings/mscm", sceMScmResetHC);
 
 INCLUDE_ASM("nonmatchings/mscm", sceMScmTPCSetCmd);
 
+#if FW_VERSION < 201
+s32 sceMScmTPCSetCmdHelper(SceMScmHC *hc, u8 cmd, s32 timeout) {
+    u8 buf[4];
+    s32 retry;
+    s32 ret;
+
+    buf[0] = cmd;
+    retry = 5;
+    do {
+        ret = sceMScmSendTPC(hc, 0xE, 1, timeout);
+        if (ret < 0) {
+            break;
+        }
+        ret = sceMScmWriteDataPIO(hc, buf, 1, timeout);
+        if (ret < 0) {
+            if (ret == 0x80220087) {
+                continue;
+            }
+            break;
+        }
+        ret = func_000047C0(hc, timeout);
+        if (ret < 0) {
+            continue;
+        }
+        if (sceMScmHCLastStatus(hc) & 0x100) {
+            ret = 0x80220089;
+            continue;
+        }
+        if (sceMScmHCLastStatus(hc) & 0x200) {
+            ret = 0x80220088;
+        }
+        break;
+    } while (retry-- != 0);
+    return ret;
+}
+#else
 INCLUDE_ASM("nonmatchings/mscm", sceMScmTPCSetCmdHelper);
+#endif
 
 INCLUDE_ASM("nonmatchings/mscm", sceMScmTPCExSetCmd);
 
