@@ -361,7 +361,7 @@ INCLUDE_ASM("nonmatchings/power", scePowerWaitRequestCompletion);
 #endif
 
 #if FW_VERSION >= 102 && FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/power", func_000006B4);
+INCLUDE_ASM("nonmatchings/power", _scePowerOffThread);
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
@@ -381,7 +381,7 @@ INCLUDE_RODATA("nonmatchings/power", D_00005D60);
 #if FW_VERSION >= 102 && FW_VERSION < 150
 INCLUDE_RODATA("nonmatchings/power", D_00003FBC);
 
-INCLUDE_ASM("nonmatchings/power", func_00000928);
+INCLUDE_ASM("nonmatchings/power", _scePowerSuspendOperation);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
@@ -461,7 +461,7 @@ s32 _scePowerOffCommon(s32 arg0) {
 #endif
 
 #if FW_VERSION >= 102 && FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/power", func_000012E8);
+INCLUDE_ASM("nonmatchings/power", _scePowerSwInit);
 #endif
 
 #if FW_VERSION == 100
@@ -928,7 +928,7 @@ s32 func_000016D8(u16 val) {
 #endif
 
 #if FW_VERSION >= 102 && FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/power", func_00001980);
+INCLUDE_ASM("nonmatchings/power", _scePowerResumePoint);
 #endif
 
 #if FW_VERSION == 100 || (FW_VERSION >= 150 && FW_VERSION < 310)
@@ -1050,7 +1050,7 @@ u32 GetGp(void) {
 }
 
 #if FW_VERSION >= 102 && FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/power", func_00001E08);
+INCLUDE_ASM("nonmatchings/power", _scePowerFreqInit);
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
@@ -1149,9 +1149,9 @@ s32 _scePowerFreqEnd(void) {
 #endif
 
 #if FW_VERSION >= 102 && FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/power", func_00002768);
+INCLUDE_ASM("nonmatchings/power", _scePowerFreqSuspend);
 
-INCLUDE_ASM("nonmatchings/power", func_000027BC);
+INCLUDE_ASM("nonmatchings/power", _scePowerFreqResume);
 #endif
 
 #if FW_VERSION >= 310
@@ -1349,11 +1349,11 @@ INCLUDE_RODATA("nonmatchings/power", D_000040A4);
 #endif
 
 #if FW_VERSION == 103
-INCLUDE_ASM("nonmatchings/power", func_000029B8);
+INCLUDE_ASM("nonmatchings/power", _scePowerBatteryThread);
 #endif
 
 #if FW_VERSION == 102
-INCLUDE_ASM("nonmatchings/power", func_0000289C);
+INCLUDE_ASM("nonmatchings/power", _scePowerBatteryThread);
 #endif
 
 #if FW_VERSION >= 350
@@ -1579,7 +1579,7 @@ INCLUDE_ASM("nonmatchings/power", scePowerGetInnerTemp);
 #endif
 
 #if FW_VERSION >= 102 && FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/power", func_00003070);
+INCLUDE_ASM("nonmatchings/power", _scePowerBatteryInit);
 #endif
 
 #if FW_VERSION == 271

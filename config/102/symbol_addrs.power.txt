@@ -179,3 +179,12 @@ _scePowerBatterySuspend = 0x00003188; // type:func rom:0x3208
 _scePowerBatteryIsBusy = 0x00003200; // type:func rom:0x3280
 _scePowerBatteryResume = 0x00003210; // type:func rom:0x3290
 // shared names (tools/add_version.py) end
+_scePowerOffThread = 0x000006B4; // type:func
+_scePowerSuspendOperation = 0x00000928; // type:func
+_scePowerSwInit = 0x000012E8; // type:func
+_scePowerResumePoint = 0x00001980; // type:func
+_scePowerFreqInit = 0x00001E08; // type:func
+_scePowerFreqSuspend = 0x00002768; // type:func
+_scePowerFreqResume = 0x000027BC; // type:func
+_scePowerBatteryInit = 0x00003070; // type:func
+_scePowerBatteryThread = 0x0000289C; // type:func
