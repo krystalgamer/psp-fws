@@ -68,9 +68,13 @@ typedef struct {
     u16 unk6;
     volatile u16 unk8;      /* 0x08: interrupt cause */
     u16 unkA;
-    u8 unkC[0x20 - 0xC];
+    u8 unkC[0x10 - 0xC];
+    volatile u16 unk10;     /* 0x10: icon ucode parameter (sector count) */
+    u8 unk12[0x20 - 0x12];
     volatile u16 unk20;     /* 0x20: icon ucode data port */
-    u8 unk22[0x30 - 0x22];
+    u16 unk22;
+    volatile u8 unk24;      /* 0x24: icon ucode parameter byte FIFO */
+    u8 unk25[0x30 - 0x25];
     volatile u16 command;   /* 0x30: TPC << 12 | size */
     u16 unk32;
     volatile u32 data;      /* 0x34 */
@@ -80,6 +84,7 @@ typedef struct {
     u16 unk3E;
     volatile u32 unk40;     /* 0x40 */
 } SceMScmHCReg;
+typedef char chk_SceMScmHCReg[(sizeof(SceMScmHCReg) == 0x44) ? 1 : -1];
 
 typedef struct SceMScmHC SceMScmHC;
 /* mscm host controller (leading field only; see src/mscm) */
@@ -322,6 +327,8 @@ extern char D_00009250[];
 extern char D_00009264[];
 extern char D_00009270[];
 extern char D_00009284[];
+extern const u16 D_00009398[];
+extern const u16 D_00009414[];
 extern SceMSstorOps D_00009850;
 extern SceMSstorOps D_0000986C;
 #if FW_VERSION < 201
@@ -378,9 +385,13 @@ s32 func_0000083C(SceMSstorDev *dev, s32 addr, s32 size, u8 *buf);
 s32 func_000008B8(SceMSstorDev *dev, u8 cmd, s32 timeout);
 s32 func_000008F0(SceMSstorDev *dev, u32 block, s32 page, s32 cmdParam, u8 *extra, s32 withExtra);
 s32 func_00000978(SceMSstorDev *dev, s32 addr, s32 size, u8 *buf);
+s32 func_00000A84(SceMSstorDev *dev);
+s32 func_000010B0(SceMSstorDev *dev);
 s32 func_000013E0(SceMSstorDev *dev, u8 *buf);
+s32 func_00001400(SceMSstorDev *dev);
 s32 func_0000140C(SceMSstorDev *dev, s32 size, u8 *buf);
 s32 func_00001474(SceMSstorDev *dev);
+s32 func_0000149C(SceMSstorDev *dev);
 s32 func_00001534(SceMSstorDev *dev, s32 size, u8 *buf);
 s32 func_00001558(struct Unk_func_00001558_0 *arg0);
 void func_00001560(s32 arg0);
@@ -413,14 +424,18 @@ s32 func_00001B88(SceMSstorDev *dev, s32 size, u8 *buf);
 void func_00001B88(s32 *arg0, s32 arg1, s32 arg2);
 #endif
 void func_00001BBC(s32 *arg0, M2C_UNK arg1, M2C_UNK arg2);
+s32 func_0000263C(SceMSstorDev *dev, u32 block);
 s32 func_000026A8(SceMSstorDev *dev);
 s32 func_0000299C(SceMSstorDev *dev, s32 arg1, void *arg2);
 u32 func_00003298(SceMSstorDev *dev);
 s32 func_000034CC(void *arg0, s32 arg1, s32 *arg2);
 s32 func_00003C2C(SceMSstorDev *dev);
 s32 func_00003C4C(SceMSstorDev *dev);
+s32 func_00003E20(SceMSstorDev *dev);
 void func_00003E88(s32 arg0);
 void func_00003EA8(s32 arg0);
+void func_00004300(u8 *p, u8 c, s32 n);
+void func_0000432C(u8 *dst, const u8 *src, s32 n);
 s32 func_00004514(void);
 s32 func_00004558(void);
 s32 func_00004588(SceMScmHC *hc, s32 cmd, unsigned long *result, s32 arg3, SceMSstorDev *dev);
@@ -459,7 +474,9 @@ s32 func_00005D18(SceIoIob *iob, s32 cmd, void *in, SceSize inlen, void *out, Sc
 s32 func_00006858(SceSize args, void *argp);
 s32 func_00006A68(SceIoIob *iob, s32 cmd, void *in, SceSize inlen, void *out, SceSize outlen);
 s32 func_00006AC8(SceIoIob *iob, s32 cmd, void *in, SceSize inlen, void *out, SceSize outlen);
+s32 func_00006BE8(SceIoIob *iob, s32 cmd, void *in, SceSize inlen, void *out, SceSize outlen);
 s32 func_00006C70(SceIoIob *iob, s32 cmd, void *in, SceSize inlen, void *out, SceSize outlen, s32 flag);
+s32 func_00006CD8(SceMSstorDev *dev, s32 arg1, s32 flag);
 s32 func_00006DFC(SceIoIob *iob, s32 cmd, void *in, SceSize inlen, void *out, SceSize outlen);
 s32 func_00006E60(SceIoIob *iob, s32 cmd, void *in, SceSize inlen, void *out, SceSize outlen);
 s32 func_00006EBC(SceIoIob *iob, s32 cmd, void *in, SceSize inlen, void *out, SceSize outlen);
@@ -474,7 +491,9 @@ void func_000077A0(struct Unk_func_000077A0_0 *arg0, s32 arg1);
 s32 func_000077B8(struct Unk_func_000077B8_0 *arg0);
 s32 func_000077C4(s32 err);
 s32 func_00007850(s32 err);
+s32 func_00007B38(SceMSstorDev *dev, s32 lba, s32 count, void *buf);
 s32 func_00007CF0(s32);
+s32 func_00007D38(SceMSstorDev *dev, s32 lba, s32 count, void *buf);
 s32 func_00007D38_v102(s32);
 s32 memcmp(const void *a, const void *b, SceSize n);
 void *memcpy(void *dst, const void *src, SceSize n);
@@ -514,9 +533,9 @@ s32 sceMScmGetSlotState(SceMScmHC *hc, s32 *out);
 s32 sceMScmHCIrqPrimaryHandler(s32 intno, SceMScmHC *hc);
 s32 sceMScmHCLastStatus(SceMScmHC *hc);
 u16 sceMScmHCSetBusyCount(SceMScmHC *hc, u16 count);
-s32 sceMScmIconLoadUcode(SceMScmHC *hc, u32 addr, u16 *code, s32 count);
+s32 sceMScmIconLoadUcode(SceMScmHC *hc, u32 addr, const u16 *code, s32 count);
 void sceMScmIconResetIcon(SceMScmHC *hc);
-s32 sceMScmIconStartUcode(SceMScmHC *hc, u32 addr);
+s32 sceMScmIconStartUcode(SceMScmHC *hc, u32 addr, s32 timeout);
 s32 sceMScmIconStopUcode(SceMScmHC *hc);
 s32 sceMScmReadDataPIO(SceMScmHC *hc, u8 *buf, s32 size, s32 timeout);
 s32 sceMScmReadMSReg(SceMScmHC *hc, s32 addr, s32 size, u8 *buf, s32 force, s32 timeout);
@@ -530,6 +549,8 @@ s32 sceMScmSetHCTransferMode(SceMScmHC *hc, s32 a, s32 b, s32 c);
 s32 sceMScmSetPullDownReg(s32 slot, s32 on);
 s32 sceMScmSetPullDownRegByDesc(SceMScmHC *hc, s32 on);
 s32 sceMScmSetSlotPower(SceMScmHC *hc, s32 on);
+s32 sceMScmStartReadDataDMA(SceMScmHC *hc, s32 a1, s32 a2, void *buf, s32 size, s32 a5, s32 a6, u32 timeout);
+s32 sceMScmStartWriteDataDMA(SceMScmHC *hc, s32 a1, s32 a2, void *buf, s32 size, s32 a5, s32 a6, u32 timeout);
 s32 sceMScmTPCExSetCmd(SceMScmHC *hc, u8 cmd, s8 *arg, u8 *intr, s32 timeout);
 s32 sceMScmTPCExSetCmdHelper(SceMScmHC *hc, u8 cmd, s8 *arg, s32 timeout);
 s32 sceMScmTPCGetInt(SceMScmHC *hc, u8 *intr, s32 mode, s32 timeout);
