@@ -19,6 +19,14 @@
 #define NAND_DMA_ECC   (*(volatile u32 *)0xBFF00800)
 #define NAND_DMA_SPARE ((volatile u32 *)0xBFF00900) /* 3 words */
 
+/* sceKernelSm1ReferOperations() result; only the 0xC entry is used here */
+typedef struct {
+    void *unk0;
+    void *unk4;
+    void *unk8;
+    s32 (*isBusClockOn)(void); /* 0xC */
+} SceKernelSm1Ops;
+
 typedef struct SceSysEventHandler {
     s32 size;
     const char *name;
@@ -90,6 +98,7 @@ typedef struct {
 } SceNandSpare;
 typedef char chk_SceNandSpare[(sizeof(SceNandSpare) == 0x10) ? 1 : -1];
 
+extern char D_000026F0[];
 extern const SceNandChipEntry D_00002860[17];
 extern SceSysEventHandler D_00002930;
 extern SceNandState D_00002970;
@@ -103,6 +112,7 @@ extern SceNandInfo D_00002FD0;
 
 s32 Kprintf(const char *fmt, ...);
 s32 func_0000014C(void);
+s32 func_00000160(void);
 s32 func_00000F18(s32 arg0);
 s32 func_00000F58(s32 mode, void *user, void *spare);
 s32 func_00001180(s32 mode, u32 ppn, void *user, void *spare);
@@ -125,6 +135,7 @@ s32 sceKernelRegisterSysEventHandler(SceSysEventHandler *handler);
 s32 sceKernelReleaseIntrHandler(s32 intrNum);
 s32 sceKernelSetEventFlag(SceUID evid, u32 bits);
 s32 sceKernelSignalSema(SceUID semaid, s32 signal);
+SceKernelSm1Ops *sceKernelSm1ReferOperations(void);
 s32 sceKernelUnregisterSysEventHandler(SceSysEventHandler *handler);
 s32 sceKernelWaitEventFlag(SceUID evid, u32 bits, u32 wait, u32 *outBits, u32 *timeout);
 s32 sceKernelWaitSema(SceUID semaid, s32 signal, u32 *timeout);

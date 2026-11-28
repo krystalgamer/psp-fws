@@ -14,7 +14,37 @@ INCLUDE_ASM("nonmatchings/emc_sm", func_0000014C);
 INCLUDE_RODATA("nonmatchings/emc_sm", D_000026F0);
 #endif
 
-#if FW_VERSION != 271
+#if FW_VERSION == 100
+s32 sceNandInit(void) {
+    SceKernelSm1Ops *ops;
+
+    __builtin_memset(&D_00002970, 0, sizeof(D_00002970));
+    sceSysregEmcsmBusClockEnable();
+    sceSysregEmcsmIoEnable();
+    D_00002970.semaId = sceKernelCreateSema(D_000026F0, 1, 1, 1, NULL);
+    D_00002970.evFlagId = sceKernelCreateEventFlag(D_000026F0, 1, 0, NULL);
+    ops = sceKernelSm1ReferOperations();
+    D_00002970.busClockOn = 0;
+    if (ops != NULL && ops->isBusClockOn() != 0) {
+        D_00002970.busClockOn = 1;
+    }
+    NAND_INTR = 0x303;
+    sceKernelRegisterIntrHandler(0x14, 1, func_00000160, NULL, NULL);
+    sceKernelEnableIntr(0x14);
+    sceKernelRegisterSysEventHandler(&D_00002930);
+    sceNandLock(0);
+    if (!func_0000014C()) {
+        Kprintf("NAND device busy!!\n");
+    } else {
+        sceNandReset(NULL);
+        sceNandDetectChip();
+    }
+    sceNandUnlock();
+    return 0;
+}
+#endif
+
+#if (FW_VERSION >= 102 && FW_VERSION < 271) || FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/emc_sm", sceNandInit);
 #endif
 

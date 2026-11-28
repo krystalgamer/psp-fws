@@ -2,6 +2,7 @@
  "funcs": {
   "Kprintf": "s32 Kprintf(const char *fmt, ...);",
   "func_0000014C": "s32 func_0000014C(void);",
+  "func_00000160": "s32 func_00000160(void);",
   "func_00000F18": "s32 func_00000F18(s32 arg0);",
   "func_00000F58": "s32 func_00000F58(s32 mode, void *user, void *spare);",
   "func_00001180": "s32 func_00001180(s32 mode, u32 ppn, void *user, void *spare);",
@@ -24,6 +25,7 @@
   "sceKernelReleaseIntrHandler": "s32 sceKernelReleaseIntrHandler(s32 intrNum);",
   "sceKernelSetEventFlag": "s32 sceKernelSetEventFlag(SceUID evid, u32 bits);",
   "sceKernelSignalSema": "s32 sceKernelSignalSema(SceUID semaid, s32 signal);",
+  "sceKernelSm1ReferOperations": "SceKernelSm1Ops *sceKernelSm1ReferOperations(void);",
   "sceKernelUnregisterSysEventHandler": "s32 sceKernelUnregisterSysEventHandler(SceSysEventHandler *handler);",
   "sceKernelWaitEventFlag": "s32 sceKernelWaitEventFlag(SceUID evid, u32 bits, u32 wait, u32 *outBits, u32 *timeout);",
   "sceKernelWaitSema": "s32 sceKernelWaitSema(SceUID semaid, s32 signal, u32 *timeout);",
@@ -72,12 +74,14 @@
  },
  "types": {
   "10_hw": "/* EMC_SM (NAND controller) registers */\n#define NAND_CTRL      (*(volatile u32 *)0xBD101000) /* bit16: no auto user ECC, bit17: write user ECC */\n#define NAND_STATUS    (*(volatile u32 *)0xBD101004) /* bit0: ready, bit7: write enable (not protected) */\n#define NAND_CMD       (*(volatile u32 *)0xBD101008)\n#define NAND_ADDR      (*(volatile u32 *)0xBD10100C)\n#define NAND_RESET     (*(volatile u32 *)0xBD101014) /* end of command */\n#define NAND_DMA_ADDR  (*(volatile u32 *)0xBD101020)\n#define NAND_DMA_CTRL  (*(volatile u32 *)0xBD101024)\n#define NAND_DMA_STAT  (*(volatile u32 *)0xBD101028)\n#define NAND_INTR      (*(volatile u32 *)0xBD101038)\n#define NAND_DATA      (*(volatile u32 *)0xBD101300)\n#define NAND_DMA_PAGE  ((volatile u32 *)0xBFF00000) /* page buffer, 0x200 bytes */\n#define NAND_DMA_ECC   (*(volatile u32 *)0xBFF00800)\n#define NAND_DMA_SPARE ((volatile u32 *)0xBFF00900) /* 3 words */",
+  "12_SceKernelSm1Ops": "/* sceKernelSm1ReferOperations() result; only the 0xC entry is used here */\ntypedef struct {\n    void *unk0;\n    void *unk4;\n    void *unk8;\n    s32 (*isBusClockOn)(void); /* 0xC */\n} SceKernelSm1Ops;",
   "15_SceSysEventHandler": "typedef struct SceSysEventHandler {\n    s32 size;\n    const char *name;\n    s32 typeMask;\n    s32 (*handler)(s32 ev, const char *name, void *param, s32 *result);\n    s32 gp;\n    s32 busy;\n    struct SceSysEventHandler *next;\n    s32 reserved[9];\n} SceSysEventHandler;",
   "20_SceNandState": "/* driver state (D_00002970); the interrupt handler func_00000160 runs the page transfers */\n#if FW_VERSION == 100\ntypedef struct {\n    SceUID semaId;   /* 0x00 */\n    SceUID evFlagId; /* 0x04 */\n    s32 busClockOn;  /* 0x08: bus clock stays on (sm1 operation 0xC returned nonzero) */\n    s32 state;       /* 0x0C: 0 idle, 1/2 wait ready (read/write), 3 reading, 4 writing, -1 done */\n    s32 error;       /* 0x10: bit0 ECC uncorrectable, bit1 ECC corrected / DMA error */\n    s32 count;       /* 0x14: pages left */\n    u32 ppn;         /* 0x18 */\n    void *user;      /* 0x1C */\n    void *spare;     /* 0x20 */\n    s32 mode;        /* 0x24: SceNandEccMode */\n} SceNandState;\ntypedef char chk_SceNandState[(sizeof(SceNandState) == 0x28) ? 1 : -1];\n#else\ntypedef struct {\n    SceUID semaId;   /* 0x00 */\n    SceUID evFlagId; /* 0x04 */\n    u8 unk8[0x2C];\n} SceNandState;\n#endif",
   "30_SceNandInfo": "/* NAND chip geometry (D_00002FD0); filled by sceNandDetectChip */\ntypedef struct {\n    s32 pageSize;      /* 0x0 */\n    s32 pagesPerBlock; /* 0x4 */\n    s32 totalBlocks;   /* 0x8 */\n    u8 makerId;        /* 0xC */\n    u8 deviceId;       /* 0xD */\n    u8 padE[2];\n} SceNandInfo;\n/* known chip table entry (D_00002860, 17 entries) */\ntypedef struct {\n    u8 makerId;         /* 0x0 */\n    u8 deviceId;        /* 0x1 */\n    u16 pageSize;       /* 0x2 */\n    u16 pagesPerBlock;  /* 0x4 */\n    u16 unk6;\n    u32 totalBlocks;    /* 0x8 */\n} SceNandChipEntry;\ntypedef char chk_SceNandChipEntry[(sizeof(SceNandChipEntry) == 0xC) ? 1 : -1];",
   "35_SceNandSpare": "/* spare area without the user ECC (sceNandReadPages/WritePages \"spare\" buffers) */\ntypedef struct {\n    u8 blockFmt;    /* 0x0 */\n    u8 blockStat;   /* 0x1: 0xFF = good block */\n    u16 lbn;        /* 0x2 */\n    u32 id;         /* 0x4 */\n    u8 spareEcc[2]; /* 0x8 */\n    u8 reserved[2]; /* 0xA */\n} SceNandSpareExtra;\n/* raw spare area (sceNandReadPagesRawAll) */\ntypedef struct {\n    u8 userEcc[3];  /* 0x0 */\n    u8 reserved0;   /* 0x3 */\n    SceNandSpareExtra extra; /* 0x4 */\n} SceNandSpare;\ntypedef char chk_SceNandSpare[(sizeof(SceNandSpare) == 0x10) ? 1 : -1];"
  },
  "vars": {
+  "D_000026F0": "extern char D_000026F0[];",
   "D_00002860": "extern const SceNandChipEntry D_00002860[17];",
   "D_00002930": "extern SceSysEventHandler D_00002930;",
   "D_00002970": "extern SceNandState D_00002970;",
