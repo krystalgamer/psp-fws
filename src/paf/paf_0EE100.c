@@ -38,7 +38,7 @@ INCLUDE_RODATA("nonmatchings/paf_0EE100", D_0019AE0C);
 INCLUDE_RODATA("nonmatchings/paf_0EE100", D_00193218);
 #endif
 
-#if FW_VERSION >= 282
+#if FW_VERSION == 282
 INCLUDE_RODATA("nonmatchings/paf_0EE100", D_0019AE18);
 #endif
 

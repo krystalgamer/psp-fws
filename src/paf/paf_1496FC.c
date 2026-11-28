@@ -3,7 +3,7 @@
 #include "common.h"
 #include "paf_decls.h"
 
-#if FW_VERSION >= 282
+#if FW_VERSION == 282
 s32 func_001496FC(s32 *arg0, s32 arg1, s32 *arg2) {
     s32 temp_v0;
     s32 var_a0;

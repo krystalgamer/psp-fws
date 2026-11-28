@@ -114,6 +114,6 @@ INCLUDE_ASM("nonmatchings/paf_0E9248", _ZNK3paf10PhMenuList9IsInheritEPKc);
 INCLUDE_ASM("nonmatchings/paf_0E9248", _ZNK3paf10PhMenuList13GetWidgetTypeEv);
 #endif
 
-#if FW_VERSION >= 282
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/paf_0E9248", func_000E94EC);
 #endif

@@ -2,23 +2,30 @@
 #include "common.h"
 #include "paf_decls.h"
 
-#if FW_VERSION < 270 || FW_VERSION == 282
+#if FW_VERSION < 270
+Class_00171640::~Class_00171640() {
+}
+#endif
+
+#if FW_VERSION == 282
 void func_0004A258(M2C_UNK **arg0) {
     *arg0 = &D_00171640;
-    func_0004417C((s32) arg0);
+    _ZN14Class_00126EC8D2Ev((s32) arg0);
 }
 
 void func_0004A280(M2C_UNK **arg0) {
     *arg0 = &D_00171640;
-    func_0004417C((s32) arg0);
+    _ZN14Class_00126EC8D2Ev((s32) arg0);
 }
 
 void func_0004A2A8(M2C_UNK **arg0) {
     *arg0 = &D_00171640;
-    func_0004417C((s32) arg0);
+    _ZN14Class_00126EC8D2Ev((s32) arg0);
     _ZdlPv(arg0);
 }
+#endif
 
+#if FW_VERSION < 270 || FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/paf_04A258", func_0004A2E0);
 
 INCLUDE_ASM("nonmatchings/paf_04A258", func_0004A460);
@@ -60,32 +67,49 @@ void func_0004AED4(M2C_UNK **arg0) {
     func_00044154((Unk_func_00044154_0*) arg0);
     *arg0 = &D_00171684;
 }
+#endif
 
+#if FW_VERSION < 270
+Class_00171684::~Class_00171684() {
+}
+#endif
+
+#if FW_VERSION == 282
 void func_0004AF04(M2C_UNK **arg0) {
     *arg0 = &D_00171684;
-    func_0004417C((s32) arg0);
+    _ZN14Class_00126EC8D2Ev((s32) arg0);
 }
 
 void func_0004AF2C(M2C_UNK **arg0) {
     *arg0 = &D_00171684;
-    func_0004417C((s32) arg0);
+    _ZN14Class_00126EC8D2Ev((s32) arg0);
 }
 
 void func_0004AF54(M2C_UNK **arg0) {
     *arg0 = &D_00171684;
-    func_0004417C((s32) arg0);
+    _ZN14Class_00126EC8D2Ev((s32) arg0);
     _ZdlPv(arg0);
 }
+#endif
 
+#if FW_VERSION < 270 || FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/paf_04A258", func_0004AF8C);
 
 INCLUDE_RODATA("nonmatchings/paf_04A258", D_00171640);
+#endif
 
+#if FW_VERSION < 270
+__asm__(".globl _ZTV14Class_00171640\n_ZTV14Class_00171640 = D_00171640 - 8\n");
+#endif
+
+#if FW_VERSION < 270 || FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/paf_04A258", func_0004B090);
 #endif
 
 #if FW_VERSION < 270
 INCLUDE_RODATA("nonmatchings/paf_04A258", D_00171684);
+
+__asm__(".globl _ZTV14Class_00171684\n_ZTV14Class_00171684 = D_00171684 - 8\n");
 #endif
 
 #if FW_VERSION < 200
@@ -121,11 +145,8 @@ INCLUDE_ASM("nonmatchings/paf_04A258", func_00042CF0);
 
 INCLUDE_ASM("nonmatchings/paf_04A258", func_00042D20);
 
-INCLUDE_ASM("nonmatchings/paf_04A258", func_00042D50);
-
-INCLUDE_ASM("nonmatchings/paf_04A258", func_00042D78);
-
-INCLUDE_ASM("nonmatchings/paf_04A258", func_00042DA0);
+Class_001716C0::~Class_001716C0() {
+}
 
 INCLUDE_ASM("nonmatchings/paf_04A258", func_00042DD8);
 #endif
@@ -144,6 +165,8 @@ INCLUDE_ASM("nonmatchings/paf_04A258", func_00043004);
 
 #if FW_VERSION >= 200 && FW_VERSION < 270
 INCLUDE_RODATA("nonmatchings/paf_04A258", D_001668C4);
+
+__asm__(".globl _ZTV14Class_001716C0\n_ZTV14Class_001716C0 = D_001668C4 - 8\n");
 #endif
 
 #if FW_VERSION >= 200 && FW_VERSION < 250
@@ -224,33 +247,33 @@ void func_0003A3C8(void *arg0) {
 #endif
 
 #if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/paf_04A258", func_0004417C);
+INCLUDE_ASM("nonmatchings/paf_04A258", _ZN14Class_00126EC8D2Ev);
 #endif
 
 #if FW_VERSION >= 200 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/paf_04A258", func_0003A3F0);
+INCLUDE_ASM("nonmatchings/paf_04A258", _ZN14Class_00126EC8D1Ev);
 #endif
 
 #if FW_VERSION == 152
-void func_0003A3F0(void *arg0) {
+void _ZN14Class_00126EC8D1Ev(struct Unk_func_00044190_0 *arg0) {
     M2C_FIELD(arg0, s32 **, 0) = &D_00126EC8;
     M2C_FIELD(arg0, s32 *, 4) = 0;
 }
 #endif
 
 #if FW_VERSION < 152
-void func_0003A3F0(void *arg0) {
+void _ZN14Class_00126EC8D1Ev(struct Unk_func_00044190_0 *arg0) {
     M2C_FIELD(arg0, M2C_UNK **, 0) = &D_00126EC8;
     M2C_FIELD(arg0, s32 *, 4) = 0;
 }
 #endif
 
 #if FW_VERSION >= 200 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/paf_04A258", func_0003A404);
+INCLUDE_ASM("nonmatchings/paf_04A258", _ZN14Class_00126EC8D0Ev);
 #endif
 
 #if FW_VERSION == 152
-void func_0003A404(void *arg0) {
+void _ZN14Class_00126EC8D0Ev(struct Unk_func_000441A4_0 *arg0) {
     M2C_FIELD(arg0, s32 **, 0) = &D_00126EC8;
     M2C_FIELD(arg0, s32 *, 4) = 0;
     _ZdlPv(arg0);
@@ -258,7 +281,7 @@ void func_0003A404(void *arg0) {
 #endif
 
 #if FW_VERSION < 152
-void func_0003A404(void *arg0) {
+void _ZN14Class_00126EC8D0Ev(struct Unk_func_000441A4_0 *arg0) {
     M2C_FIELD(arg0, M2C_UNK **, 0) = &D_00126EC8;
     M2C_FIELD(arg0, s32 *, 4) = 0;
     _ZdlPv(arg0);
@@ -315,13 +338,7 @@ void func_0003A898(void) {
 INCLUDE_ASM("nonmatchings/paf_04A258", func_0003A8A0);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 200
-void func_0003A8A0(s32 **arg0) {
-    *arg0 = &D_00126EC8;
-}
-#endif
-
-#if FW_VERSION == 100
+#if FW_VERSION < 200
 void func_0003A8A0(s32 **arg0) {
     *arg0 = &D_00126EC8;
 }
@@ -331,14 +348,7 @@ void func_0003A8A0(s32 **arg0) {
 INCLUDE_ASM("nonmatchings/paf_04A258", func_0003A8B0);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 200
-void func_0003A8B0(s32 **arg0) {
-    *arg0 = &D_00126EC8;
-    _ZdlPv(arg0);
-}
-#endif
-
-#if FW_VERSION == 100
+#if FW_VERSION < 200
 void func_0003A8B0(s32 **arg0) {
     *arg0 = &D_00126EC8;
     _ZdlPv(arg0);
@@ -363,21 +373,28 @@ void func_0004B580(M2C_UNK **arg0) {
 }
 #endif
 
+#if FW_VERSION < 200 || (FW_VERSION >= 270 && FW_VERSION < 282)
+Class_001716C0::~Class_001716C0() {
+}
+#endif
+
+#if FW_VERSION >= 200 && FW_VERSION < 270
 void func_0004B5B0(M2C_UNK **arg0) {
     *arg0 = &D_001716C0;
-    func_0004417C((s32) arg0);
+    _ZN14Class_00126EC8D2Ev((s32) arg0);
 }
 
 void func_0004B5D8(M2C_UNK **arg0) {
     *arg0 = &D_001716C0;
-    func_0004417C((s32) arg0);
+    _ZN14Class_00126EC8D2Ev((s32) arg0);
 }
 
 void func_0004B600(M2C_UNK **arg0) {
     *arg0 = &D_001716C0;
-    func_0004417C((s32) arg0);
+    _ZN14Class_00126EC8D2Ev((s32) arg0);
     _ZdlPv(arg0);
 }
+#endif
 
 #if FW_VERSION >= 200 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_04A258", func_00044538);
@@ -493,7 +510,13 @@ INCLUDE_ASM("nonmatchings/paf_04A258", func_0003BB20);
 
 #if FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/paf_04A258", D_001716C0);
+#endif
 
+#if FW_VERSION < 200 || (FW_VERSION >= 270 && FW_VERSION < 282)
+__asm__(".globl _ZTV14Class_001716C0\n_ZTV14Class_001716C0 = D_001716C0 - 8\n");
+#endif
+
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_04A258", func_0003BC2C);
 
 INCLUDE_ASM("nonmatchings/paf_04A258", func_0003BEEC);
@@ -507,17 +530,10 @@ INCLUDE_ASM("nonmatchings/paf_04A258", func_0003C4AC);
 INCLUDE_ASM("nonmatchings/paf_04A258", func_0003C504);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 200
+#if FW_VERSION < 200
 void func_0003C504(s32 **arg0) {
     *arg0 = &D_001717B4;
-    func_0004417C((s32) arg0);
-}
-#endif
-
-#if FW_VERSION == 100
-void func_0003C504(s32 **arg0) {
-    *arg0 = &D_001717B4;
-    func_0004417C((s32) arg0);
+    _ZN14Class_00126EC8D2Ev((s32) arg0);
 }
 #endif
 
@@ -525,17 +541,10 @@ void func_0003C504(s32 **arg0) {
 INCLUDE_ASM("nonmatchings/paf_04A258", func_0003C52C);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 200
+#if FW_VERSION < 200
 void func_0003C52C(s32 **arg0) {
     *arg0 = &D_001717B4;
-    func_0004417C((s32) arg0);
-}
-#endif
-
-#if FW_VERSION == 100
-void func_0003C52C(s32 **arg0) {
-    *arg0 = &D_001717B4;
-    func_0004417C((s32) arg0);
+    _ZN14Class_00126EC8D2Ev((s32) arg0);
 }
 #endif
 
@@ -543,18 +552,10 @@ void func_0003C52C(s32 **arg0) {
 INCLUDE_ASM("nonmatchings/paf_04A258", func_0003C554);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 200
+#if FW_VERSION < 200
 void func_0003C554(s32 **arg0) {
     *arg0 = &D_001717B4;
-    func_0004417C((s32) arg0);
-    _ZdlPv(arg0);
-}
-#endif
-
-#if FW_VERSION == 100
-void func_0003C554(s32 **arg0) {
-    *arg0 = &D_001717B4;
-    func_0004417C((s32) arg0);
+    _ZN14Class_00126EC8D2Ev((s32) arg0);
     _ZdlPv(arg0);
 }
 #endif
@@ -595,6 +596,8 @@ INCLUDE_RODATA("nonmatchings/paf_04A258", D_00166B2C);
 INCLUDE_RODATA("nonmatchings/paf_04A258", D_00166B48);
 
 INCLUDE_RODATA("nonmatchings/paf_04A258", D_0016AAE0);
+
+__asm__(".globl _ZTV14Class_0016AAE0\n_ZTV14Class_0016AAE0 = D_0016AAE0 - 8\n");
 #endif
 
 #if FW_VERSION >= 270 && FW_VERSION < 280
@@ -637,6 +640,8 @@ INCLUDE_RODATA("nonmatchings/paf_04A258", D_00166B2C);
 INCLUDE_RODATA("nonmatchings/paf_04A258", D_00166B48);
 
 INCLUDE_RODATA("nonmatchings/paf_04A258", D_0016AAE0);
+
+__asm__(".globl _ZTV14Class_0016AAE0\n_ZTV14Class_0016AAE0 = D_0016AAE0 - 8\n");
 #endif
 
 #if FW_VERSION == 201
@@ -821,13 +826,14 @@ INCLUDE_ASM("nonmatchings/paf_04A258", func_0003DB58);
 
 #if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_04A258", func_0004A5BC);
+#endif
 
-INCLUDE_ASM("nonmatchings/paf_04A258", func_0004A60C);
+#if FW_VERSION >= 250
+Class_0016AAE0::~Class_0016AAE0() {
+}
+#endif
 
-INCLUDE_ASM("nonmatchings/paf_04A258", func_0004A634);
-
-INCLUDE_ASM("nonmatchings/paf_04A258", func_0004A65C);
-
+#if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_04A258", func_0004A694);
 
 INCLUDE_ASM("nonmatchings/paf_04A258", func_0004A7D0);
@@ -936,17 +942,16 @@ INCLUDE_ASM("nonmatchings/paf_04A258", func_0004A36C);
 
 INCLUDE_ASM("nonmatchings/paf_04A258", func_0004A228);
 
-INCLUDE_ASM("nonmatchings/paf_04A258", func_0004A3CC);
-
-INCLUDE_ASM("nonmatchings/paf_04A258", func_0004A3F4);
-
-INCLUDE_ASM("nonmatchings/paf_04A258", func_0004A41C);
+Class_00171640::~Class_00171640() {
+}
 
 INCLUDE_ASM("nonmatchings/paf_04A258", func_0004A454);
 
 INCLUDE_ASM("nonmatchings/paf_04A258", func_0004A5D4);
 
 INCLUDE_RODATA("nonmatchings/paf_04A258", D_0016FD60);
+
+__asm__(".globl _ZTV14Class_00171640\n_ZTV14Class_00171640 = D_0016FD60 - 8\n");
 
 INCLUDE_ASM("nonmatchings/paf_04A258", func_0004A6FC);
 
@@ -964,11 +969,8 @@ INCLUDE_ASM("nonmatchings/paf_04A258", func_0004B018);
 
 INCLUDE_ASM("nonmatchings/paf_04A258", func_0004AED4);
 
-INCLUDE_ASM("nonmatchings/paf_04A258", func_0004B078);
-
-INCLUDE_ASM("nonmatchings/paf_04A258", func_0004B0A0);
-
-INCLUDE_ASM("nonmatchings/paf_04A258", func_0004B0C8);
+Class_00171684::~Class_00171684() {
+}
 
 INCLUDE_ASM("nonmatchings/paf_04A258", func_0004B100);
 #endif
@@ -983,6 +985,8 @@ INCLUDE_ASM("nonmatchings/paf_04A258", func_0004B204);
 
 #if FW_VERSION >= 270 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/paf_04A258", D_0016FDA4);
+
+__asm__(".globl _ZTV14Class_00171684\n_ZTV14Class_00171684 = D_0016FDA4 - 8\n");
 
 INCLUDE_ASM("nonmatchings/paf_04A258", func_0004B2D8);
 
@@ -1103,6 +1107,8 @@ void func_0004CA7C(struct Unk_func_0004CA7C_0 *arg0) {
 }
 
 INCLUDE_RODATA("nonmatchings/paf_04A258", D_001716C0);
+
+__asm__(".globl _ZTV14Class_0016AAE0\n_ZTV14Class_0016AAE0 = D_001716C0 - 8\n");
 
 INCLUDE_ASM("nonmatchings/paf_04A258", func_0004CAB4);
 #endif

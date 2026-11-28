@@ -3,30 +3,19 @@
 #include "common.h"
 #include "paf_decls.h"
 
-#if FW_VERSION >= 282
+#if FW_VERSION == 282
 void func_000466F4(struct Unk_func_00044154_0 *arg0, s32 arg1) {
     func_00044154(arg0);
     arg0->unk8 = (s32) (arg1 - __builtin_allegrex_ins(arg1 + ((u32) (arg1 >> 0x1F) >> 0x1E), 0, 0, 2));
     arg0->unk0 = &D_00171564;
 }
 
-void func_00046748(M2C_UNK **arg0) {
-    *arg0 = &D_00171564;
-    func_0004417C((s32) arg0);
-}
-
-void func_00046770(M2C_UNK **arg0) {
-    *arg0 = &D_00171564;
-    func_0004417C((s32) arg0);
-}
-
-void func_00046798(M2C_UNK **arg0) {
-    *arg0 = &D_00171564;
-    func_0004417C((s32) arg0);
-    _ZdlPv(arg0);
+Class_001716C0::~Class_001716C0() {
 }
 
 INCLUDE_RODATA("nonmatchings/paf_0466F4", D_001714B0);
+
+__asm__(".globl _ZTV14Class_00171684\n_ZTV14Class_00171684 = D_001714B0 - 8\n");
 
 INCLUDE_ASM("nonmatchings/paf_0466F4", func_000467D0);
 
@@ -134,17 +123,17 @@ INCLUDE_ASM("nonmatchings/paf_0466F4", func_000486AC);
 
 void func_000486FC(M2C_UNK **arg0) {
     *arg0 = &D_001715E0;
-    func_0004417C((s32) arg0);
+    _ZN14Class_00126EC8D2Ev((s32) arg0);
 }
 
 void func_00048724(M2C_UNK **arg0) {
     *arg0 = &D_001715E0;
-    func_0004417C((s32) arg0);
+    _ZN14Class_00126EC8D2Ev((s32) arg0);
 }
 
 void func_0004874C(M2C_UNK **arg0) {
     *arg0 = &D_001715E0;
-    func_0004417C((s32) arg0);
+    _ZN14Class_00126EC8D2Ev((s32) arg0);
     _ZdlPv(arg0);
 }
 

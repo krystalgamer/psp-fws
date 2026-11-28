@@ -7,7 +7,48 @@
 #ifdef __cplusplus
 #include "paf.h"
 #include "vsh.h"
+#pragma interface
 extern "C" {
+#endif
+
+#ifdef __cplusplus
+/* dtor still asm/m2c (not trivial) */
+class Class_00126EC8 {
+public:
+    virtual ~Class_00126EC8();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_0016AAE0 is data (vptr = label - 8 + 8) */
+class Class_0016AAE0 : public Class_00126EC8 {
+public:
+    virtual ~Class_0016AAE0();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_00171640 is data (vptr = label - 8 + 8) */
+class Class_00171640 : public Class_00126EC8 {
+public:
+    virtual ~Class_00171640();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_00171684 is data (vptr = label - 8 + 8) */
+class Class_00171684 : public Class_00126EC8 {
+public:
+    virtual ~Class_00171684();
+};
+#endif
+
+#ifdef __cplusplus
+/* vtable _ZTV14Class_001716C0 is data (vptr = label - 8 + 8) */
+class Class_001716C0 : public Class_00126EC8 {
+public:
+    virtual ~Class_001716C0();
+};
 #endif
 
 struct D_001A52C4_s {
@@ -4697,6 +4738,21 @@ s32 _ZN13PSJSValueImpl11NewFromPoolERK11PSJSContext13PSJSValueType(s32 *arg0, s3
 s32 _ZN13PSJSValueImpl11NewFromPoolERK11PSJSContextRK10psjsvector(s32 *arg0, M2C_UNK arg1);
 s32 _ZN13PSJSValueImpl11NewFromPoolERK11PSJSContexti(s32 *arg0, s32 arg1);
 M2C_UNK _ZN13PSJSValueImpl6DecRefEv(s32);
+void _ZN14Class_00126EC8D0Ev(struct Unk_func_000441A4_0 *arg0);
+void _ZN14Class_00126EC8D1Ev(struct Unk_func_00044190_0 *arg0);
+s32 _ZN14Class_00126EC8D2Ev(s32);
+void _ZN14Class_0016AAE0D0Ev(M2C_UNK **arg0);
+void _ZN14Class_0016AAE0D1Ev(M2C_UNK **arg0);
+void _ZN14Class_0016AAE0D2Ev(M2C_UNK **arg0);
+void _ZN14Class_00171640D0Ev(M2C_UNK **arg0);
+void _ZN14Class_00171640D1Ev(M2C_UNK **arg0);
+void _ZN14Class_00171640D2Ev(M2C_UNK **arg0);
+void _ZN14Class_00171684D0Ev(M2C_UNK **arg0);
+void _ZN14Class_00171684D1Ev(M2C_UNK **arg0);
+void _ZN14Class_00171684D2Ev(M2C_UNK **arg0);
+void _ZN14Class_001716C0D0Ev(M2C_UNK **arg0);
+void _ZN14Class_001716C0D1Ev(M2C_UNK **arg0);
+void _ZN14Class_001716C0D2Ev(M2C_UNK **arg0);
 void _ZN15psjsstring_impl6DecRefEv(s32 *arg0);
 void _ZN3paf10MessageBox25SetMessageBoxSoundHandlerEPFvNS0_9SoundTypeEE(s32 arg0);
 void _ZN3paf10MessageBox25SetQueryButtonInfoHandlerEPFbNS0_10ButtonTypeEPNS0_10ButtonInfoEE(s32 arg0);

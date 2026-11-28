@@ -2,7 +2,7 @@
 #include "common.h"
 #include "paf_decls.h"
 
-#if FW_VERSION >= 282
+#if FW_VERSION == 282
 void _ZN3paf15CriticalSectionC1Ev(struct Unk_scePaf_B884B031_0 *arg0) {
     arg0->unk4 = 0;
     arg0->unk8 = 0;

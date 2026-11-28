@@ -26,7 +26,7 @@ INCLUDE_ASM("nonmatchings/paf_0EF6AC", func_000EF900);
 
 INCLUDE_ASM("nonmatchings/paf_0EF6AC", func_000EF9C0);
 
-#if (FW_VERSION >= 200 && FW_VERSION < 282) || FW_VERSION == 340
+#if FW_VERSION >= 200 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_0EF6AC", _ZN3paf8PhScroll15SetShadowRenderEPNS_9PhSRenderE);
 #endif
 
@@ -55,10 +55,6 @@ INCLUDE_RODATA("nonmatchings/paf_0EF6AC", D_0019B044);
 INCLUDE_RODATA("nonmatchings/paf_0EF6AC", D_0019B058);
 
 INCLUDE_RODATA("nonmatchings/paf_0EF6AC", D_0019B128);
-
-#if FW_VERSION == 340
-INCLUDE_RODATA("nonmatchings/paf_0EF6AC", D_001A6260);
-#endif
 
 #if FW_VERSION >= 200 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/paf_0EF6AC", D_0018EB50);
@@ -128,9 +124,7 @@ INCLUDE_RODATA("nonmatchings/paf_0EF6AC", D_0012F710);
 
 #if FW_VERSION == 282
 INCLUDE_RODATA("nonmatchings/paf_0EF6AC", D_0019B130);
-#endif
 
-#if FW_VERSION >= 282
 INCLUDE_RODATA("nonmatchings/paf_0EF6AC", D_0019B1A0);
 
 INCLUDE_RODATA("nonmatchings/paf_0EF6AC", D_0019B1C0);
@@ -154,9 +148,6 @@ INCLUDE_ASM("nonmatchings/paf_0EF6AC", func_000F050C);
 
 INCLUDE_ASM("nonmatchings/paf_0EF6AC", func_000F0684);
 
-#if FW_VERSION == 340
-INCLUDE_ASM("nonmatchings/paf_0EF6AC", func_000F0920);
-#else
 s32 func_000F0920(struct Unk_func_000E4F0C_0 *arg0, struct Unk_func_000E4F0C_1 *arg1) {
     if (((u32) (arg1->unk8 - 1) >= 4U) || (arg0->unk331 == 0) || (arg0->unk1EC != 5)) {
         _ZN3paf8PhWidget22HandleFocusSwitchEventEPNS_7PhEventE(arg0, arg1);
@@ -164,7 +155,6 @@ s32 func_000F0920(struct Unk_func_000E4F0C_0 *arg0, struct Unk_func_000E4F0C_1 *
     arg0->unk334 = 0;
     return 0;
 }
-#endif
 
 INCLUDE_ASM("nonmatchings/paf_0EF6AC", func_000F0978);
 
@@ -173,10 +163,6 @@ INCLUDE_ASM("nonmatchings/paf_0EF6AC", func_000F0AC0);
 INCLUDE_ASM("nonmatchings/paf_0EF6AC", func_000F0C3C);
 
 INCLUDE_ASM("nonmatchings/paf_0EF6AC", func_000F0D20);
-
-#if FW_VERSION == 340
-INCLUDE_ASM("nonmatchings/paf_0EF6AC", func_000F0DB8);
-#endif
 
 #if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_0EF6AC", func_00094A80);
@@ -200,7 +186,7 @@ s32 func_000F0DB8(struct Unk_func_000F0DB8_0 *arg0, s32 arg1) {
 }
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION >= 282
+#if FW_VERSION == 100 || FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/paf_0EF6AC", func_000F0E3C);
 #endif
 
@@ -226,15 +212,13 @@ INCLUDE_ASM("nonmatchings/paf_0EF6AC", func_000F14FC);
 INCLUDE_ASM("nonmatchings/paf_0EF6AC", func_000EA774);
 #endif
 
-#if FW_VERSION >= 282
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/paf_0EF6AC", func_000F1544);
 #endif
 
 INCLUDE_ASM("nonmatchings/paf_0EF6AC", func_000F15A4);
 
-#if FW_VERSION < 340
 INCLUDE_ASM("nonmatchings/paf_0EF6AC", _ZN3paf6PhSpin14SetMaxSelectedEi);
-#endif
 
 INCLUDE_ASM("nonmatchings/paf_0EF6AC", _ZN3paf6PhSpin11SetSelectedEi);
 
@@ -244,16 +228,8 @@ INCLUDE_ASM("nonmatchings/paf_0EF6AC", _ZN3paf6PhSpin11SetAnimTimeEf);
 
 INCLUDE_ASM("nonmatchings/paf_0EF6AC", func_000F1840);
 
-#if FW_VERSION == 340
-INCLUDE_ASM("nonmatchings/paf_0EF6AC", func_000FD5F8);
-#endif
-
 #if FW_VERSION >= 200 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/paf_0EF6AC", func_000EAB3C);
-#endif
-
-#if FW_VERSION == 340
-INCLUDE_ASM("nonmatchings/paf_0EF6AC", func_000F18C8);
 #endif
 
 #if FW_VERSION == 282
@@ -344,7 +320,7 @@ INCLUDE_RODATA("nonmatchings/paf_0EF6AC", D_0018EDA8);
 INCLUDE_ASM("nonmatchings/paf_0EF6AC", func_000EAEC0);
 #endif
 
-#if FW_VERSION >= 282
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/paf_0EF6AC", func_000F1BF4);
 
 void func_000F1C54(void) {
@@ -376,7 +352,7 @@ INCLUDE_ASM("nonmatchings/paf_0EF6AC", _ZN3paf6PhTextC1EPNS_8PhWidgetEPNS_8PhApp
 
 INCLUDE_ASM("nonmatchings/paf_0EF6AC", func_000F1DD0);
 
-#if FW_VERSION >= 282
+#if FW_VERSION == 282
 INCLUDE_RODATA("nonmatchings/paf_0EF6AC", D_0019B2A8);
 
 INCLUDE_RODATA("nonmatchings/paf_0EF6AC", D_0019B378);

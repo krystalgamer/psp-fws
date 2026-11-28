@@ -1,4 +1,7 @@
 {
+ "cxx_prelude": [
+  "#pragma interface"
+ ],
  "funcs": {
   "Heap_Alloc": "s32 Heap_Alloc(s32, s32, s32);",
   "Heap_CheckMemoryBounds": "s32 Heap_CheckMemoryBounds(void);",
@@ -68,6 +71,21 @@
   "_ZN13PSJSValueImpl11NewFromPoolERK11PSJSContextRK10psjsvector": "s32 _ZN13PSJSValueImpl11NewFromPoolERK11PSJSContextRK10psjsvector(s32 *arg0, M2C_UNK arg1);",
   "_ZN13PSJSValueImpl11NewFromPoolERK11PSJSContexti": "s32 _ZN13PSJSValueImpl11NewFromPoolERK11PSJSContexti(s32 *arg0, s32 arg1);",
   "_ZN13PSJSValueImpl6DecRefEv": "M2C_UNK _ZN13PSJSValueImpl6DecRefEv(s32);",
+  "_ZN14Class_00126EC8D0Ev": "void _ZN14Class_00126EC8D0Ev(struct Unk_func_000441A4_0 *arg0);",
+  "_ZN14Class_00126EC8D1Ev": "void _ZN14Class_00126EC8D1Ev(struct Unk_func_00044190_0 *arg0);",
+  "_ZN14Class_00126EC8D2Ev": "s32 _ZN14Class_00126EC8D2Ev(s32);",
+  "_ZN14Class_0016AAE0D0Ev": "void _ZN14Class_0016AAE0D0Ev(M2C_UNK **arg0);",
+  "_ZN14Class_0016AAE0D1Ev": "void _ZN14Class_0016AAE0D1Ev(M2C_UNK **arg0);",
+  "_ZN14Class_0016AAE0D2Ev": "void _ZN14Class_0016AAE0D2Ev(M2C_UNK **arg0);",
+  "_ZN14Class_00171640D0Ev": "void _ZN14Class_00171640D0Ev(M2C_UNK **arg0);",
+  "_ZN14Class_00171640D1Ev": "void _ZN14Class_00171640D1Ev(M2C_UNK **arg0);",
+  "_ZN14Class_00171640D2Ev": "void _ZN14Class_00171640D2Ev(M2C_UNK **arg0);",
+  "_ZN14Class_00171684D0Ev": "void _ZN14Class_00171684D0Ev(M2C_UNK **arg0);",
+  "_ZN14Class_00171684D1Ev": "void _ZN14Class_00171684D1Ev(M2C_UNK **arg0);",
+  "_ZN14Class_00171684D2Ev": "void _ZN14Class_00171684D2Ev(M2C_UNK **arg0);",
+  "_ZN14Class_001716C0D0Ev": "void _ZN14Class_001716C0D0Ev(M2C_UNK **arg0);",
+  "_ZN14Class_001716C0D1Ev": "void _ZN14Class_001716C0D1Ev(M2C_UNK **arg0);",
+  "_ZN14Class_001716C0D2Ev": "void _ZN14Class_001716C0D2Ev(M2C_UNK **arg0);",
   "_ZN15psjsstring_impl6DecRefEv": "void _ZN15psjsstring_impl6DecRefEv(s32 *arg0);",
   "_ZN3paf10MessageBox25SetMessageBoxSoundHandlerEPFvNS0_9SoundTypeEE": "void _ZN3paf10MessageBox25SetMessageBoxSoundHandlerEPFvNS0_9SoundTypeEE(s32 arg0);",
   "_ZN3paf10MessageBox25SetQueryButtonInfoHandlerEPFbNS0_10ButtonTypeEPNS0_10ButtonInfoEE": "void _ZN3paf10MessageBox25SetQueryButtonInfoHandlerEPFbNS0_10ButtonTypeEPNS0_10ButtonInfoEE(s32 arg0);",
@@ -2625,6 +2643,11 @@
   "zlibCompileFlags": "s32 zlibCompileFlags(void);"
  },
  "types": {
+  "Class_00126EC8": "#ifdef __cplusplus\n/* dtor still asm/m2c (not trivial) */\nclass Class_00126EC8 {\npublic:\n    virtual ~Class_00126EC8();\n};\n#endif",
+  "Class_0016AAE0": "#ifdef __cplusplus\n/* vtable _ZTV14Class_0016AAE0 is data (vptr = label - 8 + 8) */\nclass Class_0016AAE0 : public Class_00126EC8 {\npublic:\n    virtual ~Class_0016AAE0();\n};\n#endif",
+  "Class_00171640": "#ifdef __cplusplus\n/* vtable _ZTV14Class_00171640 is data (vptr = label - 8 + 8) */\nclass Class_00171640 : public Class_00126EC8 {\npublic:\n    virtual ~Class_00171640();\n};\n#endif",
+  "Class_00171684": "#ifdef __cplusplus\n/* vtable _ZTV14Class_00171684 is data (vptr = label - 8 + 8) */\nclass Class_00171684 : public Class_00126EC8 {\npublic:\n    virtual ~Class_00171684();\n};\n#endif",
+  "Class_001716C0": "#ifdef __cplusplus\n/* vtable _ZTV14Class_001716C0 is data (vptr = label - 8 + 8) */\nclass Class_001716C0 : public Class_00126EC8 {\npublic:\n    virtual ~Class_001716C0();\n};\n#endif",
   "D_001A52C4_s": "struct D_001A52C4_s {\n    u8 pad0[0x4];\n    s32 unk4;\n};",
   "D_001A7CC0_s": "struct D_001A7CC0_s {\n    s32 unk0;\n    s32 unk4;\n    s32 unk8;\n    s32 unkC;\n};",
   "D_001A7CEC_s": "struct D_001A7CEC_s {\n    s32 unk0;\n    s32 unk4;\n    s32 unk8;\n    s32 unkC;\n    s32 unk10;\n    s32 unk14;\n    s32 unk18;\n    s32 unk1C;\n};",

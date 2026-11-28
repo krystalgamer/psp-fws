@@ -90,14 +90,7 @@ INCLUDE_ASM("nonmatchings/paf_0E4304", _ZN3paf11PhLabelTextC1EPNS_8PhWidgetEPNS_
 INCLUDE_ASM("nonmatchings/paf_0E4304", func_0008A838);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 200
-void func_0008A838(s32 **arg0) {
-    *arg0 = &D_0012EA98;
-    _ZN3paf8PhWidgetD2Ev((s32) arg0);
-}
-#endif
-
-#if FW_VERSION == 100
+#if FW_VERSION < 200
 void func_0008A838(s32 **arg0) {
     *arg0 = &D_0012EA98;
     _ZN3paf8PhWidgetD2Ev((s32) arg0);
@@ -108,15 +101,7 @@ void func_0008A838(s32 **arg0) {
 INCLUDE_ASM("nonmatchings/paf_0E4304", func_0008A860);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 200
-void func_0008A860(s32 **arg0) {
-    *arg0 = &D_0012EA98;
-    _ZN3paf8PhWidgetD2Ev((s32) arg0);
-    _ZdlPv(arg0);
-}
-#endif
-
-#if FW_VERSION == 100
+#if FW_VERSION < 200
 void func_0008A860(s32 **arg0) {
     *arg0 = &D_0012EA98;
     _ZN3paf8PhWidgetD2Ev((s32) arg0);

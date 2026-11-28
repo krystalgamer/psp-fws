@@ -91,6 +91,8 @@ void func_00049E00(struct Unk_func_00049E00_0 *arg0) {
 
 INCLUDE_RODATA("nonmatchings/paf_049B9C", D_00171564);
 
+__asm__(".globl _ZTV14Class_001716C0\n_ZTV14Class_001716C0 = D_00171564 - 8\n");
+
 INCLUDE_RODATA("nonmatchings/paf_049B9C", D_00171580);
 
 INCLUDE_RODATA("nonmatchings/paf_049B9C", D_0017158C);

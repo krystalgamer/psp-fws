@@ -3,7 +3,7 @@
 #include "common.h"
 #include "paf_decls.h"
 
-#if FW_VERSION >= 282
+#if FW_VERSION == 282
 s32 func_00168A04(struct Unk_func_00168A04_0 *arg0) {
     s32 var_a1;
 
@@ -71,7 +71,7 @@ INCLUDE_ASM("nonmatchings/paf_168A04", func_0012172C);
 INCLUDE_ASM("nonmatchings/paf_168A04", func_0012176C);
 #endif
 
-#if FW_VERSION >= 282
+#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/paf_168A04", func_00168BFC);
 
 INCLUDE_ASM("nonmatchings/paf_168A04", func_00168C94);
@@ -85,15 +85,11 @@ INCLUDE_ASM("nonmatchings/paf_168A04", func_00168EC4);
 INCLUDE_ASM("nonmatchings/paf_168A04", func_0016904C);
 
 INCLUDE_ASM("nonmatchings/paf_168A04", func_001690BC);
-#endif
 
-#if FW_VERSION == 282
 INCLUDE_ASM("nonmatchings/paf_168A04", func_001690E8);
 
 INCLUDE_ASM("nonmatchings/paf_168A04", func_00169128);
-#endif
 
-#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/paf_168A04", func_00169194);
 
 INCLUDE_ASM("nonmatchings/paf_168A04", func_00169238);
