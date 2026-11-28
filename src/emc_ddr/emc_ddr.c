@@ -1,3 +1,5 @@
+/* compiler[282,300,301,302,303,310,311,330,340]: 1.9.2 */
+/* cflags[282,300,301,302,303,310,311,330,340]: -O2 -frename-registers -mext */
 /* cflags: -O2 -frename-registers */
 #include "common.h"
 #include "emc_ddr_decls.h"

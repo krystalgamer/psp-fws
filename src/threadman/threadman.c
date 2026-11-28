@@ -1,3 +1,5 @@
+/* compiler[282,300,301,302,303,310,311,330,340,350,351,352]: 1.9.2 */
+/* cflags[282,300,301,302,303,310,311,330,340,350,351,352]: -O2 -frename-registers -mext */
 /* cflags[100,102,103]: -O2 */
 /* cflags: -O2 -frename-registers */
 #include "common.h"
@@ -3848,7 +3850,13 @@ s32 module_reboot_before(void) {
 #endif
 
 #if FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/threadman", sceKernelSetThreadmanLogHandler);
+s32 sceKernelSetThreadmanLogHandler(SceThreadmanLogHandler handler, SceThreadmanInfo **info) {
+    g_threadmanInfo.logHandler = handler;
+    if (info != NULL) {
+        *info = &g_threadmanInfo;
+    }
+    return 0;
+}
 
 INCLUDE_ASM("nonmatchings/threadman", func_00013C4C);
 

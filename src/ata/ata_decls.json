@@ -195,6 +195,7 @@
   "D_00004328": "extern s32 D_00004328;",
   "D_00004370": "extern s32 D_00004370;",
   "D_00004640": "extern s32 D_00004640;",
+  "D_000046A4": "extern SceUID D_000046A4;",
   "D_000046A8": "extern SceAtaCallBack D_000046A8;",
   "D_000046E8": "extern s32 D_000046E8;",
   "D_000046EC": "extern s32 D_000046EC;",

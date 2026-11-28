@@ -1,3 +1,5 @@
+/* compiler[282,300,301,302,303,310,311,330,340,350,351,352]: 1.9.2 */
+/* cflags[282,300,301,302,303,310,311,330,340,350,351,352]: -O2 -frename-registers -fno-strict-aliasing -mext */
 /* cflags: -O2 -frename-registers -fno-strict-aliasing */
 #include "common.h"
 #include "pspnet_inet_decls.h"

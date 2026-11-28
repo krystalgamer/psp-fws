@@ -1,3 +1,6 @@
+/* compiler[282,300,301,302,303,310,311,330,340,350,351,352]: 1.9.2 */
+/* cflags[282,300,301,302,303]: -O2 -fno-thread-jumps -mext */
+/* cflags[310,311,330,340,350,351,352]: -O2 -mext */
 /* cflags[100-303]: -O2 -fno-thread-jumps */
 #include "common.h"
 #include "k1.h"
@@ -556,7 +559,24 @@ INCLUDE_ASM("nonmatchings/registry", regCheckFiles);
 #else
 INCLUDE_ASM("nonmatchings/registry", func_000009F8);
 
-INCLUDE_ASM("nonmatchings/registry", regGetHive);
+SceRegHive *regGetHive(s32 index) {
+    SceRegHive *h;
+    s32 i;
+
+    if (g_hiveHead == NULL)
+        goto fail;
+    h = g_hiveHead;
+    for (i = 0; i < g_hiveCount; i++) {
+        if (index == i)
+            break;
+        h = h->next;
+    }
+    if (i == g_hiveCount)
+        goto fail;
+    return h;
+fail:
+    return NULL;
+}
 
 INCLUDE_ASM("nonmatchings/registry", func_00000BC8);
 #endif
@@ -587,7 +607,7 @@ s32 regFindHive(SceRegParam *param, SceRegHive **hive, s32 *index) {
 INCLUDE_ASM("nonmatchings/registry", func_00000D10);
 #endif
 
-#if FW_VERSION < 271
+#if FW_VERSION != 271
 void regHiveAddRef(SceRegHive *h) {
     h->openCount++;
 }
@@ -597,7 +617,7 @@ void regHiveAddRef(SceRegHive *h) {
 INCLUDE_ASM("nonmatchings/registry", regLoadHive);
 #endif
 
-#if FW_VERSION >= 271
+#if FW_VERSION == 271
 INCLUDE_ASM("nonmatchings/registry", regHiveAddRef);
 #endif
 
