@@ -1,4 +1,5 @@
 /* cflags[100-260]: -O2 -frename-registers -fno-merge-constants */
+/* cflags[270-271]: -O2 -frename-registers -mext */
 /* cflags: -O2 -frename-registers */
 #include "common.h"
 #include "sysreg_decls.h"
@@ -90,7 +91,7 @@ INCLUDE_ASM("nonmatchings/sysreg", sceSysregSetAwEdramSize);
 
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregGetTachyonVersion);
 
-#if FW_VERSION < 271
+#if FW_VERSION < 282
 s32 sceSysregVblankIRQPolar(s32 on) {
     s32 intr;
     u32 v;
@@ -109,11 +110,11 @@ s32 sceSysregVblankIRQPolar(s32 on) {
 }
 #else
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregVblankIRQPolar);
+
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregGenerateVblankIRQ);
 #endif
 
-#if FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregGenerateVblankIRQ);
-#else
+#if FW_VERSION < 282
 s32 sceSysregSetMasterPriv(u32 mask, s32 on) {
     u32 v;
     asm volatile("sync");
@@ -127,9 +128,7 @@ s32 sceSysregSetMasterPriv(u32 mask, s32 on) {
     asm volatile("sync");
     return 0;
 }
-#endif
-
-#if FW_VERSION >= 282
+#else
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregSetMasterPriv);
 #endif
 
@@ -1032,7 +1031,7 @@ end:
 
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregLcdcClkSelect);
 
-#if FW_VERSION < 271
+#if FW_VERSION < 282
 s32 sceSysregAtaClkSelect(u32 sel) {
     s32 intr;
     u32 v;
@@ -1053,9 +1052,34 @@ end:
 }
 #else
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregAtaClkSelect);
+#endif
 
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregAtahddClkSelect);
+#endif
 
+#if FW_VERSION == 271
+s32 sceSysregAudioClkoutClkSelect(u32 sel) {
+    s32 intr;
+    u32 v;
+    s32 ret;
+
+    ret = 0x800001FE;
+    if (sel >= 2) {
+        goto end;
+    }
+    intr = sceKernelCpuSuspendIntr();
+    v = *(volatile u32 *)0xBC100060;
+    ret = __builtin_allegrex_ext(v, 18, 1);
+    *(volatile u32 *)0xBC100060 = (v & ~0x40000) | (sel << 18);
+    sceKernelCpuResumeIntr(intr);
+    return ret;
+end:
+    return ret;
+}
+#endif
+
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregAudioClkoutClkSelect);
 #endif
 
