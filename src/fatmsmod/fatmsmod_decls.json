@@ -392,6 +392,7 @@
   "D_0002DC10": "extern s32 D_0002DC10;",
   "D_0002EF50": "extern s32 D_0002EF50;",
   "D_0002F578": "extern PfFile D_0002F578[10];",
+  "D_0003F610": "extern s32 (*D_0003F610)(s32, s32, s32);",
   "D_0003F728": "extern void *D_0003F728;",
   "D_00042A80": "extern M2C_UNK D_00042A80;",
   "g_msStubMbx": "extern SceUID g_msStubMbx;"

@@ -3495,7 +3495,18 @@ s32 func_0000A698(s32 a0, s32 a1, s32 a2) {
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 271
-INCLUDE_ASM("nonmatchings/fatmsmod", func_0000A698);
+s32 func_0000A698(s32 a0, s32 a1, s32 a2) {
+    s32 err;
+
+    D_00019E10[D_00019E0C - 'A'] = 0;
+    err = D_0003F610(a0, a1, a2);
+    if (err != 0) {
+        D_00019E04 = 0x1000;
+        D_00019E10[D_00019E0C - 'A'] = err;
+        err = -1;
+    }
+    return err;
+}
 #endif
 
 #if FW_VERSION < 282
