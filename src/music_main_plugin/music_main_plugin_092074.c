@@ -20,24 +20,12 @@ __asm__(".globl _ZTV14Class_000A2968\n_ZTV14Class_000A2968 = D_000A2968 - 8\n");
 
 INCLUDE_ASM("nonmatchings/music_main_plugin_092074", func_0009209C);
 
-void func_000924A0(struct Unk_func_000924A0_0 *arg0) {
-    arg0->unk0 = &D_000A2998;
-    arg0->unk4 = 0;
+Class_000A2998::Class_000A2998() {
+    this->unk4 = 0;
 }
 
-void func_000924B4(struct Unk_func_000924B4_0 *arg0) {
-    arg0->unk0 = &D_000A2998;
-    arg0->unk4 = 0;
-}
-
-void func_000924C8(struct Unk_func_000924C8_0 *arg0, s32 arg1) {
-    arg0->unk0 = &D_000A2998;
-    arg0->unk4 = arg1;
-}
-
-void func_000924DC(struct Unk_func_000924DC_0 *arg0, s32 arg1) {
-    arg0->unk0 = &D_000A2998;
-    arg0->unk4 = arg1;
+Class_000A2998::Class_000A2998(s32 arg1) {
+    this->unk4 = arg1;
 }
 
 Class_000A2998::~Class_000A2998() {
@@ -51,24 +39,12 @@ Class_000A29A8::Class_000A29A8() {
 Class_000A29A8::~Class_000A29A8() {
 }
 
-void func_0009268C(struct Unk_func_0009268C_0 *arg0) {
-    arg0->unk0 = &D_000A29C8;
-    arg0->unk4 = 0;
+Class_000A29C8::Class_000A29C8() {
+    this->unk4 = 0;
 }
 
-void func_000926A0(struct Unk_func_000926A0_0 *arg0) {
-    arg0->unk0 = &D_000A29C8;
-    arg0->unk4 = 0;
-}
-
-void func_000926B4(struct Unk_func_000926B4_0 *arg0, s32 arg1) {
-    arg0->unk0 = &D_000A29C8;
-    arg0->unk4 = arg1;
-}
-
-void func_000926C8(struct Unk_func_000926C8_0 *arg0, s32 arg1) {
-    arg0->unk0 = &D_000A29C8;
-    arg0->unk4 = arg1;
+Class_000A29C8::Class_000A29C8(s32 arg1) {
+    this->unk4 = arg1;
 }
 
 Class_000A29C8::~Class_000A29C8() {

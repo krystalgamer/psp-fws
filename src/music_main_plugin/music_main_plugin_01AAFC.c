@@ -77,14 +77,26 @@ INCLUDE_ASM("nonmatchings/music_main_plugin_01AAFC", func_00022968);
 
 INCLUDE_ASM("nonmatchings/music_main_plugin_01AAFC", func_00022970);
 
-INCLUDE_ASM("nonmatchings/music_main_plugin_01AAFC", func_00022978);
+Class_0009E470::Class_0009E470() {
+    this->unk4 = 1;
+}
 #endif
 
+#if FW_VERSION == 260
+void func_0001AF98(struct Unk_func_0001AF98_0 *arg0) {
+    _ZN14Class_0009E218C2Ev(arg0);
+    arg0->unk0 = &D_0009BC50;
+    arg0->unk4 = 1;
+}
+#endif
+
+#if FW_VERSION >= 271 && FW_VERSION < 330
 void func_0001AF98(struct Unk_func_0001AF98_0 *arg0) {
     func_00049EE0(arg0);
     arg0->unk0 = &D_0009BC50;
     arg0->unk4 = 1;
 }
+#endif
 
 #if FW_VERSION == 260
 Class_0009BC50::~Class_0009BC50() {

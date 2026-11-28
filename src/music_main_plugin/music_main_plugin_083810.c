@@ -374,29 +374,17 @@ INCLUDE_ASM("nonmatchings/music_main_plugin_083810", func_00086A54);
 #endif
 
 #if FW_VERSION >= 282 && FW_VERSION < 350
-void func_00086A54(struct Unk_func_00086A54_0 *arg0, s32 arg1) {
-    arg0->unk0 = &D_000A2088;
-    arg0->unk4 = -1;
-    arg0->unkC = 0;
-    arg0->unk10 = 0;
-    arg0->unk14 = 0;
-    sce_paf_private_memcpy((u8 *)arg0 + 8, arg1, 4);
+Class_000A2088::Class_000A2088(s32 arg1) {
+    this->unk4 = -1;
+    this->unkC = 0;
+    this->unk10 = 0;
+    this->unk14 = 0;
+    sce_paf_private_memcpy((u8 *)this + 8, arg1, 4);
 }
 #endif
 
 #if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/music_main_plugin_083810", func_00086A98);
-#endif
-
-#if FW_VERSION >= 282 && FW_VERSION < 350
-void func_00086A98(struct Unk_func_00086A98_0 *arg0, s32 arg1) {
-    arg0->unk0 = &D_000A2088;
-    arg0->unk4 = -1;
-    arg0->unkC = 0;
-    arg0->unk10 = 0;
-    arg0->unk14 = 0;
-    sce_paf_private_memcpy((u8 *)arg0 + 8, arg1, 4);
-}
 #endif
 
 #if FW_VERSION >= 282
@@ -419,16 +407,9 @@ s32 func_00086B44(struct Unk_func_00086B44_0 *arg0) {
     return arg0->unk4;
 }
 
-void func_00086B4C(struct Unk_func_00086B4C_0 *arg0, s32 arg1, s32 arg2) {
-    arg0->unk0 = &D_000A2078;
-    arg0->unk4 = arg1;
-    arg0->unk8 = arg2;
-}
-
-void func_00086B64(struct Unk_func_00086B64_0 *arg0, s32 arg1, s32 arg2) {
-    arg0->unk0 = &D_000A2078;
-    arg0->unk4 = arg1;
-    arg0->unk8 = arg2;
+Class_000A2078::Class_000A2078(s32 arg1, s32 arg2) {
+    this->unk4 = arg1;
+    this->unk8 = arg2;
 }
 
 Class_000A2078::~Class_000A2078() {

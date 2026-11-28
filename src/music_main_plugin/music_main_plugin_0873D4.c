@@ -80,16 +80,9 @@ s32 func_0008741C(struct Unk_func_0008741C_0 *arg0) {
     return arg0->unkC;
 }
 
-void func_00087424(struct Unk_func_00087424_0 *arg0, s32 arg1, s32 arg2) {
-    arg0->unk0 = &D_000A20D0;
-    arg0->unk4 = arg1;
-    arg0->unk8 = arg2;
-}
-
-void func_0008743C(struct Unk_func_0008743C_0 *arg0, s32 arg1, s32 arg2) {
-    arg0->unk0 = &D_000A20D0;
-    arg0->unk4 = arg1;
-    arg0->unk8 = arg2;
+Class_000A20D0::Class_000A20D0(s32 arg1, s32 arg2) {
+    this->unk4 = arg1;
+    this->unk8 = arg2;
 }
 
 Class_000A20D0::~Class_000A20D0() {
@@ -128,12 +121,12 @@ s32 func_000877F0(struct Unk_func_000877F0_0 *arg0) {
 INCLUDE_ASM("nonmatchings/music_main_plugin_0873D4", func_000877F8);
 
 void func_00087800(s32 **arg0, s32 arg1, s32 arg2) {
-    func_00087424((Unk_func_00087424_0*) arg0, arg1, arg2);
+    _ZN14Class_000A20D0C2Eii((Unk_func_00087424_0*) arg0, arg1, arg2);
     *arg0 = &D_000A20F8;
 }
 
 void func_00087830(s32 **arg0, s32 arg1, s32 arg2) {
-    func_00087424((Unk_func_00087424_0*) arg0, arg1, arg2);
+    _ZN14Class_000A20D0C2Eii((Unk_func_00087424_0*) arg0, arg1, arg2);
     *arg0 = &D_000A20F8;
 }
 

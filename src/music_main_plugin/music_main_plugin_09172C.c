@@ -28,15 +28,19 @@ void func_000918C8(struct Unk_func_000918C8_0 *arg0) {
     arg0->unk8 = 0;
 }
 
-void func_000918E0(struct Unk_func_000918E0_0 *arg0, s32 arg1, s32 arg2) {
-    arg0->unk0 = &D_000A2948;
-    arg0->unk4 = arg1;
-    arg0->unk8 = arg2;
+#if FW_VERSION < 282
+Class_000A2948::Class_000A2948(s32 arg1, s32 arg2) {
+    this->unk4 = arg1;
+    this->unk8 = arg2;
 }
+#else
+Class_00097B88::Class_00097B88(s32 arg1, s32 arg2) {
+    this->unk4 = arg1;
+    this->unk8 = arg2;
+}
+#endif
 
 #if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/music_main_plugin_09172C", func_000810E0);
-
 Class_000A2948::~Class_000A2948() {
 }
 
@@ -110,12 +114,6 @@ INCLUDE_ASM("nonmatchings/music_main_plugin_09172C", func_00082268);
 INCLUDE_ASM("nonmatchings/music_main_plugin_09172C", func_00082284);
 
 INCLUDE_ASM("nonmatchings/music_main_plugin_09172C", func_000822A0);
-#else
-void func_000918F8(struct Unk_func_000918F8_0 *arg0, s32 arg1, s32 arg2) {
-    arg0->unk0 = &D_000A2948;
-    arg0->unk4 = arg1;
-    arg0->unk8 = arg2;
-}
 #endif
 
 Class_00097B88::~Class_00097B88() {
@@ -277,18 +275,10 @@ void func_00091B58(struct Unk_func_00091B58_0 *arg0) {
     arg0->unkC = 0;
 }
 
-void func_00091B74(struct Unk_func_00091B74_0 *arg0, s32 arg1, s32 arg2, s32 arg3) {
-    arg0->unk0 = &D_000A2968;
-    arg0->unk4 = arg1;
-    arg0->unk8 = arg2;
-    arg0->unkC = arg3;
-}
-
-void func_00091B90(struct Unk_func_00091B90_0 *arg0, s32 arg1, s32 arg2, s32 arg3) {
-    arg0->unk0 = &D_000A2968;
-    arg0->unk4 = arg1;
-    arg0->unk8 = arg2;
-    arg0->unkC = arg3;
+Class_000A2968::Class_000A2968(s32 arg1, s32 arg2, s32 arg3) {
+    this->unk4 = arg1;
+    this->unk8 = arg2;
+    this->unkC = arg3;
 }
 
 Class_000A2968::~Class_000A2968() {

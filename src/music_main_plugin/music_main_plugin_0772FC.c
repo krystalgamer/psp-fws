@@ -453,14 +453,8 @@ void func_0007D83C(void) {
     func_0007D768(0, 0xFFFF);
 }
 
-void func_0007D85C(struct Unk_func_0007D85C_0 *arg0) {
-    arg0->unk0 = &D_000A1B58;
-    arg0->unk4 = 0;
-}
-
-void func_0007D870(struct Unk_func_0007D870_0 *arg0) {
-    arg0->unk0 = &D_000A1B58;
-    arg0->unk4 = 0;
+Class_000A1B58::Class_000A1B58() {
+    this->unk4 = 0;
 }
 
 Class_000A1B58::~Class_000A1B58() {
@@ -1535,16 +1529,9 @@ void func_0008209C(struct Unk_func_0008209C_0 *arg0) {
     arg0->unk8 = 0;
 }
 
-void func_000820B4(struct Unk_func_000820B4_0 *arg0, s32 arg1, s32 arg2) {
-    arg0->unk0 = &D_000A1F08;
-    arg0->unk4 = arg1;
-    arg0->unk8 = arg2;
-}
-
-void func_000820CC(struct Unk_func_000820CC_0 *arg0, s32 arg1, s32 arg2) {
-    arg0->unk0 = &D_000A1F08;
-    arg0->unk4 = arg1;
-    arg0->unk8 = arg2;
+Class_000A1F08::Class_000A1F08(s32 arg1, s32 arg2) {
+    this->unk4 = arg1;
+    this->unk8 = arg2;
 }
 
 Class_000A1F08::~Class_000A1F08() {
@@ -1561,18 +1548,10 @@ void func_0008249C(struct Unk_func_0008249C_0 *arg0) {
     arg0->unk18 = 0;
 }
 
-void func_000824BC(struct Unk_func_000824BC_0 *arg0, s32 arg1, s32 arg2) {
-    arg0->unk0 = &D_000A1F18;
-    arg0->unk10 = -1;
-    arg0->unk14 = arg1;
-    arg0->unk18 = arg2;
-}
-
-void func_000824DC(struct Unk_func_000824DC_0 *arg0, s32 arg1, s32 arg2) {
-    arg0->unk0 = &D_000A1F18;
-    arg0->unk10 = -1;
-    arg0->unk14 = arg1;
-    arg0->unk18 = arg2;
+Class_000A1F18::Class_000A1F18(s32 arg1, s32 arg2) {
+    this->unk10 = -1;
+    this->unk14 = arg1;
+    this->unk18 = arg2;
 }
 
 Class_000A1F18::~Class_000A1F18() {

@@ -259,7 +259,6 @@ func_00022950 = 0x00022950; // type:func
 func_000229CC = 0x000229CC; // type:func
 func_000229EC = 0x000229EC; // type:func
 func_00024B78 = 0x00024B78; // type:func
-func_00024D04 = 0x00024D04; // type:func
 func_00028B78 = 0x00028B78; // type:func
 func_00035288 = 0x00035288; // type:func
 func_000359FC = 0x000359FC; // type:func
