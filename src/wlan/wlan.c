@@ -2577,7 +2577,30 @@ INCLUDE_RODATA("nonmatchings/wlan", D_00018DE4);
 #endif
 
 #if FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/wlan", func_00007F30);
+SceWlanMac *func_00007F30(SceWlanSoftc *sc) {
+    SceWlanMac *mac = func_0000840C(sc, sizeof(SceWlanMac));
+
+    if (mac != NULL) {
+        memset(mac, 0, sizeof(SceWlanMac));
+        mac->bus.base = 0xBD300000;
+        mac->bus.cmdReg = (volatile u32 *)0xBD300030;
+        mac->bus.reg10 = (volatile u32 *)0xBD300034;
+        mac->bus.statusReg = (volatile u32 *)0xBD300038;
+        mac->bus.reg = (volatile u32 *)0xBD30003C;
+        mac->bus.reg1C = (volatile u32 *)0xBD300040;
+        mac->bus.evf = sceKernelCreateEventFlag(D_00018DE4, 0x201, 0, NULL);
+        mac->bus.sema = sceKernelCreateSema("SceWlanHalMsHostLock", 1, 1, 1, NULL);
+        mac->dmaOp = 0;
+        mac->dmaBuf = NULL;
+        mac->evfB8 = sceKernelCreateEventFlag("SceWlanHalMsHostLock", 1, 0, NULL);
+        mac->mbx = sceKernelCreateMbx("SceWlanHalMbx", 1, NULL);
+        mac->sc = sc;
+        mac->txBuf = func_0000840C(sc, 0x200);
+        mac->rxBuf = func_0000840C(sc, 0x200);
+        mac->unk168 = 0;
+    }
+    return mac;
+}
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282

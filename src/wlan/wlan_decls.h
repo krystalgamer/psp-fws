@@ -72,10 +72,11 @@ typedef struct {
     SceUID evf;                 /* 0x04 */
     u32 base;                   /* 0x08 controller base, 0xBD300000 = MSIF0 */
     volatile u32 *cmdReg;       /* 0x0C */
-    u32 unk10;
+    volatile u32 *reg10;        /* 0x10 */
     volatile u32 *statusReg;    /* 0x14 */
     volatile u32 *reg;          /* 0x18 control */
-    u8 unk1C[0x30 - 0x1C];
+    volatile u32 *reg1C;        /* 0x1C */
+    u8 unk20[0x30 - 0x20];
 } SceWlanBus;
 
 typedef struct {
@@ -187,11 +188,12 @@ struct SceWlanMac {
     void *dmaBuf;               /* 0x0AC */
     u32 unkB0;                  /* 0x0B0 */
     SceUID thread;              /* 0x0B4 */
-    u8 unk0B8[0xBC - 0xB8];
+    SceUID evfB8;               /* 0x0B8 */
     SceUID mbx;                 /* 0x0BC MLME mailbox */
     SceWlanSoftc *sc;           /* 0x0C0 */
     u8 *txBuf;                  /* 0x0C4 */
-    u8 unk0C8[0xCE - 0xC8];
+    u8 *rxBuf;                  /* 0x0C8 */
+    u8 unk0CC[0xCE - 0xCC];
     s16 nAddrs;                 /* 0x0CE */
     u8 unk0D0[2];
     s16 unkD2;                  /* 0x0D2 */
@@ -213,9 +215,10 @@ struct SceWlanMac {
     u32 unk15C;                 /* 0x15C */
     u8 unk160[4];               /* 0x160 */
     u8 unk164[4];               /* 0x164 */
+    u32 unk168;                 /* 0x168 */
 };
 #if FW_VERSION < 150
-typedef char chk_SceWlanMac[((u32)&((SceWlanMac *)0)->unk15C == 0x15C) ? 1 : -1];
+typedef char chk_SceWlanMac[(sizeof(SceWlanMac) == 0x16C) ? 1 : -1];
 #endif
 
 /* driver state (1.00-1.52), pointed to by D_000191B0; offsets are 1.00's */
@@ -540,6 +543,7 @@ extern s32 (*D_000137D0[0x50])(SceWlanMac *, u8 *, s32, s32);
 extern const u32 D_00018A00[15];
 extern const u16 D_00018A3C[6];
 extern const u8 D_00018A48[][14];
+extern char D_00018DE4[];
 extern const SceWlanKeyVal D_000190C4[5];
 #if FW_VERSION < 201
 extern SceWlanSoftc *D_000191B0;
@@ -575,6 +579,7 @@ extern s32 D_0002E3DC;
 extern s32 D_0002EE00;
 extern M2C_UNK func_00003F08;
 
+s32 func_00000874(void *ifh, void *m);
 s32 func_000010E0(SceSize args, void *argp);
 s32 func_00001118(SceSize args, void *argp);
 void func_00001B5C(s32 sw, SceWlanSoftc *sc);
@@ -613,6 +618,7 @@ s32 func_000066FC(s32 *arg0);
 void func_00006708(u32 arg0);
 void func_00006738(u32 arg0);
 void func_000067B8(void *arg0, void *arg1);
+s32 func_00006B04(SceWlanMac *mac);
 void func_0000806C(void *arg0);
 s32 func_0000829C(struct Unk_func_0000829C_0 *arg0);
 void func_000082AC(void);
