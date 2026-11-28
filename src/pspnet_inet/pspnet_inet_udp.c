@@ -1232,9 +1232,106 @@ void syn_cache_unreach(struct sockaddr *src, struct sockaddr *dst, struct tcphdr
 	tcp_stat.tcps_sc_unreach++;
 	SYN_CACHE_PUT(sc);
 }
+#endif
 
+#if FW_VERSION < 201
+s32 syn_cache_add(struct sockaddr *src, struct sockaddr *dst, struct tcphdr *th, u32 hlen, struct socket *so, struct mbuf *m, u8 *optp, s32 optlen, struct tcp_opt_info *oi)
+{
+	struct tcpcb tb, *tp;
+	long win;
+	struct syn_cache *sc;
+	struct syn_cache_head *scp;
+	struct mbuf *ipopts;
+
+	tp = (struct tcpcb *)((struct inpcb *)so->so_pcb)->inp_ppcb;
+
+	win = sbspace(&so->so_rcv);
+	if (win > TCP_MAXWIN)
+		win = TCP_MAXWIN;
+
+	switch (src->sa_family) {
+	case AF_INET:
+
+		ipopts = ip_srcroute();
+		break;
+	default:
+		ipopts = NULL;
+	}
+
+	if (optp) {
+		tb.t_flags = D_0002E900 ? (TF_REQ_SCALE|TF_REQ_TSTMP) : 0;
+		func_0001F088(&tb, optp, optlen, th, oi);
+	} else
+		tb.t_flags = 0;
+
+	if ((sc = syn_cache_lookup(src, dst, &scp)) != NULL) {
+		tcp_stat.tcps_sc_dupesyn++;
+		if (ipopts) {
+
+			if (sc->sc_ipopts)
+				(void) sceNetMFree(sc->sc_ipopts);
+			sc->sc_ipopts = ipopts;
+		}
+		sc->sc_timestamp = tb.ts_recent;
+		if (syn_cache_respond(sc, m) == 0) {
+			tcp_stat.tcps_sndacks++;
+			tcp_stat.tcps_sndtotal++;
+		}
+		return (1);
+	}
+
+	sc = sceNetMallocInternal(sizeof(struct syn_cache));
+	if (sc == NULL) {
+		if (ipopts)
+			(void) sceNetMFree(ipopts);
+		return (0);
+	}
+
+	func_0002C94C(sc, 0, sizeof(struct syn_cache));
+	func_0002C9B8(src, &sc->sc_src, src->sa_len);
+	func_0002C9B8(dst, &sc->sc_dst, dst->sa_len);
+	sc->sc_flags = 0;
+	sc->sc_ipopts = ipopts;
+	sc->sc_irs = th->th_seq;
+	sc->sc_iss = tcp_new_iss(sc, sizeof(struct syn_cache), 0);
+	sc->sc_peermaxseg = oi->maxseg;
+	sc->sc_ourmaxseg = tcp_mss_to_advertise(m->m_flags & M_PKTHDR ?
+						m->m_pkthdr.rcvif : NULL,
+						sc->sc_src.sin_family);
+	sc->sc_win = win;
+	sc->sc_timestamp = tb.ts_recent;
+	if (D_0002E900 && (tb.t_flags & TF_RCVD_TSTMP))
+		sc->sc_flags |= SCF_TIMESTAMP;
+	if ((tb.t_flags & (TF_RCVD_SCALE|TF_REQ_SCALE)) ==
+	    (TF_RCVD_SCALE|TF_REQ_SCALE)) {
+		sc->sc_requested_s_scale = tb.requested_s_scale;
+		sc->sc_request_r_scale = 0;
+		while (sc->sc_request_r_scale < TCP_MAX_WINSHIFT &&
+		    TCP_MAXWIN << sc->sc_request_r_scale <
+		    so->so_rcv.sb_hiwat)
+			sc->sc_request_r_scale++;
+	} else {
+		sc->sc_requested_s_scale = 15;
+		sc->sc_request_r_scale = 15;
+	}
+	sc->sc_tp = tp;
+	if (syn_cache_respond(sc, m) == 0) {
+		syn_cache_insert(sc, tp);
+		tcp_stat.tcps_sndacks++;
+		tcp_stat.tcps_sndtotal++;
+	} else {
+		SYN_CACHE_PUT(sc);
+		tcp_stat.tcps_sc_dropped++;
+	}
+	return (1);
+}
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_inet_udp", syn_cache_add);
+#endif
 
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_inet_udp", syn_cache_respond);
 #else
 INCLUDE_ASM("nonmatchings/pspnet_inet_udp", func_0001FFF0);

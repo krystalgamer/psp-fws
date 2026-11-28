@@ -1089,6 +1089,13 @@ struct syn_cache_head {
     u16 sch_length;                     /* 0x4 */
 };
 TAILQ_HEAD(syn_cache_timeq_head, syn_cache);
+struct tcp_opt_info {
+    s32 ts_present;
+    u32 ts_val;
+    u32 ts_ecr;
+    u16 maxseg;
+};
+#define TCP_MAX_WINSHIFT 14
 #define tcp_rcvseqinit(tp) (tp)->rcv_adv = (tp)->rcv_nxt = (tp)->irs + 1
 #define tcp_sendseqinit(tp) (tp)->snd_una = (tp)->snd_nxt = (tp)->snd_max = (tp)->snd_up = (tp)->snd_recover = (tp)->iss
 #define SCF_UNREACH 0x0001
@@ -2142,6 +2149,7 @@ void func_0001A8AC(void);
 void func_0001AA20(struct Unk_func_0001AA20_0 *arg0);
 void func_0001C208(void);
 void func_0001C57C(struct Unk_func_0001C57C_0 *arg0, s16 arg1);
+void func_0001F088(struct tcpcb *tp, u8 *cp, s32 cnt, struct tcphdr *th, struct tcp_opt_info *oi);
 s32 func_000232C0(struct Unk_func_000232C0_0 *arg0);
 s32 func_00023828(struct Unk_func_00023828_0 *arg0);
 void func_00023AB8(struct Unk_func_00023AB8_0 *arg0);
@@ -2403,6 +2411,7 @@ void sppp_pap_open(struct sppp *sp);
 void sppp_pap_scr(struct sppp *sp);
 void sppp_pap_tld(struct sppp *sp);
 void sppp_to_event(const struct cp *cp, struct sppp *sp);
+s32 syn_cache_add(struct sockaddr *src, struct sockaddr *dst, struct tcphdr *th, u32 hlen, struct socket *so, struct mbuf *m, u8 *optp, s32 optlen, struct tcp_opt_info *oi);
 void syn_cache_cleanup(struct tcpcb *tp);
 struct socket *syn_cache_get(struct sockaddr *src, struct sockaddr *dst, struct tcphdr *th, u32 hlen, u32 tlen, struct socket *so, struct mbuf *m);
 void syn_cache_init(void);
@@ -2429,7 +2438,7 @@ void tcp_mss_from_peer(struct tcpcb *tp, s32 offer);
 u32 tcp_mss_to_advertise(struct ifnet *ifp, s32 af);
 void tcp_mtudisc(struct inpcb *inp, s32 errno);
 void tcp_mtudisc_callback(struct in_addr addr);
-u32 tcp_new_iss(struct tcpcb *tp, u32 len, u32 addin);
+u32 tcp_new_iss(void *m, u32 len, u32 addin);
 struct tcpcb *tcp_newtcpcb(s32 family, void *aux);
 void tcp_notify(struct inpcb *inp, s32 error);
 s32 tcp_optlen(void *arg0);

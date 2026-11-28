@@ -672,7 +672,7 @@ INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", tcp_established);
 #if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", func_00023D1C);
 #else
-u32 tcp_new_iss(struct tcpcb *tp, u32 len, u32 addin) {
+u32 tcp_new_iss(void *m, u32 len, u32 addin) {
     u32 tcp_iss;
 
     tcp_iss = sceNetRand();
