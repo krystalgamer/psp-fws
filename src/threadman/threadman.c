@@ -166,7 +166,35 @@ s32 func_00000268(SceThread *thread) {
     return 1;
 }
 
-INCLUDE_ASM("nonmatchings/threadman", func_00000308);
+void func_00000308(SceSysmemUidCB *cb, s32 waitRet, s32 isIntr, s32 intr) {
+    SceWaitQ *wq = UID_CB_TO_DATA(cb, g_threadmanInfo.uidWaitQType, SceWaitQ);
+    SceThread *thread = wq->waitQueue.next;
+    SceThread *queue;
+
+    thread->waitRet = waitRet;
+    if (thread->status == THREAD_KILLED) {
+        return;
+    }
+    func_00000474(thread);
+    thread->next->prev = thread->prev;
+    thread->prev->next = thread->next;
+    if (thread->status == THREAD_WAITING_SUSPEND) {
+        queue = (SceThread *)&g_threadmanInfo.suspendedThreads;
+        thread->next = queue;
+        thread->prev = queue->prev;
+        queue->prev = thread;
+        thread->status = THREAD_SUSPEND;
+        thread->prev->next = thread;
+        return;
+    }
+    thread->status = THREAD_READY;
+    if (!isIntr) {
+        func_0000F13C(thread, intr);
+    } else {
+        func_0000F034(thread);
+        g_threadmanInfo.nextThread = NULL;
+    }
+}
 
 s32 func_000003F0(SceSysmemUidCB *cb, s32 waitRet) {
     SceWaitQ *wq = UID_CB_TO_DATA(cb, g_threadmanInfo.uidWaitQType, SceWaitQ);
@@ -395,7 +423,33 @@ s32 func_000006A8(void) {
 #endif
 
 #if FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/threadman", func_0000072C);
+void func_0000072C(SceThread *thread, s32 isIntr, s32 intr) {
+    SceThread *queue;
+    SceThread *p;
+
+    if (thread->status == THREAD_KILLED) {
+        return;
+    }
+    func_00000474(thread);
+    thread->next->prev = thread->prev;
+    thread->prev->next = thread->next;
+    if (thread->status == THREAD_WAITING_SUSPEND) {
+        queue = (SceThread *)&g_threadmanInfo.suspendedThreads;
+        thread->next = queue;
+        thread->prev = queue->prev;
+        queue->prev = thread;
+        thread->status = THREAD_SUSPEND;
+        thread->prev->next = thread;
+        return;
+    }
+    thread->status = THREAD_READY;
+    if (!isIntr) {
+        func_0000F13C(thread, intr);
+    } else {
+        func_0000F034(thread);
+        g_threadmanInfo.nextThread = NULL;
+    }
+}
 #endif
 
 #if FW_VERSION < 282
