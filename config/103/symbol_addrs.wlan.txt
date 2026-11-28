@@ -373,3 +373,8 @@ sceKernelRegisterSysEventHandler = 0x00012D68; // type:func
 sceSysconIsLowBattery = 0x00012D80; // type:func
 sceSysconGetWlanSwitch = 0x00012D88; // type:func
 sceSysconGetWlanPowerStatus = 0x00012D90; // type:func
+
+// NID-derived names
+sceWlanDevInit = 0x000000C8; // type:func
+sceWlanSetWakeUp = 0x00002AFC; // type:func
+sceKernelChangeThreadPriority = 0x00012CB8; // type:func

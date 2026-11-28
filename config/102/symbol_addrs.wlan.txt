@@ -360,3 +360,7 @@ sceNetMFreem = 0x00012CA0; // type:func
 scePowerWlanActivate = 0x00012CA8; // type:func
 scePowerWlanDeactivate = 0x00012CB0; // type:func
 sceKernelRegisterSysEventHandler = 0x00012CB8; // type:func
+
+// NID-derived names
+sceWlanDevInit = 0x000000C8; // type:func
+sceKernelChangeThreadPriority = 0x00012C08; // type:func
