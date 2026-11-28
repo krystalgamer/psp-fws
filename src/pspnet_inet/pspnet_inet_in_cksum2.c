@@ -307,16 +307,12 @@ void in_pcbpurgeif(struct inpcbtable *table, struct ifnet *ifp) {
     }
 }
 
-#if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet_in_cksum2", in_rtchange);
-#else
 void in_rtchange(struct inpcb *inp, s32 errno) {
     if (inp->inp_route.ro_rt) {
         rtfree(inp->inp_route.ro_rt);
         inp->inp_route.ro_rt = NULL;
     }
 }
-#endif
 
 #if FW_VERSION < 282
 struct inpcb *in_pcblookup_port(struct inpcbtable *table, struct in_addr laddr, u32 lport_arg, s32 lookup_wildcard) {
@@ -382,9 +378,7 @@ out:
     }
     return inp;
 }
-#endif
 
-#if FW_VERSION < 201
 struct inpcb *in_pcblookup_bind(struct inpcbtable *table, struct in_addr laddr, u32 lport_arg) {
     struct inpcbhead *head;
     struct inpcb *inp;
@@ -411,13 +405,7 @@ out:
     }
     return inp;
 }
-#endif
-
-#if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet_in_cksum2", in_pcblookup_bind);
-#endif
-
-#if FW_VERSION >= 282
+#else
 INCLUDE_ASM("nonmatchings/pspnet_inet_in_cksum2", func_000138F0);
 
 INCLUDE_ASM("nonmatchings/pspnet_inet_in_cksum2", func_000139A8);
@@ -493,13 +481,7 @@ struct sockaddr_in *in_selectsrc(struct sockaddr_in *sin, struct route *ro, s32 
     }
     return &ia->ia_addr;
 }
-#endif
 
-#if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet_in_cksum2", in_pcbinit);
-#endif
-
-#if FW_VERSION < 201
 void in_pcbinit(struct inpcbtable *table, s32 bindhashsize, s32 connecthashsize) {
     table->inpt_queue.cqh_first = (struct inpcb *)table;
     table->inpt_queue.cqh_last = (struct inpcb *)table;
@@ -508,9 +490,7 @@ void in_pcbinit(struct inpcbtable *table, s32 bindhashsize, s32 connecthashsize)
     table->inpt_lastlow = 0x3FF; /* IPPORT_RESERVEDMAX */
     table->inpt_lastport = (u16)D_0002E5EC + (sceNetRand() % (u32)((D_0002E5F0 - D_0002E5EC) + 1));
 }
-#endif
-
-#if FW_VERSION >= 282
+#else
 INCLUDE_ASM("nonmatchings/pspnet_inet_in_cksum2", func_00013CC4);
 
 void in_pcbinit(struct inpcbtable *table, s32 bindhashsize, s32 connecthashsize) {
@@ -750,11 +730,7 @@ INCLUDE_ASM("nonmatchings/pspnet_inet_in_cksum2", ip_input);
 
 INCLUDE_ASM("nonmatchings/pspnet_inet_in_cksum2", func_000150C8);
 
-#if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet_in_cksum2", ip_freef);
-#endif
-
-#if FW_VERSION < 201
+#if FW_VERSION < 282
 void ip_freef(struct Unk_func_00015654_0 *arg0) {
     struct Unk_func_00015654_temp_v1 *temp_s1;
     struct Unk_func_00015654_temp_v1 *temp_v1;
@@ -1673,9 +1649,7 @@ s32 ip_setmoptions(s32 optname, struct ip_moptions **imop, struct mbuf *m) {
 
 #if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/pspnet_inet_in_cksum2", func_00017DA0);
-#endif
-
-#if FW_VERSION < 201
+#else
 s32 ip_getmoptions(s32 optname, struct ip_moptions *imo, struct mbuf **mp) {
     u8 *ttl;
     u8 *loop;
@@ -1711,7 +1685,9 @@ s32 ip_getmoptions(s32 optname, struct ip_moptions *imo, struct mbuf **mp) {
         return (0x5F);
     }
 }
-#else
+#endif
+
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/pspnet_inet_in_cksum2", ip_getmoptions);
 #endif
 
@@ -2586,7 +2562,9 @@ void rip_disconnect(struct inpcb *inp) {
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet_in_cksum2", rip_disconnect);
+void rip_disconnect(struct inpcb *inp) {
+    inp->inp_faddr = zeroin_addr;
+}
 
 INCLUDE_ASM("nonmatchings/pspnet_inet_in_cksum2", func_0001B820);
 #endif

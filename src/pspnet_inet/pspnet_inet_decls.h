@@ -2216,7 +2216,7 @@ char *inet_ntoa(struct in_addr ina);
 char *intoa(u32 addr);
 s32 ip_ctloutput(s32 op, struct socket *so, s32 level, s32 optname, struct mbuf **mp);
 void ip_drain(void);
-void ip_freef();
+void ip_freef(struct Unk_func_00015654_0 *arg0);
 void ip_freemoptions(struct ip_moptions *imo);
 s32 ip_getmoptions(s32 optname, struct ip_moptions *imo, struct mbuf **mp);
 void ip_input(struct mbuf *m);

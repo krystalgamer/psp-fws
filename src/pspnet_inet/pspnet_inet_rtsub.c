@@ -426,7 +426,26 @@ void loopattach(void) {
     ifp->if_addrlen = 0; //P
     _sce_pspnet_if_attach(ifp);
 }
-#else
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 282
+void loopattach(void) {
+    struct ifnet *ifp = &loif;
+
+    sceNetSprintf(ifp->if_xname, "lo%d", 0);
+    ifp->if_softc = NULL; //P
+    ifp->if_mtu = 0x81BC; //P
+    ifp->if_flags = IFF_LOOPBACK | IFF_MULTICAST; //P
+    ifp->if_ioctl = loioctl; //P
+    ifp->if_output = looutput; //P
+    ifp->if_type = IFT_LOOP; //P
+    ifp->if_hdrlen = 0; //P
+    ifp->if_addrlen = 0; //P
+    _sce_pspnet_if_attach(ifp);
+}
+#endif
+
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/pspnet_inet_rtsub", loopattach);
 #endif
 
