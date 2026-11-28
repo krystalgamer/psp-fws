@@ -1315,7 +1315,72 @@ s32 ip_ctloutput(s32 op, struct socket *so, s32 level, s32 optname, struct mbuf 
 INCLUDE_ASM("nonmatchings/pspnet_inet_in_cksum", ip_ctloutput);
 #endif
 
+#if FW_VERSION < 201
+s32 ip_pcbopts(struct mbuf **pcbopt, struct mbuf *m) {
+    s32 cnt, optlen;
+    u8 *cp;
+    u8 opt;
+
+    if (*pcbopt)
+        (void)sceNetMFree(*pcbopt);
+    *pcbopt = 0;
+    if (m == (struct mbuf *)0 || m->m_len == 0) {
+        if (m)
+            (void)sceNetMFree(m);
+        return (0);
+    }
+    if (m->m_len % sizeof(s32))
+        goto bad;
+    if (m->m_data + m->m_len + sizeof(struct in_addr) >= (u8 *)&m->m_pkthdr + MLEN)
+        goto bad;
+    cnt = m->m_len;
+    m->m_len += sizeof(struct in_addr);
+    cp = mtod(m, u8 *) + sizeof(struct in_addr);
+    func_0002C864(cp, mtod(m, u8 *), (u32)cnt);
+    __builtin_memset(mtod(m, u8 *), 0, sizeof(struct in_addr));
+
+    for (; cnt > 0; cnt -= optlen, cp += optlen) {
+        opt = cp[0];
+        if (opt == 0)
+            break;
+        if (opt == 1)
+            optlen = 1;
+        else {
+            if (cnt < 1 + sizeof(*cp))
+                goto bad;
+            optlen = cp[1];
+            if (optlen < 1 + sizeof(*cp) || optlen > cnt)
+                goto bad;
+        }
+        switch (opt) {
+        default:
+            break;
+        case 0x83:
+        case 0x89:
+            if (optlen < 4 - 1 + sizeof(struct in_addr))
+                goto bad;
+            m->m_len -= sizeof(struct in_addr);
+            cnt -= sizeof(struct in_addr);
+            optlen -= sizeof(struct in_addr);
+            cp[1] = optlen;
+            func_0002C9B8((char *)&cp[2 + 1], mtod(m, char *), sizeof(struct in_addr));
+            func_0002C864(&cp[2 + 1], (char *)(&cp[2 + 1] + sizeof(struct in_addr)),
+                          (u32)cnt + sizeof(struct in_addr));
+            break;
+        }
+    }
+    if (m->m_len > 40 + sizeof(struct in_addr))
+        goto bad;
+    *pcbopt = m;
+    return (0);
+
+bad:
+    (void)sceNetMFree(m);
+    return (0x16);
+}
+#else
 INCLUDE_ASM("nonmatchings/pspnet_inet_in_cksum", ip_pcbopts);
+#endif
 
 #if FW_VERSION >= 151 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_inet_in_cksum", func_0001794C);
