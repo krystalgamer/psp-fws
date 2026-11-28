@@ -43,9 +43,9 @@ typedef struct SceMScmHC {
     s32 inService;          /* 0x0C */
 #if FW_VERSION < 250
     s32 unk10;
-    u32 intrStatus;         /* 0x14 */
-    s32 lastStatus;         /* 0x18 */
-    s32 unk1C;
+    volatile u32 intrStatus; /* 0x14 */
+    volatile s32 lastStatus; /* 0x18: status register at the last interrupt */
+    volatile s32 intrCause; /* 0x1C: reg->unk8 at the last interrupt */
     s32 readAddr;           /* 0x20: cached MS register window (-1 = unknown) */
     s32 readSize;           /* 0x24 */
     s32 writeAddr;          /* 0x28 */
@@ -72,6 +72,21 @@ typedef char chk_SceMScmHC[(sizeof(SceMScmHC) == 0x27C) ? 1 : -1];
 #elif FW_VERSION < 250
 typedef char chk_SceMScmHC[(sizeof(SceMScmHC) == 0x284) ? 1 : -1];
 #endif
+
+/* per-slot driver callbacks (D_00006ED8[slot]) */
+typedef struct {
+    u32 unk0;
+    u32 unk4;
+    s32 (*intrCb)(SceMScmHC *hc, void *arg);     /* 0x08: called from the MSIF irq handler */
+    s32 (*insertCb)(SceMScmHC *hc, void *arg);   /* 0x0C: called from the GPIO (insert/eject) handler */
+    u32 unk10;
+    void *intrArg;          /* 0x14 */
+    void *insertArg;        /* 0x18 */
+    u32 unk1C;
+    u32 unk20;
+    void *cld;              /* 0x24: attached class driver (NULL: none); a pointer, not an int (alias set) */
+} SceMScmSlotCB;
+typedef char chk_SceMScmSlotCB[(sizeof(SceMScmSlotCB) == 0x28) ? 1 : -1];
 
 /* HC register accessors: each access runs with interrupts disabled (inlined everywhere) */
 s32 sceKernelCpuSuspendIntr(void);
@@ -109,6 +124,9 @@ static inline void hcAnd16(volatile u16 *p, u16 v) {
 extern SceMScmBitMap D_000069F8[13];
 extern u8 D_00006B10[];
 extern u8 D_00006B24[];
+extern SceUID D_00006B48[1];
+extern SceUID D_00006B4C[1];
+extern SceMScmSlotCB D_00006ED8[1];
 extern s32 D_00006F0C;
 extern SceMScmHC D_00006F14[1];
 extern SceKernelSysClock D_00007190; /* sysclock ticks per usec */
@@ -116,6 +134,7 @@ extern s32 D_00007218;
 extern s32 D_00007800;
 extern s32 D_00007880;
 extern s32 D_00007AF4;
+extern s32 g_irqMissCount[1];
 
 s32 _sceMScmReinitializeHC(s32 slot);
 s32 func_00000000(s32 slot);
@@ -160,6 +179,7 @@ s32 func_00005C58(s32 slot);
 s32 func_00005C8C(s32 slot, s32 *out);
 s32 func_00005CE4(s32 slot, s32 *a, s32 *b);
 s32 func_00005E58(s32 slot, s32 on);
+s32 func_00005EB0(s32 slot);
 s32 func_00006440(SceMScmHC *hc);
 s32 func_00006474(s32 slot, s32 mode);
 s32 func_00006484(void);
@@ -189,7 +209,7 @@ s32 sceMScmIconStopUcode(SceMScmHC *hc);
 s32 sceMScmReadDataPIO(SceMScmHC *hc, u8 *buf, s32 size, s32 timeout);
 s32 sceMScmReadMSReg(SceMScmHC *hc, s32 addr, s32 size, u8 *buf, s32 force, s32 timeout);
 s32 sceMScmReadMSRegHelper(SceMScmHC *hc, u8 *buf, s32 size, s32 timeout);
-s32 sceMScmResetHC(SceMScmHC *hc, s32 mode);
+s32 sceMScmResetHC(SceMScmHC *hc, u32 mode);
 s32 sceMScmSendTPC(SceMScmHC *hc, u8 tpc, s32 size, s32 timeout);
 s32 sceMScmSendTPCDMA(SceMScmHC *hc, u8 dmaCh, s32 a2, s32 a3);
 s32 sceMScmSetHCTransferMode(SceMScmHC *hc, s32 a, s32 b, s32 c);

@@ -210,3 +210,4 @@ sceKernelPowerUnlock = 0x00006148; // type:func
 sceKernelRegisterSysEventHandler = 0x00006158; // type:func
 sceSysreg_driver_7B9E9A53 = 0x000061E0; // type:func
 sceSysreg_driver_7BDF0556 = 0x000061E8; // type:func
+g_irqMissCount = 0x00006A44; // rom:0x6AC4

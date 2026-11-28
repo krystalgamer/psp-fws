@@ -1015,7 +1015,54 @@ INCLUDE_ASM("nonmatchings/mscm", func_00003F48);
 INCLUDE_ASM("nonmatchings/mscm", func_000044D8);
 #endif
 
+#if FW_VERSION < 201 || (FW_VERSION >= 250 && FW_VERSION < 282)
+s32 sceMScmResetHC(SceMScmHC *hc, u32 mode) {
+    s32 ret;
+    u32 start;
+
+    ret = 0;
+    switch (mode) {
+    case 0:
+        break;
+    case 1:
+        ret = func_00005EB0(hc->index);
+        break;
+    case 2:
+        hcOr16(&hc->reg->sys, 0x8000);
+        start = func_00004870();
+        while ((s16)hcRead16(&hc->reg->sys) < 0) {
+            if (func_0000488C(start, 1000)) {
+                if ((s16)hc->reg->sys < 0) {
+                    return 0x80220087;
+                }
+                break;
+            }
+        }
+        sceMScmHCSetBusyCount(hc, 7);
+        hcOr16(&hc->reg->sys, 0x2000);
+        break;
+    case 4:
+        hcOr16(&hc->reg->unk4, 1);
+        start = func_00004870();
+        while (hcRead16(&hc->reg->unk4) & 1) {
+            if (func_0000488C(start, 1000)) {
+                if (hc->reg->unk4 & 1) {
+                    return 0x80220087;
+                }
+                break;
+            }
+        }
+        hcOr16(&hc->reg->unk4, 0x25C);
+        break;
+    default:
+        ret = 0xC0220000;
+        break;
+    }
+    return ret;
+}
+#else
 INCLUDE_ASM("nonmatchings/mscm", sceMScmResetHC);
+#endif
 
 INCLUDE_ASM("nonmatchings/mscm", sceMScmTPCSetCmd);
 
@@ -1352,9 +1399,145 @@ INCLUDE_ASM("nonmatchings/mscm", func_00005734);
 INCLUDE_RODATA("nonmatchings/mscm", D_000068A4);
 #endif
 
-#if FW_VERSION < 250
-INCLUDE_ASM("nonmatchings/mscm", func_00004B70);
+#if FW_VERSION == 100
+/* intr.c is its own object: its assert format is not merged with init.c's */
+static const char intrAssertFmt[] = "Assertion failed at %s:%s:%04d\n";
+#endif
 
+#if FW_VERSION >= 102 && FW_VERSION < 152
+/* intr.c is its own object: its assert format is not merged with init.c's */
+static const char intrAssertFmt[] = "Assertion failed at %s:%s:%04d\n";
+#endif
+
+#if FW_VERSION < 152
+s32 func_00004B70(s32 intno, SceMScmHC *hc) {
+    s32 index = hc->index;
+    s32 slot;
+    s32 ret;
+    SceMScmHC *h;
+    SceMScmSlotCB *cb;
+
+    switch (intno) {
+    case 7:
+        slot = 0;
+        break;
+    case 8:
+        slot = 1;
+        break;
+    default:
+        Kprintf(intrAssertFmt, "intr.c", "sceMScmHCIrqPrimaryHandler", 0x39);
+        sceKernelAssert(0, 0);
+        return -2;
+    }
+    if (index != slot) {
+        if (--g_irqMissCount[index] != -1) {
+            return -1;
+        }
+        g_irqMissCount[index] = 100;
+        return -2;
+    }
+    h = &D_00006F14[index];
+    h->lastStatus = hc->reg->status;
+    h->intrCause = hc->reg->unk8;
+    h->intrStatus = func_00004E94(index);
+    ret = 1;
+    cb = &D_00006ED8[index];
+    if (cb->cld != NULL && (D_00006F14[index].intrStatus & 0x11) && cb->intrCb != NULL) {
+        ret = cb->intrCb(hc, cb->intrArg);
+    }
+    h = &D_00006F14[index];
+    func_00005270(index, h->intrStatus);
+    if (ret > 0) {
+        sceKernelSetEventFlag(D_00006B48[index], func_00004E50(h->intrStatus));
+    }
+    return -1;
+}
+#endif
+
+#if FW_VERSION == 152
+/* intr.c is its own object: its assert format is not merged with init.c's */
+static const char intrAssertFmt[] = "Assertion failed at %s:%s:%04d\n";
+
+s32 func_00004B70(s32 intno, SceMScmHC *hc) {
+    s32 index = hc->index;
+    s32 slot;
+    s32 ret;
+    SceMScmHC *h;
+    SceMScmSlotCB *cb;
+
+    switch (intno) {
+    case 7:
+        slot = 0;
+        break;
+    case 8:
+        slot = 1;
+        break;
+    default:
+        Kprintf(intrAssertFmt, "intr.c", "sceMScmHCIrqPrimaryHandler", 0x39);
+        sceKernelAssert(0, 0);
+        return -2;
+    }
+    if (index != slot) {
+        if (--g_irqMissCount[index] != -1) {
+            return -1;
+        }
+        g_irqMissCount[index] = 100;
+        return -2;
+    }
+    h = &D_00006F14[index];
+    h->lastStatus = hc->reg->status;
+    h->intrCause = hc->reg->unk8;
+    h->intrStatus = func_0000514C(index);
+    ret = 1;
+    cb = &D_00006ED8[index];
+    if (cb->cld != NULL && (D_00006F14[index].intrStatus & 0x11) && cb->intrCb != NULL) {
+        ret = cb->intrCb(hc, cb->intrArg);
+    }
+    h = &D_00006F14[index];
+    func_00005270(index, h->intrStatus);
+    if (ret > 0) {
+        sceKernelSetEventFlag(D_00006B48[index], func_00004E50(h->intrStatus));
+    }
+    return -1;
+}
+#endif
+
+#if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/mscm", func_00004B70);
+#endif
+
+#if FW_VERSION < 150
+s32 func_00004D30(s32 intno, SceMScmHC *hc) {
+    s32 ret;
+    s32 index;
+    SceMScmSlotCB *cb;
+
+    ret = 1;
+    sceKernelPowerTick(0);
+    index = hc->index;
+    if (intno == 0x3C) {
+        D_00006F14[index].intrStatus |= 0x1000;
+    } else {
+        D_00006F14[index].intrStatus |= 0x2000;
+    }
+    cb = &D_00006ED8[index];
+    if (cb->insertCb != NULL) {
+        ret = cb->insertCb(hc, cb->insertArg);
+    }
+    func_00005C58(index);
+    if (ret > 0) {
+        if (intno == 0x3C) {
+            sceKernelSetEventFlag(D_00006B48[index], 0x40000000);
+        } else {
+            sceSysregMsifIoDisable(index);
+            sceKernelSetEventFlag(D_00006B48[index], 0x80000000);
+        }
+    }
+    return -1;
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 250
 INCLUDE_ASM("nonmatchings/mscm", func_00004D30);
 #endif
 

@@ -139,3 +139,4 @@ func_00005A44 = 0x00005224; // type:func
 func_00005A44_v100 = 0x00005A44; // type:func
 // shared names (tools/add_version.py) end
 _sceMScmReinitializeHC = 0x00000124; // type:func
+g_irqMissCount = 0x000069F4; // rom:0x6A74

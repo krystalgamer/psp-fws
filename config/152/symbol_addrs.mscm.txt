@@ -212,3 +212,4 @@ func_00005CE4 = 0x00006100; // type:func rom:0x6180
 func_00005E58 = 0x00006274; // type:func rom:0x62F4
 func_00005EB0 = 0x000062CC; // type:func rom:0x634C
 // shared names (tools/add_version.py) end
+g_irqMissCount = 0x00006DC4; // rom:0x6E44
