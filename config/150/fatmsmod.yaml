@@ -15,6 +15,7 @@ options:
   cache_path: tmp/build/150/.splat_cache.fatmsmod
   symbol_addrs_path:
     - config/150/symbol_addrs.fatmsmod.txt
+    - config/150/func_starts.fatmsmod.txt
     - tmp/build/150/prx_syms.fatmsmod.txt
   reloc_addrs_path: [tmp/build/150/reloc_addrs.fatmsmod.txt]
   asset_path: tmp/assets/150/fatmsmod

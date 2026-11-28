@@ -333,3 +333,4 @@ free_heap = 0x00000910; // type:func
 prErr = 0x00000BDC; // type:func
 add_drive_name = 0x00000B1C; // type:func
 check_heap_alive = 0x00000A58; // type:func
+stub_pf_chdmod = 0x00003A74; // type:func
