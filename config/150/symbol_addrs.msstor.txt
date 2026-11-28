@@ -204,3 +204,5 @@ func_000086F4 = 0x0000790C; // type:func rom:0x798C
 func_00008A54 = 0x00007C6C; // type:func rom:0x7CEC
 D_00008178_v150 = 0x00008178; // rom:0x81F8
 // shared names (tools/add_version.py) end
+D_0000890C = 0x00008BCC; // rom:0x8C4C
+D_00008920 = 0x00008BE0; // rom:0x8C60

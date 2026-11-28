@@ -208,3 +208,5 @@ sceKernelCreateFpl = 0x00007D08; // type:func
 sceKernelTryAllocateFpl = 0x00007D18; // type:func
 sceMScmSendTPC = 0x00007D70; // type:func
 sceMScmSendTPCDMA = 0x00007D78; // type:func
+D_0000890C = 0x0000899C; // rom:0x8A1C
+D_00008920 = 0x000089B0; // rom:0x8A30

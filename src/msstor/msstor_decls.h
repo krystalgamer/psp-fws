@@ -18,6 +18,25 @@ struct D_00009B54_s {
     s32 unk4E88;
 };
 
+/* SCE assert macro of msstor.c (file/function names read before the test) */
+#define MSSTOR_ASSERT(cond, line) { \
+    const char *file = "msstor.c", *func = "_sceMSstorCLDCallback"; \
+    s32 _ok = (cond); \
+    if (!_ok) { \
+        Kprintf("Assertion failed at %s:%s:%04d\n", file, func, line); \
+        sceKernelAssert(_ok, 0); \
+    } \
+}
+
+/* the CLD callback locks power with the user-level API in 1.02/1.03 only */
+#if FW_VERSION == 102 || FW_VERSION == 103
+#define MSSTOR_POWER_LOCK sceKernelPowerLockForUser
+#define MSSTOR_POWER_UNLOCK sceKernelPowerUnlockForUser
+#else
+#define MSSTOR_POWER_LOCK sceKernelPowerLock
+#define MSSTOR_POWER_UNLOCK sceKernelPowerUnlock
+#endif
+
 typedef int SceMode;
 typedef s64 SceOff;
 typedef s32 SceSSize;
@@ -404,6 +423,7 @@ void func_00003E88(s32 arg0);
 void func_00003EA8(s32 arg0);
 s32 func_00004514(void);
 s32 func_00004558(void);
+s32 func_00004588(SceMScmHC *hc, s32 cmd, unsigned long *result, s32 arg3, SceMSstorDev *dev);
 s32 func_00004664(SceMSstorDev *dev);
 s32 func_000046FC(SceMSstorDev *dev);
 void func_00004750(s32 arg0);
@@ -415,9 +435,12 @@ s32 func_00004A04(void);
 s32 func_00004A0C(SceIoIob *iob, char *name, s32 flags, SceMode mode);
 s32 func_00004A40(SceIoIob *iob, char *name, s32 flags, SceMode mode);
 s32 func_00004A48(void);
+s32 func_00004A90(SceIoIob *iob, char *name, s32 flags, SceMode mode);
 s32 func_00004A98(SceIoIob *iob, char *name, u32 flags, SceMode mode);
 s32 func_00004B14(SceIoIob *iob);
 s32 func_00004B2C(SceIoIob *iob, void *buf, SceSize size, s32 write, s32 (*io)(s32 lba, s32 count, void *buf));
+s32 func_00004B30(SceIoIob *iob, char *name, s32 flags, SceMode mode);
+s32 func_00004C00(SceIoIob *iob, char *name, u32 flags, SceMode mode);
 s32 func_00004C88(SceIoIob *iob);
 s32 func_00004E2C(struct Unk_func_00004E2C_0 *arg0);
 s32 func_00004E40(void);
@@ -428,11 +451,21 @@ s32 func_000053B4(SceIoIob *iob, void *buf, SceSize size);
 s32 func_0000544C(SceIoIob *iob, void *buf, SceSize size);
 s32 func_00005684(SceIoIob *iob, SceOff end);
 s32 func_00005708(SceIoIob *iob, SceOff end);
+s32 func_00005738(SceIoIob *iob, s32 cmd, void *in, SceSize inlen, void *out, SceSize outlen);
+SceOff func_000057A4(SceIoIob *iob, SceOff ofs, s32 whence);
+s32 func_00005AD4(SceIoIob *iob, s32 cmd, void *in, SceSize inlen, void *out, SceSize outlen);
+s32 func_00005D0C(SceIoIob *iob, char *name, s32 cmd, void *in, SceSize inlen, void *out, SceSize outlen);
+s32 func_00005D18(SceIoIob *iob, s32 cmd, void *in, SceSize inlen, void *out, SceSize outlen);
 s32 func_00006858(SceSize args, void *argp);
 s32 func_00006A68(SceIoIob *iob, s32 cmd, void *in, SceSize inlen, void *out, SceSize outlen);
+s32 func_00006AC8(SceIoIob *iob, s32 cmd, void *in, SceSize inlen, void *out, SceSize outlen);
+s32 func_00006C70(SceIoIob *iob, s32 cmd, void *in, SceSize inlen, void *out, SceSize outlen, s32 flag);
 s32 func_00006DFC(SceIoIob *iob, s32 cmd, void *in, SceSize inlen, void *out, SceSize outlen);
 s32 func_00006E60(SceIoIob *iob, s32 cmd, void *in, SceSize inlen, void *out, SceSize outlen);
 s32 func_00006EBC(SceIoIob *iob, s32 cmd, void *in, SceSize inlen, void *out, SceSize outlen);
+s32 func_00006F10(SceIoIob *iob, s32 cmd, void *in, SceSize inlen, void *out, SceSize outlen);
+s32 func_0000700C(s32 mode, SceIoIob *iob, s32 cmd, void *in, SceSize inlen, void *out, SceSize outlen);
+s32 func_00007108(s32 mode, SceIoIob *iob, s32 cmd, void *in, SceSize inlen, void *out, SceSize outlen);
 s32 func_00007234(SceIoIob *iob, s32 cmd, void *in, SceSize inlen, void *out, SceSize outlen);
 s32 func_000072A4(SceIoIob *iob, s32 cmd, void *in, SceSize inlen, void *out, SceSize outlen);
 s32 func_000075DC(struct Unk_func_000075DC_0 *arg0);
@@ -441,12 +474,16 @@ void func_000077A0(struct Unk_func_000077A0_0 *arg0, s32 arg1);
 s32 func_000077B8(struct Unk_func_000077B8_0 *arg0);
 s32 func_000077C4(s32 err);
 s32 func_00007850(s32 err);
+s32 func_00007CF0(s32);
+s32 func_00007D38_v102(s32);
 s32 memcmp(const void *a, const void *b, SceSize n);
 void *memcpy(void *dst, const void *src, SceSize n);
 s32 module_reboot_before(void);
 s32 sceIoAddDrv(SceIoDeviceTable *drv);
 s32 sceIoDelDrv(const char *name);
 void sceKernelAssert(s32 ok, s32 lvl);
+void sceKernelCpuResumeIntr(s32 intr);
+s32 sceKernelCpuSuspendIntr(void);
 SceUID sceKernelCreateEventFlag(const char *name, u32 attr, u32 bits, void *opt);
 SceUID sceKernelCreateFpl(const char *name, s32 part, s32 attr, SceSize size, s32 count, void *opt);
 SceUID sceKernelCreateSema(const char *name, u32 attr, s32 init, s32 max, void *opt);
