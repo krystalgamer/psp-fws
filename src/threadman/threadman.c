@@ -2964,7 +2964,27 @@ INCLUDE_ASM("nonmatchings/threadman", func_0000A818);
 INCLUDE_ASM("nonmatchings/threadman", func_0000BB7C);
 #endif
 
-INCLUDE_ASM("nonmatchings/threadman", func_0000BBD0);
+s32 func_0000BBD0(s32 *fpl) {
+    void **p = (void **)fpl[2];
+    void **tail;
+    void **head;
+    s32 ret = -1;
+
+    if (p != NULL) {
+        tail = p;
+        head = *tail;
+        fpl[4]--;
+        if (tail == head) {
+            tail = NULL;
+        } else {
+            *tail = *head;
+        }
+        fpl[2] = (s32)tail;
+        *head = NULL;
+        ret = ((u8 *)head - (u8 *)fpl[3]) >> 2;
+    }
+    return ret;
+}
 
 #if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_RODATA("nonmatchings/threadman", D_00015500);
@@ -3759,11 +3779,57 @@ INCLUDE_ASM("nonmatchings/threadman", sceKernelDeleteThread);
 INCLUDE_ASM("nonmatchings/threadman", func_0000FFA4);
 
 INCLUDE_ASM("nonmatchings/threadman", sceKernelStartThread);
+#endif
 
+#if FW_VERSION == 150
+s32 sceKernelExitThread(s32 status) {
+    void *ra = getRa();
+    u32 oldK1 = shiftK1Noreorder();
+
+    if (sceKernelIsIntrContext() || g_threadmanInfo.currentThread->unk44 != 0) {
+        setK1(oldK1);
+        return 0x80020064;
+    }
+    if (status < 0) {
+        status = 0x800200D2;
+    }
+    g_threadmanInfo.currentThread->exitStatus = status;
+    if (g_threadmanInfo.logHandler != NULL) {
+        g_threadmanInfo.logHandler(0x13, ra, 1, status);
+    }
+    func_000106E4(0, g_threadmanInfo.currentThread->exitStatus);
+}
+#endif
+
+#if FW_VERSION >= 151 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/threadman", sceKernelExitThread);
+#endif
 
+#if FW_VERSION == 150
+s32 sceKernelExitDeleteThread(s32 status) {
+    void *ra = getRa();
+    u32 oldK1 = shiftK1Noreorder();
+
+    if (sceKernelIsIntrContext() || g_threadmanInfo.currentThread->unk44 != 0) {
+        setK1(oldK1);
+        return 0x80020064;
+    }
+    if (status < 0) {
+        status = 0x800200D2;
+    }
+    g_threadmanInfo.currentThread->exitStatus = status;
+    if (g_threadmanInfo.logHandler != NULL) {
+        g_threadmanInfo.logHandler(0x14, ra, 1, status);
+    }
+    func_000106E4(1, g_threadmanInfo.currentThread->exitStatus);
+}
+#endif
+
+#if FW_VERSION >= 151 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/threadman", sceKernelExitDeleteThread);
+#endif
 
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/threadman", sceKernelTerminateThread);
 
 INCLUDE_ASM("nonmatchings/threadman", sceKernelTerminateDeleteThread);
@@ -4225,7 +4291,7 @@ INCLUDE_ASM("nonmatchings/threadman", func_0000F378);
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/threadman", func_00013B34);
+INCLUDE_ASM("nonmatchings/threadman", func_000106E4);
 
 INCLUDE_ASM("nonmatchings/threadman", func_00013C70);
 #endif
@@ -4561,9 +4627,41 @@ INCLUDE_ASM("nonmatchings/threadman", func_00014480);
 #endif
 
 #if FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/threadman", sceKernelExitThread);
+s32 sceKernelExitThread(s32 status) {
+    void *ra = getRa();
+    u32 oldK1 = shiftK1Noreorder();
 
-INCLUDE_ASM("nonmatchings/threadman", sceKernelExitDeleteThread);
+    if (sceKernelIsIntrContext() || g_threadmanInfo.currentThread->unk44 != 0) {
+        setK1(oldK1);
+        return 0x80020064;
+    }
+    if (status < 0) {
+        status = 0x800200D2;
+    }
+    g_threadmanInfo.currentThread->exitStatus = status;
+    if (g_threadmanInfo.logHandler != NULL) {
+        g_threadmanInfo.logHandler(0x13, ra, 1, status);
+    }
+    func_000106E4(0, g_threadmanInfo.currentThread->exitStatus);
+}
+
+s32 sceKernelExitDeleteThread(s32 status) {
+    void *ra = getRa();
+    u32 oldK1 = shiftK1Noreorder();
+
+    if (sceKernelIsIntrContext() || g_threadmanInfo.currentThread->unk44 != 0) {
+        setK1(oldK1);
+        return 0x80020064;
+    }
+    if (status < 0) {
+        status = 0x800200D2;
+    }
+    g_threadmanInfo.currentThread->exitStatus = status;
+    if (g_threadmanInfo.logHandler != NULL) {
+        g_threadmanInfo.logHandler(0x14, ra, 1, status);
+    }
+    func_000106E4(1, g_threadmanInfo.currentThread->exitStatus);
+}
 
 INCLUDE_ASM("nonmatchings/threadman", func_000109C4);
 

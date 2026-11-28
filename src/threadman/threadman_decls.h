@@ -659,6 +659,7 @@ s32 func_0000F264(void);
 s32 func_0000F378(s32);
 void func_0000F50C(void *arg0, s32 arg1, s32 arg2);
 s32 func_0000FD6C(void);
+void func_000106E4(s32 deleteThread, s32 exitStatus) __attribute__((noreturn));
 void func_00011B68(void *arg0, s32 arg1);
 void func_000127F8(struct Unk_func_000127F8_0 *arg0, s32 arg1);
 s32 func_000136C0(void);
@@ -673,8 +674,8 @@ s32 sceKernelCpuSuspendIntr(void);
 s32 sceKernelCreateUIDtype(const char *name, s32 size, SceSysmemUidLookupFunc *funcTable, SceSysmemUidLookupFunc *metaFuncTable, SceSysmemUidCB **uidTypeOut);
 s32 sceKernelCreateUIDtypeInherit(const char *parentName, const char *name, s32 size, SceSysmemUidLookupFunc *funcTable, SceSysmemUidLookupFunc *metaFuncTable, SceSysmemUidCB **uidTypeOut);
 s32 sceKernelDeleteHeap(SceUID heapId);
-s32 sceKernelExitDeleteThread(s32);
-s32 sceKernelExitThread(s32);
+s32 sceKernelExitDeleteThread(s32 status);
+s32 sceKernelExitThread(s32 status);
 s32 sceKernelFreeHeapMemory(SceUID heapId, void *block);
 s32 sceKernelFreePartitionMemory(); /* (SceUID blockId); one 2.x draft passes two */
 void sceKernelGetKTLS(s32 arg0);
