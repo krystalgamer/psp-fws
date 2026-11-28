@@ -73,7 +73,66 @@ struct rtentry *rtalloc1(struct sockaddr *dst, s32 report) {
 INCLUDE_ASM("nonmatchings/pspnet_inet_route", rtalloc1);
 #endif
 
+#if FW_VERSION < 201
+void rtredirect(struct sockaddr *dst, struct sockaddr *gateway, struct sockaddr *netmask, s32 flags,
+                struct sockaddr *src, struct rtentry **rtp) {
+    struct rtentry *rt;
+    s32 error = 0;
+    u16 *stat = 0;
+    struct rt_addrinfo info;
+    struct ifaddr *ifa;
+
+    if ((ifa = ifa_ifwithnet(gateway)) == 0) {
+        error = 0x72;
+        goto out;
+    }
+    rt = rtalloc1(dst, 0);
+#define equal(a1, a2) (func_0002C978((char *)(a1), (char *)(a2), (a1)->sa_len) == 0)
+    if (!(flags & 0x40) && rt &&
+        (!equal(src, rt->rt_gateway) || rt->rt_ifa != ifa))
+        error = 0x16;
+    else if (ifa_ifwithaddr(gateway))
+        error = 0x76;
+    if (error)
+        goto done;
+    if ((rt == 0) || (rt->rt_nodes[0].rn_mask && ((struct sockaddr *)rt->rt_nodes[0].rn_mask)->sa_len < 2))
+        goto create;
+    if (rt->rt_flags & 0x2) {
+        if (((rt->rt_flags & 0x4) == 0) && (flags & 0x4)) {
+        create:
+            flags |= 0x2 | 0x10;
+            error = rtrequest(1, dst, gateway, netmask, flags, (struct rtentry **)0);
+            stat = &rt_stat.rts_dynamic;
+        } else {
+            rt->rt_flags |= 0x20;
+            flags |= 0x20;
+            stat = &rt_stat.rts_newgateway;
+            rt_setgate(rt, rt_key(rt), gateway);
+        }
+    } else
+        error = 0x76;
+done:
+    if (rt) {
+        if (rtp && !error)
+            *rtp = rt;
+        else
+            rtfree(rt);
+    }
+out:
+    if (error)
+        rt_stat.rts_badredirect++;
+    else if (stat != NULL)
+        (*stat)++;
+    __builtin_memset((char *)&info, 0, sizeof(info));
+    info.rti_info[0] = dst;
+    info.rti_info[1] = gateway;
+    info.rti_info[2] = netmask;
+    info.rti_info[6] = src;
+    rt_missmsg(6, &info, flags, error);
+}
+#else
 INCLUDE_ASM("nonmatchings/pspnet_inet_route", rtredirect);
+#endif
 
 struct ifaddr *ifa_ifwithroute(s32 flags, struct sockaddr *dst, struct sockaddr *gateway) {
     struct ifaddr *ifa;
