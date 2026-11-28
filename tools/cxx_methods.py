@@ -268,7 +268,8 @@ def main():
     for qual, ms in sorted(members.items()):
         block = "".join(m + "\n" for m in ms)
         if qual in namespaces:
-            gen.append(f"namespace {qual} {{\n{block}}}\n")
+            # the decls are inside extern "C" {}: functions in a namespace would get C linkage
+            gen.append(f"extern \"C++\" {{\nnamespace {qual} {{\n{block}}}\n}}\n")
             continue
         sh = next((p for p, t in shared_text.items() if class_block(t, qual)), None)
         if sh:
