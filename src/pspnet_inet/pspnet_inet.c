@@ -534,7 +534,7 @@ s32 func_0000431C(struct socket *so, struct mbuf *nam) {
 
 #if FW_VERSION >= 282
 void func_000040FC(void) {
-    D_0002BEC0 = 0x80;
+    somaxconn = 0x80;
     D_0002C504 = 0;
     so_list.tqh_first = NULL;
     so_list.tqh_last = &so_list.tqh_first;

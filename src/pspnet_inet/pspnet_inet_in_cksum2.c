@@ -2106,7 +2106,7 @@ INCLUDE_ASM("nonmatchings/pspnet_inet_in_cksum2", func_0001B398);
 
 #if FW_VERSION >= 282
 void func_0001A8AC(void) {
-    sceNetMemset(&D_0002DBC8, 0, 0x48);
+    sceNetMemset(&igmp_stat, 0, 0x48);
     igmp_timers_are_running = 0;
     rti_head = 0;
 }

@@ -896,7 +896,7 @@ void tcp_timer_init(void) {
 }
 #else
 void func_000244B0(void) {
-    D_0002C358 = 0x3840;
+    tcp_keepidle = 0x3840;
     D_0002C39C = 0x1FF;
     tcp_keepintvl = 0x96;
     tcp_keepcnt = 8;
