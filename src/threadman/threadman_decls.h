@@ -266,6 +266,18 @@ typedef struct SceThreadCbObj {
     s32 notifyArg; /* 0x1C (Callback) */
 } SceThreadCbObj;
 
+typedef struct {
+    u32 low;
+    u32 hi;
+} SceKernelSysClock;
+
+/* "Timer" uid type data: a queued timeout, sorted by time */
+typedef struct SceTimer {
+    struct SceTimer *next; /* 0x00 */
+    struct SceTimer *prev; /* 0x04 */
+    SceKernelSysClock time; /* 0x08: expiry time */
+} SceTimer;
+
 enum SceThreadStatus {
     THREAD_RUNNING = 1,
     THREAD_READY = 2,
@@ -373,7 +385,12 @@ typedef struct SceThreadmanInfo {
     u32 unk430; /* 0x430: system time low word at last update */
     u32 unk434; /* 0x434: system time high word */
     u32 unk438; /* 0x438: next timer event (low word) */
-    u8 unk43C[0x5EC - 0x43C];
+    u8 unk43C[0x5B8 - 0x43C];
+    s32 unk5B8; /* 0x5B8: number of free Delay uids in unk5C4 */
+    SceThreadQueue timers; /* 0x5BC: active SceTimers, by time */
+    SceThreadQueue unk5C4; /* 0x5C4: free Delay uids */
+    SceThreadQueue unk5CC; /* 0x5CC: thread event handlers */
+    u8 unk5D4[0x5EC - 0x5D4];
     SceThreadQueue suspendedThreads; /* 0x5EC */
     u8 unk5F4[0x5FC - 0x5F4];
     SceSysmemUidCB *uidWaitQType; /* 0x5FC */
@@ -493,6 +510,7 @@ extern s32 D_000166F8;
 extern s32 D_0001671C;
 extern s32 D_00016754;
 extern s32 D_00016778;
+extern char D_0001679C[];
 extern char D_00016928[];
 extern s32 D_000169E0;
 extern s32 D_00016C78;
@@ -571,6 +589,7 @@ s32 func_0000ABD8(struct Unk_func_0000ABD8_0 *arg0);
 u64 func_0000B490(void);
 u64 func_0000B634(void);
 s32 func_0000BCAC(struct Unk_func_0000BCAC_0 *arg0);
+SceSysmemUidCB *func_0000BFC0(void);
 s32 func_0000DAF4(s32, s32);
 s32 func_0000DDDC(void *arg0);
 s32 func_0000DE04(void);

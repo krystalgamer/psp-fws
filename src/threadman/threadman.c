@@ -12,6 +12,15 @@ static inline void *getRa(void) {
     return ra;
 }
 
+static inline u64 sysClockToU64(SceKernelSysClock *clock) {
+    return ((u64)clock->hi << 32) + clock->low;
+}
+
+static inline void u64ToSysClock(SceKernelSysClock *clock, u64 value) {
+    clock->low = value;
+    clock->hi = value >> 32;
+}
+
 /* the original assert loads the file and function name before testing; compiled out in 2.01+ */
 #define THREADMAN_ASSERT(ok, fmt, file, func, line) \
     do { \
@@ -2793,11 +2802,28 @@ INCLUDE_ASM("nonmatchings/threadman", func_0000ADAC);
 INCLUDE_ASM("nonmatchings/threadman", func_0000AE54);
 
 INCLUDE_ASM("nonmatchings/threadman", func_0000AF9C);
+
+void func_0000B258(SceTimer *timer) {
+    SceTimer *head = (SceTimer *)&g_threadmanInfo.timers;
+    SceTimer *t;
+
+    for (t = head->next; t != head; t = t->next) {
+        if (sysClockToU64(&timer->time) < sysClockToU64(&t->time)) {
+            break;
+        }
+    }
+    timer->next = t;
+    timer->prev = t->prev;
+    t->prev = timer;
+    timer->prev->next = timer;
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 201
+INCLUDE_ASM("nonmatchings/threadman", func_0000B258);
 #endif
 
 #if FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/threadman", func_0000B258);
-
 INCLUDE_ASM("nonmatchings/threadman", func_0000B304);
 #endif
 
@@ -2897,13 +2923,65 @@ INCLUDE_ASM("nonmatchings/threadman", func_0000B694);
 #endif
 
 #if FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/threadman", func_0000BDC8);
+s32 func_0000BDC8(u32 *clock, void *handler, void *arg) {
+    SceSysmemUidCB *cb;
+    u32 *timer;
+    void **delay;
+    u64 t = ((u64)clock[1] << 32) + clock[0];
+
+    if ((s64)(t - func_0000B634()) < 0) {
+        return 0x800201A8;
+    }
+    cb = func_0000BFC0();
+    if (cb == NULL) {
+        return 0x80020190;
+    }
+    delay = UID_CB_TO_DATA(cb, g_threadmanInfo.uidDelayType, void *);
+    timer = UID_CB_TO_DATA(cb, g_threadmanInfo.uidTimerType, u32);
+    timer[2] = clock[0];
+    timer[3] = clock[1];
+    delay[0] = handler;
+    delay[1] = arg;
+    func_0000B258(timer);
+    func_0000B304();
+    return cb->uid;
+}
 
 INCLUDE_ASM("nonmatchings/threadman", func_0000BEBC);
 
-INCLUDE_ASM("nonmatchings/threadman", func_0000BFC0);
+SceSysmemUidCB *func_0000BFC0(void) {
+    SceSysmemUidCB *uid;
+    SceThread *node;
 
-INCLUDE_ASM("nonmatchings/threadman", func_0000C048);
+    if (g_threadmanInfo.unk5B8 > 0) {
+        node = g_threadmanInfo.unk5C4.next;
+        g_threadmanInfo.unk5B8--;
+        node->next->prev = node->prev;
+        node->prev->next = node->next;
+        uid = (SceSysmemUidCB *)((u8 *)node - g_threadmanInfo.uidTimerType->size * 4);
+    } else if (sceKernelCreateUID(g_threadmanInfo.uidDelayType, D_0001679C, 0, &uid) != 0) {
+        return NULL;
+    }
+    return uid;
+}
+
+void func_0000C048(SceSysmemUidCB *cb) {
+    SceThreadQueue *queue;
+    SceThread *node = UID_CB_TO_DATA(cb, g_threadmanInfo.uidTimerType, SceThread);
+    s32 count = g_threadmanInfo.unk5B8;
+
+    if (count < 32) {
+        queue = &g_threadmanInfo.unk5C4;
+        node->prev = queue->prev;
+        node->next = (SceThread *)queue;
+        queue->prev = node;
+        g_threadmanInfo.unk5B8 = count + 1;
+        node->prev->next = node;
+    } else {
+        node->currentPriority = 1;
+        func_0000EF10(cb->uid);
+    }
+}
 #endif
 
 #if FW_VERSION >= 282
