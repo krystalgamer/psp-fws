@@ -238,6 +238,24 @@ typedef struct {
 } __attribute__((packed)) SceNetArpHdr;
 
 typedef struct {
+    u8 op;
+    u8 htype;
+    u8 hlen;
+    u8 hops;
+    u32 xid;                    /* 0x04 */
+    u16 secs;                   /* 0x08 */
+    u16 flags;
+    u32 ciaddr;                 /* 0x0C */
+    u32 yiaddr;                 /* 0x10 */
+    u32 siaddr;                 /* 0x14 */
+    u32 giaddr;                 /* 0x18 */
+    u8 chaddr[16];              /* 0x1C */
+    char sname[64];             /* 0x2C */
+    char file[128];             /* 0x6C */
+    u8 options[4];              /* 0xEC magic cookie */
+} SceNetBootp;
+
+typedef struct {
     u8 vhl;
     u8 tos;
     u16 len;
@@ -282,9 +300,15 @@ typedef u32 SceNetDhcpTime;
 typedef s32 SceNetDhcpTime;
 #endif
 typedef struct {
-    u8 unk0[0xD];
+    u8 unk0[7];
+    u8 flags;                   /* 0x007 0x10: T2 given, 0x20: T1 given */
+    u8 unk8;
+    SceNetInAddrPacked ciaddr;  /* 0x009 */
     SceNetInAddrPacked yiaddr;  /* 0x00D */
-    u8 unk11[0xC8];
+    SceNetInAddrPacked siaddr;  /* 0x011 */
+    SceNetInAddrPacked giaddr;  /* 0x015 */
+    char sname[0x40];           /* 0x019 */
+    char file[0x80];            /* 0x059 */
     char hostname[0x100];       /* 0x0D9 option 12 */
     char domain[0x100];         /* 0x1D9 option 15 */
     char message[0x100];        /* 0x2D9 option 56 */
@@ -687,7 +711,7 @@ s32 func_000045B8(SceNetDhcpCtx *dc, void *addr);
 s32 func_00004704(s32 sock, u32 *dst, void *buf);
 s32 func_000047D8(SceNetDhcpCtx *dc);
 s32 func_0000487C(SceNetDhcpCtx *dc, void *spa, void *tpa);
-s32 func_00004AEC(void *bootp, s32 len, SceNetDhcpLease *l);
+s32 func_00004AEC(void *bp, s32 len, SceNetDhcpLease *l);
 s32 func_00004CDC(s8 *opt, SceNetDhcpLease *l);
 s32 func_00004DE0(s8 *opt, SceNetDhcpLease *l);
 s32 func_00004E50(s8 *opt, SceNetDhcpLease *l);
@@ -724,6 +748,7 @@ void func_000070C0(s32 *arg0);
 s32 func_000070E8(void *pkt, s32 len, s32 area, u32 *overload);
 s32 func_00007244(void *pkt, void *arg, s8 tag, s32 area, u32 *overload);
 s32 func_00007324(void);
+s32 func_00007358(SceNetBootp *bp, s32 len, SceNetDhcpLease *l, s32 area, u32 *overload);
 s32 func_0000741C(s32, s32);
 u8 *func_000074D0(u8 *dst, u8 *src, s32 n);
 void *func_00007504(void *dst, s32 c, s32 n);
