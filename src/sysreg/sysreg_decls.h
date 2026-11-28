@@ -15,7 +15,7 @@ s32 func_00000588(u32 mask, s32 on);
 s32 func_00000B64(u32 mask, s32 on);
 s32 func_00000C58(u32 mask, s32 on);
 s32 func_00001104(u32 mask, s32 on);
-s32 func_00001A68(s32, s32);
+s32 func_00001A68(u32 bit, s32 on);
 s32 func_00001AF8(u32 mask, s32 on);
 s32 func_00001BF4(u32 mask, s32 on);
 s32 module_reboot_before(void);
