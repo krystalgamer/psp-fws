@@ -748,7 +748,6 @@ void func_00001980(void) {
 
 INCLUDE_ASM("nonmatchings/mgr", func_0000199C);
 
-#if FW_VERSION < 340
 void func_00001A44(void) {
     func_0000015C(0, 0);
     if (g_mgrIb2Ctrl.sema != 0) {
@@ -760,19 +759,6 @@ void func_00001A44(void) {
         g_mgrIb2Ctrl.evf = 0;
     }
 }
-#else
-void func_00001A44(void) {
-    func_0000015C(0, 0);
-    if (g_mgrIb2Ctrl.sema != 0) {
-        sceKernelDeleteSema(g_mgrIb2Ctrl.sema);
-        g_mgrIb2Ctrl.sema = 0;
-    }
-    if (g_mgrIb2Ctrl.evf != 0) {
-        sceKernelDeleteEventFlag(g_mgrIb2Ctrl.evf);
-        g_mgrIb2Ctrl.evf = 0;
-    }
-}
-#endif
 
 void func_00001AAC(void) {
     *(volatile u32 *)0xBE100080 = 0x8000;
@@ -2930,9 +2916,55 @@ INCLUDE_ASM("nonmatchings/mgr", func_000086A8);
 
 INCLUDE_ASM("nonmatchings/mgr", func_00008788);
 #else
-INCLUDE_ASM("nonmatchings/mgr", sceMgr_driver_016A843B);
+s32 sceMgr_driver_016A843B(s32 arg0, u64 *out, u64 *in) {
+    MgrMsAuthInfo info;
+    s32 fd;
+    s32 ret;
 
-INCLUDE_ASM("nonmatchings/mgr", sceMgr_driver_3EE1140B);
+    func_00006288(&info, in, NULL, NULL);
+    ret = func_00006678(arg0, &fd, 3, 1);
+    if (ret < 0) {
+        return ret;
+    }
+    ret = func_00006134(fd, 0xC, (u8 *)&info, 0x1A);
+    if (ret >= 0) {
+        ret = func_000065FC(fd, (u8 *)"uvw", 3);
+        if (ret >= 0) {
+            ret = func_00006134(fd, 3, (u8 *)&info, 0x18);
+            if (ret >= 0) {
+                *out = info.a;
+            }
+        }
+    }
+    func_0000684C(arg0);
+    func_000067CC(arg0, 1);
+    return ret;
+}
+
+s32 sceMgr_driver_3EE1140B(s32 arg0, u64 *out, u64 *in) {
+    MgrMsAuthInfo info;
+    s32 fd;
+    s32 ret;
+
+    func_00006288(&info, in, NULL, NULL);
+    ret = func_00006678(arg0, &fd, 3, 1);
+    if (ret < 0) {
+        return ret;
+    }
+    ret = func_00006134(fd, 0xC, (u8 *)&info, 0x1A);
+    if (ret >= 0) {
+        ret = func_000065FC(fd, (u8 *)"rst", 3);
+        if (ret >= 0) {
+            ret = func_00006134(fd, 3, (u8 *)&info, 0x18);
+            if (ret >= 0) {
+                *out = info.a;
+            }
+        }
+    }
+    func_0000684C(arg0);
+    func_000067CC(arg0, 1);
+    return ret;
+}
 #endif
 
 s32 func_0000A070(s32 arg0, u64 *out) {
