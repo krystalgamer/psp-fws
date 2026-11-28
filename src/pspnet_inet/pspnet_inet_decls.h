@@ -1994,7 +1994,7 @@ s32 func_0002CCF8(void *putc, void *arg, const char *fmt, __builtin_va_list ap);
 void func_0002D420();
 struct socket *getsock(s32 s);
 void icmp_mtudisc_callback_register(void *key);
-void icmp_mtudisc_timeout(struct rtentry *rt, struct rttimer *r);
+void icmp_mtudisc_timeout(struct rtentry *rt);
 void icmp_send(struct mbuf *m, struct mbuf *opts);
 s32 icmp_sysctl(s32 *name, u32 namelen, void *oldp, u32 *oldlenp, void *newp, u32 newlen);
 s32 if_rtdel(struct rtentry *rt, void *arg);

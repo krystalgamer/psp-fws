@@ -1746,7 +1746,72 @@ s32 icmp_sysctl(s32 *name, u32 namelen, void *oldp, u32 *oldlenp, void *newp, u3
     return error;
 }
 
+#if FW_VERSION < 151
+void icmp_mtudisc(struct icmp *icp, struct in_addr faddr) {
+    struct SceNetInetKeyNode *mc;
+    struct sockaddr *dst = (struct sockaddr *)&D_0002E834;
+    struct rtentry *rt;
+    u32 mtu = (u16)__builtin_allegrex_wsbh(icp->icmp_nextmtu);
+    s32 error;
+
+    rt = rtalloc1(dst, 1);
+    if (rt == 0)
+        return;
+
+    if ((rt->rt_flags & RTF_HOST) == 0) {
+        struct rtentry *nrt;
+
+        error = rtrequest(1, dst, (struct sockaddr *)rt->rt_gateway, (struct sockaddr *)0,
+                          RTF_GATEWAY | RTF_HOST | RTF_DYNAMIC, &nrt);
+        if (error) {
+            rtfree(rt);
+            rtfree(nrt);
+            return;
+        }
+        nrt->rt_rmx = rt->rt_rmx;
+        rtfree(rt);
+        rt = nrt;
+    }
+    error = rt_timer_add(rt, icmp_mtudisc_timeout, ip_mtudisc_timeout_q);
+    if (error) {
+        rtfree(rt);
+        return;
+    }
+
+    if (mtu == 0) {
+        s32 i = 0;
+
+        mtu = icp->icmp_ip.ip_len;
+        if (rt->rt_rmx.rmx_mtu < mtu && rt->rt_rmx.rmx_mtu != 0)
+            mtu -= ((icp->icmp_ip.ip_hl_v & 0xF) << 2);
+        if (mtu == 0) {
+            mtu = rt->rt_rmx.rmx_mtu;
+            if (mtu == 0)
+                mtu = rt->rt_ifp->if_mtu;
+        }
+        for (i = 0; i < 14U; i++)
+            if (mtu > D_0002E864[i]) {
+                mtu = D_0002E864[i];
+                break;
+            }
+    }
+
+    if ((rt->rt_rmx.rmx_locks & 0x1) == 0) {
+        if (mtu < 296 || mtu > rt->rt_ifp->if_mtu)
+            rt->rt_rmx.rmx_locks |= 0x1;
+        else if (rt->rt_rmx.rmx_mtu > mtu || rt->rt_rmx.rmx_mtu == 0)
+            rt->rt_rmx.rmx_mtu = mtu;
+    }
+
+    if (rt)
+        rtfree(rt);
+
+    for (mc = D_0002C5B8.lh_first; mc != NULL; mc = mc->next)
+        (*(void (*)(struct in_addr))mc->key)(faddr);
+}
+#else
 INCLUDE_ASM("nonmatchings/pspnet_inet_in_cksum", icmp_mtudisc);
+#endif
 
 #if FW_VERSION < 151
 s32 ip_next_mtu(s32 mtu, s32 dir) {

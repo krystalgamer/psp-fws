@@ -186,7 +186,7 @@
   "func_0002D420": "void func_0002D420();",
   "getsock": "struct socket *getsock(s32 s);",
   "icmp_mtudisc_callback_register": "void icmp_mtudisc_callback_register(void *key);",
-  "icmp_mtudisc_timeout": "void icmp_mtudisc_timeout(struct rtentry *rt, struct rttimer *r);",
+  "icmp_mtudisc_timeout": "void icmp_mtudisc_timeout(struct rtentry *rt);",
   "icmp_send": "void icmp_send(struct mbuf *m, struct mbuf *opts);",
   "icmp_sysctl": "s32 icmp_sysctl(s32 *name, u32 namelen, void *oldp, u32 *oldlenp, void *newp, u32 newlen);",
   "if_rtdel": "s32 if_rtdel(struct rtentry *rt, void *arg);",
