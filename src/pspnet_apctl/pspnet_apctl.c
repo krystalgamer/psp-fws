@@ -770,7 +770,21 @@ end:
     return ret;
 }
 
-INCLUDE_ASM("nonmatchings/pspnet_apctl", func_00000EC8);
+s32 func_00000EC8(SceNetApctlCtx *ctx, s32 prev) {
+    SceNetApctlHandlerEntry *h;
+    s32 i;
+
+    sceKernelWaitSema(ctx->sema, 1, NULL);
+    h = D_00008B1C;
+    for (i = 0; i < 2; i++, h++) {
+        if (h->func == NULL) {
+            continue;
+        }
+        h->func(prev, ctx->state, ctx->event, ctx->error, h->arg);
+    }
+    sceKernelSignalSema(ctx->sema, 1);
+    return 0;
+}
 #endif
 
 #if FW_VERSION >= 282

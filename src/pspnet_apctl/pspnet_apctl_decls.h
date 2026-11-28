@@ -226,11 +226,29 @@ typedef struct {
 typedef char chk_SceNetApctlScanParam[(sizeof(SceNetApctlScanParam) == 0x4C) ? 1 : -1];
 
 typedef struct {
+    u16 hrd;
+    u16 pro;
+    u8 hln;
+    u8 pln;
+    u16 op;
+    u8 sha[6];
+    u8 spa[4];
+    u8 tha[6];
+    u8 tpa[4];
+} __attribute__((packed)) SceNetArpHdr;
+
+typedef struct {
     u16 sport;
     u16 dport;
     u16 len;
     u16 sum;
 } __attribute__((packed)) SceNetDhcpUdpHdr;
+
+typedef struct {
+    u8 dst[6];
+    u8 src[6];
+    u16 type;
+} __attribute__((packed)) SceNetEtherHdr;
 
 typedef struct {
     u32 s_addr;
@@ -276,7 +294,9 @@ typedef struct {
         u8 proto;
         u16 len;
     } pseudo;                   /* 0xE58 UDP pseudo header */
-    u8 unkE64[0x120];
+    u8 unkE64[2];
+    u8 hwaddr[6];               /* 0xE66 own MAC */
+    u8 unkE6C[0x118];
     SceNetDhcpLease *lease;     /* 0xF84 */
     u8 unkF88[0xC];
     s32 startTime;              /* 0xF94 */
@@ -503,6 +523,8 @@ extern s32 D_00008134;
 extern s32 (*D_00008138[7])(SceNetDhcpCtx *dc, s32 prev);
 extern s32 D_00008154[];
 extern s32 (*D_00008180[5])(SceNetApctlCtx *ctx, s32 prev, s32 *state, s32 *event);
+extern u32 D_000081FC; /* ARP BPF filter: target IP constant */
+extern u32 D_00008210[2]; /* struct bpf_program for the ARP filter */
 extern s32 D_00008220;
 extern s32 D_00008234; /* D_00011DD4.state (prx reloc target) */
 extern u32 D_00008240;
@@ -590,7 +612,7 @@ s32 func_0000407C(const char *ifname, SceNetDhcpLease *l);
 u32 func_00004270(SceNetInAddrPacked *addr);
 s32 func_00004424(const char *ifname);
 s32 func_00004704(s32 sock, u32 *dst, void *buf);
-s32 func_0000487C(SceNetDhcpCtx *dc, s32 *n, s32 arg);
+s32 func_0000487C(SceNetDhcpCtx *dc, void *spa, void *tpa);
 s32 func_00004EBC(s8 *opt, SceNetDhcpLease *l);
 s32 func_00004FC4(s8 *opt, SceNetDhcpLease *l);
 s32 func_00005064(s8 *opt, SceNetDhcpLease *l);
