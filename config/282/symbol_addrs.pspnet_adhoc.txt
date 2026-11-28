@@ -108,3 +108,4 @@ func_0000215C = 0x000020A4; // type:func
 ptpPoll = 0x00005024; // type:func
 gameModeDelete = 0x00007204; // type:func
 g_gameModeMasterId = 0x00007970; // rom:0x7A10
+ptpSendFrameL = 0x000062FC; // type:func

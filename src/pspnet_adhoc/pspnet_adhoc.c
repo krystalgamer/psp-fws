@@ -3759,7 +3759,7 @@ out:
 #if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_000058B8);
 
-INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_000062FC);
+INCLUDE_ASM("nonmatchings/pspnet_adhoc", ptpSendFrameL);
 
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", ptpSendCtl);
 #endif
@@ -3841,11 +3841,87 @@ out:
         _sce_pspnet_callout_reset_usec(&pcb->callout, pcb->rexmt_int, ptpTimer, pcb);
     }
 }
+
 #undef ADHOC_INFLIGHT
 #endif
 
 #if FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/pspnet_adhoc", ptpOutput);
+void ptpOutput(SceNetAdhocPtpPcb *pcb, s32 rexmt) {
+    struct mbuf *m;
+    u32 seq;
+    s32 n;
+#if FW_VERSION >= 201
+    s32 inflight;
+#define ADHOC_INFLIGHT inflight
+#else
+#define ADHOC_INFLIGHT pcb->snd_inflight
+#endif
+#if FW_VERSION >= 150
+    u32 *st;
+#endif
+
+    n = 0;
+#if FW_VERSION >= 201
+    inflight = 0;
+#endif
+    m = pcb->snd.first;
+    seq = pcb->snd_una;
+    if (m == NULL)
+        goto out;
+    for (; seq != pcb->snd_nxt; seq++) {
+#if FW_VERSION >= 201
+        inflight += m->m_pkthdr.len;
+#endif
+        m = m->m_nextpkt;
+        if (m == NULL)
+            goto out;
+    }
+    while (m != NULL) {
+        if (pcb->snd_wnd - ADHOC_INFLIGHT < m->m_pkthdr.len) {
+            if (n != 0)
+                goto out;
+            if (rexmt != 0) {
+                PTP_SEND_FRAME(pcb, 4, pcb->snd_una - 1, NULL);
+                g_adhocStat.stat[ADHOC_STAT_PTP_PROBE]++;
+                goto out;
+            }
+            if (pcb->callout.c_flags & CALLOUT_PENDING)
+                goto out;
+            g_adhocStat.stat[ADHOC_STAT_PTP_WNDWAIT]++;
+            pcb->rexmt_left = pcb->rexmt_cnt;
+            _sce_pspnet_callout_reset_usec(&pcb->callout, pcb->rexmt_int, ptpTimer, pcb);
+            goto out;
+        }
+#if FW_VERSION >= 150
+        st = (u32 *)&m->m_pkthdr.unk20; /* rf info block; st[2..3] = u64 first-send time */
+#endif
+        PTP_SEND_FRAME(pcb, 4, pcb->snd_nxt, m);
+        n++;
+#if FW_VERSION >= 150
+        if (*(u64 *)&st[2] == 0)
+            *(u64 *)&st[2] = ADHOC_CLOCK();
+#endif
+        pcb->snd_nxt++;
+#if FW_VERSION < 201
+        pcb->snd_inflight += m->m_pkthdr.len;
+#endif
+#if FW_VERSION >= 201
+        inflight += m->m_pkthdr.len;
+        m = m->m_next;
+        g_adhocStat.stat[ADHOC_STAT_PTP_SENT]++;
+#else
+#if FW_VERSION >= 150
+        g_adhocStat.stat[ADHOC_STAT_PTP_SENT]++;
+#endif
+        m = m->m_next;
+#endif
+    }
+out:
+    if (rexmt == 0 && n > 0) {
+        pcb->rexmt_left = pcb->rexmt_cnt;
+        _sce_pspnet_callout_reset_usec(&pcb->callout, pcb->rexmt_int, ptpTimer, pcb);
+    }
+}
 #else
 void ptpTimer(SceNetAdhocPtpPcb *pcb) {
     if ((u32)pcb->state < 2)
