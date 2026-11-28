@@ -4,17 +4,10 @@
 #include "common.h"
 #include "m2c_macros.h"
 
-/* game-mode master/replica entry (partial) */
-typedef struct SceNetAdhocGameMode {
-    struct SceNetAdhocGameMode *next;   /* 0x00 TAILQ */
-    struct SceNetAdhocGameMode **prev;  /* 0x04 */
-    s32 id;                             /* 0x08 */
-} SceNetAdhocGameMode;
-
 typedef struct {
-    SceNetAdhocGameMode *first;
-    SceNetAdhocGameMode **last;
-} SceNetAdhocGameModeList;
+    u32 size;
+    u32 flag;
+} SceNetAdhocGameModeOptData;
 
 /* queued PDP send entry (callout-driven) */
 typedef struct SceNetAdhocPdpQent {
@@ -69,6 +62,21 @@ typedef struct {
 typedef struct {
     u8 data[6];
 } SceNetEtherAddr;
+
+/* game-mode master/replica entry (0x1C) */
+typedef struct SceNetAdhocGameMode {
+    struct SceNetAdhocGameMode *next;   /* 0x00 TAILQ */
+    struct SceNetAdhocGameMode **prev;  /* 0x04 */
+    s32 id;                             /* 0x08 */
+    SceNetEtherAddr addr;               /* 0x0C */
+    void *ptr;                          /* 0x14 */
+    s32 size;                           /* 0x18 */
+} SceNetAdhocGameMode;
+
+typedef struct {
+    SceNetAdhocGameMode *first;
+    SceNetAdhocGameMode **last;
+} SceNetAdhocGameModeList;
 
 /* PDP control block (1.00: 0x38, 1.50+: 0x34; offsets in comments are 1.00) */
 typedef struct SceNetAdhocPdpPcb {
@@ -334,8 +342,9 @@ s32 func_000056E4(SceNetAdhocPtpPcb *pcb, s32 a1);
 void func_00005708(SceNetAdhocPtpPcb *pcb);
 void func_0000578C(struct mbuf *m);
 s32 func_00006880(void);
+s32 func_00006AB8(const SceNetEtherAddr *addr, void *ptr, s32 size);
 s32 func_00006BB8(s32 id);
-s32 func_00006C3C(s32, s32, s32);
+s32 func_00006C3C(s32 id, SceNetAdhocGameModeOptData *opt, s32 internal);
 void *func_00006D6C(const void *s, s32 c, s32 n);
 void *func_00006DA4(void *dst, const void *src, s32 n);
 s32 func_00006E18(const void *a, const void *b, s32 n);
@@ -346,14 +355,15 @@ void func_00006EF8(const void *src, void *dst, s32 n);
 void func_00006F1C(void *s, s32 n);
 s32 func_00006F68(void);
 void func_00006F80(void);
-s32 func_00007298(s32, s32, s32);
+s32 func_00007298(s32 id, SceNetAdhocGameModeOptData *opt, s32 internal);
 s32 module_start(void);
 s32 module_stop(void);
 s32 sceKernelSignalSema(s32 sema, s32 n);
+s32 sceNetAdhocGameModeCreateReplica(const SceNetEtherAddr *addr, void *ptr, s32 size);
 s32 sceNetAdhocGameModeDeleteMaster(void);
 s32 sceNetAdhocGameModeDeleteReplica(s32 id);
-void sceNetAdhocGameModeUpdateReplica(s32 arg0, s32 arg1);
-void sceNetAdhocGameModeUpdateReplicaInternal(s32 arg0, s32 arg1);
+void sceNetAdhocGameModeUpdateReplica(s32 id, SceNetAdhocGameModeOptData *opt);
+void sceNetAdhocGameModeUpdateReplicaInternal(s32 id, SceNetAdhocGameModeOptData *opt);
 s32 sceNetAdhocGetPdpStat(s32 *buflen, SceNetAdhocPdpStat *buf);
 s32 sceNetAdhocInit(void);
 s32 sceNetAdhocPdpDelete(s32 id, s32 flag);
@@ -368,5 +378,8 @@ void sceNetMFreem(struct mbuf *m);
 void *sceNetMallocInternal(u32 size);
 void *sceNetMemset(void *s, s32 c, s32 n);
 u32 sceNetRand(void);
+s32 sceWlanDevIsGameMode(void);
+s32 sceWlanGPPrevEstablishActive(const SceNetEtherAddr *addr);
+s32 sceWlanGPRecv(s32 id, void *ptr, s32 size, SceNetAdhocGameModeOptData *opt);
 
 #endif

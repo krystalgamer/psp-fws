@@ -1279,19 +1279,36 @@ void func_00006F80(void) {
 }
 
 #if FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/pspnet_adhoc", sceNetAdhocGameModeCreateReplica);
+s32 sceNetAdhocGameModeCreateReplica(const SceNetEtherAddr *addr, void *ptr, s32 size) {
+    s32 s;
+    s32 ret;
+
+    if (addr == NULL || ptr == NULL)
+        return 0x80410711;
+    ret = 0x80410712;
+    s = _sce_pspnet_spllock();
+    if (D_00007400 == 0)
+        goto end;
+    ret = 0x8041071B;
+    if (sceWlanDevIsGameMode() == 0)
+        goto end;
+    ret = func_00006AB8(addr, ptr, size);
+end:
+    _sce_pspnet_splunlock(s);
+    return ret;
+}
 #endif
 
 #if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", sceNetAdhocGameModeUpdateReplica);
 #else
-void sceNetAdhocGameModeUpdateReplica(s32 arg0, s32 arg1) {
+void sceNetAdhocGameModeUpdateReplica(s32 arg0, SceNetAdhocGameModeOptData *arg1) {
     func_00006C3C(arg0, arg1, 0);
 }
 #endif
 
 #if FW_VERSION < 282
-void sceNetAdhocGameModeUpdateReplicaInternal(s32 arg0, s32 arg1) {
+void sceNetAdhocGameModeUpdateReplicaInternal(s32 arg0, SceNetAdhocGameModeOptData *arg1) {
     func_00006C3C(arg0, arg1, 1);
 }
 #endif
@@ -1314,7 +1331,7 @@ s32 sceNetAdhocGameModeDeleteMaster(void) {
 #endif
 
 #if FW_VERSION >= 282
-void sceNetAdhocGameModeUpdateReplicaInternal(s32 arg0, s32 arg1) {
+void sceNetAdhocGameModeUpdateReplicaInternal(s32 arg0, SceNetAdhocGameModeOptData *arg1) {
     func_00007298(arg0, arg1, 1);
 }
 #endif
@@ -1367,7 +1384,48 @@ s32 func_00006BB8(s32 id) {
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00006BB8);
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION < 150
+s32 func_00006C3C(s32 id, SceNetAdhocGameModeOptData *opt, s32 internal) {
+    s32 s;
+    s32 ret;
+    SceNetAdhocGameMode *gm;
+    SceNetAdhocGameModeOptData tmp;
+    SceNetAdhocGameModeOptData *info;
+
+    info = NULL;
+    s = _sce_pspnet_spllock();
+    ret = 0x80410712;
+    if (D_00007400 == 0)
+        goto end;
+    ret = 0x8041071B;
+    if (sceWlanDevIsGameMode() == 0)
+        goto end;
+    for (gm = D_000079C0.first; gm != NULL; gm = gm->next) {
+        if (gm->id == id)
+            break;
+    }
+    if (gm == NULL) {
+        ret = 0x8041071C;
+        goto end;
+    }
+    if (opt != NULL) {
+        tmp.size = sizeof(tmp);
+        info = &tmp;
+    }
+    ret = sceWlanGPRecv(id, gm->ptr, gm->size, info);
+    if (opt == NULL)
+        goto end;
+    if (opt->size >= sizeof(tmp))
+        opt->flag = info->flag;
+    if (internal == 0)
+        opt->flag = (u16)opt->flag;
+end:
+    _sce_pspnet_splunlock(s);
+    return ret;
+}
+#endif
+
+#if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00006C3C);
 #endif
 
