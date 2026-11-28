@@ -1,3 +1,7 @@
+/* compiler[271]: 1.9.2 */
+/* cflags[271]: -O2 -frename-registers -mext */
+/* compiler[282,300,301,302,303,310,311,330,340,350,351,352]: 1.9.2 */
+/* cflags[282,300,301,302,303,310,311,330,340,350,351,352]: -O2 -frename-registers -mext */
 /* cflags: -O2 -frename-registers */
 #include "common.h"
 #include "pspnet_inet_decls.h"
@@ -714,7 +718,51 @@ struct socket *sonewconn1(struct socket *head, s32 connstatus) {
     so_list.tqh_last = &so->so_list.tqe_next;
     return so;
 }
-#else
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 271
+struct socket *sonewconn1(struct socket *head, s32 connstatus) {
+    struct socket *so;
+    s32 soqueue = connstatus ? 1 : 0;
+
+    if (head->so_qlen + head->so_q0len > 3 * head->so_qlimit / 2) {
+        return NULL;
+    }
+    so = sceNetMallocInternal(sizeof(*so));
+    if (so == NULL) {
+        return NULL;
+    }
+    sceNetMemset(so, 0, sizeof(*so));
+    so->so_type = head->so_type;
+    so->so_options = head->so_options & ~0x2;
+    so->so_linger = head->so_linger;
+    so->so_state = head->so_state | SS_NOFDREF;
+    so->so_proto = head->so_proto;
+    so->so_timeo = head->so_timeo;
+    so->so_send = head->so_send;
+    so->so_receive = head->so_receive;
+    so->so_fd = -1;
+    (void)soreserve(so, head->so_snd.sb_hiwat, head->so_rcv.sb_hiwat);
+    func_000047DC(head, so, soqueue);
+    if (so->so_proto->pr_usrreq(so, PRU_ATTACH, NULL, NULL, NULL)) {
+        (void)soqremque(so, soqueue);
+        sceNetFreeInternal(so);
+        return NULL;
+    }
+    if (connstatus) {
+        sorwakeup(head);
+        _sce_pspnet_wakeup(&head->so_timeo);
+        so->so_state |= connstatus;
+    }
+    so->so_list.tqe_next = NULL;
+    so->so_list.tqe_prev = so_list.tqh_last;
+    *so_list.tqh_last = so;
+    so_list.tqh_last = &so->so_list.tqe_next;
+    return so;
+}
+#endif
+
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/pspnet_inet", sonewconn1);
 #endif
 
@@ -941,7 +989,37 @@ struct mbuf *sbcreatecontrol(void *p, s32 size, s32 type, s32 level) {
     cp->cmsg_type = type;
     return m;
 }
-#else
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 282
+struct mbuf *sbcreatecontrol(void *p, s32 size, s32 type, s32 level) {
+    struct cmsghdr *cp;
+    struct mbuf *m;
+
+    if (CMSG_SPACE(size) > MCLBYTES) {
+        return NULL;
+    }
+    if ((m = sceNetMGet(M_DONTWAIT, MT_CONTROL)) == NULL) {
+        return NULL;
+    }
+    if (CMSG_SPACE(size) > MLEN) {
+        MCLGET(m, M_DONTWAIT);
+        if ((m->m_flags & M_EXT) == 0) {
+            sceNetMFree(m);
+            return NULL;
+        }
+    }
+    cp = mtod(m, struct cmsghdr *);
+    sceNetMemcpy(CMSG_DATA(cp), p, size);
+    m->m_len = CMSG_SPACE(size);
+    cp->cmsg_len = CMSG_LEN(size);
+    cp->cmsg_level = level;
+    cp->cmsg_type = type;
+    return m;
+}
+#endif
+
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/pspnet_inet", sbcreatecontrol);
 #endif
 
@@ -963,18 +1041,12 @@ struct socket *getsock(s32 s) {
     return so;
 }
 
-#if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet", soisconnecting);
-#endif
-
-#if FW_VERSION < 201
+#if FW_VERSION < 282
 void soisconnecting(struct socket *so) {
     so->so_state &= ~(SS_ISCONNECTED | SS_ISDISCONNECTING);
     so->so_state |= SS_ISCONNECTING;
 }
-#endif
-
-#if FW_VERSION >= 282
+#else
 void func_00005778(struct socket *so) {
     so->so_state &= ~(SS_ISCONNECTED | SS_ISDISCONNECTING);
     so->so_state |= SS_ISCONNECTING;
@@ -1013,11 +1085,7 @@ void soisdisconnected(struct socket *so) {
 INCLUDE_ASM("nonmatchings/pspnet_inet", soisdisconnected);
 #endif
 
-#if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet", socantsendmore);
-#endif
-
-#if FW_VERSION < 201
+#if FW_VERSION < 282
 void socantsendmore(struct socket *so) {
     so->so_state |= SS_CANTSENDMORE;
     if (so->so_snd.sb_flags & SB_NOTIFY) {
@@ -1118,10 +1186,14 @@ void sbappend(struct sockbuf *sb, struct mbuf *m) {
 INCLUDE_ASM("nonmatchings/pspnet_inet", sbappend);
 
 #if FW_VERSION < 271
+
 INCLUDE_ASM("nonmatchings/pspnet_inet", sbappendrecord);
+
 #endif
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet", sce_alignbytes);
+s32 sce_alignbytes(void) {
+    return 3;
+}
 #endif

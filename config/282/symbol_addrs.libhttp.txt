@@ -193,3 +193,5 @@ CRYPTO_time_import = 0x00016B30; // type:func
 SSL_read = 0x00016B38; // type:func
 SSL_new = 0x00016B40; // type:func
 SSL_CTX_new = 0x00016B48; // type:func
+__udivdi3 = 0x00015C90; // type:func
+__umoddi3 = 0x00016204; // type:func

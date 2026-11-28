@@ -40,9 +40,20 @@ def main():
     args = ap.parse_args()
 
     names = {}
+    sized = []  # (start, end, name) of named symbols with a `// size:` attribute
     for f in args.names:
-        for m in re.finditer(r"^\s*(\w+)\s*=\s*(0x[0-9A-Fa-f]+|\d+)\s*;", f.read_text(), re.M):
+        for m in re.finditer(r"^\s*(\w+)\s*=\s*(0x[0-9A-Fa-f]+|\d+)\s*;([^\n]*)", f.read_text(), re.M):
             names[int(m[2], 0)] = m[1]
+            sz = re.search(r"\bsize:\s*(0x[0-9A-Fa-f]+|\d+)", m[3])
+            if sz and "type:func" not in m[3] and int(sz[1], 0) > 1:
+                sized.append((int(m[2], 0), int(m[2], 0) + int(sz[1], 0), m[1]))
+
+    def inside_sized(target):
+        """(name, offset) when TARGET lies strictly inside a sized named symbol."""
+        for start, end, nm in sized:
+            if start < target < end:
+                return nm, target - start
+        return None
 
     raw = args.prx.read_bytes()
     elf = ELFFile(open(args.prx, "rb"))
@@ -74,6 +85,7 @@ def main():
                 gp_target = word(file_offset(ofs_base, ofs)) + segs[addr_base]["p_vaddr"]
 
     absolute = set()
+    interior = {}  # auto label -> (sized symbol, offset): kept as a PROVIDE alias for existing C
 
     def sym_name(target, typ):
         if target in names:
@@ -170,6 +182,12 @@ def main():
             # symbol with the link-space value as addend
             lines.append(f"rom:{rom:#X} reloc:{REL_NAMES[typ]} symbol:PRX_ZERO addend:{link_value:#x}")
             continue
+        inner = None if target in names else inside_sized(target)
+        if inner:
+            # a field of a sized global: reference it as sym+off instead of a label of its own
+            interior[f"D_{target:08X}"] = inner
+            lines.append(f"rom:{rom:#X} reloc:{REL_NAMES[typ]} symbol:{inner[0]} addend:{inner[1]:#x}")
+            continue
         lines.append(
             f"rom:{rom:#X} reloc:{REL_NAMES[typ]} symbol:{sym_name(target, typ)}"
         )
@@ -194,7 +212,9 @@ def main():
     args.out.with_name(args.out.name.replace("reloc_addrs.", "reloc_roms.")).write_text(
         "".join(f"0x{r:X}\n" for r in sorted(all_roms)))
     abs_path = args.out.with_name(args.out.name.replace("reloc_addrs.", "abs_syms."))
-    abs_path.write_text("PRX_ZERO = 0;\n" + "".join(f"D_{a:08X} = 0x{a:08X};\n" for a in sorted(absolute)))
+    abs_path.write_text("PRX_ZERO = 0;\n" + "".join(f"D_{a:08X} = 0x{a:08X};\n" for a in sorted(absolute))
+                        # old auto names of fields inside sized symbols still link (C written before the size)
+                        + "".join(f"PROVIDE({lbl} = {nm} + {off:#x});\n" for lbl, (nm, off) in sorted(interior.items())))
     args.syms.write_text("\n".join(syms) + "\n")
 
 

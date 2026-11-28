@@ -21,6 +21,9 @@ static __inline s32 imin(s32 a, s32 b) {
 static __inline s32 imax(s32 a, s32 b) {
     return (a > b) ? a : b;
 }
+static __inline u16 htons(u16 x) {
+    return (u16)__builtin_allegrex_wsbh(x);
+}
 
 #define TAILQ_HEAD(name, type) struct name { struct type *tqh_first; struct type **tqh_last; }
 #define TAILQ_ENTRY(type) struct { struct type *tqe_next; struct type **tqe_prev; }
@@ -83,6 +86,12 @@ struct protosw {
 #define PRU_SEND        9
 #define PRU_ABORT       10
 #define PRU_CONTROL     11
+#define PRU_SENSE       12
+#define PRU_RCVOOB      13
+#define PRU_SENDOOB     14
+#define PRU_SOCKADDR    15
+#define PRU_PEERADDR    16
+#define PRU_CONNECT2    17
 
 TAILQ_HEAD(soqhead, socket);
 
@@ -406,16 +415,16 @@ typedef char chk_SceNetInetWaiter[(sizeof(struct SceNetInetWaiter) == 0x60) ? 1 
 
 /* struct rt_metrics (4.4BSD route.h, 0x28) */
 struct rt_metrics {
-    u32 rmx_locks;      /* 0x00 RTV_* */
-    u32 rmx_mtu;        /* 0x04 */
-    u32 rmx_hopcount;   /* 0x08 */
-    u32 rmx_expire;     /* 0x0C */
-    u32 rmx_recvpipe;   /* 0x10 */
-    u32 rmx_sendpipe;   /* 0x14 */
-    u32 rmx_ssthresh;   /* 0x18 */
-    u32 rmx_rtt;        /* 0x1C */
-    u32 rmx_rttvar;     /* 0x20 */
-    u32 rmx_pksent;     /* 0x24 */
+    unsigned long rmx_locks;      /* 0x00 RTV_* */
+    unsigned long rmx_mtu;        /* 0x04 */
+    unsigned long rmx_hopcount;   /* 0x08 */
+    unsigned long rmx_expire;     /* 0x0C */
+    unsigned long rmx_recvpipe;   /* 0x10 */
+    unsigned long rmx_sendpipe;   /* 0x14 */
+    unsigned long rmx_ssthresh;   /* 0x18 */
+    unsigned long rmx_rtt;        /* 0x1C */
+    unsigned long rmx_rttvar;     /* 0x20 */
+    unsigned long rmx_pksent;     /* 0x24 */
 };
 #define RTV_MTU 0x1
 #define RTV_SSTHRESH 0x20
@@ -428,7 +437,7 @@ struct rtentry {
     struct sockaddr *rt_gateway;    /* 0x30 */
     s32 rt_flags;                   /* 0x34 RTF_* */
     s32 rt_refcnt;                  /* 0x38 */
-    u32 rt_use;                     /* 0x3C */
+    long rt_use;                    /* 0x3C */
     struct ifnet *rt_ifp;           /* 0x40 */
     struct ifaddr *rt_ifa;          /* 0x44 */
     struct sockaddr *rt_genmask;    /* 0x48 */
@@ -637,7 +646,19 @@ struct if_data {
     u64 ifi_mtu;                        /* 0x08 */
     u64 ifi_metric;                     /* 0x10 */
     u64 ifi_baudrate;                   /* 0x18 */
+    u64 ifi_ipackets;                   /* 0x20 */
+    u64 ifi_ierrors;                    /* 0x28 */
+    u64 ifi_opackets;                   /* 0x30 */
+    u64 ifi_oerrors;                    /* 0x38 */
+    u64 ifi_collisions;                 /* 0x40 */
+    u64 ifi_ibytes;                     /* 0x48 */
+    u64 ifi_obytes;                     /* 0x50 */
+    u64 ifi_imcasts;                    /* 0x58 */
+    u64 ifi_omcasts;                    /* 0x60 */
+    u64 ifi_iqdrops;                    /* 0x68 */
+    u64 ifi_noproto;                    /* 0x70 */
 };
+typedef char chk_if_data[(sizeof(struct if_data) == 0x78) ? 1 : -1];
 
 /* struct ifnet (NetBSD 1.5 if.h, partial) */
 struct ifnet {
@@ -652,8 +673,6 @@ struct ifnet {
     s16 if_flags;                       /* 0x30 IFF_* */
     u8 unk32[0x38 - 0x32];
     struct if_data if_data;             /* 0x38 */
-    u8 unk58[0xC];
-    u8 unk64[0xB0 - 0x58 - 0xC];
     s32 (*if_output)();                 /* 0xB0 */
     void (*if_input)(struct ifnet *ifp, struct mbuf *m); /* 0xB4 */
     void (*if_start)(struct ifnet *ifp); /* 0xB8 */
@@ -679,7 +698,7 @@ struct ifaddr {
     struct sockaddr *ifa_netmask;       /* 0x08 */
     struct ifnet *ifa_ifp;              /* 0x0C */
     TAILQ_ENTRY(ifaddr) ifa_list;       /* 0x10 */
-    u8 ifa_data[0x10];                  /* 0x18 struct ifaddr_data (u_quad_t in/out bytes) */
+    struct { u64 ifad_inbytes; u64 ifad_outbytes; } ifa_data; /* 0x18 */
     void (*ifa_rtrequest)(s32 cmd, struct rtentry *rt, struct sockaddr *sa); /* 0x28 */
     u32 ifa_flags;                      /* 0x2C */
     s32 ifa_refcnt;                     /* 0x30 */
@@ -750,6 +769,93 @@ struct rt_addrinfo {
     s32 rti_addrs;                      /* 0x00 */
     struct sockaddr *rti_info[RTAX_MAX]; /* 0x04 */
 };
+typedef __builtin_va_list va_list;
+#define va_start(ap, last) __builtin_va_start((ap), (last))
+#define va_arg(ap, type) __builtin_va_arg((ap), type)
+#define va_end(ap) __builtin_va_end(ap)
+#define M_COPYALL 1000000000
+/* struct rt_msghdr (route.h), route_cb (rtsock.c) */
+#define AF_NS 6
+#define AF_ISO 7
+#define AF_IPX 23
+#define SO_USELOOPBACK 0x0040
+struct walkarg {
+    s32 w_op;
+    s32 w_arg;
+    s32 w_given;
+    s32 w_needed;
+    char *w_where;
+    s32 w_tmemsize;
+    s32 w_tmemneeded;
+    char *w_tmem;
+};
+#define RTM_NEWADDR 0xc
+#define RTM_DELADDR 0xd
+#define RTM_VERSION 3
+#define ROUNDUP(a) \
+	((a) > 0 ? (1 + (((a) - 1) | (sizeof(long) - 1))) : sizeof(long))
+struct ifa_msghdr {
+    u16 ifam_msglen;
+    u8 ifam_version;
+    u8 ifam_type;
+    s32 ifam_addrs;
+    s32 ifam_flags;
+    u16 ifam_index;
+    s32 ifam_metric;
+};
+struct if_announcemsghdr {
+    u16 ifan_msglen;
+    u8 ifan_version;
+    u8 ifan_type;
+    u16 ifan_index;
+    char ifan_name[16];
+    u16 ifan_what;
+};
+#define RTM_IFANNOUNCE 0x10
+struct if_msghdr {
+    u16 ifm_msglen;
+    u8 ifm_version;
+    u8 ifm_type;
+    s32 ifm_addrs;
+    s32 ifm_flags;
+    u16 ifm_index;
+    struct if_data ifm_data;
+};
+#define RTM_IFINFO 0xf
+struct rt_msghdr {
+    u16 rtm_msglen;
+    u8 rtm_version;
+    u8 rtm_type;
+    u16 rtm_index;
+    s32 rtm_flags;
+    s32 rtm_addrs;
+    s32 rtm_pid;
+    s32 rtm_seq;
+    s32 rtm_errno;
+    s32 rtm_use;
+    u32 rtm_inits;
+    struct rt_metrics rtm_rmx;
+};
+struct route_cb {
+    s32 ip_count;
+    s32 ip6_count;
+    s32 ipx_count;
+    s32 ns_count;
+    s32 iso_count;
+    s32 any_count;
+};
+#define RTF_DONE 0x40
+#define RTAX_DST 0
+#define RTAX_GATEWAY 1
+#define RTAX_NETMASK 2
+#define RTAX_IFP 4
+#define RTAX_IFA 5
+#define RTAX_BRD 7
+#define RTAX_GENMASK 3
+#define NET_RT_FLAGS 2
+#define IFF_POINTOPOINT 0x10
+#define RTM_GET 4
+#define rt_mask(r) ((struct sockaddr *)((r)->rt_nodes[0].rn_mask))
 
 /* struct arphdr (if_arp.h), byte-aligned */
 struct arphdr {
@@ -852,7 +958,7 @@ struct tcpcb {
     u32 last_ack_sent;          /* 0xA4 */
     void *timeq;                /* 0xA8 LIST_HEAD */
     s32 t_mtudisc;              /* 0xAC */
-    void *t_sc;                 /* 0xB0 LIST_HEAD */
+    struct { struct syn_cache *lh_first; } t_sc; /* 0xB0 */
 };
 typedef char chk_tcpcb[(sizeof(struct tcpcb) == 0xB4) ? 1 : -1];
 #define TCPS_CLOSED 0
@@ -1030,6 +1136,108 @@ struct inpcbtable {
     if ((elm)->field.le_next != NULL) \
         (elm)->field.le_next->field.le_prev = (elm)->field.le_prev; \
     *(elm)->field.le_prev = (elm)->field.le_next; \
+} while (0)
+#define LIST_INIT(head) do { (head)->lh_first = NULL; } while (0)
+#define LIST_FIRST(head) ((head)->lh_first)
+#define LIST_NEXT(elm, field) ((elm)->field.le_next)
+#define TAILQ_INIT(head) do { \
+    (head)->tqh_first = NULL; \
+    (head)->tqh_last = &(head)->tqh_first; \
+} while (0)
+#define TAILQ_FIRST(head) ((head)->tqh_first)
+#define TAILQ_NEXT(elm, field) ((elm)->field.tqe_next)
+#define TAILQ_INSERT_TAIL(head, elm, field) do { \
+    (elm)->field.tqe_next = NULL; \
+    (elm)->field.tqe_prev = (head)->tqh_last; \
+    *(head)->tqh_last = (elm); \
+    (head)->tqh_last = &(elm)->field.tqe_next; \
+} while (0)
+#define TAILQ_REMOVE(head, elm, field) do { \
+    if (((elm)->field.tqe_next) != NULL) \
+        (elm)->field.tqe_next->field.tqe_prev = (elm)->field.tqe_prev; \
+    else \
+        (head)->tqh_last = (elm)->field.tqe_prev; \
+    *(elm)->field.tqe_prev = (elm)->field.tqe_next; \
+} while (0)
+
+/* struct syn_cache (NetBSD-current tcp_var.h, late 2000; no INET6) */
+struct syn_cache {
+    struct { struct syn_cache *le_next; struct syn_cache **le_prev; } sc_bucketq; /* 0x00 */
+    TAILQ_ENTRY(syn_cache) sc_timeq;    /* 0x08 */
+    struct route sc_route4;             /* 0x10 */
+    long sc_win;                        /* 0x24 */
+    s32 sc_bucketidx;                   /* 0x28 */
+    u32 sc_hash;                        /* 0x2C */
+    u32 sc_timestamp;                   /* 0x30 */
+    struct sockaddr_in sc_src;          /* 0x34 */
+    struct sockaddr_in sc_dst;          /* 0x44 */
+    u32 sc_irs;                         /* 0x54 */
+    u32 sc_iss;                         /* 0x58 */
+    u32 sc_rexmt;                       /* 0x5C */
+    u32 sc_rxtcur;                      /* 0x60 */
+    u32 sc_rxttot;                      /* 0x64 */
+    u16 sc_rxtshift;                    /* 0x68 */
+    u16 sc_flags;                       /* 0x6A */
+    struct mbuf *sc_ipopts;             /* 0x6C */
+    u16 sc_peermaxseg;                  /* 0x70 */
+    u16 sc_ourmaxseg;                   /* 0x72 */
+    u8 sc_request_r_scale : 4,          /* 0x74 */
+        sc_requested_s_scale : 4;
+    struct tcpcb *sc_tp;                /* 0x78 */
+    struct { struct syn_cache *le_next; struct syn_cache **le_prev; } sc_tpq; /* 0x7C */
+};
+typedef char chk_syn_cache[(sizeof(struct syn_cache) == 0x84) ? 1 : -1];
+struct syn_cache_head {
+    struct { struct syn_cache *lh_first; } sch_bucket; /* 0x0 */
+    u16 sch_length;                     /* 0x4 */
+};
+TAILQ_HEAD(syn_cache_timeq_head, syn_cache);
+struct tcp_opt_info {
+    s32 ts_present;
+    u32 ts_val;
+    u32 ts_ecr;
+    u16 maxseg;
+};
+#define TCP_MAX_WINSHIFT 14
+#define tcp_rcvseqinit(tp) (tp)->rcv_adv = (tp)->rcv_nxt = (tp)->irs + 1
+#define tcp_sendseqinit(tp) (tp)->snd_una = (tp)->snd_nxt = (tp)->snd_max = (tp)->snd_up = (tp)->snd_recover = (tp)->iss
+#define SCF_UNREACH 0x0001
+#define SCF_TIMESTAMP 0x0002
+#define SYN_HASH(sa, sp, dp) \
+    ((((sa)->s_addr^syn_hash1)*(((((u32)(dp))<<16) + \
+                     ((u32)(sp)))^syn_hash2)))
+#define SYN_HASHALL(hash, src, dst) \
+do { \
+    hash = SYN_HASH(&((struct sockaddr_in *)(src))->sin_addr, \
+        ((struct sockaddr_in *)(src))->sin_port, \
+        ((struct sockaddr_in *)(dst))->sin_port); \
+} while (0)
+#define TCPTV_SRTTDFLT 6
+#define TCPTV_MIN 2
+#define TCPTV_REXMTMAX 128
+#define TCPTV_KEEP_INIT 150
+#define PRT_SLOW_ARM(t, nticks) ((t) = pfslowtimo_now + (nticks))
+#define PRT_SLOW_ISEXPIRED(t) ((t) != 0 && pfslowtimo_now >= (t))
+#define SYN_CACHE_TIMER_ARM(sc) do { \
+    TCPT_RANGESET((sc)->sc_rxtcur, \
+        TCPTV_SRTTDFLT * tcp_backoff[(sc)->sc_rxtshift], TCPTV_MIN, \
+        TCPTV_REXMTMAX); \
+    PRT_SLOW_ARM((sc)->sc_rexmt, (sc)->sc_rxtcur); \
+} while (0)
+#define SYN_CACHE_RM(sc) do { \
+    LIST_REMOVE((sc), sc_bucketq); \
+    (sc)->sc_tp = NULL; \
+    LIST_REMOVE((sc), sc_tpq); \
+    tcp_syn_cache[(sc)->sc_bucketidx].sch_length--; \
+    TAILQ_REMOVE(&tcp_syn_cache_timeq[(sc)->sc_rxtshift], (sc), sc_timeq); \
+    syn_cache_count--; \
+} while (0)
+#define SYN_CACHE_PUT(sc) do { \
+    if ((sc)->sc_ipopts) \
+        (void)sceNetMFree((sc)->sc_ipopts); \
+    if ((sc)->sc_route4.ro_rt != NULL) \
+        RTFREE((sc)->sc_route4.ro_rt); \
+    sceNetFreeInternal(sc); \
 } while (0)
 #define IN_MULTICAST(a) (((u32)(a) & __builtin_allegrex_wsbw(0xF0000000)) == __builtin_allegrex_wsbw(0xE0000000))
 #define RTFREE(rt) do { \
@@ -1386,6 +1594,84 @@ struct ipoption {
     s8 ipopt_list[40];                  /* 0x04 */
 };
 
+/* tcp/ip constants and SCE mbuf/timer macros (NetBSD-current, late 2000) */
+#define TH_FIN 0x01
+#define TH_SYN 0x02
+#define TH_RST 0x04
+#define TH_PUSH 0x08
+#define TH_ACK 0x10
+#define TH_URG 0x20
+#define TF_ACKNOW 0x0001
+#define TF_DELACK 0x0002
+#define TF_NODELAY 0x0004
+#define TF_NOOPT 0x0008
+#define TF_REQ_SCALE 0x0020
+#define TF_RCVD_SCALE 0x0040
+#define TF_REQ_TSTMP 0x0080
+#define TF_RCVD_TSTMP 0x0100
+#define TCPOPT_NOP 1
+#define TCPOPT_MAXSEG 2
+#define TCPOPT_WINDOW 3
+#define TCPOLEN_WINDOW 3
+#define TCPOPT_TIMESTAMP 8
+#define TCPOLEN_TIMESTAMP 10
+#define TCPOLEN_TSTAMP_APPA (TCPOLEN_TIMESTAMP + 2)
+#define TCPOPT_TSTAMP_HDR (TCPOPT_NOP << 24 | TCPOPT_NOP << 16 | TCPOPT_TIMESTAMP << 8 | TCPOLEN_TIMESTAMP)
+#define MAX_TCPOPTLEN 32
+#define TCP_MAXBURST 4
+#define TCP_MAXWIN 65535
+#define IP_MAXPACKET 65535
+#define IP_MTUDISC 0x0400
+#define SO_DEBUG 0x0001
+#define SO_DONTROUTE 0x0010
+#define ENETDOWN 0x73
+#define SEQ_LT(a, b) ((int)((a) - (b)) < 0)
+#define SEQ_LEQ(a, b) ((int)((a) - (b)) <= 0)
+#define SEQ_GT(a, b) ((int)((a) - (b)) > 0)
+#define SEQ_GEQ(a, b) ((int)((a) - (b)) >= 0)
+#define TCP_TIMER_ARM(tp, timer, nticks) ((tp)->t_timer[(timer)] = pfslowtimo_now + (nticks))
+#define TCP_TIMER_DISARM(tp, timer) ((tp)->t_timer[(timer)] = 0)
+#define TCP_TIMER_ISARMED(tp, timer) ((tp)->t_timer[(timer)])
+#define TCP_CLEAR_DELACK(tp) do { \
+    if ((tp)->t_flags & TF_DELACK) { \
+        (tp)->t_flags &= ~TF_DELACK; \
+        LIST_REMOVE(tp, t_delack); \
+    } \
+} while (0)
+#define MHLEN (MSIZE - 0x30)
+#define MGETHDR(m, how, type) do { \
+    (m) = sceNetMallocInternal(MSIZE); \
+    if (m) { \
+        (m)->m_type = (type); \
+        (m)->m_data = (u8 *)&(m)->m_ext; \
+        (m)->m_flags = M_PKTHDR; \
+        (m)->m_next = NULL; \
+        (m)->m_nextpkt = NULL; \
+        (m)->m_pkthdr.aux = NULL; \
+    } \
+} while (0)
+#define M_TRAILINGSPACE(m) \
+    ((m)->m_flags & M_EXT ? (m)->m_ext.ext_buf + (m)->m_ext.ext_size - \
+        ((m)->m_data + (m)->m_len) : \
+        &((u8 *)(m) + 0x14)[MLEN] - ((m)->m_data + (m)->m_len))
+#define m_copy(m, o, l) sceNetMCopym((m), (o), (l), M_DONTWAIT)
+#define htonl(x) __builtin_allegrex_wsbw(x)
+#define ntohl(x) __builtin_allegrex_wsbw(x)
+#define EINVAL 0x16
+#define ENOBUFS 0x69
+#define EAFNOSUPPORT 0x6A
+#define EHOSTUNREACH 0x76
+typedef u32 tcp_seq;
+#define m_copydata sceNetMCopydata
+
+/* 2.x link bcmp from sceNet instead of a local copy */
+#if FW_VERSION >= 201
+#define func_0002C978 sceNetBcmp
+#endif
+#define EOPNOTSUPP 0x5F
+#define EISCONN 0x7F
+#define ENOTCONN 0x80
+
 struct SceTailqHead {
     void *tqh_first;
     void **tqh_last;
@@ -1635,7 +1921,6 @@ extern s32 D_0002C01C;
 extern s32 D_0002C020;
 extern s32 D_0002C02C;
 extern s32 D_0002C030;
-extern s32 D_0002C1D4;
 extern s32 D_0002C1D8;
 extern s32 D_0002C1DC;
 extern s32 D_0002C1E4;
@@ -1644,12 +1929,20 @@ extern s32 D_0002C208; /* ip_maxfragpackets */
 extern s32 D_0002C228;
 extern s32 D_0002C22C;
 extern s32 D_0002C234;
+extern s32 D_0002C240;
 extern s32 D_0002C270; /* icmpreturndatabytes */
 extern s32 D_0002C318;
 extern s32 D_0002C358;
 extern s32 D_0002C364;
 extern s32 D_0002C368;
+extern s32 D_0002C374;
+extern s32 D_0002C384;
+extern s32 D_0002C38C;
+extern s32 D_0002C390;
+extern s32 D_0002C394;
+extern s32 D_0002C398;
 extern s32 D_0002C39C;
+extern s32 D_0002C3A4;
 extern s32 D_0002C4F0;
 extern s32 D_0002C4F4;
 extern s32 D_0002C504;
@@ -1669,6 +1962,9 @@ extern s32 D_0002C594;
 extern s32 D_0002C5B4; /* icmpmaskrepl */
 extern struct { struct SceNetInetKeyNode *lh_first; } D_0002C5B8;
 extern u8 D_0002C5DC[];
+extern s32 D_0002C610;
+extern s32 D_0002C614_v201;
+extern s32 D_0002C618;
 extern u8 D_0002CC50[]; /* pffasttimo_ch */
 extern u8 D_0002CC74[]; /* pfslowtimo_ch */
 extern struct { struct rttimer_queue *lh_first; } D_0002CCB4; /* rttimer_queue_head */
@@ -1680,22 +1976,18 @@ extern s32 D_0002CEC0;
 extern s32 D_0002CF00;
 extern s32 D_0002CF0C;
 extern s32 D_0002CF10;
-extern struct SceTailqHead D_0002CFF8[];
 extern s32 D_0002D944; /* ipq_locked */
 extern struct ipstat D_0002D960; /* ipstat */
 extern struct { struct ipq *lh_first; } D_0002DA48; /* ipq */
 extern u8 D_0002DA50[0x170]; /* icmpstat */
 extern M2C_UNK D_0002DBC8;
 extern struct inpcbtable D_0002DC78;
-extern struct SceTailqHead D_0002DC98[13];
-extern s32 D_0002DD04;
+extern s32 D_0002DCE4;
 extern struct route D_0002E19C;
 extern s32 D_0002E5EC;
 extern s32 D_0002E5F0;
 extern s32 D_0002E5F4; /* lowportmin */
 extern s32 D_0002E5F8; /* lowportmax */
-extern s32 D_0002E798;
-extern s32 D_0002E79C;
 extern s32 D_0002E7A4;
 extern s32 D_0002E7B0; /* ip_defttl */
 extern struct sockaddr_in D_0002E834 __attribute__((aligned(4)));
@@ -1704,14 +1996,11 @@ extern struct sockaddr_in D_0002E854 __attribute__((aligned(4)));
 extern u32 D_0002E864[]; /* mtu_table (icmp_mtudisc) */
 extern s32 D_0002E8D8;
 extern s32 D_0002E8E4;
-extern s32 D_0002E8F4;
-extern s32 D_0002E8F8; /* tcp_mssdflt */
 extern s32 D_0002E8FC; /* tcp_rttdflt */
 extern s32 D_0002E900; /* tcp_do_rfc1323 */
 extern s32 D_0002E904; /* tcp_do_sack */
 extern s32 D_0002E908; /* tcp_do_win_scale */
 extern s32 D_0002E90C; /* tcp_do_timestamps */
-extern s32 D_0002E910; /* tcp_init_win */
 extern s8 D_0002EAB0[];
 extern s32 D_0002EAB1;
 extern s32 D_0002EB40;
@@ -1723,12 +2012,8 @@ extern s32 D_0002EB8C;
 extern s32 D_0002EB90;
 extern s32 D_0002EB94;
 extern char D_0002EBB0[16]; /* inet_ntoa buf */
-extern s32 D_0002EC10;
-extern s32 D_0002EC14;
-extern s32 D_0002EC18;
 extern char D_0002F288[18] __attribute__((aligned(4)));
 extern s32 D_0002F2F8;
-extern struct { s32 w[6]; } D_0002F3B8;
 extern s32 D_0002F500;
 extern s32 D_0002F50C;
 extern s32 D_0002F510;
@@ -1776,18 +2061,30 @@ extern s32 rip_recvspace;
 extern s32 rip_sendspace;
 extern char *rn_ones; /* rn_ones */
 extern char *rn_zeros; /* rn_zeros */
+extern struct route_cb route_cb;
+extern struct sockaddr route_dst;
+extern struct sockproto route_proto;
+extern struct sockaddr route_src;
 extern struct rtstat rt_stat; /* rtstat */
 extern struct radix_node_head *rt_tables[32]; /* rt_tables */
 extern s32 rttrash; /* rttrash */
 extern struct soqhead so_list;
 extern s32 somaxconn; /* somaxconn */
+extern s32 syn_cache_count;
 extern s32 syn_cache_last;
+extern u32 syn_hash1;
+extern u32 syn_hash2;
 extern s32 tcbhashsize; /* tcbhashsize */
 extern struct inpcbtable tcbtable;
+extern s32 tcp_ack_on_push;
 extern s32 tcp_backoff[]; /* tcp_backoff */
 extern s32 tcp_compat_42; /* tcp_compat_42 */
 extern struct tcp_ctlvar tcp_ctlvars[]; /* tcp_ctlvars */
+extern s32 tcp_cwm;
+extern s32 tcp_cwm_burstsize;
 extern struct tcpcb *tcp_delacks; /* tcp_delacks */
+extern s32 tcp_do_newreno;
+extern s32 tcp_init_win; /* tcp_init_win */
 extern u32 tcp_iss_seq; /* tcp_iss_seq */
 extern s32 tcp_keepcnt;
 extern s32 tcp_keepidle; /* tcp_keepidle */
@@ -1795,11 +2092,18 @@ extern s32 tcp_keepintvl; /* tcp_keepintvl */
 extern s32 tcp_maxidle;
 extern s32 tcp_maxpersistidle; /* tcp_maxpersistidle */
 extern s32 tcp_mss_ifmtu;
+extern s32 tcp_mssdflt; /* tcp_mssdflt */
 extern u32 tcp_now; /* tcp_now */
+extern u8 tcp_outflags[];
 extern u32 tcp_recvspace; /* tcp_recvspace */
 extern u32 tcp_sendspace; /* tcp_sendspace */
 extern struct tcpstat tcp_stat;
+extern s32 tcp_syn_bucket_limit;
+extern struct syn_cache_head tcp_syn_cache[];
 extern s32 tcp_syn_cache_interval;
+extern u32 tcp_syn_cache_limit;
+extern s32 tcp_syn_cache_size;
+extern struct syn_cache_timeq_head tcp_syn_cache_timeq[13];
 extern s32 tcp_totbackoff; /* tcp_totbackoff */
 extern struct inpcbtable udbtable;
 extern s32 udp_recvspace;
@@ -1914,21 +2218,29 @@ struct radix_node *func_0000A144();
 struct radix_node *func_0000A61C(void *n_arg, s32 search, s32 skip);
 struct radix_node *func_0000A804();
 struct radix_node *func_0000AE9C();
+struct rttimer_queue *func_0000D188(u32 timeout);
 s32 func_0000D1F4(void);
 void func_0000D25C(s32 *arg0, s32 arg1);
 s32 func_0000D264(void *arg0, s32 arg1);
 void func_0000D330(s32 *arg0, s32 arg1);
 s32 func_0000D338(struct Unk_func_0000D338_0 *arg0, s32 arg1);
 s32 func_0000D378(s32);
+s32 func_0000D484(struct socket *so, s32 req, struct mbuf *m, struct mbuf *nam, struct mbuf *control);
 void func_0000DD34(s32 arg0, void *arg1, void *arg2);
 void func_0000DDCC(s32 arg0, struct Unk_func_0000DDCC_1 *arg1, struct Unk_func_0000DDCC_2 *arg2);
-s32 func_0000E3F0(s32);
-s32 func_0000E448(s32, s32);
+s32 func_0000DF08(s32 type, struct rt_addrinfo *rtinfo, char *cp, struct walkarg *w, s32 *lenp);
+void func_0000E0EC(s32 cmd, struct ifaddr *ifa, s32 error, struct rtentry *rt);
+void func_0000E3F0(struct ifnet *ifp);
+void func_0000E448(struct ifnet *ifp, s32 what);
 s32 func_0000E4E4(s32, s32);
+struct mbuf *func_0000E5A4(s32 type, struct rt_addrinfo *rtinfo, char *data, s32 datalen);
+s32 func_0000E928(struct radix_node *rn, void *v);
 void func_0000ED48(void *arg0);
 void func_0000ED94(void *arg0);
 void func_0000EDB8(struct Unk_func_0000EDB8_0 *arg0);
 void func_0000EE04(struct Unk_func_0000EE04_0 *arg0);
+void func_0000EE68(struct mbuf *m0, ...);
+s32 func_0000F040(struct socket *so, s32 req, struct mbuf *m, struct mbuf *nam, struct mbuf *control);
 void func_0000F1F8(void);
 s32 func_0000F204(void);
 void func_0000F268(void);
@@ -1941,7 +2253,11 @@ void func_00010528(struct mbuf *m);
 s32 func_000106E0(void);
 s32 func_00010700(void);
 s32 func_00010874(struct socket *so, s32 cmd, void *data, struct ifnet *ifp);
+s32 func_00010D50(struct socket *so, s32 cmd, void *data, struct ifnet *ifp);
+s32 func_000123FC(struct in_addr in);
 s32 func_00013114(void *v, struct mbuf *nam);
+void func_00014260(struct inpcb *inp, struct mbuf *nam);
+void func_000142CC(struct inpcb *inp, struct mbuf *nam);
 s32 func_00019A98(void);
 void func_00019C00(struct rtentry *rt);
 s32 func_0001A410(void);
@@ -1950,11 +2266,11 @@ void func_0001A8AC(void);
 void func_0001AA20(struct Unk_func_0001AA20_0 *arg0);
 void func_0001C208(void);
 void func_0001C57C(struct Unk_func_0001C57C_0 *arg0, s16 arg1);
+void func_0001F088(struct tcpcb *tp, u8 *cp, s32 cnt, struct tcphdr *th, struct tcp_opt_info *oi);
 s32 func_000232C0(struct Unk_func_000232C0_0 *arg0);
 s32 func_00023828(struct Unk_func_00023828_0 *arg0);
 void func_00023AB8(struct Unk_func_00023AB8_0 *arg0);
 void func_000244B0(void);
-void func_0002544C(void *arg0);
 void func_00025638(struct sppp *sp, u16 proto, u8 type, u8 ident, u16 len, void *data);
 void func_00026FF4(const struct cp *cp, struct sppp *sp, u32 type, u32 id, ...);
 s32 func_00027830(struct Unk_func_00027830_0 *arg0);
@@ -1988,6 +2304,7 @@ s32 *func_0002C820(void);
 void *func_0002C864(void *dst, const void *src, s32 n);
 u8 *func_0002C918(u8 *dst, const u8 *src, s32 n);
 void *func_0002C94C(void *p, s32 c, s32 n);
+s32 func_0002C978(const void *b1, const void *b2, u32 len);
 void func_0002C9B8(const void *src, void *dst, s32 len);
 u8 *func_0002CC40(u8 *arg0, u8 *arg1);
 s32 func_0002CCF8(void *putc, void *arg, const char *fmt, __builtin_va_list ap);
@@ -2041,7 +2358,7 @@ char *inet_ntoa(struct in_addr ina);
 char *intoa(u32 addr);
 s32 ip_ctloutput(s32 op, struct socket *so, s32 level, s32 optname, struct mbuf **mp);
 void ip_drain(void);
-void ip_freef();
+void ip_freef(struct Unk_func_00015654_0 *arg0);
 void ip_freemoptions(struct ip_moptions *imo);
 s32 ip_getmoptions(s32 optname, struct ip_moptions *imo, struct mbuf **mp);
 void ip_input(struct mbuf *m);
@@ -2114,6 +2431,7 @@ void sbinsertoob(struct sockbuf *sb, struct mbuf *m0);
 s32 sbreserve(struct sockbuf *sb, u32 cc);
 s32 sceKernelGetThreadId(void);
 s32 sceKernelSignalSema(u32, s32);
+s32 sceNetBcmp(const void *b1, const void *b2, u32 len);
 M2C_UNK sceNetBcopy(u8 *, s32, u8);
 s32 sceNetConfigAddArp(s32, s32);
 s32 sceNetConfigDelArp(s32, s32);
@@ -2147,14 +2465,18 @@ s32 sceNetInetTerm(void);
 char *sceNetInet_lib_2595064C(struct in_addr in);
 struct ifqueue *sceNetInet_lib_D7928A6D(void);
 void sceNetMAdj(struct mbuf *mp, s32 req_len);
+void sceNetMCopyback(struct mbuf *m0, s32 off, s32 len, char *cp);
+s32 sceNetMCopydata(struct mbuf *m, s32 off, s32 len, void *cp);
 struct mbuf *sceNetMCopym(struct mbuf *m, s32 off, s32 len, s32 wait);
 struct mbuf *sceNetMFree(struct mbuf *m);
 void sceNetMFreem(struct mbuf *m);
 struct mbuf *sceNetMGet(s32 how, s32 type);
 struct mbuf *sceNetMGetclr(s32 how, s32 type);
+struct mbuf *sceNetMGethdr(s32 how, s32 type);
 struct mbuf *sceNetMPrepend(struct mbuf *m, s32 plen, s32 how);
 struct mbuf *sceNetMPullup(struct mbuf *n, s32 len);
 void *sceNetMallocInternal(u32 size);
+u8 *sceNetMemcpy(u8 *dst, const u8 *src, s32 n);
 M2C_UNK sceNetMemset(M2C_UNK *, M2C_UNK, M2C_UNK);
 u32 sceNetRand(void);
 s32 sce_alignbytes(void);
@@ -2208,9 +2530,16 @@ void sppp_pap_open(struct sppp *sp);
 void sppp_pap_scr(struct sppp *sp);
 void sppp_pap_tld(struct sppp *sp);
 void sppp_to_event(const struct cp *cp, struct sppp *sp);
+s32 syn_cache_add(struct sockaddr *src, struct sockaddr *dst, struct tcphdr *th, u32 hlen, struct socket *so, struct mbuf *m, u8 *optp, s32 optlen, struct tcp_opt_info *oi);
 void syn_cache_cleanup(struct tcpcb *tp);
+struct socket *syn_cache_get(struct sockaddr *src, struct sockaddr *dst, struct tcphdr *th, u32 hlen, u32 tlen, struct socket *so, struct mbuf *m);
 void syn_cache_init(void);
+void syn_cache_insert(struct syn_cache *sc, struct tcpcb *tp);
+struct syn_cache *syn_cache_lookup(struct sockaddr *src, struct sockaddr *dst, struct syn_cache_head **headp);
+void syn_cache_reset(struct sockaddr *src, struct sockaddr *dst, struct tcphdr *th);
+s32 syn_cache_respond(struct syn_cache *sc, struct mbuf *m);
 void syn_cache_timer(void);
+void syn_cache_unreach(struct sockaddr *src, struct sockaddr *dst, struct tcphdr *th);
 s32 sysctl_int(void *oldp, u32 *oldlenp, void *newp, u32 newlen, s32 *valp);
 s32 sysctl_rdint(void *oldp, u32 *oldlenp, void *newp, s32 val);
 s32 sysctl_rdstruct(void *oldp, u32 *oldlenp, void *newp, const void *sp, u32 len);
@@ -2228,12 +2557,13 @@ void tcp_mss_from_peer(struct tcpcb *tp, s32 offer);
 u32 tcp_mss_to_advertise(struct ifnet *ifp, s32 af);
 void tcp_mtudisc(struct inpcb *inp, s32 errno);
 void tcp_mtudisc_callback(struct in_addr addr);
-u32 tcp_new_iss(struct tcpcb *tp, u32 len, u32 addin);
+u32 tcp_new_iss(void *m, u32 len, u32 addin);
 struct tcpcb *tcp_newtcpcb(s32 family, void *aux);
 void tcp_notify(struct inpcb *inp, s32 error);
-s32 tcp_optlen(void *tp);
+s32 tcp_optlen(void *arg0);
 s32 tcp_output(struct tcpcb *tp);
 void tcp_pulloutofband(struct socket *so, struct tcphdr *th, struct mbuf *m, s32 off);
+void tcp_quench(struct inpcb *inp, s32 errno);
 s32 tcp_respond(struct tcpcb *tp, struct mbuf *template, struct mbuf *m, struct tcphdr *th0, u32 ack, u32 seq, s32 flags);
 void tcp_rmx_rtt(struct tcpcb *tp);
 void tcp_setpersist(struct tcpcb *tp);

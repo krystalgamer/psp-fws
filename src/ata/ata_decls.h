@@ -40,7 +40,7 @@ typedef struct {
     SceUID semaId;            /* 0x10 */
     SceUID evfId;             /* 0x14 */
 #else
-    s32 unk10;                /* 0x10 (1.50: -1 at init; sema or event flag) */
+    SceUID semaId;            /* 0x10: still set to -1 but unused: 1.50+ make no sema/event flag calls; evfId is the removed word */
 #endif
     u32 byteLimit;            /* 0x18 (1.50: 0x14) */
     /* the two command pointers are void * like SceAtaCmd.buf: storing buf must
@@ -151,7 +151,7 @@ extern M2C_UNK D_00003F1C;
 extern u32 D_00004140[3];
 extern s32 D_00004180;
 extern SceAtaDrive D_00004200[2];
-extern volatile s32 D_00004250; /* sceAtaSetIntrFlag/GetIntrFlag (set from interrupt context) */
+extern s32 D_00004250;
 extern s32 D_00004260;
 extern SceAtaAhbBlock D_00004280;
 extern s32 D_000042A0;
@@ -162,6 +162,7 @@ extern s32 D_00004324;
 extern s32 D_00004328;
 extern s32 D_00004370;
 extern s32 D_00004640;
+extern SceUID D_000046A4;
 extern SceAtaCallBack D_000046A8;
 extern s32 D_000046E8;
 extern s32 D_000046EC;
@@ -257,7 +258,7 @@ s32 sceAtaAhbSetUDMATiming();
 s32 sceAtaAhbTerm(void);
 s32 sceAtaBufferSelectSemaphore(u32 *stat);
 s32 sceAtaCheckDeviceReady(SceAtaDrive *drive);
-void sceAtaClearDriveStat(s32 arg0, s32 arg1);
+void sceAtaClearDriveStat(s32 arg0, M2C_UNK arg1);
 void sceAtaClearIntrStateFlag(s32 arg0);
 s32 sceAtaDisableClkIo(u32 flags);
 void sceAtaDisplayReqSense(void);

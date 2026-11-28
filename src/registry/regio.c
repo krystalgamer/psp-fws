@@ -1,3 +1,8 @@
+/* compiler[271]: 1.9.2 */
+/* cflags[271]: -O2 -fno-thread-jumps -mext */
+/* compiler[282,300,301,302,303,310,311,330,340,350,351,352]: 1.9.2 */
+/* cflags[282,300,301,302,303]: -O2 -fno-thread-jumps -mext */
+/* cflags[310,311,330,340,350,351,352]: -O2 -mext */
 /* cflags[100-303]: -O2 -fno-thread-jumps */
 #include "common.h"
 #include "k1.h"
@@ -131,7 +136,9 @@ s32 regSeekFile(s32 fd, s32 offset, s32 whence) {
     return ((s32)sceIoLseek(fd, offset, func_000061B4(whence)) < 0) ? -9 : 0;
 }
 #else
-INCLUDE_ASM("nonmatchings/regio", regSeekFile);
+s32 regSeekFile(s32 fd, s32 offset, s32 whence) {
+    return ((s32)sceIoLseek(fd, offset, func_00006998(whence)) < 0) ? -9 : 0;
+}
 #endif
 
 #if FW_VERSION < 201

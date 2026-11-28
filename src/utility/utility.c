@@ -1,3 +1,7 @@
+/* compiler[271]: 1.9.2 */
+/* cflags[271]: -O2 -frename-registers -mext */
+/* compiler[282,300,301,302,303,310,311,330,340,350,351,352]: 1.9.2 */
+/* cflags[282,300,301,302,303,310,311,330,340,350,351,352]: -O2 -frename-registers -mext */
 /* cflags[152]: -O0 */
 /* cflags[150]: -O0 */
 /* cflags[100,102,103]: -O0 */
@@ -2796,7 +2800,15 @@ void sceUtilityDdHelperGetStatus(void) {
 #endif
 
 #if FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/utility", sceUtilityHtmlViewerInitStart);
+s32 sceUtilityHtmlViewerInitStart(void *arg0) {
+    s32 temp_v0;
+    u32 temp_s0;
+
+    temp_s0 = shiftK1();
+    temp_v0 = func_000014FC(1, (s32) arg0);
+    setK1(temp_s0);
+    return temp_v0;
+}
 
 s32 sceUtilityHtmlViewerShutdownStart(void) {
     s32 temp_v0;

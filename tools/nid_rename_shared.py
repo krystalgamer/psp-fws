@@ -74,11 +74,13 @@ def main():
             p.write_text(FM.emit(FM.dedupe(ents), fv))
     # auto names still used by entries that could not be renamed: drop the NID name for that address in those
     # versions (the entry keeps resolving by its auto name)
-    alltext = "".join(p.read_text() for p in srcs if p.suffix == ".c")
+    # (only text the version is built from: an auto name can be a different function in other versions)
+    parsed = [FM.parse(p.read_text(), fv) for p in srcs if p.suffix == ".c"]
     for v in list(sym0):
         nv = fw(v)
+        vtext = "".join(e.text for ents in parsed for e in ents if nv in e.vers)
         for auto, real in list(new.get(nv, {}).items()):
-            if re.search(rf"\b{auto}\b", alltext):
+            if re.search(rf"\b{auto}\b", vtext):
                 t = symfs[v].read_text()
                 t = re.sub(rf"^{real} = 0x{auto[5:]};[^\n]*\n", "", t, flags=re.M)
                 symfs[v].write_text(t)

@@ -1,3 +1,7 @@
+/* compiler[271]: 1.9.2 */
+/* cflags[271]: -O2 -frename-registers -mext */
+/* compiler[282,300,301,302,303,310,311,330,340,350,351,352]: 1.9.2 */
+/* cflags[282,300,301,302,303,310,311,330,340,350,351,352]: -O2 -frename-registers -mext */
 /* cflags: -O2 -frename-registers */
 #include "common.h"
 #include "k1.h"
@@ -524,7 +528,27 @@ s32 func_000026E8(s32 n) {
     return 0;
 }
 #else
-INCLUDE_ASM("nonmatchings/usb", func_000026E8);
+s32 func_000026E8(s32 n) {
+    UsbbdEpRec *rec = &g_usbbd.eps[n];
+    s32 intr = sceKernelCpuSuspendIntr();
+
+    if (g_usbbd.actState != 0x200 || g_usbbd.cableState != 0x20 || g_usbbd.connState == 4
+        || g_usbbd.unkE4 == 0x20) {
+        while (rec->head != NULL) {
+            func_00002808(rec, -2);
+        }
+    } else if (rec->head != NULL) {
+        if (func_00004510(n, -2) != 0) {
+            sceKernelCpuResumeIntr(intr);
+            return 0x80243006;
+        }
+        while (rec->head != NULL) {
+            func_00002808(rec, -2);
+        }
+    }
+    sceKernelCpuResumeIntr(intr);
+    return 0;
+}
 #endif
 
 #if FW_VERSION < 282
@@ -579,7 +603,48 @@ void func_00002808(UsbbdEpRec *rec, s32 status) {
     }
 }
 #else
-INCLUDE_ASM("nonmatchings/usb", func_00002808);
+void func_00002808(UsbbdEpRec *rec, s32 status) {
+    SceUsbdDeviceReq *req = rec->head;
+    SceUsbdDeviceReq *next;
+    SceUsbdEndpoint *ep;
+
+    if (req == NULL) {
+        return;
+    }
+    if (req->next == NULL) {
+        rec->tail = NULL;
+        rec->head = NULL;
+        if (g_usbbd.actState == 0x200 && g_usbbd.unkE4 != 0x20) {
+            if (rec->address == 0) {
+                func_000041FC(req->endpoint->busEndpointNumber);
+            } else {
+                func_00004050(req->endpoint->busEndpointNumber);
+            }
+        }
+        if (status == -2) {
+            status = -3;
+        }
+    } else {
+        next = req->next;
+        rec->head = next;
+        if (g_usbbd.actState == 0x200 && g_usbbd.unkE4 != 0x20) {
+            if (status != -2) {
+                if (next->returnCode == 2) {
+                    func_00004100(req->endpoint->busEndpointNumber);
+                } else {
+                    func_00003EB8(req->endpoint->busEndpointNumber);
+                }
+            }
+        }
+    }
+    req->returnCode = status;
+    ep = req->endpoint;
+    ep->transmittedBytes += req->transmittedBytes;
+    req->next = NULL;
+    if (req->onComplete != NULL) {
+        req->onComplete(req);
+    }
+}
 #endif
 
 #if FW_VERSION >= 300
@@ -824,7 +889,6 @@ s32 sceUsbbdReqCancelAll(SceUsbdEndpoint *ep) {
 INCLUDE_ASM("nonmatchings/usb", sceUsbbdReqCancelAll);
 #endif
 
-#if FW_VERSION < 282
 s32 func_00002E80(s32 n) {
     UsbbdEpRec *rec = &g_usbbd.eps[n];
     s32 intr = sceKernelCpuSuspendIntr();
@@ -835,9 +899,6 @@ s32 func_00002E80(s32 n) {
     sceKernelCpuResumeIntr(intr);
     return 0;
 }
-#else
-INCLUDE_ASM("nonmatchings/usb", func_00002E80);
-#endif
 
 #if (FW_VERSION >= 102 && FW_VERSION < 150) || FW_VERSION == 271
 INCLUDE_ASM("nonmatchings/usb", module_start);

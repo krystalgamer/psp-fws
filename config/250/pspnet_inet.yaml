@@ -57,9 +57,11 @@ segments:
       - [0x5D14, c, pspnet_inet_api]
       - [0xBBA8, c, pspnet_inet_route]
       - [0xD39C, c, pspnet_inet_rtsub]
+      - [0xF474, c, pspnet_inet_if_loop]
       - [0x12D98, c, pspnet_inet_in_init]
-      - [0x1318C, c, pspnet_inet_in_cksum]
+      - [0x1318C, c, pspnet_inet_in_cksum2]
       - [0x1BB9C, c, pspnet_inet_udp]
+      - [0x2173C, c, pspnet_inet_tcp_output]
       - [0x225DC, c, pspnet_inet_tcp_subr]
       - { start: 0x2B154, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x2B3EC, type: prxpad, order: .text }
@@ -73,7 +75,8 @@ segments:
       - { start: 0x2B4B4, type: rodata, name: resident, linker_section: .rodata.sceResident }
       - { start: 0x2B6E4, type: rodata, name: nid, linker_section: .rodata.sceNid }
       - [0x2B830, .rodata, pspnet_inet_rtsub]
-      - [0x2B8BC, .rodata, pspnet_inet_in_cksum]
+      - [0x2B8AC, .rodata, pspnet_inet_if_loop]
+      - [0x2B8BC, .rodata, pspnet_inet_in_cksum2]
       - [0x2BB64, .rodata, pspnet_inet_udp]
       - [0x2BBFC, .rodata, pspnet_inet_tcp_subr]
       - { start: 0x2C014, type: prxpad, order: .rodata }

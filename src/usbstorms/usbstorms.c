@@ -1,3 +1,9 @@
+/* compiler[280]: 1.9.2 */
+/* cflags[280]: -O2 -mext */
+/* compiler[271]: 1.9.2 */
+/* cflags[271]: -O2 -mext */
+/* compiler[282,300,301,302,303,310,311,330,340,350,351,352]: 1.9.2 */
+/* cflags[282,300,301,302,303,310,311,330,340,350,351,352]: -O2 -mext */
 /* cflags[152]: -O2 -frename-registers */
 /* cflags[151]: -O2 -frename-registers */
 /* cflags[150]: -O2 -frename-registers */

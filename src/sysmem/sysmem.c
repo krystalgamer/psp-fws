@@ -1,3 +1,9 @@
+/* compiler[280,281]: 1.9.2 */
+/* cflags[280,281]: -O2 -frename-registers -mext */
+/* compiler[270,271]: 1.9.2 */
+/* cflags[270,271]: -O2 -frename-registers -mext */
+/* compiler[282,300,301,302,303,310,311,330,340,350,351,352]: 1.9.2 */
+/* cflags[282,300,301,302,303,310,311,330,340,350,351,352]: -O2 -frename-registers -mext */
 /* cflags[100,102,103]: -O2 */
 /* cflags: -O2 -frename-registers */
 #include "common.h"
@@ -1662,7 +1668,9 @@ INCLUDE_ASM("nonmatchings/sysmem", sceKernelSetFilenameBlock);
 #endif
 
 #if FW_VERSION >= 280
-INCLUDE_ASM("nonmatchings/sysmem", sceKernelGetInitialRandomValue);
+s32 sceKernelGetInitialRandomValue(void) {
+    return D_00014264;
+}
 
 INCLUDE_ASM("nonmatchings/sysmem", sceKernelGetModel);
 #endif
@@ -1756,13 +1764,7 @@ void sceKernelMemoryShrinkSize(void) {
 
 #if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/sysmem", sceKernelMemoryOpenSize);
-#endif
 
-#if FW_VERSION >= 270
-INCLUDE_ASM("nonmatchings/sysmem", sceKernelMemoryCloseSize);
-#endif
-
-#if FW_VERSION >= 201 && FW_VERSION < 270
 void sceKernelMemoryCloseSize(s32 arg0) {
     *(s32 *)0xBC100040 = (*(s32 *)0xBC100040 & ~3) | (arg0 & 3);
 }
@@ -2225,7 +2227,7 @@ s32 sceKernelDeleteUID(SceUID id) {
 INCLUDE_ASM("nonmatchings/sysmem", sceKernelSearchUIDbyName);
 #endif
 
-#if FW_VERSION < 270
+#if FW_VERSION < 350
 s32 sceKernelGetUIDcontrolBlock(SceUID id, SceSysmemUidCB **uidOut) {
     SceSysmemUidCB *uid;
     if (id == 0 || (id & 0x80000001) != 1) {
@@ -2245,7 +2247,9 @@ INCLUDE_ASM("nonmatchings/sysmem", sceKernelGetUIDcontrolBlock);
 #if FW_VERSION < 270
 s32 suspendIntr(void);
 void resumeIntr(s32);
+#endif
 
+#if FW_VERSION < 350
 s32 sceKernelGetUIDcontrolBlockWithType(SceUID id, SceSysmemUidCB *type, SceSysmemUidCB **outUid) {
     s32 oldIntr = suspendIntr();
     SceSysmemUidCB *uid;
@@ -3342,11 +3346,7 @@ s32 sceKernelDipsw(u32 arg0) {
 }
 #endif
 
-#if FW_VERSION >= 280
-INCLUDE_ASM("nonmatchings/sysmem", sceKernelDipswAll);
-#endif
-
-#if FW_VERSION >= 201 && FW_VERSION < 280
+#if FW_VERSION >= 201
 s32 sceKernelDipswAll(void) {
     return D_0000FC3C;
 }

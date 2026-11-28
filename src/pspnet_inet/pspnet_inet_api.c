@@ -1,3 +1,7 @@
+/* compiler[271]: 1.9.2 */
+/* cflags[271]: -O2 -frename-registers -mext */
+/* compiler[282,300,301,302,303,310,311,330,340,350,351,352]: 1.9.2 */
+/* cflags[282,300,301,302,303,310,311,330,340,350,351,352]: -O2 -frename-registers -mext */
 /* cflags: -O2 -frename-registers */
 #include "common.h"
 #include "pspnet_inet_decls.h"
@@ -596,7 +600,6 @@ struct ifaddr *ifa_ifwithnet(struct sockaddr *addr) {
     return (ifa_maybe);
 }
 
-#if FW_VERSION < 201
 struct ifaddr *ifaof_ifpforaddr(struct sockaddr *addr, struct ifnet *ifp) {
     struct ifaddr *ifa;
     char *cp, *cp2, *cp3;
@@ -632,22 +635,14 @@ struct ifaddr *ifaof_ifpforaddr(struct sockaddr *addr, struct ifnet *ifp) {
     }
     return (ifa_maybe);
 }
-#else
-INCLUDE_ASM("nonmatchings/pspnet_inet_api", ifaof_ifpforaddr);
-#endif
 
-#if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet_api", if_rtdel);
-#else
 s32 if_rtdel(struct rtentry *rt, void *arg) {
     if (rt->rt_ifp == arg) {
         rtrequest(2, rt->rt_nodes[0].rn_key, rt->rt_gateway, rt->rt_nodes[0].rn_mask, rt->rt_flags, NULL);
     }
     return 0;
 }
-#endif
 
-#if FW_VERSION < 201
 struct ifaddr *ifa_ifwithaddr(struct sockaddr *addr) {
     struct ifnet *ifp;
     struct ifaddr *ifa;
@@ -670,11 +665,7 @@ struct ifaddr *ifa_ifwithaddr(struct sockaddr *addr) {
     }
     return ((struct ifaddr *)0);
 }
-#else
-INCLUDE_ASM("nonmatchings/pspnet_inet_api", ifa_ifwithaddr);
-#endif
 
-#if FW_VERSION < 201
 struct ifaddr *ifa_ifwithdstaddr(struct sockaddr *addr) {
     struct ifnet *ifp;
     struct ifaddr *ifa;
@@ -694,9 +685,6 @@ struct ifaddr *ifa_ifwithdstaddr(struct sockaddr *addr) {
     }
     return (NULL);
 }
-#else
-INCLUDE_ASM("nonmatchings/pspnet_inet_api", ifa_ifwithdstaddr);
-#endif
 
 INCLUDE_ASM("nonmatchings/pspnet_inet_api", ifa_ifwithladdr);
 
@@ -922,7 +910,7 @@ void func_0000993C(void) {
 }
 #endif
 
-#if FW_VERSION < 151 || FW_VERSION == 152
+#if FW_VERSION < 201
 s32 ether_multiaddr(struct sockaddr *sa, u8 *addrlo, u8 *addrhi) {
     struct sockaddr_in *sin;
 
@@ -1002,7 +990,9 @@ s32 func_000099D4(void) {
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet_api", sceNetInet_lib_D7928A6D);
+struct ifqueue *sceNetInet_lib_D7928A6D(void) {
+    return &ipintrq;
+}
 #endif
 
 #if FW_VERSION >= 282

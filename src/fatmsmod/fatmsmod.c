@@ -1,3 +1,5 @@
+/* compiler[282,300,301,302,303,310,311,330,340,350,351,352]: 1.9.2 */
+/* cflags[282,300,301,302,303,310,311,330,340,350,351,352]: -O2 -mext */
 /* cflags[271-352]: -O2 -mext */
 #include "common.h"
 #include "fatmsmod_decls.h"
@@ -2463,11 +2465,9 @@ s32 func_00004BBC(s32 arg0) {
 }
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/fatmsmod", func_00007718);
-#endif
-
 #if FW_VERSION == 150
+INCLUDE_ASM("nonmatchings/fatmsmod", func_00007718);
+
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00005D40);
 
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00005D54);
@@ -2503,7 +2503,7 @@ INCLUDE_RODATA("nonmatchings/fatmsmod", D_00024B18);
 INCLUDE_ASM("nonmatchings/fatmsmod", func_0000760C);
 #endif
 
-#if FW_VERSION == 100 || FW_VERSION >= 282
+#if FW_VERSION != 150
 void *func_00007718(void *dst0, const void *src0, u32 length) {
     char *dst = dst0;
     const char *src = src0;

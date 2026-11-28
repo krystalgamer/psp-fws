@@ -1,3 +1,9 @@
+/* compiler[280]: 1.9.2 */
+/* cflags[280]: -Os -mext */
+/* compiler[271]: 1.9.2 */
+/* cflags[271]: -Os -mext */
+/* compiler[282,300,301,302,303,310,311,330,340,350,351,352]: 1.9.2 */
+/* cflags[282,300,301,302,303,310,311,330,340,350,351,352]: -Os -mext */
 /* cflags: -Os */
 #include "common.h"
 #include "msstor_decls.h"

@@ -1,3 +1,7 @@
+/* compiler[271]: 1.9.2 */
+/* cflags[271]: -O2 -frename-registers -mext */
+/* compiler[282,300,301,302,303,310,311,330,340,350,351,352]: 1.9.2 */
+/* cflags[282,300,301,302,303,310,311,330,340,350,351,352]: -O2 -frename-registers -mext */
 /* cflags: -O2 -frename-registers */
 #include "common.h"
 #include "pspnet_inet_decls.h"
@@ -448,7 +452,7 @@ s32 udp_usrreq(struct socket *so, s32 req, struct mbuf *m, struct mbuf *nam, str
         error = 0x5F;
         break;
     case 4:
-        error = func_00013114(inp, nam);
+        error = in_pcbconnect(inp, nam);
         if (error)
             break;
         soisconnected(so);
@@ -484,7 +488,7 @@ s32 udp_usrreq(struct socket *so, s32 req, struct mbuf *m, struct mbuf *nam, str
                     error = 0x7F;
                     goto die;
                 }
-                error = func_00013114(inp, nam);
+                error = in_pcbconnect(inp, nam);
                 if (error) {
                 die:
                     sceNetMFreem(m);
@@ -530,9 +534,141 @@ release:
 }
 #endif
 
-#if FW_VERSION >= 201
+#if FW_VERSION >= 201 && FW_VERSION < 271
+s32 udp_usrreq(struct socket *so, s32 req, struct mbuf *m, struct mbuf *nam, struct mbuf *control) {
+    struct inpcb *inp;
+    s32 s;
+    s32 error = 0;
+
+    if (req == 11)
+        return (func_00010D50(so, (s32)m, (void *)nam, (struct ifnet *)control));
+    if (req == 22) {
+        in_purgeif((struct ifnet *)control);
+        in_pcbpurgeif(&udbtable, (struct ifnet *)control);
+        return (0);
+    }
+    s = _sce_pspnet_spllock();
+    inp = (struct inpcb *)so->so_pcb;
+    if (inp == 0 && req != 0) {
+        error = 0x16;
+        goto release;
+    }
+    switch (req) {
+    case 0:
+        if (inp != 0) {
+            error = 0x7F;
+            break;
+        }
+        if (so->so_snd.sb_hiwat == 0 || so->so_rcv.sb_hiwat == 0) {
+            error = soreserve(so, udp_sendspace, udp_recvspace);
+            if (error)
+                break;
+        }
+        error = in_pcballoc(so, &udbtable);
+        if (error)
+            break;
+        inp = (struct inpcb *)so->so_pcb;
+        inp->inp_ip.ip_ttl = D_0002C240;
+        break;
+    case 10:
+        soisdisconnected(so);
+    case 1:
+        in_pcbdetach(inp);
+        break;
+    case 2:
+        error = in_pcbbind(inp, nam);
+        break;
+    case 3:
+        error = 0x5F;
+        break;
+    case 4:
+        error = in_pcbconnect(inp, nam);
+        if (error)
+            break;
+        soisconnected(so);
+        break;
+    case 17:
+        error = 0x5F;
+        break;
+    case 6:
+        so->so_state &= ~SS_ISCONNECTED;
+        in_pcbdisconnect(inp);
+        inp->inp_laddr = zeroin_addr;
+        in_pcbstate(inp, 1);
+        break;
+    case 7:
+        socantsendmore(so);
+        break;
+    case 8:
+        error = 0x5F;
+        break;
+    case 9:
+        if (control && control->m_len) {
+            sceNetMFreem(control);
+            sceNetMFreem(m);
+            error = 0x16;
+            break;
+        }
+        {
+            struct in_addr laddr;
+
+            if (nam) {
+                laddr = inp->inp_laddr;
+                if ((so->so_state & SS_ISCONNECTED) != 0) {
+                    error = 0x7F;
+                    goto die;
+                }
+                error = in_pcbconnect(inp, nam);
+                if (error) {
+                die:
+                    sceNetMFreem(m);
+                    break;
+                }
+            } else {
+                if ((so->so_state & SS_ISCONNECTED) == 0) {
+                    error = 0x80;
+                    goto die;
+                }
+            }
+            error = udp_output(m, inp);
+            if (nam) {
+                in_pcbdisconnect(inp);
+                inp->inp_laddr = laddr;
+                in_pcbstate(inp, 1);
+            }
+        }
+        break;
+    case 12:
+        _sce_pspnet_splunlock(s);
+        return (0);
+    case 13:
+        error = 0x5F;
+        break;
+    case 14:
+        sceNetMFreem(control);
+        sceNetMFreem(m);
+        error = 0x5F;
+        break;
+    case 15:
+        func_00014260(inp, nam);
+        break;
+    case 16:
+        func_000142CC(inp, nam);
+        break;
+    default:
+        break;
+    }
+release:
+    _sce_pspnet_splunlock(s);
+    return (error);
+}
+#endif
+
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/pspnet_inet_udp", udp_usrreq);
-#else
+#endif
+
+#if FW_VERSION < 201
 void udp_init(void) {
     udp_sendspace = 0x2400;
     udp_recvspace = 0xA280;
@@ -543,10 +679,16 @@ void udp_init(void) {
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet_udp", udp_init);
+void udp_init(void) {
+    udp_sendspace = 0x2400;
+    udp_recvspace = 0xA280;
+    udpcksum = 1;
+    sceNetMemset(&udp_stat, 0, 0x48);
+    in_pcbinit(&udbtable, D_0002C368, D_0002C368);
+}
 #endif
 
-#if FW_VERSION < 151 || FW_VERSION == 152
+#if FW_VERSION < 282
 void *udp_ctlinput(s32 cmd, struct sockaddr *sa, void *v) {
     struct ip *ip = v;
     struct tcphdr *th;
@@ -575,13 +717,7 @@ void *udp_ctlinput(s32 cmd, struct sockaddr *sa, void *v) {
     }
     return NULL;
 }
-#endif
-
-#if FW_VERSION == 151 || (FW_VERSION >= 201 && FW_VERSION < 282)
-INCLUDE_ASM("nonmatchings/pspnet_inet_udp", udp_ctlinput);
-#endif
-
-#if FW_VERSION >= 282
+#else
 void func_0001C208(void) {
     udp_sendspace = 0x2400;
     udp_recvspace = 0xA280;
@@ -642,11 +778,7 @@ void udp4_sendup(struct mbuf *m, s32 off, struct sockaddr *src, struct socket *s
     }
 }
 
-#if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet_udp", udp_notify);
-#endif
-
-#if FW_VERSION < 201
+#if FW_VERSION < 282
 void udp_notify(void *arg0, s16 arg1) {
     void *var_a2;
 
@@ -743,14 +875,69 @@ INCLUDE_ASM("nonmatchings/pspnet_inet_udp", func_0001F0A4);
 INCLUDE_ASM("nonmatchings/pspnet_inet_udp", func_0001F674);
 #endif
 
-#if FW_VERSION >= 151 && FW_VERSION < 201
-INCLUDE_ASM("nonmatchings/pspnet_inet_udp", func_0001F178);
-#endif
-
 #if FW_VERSION < 151
 INCLUDE_ASM("nonmatchings/pspnet_inet_udp", func_00020A20);
+#endif
 
-INCLUDE_ASM("nonmatchings/pspnet_inet_udp", func_00020B74);
+#if FW_VERSION < 201
+void syn_cache_insert(struct syn_cache *sc, struct tcpcb *tp)
+{
+	struct syn_cache_head *scp;
+	struct syn_cache *sc2;
+	int s, i;
+
+	if (syn_cache_count == 0) {
+		struct timeval tv;
+		_sce_pspnet_microtime(&tv);
+		syn_hash1 = sceNetRand() ^ (u32)&sc;
+		syn_hash2 = sceNetRand() ^ tv.tv_usec;
+	}
+
+	SYN_HASHALL(sc->sc_hash, &sc->sc_src, &sc->sc_dst);
+	sc->sc_bucketidx = sc->sc_hash % tcp_syn_cache_size;
+	scp = &tcp_syn_cache[sc->sc_bucketidx];
+
+	s = _sce_pspnet_spllock();
+	if (scp->sch_length >= tcp_syn_bucket_limit) {
+		tcp_stat.tcps_sc_bucketoverflow++;
+		for (i = TCP_MAXRXTSHIFT; i >= 0; i--) {
+			for (sc2 = TAILQ_FIRST(&tcp_syn_cache_timeq[i]);
+			     sc2 != NULL;
+			     sc2 = TAILQ_NEXT(sc2, sc_timeq)) {
+				if (sc2->sc_bucketidx == sc->sc_bucketidx) {
+					SYN_CACHE_RM(sc2);
+					SYN_CACHE_PUT(sc2);
+					goto insert;
+				}
+			}
+		}
+	} else if (syn_cache_count >= tcp_syn_cache_limit) {
+		tcp_stat.tcps_sc_overflowed++;
+		for (i = TCP_MAXRXTSHIFT; i >= 0; i--) {
+			sc2 = TAILQ_FIRST(&tcp_syn_cache_timeq[i]);
+			if (sc2 == NULL)
+				continue;
+			SYN_CACHE_RM(sc2);
+			SYN_CACHE_PUT(sc2);
+			goto insert;
+		}
+	}
+
+ insert:
+	sc->sc_rxttot = 0;
+	sc->sc_rxtshift = 0;
+	SYN_CACHE_TIMER_ARM(sc);
+	TAILQ_INSERT_TAIL(&tcp_syn_cache_timeq[sc->sc_rxtshift], sc, sc_timeq);
+
+	LIST_INSERT_HEAD(&tp->t_sc, sc, sc_tpq);
+
+	LIST_INSERT_HEAD(&scp->sch_bucket, sc, sc_bucketq);
+	scp->sch_length++;
+	syn_cache_count++;
+
+	tcp_stat.tcps_sc_added++;
+	_sce_pspnet_splunlock(s);
+}
 #endif
 
 #if FW_VERSION >= 282
@@ -759,32 +946,397 @@ INCLUDE_ASM("nonmatchings/pspnet_inet_udp", func_0001F4CC);
 INCLUDE_ASM("nonmatchings/pspnet_inet_udp", func_0001F5A0);
 #endif
 
+#if FW_VERSION < 201
+void syn_cache_timer(void)
+{
+	struct syn_cache *sc, *nsc;
+	int i, s;
+
+	s = _sce_pspnet_spllock();
+
+	for (i = 0; i < TCP_MAXRXTSHIFT; i++) {
+		for (sc = TAILQ_FIRST(&tcp_syn_cache_timeq[i]);
+		     sc != NULL && PRT_SLOW_ISEXPIRED(sc->sc_rexmt);
+		     sc = nsc) {
+			nsc = TAILQ_NEXT(sc, sc_timeq);
+
+			sc->sc_rxttot += sc->sc_rxtcur;
+			if (sc->sc_rxttot >= TCPTV_KEEP_INIT) {
+				tcp_stat.tcps_sc_timed_out++;
+				SYN_CACHE_RM(sc);
+				SYN_CACHE_PUT(sc);
+				continue;
+			}
+
+			tcp_stat.tcps_sc_retransmitted++;
+			(void) syn_cache_respond(sc, NULL);
+
+			TAILQ_REMOVE(&tcp_syn_cache_timeq[i], sc, sc_timeq);
+			sc->sc_rxtshift = i + 1;
+			SYN_CACHE_TIMER_ARM(sc);
+			TAILQ_INSERT_TAIL(&tcp_syn_cache_timeq[sc->sc_rxtshift],
+			    sc, sc_timeq);
+		}
+	}
+
+	for (sc = TAILQ_FIRST(&tcp_syn_cache_timeq[TCP_MAXRXTSHIFT]);
+	     sc != NULL && PRT_SLOW_ISEXPIRED(sc->sc_rexmt);
+	     sc = nsc) {
+		nsc = TAILQ_NEXT(sc, sc_timeq);
+		tcp_stat.tcps_sc_timed_out++;
+		SYN_CACHE_RM(sc);
+		SYN_CACHE_PUT(sc);
+	}
+	_sce_pspnet_splunlock(s);
+}
+#else
 INCLUDE_ASM("nonmatchings/pspnet_inet_udp", syn_cache_timer);
-
-INCLUDE_ASM("nonmatchings/pspnet_inet_udp", syn_cache_cleanup);
-
-#if FW_VERSION >= 151 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet_udp", func_0001FBBC);
-
-INCLUDE_ASM("nonmatchings/pspnet_inet_udp", func_00020260);
-
-INCLUDE_ASM("nonmatchings/pspnet_inet_udp", func_000204E4);
-
-INCLUDE_ASM("nonmatchings/pspnet_inet_udp", func_00020788);
 #endif
 
-#if FW_VERSION < 151
-INCLUDE_ASM("nonmatchings/pspnet_inet_udp", func_000215D8);
+void syn_cache_cleanup(struct tcpcb *tp)
+{
+	struct syn_cache *sc, *nsc;
+	int s;
 
-INCLUDE_ASM("nonmatchings/pspnet_inet_udp", func_00021D08);
+	s = _sce_pspnet_spllock();
 
-INCLUDE_ASM("nonmatchings/pspnet_inet_udp", func_00021FCC);
+	for (sc = LIST_FIRST(&tp->t_sc); sc != NULL; sc = nsc) {
+		nsc = LIST_NEXT(sc, sc_tpq);
+		SYN_CACHE_RM(sc);
+		SYN_CACHE_PUT(sc);
+	}
+	LIST_INIT(&tp->t_sc);
 
-INCLUDE_ASM("nonmatchings/pspnet_inet_udp", func_000222B0);
+	_sce_pspnet_splunlock(s);
+}
+
+#if FW_VERSION < 282
+__inline struct syn_cache *syn_cache_lookup(struct sockaddr *src, struct sockaddr *dst, struct syn_cache_head **headp)
+{
+	struct syn_cache *sc;
+	struct syn_cache_head *scp;
+	u32 hash;
+	int s;
+
+	SYN_HASHALL(hash, src, dst);
+
+	scp = &tcp_syn_cache[hash % tcp_syn_cache_size];
+	*headp = scp;
+	s = _sce_pspnet_spllock();
+	for (sc = LIST_FIRST(&scp->sch_bucket); sc != NULL;
+	     sc = LIST_NEXT(sc, sc_bucketq)) {
+		if (sc->sc_hash != hash)
+			continue;
+		if (!func_0002C978(&sc->sc_src, src, src->sa_len) &&
+		    !func_0002C978(&sc->sc_dst, dst, dst->sa_len)) {
+			_sce_pspnet_splunlock(s);
+			return (sc);
+		}
+	}
+	_sce_pspnet_splunlock(s);
+	return (NULL);
+}
+#endif
+
+#if FW_VERSION < 201
+struct socket *syn_cache_get(struct sockaddr *src, struct sockaddr *dst, struct tcphdr *th, u32 hlen, u32 tlen, struct socket *so, struct mbuf *m)
+{
+	struct syn_cache *sc;
+	struct syn_cache_head *scp;
+	struct inpcb *inp = NULL;
+	struct tcpcb *tp = 0;
+	struct mbuf *am;
+	int s;
+	struct socket *oso;
+
+	s = _sce_pspnet_spllock();
+	if ((sc = syn_cache_lookup(src, dst, &scp)) == NULL) {
+		_sce_pspnet_splunlock(s);
+		return (NULL);
+	}
+
+	if ((th->th_ack != sc->sc_iss + 1) ||
+	    SEQ_LEQ(th->th_seq, sc->sc_irs) ||
+	    SEQ_GT(th->th_seq, sc->sc_irs + 1 + sc->sc_win)) {
+		(void) syn_cache_respond(sc, m);
+		_sce_pspnet_splunlock(s);
+		return ((struct socket *)(-1));
+	}
+
+	SYN_CACHE_RM(sc);
+	_sce_pspnet_splunlock(s);
+
+    {
+	struct inpcb *parentinpcb;
+
+	parentinpcb = (struct inpcb *)so->so_pcb;
+
+	oso = so;
+	so = sonewconn1(so, SS_ISCONNECTED);
+	if (so == NULL)
+		goto resetandabort;
+
+	switch (so->so_proto->pr_domain->dom_family) {
+	case AF_INET:
+		inp = (struct inpcb *)so->so_pcb;
+		break;
+	}
+    }
+	switch (src->sa_family) {
+	case AF_INET:
+		if (inp) {
+			inp->inp_laddr = ((struct sockaddr_in *)dst)->sin_addr;
+			inp->inp_lport = ((struct sockaddr_in *)dst)->sin_port;
+			inp->inp_options = ip_srcroute();
+			in_pcbstate(inp, INP_BOUND);
+			if (inp->inp_options == NULL) {
+				inp->inp_options = sc->sc_ipopts;
+				sc->sc_ipopts = NULL;
+			}
+		}
+		break;
+	}
+
+	if (inp)
+		inp->inp_route = sc->sc_route4;
+	sc->sc_route4.ro_rt = NULL;
+
+	am = sceNetMGet(M_DONTWAIT, MT_SONAME);
+	if (am == NULL)
+		goto resetandabort;
+	am->m_len = src->sa_len;
+	func_0002C9B8(src, mtod(am, char *), src->sa_len);
+	if (inp) {
+		if (in_pcbconnect(inp, am)) {
+			(void) sceNetMFree(am);
+			goto resetandabort;
+		}
+	}
+	else {
+		(void) sceNetMFree(am);
+		goto resetandabort;
+	}
+	(void) sceNetMFree(am);
+
+	if (inp)
+		tp = (struct tcpcb *)inp->inp_ppcb;
+	else
+		tp = NULL;
+	if (sc->sc_request_r_scale != 15) {
+		tp->requested_s_scale = sc->sc_requested_s_scale;
+		tp->request_r_scale = sc->sc_request_r_scale;
+		tp->snd_scale = sc->sc_requested_s_scale;
+		tp->rcv_scale = sc->sc_request_r_scale;
+		tp->t_flags |= TF_RCVD_SCALE;
+	}
+	if (sc->sc_flags & SCF_TIMESTAMP)
+		tp->t_flags |= TF_RCVD_TSTMP;
+
+	tp->t_template = tcp_template(tp);
+	if (tp->t_template == 0) {
+		tp = tcp_drop(tp, ENOBUFS);
+		so = NULL;
+		sceNetMFreem(m);
+		goto abort;
+	}
+
+	tp->iss = sc->sc_iss;
+	tp->irs = sc->sc_irs;
+	tcp_sendseqinit(tp);
+	tcp_rcvseqinit(tp);
+	tp->t_state = TCPS_SYN_RECEIVED;
+	TCP_TIMER_ARM(tp, TCPT_KEEP, TCPTV_KEEP_INIT);
+	tcp_stat.tcps_accepts++;
+
+	tp->t_ourmss = sc->sc_ourmaxseg;
+	tcp_mss_from_peer(tp, sc->sc_peermaxseg);
+
+	if (sc->sc_rxtshift)
+		tp->snd_cwnd = tp->t_peermss;
+	else
+		tp->snd_cwnd = TCP_INITIAL_WINDOW(tcp_init_win, tp->t_peermss);
+
+	tcp_rmx_rtt(tp);
+	tp->snd_wl1 = sc->sc_irs;
+	tp->rcv_up = sc->sc_irs + 1;
+
+	tp->snd_up = tp->snd_una;
+	tp->snd_max = tp->snd_nxt = tp->iss+1;
+	TCP_TIMER_ARM(tp, TCPT_REXMT, tp->t_rxtcur);
+	if (sc->sc_win > 0 && SEQ_GT(tp->rcv_nxt + sc->sc_win, tp->rcv_adv))
+		tp->rcv_adv = tp->rcv_nxt + sc->sc_win;
+	tp->last_ack_sent = tp->rcv_nxt;
+
+	tcp_stat.tcps_sc_completed++;
+	SYN_CACHE_PUT(sc);
+	return (so);
+
+resetandabort:
+	(void) tcp_respond(NULL, m, m, th,
+			   th->th_seq + tlen, (tcp_seq)0, TH_RST|TH_ACK);
+abort:
+	if (so != NULL)
+		(void) soabort(so);
+	SYN_CACHE_PUT(sc);
+	tcp_stat.tcps_sc_aborted++;
+	return ((struct socket *)(-1));
+}
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 282
+INCLUDE_ASM("nonmatchings/pspnet_inet_udp", syn_cache_get);
 #endif
 
 #if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet_udp", func_000227D4);
+void syn_cache_reset(struct sockaddr *src, struct sockaddr *dst, struct tcphdr *th)
+{
+	struct syn_cache *sc;
+	struct syn_cache_head *scp;
+	int s = _sce_pspnet_spllock();
+
+	if ((sc = syn_cache_lookup(src, dst, &scp)) == NULL) {
+		_sce_pspnet_splunlock(s);
+		return;
+	}
+	if (SEQ_LT(th->th_seq, sc->sc_irs) ||
+	    SEQ_GT(th->th_seq, sc->sc_irs+1)) {
+		_sce_pspnet_splunlock(s);
+		return;
+	}
+	SYN_CACHE_RM(sc);
+	_sce_pspnet_splunlock(s);
+	tcp_stat.tcps_sc_reset++;
+	SYN_CACHE_PUT(sc);
+}
+
+void syn_cache_unreach(struct sockaddr *src, struct sockaddr *dst, struct tcphdr *th)
+{
+	struct syn_cache *sc;
+	struct syn_cache_head *scp;
+	int s;
+
+	s = _sce_pspnet_spllock();
+	if ((sc = syn_cache_lookup(src, dst, &scp)) == NULL) {
+		_sce_pspnet_splunlock(s);
+		return;
+	}
+	if (ntohl (th->th_seq) != sc->sc_iss) {
+		_sce_pspnet_splunlock(s);
+		return;
+	}
+
+	if ((sc->sc_flags & SCF_UNREACH) == 0 || sc->sc_rxtshift < 3) {
+		sc->sc_flags |= SCF_UNREACH;
+		_sce_pspnet_splunlock(s);
+		return;
+	}
+
+	SYN_CACHE_RM(sc);
+	_sce_pspnet_splunlock(s);
+	tcp_stat.tcps_sc_unreach++;
+	SYN_CACHE_PUT(sc);
+}
+#endif
+
+#if FW_VERSION < 201
+s32 syn_cache_add(struct sockaddr *src, struct sockaddr *dst, struct tcphdr *th, u32 hlen, struct socket *so, struct mbuf *m, u8 *optp, s32 optlen, struct tcp_opt_info *oi)
+{
+	struct tcpcb tb, *tp;
+	long win;
+	struct syn_cache *sc;
+	struct syn_cache_head *scp;
+	struct mbuf *ipopts;
+
+	tp = (struct tcpcb *)((struct inpcb *)so->so_pcb)->inp_ppcb;
+
+	win = sbspace(&so->so_rcv);
+	if (win > TCP_MAXWIN)
+		win = TCP_MAXWIN;
+
+	switch (src->sa_family) {
+	case AF_INET:
+
+		ipopts = ip_srcroute();
+		break;
+	default:
+		ipopts = NULL;
+	}
+
+	if (optp) {
+		tb.t_flags = D_0002E900 ? (TF_REQ_SCALE|TF_REQ_TSTMP) : 0;
+		func_0001F088(&tb, optp, optlen, th, oi);
+	} else
+		tb.t_flags = 0;
+
+	if ((sc = syn_cache_lookup(src, dst, &scp)) != NULL) {
+		tcp_stat.tcps_sc_dupesyn++;
+		if (ipopts) {
+
+			if (sc->sc_ipopts)
+				(void) sceNetMFree(sc->sc_ipopts);
+			sc->sc_ipopts = ipopts;
+		}
+		sc->sc_timestamp = tb.ts_recent;
+		if (syn_cache_respond(sc, m) == 0) {
+			tcp_stat.tcps_sndacks++;
+			tcp_stat.tcps_sndtotal++;
+		}
+		return (1);
+	}
+
+	sc = sceNetMallocInternal(sizeof(struct syn_cache));
+	if (sc == NULL) {
+		if (ipopts)
+			(void) sceNetMFree(ipopts);
+		return (0);
+	}
+
+	func_0002C94C(sc, 0, sizeof(struct syn_cache));
+	func_0002C9B8(src, &sc->sc_src, src->sa_len);
+	func_0002C9B8(dst, &sc->sc_dst, dst->sa_len);
+	sc->sc_flags = 0;
+	sc->sc_ipopts = ipopts;
+	sc->sc_irs = th->th_seq;
+	sc->sc_iss = tcp_new_iss(sc, sizeof(struct syn_cache), 0);
+	sc->sc_peermaxseg = oi->maxseg;
+	sc->sc_ourmaxseg = tcp_mss_to_advertise(m->m_flags & M_PKTHDR ?
+						m->m_pkthdr.rcvif : NULL,
+						sc->sc_src.sin_family);
+	sc->sc_win = win;
+	sc->sc_timestamp = tb.ts_recent;
+	if (D_0002E900 && (tb.t_flags & TF_RCVD_TSTMP))
+		sc->sc_flags |= SCF_TIMESTAMP;
+	if ((tb.t_flags & (TF_RCVD_SCALE|TF_REQ_SCALE)) ==
+	    (TF_RCVD_SCALE|TF_REQ_SCALE)) {
+		sc->sc_requested_s_scale = tb.requested_s_scale;
+		sc->sc_request_r_scale = 0;
+		while (sc->sc_request_r_scale < TCP_MAX_WINSHIFT &&
+		    TCP_MAXWIN << sc->sc_request_r_scale <
+		    so->so_rcv.sb_hiwat)
+			sc->sc_request_r_scale++;
+	} else {
+		sc->sc_requested_s_scale = 15;
+		sc->sc_request_r_scale = 15;
+	}
+	sc->sc_tp = tp;
+	if (syn_cache_respond(sc, m) == 0) {
+		syn_cache_insert(sc, tp);
+		tcp_stat.tcps_sndacks++;
+		tcp_stat.tcps_sndtotal++;
+	} else {
+		SYN_CACHE_PUT(sc);
+		tcp_stat.tcps_sc_dropped++;
+	}
+	return (1);
+}
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 282
+INCLUDE_ASM("nonmatchings/pspnet_inet_udp", syn_cache_add);
+#endif
+
+#if FW_VERSION < 282
+INCLUDE_ASM("nonmatchings/pspnet_inet_udp", syn_cache_respond);
 #else
 INCLUDE_ASM("nonmatchings/pspnet_inet_udp", func_0001FFF0);
 
@@ -799,37 +1351,15 @@ INCLUDE_ASM("nonmatchings/pspnet_inet_udp", func_00021070);
 
 void syn_cache_init(void) {
     s32 i;
-    D_0002DD04 = 0;
-    for (i = 0; i < D_0002C1D4; i++) {
-        D_0002CFF8[i].tqh_first = NULL;
+    syn_cache_count = 0;
+    for (i = 0; i < tcp_syn_cache_size; i++) {
+        LIST_INIT(&tcp_syn_cache[i].sch_bucket);
     }
     for (i = 0; i < 13; i++) {
-        D_0002DC98[i].tqh_first = NULL;
-        D_0002DC98[i].tqh_last = (void **)&D_0002DC98[i];
+        TAILQ_INIT(&tcp_syn_cache_timeq[i]);
     }
 }
 
-INCLUDE_ASM("nonmatchings/pspnet_inet_udp", func_000214B0);
-
-INCLUDE_ASM("nonmatchings/pspnet_inet_udp", tcp_output);
-
-#if FW_VERSION < 282
-void tcp_setpersist(struct tcpcb *tp) {
-    s32 t = ((tp->t_srtt >> 2) + tp->t_rttvar) >> (1 + 2);
-    s32 nticks;
-
-    if (t < tp->t_rttmin) {
-        t = tp->t_rttmin;
-    }
-    nticks = t * tcp_backoff[tp->t_rxtshift];
-    if (nticks < TCPTV_PERSMIN) {
-        nticks = TCPTV_PERSMIN;
-    } else if (nticks > TCPTV_PERSMAX) {
-        nticks = TCPTV_PERSMAX;
-    }
-    tp->t_timer[TCPT_PERSIST] = pfslowtimo_now + nticks;
-    if (tp->t_rxtshift < TCP_MAXRXTSHIFT) {
-        tp->t_rxtshift++;
-    }
-}
+#if FW_VERSION >= 282
+INCLUDE_ASM("nonmatchings/pspnet_inet_udp", syn_cache_lookup);
 #endif

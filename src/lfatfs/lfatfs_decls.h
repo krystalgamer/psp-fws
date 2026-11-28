@@ -157,82 +157,12 @@ struct UFatBuf {
     u8 *data; /* 0x14 */
 };
 
-/* 1.00: 8 bytes (no d_userfd_count yet). */
-struct SceIoDeviceEntry {
-    SceIoDeviceTable *d_dp; /* 0x0 */
-    void *d_private; /* 0x4 */
-};
-
-/* Driver function table (22 entries in 1.00, e.g. _nullcon_function). */
-struct SceIoDeviceFunction {
-    s32 (*df_init)(SceIoDeviceEntry *); /* 0x0 */
-    s32 (*df_exit)(SceIoDeviceEntry *); /* 0x4 */
-    s32 (*df_open)(SceIoIob *, char *, s32, SceMode); /* 0x8 */
-    s32 (*df_close)(SceIoIob *); /* 0xC */
-    SceSSize (*df_read)(SceIoIob *, void *, SceSize); /* 0x10 */
-    SceSSize (*df_write)(SceIoIob *, const void *, SceSize); /* 0x14 */
-    SceOff (*df_lseek)(SceIoIob *, SceOff, s32); /* 0x18 */
-    s32 (*df_ioctl)(SceIoIob *, s32, void *, SceSize, void *, SceSize); /* 0x1C */
-    s32 (*df_remove)(SceIoIob *, char *); /* 0x20 */
-    s32 (*df_mkdir)(SceIoIob *, char *, SceMode); /* 0x24 */
-    s32 (*df_rmdir)(SceIoIob *, char *); /* 0x28 */
-    s32 (*df_dopen)(SceIoIob *, char *); /* 0x2C */
-    s32 (*df_dclose)(SceIoIob *); /* 0x30 */
-    s32 (*df_dread)(SceIoIob *, SceIoDirent *); /* 0x34 */
-    s32 (*df_getstat)(SceIoIob *, char *, SceIoStat *); /* 0x38 */
-    s32 (*df_chstat)(SceIoIob *, char *, SceIoStat *, u32); /* 0x3C */
-    s32 (*df_rename)(SceIoIob *, const char *, const char *); /* 0x40 */
-    s32 (*df_chdir)(SceIoIob *, char *); /* 0x44 */
-    s32 (*df_mount)(SceIoIob *, const char *, const char *, s32, void *, s32); /* 0x48 */
-    s32 (*df_umount)(SceIoIob *, char *); /* 0x4C */
-    s32 (*df_devctl)(SceIoIob *, char *, s32, void *, SceSize, void *, SceSize); /* 0x50 */
-    s32 (*df_cancel)(SceIoIob *); /* 0x54 */
-};
-
-/* Driver descriptor passed to sceIoAddDrv (0x14 bytes). */
-struct SceIoDeviceTable {
-    char *dt_string; /* 0x0, device name */
-    s32 dt_type; /* 0x4 */
-    s32 dt_size; /* 0x8 */
-    char *dt_desc; /* 0xC */
-    SceIoDeviceFunction *dt_func; /* 0x10 */
-};
-
 /* 0x160 bytes */
 struct SceIoDirent {
     SceIoStat d_stat; /* 0x0 */
     char d_name[256]; /* 0x58 */
     void *d_private; /* 0x158 */
     s32 dummy; /* 0x15C */
-};
-
-/* File descriptor block. 1.00/1.50: static table g_iob[64] of 0x80 bytes, fd = index. */
-struct SceIoIob {
-    s32 i_flgs; /* 0x0, 1 = read, 2 = write, 0x8 = dir, 0x1000000 = thread-owned, 0x2000000 = power lock */
-    s32 i_unit; /* 0x4 */
-    SceIoDeviceEntry *i_de; /* 0x8 */
-    s32 d_type; /* 0xC */
-    void *i_private; /* 0x10 */
-    void *i_cwd; /* 0x14 */
-    SceOff i_fpos; /* 0x18 */
-    SceUID i_thread; /* 0x20 */
-    s32 unk24; /* 0x24 */
-    s32 fd; /* 0x28, own index; -1 = free */
-    SceUID curThread; /* 0x2C */
-    s32 userMode; /* 0x30 */
-    s32 powerLocked; /* 0x34 */
-    s32 asyncPrio; /* 0x38 */
-    SceUID asyncThread; /* 0x3C */
-    SceUID asyncSema; /* 0x40 */
-    SceUID asyncEvFlag; /* 0x44 */
-    SceUID asyncCb; /* 0x48 */
-    void *asyncCbArgp; /* 0x4C */
-    s32 asyncClosed; /* 0x50, uOFW unk050: free the iob when the async result is collected */
-    char *asyncCwd; /* 0x54, copy of the caller's cwd for an async open */
-    u32 k1; /* 0x58 */
-    s32 asyncCmd; /* 0x5C, 0 = close (deleted dev), 1 = open, 2 = close, 3 = read, 4 = write, 5 = lseek, 6 = ioctl */
-    s64 asyncRet; /* 0x60 */
-    s32 asyncArgs[6]; /* 0x68 */
 };
 
 struct Unk_Unk_func_00003AE8_0_0 {
@@ -366,6 +296,76 @@ static inline void signal_sema(SceUID sema) {
 }
 #endif
 
+/* 1.00: 8 bytes (no d_userfd_count yet). */
+struct SceIoDeviceEntry {
+    SceIoDeviceTable *d_dp; /* 0x0 */
+    void *d_private; /* 0x4 */
+};
+
+/* File descriptor block. 1.00/1.50: static table g_iob[64] of 0x80 bytes, fd = index. */
+struct SceIoIob {
+    s32 i_flgs; /* 0x0, 1 = read, 2 = write, 0x8 = dir, 0x1000000 = thread-owned, 0x2000000 = power lock */
+    s32 i_unit; /* 0x4 */
+    SceIoDeviceEntry *i_de; /* 0x8 */
+    s32 d_type; /* 0xC */
+    void *i_private; /* 0x10 */
+    void *i_cwd; /* 0x14 */
+    SceOff i_fpos; /* 0x18 */
+    SceUID i_thread; /* 0x20 */
+    s32 unk24; /* 0x24 */
+    s32 fd; /* 0x28, own index; -1 = free */
+    SceUID curThread; /* 0x2C */
+    s32 userMode; /* 0x30 */
+    s32 powerLocked; /* 0x34 */
+    s32 asyncPrio; /* 0x38 */
+    SceUID asyncThread; /* 0x3C */
+    SceUID asyncSema; /* 0x40 */
+    SceUID asyncEvFlag; /* 0x44 */
+    SceUID asyncCb; /* 0x48 */
+    void *asyncCbArgp; /* 0x4C */
+    s32 asyncClosed; /* 0x50, uOFW unk050: free the iob when the async result is collected */
+    char *asyncCwd; /* 0x54, copy of the caller's cwd for an async open */
+    u32 k1; /* 0x58 */
+    s32 asyncCmd; /* 0x5C, 0 = close (deleted dev), 1 = open, 2 = close, 3 = read, 4 = write, 5 = lseek, 6 = ioctl */
+    s64 asyncRet; /* 0x60 */
+    s32 asyncArgs[6]; /* 0x68 */
+};
+
+/* Driver function table (22 entries in 1.00, e.g. _nullcon_function). */
+struct SceIoDeviceFunction {
+    s32 (*df_init)(SceIoDeviceEntry *); /* 0x0 */
+    s32 (*df_exit)(SceIoDeviceEntry *); /* 0x4 */
+    s32 (*df_open)(SceIoIob *, char *, s32, SceMode); /* 0x8 */
+    s32 (*df_close)(SceIoIob *); /* 0xC */
+    SceSSize (*df_read)(SceIoIob *, void *, SceSize); /* 0x10 */
+    SceSSize (*df_write)(SceIoIob *, const void *, SceSize); /* 0x14 */
+    SceOff (*df_lseek)(SceIoIob *, SceOff, s32); /* 0x18 */
+    s32 (*df_ioctl)(SceIoIob *, s32, void *, SceSize, void *, SceSize); /* 0x1C */
+    s32 (*df_remove)(SceIoIob *, char *); /* 0x20 */
+    s32 (*df_mkdir)(SceIoIob *, char *, SceMode); /* 0x24 */
+    s32 (*df_rmdir)(SceIoIob *, char *); /* 0x28 */
+    s32 (*df_dopen)(SceIoIob *, char *); /* 0x2C */
+    s32 (*df_dclose)(SceIoIob *); /* 0x30 */
+    s32 (*df_dread)(SceIoIob *, SceIoDirent *); /* 0x34 */
+    s32 (*df_getstat)(SceIoIob *, char *, SceIoStat *); /* 0x38 */
+    s32 (*df_chstat)(SceIoIob *, char *, SceIoStat *, u32); /* 0x3C */
+    s32 (*df_rename)(SceIoIob *, const char *, const char *); /* 0x40 */
+    s32 (*df_chdir)(SceIoIob *, char *); /* 0x44 */
+    s32 (*df_mount)(SceIoIob *, const char *, const char *, s32, void *, s32); /* 0x48 */
+    s32 (*df_umount)(SceIoIob *, char *); /* 0x4C */
+    s32 (*df_devctl)(SceIoIob *, char *, s32, void *, SceSize, void *, SceSize); /* 0x50 */
+    s32 (*df_cancel)(SceIoIob *); /* 0x54 */
+};
+
+/* Driver descriptor passed to sceIoAddDrv (0x14 bytes). */
+struct SceIoDeviceTable {
+    char *dt_string; /* 0x0, device name */
+    s32 dt_type; /* 0x4 */
+    s32 dt_size; /* 0x8 */
+    char *dt_desc; /* 0xC */
+    SceIoDeviceFunction *dt_func; /* 0x10 */
+};
+
 extern char D_0000C56C[];
 extern char D_0000C5B4[];
 extern char D_0000CD6C[];
@@ -392,6 +392,7 @@ extern char D_0000D8C0[];
 extern s32 D_0000D980;
 extern s32 D_0000D984;
 extern M2C_UNK D_0000DA50;
+extern char D_0000DA98[];
 extern char D_0000DCE0[];
 extern M2C_UNK D_0000E050;
 extern s32 D_0000E094;
@@ -406,6 +407,7 @@ extern void **D_0000E810;
 extern void *D_0000E814;
 extern s32 D_0000E8F4;
 extern s32 D_0000EB24;
+extern volatile SceUID D_0000EB30;
 extern s32 D_0000EC14;
 extern M2C_UNK D_0000ECA8;
 extern void *D_0000EDAC;

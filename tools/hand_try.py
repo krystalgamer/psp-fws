@@ -10,6 +10,7 @@ for the module's own setting; --perm writes a decomp-permuter directory
 (tmp/perm/MODULE/FUNC) seeded with the hand C. Nothing in the repository is changed.
 """
 import argparse
+import math
 import os
 import difflib
 import re
@@ -53,6 +54,20 @@ def compiled_reloc_syms(c_text, comp, opt):
         symtab = elf.get_section_by_name(".symtab")
         text = elf.get_section_by_name(".text").data()
         out, strs, hi, calls, addend, consts = [], {}, {}, [], {}, {}
+        # words of .rodata* that are relocated against .text: jump tables (case labels), not literals
+        rodata_text = {}  # rodata section name -> {offset: .text offset the word points at}
+        func_off = {s.name: s["st_value"] for s in symtab.iter_symbols() if s["st_info"]["type"] == "STT_FUNC"}
+        for sec in elf.iter_sections():
+            if isinstance(sec, RelocationSection) and sec.name.startswith(".rel.rodata"):
+                tsec = elf.get_section(sec["sh_info"])
+                d = tsec.data()
+                for rel in sec.iter_relocations():
+                    sym = symtab.get_symbol(rel["r_info_sym"])
+                    if rel["r_info_type"] == 2 and sym["st_shndx"] not in ("SHN_UNDEF", "SHN_ABS") \
+                            and elf.get_section(sym["st_shndx"]).name == ".text":
+                        rodata_text.setdefault(tsec.name, {})[rel["r_offset"]] = \
+                            sym["st_value"] + struct.unpack_from("<I", d, rel["r_offset"])[0]
+        jtabs = {}
         for sec in elf.iter_sections():
             if isinstance(sec, RelocationSection) and sec.name == ".rel.text":
                 for rel in sorted(sec.iter_relocations(), key=lambda r: r["r_offset"]):
@@ -76,6 +91,14 @@ def compiled_reloc_syms(c_text, comp, opt):
                         if target.name.startswith(".rodata"):
                             off = (hi.get(rel["r_info_sym"], 0) << 16) + (imm - 0x10000 if imm & 0x8000 else imm)
                             d = target.data()
+                            jt = rodata_text.get(target.name, {})
+                            if off in jt:
+                                ents, o2 = [], off
+                                while o2 in jt:
+                                    ents.append(jt[o2])
+                                    o2 += 4
+                                jtabs[rel["r_offset"]] = ents
+                                continue
                             strs[rel["r_offset"]] = d[off:d.find(b"\0", off)] if 0 <= off < len(d) else None
                             # raw constant words too (float/double literals: .rodata.cst4/cst8 or plain .rodata)
                             width = 8 if target.name.endswith("cst8") else 4
@@ -86,6 +109,11 @@ def compiled_reloc_syms(c_text, comp, opt):
         compiled_reloc_syms.calls = calls
         compiled_reloc_syms.addends = [addend.get(o2) for o2, _ in sorted(out)]
         compiled_reloc_syms.consts = [consts.get(o2) for o2, _ in sorted(out)]
+        # jump tables: .text offsets of the entries, relative to the function using them
+        def fstart(o2):
+            return max([v for v in func_off.values() if v <= o2], default=0)
+        compiled_reloc_syms.jtabs = [None if o2 not in jtabs else [t - fstart(o2) for t in jtabs[o2]]
+                                     for o2, _ in sorted(out)]
         return names
 
 
@@ -103,6 +131,13 @@ def build_map_addrs(mod):
         for m in re.finditer(r"^\s*([A-Za-z_]\w*)\s*=\s*0x([0-9A-Fa-f]+)\s*;", sa.read_text(), re.M):
             out[m[1]] = int(m[2], 16)
     return out
+
+
+def field_aliases(mod):
+    """Old auto labels of fields inside sized symbols: label -> (symbol, offset) (prx_relocs PROVIDEs)."""
+    ab = ROOT / "tmp/build" / mod.ver / f"abs_syms.{mod.mod}.txt"
+    return {m[1]: (m[2], int(m[3], 16)) for m in re.finditer(
+        r"^PROVIDE\((\w+) = (\w+) \+ (0x[0-9a-fA-F]+)\);", ab.read_text() if ab.exists() else "", re.M)}
 
 
 def target_calls_from_words(mod, name):
@@ -129,10 +164,14 @@ def target_calls_from_words(mod, name):
 def target_reloc_syms(mod, name):
     rom, end, _ = mod.funcs[name]
     out = []
+    tadd = {}
     for line in (ROOT / "tmp/build" / mod.ver / f"reloc_addrs.{mod.mod}.txt").read_text().splitlines():
-        m = re.match(r"rom:(0[xX][0-9A-Fa-f]+) reloc:MIPS_\w+ symbol:(\w+)", line)
+        m = re.match(r"rom:(0[xX][0-9A-Fa-f]+) reloc:MIPS_\w+ symbol:(\w+)(?: addend:(0x[0-9A-Fa-f]+))?", line)
         if m and rom <= int(m[1], 16) < end:
             out.append((int(m[1], 16), m[2]))
+            if m[3] and m[2] != "PRX_ZERO":  # a field of a sized symbol: sym+addend
+                tadd[int(m[1], 16)] = int(m[3], 16)
+    target_reloc_syms.tadds = [tadd.get(r) for r, _ in sorted(out)]
     # the address each reloc resolves to, from the original's own HI/LO immediates
     # (splat's label name may carry another version's address)
     addrs, hi = [], {}
@@ -147,6 +186,56 @@ def target_reloc_syms(mod, name):
             addrs.append((base << 16) + (imm - 0x10000 if imm & 0x8000 else imm))
     target_reloc_syms.addrs = addrs
     return [n for _, n in sorted(out)]
+
+
+def undeclared_before(mod, name, ver):
+    """Functions with a prototype only because the source defines them (auto_decomp adds those to the store)
+    that the real file has not declared or defined before NAME (for VER)."""
+    import json
+    import fwmodel as FM
+    v = int(re.match(r"\d+", ver)[0])
+    have = set(json.loads(mod.store_path.read_text()).get("funcs", {})) if mod.store_path.exists() else set()
+    auto = set(mod.store["funcs"]) - have
+    f = Path(mod.file_of(name))
+    if not auto or not f.exists():
+        return set()
+    ents = FM.parse(f.read_text(), mod.fwvers)
+    k = next((i for i, e in enumerate(ents) if e.name == name and v in e.vers), None)
+    if k is None:
+        return set()
+    seen = set()
+    for e in ents[:k]:
+        if v not in e.vers:
+            continue
+        if e.kind == "cfunc":
+            seen.add(e.name)
+        # prototypes and static definitions in file-scope text before the function
+        seen.update(re.findall(r"\b(\w+)\s*\([^;{}]*\)\s*[;{]", "\n".join(top_level_lines(e.text))))
+    return auto - seen - {name}
+
+
+def cxx_name(mod, cls, dtor):
+    """A C++ ctor/dtor definition emits several functions (ctor C2, C1; dtor D2, D1 and, if virtual, D0) back
+    to back: register them as one pseudo function 'X::X' / 'X::~X' covering the original's variants."""
+    key = f"{cls}::{'~' if dtor else ''}{cls}"
+    rngs = []
+    for v in (("D2", "D1", "D0") if dtor else ("C2", "C1")):
+        n = f"_ZN{len(cls)}{cls}{v}Ev"
+        try:
+            mod.target_words(n)
+        except KeyError:
+            continue
+        rngs.append((mod.funcs[n][0], mod.funcs[n][1], n))
+    if not rngs:
+        sys.exit(f"{key}: none of its mangled variants (_ZN{len(cls)}{cls}{'D2' if dtor else 'C2'}Ev, ...) "
+                 f"is an asm function or in the build of {mod.ver}")
+    rngs.sort()
+    for (_, e, a), (r, _, b) in zip(rngs, rngs[1:]):
+        if e != r:
+            sys.exit(f"{key}: {a} and {b} are not adjacent; score them separately")
+    print(f"{key}: scored as {' + '.join(n for _, _, n in rngs)}")
+    mod.funcs[key] = (rngs[0][0], rngs[-1][1], None)
+    return key
 
 
 def top_level_lines(text):
@@ -178,6 +267,12 @@ def _var_score(args):
         return combo, None
     sm = difflib.SequenceMatcher(None, target, w, autojunk=False)
     return combo, max(len(target), len(w)) - sum(b.size for b in sm.get_matching_blocks())
+
+
+def first_variant(body):
+    """BODY with every //V{ alt0 //V| alt1 ... //V} block reduced to its first alternative."""
+    return re.sub(r"[ \t]*//V\{[^\n]*\n(.*?)[ \t]*//V\}[^\n]*\n",
+                  lambda m: re.split(r"[ \t]*//V\|[^\n]*\n", m[1])[0], body, flags=re.S)
 
 
 def variants(text, body, target, comp, opt, jobs):
@@ -241,7 +336,7 @@ def climb(pre, lines, idx, target, comp, opt, jobs):
                 overall = (best, cur)
             if best == 0:
                 break
-    print(f"climb best {overall[0]}:", " | ".join(l.strip() for l in overall[1]))
+    print(f"climb best {overall[0]}:", " | ".join(" ".join(l.split()) for l in overall[1]))
 
 
 def _climb1(pool, pre, lines, idx, cur, best, target, comp, opt):
@@ -303,7 +398,23 @@ def permute(text, body, target, comp, opt, jobs):
         print(f"--cases: {len(blocks)} case blocks, {sum(1 for b in blocks if MOVABLE(b))} movable")
         return climb(pre, lines, idx, target, comp, opt, jobs) if len(idx) > 7 else \
             _permute_units(pre, lines, idx, target, comp, opt, jobs)
-    lines = body.split("\n")
+    lines = []
+    raw = body.split("\n")
+    i = 0
+    while i < len(raw):
+        unit = raw[i]
+        # a tagged line that opens a block (`if (...) {` ... `}`) moves as one unit with its body
+        if "//P" in unit:
+            depth = unit.count("{") - unit.count("}")
+            first = i
+            while depth > 0 and i + 1 < len(raw):
+                i += 1
+                unit += "\n" + raw[i]
+                depth += raw[i].count("{") - raw[i].count("}")
+            if i > first:
+                print(f"--permute: tagged line {first + 1} of the body opens a block: lines {first + 1}-{i + 1} move as one unit")
+        lines.append(unit)
+        i += 1
     idx = [i for i, l in enumerate(lines) if "//P" in l]
     if len(idx) > 7:
         return climb(pre, lines, idx, target, comp, opt, jobs)
@@ -323,42 +434,19 @@ def _permute_units(pre, lines, idx, target, comp, opt, jobs):
                     pool.terminate()
                     break
     res.sort(key=lambda r: r[0])
-    print(f"permute: {len(res)} orders compiled")
+    total = math.factorial(len(idx))
+    print(f"permute: {len(res)} orders compiled" + ("" if res and res[0][0] == 0 else f" of {total}"))
+    if len(res) < total and not (res and res[0][0] == 0):
+        print(f"WARNING: {total - len(res)} orders did not compile (a tagged line that is not a whole statement?)")
     for sc, p in res[:3]:
-        print(f"  {sc}:", " | ".join(p))
-
-
-def cxx_group(mod, body):
-    """C++ constructor/destructor definitions compile to all their clones (gcc 3.3: C2 C1, D2 D1 D0,
-    in that order): their module names, or None for other definitions. Classes are found by the
-    mangled names of the module's functions (`_ZN<len><name>D2Ev`, `..C2E<params>`)."""
-    m = re.search(r"^(?!static)[^\n;#(]*?\b((?:\w+::)+)(~?)(\w+)\(([^;{}]*)\)\s*(?:const\s*)?\{", body, re.M)
-    if not m or m[1].split("::")[-2] != m[3]:
-        return None
-    pre = "_ZN" + "".join(f"{len(x)}{x}" for x in m[1].split("::")[:-1])
-    names = set(mod.funcs)
-    elfp = ROOT / "tmp/build" / mod.ver / f"{mod.mod}.elf"
-    if elfp.exists():  # functions that are C already (hand_try re-scores C too)
-        from elftools.elf.elffile import ELFFile
-        with open(elfp, "rb") as fh:
-            names |= {s.name for s in ELFFile(fh).get_section_by_name(".symtab").iter_symbols()
-                      if s["st_info"]["type"] == "STT_FUNC" and s.name.startswith(pre)}
-    if m[2]:
-        want = [f"{pre}D{k}Ev" for k in (2, 1, 0)]
-        got = [n for n in want if n in names]
-        return got or None
-    c2 = [n for n in names if n.startswith(pre + "C2E")]
-    if not m[4].strip() or m[4].strip() == "void":
-        c2 = [n for n in c2 if n == pre + "C2Ev"]
-    if len(c2) != 1:
-        return None
-    c1 = c2[0].replace("C2E", "C1E", 1)
-    return [c2[0]] + ([c1] if c1 in names else [])
+        print(f"  {sc}:", " | ".join(" ".join(x.split()) for x in p))
 
 
 def lock_shared():
     """Wait while tools/hand.py rewrites this tree's sources (it holds the lock exclusively)."""
     import fcntl
+    if os.environ.get("HAND_TRY_NOLOCK"):  # run by hand.py itself, which holds the lock
+        return None
     (ROOT / "tmp").mkdir(exist_ok=True)
     f = open(ROOT / "tmp" / "hand.lock", "a")
     fcntl.flock(f, fcntl.LOCK_SH)
@@ -389,11 +477,26 @@ def main():
     a = ap.parse_args()
     mod = AD.Module(a.ver, a.module)
     body = Path(a.cfile).read_text()
-    name = re.search(r"^(?!static)[^\n;#]*?\b(\w+)\([^;{}]*\)\s*\{", body, re.M)[1]
-    group = cxx_group(mod, body)  # `X::~X() {}` / `X::X() {}`: cc1plus emits every clone
-    if group:
-        name = group[0]
+    defm = re.search(r"^(?!static\b)(?!(?:if|while|for|switch|return|else|do)\b)(?=[A-Za-z_])[^\n;#]*?\b(\w+)\([^;{}]*\)\s*\{", body, re.M)
+    if not defm:
+        sys.exit(f"{a.cfile}: no function definition starting at column 0")
+    name = defm[1]
+    cxx_def = re.search(r"^(\w+)::(~?)(\w+)\s*\(\s*(void)?\s*\)\s*(?::[^{;]*)?\{", body, re.M)
+    if cxx_def and cxx_def[1] == cxx_def[3]:
+        name = cxx_name(mod, cxx_def[1], bool(cxx_def[2]))
+    elif re.search(r"^\w+::~?\w+\s*\(", body, re.M):
+        sys.exit("C++ definitions: only parameterless constructors/destructors (X::X(), X::~X()) can be scored; "
+                 "for other members score the mangled C wrapper or use the asm name")
     extra = Path(a.decls).read_text() if a.decls else ""
+    # the real file sees the decls' prototypes plus what it defines/declares before the function: a function
+    # defined later (or in another file) without a decls prototype is an implicit `int f()` there
+    implicit = undeclared_before(mod, name, a.ver)
+    for n in implicit:
+        mod.store["funcs"].pop(n, None)
+    called = sorted(n for n in implicit if re.search(rf"\b{re.escape(n)}\b", body))
+    if called:
+        print(f"note: {', '.join(called)}: no prototype before {name} in the real file (implicit int f(), as in "
+              f"the build); add one to the decls if the original was compiled with it")
     # drop the decls' own prototype/vars that the hand decls redefine
     hdr = mod.header()
     # only file-scope lines count (struct members and statements inside bodies don't)
@@ -415,12 +518,16 @@ def main():
     # the source file's own prelude: includes, file-local externs and static inlines before the first entry
     src = Path(mod.file_of(name)).read_text()
     # (stops at the first non-static function definition too: earlier C functions would be compiled into the score)
-    m = re.search(r"^(INCLUDE_ASM|INCLUDE_RODATA|#if|(?!static)[^\n;#]*?\b\w+\([^;{}]*\)\s*\{)", src, re.M)
+    m = re.search(r"^(INCLUDE_ASM|INCLUDE_RODATA|#if|(?!static\b)(?!(?:if|while|for|switch|return|else|do)\b)(?=[A-Za-z_])[^\n;#]*?\b\w+\([^;{}]*\)\s*\{)", src, re.M)
     prelude = re.sub(r'^#include "\w+_decls\.h"\n', "", src[:m.start()] if m else "", flags=re.M)
     fwv = re.match(r"\d+", a.ver)[0]
     fwvar = (re.search(r"v(\d+)", a.ver) or [None, "0"])[1]
+    if not a.variants and re.search(r"//V\{", body):
+        # without --variants a body with //V blocks is scored (and --perm written) with the first alternatives
+        print("note: //V blocks: using their first alternatives (--variants scores every combination)")
+        body = first_variant(body)
     text = f"#define FW_VERSION {fwv}\n#define FW_VARIANT {fwvar}\n" + hdr + "\n" + prelude + "\n" + extra + "\n" + body
-    target = [w for n in group for w in mod.target_words(n)] if group else mod.target_words(name)
+    target = mod.target_words(name)
     comp, own = AD.Module.file_setting(mod.file_of(name))
     if os.environ.get("HT_COMP"):  # try another compiler release with the file's flags
         comp = os.environ["HT_COMP"]
@@ -454,11 +561,7 @@ def main():
     if best == target:
         # words are compared with relocated fields masked; check the symbols too
         mine = compiled_reloc_syms(text, comp, own.split(" ", 1)[1])
-        want, _addrs = [], []
-        for n in (group or [name]):
-            want += target_reloc_syms(mod, n)
-            _addrs += target_reloc_syms.addrs
-        target_reloc_syms.addrs = _addrs
+        want = target_reloc_syms(mod, name)
         # splat names an address inside a global's extent D_XXXXXXXX; the C reaches it as sym+off
         # (also auto-named: splat labels each referenced word of a big struct, the C uses the base + field offset)
         def interior(m, w):
@@ -481,15 +584,33 @@ def main():
                 return False
             return (symaddr[m] + ad) & 0xFFFFFFFF == ta & 0xFFFFFFFF
         bad = [(i, w, m) for i, w, m in bad if not same_addr(i, m)]
-        if len(mine) != len(want) or any(not interior(m, w) for _, w, m in bad):
+        # the original references a field of a sized symbol (sym+addend): same symbol, same offset
+        tadds = getattr(target_reloc_syms, "tadds", [])
+
+        def tname(i, w):
+            ta = tadds[i] if i < len(tadds) else None
+            return f"{w}+0x{ta:X}" if ta else w
+        off_bad = [(i, w, m) for i, (w, m) in enumerate(zip(want, mine))
+                   if m == w and i < len(tadds) and tadds[i] is not None and i < len(adds)
+                   and adds[i] is not None and adds[i] != tadds[i]]
+        # a %lo of a sized symbol's field must resolve to the same address (no interior-label leniency)
+        alias = field_aliases(mod)
+        field_bad = [i for i, w, m in bad if i < len(tadds) and tadds[i] is not None and i < len(adds)
+                     and adds[i] is not None and alias.get(m, (None, 0))[0] != w
+                     or (m in alias and alias[m][0] == w and adds[i] is not None and alias[m][1] + adds[i] != tadds[i])]
+        if len(mine) != len(want) or any(not interior(m, w) for _, w, m in bad) or off_bad or field_bad:
             print("relocation symbols differ:")
             for i, w, m in bad:
-                print(f"  reloc {i}: target {w}, mine {m}")
+                print(f"  reloc {i}: target {tname(i, w)}, mine {m}")
+            for i, w, m in off_bad:
+                print(f"  reloc {i}: target {tname(i, w)}, mine {m}+0x{adds[i]:X} (another field)")
             print("RESULT: words match, RELOCATION SYMBOLS DIFFER (not a match)")
         else:
             print("relocation symbols match")
             adds = getattr(compiled_reloc_syms, "addends", [])
             for i, w, m in bad:
+                if alias.get(m, (None,))[0] == w:  # an old field label of w: checked above
+                    continue
                 off = adds[i] if i < len(adds) and adds[i] is not None else None
                 print(f"  (reloc {i}: target label {w} assumed inside {m}; check the offset)"
                       + (f" [{m}+0x{off:X}]" if off is not None else ""))
@@ -528,6 +649,19 @@ def main():
                     bad_str.append((want[i], tb, mine_b))
             for w, ts, ms in dict.fromkeys(bad_str):
                 print(f"  literal for {w} differs: target {ts!r}, mine {ms!r}")
+            # jump tables: compare the case labels (entry offsets inside the function), not the raw words
+            fvaddr = mod.funcs[name][0] - mod.text_off
+            for i, jt in enumerate(getattr(compiled_reloc_syms, "jtabs", [])):
+                ta = taddrs[i] if i < len(taddrs) else None
+                if not jt or ta is None:
+                    continue
+                at = mod.text_off + ta
+                tw = [struct.unpack_from("<I", mod.base, at + 4 * k)[0] - fvaddr for k in range(len(jt))]
+                if tw != jt:
+                    k = next(k for k in range(len(jt)) if tw[k] != jt[k])
+                    print(f"  jump table {want[i]} differs: entry {k} -> +0x{tw[k] & 0xFFFFFFFF:X} in the target, "
+                          f"+0x{jt[k]:X} in mine")
+                    bad_str.append((want[i], None, None))
             # call targets: the original's jal names (from its asm) must be the functions the C calls
             bad_call = []
             asm_path = mod.funcs[name][2]
@@ -537,7 +671,7 @@ def main():
                 want_calls = [None if c.startswith(".") else c
                               for c in re.findall(r"\bj(?:al)?\s+(\.?[A-Za-z_]\w*)", asm_path.read_text())]
             else:
-                want_calls = [x for n in (group or [name]) for x in target_calls_from_words(mod, n)]
+                want_calls = target_calls_from_words(mod, name)
             if want_calls is not None:
                 got = compiled_reloc_syms.calls
                 if len(want_calls) == len(got):
@@ -579,9 +713,17 @@ def main():
     CASES = a.cases
     if a.permute:
         permute(text, body, target, comp, sopt, a.j)
-    if a.perm:
+    if a.perm and mod.funcs[name][2] is None:
+        print(f"--perm: {name} has no asm in {a.ver} (already C), no permuter dir written")
+    elif a.perm:
         import perm_near
-        d = perm_near.write_perm_dir(mod, name, text, comp, own.split(" ", 1)[1])
+        ptext = text
+        if a.variants and re.search(r"//V\{", body):
+            # the permuter needs one compilable source: the best combination, else the first alternatives
+            best_v = bestsrc is not None
+            ptext = text[:len(text) - len(body)] + (bestsrc if best_v else first_variant(body))
+            print(f"--perm: //V blocks reduced to {'the best combination' if best_v else 'their first alternatives'}")
+        d = perm_near.write_perm_dir(mod, name, ptext, comp, own.split(" ", 1)[1])
         print(f"permuter dir: {d}")
     if a.diff and a.diff_opt:
         if a.diff_opt not in opts:
