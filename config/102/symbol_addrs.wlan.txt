@@ -344,14 +344,10 @@ sceSysregMsifClkSelect = 0x00012D30; // type:func rom:0x12DB0
 sceSysregMsifIoEnable = 0x00012D38; // type:func rom:0x12DB8
 sceSysregMsifIoDisable = 0x00012D40; // type:func rom:0x12DC0
 // shared names (tools/add_version.py) end
-
-// NID-derived names
-sceWlanDevInit = 0x000000C8; // type:func
 memmove = 0x00012B08; // type:func
 sceKernelCreateSema = 0x00012B30; // type:func
 sceKernelCreateEventFlag = 0x00012B58; // type:func
 sceKernelCreateMbx = 0x00012B90; // type:func
-sceKernelChangeThreadPriority = 0x00012C08; // type:func
 sceLedSetMode = 0x00012C28; // type:func
 sceNetCreateIfhandleEther = 0x00012C30; // type:func
 sceNetAttachIfhandleEther = 0x00012C40; // type:func
