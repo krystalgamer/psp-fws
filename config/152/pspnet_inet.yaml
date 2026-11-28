@@ -54,6 +54,7 @@ segments:
     vram: 0x0
     subsegments:
       - [0x80, c, pspnet_inet]
+      - [0x12A18, c, pspnet_inet_in_init]
       - [0x12A48, c, pspnet_inet_in_cksum]
       - [0x1B4A8, c, pspnet_inet_udp]
       - [0x2221C, c, pspnet_inet_tcp_subr]

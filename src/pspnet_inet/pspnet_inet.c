@@ -3144,15 +3144,3 @@ void in_purgemkludge(struct ifnet *ifp) {
 #if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00012B9C);
 #endif
-
-void func_00012CDC(void) {
-    D_0002C01C = 1;
-    D_0002C020 = 1;
-    in_maxmtu = 0;
-    in_mk.tqh_first = NULL;
-    in_mk.tqh_last = &in_mk.tqh_first;
-}
-
-#if FW_VERSION >= 201 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_inet", func_00012D50);
-#endif
