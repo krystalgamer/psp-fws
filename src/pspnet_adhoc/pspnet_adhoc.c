@@ -1486,7 +1486,19 @@ void func_00002E48(SceNetAdhocPdpQent *e) {
     sceNetFreeInternal(e);
 }
 #else
-INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00002E48);
+void func_00002E48(SceNetAdhocPdpQent *e) {
+    _sce_pspnet_callout_stop(e->callout);
+    sceNetMFreem(e->m);
+    if (e->next != NULL)
+        e->next->prev = e->prev;
+    else
+        e->pcb->qlast = e->prev;
+    *e->prev = e->next;
+    sceNetFreeInternal(e);
+#if FW_VERSION >= 150
+    g_pdpStat.stat[5]++;
+#endif
+}
 #endif
 
 #if FW_VERSION < 201
