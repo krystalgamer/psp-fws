@@ -1,3 +1,5 @@
+/* compiler[340]: 1.9.2 */
+/* cflags[340]: -O0 -mext */
 /* cflags: -O0 */
 #include "common.h"
 #include "libdnas_decls.h"
