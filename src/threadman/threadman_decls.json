@@ -121,6 +121,8 @@
   "sceKernelReleaseIntrHandler": "M2C_UNK sceKernelReleaseIntrHandler(s32);",
   "sceKernelUSec2SysClockWide": "s64 sceKernelUSec2SysClockWide(u32 arg0);",
   "setAlarm": "SceUID setAlarm(u64 clock, void *handler, void *common);",
+  "sysClockDivMod": "void sysClockDivMod(void *quot, void *clock, u32 div, u32 *rem);",
+  "timerUpdate": "void timerUpdate(void);",
   "wakeFirstWaitThread": "void wakeFirstWaitThread(SceSysmemUidCB *cb, s32 waitRet, s32 isIntr, s32 intr);"
  },
  "types": {

@@ -4572,7 +4572,25 @@ s64 sceKernelUSec2SysClockWide(u32 arg0) {
     return (s64) arg0;
 }
 
-INCLUDE_ASM("nonmatchings/threadman", sceKernelSysClock2USec);
+s32 sceKernelSysClock2USec(SceKernelSysClock *clock, u32 *sec, u32 *usec) {
+    u32 q;
+    u32 oldK1 = shiftK1();
+
+    if ((k1IsUserMode() && IS_USER_ADDR((u32)clock | ((u32)clock + sizeof(SceKernelSysClock))) == 0)
+        || (k1IsUserMode() && IS_USER_ADDR((u32)sec | ((u32)sec + 4)) == 0)
+        || (k1IsUserMode() && IS_USER_ADDR((u32)usec | ((u32)usec + 4)) == 0)) {
+        setK1(oldK1);
+        return 0x800200D3;
+    }
+    if (sec == NULL) {
+        *usec = clock->low;
+    } else {
+        sysClockDivMod(&q, clock, 1000000, usec);
+        *sec = q;
+    }
+    setK1(oldK1);
+    return 0;
+}
 
 INCLUDE_ASM("nonmatchings/threadman", sceKernelSysClock2USecWide);
 #endif
@@ -4826,7 +4844,7 @@ INCLUDE_ASM("nonmatchings/threadman", func_0000C638);
 INCLUDE_ASM("nonmatchings/threadman", sceKernelReferAlarmStatus);
 
 #if FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/threadman", func_0000C274);
+INCLUDE_ASM("nonmatchings/threadman", sysClockDivMod);
 #endif
 
 #if FW_VERSION < 151
@@ -5324,9 +5342,35 @@ s32 _sceKernelReturnFromTimerHandler(void) {
 s64 sceKernelUSec2SysClockWide(u32 arg0) {
     return (s64) arg0;
 }
+#endif
 
+#if FW_VERSION >= 150 && FW_VERSION < 270
+s32 sceKernelSysClock2USec(SceKernelSysClock *clock, u32 *sec, u32 *usec) {
+    u32 q;
+    u32 oldK1 = shiftK1();
+
+    if ((k1IsUserMode() && IS_USER_ADDR((u32)clock | ((u32)clock + sizeof(SceKernelSysClock))) == 0)
+        || (k1IsUserMode() && IS_USER_ADDR((u32)sec | ((u32)sec + 4)) == 0)
+        || (k1IsUserMode() && IS_USER_ADDR((u32)usec | ((u32)usec + 4)) == 0)) {
+        setK1(oldK1);
+        return 0x800200D3;
+    }
+    if (sec == NULL) {
+        *usec = clock->low;
+    } else {
+        sysClockDivMod(&q, clock, 1000000, usec);
+        *sec = q;
+    }
+    setK1(oldK1);
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 270
 INCLUDE_ASM("nonmatchings/threadman", sceKernelSysClock2USec);
+#endif
 
+#if FW_VERSION >= 150
 INCLUDE_ASM("nonmatchings/threadman", sceKernelSysClock2USecWide);
 
 INCLUDE_ASM("nonmatchings/threadman", sceKernelGetSystemTime);
@@ -5452,7 +5496,7 @@ INCLUDE_ASM("nonmatchings/threadman", func_0000AA0C);
 
 INCLUDE_ASM("nonmatchings/threadman", func_0000AA80);
 
-INCLUDE_ASM("nonmatchings/threadman", func_0000DEC0);
+INCLUDE_ASM("nonmatchings/threadman", sysClockDivMod);
 
 INCLUDE_ASM("nonmatchings/threadman", func_0000DF4C);
 
@@ -5585,7 +5629,7 @@ INCLUDE_ASM("nonmatchings/threadman", func_0000EBF8);
 
 INCLUDE_ASM("nonmatchings/threadman", func_0000EC6C);
 
-INCLUDE_ASM("nonmatchings/threadman", func_0000ECF0);
+INCLUDE_ASM("nonmatchings/threadman", sysClockDivMod);
 
 INCLUDE_ASM("nonmatchings/threadman", func_0000ED7C);
 

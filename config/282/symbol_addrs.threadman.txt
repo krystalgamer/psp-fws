@@ -206,3 +206,4 @@ threadReturnStub = 0x00014480; // type:func
 setAlarm = 0x0000EFF4; // type:func
 deleteUIDDeferred = 0x0000FE78; // type:func
 timerUpdate = 0x0000C2EC; // type:func
+sysClockDivMod = 0x0000ECF0; // type:func
