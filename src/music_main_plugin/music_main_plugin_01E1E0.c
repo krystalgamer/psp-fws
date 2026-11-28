@@ -44,11 +44,7 @@ s32 func_0001EAD8(struct Unk_func_0001EAD8_0 *arg0) {
 }
 #endif
 
-#if FW_VERSION >= 301
-INCLUDE_ASM("nonmatchings/music_main_plugin_01E1E0", func_00022E04);
-#endif
-
-#if FW_VERSION == 300
+#if FW_VERSION >= 300
 void func_00022E04(void) {
     func_0002E21C();
 }
@@ -552,21 +548,13 @@ INCLUDE_ASM("nonmatchings/music_main_plugin_01E1E0", func_000230A8);
 
 INCLUDE_ASM("nonmatchings/music_main_plugin_01E1E0", func_000230DC);
 
-#if FW_VERSION != 300
-INCLUDE_ASM("nonmatchings/music_main_plugin_01E1E0", func_00023110);
-#else
 void func_00023110(void) {
     vshIoDevctl(&D_0009C130, 0x01E080D4, 0, 0, 0, 0);
 }
-#endif
 
-#if FW_VERSION != 300
-INCLUDE_ASM("nonmatchings/music_main_plugin_01E1E0", func_00023148);
-#else
 void func_00023148(void) {
     vshIoDevctl(&D_0009C130, 0x01E000D5, 0, 0, 0, 0);
 }
-#endif
 
 INCLUDE_ASM("nonmatchings/music_main_plugin_01E1E0", func_00023180);
 
