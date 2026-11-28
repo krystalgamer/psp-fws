@@ -3094,7 +3094,38 @@ INCLUDE_ASM("nonmatchings/pspnet_inet", func_00012A08);
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_000129AC);
 #endif
 
+#if FW_VERSION < 151
+__inline void in_purgemkludge(struct ifnet *ifp) {
+    struct in_ifaddr *ia;
+
+    for (ia = in_mk.tqh_first; ia != NULL; ia = ia->ia_list.tqe_next) {
+        if (ia->ia_ifp != ifp)
+            continue;
+        if (ia->ia_list.tqe_next != NULL)
+            ia->ia_list.tqe_next->ia_list.tqe_prev = ia->ia_list.tqe_prev;
+        else
+            in_mk.tqh_last = ia->ia_list.tqe_prev;
+        *ia->ia_list.tqe_prev = ia->ia_list.tqe_next;
+        if (--ia->ia_ifa.ifa_refcnt == 0)
+            _sce_pspnet_ifafree(&ia->ia_ifa);
+        break;
+    }
+}
+
+void in_purgeif(struct ifnet *ifp) {
+    struct ifaddr *ifa, *nifa;
+
+    for (ifa = ifp->if_addrlist.tqh_first; ifa != NULL; ifa = nifa) {
+        nifa = ifa->ifa_list.tqe_next;
+        if (ifa->ifa_addr->sa_family != AF_INET)
+            continue;
+        in_purgeaddr(ifa, ifp);
+    }
+    in_purgemkludge(ifp);
+}
+#else
 INCLUDE_ASM("nonmatchings/pspnet_inet", in_purgeif);
+#endif
 
 #if FW_VERSION >= 151 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_inet", func_00012730);
@@ -3123,22 +3154,6 @@ s32 in_broadcast(struct in_addr in, struct ifnet *ifp) {
 #undef ia
 }
 
-void in_purgemkludge(struct ifnet *ifp) {
-    struct in_ifaddr *ia;
-
-    for (ia = in_mk.tqh_first; ia != NULL; ia = ia->ia_list.tqe_next) {
-        if (ia->ia_ifp != ifp)
-            continue;
-        if (ia->ia_list.tqe_next != NULL)
-            ia->ia_list.tqe_next->ia_list.tqe_prev = ia->ia_list.tqe_prev;
-        else
-            in_mk.tqh_last = ia->ia_list.tqe_prev;
-        *ia->ia_list.tqe_prev = ia->ia_list.tqe_next;
-        if (--ia->ia_ifa.ifa_refcnt == 0)
-            _sce_pspnet_ifafree(&ia->ia_ifa);
-        break;
-    }
-}
 #endif
 
 #if FW_VERSION >= 282
