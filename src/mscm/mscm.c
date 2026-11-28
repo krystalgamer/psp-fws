@@ -340,7 +340,7 @@ s32 sceMScmDetachCLD(s32 slot, SceMScmCLD *cld) {
         return 0x80220081;
     }
     func_00002194(cb->drv.cmd, (s32)&D_00006F14[slot], 4, (s32)buf, 0, cb->drv.cmdArg);
-    stop = cb->cldm->info.unk110;
+    stop = (s32 (*)(s32, s32, s32))cb->cldm->info.entry;
     if (stop != NULL) {
         stop(0, 0, 0);
     }
@@ -366,7 +366,7 @@ s32 sceMScmDetachCLD(s32 slot, SceMScmCLD *cld) {
         return 0x80220081;
     }
     func_00002194(cb->drv.cmd, (s32)&D_00006F14[slot], 4, (s32)buf, 0, cb->drv.cmdArg);
-    stop = cb->cldm->info.unk110;
+    stop = (s32 (*)(s32, s32, s32))cb->cldm->info.entry;
     if (stop != NULL) {
         stop(0, 0, 0);
     }
@@ -605,9 +605,79 @@ INCLUDE_ASM("nonmatchings/mscm", func_0000179C);
 INCLUDE_ASM("nonmatchings/mscm", func_00001B88);
 #endif
 
-#if FW_VERSION < 250
-INCLUDE_ASM("nonmatchings/mscm", func_000018B8);
+#if FW_VERSION == 100
+s32 func_000018B8(s32 slot) {
+    s32 st;
+    s32 buf[1];
+    s32 ret;
+    s32 i;
+    s32 intr;
+    SceMScmSlotCB *cb;
+    u32 entry;
+    s32 (*cmd)(s32, s32, s32, s32, s32);
 
+    st = 0;
+    sceLedSetMode(0, 0, 0);
+    ret = func_00005C8C(slot, &st);
+    if (st != 0) {
+        return 0;
+    }
+    sceKernelPowerLock(0);
+    sceMScmSetSlotPower(&D_00006F14[slot], 1);
+    sceKernelDelayThread(100000);
+    intr = sceKernelSuspendDispatchThread();
+    for (i = 0; i < 32; i++) {
+        if (D_00007198[slot][i] != 0) {
+            sceKernelSetEventFlag(D_00007198[slot][i], 8);
+        }
+        if (D_0000721C[slot][i] != 0) {
+            if (sceKernelNotifyCallback(D_0000721C[slot][i], 8) == 0x800201A1) {
+                D_0000721C[slot][i] = 0;
+            }
+        }
+    }
+    sceKernelResumeDispatchThread(intr);
+    cb = &D_00006ED8[slot];
+    if (cb->attached == 0) {
+        D_00006ED4[slot] = 1;
+        sceKernelPowerUnlock(0);
+        return 0;
+    }
+    cmd = cb->drv.cmd;
+    func_00002194(cmd, (s32)&D_00006F14[slot], 3, (s32)buf, 0, cb->drv.cmdArg);
+    cb->attached = 0;
+    func_00002194(cmd, (s32)&D_00006F14[slot], 4, (s32)buf, 0, cb->drv.cmdArg);
+    entry = (u32)cb->cldm->info.entry;
+    if (entry != 0) {
+        ((s32 (*)(s32, s32, s32))entry)(0, 0, 0);
+    }
+    sceMScmUnRegisterCLD(slot, &cb->drv);
+    intr = sceKernelSuspendDispatchThread();
+    for (i = 0; i < 32; i++) {
+        if (D_00007198[slot][i] != 0) {
+            sceKernelSetEventFlag(D_00007198[slot][i], 2);
+        }
+        if (D_0000721C[slot][i] != 0) {
+            if (sceKernelNotifyCallback(D_0000721C[slot][i], 2) == 0x800201A1) {
+                D_0000721C[slot][i] = 0;
+            }
+        }
+    }
+    sceKernelResumeDispatchThread(intr);
+    memset(&D_00006ED8[slot], 0, 0x20);
+    D_00006B40[slot] = 0;
+    D_00006ED4[slot] = 1;
+    _sceMScmReinitializeHC(slot);
+    sceKernelPowerUnlock(0);
+    return ret;
+}
+#endif
+
+#if FW_VERSION >= 102 && FW_VERSION < 250
+INCLUDE_ASM("nonmatchings/mscm", func_000018B8);
+#endif
+
+#if FW_VERSION < 250
 INCLUDE_ASM("nonmatchings/mscm", func_00001BA0);
 
 INCLUDE_ASM("nonmatchings/mscm", func_00001D18);

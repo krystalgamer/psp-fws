@@ -29,7 +29,7 @@ typedef struct {
     u32 unk4;
     void *unk8;                 /* VPL block */
     u8 unkC[0x110 - 0xC];
-    void *unk110;               /* VPL block; called as s32 (*)(s32, s32, s32) on detach */
+    u32 entry;                  /* 0x110: VPL block holding the CLDM's stop entry, called as s32 (*)(s32, s32, s32) on detach */
     u32 unk114;
     u32 unk118;
 } SceMScmCLDMInfo;
