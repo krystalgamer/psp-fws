@@ -10,6 +10,7 @@ for the module's own setting; --perm writes a decomp-permuter directory
 (tmp/perm/MODULE/FUNC) seeded with the hand C. Nothing in the repository is changed.
 """
 import argparse
+import math
 import os
 import difflib
 import re
@@ -274,7 +275,7 @@ def climb(pre, lines, idx, target, comp, opt, jobs):
                 overall = (best, cur)
             if best == 0:
                 break
-    print(f"climb best {overall[0]}:", " | ".join(l.strip() for l in overall[1]))
+    print(f"climb best {overall[0]}:", " | ".join(" ".join(l.split()) for l in overall[1]))
 
 
 def _climb1(pool, pre, lines, idx, cur, best, target, comp, opt):
@@ -336,7 +337,23 @@ def permute(text, body, target, comp, opt, jobs):
         print(f"--cases: {len(blocks)} case blocks, {sum(1 for b in blocks if MOVABLE(b))} movable")
         return climb(pre, lines, idx, target, comp, opt, jobs) if len(idx) > 7 else \
             _permute_units(pre, lines, idx, target, comp, opt, jobs)
-    lines = body.split("\n")
+    lines = []
+    raw = body.split("\n")
+    i = 0
+    while i < len(raw):
+        unit = raw[i]
+        # a tagged line that opens a block (`if (...) {` ... `}`) moves as one unit with its body
+        if "//P" in unit:
+            depth = unit.count("{") - unit.count("}")
+            first = i
+            while depth > 0 and i + 1 < len(raw):
+                i += 1
+                unit += "\n" + raw[i]
+                depth += raw[i].count("{") - raw[i].count("}")
+            if i > first:
+                print(f"--permute: tagged line {first + 1} of the body opens a block: lines {first + 1}-{i + 1} move as one unit")
+        lines.append(unit)
+        i += 1
     idx = [i for i, l in enumerate(lines) if "//P" in l]
     if len(idx) > 7:
         return climb(pre, lines, idx, target, comp, opt, jobs)
@@ -356,9 +373,12 @@ def _permute_units(pre, lines, idx, target, comp, opt, jobs):
                     pool.terminate()
                     break
     res.sort(key=lambda r: r[0])
-    print(f"permute: {len(res)} orders compiled")
+    total = math.factorial(len(idx))
+    print(f"permute: {len(res)} orders compiled" + ("" if res and res[0][0] == 0 else f" of {total}"))
+    if len(res) < total and not (res and res[0][0] == 0):
+        print(f"WARNING: {total - len(res)} orders did not compile (a tagged line that is not a whole statement?)")
     for sc, p in res[:3]:
-        print(f"  {sc}:", " | ".join(p))
+        print(f"  {sc}:", " | ".join(" ".join(x.split()) for x in p))
 
 
 def lock_shared():
