@@ -20,6 +20,12 @@ typedef struct SceNetAdhocPdpQent {
 } SceNetAdhocPdpQent;
 
 typedef struct {
+    s32 id;
+    s32 events;
+    s32 revents;
+} SceNetAdhocPollSd;
+
+typedef struct {
     struct mbuf *first;                 /* 0x00 m_nextpkt chain */
     struct mbuf *last;                  /* 0x04 */
     u32 cc;                             /* 0x08 */
@@ -58,6 +64,11 @@ typedef struct {
     SceNetAdhocDesc *first;
     SceNetAdhocDesc **last;
 } SceNetAdhocDescList;
+
+typedef struct {
+    SceNetAdhocDesc *d;
+    SceNetAdhocPollSd *sd;
+} SceNetAdhocPollEnt;
 
 typedef struct {
     u8 data[6];
@@ -165,28 +176,6 @@ typedef struct SceNetAdhocPtpStat {
     u32 rcv_sb_cc;                      /* 0x1C */
     s32 state;                          /* 0x20 */
 } SceNetAdhocPtpStat;
-
-struct Unk_func_00000974_temp_a1 {
-    u8 pad0[0x10];
-    u8 unk10;
-};
-
-struct Unk_func_00000974_temp_s0 {
-    u8 pad0[0x4];
-    s32 unk4;
-    s32 unk8;
-};
-
-struct Unk_func_00000974_temp_s0_2 {
-    u8 pad0[0x4];
-    s32 unk4;
-    s32 unk8;
-};
-
-struct Unk_func_00000974_temp_v0 {
-    u8 pad0[0x8];
-    s32 unk8;
-};
 
 struct ifqueue {
     struct mbuf *ifq_head;      /* 0x00 */
@@ -310,8 +299,8 @@ void func_0000036C(struct ifnet *ifp, struct mbuf *m);
 void func_00000444(struct ifnet *ifp);
 s32 func_0000047C(s32 a0, s32 a1, struct ifqueue **out);
 void func_00000490(s32 arg0);
-s32 func_0000092C(void *arg0, s32 arg1);
-s32 func_00000974(void *arg0, s32 arg1);
+s32 func_0000092C(SceNetAdhocPollEnt *ent, s32 count);
+s32 func_00000974(SceNetAdhocPollEnt *ent, s32 count);
 s32 func_00000DD0(void);
 void func_00000E18(void);
 s32 func_00000E44(void);
@@ -333,7 +322,7 @@ s32 func_00002C00(SceNetAdhocDesc *d, s32 events);
 void func_00002CD4(SceNetAdhocDesc *d);
 s32 func_00002D20(SceNetAdhocPdpPcb *pcb, s32 size);
 s32 func_00002D2C(s32);
-s32 func_00002D94(s32, s32);
+s32 func_00002D94(SceNetAdhocDesc *d, s32 events);
 void func_00002E48(SceNetAdhocPdpQent *e);
 void func_000039FC(SceNetAdhocDesc *d);
 s32 func_00003A68(const SceNetEtherAddr *saddr, u16 sport, s32 sndbuf, s32 rcvbuf, u32 rexmt_int, s32 rexmt_cnt, SceNetAdhocDesc **out);
@@ -345,7 +334,7 @@ void func_00004B30(SceNetAdhocPtpPcb *pcb);
 void func_00004E60(SceNetAdhocPtpPcb *pcb);
 s32 func_00004E98(SceNetAdhocPtpPcb *pcb);
 void func_00004F50(SceNetAdhocPtpPcb *pcb);
-s32 func_00005024(s32, s32);
+s32 func_00005024(SceNetAdhocDesc *d, s32 events);
 s32 func_000050F8(SceNetAdhocDesc *d, s32 events);
 s32 func_000052D4(void);
 SceNetAdhocPtpPcb *func_0000532C(const SceNetEtherAddr *laddr, u16 lport, const SceNetEtherAddr *paddr, u16 pport);

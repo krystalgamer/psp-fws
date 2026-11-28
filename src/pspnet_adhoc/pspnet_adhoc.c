@@ -142,76 +142,42 @@ void func_00000490(s32 arg0) {
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", sceNetAdhocPollSocket);
 
 #if FW_VERSION < 282
-s32 func_0000092C(void *arg0, s32 arg1) {
-    s32 var_s2;
-    s32 var_s3;
-    u8 temp_v1;
-    void *temp_a1;
-    void *temp_s0;
-    void *temp_s0_2;
-    void *temp_v0;
-    void *var_s1;
+s32 func_0000092C(SceNetAdhocPollEnt *ent, s32 count) {
+    s32 i;
+    s32 n;
 
-    var_s3 = 0;
-    var_s1 = arg0;
-    if (arg1 > 0) {
-        var_s2 = arg1;
-        do {
-            temp_a1 = M2C_FIELD(var_s1, void **, 0);
-            temp_v1 = M2C_FIELD(temp_a1, u8 *, 0x10);
-            switch (temp_v1) {                      /* irregular */
-            case 2:
-                temp_s0 = M2C_FIELD(var_s1, void **, 4);
-                M2C_FIELD(temp_s0, s32 *, 8) = func_000050F8(temp_a1, M2C_FIELD(temp_s0, s32 *, 4));
-                break;
-            case 1:
-                temp_s0_2 = M2C_FIELD(var_s1, void **, 4);
-                M2C_FIELD(temp_s0_2, s32 *, 8) = func_00002C00(temp_a1, M2C_FIELD(temp_s0_2, s32 *, 4));
-                break;
-            }
-            temp_v0 = M2C_FIELD(var_s1, void **, 4);
-            var_s2 -= 1;
-            var_s1 += 8;
-            var_s3 += M2C_FIELD(temp_v0, s32 *, 8) != 0;
-        } while (var_s2 != 0);
+    n = 0;
+    for (i = 0; i < count; i++, ent++) {
+        switch (ent->d->type) {
+        case 2:
+            ent->sd->revents = func_000050F8(ent->d, ent->sd->events);
+            break;
+        case 1:
+            ent->sd->revents = func_00002C00(ent->d, ent->sd->events);
+            break;
+        }
+        n += ent->sd->revents != 0;
     }
-    return var_s3;
+    return n;
 }
 #else
-s32 func_00000974(void *arg0, s32 arg1) {
-    s32 var_s2;
-    s32 var_s3;
-    u8 temp_v1;
-    struct Unk_func_00000974_temp_a1 *temp_a1;
-    struct Unk_func_00000974_temp_s0 *temp_s0;
-    struct Unk_func_00000974_temp_s0_2 *temp_s0_2;
-    struct Unk_func_00000974_temp_v0 *temp_v0;
-    void *var_s1;
+s32 func_00000974(SceNetAdhocPollEnt *ent, s32 count) {
+    s32 i;
+    s32 n;
 
-    var_s3 = 0;
-    var_s1 = arg0;
-    if (arg1 > 0) {
-        var_s2 = arg1;
-        do {
-            temp_a1 = M2C_FIELD(var_s1, void **, 0);
-            temp_v1 = temp_a1->unk10;
-            switch (temp_v1) {                      /* irregular */
-            case 2:
-                temp_s0 = M2C_FIELD(var_s1, void **, 4);
-                temp_s0->unk8 = func_00005024((s32) temp_a1, temp_s0->unk4);
-                break;
-            case 1:
-                temp_s0_2 = M2C_FIELD(var_s1, void **, 4);
-                temp_s0_2->unk8 = func_00002D94((s32) temp_a1, temp_s0_2->unk4);
-                break;
-            }
-            temp_v0 = M2C_FIELD(var_s1, void **, 4);
-            var_s2 -= 1;
-            var_s1 += 8;
-            var_s3 += temp_v0->unk8 != 0;
-        } while (var_s2 != 0);
+    n = 0;
+    for (i = 0; i < count; i++, ent++) {
+        switch (ent->d->type) {
+        case 2:
+            ent->sd->revents = func_00005024(ent->d, ent->sd->events);
+            break;
+        case 1:
+            ent->sd->revents = func_00002D94(ent->d, ent->sd->events);
+            break;
+        }
+        n += ent->sd->revents != 0;
     }
-    return var_s3;
+    return n;
 }
 #endif
 
