@@ -1065,7 +1065,23 @@ INCLUDE_ASM("nonmatchings/umd9660", func_00002BFC);
 
 #if FW_VERSION >= 350
 INCLUDE_ASM("nonmatchings/umd9660", func_00003504);
-#else
+#endif
+
+#if FW_VERSION < 201
+s32 func_00002CE4(SceUmd9660Drive *drive, u32 *arg, SceSize size) {
+    s32 ret;
+    if (drive == NULL || arg == NULL || size < 0x14) {
+        return 0x80010016;
+    }
+    ret = sceUmdMan_driver_F4AFF62D(drive->umdDrive, arg[0], arg[1], arg[2], arg[3], arg[4]);
+    if (ret != 0) {
+        return ret;
+    }
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 350
 INCLUDE_ASM("nonmatchings/umd9660", func_00002CE4);
 #endif
 
@@ -1272,9 +1288,32 @@ INCLUDE_ASM("nonmatchings/umd9660", func_00002974);
 #endif
 
 #if FW_VERSION < 103
-INCLUDE_ASM("nonmatchings/umd9660", func_00003E54);
+s32 func_00003E54(SceUmd9660Drive *drive, void *buf) {
+    SceUmdDrive *umd;
+    s32 ret;
+    if (drive == NULL) {
+        goto bad;
+    }
+    umd = drive->umdDrive;
+    if (umd == NULL || buf == NULL) {
+bad:
+        ret = 0x80010016;
+        goto end;
+    }
+    for (;;) {
+        if (sceUmdExecMechaStatCmd(umd, 0x10, buf) == 0) {
+            ret = 0;
+            break;
+        }
+        sceUmdExecReqSenseCmd(umd, umd->sense, 0x12);
+    }
+end:
+    return ret;
+}
 
-INCLUDE_ASM("nonmatchings/umd9660", func_00003ED4);
+SceUmd9660File *func_00003ED4(void) {
+    return D_00007000;
+}
 #endif
 
 #if FW_VERSION < 201
@@ -1387,9 +1426,20 @@ INCLUDE_ASM("nonmatchings/umd9660", func_00003DEC);
 INCLUDE_ASM("nonmatchings/umd9660", func_000048B0);
 #endif
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/umd9660", func_000040C8);
+#if FW_VERSION < 201
+s32 func_000040C8(SceUmd9660Drive *drive, s32 *mode, SceSize size) {
+    if (drive == NULL || mode == NULL || size < 4) {
+        return 0x80010016;
+    }
+    return sceUmdManChangePowerMode(drive->umdDrive, *mode);
+}
+#endif
 
+#if FW_VERSION >= 201 && FW_VERSION < 282
+INCLUDE_ASM("nonmatchings/umd9660", func_000040C8);
+#endif
+
+#if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/umd9660", func_00004114);
 #endif
 
