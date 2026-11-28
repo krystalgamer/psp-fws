@@ -178,7 +178,80 @@ void func_0000DDCC(s32 arg0, struct Unk_func_0000DDCC_1 *arg1, struct Unk_func_0
 INCLUDE_ASM("nonmatchings/pspnet_inet_rtsub", func_0000DE58);
 #endif
 
+#if FW_VERSION < 201
+s32 func_0000DF08(s32 type, struct rt_addrinfo *rtinfo, char *cp, struct walkarg *w, s32 *lenp)
+{
+	int i;
+	int len, dlen, second_time = 0;
+	char * cp0;
+
+	rtinfo->rti_addrs = 0;
+again:
+	switch (type) {
+
+	case RTM_DELADDR:
+	case RTM_NEWADDR:
+		len = sizeof(struct ifa_msghdr);
+		break;
+
+	case RTM_IFINFO:
+		len = sizeof(struct if_msghdr);
+		break;
+
+	default:
+		len = sizeof(struct rt_msghdr);
+	}
+	if ((cp0 = cp) != NULL)
+		cp += len;
+	for (i = 0; i < RTAX_MAX; i++) {
+		struct sockaddr *sa;
+
+		if ((sa = rtinfo->rti_info[i]) == 0)
+			continue;
+		rtinfo->rti_addrs |= (1 << i);
+		dlen = ROUNDUP(sa->sa_len);
+		if (cp) {
+			func_0002C9B8(sa, cp, (unsigned)dlen);
+			cp += dlen;
+		}
+		len += dlen;
+	}
+	if (cp == 0 && w != NULL && !second_time) {
+		struct walkarg *rw = w;
+
+		rw->w_needed += len;
+		if (rw->w_needed <= 0 && rw->w_where) {
+			if (rw->w_tmemsize < len) {
+				if (rw->w_tmem)
+					sceNetFreeInternal(rw->w_tmem);
+				rw->w_tmem = (char *)sceNetMallocInternal(len);
+				if (rw->w_tmem)
+					rw->w_tmemsize = len;
+			}
+			if (rw->w_tmem) {
+				cp = rw->w_tmem;
+				second_time = 1;
+				goto again;
+			} else {
+				rw->w_tmemneeded = len;
+				return (ENOBUFS);
+			}
+		}
+	}
+	if (cp) {
+		struct rt_msghdr *rtm = (struct rt_msghdr *)cp0;
+
+		rtm->rtm_version = RTM_VERSION;
+		rtm->rtm_type = type;
+		rtm->rtm_msglen = len;
+	}
+	if (lenp)
+		*lenp = len;
+	return (0);
+}
+#else
 INCLUDE_ASM("nonmatchings/pspnet_inet_rtsub", func_0000DF08);
+#endif
 
 #if FW_VERSION < 201
 void func_0000E0EC(s32 cmd, struct ifaddr *ifa, s32 error, struct rtentry *rt)

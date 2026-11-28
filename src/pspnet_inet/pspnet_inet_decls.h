@@ -764,6 +764,16 @@ struct rt_addrinfo {
     struct sockaddr *rti_info[RTAX_MAX]; /* 0x04 */
 };
 /* struct rt_msghdr (route.h), route_cb (rtsock.c) */
+struct walkarg {
+    s32 w_op;
+    s32 w_arg;
+    s32 w_given;
+    s32 w_needed;
+    char *w_where;
+    s32 w_tmemsize;
+    s32 w_tmemneeded;
+    char *w_tmem;
+};
 #define RTM_NEWADDR 0xc
 #define RTM_DELADDR 0xd
 #define RTM_VERSION 3
@@ -2194,6 +2204,7 @@ s32 func_0000D338(struct Unk_func_0000D338_0 *arg0, s32 arg1);
 s32 func_0000D378(s32);
 void func_0000DD34(s32 arg0, void *arg1, void *arg2);
 void func_0000DDCC(s32 arg0, struct Unk_func_0000DDCC_1 *arg1, struct Unk_func_0000DDCC_2 *arg2);
+s32 func_0000DF08(s32 type, struct rt_addrinfo *rtinfo, char *cp, struct walkarg *w, s32 *lenp);
 void func_0000E0EC(s32 cmd, struct ifaddr *ifa, s32 error, struct rtentry *rt);
 void func_0000E3F0(struct ifnet *ifp);
 void func_0000E448(struct ifnet *ifp, s32 what);
