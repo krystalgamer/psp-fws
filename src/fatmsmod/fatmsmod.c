@@ -3776,9 +3776,38 @@ s32 func_0000ACF8(void) {
     }
     return 0;
 }
+#endif
 
+#if FW_VERSION < 201
+s32 func_0000AD4C(void) {
+    s8 saved;
+    s32 err = -1;
+
+    if (func_0000ACF8() == err) {
+        return err;
+    }
+    if (func_0000565C() == 1 || (s8)D_000193F8 != D_00019E0C) {
+        D_000193F8 = D_00019E0C;
+        saved = D_00027C98;
+        if (func_00009DC0() == err || func_00005118() == err) {
+            if (D_00019E04 == 0) {
+                D_00019E04 = 2;
+            }
+            D_00019E08 = D_00019E04;
+            return err;
+        }
+        D_00027C98 = saved;
+        func_00007718(D_00027804, D_000276FC, 0x103);
+    }
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 271
 INCLUDE_ASM("nonmatchings/fatmsmod", func_0000AD4C);
+#endif
 
+#if FW_VERSION < 271
 INCLUDE_ASM("nonmatchings/fatmsmod", func_0000AE30);
 #endif
 
