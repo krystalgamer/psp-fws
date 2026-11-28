@@ -107,7 +107,7 @@ INCLUDE_ASM("nonmatchings/pspnet_apctl_006340", func_00006F34);
 
 INCLUDE_ASM("nonmatchings/pspnet_apctl_006340", func_00006FC8);
 
-#if FW_VERSION < 150
+#if FW_VERSION < 250
 void func_0000708C(const u8 *src, u8 *dst, s32 n) {
     s32 i;
 
@@ -122,16 +122,16 @@ void func_0000708C(const u8 *src, u8 *dst, s32 n) {
 INCLUDE_ASM("nonmatchings/pspnet_apctl_006340", func_0000708C);
 #endif
 
-#if FW_VERSION >= 102 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/pspnet_apctl_006340", func_00005290);
-#endif
-
-#if FW_VERSION == 100
+#if FW_VERSION < 250
 void func_00005290(void *arg0) {
     if (arg0 != NULL) {
         func_00007504(arg0, 0, 0x404);
     }
 }
+#endif
+
+#if FW_VERSION >= 250 && FW_VERSION < 282
+INCLUDE_ASM("nonmatchings/pspnet_apctl_006340", func_00005290);
 #endif
 
 #if FW_VERSION >= 282
@@ -241,7 +241,7 @@ s32 func_00008E00(void) {
 }
 #endif
 
-#if FW_VERSION < 150
+#if FW_VERSION < 250
 s32 func_00008E34(void) {
     if (D_00013F20 == NULL) {
         return 0x8041030B;
