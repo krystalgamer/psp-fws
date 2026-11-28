@@ -1781,20 +1781,28 @@ s32 func_0000439C(u32 *a, u32 *b) {
 }
 
 #if FW_VERSION < 340
-void func_00003E08(s32 arg0) {
-    func_000002EC(arg0);
-    if (func_000007DC(0x1400, 3) >= 0) {
-        func_000002EC(arg0 + 8);
-        func_000007DC(0x1410, 3);
+s32 func_00003E08(u32 *key) {
+    s32 ret;
+
+    func_000002EC(key);
+    ret = func_000007DC(0x1400, 3);
+    if (ret >= 0) {
+        func_000002EC(key + 2);
+        ret = func_000007DC(0x1410, 3);
     }
+    return ret;
 }
 #else
-void func_00004410(s32 arg0) {
-    func_000002EC(arg0);
-    if (func_000007DC(0x1400, 3) >= 0) {
-        func_000002EC(arg0 + 8);
-        func_000007DC(0x1410, 3);
+s32 func_00004410(u32 *key) {
+    s32 ret;
+
+    func_000002EC(key);
+    ret = func_000007DC(0x1400, 3);
+    if (ret >= 0) {
+        func_000002EC(key + 2);
+        ret = func_000007DC(0x1410, 3);
     }
+    return ret;
 }
 #endif
 
