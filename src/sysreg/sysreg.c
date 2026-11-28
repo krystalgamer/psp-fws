@@ -58,15 +58,46 @@ INCLUDE_ASM("nonmatchings/sysreg", sceSysregVblankIRQPolar);
 
 #if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregGenerateVblankIRQ);
+#else
+s32 sceSysregSetMasterPriv(u32 mask, s32 on) {
+    u32 v;
+    asm volatile("sync");
+    v = *(volatile u32 *)0xBC000044;
+    if (on) {
+        v |= mask;
+    } else {
+        v &= ~mask;
+    }
+    *(volatile u32 *)0xBC000044 = v;
+    asm volatile("sync");
+    return 0;
+}
 #endif
 
+#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregSetMasterPriv);
+#endif
 
 #if FW_VERSION >= 103
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregGetFuseId);
 #endif
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregGetFuseConfig);
+u32 sceSysregGetFuseConfig(void) {
+//V{
+    return *(volatile u32 *)0xBC100098;
+//V|
+    return *(volatile s32 *)0xBC100098;
+//V|
+    volatile u32 *r = (volatile u32 *)0xBC100098;
+    return *r;
+//V|
+    u32 v = *(volatile u32 *)0xBC100098;
+    return v;
+//V|
+    asm volatile("");
+    return *(volatile u32 *)0xBC100098;
+//V}
+}
 
 #if FW_VERSION < 271
 s32 sceSysregTopResetEnable(void) {
@@ -256,9 +287,13 @@ INCLUDE_ASM("nonmatchings/sysreg", sceSysregPllGetBaseFrequency);
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregPllUpdateFrequency);
 #endif
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregPllGetFrequency);
+float sceSysregPllGetFrequency(void) {
+    return D_00002610;
+}
 
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregPllGetOutSelect);
+s32 sceSysregPllGetOutSelect(void) {
+    return *(volatile u32 *)0xBC100068 & 0xF;
+}
 
 #if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregPllSetOutSelect);
@@ -1110,9 +1145,7 @@ s32 sceSysreg_driver_A46E9CA8(void) {
 
 #if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_A46E9CA8);
-#endif
 
-#if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregUsbGetConnectStatus);
 
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregUsbQueryIntr);
@@ -1122,27 +1155,45 @@ INCLUDE_ASM("nonmatchings/sysreg", sceSysregUsbAcquireIntr);
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregUsbhostQueryIntr);
 
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregUsbhostAcquireIntr);
+#else
+s32 sceSysregMsifGetConnectStatus(u32 n) {
+    if (n < 2) {
+        return (*(volatile u32 *)0xBC100080 >> (n * 8 + 8)) & 1;
+    }
+    return 0x80000102;
+}
 #endif
 
-#if FW_VERSION != 271
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregMsifGetConnectStatus);
+#else
+s32 sceSysregMsifQueryConnectIntr(u32 n) {
+    if (n < 2) {
+        return (*(volatile u32 *)0xBC100080 >> (n * 8 + 9)) & 3;
+    }
+    return 0x80000102;
+}
+#endif
 
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregMsifQueryConnectIntr);
+#endif
 
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregMsifAcquireConnectIntr);
-#endif
-
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregUsbGetConnectStatus);
-
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregUsbQueryIntr);
-#endif
-
-#if FW_VERSION == 271
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregUsbAcquireIntr);
-#endif
 
 #if FW_VERSION < 271
+s32 sceSysregUsbGetConnectStatus(void) {
+//V{
+    return *(u32 *)0xBC100080 & 1;
+//V|
+    return *(s32 *)0xBC100080 & 1;
+//V}
+}
+
+s32 sceSysregUsbQueryIntr(void) {
+    return __builtin_allegrex_ext(*(volatile u32 *)0xBC100080, 1, 4);
+}
+
 s32 sceSysregUsbAcquireIntr(s32 arg0) {
     s32 temp_a0;
     s32 temp_s0;
@@ -1155,29 +1206,34 @@ s32 sceSysregUsbAcquireIntr(s32 arg0) {
 }
 #endif
 
-#if FW_VERSION == 271
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregUsbhostQueryIntr);
-
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregUsbhostAcquireIntr);
-
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregMsifGetConnectStatus);
-
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregMsifQueryConnectIntr);
-
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregMsifAcquireConnectIntr);
-#endif
-
+#if FW_VERSION < 310
+s32 sceSysregInterruptToOther(void) {
+    asm volatile("sync");
+    *(volatile u32 *)0xBC100044 = 1;
+    asm volatile("sync");
+    return 0;
+}
+#else
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregInterruptToOther);
+#endif
 
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregSemaTryLock);
 
+#if FW_VERSION < 310
+void sceSysregSemaUnlock(void) {
+    asm volatile("sync");
+    *(volatile u32 *)0xBC100048 = 0;
+    asm volatile("sync");
+}
+#else
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregSemaUnlock);
 
-#if FW_VERSION >= 310
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregSramAtomicRead);
 
 INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_A41929DA);
-#else
+#endif
+
+#if FW_VERSION < 310
 INCLUDE_ASM("nonmatchings/sysreg", func_00001814);
 #endif
 
@@ -1240,13 +1296,29 @@ INCLUDE_ASM("nonmatchings/sysreg", func_00001AE8_v311);
 INCLUDE_ASM("nonmatchings/sysreg", func_00001AE8_v310);
 #endif
 
-INCLUDE_ASM("nonmatchings/sysreg", func_00001AC8);
+s32 func_00001AC8(s32 arg0, s32 bit) {
+    D_00002614 |= 1 << bit;
+    return 0;
+}
 
-INCLUDE_ASM("nonmatchings/sysreg", func_00001AE8);
+s32 func_00001AE8(s32 arg0, s32 bit) {
+    D_00002614 &= ~(1 << bit);
+    return 0;
+}
 
-INCLUDE_ASM("nonmatchings/sysreg", func_00001B0C);
+s32 func_00001B0C(s32 arg0, s32 bit, s32 *old) {
+    u32 m = ~(1 << bit);
+    if (old != NULL) {
+        *old = (D_00002614 >> bit) & 1;
+    }
+    D_00002614 &= m;
+    return 0;
+}
 
-INCLUDE_ASM("nonmatchings/sysreg", func_00001B44);
+s32 func_00001B44(s32 arg0, s32 bit, s32 val) {
+    D_00002614 |= val << bit;
+    return 0;
+}
 
 INCLUDE_ASM("nonmatchings/sysreg", func_00001B60);
 
@@ -1256,7 +1328,15 @@ INCLUDE_ASM("nonmatchings/sysreg", sceClkcGetCpuGear);
 
 INCLUDE_ASM("nonmatchings/sysreg", sceClkcSetBusGear);
 
-INCLUDE_ASM("nonmatchings/sysreg", sceClkcGetBusGear);
+s32 sceClkcGetBusGear(s32 *num, s32 *den) {
+    if (num != NULL) {
+        *num = __builtin_allegrex_ext(*(volatile u32 *)0xBC200004, 16, 9);
+    }
+    if (den != NULL) {
+        *den = *(volatile u32 *)0xBC200004 & 0x1FF;
+    }
+    return 0;
+}
 
 INCLUDE_ASM("nonmatchings/sysreg", sceClkcSetCpuFrequency);
 
