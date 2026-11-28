@@ -2783,7 +2783,32 @@ end:
 INCLUDE_ASM("nonmatchings/libhttp", _try_resolve_hostname);
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION == 100 || (FW_VERSION >= 150 && FW_VERSION < 201)
+int func_0000786C(SceHttpAuth100 *auth, unsigned char *header, SceSize size) {
+    unsigned char *value = NULL;
+    SceSize len;
+    int proxy = 0;
+    int ret;
+
+    ret = sceParseHttpResponseHeader(header, size, (const unsigned char *)"WWW-Authenticate", &value, &len);
+    if (ret < 0) {
+        proxy = 1;
+        ret = sceParseHttpResponseHeader(header, size, (const unsigned char *)"Proxy-WWW-Authenticate", &value, &len);
+        if (ret < 0) {
+            ret = 0x80431025;
+            goto end;
+        }
+    }
+    ret = func_00007918(auth, value, len);
+    if (ret >= 0) {
+        auth->proxy = proxy;
+    }
+end:
+    return ret;
+}
+#endif
+
+#if (FW_VERSION >= 102 && FW_VERSION < 150) || (FW_VERSION >= 201 && FW_VERSION < 282)
 INCLUDE_ASM("nonmatchings/libhttp", func_0000786C);
 #endif
 
@@ -4221,7 +4246,25 @@ INCLUDE_ASM("nonmatchings/libhttp", func_00007D38);
 
 INCLUDE_ASM("nonmatchings/libhttp", func_00007DC4);
 
-INCLUDE_ASM("nonmatchings/libhttp", func_00007ED0);
+void func_00003E34(const char *key, SceHttpMd5Entry **out) {
+    char *copy;
+    SceHttpMd5Entry *entry;
+
+    copy = func_00006320(func_0000BE38(key) + 1);
+    if (copy == NULL) {
+        return;
+    }
+    func_0000C0DC(copy, key);
+    entry = func_00006320(sizeof(SceHttpMd5Entry));
+    if (entry == NULL) {
+        func_00006388(copy);
+        return;
+    }
+    func_0000BBCC(entry, 0, sizeof(SceHttpMd5Entry));
+    sceKernelUtilsMd5Digest((u8 *)key, func_0000BE38(key), entry->digest);
+    entry->key = copy;
+    *out = entry;
+}
 
 INCLUDE_ASM("nonmatchings/libhttp", func_00007F88);
 
@@ -4373,9 +4416,47 @@ INCLUDE_ASM("nonmatchings/libhttp", func_0000EDEC);
 
 #if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/libhttp", func_00008E24);
+
+int GetProxyInfoFromSystem(SceHttpTmpl *tmpl) {
+    union SceNetApctlInfo info;
+    int ret;
+
+    ret = sceNetApctlGetInfo(13, &info);
+    if (ret < 0) {
+        goto end;
+    }
+    if (info.http_proxy_flag != 1) {
+        tmpl->proxy_status = 0;
+        goto end;
+    }
+    tmpl->proxy_status = info.http_proxy_flag;
+    ret = sceNetApctlGetInfo(15, &info);
+    if (ret < 0) {
+        goto end;
+    }
+    tmpl->proxy_port = info.http_proxy_port;
+    ret = sceNetApctlGetInfo(14, &info);
+    if (ret < 0) {
+        goto end;
+    }
+    if (tmpl->proxy_host != NULL) {
+        if (func_0000BC98(tmpl->proxy_host, info.http_proxy_server) == 0) {
+            goto end;
+        }
+        func_00006388(tmpl->proxy_host);
+    }
+    tmpl->proxy_host = func_00006320(func_0000BE38(info.http_proxy_server) + 1);
+    if (tmpl->proxy_host == NULL) {
+        ret = 0x80431022;
+        goto end;
+    }
+    func_0000C0DC(tmpl->proxy_host, info.http_proxy_server);
+end:
+    return ret;
+}
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 271
+#if FW_VERSION >= 201 && FW_VERSION < 271
 INCLUDE_ASM("nonmatchings/libhttp", func_00008E84);
 #endif
 
@@ -4540,7 +4621,7 @@ void func_0000AAAC(void *arg0) {
 
     temp_v1 = M2C_FIELD(arg0, s32 *, 0x64);
     if (temp_v1 != 0) {
-        func_0000C1F0(temp_v1);
+        FreeHttpHederList(temp_v1);
         M2C_FIELD(arg0, s32 *, 0x64) = 0;
     }
     temp_v1_2 = M2C_FIELD(arg0, s32 *, 0x30);
@@ -4626,7 +4707,17 @@ INCLUDE_ASM("nonmatchings/libhttp", func_0000B0E8);
 
 INCLUDE_ASM("nonmatchings/libhttp", func_0000B28C);
 
-INCLUDE_ASM("nonmatchings/libhttp", func_0000B428);
+SceUInt64 _HttpAtoi64(const char *str) {
+    SceUInt64 ret = 0;
+
+    if (str != NULL) {
+        while (*str != '\0') {
+            ret = ret * 10 + (*str - '0');
+            str++;
+        }
+    }
+    return ret;
+}
 #endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
@@ -4657,9 +4748,31 @@ void func_0000B560(void *arg0, void *arg1) {
         M2C_FIELD(arg0, s32 *, 0x28) = 0;
     }
 }
+
+int HttpWhichId(int id) {
+    int tmp;
+    int ret;
+
+    tmp = id & 0x0F000000;
+    switch (tmp) {
+    case 0:
+        ret = 0;
+        break;
+    case 0x1000000:
+        ret = 0x1000000;
+        break;
+    case 0x2000000:
+        ret = 0x2000000;
+        break;
+    default:
+        ret = 0x80431100;
+        break;
+    }
+    return ret;
+}
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 271
+#if FW_VERSION >= 201 && FW_VERSION < 271
 INCLUDE_ASM("nonmatchings/libhttp", func_0000B590);
 #endif
 
@@ -4669,7 +4782,17 @@ INCLUDE_ASM("nonmatchings/libhttp", func_00011A08);
 INCLUDE_ASM("nonmatchings/libhttp", func_00011A54);
 #endif
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
+#if FW_VERSION >= 150 && FW_VERSION < 201
+void __HttpI64toa(char **pStr, const SceUInt64 val) {
+    if (val != 0) {
+        __HttpI64toa(pStr, val / 10);
+        **pStr = val % 10 + '0';
+        (*pStr)++;
+    }
+}
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/libhttp", func_0000B5DC);
 #endif
 
@@ -4881,14 +5004,77 @@ INCLUDE_RODATA("nonmatchings/libhttp", D_0000EE28);
 
 INCLUDE_ASM("nonmatchings/libhttp", func_0000BF98);
 
-INCLUDE_ASM("nonmatchings/libhttp", func_0000C088);
-#endif
+int CreateHttpExtraHeader(_SceHttpReqHeaderList **out, const SceUChar8 *name, const SceUChar8 *value) {
+    _SceHttpReqHeaderList *h;
+    int ret = 0x804311FE;
+    SceSize len;
 
-#if FW_VERSION >= 150 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/libhttp", func_0000C1F0);
+    if (name == NULL || value == NULL) {
+        goto out;
+    }
+    h = func_00006320(sizeof(_SceHttpReqHeaderList));
+    if (h == NULL) {
+        ret = 0x80431022;
+        goto fail;
+    }
+    h->field_name = NULL;
+    h->field_value = NULL;
+    h->next = NULL;
+    len = func_0000BE38((const char *)name);
+    h->field_name = func_00006320(len + 1);
+    if (h->field_name == NULL) {
+        ret = 0x80431022;
+        goto fail;
+    }
+    func_0000BB98(h->field_name, (u8 *)name, len);
+    h->field_name[len] = '\0';
+    if (value != NULL) {
+        len = func_0000BE38((const char *)value);
+        h->field_value = func_00006320(len + 1);
+        if (h->field_value == NULL) {
+            ret = 0x80431022;
+            goto fail;
+        }
+        func_0000BB98(h->field_value, (u8 *)value, len);
+        h->field_value[len] = '\0';
+    }
+    *out = h;
+    return 0;
+
+fail:
+    if (h != NULL) {
+        if (h->field_name != NULL) {
+            func_00006388(h->field_name);
+        }
+        if (h->field_value != NULL) {
+            func_00006388(h->field_value);
+        }
+        func_00006388(h);
+    }
+out:
+    return ret;
+}
+
+void FreeHttpHederList(_SceHttpReqHeaderList *list) {
+    _SceHttpReqHeaderList *next;
+
+    while (list != NULL) {
+        if (list->field_name != NULL) {
+            func_00006388(list->field_name);
+        }
+        if (list->field_value != NULL) {
+            func_00006388(list->field_value);
+        }
+        next = list->next;
+        func_00006388(list);
+        list = next;
+    }
+}
 #endif
 
 #if FW_VERSION >= 201 && FW_VERSION < 282
+INCLUDE_ASM("nonmatchings/libhttp", func_0000C1F0);
+
 INCLUDE_RODATA("nonmatchings/libhttp", D_00017250);
 #endif
 

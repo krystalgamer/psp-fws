@@ -216,3 +216,10 @@ func_00015A10 = 0x0000D73C; // type:func rom:0xD7BC
 __udivdi3 = 0x0000D75C; // type:func rom:0xD7DC
 __umoddi3 = 0x0000DCAC; // type:func rom:0xDD2C
 // shared names (tools/add_version.py) end
+GetProxyInfoFromSystem = 0x00008E84; // type:func
+HttpWhichId = 0x0000B590; // type:func
+CreateHttpExtraHeader = 0x0000C088; // type:func
+FreeHttpHederList = 0x0000C1F0; // type:func
+_HttpAtoi64 = 0x0000B428; // type:func
+__HttpI64toa = 0x0000B5DC; // type:func
+func_00003E34 = 0x00007ED0; // type:func

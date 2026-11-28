@@ -548,8 +548,14 @@ typedef struct SceHttpsUnkGroup {
     struct SceHttpsUnkGroup *next; /* 0x00 */
     s32 unk04;
     SceHttpsUnkItem *items; /* 0x08 */
-    void *buf0C;            /* 0x0C */
+    char *buf0C;            /* 0x0C domain */
 } SceHttpsUnkGroup;
+
+/* WWW-Authenticate parse result (func_0000786C/func_00007918); only the head is known */
+typedef struct {
+    s32 type;
+    s32 proxy;              /* 0x04 1 = from Proxy-WWW-Authenticate */
+} SceHttpAuth100;
 
 struct Unk_func_00005CD0_var_a0 {
     u8 pad0[0x7C];
@@ -687,6 +693,7 @@ s32 func_00005D20(s32);
 u32 func_00005DE0(u32 size);
 s32 func_00005EF4(s32);
 int func_000060F8(SceHttpReq *req, void *buf, SceSize len, int flags);
+void *func_00006320(SceSize size);
 void func_00006380(SceHttpConn *con);
 s32 func_00006388(s32);
 void func_0000646C(void *arg0, void *arg1, u32 arg2, s32 arg3);
@@ -695,10 +702,13 @@ void func_000064A8(void *arg0, void *arg1, u32 arg2, s32 arg3);
 void func_00006558(void);
 int func_00006658(SceHttpReq *req);
 void func_000073F4(SceHttpMd5Entry *entry, const char *value);
+int func_0000786C(SceHttpAuth100 *auth, unsigned char *header, SceSize size);
+int func_00007918(SceHttpAuth100 *auth, unsigned char *value, SceSize len);
 s32 func_00007C58(void);
 void func_00008360(void *arg0);
 s32 func_00008510(void);
 void func_00008AB8(void *arg0, void *arg1, u32 arg2, s32 arg3);
+int func_00008DA4(char *buf, SceSize cap, SceSize *needed, const char *name, const char *value, int write);
 void func_00008EBC(const u8 *digest, char *out);
 void func_00008F68(void *arg0, void *arg1, u32 arg2, s32 arg3);
 int func_00008FB4(void **list, unsigned char *host);
@@ -725,10 +735,11 @@ void func_0000AAAC(void *arg0);
 s32 func_0000AE54(s32);
 s32 func_0000AF34(void);
 s32 func_0000B2C0(s32);
-int func_0000B2D4(SceHttpConn *con);
+int func_0000B2D4(SceHttpConn *con, int sock_id);
 s32 func_0000B484(s32, s32, s32);
 void func_0000B560(void *arg0, void *arg1);
 s32 func_0000B598(void *arg0);
+void func_0000B5DC(char **pStr, const SceUInt64 val);
 s32 func_0000BA58(void);
 s32 func_0000BA64(void);
 s32 func_0000BA74(void);
@@ -738,11 +749,12 @@ s32 *func_0000BB14(void);
 int func_0000BB58(const void *s1, const void *s2, int n);
 u8 *func_0000BB98(u8 *dst, u8 *src, s32 n);
 void *func_0000BBCC(void *s, int c, int n);
+char *func_0000BBF8(char *dst, const char *src);
 int func_0000BC98(const char *s1, const char *s2);
 int func_0000BE38(const char *s);
 char *func_0000C0DC(char *dst, const char *src);
 s32 func_0000C114(s32, s32, s32);
-s32 func_0000C1F0(s32);
+void func_0000C1F0(_SceHttpReqHeaderList *list);
 void func_0000CD48(void);
 void func_0000CD64(void);
 void func_0000CD80(void);
@@ -810,6 +822,7 @@ M2C_UNK sceNetMemset(s32 *, M2C_UNK, M2C_UNK);
 int sceNetResolverCreate(int *rid, void *buf, SceSize buflen);
 int sceNetResolverDelete(int rid);
 int sceNetResolverStartNtoA(int rid, const char *hostname, struct SceNetInetInAddr *addr, unsigned int timeout, int retry);
+int sceParseHttpResponseHeader(); /* (const unsigned char *header, SceSize len, const unsigned char *field, unsigned char **value, SceSize *value_len) */
 M2C_UNK sceRtcFormatRFC2822();
 int sceRtcGetCurrentTick(); /* (u64 *tick); unprototyped for other versions' C */
 M2C_UNK sceRtcParseDateTime();
