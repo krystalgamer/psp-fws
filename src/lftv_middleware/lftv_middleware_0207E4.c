@@ -27,6 +27,10 @@ INCLUDE_ASM("nonmatchings/lftv_middleware_0207E4", func_00020D1C);
 
 INCLUDE_RODATA("nonmatchings/lftv_middleware_0207E4", D_000551E8);
 
+#if FW_VERSION < 352
+__asm__(".globl _ZTV14Class_000551E8\n_ZTV14Class_000551E8 = D_000551E8 - 8\n");
+#endif
+
 INCLUDE_RODATA("nonmatchings/lftv_middleware_0207E4", D_00055208);
 
 INCLUDE_RODATA("nonmatchings/lftv_middleware_0207E4", D_00055228);

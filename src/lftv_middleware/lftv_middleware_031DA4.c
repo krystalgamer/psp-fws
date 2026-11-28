@@ -188,7 +188,13 @@ INCLUDE_RODATA("nonmatchings/lftv_middleware_031DA4", D_00056160);
 INCLUDE_RODATA("nonmatchings/lftv_middleware_031DA4", D_00056164);
 
 INCLUDE_RODATA("nonmatchings/lftv_middleware_031DA4", D_00056170);
+#endif
 
+#if FW_VERSION >= 303 && FW_VERSION < 352
+__asm__(".globl _ZTV14Class_00056170\n_ZTV14Class_00056170 = D_00056170 - 8\n");
+#endif
+
+#if FW_VERSION >= 303
 INCLUDE_RODATA("nonmatchings/lftv_middleware_031DA4", D_00056180);
 
 INCLUDE_RODATA("nonmatchings/lftv_middleware_031DA4", D_00056190);
@@ -198,11 +204,29 @@ INCLUDE_RODATA("nonmatchings/lftv_middleware_031DA4", D_00056198);
 INCLUDE_RODATA("nonmatchings/lftv_middleware_031DA4", D_000561A4);
 
 INCLUDE_RODATA("nonmatchings/lftv_middleware_031DA4", D_000561B8);
+#endif
 
+#if FW_VERSION >= 303 && FW_VERSION < 352
+__asm__(".globl _ZTV14Class_000561B8\n_ZTV14Class_000561B8 = D_000561B8 - 8\n");
+#endif
+
+#if FW_VERSION >= 303
 INCLUDE_RODATA("nonmatchings/lftv_middleware_031DA4", D_000561E0);
+#endif
 
+#if FW_VERSION >= 303 && FW_VERSION < 352
+__asm__(".globl _ZTV14Class_000561E0\n_ZTV14Class_000561E0 = D_000561E0 - 8\n");
+#endif
+
+#if FW_VERSION >= 303
 INCLUDE_RODATA("nonmatchings/lftv_middleware_031DA4", D_00056208);
+#endif
 
+#if FW_VERSION >= 303 && FW_VERSION < 352
+__asm__(".globl _ZTV14Class_00056208\n_ZTV14Class_00056208 = D_00056208 - 8\n");
+#endif
+
+#if FW_VERSION >= 303
 INCLUDE_RODATA("nonmatchings/lftv_middleware_031DA4", D_00056230);
 
 INCLUDE_RODATA("nonmatchings/lftv_middleware_031DA4", D_00056250);

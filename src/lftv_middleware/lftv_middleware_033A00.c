@@ -150,7 +150,13 @@ INCLUDE_RODATA("nonmatchings/lftv_middleware_033A00", D_000562CC);
 
 #if FW_VERSION >= 311
 INCLUDE_RODATA("nonmatchings/lftv_middleware_033A00", D_000562E0);
+#endif
 
+#if FW_VERSION >= 311 && FW_VERSION < 352
+__asm__(".globl _ZTV14Class_000562E0\n_ZTV14Class_000562E0 = D_000562E0 - 8\n");
+#endif
+
+#if FW_VERSION >= 311
 INCLUDE_RODATA("nonmatchings/lftv_middleware_033A00", D_000562F0);
 
 INCLUDE_RODATA("nonmatchings/lftv_middleware_033A00", D_000582E0);
@@ -228,6 +234,12 @@ INCLUDE_ASM("nonmatchings/lftv_middleware_033A00", func_00034260);
 
 INCLUDE_ASM("nonmatchings/lftv_middleware_033A00", func_000342B4);
 
+#if FW_VERSION < 352
+Class_000562E0::~Class_000562E0() {
+    sceKernelDeleteSema(D_0005C5BC);
+    D_0005C5BC = 0;
+}
+#else
 void func_00034308(M2C_UNK **arg0) {
     *arg0 = &D_000562E0;
     sceKernelDeleteSema(D_0005C5BC);
@@ -242,9 +254,10 @@ void func_00034344(M2C_UNK **arg0) {
 
 INCLUDE_ASM("nonmatchings/lftv_middleware_033A00", func_00034380);
 
-#if FW_VERSION == 352
 INCLUDE_ASM("nonmatchings/lftv_middleware_033A00", func_000343D0);
-#else
+#endif
+
+#if FW_VERSION < 352
 s32 func_000343D0(void) {
     s32 temp_v0;
     s32 var_v0;

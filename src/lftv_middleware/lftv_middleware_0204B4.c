@@ -15,14 +15,29 @@ void func_000204D0(struct Unk_func_000204D0_0 *arg0) {
     arg0->unk8 = 0;
 }
 
+#if FW_VERSION == 352
 INCLUDE_ASM("nonmatchings/lftv_middleware_0204B4", func_000204EC);
+#else
+INCLUDE_ASM("nonmatchings/lftv_middleware_0204B4", _ZN14Class_00055228D2Ev);
+#endif
 
+#if FW_VERSION == 352
 void func_00020514(M2C_UNK **arg0) {
     *arg0 = &D_00055228;
     func_00020738((s32) arg0);
 }
+#else
+void _ZN14Class_00055228D1Ev(M2C_UNK **arg0) {
+    *arg0 = &D_00055228;
+    func_00020738((s32) arg0);
+}
+#endif
 
+#if FW_VERSION == 352
 INCLUDE_ASM("nonmatchings/lftv_middleware_0204B4", func_0002053C);
+#else
+INCLUDE_ASM("nonmatchings/lftv_middleware_0204B4", _ZN14Class_00055228D0Ev);
+#endif
 
 INCLUDE_ASM("nonmatchings/lftv_middleware_0204B4", func_00020574);
 
