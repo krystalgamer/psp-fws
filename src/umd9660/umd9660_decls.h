@@ -78,7 +78,7 @@ typedef struct {
 
 /* open file (g_umd9660Files[maxFiles], 0x60 bytes) */
 typedef struct {
-    SceOff pos; /* 0x00: current sector */
+    u64 pos; /* 0x00: current sector */
     char devName[0x20]; /* 0x08 */
     char path[0x20]; /* 0x28 */
     s32 state; /* 0x48: 1 = free, 0x80 = allocated */
@@ -190,6 +190,8 @@ struct Unk_ret_sceUmdMan_driver_E192C10A {
 };
 
 extern char D_00005A70[];
+extern char D_00005AD0[];
+extern char D_00005AF0[];
 extern char D_00005AFC[];
 extern M2C_UNK D_00005C80;
 extern M2C_UNK D_00005C88;
@@ -247,8 +249,11 @@ s32 func_00001E0C(void);
 s32 func_00001E18(void);
 s32 func_00001E24(void);
 SceOff func_00001E30(SceUmd9660File *file, SceOff ofs, s32 whence);
+void func_000022E8(void);
 SceUmd9660Mgr *func_000026E4(void);
+SceUmd9660File *func_00002910(SceIoIob *iob);
 s32 func_00002974(SceUmd9660Drive *drive, void *buf, SceSize size, SceUmdLbnParam *param);
+s32 func_000029FC(SceUmd9660Drive *drive, void *buf, SceSize size, s32 arg3, SceUmdLbnParam *param);
 s32 func_000036D0(s32 arg0);
 s32 func_00003A58(void);
 s32 func_00003BFC(void);
@@ -257,6 +262,7 @@ s32 func_00003C80(s32 arg0);
 s32 func_00003D24(s32);
 s32 func_00003D28(SceIoIob *iob);
 s32 func_00003F70(void);
+s32 func_00003F7C(const char *name);
 void func_00003FAC(void);
 void func_00003FD4(void);
 s32 func_00003FF0(struct Unk_func_00003FF0_0 *arg0);
@@ -302,8 +308,11 @@ u8 func_000053CC(void);
 u8 func_000053D8(void);
 u8 func_000053E4(void);
 u8 func_000053F0(void);
+u32 func_00005420(s32 arg0);
 void func_00005B20(s32 arg0);
 void func_00005B2C(s32 arg0);
+void *memcpy(void *dst, const void *src, SceSize n);
+void *memset(void *dst, s32 c, SceSize n);
 s32 module_start(void);
 s32 sceAtaIsDvdDrive(void);
 M2C_UNK sceIoAddDrv(M2C_UNK *);
@@ -339,6 +348,7 @@ s32 sceUmdMan_driver_85AEA6C5();
 struct Unk_ret_sceUmdMan_driver_E192C10A *sceUmdMan_driver_E192C10A();
 M2C_UNK sceUmdRegisterGetUMDInfoCallBack(M2C_UNK *, M2C_UNK *);
 M2C_UNK sceUmdUnRegisterGetUMDInfoCallBack();
+s32 sprintf(char *buf, const char *fmt, ...);
 SceSize strlen(const char *s);
 
 #endif

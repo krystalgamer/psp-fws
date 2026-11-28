@@ -132,9 +132,56 @@ s32 func_00000134(SceIoIob *iob) {
     }
     return ret;
 }
+#endif
 
+#if FW_VERSION == 100
+s32 func_000001BC(SceIoIob *iob, void *buf, SceSize cnt) {
+    SceUmd9660File *file = iob->i_private;
+    SceUmdLbnParam param;
+    s32 ret;
+    UMD9660_ASSERT(cnt != 0, D_00005A70, D_00005AFC, "umd9660_read", 0x1FF);
+    UMD9660_ASSERT(iob != NULL, D_00005A70, D_00005AFC, "umd9660_read", 0x200);
+    UMD9660_ASSERT(buf != NULL, D_00005A70, D_00005AFC, "umd9660_read", 0x201);
+    UMD9660_ASSERT(file != NULL, D_00005A70, D_00005AFC, "umd9660_read", 0x202);
+    if (iob == NULL || file == NULL || file->drive == NULL) {
+        return 0x80010002;
+    }
+    sceKernelWaitSema(file->drive->semaId, 1, NULL);
+    ret = 0x80010016;
+    if (buf == NULL || cnt == 0) {
+        goto end;
+    }
+    if (file->pos > file->numSectors) {
+        ret = 0x80210002;
+        goto end;
+    }
+    if (cnt + file->pos > file->numSectors) {
+        cnt = file->numSectors - file->pos;
+    }
+    param.unk0 = 0;
+    param.cmd = 0;
+    param.lbn = file->pos;
+    param.lbnSize = cnt;
+    param.size = cnt << 11;
+    param.byteSizeMiddle = cnt << 11;
+    param.byteSizeFirst = 0;
+    param.byteSizeLast = 0;
+    ret = func_00002974(file->drive, buf, cnt << 11, &param);
+    if (ret == 0) {
+        file->pos += cnt;
+        ret = cnt;
+    }
+end:
+    sceKernelSignalSema(file->drive->semaId, 1);
+    return ret;
+}
+#endif
+
+#if FW_VERSION >= 102 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/umd9660", func_000001BC);
+#endif
 
+#if FW_VERSION < 201
 s32 func_0000043C(void *dev) {
     s32 ret = 0;
     UMD9660_ASSERT(dev != NULL, D_00005A70, D_00005AFC, "umd9660_exit", UMD9660_V(0x275, 0x280, 0x27F, 0x1FD, 0x1FE));
