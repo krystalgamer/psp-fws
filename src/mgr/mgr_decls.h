@@ -53,6 +53,12 @@ typedef struct {
     volatile s32 unkC;
 } MgrMsCtrl;
 
+typedef union {
+    u8 b[0x20];
+    u32 w[8];
+    u64 id[4];
+} MgrMsRegBuf;
+
 typedef struct {
     u32 w0;
     u32 w1;
@@ -90,6 +96,7 @@ extern MgrKeyReg D_00009C8C[14];
 extern const u64 D_0000AE68;
 extern s32 D_0000AEE0;
 extern M2C_UNK D_0000AFA0;
+extern const u8 D_0000AFBC[4];
 extern M2C_UNK D_0000AFCC;
 extern M2C_UNK D_0000AFD0;
 extern MgrMsCtrl D_0000AFF8;
@@ -223,14 +230,19 @@ s32 func_00006884(s32 arg0, s32 arg1);
 s32 func_000069E0(s32 arg0, s32 arg1);
 s32 func_00006C40(s32, s32, s32, s32, s32);
 s32 func_00006D2C(s32 arg0, s32 arg1, s32 arg2, s32 *arg3);
-s32 func_00007644(s32);
+s32 func_00007644(s32 arg0);
+s32 func_000077A0(s32 fd, u64 *a, u64 *b);
+s32 func_000078F8(s32 fd, u64 *a, u64 *b);
 void func_0000798C(s32 arg0);
 s32 func_00008300(s32 fd, s32 reg);
+s32 func_00008374(s32 arg0, s32 arg1, s32 pos, s32 step);
 void func_00008388(s32 arg0);
+s32 func_00008460(s32 arg0, s32 arg1, s32 start, s32 step);
 s32 func_00008504(s32 arg0, s32 arg1, s32 arg2, u32 *out);
 s32 func_00008584(s32 arg0, s32 arg1, s32 arg2, s32 *arg3);
 s32 func_00008EB0(s32 *out, s32 pos);
 void func_00009BAC(s32 arg0);
+s32 func_0000A070(s32 arg0, u64 *out);
 s32 func_0000A1C8(s32 arg0, s32 arg1, s32 arg2);
 s32 memcmp(const void *, const void *, u32);
 s32 module_start(void);
@@ -293,7 +305,10 @@ s32 sceMgrMSCompareICV(s32 arg0);
 s32 sceMgrMSDeauth(s32 arg0);
 s32 sceMgrMSEnd(void);
 s32 sceMgrMSGetLocalEKB(s32 arg0, s32 buf, s32 size);
+s32 sceMgrMSGetMediaType(s32 arg0);
 s32 sceMgrMSReset(void);
+s32 sceMgrMSSetLeafID(s32 arg0, u64 *id);
+s32 sceMgrMSSetRd(s32 arg0, u64 *rd);
 void sceMgrNetDecryptKc(s32 arg0, s32 arg1, s32 arg2);
 s32 sceMgrPollLock(void);
 s32 sceMgrRandom(s32 arg0, s32 arg1);
