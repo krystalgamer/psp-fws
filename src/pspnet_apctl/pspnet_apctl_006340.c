@@ -1,4 +1,4 @@
-/* cflags[100,102,103]: -O2 -frename-registers */
+/* cflags[100,102,103,150,151,152]: -O2 -frename-registers */
 /* cflags: -Os -frename-registers */
 #include "common.h"
 #include "pspnet_apctl_decls.h"

@@ -218,7 +218,11 @@ typedef struct {
 typedef struct {
     u8 unk0[0xD];
     SceNetInAddrPacked yiaddr;  /* 0x00D */
-    u8 unk11[0x3CB];
+    u8 unk11[0xC8];
+    char hostname[0x100];       /* 0x0D9 option 12 */
+    char domain[0x100];         /* 0x1D9 option 15 */
+    char message[0x100];        /* 0x2D9 option 56 */
+    u8 unk3D9[3];
     u32 unk3DC;                 /* 0x3DC option 51 lease time */
     u32 unk3E0;                 /* 0x3E0 option 58 T1 */
     u32 unk3E4;                 /* 0x3E4 option 59 T2 */
@@ -524,7 +528,7 @@ s32 func_00001C54(SceNetApctlCtx *ctx);
 void func_00001D84(SceNetApctlCtx *ctx);
 void func_00001DB8(SceNetApctlCtx *ctx);
 void func_00001DE8(SceNetApctlCtx *ctx);
-s32 func_00001E20(SceNetApctlCtx *ctx, u32 *ip, u32 *netmask, u32 *broadcast, u32 *route, u32 *dns1, u32 *dns2);
+s32 func_00001E20(SceNetApctlCtx *ctx, SceNetInAddrPacked *ip, SceNetInAddrPacked *bcast, SceNetInAddrPacked *mask, SceNetInAddrPacked *route, SceNetInAddrPacked *dns1, SceNetInAddrPacked *dns2);
 s32 func_000020CC(s32 *arg0);
 s32 func_00002204(s32 connIndex);
 s32 func_0000228C(void);
@@ -555,7 +559,7 @@ s32 func_00006A14(const char *ifname, void *func, s32 a2, s32 prio, s32 a4, SceN
 void func_000070C0(s32 *arg0);
 s32 func_00007324(void);
 s32 func_0000741C(s32, s32);
-u8 *func_000074D0(u8 *arg0, u8 *arg1, s32 arg2);
+u8 *func_000074D0(u8 *dst, u8 *src, s32 n);
 void *func_00007504(void *dst, s32 c, s32 n);
 char *func_0000774C(char *dst, const char *src, s32 n);
 char *func_000077F8(char *dst, const char *src);
