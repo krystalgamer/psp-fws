@@ -125,6 +125,7 @@
   "func_00007844": "s32 func_00007844(s32 fd, u64 *a, u64 *b, u64 *c, s32 flag);",
   "func_000078F8": "s32 func_000078F8(s32 fd, u64 *a, u64 *b);",
   "func_0000798C": "void func_0000798C(s32 arg0);",
+  "func_00008274": "s32 func_00008274(s32 fd, s32 reg);",
   "func_00008300": "s32 func_00008300(s32 fd, s32 reg);",
   "func_00008374": "s32 func_00008374(s32 arg0, s32 arg1, s32 pos, s32 step);",
   "func_00008388": "void func_00008388(s32 arg0);",
@@ -132,6 +133,7 @@
   "func_00008504": "s32 func_00008504(s32 arg0, s32 arg1, s32 arg2, u32 *out);",
   "func_00008584": "s32 func_00008584(s32 arg0, s32 arg1, s32 arg2, s32 *arg3);",
   "func_00008EB0": "s32 func_00008EB0(s32 *out, s32 pos);",
+  "func_00009B34": "s32 func_00009B34(s32 fd, s32 reg);",
   "func_00009BAC": "void func_00009BAC(s32 arg0);",
   "func_0000A070": "s32 func_0000A070(s32 arg0, u64 *out);",
   "func_0000A1C8": "s32 func_0000A1C8(s32 arg0, s32 arg1, s32 arg2);",
@@ -279,6 +281,7 @@
   "D_0000B6E0": "extern M2C_UNK D_0000B6E0;",
   "D_0000B6E8": "extern M2C_UNK D_0000B6E8;",
   "D_0000B6F8": "extern M2C_UNK D_0000B6F8;",
-  "D_0000B708": "extern MgrIb2Ctrl D_0000B708;"
+  "D_0000B708": "extern MgrIb2Ctrl D_0000B708;",
+  "D_0000B70C": "extern MgrIb2Ctrl D_0000B70C;"
  }
 }
