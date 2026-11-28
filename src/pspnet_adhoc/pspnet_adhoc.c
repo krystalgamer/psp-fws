@@ -582,7 +582,6 @@ s32 adhocDescAllocId(void) {
     return -1;
 }
 
-#if FW_VERSION < 260
 s32 adhocDescAlloc(u8 type, SceNetAdhocDesc **out) {
     SceNetAdhocDesc *d;
 
@@ -599,9 +598,6 @@ s32 adhocDescAlloc(u8 type, SceNetAdhocDesc **out) {
     *out = d;
     return 0;
 }
-#else
-INCLUDE_ASM("nonmatchings/pspnet_adhoc", adhocDescAlloc);
-#endif
 
 void adhocDescFree(SceNetAdhocDesc *d) {
     if (d->pcb != NULL)
