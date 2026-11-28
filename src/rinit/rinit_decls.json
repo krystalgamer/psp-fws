@@ -36,6 +36,10 @@
   "func_000016E0": "void func_000016E0(void);",
   "func_000016FC": "void func_000016FC(void);",
   "isatty": "s32 isatty(void);",
+  "memchr": "void *memchr(const void *src_void, int c, size_t length);",
+  "memcpy": "void *memcpy(void *dst0, const void *src0, size_t len0);",
+  "memmove": "void *memmove(void *dst_void, const void *src_void, size_t length);",
+  "memset": "void *memset(void *m, int c, size_t n);",
   "sceIoClose": "s32 sceIoClose(s32);",
   "sceIoOpen": "M2C_UNK sceIoOpen();",
   "sceIoRead": "s32 sceIoRead(s32, M2C_UNK, M2C_UNK);",
@@ -49,7 +53,13 @@
   "sceKernelStderr": "s32 sceKernelStderr();",
   "sceKernelStdin": "s32 sceKernelStdin();",
   "sceKernelStdout": "s32 sceKernelStdout();",
-  "setlocale": "void setlocale(s32 arg0, s32 arg1);"
+  "setlocale": "void setlocale(s32 arg0, s32 arg1);",
+  "strchr": "char *strchr(const char *s1, int i);",
+  "strcmp": "int strcmp(const char *s1, const char *s2);",
+  "strcpy": "char *strcpy(char *dst0, const char *src0);",
+  "strlen": "size_t strlen(const char *str);",
+  "strncpy": "char *strncpy(char *dst0, const char *src0, size_t count);",
+  "strrchr": "char *strrchr(const char *s, int i);"
  },
  "types": {
   "Unk_func_00001AF8_1": "struct Unk_func_00001AF8_1 {\n    u8 pad0[0x4];\n    s32 unk4;\n    s32 unk8;\n};",
@@ -59,7 +69,13 @@
   "Unk_func_000088F0_0": "struct Unk_func_000088F0_0 {\n    u8 pad0[0xC];\n    u16 unkC;\n    s16 unkE;\n    u8 pad10[0x40];\n    s32 unk50;\n};",
   "Unk_func_00008958_0": "struct Unk_func_00008958_0 {\n    u8 pad0[0xC];\n    u16 unkC;\n    s16 unkE;\n};",
   "Unk_func_00008A4C_0": "struct Unk_func_00008A4C_0 {\n    u8 pad0[0xE];\n    s16 unkE;\n};",
-  "hand_func_0000AEF0": "typedef void (*func_ptr)(void);"
+  "__sFILE": "struct __sbuf {\n    unsigned char *_base;\n    int _size;\n};\nstruct _reent;\n/* newlib 1.12 stdio stream (0x5C) */\nstruct __sFILE {\n    unsigned char *_p;          /* 0x00 */\n    int _r;                     /* 0x04 */\n    int _w;                     /* 0x08 */\n    short _flags;               /* 0x0C */\n    short _file;                /* 0x0E */\n    struct __sbuf _bf;          /* 0x10 */\n    int _lbfsize;               /* 0x18 */\n    void *_cookie;              /* 0x1C */\n    int (*_read)(void *_cookie, char *_buf, int _n);\n    int (*_write)(void *_cookie, const char *_buf, int _n);\n    _fpos_t (*_seek)(void *_cookie, _fpos_t _offset, int _whence);\n    int (*_close)(void *_cookie); /* 0x2C */\n    struct __sbuf _ub;          /* 0x30 */\n    unsigned char *_up;         /* 0x38 */\n    int _ur;                    /* 0x3C */\n    unsigned char _ubuf[3];     /* 0x40 */\n    unsigned char _nbuf[1];     /* 0x43 */\n    struct __sbuf _lb;          /* 0x44 */\n    int _blksize;               /* 0x4C */\n    int _offset;                /* 0x50 */\n    struct _reent *_data;       /* 0x54 */\n    _flock_t _lock;             /* 0x58 */\n};\ntypedef struct __sFILE __FILE;\ntypedef struct __sFILE FILE;\ntypedef char chk___sFILE[(sizeof(struct __sFILE) == 0x5C) ? 1 : -1];\nstruct _glue {\n    struct _glue *_next;\n    int _niobs;\n    __FILE *_iobs;\n};",
+  "__tm": "struct __tm {\n    int __tm_sec;\n    int __tm_min;\n    int __tm_hour;\n    int __tm_mday;\n    int __tm_mon;\n    int __tm_year;\n    int __tm_wday;\n    int __tm_yday;\n    int __tm_isdst;\n};",
+  "_atexit": "struct _on_exit_args {\n    void *_fnargs[32];\n    __ULong _fntypes;\n};\nstruct _atexit {\n    struct _atexit *_next;\n    int _ind;\n    void (*_fns[32])(void);\n    struct _on_exit_args _on_exit_args;\n};",
+  "_mbstate_t": "typedef struct {\n    int __count;\n    union {\n        wint_t __wch;\n        unsigned char __wchb[4];\n    } __value;\n} _mbstate_t;",
+  "_reent": "struct _rand48 {\n    unsigned short _seed[3];\n    unsigned short _mult[3];\n    unsigned short _add;\n};\nstruct _Bigint {\n    struct _Bigint *_next;\n    int _k, _maxwds, _sign, _wds;\n    __ULong _x[1];\n};\n/* newlib 1.12 reentrancy structure */\nstruct _reent {\n    int _errno;                         /* 0x00 */\n    __FILE *_stdin, *_stdout, *_stderr; /* 0x04 */\n    int _inc;                           /* 0x10 */\n    char _emergency[25];                /* 0x14 */\n    int _current_category;              /* 0x30 */\n    const char *_current_locale;        /* 0x34 */\n    int __sdidinit;                     /* 0x38 */\n    void (*__cleanup)(struct _reent *); /* 0x3C */\n    struct _Bigint *_result;            /* 0x40 */\n    int _result_k;                      /* 0x44 */\n    struct _Bigint *_p5s;               /* 0x48 */\n    struct _Bigint **_freelist;         /* 0x4C */\n    int _cvtlen;                        /* 0x50 */\n    char *_cvtbuf;                      /* 0x54 */\n    union {\n        struct {\n            unsigned int _unused_rand;\n            char *_strtok_last;\n            char _asctime_buf[26];\n            struct __tm _localtime_buf;\n            int _gamma_signgam;\n            __extension__ unsigned long long _rand_next;\n            struct _rand48 _r48;\n            _mbstate_t _mblen_state;\n            _mbstate_t _mbtowc_state;\n            _mbstate_t _wctomb_state;\n            char _l64a_buf[8];\n            char _signal_buf[24];\n            int _getdate_err;\n            _mbstate_t _mbrlen_state;\n            _mbstate_t _mbrtowc_state;\n            _mbstate_t _mbsrtowcs_state;\n            _mbstate_t _wcrtomb_state;\n            _mbstate_t _wcsrtombs_state;\n        } _reent;\n        struct {\n            unsigned char *_nextf[30];\n            unsigned int _nmalloc[30];\n        } _unused;\n    } _new;\n    struct _atexit *_atexit;\n    struct _atexit _atexit0;\n    void (**(_sig_func))(int);\n    struct _glue __sglue;\n    __FILE __sf[3];\n};",
+  "hand_func_0000AEF0": "typedef void (*func_ptr)(void);",
+  "newlib_base": "typedef unsigned int size_t;\ntypedef int ptrdiff_t;\ntypedef int wchar_t;\ntypedef unsigned int wint_t;\ntypedef long _off_t;\ntypedef int _ssize_t;\ntypedef long _fpos_t;\ntypedef int _flock_t;\ntypedef unsigned long __ULong;\ntypedef __builtin_va_list va_list;"
  },
  "vars": {
   "D_0000B28C": "extern func_ptr D_0000B28C[];",
