@@ -1,6 +1,7 @@
 {
  "funcs": {
   "_Jv_RegisterClasses": "extern void _Jv_RegisterClasses(void *) __attribute__((weak));",
+  "__locale_charset": "char *__locale_charset(void);",
   "__malloc_lock": "void __malloc_lock(struct _reent *ptr);",
   "__malloc_unlock": "void __malloc_unlock(struct _reent *ptr);",
   "__sclose": "int __sclose(void *cookie);",
@@ -166,6 +167,7 @@
   "D_0000F5E4": "extern s32 D_0000F5E4;",
   "__lc_ctype": "extern char __lc_ctype[12];",
   "_impure_ptr": "extern struct _reent *_impure_ptr;",
+  "charset": "extern char *charset; /* locale.c static, \"ISO-8859-1\" */",
   "errno": "extern int errno;"
  }
 }

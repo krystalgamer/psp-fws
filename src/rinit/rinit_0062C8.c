@@ -15,6 +15,10 @@ INCLUDE_RODATA("nonmatchings/rinit_0062C8", D_0000BEEC);
 
 INCLUDE_ASM("nonmatchings/rinit_0062C8", _setlocale_r);
 
+char *__locale_charset(void) {
+    return charset;
+}
+
 struct lconv *_localeconv_r(struct _reent *data) {
     return &D_0000BEBC;
 }

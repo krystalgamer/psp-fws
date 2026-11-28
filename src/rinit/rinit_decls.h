@@ -285,9 +285,11 @@ extern s32 D_0000F5E0;
 extern s32 D_0000F5E4;
 extern char __lc_ctype[12];
 extern struct _reent *_impure_ptr;
+extern char *charset; /* locale.c static, "ISO-8859-1" */
 extern int errno;
 
 extern void _Jv_RegisterClasses(void *) __attribute__((weak));
+char *__locale_charset(void);
 void __malloc_lock(struct _reent *ptr);
 void __malloc_unlock(struct _reent *ptr);
 int __sclose(void *cookie);
