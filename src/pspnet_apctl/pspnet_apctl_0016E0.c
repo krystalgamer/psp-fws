@@ -863,7 +863,40 @@ INCLUDE_RODATA("nonmatchings/pspnet_apctl_0016E0", D_00010AFC);
 
 INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_000051A0);
 
-#if FW_VERSION < 250
+#if FW_VERSION == 100
+s32 func_00003754(SceSize args, void *argp) {
+    SceNetDhcpCtx *dc = &D_00008B38;
+    s32 prev = 0;
+    s32 ret;
+
+    dc->state = 0;
+    dc->startTime = sceNetGetSystemClockSec();
+    ret = 0x80410586;
+    if (dc->startTime < 0) {
+        goto end;
+    }
+    for (;;) {
+        ret = D_00008138[dc->state](dc, prev);
+        if (ret < 0) {
+            break;
+        }
+        prev = dc->state;
+        dc->state = ret;
+        if (sceKernelPollSema(dc->sema, 1) == 0) {
+            func_00005D14(dc, dc->state, 0);
+        }
+    }
+end:
+    if (dc->callback != NULL) {
+        dc->callback(4, ret);
+    }
+    func_00004424(dc->ifname);
+    sceKernelExitThread(0);
+    return 0;
+}
+#endif
+
+#if FW_VERSION >= 102 && FW_VERSION < 250
 INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00003754);
 #endif
 
@@ -957,7 +990,21 @@ INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00005D14);
 
 INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00005E00);
 
-INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_00005E90);
+u16 func_00005E90(u16 *p, s32 nwords) {
+    u32 sum = 0;
+    u16 r;
+
+    for (; nwords > 0; nwords--) {
+        sum += *p++;
+    }
+    sum = (sum >> 16) + (sum & 0xFFFF);
+    sum += sum >> 16;
+    r = ~sum;
+    if (r == 0) {
+        r = 0xFFFF;
+    }
+    return r;
+}
 
 #if FW_VERSION >= 250 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_apctl_0016E0", func_000059B0);
@@ -1011,7 +1058,7 @@ s32 func_00006304(s32 arg0) {
 
     var_v0 = sceNetConfigFlushRoute();
     if (var_v0 >= 0) {
-        var_v0 = __builtin_allegrex_min(sceNetConfigDelIfaddr(ifname), 0);
+        var_v0 = __builtin_allegrex_min(sceNetConfigDelIfaddr(arg0), 0);
     }
     return var_v0;
 }
