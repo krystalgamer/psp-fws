@@ -2,63 +2,299 @@
 #include "common.h"
 #include "mgr_decls.h"
 
-INCLUDE_ASM("nonmatchings/mgr", sceMgrLock);
+s32 sceMgrLock(void) {
+    s32 ret = sceKernelWaitSema(D_0000B690.sema, 1, NULL);
+    if (ret == 0x800201B5) {
+        return 0x80500002;
+    }
+    if (ret == 0x80020199) {
+        return 0x80501001;
+    }
+    if (ret != 0) {
+        return ret;
+    }
+    sceKernelPowerLock(0);
+    return 0;
+}
 
-INCLUDE_ASM("nonmatchings/mgr", sceMgrPollLock);
+s32 sceMgrPollLock(void) {
+    s32 ret = sceKernelPollSema(D_0000B690.sema, 1);
+    if (ret == 0x800201AD) {
+        return 0x80502001;
+    }
+    if (ret == 0x800201B5) {
+        return 0x80500002;
+    }
+    if (ret == 0x80020199) {
+        return 0x80501001;
+    }
+    if (ret != 0) {
+        return ret;
+    }
+    sceKernelPowerLock(0);
+    return 0;
+}
 
-INCLUDE_ASM("nonmatchings/mgr", sceMgrUnLock);
+s32 sceMgrUnLock(void) {
+    sceKernelPowerUnlock(0);
+    return sceKernelSignalSema(D_0000B690.sema, 1);
+}
 
-INCLUDE_ASM("nonmatchings/mgr", func_0000011C);
+void func_0000011C(void) {
+    MgrCtrl *ctrl;
 
-INCLUDE_ASM("nonmatchings/mgr", func_0000015C);
+    *(volatile u32 *)0xBE100000 = 0x8000;
+    __asm__ volatile("sync");
+    ctrl = &D_0000B690;
+    if (ctrl->cb != NULL) {
+        ctrl->cb(ctrl->cbArg);
+    }
+}
 
-INCLUDE_ASM("nonmatchings/mgr", func_00000170);
+void func_0000015C(s32 (*intrCb)(void *), void *arg) {
+    MgrCtrl *ctrl = &D_0000B690;
 
-INCLUDE_ASM("nonmatchings/mgr", func_000001C8);
+    ctrl->intrCb = intrCb;
+    ctrl->cbArg = arg;
+}
 
-INCLUDE_ASM("nonmatchings/mgr", func_000001E4);
+s32 func_00000170(s32 unused, MgrCtrl *ctrl) {
+    if (ctrl->intrCb == NULL || ctrl->intrCb(ctrl->cbArg) == 0) {
+        *(volatile u32 *)0xBE100000 = 0x80;
+        __asm__ volatile("sync");
+        sceKernelSetEventFlag(ctrl->evf, 2);
+    }
+    return -1;
+}
 
-INCLUDE_ASM("nonmatchings/mgr", func_00000234);
+s32 func_000001C8(void) {
+    return (*(volatile u32 *)0xBE100018 & 6) ? 0x80501001 : 0;
+}
 
-INCLUDE_ASM("nonmatchings/mgr", func_0000026C);
+s32 func_000001E4(void) {
+    s32 ret;
 
-INCLUDE_ASM("nonmatchings/mgr", func_0000027C);
+    if (*(volatile u32 *)0xBE100018 & 2) {
+        ret = 0x80501001;
+    } else if (*(volatile u32 *)0xBE100018 & 0x100) {
+        ret = 0x80501001;
+    } else {
+        ret = (*(volatile u32 *)0xBE100018 & 0x200) ? 0x80503002 : 0;
+    }
+    return ret;
+}
 
-INCLUDE_ASM("nonmatchings/mgr", func_000002A4);
+s32 func_00000234(void) {
+    s32 ret;
 
-INCLUDE_ASM("nonmatchings/mgr", func_000002C8);
+    if (*(volatile u32 *)0xBE100018 & 0x2000) {
+        ret = 0x80503004;
+    } else {
+        ret = (*(volatile u32 *)0xBE100018 & 0x1000) ? 0 : 0x80501001;
+    }
+    return ret;
+}
 
-INCLUDE_ASM("nonmatchings/mgr", func_000002EC);
+void func_0000026C(void) {
+    *(volatile u32 *)0xBE100000 = 8;
+}
 
-INCLUDE_ASM("nonmatchings/mgr", func_00000310);
+void func_0000027C(u32 cmd) {
+    *(volatile u32 *)0xBE100010 = 0x100;
+    *(volatile u32 *)0xBE100020 = cmd;
+    __asm__ volatile("sync");
+}
 
-INCLUDE_ASM("nonmatchings/mgr", func_00000334);
+void func_000002A4(u32 *arg0) {
+    *(volatile u32 *)0xBE100040 = arg0[0];
+    *(volatile u32 *)0xBE100044 = arg0[1];
+}
 
-INCLUDE_ASM("nonmatchings/mgr", func_00000378);
+void func_000002C8(u32 *arg0) {
+    *(volatile u32 *)0xBE100060 = arg0[0];
+    *(volatile u32 *)0xBE100064 = arg0[1];
+}
 
-INCLUDE_ASM("nonmatchings/mgr", func_000003BC);
+void func_000002EC(u32 *arg0) {
+    *(volatile u32 *)0xBE100050 = arg0[0];
+    *(volatile u32 *)0xBE100054 = arg0[1];
+}
 
+void func_00000310(u32 *arg0) {
+    arg0[0] = *(volatile u32 *)0xBE100070;
+    arg0[1] = *(volatile u32 *)0xBE100074;
+}
+
+void func_00000334(u32 *arg0) {
+    *(volatile u32 *)0xBE100060 = arg0[0];
+    *(volatile u32 *)0xBE100064 = arg0[1];
+    *(volatile u32 *)0xBE100068 = arg0[2];
+    *(volatile u32 *)0xBE10006C = arg0[3];
+}
+
+void func_00000378(u32 *arg0) {
+    *(volatile u32 *)0xBE100050 = arg0[0];
+    *(volatile u32 *)0xBE100054 = arg0[1];
+    *(volatile u32 *)0xBE100058 = arg0[2];
+    *(volatile u32 *)0xBE10005C = arg0[3];
+}
+
+void func_000003BC(u32 *arg0) {
+    arg0[0] = *(volatile u32 *)0xBE100070;
+    arg0[1] = *(volatile u32 *)0xBE100074;
+    arg0[2] = *(volatile u32 *)0xBE100078;
+    arg0[3] = *(volatile u32 *)0xBE10007C;
+}
+
+#if FW_VERSION < 340
+void func_00000400(u32 arg0) {
+    volatile u32 *reg = (volatile u32 *)0xBE100008;
+
+    *reg &= ~7;
+    *reg |= arg0;
+}
+#else
 INCLUDE_ASM("nonmatchings/mgr", func_00000400);
+#endif
 
-INCLUDE_ASM("nonmatchings/mgr", func_00000424);
+s32 func_00000424(s32 arg0, s32 arg1, s32 arg2) {
+    u32 val = 0;
+    s32 ret;
+
+    if (arg0 >= 0) {
+        ret = func_00002748(arg0);
+        if (ret < 0) {
+            return ret;
+        }
+        val = ret;
+    }
+    if (arg1 >= 0) {
+        ret = func_00002748(arg1);
+        if (ret < 0) {
+            return ret;
+        }
+        val |= ret;
+    }
+    if (arg2 >= 0) {
+        ret = func_00002748(arg2);
+        if (ret < 0) {
+            return ret;
+        }
+        val |= ret;
+    }
+    val |= *(volatile u32 *)0xBE100008 & 7;
+    *(volatile u32 *)0xBE100008 = val;
+    return 0;
+}
 
 INCLUDE_ASM("nonmatchings/mgr", func_000004CC);
 
 INCLUDE_ASM("nonmatchings/mgr", func_0000052C);
 
-INCLUDE_ASM("nonmatchings/mgr", func_0000058C);
+s32 func_0000058C(s32 arg0, s32 arg1) {
+    s32 ret = func_00000424(arg1, -1, -1);
 
-INCLUDE_ASM("nonmatchings/mgr", func_000005EC);
+    if (ret < 0) {
+        return ret;
+    }
+    ret = func_000004CC(arg0);
+    if (ret < 0) {
+        return ret;
+    }
+    func_0000027C(0x4001);
+    return 0;
+}
 
-INCLUDE_ASM("nonmatchings/mgr", func_0000064C);
+s32 func_000005EC(s32 arg0, s32 arg1) {
+    s32 ret = func_00000424(arg1, -1, -1);
 
-INCLUDE_ASM("nonmatchings/mgr", func_000006CC);
+    if (ret < 0) {
+        return ret;
+    }
+    ret = func_0000052C(arg0);
+    if (ret < 0) {
+        return ret;
+    }
+    func_0000027C(0x4002);
+    return 0;
+}
 
-INCLUDE_ASM("nonmatchings/mgr", func_00000708);
+s32 func_0000064C(void) {
+    u32 res;
+    u32 timeout = 1000000;
+    s32 ret;
 
-INCLUDE_ASM("nonmatchings/mgr", func_00000754);
+    if ((*(volatile u32 *)0xBE100018 & 1) == 0) {
+        return 0;
+    }
+    ret = sceKernelWaitEventFlag(D_0000B690.evf, 2, 0x11, &res, &timeout);
+    if (ret == 0x800201A8) {
+        return 0x80502002;
+    }
+    if (*(volatile u32 *)0xBE100018 & 1) {
+        return 0x80502002;
+    }
+    return 0;
+}
 
-INCLUDE_ASM("nonmatchings/mgr", func_000007DC);
+s32 func_000006CC(u32 cmd) {
+    s32 ret;
+
+    func_0000027C(cmd);
+    ret = func_0000064C();
+    if (ret < 0) {
+        return ret;
+    }
+    return func_000001C8();
+}
+
+s32 func_00000708(u32 *arg0, u32 cmd) {
+    s32 ret;
+
+    func_000002EC(arg0);
+    func_0000027C(cmd);
+    ret = func_0000064C();
+    if (ret < 0) {
+        return ret;
+    }
+    return func_000001C8();
+}
+
+s32 func_00000754(u32 cmd0, u32 cmd1, u32 cmd2) {
+    s32 ret;
+
+    func_0000027C(cmd0);
+    ret = func_0000064C();
+    if (ret < 0) {
+        return ret;
+    }
+    func_0000027C(cmd1);
+    ret = func_0000064C();
+    if (ret < 0) {
+        return ret;
+    }
+    func_0000027C(cmd2);
+    ret = func_0000064C();
+    if (ret < 0) {
+        return ret;
+    }
+    return func_000001C8();
+}
+
+s32 func_000007DC(u32 cmd, s32 count) {
+    s32 ret;
+    s32 i;
+
+    for (i = count - 1; i >= 0; i--) {
+        func_0000027C(cmd);
+        ret = func_0000064C();
+        cmd++;
+        if (ret < 0) {
+            return ret;
+        }
+    }
+    return func_000001C8();
+}
 
 void func_00000840(s32 arg0, s32 arg1, s32 arg2) {
     func_000002EC(arg0);
