@@ -4584,8 +4584,23 @@ INCLUDE_ASM("nonmatchings/pafmini_0346A8", func_00057738);
 INCLUDE_ASM("nonmatchings/pafmini_0346A8", func_00057780);
 #endif
 
-#if FW_VERSION < 201
+#if FW_VERSION >= 150 && FW_VERSION < 201
 INCLUDE_ASM("nonmatchings/pafmini_0346A8", func_0007136C);
+#endif
+
+#if FW_VERSION == 100
+s32 func_0007136C(void *arg0, s32 arg1, s32 arg2) {
+    s32 var_v0;
+
+    if (arg1 != 0xE) {
+        var_v0 = _ZN3paf8PhWidget8SetStyleEii(arg0, arg1, arg2);
+    } else {
+        M2C_FIELD(arg0, s32 *, 0x354) = arg2;
+        func_00072EFC((s32) arg0);
+        var_v0 = 0;
+    }
+    return var_v0;
+}
 #endif
 
 #if FW_VERSION == 282
@@ -5469,8 +5484,22 @@ INCLUDE_ASM("nonmatchings/pafmini_0346A8", _ZN3paf6PhList8GetStyleEiRi);
 INCLUDE_ASM("nonmatchings/pafmini_0346A8", _ZN3paf6PhList8GetStyleEiRf);
 #endif
 
-#if FW_VERSION < 250
+#if FW_VERSION >= 150 && FW_VERSION < 250
 INCLUDE_ASM("nonmatchings/pafmini_0346A8", func_00077A00);
+#endif
+
+#if FW_VERSION == 100
+s32 func_00077A00(void *arg0, s32 arg1, s32 *arg2) {
+    s32 var_a5;
+
+    var_a5 = 0;
+    if (arg1 != 0xE) {
+        var_a5 = _ZN3paf8PhWidget8GetStyleEiRi(arg0, arg1, arg2);
+    } else {
+        *arg2 = M2C_FIELD(arg0, s32 *, 0x360);
+    }
+    return var_a5;
+}
 #endif
 
 #if FW_VERSION == 282
