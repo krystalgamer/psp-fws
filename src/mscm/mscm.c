@@ -1475,11 +1475,38 @@ s32 func_00005AA8(SceMScmHC *hc, s32 mode) {
 }
 #endif
 
-#if FW_VERSION < 250
-INCLUDE_ASM("nonmatchings/mscm", func_00005AD0);
+#if FW_VERSION < 201
+s32 func_00005AD0(s32 slot, u32 mode) {
+    s32 ret;
+    s32 clk;
+
+    ret = 0x80220081;
+    if (slot == 0) {
+        switch (mode) {
+        case 0:
+            return 0;
+        case 1:
+            clk = 2;
+            break;
+        case 2:
+            clk = 0;
+            break;
+        case 3:
+            clk = 1;
+            break;
+        default:
+            return 0x80220081;
+        }
+        sceSysregMsifClkSelect(slot, clk);
+        ret = 0;
+    }
+    return ret;
+}
 #endif
 
 #if FW_VERSION == 201
+INCLUDE_ASM("nonmatchings/mscm", func_00005AD0);
+
 INCLUDE_ASM("nonmatchings/mscm", func_00005B3C);
 #endif
 
@@ -1527,7 +1554,24 @@ s32 sceMScmSetPullDownRegByDesc(SceMScmHC *hc, s32 on) {
 }
 #endif
 
-#if FW_VERSION < 282
+#if FW_VERSION < 201 || (FW_VERSION >= 250 && FW_VERSION < 282)
+s32 sceMScmSetPullDownReg(s32 slot, s32 on) {
+    s32 ret;
+
+    ret = 0x80220081;
+    if (slot == 0) {
+        if (on != 0) {
+            sceSysreg_driver_55B18B84(slot);
+        } else {
+            sceSysreg_driver_2112E686(slot);
+        }
+        ret = 0;
+    }
+    return ret;
+}
+#endif
+
+#if FW_VERSION == 201
 INCLUDE_ASM("nonmatchings/mscm", sceMScmSetPullDownReg);
 #endif
 
@@ -1545,9 +1589,44 @@ s32 func_00005C58(s32 slot) {
 INCLUDE_ASM("nonmatchings/mscm", func_00005C58);
 #endif
 
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/mscm", func_00005C8C);
+#if FW_VERSION < 201
+s32 func_00005C8C(s32 slot, s32 *out) {
+    s32 ret;
 
+    ret = 0x80220081;
+    if (slot == 0) {
+        if (D_00006F0C != 0) {
+            *out = 0;
+        } else {
+            *out = sceSysregMsifGetConnectStatus(slot);
+        }
+        ret = 0;
+    }
+    return ret;
+}
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 282
+INCLUDE_ASM("nonmatchings/mscm", func_00005C8C);
+#endif
+
+#if FW_VERSION < 201
+s32 func_00005CE4(s32 slot, s32 *a, s32 *b) {
+    s32 ret;
+    u32 v;
+
+    ret = 0x80220081;
+    if (slot == 0) {
+        v = sceSysregMsifQueryConnectIntr(slot);
+        *a = v & 1;
+        ret = 0;
+        *b = (v >> 1) & 1;
+    }
+    return ret;
+}
+#endif
+
+#if FW_VERSION >= 201 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/mscm", func_00005CE4);
 #endif
 
@@ -1619,7 +1698,26 @@ s32 sceMScmGetSlotState(SceMScmHC *hc, s32 *out) {
 INCLUDE_ASM("nonmatchings/mscm", sceMScmGetSlotState);
 #endif
 
-#if FW_VERSION < 250
+#if FW_VERSION < 201
+s32 func_00005E58(s32 slot, s32 on) {
+    s32 ret;
+
+    ret = 0x80220081;
+    if (slot == 0) {
+        if (on != 0) {
+            sceSysregMsifClkEnable(slot);
+            sceSysregMsifBusClockEnable(0);
+        } else {
+            sceSysregMsifClkDisable(slot);
+            sceSysregMsifBusClockDisable(0);
+        }
+        ret = 0;
+    }
+    return ret;
+}
+#endif
+
+#if FW_VERSION == 201
 INCLUDE_ASM("nonmatchings/mscm", func_00005E58);
 #endif
 
