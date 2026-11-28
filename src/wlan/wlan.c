@@ -4739,7 +4739,36 @@ INCLUDE_RODATA("nonmatchings/wlan", D_000190C4);
 INCLUDE_RODATA("nonmatchings/wlan", D_000190EC);
 
 INCLUDE_RODATA("nonmatchings/wlan", D_000190F8);
+#endif
 
+#if FW_VERSION < 150
+SceWlanMlmeSync *func_00015B48(SceWlanMac *mac) {
+    SceWlanMlmeSync *s = func_0000840C(mac->sc, sizeof(SceWlanMlmeSync));
+    SceWlanMlmeBuf *b;
+
+    if (s == NULL)
+        return NULL;
+    memset(s, 0, sizeof(SceWlanMlmeSync));
+    s->flags = 0;
+    b = func_0000840C(mac->sc, 0xC04);
+    s->buf = b;
+    if (b == NULL) {
+        func_000067B8(mac->sc, s);
+        return NULL;
+    }
+    b->sema = sceKernelCreateSema("SceWlanChipCmdLock", 1, 1, 1, NULL);
+    s->sema3C = sceKernelCreateSema("SceWlanGameDataCacheLock", 1, 1, 1, NULL);
+    s->evf34 = sceKernelCreateEventFlag("SceWlanChipHostEvent", 0x201, 0, NULL);
+    s->evf38 = sceKernelCreateEventFlag("SceWlanChipCardEvent", 0x201, 0, NULL);
+    s->unk50 = func_0000840C(mac->sc, 0x93A);
+    s->unk54 = func_0000840C(mac->sc, 0x942);
+    s->mac = mac;
+    s->unk78 |= 3;
+    return s;
+}
+#endif
+
+#if (FW_VERSION >= 150 && FW_VERSION < 250) || FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/wlan", func_00015B48);
 #endif
 

@@ -208,12 +208,14 @@ typedef struct {
     SceUID evf38;               /* 0x38 */
     SceUID sema3C;              /* 0x3C */
     SceWlanMlmeBuf *buf;        /* 0x40 */
-    u8 unk44[0x50 - 0x44];
+    SceWlanMac *mac;            /* 0x44 */
+    u8 unk48[0x50 - 0x48];
     void *unk50;                /* 0x50 */
     void *unk54;                /* 0x54 */
     u8 unk58[0x78 - 0x58];
     u32 unk78;                  /* 0x78 */
 } SceWlanMlmeSync;
+typedef char chk_SceWlanMlmeSync[(sizeof(SceWlanMlmeSync) == 0x7C) ? 1 : -1];
 
 /* MAC/chip state (D_000191B0->mac); offsets are 1.00's, 1.50 inserts 0x3C bytes before 0x7C */
 struct SceWlanMac {
