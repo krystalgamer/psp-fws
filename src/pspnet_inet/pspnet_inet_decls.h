@@ -640,7 +640,19 @@ struct if_data {
     u64 ifi_mtu;                        /* 0x08 */
     u64 ifi_metric;                     /* 0x10 */
     u64 ifi_baudrate;                   /* 0x18 */
+    u64 ifi_ipackets;                   /* 0x20 */
+    u64 ifi_ierrors;                    /* 0x28 */
+    u64 ifi_opackets;                   /* 0x30 */
+    u64 ifi_oerrors;                    /* 0x38 */
+    u64 ifi_collisions;                 /* 0x40 */
+    u64 ifi_ibytes;                     /* 0x48 */
+    u64 ifi_obytes;                     /* 0x50 */
+    u64 ifi_imcasts;                    /* 0x58 */
+    u64 ifi_omcasts;                    /* 0x60 */
+    u64 ifi_iqdrops;                    /* 0x68 */
+    u64 ifi_noproto;                    /* 0x70 */
 };
+typedef char chk_if_data[(sizeof(struct if_data) == 0x78) ? 1 : -1];
 
 /* struct ifnet (NetBSD 1.5 if.h, partial) */
 struct ifnet {
@@ -655,8 +667,6 @@ struct ifnet {
     s16 if_flags;                       /* 0x30 IFF_* */
     u8 unk32[0x38 - 0x32];
     struct if_data if_data;             /* 0x38 */
-    u8 unk58[0xC];
-    u8 unk64[0xB0 - 0x58 - 0xC];
     s32 (*if_output)();                 /* 0xB0 */
     void (*if_input)(struct ifnet *ifp, struct mbuf *m); /* 0xB4 */
     void (*if_start)(struct ifnet *ifp); /* 0xB8 */
@@ -754,6 +764,16 @@ struct rt_addrinfo {
     struct sockaddr *rti_info[RTAX_MAX]; /* 0x04 */
 };
 /* struct rt_msghdr (route.h), route_cb (rtsock.c) */
+struct if_msghdr {
+    u16 ifm_msglen;
+    u8 ifm_version;
+    u8 ifm_type;
+    s32 ifm_addrs;
+    s32 ifm_flags;
+    u16 ifm_index;
+    struct if_data ifm_data;
+};
+#define RTM_IFINFO 0xf
 struct rt_msghdr {
     u16 rtm_msglen;
     u8 rtm_version;
@@ -2145,7 +2165,7 @@ s32 func_0000D338(struct Unk_func_0000D338_0 *arg0, s32 arg1);
 s32 func_0000D378(s32);
 void func_0000DD34(s32 arg0, void *arg1, void *arg2);
 void func_0000DDCC(s32 arg0, struct Unk_func_0000DDCC_1 *arg1, struct Unk_func_0000DDCC_2 *arg2);
-s32 func_0000E3F0(s32);
+void func_0000E3F0(struct ifnet *ifp);
 s32 func_0000E448(s32, s32);
 s32 func_0000E4E4(s32, s32);
 struct mbuf *func_0000E5A4(s32 type, struct rt_addrinfo *rtinfo, char *data, s32 datalen);

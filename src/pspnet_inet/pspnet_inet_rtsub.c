@@ -205,7 +205,30 @@ void rt_missmsg(s32 type, struct rt_addrinfo *rtinfo, s32 flags, s32 error)
 INCLUDE_ASM("nonmatchings/pspnet_inet_rtsub", rt_missmsg);
 #endif
 
+#if FW_VERSION < 201
+void func_0000E3F0(struct ifnet *ifp)
+{
+	struct if_msghdr ifm;
+	struct mbuf *m;
+	struct rt_addrinfo info;
+
+	if (route_cb.any_count == 0)
+		return;
+	__builtin_memset(&info, 0, sizeof(info));
+	func_0002C94C(&ifm, 0, sizeof(ifm));
+	ifm.ifm_index = ifp->if_index;
+	ifm.ifm_flags = ifp->if_flags;
+	ifm.ifm_data = ifp->if_data;
+	ifm.ifm_addrs = 0;
+	m = func_0000E5A4(RTM_IFINFO, &info, (char *)&ifm, sizeof(ifm));
+	if (m == 0)
+		return;
+	route_proto.sp_protocol = 0;
+	func_0000EE68(m, &route_proto, &route_src, &route_dst);
+}
+#else
 INCLUDE_ASM("nonmatchings/pspnet_inet_rtsub", func_0000E3F0);
+#endif
 
 #if FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_inet_rtsub", func_0000E448);
