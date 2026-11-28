@@ -284,6 +284,12 @@ typedef struct SceTimer {
     SceKernelSysClock time; /* 0x08: expiry time */
 } SceTimer;
 
+/* "VTimer" uid type data (partial) */
+typedef struct SceVTimer {
+    s32 active; /* 0x00 */
+    SceKernelSysClock base; /* 0x04: system time when started */
+} SceVTimer;
+
 enum SceThreadStatus {
     THREAD_RUNNING = 1,
     THREAD_READY = 2,
