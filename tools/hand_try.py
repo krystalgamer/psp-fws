@@ -97,6 +97,11 @@ def build_map_addrs(mod):
         for m in re.finditer(r"^\s+0x([0-9a-f]+)\s+([A-Za-z_]\w*)$", mp.read_text(), re.M):
             if not m[2].endswith("NON_MATCHING"):
                 out.setdefault(m[2], int(m[1], 16))
+    # the map is section-relative for data; symbol_addrs holds the module addresses the immediates use
+    sa = ROOT / "config" / mod.ver / f"symbol_addrs.{mod.mod}.txt"
+    if sa.exists():
+        for m in re.finditer(r"^\s*([A-Za-z_]\w*)\s*=\s*0x([0-9A-Fa-f]+)\s*;", sa.read_text(), re.M):
+            out[m[1]] = int(m[2], 16)
     return out
 
 
