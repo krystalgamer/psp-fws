@@ -989,17 +989,17 @@ s32 func_00003F3C(SceUmd9660Drive *drive, s32 arg1, void *buf) {
 INCLUDE_ASM("nonmatchings/umd9660", func_00003F3C);
 #endif
 
-#if FW_VERSION == 100
+#if FW_VERSION < 150
 s32 func_0000420C(void) {
     if (sceKernelDipswAll() & 0x10000) {
         return sceUmd9660_driver_F42C0AEE();
     }
+#if FW_VERSION == 100
     return sceUmdMan_driver_E192C10A()->unk70;
-}
+#else
+    return sceUmdMan_driver_E192C10A()->unk74;
 #endif
-
-#if FW_VERSION >= 102 && FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/umd9660", func_0000420C);
+}
 #endif
 
 #if FW_VERSION == 271
