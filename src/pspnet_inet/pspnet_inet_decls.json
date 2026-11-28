@@ -393,8 +393,6 @@
   "D_0002C234": "extern s32 D_0002C234;",
   "D_0002C270": "extern s32 D_0002C270; /* icmpreturndatabytes */",
   "D_0002C318": "extern s32 D_0002C318;",
-  "D_0002C31C": "extern s32 D_0002C31C;",
-  "D_0002C320": "extern s32 D_0002C320;",
   "D_0002C358": "extern s32 D_0002C358;",
   "D_0002C364": "extern s32 D_0002C364;",
   "D_0002C368": "extern s32 D_0002C368;",
@@ -535,6 +533,8 @@
   "tcp_syn_cache_interval": "extern s32 tcp_syn_cache_interval;",
   "tcp_totbackoff": "extern s32 tcp_totbackoff; /* tcp_totbackoff */",
   "udbtable": "extern struct inpcbtable udbtable;",
+  "udp_recvspace": "extern s32 udp_recvspace;",
+  "udp_sendspace": "extern s32 udp_sendspace;",
   "udp_stat": "extern struct udpstat udp_stat; /* udpstat */",
   "udpcksum": "extern s32 udpcksum; /* udpcksum */",
   "zeroin_addr": "extern struct in_addr zeroin_addr; /* zeroin_addr */"

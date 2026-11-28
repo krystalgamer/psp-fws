@@ -1584,8 +1584,6 @@ extern s32 D_0002C22C;
 extern s32 D_0002C234;
 extern s32 D_0002C270; /* icmpreturndatabytes */
 extern s32 D_0002C318;
-extern s32 D_0002C31C;
-extern s32 D_0002C320;
 extern s32 D_0002C358;
 extern s32 D_0002C364;
 extern s32 D_0002C368;
@@ -1726,6 +1724,8 @@ extern struct tcpstat tcp_stat;
 extern s32 tcp_syn_cache_interval;
 extern s32 tcp_totbackoff; /* tcp_totbackoff */
 extern struct inpcbtable udbtable;
+extern s32 udp_recvspace;
+extern s32 udp_sendspace;
 extern struct udpstat udp_stat; /* udpstat */
 extern s32 udpcksum; /* udpcksum */
 extern struct in_addr zeroin_addr; /* zeroin_addr */
