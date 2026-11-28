@@ -3,7 +3,7 @@
 /* cflags[152]: -O2 -frename-registers */
 /* cflags[151]: -O2 -frename-registers */
 /* cflags[150]: -O2 -frename-registers */
-/* cflags[100,102,103]: -O2 -frename-registers */
+/* cflags[100,102,103]: -O2 -frename-registers -fno-thread-jumps */
 #include "common.h"
 #include "libhttp_decls.h"
 
