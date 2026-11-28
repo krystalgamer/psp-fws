@@ -11,27 +11,14 @@ typedef struct {
 typedef char chk_SceSysregIntrState[(sizeof(SceSysregIntrState) == 8) ? 1 : -1];
 
 extern s32 D_000025C0;
-extern float D_00002610;
-extern SceSysregIntrState D_00002614;
 extern const float D_00002B04[];
 extern M2C_UNK D_00002BD0;
+extern float g_pllFrequency;
+extern SceSysregIntrState g_sysregIntr;
 
 s32 func_000000B4(void);
 s32 func_000000BC(void);
 s32 func_000000C4(void);
-s32 func_00000588(u32 mask, s32 on);
-s32 func_00000B64(u32 mask, s32 on);
-s32 func_00000C58(u32 mask, s32 on);
-s32 func_00001104(u32 mask, s32 on);
-s32 func_00001814(s32 intno, s32 unk, void *arg);
-s32 func_00001A68(u32 bit, s32 on);
-s32 func_00001AC8(s32 arg0, s32 bit);
-s32 func_00001AE8(s32 arg0, s32 bit);
-s32 func_00001AF8(u32 mask, s32 on);
-s32 func_00001B0C(s32 arg0, s32 bit, s32 *old);
-s32 func_00001B44(s32 arg0, s32 bit, s32 val);
-s32 func_00001B60(s32 arg0, s32 bit);
-s32 func_00001BF4(u32 mask, s32 on);
 s32 module_reboot_before(void);
 s32 module_start(void);
 float sceClkcGetBusFrequency(void);
@@ -61,5 +48,18 @@ float sceSysregPllGetBaseFrequency(void);
 float sceSysregPllGetFrequency(void);
 float sceSysregPllUpdateFrequency(void);
 s32 sceSysregUsbAcquireIntr(s32 arg0);
+s32 sysregIntrHandler(s32 intno, s32 unk, void *arg);
+s32 sysregSetBusClkBit(u32 mask, s32 on);
+s32 sysregSetClk1Bit(u32 mask, s32 on);
+s32 sysregSetClk2Bit(u32 mask, s32 on);
+s32 sysregSetGpioIoBit(u32 bit, s32 on);
+s32 sysregSetIoBit(u32 mask, s32 on);
+s32 sysregSetResetBit(u32 mask, s32 on);
+s32 sysregSetUnk74Bit(u32 mask, s32 on);
+s32 sysregSubIntrDisable(s32 arg0, s32 bit);
+s32 sysregSubIntrEnable(s32 arg0, s32 bit);
+s32 sysregSubIntrIsOccured(s32 arg0, s32 bit);
+s32 sysregSubIntrResume(s32 arg0, s32 bit, s32 val);
+s32 sysregSubIntrSuspend(s32 arg0, s32 bit, s32 *old);
 
 #endif

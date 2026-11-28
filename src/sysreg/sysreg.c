@@ -156,7 +156,7 @@ u32 sceSysregGetFuseConfig(void) {
 
 #if FW_VERSION < 271
 s32 sceSysregTopResetEnable(void) {
-    return func_00000588(0x1, 1);
+    return sysregSetResetBit(0x1, 1);
 }
 #else
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregTopResetEnable);
@@ -164,7 +164,7 @@ INCLUDE_ASM("nonmatchings/sysreg", sceSysregTopResetEnable);
 
 #if FW_VERSION < 271
 s32 sceSysregScResetEnable(void) {
-    return func_00000588(0x2, 1);
+    return sysregSetResetBit(0x2, 1);
 }
 #else
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregScResetEnable);
@@ -172,7 +172,7 @@ INCLUDE_ASM("nonmatchings/sysreg", sceSysregScResetEnable);
 
 #if FW_VERSION < 271
 s32 sceSysregMeResetEnable(void) {
-    return func_00000588(0x4, 1);
+    return sysregSetResetBit(0x4, 1);
 }
 #else
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregMeResetEnable);
@@ -180,7 +180,7 @@ INCLUDE_ASM("nonmatchings/sysreg", sceSysregMeResetEnable);
 
 #if FW_VERSION < 271
 s32 sceSysregMeResetDisable(void) {
-    return func_00000588(0x4, 0);
+    return sysregSetResetBit(0x4, 0);
 }
 #else
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregMeResetDisable);
@@ -188,7 +188,7 @@ INCLUDE_ASM("nonmatchings/sysreg", sceSysregMeResetDisable);
 
 #if FW_VERSION < 271
 s32 sceSysregAwResetEnable(void) {
-    return func_00000588(0x8, 1);
+    return sysregSetResetBit(0x8, 1);
 }
 #else
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregAwResetEnable);
@@ -196,7 +196,7 @@ INCLUDE_ASM("nonmatchings/sysreg", sceSysregAwResetEnable);
 
 #if FW_VERSION < 271
 s32 sceSysregAwResetDisable(void) {
-    return func_00000588(0x8, 0);
+    return sysregSetResetBit(0x8, 0);
 }
 #else
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregAwResetDisable);
@@ -204,7 +204,7 @@ INCLUDE_ASM("nonmatchings/sysreg", sceSysregAwResetDisable);
 
 #if FW_VERSION < 271
 s32 sceSysregVmeResetEnable(void) {
-    return func_00000588(0x10, 1);
+    return sysregSetResetBit(0x10, 1);
 }
 #else
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregVmeResetEnable);
@@ -212,7 +212,7 @@ INCLUDE_ASM("nonmatchings/sysreg", sceSysregVmeResetEnable);
 
 #if FW_VERSION < 271
 s32 sceSysregVmeResetDisable(void) {
-    return func_00000588(0x10, 0);
+    return sysregSetResetBit(0x10, 0);
 }
 #else
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregVmeResetDisable);
@@ -220,7 +220,7 @@ INCLUDE_ASM("nonmatchings/sysreg", sceSysregVmeResetDisable);
 
 #if FW_VERSION < 271
 s32 sceSysregAvcResetEnable(void) {
-    return func_00000588(0x20, 1);
+    return sysregSetResetBit(0x20, 1);
 }
 #else
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregAvcResetEnable);
@@ -228,7 +228,7 @@ INCLUDE_ASM("nonmatchings/sysreg", sceSysregAvcResetEnable);
 
 #if FW_VERSION < 271
 s32 sceSysregAvcResetDisable(void) {
-    return func_00000588(0x20, 0);
+    return sysregSetResetBit(0x20, 0);
 }
 #else
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregAvcResetDisable);
@@ -236,7 +236,7 @@ INCLUDE_ASM("nonmatchings/sysreg", sceSysregAvcResetDisable);
 
 #if FW_VERSION < 271
 s32 sceSysregUsbResetEnable(void) {
-    return func_00000588(0x40, 1);
+    return sysregSetResetBit(0x40, 1);
 }
 #else
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregUsbResetEnable);
@@ -244,7 +244,7 @@ INCLUDE_ASM("nonmatchings/sysreg", sceSysregUsbResetEnable);
 
 #if FW_VERSION < 271
 s32 sceSysregUsbResetDisable(void) {
-    return func_00000588(0x40, 0);
+    return sysregSetResetBit(0x40, 0);
 }
 #else
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregUsbResetDisable);
@@ -252,7 +252,7 @@ INCLUDE_ASM("nonmatchings/sysreg", sceSysregUsbResetDisable);
 
 #if FW_VERSION < 271
 s32 sceSysregAtaResetEnable(void) {
-    return func_00000588(0x80, 1);
+    return sysregSetResetBit(0x80, 1);
 }
 #else
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregAtaResetEnable);
@@ -260,7 +260,7 @@ INCLUDE_ASM("nonmatchings/sysreg", sceSysregAtaResetEnable);
 
 #if FW_VERSION < 271
 s32 sceSysregAtaResetDisable(void) {
-    return func_00000588(0x80, 0);
+    return sysregSetResetBit(0x80, 0);
 }
 #else
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregAtaResetDisable);
@@ -269,7 +269,7 @@ INCLUDE_ASM("nonmatchings/sysreg", sceSysregAtaResetDisable);
 #if FW_VERSION < 271
 s32 sceSysregMsifResetEnable(u32 n) {
     if (n < 2) {
-        return func_00000588(0x100 << n, 1);
+        return sysregSetResetBit(0x100 << n, 1);
     }
     return 0x80000102;
 }
@@ -280,7 +280,7 @@ INCLUDE_ASM("nonmatchings/sysreg", sceSysregMsifResetEnable);
 #if FW_VERSION < 271
 s32 sceSysregMsifResetDisable(u32 n) {
     if (n < 2) {
-        return func_00000588(0x100 << n, 0);
+        return sysregSetResetBit(0x100 << n, 0);
     }
     return 0x80000102;
 }
@@ -290,7 +290,7 @@ INCLUDE_ASM("nonmatchings/sysreg", sceSysregMsifResetDisable);
 
 #if FW_VERSION < 271
 s32 sceSysregKirkResetEnable(void) {
-    return func_00000588(0x400, 1);
+    return sysregSetResetBit(0x400, 1);
 }
 #else
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregKirkResetEnable);
@@ -298,7 +298,7 @@ INCLUDE_ASM("nonmatchings/sysreg", sceSysregKirkResetEnable);
 
 #if FW_VERSION < 271
 s32 sceSysregKirkResetDisable(void) {
-    return func_00000588(0x400, 0);
+    return sysregSetResetBit(0x400, 0);
 }
 #else
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregKirkResetDisable);
@@ -313,7 +313,7 @@ INCLUDE_ASM("nonmatchings/sysreg", sceSysregUsbhostResetDisable);
 #endif
 
 #if FW_VERSION < 271
-INCLUDE_ASM("nonmatchings/sysreg", func_00000588);
+INCLUDE_ASM("nonmatchings/sysreg", sysregSetResetBit);
 #endif
 
 INCLUDE_RODATA("nonmatchings/sysreg", D_00002520);
@@ -330,7 +330,7 @@ INCLUDE_RODATA("nonmatchings/sysreg", D_00002B04);
 float sceSysregPllUpdateFrequency(void) {
     u32 sel = *(volatile u32 *)0xBC100068 & 0xF;
     u32 mul = __builtin_allegrex_ext(*(volatile u32 *)0xBC1000FC, 8, 8);
-    return D_00002610 = (s32)mul * 37.0f * D_00002B04[sel];
+    return g_pllFrequency = (s32)mul * 37.0f * D_00002B04[sel];
 }
 #endif
 
@@ -372,7 +372,7 @@ INCLUDE_ASM("nonmatchings/sysreg", sceSysregPllUpdateFrequency);
 #endif
 
 float sceSysregPllGetFrequency(void) {
-    return D_00002610;
+    return g_pllFrequency;
 }
 
 s32 sceSysregPllGetOutSelect(void) {
@@ -383,7 +383,7 @@ s32 sceSysregPllGetOutSelect(void) {
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregPllSetOutSelect);
 #else
 s32 sceSysregMeBusClockEnable(void) {
-    return func_00000B64(0x1, 1);
+    return sysregSetBusClkBit(0x1, 1);
 }
 #endif
 
@@ -391,7 +391,7 @@ s32 sceSysregMeBusClockEnable(void) {
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregMeBusClockEnable);
 #else
 s32 sceSysregMeBusClockDisable(void) {
-    return func_00000B64(0x1, 0);
+    return sysregSetBusClkBit(0x1, 0);
 }
 #endif
 
@@ -399,7 +399,7 @@ s32 sceSysregMeBusClockDisable(void) {
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregMeBusClockDisable);
 #else
 s32 sceSysregAwRegABusClockEnable(void) {
-    return func_00000B64(0x2, 1);
+    return sysregSetBusClkBit(0x2, 1);
 }
 #endif
 
@@ -407,7 +407,7 @@ s32 sceSysregAwRegABusClockEnable(void) {
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregAwRegABusClockEnable);
 #else
 s32 sceSysregAwRegABusClockDisable(void) {
-    return func_00000B64(0x2, 0);
+    return sysregSetBusClkBit(0x2, 0);
 }
 #endif
 
@@ -415,7 +415,7 @@ s32 sceSysregAwRegABusClockDisable(void) {
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregAwRegABusClockDisable);
 #else
 s32 sceSysregAwRegBBusClockEnable(void) {
-    return func_00000B64(0x4, 1);
+    return sysregSetBusClkBit(0x4, 1);
 }
 #endif
 
@@ -423,7 +423,7 @@ s32 sceSysregAwRegBBusClockEnable(void) {
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregAwRegBBusClockEnable);
 #else
 s32 sceSysregAwRegBBusClockDisable(void) {
-    return func_00000B64(0x4, 0);
+    return sysregSetBusClkBit(0x4, 0);
 }
 #endif
 
@@ -431,7 +431,7 @@ s32 sceSysregAwRegBBusClockDisable(void) {
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregAwRegBBusClockDisable);
 #else
 s32 sceSysregAwEdramBusClockEnable(void) {
-    return func_00000B64(0x8, 1);
+    return sysregSetBusClkBit(0x8, 1);
 }
 #endif
 
@@ -439,7 +439,7 @@ s32 sceSysregAwEdramBusClockEnable(void) {
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregAwEdramBusClockEnable);
 #else
 s32 sceSysregAwEdramBusClockDisable(void) {
-    return func_00000B64(0x8, 0);
+    return sysregSetBusClkBit(0x8, 0);
 }
 #endif
 
@@ -447,7 +447,7 @@ s32 sceSysregAwEdramBusClockDisable(void) {
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregAwEdramBusClockDisable);
 #else
 s32 sceSysregDmacplusBusClockEnable(void) {
-    return func_00000B64(0x10, 1);
+    return sysregSetBusClkBit(0x10, 1);
 }
 #endif
 
@@ -455,7 +455,7 @@ s32 sceSysregDmacplusBusClockEnable(void) {
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregDmacplusBusClockEnable);
 #else
 s32 sceSysregDmacplusBusClockDisable(void) {
-    return func_00000B64(0x10, 0);
+    return sysregSetBusClkBit(0x10, 0);
 }
 #endif
 
@@ -464,7 +464,7 @@ INCLUDE_ASM("nonmatchings/sysreg", sceSysregDmacplusBusClockDisable);
 #else
 s32 sceSysregDmacBusClockEnable(u32 n) {
     if (n < 2) {
-        return func_00000B64(0x20 << n, 1);
+        return sysregSetBusClkBit(0x20 << n, 1);
     }
     return 0x80000102;
 }
@@ -475,7 +475,7 @@ INCLUDE_ASM("nonmatchings/sysreg", sceSysregDmacBusClockEnable);
 #else
 s32 sceSysregDmacBusClockDisable(u32 n) {
     if (n < 2) {
-        return func_00000B64(0x20 << n, 0);
+        return sysregSetBusClkBit(0x20 << n, 0);
     }
     return 0x80000102;
 }
@@ -485,7 +485,7 @@ s32 sceSysregDmacBusClockDisable(u32 n) {
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregDmacBusClockDisable);
 #else
 s32 sceSysregKirkBusClockEnable(void) {
-    return func_00000B64(0x80, 1);
+    return sysregSetBusClkBit(0x80, 1);
 }
 #endif
 
@@ -493,7 +493,7 @@ s32 sceSysregKirkBusClockEnable(void) {
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregKirkBusClockEnable);
 #else
 s32 sceSysregKirkBusClockDisable(void) {
-    return func_00000B64(0x80, 0);
+    return sysregSetBusClkBit(0x80, 0);
 }
 #endif
 
@@ -501,7 +501,7 @@ s32 sceSysregKirkBusClockDisable(void) {
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregKirkBusClockDisable);
 #else
 s32 sceSysregAtaBusClockEnable(void) {
-    return func_00000B64(0x100, 1);
+    return sysregSetBusClkBit(0x100, 1);
 }
 #endif
 
@@ -509,7 +509,7 @@ s32 sceSysregAtaBusClockEnable(void) {
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregAtaBusClockEnable);
 #else
 s32 sceSysregAtaBusClockDisable(void) {
-    return func_00000B64(0x100, 0);
+    return sysregSetBusClkBit(0x100, 0);
 }
 #endif
 
@@ -517,7 +517,7 @@ s32 sceSysregAtaBusClockDisable(void) {
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregAtaBusClockDisable);
 #else
 s32 sceSysregUsbBusClockEnable(void) {
-    return func_00000B64(0x200, 1);
+    return sysregSetBusClkBit(0x200, 1);
 }
 #endif
 
@@ -525,7 +525,7 @@ s32 sceSysregUsbBusClockEnable(void) {
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregUsbBusClockEnable);
 #else
 s32 sceSysregUsbBusClockDisable(void) {
-    return func_00000B64(0x200, 0);
+    return sysregSetBusClkBit(0x200, 0);
 }
 #endif
 
@@ -534,7 +534,7 @@ INCLUDE_ASM("nonmatchings/sysreg", sceSysregUsbBusClockDisable);
 #else
 s32 sceSysregMsifBusClockEnable(u32 n) {
     if (n < 2) {
-        return func_00000B64(0x400 << n, 1);
+        return sysregSetBusClkBit(0x400 << n, 1);
     }
     return 0x80000102;
 }
@@ -545,7 +545,7 @@ INCLUDE_ASM("nonmatchings/sysreg", sceSysregMsifBusClockEnable);
 #else
 s32 sceSysregMsifBusClockDisable(u32 n) {
     if (n < 2) {
-        return func_00000B64(0x400 << n, 0);
+        return sysregSetBusClkBit(0x400 << n, 0);
     }
     return 0x80000102;
 }
@@ -555,7 +555,7 @@ s32 sceSysregMsifBusClockDisable(u32 n) {
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregMsifBusClockDisable);
 #else
 s32 sceSysregEmcddrBusClockEnable(void) {
-    return func_00000B64(0x1000, 1);
+    return sysregSetBusClkBit(0x1000, 1);
 }
 #endif
 
@@ -563,7 +563,7 @@ s32 sceSysregEmcddrBusClockEnable(void) {
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregEmcddrBusClockEnable);
 #else
 s32 sceSysregEmcddrBusClockDisable(void) {
-    return func_00000B64(0x1000, 0);
+    return sysregSetBusClkBit(0x1000, 0);
 }
 #endif
 
@@ -571,7 +571,7 @@ s32 sceSysregEmcddrBusClockDisable(void) {
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregEmcddrBusClockDisable);
 #else
 s32 sceSysregEmcsmBusClockEnable(void) {
-    return func_00000B64(0x2000, 1);
+    return sysregSetBusClkBit(0x2000, 1);
 }
 #endif
 
@@ -579,7 +579,7 @@ s32 sceSysregEmcsmBusClockEnable(void) {
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregEmcsmBusClockEnable);
 #else
 s32 sceSysregEmcsmBusClockDisable(void) {
-    return func_00000B64(0x2000, 0);
+    return sysregSetBusClkBit(0x2000, 0);
 }
 #endif
 
@@ -587,7 +587,7 @@ s32 sceSysregEmcsmBusClockDisable(void) {
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregEmcsmBusClockDisable);
 #else
 s32 sceSysregApbBusClockEnable(void) {
-    return func_00000B64(0x4000, 1);
+    return sysregSetBusClkBit(0x4000, 1);
 }
 #endif
 
@@ -595,7 +595,7 @@ s32 sceSysregApbBusClockEnable(void) {
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregApbBusClockEnable);
 #else
 s32 sceSysregApbBusClockDisable(void) {
-    return func_00000B64(0x4000, 0);
+    return sysregSetBusClkBit(0x4000, 0);
 }
 #endif
 
@@ -604,7 +604,7 @@ INCLUDE_ASM("nonmatchings/sysreg", sceSysregApbBusClockDisable);
 #else
 s32 sceSysregAudioBusClockEnable(u32 n) {
     if (n < 2) {
-        return func_00000B64(0x8000 << n, 1);
+        return sysregSetBusClkBit(0x8000 << n, 1);
     }
     return 0x80000102;
 }
@@ -615,7 +615,7 @@ INCLUDE_ASM("nonmatchings/sysreg", sceSysregAudioBusClockEnable);
 #else
 s32 sceSysregAudioBusClockDisable(u32 n) {
     if (n < 2) {
-        return func_00000B64(0x8000 << n, 0);
+        return sysregSetBusClkBit(0x8000 << n, 0);
     }
     return 0x80000102;
 }
@@ -632,7 +632,7 @@ INCLUDE_ASM("nonmatchings/sysreg", sceSysregUsbhostBusClockEnable);
 
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregUsbhostBusClockDisable);
 #else
-INCLUDE_ASM("nonmatchings/sysreg", func_00000B64);
+INCLUDE_ASM("nonmatchings/sysreg", sysregSetBusClkBit);
 #endif
 
 #if FW_VERSION >= 271
@@ -650,7 +650,7 @@ INCLUDE_ASM("nonmatchings/sysreg", sceSysregUsbhostClkDisable);
 #else
 s32 sceSysregMsifClkEnable(u32 n) {
     if (n < 2) {
-        return func_00000C58(0x100 << n, 1);
+        return sysregSetClk1Bit(0x100 << n, 1);
     }
     return 0x80000102;
 }
@@ -661,7 +661,7 @@ INCLUDE_ASM("nonmatchings/sysreg", sceSysregMsifClkEnable);
 #else
 s32 sceSysregMsifClkDisable(u32 n) {
     if (n < 2) {
-        return func_00000C58(0x100 << n, 0);
+        return sysregSetClk1Bit(0x100 << n, 0);
     }
     return 0x80000102;
 }
@@ -670,27 +670,27 @@ s32 sceSysregMsifClkDisable(u32 n) {
 #if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregMsifClkDisable);
 #else
-INCLUDE_ASM("nonmatchings/sysreg", func_00000C58);
+INCLUDE_ASM("nonmatchings/sysreg", sysregSetClk1Bit);
 
 s32 sceSysregAtaClkEnable(void) {
-    return func_00000C58(0x1, 1);
+    return sysregSetClk1Bit(0x1, 1);
 }
 
 s32 sceSysregAtaClkDisable(void) {
-    return func_00000C58(0x1, 0);
+    return sysregSetClk1Bit(0x1, 0);
 }
 
 s32 sceSysregUsbClkEnable(u32 n) {
-    return func_00000C58((n & 0xF) << 4, 1);
+    return sysregSetClk1Bit((n & 0xF) << 4, 1);
 }
 
 s32 sceSysregUsbClkDisable(u32 n) {
-    return func_00000C58((n & 0xF) << 4, 0);
+    return sysregSetClk1Bit((n & 0xF) << 4, 0);
 }
 
 s32 sceSysregSpiClkEnable(u32 n) {
     if (n < 6) {
-        return func_00001104(0x1 << n, 1);
+        return sysregSetClk2Bit(0x1 << n, 1);
     }
     return 0x80000102;
 }
@@ -701,7 +701,7 @@ INCLUDE_ASM("nonmatchings/sysreg", sceSysregSpiClkEnable);
 #else
 s32 sceSysregSpiClkDisable(u32 n) {
     if (n < 6) {
-        return func_00001104(0x1 << n, 0);
+        return sysregSetClk2Bit(0x1 << n, 0);
     }
     return 0x80000102;
 }
@@ -712,7 +712,7 @@ INCLUDE_ASM("nonmatchings/sysreg", sceSysregSpiClkDisable);
 #else
 s32 sceSysregUartClkEnable(u32 n) {
     if (n < 6) {
-        return func_00001104(0x40 << n, 1);
+        return sysregSetClk2Bit(0x40 << n, 1);
     }
     return 0x80000102;
 }
@@ -723,7 +723,7 @@ INCLUDE_ASM("nonmatchings/sysreg", sceSysregUartClkEnable);
 #else
 s32 sceSysregUartClkDisable(u32 n) {
     if (n < 6) {
-        return func_00001104(0x40 << n, 0);
+        return sysregSetClk2Bit(0x40 << n, 0);
     }
     return 0x80000102;
 }
@@ -734,7 +734,7 @@ INCLUDE_ASM("nonmatchings/sysreg", sceSysregUartClkDisable);
 #else
 s32 sceSysregApbTimerClkEnable(u32 n) {
     if (n < 4) {
-        return func_00001104(0x1000 << n, 1);
+        return sysregSetClk2Bit(0x1000 << n, 1);
     }
     return 0x80000102;
 }
@@ -745,7 +745,7 @@ INCLUDE_ASM("nonmatchings/sysreg", sceSysregApbTimerClkEnable);
 #else
 s32 sceSysregApbTimerClkDisable(u32 n) {
     if (n < 4) {
-        return func_00001104(0x1000 << n, 0);
+        return sysregSetClk2Bit(0x1000 << n, 0);
     }
     return 0x80000102;
 }
@@ -756,7 +756,7 @@ INCLUDE_ASM("nonmatchings/sysreg", sceSysregApbTimerClkDisable);
 #else
 s32 sceSysregAudioClkEnable(u32 n) {
     if (n < 2) {
-        return func_00001104(0x10000 << n, 1);
+        return sysregSetClk2Bit(0x10000 << n, 1);
     }
     return 0x80000102;
 }
@@ -767,7 +767,7 @@ INCLUDE_ASM("nonmatchings/sysreg", sceSysregAudioClkEnable);
 #else
 s32 sceSysregAudioClkDisable(u32 n) {
     if (n < 2) {
-        return func_00001104(0x10000 << n, 0);
+        return sysregSetClk2Bit(0x10000 << n, 0);
     }
     return 0x80000102;
 }
@@ -777,7 +777,7 @@ s32 sceSysregAudioClkDisable(u32 n) {
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregAudioClkDisable);
 #else
 s32 sceSysregLcdcClkEnable(void) {
-    return func_00001104(0x40000, 1);
+    return sysregSetClk2Bit(0x40000, 1);
 }
 #endif
 
@@ -785,7 +785,7 @@ s32 sceSysregLcdcClkEnable(void) {
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregLcdcClkEnable);
 #else
 s32 sceSysregLcdcClkDisable(void) {
-    return func_00001104(0x40000, 0);
+    return sysregSetClk2Bit(0x40000, 0);
 }
 #endif
 
@@ -793,7 +793,7 @@ s32 sceSysregLcdcClkDisable(void) {
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregLcdcClkDisable);
 #else
 s32 sceSysregPwmClkEnable(void) {
-    return func_00001104(0x80000, 1);
+    return sysregSetClk2Bit(0x80000, 1);
 }
 #endif
 
@@ -801,7 +801,7 @@ s32 sceSysregPwmClkEnable(void) {
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregPwmClkEnable);
 #else
 s32 sceSysregPwmClkDisable(void) {
-    return func_00001104(0x80000, 0);
+    return sysregSetClk2Bit(0x80000, 0);
 }
 #endif
 
@@ -823,7 +823,7 @@ s32 sceSysregKeyClkDisable(void) {
 }
 
 s32 sceSysregIicClkEnable(void) {
-    return func_00001104(0x200000, 1);
+    return sysregSetClk2Bit(0x200000, 1);
 }
 #endif
 
@@ -831,7 +831,7 @@ s32 sceSysregIicClkEnable(void) {
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregIicClkEnable);
 #else
 s32 sceSysregIicClkDisable(void) {
-    return func_00001104(0x200000, 0);
+    return sysregSetClk2Bit(0x200000, 0);
 }
 #endif
 
@@ -839,7 +839,7 @@ s32 sceSysregIicClkDisable(void) {
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregIicClkDisable);
 #else
 s32 sceSysregSircsClkEnable(void) {
-    return func_00001104(0x400000, 1);
+    return sysregSetClk2Bit(0x400000, 1);
 }
 #endif
 
@@ -847,7 +847,7 @@ s32 sceSysregSircsClkEnable(void) {
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregSircsClkEnable);
 #else
 s32 sceSysregSircsClkDisable(void) {
-    return func_00001104(0x400000, 0);
+    return sysregSetClk2Bit(0x400000, 0);
 }
 #endif
 
@@ -855,7 +855,7 @@ s32 sceSysregSircsClkDisable(void) {
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregSircsClkDisable);
 #else
 s32 sceSysregGpioClkEnable(void) {
-    return func_00001104(0x800000, 1);
+    return sysregSetClk2Bit(0x800000, 1);
 }
 #endif
 
@@ -863,7 +863,7 @@ s32 sceSysregGpioClkEnable(void) {
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregGpioClkEnable);
 #else
 s32 sceSysregGpioClkDisable(void) {
-    return func_00001104(0x800000, 0);
+    return sysregSetClk2Bit(0x800000, 0);
 }
 #endif
 
@@ -871,7 +871,7 @@ s32 sceSysregGpioClkDisable(void) {
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregGpioClkDisable);
 #else
 s32 sceSysregAudioClkoutClkEnable(void) {
-    return func_00001104(0x1000000, 1);
+    return sysregSetClk2Bit(0x1000000, 1);
 }
 #endif
 
@@ -879,7 +879,7 @@ s32 sceSysregAudioClkoutClkEnable(void) {
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregAudioClkoutClkEnable);
 #else
 s32 sceSysregAudioClkoutClkDisable(void) {
-    return func_00001104(0x1000000, 0);
+    return sysregSetClk2Bit(0x1000000, 0);
 }
 #endif
 
@@ -890,7 +890,7 @@ INCLUDE_ASM("nonmatchings/sysreg", sceSysregUsbClkEnable);
 
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregUsbClkDisable);
 #else
-INCLUDE_ASM("nonmatchings/sysreg", func_00001104);
+INCLUDE_ASM("nonmatchings/sysreg", sysregSetClk2Bit);
 
 s32 sceSysregMsifClkSelect(u32 n, u32 sel) {
     s32 intr;
@@ -1074,7 +1074,7 @@ INCLUDE_ASM("nonmatchings/sysreg", sceSysregAudioClkoutClkSelect);
 
 #if FW_VERSION < 271
 s32 sceSysregEmcsmIoEnable(void) {
-    return func_00001AF8(0x2, 1);
+    return sysregSetIoBit(0x2, 1);
 }
 #else
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregEmcsmIoEnable);
@@ -1082,7 +1082,7 @@ INCLUDE_ASM("nonmatchings/sysreg", sceSysregEmcsmIoEnable);
 
 #if FW_VERSION < 271
 s32 sceSysregEmcsmIoDisable(void) {
-    return func_00001AF8(0x2, 0);
+    return sysregSetIoBit(0x2, 0);
 }
 #else
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregEmcsmIoDisable);
@@ -1090,7 +1090,7 @@ INCLUDE_ASM("nonmatchings/sysreg", sceSysregEmcsmIoDisable);
 
 #if FW_VERSION < 271
 s32 sceSysregUsbIoEnable(void) {
-    return func_00001AF8(0x4, 1);
+    return sysregSetIoBit(0x4, 1);
 }
 #else
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregUsbIoEnable);
@@ -1098,7 +1098,7 @@ INCLUDE_ASM("nonmatchings/sysreg", sceSysregUsbIoEnable);
 
 #if FW_VERSION < 271
 s32 sceSysregUsbIoDisable(void) {
-    return func_00001AF8(0x4, 0);
+    return sysregSetIoBit(0x4, 0);
 }
 #else
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregUsbIoDisable);
@@ -1106,7 +1106,7 @@ INCLUDE_ASM("nonmatchings/sysreg", sceSysregUsbIoDisable);
 
 #if FW_VERSION < 271
 s32 sceSysregAtaIoEnable(void) {
-    return func_00001AF8(0x8, 1);
+    return sysregSetIoBit(0x8, 1);
 }
 #else
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregAtaIoEnable);
@@ -1114,7 +1114,7 @@ INCLUDE_ASM("nonmatchings/sysreg", sceSysregAtaIoEnable);
 
 #if FW_VERSION < 271
 s32 sceSysregAtaIoDisable(void) {
-    return func_00001AF8(0x8, 0);
+    return sysregSetIoBit(0x8, 0);
 }
 #else
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregAtaIoDisable);
@@ -1123,7 +1123,7 @@ INCLUDE_ASM("nonmatchings/sysreg", sceSysregAtaIoDisable);
 #if FW_VERSION < 271
 s32 sceSysregMsifIoEnable(u32 n) {
     if (n < 2) {
-        return func_00001AF8(0x10 << n, 1);
+        return sysregSetIoBit(0x10 << n, 1);
     }
     return 0x80000102;
 }
@@ -1134,7 +1134,7 @@ INCLUDE_ASM("nonmatchings/sysreg", sceSysregMsifIoEnable);
 #if FW_VERSION < 271
 s32 sceSysregMsifIoDisable(u32 n) {
     if (n < 2) {
-        return func_00001AF8(0x10 << n, 0);
+        return sysregSetIoBit(0x10 << n, 0);
     }
     return 0x80000102;
 }
@@ -1144,7 +1144,7 @@ INCLUDE_ASM("nonmatchings/sysreg", sceSysregMsifIoDisable);
 
 #if FW_VERSION < 271
 s32 sceSysregLcdcIoEnable(void) {
-    return func_00001AF8(0x40, 1);
+    return sysregSetIoBit(0x40, 1);
 }
 #else
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregLcdcIoEnable);
@@ -1152,7 +1152,7 @@ INCLUDE_ASM("nonmatchings/sysreg", sceSysregLcdcIoEnable);
 
 #if FW_VERSION < 271
 s32 sceSysregLcdcIoDisable(void) {
-    return func_00001AF8(0x40, 0);
+    return sysregSetIoBit(0x40, 0);
 }
 #else
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregLcdcIoDisable);
@@ -1161,7 +1161,7 @@ INCLUDE_ASM("nonmatchings/sysreg", sceSysregLcdcIoDisable);
 #if FW_VERSION < 271
 s32 sceSysregAudioIoEnable(u32 n) {
     if (n < 2) {
-        return func_00001AF8(0x80 << n, 1);
+        return sysregSetIoBit(0x80 << n, 1);
     }
     return 0x80000102;
 }
@@ -1172,7 +1172,7 @@ INCLUDE_ASM("nonmatchings/sysreg", sceSysregAudioIoEnable);
 #if FW_VERSION < 271
 s32 sceSysregAudioIoDisable(u32 n) {
     if (n < 2) {
-        return func_00001AF8(0x80 << n, 0);
+        return sysregSetIoBit(0x80 << n, 0);
     }
     return 0x80000102;
 }
@@ -1182,7 +1182,7 @@ INCLUDE_ASM("nonmatchings/sysreg", sceSysregAudioIoDisable);
 
 #if FW_VERSION < 271
 s32 sceSysregIicIoEnable(void) {
-    return func_00001AF8(0x200, 1);
+    return sysregSetIoBit(0x200, 1);
 }
 #else
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregIicIoEnable);
@@ -1190,7 +1190,7 @@ INCLUDE_ASM("nonmatchings/sysreg", sceSysregIicIoEnable);
 
 #if FW_VERSION < 271
 s32 sceSysregIicIoDisable(void) {
-    return func_00001AF8(0x200, 0);
+    return sysregSetIoBit(0x200, 0);
 }
 #else
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregIicIoDisable);
@@ -1198,7 +1198,7 @@ INCLUDE_ASM("nonmatchings/sysreg", sceSysregIicIoDisable);
 
 #if FW_VERSION < 271
 s32 sceSysregSircsIoEnable(void) {
-    return func_00001AF8(0x400, 1);
+    return sysregSetIoBit(0x400, 1);
 }
 #else
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregSircsIoEnable);
@@ -1206,7 +1206,7 @@ INCLUDE_ASM("nonmatchings/sysreg", sceSysregSircsIoEnable);
 
 #if FW_VERSION < 271
 s32 sceSysregSircsIoDisable(void) {
-    return func_00001AF8(0x400, 0);
+    return sysregSetIoBit(0x400, 0);
 }
 #else
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregSircsIoDisable);
@@ -1214,7 +1214,7 @@ INCLUDE_ASM("nonmatchings/sysreg", sceSysregSircsIoDisable);
 
 #if FW_VERSION < 271
 s32 sceSysregAudioClkoutIoEnable(void) {
-    return func_00001AF8(0x800, 1);
+    return sysregSetIoBit(0x800, 1);
 }
 #else
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregAudioClkoutIoEnable);
@@ -1222,7 +1222,7 @@ INCLUDE_ASM("nonmatchings/sysreg", sceSysregAudioClkoutIoEnable);
 
 #if FW_VERSION < 271
 s32 sceSysregAudioClkoutIoDisable(void) {
-    return func_00001AF8(0x800, 0);
+    return sysregSetIoBit(0x800, 0);
 }
 #else
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregAudioClkoutIoDisable);
@@ -1244,7 +1244,7 @@ s32 sceSysregKeyIoDisable(void) {
 }
 
 s32 sceSysregPwmIoEnable(void) {
-    return func_00001AF8(0x2000, 1);
+    return sysregSetIoBit(0x2000, 1);
 }
 #else
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregPwmIoEnable);
@@ -1252,7 +1252,7 @@ INCLUDE_ASM("nonmatchings/sysreg", sceSysregPwmIoEnable);
 
 #if FW_VERSION < 271
 s32 sceSysregPwmIoDisable(void) {
-    return func_00001AF8(0x2000, 0);
+    return sysregSetIoBit(0x2000, 0);
 }
 #else
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregPwmIoDisable);
@@ -1265,7 +1265,7 @@ INCLUDE_ASM("nonmatchings/sysreg", sceSysregAtahddIoDisable);
 #if FW_VERSION < 271
 s32 sceSysregUartIoEnable(u32 n) {
     if (n < 6) {
-        return func_00001AF8(0x10000 << n, 1);
+        return sysregSetIoBit(0x10000 << n, 1);
     }
     return 0x80000102;
 }
@@ -1276,7 +1276,7 @@ INCLUDE_ASM("nonmatchings/sysreg", sceSysregUartIoEnable);
 #if FW_VERSION < 271
 s32 sceSysregUartIoDisable(u32 n) {
     if (n < 6) {
-        return func_00001AF8(0x10000 << n, 0);
+        return sysregSetIoBit(0x10000 << n, 0);
     }
     return 0x80000102;
 }
@@ -1287,7 +1287,7 @@ INCLUDE_ASM("nonmatchings/sysreg", sceSysregUartIoDisable);
 #if FW_VERSION < 271
 s32 sceSysregSpiIoEnable(u32 n) {
     if (n < 6) {
-        return func_00001AF8(0x1000000 << n, 1);
+        return sysregSetIoBit(0x1000000 << n, 1);
     }
     return 0x80000102;
 }
@@ -1298,7 +1298,7 @@ INCLUDE_ASM("nonmatchings/sysreg", sceSysregSpiIoEnable);
 #if FW_VERSION < 271
 s32 sceSysregSpiIoDisable(u32 n) {
     if (n < 6) {
-        return func_00001AF8(0x1000000 << n, 0);
+        return sysregSetIoBit(0x1000000 << n, 0);
     }
     return 0x80000102;
 }
@@ -1310,7 +1310,7 @@ INCLUDE_ASM("nonmatchings/sysreg", sceSysregGpioIoEnable);
 
 #if FW_VERSION < 271
 void sceSysregGpioIoEnable(s32 arg0) {
-    func_00001A68(arg0, 1);
+    sysregSetGpioIoBit(arg0, 1);
 }
 #else
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregGpioIoDisable);
@@ -1318,16 +1318,16 @@ INCLUDE_ASM("nonmatchings/sysreg", sceSysregGpioIoDisable);
 
 #if FW_VERSION < 271
 void sceSysregGpioIoDisable(s32 arg0) {
-    func_00001A68(arg0, 0);
+    sysregSetGpioIoBit(arg0, 0);
 }
 
-INCLUDE_ASM("nonmatchings/sysreg", func_00001A68);
+INCLUDE_ASM("nonmatchings/sysreg", sysregSetGpioIoBit);
 
-INCLUDE_ASM("nonmatchings/sysreg", func_00001AF8);
+INCLUDE_ASM("nonmatchings/sysreg", sysregSetIoBit);
 
 s32 sceSysreg_driver_55B18B84(u32 n) {
     if (n < 2) {
-        return func_00001BF4(1 << (n * 4), 0);
+        return sysregSetUnk74Bit(1 << (n * 4), 0);
     }
     return 0x80000102;
 }
@@ -1338,7 +1338,7 @@ INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_55B18B84);
 #if FW_VERSION < 271
 s32 sceSysreg_driver_2112E686(u32 n) {
     if (n < 2) {
-        return func_00001BF4(1 << (n * 4), 1);
+        return sysregSetUnk74Bit(1 << (n * 4), 1);
     }
     return 0x80000102;
 }
@@ -1347,11 +1347,11 @@ INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_2112E686);
 #endif
 
 #if FW_VERSION < 271
-INCLUDE_ASM("nonmatchings/sysreg", func_00001BF4);
+INCLUDE_ASM("nonmatchings/sysreg", sysregSetUnk74Bit);
 
 s32 sceSysreg_driver_7B9E9A53(u32 n) {
     if (n < 2) {
-        return func_00001BF4(2 << (n * 4), 0);
+        return sysregSetUnk74Bit(2 << (n * 4), 0);
     }
     return 0x80000102;
 }
@@ -1362,7 +1362,7 @@ INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_7B9E9A53);
 #if FW_VERSION < 271
 s32 sceSysreg_driver_7BDF0556(u32 n) {
     if (n < 2) {
-        return func_00001BF4(2 << (n * 4), 1);
+        return sysregSetUnk74Bit(2 << (n * 4), 1);
     }
     return 0x80000102;
 }
@@ -1372,7 +1372,7 @@ INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_7BDF0556);
 
 #if FW_VERSION < 271
 s32 sceSysreg_driver_8D0FED1E(void) {
-    return func_00001BF4(0x100, 1);
+    return sysregSetUnk74Bit(0x100, 1);
 }
 #else
 INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_8D0FED1E);
@@ -1380,7 +1380,7 @@ INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_8D0FED1E);
 
 #if FW_VERSION < 271
 s32 sceSysreg_driver_A46E9CA8(void) {
-    return func_00001BF4(0x100, 0);
+    return sysregSetUnk74Bit(0x100, 0);
 }
 #else
 INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_A46E9CA8);
@@ -1510,7 +1510,7 @@ INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_A41929DA);
 #endif
 
 #if FW_VERSION < 310
-INCLUDE_ASM("nonmatchings/sysreg", func_00001814);
+INCLUDE_ASM("nonmatchings/sysreg", sysregIntrHandler);
 
 s32 sceSysregRequestIntr(u32 cpu, u32 intno) {
     s32 cur;
@@ -1553,7 +1553,7 @@ INCLUDE_RODATA("nonmatchings/sysreg", D_00002578);
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregIntrInit);
 #else
 s32 sceSysregIntrInit(void) {
-    sceKernelRegisterIntrHandler(0x1F, 1, &func_00001814, 0, &D_00002BD0);
+    sceKernelRegisterIntrHandler(0x1F, 1, &sysregIntrHandler, 0, &D_00002BD0);
     sceKernelEnableIntr(0x1F);
     return 0;
 }
@@ -1569,8 +1569,8 @@ s32 sceSysregEnableIntr(u32 intno) {
     s32 old;
     if (intno < 32) {
         intr = sceKernelCpuSuspendIntr();
-        old = (D_00002614.enabled >> intno) & 1;
-        D_00002614.enabled |= 1 << intno;
+        old = (g_sysregIntr.enabled >> intno) & 1;
+        g_sysregIntr.enabled |= 1 << intno;
         sceKernelCpuResumeIntr(intr);
         return old;
     }
@@ -1582,8 +1582,8 @@ s32 sceSysregDisableIntr(u32 intno) {
     s32 old;
     if (intno < 32) {
         intr = sceKernelCpuSuspendIntr();
-        old = (D_00002614.enabled >> intno) & 1;
-        D_00002614.enabled &= ~(1 << intno);
+        old = (g_sysregIntr.enabled >> intno) & 1;
+        g_sysregIntr.enabled &= ~(1 << intno);
         sceKernelCpuResumeIntr(intr);
         return old;
     }
@@ -1610,38 +1610,38 @@ INCLUDE_ASM("nonmatchings/sysreg", func_00001AE8_v311);
 INCLUDE_ASM("nonmatchings/sysreg", func_00001AE8_v310);
 #endif
 
-s32 func_00001AC8(s32 arg0, s32 bit) {
-    D_00002614.enabled |= 1 << bit;
+s32 sysregSubIntrEnable(s32 arg0, s32 bit) {
+    g_sysregIntr.enabled |= 1 << bit;
     return 0;
 }
 
-s32 func_00001AE8(s32 arg0, s32 bit) {
-    D_00002614.enabled &= ~(1 << bit);
+s32 sysregSubIntrDisable(s32 arg0, s32 bit) {
+    g_sysregIntr.enabled &= ~(1 << bit);
     return 0;
 }
 
-s32 func_00001B0C(s32 arg0, s32 bit, s32 *old) {
+s32 sysregSubIntrSuspend(s32 arg0, s32 bit, s32 *old) {
     u32 m = ~(1 << bit);
     if (old != NULL) {
-        *old = (D_00002614.enabled >> bit) & 1;
+        *old = (g_sysregIntr.enabled >> bit) & 1;
     }
-    D_00002614.enabled &= m;
+    g_sysregIntr.enabled &= m;
     return 0;
 }
 
-s32 func_00001B44(s32 arg0, s32 bit, s32 val) {
-    D_00002614.enabled |= val << bit;
+s32 sysregSubIntrResume(s32 arg0, s32 bit, s32 val) {
+    g_sysregIntr.enabled |= val << bit;
     return 0;
 }
 
 #if FW_VERSION < 310
-s32 func_00001B60(s32 arg0, s32 bit) {
+s32 sysregSubIntrIsOccured(s32 arg0, s32 bit) {
     s32 cpu;
     asm volatile("mfc0 %0, $22" : "=r"(cpu));
     return (((volatile u32 *)0xBFC00400)[cpu] >> bit) & 1;
 }
 #else
-INCLUDE_ASM("nonmatchings/sysreg", func_00001B60);
+INCLUDE_ASM("nonmatchings/sysreg", sysregSubIntrIsOccured);
 #endif
 
 #if FW_VERSION < 271
