@@ -1557,7 +1557,7 @@ s32 sceMScm_driver_D6DB3199(SceMScmHC *hc, s32 *arg1, s32 *arg2, s32 *arg3) {
 }
 #endif
 
-#if FW_VERSION < 201 || (FW_VERSION >= 250 && FW_VERSION < 271) || FW_VERSION >= 282
+#if FW_VERSION != 201
 s32 func_00004430(SceMScmHC *hc, s32 mode) {
     s32 intr;
     s32 ret;
@@ -1929,7 +1929,7 @@ s32 func_00004E68(s32 arg0, s32 arg1) {
 }
 #endif
 
-#if FW_VERSION < 201 || (FW_VERSION >= 250 && FW_VERSION < 271) || FW_VERSION >= 282
+#if FW_VERSION != 201
 u16 sceMScmHCSetBusyCount(SceMScmHC *hc, u16 count) {
     s32 intr;
     s32 old;
