@@ -1129,9 +1129,47 @@ s32 scePowerSetCpuClockFrequency(s32 freq) {
 INCLUDE_ASM("nonmatchings/power", scePowerSetCpuClockFrequency);
 #endif
 
-#if FW_VERSION >= 102
+#if FW_VERSION >= 102 && FW_VERSION < 201
+s32 scePowerSetBusClockFrequency(s32 freq) {
+    s32 intr;
+    s32 ret;
+    u32 oldK1;
+    s32 (**ops)(void);
+    float busFreq;
+
+    if (freq <= 0 || freq > g_PowerFreq.pllClockFrequencyInt / 2) {
+        return 0x800001FE;
+    }
+    oldK1 = shiftK1Noreorder();
+    intr = sceKernelCpuSuspendIntr();
+    if (freq < g_PowerFreq.scBusClockLowerLimit) {
+        freq = g_PowerFreq.scBusClockLowerLimit;
+    } else if (freq > g_PowerFreq.scBusClockUpperLimit) {
+        freq = g_PowerFreq.scBusClockUpperLimit;
+    }
+    if (freq < g_PowerFreq.pllClockFrequencyInt / 4) {
+        freq = g_PowerFreq.pllClockFrequencyInt / 4;
+    }
+    ret = sceClkcSetBusFrequency(freq);
+    busFreq = sceClkcGetBusFrequency();
+    g_PowerFreq.busClockFrequencyFloat = busFreq;
+    g_PowerFreq.busClockFrequencyInt = busFreq;
+    scePowerSetGeEdramRefreshMode(scePowerGetGeEdramRefreshMode());
+    ops = (s32 (**)(void))sceKernelSm1ReferOperations();
+    if (ops != NULL) {
+        ops[11]();
+    }
+    sceKernelCpuResumeIntr(intr);
+    setK1(oldK1);
+    return ret;
+}
+#endif
+
+#if FW_VERSION >= 201
 INCLUDE_ASM("nonmatchings/power", scePowerSetBusClockFrequency);
-#else
+#endif
+
+#if FW_VERSION == 100
 s32 scePowerSetBusClockFrequency(s32 freq) {
     s32 intr;
     s32 ret;
@@ -1743,11 +1781,28 @@ s32 _scePowerBatteryIsBusy(void) {
 }
 #endif
 
-#if FW_VERSION >= 102 && FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/power", _scePowerBatteryResume);
+#if FW_VERSION == 102
+s32 _scePowerBatteryResume(void) {
+    s32 intr;
+    u32 flags;
+
+    intr = sceKernelCpuSuspendIntr();
+    flags = 0x20000000;
+    if (g_Battery.batteryForbidChargingNetCounter != 0) {
+        flags |= 0x100;
+    }
+    g_Battery.unk20 = -1;
+    g_Battery.isBatteryPollingSuspended = 0;
+    sceKernelClearEventFlag(g_Battery.batteryEventFlagId, ~0x200);
+    sceKernelSetEventFlag(g_Battery.batteryEventFlagId, flags);
+    sceKernelCpuResumeIntr(intr);
+    return 0;
+}
 #endif
 
 #if FW_VERSION >= 103 && FW_VERSION < 282
+INCLUDE_ASM("nonmatchings/power", _scePowerBatteryResume);
+
 s32 scePowerBatteryUpdateInfo(void) {
     s32 temp_s1;
 
