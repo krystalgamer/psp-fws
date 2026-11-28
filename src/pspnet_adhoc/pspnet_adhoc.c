@@ -3158,18 +3158,18 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_0000473C);
 void sceNetAdhoc_lib_62B875A8(void) {
     sceNetMemset(&g_adhocStat, 0, sizeof(g_adhocStat));
 }
-#else
+#endif
+
 s32 sceNetAdhoc_lib_2CA12790(SceNetAdhocStat *out) {
     if (out == NULL)
         return 0x80410711;
+#if FW_VERSION >= 201
+    sceNetMemcpy(out, &g_adhocStat, sizeof(g_adhocStat));
+#else
     *out = g_adhocStat;
+#endif
     return 0;
 }
-#endif
-
-#if FW_VERSION >= 201
-INCLUDE_ASM("nonmatchings/pspnet_adhoc", sceNetAdhoc_lib_2CA12790);
-#endif
 
 #if FW_VERSION < 300
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", ptpTerm);
@@ -4015,6 +4015,7 @@ end:
 
 #if FW_VERSION >= 201
 /* 2.01+: the master delete has gameModeDelete's body inlined */
+
 static __inline s32 gameModeDeleteInl(s32 id) {
     SceNetAdhocGameMode *gm;
 
