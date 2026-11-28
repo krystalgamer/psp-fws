@@ -467,6 +467,6 @@ func_00015A9C = 0x000167DC; // type:func rom:0x1687C
 func_00015ADC = 0x0001681C; // type:func rom:0x168BC
 func_00015B00 = 0x00016840; // type:func rom:0x168E0
 func_00015BC0 = 0x00016900; // type:func rom:0x169A0
-func_00015C90 = 0x000169D0; // type:func rom:0x16A70
-func_00016204 = 0x00016F44; // type:func rom:0x16FE4
+__udivdi3 = 0x000169D0; // type:func rom:0x16A70
+__umoddi3 = 0x00016F44; // type:func rom:0x16FE4
 // shared names (tools/add_version.py) end

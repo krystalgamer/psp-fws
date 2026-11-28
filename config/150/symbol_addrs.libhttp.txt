@@ -190,7 +190,7 @@ func_0000B5C4 = 0x000052A4; // type:func rom:0x5324
 func_00009CA4 = 0x00005440; // type:func rom:0x54C0
 func_00009D54 = 0x000054F0; // type:func rom:0x5570
 func_0000B93C = 0x0000561C; // type:func rom:0x569C
-func_00006B7C = 0x00009F38; // type:func rom:0x9FB8
+CreateConnectionWithUrl = 0x00009F38; // type:func rom:0x9FB8
 func_0000BAA8 = 0x0000CE8C; // type:func rom:0xCF0C
 func_0000BAD4 = 0x0000CEB8; // type:func rom:0xCF38
 func_0000BB00 = 0x0000CEE4; // type:func rom:0xCF64
@@ -213,6 +213,6 @@ func_0000C0DC = 0x0000D4C0; // type:func rom:0xD540
 func_0000C114 = 0x0000D4F8; // type:func rom:0xD578
 func_0000C2F0 = 0x0000D6D4; // type:func rom:0xD754
 func_00015A10 = 0x0000D73C; // type:func rom:0xD7BC
-func_00015C90 = 0x0000D75C; // type:func rom:0xD7DC
-func_00016204 = 0x0000DCAC; // type:func rom:0xDD2C
+__udivdi3 = 0x0000D75C; // type:func rom:0xD7DC
+__umoddi3 = 0x0000DCAC; // type:func rom:0xDD2C
 // shared names (tools/add_version.py) end
