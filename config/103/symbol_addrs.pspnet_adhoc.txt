@@ -108,3 +108,5 @@ sceWlanGPRecv = 0x0000704C; // type:func rom:0x70CC
 // shared names (tools/add_version.py) end
 g_adhocInit = 0x00007400;
 g_gameModeMasterId = 0x000073F0; // rom:0x7470
+g_adhocSelChan = 0x00007448;
+g_adhocStat = 0x00007450;

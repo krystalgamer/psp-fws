@@ -169,11 +169,9 @@
   "mbuf": "/* NetBSD 1.5 mbuf as in pspnet (partial) */\nstruct mbuf {\n    struct mbuf *m_next;        /* 0x00 */\n    struct mbuf *m_nextpkt;     /* 0x04 */\n    u8 *m_data;                 /* 0x08 */\n    s32 m_len;                  /* 0x0C */\n    s16 m_type;                 /* 0x10 */\n    s16 m_flags;                /* 0x12 */\n    struct {\n        struct ifnet *rcvif;    /* 0x14 */\n        s32 len;                /* 0x18 */\n        struct mbuf *aux;       /* 0x1C */\n        u8 unk20[0x10];\n    } m_pkthdr;\n    u8 m_dat[0x100 - 0x30];     /* 0x30 */\n};\n#define MT_DATA 1\n#define M_PKTHDR 0x0002",
   "sockaddr_dl": "struct sockaddr_dl {\n    u8 sdl_len;\n    u8 sdl_family;\n    u16 sdl_index;\n    u8 sdl_type;\n    u8 sdl_nlen;\n    u8 sdl_alen;\n    u8 sdl_slen;\n    char sdl_data[12];\n};\n#define LLADDR(s) ((u8 *)((s)->sdl_data + (s)->sdl_nlen))",
   "zz_ifq_macros": "/* NetBSD 1.5 if.h queue macros */\n#define IF_QFULL(ifq) ((ifq)->ifq_len >= (ifq)->ifq_maxlen)\n#define IF_DROP(ifq) ((ifq)->ifq_drops++)\n#define IF_ENQUEUE(ifq, m) do { \\\n        (m)->m_nextpkt = 0; \\\n        if ((ifq)->ifq_tail == 0) \\\n            (ifq)->ifq_head = m; \\\n        else \\\n            (ifq)->ifq_tail->m_nextpkt = m; \\\n        (ifq)->ifq_tail = m; \\\n        (ifq)->ifq_len++; \\\n    } while (0)\n#define IF_DEQUEUE(ifq, m) do { \\\n        (m) = (ifq)->ifq_head; \\\n        if (m) { \\\n            if (((ifq)->ifq_head = (m)->m_nextpkt) == 0) \\\n                (ifq)->ifq_tail = 0; \\\n            (m)->m_nextpkt = 0; \\\n            (ifq)->ifq_len--; \\\n        } \\\n    } while (0)",
-  "zz_ptp_macros": "#define PTP_SBWAKEUP(sb) do { \\\n        if ((sb)->flags & 1) { \\\n            (sb)->flags &= ~1; \\\n            _sce_pspnet_wakeup(sb); \\\n        } \\\n        if ((sb)->flags & 2) { \\\n            (sb)->flags &= ~2; \\\n            _sce_pspnet_wakeup(&D_00007448); \\\n        } \\\n    } while (0)"
+  "zz_ptp_macros": "#define PTP_SBWAKEUP(sb) do { \\\n        if ((sb)->flags & 1) { \\\n            (sb)->flags &= ~1; \\\n            _sce_pspnet_wakeup(sb); \\\n        } \\\n        if ((sb)->flags & 2) { \\\n            (sb)->flags &= ~2; \\\n            _sce_pspnet_wakeup(&g_adhocSelChan); \\\n        } \\\n    } while (0)"
  },
  "vars": {
-  "D_00007448": "extern s32 D_00007448;",
-  "D_00007450": "extern SceNetAdhocStat100 D_00007450;",
   "D_000078A4": "extern const SceNetEtherAddr D_000078A4; /* ff:ff:ff:ff:ff:ff */",
   "D_000078AC": "extern const SceNetEtherAddr D_000078AC; /* 00:00:00:00:00:00 */",
   "D_000079CC": "extern M2C_UNK D_000079CC;",
@@ -185,6 +183,8 @@
   "g_adhocInit": "extern s32 g_adhocInit;",
   "g_adhocIntrq": "extern struct ifqueue g_adhocIntrq;",
   "g_adhocLastId": "extern s32 g_adhocLastId;",
+  "g_adhocSelChan": "extern s32 g_adhocSelChan;",
+  "g_adhocStat": "extern SceNetAdhocStat100 g_adhocStat;",
   "g_gameModeList": "extern SceNetAdhocGameModeList g_gameModeList;",
   "g_gameModeMasterId": "extern s32 g_gameModeMasterId;",
   "g_pdpLastPort": "extern u16 g_pdpLastPort;",

@@ -290,12 +290,10 @@ struct sockaddr_dl {
         } \
         if ((sb)->flags & 2) { \
             (sb)->flags &= ~2; \
-            _sce_pspnet_wakeup(&D_00007448); \
+            _sce_pspnet_wakeup(&g_adhocSelChan); \
         } \
     } while (0)
 
-extern s32 D_00007448;
-extern SceNetAdhocStat100 D_00007450;
 extern const SceNetEtherAddr D_000078A4; /* ff:ff:ff:ff:ff:ff */
 extern const SceNetEtherAddr D_000078AC; /* 00:00:00:00:00:00 */
 extern M2C_UNK D_000079CC;
@@ -307,6 +305,8 @@ extern SceNetAdhocDescList g_adhocDescList;
 extern s32 g_adhocInit;
 extern struct ifqueue g_adhocIntrq;
 extern s32 g_adhocLastId;
+extern s32 g_adhocSelChan;
+extern SceNetAdhocStat100 g_adhocStat;
 extern SceNetAdhocGameModeList g_gameModeList;
 extern s32 g_gameModeMasterId;
 extern u16 g_pdpLastPort;

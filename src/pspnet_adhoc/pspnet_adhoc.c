@@ -515,7 +515,7 @@ s32 sceNetAdhocPdpDelete(s32 id, s32 flag) {
     }
     if (pcb->flags & 2) {
         pcb->flags &= ~2;
-        _sce_pspnet_wakeup(&D_00007448);
+        _sce_pspnet_wakeup(&g_adhocSelChan);
     }
     if (pcb->ifp->if_adhocflags & 1) {
         pcb->ifp->if_adhocflags &= ~1;
@@ -523,7 +523,7 @@ s32 sceNetAdhocPdpDelete(s32 id, s32 flag) {
     }
     if (pcb->ifp->if_adhocflags & 2) {
         pcb->ifp->if_adhocflags &= ~2;
-        _sce_pspnet_wakeup(&D_00007448);
+        _sce_pspnet_wakeup(&g_adhocSelChan);
     }
     func_0000223C(pcb);
     d->flags |= 1;
@@ -800,7 +800,7 @@ void func_00002B90(struct ifnet *ifp) {
     }
     if (ifp->if_adhocflags & 2) {
         ifp->if_adhocflags &= ~2;
-        _sce_pspnet_wakeup(&D_00007448);
+        _sce_pspnet_wakeup(&g_adhocSelChan);
     }
 }
 #endif
@@ -1343,7 +1343,7 @@ void sceNetAdhoc_lib_62B875A8(void) {
 
 #if FW_VERSION < 150
 void sceNetAdhoc_lib_62B875A8(void) {
-    __builtin_memset(&D_00007450, 0, sizeof(D_00007450));
+    __builtin_memset(&g_adhocStat, 0, sizeof(g_adhocStat));
 }
 #endif
 
@@ -1359,7 +1359,7 @@ void sceNetAdhoc_lib_62B875A8(void) {
 s32 sceNetAdhoc_lib_2CA12790(SceNetAdhocStat100 *out) {
     if (out == NULL)
         return 0x80410711;
-    *out = D_00007450;
+    *out = g_adhocStat;
     return 0;
 }
 #else
@@ -1902,12 +1902,12 @@ void func_0000648C(SceNetAdhocPtpPcb *pcb, s32 rexmt) {
                 goto out;
             if (rexmt != 0) {
                 func_00005FF8(pcb->ifp, &pcb->laddr, pcb->lport, &pcb->paddr, pcb->pport, 4, pcb->snd_una - 1, NULL);
-                D_00007450.stat[10]++;
+                g_adhocStat.stat[10]++;
                 goto out;
             }
             if (pcb->callout.c_flags & CALLOUT_PENDING)
                 goto out;
-            D_00007450.stat[11]++;
+            g_adhocStat.stat[11]++;
             pcb->rexmt_left = pcb->rexmt_cnt;
             _sce_pspnet_callout_reset_usec(&pcb->callout, pcb->rexmt_int, func_000069D4, pcb);
             goto out;
@@ -1956,7 +1956,7 @@ void func_000069D4(SceNetAdhocPtpPcb *pcb) {
         pcb->snd_inflight = 0;
         pcb->snd_nxt = pcb->snd_una;
         func_0000648C(pcb, 1);
-        D_00007450.stat[9]++;
+        g_adhocStat.stat[9]++;
         break;
     }
     _sce_pspnet_callout_reset_usec(&pcb->callout, pcb->rexmt_int, func_000069D4, pcb);

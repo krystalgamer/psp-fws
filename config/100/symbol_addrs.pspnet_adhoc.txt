@@ -109,3 +109,5 @@ func_00006F80 = 0x00006898; // type:func rom:0x6918
 // shared names (tools/add_version.py) end
 g_adhocInit = 0x00007400;
 g_gameModeMasterId = 0x000073F0; // rom:0x7470
+g_adhocSelChan = 0x00007448;
+g_adhocStat = 0x00007450;
