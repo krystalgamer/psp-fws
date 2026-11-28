@@ -490,6 +490,8 @@ extern u32 D_00008240;
 extern SceNetApctlHandlerEntry D_00008B1C[2];
 extern SceNetApctlCtx *D_00008B34;
 extern SceNetDhcpCtx D_00008B38;
+extern SceNetApctlHandlerEntry D_00008B80[2];
+extern SceNetApctlHandlerEntry D_00008B98[1]; /* 1.50+ internal handler */
 extern char D_00010A8C[]; /* "wlan" */
 extern SceNetApctlCtx D_00011DD4;
 extern s32 D_00011DE4;

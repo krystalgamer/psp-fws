@@ -237,6 +237,8 @@
   "D_00008B1C": "extern SceNetApctlHandlerEntry D_00008B1C[2];",
   "D_00008B34": "extern SceNetApctlCtx *D_00008B34;",
   "D_00008B38": "extern SceNetDhcpCtx D_00008B38;",
+  "D_00008B80": "extern SceNetApctlHandlerEntry D_00008B80[2];",
+  "D_00008B98": "extern SceNetApctlHandlerEntry D_00008B98[1]; /* 1.50+ internal handler */",
   "D_00010A8C": "extern char D_00010A8C[]; /* \"wlan\" */",
   "D_00011DD4": "extern SceNetApctlCtx D_00011DD4;",
   "D_00011DE4": "extern s32 D_00011DE4;",
