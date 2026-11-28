@@ -71,43 +71,155 @@ INCLUDE_ASM("nonmatchings/sysreg", sceSysregGetFuseId);
 
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregGetFuseConfig);
 
+#if FW_VERSION < 271
+s32 sceSysregTopResetEnable(void) {
+    return func_00000588(0x1, 1);
+}
+#else
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregTopResetEnable);
+#endif
 
+#if FW_VERSION < 271
+s32 sceSysregScResetEnable(void) {
+    return func_00000588(0x2, 1);
+}
+#else
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregScResetEnable);
+#endif
 
+#if FW_VERSION < 271
+s32 sceSysregMeResetEnable(void) {
+    return func_00000588(0x4, 1);
+}
+#else
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregMeResetEnable);
+#endif
 
+#if FW_VERSION < 271
+s32 sceSysregMeResetDisable(void) {
+    return func_00000588(0x4, 0);
+}
+#else
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregMeResetDisable);
+#endif
 
+#if FW_VERSION < 271
+s32 sceSysregAwResetEnable(void) {
+    return func_00000588(0x8, 1);
+}
+#else
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregAwResetEnable);
+#endif
 
+#if FW_VERSION < 271
+s32 sceSysregAwResetDisable(void) {
+    return func_00000588(0x8, 0);
+}
+#else
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregAwResetDisable);
+#endif
 
+#if FW_VERSION < 271
+s32 sceSysregVmeResetEnable(void) {
+    return func_00000588(0x10, 1);
+}
+#else
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregVmeResetEnable);
+#endif
 
+#if FW_VERSION < 271
+s32 sceSysregVmeResetDisable(void) {
+    return func_00000588(0x10, 0);
+}
+#else
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregVmeResetDisable);
+#endif
 
+#if FW_VERSION < 271
+s32 sceSysregAvcResetEnable(void) {
+    return func_00000588(0x20, 1);
+}
+#else
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregAvcResetEnable);
+#endif
 
+#if FW_VERSION < 271
+s32 sceSysregAvcResetDisable(void) {
+    return func_00000588(0x20, 0);
+}
+#else
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregAvcResetDisable);
+#endif
 
+#if FW_VERSION < 271
+s32 sceSysregUsbResetEnable(void) {
+    return func_00000588(0x40, 1);
+}
+#else
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregUsbResetEnable);
+#endif
 
+#if FW_VERSION < 271
+s32 sceSysregUsbResetDisable(void) {
+    return func_00000588(0x40, 0);
+}
+#else
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregUsbResetDisable);
+#endif
 
+#if FW_VERSION < 271
+s32 sceSysregAtaResetEnable(void) {
+    return func_00000588(0x80, 1);
+}
+#else
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregAtaResetEnable);
+#endif
 
+#if FW_VERSION < 271
+s32 sceSysregAtaResetDisable(void) {
+    return func_00000588(0x80, 0);
+}
+#else
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregAtaResetDisable);
+#endif
 
+#if FW_VERSION < 271
+s32 sceSysregMsifResetEnable(u32 n) {
+    if (n < 2) {
+        return func_00000588(0x100 << n, 1);
+    }
+    return 0x80000102;
+}
+#else
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregMsifResetEnable);
+#endif
 
+#if FW_VERSION < 271
+s32 sceSysregMsifResetDisable(u32 n) {
+    if (n < 2) {
+        return func_00000588(0x100 << n, 0);
+    }
+    return 0x80000102;
+}
+#else
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregMsifResetDisable);
+#endif
 
+#if FW_VERSION < 271
+s32 sceSysregKirkResetEnable(void) {
+    return func_00000588(0x400, 1);
+}
+#else
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregKirkResetEnable);
+#endif
 
+#if FW_VERSION < 271
+s32 sceSysregKirkResetDisable(void) {
+    return func_00000588(0x400, 0);
+}
+#else
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregKirkResetDisable);
 
-#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregAtahddResetEnable);
 
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregAtahddResetDisable);
@@ -115,7 +227,9 @@ INCLUDE_ASM("nonmatchings/sysreg", sceSysregAtahddResetDisable);
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregUsbhostResetEnable);
 
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregUsbhostResetDisable);
-#else
+#endif
+
+#if FW_VERSION < 271
 INCLUDE_ASM("nonmatchings/sysreg", func_00000588);
 #endif
 
@@ -151,65 +265,249 @@ INCLUDE_ASM("nonmatchings/sysreg", sceSysregPllGetOutSelect);
 
 #if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregPllSetOutSelect);
+#else
+s32 sceSysregMeBusClockEnable(void) {
+    return func_00000B64(0x1, 1);
+}
 #endif
 
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregMeBusClockEnable);
-
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregMeBusClockDisable);
-
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregAwRegABusClockEnable);
-
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregAwRegABusClockDisable);
-
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregAwRegBBusClockEnable);
-
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregAwRegBBusClockDisable);
-
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregAwEdramBusClockEnable);
-
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregAwEdramBusClockDisable);
-
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregDmacplusBusClockEnable);
-
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregDmacplusBusClockDisable);
-
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregDmacBusClockEnable);
-
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregDmacBusClockDisable);
-
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregKirkBusClockEnable);
-
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregKirkBusClockDisable);
-
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregAtaBusClockEnable);
-
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregAtaBusClockDisable);
-
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregUsbBusClockEnable);
-
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregUsbBusClockDisable);
-
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregMsifBusClockEnable);
-
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregMsifBusClockDisable);
-
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregEmcddrBusClockEnable);
-
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregEmcddrBusClockDisable);
-
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregEmcsmBusClockEnable);
-
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregEmcsmBusClockDisable);
-
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregApbBusClockEnable);
-
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregApbBusClockDisable);
-
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregAudioBusClockEnable);
-
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregAudioBusClockDisable);
+#else
+s32 sceSysregMeBusClockDisable(void) {
+    return func_00000B64(0x1, 0);
+}
+#endif
 
 #if FW_VERSION >= 271
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregMeBusClockDisable);
+#else
+s32 sceSysregAwRegABusClockEnable(void) {
+    return func_00000B64(0x2, 1);
+}
+#endif
+
+#if FW_VERSION >= 271
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregAwRegABusClockEnable);
+#else
+s32 sceSysregAwRegABusClockDisable(void) {
+    return func_00000B64(0x2, 0);
+}
+#endif
+
+#if FW_VERSION >= 271
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregAwRegABusClockDisable);
+#else
+s32 sceSysregAwRegBBusClockEnable(void) {
+    return func_00000B64(0x4, 1);
+}
+#endif
+
+#if FW_VERSION >= 271
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregAwRegBBusClockEnable);
+#else
+s32 sceSysregAwRegBBusClockDisable(void) {
+    return func_00000B64(0x4, 0);
+}
+#endif
+
+#if FW_VERSION >= 271
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregAwRegBBusClockDisable);
+#else
+s32 sceSysregAwEdramBusClockEnable(void) {
+    return func_00000B64(0x8, 1);
+}
+#endif
+
+#if FW_VERSION >= 271
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregAwEdramBusClockEnable);
+#else
+s32 sceSysregAwEdramBusClockDisable(void) {
+    return func_00000B64(0x8, 0);
+}
+#endif
+
+#if FW_VERSION >= 271
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregAwEdramBusClockDisable);
+#else
+s32 sceSysregDmacplusBusClockEnable(void) {
+    return func_00000B64(0x10, 1);
+}
+#endif
+
+#if FW_VERSION >= 271
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregDmacplusBusClockEnable);
+#else
+s32 sceSysregDmacplusBusClockDisable(void) {
+    return func_00000B64(0x10, 0);
+}
+#endif
+
+#if FW_VERSION >= 271
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregDmacplusBusClockDisable);
+#else
+s32 sceSysregDmacBusClockEnable(u32 n) {
+    if (n < 2) {
+        return func_00000B64(0x20 << n, 1);
+    }
+    return 0x80000102;
+}
+#endif
+
+#if FW_VERSION >= 271
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregDmacBusClockEnable);
+#else
+s32 sceSysregDmacBusClockDisable(u32 n) {
+    if (n < 2) {
+        return func_00000B64(0x20 << n, 0);
+    }
+    return 0x80000102;
+}
+#endif
+
+#if FW_VERSION >= 271
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregDmacBusClockDisable);
+#else
+s32 sceSysregKirkBusClockEnable(void) {
+    return func_00000B64(0x80, 1);
+}
+#endif
+
+#if FW_VERSION >= 271
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregKirkBusClockEnable);
+#else
+s32 sceSysregKirkBusClockDisable(void) {
+    return func_00000B64(0x80, 0);
+}
+#endif
+
+#if FW_VERSION >= 271
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregKirkBusClockDisable);
+#else
+s32 sceSysregAtaBusClockEnable(void) {
+    return func_00000B64(0x100, 1);
+}
+#endif
+
+#if FW_VERSION >= 271
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregAtaBusClockEnable);
+#else
+s32 sceSysregAtaBusClockDisable(void) {
+    return func_00000B64(0x100, 0);
+}
+#endif
+
+#if FW_VERSION >= 271
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregAtaBusClockDisable);
+#else
+s32 sceSysregUsbBusClockEnable(void) {
+    return func_00000B64(0x200, 1);
+}
+#endif
+
+#if FW_VERSION >= 271
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregUsbBusClockEnable);
+#else
+s32 sceSysregUsbBusClockDisable(void) {
+    return func_00000B64(0x200, 0);
+}
+#endif
+
+#if FW_VERSION >= 271
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregUsbBusClockDisable);
+#else
+s32 sceSysregMsifBusClockEnable(u32 n) {
+    if (n < 2) {
+        return func_00000B64(0x400 << n, 1);
+    }
+    return 0x80000102;
+}
+#endif
+
+#if FW_VERSION >= 271
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregMsifBusClockEnable);
+#else
+s32 sceSysregMsifBusClockDisable(u32 n) {
+    if (n < 2) {
+        return func_00000B64(0x400 << n, 0);
+    }
+    return 0x80000102;
+}
+#endif
+
+#if FW_VERSION >= 271
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregMsifBusClockDisable);
+#else
+s32 sceSysregEmcddrBusClockEnable(void) {
+    return func_00000B64(0x1000, 1);
+}
+#endif
+
+#if FW_VERSION >= 271
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregEmcddrBusClockEnable);
+#else
+s32 sceSysregEmcddrBusClockDisable(void) {
+    return func_00000B64(0x1000, 0);
+}
+#endif
+
+#if FW_VERSION >= 271
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregEmcddrBusClockDisable);
+#else
+s32 sceSysregEmcsmBusClockEnable(void) {
+    return func_00000B64(0x2000, 1);
+}
+#endif
+
+#if FW_VERSION >= 271
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregEmcsmBusClockEnable);
+#else
+s32 sceSysregEmcsmBusClockDisable(void) {
+    return func_00000B64(0x2000, 0);
+}
+#endif
+
+#if FW_VERSION >= 271
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregEmcsmBusClockDisable);
+#else
+s32 sceSysregApbBusClockEnable(void) {
+    return func_00000B64(0x4000, 1);
+}
+#endif
+
+#if FW_VERSION >= 271
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregApbBusClockEnable);
+#else
+s32 sceSysregApbBusClockDisable(void) {
+    return func_00000B64(0x4000, 0);
+}
+#endif
+
+#if FW_VERSION >= 271
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregApbBusClockDisable);
+#else
+s32 sceSysregAudioBusClockEnable(u32 n) {
+    if (n < 2) {
+        return func_00000B64(0x8000 << n, 1);
+    }
+    return 0x80000102;
+}
+#endif
+
+#if FW_VERSION >= 271
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregAudioBusClockEnable);
+#else
+s32 sceSysregAudioBusClockDisable(u32 n) {
+    if (n < 2) {
+        return func_00000B64(0x8000 << n, 0);
+    }
+    return 0x80000102;
+}
+#endif
+
+#if FW_VERSION >= 271
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregAudioBusClockDisable);
+
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregAtahddBusClockEnable);
 
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregAtahddBusClockDisable);
@@ -221,7 +519,7 @@ INCLUDE_ASM("nonmatchings/sysreg", sceSysregUsbhostBusClockDisable);
 INCLUDE_ASM("nonmatchings/sysreg", func_00000B64);
 #endif
 
-#if FW_VERSION >= 282
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregAtaClkEnable);
 
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregAtaClkDisable);
@@ -233,69 +531,167 @@ INCLUDE_ASM("nonmatchings/sysreg", sceSysregAtahddClkDisable);
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregUsbhostClkEnable);
 
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregUsbhostClkDisable);
+#else
+s32 sceSysregMsifClkEnable(u32 n) {
+    if (n < 2) {
+        return func_00000C58(0x100 << n, 1);
+    }
+    return 0x80000102;
+}
 #endif
-
-#if FW_VERSION != 271
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregMsifClkEnable);
-
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregMsifClkDisable);
-#endif
-
-#if FW_VERSION < 271
-INCLUDE_ASM("nonmatchings/sysreg", func_00000C58);
-#endif
-
-#if FW_VERSION < 282
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregAtaClkEnable);
-
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregAtaClkDisable);
-#endif
-
-#if FW_VERSION == 271
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregAtahddClkEnable);
-
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregAtahddClkDisable);
-
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregUsbhostClkEnable);
-
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregUsbhostClkDisable);
-
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregMsifClkEnable);
-
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregMsifClkDisable);
-#endif
-
-#if FW_VERSION < 271
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregUsbClkEnable);
-
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregUsbClkDisable);
-#endif
-
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregSpiClkEnable);
-
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregSpiClkDisable);
-
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregUartClkEnable);
-
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregUartClkDisable);
-
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregApbTimerClkEnable);
-
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregApbTimerClkDisable);
-
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregAudioClkEnable);
-
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregAudioClkDisable);
-
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregLcdcClkEnable);
-
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregLcdcClkDisable);
-
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregPwmClkEnable);
-
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregPwmClkDisable);
 
 #if FW_VERSION >= 271
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregMsifClkEnable);
+#else
+s32 sceSysregMsifClkDisable(u32 n) {
+    if (n < 2) {
+        return func_00000C58(0x100 << n, 0);
+    }
+    return 0x80000102;
+}
+#endif
+
+#if FW_VERSION >= 271
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregMsifClkDisable);
+#else
+INCLUDE_ASM("nonmatchings/sysreg", func_00000C58);
+
+s32 sceSysregAtaClkEnable(void) {
+    return func_00000C58(0x1, 1);
+}
+
+s32 sceSysregAtaClkDisable(void) {
+    return func_00000C58(0x1, 0);
+}
+
+s32 sceSysregUsbClkEnable(u32 n) {
+    return func_00000C58((n & 0xF) << 4, 1);
+}
+
+s32 sceSysregUsbClkDisable(u32 n) {
+    return func_00000C58((n & 0xF) << 4, 0);
+}
+
+s32 sceSysregSpiClkEnable(u32 n) {
+    if (n < 6) {
+        return func_00001104(0x1 << n, 1);
+    }
+    return 0x80000102;
+}
+#endif
+
+#if FW_VERSION >= 271
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregSpiClkEnable);
+#else
+s32 sceSysregSpiClkDisable(u32 n) {
+    if (n < 6) {
+        return func_00001104(0x1 << n, 0);
+    }
+    return 0x80000102;
+}
+#endif
+
+#if FW_VERSION >= 271
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregSpiClkDisable);
+#else
+s32 sceSysregUartClkEnable(u32 n) {
+    if (n < 6) {
+        return func_00001104(0x40 << n, 1);
+    }
+    return 0x80000102;
+}
+#endif
+
+#if FW_VERSION >= 271
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregUartClkEnable);
+#else
+s32 sceSysregUartClkDisable(u32 n) {
+    if (n < 6) {
+        return func_00001104(0x40 << n, 0);
+    }
+    return 0x80000102;
+}
+#endif
+
+#if FW_VERSION >= 271
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregUartClkDisable);
+#else
+s32 sceSysregApbTimerClkEnable(u32 n) {
+    if (n < 4) {
+        return func_00001104(0x1000 << n, 1);
+    }
+    return 0x80000102;
+}
+#endif
+
+#if FW_VERSION >= 271
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregApbTimerClkEnable);
+#else
+s32 sceSysregApbTimerClkDisable(u32 n) {
+    if (n < 4) {
+        return func_00001104(0x1000 << n, 0);
+    }
+    return 0x80000102;
+}
+#endif
+
+#if FW_VERSION >= 271
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregApbTimerClkDisable);
+#else
+s32 sceSysregAudioClkEnable(u32 n) {
+    if (n < 2) {
+        return func_00001104(0x10000 << n, 1);
+    }
+    return 0x80000102;
+}
+#endif
+
+#if FW_VERSION >= 271
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregAudioClkEnable);
+#else
+s32 sceSysregAudioClkDisable(u32 n) {
+    if (n < 2) {
+        return func_00001104(0x10000 << n, 0);
+    }
+    return 0x80000102;
+}
+#endif
+
+#if FW_VERSION >= 271
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregAudioClkDisable);
+#else
+s32 sceSysregLcdcClkEnable(void) {
+    return func_00001104(0x40000, 1);
+}
+#endif
+
+#if FW_VERSION >= 271
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregLcdcClkEnable);
+#else
+s32 sceSysregLcdcClkDisable(void) {
+    return func_00001104(0x40000, 0);
+}
+#endif
+
+#if FW_VERSION >= 271
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregLcdcClkDisable);
+#else
+s32 sceSysregPwmClkEnable(void) {
+    return func_00001104(0x80000, 1);
+}
+#endif
+
+#if FW_VERSION >= 271
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregPwmClkEnable);
+#else
+s32 sceSysregPwmClkDisable(void) {
+    return func_00001104(0x80000, 0);
+}
+#endif
+
+#if FW_VERSION >= 271
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregPwmClkDisable);
+
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregKeyClkEnable);
 #else
 s32 sceSysregKeyClkEnable(void) {
@@ -309,25 +705,71 @@ INCLUDE_ASM("nonmatchings/sysreg", sceSysregKeyClkDisable);
 s32 sceSysregKeyClkDisable(void) {
     return 0x80000004;
 }
+
+s32 sceSysregIicClkEnable(void) {
+    return func_00001104(0x200000, 1);
+}
 #endif
 
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregIicClkEnable);
-
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregIicClkDisable);
-
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregSircsClkEnable);
-
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregSircsClkDisable);
-
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregGpioClkEnable);
-
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregGpioClkDisable);
-
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregAudioClkoutClkEnable);
-
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregAudioClkoutClkDisable);
+#else
+s32 sceSysregIicClkDisable(void) {
+    return func_00001104(0x200000, 0);
+}
+#endif
 
 #if FW_VERSION >= 271
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregIicClkDisable);
+#else
+s32 sceSysregSircsClkEnable(void) {
+    return func_00001104(0x400000, 1);
+}
+#endif
+
+#if FW_VERSION >= 271
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregSircsClkEnable);
+#else
+s32 sceSysregSircsClkDisable(void) {
+    return func_00001104(0x400000, 0);
+}
+#endif
+
+#if FW_VERSION >= 271
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregSircsClkDisable);
+#else
+s32 sceSysregGpioClkEnable(void) {
+    return func_00001104(0x800000, 1);
+}
+#endif
+
+#if FW_VERSION >= 271
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregGpioClkEnable);
+#else
+s32 sceSysregGpioClkDisable(void) {
+    return func_00001104(0x800000, 0);
+}
+#endif
+
+#if FW_VERSION >= 271
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregGpioClkDisable);
+#else
+s32 sceSysregAudioClkoutClkEnable(void) {
+    return func_00001104(0x1000000, 1);
+}
+#endif
+
+#if FW_VERSION >= 271
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregAudioClkoutClkEnable);
+#else
+s32 sceSysregAudioClkoutClkDisable(void) {
+    return func_00001104(0x1000000, 0);
+}
+#endif
+
+#if FW_VERSION >= 271
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregAudioClkoutClkDisable);
+
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregUsbClkEnable);
 
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregUsbClkDisable);
@@ -357,45 +799,163 @@ INCLUDE_ASM("nonmatchings/sysreg", sceSysregAtaClkSelect);
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregAtahddClkSelect);
 
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregAudioClkoutClkSelect);
+#else
+s32 sceSysregEmcsmIoEnable(void) {
+    return func_00001AF8(0x2, 1);
+}
 #endif
 
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregEmcsmIoEnable);
-
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregEmcsmIoDisable);
-
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregUsbIoEnable);
-
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregUsbIoDisable);
-
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregAtaIoEnable);
-
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregAtaIoDisable);
-
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregMsifIoEnable);
-
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregMsifIoDisable);
-
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregLcdcIoEnable);
-
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregLcdcIoDisable);
-
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregAudioIoEnable);
-
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregAudioIoDisable);
-
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregIicIoEnable);
-
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregIicIoDisable);
-
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregSircsIoEnable);
-
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregSircsIoDisable);
-
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregAudioClkoutIoEnable);
-
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregAudioClkoutIoDisable);
+#else
+s32 sceSysregEmcsmIoDisable(void) {
+    return func_00001AF8(0x2, 0);
+}
+#endif
 
 #if FW_VERSION >= 271
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregEmcsmIoDisable);
+#else
+s32 sceSysregUsbIoEnable(void) {
+    return func_00001AF8(0x4, 1);
+}
+#endif
+
+#if FW_VERSION >= 271
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregUsbIoEnable);
+#else
+s32 sceSysregUsbIoDisable(void) {
+    return func_00001AF8(0x4, 0);
+}
+#endif
+
+#if FW_VERSION >= 271
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregUsbIoDisable);
+#else
+s32 sceSysregAtaIoEnable(void) {
+    return func_00001AF8(0x8, 1);
+}
+#endif
+
+#if FW_VERSION >= 271
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregAtaIoEnable);
+#else
+s32 sceSysregAtaIoDisable(void) {
+    return func_00001AF8(0x8, 0);
+}
+#endif
+
+#if FW_VERSION >= 271
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregAtaIoDisable);
+#else
+s32 sceSysregMsifIoEnable(u32 n) {
+    if (n < 2) {
+        return func_00001AF8(0x10 << n, 1);
+    }
+    return 0x80000102;
+}
+#endif
+
+#if FW_VERSION >= 271
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregMsifIoEnable);
+#else
+s32 sceSysregMsifIoDisable(u32 n) {
+    if (n < 2) {
+        return func_00001AF8(0x10 << n, 0);
+    }
+    return 0x80000102;
+}
+#endif
+
+#if FW_VERSION >= 271
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregMsifIoDisable);
+#else
+s32 sceSysregLcdcIoEnable(void) {
+    return func_00001AF8(0x40, 1);
+}
+#endif
+
+#if FW_VERSION >= 271
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregLcdcIoEnable);
+#else
+s32 sceSysregLcdcIoDisable(void) {
+    return func_00001AF8(0x40, 0);
+}
+#endif
+
+#if FW_VERSION >= 271
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregLcdcIoDisable);
+#else
+s32 sceSysregAudioIoEnable(u32 n) {
+    if (n < 2) {
+        return func_00001AF8(0x80 << n, 1);
+    }
+    return 0x80000102;
+}
+#endif
+
+#if FW_VERSION >= 271
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregAudioIoEnable);
+#else
+s32 sceSysregAudioIoDisable(u32 n) {
+    if (n < 2) {
+        return func_00001AF8(0x80 << n, 0);
+    }
+    return 0x80000102;
+}
+#endif
+
+#if FW_VERSION >= 271
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregAudioIoDisable);
+#else
+s32 sceSysregIicIoEnable(void) {
+    return func_00001AF8(0x200, 1);
+}
+#endif
+
+#if FW_VERSION >= 271
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregIicIoEnable);
+#else
+s32 sceSysregIicIoDisable(void) {
+    return func_00001AF8(0x200, 0);
+}
+#endif
+
+#if FW_VERSION >= 271
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregIicIoDisable);
+#else
+s32 sceSysregSircsIoEnable(void) {
+    return func_00001AF8(0x400, 1);
+}
+#endif
+
+#if FW_VERSION >= 271
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregSircsIoEnable);
+#else
+s32 sceSysregSircsIoDisable(void) {
+    return func_00001AF8(0x400, 0);
+}
+#endif
+
+#if FW_VERSION >= 271
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregSircsIoDisable);
+#else
+s32 sceSysregAudioClkoutIoEnable(void) {
+    return func_00001AF8(0x800, 1);
+}
+#endif
+
+#if FW_VERSION >= 271
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregAudioClkoutIoEnable);
+#else
+s32 sceSysregAudioClkoutIoDisable(void) {
+    return func_00001AF8(0x800, 0);
+}
+#endif
+
+#if FW_VERSION >= 271
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregAudioClkoutIoDisable);
+
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregKeyIoEnable);
 #else
 s32 sceSysregKeyIoEnable(void) {
@@ -409,27 +969,71 @@ INCLUDE_ASM("nonmatchings/sysreg", sceSysregKeyIoDisable);
 s32 sceSysregKeyIoDisable(void) {
     return 0x80000004;
 }
+
+s32 sceSysregPwmIoEnable(void) {
+    return func_00001AF8(0x2000, 1);
+}
 #endif
 
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregPwmIoEnable);
-
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregPwmIoDisable);
+#else
+s32 sceSysregPwmIoDisable(void) {
+    return func_00001AF8(0x2000, 0);
+}
+#endif
 
 #if FW_VERSION >= 271
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregPwmIoDisable);
+
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregAtahddIoEnable);
 
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregAtahddIoDisable);
+#else
+s32 sceSysregUartIoEnable(u32 n) {
+    if (n < 6) {
+        return func_00001AF8(0x10000 << n, 1);
+    }
+    return 0x80000102;
+}
 #endif
 
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregUartIoEnable);
-
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregUartIoDisable);
-
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregSpiIoEnable);
-
-INCLUDE_ASM("nonmatchings/sysreg", sceSysregSpiIoDisable);
+#else
+s32 sceSysregUartIoDisable(u32 n) {
+    if (n < 6) {
+        return func_00001AF8(0x10000 << n, 0);
+    }
+    return 0x80000102;
+}
+#endif
 
 #if FW_VERSION >= 271
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregUartIoDisable);
+#else
+s32 sceSysregSpiIoEnable(u32 n) {
+    if (n < 6) {
+        return func_00001AF8(0x1000000 << n, 1);
+    }
+    return 0x80000102;
+}
+#endif
+
+#if FW_VERSION >= 271
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregSpiIoEnable);
+#else
+s32 sceSysregSpiIoDisable(u32 n) {
+    if (n < 6) {
+        return func_00001AF8(0x1000000 << n, 0);
+    }
+    return 0x80000102;
+}
+#endif
+
+#if FW_VERSION >= 271
+INCLUDE_ASM("nonmatchings/sysreg", sceSysregSpiIoDisable);
+
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregGpioIoEnable);
 #else
 void sceSysregGpioIoEnable(s32 arg0) {
@@ -447,23 +1051,69 @@ void sceSysregGpioIoDisable(s32 arg0) {
 INCLUDE_ASM("nonmatchings/sysreg", func_00001A68);
 
 INCLUDE_ASM("nonmatchings/sysreg", func_00001AF8);
+
+s32 sceSysreg_driver_55B18B84(u32 n) {
+    if (n < 2) {
+        return func_00001BF4(1 << (n * 4), 0);
+    }
+    return 0x80000102;
+}
 #endif
 
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_55B18B84);
-
-INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_2112E686);
-
-#if FW_VERSION < 271
-INCLUDE_ASM("nonmatchings/sysreg", func_00001BF4);
+#else
+s32 sceSysreg_driver_2112E686(u32 n) {
+    if (n < 2) {
+        return func_00001BF4(1 << (n * 4), 1);
+    }
+    return 0x80000102;
+}
 #endif
 
+#if FW_VERSION >= 271
+INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_2112E686);
+#else
+INCLUDE_ASM("nonmatchings/sysreg", func_00001BF4);
+
+s32 sceSysreg_driver_7B9E9A53(u32 n) {
+    if (n < 2) {
+        return func_00001BF4(2 << (n * 4), 0);
+    }
+    return 0x80000102;
+}
+#endif
+
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_7B9E9A53);
+#else
+s32 sceSysreg_driver_7BDF0556(u32 n) {
+    if (n < 2) {
+        return func_00001BF4(2 << (n * 4), 1);
+    }
+    return 0x80000102;
+}
+#endif
 
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_7BDF0556);
+#else
+s32 sceSysreg_driver_8D0FED1E(void) {
+    return func_00001BF4(0x100, 1);
+}
+#endif
 
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_8D0FED1E);
+#else
+s32 sceSysreg_driver_A46E9CA8(void) {
+    return func_00001BF4(0x100, 0);
+}
+#endif
 
+#if FW_VERSION >= 271
 INCLUDE_ASM("nonmatchings/sysreg", sceSysreg_driver_A46E9CA8);
+#endif
 
 #if FW_VERSION >= 282
 INCLUDE_ASM("nonmatchings/sysreg", sceSysregUsbGetConnectStatus);
