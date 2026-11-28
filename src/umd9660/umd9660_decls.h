@@ -126,7 +126,7 @@ typedef struct SceUmdDrive {
     s32 unk3C; /* 0x3C */
 } SceUmdDrive;
 
-/* umdman read request (1.00: uOFW LbnParams without unk20) */
+/* umdman read request (uOFW LbnParams; unk20 from 1.50 on) */
 typedef struct {
     u32 unk0;
     u32 cmd;
@@ -136,6 +136,9 @@ typedef struct {
     u32 byteSizeMiddle;
     u32 byteSizeFirst;
     u32 byteSizeLast;
+#if FW_VERSION >= 150
+    u32 unk20;
+#endif
 } SceUmdLbnParam;
 
 /* SCE assert: Kprintf(fmt, __FILE__, __FUNCTION__, __LINE__) */
