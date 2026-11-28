@@ -150,6 +150,33 @@ def relayout(types):
     return bad
 
 
+def first_mismatch(v, mod):
+    """Name of the first symbol (from the link map) whose bytes differ from the baserom."""
+    from elftools.elf.elffile import ELFFile
+    a = (ROOT / f"tmp/build/{v}/{mod}.prx").read_bytes()
+    b = (ROOT / f"tmp/baserom/{v}/{mod}.prx").read_bytes()
+    with open(ROOT / f"tmp/baserom/{v}/{mod}.prx", "rb") as fh:
+        seg = next(s for s in ELFFile(fh).iter_segments() if s["p_type"] == "PT_LOAD")
+        off, size = seg["p_offset"], seg["p_filesz"]
+    syms = []
+    for l in (ROOT / f"tmp/build/{v}/{mod}.map").read_text().splitlines():
+        m = re.match(r"\s+0x([0-9a-f]+)\s+(\S.*?)\s*$", l)
+        if m and not m[2].startswith("0x") and not m[2].endswith("NON_MATCHING"):
+            syms.append((int(m[1], 16), m[2]))
+    syms.sort()
+    for i in range(off, off + size, 4):
+        if a[i:i + 4] != b[i:i + 4]:
+            va = i - off
+            best = None
+            for x, n in syms:
+                if x <= va:
+                    best = n
+                else:
+                    break
+            return best
+    return None
+
+
 def dtor_body(text, label, structs):
     """m2c C of a non-trivial D2/D1 -> (body of `X::~X()`, base D2 name or None, {offset: field}) or
     None: the vptr store of `label` goes (the compiler emits it), a final `B(arg0);` is the base
@@ -241,6 +268,7 @@ def main():
     ap.add_argument("-v", action="store_true")
     ap.add_argument("--migrate", action="store_true", help="only move old version-listed vtable aliases")
     ap.add_argument("--nontrivial", action="store_true", help="also dtors with a body (from the C of D2/D1)")
+    ap.add_argument("--exclude", default="", help="classes to leave alone (comma-separated)")
     a = ap.parse_args()
     mod = a.module
     have = sorted((p.parent.name for p in ROOT.glob(f"config/*/{mod}.yaml")), key=lambda v: (fwnum(v), v))
@@ -452,6 +480,9 @@ def main():
         else:
             ok.append(p)
     ok.sort(key=lambda p: (p["base_cls"] or "") in {q["cls"] for q in ok})  # bases first in the decls
+    if a.exclude:
+        ex = set(a.exclude.split(","))
+        ok = [p for p in ok if p["cls"] not in ex and p["base_cls"] not in ex]
     if a.limit:
         ok = ok[:a.limit]
     total = len(clusters)
@@ -609,6 +640,16 @@ def main():
     bad = [l for l in r.stdout.splitlines() if l.strip() and not l.endswith(": OK")]
     if bad:
         print("\n".join(sorted(bad)[:12]))
+        culprits = set()
+        for l in bad:
+            m = re.match(r"^(\w+):\S+: FAIL .*MISMATCH", l)
+            if m:
+                n = first_mismatch(m[1], mod)
+                cm = re.match(r"^(\w+)::~\1\(\)", n or "")
+                if cm:
+                    culprits.add(cm[1])
+        if culprits:
+            print("mismatching classes: " + " ".join(sorted(culprits)))
         for q, txt in list(keep.items()) + list(keepcfg.items()):
             q.write_text(txt)
         print("restored")
