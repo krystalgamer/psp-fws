@@ -60,6 +60,7 @@ segments:
       - [0x12D7C, c, pspnet_inet_in_init]
       - [0x12DAC, c, pspnet_inet_in_cksum2]
       - [0x1B7F4, c, pspnet_inet_udp]
+      - [0x21664, c, pspnet_inet_tcp_output]
       - [0x2246C, c, pspnet_inet_tcp_subr]
       - { start: 0x2B058, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x2B2F0, type: rodata, name: lib_ent_top, linker_section: .lib.ent.top }

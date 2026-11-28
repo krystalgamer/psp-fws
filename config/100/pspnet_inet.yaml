@@ -61,6 +61,7 @@ segments:
       - [0x12E04, c, pspnet_inet_in_cksum]
       - [0x131B0, c, pspnet_inet_in_cksum2]
       - [0x1C38C, c, pspnet_inet_udp]
+      - [0x22DFC, c, pspnet_inet_tcp_output]
       - [0x23CF4, c, pspnet_inet_tcp_subr]
       - { start: 0x2D4C8, type: asm, name: sceStub, linker_section: .sceStub.text }
       - { start: 0x2D6F8, type: prxpad, order: .text }

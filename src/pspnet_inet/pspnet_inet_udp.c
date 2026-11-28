@@ -891,6 +891,34 @@ INCLUDE_ASM("nonmatchings/pspnet_inet_udp", func_00020788);
 #endif
 
 #if FW_VERSION < 151
+__inline struct syn_cache *syn_cache_lookup(struct sockaddr *src, struct sockaddr *dst, struct syn_cache_head **headp)
+{
+	struct syn_cache *sc;
+	struct syn_cache_head *scp;
+	u32 hash;
+	int s;
+
+	SYN_HASHALL(hash, src, dst);
+
+	scp = &tcp_syn_cache[hash % tcp_syn_cache_size];
+	*headp = scp;
+	s = _sce_pspnet_spllock();
+	for (sc = LIST_FIRST(&scp->sch_bucket); sc != NULL;
+	     sc = LIST_NEXT(sc, sc_bucketq)) {
+		if (sc->sc_hash != hash)
+			continue;
+		if (!func_0002C978(&sc->sc_src, src, src->sa_len) &&
+		    !func_0002C978(&sc->sc_dst, dst, dst->sa_len)) {
+			_sce_pspnet_splunlock(s);
+			return (sc);
+		}
+	}
+	_sce_pspnet_splunlock(s);
+	return (NULL);
+}
+#endif
+
+#if FW_VERSION < 151
 INCLUDE_ASM("nonmatchings/pspnet_inet_udp", func_000215D8);
 
 INCLUDE_ASM("nonmatchings/pspnet_inet_udp", func_00021D08);
@@ -925,27 +953,6 @@ void syn_cache_init(void) {
     }
 }
 
-INCLUDE_ASM("nonmatchings/pspnet_inet_udp", func_000214B0);
-
-INCLUDE_ASM("nonmatchings/pspnet_inet_udp", tcp_output);
-
-#if FW_VERSION < 282
-void tcp_setpersist(struct tcpcb *tp) {
-    s32 t = ((tp->t_srtt >> 2) + tp->t_rttvar) >> (1 + 2);
-    s32 nticks;
-
-    if (t < tp->t_rttmin) {
-        t = tp->t_rttmin;
-    }
-    nticks = t * tcp_backoff[tp->t_rxtshift];
-    if (nticks < TCPTV_PERSMIN) {
-        nticks = TCPTV_PERSMIN;
-    } else if (nticks > TCPTV_PERSMAX) {
-        nticks = TCPTV_PERSMAX;
-    }
-    tp->t_timer[TCPT_PERSIST] = pfslowtimo_now + nticks;
-    if (tp->t_rxtshift < TCP_MAXRXTSHIFT) {
-        tp->t_rxtshift++;
-    }
-}
+#if FW_VERSION >= 151
+INCLUDE_ASM("nonmatchings/pspnet_inet_udp", syn_cache_lookup);
 #endif
