@@ -1315,7 +1315,7 @@ void func_00004048(struct Unk_func_00004048_0 *arg0) {
 void func_000040AC(struct Unk_func_000040AC_0 *arg0) {
     arg0->unk34 = 0;
     arg0->unk38 = 0;
-    func_0000F280(arg0);
+    func_0000F280((Class_00022578*) arg0);
 }
 #endif
 
