@@ -126,7 +126,16 @@ s32 func_00010700(void) {
     return 0x5F;
 }
 
-INCLUDE_ASM("nonmatchings/pspnet_inet_if_loop", arp_ifinit);
+void arp_ifinit(struct ifnet *ifp, struct ifaddr *ifa) {
+    struct in_addr *ip;
+
+    ip = &((struct in_ifaddr *)ifa)->ia_addr.sin_addr;
+    if (ip->s_addr != __builtin_allegrex_wsbw(0)) {
+        func_0000FA70(ifp, ip, ip, LLADDR(ifp->if_sadl));
+    }
+    ifa->ifa_rtrequest = func_0000F730;
+    ifa->ifa_flags |= RTF_CLONING;
+}
 #endif
 
 #if FW_VERSION < 250
@@ -480,7 +489,24 @@ void in_socktrim(struct sockaddr_in *ap) {
 #endif
 
 #if FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/pspnet_inet_if_loop", func_00012758);
+s32 func_00012758(struct in_addr in) {
+    struct in_ifaddr *ia;
+
+    if (D_0002C01C) {
+        for (ia = in_ifaddrhead.tqh_first; ia != 0; ia = ia->ia_list.tqe_next) {
+            if ((in.s_addr & ia->ia_netmask) == ia->ia_net) {
+                return 1;
+            }
+        }
+    } else {
+        for (ia = in_ifaddrhead.tqh_first; ia != 0; ia = ia->ia_list.tqe_next) {
+            if ((in.s_addr & ia->ia_subnetmask) == ia->ia_subnet) {
+                return 1;
+            }
+        }
+    }
+    return 0;
+}
 
 INCLUDE_ASM("nonmatchings/pspnet_inet_if_loop", func_000127EC);
 #endif

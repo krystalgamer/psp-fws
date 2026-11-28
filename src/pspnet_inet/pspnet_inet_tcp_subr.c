@@ -125,7 +125,24 @@ INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", tcp_segsize);
 #endif
 
 #if FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", tcp_setpersist);
+void tcp_setpersist(struct tcpcb *tp) {
+    s32 t = ((tp->t_srtt >> 2) + tp->t_rttvar) >> (1 + 2);
+    s32 nticks;
+
+    if (t < tp->t_rttmin) {
+        t = tp->t_rttmin;
+    }
+    nticks = t * tcp_backoff[tp->t_rxtshift];
+    if (nticks < TCPTV_PERSMIN) {
+        nticks = TCPTV_PERSMIN;
+    } else if (nticks > TCPTV_PERSMAX) {
+        nticks = TCPTV_PERSMAX;
+    }
+    tp->t_timer[TCPT_PERSIST] = pfslowtimo_now + nticks;
+    if (tp->t_rxtshift < TCP_MAXRXTSHIFT) {
+        tp->t_rxtshift++;
+    }
+}
 
 INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", func_00022450);
 #endif
@@ -666,7 +683,9 @@ void func_00023AB8(struct Unk_func_00023AB8_0 *arg0) {
     }
 }
 
-INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", tcp_mtudisc_callback);
+void tcp_mtudisc_callback(struct in_addr addr) {
+    in_pcbnotifyall(&tcbtable, addr, 0x7A, tcp_mtudisc);
+}
 
 void tcp_mtudisc(struct inpcb *inp, s32 errno) {
     struct tcpcb *tp = (struct tcpcb *)inp->inp_ppcb;
@@ -2459,7 +2478,13 @@ void func_000289B0(struct Unk_func_000289B0_0 *arg0) {
     arg0->unk254 = (s32) (arg0->unk254 | 8);
 }
 
-INCLUDE_ASM("nonmatchings/pspnet_inet_tcp_subr", func_000289C0);
+void func_000289C0(void *arg0) {
+    if (M2C_FIELD(arg0, s32 *, 0x18C) != 2) {
+        sppp_cp_change_state(&chap, arg0, STATE_CLOSED);
+    }
+    _sce_pspnet_callout_stop(arg0 + 0x220);
+    M2C_FIELD(arg0, s32 *, 0x254) = (s32) (M2C_FIELD(arg0, s32 *, 0x254) & ~8);
+}
 #endif
 
 #if FW_VERSION < 103

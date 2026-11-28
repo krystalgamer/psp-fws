@@ -216,7 +216,9 @@ INCLUDE_ASM("nonmatchings/pspnet_inet_udp", udp4_realinput);
 #endif
 
 #if FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/pspnet_inet_udp", rip_disconnect);
+void rip_disconnect(struct inpcb *inp) {
+    inp->inp_faddr = zeroin_addr;
+}
 
 INCLUDE_ASM("nonmatchings/pspnet_inet_udp", func_0001B770);
 
@@ -856,7 +858,34 @@ void func_0001C208(void) {
     in_pcbinit(&D_0002DC78, D_0002C318, D_0002C318);
 }
 
-INCLUDE_ASM("nonmatchings/pspnet_inet_udp", udp_ctlinput);
+void *udp_ctlinput(s32 cmd, struct sockaddr *sa, void *v) {
+    struct ip *ip = v;
+    struct tcphdr *th;
+    void (*notify)() = func_0001C57C;
+    s32 errno;
+
+    if (sa->sa_family != AF_INET || sa->sa_len != sizeof(struct sockaddr_in)) {
+        return NULL;
+    }
+    if ((u32)cmd >= PRC_NCMDS) {
+        return NULL;
+    }
+    errno = D_0002C21C[cmd];
+    if (PRC_IS_REDIRECT(cmd)) {
+        notify = in_rtchange, ip = 0;
+    } else if (cmd == PRC_HOSTDEAD) {
+        ip = 0;
+    } else if (errno == 0) {
+        return NULL;
+    }
+    if (ip) {
+        th = (struct tcphdr *)((u8 *)ip + ((ip->ip_hl_v & 0xF) << 2));
+        in_pcbnotify(&D_0002DC78, ((struct sockaddr_in *)sa)->sin_addr, th->th_dport, ip->ip_src, th->th_sport, errno, notify);
+    } else {
+        in_pcbnotifyall(&D_0002DC78, ((struct sockaddr_in *)sa)->sin_addr, errno, notify);
+    }
+    return NULL;
+}
 #endif
 
 s32 udp_sysctl(s32 *name, u32 namelen, void *oldp, u32 *oldlenp, void *newp, u32 newlen) {

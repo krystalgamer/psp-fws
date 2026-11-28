@@ -1934,12 +1934,15 @@ extern s32 D_0002C01C;
 extern s32 D_0002C020;
 extern s32 D_0002C02C;
 extern s32 D_0002C030;
+extern s32 D_0002C034;
+extern s32 D_0002C038;
 extern s32 D_0002C1D8;
 extern s32 D_0002C1DC;
 extern s32 D_0002C1E4;
 extern s32 D_0002C1E8; /* icmperrppslim */
 extern s32 D_0002C1F0;
 extern s32 D_0002C208; /* ip_maxfragpackets */
+extern s32 D_0002C21C[];
 extern s32 D_0002C228;
 extern s32 D_0002C22C;
 extern s32 D_0002C234;
