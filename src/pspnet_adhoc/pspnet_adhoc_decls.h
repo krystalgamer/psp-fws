@@ -31,7 +31,7 @@ typedef struct {
     s32 cc;                             /* 0x08 */
     s32 hiwat;                          /* 0x0C */
     s32 lowat;                          /* 0x10 */
-    s32 unk14;
+    u32 flags;                          /* 0x14 1: wakeup sb, 2: wakeup select */
 } SceNetAdhocPtpSockbuf;
 
 typedef struct SceNetAdhocWaiter {
@@ -121,7 +121,7 @@ typedef struct SceNetAdhocPtpPcb {
     SceNetAdhocPtpSockbuf snd;          /* 0x2C */
     SceNetAdhocPtpSockbuf rcv;          /* 0x44 */
     SceNetAdhocDesc *desc;              /* 0x5C */
-    s32 unk60;
+    s32 state;                          /* 0x60 */
     s32 unk64;
     s32 mss;                            /* 0x68 */
     u8 unk6C[0x88 - 0x6C];
@@ -134,7 +134,9 @@ typedef struct SceNetAdhocPtpPcb {
     s32 unkB4;
     s32 nchildren;                      /* 0xB8 */
     s32 unkBC;
+    struct SceNetAdhocPtpPcb *parent;   /* 0xC0 listener */
 } SceNetAdhocPtpPcb;
+typedef char chk_SceNetAdhocPtpPcb[(sizeof(SceNetAdhocPtpPcb) == ((FW_VERSION < 150) ? 0xC4 : 0xE4)) ? 1 : -1];
 typedef char chk_SceNetAdhocPtpPcb_desc[((u32)&((SceNetAdhocPtpPcb *)0)->desc == ((FW_VERSION < 150) ? 0x5C : 0x58)) ? 1 : -1];
 
 typedef struct {
@@ -234,6 +236,17 @@ struct sockaddr_dl {
         } \
     } while (0)
 
+#define PTP_SBWAKEUP(sb) do { \
+        if ((sb)->flags & 1) { \
+            (sb)->flags &= ~1; \
+            _sce_pspnet_wakeup(sb); \
+        } \
+        if ((sb)->flags & 2) { \
+            (sb)->flags &= ~2; \
+            _sce_pspnet_wakeup(&D_00007448); \
+        } \
+    } while (0)
+
 extern s32 D_00007400;
 extern s32 D_00007448;
 extern M2C_UNK D_00007450;
@@ -252,6 +265,7 @@ extern M2C_UNK D_000079E8;
 extern M2C_UNK D_00007A8C;
 extern M2C_UNK D_00007CC8;
 
+void _sce_pspnet_callout_init(void *c);
 void _sce_pspnet_callout_stop(void *c);
 struct ifnet *_sce_pspnet_ifplookup_lladdr(const SceNetEtherAddr *addr);
 void _sce_pspnet_schednetintr_with_evf(s32 bit);
@@ -299,12 +313,15 @@ void func_00003BB0(SceNetAdhocDesc *d);
 void func_00004964(void);
 void func_00004AE4(SceNetAdhocDesc *d);
 void func_00004B30(SceNetAdhocPtpPcb *pcb);
+void func_00004E60(SceNetAdhocPtpPcb *pcb);
 s32 func_00004E98(SceNetAdhocPtpPcb *pcb);
 s32 func_00004F50(SceNetAdhocPtpPcb *pcb);
 s32 func_00005024(s32, s32);
 s32 func_000050F8(s32, s32);
 s32 func_000052D4(void);
 SceNetAdhocPtpPcb *func_0000532C(const SceNetEtherAddr *laddr, u16 lport, const SceNetEtherAddr *paddr, u16 pport);
+s32 func_0000548C(SceNetAdhocDesc *d);
+void func_00005528(SceNetAdhocPtpPcb *pcb);
 s32 func_00005544(SceNetAdhocPtpPcb *pcb, s32 sndsize, s32 rcvsize);
 void func_00005560(SceNetAdhocPtpPcb *pcb, s32 a1, s32 a2);
 s32 func_00005594(SceNetAdhocPtpPcb *pcb, s32 sndsize, s32 rcvsize);

@@ -824,9 +824,19 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00004DFC);
 
 #if FW_VERSION < 150
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00004C0C);
+
+void func_00004E60(SceNetAdhocPtpPcb *pcb) {
+    _sce_pspnet_callout_stop(pcb->callout);
+    pcb->state = 4;
+    pcb->desc->unkC = (pcb->desc->unkC & ~0x2000) | 0x4000;
+    if (pcb->parent != NULL)
+        PTP_SBWAKEUP(&pcb->parent->rcv);
+    else
+        PTP_SBWAKEUP(&pcb->rcv);
+}
 #endif
 
-#if FW_VERSION < 271
+#if FW_VERSION >= 150 && FW_VERSION < 271
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00004E60);
 #endif
 
@@ -881,9 +891,31 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_000056CC);
 #endif
 
 #if FW_VERSION < 150
-INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_0000548C);
+s32 func_0000548C(SceNetAdhocDesc *d) {
+    SceNetAdhocPtpPcb *pcb;
 
-INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00005528);
+    pcb = sceNetMallocInternal(sizeof(SceNetAdhocPtpPcb));
+    if (pcb == NULL)
+        return 0x80410001;
+    func_00006E8C(pcb, 0, sizeof(SceNetAdhocPtpPcb));
+    pcb->cfirst = NULL;
+    pcb->clast = &pcb->cfirst;
+    _sce_pspnet_callout_init(pcb->callout);
+    pcb->next = NULL;
+    pcb->prev = D_000079B0.last;
+    *D_000079B0.last = pcb;
+    D_000079B0.last = &pcb->next;
+    pcb->state = 0;
+    pcb->desc = d;
+    d->pcb = pcb;
+    return 0;
+}
+
+void func_00005528(SceNetAdhocPtpPcb *pcb) {
+    __builtin_memset(&pcb->laddr, 0, sizeof(pcb->laddr));
+    __builtin_memset(&pcb->paddr, 0, sizeof(pcb->paddr));
+    pcb->lport = 0;
+}
 #endif
 
 #if FW_VERSION < 282
@@ -911,7 +943,7 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_0000556C);
 
 #if FW_VERSION < 282
 s32 func_000056B0(SceNetAdhocPtpPcb *pcb, s32 a1) {
-    pcb->unk60 = 1;
+    pcb->state = 1;
     pcb->unkBC = a1;
     pcb->desc->unkC |= 0x1000;
     return 0;
@@ -1060,7 +1092,7 @@ void func_000055B0(SceNetAdhocPtpPcb *pcb, s32 a1, s32 a2) {
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_000055BC);
 
 s32 func_000056E4(SceNetAdhocPtpPcb *pcb, s32 a1) {
-    pcb->unk60 = 1;
+    pcb->state = 1;
     pcb->unkBC = a1;
     pcb->desc->unkC |= 0x1000;
     return 0;
