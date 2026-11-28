@@ -1543,7 +1543,34 @@ INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_0000660C);
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_000067F8);
 #endif
 
+#if FW_VERSION < 150
+void func_000069D4(SceNetAdhocPtpPcb *pcb) {
+    if ((u32)pcb->state < 2)
+        return;
+    if (pcb->rexmt_left-- <= 0) {
+        _sce_pspnet_callout_stop(pcb->callout);
+        func_00004F50(pcb);
+        return;
+    }
+    switch (pcb->state) {
+    case 2:
+        func_00006340(pcb, 1);
+        break;
+    case 3:
+        func_00006340(pcb, 2);
+        break;
+    case 4:
+        pcb->snd_inflight = 0;
+        pcb->snd_nxt = pcb->snd_una;
+        func_0000648C(pcb, 1);
+        D_00007450.stat[9]++;
+        break;
+    }
+    _sce_pspnet_callout_reset_usec(pcb->callout, pcb->rexmt_int, func_000069D4, pcb);
+}
+#else
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_000069D4);
+#endif
 
 #if FW_VERSION >= 150 && FW_VERSION < 282
 INCLUDE_ASM("nonmatchings/pspnet_adhoc", func_00006B1C);

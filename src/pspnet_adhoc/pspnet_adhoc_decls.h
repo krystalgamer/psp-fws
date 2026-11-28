@@ -163,7 +163,12 @@ typedef struct SceNetAdhocPtpPcb {
     s32 unk64;
     s32 mss;                            /* 0x68 */
     u32 iss;                            /* 0x6C */
-    u8 unk70[0x88 - 0x70];
+    u32 unk70;
+    u32 snd_una;                        /* 0x74 */
+    u32 snd_nxt;                        /* 0x78 */
+    u32 rcv_nxt;                        /* 0x7C */
+    s32 snd_wnd;                        /* 0x80 */
+    s32 snd_inflight;                   /* 0x84 */
     u8 callout[0xAC - 0x88];            /* 0x88 */
 #if FW_VERSION >= 150
     u8 unk150[0x24];
@@ -228,8 +233,13 @@ struct mbuf {
     struct {
         struct ifnet *rcvif;    /* 0x14 */
         s32 len;                /* 0x18 */
+        struct mbuf *aux;       /* 0x1C */
+        u8 unk20[0x10];
     } m_pkthdr;
+    u8 m_dat[0x100 - 0x30];     /* 0x30 */
 };
+#define MT_DATA 1
+#define M_PKTHDR 0x0002
 
 struct sockaddr_dl {
     u8 sdl_len;
@@ -371,7 +381,9 @@ void func_000056D4(SceNetAdhocPtpPcb *pcb);
 s32 func_000056E4(SceNetAdhocPtpPcb *pcb, s32 a1);
 void func_00005708(SceNetAdhocPtpPcb *pcb);
 void func_0000578C(struct mbuf *m);
-void func_00006340(SceNetAdhocPtpPcb *pcb, s32 type);
+void func_00005FF8(struct ifnet *ifp, const SceNetEtherAddr *laddr, u16 lport, const SceNetEtherAddr *paddr, u16 pport, u8 type, u32 seq, struct mbuf *m);
+void func_00006340(SceNetAdhocPtpPcb *pcb, u8 type);
+void func_0000648C(SceNetAdhocPtpPcb *pcb, s32 rexmt);
 s32 func_00006880(void);
 void func_000069D4(SceNetAdhocPtpPcb *pcb);
 s32 func_00006AB8(const SceNetEtherAddr *addr, void *ptr, s32 size);
