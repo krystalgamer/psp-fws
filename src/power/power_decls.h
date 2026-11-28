@@ -34,8 +34,15 @@ typedef struct {
     s32 lowBatteryCapacity; /* 0x10 */
     u32 isBatteryPollingSuspended; /* 0x14 */
     u32 batteryForbidChargingNetCounter; /* 0x18 */
-#if FW_VERSION == 100
+#if FW_VERSION < 282
+    /* 1.00: 0x50 bytes; 1.02 inserts unk20 (0x54), 1.03-2.71 also unk24 (0x58); offsets below are 1.00's */
     s32 workerThreadNextOp; /* 0x1C */
+#if FW_VERSION >= 102
+    s32 unk20; /* -1 at init and on resume */
+#endif
+#if FW_VERSION >= 103
+    s32 unk24; /* -1 at init */
+#endif
     u32 powerSupplyStatus; /* 0x20 */
     float innerTemp; /* 0x24 */
     u32 batteryAvailabilityStatus; /* 0x28, 2 = battery info valid */
@@ -82,10 +89,36 @@ typedef struct {
     u16 unk3A; /* 0x3A */
     s32 geEdramRefreshMode; /* 0x3C */
     s32 oldGeEdramRefreshMode; /* 0x40 */
+#elif FW_VERSION == 102 || FW_VERSION == 103 || (FW_VERSION >= 150 && FW_VERSION < 201)
+    /* 1.02-2.00 layout, 0x50 bytes */
+    s32 pllOutSelect; /* 0x4 */
+    s32 pllClockFrequencyInt; /* 0x8 */
+    s32 cpuClockFrequencyInt; /* 0xC */
+    s32 busClockFrequencyInt; /* 0x10 */
+    float pllClockFrequencyFloat; /* 0x14 */
+    float cpuClockFrequencyFloat; /* 0x18 */
+    float busClockFrequencyFloat; /* 0x1C */
+    u32 clkcCpuGearNumerator; /* 0x20 */
+    u32 clkcCpuGearDenominator; /* 0x24 */
+    u32 clkcBusGearNumerator; /* 0x28 */
+    u32 clkcBusGearDenominator; /* 0x2C */
+    u32 isTachyonMaxVoltage; /* 0x30 */
+    s16 tachyonMaxVoltage; /* 0x34 */
+    s16 tachyonDefaultVoltage; /* 0x36 */
+    u16 unk38; /* 0x38 */
+    s16 scCpuClockLowerLimit; /* 0x3A */
+    s16 scCpuClockUpperLimit; /* 0x3C */
+    s16 scBusClockLowerLimit; /* 0x3E */
+    s16 scBusClockUpperLimit; /* 0x40 */
+    s16 pllClockLowerLimit; /* 0x42 */
+    s16 pllClockUpperLimit; /* 0x44 */
+    u16 unk46; /* 0x46 */
+    s32 geEdramRefreshMode; /* 0x48 */
+    s32 oldGeEdramRefreshMode; /* 0x4C */
 #endif
 } ScePowerFrequency;
 
-/* sceKernelRegisterPowerHandlers table (1.00: 6 words). */
+/* sceKernelRegisterPowerHandlers table (1.00: 6 words, 1.02: 7, 1.50: 10). */
 typedef struct {
     s32 size;
     s32 (*tick)(s32);
@@ -93,6 +126,14 @@ typedef struct {
     s32 (*unlock)(s32);
     s32 (*lockForUser)(s32);
     s32 (*unlockForUser)(s32);
+#if FW_VERSION >= 102
+    s32 (*rebootStart)(void);
+#endif
+#if FW_VERSION >= 150
+    s32 (*memLock)(s32, void **, SceSize *);
+    s32 (*memTryLock)(s32, void **, SceSize *);
+    s32 (*memUnlock)(s32);
+#endif
 } ScePowerHandlers;
 
 /* Idle timer slot (1.00: 0x20 bytes). */
@@ -119,7 +160,11 @@ typedef struct {
     u8 hwResetVector[0x1000]; /* 0x4000, copy of 0xBFC00000 */
     s32 pllOutSelect; /* 0x5000 */
     s32 powerDownCounter; /* 0x5004 */
+#if FW_VERSION == 102 || FW_VERSION == 103
+    u8 resumeInfo[0x78]; /* 0x5008, ScePowerResumeInfo (size word first) */
+#else
     u8 resumeInfo[0x38]; /* 0x5008, ScePowerResumeInfo (size word first) */
+#endif
 } ScePowerResume;
 
 /* powerSwitch.c state (1.00: 0x28 bytes; 1.50-2.71 offsets from the shared C). */
@@ -138,8 +183,8 @@ typedef struct {
 #endif
     s32 curHardwarePowerSwitchRequest; /* 1.00: 0x18, 1.50: 0x20 */
     s32 curSoftwarePowerSwitchRequest; /* 1.00: 0x1C, 1.50: 0x24 */
-#if FW_VERSION >= 150
-    u32 isRebootPowerLockExist; /* 0x28 */
+#if FW_VERSION >= 150 || FW_VERSION == 102 || FW_VERSION == 103
+    u32 isRebootPowerLockExist; /* 1.02: 0x20, 1.50: 0x28 */
 #endif
 #if FW_VERSION >= 201
     u32 coldResetMode; /* 0x2C */
@@ -152,7 +197,14 @@ typedef struct {
 typedef struct {
     ScePowerCallbackCB powerCallbackCBs[32]; /* 0x0 */
     u32 curPowerStateForCallbackArg; /* 0x100 */
+#if FW_VERSION == 102 || FW_VERSION == 103
+    u8 wlanActivity; /* 0x104 */
+    u8 isWlanSuppressChargingEnabled; /* 0x105, IdStorage key 4 byte 0x19 */
+    u8 backlightMaximumWlanActive; /* 0x106, byte 0x1E */
+    u8 ledOffTiming; /* 0x107, byte 0x1F (set from 1.03) */
+#else
     u32 isWlanSuppressChargingEnabled; /* 0x104, IdStorage key 4 byte 0x19 */
+#endif
 } ScePower;
 
 typedef struct SceSysEventHandler {
@@ -169,6 +221,8 @@ typedef struct SceSysEventHandler {
 extern s32 D_00003DC4;
 extern s32 D_00003E08;
 extern s32 D_00003E20;
+extern u8 D_00004244;
+extern u8 D_000045C7;
 extern u8 D_00004FC5;
 extern u8 D_00004FC6;
 extern u8 D_00004FC9;
@@ -185,6 +239,7 @@ extern s32 D_00008F90;
 extern s32 D_00008FD4;
 extern s32 D_00008FD8;
 extern s32 D_00008FDC;
+extern s32 D_00009450;
 extern s32 D_0000A1CC;
 extern s32 D_0000A1D0;
 extern u16 D_0000A1F8;
@@ -244,6 +299,7 @@ void _scePowerPowerSwCallback(s32 enable);
 s32 _scePowerUnlock(s32 lockType, s32 isUserLock);
 s32 _scePowerVblankInterrupt(s32 subIntr, void *arg);
 s32 func_000012B4(s32, s32);
+s32 func_000017B0(s32 lockType, s32 isUserLock);
 s32 func_00001EF4(s32, s32);
 s32 func_00001FEC(s32, s32);
 s32 func_0000250C(void);
