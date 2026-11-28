@@ -2509,7 +2509,7 @@ s32 func_000067D4(SceWlanMac *mac) {
             mac->regWrite = NULL;
             mac->gpSend = NULL;
             mac->gpRecv = NULL;
-            mac->unkA0 = 0;
+            mac->gameStop = NULL;
             mac->prevEstablish = NULL;
         }
         sceKernelClearEventFlag(mac->bus.evf, ~0x10);

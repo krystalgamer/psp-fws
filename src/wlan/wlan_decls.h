@@ -4,6 +4,24 @@
 #include "common.h"
 #include "m2c_macros.h"
 
+struct D_0001925C_s {
+    s32 unk0;
+    s32 unk4;
+    s32 unk8;
+    s32 unkC;
+    s32 unk10;
+    s32 unk14;
+    s32 unk18;
+};
+
+/* the part of the pspnet mbuf the driver touches */
+typedef struct {
+    u8 unk0[0x12];
+    u16 flags;                  /* 0x12 M_PKTHDR = 2 */
+    u8 unk14[4];
+    s32 len;                    /* 0x18 m_pkthdr.len */
+} SceWlanMbuf;
+
 typedef struct {
     s32 val;
     u32 key;
@@ -199,7 +217,7 @@ typedef struct {
     s32 (*gpSend)(SceWlanMac *, s32, void *, u32);          /* 0x24 */
     s32 (*gpRecv)(SceWlanMac *, s32, void *, u32, s32 *);   /* 0x28 */
     s32 (*prevEstablish)(SceWlanMac *, void *); /* 0x2C */
-    u32 unk30;                                  /* 0x30 */
+    void (*gameStop)(SceWlanMac *, s32);        /* 0x30 */
 } SceWlanChipOps;
 
 #if FW_VERSION >= 201
@@ -265,7 +283,7 @@ struct SceWlanMac {
     s32 (*regWrite)(SceWlanMac *, s32, void *);  /* 0x094 */
     s32 (*gpSend)(SceWlanMac *, s32, void *, u32);              /* 0x098 */
     s32 (*gpRecv)(SceWlanMac *, s32, void *, u32, s32 *);       /* 0x09C */
-    u32 unkA0;
+    void (*gameStop)(SceWlanMac *, s32);        /* 0x0A0 */
     s32 (*prevEstablish)(SceWlanMac *, void *);  /* 0x0A4 */
     s32 dmaOp;                  /* 0x0A8 */
     void *dmaBuf;               /* 0x0AC */
@@ -307,7 +325,8 @@ typedef char chk_SceWlanMac[(sizeof(SceWlanMac) == 0x16C) ? 1 : -1];
 /* driver state (1.00-1.52), pointed to by D_000191B0; offsets are 1.00's */
 struct SceWlanSoftc {
     u32 flags;                  /* 0x000 0x800: game mode, 0x200: MAC address valid, 0x2000: ... */
-    u8 unk004[0x90 - 0x4];
+    u32 unk004;
+    u8 unk008[0x88];            /* 0x008 cleared on power-down */
     u32 unk90;                  /* 0x090 */
     u32 unk94;                  /* 0x094 */
     u32 unk98;                  /* 0x098 */
@@ -336,7 +355,10 @@ struct SceWlanSoftc {
     u8 unk23C[0x24C - 0x23C];
     SceWlanRingEnt *ring;       /* 0x24C 100 entries */
     SceWlanRingEnt *ringHead;   /* 0x250 */
-    u8 unk254[0x260 - 0x254];
+    u16 unk254;                 /* 0x254 */
+    u16 unk256;                 /* 0x256 */
+    s32 running;                /* 0x258 driver thread loop flag */
+    u8 unk25C[4];
     SceUID thread;              /* 0x260 SceWlanMac */
 #if FW_VERSION >= 150
     SceUID thread264;           /* 1.50+: second thread, terminated by func_0000368C */
@@ -362,16 +384,6 @@ struct SceWlanSoftc {
 typedef char chk_SceWlanSoftc[((u32)&((SceWlanSoftc *)0)->gpCallback == 0x2C0) ? 1 : -1];
 #endif
 #endif
-
-struct D_0001925C_s {
-    s32 unk0;
-    s32 unk4;
-    s32 unk8;
-    s32 unkC;
-    s32 unk10;
-    s32 unk14;
-    s32 unk18;
-};
 
 struct Unk_D_000191B0 {
     u8 pad0[0x184];
@@ -669,6 +681,7 @@ extern s32 D_0002E3DC;
 extern s32 D_0002EE00;
 extern M2C_UNK func_00003F08;
 
+SceWlanQEnt *func_00000000(SceWlanSoftc *sc, u32 owner);
 s32 func_00000874(void *ifh, void *m);
 s32 func_000010E0(SceSize args, void *argp);
 s32 func_00001118(SceSize args, void *argp);
@@ -802,6 +815,10 @@ M2C_UNK sceNetDestroyIfhandleEther(void *);
 M2C_UNK sceNetDetachIfhandleEther(void *);
 M2C_UNK sceNetFlagIfEvent(void *, M2C_UNK, M2C_UNK);
 void *sceNetGetIfhandleOpt(void *ifh);
+SceWlanMbuf *sceNetIfDequeue(void *ifh);
+s32 sceNetIfPrepend(void *ifh, SceWlanMbuf *m);
+s32 sceNetMCopydata(SceWlanMbuf *m, s32 off, s32 len, void *buf);
+s32 sceNetMFreem(SceWlanMbuf *m);
 s32 sceNetSendIfEvent(void *ifh, s32 ev, s32 arg);
 M2C_UNK sceSysconResetDevice(M2C_UNK, M2C_UNK);
 M2C_UNK sceSysregMsifBusClockDisable(M2C_UNK);
