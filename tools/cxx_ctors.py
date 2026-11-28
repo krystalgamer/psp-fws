@@ -41,8 +41,63 @@ CTOR_TEMPLATES = {
 }
 
 
-def ctor_names(cls):
-    return [f"_ZN{CC.mangle_cls(cls)}C{k}Ev" for k in (2, 1)]
+def ctor_names(cls, sig="v"):
+    return [f"_ZN{CC.mangle_cls(cls)}C{k}E{sig}" for k in (2, 1)]
+
+
+MANGLE = {"s32": "i", "M2C_UNK": "i", "int": "i", "u32": "j", "s16": "s", "u16": "t", "s8": "a", "u8": "h",
+          "f32": "f", "void": "v", "char": "c"}
+
+
+def mangle_params(params):
+    """'s32 arg1, void *arg2' -> 'iPv' (None for types we don't mangle)."""
+    out = ""
+    for prm in [x.strip() for x in params.split(",") if x.strip()]:
+        m = re.match(r"^(?:const )?(\w+)\s*(\**)\s*arg\d+$", prm)
+        if not m or m[1] not in MANGLE or (m[1] == "void" and not m[2]):
+            return None
+        out += "P" * len(m[2]) + MANGLE[m[1]]
+    return out or "v"
+
+
+def ctor_body(text, label, structs):
+    """m2c C of a C2/C1 -> (params, mangled params, body, base C2 name or None, fields) or None.
+    The base ctor call (first statement, `B(arg0);`) and the vptr store go: the compiler emits them."""
+    m = re.match(r"^void \w+\((?:struct (\w+) \*|M2C_UNK \*\*|void \*|s32 )arg0((?:, [^)]*)?)\) \{\n(.*)\n\}\n*$",
+                 text, re.S)
+    if not m:
+        return None
+    params = m[2][2:] if m[2] else ""
+    sig = mangle_params(params)
+    if sig is None:
+        return None
+    lines = m[3].split("\n")
+    vp = [i for i, l in enumerate(lines) if re.match(rf"^    (?:arg0->unk0|\*arg0) = (?:\([^)]*\) )?&{label};$", l)]
+    if len(vp) != 1:
+        return None
+    del lines[vp[0]]
+    # locals first, then the statements
+    k = 0
+    while k < len(lines) and (re.match(r"^    [\w ]+\**\s*\w+(?:\[\w+\])?;$", lines[k]) or not lines[k].strip()):
+        k += 1
+    base = None
+    bm = re.match(r"^    (\w+)\((?:\([^()]*\) )?arg0\);$", lines[k]) if k < len(lines) else None
+    if bm:
+        base = bm[1]
+        del lines[k]
+    body = "\n".join(lines).rstrip()
+    if re.search(r"\barg0->unk0\b|\*arg0\b|\breturn\b", body):
+        return None
+    fields = {}
+    if m[1]:
+        for o, f in structs.get(m[1], {}).items():
+            if re.search(rf"\barg0->unk{o:X}\b", body):
+                if f[0] is None:
+                    return None
+                fields[o] = f
+    if re.search(r"\barg0->unk", body) and not fields:
+        return None
+    return params, sig, re.sub(r"\barg0\b", "this", body), base, fields
 
 
 def ctor_shapes(flags, size):
@@ -51,10 +106,11 @@ def ctor_shapes(flags, size):
     return CC.template_shapes(flags, key)
 
 
-def declare_ctor(text, cls):
-    if re.search(rf"^\s+{cls}\(\);", text, re.M):
+def declare_ctor(text, cls, params=""):
+    decl = f"    {cls}({params});"
+    if decl in text.split("\n"):
         return text
-    return re.sub(rf"(class {cls}\b[^{{]*\{{\npublic:\n)", rf"\g<1>    {cls}();\n", text, count=1)
+    return re.sub(rf"(class {cls}\b[^{{]*\{{\npublic:\n)", lambda m: m[1] + decl + "\n", text, count=1)
 
 
 def main():
@@ -63,6 +119,8 @@ def main():
     ap.add_argument("--apply", action="store_true")
     ap.add_argument("--no-build", action="store_true")
     ap.add_argument("-v", action="store_true")
+    ap.add_argument("--nontrivial", action="store_true", help="also ctors with a body (from the C of C2/C1)")
+    ap.add_argument("--exclude", default="", help="classes to leave alone (comma-separated)")
     a = ap.parse_args()
     mod = a.module
     have = sorted((p.parent.name for p in ROOT.glob(f"config/*/{mod}.yaml")), key=lambda v: (CC.fwnum(v), v))
@@ -80,6 +138,10 @@ def main():
         for m in re.finditer(r"^class (\w+)(?: : public ([\w:]+))? \{", t, re.M):
             declared[m[1]] = (k, m[2])
 
+    structs = {}
+    for t in types.values():
+        for m in re.finditer(r"struct (\w+) \{\n(.*?)\n\};", t, re.S):
+            structs[m[1]] = CC.struct_fields(m[2])
     reasons, plans, base_renames = Counter(), [], []
     for v in vers:
         n = CC.fwnum(v)
@@ -100,15 +162,15 @@ def main():
                 reasons["dtor not C++ (no vtable alias)"] += 1
                 continue
             names = [x for _, x in g["funcs"]]
-            new = ctor_names(cls)
-            if names == new:
+            if all(x.startswith(f"_ZN{CC.mangle_cls(cls)}C") for x in names):
                 reasons["done"] += 1
                 continue
             if any(x.startswith("_Z") for x in names):
                 reasons["other mangled names"] += 1
                 continue
             size = g["sizes"][0]
-            if tuple(g["sizes"]) not in ((0x10, 0x10), (0x28, 0x28)) or cls not in declared:
+            triv = tuple(g["sizes"]) in ((0x10, 0x10), (0x28, 0x28))
+            if (not triv and not a.nontrivial) or cls not in declared:
                 reasons["not trivial"] += 1
                 continue
             where = None
@@ -122,15 +184,30 @@ def main():
                 reasons["entries not consecutive"] += 1
                 continue
             flags = CC.unit_flags(where[0], v)
-            if not flags.startswith("cc1plus") or ctor_shapes(flags, size) != [list(x) for x in g["shapes"]]:
-                reasons["not trivial"] += 1
+            if not flags.startswith("cc1plus"):
+                reasons["not C++"] += 1
                 continue
             base = declared[cls][1]
-            if size == 0x10 and base:
+            nt = None
+            if not (triv and ctor_shapes(flags, size) == [list(x) for x in g["shapes"]]):
+                if not a.nontrivial:
+                    reasons["not trivial"] += 1
+                    continue
+                es = ents[where[0]]
+                nt = next((b for b in (ctor_body(es[k].text, g["vptr_label"], structs) for k in where[1]
+                                       if es[k].kind == "cfunc") if b), None)
+                if nt is None:
+                    reasons["ctor body not in C (or not convertible)"] += 1
+                    continue
+                have = CC.struct_fields(types[declared[cls][0]])
+                if any(o in have and have[o] != f for o, f in nt[4].items()):
+                    reasons["field differs from the class's"] += 1
+                    continue
+            if (nt is None and size == 0x10 and base) or (nt is not None and bool(nt[3]) != bool(base)):
                 reasons["base mismatch"] += 1
                 continue
-            if size == 0x28:
-                b = g["base"]
+            if (nt is None and size == 0x28) or (nt is not None and base):
+                b = nt[3] if nt is not None else g["base"]
                 if not base:
                     reasons["base mismatch"] += 1
                     continue
@@ -142,11 +219,14 @@ def main():
                         reasons["base ctor not found"] += 1
                         continue
                     base_renames.append((v, base, bg))
-            plans.append((v, cls, g, where))
+            plans.append((v, cls, g, where, nt))
+    ex = set(a.exclude.split(",")) - {""}
+    plans = [p for p in plans if p[1] not in ex]
+    base_renames = [b for b in base_renames if any(p[0] == b[0] for p in plans)]
     print(f"{mod}: {len(plans)} ctor pairs to convert; " + ", ".join(f"{k} {c}" for k, c in sorted(reasons.items())))
     if a.v:
-        for v, cls, g, _ in plans:
-            print(f"  {v}: {cls}::{cls}()  {' '.join(x for _, x in g['funcs'])}")
+        for v, cls, g, _, nt in plans:
+            print(f"  {v}: {cls}::{cls}({nt[0] if nt else ''})  {' '.join(x for _, x in g['funcs'])}")
     if not a.apply or not plans:
         return
 
@@ -178,7 +258,7 @@ def main():
         rename_cfg(v, bg["funcs"], ctor_names(base))
         k, _ = declared[base]
         types[k] = declare_ctor(types[k], base)
-    for v, cls, g, (f, _) in plans:
+    for v, cls, g, (f, _), nt in plans:
         n = CC.fwnum(v)
         es = ents[f]
         names = [x for _, x in g["funcs"]]
@@ -186,10 +266,18 @@ def main():
         assert [es[k].name for k in idxs] == names, (cls, v)
         for k in idxs:
             es[k].vers = es[k].vers - {n}
-        es.insert(idxs[0], FM.Entry(frozenset([n]), "cfunc", f"{cls}_ctor", f"{cls}::{cls}() {{\n}}\n"))
-        rename_cfg(v, g["funcs"], ctor_names(cls))
+        params, sig, body, _, fields = nt if nt else ("", "v", "", None, {})
+        body = body + "\n" if body.strip() else ""
+        es.insert(idxs[0], FM.Entry(frozenset([n]), "cfunc", f"{cls}_ctor", f"{cls}::{cls}({params}) {{\n{body}}}\n"))
+        if fields:
+            k, _ = declared[cls]
+            fs = CC.struct_fields(types[k])
+            add = [f[1] for o, f in sorted(fields.items()) if o not in fs]
+            if add:
+                types[k] = types[k].replace("public:\n", "public:\n" + "".join(f"    {d}\n" for d in add), 1)
+        rename_cfg(v, g["funcs"], ctor_names(cls, sig))
         k, base = declared[cls]
-        types[k] = declare_ctor(types[k], cls)
+        types[k] = declare_ctor(types[k], cls, params)
         if base and base in declared:
             bk, _ = declared[base]
             types[bk] = declare_ctor(types[bk], base)
@@ -213,6 +301,11 @@ def main():
         for o, nn in m.items():
             if o in store["funcs"] and nn not in store["funcs"]:
                 store["funcs"][nn] = re.sub(rf"\b{o}\b", nn, store["funcs"][o])
+    bad = CC.relayout(types)
+    if bad:
+        for q, txt in list(keep.items()) + list(keepcfg.items()):
+            q.write_text(txt)
+        raise SystemExit(f"fields overlap the base's in {', '.join(bad)}; restored")
     structify.SRC[mod] = sd
     structify.write_decls(mod, store)
     print(f"converted {len(plans)} ctor pairs in {len(renames)} versions")
@@ -234,6 +327,15 @@ def main():
     bad = [l for l in r.stdout.splitlines() if l.strip() and not l.endswith(": OK")]
     if bad:
         print("\n".join(sorted(bad)[:12]))
+        culprits = set()
+        for l in bad:
+            m = re.match(r"^(\w+):\S+: FAIL .*MISMATCH", l)
+            if m:
+                cm = re.match(r"^(\w+)::\1\(", CC.first_mismatch(m[1], mod) or "")
+                if cm:
+                    culprits.add(cm[1])
+        if culprits:
+            print("mismatching classes: " + " ".join(sorted(culprits)))
         restore()
     print(f"{mod}: every version byte-matching")
 
