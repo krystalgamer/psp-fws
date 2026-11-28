@@ -1642,9 +1642,30 @@ s32 stub_pf_chdmod(s32 a0, s32 a1, s32 a2) {
 #endif
 
 #if FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/fatmsmod", func_00004BCC);
+s32 func_00004BCC(s32 a0, s32 a1) {
+    SceMsStubMsg msg;
 
-INCLUDE_ASM("nonmatchings/fatmsmod", func_00004C10);
+    msg.cmd = 0xb;
+    msg.p2 = a0;
+    msg.p7 = a1;
+    if (FcpSendMsg(&msg) == -1) {
+        return -1;
+    }
+    return msg.ret;
+}
+
+s32 func_00004C10(s32 a0, s32 a1, s32 a2) {
+    SceMsStubMsg msg;
+
+    msg.cmd = 0x18;
+    msg.p2 = a0;
+    msg.p0 = a1;
+    msg.p7 = a2;
+    if (FcpSendMsg(&msg) == -1) {
+        return -1;
+    }
+    return msg.ret;
+}
 #endif
 
 s32 func_00004C58(s32 a0, s32 a1) {
@@ -1739,7 +1760,18 @@ s32 stub_pf_chmod(s32 a0, s32 a1, s32 a2) {
 #endif
 
 #if FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/fatmsmod", func_00004D24);
+s32 func_00004D24(s32 a0, s32 a1, s32 a2) {
+    SceMsStubMsg msg;
+
+    msg.cmd = 0xd;
+    msg.p2 = a0;
+    msg.p0 = a1;
+    msg.p7 = a2;
+    if (FcpSendMsg(&msg) == -1) {
+        return -1;
+    }
+    return msg.ret;
+}
 #endif
 
 s32 stub_pf_fclose(s32 a0) {
@@ -1781,7 +1813,17 @@ s32 func_00002D24(s32 a0, s32 a1) {
 #endif
 
 #if FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/fatmsmod", func_00004DAC);
+s32 func_00004DAC(s32 a0, s32 a1) {
+    SceMsStubMsg msg;
+
+    msg.cmd = 0x1b;
+    msg.x2 = a0;
+    msg.p7 = a1;
+    if (FcpSendMsg(&msg) == -1) {
+        return -1;
+    }
+    return msg.ret;
+}
 #endif
 
 s32 stub_pf_feof(s32 a0) {
@@ -1965,7 +2007,18 @@ s32 stub_pf_fstat(s32 a0, s32 a1, s32 a2) {
 #endif
 
 #if FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/fatmsmod", func_00004FD4);
+s32 func_00004FD4(s32 a0, s32 a1, s32 a2) {
+    SceMsStubMsg msg;
+
+    msg.cmd = 0xc;
+    msg.p2 = a0;
+    msg.p3 = a1;
+    msg.p7 = a2;
+    if (FcpSendMsg(&msg) == -1) {
+        return -1;
+    }
+    return msg.ret;
+}
 #endif
 
 s32 stub_pf_fwrite(s32 a0, s32 a1, s32 a2, s32 a3) {
@@ -2046,7 +2099,18 @@ s32 stub_pf_rename(s32 a0, s32 a1) {
 #endif
 
 #if FW_VERSION >= 282
-INCLUDE_ASM("nonmatchings/fatmsmod", func_00005168);
+s32 func_00005168(s32 a0, s32 a1, s32 a2) {
+    SceMsStubMsg msg;
+
+    msg.cmd = 0x20;
+    msg.p2 = a0;
+    msg.p3 = a1;
+    msg.p7 = a2;
+    if (FcpSendMsg(&msg) == -1) {
+        return -1;
+    }
+    return msg.ret;
+}
 #endif
 
 #if FW_VERSION >= 150
@@ -2297,9 +2361,27 @@ s32 func_000067EC(void) {
     return D_0002B5CC;
 }
 
-INCLUDE_ASM("nonmatchings/fatmsmod", func_000067F8);
+s32 func_000067F8(s32 a0) {
+    SceMsStubMsg msg;
 
-INCLUDE_ASM("nonmatchings/fatmsmod", func_00006838);
+    msg.cmd = 0x31;
+    msg.p0 = a0;
+    if (FcpSendMsg(&msg) == -1) {
+        return -1;
+    }
+    return msg.ret;
+}
+
+s32 func_00006838(s32 a0) {
+    SceMsStubMsg msg;
+
+    msg.cmd = 0x32;
+    msg.p2 = a0;
+    if (FcpSendMsg(&msg) == -1) {
+        return -1;
+    }
+    return msg.ret;
+}
 
 INCLUDE_ASM("nonmatchings/fatmsmod", func_00006878);
 
