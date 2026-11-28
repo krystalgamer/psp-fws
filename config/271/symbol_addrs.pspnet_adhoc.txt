@@ -71,7 +71,7 @@ sceWlanGPPrevEstablishActive = 0x00007538; // type:func
 sceWlanGPRecv = 0x00007540; // type:func
 sceWlanGPSend = 0x00007548; // type:func
 // shared names (tools/add_version.py) begin
-D_00007C50 = 0x00007970; // rom:0x7A10
+g_gameModeMasterId = 0x00007970; // rom:0x7A10
 g_adhocInit = 0x00007980;
 g_adhocSelChan = 0x000079C8;
 g_pdpStat = 0x000079CC;

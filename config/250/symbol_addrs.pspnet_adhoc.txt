@@ -147,3 +147,4 @@ pdpInput = 0x00002404; // type:func
 ptpInput = 0x00005B98; // type:func
 adhocEtherInput = 0x0000036C; // type:func
 ptpFlushWait = 0x000049E4; // type:func
+g_gameModeMasterId = 0x00007C50; // rom:0x7CD0
