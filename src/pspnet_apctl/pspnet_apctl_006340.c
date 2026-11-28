@@ -749,7 +749,19 @@ u8 *func_000074D0(u8 *arg0, u8 *arg1, s32 arg2) {
     return var_v0;
 }
 
-INCLUDE_ASM("nonmatchings/pspnet_apctl_006340", func_00007504);
+void *func_00007504(void *dst, s32 c, s32 n) {
+    u8 *p;
+
+    if (dst != NULL) {
+        u8 v = c;
+        p = dst;
+        while (n > 0) {
+            n--;
+            *p++ = v;
+        }
+    }
+    return dst;
+}
 #endif
 
 #if FW_VERSION >= 151 && FW_VERSION < 250
